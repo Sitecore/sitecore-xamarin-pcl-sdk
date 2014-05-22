@@ -1,6 +1,17 @@
 # Sitecore Mobile SDK PCL
 
 Sitecore Mobile SDK is a framework for building applications front-end on all major platforms. It provides the API for interaction with the Sitecore Item Web API service to perform CRUD operations.
+
+
+## The SDK includes the following features:
+[x] Authentication
+[x] Fetching content from Sitecore Instance (raw value only)
+[-] CRUD operations on items
+[-] Access item fields and properties
+[-] Upload media items
+[-] Getting html rendering of an item
+
+## The SDK supports multiple mobile platforms
 It is distributed as a [Portable Class Library](http://msdn.microsoft.com/en-us/library/gg597391(v=vs.110).aspx) and should work on all platforms.
 It has been tested for the listed platforms :
 
