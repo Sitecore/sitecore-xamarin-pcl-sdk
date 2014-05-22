@@ -1,0 +1,28 @@
+
+# Mac OS X
+.DS_Store
+
+
+# xcode
+*.xccheckout
+*xcuserdata*
+DerivedData
+build
+*xcworkspace*
+
+
+# JetBrains
+.idea
+
+
+# MS Visual Studio
+bin
+obj
+*.pdb
+*.ncb
+*.suo
+*.userprefs
+
+
+# NuGet
+packages
