@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteLabel-iOS", "..\app\WhiteLabel\iOS\WhiteLabel-iOS\WhiteLabel-iOS.csproj", "{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK-PCL", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK-PCL.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Debug|iPhone.Build.0 = Debug|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Release|iPhone.ActiveCfg = Release|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Release|iPhone.Build.0 = Release|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhone.Build.0 = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\app\WhiteLabel\iOS\WhiteLabel-iOS\WhiteLabel-iOS.csproj
+	EndGlobalSection
+EndGlobal
