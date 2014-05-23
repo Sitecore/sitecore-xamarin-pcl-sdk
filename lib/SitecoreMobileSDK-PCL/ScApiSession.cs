@@ -1,17 +1,22 @@
-﻿namespace Sitecore.MobileSDK
+﻿
+
+namespace Sitecore.MobileSDK
 {
     using System;
     using System.Diagnostics;
     using System.IO;
+	using System.Text;
     using System.Net.Http;
-    using System.Text;
     using System.Threading.Tasks;
-    using System.Xml;
-    using Org.BouncyCastle.Crypto;
+    
+    
+	using Org.BouncyCastle.Crypto;
     using Org.BouncyCastle.Crypto.Parameters;
     using Org.BouncyCastle.Math;
     using Org.BouncyCastle.Security;
+
     using Sitecore.MobileSDK.PublicKey;
+	using Sitecore.MobileSDK.TaskFlow;
 
     public class ScApiSession
     {
@@ -31,19 +36,14 @@
 
         public async Task<PublicKeyX509Certificate> GetPublicKey()
         {
-            string url = this.sessionConfig.InstanceUrl + "/-/item/v1/-/actions/getpublickey";
+			GetPublicKeyTasks taskFlow = new GetPublicKeyTasks (this.httpClient);
 
-            Task<Stream> asyncPublicKeyStream = this.httpClient.GetStreamAsync(url);
-            using (Stream publicKeyStream = await asyncPublicKeyStream)
-            {
-                Func<PublicKeyX509Certificate> syncParsePublicKey = () =>
-                {
-                    return new PublicKeyXmlParser().Parse(publicKeyStream);
-                };
-                this.publicCertifiacte = await Task.Factory.StartNew(syncParsePublicKey);
-                return this.publicCertifiacte;
-            }
-        }
+
+			PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
+			this.publicCertifiacte = result;
+
+			return result;
+		}
 
 
 		private BigInteger Base64StringToBigInteger(string str)
