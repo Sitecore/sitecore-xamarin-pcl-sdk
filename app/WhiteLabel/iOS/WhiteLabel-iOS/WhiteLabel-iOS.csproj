@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\en.lproj\Localizable.strings" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -103,14 +104,22 @@
     <Compile Include="MasterViewController.designer.cs">
       <DependentUpon>MasterViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="DetailViewController.cs" />
-    <Compile Include="DetailViewController.designer.cs">
-      <DependentUpon>DetailViewController.cs</DependentUpon>
+    <Compile Include="SettingsViewController.cs" />
+    <Compile Include="SettingsViewController.designer.cs">
+      <DependentUpon>SettingsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstanceSettings.cs" />
+    <Compile Include="GetItemByPathViewController.cs" />
+    <Compile Include="GetItemByPathViewController.designer.cs">
+      <DependentUpon>GetItemByPathViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GetItemByIdViewController.cs" />
+    <Compile Include="GetItemByIdViewController.designer.cs">
+      <DependentUpon>GetItemByIdViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
-    <InterfaceDefinition Include="MainStoryboard_iPad.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -118,5 +127,8 @@
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>SitecoreMobileSDK-PCL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\en.lproj\" />
   </ItemGroup>
 </Project>
