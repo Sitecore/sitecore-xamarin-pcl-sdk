@@ -45,15 +45,21 @@
             }
         }
 
+
+		private BigInteger Base64StringToBigInteger(string str)
+        {
+            byte[] binModulus = Convert.FromBase64String(str);
+            BigInteger modulus = new BigInteger(1, binModulus);
+
+            return modulus;
+        }
+
         public string EncryptString(string data)
         {
             var cipher = CipherUtilities.GetCipher("RSA/None/PKCS1Padding");
 
-            byte[] binModulus = Convert.FromBase64String(this.publicCertifiacte.ModulusInBase64);
-            byte[] binExponent = Convert.FromBase64String(this.publicCertifiacte.ExponentInBase64);
-
-            BigInteger modulus = new BigInteger(1, binModulus);
-            BigInteger exponent = new BigInteger(1, binExponent);
+            BigInteger modulus = this.Base64StringToBigInteger(this.publicCertifiacte.ModulusInBase64);
+            BigInteger exponent = this.Base64StringToBigInteger(this.publicCertifiacte.ExponentInBase64);
 
             RsaKeyParameters publicKey = new RsaKeyParameters(false, modulus, exponent);
 
