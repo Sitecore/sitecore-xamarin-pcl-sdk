@@ -96,6 +96,9 @@
       <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\monotouch\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="crypto">
+      <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -108,7 +111,15 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="UnitTestAppDelegate.cs" />
-    <Compile Include="GetPublicKeyTest.cs" />
+    <Compile Include="..\..\Android\MobileSDKTest-Android\GetPublicKeyTest.cs">
+      <Link>GetPublicKeyTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Android\MobileSDKTest-Android\LoginAndPasswordEncryptionTest.cs">
+      <Link>LoginAndPasswordEncryptionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Android\MobileSDKTest-Android\PublicKeyParsingTest.cs">
+      <Link>PublicKeyParsingTest.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
