@@ -9,59 +9,56 @@ namespace WhiteLabeliOS
 	public partial class MasterViewController : UITableViewController
 	{
 		DataSource dataSource;
+		InstanceSettings settings;
+		List<object> features = new List<object> ();
 
 		public MasterViewController (IntPtr handle) : base (handle)
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("Master", "Master");
-			
-			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-			{
-				ContentSizeForViewInPopover = new SizeF (320f, 600f);
-				ClearsSelectionOnViewWillAppear = false;
-			}
-			
-			// Custom initialization
 		}
 
-		public DetailViewController DetailViewController
+		partial void settingsButtonTouched (NSObject sender)
 		{
-			get;
-			set;
+			this.showSeetingsView();
 		}
 
-		void AddNewItem (object sender, EventArgs args)
+		private void showSeetingsView()
 		{
-			dataSource.Objects.Insert (0, DateTime.Now);
+			UINavigationController navController = this.NavigationController;
 
-			using (var indexPath = NSIndexPath.FromRowSection (0, 0))
-				TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
+			UIStoryboard myStoryboard = this.Storyboard as UIStoryboard;
+			SettingsViewController settingsViewController = myStoryboard.InstantiateViewController ("configurationViewController") as SettingsViewController;
+			settingsViewController.InstanceSettings = this.settings;
+
+			navController.PushViewController (settingsViewController, true);
 		}
 
-		public override void DidReceiveMemoryWarning ()
+		public override void ViewDidAppear(bool animated)
 		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
+			base.ViewDidAppear (animated);
+			System.Console.WriteLine ("Current settings:\nURL: " + this.settings.InstanceUrl
+				+ "\nLogin:    " + this.settings.InstanceLogin
+				+ "\nPassword: " + this.settings.InstancePassword
+				+ "\nSite:     " + this.settings.InstanceSite
+				+ "\nDtaBase:  " + this.settings.InstanceDataBase);
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 
-			// Perform any additional setup after loading the view, typically from a nib.
-			NavigationItem.LeftBarButtonItem = EditButtonItem;
+			this.settings = new InstanceSettings();
 
-			var addButton = new UIBarButtonItem (UIBarButtonSystemItem.Add, AddNewItem);
-			NavigationItem.RightBarButtonItem = addButton;
+			this.features.Insert (0, "getItemByPath");
+			this.features.Insert (0, "getItemById");
 
 			TableView.Source = dataSource = new DataSource (this);
+			this.TableView.ReloadData();
 		}
 
 		class DataSource : UITableViewSource
 		{
 			static readonly NSString CellIdentifier = new NSString ("Cell");
-			readonly List<object> objects = new List<object> ();
 			readonly MasterViewController controller;
 
 			public DataSource (MasterViewController controller)
@@ -69,11 +66,6 @@ namespace WhiteLabeliOS
 				this.controller = controller;
 			}
 
-			public IList<object> Objects
-			{
-				get { return objects; }
-			}
-			// Customize the number of sections in the table view.
 			public override int NumberOfSections (UITableView tableView)
 			{
 				return 1;
@@ -81,14 +73,15 @@ namespace WhiteLabeliOS
 
 			public override int RowsInSection (UITableView tableview, int section)
 			{
-				return objects.Count;
+				return controller.features.Count;
 			}
 			// Customize the appearance of table view cells.
 			public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 			{
 				var cell = (UITableViewCell)tableView.DequeueReusableCell (CellIdentifier, indexPath);
-
-				cell.TextLabel.Text = objects [indexPath.Row].ToString ();
+				string featureKey = controller.features [indexPath.Row].ToString ();
+				string featureTitle = NSBundle.MainBundle.LocalizedString (featureKey, null);
+				cell.TextLabel.Text = featureTitle;
 
 				return cell;
 			}
@@ -96,53 +89,22 @@ namespace WhiteLabeliOS
 			public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)
 			{
 				// Return false if you do not want the specified item to be editable.
-				return true;
+				return false;
 			}
 
-			public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
-			{
-				if (editingStyle == UITableViewCellEditingStyle.Delete)
-				{
-					// Delete the row from the data source.
-					objects.RemoveAt (indexPath.Row);
-					controller.TableView.DeleteRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
-				}
-				else if (editingStyle == UITableViewCellEditingStyle.Insert)
-				{
-					// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-				}
-			}
-			/*
-			// Override to support rearranging the table view.
-			public override void MoveRow (UITableView tableView, NSIndexPath sourceIndexPath, NSIndexPath destinationIndexPath)
-			{
-			}
-			*/
-			/*
-			// Override to support conditional rearranging of the table view.
-			public override bool CanMoveRow (UITableView tableView, NSIndexPath indexPath)
-			{
-				// Return false if you do not want the item to be re-orderable.
-				return true;
-			}
-			*/
+
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
-				if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-					controller.DetailViewController.SetDetailItem (objects [indexPath.Row]);
+				UINavigationController navController = controller.NavigationController;
+				string featureKey = controller.features [indexPath.Row].ToString ();
+
+				UIStoryboard myStoryboard = controller.Storyboard as UIStoryboard;
+				UIViewController detailViewController = myStoryboard.InstantiateViewController (featureKey) as UIViewController;
+
+				navController.PushViewController (detailViewController, true);
 			}
 		}
-
-		public override void PrepareForSegue (UIStoryboardSegue segue, NSObject sender)
-		{
-			if (segue.Identifier == "showDetail")
-			{
-				var indexPath = TableView.IndexPathForSelectedRow;
-				var item = dataSource.Objects [indexPath.Row];
-
-				((DetailViewController)segue.DestinationViewController).SetDetailItem (item);
-			}
-		}
+			
 	}
 }
 
