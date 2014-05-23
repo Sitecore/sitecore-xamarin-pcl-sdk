@@ -45,32 +45,10 @@ namespace Sitecore.MobileSDK
 			return result;
 		}
 
-
-		private BigInteger Base64StringToBigInteger(string str)
+		public string EncryptString(string data)
         {
-            byte[] binModulus = Convert.FromBase64String(str);
-            BigInteger modulus = new BigInteger(1, binModulus);
-
-            return modulus;
-        }
-
-        public string EncryptString(string data)
-        {
-            var cipher = CipherUtilities.GetCipher("RSA/None/PKCS1Padding");
-
-            BigInteger modulus = this.Base64StringToBigInteger(this.publicCertifiacte.ModulusInBase64);
-            BigInteger exponent = this.Base64StringToBigInteger(this.publicCertifiacte.ExponentInBase64);
-
-            RsaKeyParameters publicKey = new RsaKeyParameters(false, modulus, exponent);
-
-            ICipherParameters rsaOptions = publicKey;
-            cipher.Init(true, rsaOptions);
-
-            UTF8Encoding utf8 = new UTF8Encoding();
-            byte[] rawEncryptedData = cipher.DoFinal(utf8.GetBytes(data));
-            string encryptedData = Convert.ToBase64String(rawEncryptedData);
-
-            return encryptedData;
+			EncryptionUtil cryptor = new EncryptionUtil (this.publicCertifiacte);
+			return cryptor.Encrypt (data);
         }
     }
 }
