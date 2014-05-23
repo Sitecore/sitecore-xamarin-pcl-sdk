@@ -28,7 +28,7 @@
 
             button.Click += async (sender, e) =>
             {
-                SCApiSession session = new SCApiSession(Config);
+                ScApiSession session = new ScApiSession(Config);
                 await session.GetPublicKey();
                 Log.Error("some tag", "login : " + session.EncryptString("extranet\\creatorex"));
                 Log.Error("some tag", "pass : " + session.EncryptString("creatorex"));

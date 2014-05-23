@@ -48,8 +48,6 @@
             string encryptedLogin = this.sessionWithNoAnonymousAccess.EncryptString("sitecore\\admin");
             string encryptedPassword = this.sessionWithNoAnonymousAccess.EncryptString("b");
 
-            // TODO : setup headers
-
             this.httpClient.DefaultRequestHeaders.Add("X-Scitemwebapi-Username", encryptedLogin);
             this.httpClient.DefaultRequestHeaders.Add("X-Scitemwebapi-Password", encryptedPassword);
             this.httpClient.DefaultRequestHeaders.Add("X-Scitemwebapi-Encrypted", "1");

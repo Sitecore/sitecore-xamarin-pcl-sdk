@@ -11,7 +11,7 @@
     using Org.BouncyCastle.Crypto.Parameters;
     using Org.BouncyCastle.Math;
     using Org.BouncyCastle.Security;
-
+    using Sitecore.MobileSDK.PublicKey;
 
     public class ScApiSession
     {
@@ -36,7 +36,10 @@
             Task<Stream> asyncPublicKeyStream = this.httpClient.GetStreamAsync(url);
             using (Stream publicKeyStream = await asyncPublicKeyStream)
             {
-                Func<PublicKeyX509Certificate> syncParsePublicKey = ScApiSession.ParsePublicKeyFromStreamDelegate(publicKeyStream);
+                Func<PublicKeyX509Certificate> syncParsePublicKey = () =>
+                {
+                    return new PublicKeyXmlParser().Parse(publicKeyStream);
+                };
                 this.publicCertifiacte = await Task.Factory.StartNew(syncParsePublicKey);
                 return this.publicCertifiacte;
             }
@@ -46,8 +49,8 @@
         {
             var cipher = CipherUtilities.GetCipher("RSA/None/PKCS1Padding");
 
-            byte[] binModulus = Convert.FromBase64String(this.publicCertifiacte.Modulus);
-            byte[] binExponent = Convert.FromBase64String(this.publicCertifiacte.Exponent);
+            byte[] binModulus = Convert.FromBase64String(this.publicCertifiacte.ModulusInBase64);
+            byte[] binExponent = Convert.FromBase64String(this.publicCertifiacte.ExponentInBase64);
 
             BigInteger modulus = new BigInteger(1, binModulus);
             BigInteger exponent = new BigInteger(1, binExponent);
@@ -62,40 +65,6 @@
             string encryptedData = Convert.ToBase64String(rawEncryptedData);
 
             return encryptedData;
-        }
-
-        private static Func<PublicKeyX509Certificate> ParsePublicKeyFromStreamDelegate(Stream publicKeyStream)
-        {
-            Func<PublicKeyX509Certificate> syncParsePublicKey = () =>
-            {
-                using (XmlReader reader = XmlReader.Create(publicKeyStream))
-                {
-                    string modulus = null;
-                    string exponent = null;
-
-                    while (true)
-                    {
-                        if (reader.Name.Equals("Modulus"))
-                        {
-                            modulus = reader.ReadElementContentAsString();
-                            continue;
-                        }
-                        else if (reader.Name.Equals("Exponent"))
-                        {
-                            exponent = reader.ReadElementContentAsString();
-                            continue;
-                        }
-
-                        if (!reader.Read())
-                        {
-                            break;
-                        }
-                    }
-                    return new PublicKeyX509Certificate(modulus, exponent);
-                }
-            };
-
-            return syncParsePublicKey;
         }
     }
 }
