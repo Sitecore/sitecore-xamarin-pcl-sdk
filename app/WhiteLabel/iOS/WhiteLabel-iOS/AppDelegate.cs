@@ -20,23 +20,6 @@ namespace WhiteLabeliOS
 		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
 			// Override point for customization after application launch.
-			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-			{
-				var splitViewController = (UISplitViewController)Window.RootViewController;
-
-				// Get the UINavigationControllers containing our master & detail view controllers
-				var masterNavigationController = (UINavigationController)splitViewController.ViewControllers [0];
-				var detailNavigationController = (UINavigationController)splitViewController.ViewControllers [1];
-
-				var masterViewController = (MasterViewController)masterNavigationController.TopViewController;
-				var detailViewController = (DetailViewController)detailNavigationController.TopViewController;
-
-				masterViewController.DetailViewController = detailViewController;
-
-				// Set the DetailViewController as the UISplitViewController Delegate.
-				splitViewController.WeakDelegate = detailViewController;
-			}
-
 			return true;
 		}
 		//
