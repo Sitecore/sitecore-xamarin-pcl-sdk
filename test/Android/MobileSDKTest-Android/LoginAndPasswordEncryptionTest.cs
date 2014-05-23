@@ -71,21 +71,21 @@
             ICipherParameters rsaOptions = this.GetPrivateKeyParams();
             cipher.Init(false, rsaOptions);
 
-            byte[] decryptedData = Convert.FromBase64String(str);
+            byte[] encryptedData = Convert.FromBase64String(str);
 
-            int size = cipher.GetOutputSize(decryptedData.Length);
-            byte[] result = new byte[size];
-            int olen = cipher.ProcessBytes(decryptedData, 0, decryptedData.Length, result, 0);
-            olen += cipher.DoFinal(result, olen);
+            int size = cipher.GetOutputSize(encryptedData.Length);
+            byte[] decryptedData = new byte[size];
+            int readLength = cipher.ProcessBytes(encryptedData, 0, encryptedData.Length, decryptedData, 0);
+            readLength += cipher.DoFinal(decryptedData, readLength);
 
-            if (olen < size)
+            if (readLength < size)
             {
-                byte[] tmp = new byte[olen];
-                Array.Copy(result, 0, tmp, 0, olen);
-                result = tmp;
+                byte[] tmp = new byte[readLength];
+                Array.Copy(decryptedData, 0, tmp, 0, readLength);
+                decryptedData = tmp;
             }
 
-            return Encoding.UTF8.GetString(result);
+            return Encoding.UTF8.GetString(decryptedData);
         }
 
         private RsaPrivateCrtKeyParameters GetPrivateKeyParams()
