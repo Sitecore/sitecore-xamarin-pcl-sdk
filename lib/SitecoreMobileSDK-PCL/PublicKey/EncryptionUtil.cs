@@ -41,6 +41,11 @@
 
         public string Encrypt(string text)
         {
+			if (null == text)
+			{
+				return null;
+			}
+
             var cipher = CipherUtilities.GetCipher("RSA/None/PKCS1Padding");
 
             BigInteger modulus = this.BigIntegerForModulus();

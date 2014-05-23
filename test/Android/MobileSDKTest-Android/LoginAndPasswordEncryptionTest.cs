@@ -64,6 +64,26 @@
             Assert.AreEqual(login, this.Decrypt(encryptedLogin));
         }
 
+        [Test]
+        public void TestEncryptionUtilCanProcessEmptyString()
+        {
+            var login = "";
+
+            EncryptionUtil encryptor = new EncryptionUtil(this.publicCertificate);
+            string encryptedLogin = encryptor.Encrypt(login);
+
+            Assert.AreEqual(login, this.Decrypt(encryptedLogin));
+        }
+
+        [Test]
+        public void TestEncryptionUtilReturnsNullForNullInput()
+        {
+            EncryptionUtil encryptor = new EncryptionUtil(this.publicCertificate);
+            string encryptedLogin = encryptor.Encrypt(null);
+
+            Assert.IsNull(encryptedLogin);
+        }
+
         private string Decrypt(string str)
         {
             var cipher = CipherUtilities.GetCipher("RSA/None/PKCS1Padding");
