@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKTest-iOS", "..\test\iOS\MobileSDKTest-iOS\MobileSDKTest-iOS.csproj", "{6760B6C9-D849-486D-98A7-3E029F5F1764}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK-PCL", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK-PCL.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

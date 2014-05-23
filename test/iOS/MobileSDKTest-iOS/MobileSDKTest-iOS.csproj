@@ -103,9 +103,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK-PCL.csproj">
+    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
-      <Name>SitecoreMobileSDK-PCL</Name>
+      <Name>SitecoreMobileSDK</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
