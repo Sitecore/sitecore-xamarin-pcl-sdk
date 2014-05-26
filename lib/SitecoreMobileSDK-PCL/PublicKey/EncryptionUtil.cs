@@ -11,8 +11,14 @@
     {
         private readonly PublicKeyX509Certificate certificate;
 
+        /// <exception cref="ArgumentNullException">cert cannot be null</exception>
         public EncryptionUtil(PublicKeyX509Certificate cert)
         {
+            if (null == cert)
+            {
+                throw new ArgumentNullException("cert cannot be null");
+            }
+
             this.certificate = cert;
         }
 
@@ -41,6 +47,11 @@
 
         public string Encrypt(string text)
         {
+            if (null == text)
+            {
+                return null;
+            }
+
             var cipher = CipherUtilities.GetCipher("RSA/None/PKCS1Padding");
 
             BigInteger modulus = this.BigIntegerForModulus();
