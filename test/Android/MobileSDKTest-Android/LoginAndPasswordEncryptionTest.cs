@@ -1,7 +1,9 @@
 ﻿namespace MobileSDKTestAndroid
 {
     using System;
+    using System.IO;
     using System.Text;
+    using System.Xml;
     using NUnit.Framework;
     using Org.BouncyCastle.Crypto;
     using Org.BouncyCastle.Crypto.Parameters;
@@ -62,6 +64,16 @@
             string encryptedLogin = encryptor.Encrypt(login);
 
             Assert.AreEqual(login, this.Decrypt(encryptedLogin));
+        }
+
+        [Test]
+        public void TestEncryptionUtilWithNullCert()
+        {
+            TestDelegate action = () =>
+            {
+                EncryptionUtil encryptor = new EncryptionUtil(null);
+            };
+            Assert.Throws<ArgumentNullException>(action, "ArgumentNullException should be thrown here");
         }
 
         [Test]

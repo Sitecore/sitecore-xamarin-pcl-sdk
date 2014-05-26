@@ -11,8 +11,14 @@
     {
         private readonly PublicKeyX509Certificate certificate;
 
+        /// <exception cref="ArgumentNullException">cert cannot be null</exception>
         public EncryptionUtil(PublicKeyX509Certificate cert)
         {
+            if (null == cert)
+            {
+                throw new ArgumentNullException("cert cannot be null");
+            }
+
             this.certificate = cert;
         }
 
