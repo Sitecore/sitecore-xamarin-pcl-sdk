@@ -26,3 +26,4 @@ obj
 
 # NuGet
 packages
+.nuget
