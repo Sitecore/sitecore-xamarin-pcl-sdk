@@ -7,51 +7,55 @@ namespace Sitecore.MobileSDK
     using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
-    
+
     using Sitecore.MobileSDK.PublicKey;
-	using Sitecore.MobileSDK.TaskFlow;
+    using Sitecore.MobileSDK.TaskFlow;
 
     public class ScApiSession
     {
-		#region Forbidden Methods
+        #region Private Variables
 
-		private ScApiSession()
-		{
-		}
+        private readonly HttpClient httpClient;
 
-		#endregion Forbidden Methods
+        private readonly SessionConfig sessionConfig;
+
+        private PublicKeyX509Certificate publicCertifiacte;
+
+        #endregion Private Variables
 
         public ScApiSession(SessionConfig config)
         {
             this.sessionConfig = config;
             this.httpClient = new HttpClient();
         }
-			
-		#region Encryption
+
+        #region Forbidden Methods
+
+        private ScApiSession()
+        {
+        }
+
+        #endregion Forbidden Methods
+
+        #region Encryption
+
         public async Task<PublicKeyX509Certificate> GetPublicKey()
         {
-			GetPublicKeyTasks taskFlow = new GetPublicKeyTasks (this.httpClient);
+            GetPublicKeyTasks taskFlow = new GetPublicKeyTasks(this.httpClient);
 
 
-			PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
-			this.publicCertifiacte = result;
+            PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
+            this.publicCertifiacte = result;
 
-			return result;
-		}
-
-		public string EncryptString(string data)
-        {
-			EncryptionUtil cryptor = new EncryptionUtil (this.publicCertifiacte);
-			return cryptor.Encrypt (data);
+            return result;
         }
-		#endregion Encryption
 
-		#region Private Variables
+        public string EncryptString(string data)
+        {
+            EncryptionUtil cryptor = new EncryptionUtil(this.publicCertifiacte);
+            return cryptor.Encrypt(data);
+        }
 
-		private readonly HttpClient httpClient;
-		private readonly SessionConfig sessionConfig;
-		private PublicKeyX509Certificate publicCertifiacte;
-
-		#endregion Private Variables
+        #endregion Encryption
     }
 }
