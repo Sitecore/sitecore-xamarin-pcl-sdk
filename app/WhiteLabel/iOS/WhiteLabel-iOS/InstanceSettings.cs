@@ -81,7 +81,7 @@ namespace WhiteLabeliOS
 			} 
 			set
 			{ 
-				//TODO: @igk keychaine?
+				//TODO: @igk keychain?
 				this.instancePassword = value;
 				this.SaveValueToStorage (value, "instancePassword");
 			} 
