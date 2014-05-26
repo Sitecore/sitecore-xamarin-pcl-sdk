@@ -48,7 +48,7 @@ Global
 		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {936F2661-0B44-4470-AEE1-D7CF620B6A50}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\test\Android\MobileSDK-IntegrationTest-Android\MobileSDK-IntegrationTest-Android.csproj
+		StartupItem = ..\test\Android\MobileSDKTest-Android\MobileSDKTest-Android.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
