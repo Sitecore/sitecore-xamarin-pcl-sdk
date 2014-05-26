@@ -39,6 +39,7 @@
     <Compile Include="TaskFlow\IRestApiCallTasks.cs" />
     <Compile Include="TaskFlow\RestApiCallFlow.cs" />
     <Compile Include="PublicKey\GetPublicKeyTasks.cs" />
+    <Compile Include="ItemSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
