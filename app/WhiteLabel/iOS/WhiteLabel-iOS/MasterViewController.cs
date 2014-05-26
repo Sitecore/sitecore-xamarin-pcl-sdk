@@ -86,13 +86,6 @@ namespace WhiteLabeliOS
 				return cell;
 			}
 
-			public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)
-			{
-				// Return false if you do not want the specified item to be editable.
-				return false;
-			}
-
-
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
 				UINavigationController navController = controller.NavigationController;
