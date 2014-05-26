@@ -1,5 +1,6 @@
 ﻿using System;
 using MonoTouch.Foundation;
+using Sitecore.MobileSDK;
 
 namespace WhiteLabeliOS
 {
@@ -26,9 +27,11 @@ namespace WhiteLabeliOS
 			this.instanceDataBase 	= userDefaults.StringForKey ("instanceDataBase");
 		}
 
-		public NSObject GetSession()
+		public ScApiSession GetSession()
 		{
-			return null;
+			SessionConfig config = new SessionConfig (this.instanceUrl, this.instanceLogin, this.instancePassword);
+
+			return new ScApiSession (config);
 		}
 
 		private void SaveValueToStorage(string value, string key)

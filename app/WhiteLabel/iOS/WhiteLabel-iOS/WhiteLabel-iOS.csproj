@@ -109,13 +109,13 @@
       <DependentUpon>SettingsViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="InstanceSettings.cs" />
-    <Compile Include="GetItemByPathViewController.cs" />
-    <Compile Include="GetItemByPathViewController.designer.cs">
-      <DependentUpon>GetItemByPathViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GetItemByIdViewController.cs" />
-    <Compile Include="GetItemByIdViewController.designer.cs">
+    <Compile Include="GetITemTasks\GetItemByIdViewController.cs" />
+    <Compile Include="GetITemTasks\GetItemByIdViewController.designer.cs">
       <DependentUpon>GetItemByIdViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GetITemTasks\GetItemByPathViewController.cs" />
+    <Compile Include="GetITemTasks\GetItemByPathViewController.designer.cs">
+      <DependentUpon>GetItemByPathViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +124,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\en.lproj\" />
+    <Folder Include="GetITemTasks\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
