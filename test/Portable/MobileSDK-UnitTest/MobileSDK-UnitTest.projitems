@@ -11,5 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)LoginAndPasswordEncryptionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PublicKeyParsingTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemSourceTest.cs" />
   </ItemGroup>
 </Project>
