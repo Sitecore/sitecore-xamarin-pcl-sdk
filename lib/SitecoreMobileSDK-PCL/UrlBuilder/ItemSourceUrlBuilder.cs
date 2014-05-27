@@ -8,10 +8,24 @@ namespace Sitecore.MobileSDK.UrlBuilder
         {
         }
 
-        public  ItemSourceUrlBuilder (ItemSource itemSource)
+        public  ItemSourceUrlBuilder (IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar, ItemSource itemSource)
         {
             this.itemSource = itemSource;
+            this.restGrammar = restGrammar;
+            this.webApiGrammar = webApiGrammar;
+
             this.Validate ();
+        }
+
+        public string BuildUrlQueryString()
+        {
+            string result = 
+                this.webApiGrammar.DatabaseParameterName +  this.restGrammar.KeyValuePairSeparator + this.itemSource.Database +
+
+                this.restGrammar.FieldSeparator + 
+                this.webApiGrammar.LanguageParameterName +  this.restGrammar.KeyValuePairSeparator + this.itemSource.Language;
+
+            return result;
         }
 
         private void Validate()
@@ -20,9 +34,19 @@ namespace Sitecore.MobileSDK.UrlBuilder
             {
                 throw new ArgumentNullException ("[ItemSourceUrlBuilder.itemSource] Do not pass null");
             }
+            else if (null == this.restGrammar)
+            {
+                throw new ArgumentNullException ("[ItemSourceUrlBuilder.grammar] Do not pass null");
+            }
+            else if (null == this.webApiGrammar)
+            {
+                throw new ArgumentNullException ("[ItemSourceUrlBuilder.grammar] Do not pass null");
+            }
         }
 
-        private ItemSource itemSource;
+        private ItemSource           itemSource   ;
+        private IRestServiceGrammar  restGrammar  ;
+        private IWebApiUrlParameters webApiGrammar;
     }
 }
 

@@ -43,6 +43,10 @@
     <Compile Include="PublicKey\GetPublicKeyTasks.cs" />
     <Compile Include="ItemSource.cs" />
     <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\RestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\WebApiUrlParameters.cs" />
+    <Compile Include="UrlBuilder\IRestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\IWebApiUrlParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
