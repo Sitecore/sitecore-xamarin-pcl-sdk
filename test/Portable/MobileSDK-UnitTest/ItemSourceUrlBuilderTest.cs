@@ -35,6 +35,16 @@ namespace Sitecore.MobileSdkUnitTest
             string expected = "sc_database=web&sc_lang=en";
             Assert.AreEqual (builder.BuildUrlQueryString(), expected);
         }
+
+        [Test]
+        public void TestSerializationSupportsVersion()
+        {
+            ItemSource data = new ItemSource ("master", "da", "100500");
+            ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder (RestServiceGrammar.ItemWebApiV2Grammar (), WebApiUrlParameters.ItemWebApiV2UrlParameters(), data);
+
+            string expected = "sc_database=master&sc_lang=da&sc_itemversion=100500";
+            Assert.AreEqual (builder.BuildUrlQueryString(), expected);
+        }
     }
 }
 

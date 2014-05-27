@@ -20,10 +20,17 @@ namespace Sitecore.MobileSDK.UrlBuilder
         public string BuildUrlQueryString()
         {
             string result = 
-                this.webApiGrammar.DatabaseParameterName +  this.restGrammar.KeyValuePairSeparator + this.itemSource.Database +
+                this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + this.itemSource.Database +
 
                 this.restGrammar.FieldSeparator + 
-                this.webApiGrammar.LanguageParameterName +  this.restGrammar.KeyValuePairSeparator + this.itemSource.Language;
+                this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + this.itemSource.Language;
+
+            if (null != this.itemSource.Version)
+            {
+                result += 
+                    this.restGrammar.FieldSeparator + 
+                    this.webApiGrammar.VersionParameterName + this.restGrammar.KeyValuePairSeparator + this.itemSource.Version;
+            }
 
             return result;
         }
