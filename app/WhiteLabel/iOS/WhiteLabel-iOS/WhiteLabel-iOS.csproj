@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -109,13 +109,26 @@
       <DependentUpon>SettingsViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="InstanceSettings.cs" />
-    <Compile Include="GetITemTasks\GetItemByIdViewController.cs" />
-    <Compile Include="GetITemTasks\GetItemByIdViewController.designer.cs">
+    <Compile Include="ITemTasks\GetItemByIdViewController.cs" />
+    <Compile Include="ITemTasks\DeleteITemByIdViewController.cs" />
+    <Compile Include="ITemTasks\GetItemByIdViewController.designer.cs">
       <DependentUpon>GetItemByIdViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="GetITemTasks\GetItemByPathViewController.cs" />
-    <Compile Include="GetITemTasks\GetItemByPathViewController.designer.cs">
+    <Compile Include="ITemTasks\GetItemByPathViewController.cs" />
+    <Compile Include="ITemTasks\GetItemByPathViewController.designer.cs">
       <DependentUpon>GetItemByPathViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\DeleteITemByIdViewController.designer.cs">
+      <DependentUpon>DeleteITemByIdViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskViewController.cs" />
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskViewController.designer.cs">
+      <DependentUpon>BaseTaskViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AlertHelper.cs" />
+    <Compile Include="ITemTasks\CreateEditItemViewController.cs" />
+    <Compile Include="ITemTasks\CreateEditItemViewController.designer.cs">
+      <DependentUpon>CreateEditItemViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +137,9 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\en.lproj\" />
-    <Folder Include="GetITemTasks\" />
+    <Folder Include="ITemTasks\" />
+    <Folder Include="ITemTasks\BaseClasses\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
