@@ -42,6 +42,9 @@
     <Compile Include="Items\ScItem.cs" />
     <Compile Include="Items\ScItemsResponse.cs" />
     <Compile Include="Items\ScItemsParser.cs" />
+    <Compile Include="GetItemsTasks.cs" />
+    <Compile Include="Items\ItemsSource.cs" />
+    <Compile Include="Items\ItemRequestConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

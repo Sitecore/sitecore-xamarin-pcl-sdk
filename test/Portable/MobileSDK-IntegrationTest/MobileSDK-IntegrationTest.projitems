@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)GetPublicKeyTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetItemsTest.cs" />
   </ItemGroup>
 </Project>
