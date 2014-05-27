@@ -49,11 +49,17 @@
                                 <state key="normal" title="Get Item">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="getItem:" destination="X0y-MS-f8R" eventType="touchUpInside" id="PLr-Mu-fHT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="itemPathField" destination="Ipi-Wb-XmQ" id="dFX-Gl-1at"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vks-fu-8oK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -194,15 +200,132 @@
                                 <state key="normal" title="Get Item">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="getItem:" destination="7Eu-4h-pPF" eventType="touchUpInside" id="CBY-fR-3Ny"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="itemIdTextField" destination="2Nl-wT-nTp" id="7hK-7U-2bd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D3A-WZ-5X9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="412" y="896"/>
+            <point key="canvasLocation" x="384" y="896"/>
+        </scene>
+        <!--DeleteI Tem By Id View Controller-->
+        <scene sceneID="Asd-Of-05P">
+            <objects>
+                <viewController storyboardIdentifier="deleteItemById" id="y4l-nL-zVW" customClass="DeleteITemByIdViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iHO-b7-i0v"/>
+                        <viewControllerLayoutGuide type="bottom" id="zb1-3r-ps6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n5k-i9-fDg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type item Id:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyF-Po-ss9">
+                                <rect key="frame" x="20" y="81" width="98" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9qP-Vl-vKp">
+                                <rect key="frame" x="20" y="110" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3h-fr-2IA">
+                                <rect key="frame" x="109" y="148" width="102" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Delete Item">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteItem:" destination="y4l-nL-zVW" eventType="touchUpInside" id="vN2-P8-j7S"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="itemIdField" destination="9qP-Vl-vKp" id="twJ-GE-qsb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Poa-J4-tWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="751" y="896"/>
+        </scene>
+        <!--Create Edit Item View Controller-->
+        <scene sceneID="50f-BP-j3U">
+            <objects>
+                <viewController storyboardIdentifier="createEditItem" id="hDq-Kn-IbD" customClass="CreateEditItemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5GE-kj-Ih3"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZqV-sX-dxH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vdN-QR-R2l">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Test title" borderStyle="line" placeholder="type item title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OQn-Ac-Sc6">
+                                <rect key="frame" x="20" y="76" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Test text" borderStyle="line" placeholder="type item text" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bmb-U1-Yxb">
+                                <rect key="frame" x="20" y="114" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="/Sitecore/Content/Home/" borderStyle="line" placeholder="type item path" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WH6-wC-5s6">
+                                <rect key="frame" x="20" y="164" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkx-UR-mBG">
+                                <rect key="frame" x="20" y="202" width="135" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createITemTouched:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="c09-Ys-7vx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLz-4a-di3">
+                                <rect key="frame" x="165" y="202" width="135" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save Changes">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveItemTouched:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="rkh-Cx-159"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="pathField" destination="WH6-wC-5s6" id="GpO-Zq-t96"/>
+                        <outlet property="saveButton" destination="YLz-4a-di3" id="KbK-Z9-9cg"/>
+                        <outlet property="textField" destination="Bmb-U1-Yxb" id="Ef8-Ny-JQg"/>
+                        <outlet property="titleField" destination="OQn-Ac-Sc6" id="GQq-Ri-Rwd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Xb-x1-fNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1123" y="896"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
