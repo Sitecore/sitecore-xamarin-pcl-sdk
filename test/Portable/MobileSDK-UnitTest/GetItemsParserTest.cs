@@ -1,25 +1,15 @@
-﻿using NUnit.Framework;
-using System;
-using Sitecore.MobileSDK;
-using System.Net.Http;
-using Sitecore.MobileSDK.Items;
-using Newtonsoft.Json;
-
-namespace MobileSDKTestAndroid
+﻿namespace MobileSDKTestAndroid
 {
+	using NUnit.Framework;
+	using System;
+	using Sitecore.MobileSDK;
+	using System.Net.Http;
+	using Sitecore.MobileSDK.Items;
+	using Newtonsoft.Json;
+
 	[TestFixture]
 	public class GetItemsParserTest
 	{
-		[SetUp]
-		public void Setup ()
-		{
-		}
-
-		[TearDown]
-		public void TearDown ()
-		{
-		}
-
 		[Test]
 		public void TestParseValidResponse ()
 		{
@@ -30,14 +20,14 @@ namespace MobileSDKTestAndroid
 			ScItem item1 = response.Items [0];
 
 			Assert.AreEqual ("Home", item1.DisplayName);
-			Assert.AreEqual ("web", item1.Database);
+			Assert.AreEqual ("web", item1.Source.Database);
 			Assert.AreEqual (true, item1.HasChildren);
-			Assert.AreEqual ("en", item1.Language);
+			Assert.AreEqual ("en", item1.Source.Language);
 			Assert.AreEqual ("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", item1.Id);
 			Assert.AreEqual ("/{11111111-1111-1111-1111-111111111111}/{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", item1.LongId);
 			Assert.AreEqual ("/sitecore/content/Home", item1.Path);
 			Assert.AreEqual ("Sample/Sample Item", item1.Template);
-			Assert.AreEqual (1, item1.Version);
+			Assert.AreEqual (1, item1.Source.Version);
 		}
 
 		[Test]
@@ -70,8 +60,18 @@ namespace MobileSDKTestAndroid
 		{
 			string rawResponse = "{\n  \"statusCode\": 200,\n  \"result\": {\n    \"Invalidtotaldount\": 0,\n    \"InvalidresultCount\": 0,\n    \"items\": []\n  }\n}";
 			TestDelegate action = () => ScItemsParser.Parse (rawResponse);
-			Assert.Throws<ArgumentException> (action, "JsonException should be here");
+			Assert.Throws<JsonException> (action, "JsonException should be here");
+		}
+
+		[Test]
+		public void TestParseErrorResponse ()
+		{
+			string rawResponse = "{\"statusCode\":401,\"error\":{\"message\":\"Access to the \\u0027master\\u0027 database is denied. Only members of the Sitecore Client Users role can switch databases.\"}}";
+			TestDelegate action = () => ScItemsParser.Parse (rawResponse);
+			ScResponseException exception = Assert.Throws<ScResponseException> (action, "ScResponseException should be here");
+
+			Assert.AreEqual (401, exception.Response.StatusCode);
+			Assert.AreEqual ("Access to the 'master' database is denied. Only members of the Sitecore Client Users role can switch databases.", exception.Response.Message);
 		}
 	}
 }
-

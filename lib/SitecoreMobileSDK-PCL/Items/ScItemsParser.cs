@@ -1,55 +1,66 @@
-﻿using System;
-using Sitecore.MobileSDK.Items;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK
 {
+	using System;
+	using Sitecore.MobileSDK.Items;
+	using Newtonsoft.Json;
+	using Newtonsoft.Json.Linq;
+	using System.Collections.Generic;
+
 	public class ScItemsParser
 	{
 		private ScItemsParser ()
 		{
 		}
 
-		public static ScItemsResponse Parse (string response)
+		public static ScItemsResponse Parse (string responseString)
 		{
-			if (string.IsNullOrEmpty (response))
+			if (string.IsNullOrEmpty (responseString))
 			{
 				throw new ArgumentException ("response cannot null or empty");
 			}
 
-			JObject jsonResponse = JObject.Parse (response);
+			JObject response = JObject.Parse (responseString);
 
-			int totalCount = ParseOrFail<int> (jsonResponse, "$.result.totalCount");
-			int resultCount = ParseOrFail<int> (jsonResponse, "$.result.resultCount");
-
-			var responseItems = jsonResponse.SelectToken ("$.result.items");
-			var items = new List<ScItem> ();
-
-			foreach (JObject singleItem in responseItems)
+			int statusCode = ParseOrFail<int> (response, "$.statusCode");
+			if (200 != statusCode)
 			{
-				ScItem resultItem = new ScItem ();
-
-				resultItem.DisplayName = (string)singleItem.GetValue ("DisplayName");
-				resultItem.Database = (string)singleItem.GetValue ("Database");
-				resultItem.HasChildren = (bool)singleItem.GetValue ("HasChildren");
-				resultItem.Id = (string)singleItem.GetValue ("ID");
-				resultItem.Language = (string)singleItem.GetValue ("Language");
-				resultItem.LongId = (string)singleItem.GetValue ("LongID");
-				resultItem.Path = (string)singleItem.GetValue ("Path");
-				resultItem.Template = (string)singleItem.GetValue ("Template");
-				resultItem.Version = (int)singleItem.GetValue ("Version");
-
-				items.Add (resultItem);
+				var error = new ScErrorResponse (statusCode, ParseOrFail<string> (response, "$.error.message")); 
+				throw new ScResponseException (error);
 			}
 
+			int totalCount = ParseOrFail<int> (response, "$.result.totalCount");
+			int resultCount = ParseOrFail<int> (response, "$.result.resultCount");
+
+			var responseItems = response.SelectToken ("$.result.items");
+			var items = new List<ScItem> ();
+
+			foreach (JObject item in responseItems)
+			{
+				var source = ParseItemSource (item);
+
+				var displayName = (string)item.GetValue ("DisplayName");
+				var hasChildren = (bool)item.GetValue ("HasChildren");
+				var id = (string)item.GetValue ("ID");
+				var longId = (string)item.GetValue ("LongID");
+				var path = (string)item.GetValue ("Path");
+				var template = (string)item.GetValue ("Template");
+
+				items.Add (new ScItem (source, displayName, hasChildren, id, longId, path, template));
+			}
 			return new ScItemsResponse (totalCount, resultCount, items);
 		}
 
-		private static T ParseOrFail<T>(JObject json, string path)
+		private static ItemSource ParseItemSource (JObject json)
 		{
+			var language = (string)json.GetValue ("Language");
+			var database = (string)json.GetValue ("Database");
+			var version = (int)json.GetValue ("Version");
 
+			return new ItemSource (database, language, version);
+		}
+
+		private static T ParseOrFail<T> (JObject json, string path)
+		{
 			JToken objectToken = json.SelectToken (path);
 			if (null == objectToken)
 			{
@@ -60,4 +71,3 @@ namespace Sitecore.MobileSDK
 		}
 	}
 }
-

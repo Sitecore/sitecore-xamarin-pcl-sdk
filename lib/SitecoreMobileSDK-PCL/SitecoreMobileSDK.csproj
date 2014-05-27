@@ -45,6 +45,8 @@
     <Compile Include="GetItemsTasks.cs" />
     <Compile Include="Items\ItemsSource.cs" />
     <Compile Include="Items\ItemRequestConfig.cs" />
+    <Compile Include="ScResponseException.cs" />
+    <Compile Include="ScErrorResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

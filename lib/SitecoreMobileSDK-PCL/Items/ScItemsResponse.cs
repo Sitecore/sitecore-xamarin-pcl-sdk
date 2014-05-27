@@ -4,11 +4,11 @@
 
 	public class ScItemsResponse
 	{
-		public int TotalCount { get; set; }
+		public int TotalCount { get; private set; }
 
-		public int ResultCount { get; set; }
+		public int ResultCount { get; private set; }
 
-		public List<ScItem> Items { get; set; }
+		public List<ScItem> Items { get; private set; }
 
 		public ScItemsResponse (int totalCount, int resultCount, List<ScItem> items)
 		{

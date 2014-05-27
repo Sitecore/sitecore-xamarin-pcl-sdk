@@ -60,7 +60,7 @@ namespace Sitecore.MobileSDK
 		#region GetItems
 		public async Task<ScItemsResponse> GetItemById (string id)
 		{
-			var config = new ItemRequestConfig (this.sessionConfigm); 
+			var config = new ItemRequestConfig (this.sessionConfig); 
 			config.Id = id;
 
 			var taskFlow = new GetItemsTasks(this.httpClient, config);

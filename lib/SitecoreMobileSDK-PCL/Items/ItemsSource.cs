@@ -2,7 +2,7 @@
 
 namespace Sitecore.MobileSDK
 {
-	public class ItemsSource
+	public class ItemSource
 	{
 		public string Database { get; private set; }
 
@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK
 
 		public int Version { get; private set; }
 
-		public ItemsSource (string database, string language, int version)
+		public ItemSource (string database, string language, int version)
 		{
 			this.Database = database;
 			this.Language = language;
