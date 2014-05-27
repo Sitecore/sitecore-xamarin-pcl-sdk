@@ -22,7 +22,10 @@ obj
 *.ncb
 *.suo
 *.userprefs
-
+TestResult.xml
+UpgradeLog.html
+UpgradeLog.htm
+*.VisualState.xml
 
 # NuGet
 packages
