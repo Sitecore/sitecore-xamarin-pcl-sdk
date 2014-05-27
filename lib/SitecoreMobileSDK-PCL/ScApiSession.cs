@@ -77,7 +77,7 @@ namespace Sitecore.MobileSDK
 
 			var taskFlow = new GetItemsTasks(this.httpClient, config);
 
-			return await RestApiCallFlow.LoadRequestFromNetworkFlow("", taskFlow);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
 		}
 		#endregion GetItems
     }
