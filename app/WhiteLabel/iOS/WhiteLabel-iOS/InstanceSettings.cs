@@ -30,8 +30,9 @@ namespace WhiteLabeliOS
 		public ScApiSession GetSession()
 		{
 			SessionConfig config = new SessionConfig (this.instanceUrl, this.instanceLogin, this.instancePassword);
+			ItemSource defaultSource = ItemSource.DefaultSource ();
 
-			return new ScApiSession (config);
+			return new ScApiSession (config, defaultSource);
 		}
 
 		private void SaveValueToStorage(string value, string key)
