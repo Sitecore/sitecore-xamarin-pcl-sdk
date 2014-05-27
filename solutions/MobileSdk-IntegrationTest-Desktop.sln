@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSdk-IntegrationTest-Desktop", "..\test\Desktop\MobileSdk-IntegrationTest-Desktop\MobileSdk-IntegrationTest-Desktop.csproj", "{94CDE59C-A7D2-412A-B8B9-EF92885654A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94CDE59C-A7D2-412A-B8B9-EF92885654A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94CDE59C-A7D2-412A-B8B9-EF92885654A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94CDE59C-A7D2-412A-B8B9-EF92885654A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94CDE59C-A7D2-412A-B8B9-EF92885654A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

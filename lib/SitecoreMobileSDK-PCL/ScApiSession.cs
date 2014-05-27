@@ -18,14 +18,26 @@ namespace Sitecore.MobileSDK
         private readonly HttpClient httpClient;
 
         private readonly SessionConfig sessionConfig;
+        private readonly ItemSource defaultSource;
 
         private PublicKeyX509Certificate publicCertifiacte;
 
         #endregion Private Variables
 
-        public ScApiSession(SessionConfig config)
+        public ScApiSession(SessionConfig config, ItemSource defaultSource)
         {
+            if (null == config)
+            {
+                throw new ArgumentNullException ("ScApiSession.config cannot be null");
+            }
+            if (null == defaultSource)
+            {
+                throw new ArgumentNullException ("ScApiSession.defaultSource cannot be null");
+            }
+
+
             this.sessionConfig = config;
+            this.defaultSource = defaultSource;
             this.httpClient = new HttpClient();
         }
 
