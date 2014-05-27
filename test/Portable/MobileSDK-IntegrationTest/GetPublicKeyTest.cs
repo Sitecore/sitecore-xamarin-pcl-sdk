@@ -16,10 +16,10 @@
         public void Setup()
         {
             SessionConfig config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:7119", "extranet\\creatorex", "creatorex");
-            this.sessionWithNoAnonymousAccess = new ScApiSession(config);
+            this.sessionWithNoAnonymousAccess = new ScApiSession(config, ItemSource.DefaultSource());
 
             config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:722", "extranet\\creatorex", "creatorex");
-            this.sessionWithAnonymousAccess = new ScApiSession(config);
+            this.sessionWithAnonymousAccess = new ScApiSession(config, ItemSource.DefaultSource());
 
             this.httpClient = new HttpClient();
         }

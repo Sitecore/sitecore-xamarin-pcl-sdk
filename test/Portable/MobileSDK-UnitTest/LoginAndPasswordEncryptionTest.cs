@@ -1,4 +1,4 @@
-﻿namespace MobileSDKTestAndroid
+﻿namespace Sitecore.MobileSdkUnitTest
 {
     using System;
     using System.IO;
