@@ -3,6 +3,7 @@ using System;
 using Sitecore.MobileSDK;
 using System.Net.Http;
 using Sitecore.MobileSDK.Items;
+using Newtonsoft.Json;
 
 namespace MobileSDKTestAndroid
 {
@@ -51,6 +52,25 @@ namespace MobileSDKTestAndroid
 		{
 			TestDelegate action = () => ScItemsParser.Parse (null);
 			Assert.Throws<ArgumentException> (action, "cannot parse null response");
+		}
+
+		[Test]
+		public void TestParseResponseWithEmptyItems ()
+		{
+			string rawResponse = "{\n  \"statusCode\": 200,\n  \"result\": {\n    \"totalCount\": 0,\n    \"resultCount\": 0,\n    \"items\": []\n  }\n}";
+			ScItemsResponse response = ScItemsParser.Parse (rawResponse);
+
+			Assert.AreEqual (0, response.TotalCount);
+			Assert.AreEqual (0, response.ResultCount);
+			Assert.AreEqual (0, response.Items.Count);
+		}
+
+		[Test]
+		public void TestParseInvalidResponse ()
+		{
+			string rawResponse = "{\n  \"statusCode\": 200,\n  \"result\": {\n    \"Invalidtotaldount\": 0,\n    \"InvalidresultCount\": 0,\n    \"items\": []\n  }\n}";
+			TestDelegate action = () => ScItemsParser.Parse (rawResponse);
+			Assert.Throws<ArgumentException> (action, "JsonException should be here");
 		}
 	}
 }

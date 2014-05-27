@@ -21,8 +21,8 @@ namespace Sitecore.MobileSDK
 
 			JObject jsonResponse = JObject.Parse (response);
 
-			int totalCount = jsonResponse.SelectToken ("$.result.totalCount").Value<int> ();
-			int resultCount = jsonResponse.SelectToken ("$.result.resultCount").Value<int> ();
+			int totalCount = ParseOrFail<int> (jsonResponse, "$.result.totalCount");
+			int resultCount = ParseOrFail<int> (jsonResponse, "$.result.resultCount");
 
 			var responseItems = jsonResponse.SelectToken ("$.result.items");
 			var items = new List<ScItem> ();
@@ -45,6 +45,18 @@ namespace Sitecore.MobileSDK
 			}
 
 			return new ScItemsResponse (totalCount, resultCount, items);
+		}
+
+		private static T ParseOrFail<T>(JObject json, string path)
+		{
+
+			JToken objectToken = json.SelectToken (path);
+			if (null == objectToken)
+			{
+				throw new JsonException ("Invalid json");
+			}
+
+			return objectToken.Value<T> ();
 		}
 	}
 }
