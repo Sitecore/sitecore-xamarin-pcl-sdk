@@ -29,5 +29,5 @@ UpgradeLog.htm
 
 # NuGet
 packages
-.nuget
+*.exe
 *.dgml
