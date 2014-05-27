@@ -1,10 +1,11 @@
-﻿namespace MobileSDKTestAndroid
+﻿namespace Sitecore.MobileSdkUnitTest
 {
 	using NUnit.Framework;
 	using System;
 	using Sitecore.MobileSDK;
-	using System.Net.Http;
 	using Sitecore.MobileSDK.Items;
+
+    // @adk.review : waybe we should we wrap this? 
 	using Newtonsoft.Json;
 
 	[TestFixture]
@@ -27,7 +28,7 @@
 			Assert.AreEqual ("/{11111111-1111-1111-1111-111111111111}/{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", item1.LongId);
 			Assert.AreEqual ("/sitecore/content/Home", item1.Path);
 			Assert.AreEqual ("Sample/Sample Item", item1.Template);
-			Assert.AreEqual (1, item1.Source.Version);
+            Assert.AreEqual (1, item1.Source.VersionNumber);
 		}
 
 		[Test]
@@ -60,6 +61,8 @@
 		{
 			string rawResponse = "{\n  \"statusCode\": 200,\n  \"result\": {\n    \"Invalidtotaldount\": 0,\n    \"InvalidresultCount\": 0,\n    \"items\": []\n  }\n}";
 			TestDelegate action = () => ScItemsParser.Parse (rawResponse);
+
+            // @adk.review : waybe we should we wrap this? 
 			Assert.Throws<JsonException> (action, "JsonException should be here");
 		}
 
