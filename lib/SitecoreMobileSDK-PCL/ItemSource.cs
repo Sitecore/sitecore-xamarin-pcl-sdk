@@ -6,20 +6,18 @@ namespace Sitecore.MobileSDK
     {
         public static ItemSource DefaultSource()
         {
-            return new ItemSource ("web", "en", null, null);
+            return new ItemSource ("web", "en", null);
         }
 
-        public ItemSource ( string database, string language, string site = null, string version = null )
+        public ItemSource ( string database, string language, string version = null )
         {
             this.Database = database;
             this.Language = language;
-            this.Site     = site    ;
             this.Version  = version ;
         }
 
         public string Database  { get; private set; }
         public string Language  { get; private set; }
-        public string Site      { get; private set; }
         public string Version   { get; private set; }
     }     
 }         
