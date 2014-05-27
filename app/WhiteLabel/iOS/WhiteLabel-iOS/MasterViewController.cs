@@ -17,7 +17,7 @@ namespace WhiteLabeliOS
 			Title = NSBundle.MainBundle.LocalizedString ("Master", "Master");
 		}
 
-		partial void settingsButtonTouched (NSObject sender)
+		partial void settingsButtonTouched (MonoTouch.UIKit.UIBarButtonItem sender)
 		{
 			this.showSeetingsView();
 		}
@@ -49,11 +49,19 @@ namespace WhiteLabeliOS
 
 			this.settings = new InstanceSettings();
 
-			this.features.Insert (0, "getItemByPath");
-			this.features.Insert (0, "getItemById");
+			this.InitFeaturesList ();
 
 			TableView.Source = dataSource = new DataSource (this);
 			this.TableView.ReloadData();
+		}
+
+		private void InitFeaturesList()
+		{
+			this.features.Insert (0, "getItemByPath");
+			this.features.Insert (0, "getItemById");
+			this.features.Insert (0, "deleteItemById");
+			this.features.Insert (0, "createEditItem");
+
 		}
 
 		class DataSource : UITableViewSource
@@ -92,7 +100,9 @@ namespace WhiteLabeliOS
 				string featureKey = controller.features [indexPath.Row].ToString ();
 
 				UIStoryboard myStoryboard = controller.Storyboard as UIStoryboard;
-				UIViewController detailViewController = myStoryboard.InstantiateViewController (featureKey) as UIViewController;
+				BaseTaskViewController detailViewController = myStoryboard.InstantiateViewController (featureKey) as BaseTaskViewController;
+
+				detailViewController.instanceSettings = controller.settings;
 
 				navController.PushViewController (detailViewController, true);
 			}
