@@ -1,10 +1,11 @@
 ﻿namespace Sitecore.MobileSDK
 {
 	using System;
-	using Sitecore.MobileSDK.Items;
 	using Newtonsoft.Json;
 	using Newtonsoft.Json.Linq;
 	using System.Collections.Generic;
+
+    using Sitecore.MobileSDK.Items;
 
 	public class ScItemsParser
 	{
@@ -54,7 +55,7 @@
 		{
 			var language = (string)json.GetValue ("Language");
 			var database = (string)json.GetValue ("Database");
-			var version = (int)json.GetValue ("Version");
+            var version = (string)json.GetValue ("Version");
 
 			return new ItemSource (database, language, version);
 		}
