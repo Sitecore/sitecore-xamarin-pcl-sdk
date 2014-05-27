@@ -1,10 +1,15 @@
 ﻿
 namespace Sitecore.MobileSdkUnitTest
 {
-    using System;
     using NUnit.Framework;
-    using Sitecore.MobileSDK;
+
+    using System;
     using System.Diagnostics;
+
+    using Sitecore.MobileSDK;
+    using Sitecore.MobileSDK.Items;
+
+
 
     [TestFixture]
     public class ItemSourceTest

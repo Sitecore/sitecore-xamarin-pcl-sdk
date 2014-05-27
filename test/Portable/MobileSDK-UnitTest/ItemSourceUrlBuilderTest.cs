@@ -5,6 +5,7 @@ namespace Sitecore.MobileSdkUnitTest
     using System;
     using NUnit.Framework;
 
+    using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder;
 
 

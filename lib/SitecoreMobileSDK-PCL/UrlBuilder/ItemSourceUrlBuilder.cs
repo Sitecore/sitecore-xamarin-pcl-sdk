@@ -1,7 +1,10 @@
-﻿using System;
+﻿
 
 namespace Sitecore.MobileSDK.UrlBuilder
 {
+    using System;
+    using Sitecore.MobileSDK.Items;
+
     public class ItemSourceUrlBuilder
     {
         private ItemSourceUrlBuilder ()
