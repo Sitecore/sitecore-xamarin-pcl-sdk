@@ -11,22 +11,16 @@ namespace Sitecore.MobileSDK
 
         public ItemSource ( string database, string language, string site = null, string version = null )
         {
-            this.database = database;
-            this.language = language;
-            this.site     = site    ;
-            this.version  = version ;
+            this.Database = database;
+            this.Language = language;
+            this.Site     = site    ;
+            this.Version  = version ;
         }
 
-        public string Database  { get { return this.database; } }
-        public string Language  { get { return this.language; } }
-        public string Site      { get { return this.site    ; } }
-        public string Version   { get { return this.version ; } }
-
-
-        private string database;
-        private string language;
-        private string site    ;
-        private string version ;
+        public string Database  { get; private set; }
+        public string Language  { get; private set; }
+        public string Site      { get; private set; }
+        public string Version   { get; private set; }
     }     
 }         
 
