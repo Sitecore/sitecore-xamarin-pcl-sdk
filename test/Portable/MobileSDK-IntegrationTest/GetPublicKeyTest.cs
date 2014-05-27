@@ -1,8 +1,11 @@
 ﻿namespace MobileSDKTestAndroid
 {
-    using System.Net.Http;
     using NUnit.Framework;
+
+    using System.Net.Http;
+
     using Sitecore.MobileSDK;
+    using Sitecore.MobileSDK.Items;
 
     [TestFixture]
     public class GetPublicKeyTest
