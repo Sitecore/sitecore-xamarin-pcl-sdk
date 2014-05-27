@@ -7,18 +7,11 @@ using MonoTouch.UIKit;
 
 namespace WhiteLabeliOS
 {
-	public partial class CreateEditItemViewController : UIViewController
+	public partial class CreateEditItemViewController : BaseTaskViewController
 	{
-		public CreateEditItemViewController () : base ("CreateEditItemViewController", null)
+		public CreateEditItemViewController (IntPtr handle) : base (handle)
 		{
-		}
-
-		public override void DidReceiveMemoryWarning ()
-		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
+			Title = NSBundle.MainBundle.LocalizedString ("createEditItem", null);
 		}
 
 		public override void ViewDidLoad ()
@@ -26,6 +19,16 @@ namespace WhiteLabeliOS
 			base.ViewDidLoad ();
 			
 			// Perform any additional setup after loading the view, typically from a nib.
+		}
+
+		partial void createITemTouched (MonoTouch.Foundation.NSObject sender)
+		{
+			this.saveButton.Enabled = true;
+		}
+
+		partial void saveItemTouched (MonoTouch.Foundation.NSObject sender)
+		{
+
 		}
 	}
 }
