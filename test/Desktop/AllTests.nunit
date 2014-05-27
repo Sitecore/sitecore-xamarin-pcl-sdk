@@ -1,0 +1,8 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="MobileSdk-IntegrationTest-Desktop\bin\Debug\MobileSdk-IntegrationTest-Desktop.dll" />
+    <assembly path="MobileSDK-UnitTest-Desktop\bin\Debug\MobileSDK-UnitTest-Desktop.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto" />
+</NUnitProject>
