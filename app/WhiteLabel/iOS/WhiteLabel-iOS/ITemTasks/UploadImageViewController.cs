@@ -7,25 +7,69 @@ using MonoTouch.UIKit;
 
 namespace WhiteLabeliOS
 {
-	public partial class UploadImageViewController : UIViewController
+	public partial class UploadImageViewController : BaseTaskViewController
 	{
-		public UploadImageViewController () : base ("UploadImageViewController", null)
+		private UIImagePickerController imagePicker;
+
+		public UploadImageViewController (IntPtr handle) : base (handle)
 		{
+			Title = NSBundle.MainBundle.LocalizedString ("uploadImageVC", null);
 		}
 
-		public override void DidReceiveMemoryWarning ()
+		partial void cancelUpload (MonoTouch.Foundation.NSObject sender)
 		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
+			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
+			this.cancelButton.Enabled = false;
 		}
 
-		public override void ViewDidLoad ()
+		partial void startUpload (MonoTouch.Foundation.NSObject sender)
 		{
-			base.ViewDidLoad ();
-			
-			// Perform any additional setup after loading the view, typically from a nib.
+			this.cancelButton.Enabled = true;
+			this.chooseImageFromLibrary();
+		}
+
+		private void chooseImageFromLibrary()
+		{
+		    imagePicker = new UIImagePickerController ();
+			imagePicker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+			imagePicker.MediaTypes = UIImagePickerController.AvailableMediaTypes (UIImagePickerControllerSourceType.PhotoLibrary);
+			imagePicker.FinishedPickingMedia += Handle_FinishedPickingMedia;
+			imagePicker.Canceled += Handle_Canceled;
+			this.NavigationController.PresentViewController (imagePicker, true, null);
+		}
+
+		protected void Handle_FinishedPickingMedia (object sender, UIImagePickerMediaPickedEventArgs e)
+		{
+			bool isImage = false;
+			switch(e.Info[UIImagePickerController.MediaType].ToString()) {
+			case "public.image":
+				Console.WriteLine("Image selected");
+				isImage = true;
+				break;
+			case "public.video":
+				Console.WriteLine("Video selected");
+				break;
+			}
+
+			if(isImage) 
+			{
+
+				UIImage originalImage = e.Info[UIImagePickerController.OriginalImage] as UIImage;
+				if(originalImage != null) 
+				{
+					AlertHelper.ShowErrorAlertWithOkOption("Alert", "Image uploading is not implemented yet");
+				}
+			} 
+			else 
+			{ 
+				AlertHelper.ShowErrorAlertWithOkOption("Alert", "Video uploading is not supported");
+			}          
+
+			imagePicker.DismissModalViewControllerAnimated (true);
+		}
+
+		void Handle_Canceled (object sender, EventArgs e) {
+			imagePicker.DismissModalViewControllerAnimated(true);
 		}
 	}
 }
