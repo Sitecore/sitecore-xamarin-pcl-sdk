@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteLabel-iOS", "..\app\WhiteLabel\iOS\WhiteLabel-iOS\WhiteLabel-iOS.csproj", "{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK-PCL", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK-PCL.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

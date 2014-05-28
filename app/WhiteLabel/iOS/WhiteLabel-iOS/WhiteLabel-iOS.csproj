@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\en.lproj\Localizable.strings" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -103,20 +104,51 @@
     <Compile Include="MasterViewController.designer.cs">
       <DependentUpon>MasterViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="DetailViewController.cs" />
-    <Compile Include="DetailViewController.designer.cs">
-      <DependentUpon>DetailViewController.cs</DependentUpon>
+    <Compile Include="SettingsViewController.cs" />
+    <Compile Include="SettingsViewController.designer.cs">
+      <DependentUpon>SettingsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstanceSettings.cs" />
+    <Compile Include="ITemTasks\GetItemByIdViewController.cs" />
+    <Compile Include="ITemTasks\DeleteITemByIdViewController.cs" />
+    <Compile Include="ITemTasks\GetItemByIdViewController.designer.cs">
+      <DependentUpon>GetItemByIdViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\GetItemByPathViewController.cs" />
+    <Compile Include="ITemTasks\GetItemByPathViewController.designer.cs">
+      <DependentUpon>GetItemByPathViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\DeleteITemByIdViewController.designer.cs">
+      <DependentUpon>DeleteITemByIdViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskViewController.cs" />
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskViewController.designer.cs">
+      <DependentUpon>BaseTaskViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AlertHelper.cs" />
+    <Compile Include="ITemTasks\CreateEditItemViewController.cs" />
+    <Compile Include="ITemTasks\CreateEditItemViewController.designer.cs">
+      <DependentUpon>CreateEditItemViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\UploadImageViewController.cs" />
+    <Compile Include="ITemTasks\UploadImageViewController.designer.cs">
+      <DependentUpon>UploadImageViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
-    <InterfaceDefinition Include="MainStoryboard_iPad.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK-PCL.csproj">
+    <Folder Include="Resources\en.lproj\" />
+    <Folder Include="ITemTasks\" />
+    <Folder Include="ITemTasks\BaseClasses\" />
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
-      <Name>SitecoreMobileSDK-PCL</Name>
+      <Name>SitecoreMobileSDK</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

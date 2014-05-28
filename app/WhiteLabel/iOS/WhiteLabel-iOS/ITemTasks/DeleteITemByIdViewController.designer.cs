@@ -11,15 +11,23 @@ using System.CodeDom.Compiler;
 
 namespace WhiteLabeliOS
 {
-	[Register ("MasterViewController")]
-	partial class MasterViewController
+	[Register ("DeleteITemByIdViewController")]
+	partial class DeleteITemByIdViewController
 	{
-		[Action ("settingsButtonTouched:")]
+		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void settingsButtonTouched (MonoTouch.UIKit.UIBarButtonItem sender);
+		UITextField itemIdField { get; set; }
+
+		[Action ("deleteItem:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void deleteItem (UIButton sender);
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (itemIdField != null) {
+				itemIdField.Dispose ();
+				itemIdField = null;
+			}
 		}
 	}
 }

@@ -11,15 +11,23 @@ using System.CodeDom.Compiler;
 
 namespace WhiteLabeliOS
 {
-	[Register ("MasterViewController")]
-	partial class MasterViewController
+	[Register ("GetItemByPathViewController")]
+	partial class GetItemByPathViewController
 	{
-		[Action ("settingsButtonTouched:")]
+		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void settingsButtonTouched (MonoTouch.UIKit.UIBarButtonItem sender);
+		MonoTouch.UIKit.UITextField itemPathField { get; set; }
+
+		[Action ("getItem:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void getItem (MonoTouch.UIKit.UIButton sender);
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (itemPathField != null) {
+				itemPathField.Dispose ();
+				itemPathField = null;
+			}
 		}
 	}
 }

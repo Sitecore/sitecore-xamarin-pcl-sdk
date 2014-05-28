@@ -1,0 +1,6 @@
+﻿"Settings" = "Settings";
+"getItemByPath" = "Item by Path";
+"getItemById" = "Item by ID & item children";
+"deleteItemById" = "Delete Item by ID";
+"createEditItem" = "Create & Edit Item";
+"uploadImageVC" = "Upload Image";
