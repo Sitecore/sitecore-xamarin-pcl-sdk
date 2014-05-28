@@ -8,10 +8,15 @@ namespace Sitecore.MobileSDK.PublicKey
 
     public class AnonymousSessionCryptor : ICredentialsHeadersCryptor
     {
-        public Task<HttpRequestMessage> AddEncryptedCredentialHeaders (HttpRequestMessage httpRequest)
+		public async Task<HttpRequestMessage> AddEncryptedCredentialHeadersAsync (HttpRequestMessage httpRequest)
         {
-            return httpRequest;
+			return this.AddEncryptedCredentialHeaders(httpRequest);
         }
+
+		public HttpRequestMessage AddEncryptedCredentialHeaders (HttpRequestMessage httpRequest)
+		{
+			return httpRequest;
+		}
     }
 }
 

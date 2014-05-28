@@ -7,7 +7,8 @@ namespace Sitecore.MobileSDK.PublicKey
 
     public interface ICredentialsHeadersCryptor
     {
-        Task<HttpRequestMessage> AddEncryptedCredentialHeaders(HttpRequestMessage httpRequest);
+        Task<HttpRequestMessage> AddEncryptedCredentialHeadersAsync(HttpRequestMessage httpRequest);
+		HttpRequestMessage AddEncryptedCredentialHeaders (HttpRequestMessage httpRequest);
     }
 }
 
