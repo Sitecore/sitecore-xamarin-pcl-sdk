@@ -1,12 +1,15 @@
 ﻿
-
-
 namespace Sitecore.MobileSdkUnitTest
 {
-    using System;
     using NUnit.Framework;
-    using Sitecore.MobileSDK;
+
+    using System;
     using System.Diagnostics;
+
+    using Sitecore.MobileSDK;
+    using Sitecore.MobileSDK.Items;
+
+
 
     [TestFixture]
     public class ItemSourceTest
@@ -29,7 +32,6 @@ namespace Sitecore.MobileSdkUnitTest
         [Test]
         public void TestApiSessionConstructorRequiresConfig()
         {
-            SessionConfig config = new SessionConfig ("localhost", "alex.fergusson", "man u is a champion");
             ItemSource defaultSource = ItemSource.DefaultSource ();
 
             TestDelegate initSessionAction = () =>
@@ -39,6 +41,34 @@ namespace Sitecore.MobileSdkUnitTest
             };
 
             Assert.Throws<ArgumentNullException>(initSessionAction);
+        }
+
+        [Test]
+        public void TestItemSourceRequiresDatabase()
+        {
+            Assert.Throws<ArgumentNullException> (() => new ItemSource (null, "en", "1"));
+        }
+
+        [Test]
+        public void TestItemSourceRequiresLanguage()
+        {
+            Assert.Throws<ArgumentNullException> (() => new ItemSource ("master", null, "1"));
+        }
+
+        [Test]
+        public void TestLanguageIsOptionalForItemSource()
+        {
+            Assert.DoesNotThrow (() => new ItemSource ("core", "da", null));
+        }
+
+        [Test]
+        public void TestDefaultSource()
+        {
+            ItemSource defaultSource = ItemSource.DefaultSource ();
+
+            Assert.AreEqual (defaultSource.Database, "web");
+            Assert.AreEqual (defaultSource.Language, "en");
+
         }
     }
 }

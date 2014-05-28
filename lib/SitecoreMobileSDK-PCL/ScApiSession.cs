@@ -1,4 +1,4 @@
-﻿
+﻿using Sitecore.MobileSDK.Items;
 
 namespace Sitecore.MobileSDK
 {
@@ -55,7 +55,6 @@ namespace Sitecore.MobileSDK
         {
             GetPublicKeyTasks taskFlow = new GetPublicKeyTasks(this.httpClient);
 
-
             PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
             this.publicCertifiacte = result;
 
@@ -69,5 +68,17 @@ namespace Sitecore.MobileSDK
         }
 
         #endregion Encryption
+
+		#region GetItems
+		public async Task<ScItemsResponse> GetItemById (string id)
+		{
+			var config = new ItemRequestConfig (this.sessionConfig); 
+			config.Id = id;
+
+			var taskFlow = new GetItemsTasks(this.httpClient, config);
+
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
+		}
+		#endregion GetItems
     }
 }

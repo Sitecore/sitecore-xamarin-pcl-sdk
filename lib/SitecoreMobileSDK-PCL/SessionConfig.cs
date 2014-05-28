@@ -4,17 +4,24 @@
 
     public class SessionConfig
     {
-        public SessionConfig(string instanceUrl, string login, string password)
+        public SessionConfig(string instanceUrl, string login, string password, string site = null)
         {
             this.InstanceUrl = instanceUrl;
-            this.Login = login;
-            this.Password = password;
+            this.Login       = login      ;
+            this.Password    = password   ;
+            this.Site        = site       ;
         }
 
         public string InstanceUrl
         {
             get;
             private set;
+        }
+
+        public string Site      
+        { 
+            get; 
+            private set; 
         }
 
         public string Login
