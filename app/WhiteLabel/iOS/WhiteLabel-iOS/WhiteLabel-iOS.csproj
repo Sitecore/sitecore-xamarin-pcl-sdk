@@ -130,6 +130,10 @@
     <Compile Include="ITemTasks\CreateEditItemViewController.designer.cs">
       <DependentUpon>CreateEditItemViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITemTasks\UploadImageViewController.cs" />
+    <Compile Include="ITemTasks\UploadImageViewController.designer.cs">
+      <DependentUpon>UploadImageViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
