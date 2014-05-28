@@ -1,13 +1,18 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.IO;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.TaskFlow;
-using Sitecore.MobileSDK.PublicKey;
+﻿
 
 namespace Sitecore.MobileSDK
 {
+    using System;
+    using System.IO;
+    using System.Net.Http;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.TaskFlow;
+    using Sitecore.MobileSDK.PublicKey;
+
+
 	public class GetItemsTasks : IRestApiCallTasks<string, string, ScItemsResponse>
 	{
 		#region Private Variables
@@ -35,6 +40,8 @@ namespace Sitecore.MobileSDK
 					finalUrl += "?sc_itemid=" + this.requestConfig.Id;
 				}
 
+
+                Debug.WriteLine(finalUrl);
 				return finalUrl;
 			});
 		}
@@ -78,3 +85,4 @@ namespace Sitecore.MobileSDK
 		#endregion IRestApiCallTasks
 	}
 }
+
