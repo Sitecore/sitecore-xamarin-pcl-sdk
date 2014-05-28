@@ -5,8 +5,16 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
     public class WebApiUrlBuilder
     {
-        public WebApiUrlBuilder()
+        private WebApiUrlBuilder()
         {
+        }
+
+        public WebApiUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+        {
+            this.restGrammar = restGrammar;
+            this.webApiGrammar = webApiGrammar;
+
+            this.Validate ();
         }
 
         public string GetUrlForRequest(IRequestConfig request)
@@ -54,5 +62,13 @@ namespace Sitecore.MobileSDK.UrlBuilder
             }
 
         }
+
+        private void Validate()
+        {
+            // TODO : implement me
+        }
+
+        private IRestServiceGrammar restGrammar;
+        private IWebApiUrlParameters webApiGrammar;
     }
 }

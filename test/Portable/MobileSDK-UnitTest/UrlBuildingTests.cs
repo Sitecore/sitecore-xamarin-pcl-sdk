@@ -15,7 +15,11 @@
         [SetUp]
         public void SetUp()
         {
-            this.builder = new WebApiUrlBuilder();
+            IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar ();
+            IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+            
+
+            this.builder = new WebApiUrlBuilder(restGrammar, webApiGrammar);
         }
 
         [TearDown]

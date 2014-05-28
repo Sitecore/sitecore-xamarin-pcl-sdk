@@ -9,6 +9,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
             RestServiceGrammar result = new RestServiceGrammar ();
             result.KeyValuePairSeparator = "=";
             result.FieldSeparator        = "&";
+            result.HostAndArgsSeparator  = "?";
 
             return result;
         }
@@ -19,6 +20,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
         public string KeyValuePairSeparator { get; private set; }
         public string FieldSeparator        { get; private set; }
+        public string HostAndArgsSeparator  { get; private set; }
     }
 }
 
