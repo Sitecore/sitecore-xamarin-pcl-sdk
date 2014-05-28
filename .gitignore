@@ -26,6 +26,7 @@ TestResult.xml
 UpgradeLog.html
 UpgradeLog.htm
 *.VisualState.xml
+*.sln.*
 
 # NuGet
 packages
