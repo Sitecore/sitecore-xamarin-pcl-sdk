@@ -1,10 +1,15 @@
-﻿using System;
+﻿
 
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.PublicKey
 {
-    public class AuthenticedSessionCryptor
+    using System;
+    using System.Threading.Tasks;
+    using System.Net.Http;
+
+
+    public class AuthenticedSessionCryptor : ICredentialsHeadersCryptor
     {
-        public AuthenticedSessionCryptor ()
+        Task<HttpRequestMessage> AddEncryptedCredentialHeaders(HttpRequestMessage httpRequest)
         {
         }
     }
