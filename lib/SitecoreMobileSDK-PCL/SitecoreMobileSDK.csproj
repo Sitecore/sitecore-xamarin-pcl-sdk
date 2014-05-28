@@ -54,6 +54,9 @@
     <Compile Include="UrlBuilder\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\IWebApiUrlParameters.cs" />
+    <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
+    <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
+    <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
