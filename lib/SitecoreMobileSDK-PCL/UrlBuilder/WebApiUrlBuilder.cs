@@ -30,6 +30,15 @@ namespace Sitecore.MobileSDK.UrlBuilder
             {
                 throw new ArgumentNullException("WebApiUrlBuilder.GetUrlForRequest() : do not pass null");
             }
+
+            bool hasOpeningBrace = request.ItemId.StartsWith("{");
+            bool hasClosingBrace = request.ItemId.EndsWith("}");
+            bool isValidId = hasOpeningBrace && hasClosingBrace;
+            if (!isValidId)
+            {
+                throw new ArgumentException("WebApiUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
+            }
+
         }
     }
 }
