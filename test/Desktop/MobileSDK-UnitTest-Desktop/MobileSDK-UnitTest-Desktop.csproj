@@ -72,12 +72,16 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\LoginAndPasswordEncryptionTest.cs">
       <Link>LoginAndPasswordEncryptionTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockReadItemByIdParameters.cs">
+      <Link>Mock\MockReadItemByIdParameters.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\PublicKeyParsingTest.cs">
       <Link>PublicKeyParsingTest.cs</Link>
     </Compile>
-    <Compile Include="Mock\MockReadItemByIdParameters.cs" />
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\UrlBuildingTests.cs">
+      <Link>UrlBuildingTests.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UrlBuildingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
