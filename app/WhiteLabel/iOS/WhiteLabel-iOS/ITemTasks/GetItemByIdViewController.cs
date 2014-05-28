@@ -23,7 +23,19 @@ namespace WhiteLabeliOS
 
 		partial void getItem (MonoTouch.UIKit.UIButton sender)
 		{
-			this.sendRequest();
+			if (String.IsNullOrEmpty(itemIdTextField.Text))
+			{
+				AlertHelper.ShowErrorAlertWithOkOption("Error", "Please type item Id");
+			}
+			else
+			{
+				this.sendRequest();
+			}
+		}
+
+		partial void getChildren (MonoTouch.Foundation.NSObject sender)
+		{
+			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
 		private async void sendRequest ()
@@ -31,8 +43,15 @@ namespace WhiteLabeliOS
 			ScApiSession session = this.instanceSettings.GetSession();
 			string itemId = itemIdTextField.Text;
 			ScItemsResponse response = await session.GetItemById(itemId);
-			ScItem item = response.Items [0];
-			AlertHelper.ShowAlert ("result", "item title" + item.DisplayName, "ok");
+			if (response.ResultCount > 0)
+			{
+				ScItem item = response.Items [0];
+				AlertHelper.ShowAlert ("Item received", "item title is \"" + item.DisplayName + "\"", "OK");
+			}
+			else
+			{
+				AlertHelper.ShowErrorAlertWithOkOption("Message", "Item is not exist");
+			}
 		}
 	}
 }
