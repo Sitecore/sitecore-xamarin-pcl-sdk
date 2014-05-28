@@ -1,9 +1,13 @@
-﻿namespace MobileSDKIntegrationTest
+﻿using System;
+using System.Security;
+using NUnit.Framework.Constraints;
+
+namespace MobileSDKIntegrationTest
 {
     using NUnit.Framework;
 
     using System.Net.Http;
-    
+    using System.Xml;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
@@ -66,6 +70,50 @@
             int statusCode = (int)json.SelectToken("$.statusCode");
 
             Assert.AreEqual(200, statusCode);
+        }
+
+        [Test]
+        public async void TestGetPublicKeyWithInvalidInstanceUrl()
+        {
+            SessionConfig config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", "sitecore\\admin", "b");
+            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+
+            TestDelegate action = async () =>
+            {
+                var response = await session.GetItemById("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
+            };
+
+            XmlException exception = Assert.Throws<XmlException>(action, "we should get error here");
+        }
+
+        [Test]
+        public async void TestGetPublicKeyWithNullInstanceUrl()
+        {
+            SessionConfig config = new SessionConfig(null, "sitecore\\admin", "b");
+            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+
+            TestDelegate action = async () =>
+            {
+                var response = await session.GetItemById("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
+            };
+
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(action, "we should get error here");
+            StringAssert.Contains("An invalid request URI was provided.", exception.GetBaseException().ToString());
+        }
+
+        [Test]
+        public async void TestGetPublicKeyWithNullItemsSource()
+        {
+            SessionConfig config = new SessionConfig(null, "sitecore\\admin", "b");
+            
+
+            TestDelegate action = async () =>
+            {
+                ScApiSession session = new ScApiSession(config, null);
+            };
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(action, "we should get error here");
+            StringAssert.Contains("ScApiSession.defaultSource cannot be null", exception.GetBaseException().ToString());
         }
     }
 }
