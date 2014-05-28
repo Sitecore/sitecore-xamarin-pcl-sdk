@@ -14,14 +14,28 @@ namespace Sitecore.MobileSDK.UrlBuilder
             this.ValidateRequest(request);
 
             string escapedId = Uri.EscapeDataString(request.ItemId);
+            string escapedVersion = Uri.EscapeDataString (request.WebApiVersion);
 
-            if (!request.InstanceUrl.StartsWith("https://") && !request.InstanceUrl.StartsWith("http://"))
+            if ( !this.IsValidUrlScheme(request.InstanceUrl) )
             {
                 request.InstanceUrl = request.InstanceUrl.Insert(0, "http://");
             }
 
-            string result = request.InstanceUrl + "/-/item/" + request.WebApiVersion + "?sc_itemid=" + escapedId;
-            return result.ToLower();
+
+
+            string result = request.InstanceUrl + "/-/item/" + escapedVersion + "?sc_itemid=" + escapedId;
+            return result.ToLowerInvariant();
+        }
+
+        private bool IsValidUrlScheme( string url )
+        {
+            string lowercaseUrl = url.ToLowerInvariant ();
+
+            bool isHttps = lowercaseUrl.StartsWith ("https://");
+            bool isHttp = lowercaseUrl.StartsWith ("http://");
+            bool result =  (isHttps || isHttp);
+
+            return result;
         }
 
         private void ValidateRequest(IRequestConfig request)

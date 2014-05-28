@@ -22,20 +22,27 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
         public string BuildUrlQueryString()
         {
+            string escapedDatabase = Uri.EscapeDataString (this.itemSource.Database);
+            string escapedLanguage = Uri.EscapeDataString (this.itemSource.Language);
+
+
+
             string result = 
-                this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + this.itemSource.Database +
+                this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + escapedDatabase +
 
                 this.restGrammar.FieldSeparator + 
-                this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + this.itemSource.Language;
+                this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
 
             if (null != this.itemSource.Version)
             {
+                string escapedVersion = Uri.EscapeDataString (this.itemSource.Version);
+
                 result += 
                     this.restGrammar.FieldSeparator + 
-                    this.webApiGrammar.VersionParameterName + this.restGrammar.KeyValuePairSeparator + this.itemSource.Version;
+                    this.webApiGrammar.VersionParameterName + this.restGrammar.KeyValuePairSeparator + escapedVersion;
             }
 
-            return result;
+            return result.ToLowerInvariant ();
         }
 
         private void Validate()

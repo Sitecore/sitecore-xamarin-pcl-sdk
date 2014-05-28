@@ -1,11 +1,12 @@
-﻿using System;
-using System.Security;
-using NUnit.Framework.Constraints;
+﻿
 
 namespace MobileSDKIntegrationTest
 {
     using NUnit.Framework;
+    using NUnit.Framework.Constraints;
 
+    using System;
+    using System.Security;
     using System.Net.Http;
     using System.Xml;
     using Newtonsoft.Json;
