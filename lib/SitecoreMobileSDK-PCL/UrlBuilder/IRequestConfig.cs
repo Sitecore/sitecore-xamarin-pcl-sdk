@@ -1,7 +1,5 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder
 {
-    using System;
-
     public interface IRequestConfig
     {
         string InstanceUrl { get; set; }
