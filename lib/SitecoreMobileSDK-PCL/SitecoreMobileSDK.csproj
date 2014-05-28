@@ -44,9 +44,7 @@
     <Compile Include="Items\ScItem.cs" />
     <Compile Include="Items\ScItemsResponse.cs" />
     <Compile Include="Items\ScItemsParser.cs" />
-    <Compile Include="GetItemsTasks.cs" />
     <Compile Include="Items\ItemsSource.cs" />
-    <Compile Include="Items\ItemRequestConfig.cs" />
     <Compile Include="ScResponseException.cs" />
     <Compile Include="ScErrorResponse.cs" />
     <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
@@ -57,6 +55,8 @@
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
+    <Compile Include="CrudTasks\GetItemsTasks.cs" />
+    <Compile Include="CrudTasks\ItemRequestConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -113,5 +113,6 @@
     <Folder Include="TaskFlow\" />
     <Folder Include="Items\" />
     <Folder Include="UrlBuilder\" />
+    <Folder Include="CrudTasks\" />
   </ItemGroup>
 </Project>
