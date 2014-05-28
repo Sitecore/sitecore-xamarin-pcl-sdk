@@ -10,6 +10,7 @@ namespace Sitecore.MobileSDK
 
     using Sitecore.MobileSDK.PublicKey;
     using Sitecore.MobileSDK.TaskFlow;
+	using Sitecore.MobileSDK.CrudTasks;
 
     public class ScApiSession
     {
@@ -67,19 +68,32 @@ namespace Sitecore.MobileSDK
             return cryptor.Encrypt(data);
         }
 
+		public async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
+		{
+			if (this.sessionConfig.IsAnonymous ())
+			{
+				return new AnonymousSessionCryptor ();
+			}
+			else
+			{
+				// TODO : flow should be responsible for caching. Do not hard code here
+				PublicKeyX509Certificate cert = await this.GetPublicKey ();
+				return new AuthenticedSessionCryptor (this.sessionConfig.Login, this.sessionConfig.Password, cert);
+			}
+		}
+
         #endregion Encryption
 
 		#region GetItems
 		public async Task<ScItemsResponse> GetItemById (string id)
 		{
             PublicKeyX509Certificate cert = await GetPublicKey ();
+			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync ();
+			ItemRequestConfig config = new ItemRequestConfig (this.sessionConfig.InstanceUrl, id, cryptor);
 
-            var config = new ItemRequestConfig (this.sessionConfig, cert); 
-			config.Id = id;
+			var taskFlow = new GetItemsTasks(this.httpClient);
 
-			var taskFlow = new GetItemsTasks(this.httpClient, config);
-
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
+			return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
 		}
 		#endregion GetItems
     }
