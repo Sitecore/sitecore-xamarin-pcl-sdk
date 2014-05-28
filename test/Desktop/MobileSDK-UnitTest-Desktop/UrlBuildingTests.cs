@@ -60,5 +60,26 @@
 
             Assert.Throws<ArgumentNullException>(action);
         }
+
+        [Test]
+        public void TestInvalidItemId()
+        {
+            MockReadItemByIdParameters mockParams = new MockReadItemByIdParameters
+            {
+                InstanceUrl = "SITECORE.net",
+                WebApiVersion = "V100500",
+                ItemId = "/path/to/item"
+            };
+
+            IRequestConfig itemInfo = mockParams;
+            WebApiUrlBuilder builder = new WebApiUrlBuilder();
+
+            TestDelegate action = () =>
+            {
+                string result = builder.GetUrlForRequest(itemInfo);
+            };
+
+            Assert.Throws<ArgumentException>(action);
+        }
     }
 }
