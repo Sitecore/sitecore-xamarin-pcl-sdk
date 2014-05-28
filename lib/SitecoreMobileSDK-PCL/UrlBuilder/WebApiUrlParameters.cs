@@ -11,6 +11,9 @@ namespace Sitecore.MobileSDK.UrlBuilder
             result.LanguageParameterName = "sc_lang";
             result.VersionParameterName  = "sc_itemversion";
 
+            result.ItemWebApiEndpoint = "/-/item/";
+            result.ItemIdParameterName = "sc_itemid";
+
             return result;
         }
 
@@ -18,9 +21,11 @@ namespace Sitecore.MobileSDK.UrlBuilder
         {
         }
 
+        public string ItemIdParameterName { get; private set;}
         public string DatabaseParameterName { get; private set;}
         public string LanguageParameterName { get; private set;}
         public string VersionParameterName  { get; private set;}
+        public string ItemWebApiEndpoint   { get; private set;}
 
     }
 }

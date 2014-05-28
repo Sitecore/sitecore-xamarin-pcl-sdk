@@ -7,6 +7,10 @@ namespace Sitecore.MobileSDK.UrlBuilder
         string DatabaseParameterName { get; }
         string LanguageParameterName { get; }
         string VersionParameterName { get; }
+
+        string ItemIdParameterName { get; }
+
+        string ItemWebApiEndpoint { get; }
     }
 }
 

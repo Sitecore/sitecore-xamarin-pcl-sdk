@@ -31,7 +31,13 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
 
 
-            string result = request.InstanceUrl + "/-/item/" + escapedVersion + "?sc_itemid=" + escapedId;
+            string result = 
+                request.InstanceUrl +
+                this.webApiGrammar.ItemWebApiEndpoint +
+                escapedVersion +
+                this.restGrammar.HostAndArgsSeparator +
+                this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
+
             return result.ToLowerInvariant();
         }
 
