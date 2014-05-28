@@ -24,11 +24,12 @@ namespace WhiteLabeliOS
 		partial void createITemTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			this.saveButton.Enabled = true;
+			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
 		partial void saveItemTouched (MonoTouch.Foundation.NSObject sender)
 		{
-
+			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
 		}
 	}
 }

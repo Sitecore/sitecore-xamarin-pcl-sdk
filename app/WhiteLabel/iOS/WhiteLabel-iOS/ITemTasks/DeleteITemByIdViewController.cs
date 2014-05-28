@@ -13,6 +13,11 @@ namespace WhiteLabeliOS
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("deleteItemById", null);
 		}
+
+		partial void deleteItem (UIButton sender)
+		{
+			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
+		}
 	}
 }
 
