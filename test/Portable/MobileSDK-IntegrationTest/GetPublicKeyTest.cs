@@ -8,6 +8,8 @@ namespace MobileSDKIntegrationTest
 
     using System.Net.Http;
     using System.Xml;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
@@ -64,8 +66,10 @@ namespace MobileSDKIntegrationTest
             string response = await this.httpClient.GetStringAsync(url);
 
 
-            string expectedResponse = "{\"statusCode\":200,\"result\":{\"totalCount\":1,\"resultCount\":1,\"items\":";
-            StringAssert.Contains(expectedResponse, response);
+            JObject json = JObject.Parse(response);
+            int statusCode = (int)json.SelectToken("$.statusCode");
+
+            Assert.AreEqual(200, statusCode);
         }
 
         [Test]
