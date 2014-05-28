@@ -1,5 +1,6 @@
 ﻿using System;
 using MonoTouch.Foundation;
+using Sitecore.MobileSDK.Items;
 using Sitecore.MobileSDK;
 
 namespace WhiteLabeliOS
@@ -29,7 +30,7 @@ namespace WhiteLabeliOS
 
 		public ScApiSession GetSession()
 		{
-			SessionConfig config = new SessionConfig (this.instanceUrl, this.instanceLogin, this.instancePassword);
+			SessionConfig config = new SessionConfig (this.instanceUrl, this.instanceLogin, this.instancePassword, this.instanceSite);
 			ItemSource defaultSource = ItemSource.DefaultSource ();
 
 			return new ScApiSession (config, defaultSource);
