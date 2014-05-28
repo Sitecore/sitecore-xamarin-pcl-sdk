@@ -72,7 +72,9 @@ namespace Sitecore.MobileSDK
 		#region GetItems
 		public async Task<ScItemsResponse> GetItemById (string id)
 		{
-			var config = new ItemRequestConfig (this.sessionConfig); 
+            PublicKeyX509Certificate cert = await GetPublicKey ();
+
+            var config = new ItemRequestConfig (this.sessionConfig, cert); 
 			config.Id = id;
 
 			var taskFlow = new GetItemsTasks(this.httpClient, config);
