@@ -34,7 +34,7 @@
         [Test]
         public void TestParseEmptyResponse()
         {
-            TestDelegate action = () => ScItemsParser.Parse("");
+            TestDelegate action = () => ScItemsParser.Parse(string.Empty);
             Assert.Throws<ArgumentException>(action, "cannot parse empty response");
         }
 
