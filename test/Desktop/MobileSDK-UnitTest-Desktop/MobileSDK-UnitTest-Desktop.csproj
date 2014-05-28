@@ -56,6 +56,15 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\GetItemsParserTest.cs">
+      <Link>GetItemsParserTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceTest.cs">
+      <Link>ItemSourceTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceUrlBuilderTest.cs">
+      <Link>ItemSourceUrlBuilderTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\LoginAndPasswordEncryptionTest.cs">
       <Link>LoginAndPasswordEncryptionTest.cs</Link>
     </Compile>
