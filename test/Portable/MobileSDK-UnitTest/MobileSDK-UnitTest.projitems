@@ -14,5 +14,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceUrlBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mock\MockReadItemByIdParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UrlBuildingTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Mock\" />
   </ItemGroup>
 </Project>

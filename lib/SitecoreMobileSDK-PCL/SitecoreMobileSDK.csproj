@@ -47,8 +47,10 @@
     <Compile Include="Items\ItemsSource.cs" />
     <Compile Include="ScResponseException.cs" />
     <Compile Include="ScErrorResponse.cs" />
+    <Compile Include="UrlBuilder\IRequestConfig.cs" />
     <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
     <Compile Include="UrlBuilder\RestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\WebApiUrlBuilder.cs" />
     <Compile Include="UrlBuilder\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\IWebApiUrlParameters.cs" />
@@ -109,10 +111,5 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-  <ItemGroup>
-    <Folder Include="TaskFlow\" />
-    <Folder Include="Items\" />
-    <Folder Include="UrlBuilder\" />
-    <Folder Include="CrudTasks\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
