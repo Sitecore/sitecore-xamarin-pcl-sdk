@@ -1,4 +1,4 @@
-﻿namespace MobileSDKTestAndroid
+﻿namespace MobileSDKIntegrationTest
 {
     using NUnit.Framework;
 
