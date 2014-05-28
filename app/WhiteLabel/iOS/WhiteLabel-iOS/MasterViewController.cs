@@ -28,7 +28,7 @@ namespace WhiteLabeliOS
 
 			UIStoryboard myStoryboard = this.Storyboard as UIStoryboard;
 			SettingsViewController settingsViewController = myStoryboard.InstantiateViewController ("configurationViewController") as SettingsViewController;
-			settingsViewController.InstanceSettings = this.settings;
+			settingsViewController.instanceSettings = this.settings;
 
 			navController.PushViewController (settingsViewController, true);
 		}

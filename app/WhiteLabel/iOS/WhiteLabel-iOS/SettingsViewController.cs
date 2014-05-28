@@ -5,10 +5,8 @@ using MonoTouch.UIKit;
 
 namespace WhiteLabeliOS
 {
-	public partial class SettingsViewController : UIViewController
+	public partial class SettingsViewController : BaseTaskViewController
 	{
-		private InstanceSettings instanceSettings;
-
 		public SettingsViewController (IntPtr handle) : base (handle)
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("Settings", "Settings");
@@ -18,17 +16,11 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
-		}
-
-		public InstanceSettings InstanceSettings { 
-			get
-			{
-				return this.instanceSettings;
-			} 
-			set
-			{ 
-				this.instanceSettings = value;
-			}
+			this.instanceUrlField.ShouldReturn = this.HideKeyboard;
+			this.passwordField.ShouldReturn = this.HideKeyboard;
+			this.loginField.ShouldReturn = this.HideKeyboard;
+			this.siteField.ShouldReturn = this.HideKeyboard;
+			this.dbField.ShouldReturn = this.HideKeyboard;
 		}
 
 		public override void ViewWillAppear(bool animated)
