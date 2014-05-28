@@ -9,7 +9,7 @@ namespace Sitecore.MobileSDK.PublicKey
     using Sitecore.MobileSDK.TaskFlow;
 
 
-    public class GetPublicKeyTasks : IRestApiCallTasks<string, Stream, PublicKeyX509Certificate>
+	public class GetPublicKeyTasks : IRestApiCallTasks<string, string, Stream, PublicKeyX509Certificate>
     {
         #region Private Variables
 

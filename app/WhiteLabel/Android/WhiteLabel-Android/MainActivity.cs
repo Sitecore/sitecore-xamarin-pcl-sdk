@@ -1,6 +1,10 @@
-﻿namespace WhiteLabelAndroid
+﻿
+
+namespace WhiteLabelAndroid
 {
     using System;
+
+
     using Android.App;
     using Android.Content;
     using Android.OS;
@@ -8,7 +12,9 @@
     using Android.Util;
     using Android.Views;
     using Android.Widget;
-    using Sitecore.MobileSDK;
+
+	using Sitecore.MobileSDK;
+	using Sitecore.MobileSDK.Items;
 
     [Activity(Label = "WhiteLabel-Android", MainLauncher = true)]
     public class MainActivity : Activity
@@ -28,7 +34,7 @@
 
             button.Click += async (sender, e) =>
             {
-                ScApiSession session = new ScApiSession(Config);
+				ScApiSession session = new ScApiSession(Config, ItemSource.DefaultSource());
                 await session.GetPublicKey();
                 Log.Error("some tag", "login : " + session.EncryptString("extranet\\creatorex"));
                 Log.Error("some tag", "pass : " + session.EncryptString("creatorex"));
