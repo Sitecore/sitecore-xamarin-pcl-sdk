@@ -10,6 +10,19 @@
     [TestFixture]
     public class UrlBuildingTests
     {
+        private WebApiUrlBuilder builder;
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.builder = new WebApiUrlBuilder();
+        }
+
+        [TearDown]
+        public void TearDown ()
+        {
+            this.builder = null;
+        }
 
         [Test]
         public void TestBuildValidParams()
@@ -21,7 +34,7 @@
 
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = new WebApiUrlBuilder();
+            WebApiUrlBuilder builder = this.builder;
 
             string result = builder.GetUrlForRequest(itemInfo);
             string expected = "https://localhost:80/-/item/v1?sc_itemid=%7b000-111-222-333%7d";
@@ -40,7 +53,7 @@
 
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = new WebApiUrlBuilder();
+            WebApiUrlBuilder builder = this.builder;
 
             string result = builder.GetUrlForRequest(itemInfo);
             string expected = "http://localhost:80/-/item/v1?sc_itemid=%7b000-111-222-333%7d";
@@ -60,7 +73,7 @@
             };
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = new WebApiUrlBuilder();
+            WebApiUrlBuilder builder = this.builder;
 
             string result = builder.GetUrlForRequest(itemInfo);
             string expected = "http://sitecore.net/-/item/v100500?sc_itemid=%7btest-guid-666-13-666%7d";
@@ -71,7 +84,7 @@
         [Test]
         public void TestBuildInvalidParams()
         {
-            WebApiUrlBuilder builder = new WebApiUrlBuilder();
+            WebApiUrlBuilder builder = this.builder;
             TestDelegate action = () => builder.GetUrlForRequest(null);
 
             Assert.Throws<ArgumentNullException>(action);
@@ -88,7 +101,7 @@
             };
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = new WebApiUrlBuilder();
+            WebApiUrlBuilder builder = this.builder;
 
             TestDelegate action = () => builder.GetUrlForRequest(itemInfo);
 
@@ -107,7 +120,7 @@
             };
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = new WebApiUrlBuilder();
+            WebApiUrlBuilder builder = this.builder;
 
             string result = builder.GetUrlForRequest(itemInfo);
             string expected = "http://sitecore.net/-/item/v%7b1%7d?sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
@@ -126,7 +139,7 @@
             };
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = new WebApiUrlBuilder();
+            WebApiUrlBuilder builder = this.builder;
 
             string result = builder.GetUrlForRequest(itemInfo);
             string expected = "http://sitecore.net(((}}}/-/item/v%7b1%7d?sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
