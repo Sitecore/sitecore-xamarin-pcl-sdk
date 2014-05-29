@@ -10,6 +10,7 @@
     public class ItemPathUrlBuilderTests
     {
         private ItemPathUrlBuilder builder;
+
         [SetUp]
         public void SetUp()
         {

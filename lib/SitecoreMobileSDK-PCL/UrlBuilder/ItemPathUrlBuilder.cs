@@ -26,7 +26,7 @@
         public override string GetUrlForRequest(IRequestConfig request)
         {
             string result = base.GetUrlForRequest(request);
-            
+
             ReadItemByPathParameters config = (ReadItemByPathParameters)request;
 
             this.ValidatePath(config.ItemPath);

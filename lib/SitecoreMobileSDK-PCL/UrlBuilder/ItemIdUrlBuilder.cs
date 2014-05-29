@@ -13,7 +13,7 @@
         {
             if (null == itemId)
             {
-                throw new ArgumentNullException("WebApiUrlBuilder.GetUrlForRequest() : item id cannot be null");
+                throw new ArgumentNullException("ItemIdUrlBuilder.GetUrlForRequest() : item id cannot be null");
             }
 
             bool hasOpeningBrace = itemId.StartsWith("{");
@@ -21,15 +21,15 @@
             bool isValidId = hasOpeningBrace && hasClosingBrace;
             if (!isValidId)
             {
-                throw new ArgumentException("WebApiUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
+                throw new ArgumentException("ItemIdUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
             }
         }
 
         public override string GetUrlForRequest(IRequestConfig request)
         {
             string result = base.GetUrlForRequest(request);
-            
-            ReadItemByIdParameters config = (ReadItemByIdParameters) request;
+
+            ReadItemByIdParameters config = (ReadItemByIdParameters)request;
 
             this.ValidateId(config.ItemId);
             string escapedId = Uri.EscapeDataString(config.ItemId);
