@@ -17,15 +17,13 @@ namespace Sitecore.MobileSDK.UrlBuilder
             this.restGrammar = restGrammar;
             this.webApiGrammar = webApiGrammar;
 
-            this.Validate ();
+            this.Validate();
         }
 
         public string BuildUrlQueryString()
         {
             string escapedDatabase = Uri.EscapeDataString (this.itemSource.Database);
             string escapedLanguage = Uri.EscapeDataString (this.itemSource.Language);
-
-
 
             string result = 
                 this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + escapedDatabase +

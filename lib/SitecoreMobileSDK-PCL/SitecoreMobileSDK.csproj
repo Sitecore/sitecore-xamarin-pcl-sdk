@@ -32,6 +32,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
@@ -59,7 +60,6 @@
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsTasks.cs" />
-    <Compile Include="CrudTasks\ItemRequestConfig.cs" />
     <Compile Include="Items\ReadItemByIdParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
