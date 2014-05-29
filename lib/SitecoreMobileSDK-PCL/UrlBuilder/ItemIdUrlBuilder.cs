@@ -34,7 +34,7 @@
             this.ValidateId(config.ItemId);
             string escapedId = Uri.EscapeDataString(config.ItemId);
 
-            result += this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
+            result += this.restGrammar.HostAndArgsSeparator + this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
 
             return result.ToLower();
         }

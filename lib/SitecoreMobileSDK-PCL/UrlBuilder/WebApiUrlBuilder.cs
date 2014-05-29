@@ -31,8 +31,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
             string result =
                 request.InstanceUrl +
                     this.webApiGrammar.ItemWebApiEndpoint +
-                    escapedVersion +
-                    this.restGrammar.HostAndArgsSeparator;
+                    escapedVersion;
 
             return result.ToLowerInvariant();
         }

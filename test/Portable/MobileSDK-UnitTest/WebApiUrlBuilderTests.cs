@@ -38,7 +38,7 @@
             IRequestConfig itemInfo = mockParams;
 
             string result = this.builder.GetUrlForRequest(itemInfo);
-            string expected = "https://localhost:80/-/item/v1?";
+            string expected = "https://localhost:80/-/item/v1";
 
             Assert.AreEqual(expected, result);
         }
@@ -56,7 +56,7 @@
             IRequestConfig itemInfo = mockParams;
 
             string result = this.builder.GetUrlForRequest(itemInfo);
-            string expected = "http://localhost:80/-/item/v1?";
+            string expected = "http://localhost:80/-/item/v1";
 
             Assert.AreEqual(expected, result);
         }
@@ -74,7 +74,7 @@
             IRequestConfig itemInfo = mockParams;
 
             string result = this.builder.GetUrlForRequest(itemInfo);
-            string expected = "http://sitecore.net/-/item/v100500?";
+            string expected = "http://sitecore.net/-/item/v100500";
 
             Assert.AreEqual(expected, result);
         }
@@ -98,7 +98,7 @@
             IRequestConfig itemInfo = mockParams;
 
             string result = this.builder.GetUrlForRequest(itemInfo);
-            string expected = "http://sitecore.net(((}}}/-/item/v%7b1%7d?";
+            string expected = "http://sitecore.net(((}}}/-/item/v%7b1%7d";
 
             Assert.AreEqual(expected, result);
         }

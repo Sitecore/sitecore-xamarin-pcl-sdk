@@ -3,6 +3,7 @@
     using System;
     using MobileSDKUnitTest.Mock;
     using NUnit.Framework;
+    using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.UrlBuilder;
 
     [TestFixture]
@@ -28,51 +29,30 @@
         [Test]
         public void TestInvalidItemId()
         {
-            MockReadItemByIdParameters mockParams = new MockReadItemByIdParameters
-            {
-                InstanceUrl = "SITECORE.net",
-                WebApiVersion = "V100500",
-                ItemId = "/path/to/item"
-            };
+            ReadItemByIdParameters parameters = new ReadItemByIdParameters("SITECORE.net", "V100500", "/path/to/item", null);
 
-            IRequestConfig itemInfo = mockParams;
-            TestDelegate action = () => this.builder.GetUrlForRequest(itemInfo);
-
+            TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
             Assert.Throws<ArgumentException>(action);
         }
 
         [Test]
         public void TestUrlBuilderExcapesArgs()
         {
-            MockReadItemByIdParameters mockParams = new MockReadItemByIdParameters
-            {
-                InstanceUrl = "SITECORE.net",
-                WebApiVersion = "V{1}",
-                ItemId = "{   xxx   }"
-            };
+            ReadItemByIdParameters parameters = new ReadItemByIdParameters("SITECORE.net", "V{1}", "{   xxx   }", null);
 
-            IRequestConfig itemInfo = mockParams;
-
-            string result = this.builder.GetUrlForRequest(itemInfo);
+            string result = this.builder.GetUrlForRequest(parameters);
             string expected = "http://sitecore.net/-/item/v%7b1%7d?sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
 
             Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void TestUrlBuilderHandlesEmptyItemId()
+        public void TestUrlBuilderHandlesNullItemId()
         {
-            MockReadItemByIdParameters mockParams = new MockReadItemByIdParameters
-            {
-                InstanceUrl = "SITECORE.net",
-                WebApiVersion = "V{1}",
-            };
-
-            IRequestConfig itemInfo = mockParams;
-
+            ReadItemByIdParameters parameters = new ReadItemByIdParameters("SITECORE.net", "V{1}", null, null);
             TestDelegate action = () =>
             {
-                string result = this.builder.GetUrlForRequest(itemInfo);
+                string result = this.builder.GetUrlForRequest(parameters);
             };
 
             Assert.Throws<ArgumentNullException>(action);
