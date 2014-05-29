@@ -13,15 +13,16 @@ namespace WhiteLabeliOS
 			Title = NSBundle.MainBundle.LocalizedString ("getItemByPath", null);
 		}
 
-
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+
+			this.itemPathField.ShouldReturn = this.HideKeyboard;
 		}
 
 		partial void getItem (MonoTouch.UIKit.UIButton sender)
 		{
-			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}
 	}
 }

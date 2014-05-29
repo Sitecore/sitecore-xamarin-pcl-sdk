@@ -134,6 +134,7 @@
     <Compile Include="ITemTasks\UploadImageViewController.designer.cs">
       <DependentUpon>UploadImageViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\LoadingOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />

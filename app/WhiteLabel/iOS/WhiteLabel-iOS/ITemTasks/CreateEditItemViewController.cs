@@ -18,18 +18,20 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 			
-			// Perform any additional setup after loading the view, typically from a nib.
+			this.pathField.ShouldReturn = this.HideKeyboard;
+			this.textField.ShouldReturn = this.HideKeyboard;
+			this.titleField.ShouldReturn = this.HideKeyboard;
 		}
 
 		partial void createITemTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			this.saveButton.Enabled = true;
-			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
 		partial void saveItemTouched (MonoTouch.Foundation.NSObject sender)
 		{
-			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}
 	}
 }
