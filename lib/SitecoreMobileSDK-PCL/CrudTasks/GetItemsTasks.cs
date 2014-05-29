@@ -1,33 +1,31 @@
-﻿
+﻿using Sitecore.MobileSDK.UrlBuilder;
 
 namespace Sitecore.MobileSDK.CrudTasks
 {
     using System;
-    using System.IO;
     using System.Net.Http;
-    using System.Diagnostics;
     using System.Threading.Tasks;
-
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.TaskFlow;
-    using Sitecore.MobileSDK.PublicKey;
 
 
-    public class GetItemsTasks : IRestApiCallTasks<ItemRequestConfig, HttpRequestMessage, string, ScItemsResponse>
+    public class GetItemsTasks : IRestApiCallTasks<ReadItemByIdParameters, HttpRequestMessage, string, ScItemsResponse>
     {
-        public GetItemsTasks(HttpClient httpClient)
+        public GetItemsTasks(WebApiUrlBuilder urlBuilder, HttpClient httpClient)
         {
             this.httpClient = httpClient;
+            this.urlBuilder = urlBuilder;
         }
 
         #region  IRestApiCallTasks
-        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(ItemRequestConfig request)
+
+        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(ReadItemByIdParameters request)
         {
             string url = this.UrlToGetItemWithRequest(request);
             HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-            result = await request.CredentialsCryptor.AddEncryptedCredentialHeadersAsync(result);
+            result = await request.CredentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result);
             return result;
         }
 
@@ -48,16 +46,13 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #endregion IRestApiCallTasks
 
-        private string UrlToGetItemWithRequest(ItemRequestConfig request)
+        private string UrlToGetItemWithRequest(ReadItemByIdParameters request)
         {
-            //TODO : extract me
-            string result = request.InstanceUrl + "/-/item/v1?" + "sc_itemid=" + Uri.EscapeDataString(request.Id);
-            return result;
-
-            //		    return "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v1?sc_itemid=%7B3D6658D8-A0BF-4E75-B3E2-D050FABCF4E1%7D";
+            return this.urlBuilder.GetUrlForRequest(request);
         }
 
         private readonly HttpClient httpClient;
+        private readonly WebApiUrlBuilder urlBuilder;
     }
 }
 
