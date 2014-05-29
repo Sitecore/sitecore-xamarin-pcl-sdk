@@ -13,6 +13,7 @@ namespace MobileSdk_IntegrationTest_Desktop
     public class GetItemTestSteps
     {
         private readonly string _instanceUrl = ConfigurationManager.AppSettings["anonymousInstanceURL"];
+        private const string HomeItemId = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
 
         [Given(@"I logged in as sitecore admin user")]
         public void GivenILoggedInAsSitecoreAdminUser()
@@ -24,18 +25,29 @@ namespace MobileSdk_IntegrationTest_Desktop
         [When(@"I send request to get Home item by ID")]
         public async void WhenISendRequestToGetHomeItemById()
         {
-            const string homeItemId = "{3D6658D8-A0BF-4E75-B3E2-D050FABCF4E1}";
+            
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
-            ScenarioContext.Current["Response"] = await apiSession.GetItemById(homeItemId);
+            ScenarioContext.Current["Response"] = await apiSession.GetItemById(HomeItemId);
         }
 
-        [Then(@"I've got the Home item in response")]
-        public void ThenIVeGotTheHomeItemInResponse()
+        [Then(@"I've got one item in response")]
+        public void ThenIVeGotOneItemInResponse()
         {
             Thread.Sleep(1000); //how can we avoid delays?!!! does specflow support async operations?
             var response = ScenarioContext.Current.Get<ScItemsResponse>("Response");
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.Items.Count);
+            ScenarioContext.Current["Item"] = response.Items[0];
         }
+
+        [Then(@"This is Home item")]
+        public void ThenThisIsHomeItem()
+        {
+            var item = ScenarioContext.Current.Get<ScItem>("Item");
+            Assert.AreEqual("Home", item.DisplayName);
+            Assert.AreEqual(HomeItemId, item.Id);
+            Assert.AreEqual("Sample/Sample Item", item.Template);
+        }
+
     }
 }
