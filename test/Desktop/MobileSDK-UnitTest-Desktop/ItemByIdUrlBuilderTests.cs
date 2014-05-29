@@ -58,5 +58,24 @@
 
             Assert.AreEqual(expected, result);
         }
+
+        [Test]
+        public void TestUrlBuilderHandlesEmptyItemId()
+        {
+            MockReadItemByIdParameters mockParams = new MockReadItemByIdParameters
+            {
+                InstanceUrl = "SITECORE.net",
+                WebApiVersion = "V{1}",
+            };
+
+            IRequestConfig itemInfo = mockParams;
+
+            TestDelegate action = () =>
+            {
+                string result = this.builder.GetUrlForRequest(itemInfo);
+            };
+
+            Assert.Throws<ArgumentNullException>(action);
+        }
     }
 }

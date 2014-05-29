@@ -11,6 +11,11 @@
 
         public void ValidateId(string itemId)
         {
+            if (null == itemId)
+            {
+                throw new ArgumentNullException("WebApiUrlBuilder.GetUrlForRequest() : item id cannot be null");
+            }
+
             bool hasOpeningBrace = itemId.StartsWith("{");
             bool hasClosingBrace = itemId.EndsWith("}");
             bool isValidId = hasOpeningBrace && hasClosingBrace;
