@@ -78,9 +78,10 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\PublicKeyParsingTest.cs">
       <Link>PublicKeyParsingTest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-UnitTest\UrlBuildingTests.cs">
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\WebApiUrlBuilderTests.cs">
       <Link>UrlBuildingTests.cs</Link>
     </Compile>
+    <Compile Include="ItemByIdUrlBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
