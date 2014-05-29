@@ -48,6 +48,7 @@
     <Compile Include="ScResponseException.cs" />
     <Compile Include="ScErrorResponse.cs" />
     <Compile Include="UrlBuilder\IRequestConfig.cs" />
+    <Compile Include="UrlBuilder\ItemIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
     <Compile Include="UrlBuilder\RestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\WebApiUrlBuilder.cs" />

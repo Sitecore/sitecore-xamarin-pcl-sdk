@@ -5,7 +5,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
     public class WebApiUrlBuilder
     {
-        private WebApiUrlBuilder()
+        protected WebApiUrlBuilder()
         {
         }
 
@@ -17,26 +17,22 @@ namespace Sitecore.MobileSDK.UrlBuilder
             this.Validate();
         }
 
-        public string GetUrlForRequest(IRequestConfig request)
+        public virtual string GetUrlForRequest(IRequestConfig request)
         {
             this.ValidateRequest(request);
-
-            string escapedId = Uri.EscapeDataString(request.ItemId);
-            string escapedVersion = Uri.EscapeDataString(request.WebApiVersion);
 
             if (!this.IsValidUrlScheme(request.InstanceUrl))
             {
                 request.InstanceUrl = request.InstanceUrl.Insert(0, "http://");
             }
 
-
+            string escapedVersion = Uri.EscapeDataString(request.WebApiVersion);
 
             string result =
                 request.InstanceUrl +
-                this.webApiGrammar.ItemWebApiEndpoint +
-                escapedVersion +
-                this.restGrammar.HostAndArgsSeparator +
-                this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
+                    this.webApiGrammar.ItemWebApiEndpoint +
+                    escapedVersion +
+                    this.restGrammar.HostAndArgsSeparator;
 
             return result.ToLowerInvariant();
         }
@@ -74,7 +70,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
             // TODO : implement me
         }
 
-        private IRestServiceGrammar restGrammar;
-        private IWebApiUrlParameters webApiGrammar;
+        protected IRestServiceGrammar restGrammar;
+        protected IWebApiUrlParameters webApiGrammar;
     }
 }
