@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
             this.restGrammar = restGrammar;
             this.webApiGrammar = webApiGrammar;
 
-            this.Validate ();
+            this.Validate();
         }
 
         public string GetUrlForRequest(IRequestConfig request)
@@ -22,16 +22,16 @@ namespace Sitecore.MobileSDK.UrlBuilder
             this.ValidateRequest(request);
 
             string escapedId = Uri.EscapeDataString(request.ItemId);
-            string escapedVersion = Uri.EscapeDataString (request.WebApiVersion);
+            string escapedVersion = Uri.EscapeDataString(request.WebApiVersion);
 
-            if ( !this.IsValidUrlScheme(request.InstanceUrl) )
+            if (!this.IsValidUrlScheme(request.InstanceUrl))
             {
                 request.InstanceUrl = request.InstanceUrl.Insert(0, "http://");
             }
 
 
 
-            string result = 
+            string result =
                 request.InstanceUrl +
                 this.webApiGrammar.ItemWebApiEndpoint +
                 escapedVersion +
@@ -41,13 +41,13 @@ namespace Sitecore.MobileSDK.UrlBuilder
             return result.ToLowerInvariant();
         }
 
-        private bool IsValidUrlScheme( string url )
+        private bool IsValidUrlScheme(string url)
         {
-            string lowercaseUrl = url.ToLowerInvariant ();
+            string lowercaseUrl = url.ToLowerInvariant();
 
-            bool isHttps = lowercaseUrl.StartsWith ("https://");
-            bool isHttp = lowercaseUrl.StartsWith ("http://");
-            bool result =  (isHttps || isHttp);
+            bool isHttps = lowercaseUrl.StartsWith("https://");
+            bool isHttp = lowercaseUrl.StartsWith("http://");
+            bool result = (isHttps || isHttp);
 
             return result;
         }

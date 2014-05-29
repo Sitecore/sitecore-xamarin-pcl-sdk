@@ -5,7 +5,6 @@
     using NUnit.Framework;
 
     using Sitecore.MobileSDK.UrlBuilder;
-    using Sitecore.MobileSDK.CrudTasks;
 
     [TestFixture]
     public class UrlBuildingTests
@@ -15,15 +14,14 @@
         [SetUp]
         public void SetUp()
         {
-            IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar ();
+            IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
             IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
-            
 
             this.builder = new WebApiUrlBuilder(restGrammar, webApiGrammar);
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
             this.builder = null;
         }
@@ -36,14 +34,12 @@
             mockParams.WebApiVersion = "v1";
             mockParams.ItemId = "{000-111-222-333}";
 
-
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = this.builder;
 
-            string result = builder.GetUrlForRequest(itemInfo);
+            string result = this.builder.GetUrlForRequest(itemInfo);
             string expected = "https://localhost:80/-/item/v1?sc_itemid=%7b000-111-222-333%7d";
 
-            Assert.AreEqual( expected, result );
+            Assert.AreEqual(expected, result);
         }
 
 
@@ -55,14 +51,12 @@
             mockParams.WebApiVersion = "v1";
             mockParams.ItemId = "{000-111-222-333}";
 
-
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = this.builder;
 
-            string result = builder.GetUrlForRequest(itemInfo);
+            string result = this.builder.GetUrlForRequest(itemInfo);
             string expected = "http://localhost:80/-/item/v1?sc_itemid=%7b000-111-222-333%7d";
 
-            Assert.AreEqual( expected, result );
+            Assert.AreEqual(expected, result);
         }
 
 
@@ -77,9 +71,8 @@
             };
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = this.builder;
 
-            string result = builder.GetUrlForRequest(itemInfo);
+            string result = this.builder.GetUrlForRequest(itemInfo);
             string expected = "http://sitecore.net/-/item/v100500?sc_itemid=%7btest-guid-666-13-666%7d";
 
             Assert.AreEqual(expected, result);
@@ -88,8 +81,7 @@
         [Test]
         public void TestBuildInvalidParams()
         {
-            WebApiUrlBuilder builder = this.builder;
-            TestDelegate action = () => builder.GetUrlForRequest(null);
+            TestDelegate action = () => this.builder.GetUrlForRequest(null);
 
             Assert.Throws<ArgumentNullException>(action);
         }
@@ -105,10 +97,7 @@
             };
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = this.builder;
-
-            TestDelegate action = () => builder.GetUrlForRequest(itemInfo);
-
+            TestDelegate action = () => this.builder.GetUrlForRequest(itemInfo);
 
             Assert.Throws<ArgumentException>(action);
         }
@@ -124,9 +113,8 @@
             };
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = this.builder;
 
-            string result = builder.GetUrlForRequest(itemInfo);
+            string result = this.builder.GetUrlForRequest(itemInfo);
             string expected = "http://sitecore.net/-/item/v%7b1%7d?sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
 
             Assert.AreEqual(expected, result);
@@ -143,9 +131,8 @@
             };
 
             IRequestConfig itemInfo = mockParams;
-            WebApiUrlBuilder builder = this.builder;
 
-            string result = builder.GetUrlForRequest(itemInfo);
+            string result = this.builder.GetUrlForRequest(itemInfo);
             string expected = "http://sitecore.net(((}}}/-/item/v%7b1%7d?sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
 
             Assert.AreEqual(expected, result);
