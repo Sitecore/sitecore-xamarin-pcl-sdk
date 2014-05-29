@@ -82,6 +82,7 @@
       <Link>UrlBuildingTests.cs</Link>
     </Compile>
     <Compile Include="ItemByIdUrlBuilderTests.cs" />
+    <Compile Include="ItemPathUrlBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
