@@ -85,6 +85,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GetPublicKeyTest.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\Get items\GetPublicKeyTestSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">

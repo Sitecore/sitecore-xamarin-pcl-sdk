@@ -83,6 +83,44 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get item with invalid instance Url")]
+        [NUnit.Framework.CategoryAttribute("mytag")]
+        public virtual void GetItemWithInvalidInstanceUrl()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get item with invalid instance Url", new string[] {
+                        "mytag"});
+#line 13
+this.ScenarioSetup(scenarioInfo);
+#line 14
+ testRunner.Given("I set incorrect instance Url", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 15
+ testRunner.When("I try to get an item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 16
+ testRunner.Then("I\'ve got an AggregateException error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get item with null instance Url")]
+        [NUnit.Framework.CategoryAttribute("mytag")]
+        public virtual void GetItemWithNullInstanceUrl()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get item with null instance Url", new string[] {
+                        "mytag"});
+#line 19
+this.ScenarioSetup(scenarioInfo);
+#line 20
+ testRunner.Given("I set null instance Url", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+ testRunner.When("I try to get an item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 22
+ testRunner.Then("I\'ve got an InvalidOperation error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

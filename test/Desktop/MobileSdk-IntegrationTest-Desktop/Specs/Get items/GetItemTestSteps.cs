@@ -1,8 +1,5 @@
-﻿using System;
-using System.Configuration;
-using System.Threading;
+﻿using System.Configuration;
 using NUnit.Framework;
-
 using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.Items;
 using TechTalk.SpecFlow;
