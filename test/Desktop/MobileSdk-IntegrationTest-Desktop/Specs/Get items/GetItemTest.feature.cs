@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace MobileSdk_IntegrationTest_Desktop
+namespace MobileSdk_IntegrationTest_Desktop.Specs.GetItems
 {
     using TechTalk.SpecFlow;
     
@@ -79,9 +79,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.When("I send request to get Home item by ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.Then("I\'ve got one item in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I\'ve got one item in \'Response\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 11
- testRunner.And("This is Home item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("The \'Item\' = Home item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

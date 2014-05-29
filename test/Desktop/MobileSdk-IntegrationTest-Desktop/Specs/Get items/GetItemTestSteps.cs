@@ -30,7 +30,7 @@ namespace MobileSdk_IntegrationTest_Desktop
             ScenarioContext.Current["Response"] = await apiSession.GetItemById(HomeItemId);
         }
 
-        [Then(@"I've got one item in response")]
+        [Then(@"I've got one item in 'Response'")]
         public void ThenIVeGotOneItemInResponse()
         {
             Thread.Sleep(1000); //how can we avoid delays?!!! does specflow support async operations?
@@ -40,7 +40,7 @@ namespace MobileSdk_IntegrationTest_Desktop
             ScenarioContext.Current["Item"] = response.Items[0];
         }
 
-        [Then(@"This is Home item")]
+        [Then(@"The 'Item' = Home item")]
         public void ThenThisIsHomeItem()
         {
             var item = ScenarioContext.Current.Get<ScItem>("Item");

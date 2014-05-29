@@ -7,5 +7,5 @@
 Scenario: Get Item by ID
 	Given I logged in as sitecore admin user
 	When I send request to get Home item by ID
-	Then I've got one item in response
-	And This is Home item
+	Then I've got one item in 'Response'
+	And The 'Item' = Home item

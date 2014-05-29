@@ -73,12 +73,12 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetPublicKeyTest.cs">
       <Link>GetPublicKeyTest.cs</Link>
     </Compile>
-    <Compile Include="GetItemTest.feature.cs">
+    <Compile Include="Specs\Get items\GetItemTest.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GetItemTest.feature</DependentUpon>
     </Compile>
-    <Compile Include="GetItemTestSteps.cs" />
+    <Compile Include="Specs\Get items\GetItemTestSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +91,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="GetItemTest.feature">
+    <None Include="Specs\Get items\GetItemTest.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetItemTest.feature.cs</LastGenOutput>
     </None>
