@@ -29,8 +29,10 @@
         {
             string result = base.GetUrlForRequest(request);
             
-            this.ValidateId(request.ItemId);
-            string escapedId = Uri.EscapeDataString(request.ItemId);
+            ReadItemByIdParameters config = (ReadItemByIdParameters) request;
+
+            this.ValidateId(config.ItemId);
+            string escapedId = Uri.EscapeDataString(config.ItemId);
 
             result += this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
 
