@@ -5,7 +5,7 @@
     using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.UrlBuilder;
 
-    public class GetItemsByIdParameters : IGetItemByIdRequest
+    public class GetItemsByIdParameters : IGetItemByIdRequest, ICredentialCryptorOwner
     {
         public GetItemsByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, string itemId, ICredentialsHeadersCryptor cryptor = null)
         {

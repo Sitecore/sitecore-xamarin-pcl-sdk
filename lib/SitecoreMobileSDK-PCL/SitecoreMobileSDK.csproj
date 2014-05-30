@@ -38,7 +38,6 @@
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
     <Compile Include="ScApiSession.cs" />
-    <Compile Include="SessionSettings\ICredentialCryptorOwner.cs" />
     <Compile Include="SessionSettings\ISessionConfig.cs" />
     <Compile Include="SessionSettings\IWebApiCredentials.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />
@@ -72,6 +71,8 @@
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
     <Compile Include="Items\GetItemsByIdParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
+    <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
+    <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
