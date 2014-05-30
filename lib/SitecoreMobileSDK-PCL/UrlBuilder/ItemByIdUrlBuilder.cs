@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class ItemIdUrlBuilder : WebApiUrlBuilder
+    public class ItemByIdUrlBuilder : WebApiUrlBuilder
     {
-        public ItemIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+        public ItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
             : base(restGrammar, webApiGrammar)
         {
         }
@@ -13,7 +13,7 @@
         {
             if (null == itemId)
             {
-                throw new ArgumentNullException("ItemIdUrlBuilder.GetUrlForRequest() : item id cannot be null");
+                throw new ArgumentNullException("ItemByIdUrlBuilder.GetUrlForRequest() : item id cannot be null");
             }
 
             bool hasOpeningBrace = itemId.StartsWith("{");
@@ -21,7 +21,7 @@
             bool isValidId = hasOpeningBrace && hasClosingBrace;
             if (!isValidId)
             {
-                throw new ArgumentException("ItemIdUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
+                throw new ArgumentException("ItemByIdUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
             }
         }
 
