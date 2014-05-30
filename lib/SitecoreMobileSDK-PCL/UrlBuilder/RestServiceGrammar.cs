@@ -10,6 +10,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
             result.KeyValuePairSeparator = "=";
             result.FieldSeparator        = "&";
             result.HostAndArgsSeparator  = "?";
+            result.PathComponentSeparator = "/";
 
             return result;
         }
@@ -21,6 +22,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
         public string KeyValuePairSeparator { get; private set; }
         public string FieldSeparator        { get; private set; }
         public string HostAndArgsSeparator  { get; private set; }
+        public string PathComponentSeparator{ get; private set; }
     }
 }
 
