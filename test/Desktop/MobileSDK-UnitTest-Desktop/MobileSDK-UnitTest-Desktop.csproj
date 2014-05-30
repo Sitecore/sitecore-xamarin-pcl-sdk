@@ -75,6 +75,12 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockReadItemByIdParameters.cs">
       <Link>Mock\MockReadItemByIdParameters.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockReadItemByPathParameters.cs">
+      <Link>Mock\MockReadItemByPathParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockSessionInfo.cs">
+      <Link>Mock\MockSessionInfo.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\PublicKeyParsingTest.cs">
       <Link>PublicKeyParsingTest.cs</Link>
     </Compile>
@@ -83,7 +89,6 @@
     </Compile>
     <Compile Include="ItemByIdUrlBuilderTests.cs" />
     <Compile Include="ItemByPathUrlBuilderTests.cs" />
-    <Compile Include="Mock\MockSessionInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionConfigUrlBuilderTest.cs" />
   </ItemGroup>

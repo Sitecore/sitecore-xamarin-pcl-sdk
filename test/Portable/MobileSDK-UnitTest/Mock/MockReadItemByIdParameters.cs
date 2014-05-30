@@ -2,13 +2,15 @@
 
 namespace MobileSDKUnitTest.Mock
 {
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.UrlBuilder;
 
-    public class MockReadItemByIdParameters : IRequestConfig
+    public class MockGetItemsByIdParameters : IGetItemByIdRequest
     {
-        public string InstanceUrl { get; set; }
+        public IItemSource ItemSource { get; set; }
 
-        public string WebApiVersion { get; set; }
+        public ISessionConfig SessionSettings { get; set; }
 
         public string ItemId { get; set; }
     }
