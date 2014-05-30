@@ -1,8 +1,8 @@
-﻿namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.SessionSettings
 {
     using System;
 
-    public class SessionConfig
+    public class SessionConfig : ISessionConfig
     {
         public SessionConfig(string instanceUrl, string login, string password, string site = null)
         {
