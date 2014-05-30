@@ -71,7 +71,7 @@
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
     <Compile Include="Items\GetItemsByIdParameters.cs" />
-    <Compile Include="Items\GetItemsByPathTasks.cs" />
+    <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
