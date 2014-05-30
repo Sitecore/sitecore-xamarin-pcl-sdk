@@ -48,6 +48,19 @@
             }
         }
 
+        private void Validate()
+        {
+            if (null == this.restGrammar)
+            {
+                throw new ArgumentNullException ("[SessionConfigUrlBuilder] restGrammar cannot be null");
+            }
+            else if (null == this.webApiGrammar)
+            {
+                throw new ArgumentNullException ("[SessionConfigUrlBuilder] webApiGrammar cannot be null");
+            }
+        }
+
+
         private IRestServiceGrammar restGrammar;
         private IWebApiUrlParameters webApiGrammar;
     }
