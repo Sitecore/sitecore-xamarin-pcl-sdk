@@ -21,7 +21,9 @@ namespace MobileSDK_UnitTest_Desktop
             mockConfig.Site = "/sitecore/shell";
 
             string result = builder.BuildUrlString(mockConfig);
-            string expected = "http://localhost/sitecore/shell/-/item/v1";
+            string expected = "http://localhost/-/item/v1%2fsitecore%2fshell";
+
+            Assert.AreEqual (expected, result);
         }
 
         public void TestBuildBaseUrlWithoutSite()
@@ -34,6 +36,8 @@ namespace MobileSDK_UnitTest_Desktop
 
             string result = builder.BuildUrlString(mockConfig);
             string expected = "http://localhost/-/item/v1";
+
+            Assert.AreEqual (expected, result);
         }
 
         [Test]
