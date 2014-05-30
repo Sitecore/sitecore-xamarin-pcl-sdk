@@ -53,7 +53,6 @@
     <Compile Include="ScResponseException.cs" />
     <Compile Include="ScErrorResponse.cs" />
     <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
-    <Compile Include="UrlBuilder\IGetItemByQueryRequest.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
+    <Compile Include="UrlBuilder\ItemByQuery\IGetItemByQueryRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -129,5 +129,6 @@
     <Folder Include="UrlBuilder\ItemByPath\" />
     <Folder Include="UrlBuilder\Rest\" />
     <Folder Include="UrlBuilder\WebApi\" />
+    <Folder Include="UrlBuilder\ItemByQuery\" />
   </ItemGroup>
 </Project>
