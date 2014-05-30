@@ -8,6 +8,8 @@ namespace Sitecore.MobileSdkUnitTest
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
 
 

@@ -8,6 +8,7 @@ namespace Sitecore.MobileSDK.CrudTasks
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.TaskFlow;
     using Sitecore.MobileSDK.UrlBuilder;
+    using Sitecore.MobileSDK.UrlBuilder.ItemById;
 
 
     public class GetItemsByIdTasks : AbstractGetItemTask<GetItemsByIdParameters>

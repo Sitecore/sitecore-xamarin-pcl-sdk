@@ -4,6 +4,7 @@
     using Sitecore.MobileSDK.PublicKey;
     using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.UrlBuilder;
+    using Sitecore.MobileSDK.UrlBuilder.ItemById;
 
     public class GetItemsByIdParameters : IGetItemByIdRequest, ICredentialCryptorOwner
     {

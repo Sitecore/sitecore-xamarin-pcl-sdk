@@ -3,8 +3,9 @@
 namespace Sitecore.MobileSDK.Items
 {
     using Sitecore.MobileSDK.PublicKey;
-    using Sitecore.MobileSDK.UrlBuilder;
     using Sitecore.MobileSDK.SessionSettings;
+
+    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 
     public class ReadItemByPathParameters : IGetItemByPathRequest, ICredentialCryptorOwner
     {

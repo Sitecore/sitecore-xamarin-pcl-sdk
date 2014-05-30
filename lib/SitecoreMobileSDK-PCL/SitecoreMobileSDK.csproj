@@ -53,18 +53,7 @@
     <Compile Include="ScResponseException.cs" />
     <Compile Include="ScErrorResponse.cs" />
     <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
-    <Compile Include="UrlBuilder\IGetItemByIdRequest.cs" />
-    <Compile Include="UrlBuilder\IGetItemByPathRequest.cs" />
     <Compile Include="UrlBuilder\IGetItemByQueryRequest.cs" />
-    <Compile Include="UrlBuilder\IRequestConfig.cs" />
-    <Compile Include="UrlBuilder\ItemByIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\ItemByPathUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\RestServiceGrammar.cs" />
-    <Compile Include="UrlBuilder\WebApiUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\WebApiUrlParameters.cs" />
-    <Compile Include="UrlBuilder\IRestServiceGrammar.cs" />
-    <Compile Include="UrlBuilder\IWebApiUrlParameters.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
@@ -73,6 +62,15 @@
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
     <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
     <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
+    <Compile Include="UrlBuilder\ItemById\IGetItemByIdRequest.cs" />
+    <Compile Include="UrlBuilder\ItemById\ItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\IGetItemByPathRequest.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
+    <Compile Include="Items\ItemSourceUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
+    <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -126,4 +124,10 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UrlBuilder\ItemById\" />
+    <Folder Include="UrlBuilder\ItemByPath\" />
+    <Folder Include="UrlBuilder\Rest\" />
+    <Folder Include="UrlBuilder\WebApi\" />
+  </ItemGroup>
 </Project>

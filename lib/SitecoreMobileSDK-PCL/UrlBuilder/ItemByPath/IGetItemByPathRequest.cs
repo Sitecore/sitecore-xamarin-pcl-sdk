@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder
+﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 {
     public interface IGetItemByPathRequest : IBaseGetItemRequest
     {

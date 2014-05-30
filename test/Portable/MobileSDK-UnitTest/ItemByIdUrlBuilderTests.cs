@@ -9,6 +9,9 @@
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.UrlBuilder;
+    using Sitecore.MobileSDK.UrlBuilder.ItemById;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
     [TestFixture]
     public class ItemByIdUrlBuilderTests

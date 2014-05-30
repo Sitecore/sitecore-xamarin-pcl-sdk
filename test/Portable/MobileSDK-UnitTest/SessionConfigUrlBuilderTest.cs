@@ -6,6 +6,8 @@ namespace MobileSDK_UnitTest_Desktop
     using NUnit.Framework;
     using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.UrlBuilder;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
 
     [TestFixture]

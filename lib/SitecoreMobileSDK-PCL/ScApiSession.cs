@@ -9,7 +9,10 @@
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.PublicKey;
     using Sitecore.MobileSDK.TaskFlow;
-    using Sitecore.MobileSDK.UrlBuilder;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
+    using Sitecore.MobileSDK.UrlBuilder.ItemById;
+    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 
     public class ScApiSession
     {

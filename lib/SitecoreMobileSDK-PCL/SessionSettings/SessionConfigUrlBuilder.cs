@@ -2,6 +2,8 @@
 {
     using System;
     using Sitecore.MobileSDK.UrlBuilder;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
     public class SessionConfigUrlBuilder
     {

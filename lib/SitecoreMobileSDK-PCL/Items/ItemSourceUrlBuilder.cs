@@ -1,9 +1,12 @@
 ﻿
 
-namespace Sitecore.MobileSDK.UrlBuilder
+namespace Sitecore.MobileSDK.Items
 {
     using System;
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
+
 
     public class ItemSourceUrlBuilder
     {

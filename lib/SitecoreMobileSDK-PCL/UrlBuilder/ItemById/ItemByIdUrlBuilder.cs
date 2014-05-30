@@ -1,7 +1,11 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder
+﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 {
     using System;
     using Sitecore.MobileSDK.SessionSettings;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
+
 
     public class ItemByIdUrlBuilder 
     {

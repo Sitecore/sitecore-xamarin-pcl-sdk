@@ -1,9 +1,12 @@
 ﻿using Sitecore.MobileSDK.SessionSettings;
 
-namespace Sitecore.MobileSDK.UrlBuilder
+namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 {
     using System;
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
+
 
     public class ItemByPathUrlBuilder
     {
