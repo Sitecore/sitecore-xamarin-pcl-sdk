@@ -84,6 +84,7 @@
     <Compile Include="ItemByIdUrlBuilderTests.cs" />
     <Compile Include="ItemByPathUrlBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionConfigUrlBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
