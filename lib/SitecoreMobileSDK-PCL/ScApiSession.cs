@@ -93,7 +93,7 @@
             PublicKeyX509Certificate cert = await this.GetPublicKey();
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
-            ReadItemByIdParameters config = new ReadItemByIdParameters(this.sessionConfig.InstanceUrl, this.itemWebApiVersion, id, cryptor);
+            GetItemsByIdParameters config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
 
             var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
 
