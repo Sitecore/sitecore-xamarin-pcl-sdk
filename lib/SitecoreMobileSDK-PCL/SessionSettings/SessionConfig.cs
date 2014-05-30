@@ -11,6 +11,8 @@
             this.Password    = password   ;
             this.Site        = site       ;
             this.ItemWebApiVersion = itemWebApiVersion;
+
+            this.Validate ();
         }
 
         public string InstanceUrl
@@ -46,6 +48,18 @@
         public bool IsAnonymous()
         {
             return string.IsNullOrEmpty(this.Login) && string.IsNullOrEmpty(this.Password);
+        }
+
+        private void Validate()
+        {
+            if (string.IsNullOrEmpty (this.InstanceUrl))
+            {
+                throw new ArgumentNullException ("SessionConfig.InstanceUrl is required");
+            }
+            else if (string.IsNullOrEmpty (this.ItemWebApiVersion))
+            {
+                throw new ArgumentNullException ("SessionConfig.ItemWebApiVersion is required");
+            }
         }
     }
 }

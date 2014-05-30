@@ -92,34 +92,22 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetPublicKeyWithNullInstanceUrl()
         {
-            SessionConfig config = new SessionConfig(null, "sitecore\\admin", "b");
-            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+            // ???
+            //            InvalidOperationException exception = Assert.Throws<InvalidOperationException>( action, "we should get error here");
 
-            TestDelegate action = async () =>
-            {
-                var response = await session.GetItemById("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
-            };
-
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(action, "we should get error here");
-
+            var exception = Assert.Throws<ArgumentNullException> (() => new SessionConfig (null, "sitecore\\admin", "b"));
             Assert.IsTrue( 
-                exception.GetBaseException().ToString().Contains("An invalid request URI was provided.") 
+                exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required") 
             );
         }
 
         [Test]
-        public async void TestGetPublicKeyWithNullItemsSource()
+        public void TestGetPublicKeyWithNullItemsSource()
         {
-            SessionConfig config = new SessionConfig(null, "sitecore\\admin", "b");
-            
+            SessionConfig config = new SessionConfig("localhost", "sitecore\\admin", "b");
 
-            TestDelegate action = async () =>
-            {
-                ScApiSession session = new ScApiSession(config, null);
-            };
-
+            TestDelegate action = () => new ScApiSession(config, null);
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(action, "we should get error here");
-
 
             Assert.IsTrue( 
                 exception.GetBaseException().ToString().Contains("ScApiSession.defaultSource cannot be null") 

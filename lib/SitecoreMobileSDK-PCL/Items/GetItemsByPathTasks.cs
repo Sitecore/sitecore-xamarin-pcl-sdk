@@ -44,8 +44,7 @@
 
         private string UrlToGetItemWithRequest(ReadItemByPathParameters request)
         {
-            return null;
-            //            return this.urlBuilder.GetUrlForRequest(request);
+            return this.urlBuilder.GetUrlForRequest(request);
         }
 
         private readonly HttpClient httpClient;

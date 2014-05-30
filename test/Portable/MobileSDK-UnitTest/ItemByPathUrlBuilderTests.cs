@@ -1,8 +1,10 @@
 ﻿namespace MobileSDK_UnitTest_Desktop
 {
     using System;
-    using MobileSDKUnitTest.Mock;
     using NUnit.Framework;
+
+    using MobileSDKUnitTest.Mock;
+
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.UrlBuilder;
