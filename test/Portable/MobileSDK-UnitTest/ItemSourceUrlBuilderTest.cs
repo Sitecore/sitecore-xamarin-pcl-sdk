@@ -51,6 +51,9 @@ namespace Sitecore.MobileSdkUnitTest
         [Test]
         public void TestUrlBuilderExcapesArgs()
         {
+            // TODO : 
+            // Braces are encoded on iOS but not encoded on Desktop
+
             ItemSource data = new ItemSource("{master}", "da???", ";()//");
             ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters(), data);
 
