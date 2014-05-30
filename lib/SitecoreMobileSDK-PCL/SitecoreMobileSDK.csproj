@@ -41,6 +41,7 @@
     <Compile Include="SessionSettings\ISessionConfig.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />
     <Compile Include="PublicKeyX509Certificate.cs" />
+    <Compile Include="SessionSettings\SessionConfigUrlBuilder.cs" />
     <Compile Include="TaskFlow\IRestApiCallTasks.cs" />
     <Compile Include="TaskFlow\RestApiCallFlow.cs" />
     <Compile Include="PublicKey\GetPublicKeyTasks.cs" />
