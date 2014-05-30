@@ -5,19 +5,14 @@ using System.Text;
 
 namespace Sitecore.MobileSDK.SessionSettings
 {
-    public interface ISessionConfig
+    interface IWebApiCredentials
     {
-        string InstanceUrl
+        string Login
         {
             get;
         }
 
-        string Site      
-        { 
-            get; 
-        }
-
-        string ItemWebApiVersion
+        string Password
         {
             get;
         }

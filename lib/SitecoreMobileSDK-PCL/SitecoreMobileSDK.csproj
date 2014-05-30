@@ -39,6 +39,7 @@
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
     <Compile Include="ScApiSession.cs" />
     <Compile Include="SessionSettings\ISessionConfig.cs" />
+    <Compile Include="SessionSettings\IWebApiCredentials.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />
     <Compile Include="PublicKeyX509Certificate.cs" />
     <Compile Include="SessionSettings\SessionConfigUrlBuilder.cs" />

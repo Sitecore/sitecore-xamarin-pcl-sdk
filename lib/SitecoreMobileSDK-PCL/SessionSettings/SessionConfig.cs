@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class SessionConfig : ISessionConfig
+    public class SessionConfig : ISessionConfig, IWebApiCredentials
     {
         public SessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
         {
