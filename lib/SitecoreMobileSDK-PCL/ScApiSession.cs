@@ -20,6 +20,7 @@
 
         private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
         private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+        private readonly string itemWebApiVersion = "v1";
 
         private PublicKeyX509Certificate publicCertifiacte;
 
@@ -90,12 +91,25 @@
             PublicKeyX509Certificate cert = await this.GetPublicKey();
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
-            ReadItemByIdParameters config = new ReadItemByIdParameters(this.sessionConfig.InstanceUrl, "v2", id, cryptor);
+            ReadItemByIdParameters config = new ReadItemByIdParameters(this.sessionConfig.InstanceUrl, "v1", id, cryptor);
 
-            var taskFlow = new GetItemsTasks(new WebApiUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
+            var taskFlow = new GetItemsTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
 
             return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
         }
+        
+        public async Task<ScItemsResponse> GetItemByPath(string path)
+        {
+            PublicKeyX509Certificate cert = await this.GetPublicKey();
+            ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
+
+            ReadItemByPathParameters config = new ReadItemByPathParameters(this.sessionConfig.InstanceUrl, this.itemWebApiVersion, path, cryptor);
+
+            var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
+
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+        }
+
         #endregion GetItems
     }
 }

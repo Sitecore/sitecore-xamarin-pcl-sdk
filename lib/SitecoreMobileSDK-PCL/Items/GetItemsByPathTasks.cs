@@ -1,18 +1,14 @@
-﻿using Sitecore.MobileSDK.UrlBuilder;
-
-namespace Sitecore.MobileSDK.CrudTasks
+﻿namespace Sitecore.MobileSDK.Items
 {
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Sitecore.MobileSDK;
-    using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.TaskFlow;
+    using Sitecore.MobileSDK.UrlBuilder;
 
-
-    public class GetItemsTasks : IRestApiCallTasks<ReadItemByIdParameters, HttpRequestMessage, string, ScItemsResponse>
+    public class GetItemsByPathTasks : IRestApiCallTasks<ReadItemByPathParameters, HttpRequestMessage, string, ScItemsResponse>
     {
-        public GetItemsTasks(WebApiUrlBuilder urlBuilder, HttpClient httpClient)
+        public GetItemsByPathTasks(ItemByPathUrlBuilder urlBuilder, HttpClient httpClient)
         {
             this.httpClient = httpClient;
             this.urlBuilder = urlBuilder;
@@ -20,7 +16,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #region  IRestApiCallTasks
 
-        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(ReadItemByIdParameters request)
+        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(ReadItemByPathParameters request)
         {
             string url = this.UrlToGetItemWithRequest(request);
             HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
@@ -46,13 +42,12 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #endregion IRestApiCallTasks
 
-        private string UrlToGetItemWithRequest(ReadItemByIdParameters request)
+        private string UrlToGetItemWithRequest(ReadItemByPathParameters request)
         {
             return this.urlBuilder.GetUrlForRequest(request);
         }
 
         private readonly HttpClient httpClient;
-        private readonly WebApiUrlBuilder urlBuilder;
+        private readonly ItemByPathUrlBuilder urlBuilder;
     }
 }
-
