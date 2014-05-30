@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK.CrudTasks
     using Sitecore.MobileSDK.TaskFlow;
 
 
-    public class GetItemsByIdTasks : IRestApiCallTasks<ReadItemByIdParameters, HttpRequestMessage, string, ScItemsResponse>
+    public class GetItemsByIdTasks : IRestApiCallTasks<GetItemsByIdParameters, HttpRequestMessage, string, ScItemsResponse>
     {
         public GetItemsByIdTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient)
         {
@@ -20,7 +20,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #region  IRestApiCallTasks
 
-        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(ReadItemByIdParameters request)
+        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(GetItemsByIdParameters request)
         {
             string url = this.UrlToGetItemWithRequest(request);
             HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
@@ -46,7 +46,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #endregion IRestApiCallTasks
 
-        private string UrlToGetItemWithRequest(ReadItemByIdParameters request)
+        private string UrlToGetItemWithRequest(GetItemsByIdParameters request)
         {
             return this.urlBuilder.GetUrlForRequest(request);
         }

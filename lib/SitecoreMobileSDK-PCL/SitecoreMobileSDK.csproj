@@ -38,6 +38,7 @@
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
     <Compile Include="ScApiSession.cs" />
+    <Compile Include="SessionSettings\ICredentialCryptorOwner.cs" />
     <Compile Include="SessionSettings\ISessionConfig.cs" />
     <Compile Include="SessionSettings\IWebApiCredentials.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />
@@ -52,6 +53,10 @@
     <Compile Include="Items\ItemSource.cs" />
     <Compile Include="ScResponseException.cs" />
     <Compile Include="ScErrorResponse.cs" />
+    <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
+    <Compile Include="UrlBuilder\IGetItemByIdRequest.cs" />
+    <Compile Include="UrlBuilder\IGetItemByPathRequest.cs" />
+    <Compile Include="UrlBuilder\IGetItemByQueryRequest.cs" />
     <Compile Include="UrlBuilder\IRequestConfig.cs" />
     <Compile Include="UrlBuilder\ItemByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\ItemByPathUrlBuilder.cs" />
@@ -65,7 +70,7 @@
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
-    <Compile Include="Items\ReadItemByIdParameters.cs" />
+    <Compile Include="Items\GetItemsByIdParameters.cs" />
     <Compile Include="Items\GetItemsByPathTasks.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
