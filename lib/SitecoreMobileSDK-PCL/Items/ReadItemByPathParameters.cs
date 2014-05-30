@@ -1,24 +1,33 @@
-﻿namespace Sitecore.MobileSDK.Items
+﻿
+
+namespace Sitecore.MobileSDK.Items
 {
     using Sitecore.MobileSDK.PublicKey;
     using Sitecore.MobileSDK.UrlBuilder;
+    using Sitecore.MobileSDK.SessionSettings;
 
-    public class ReadItemByPathParameters : IRequestConfig
+    public class ReadItemByPathParameters : IGetItemByPathRequest
     {
-        public ReadItemByPathParameters(string instanceUrl, string webApiVersion, string itemPath, ICredentialsHeadersCryptor cryptor)
+        public ReadItemByPathParameters(
+            ISessionConfig sessionSettings, 
+            IItemSource itemSource, 
+            string itemPath, 
+            ICredentialsHeadersCryptor cryptor = null)
         {
-            this.InstanceUrl = instanceUrl;
-            this.WebApiVersion = webApiVersion;
+            this.SessionSettings = sessionSettings;
+            this.ItemSource = itemSource;
             this.ItemPath = itemPath;
             this.CredentialsHeadersCryptor = cryptor;
         }
 
-        public string InstanceUrl { get; set; }
-
-        public string WebApiVersion { get; private set; }
-
         public string ItemPath { get; private set; }
 
         public ICredentialsHeadersCryptor CredentialsHeadersCryptor { get; private set; }
+
+        public IItemSource ItemSource { get; private set; }
+
+        public ISessionConfig SessionSettings { get; private set; }
+
+        public ICredentialsHeadersCryptor CredentialsCryptor { get; private set; }
     }
 }
