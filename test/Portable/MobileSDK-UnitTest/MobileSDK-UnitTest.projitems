@@ -16,6 +16,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mock\MockReadItemByIdParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WebApiUrlBuilderTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mock\MockReadItemByPathParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mock\MockSessionInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemByIdUrlBuilderTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemByPathUrlBuilderTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Mock\" />
