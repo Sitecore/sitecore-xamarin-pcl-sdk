@@ -6,6 +6,7 @@ namespace MobileSDKIntegrationTest
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.SessionSettings;
 
 
     [TestFixture]

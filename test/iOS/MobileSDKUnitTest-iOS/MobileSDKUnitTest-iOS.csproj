@@ -102,7 +102,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
+    <Compile Include="Main.cs">
+      <DependentUpon>packages.config</DependentUpon>
+    </Compile>
     <Compile Include="UnitTestAppDelegate.cs" />
   </ItemGroup>
   <Import Project="..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems')" />

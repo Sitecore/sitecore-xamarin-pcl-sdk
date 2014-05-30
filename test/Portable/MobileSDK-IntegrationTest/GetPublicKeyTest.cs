@@ -14,6 +14,8 @@ namespace MobileSDKIntegrationTest
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.SessionSettings;
+
 
     [TestFixture]
     public class GetPublicKeyTest
@@ -99,7 +101,10 @@ namespace MobileSDKIntegrationTest
             };
 
             InvalidOperationException exception = Assert.Throws<InvalidOperationException>(action, "we should get error here");
-            StringAssert.Contains("An invalid request URI was provided.", exception.GetBaseException().ToString());
+
+            Assert.IsTrue( 
+                exception.GetBaseException().ToString().Contains("An invalid request URI was provided.") 
+            );
         }
 
         [Test]
@@ -114,7 +119,11 @@ namespace MobileSDKIntegrationTest
             };
 
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(action, "we should get error here");
-            StringAssert.Contains("ScApiSession.defaultSource cannot be null", exception.GetBaseException().ToString());
+
+
+            Assert.IsTrue( 
+                exception.GetBaseException().ToString().Contains("ScApiSession.defaultSource cannot be null") 
+            );
         }
     }
 }
