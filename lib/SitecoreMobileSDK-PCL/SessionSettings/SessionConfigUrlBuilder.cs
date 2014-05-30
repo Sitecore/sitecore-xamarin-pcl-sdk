@@ -25,10 +25,20 @@
 
             string escapedVersion = Uri.EscapeDataString(request.ItemWebApiVersion);
 
+
             string result =
-                autocompletedInstanceUrl +
+                autocompletedInstanceUrl;
+
+            result +=
                     this.webApiGrammar.ItemWebApiEndpoint +
                     escapedVersion;
+
+            if (!string.IsNullOrEmpty (request.Site))
+            {
+                string escapedSite = Uri.EscapeDataString (request.Site);
+                result += 
+                    escapedSite;
+            }
 
             return result.ToLowerInvariant();
         }
@@ -54,7 +64,14 @@
 
         private void Validate()
         {
-            // TODO : implement me
+            if (null == this.restGrammar)
+            {
+                throw new ArgumentNullException ("[SessionConfigUrlBuilder] restGrammar cannot be null");
+            }
+            else if (null == this.webApiGrammar)
+            {
+                throw new ArgumentNullException ("[SessionConfigUrlBuilder] webApiGrammar cannot be null");
+            }
         }
 
         private IRestServiceGrammar restGrammar;

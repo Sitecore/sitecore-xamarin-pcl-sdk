@@ -15,6 +15,8 @@
     {
         private ItemByIdUrlBuilder builder;
         private ISessionConfig sessionConfig;
+        private ISessionConfig sitecoreShellConfig;
+
 
         [SetUp]
         public void SetUp()
@@ -28,8 +30,14 @@
             mutableSessionConfig.ItemWebApiVersion = "v1";
             mutableSessionConfig.InstanceUrl = "sitecore.net";
             mutableSessionConfig.Site = null;
-
             this.sessionConfig = mutableSessionConfig;
+
+
+            mutableSessionConfig = new SessionConfigPOD();
+            mutableSessionConfig.ItemWebApiVersion = "v234";
+            mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
+            mutableSessionConfig.Site = "/sitecore/shell";
+            this.sitecoreShellConfig = mutableSessionConfig;
         }
 
         [TearDown]
@@ -58,13 +66,29 @@
         {
             MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
             mutableParameters.SessionSettings = this.sessionConfig;
-            mutableParameters.ItemSource = null;
+            mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
 
             IGetItemByIdRequest parameters = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(parameters);
-            string expected = "http://sitecore.net/-/item/v1?sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+            string expected = "http://sitecore.net/-/item/v1?sc_database=web&sc_lang=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void TestUrlBuilderAddsItemSource()
+        {
+            MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+            mutableParameters.SessionSettings = this.sitecoreShellConfig;
+            mutableParameters.ItemSource = ItemSource.DefaultSource();
+            mutableParameters.ItemId = "{   xxx   }";
+
+            IGetItemByIdRequest parameters = mutableParameters;
+
+            string result = this.builder.GetUrlForRequest(parameters);
+            string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&sc_lang=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
 
             Assert.AreEqual(expected, result);
         }
@@ -79,10 +103,7 @@
 
             IGetItemByIdRequest parameters = mutableParameters;
 
-            TestDelegate action = () =>
-            {
-                string result = this.builder.GetUrlForRequest(parameters);
-            };
+            TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
 
             Assert.Throws<ArgumentNullException>(action);
         }
