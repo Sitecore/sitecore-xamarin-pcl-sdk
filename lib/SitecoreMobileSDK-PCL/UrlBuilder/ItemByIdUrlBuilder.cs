@@ -3,23 +3,31 @@
     using System;
     using Sitecore.MobileSDK.SessionSettings;
 
-    public class ItemByIdUrlBuilder : WebApiUrlBuilder
+    public class ItemByIdUrlBuilder 
     {
         public ItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-            : base(restGrammar, webApiGrammar)
         {
+            this.restGrammar = restGrammar;
+            this.webApiGrammar = webApiGrammar;
         }
+
 
         public string GetUrlForRequest(IGetItemByIdRequest request)
         {
+            this.ValidateId(request.ItemId);
+            string escapedId = Uri.EscapeDataString(request.ItemId);
+
             SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
             string result = sessionBuilder.BuildUrlString(request.SessionSettings);
 
-            this.ValidateId(request.ItemId);
+            ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
+            string itemSourceArgs = sourceBuilder.BuildUrlQueryString ();
 
-            string escapedId = Uri.EscapeDataString(request.ItemId);
-            
-            result += this.restGrammar.HostAndArgsSeparator + this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
+            result += 
+                this.restGrammar.HostAndArgsSeparator + 
+                itemSourceArgs + 
+                this.restGrammar.FieldSeparator + 
+                this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator +  escapedId;
 
             return result.ToLowerInvariant();
         }
@@ -39,5 +47,8 @@
                 throw new ArgumentException("ItemByIdUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
             }
         }
+
+        private IRestServiceGrammar restGrammar;
+        private IWebApiUrlParameters webApiGrammar;
     }
 }
