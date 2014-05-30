@@ -2,7 +2,7 @@
 {
     public interface IRequestConfig
     {
-        string InstanceUrl { get; set; }
+        string InstanceUrl { get; }
         
         string WebApiVersion { get; }
     }

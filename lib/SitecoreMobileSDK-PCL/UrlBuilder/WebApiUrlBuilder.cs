@@ -21,15 +21,16 @@ namespace Sitecore.MobileSDK.UrlBuilder
         {
             this.ValidateRequest(request);
 
-            if (!this.IsValidUrlScheme(request.InstanceUrl))
+            string autocompletedInstanceUrl = request.InstanceUrl;
+            if (!this.IsValidUrlScheme(autocompletedInstanceUrl))
             {
-                request.InstanceUrl = request.InstanceUrl.Insert(0, "http://");
+                autocompletedInstanceUrl = autocompletedInstanceUrl.Insert(0, "http://");
             }
 
             string escapedVersion = Uri.EscapeDataString(request.WebApiVersion);
 
             string result =
-                request.InstanceUrl +
+                autocompletedInstanceUrl +
                     this.webApiGrammar.ItemWebApiEndpoint +
                     escapedVersion;
 
