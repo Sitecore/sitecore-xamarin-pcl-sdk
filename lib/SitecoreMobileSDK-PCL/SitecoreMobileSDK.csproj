@@ -71,6 +71,7 @@
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\IGetItemByQueryRequest.cs" />
+    <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
