@@ -17,6 +17,11 @@ namespace Sitecore.MobileSDK.SessionSettings
             get; 
         }
 
+        string ItemWebApiVersion
+        {
+            get;
+        }
+
         string Login
         {
             get;

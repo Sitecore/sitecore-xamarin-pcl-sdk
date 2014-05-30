@@ -4,12 +4,13 @@
 
     public class SessionConfig : ISessionConfig
     {
-        public SessionConfig(string instanceUrl, string login, string password, string site = null)
+        public SessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
         {
             this.InstanceUrl = instanceUrl;
             this.Login       = login      ;
             this.Password    = password   ;
             this.Site        = site       ;
+            this.ItemWebApiVersion = itemWebApiVersion;
         }
 
         public string InstanceUrl
@@ -33,6 +34,12 @@
         public string Password
         {
             get;
+            private set;
+        }
+
+        public string ItemWebApiVersion
+        {
+            get; 
             private set;
         }
 
