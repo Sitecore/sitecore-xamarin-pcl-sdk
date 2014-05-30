@@ -3,11 +3,14 @@
     using System;
     using Sitecore.MobileSDK.Items;
 
-    public class ItemByPathUrlBuilder : WebApiUrlBuilder
+    public class ItemByPathUrlBuilder
     {
         public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-            : base(restGrammar, webApiGrammar)
         {
+            this.restGrammar = restGrammar;
+            this.webApiGrammar = webApiGrammar;
+
+            this.Validate();
         }
 
         public void ValidatePath(string itemPath)
@@ -23,18 +26,25 @@
             }
         }
 
-        public override string GetUrlForRequest(IRequestConfig request)
+        public string GetUrlForRequest(IGetItemByPathRequest request)
         {
-            string result = base.GetUrlForRequest(request);
-
-            ReadItemByPathParameters config = (ReadItemByPathParameters)request;
-
-            this.ValidatePath(config.ItemPath);
-
-            string escapedPath = Uri.EscapeUriString(config.ItemPath);
-
-            result += escapedPath;
-            return result.ToLowerInvariant();
+            return null;
+            //            ReadItemByPathParameters config = (ReadItemByPathParameters)request;
+            //
+            //            this.ValidatePath(config.ItemPath);
+            //
+            //            string escapedPath = Uri.EscapeUriString(config.ItemPath);
+            //
+            //            result += escapedPath;
+            //            return result.ToLowerInvariant();
         }
+
+        private void Validate()
+        {
+            // TODO : implement me
+        }
+
+        private IRestServiceGrammar restGrammar;
+        private IWebApiUrlParameters webApiGrammar;
     }
 }
