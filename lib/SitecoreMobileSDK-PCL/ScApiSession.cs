@@ -3,6 +3,8 @@
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
+
+    using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.CrudTasks;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.PublicKey;

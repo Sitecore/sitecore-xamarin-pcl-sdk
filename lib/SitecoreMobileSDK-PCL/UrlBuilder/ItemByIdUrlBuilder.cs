@@ -25,7 +25,7 @@
             }
         }
 
-        public override string GetUrlForRequest(IRequestConfig request)
+        public string GetUrlForRequest(ReadItemByIdParameters request)
         {
             string result = base.GetUrlForRequest(request);
 

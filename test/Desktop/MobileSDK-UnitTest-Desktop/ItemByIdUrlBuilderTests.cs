@@ -9,7 +9,7 @@
     [TestFixture]
     public class ItemByIdUrlBuilderTests
     {
-        private ItemIdUrlBuilder builder;
+        private ItemByIdUrlBuilder builder;
 
         [SetUp]
         public void SetUp()
@@ -17,7 +17,7 @@
             IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
             IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
 
-            this.builder = new ItemIdUrlBuilder(restGrammar, webApiGrammar);
+            this.builder = new ItemByIdUrlBuilder(restGrammar, webApiGrammar);
         }
 
         [TearDown]
