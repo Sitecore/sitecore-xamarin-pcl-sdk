@@ -8,10 +8,10 @@ namespace MobileSDKUnitTest.Mock
 
     public class MockGetItemsByPathParameters : IGetItemByPathRequest
     {
-        public IItemSource ItemSource { get; private set; }
+        public IItemSource ItemSource { get; set; }
 
-        public ISessionConfig SessionSettings { get; private set; }
+        public ISessionConfig SessionSettings { get; set; }
 
-        public string ItemPath { get; private set; }
+        public string ItemPath { get; set; }
     }
 }
