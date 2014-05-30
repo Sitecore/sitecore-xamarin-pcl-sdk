@@ -90,7 +90,6 @@
         #region GetItems
         public async Task<ScItemsResponse> GetItemById(string id)
         {
-            PublicKeyX509Certificate cert = await this.GetPublicKey();
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
             GetItemsByIdParameters config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
@@ -102,10 +101,13 @@
         
         public async Task<ScItemsResponse> GetItemByPath(string path)
         {
-            PublicKeyX509Certificate cert = await this.GetPublicKey();
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
-            ReadItemByPathParameters config = new ReadItemByPathParameters(this.sessionConfig.InstanceUrl, this.itemWebApiVersion, path, cryptor);
+            ReadItemByPathParameters config = new ReadItemByPathParameters(
+                this.sessionConfig, 
+                ItemSource.DefaultSource(), 
+                path, 
+                cryptor);
 
             var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
 
