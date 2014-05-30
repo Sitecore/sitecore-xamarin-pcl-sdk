@@ -3,9 +3,9 @@
     using System;
     using Sitecore.MobileSDK.Items;
 
-    public class ItemPathUrlBuilder : WebApiUrlBuilder
+    public class ItemByPathUrlBuilder : WebApiUrlBuilder
     {
-        public ItemPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+        public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
             : base(restGrammar, webApiGrammar)
         {
         }
@@ -14,12 +14,12 @@
         {
             if (string.IsNullOrEmpty(itemPath))
             {
-                throw new ArgumentNullException("ItemPathUrlBuilder.GetUrlForRequest() : item path cannot be null or empty");
+                throw new ArgumentNullException("ItemByPathUrlBuilder.GetUrlForRequest() : item path cannot be null or empty");
             }
 
             if (!itemPath.StartsWith("/"))
             {
-                throw new ArgumentException("ItemPathUrlBuilder.GetUrlForRequest() : item path should begin with '/'");
+                throw new ArgumentException("ItemByPathUrlBuilder.GetUrlForRequest() : item path should begin with '/'");
             }
         }
 

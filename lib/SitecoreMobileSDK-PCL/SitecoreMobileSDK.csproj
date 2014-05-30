@@ -50,7 +50,7 @@
     <Compile Include="ScErrorResponse.cs" />
     <Compile Include="UrlBuilder\IRequestConfig.cs" />
     <Compile Include="UrlBuilder\ItemIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\ItemPathUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\ItemByPathUrlBuilder.cs" />
     <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
     <Compile Include="UrlBuilder\RestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\WebApiUrlBuilder.cs" />

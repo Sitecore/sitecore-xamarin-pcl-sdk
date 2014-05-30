@@ -7,9 +7,9 @@
     using Sitecore.MobileSDK.UrlBuilder;
 
     [TestFixture]
-    public class ItemPathUrlBuilderTests
+    public class ItemByPathUrlBuilderTests
     {
-        private ItemPathUrlBuilder builder;
+        private ItemByPathUrlBuilder builder;
 
         [SetUp]
         public void SetUp()
@@ -17,7 +17,7 @@
             IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
             IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
 
-            this.builder = new ItemPathUrlBuilder(restGrammar, webApiGrammar);
+            this.builder = new ItemByPathUrlBuilder(restGrammar, webApiGrammar);
         }
 
         [TearDown]
