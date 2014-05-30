@@ -32,8 +32,8 @@ namespace MobileSdk_IntegrationTest_Desktop.Specs.GetItems
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetItemTest", "In order to get data from sitecore to mobile app\nAs a daveloper\nI want to get ite" +
-                    "m using Mobile SDK", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetItemTest", "In order to get data from sitecore to mobile app\r\nAs a daveloper\r\nI want to get i" +
+                    "tem using Mobile SDK", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,13 +75,22 @@ namespace MobileSdk_IntegrationTest_Desktop.Specs.GetItems
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I logged in as sitecore admin user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Username",
+                        "Password"});
+            table1.AddRow(new string[] {
+                        "sitecore\\admin",
+                        "b"});
 #line 9
- testRunner.When("I send request to get Home item by ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 10
- testRunner.Then("I\'ve got one item in \'Response\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 11
- testRunner.And("The \'Item\' = Home item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I have choosed user", ((string)(null)), table1, "And ");
+#line 12
+ testRunner.When("I send request to get item by id \"HomeItemId\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 13
+ testRunner.Then("I\'ve got 1 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 14
+ testRunner.And("This is Home item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

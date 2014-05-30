@@ -3,48 +3,61 @@ using NUnit.Framework;
 using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.Items;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace MobileSdk_IntegrationTest_Desktop
 {
     [Binding]
     public class GetItemTestSteps
     {
-        private readonly string _instanceUrl = ConfigurationManager.AppSettings["authenticatedInstanceURL"];
-        private const string HomeItemId = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
-
-        [Given(@"I logged in as sitecore admin user")]
-        public void GivenILoggedInAsSitecoreAdminUser()
+        [Given(@"I have logged in ""(.*)""")]
+        public void GivenIHaveLoggedIn(string instance)
         {
-            SessionConfig config = new SessionConfig(_instanceUrl, "sitecore\\admin", "b");
+            ScenarioContext.Current["InstanceUrl"] = ConfigurationManager.AppSettings[instance];
+        }
+
+        [Given(@"I have choosed user")]
+        public void GivenIHaveChoosedUser(Table credentials)
+        {
+            var userCredentials = credentials.CreateInstance<UserTable>();
+
+            SessionConfig config = new SessionConfig(ScenarioContext.Current.Get<string>("InstanceUrl"), userCredentials.Username, userCredentials.Password);
             ScenarioContext.Current["ApiSession"] = new ScApiSession(config, ItemSource.DefaultSource());
         }
 
-        [When(@"I send request to get Home item by ID")]
-        public void WhenISendRequestToGetHomeItemById()
+
+        [When(@"I send request to get item by id ""(.*)""")]
+        public void WhenISendRequestToGetItemById(string itemId)
         {
-            
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
-            ScenarioContext.Current["Response"] = apiSession.GetItemById(HomeItemId).Result;
+            string id = ConfigurationManager.AppSettings[itemId];
+            ScenarioContext.Current["Response"] = apiSession.GetItemById(id).Result;
         }
 
-        [Then(@"I've got one item in 'Response'")]
-        public void ThenIVeGotOneItemInResponse()
+        [Then(@"I've got (.*) items in response")]
+        public void ThenIVeGotItemsInResponse(int count)
         {
-            //Thread.Sleep(1000); //how can we avoid delays?!!! does specflow support async operations?
             var response = ScenarioContext.Current.Get<ScItemsResponse>("Response");
-            Assert.AreEqual(1, response.TotalCount);
-            Assert.AreEqual(1, response.Items.Count);
-            ScenarioContext.Current["Item"] = response.Items[0];
+            Assert.AreEqual(count, response.TotalCount);
+            Assert.AreEqual(count, response.Items.Count);
         }
 
-        [Then(@"The 'Item' = Home item")]
+
+        [Then(@"This is Home item")]
         public void ThenThisIsHomeItem()
         {
-            var item = ScenarioContext.Current.Get<ScItem>("Item");
+            var response = ScenarioContext.Current.Get<ScItemsResponse>("Response");
+            var item = response.Items[0];
             Assert.AreEqual("Home", item.DisplayName);
-            Assert.AreEqual(HomeItemId, item.Id);
+            Assert.AreEqual(ConfigurationManager.AppSettings["HomeItemId"], item.Id);
             Assert.AreEqual("Sample/Sample Item", item.Template);
         }
 
+        public class UserTable
+        {
+            public string Username { get; set; }
+
+            public string Password { get; set; }
+        }
     }
 }

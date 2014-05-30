@@ -5,7 +5,10 @@
 
 @mytag
 Scenario: Get Item by ID
-	Given I logged in as sitecore admin user
-	When I send request to get Home item by ID
-	Then I've got one item in 'Response'
-	And The 'Item' = Home item
+	Given I have logged in "authenticatedInstanceURL"
+	And I have choosed user
+	| Username		  | Password |
+	| sitecore\\admin | b        |
+	When I send request to get item by id "HomeItemId"
+	Then I've got 1 items in response
+	And This is Home item
