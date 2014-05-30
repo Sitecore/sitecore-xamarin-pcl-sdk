@@ -2,14 +2,14 @@
 
 namespace Sitecore.MobileSDK.Items
 {
-    public class ItemSource
+    public class ItemSource : IItemSource
     {
         public static ItemSource DefaultSource()
         {
             return new ItemSource ("web", "en", null);
         }
 
-        public ItemSource ( string database, string language, string version = null )
+        public ItemSource(string database, string language, string version = null)
         {
             this.Database = database;
             this.Language = language;
@@ -18,6 +18,7 @@ namespace Sitecore.MobileSDK.Items
             this.Validate ();
         }
 
+        /// <exception cref="ArgumentNullException">[ItemSource.Database] Do not pass null to constructor</exception>
         private void Validate()
         {
             if (null == this.Database)
