@@ -10,9 +10,9 @@ namespace Sitecore.MobileSDK.CrudTasks
     using Sitecore.MobileSDK.TaskFlow;
 
 
-    public class GetItemsTasks : IRestApiCallTasks<ReadItemByIdParameters, HttpRequestMessage, string, ScItemsResponse>
+    public class GetItemsByIdTasks : IRestApiCallTasks<ReadItemByIdParameters, HttpRequestMessage, string, ScItemsResponse>
     {
-        public GetItemsTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient)
+        public GetItemsByIdTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient)
         {
             this.httpClient = httpClient;
             this.urlBuilder = urlBuilder;

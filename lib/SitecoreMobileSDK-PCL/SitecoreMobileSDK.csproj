@@ -60,7 +60,7 @@
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
-    <Compile Include="CrudTasks\GetItemsTasks.cs" />
+    <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
     <Compile Include="Items\ReadItemByIdParameters.cs" />
     <Compile Include="Items\GetItemsByPathTasks.cs" />
   </ItemGroup>
