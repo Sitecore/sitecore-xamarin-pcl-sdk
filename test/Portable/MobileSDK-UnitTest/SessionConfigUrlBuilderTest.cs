@@ -54,7 +54,6 @@ namespace Sitecore.MobileSdkUnitTest
 		[Test]
 		public void TestBuildWithInvalidSite()
 		{
-			SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
 			SessionConfigPOD mockConfig = new SessionConfigPOD();
 			mockConfig.InstanceUrl = "localhost";
 			mockConfig.ItemWebApiVersion = "v1";
