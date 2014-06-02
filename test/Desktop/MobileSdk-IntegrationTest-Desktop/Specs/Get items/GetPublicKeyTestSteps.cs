@@ -4,6 +4,7 @@ using System.Xml;
 using NUnit.Framework;
 using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.Items;
+using Sitecore.MobileSDK.SessionSettings;
 using TechTalk.SpecFlow;
 
 namespace MobileSdk_IntegrationTest_Desktop.Specs.Get_items

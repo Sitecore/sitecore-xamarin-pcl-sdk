@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.Items;
+using Sitecore.MobileSDK.SessionSettings;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
