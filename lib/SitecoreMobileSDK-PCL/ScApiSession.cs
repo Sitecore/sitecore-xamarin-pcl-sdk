@@ -27,7 +27,6 @@ namespace Sitecore.MobileSDK
 
         private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
         private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
-        private readonly string itemWebApiVersion = "v1";
 
         private PublicKeyX509Certificate publicCertifiacte;
 
