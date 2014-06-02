@@ -1,19 +1,19 @@
 namespace Sitecore.MobileSDK
 {
-    using System;
-    using System.Net.Http;
-    using System.Threading.Tasks;
+	using System;
+	using System.Net.Http;
+	using System.Threading.Tasks;
 
-    using Sitecore.MobileSDK.SessionSettings;
-    using Sitecore.MobileSDK.CrudTasks;
-    using Sitecore.MobileSDK.PublicKey;
-    using Sitecore.MobileSDK.TaskFlow;
-
-    using Sitecore.MobileSDK.UrlBuilder.Rest;
-    using Sitecore.MobileSDK.UrlBuilder.WebApi;
-    using Sitecore.MobileSDK.UrlBuilder.ItemById;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+	using Sitecore.MobileSDK.SessionSettings;
+	using Sitecore.MobileSDK.CrudTasks;
+	using Sitecore.MobileSDK.Items;
+	using Sitecore.MobileSDK.PublicKey;
+	using Sitecore.MobileSDK.TaskFlow;
+	using Sitecore.MobileSDK.UrlBuilder.Rest;
+	using Sitecore.MobileSDK.UrlBuilder.WebApi;
+	using Sitecore.MobileSDK.UrlBuilder.ItemById;
+	using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+	using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
     public class ScApiSession
     {
