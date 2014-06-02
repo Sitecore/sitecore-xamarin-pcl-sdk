@@ -50,19 +50,19 @@
             this.sessionConfig = null;
         }
 
-        [Test]
-        public void TestInvalidItemId()
-        {
-            MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-            mutableParameters.SessionSettings = this.sessionConfig;
-            mutableParameters.ItemSource = ItemSource.DefaultSource();
-            mutableParameters.ItemId = "someInvalidItemId";
+		[Test]
+		public void TestInvaliSite()
+		{
+			MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+			mutableParameters.SessionSettings = this.sessionConfig;
+			mutableParameters.ItemSource = ItemSource.DefaultSource();
+			mutableParameters.ItemId = "someInvalidItemId";
 
-            IGetItemByIdRequest parameters = mutableParameters;
+			IGetItemByIdRequest parameters = mutableParameters;
 
-            TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
-            Assert.Throws<ArgumentException>(action);
-        }
+			TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
+			Assert.Throws<ArgumentException>(action);
+		}
 
         [Test]
         public void TestUrlBuilderExcapesArgs()
