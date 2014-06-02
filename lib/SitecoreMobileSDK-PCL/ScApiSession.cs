@@ -46,7 +46,7 @@ namespace Sitecore.MobileSDK
 
         #region Encryption
 
-        protected async Task<PublicKeyX509Certificate> GetPublicKeyAsync()
+        protected virtual async Task<PublicKeyX509Certificate> GetPublicKeyAsync()
         {
             var taskFlow = new GetPublicKeyTasks(this.httpClient);
 
@@ -56,7 +56,7 @@ namespace Sitecore.MobileSDK
             return result;
         }
 
-        private async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
+        protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
         {
             if (this.sessionConfig.IsAnonymous())
             {

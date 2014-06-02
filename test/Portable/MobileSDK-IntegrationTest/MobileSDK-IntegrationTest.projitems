@@ -12,5 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GetPublicKeyTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScTestApiSession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CryptorConstructionTest.cs" />
   </ItemGroup>
 </Project>

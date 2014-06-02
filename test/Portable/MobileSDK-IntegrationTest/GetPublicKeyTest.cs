@@ -58,7 +58,7 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestRestrictedInstanceReturnsItemsWhenAuthenticated()
         {
-            PublicKeyX509Certificate publicKey = await this.sessionWithNoAnonymousAccess.GetPublicKeyAsync();
+            PublicKeyX509Certificate publicKey = await this.sessionWithNoAnonymousAccess.GetPublicKeyAsync_Public();
 
             var cryptor = new EncryptionUtil (publicKey);
 
