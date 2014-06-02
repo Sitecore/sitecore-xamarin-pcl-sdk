@@ -3,12 +3,15 @@
 namespace Sitecore.MobileSDK.CrudTasks
 {
     using System;
+    using System.IO;
     using System.Net.Http;
+    using System.Diagnostics;
     using System.Threading.Tasks;
+
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.TaskFlow;
-
+    using Sitecore.MobileSDK.PublicKey;
 
     public abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
         where TRequest : ICredentialCryptorOwner
@@ -20,7 +23,7 @@ namespace Sitecore.MobileSDK.CrudTasks
             string url = this.UrlToGetItemWithRequest(request);
             HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-            result = await request.CredentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result);
+			result = await request.CredentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result);
             return result;
         }
 

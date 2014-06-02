@@ -4,6 +4,7 @@ namespace MobileSDKIntegrationTest
 {
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
+    using Sitecore.MobileSDK.PublicKey;
 
     using System;
     using System.Security;
@@ -20,8 +21,8 @@ namespace MobileSDKIntegrationTest
     [TestFixture]
     public class GetPublicKeyTest
     {
-        private ScApiSession sessionWithAnonymousAccess;
-        private ScApiSession sessionWithNoAnonymousAccess;
+//        private ScTestApiSession sessionWithAnonymousAccess;
+        private ScTestApiSession sessionWithNoAnonymousAccess;
 
         private HttpClient httpClient;
 
@@ -29,10 +30,10 @@ namespace MobileSDKIntegrationTest
         public void Setup()
         {
             SessionConfig config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:7119", "sitecore\\admin", "b");
-            this.sessionWithNoAnonymousAccess = new ScApiSession(config, ItemSource.DefaultSource());
+            this.sessionWithNoAnonymousAccess = new ScTestApiSession(config, ItemSource.DefaultSource());
 
-            config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:722", "sitecore\\admin", "b");
-            this.sessionWithAnonymousAccess = new ScApiSession(config, ItemSource.DefaultSource());
+//            config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:722", "sitecore\\admin", "b");
+//            this.sessionWithAnonymousAccess = new ScTestApiSession(config, ItemSource.DefaultSource());
 
             this.httpClient = new HttpClient();
         }
@@ -41,7 +42,7 @@ namespace MobileSDKIntegrationTest
         public void TearDown()
         {
             this.sessionWithNoAnonymousAccess = null;
-            this.sessionWithAnonymousAccess = null;
+//            this.sessionWithAnonymousAccess = null;
         }
 
         [Test]
@@ -57,9 +58,12 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestRestrictedInstanceReturnsItemsWhenAuthenticated()
         {
-            PublicKeyX509Certificate publicKey = await this.sessionWithNoAnonymousAccess.GetPublicKey();
-            string encryptedLogin = this.sessionWithNoAnonymousAccess.EncryptString("sitecore\\admin");
-            string encryptedPassword = this.sessionWithNoAnonymousAccess.EncryptString("b");
+            PublicKeyX509Certificate publicKey = await this.sessionWithNoAnonymousAccess.GetPublicKeyAsync_Public();
+
+            var cryptor = new EncryptionUtil (publicKey);
+
+            string encryptedLogin = cryptor.Encrypt("sitecore\\admin");
+            string encryptedPassword = cryptor.Encrypt("b");
 
             this.httpClient.DefaultRequestHeaders.Add("X-Scitemwebapi-Username", encryptedLogin);
             this.httpClient.DefaultRequestHeaders.Add("X-Scitemwebapi-Password", encryptedPassword);
@@ -83,7 +87,7 @@ namespace MobileSDKIntegrationTest
 
             TestDelegate action = async () =>
             {
-                var response = await session.GetItemById("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
+                var response = await session.ReadItemByIdAsync("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
             };
 
             XmlException exception = Assert.Throws<XmlException>(action, "we should get error here");

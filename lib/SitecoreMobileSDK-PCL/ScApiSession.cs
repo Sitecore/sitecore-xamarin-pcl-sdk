@@ -1,38 +1,24 @@
-﻿
+
 namespace Sitecore.MobileSDK
 {
-    using System;
-    using System.Net.Http;
-    using System.Threading.Tasks;
+	using System;
+	using System.Net.Http;
+	using System.Threading.Tasks;
 
-    using Sitecore.MobileSDK.SessionSettings;
-    using Sitecore.MobileSDK.CrudTasks;
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.PublicKey;
-    using Sitecore.MobileSDK.TaskFlow;
-    using Sitecore.MobileSDK.UrlBuilder.Rest;
-    using Sitecore.MobileSDK.UrlBuilder.WebApi;
-    using Sitecore.MobileSDK.UrlBuilder.ItemById;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+	using Sitecore.MobileSDK.SessionSettings;
+	using Sitecore.MobileSDK.CrudTasks;
+	using Sitecore.MobileSDK.Items;
+	using Sitecore.MobileSDK.PublicKey;
+	using Sitecore.MobileSDK.TaskFlow;
+	using Sitecore.MobileSDK.UrlBuilder.Rest;
+	using Sitecore.MobileSDK.UrlBuilder.WebApi;
+	using Sitecore.MobileSDK.UrlBuilder.ItemById;
+	using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+	using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+
 
     public class ScApiSession
     {
-        #region Private Variables
-
-        private readonly HttpClient httpClient;
-
-        private readonly SessionConfig sessionConfig;
-        private readonly ItemSource defaultSource;
-
-        private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-        private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
-        private readonly string itemWebApiVersion = "v1";
-
-        private PublicKeyX509Certificate publicCertifiacte;
-
-        #endregion Private Variables
-
         public ScApiSession(SessionConfig config, ItemSource defaultSource)
         {
             if (null == config)
@@ -60,7 +46,7 @@ namespace Sitecore.MobileSDK
 
         #region Encryption
 
-        public async Task<PublicKeyX509Certificate> GetPublicKey()
+        protected virtual async Task<PublicKeyX509Certificate> GetPublicKeyAsync()
         {
             var taskFlow = new GetPublicKeyTasks(this.httpClient);
 
@@ -70,13 +56,7 @@ namespace Sitecore.MobileSDK
             return result;
         }
 
-        public string EncryptString(string data)
-        {
-            var cryptor = new EncryptionUtil(this.publicCertifiacte);
-            return cryptor.Encrypt(data);
-        }
-
-        public async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
+        protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
         {
             if (this.sessionConfig.IsAnonymous())
             {
@@ -85,32 +65,33 @@ namespace Sitecore.MobileSDK
             else
             {
                 // TODO : flow should be responsible for caching. Do not hard code here
-                PublicKeyX509Certificate cert = await this.GetPublicKey();
-                return new AuthenticedSessionCryptor(this.sessionConfig.Login, this.sessionConfig.Password, cert);
+                this.publicCertifiacte = await this.GetPublicKeyAsync();
+                return new AuthenticedSessionCryptor(this.sessionConfig.Login, this.sessionConfig.Password, this.publicCertifiacte);
             }
         }
 
         #endregion Encryption
 
         #region GetItems
-        public async Task<ScItemsResponse> GetItemById(string id)
-        {
-            ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
+
+		public async Task<ScItemsResponse> ReadItemByIdAsync(string id)
+		{
+			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
             var config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
 
-            var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
+			var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
 
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
-        }
-        
-        public async Task<ScItemsResponse> GetItemByPath(string path)
+			return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+		}
+
+        public async Task<ScItemsResponse> ReadItemByPathAsync(string path)
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
             var config = new ReadItemByPathParameters(
                 this.sessionConfig, 
-                ItemSource.DefaultSource(), 
+                this.defaultSource, 
                 path, 
                 cryptor);
 
@@ -119,13 +100,13 @@ namespace Sitecore.MobileSDK
             return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
         }
 
-        public async Task<ScItemsResponse> GetItemByQuery(string sitecoreQuery)
+        public async Task<ScItemsResponse> ReadItemByQueryAsync(string sitecoreQuery)
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
             var config = new ReadItemByQueryParameters(
                 this.sessionConfig, 
-                ItemSource.DefaultSource(), 
+                this.defaultSource, 
                 sitecoreQuery, 
                 cryptor);
 
@@ -135,5 +116,21 @@ namespace Sitecore.MobileSDK
         }
 
         #endregion GetItems
+
+
+        #region Private Variables
+
+        private readonly HttpClient httpClient;
+
+        private readonly SessionConfig sessionConfig;
+        private readonly ItemSource defaultSource;
+
+        private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
+        private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+
+
+        private PublicKeyX509Certificate publicCertifiacte;
+
+        #endregion Private Variables
     }
 }

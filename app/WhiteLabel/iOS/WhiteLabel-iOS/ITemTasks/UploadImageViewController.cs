@@ -18,7 +18,7 @@ namespace WhiteLabeliOS
 
 		partial void cancelUpload (MonoTouch.Foundation.NSObject sender)
 		{
-			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 			this.cancelButton.Enabled = false;
 		}
 
@@ -57,19 +57,20 @@ namespace WhiteLabeliOS
 				UIImage originalImage = e.Info[UIImagePickerController.OriginalImage] as UIImage;
 				if(originalImage != null) 
 				{
-					AlertHelper.ShowErrorAlertWithOkOption("Alert", "Image uploading is not implemented yet");
+					AlertHelper.ShowAlertWithOkOption("Alert", "Image uploading is not implemented yet");
 				}
 			} 
 			else 
 			{ 
-				AlertHelper.ShowErrorAlertWithOkOption("Alert", "Video uploading is not supported");
+				AlertHelper.ShowAlertWithOkOption("Alert", "Video uploading is not supported");
 			}          
 
-			imagePicker.DismissModalViewControllerAnimated (true);
+			imagePicker.DismissViewController (true, null);
 		}
 
-		void Handle_Canceled (object sender, EventArgs e) {
-			imagePicker.DismissModalViewControllerAnimated(true);
+		void Handle_Canceled (object sender, EventArgs e) 
+		{
+			imagePicker.DismissViewController (true, null);
 		}
 	}
 }

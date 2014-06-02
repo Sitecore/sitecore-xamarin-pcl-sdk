@@ -1,4 +1,4 @@
-﻿
+﻿using Sitecore.MobileSDK.SessionSettings;
 
 namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 {
@@ -6,8 +6,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
-    using Sitecore.MobileSDK.SessionSettings;
-    using Sitecore.MobileSDK.Utils;
 
 
     public class ItemByPathUrlBuilder
@@ -23,7 +21,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
         public string GetUrlForRequest(IGetItemByPathRequest request)
         {
             this.ValidateRequest (request);
-            string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath);
+            string escapedPath = Uri.EscapeDataString(request.ItemPath);
 
             SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
             string result = sessionBuilder.BuildUrlString(request.SessionSettings);

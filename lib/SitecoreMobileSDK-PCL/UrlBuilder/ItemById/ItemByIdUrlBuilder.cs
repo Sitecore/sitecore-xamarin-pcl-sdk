@@ -1,6 +1,4 @@
-﻿using Sitecore.MobileSDK.Utils;
-
-namespace Sitecore.MobileSDK.UrlBuilder.ItemById
+﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 {
     using System;
     using Sitecore.MobileSDK.SessionSettings;
@@ -21,7 +19,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
         public string GetUrlForRequest(IGetItemByIdRequest request)
         {
             this.ValidateId(request.ItemId);
-            string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
+            string escapedId = Uri.EscapeDataString(request.ItemId);
 
             SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
             string result = sessionBuilder.BuildUrlString(request.SessionSettings);
