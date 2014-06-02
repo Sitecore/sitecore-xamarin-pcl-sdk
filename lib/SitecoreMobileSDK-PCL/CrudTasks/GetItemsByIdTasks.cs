@@ -1,4 +1,4 @@
-﻿
+﻿using Sitecore.MobileSDK.PublicKey;
 
 namespace Sitecore.MobileSDK.CrudTasks
 {
@@ -11,15 +11,15 @@ namespace Sitecore.MobileSDK.CrudTasks
     using Sitecore.MobileSDK.UrlBuilder.ItemById;
 
 
-    public class GetItemsByIdTasks : AbstractGetItemTask<GetItemsByIdParameters>
+    public class GetItemsByIdTasks : AbstractGetItemTask<ReadItemsByIdParameters>
     {
-        public GetItemsByIdTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient)
+        public GetItemsByIdTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
+            : base(httpClient, credentialsHeadersCryptor)
         {
-            this.httpClient = httpClient;
             this.urlBuilder = urlBuilder;
         }
 
-        protected override string UrlToGetItemWithRequest(GetItemsByIdParameters request)
+        protected override string UrlToGetItemWithRequest(ReadItemsByIdParameters request)
         {
             return this.urlBuilder.GetUrlForRequest(request);
         }

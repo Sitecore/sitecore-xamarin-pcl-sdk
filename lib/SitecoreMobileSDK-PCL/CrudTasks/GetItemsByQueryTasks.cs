@@ -2,20 +2,16 @@
 using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 using System.Net.Http;
 using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+using Sitecore.MobileSDK.PublicKey;
 
 namespace Sitecore.MobileSDK.CrudTasks
 {
     public class GetItemsByQueryTasks : AbstractGetItemTask<ReadItemByQueryParameters>
     {
-        private GetItemsByQueryTasks ()
+        public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
+            : base(httpClient, credentialsHeadersCryptor)
         {
-        }
-
-        public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient)
-        {
-            this.httpClient = httpClient;
             this.urlBuilder = urlBuilder;
-
             this.Validate ();
         }
 
@@ -37,11 +33,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         private void Validate()
         {
-            if (null == this.httpClient)
-            {
-                throw new ArgumentNullException ("GetItemsByQueryTasks.httpClient cannot be null");
-            }
-            else if (null == this.urlBuilder)
+            if (null == this.urlBuilder)
             {
                 throw new ArgumentNullException ("GetItemsByQueryTasks.urlBuilder cannot be null");
             }

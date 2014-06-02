@@ -78,9 +78,9 @@ namespace Sitecore.MobileSDK
 		{
 			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
-            var config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
+            var config = new ReadItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id);
 
-			var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
+            var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
 			return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
 		}
@@ -92,10 +92,9 @@ namespace Sitecore.MobileSDK
             var config = new ReadItemByPathParameters(
                 this.sessionConfig, 
                 this.defaultSource, 
-                path, 
-                cryptor);
+                path);
 
-            var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
+            var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
             return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
         }
@@ -107,10 +106,9 @@ namespace Sitecore.MobileSDK
             var config = new ReadItemByQueryParameters(
                 this.sessionConfig, 
                 this.defaultSource, 
-                sitecoreQuery, 
-                cryptor);
+                sitecoreQuery);
 
-            var taskFlow = new GetItemsByQueryTasks(new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
+            var taskFlow = new GetItemsByQueryTasks(new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
             return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
         }
