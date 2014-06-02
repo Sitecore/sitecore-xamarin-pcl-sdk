@@ -12,31 +12,52 @@ namespace MobileSdk_IntegrationTest_Desktop.Specs.Get_items
     [Binding]
     public class GetPublicKeyTestSteps
     {
-        [Given(@"I set incorrect instance Url")]
-        public void GivenISetIncorrectInstanceUrl()
+        [When(@"I try to get an item by id ""(.*)""")]
+        public void WhenITryToGetAnItemById(string itemId)
         {
-            SessionConfig config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", "sitecore\\admin", "b");
-            ScenarioContext.Current["ApiSession"] = new ScApiSession(config, ItemSource.DefaultSource());
-        }
-
-        [When(@"I try to get an item")]
-        public void WhenITryToGetAnItem()
-        {
-            ScApiSession session = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
-            TestDelegate action = () =>
+            var session = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
+            TestDelegate action = async () =>
             {
-                var response = session.GetItemById("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}").Result;
+                await session.ReadItemByIdAsync(ConfigurationManager.AppSettings[itemId]);
             };
             ScenarioContext.Current["Action"] = action;
         }
 
-
-        [Then(@"I've got an AggregateException error")]
-        public void ThenIVeGotAnXmlError()
+        [Then(@"I've got an ""(.*)"" error")]
+        public void ThenIVeGotAnError(string type)
         {
-            //what exception type should be here?
-            var exception = Assert.Throws<AggregateException>(ScenarioContext.Current.Get<TestDelegate>("Action"), "we should get xml error here");
-            StringAssert.Contains("Cannot connect to the specified URL", exception.Message);
+            var action = ScenarioContext.Current.Get<TestDelegate>("Action");
+            var exception = Assert.Throws<ArgumentNullException>(action, " it work ?");
+            ScenarioContext.Current["ExceptionMessage"] = exception.Message;
         }
+
+        [Then(@"the error message contains ""(.*)""")]
+        public void ThenTheErrorMessageIs(string message)
+        {
+            Assert.True(ScenarioContext.Current.Get<string>("ExceptionMessage").Contains(message));
+        }
+
+        [Given(@"I have logged in empty instance url")]
+        public void GivenIHaveLoggedInNullInstanceUrl()
+        {
+            ScenarioContext.Current["InstanceUrl"] = "";
+        }
+
+        [Given(@"I have tried to connect as admin user")]
+        public void GivenIHaveTriedToConnectAsAdminUser()
+        {
+            string errorMessage = "";
+            try
+            {
+                SessionConfig config = new SessionConfig(ScenarioContext.Current.Get<string>("InstanceUrl"), "admin", "b");
+            }
+            catch (Exception exception)
+            {
+                errorMessage = exception.Message;
+            }
+            ScenarioContext.Current["ExceptionMessage"] = errorMessage;
+        }
+
+
     }
 }

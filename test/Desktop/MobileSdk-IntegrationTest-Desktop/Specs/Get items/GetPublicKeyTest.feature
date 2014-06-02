@@ -5,18 +5,55 @@
 
 @mytag
 Scenario: Get item with correct authentication parameters 
-	Given I logged in as sitecore admin user
-	When I send request to get Home item by ID
-	Then I've got one item in 'Response'
+	Given I have logged in "authenticatedInstanceURL"
+	And I have choosed user
+	| Username		  | Password |
+	| sitecore\\admin | b        |
+	When I send request to get item by id "HomeItemId"
+	Then I've got 1 items in response
 
 @mytag
 Scenario: Get item with invalid instance Url 
-	Given I set incorrect instance Url
-	When I try to get an item
-	Then I've got an AggregateException error
+	Given I have logged in "incorrectInstanceURL"
+	And I have choosed user
+	| Username		  | Password |
+	| sitecore\\admin | b        |
+	When I try to get an item by id "HomeItemId"
+	Then I've got an "System.Xml.XmlException" error
+	And the error message contains "Name cannot begin with the ' ' character"
 
 @mytag
-Scenario: Get item with null instance Url 
-	Given I set null instance Url
-	When I try to get an item
-	Then I've got an InvalidOperation error
+Scenario: Get item with empty instance Url 
+	Given I have logged in empty instance url
+	And I have tried to connect as admin user
+	Then the error message contains "Value cannot be null"
+
+@mytag
+Scenario: Get item with incorrect username and password 
+	Given I have logged in "authenticatedInstanceURL"
+	And I have choosed user
+	| Username		   | Password  |
+	| sitecore\\nouser | incorrect |
+	When I try to get an item by id "HomeItemId"
+	Then I've got an "ScAuthenticationError" error
+	And the error message contains "Cannot connect with specified username and password"
+
+@mytag
+Scenario: Get item with empty password 
+	Given I have logged in "authenticatedInstanceURL"
+	And I have choosed user
+	| Username		  | Password  |
+	| sitecore\\admin |           |
+	When I try to get an item by id "HomeItemId"
+	Then I've got an "ScAuthenticationError" error
+	And the error message contains "Cannot connect with specified username and password"
+
+@mytag
+Scenario: Get item with invalid password 
+	Given I have logged in "authenticatedInstanceURL"
+	And I have choosed user
+	| Username	  | Password   |
+	| tra-ta-ta$# | pwd^&- + " |
+	When I try to get an item by id "HomeItemId"
+	Then I've got an "ScAuthenticationError" error
+	And the error message contains "Cannot connect with specified username and password"
