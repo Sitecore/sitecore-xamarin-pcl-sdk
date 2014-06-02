@@ -1,5 +1,5 @@
 ﻿
-namespace MobileSDK_UnitTest_Desktop
+namespace Sitecore.MobileSdkUnitTest
 {
     using System;
     using MobileSDKUnitTest.Mock;

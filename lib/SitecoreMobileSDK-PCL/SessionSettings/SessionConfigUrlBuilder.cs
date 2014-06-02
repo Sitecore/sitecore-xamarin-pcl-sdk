@@ -40,7 +40,7 @@ namespace Sitecore.MobileSDK.SessionSettings
             if (!string.IsNullOrEmpty (request.Site))
             {
                 string escapedSite = UrlBuilderUtils.EscapeDataString(request.Site);
-                result += 
+				result += this.restGrammar.PathComponentSeparator +
                     escapedSite;
             }
 

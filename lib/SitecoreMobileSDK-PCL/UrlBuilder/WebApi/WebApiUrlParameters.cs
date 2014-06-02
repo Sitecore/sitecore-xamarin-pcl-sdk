@@ -13,6 +13,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.WebApi
 
             result.ItemWebApiEndpoint = "/-/item/";
             result.ItemIdParameterName = "sc_itemid";
+            result.SitecoreQueryParameterName = "query";
 
             return result;
         }
@@ -26,7 +27,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.WebApi
         public string LanguageParameterName { get; private set;}
         public string VersionParameterName  { get; private set;}
         public string ItemWebApiEndpoint   { get; private set;}
-
+        public string SitecoreQueryParameterName { get; private set; }
     }
 }
 

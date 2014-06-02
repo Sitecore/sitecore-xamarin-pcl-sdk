@@ -73,6 +73,8 @@
     <Compile Include="UrlBuilder\ItemByQuery\IGetItemByQueryRequest.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
+    <Compile Include="Items\ReadItemByQueryParameters.cs" />
+    <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
