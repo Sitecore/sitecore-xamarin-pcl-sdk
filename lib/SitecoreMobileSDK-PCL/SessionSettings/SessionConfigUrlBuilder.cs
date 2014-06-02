@@ -1,9 +1,7 @@
-﻿
-
-namespace Sitecore.MobileSDK.SessionSettings
+﻿namespace Sitecore.MobileSDK.SessionSettings
 {
     using System;
-    using Sitecore.MobileSDK.Utils;
+    using Sitecore.MobileSDK.UrlBuilder;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
@@ -27,7 +25,7 @@ namespace Sitecore.MobileSDK.SessionSettings
                 autocompletedInstanceUrl = autocompletedInstanceUrl.Insert(0, "http://");
             }
 
-            string escapedVersion = UrlBuilderUtils.EscapeDataString(request.ItemWebApiVersion);
+            string escapedVersion = Uri.EscapeDataString(request.ItemWebApiVersion);
 
 
             string result =
@@ -39,7 +37,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
             if (!string.IsNullOrEmpty (request.Site))
             {
-                string escapedSite = UrlBuilderUtils.EscapeDataString(request.Site);
+                string escapedSite = Uri.EscapeDataString (request.Site);
                 result += 
                     escapedSite;
             }

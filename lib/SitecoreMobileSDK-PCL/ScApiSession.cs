@@ -94,18 +94,16 @@ namespace Sitecore.MobileSDK
         #endregion Encryption
 
         #region GetItems
-        public async Task<ScItemsResponse> GetItemById(string id)
-        {
+		public async Task<ScItemsResponse> GetItemById(string id)
+		{
+			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
-            ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
-            ItemRequestConfig config = new ItemRequestConfig(this.sessionConfig.InstanceUrl, id, cryptor);
+			GetItemsByIdParameters config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
 
-            GetItemsByIdParameters config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
+			var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
 
-            var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
-
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
-        }
+			return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+		}
         
         public async Task<ScItemsResponse> GetItemByPath(string path)
         {

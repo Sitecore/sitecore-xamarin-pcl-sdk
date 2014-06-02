@@ -56,8 +56,6 @@
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
-    <Compile Include="CrudTasks\GetItemsTasks.cs" />
-    <Compile Include="CrudTasks\ItemRequestConfig.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
     <Compile Include="Items\GetItemsByIdParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
@@ -74,7 +72,6 @@
     <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\IGetItemByQueryRequest.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
-    <Compile Include="Utils\UrlBuilderUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -128,5 +125,11 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UrlBuilder\ItemById\" />
+    <Folder Include="UrlBuilder\ItemByPath\" />
+    <Folder Include="UrlBuilder\Rest\" />
+    <Folder Include="UrlBuilder\WebApi\" />
+    <Folder Include="UrlBuilder\ItemByQuery\" />
+  </ItemGroup>
 </Project>
