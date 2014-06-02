@@ -47,6 +47,17 @@ namespace MobileSDKIntegrationTest
             Assert.AreEqual("Home", response.Items[0].DisplayName);
         }
 
+        [Test]
+        public async void TestValidGetItemsByQueryRequest()
+        {
+            string query = "/sitecore/content/HOME/AllowED_PARent/*";
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.GetItemByQuery(query);
+
+            Assert.AreEqual(2, response.TotalCount );
+            Assert.AreEqual(2, response.ResultCount);
+            Assert.AreEqual(2, response.Items.Count);
+        }
+
         [TearDown]
         public void TearDown()
         {

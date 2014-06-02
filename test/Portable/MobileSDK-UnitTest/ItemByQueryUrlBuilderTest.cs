@@ -60,7 +60,21 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual(expected, result);
         }
 
+        [Test]
+        public void TestBuildWithRegularQuery()
+        {
+            MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
+            mutableParameters.ItemSource = ItemSource.DefaultSource ();
+            mutableParameters.SitecoreQuery = "/Sitecore/Content/*";
+            mutableParameters.SessionSettings = this.sessionConfig;
 
+            IGetItemByQueryRequest request = mutableParameters;
+
+            string result = this.builder.GetUrlForRequest(request);
+            string expected = "http://mobiledev1ua1.dk.sitecore.net:722/-/item/v13?sc_database=web&sc_lang=en&query=%2fsitecore%2fcontent%2f%2a";
+
+            Assert.AreEqual(expected, result);
+        }
     }
 
 }
