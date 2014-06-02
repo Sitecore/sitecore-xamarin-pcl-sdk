@@ -2,4 +2,6 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">WhiteLabel-Android</string>
+	<string name="text_settings">Settings</string>
+
 </resources>

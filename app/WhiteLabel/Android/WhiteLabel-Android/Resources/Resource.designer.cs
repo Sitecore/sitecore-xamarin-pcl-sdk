@@ -45,7 +45,10 @@ namespace WhiteLabelAndroid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int ic_lock_power_off = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Icon = 2130837505;
 			
 			static Drawable()
 			{
@@ -60,8 +63,11 @@ namespace WhiteLabelAndroid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int myButton = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int myButton = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int settings = 2131099649;
 			
 			static Id()
 			{
@@ -89,6 +95,22 @@ namespace WhiteLabelAndroid
 			}
 		}
 		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int main = 2131034112;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
+			{
+			}
+		}
+		
 		public partial class String
 		{
 			
@@ -97,6 +119,9 @@ namespace WhiteLabelAndroid
 			
 			// aapt resource value: 0x7f040000
 			public const int hello = 2130968576;
+			
+			// aapt resource value: 0x7f040002
+			public const int text_settings = 2130968578;
 			
 			static String()
 			{
