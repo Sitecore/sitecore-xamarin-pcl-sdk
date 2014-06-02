@@ -36,21 +36,28 @@ namespace WhiteLabeliOS
 
 		private async void sendRequest ()
 		{
-			ScApiSession session = this.instanceSettings.GetSession();
-			string itemPath = itemPathField.Text;
-			this.ShowLoader ();
-
-			ScItemsResponse response = await session.GetItemByPath (itemPath);
-
-			this.HideLoader ();
-			if (response.ResultCount > 0)
+			try
 			{
-				ScItem item = response.Items [0];
-				AlertHelper.ShowAlertWithOkOption("Item received", "item title is \"" + item.DisplayName + "\"");
+				ScApiSession session = this.instanceSettings.GetSession();
+				string itemPath = itemPathField.Text;
+				this.ShowLoader ();
+
+				ScItemsResponse response = await session.GetItemByPath (itemPath);
+
+				this.HideLoader ();
+				if (response.ResultCount > 0)
+				{
+					ScItem item = response.Items [0];
+					AlertHelper.ShowAlertWithOkOption("Item received", "item title is \"" + item.DisplayName + "\"");
+				}
+				else
+				{
+					AlertHelper.ShowAlertWithOkOption("Message", "Item is not exist");
+				}
 			}
-			else
+			catch(Exception e) 
 			{
-				AlertHelper.ShowAlertWithOkOption("Message", "Item is not exist");
+				AlertHelper.ShowAlertWithOkOption("Erorr", e.Message);
 			}
 		}
 	}
