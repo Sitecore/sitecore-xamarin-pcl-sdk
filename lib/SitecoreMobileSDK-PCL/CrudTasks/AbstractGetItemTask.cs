@@ -23,7 +23,7 @@ namespace Sitecore.MobileSDK.CrudTasks
             string url = this.UrlToGetItemWithRequest(request);
             HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-            result = await request.CredentialsCryptor.AddEncryptedCredentialHeadersAsync(result);
+			result = await request.CredentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result);
             return result;
         }
 
