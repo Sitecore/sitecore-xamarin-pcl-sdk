@@ -39,7 +39,7 @@
             if (!string.IsNullOrEmpty (request.Site))
             {
                 string escapedSite = UrlBuilderUtils.EscapeDataString(request.Site);
-				result += this.restGrammar.PathComponentSeparator +
+				result +=
                     escapedSite;
             }
 
