@@ -69,10 +69,8 @@
         [Test]
         public void TestEncryptionUtilWithNullCert()
         {
-            TestDelegate action = () =>
-            {
-                EncryptionUtil encryptor = new EncryptionUtil(null);
-            };
+            TestDelegate action = () => new EncryptionUtil(null);
+
             Assert.Throws<ArgumentNullException>(action, "ArgumentNullException should be thrown here");
         }
 

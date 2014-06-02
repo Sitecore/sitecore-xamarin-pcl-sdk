@@ -6,6 +6,7 @@ namespace MobileSDKIntegrationTest
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.SessionSettings;
 
 
 	[TestFixture]
@@ -28,12 +29,27 @@ namespace MobileSDKIntegrationTest
 			Assert.AreEqual (1, response.TotalCount);
 			Assert.AreEqual (1, response.ResultCount);
 			Assert.AreEqual (1, response.Items.Count);
-		}
 
-		[TearDown]
-		public void TearDown()
-		{
-			this.sessionWithAnonymousAccess = null;
-		}
-	}
+            Assert.AreEqual("Media Library", response.Items[0].DisplayName);
+        }
+
+        [Test]
+        public async void TestValidGetItemsByPathRequest()
+        {
+            string homePath = "/sitecore/content/home";
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.GetItemByPath(homePath);
+
+            Assert.AreEqual(1, response.TotalCount);
+            Assert.AreEqual(1, response.ResultCount);
+            Assert.AreEqual(1, response.Items.Count);
+
+            Assert.AreEqual("Home", response.Items[0].DisplayName);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            this.sessionWithAnonymousAccess = null;
+        }
+    }
 }

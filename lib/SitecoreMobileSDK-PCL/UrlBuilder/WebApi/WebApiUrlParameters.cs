@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sitecore.MobileSDK.UrlBuilder
+namespace Sitecore.MobileSDK.UrlBuilder.WebApi
 {
     public class WebApiUrlParameters : IWebApiUrlParameters
     {

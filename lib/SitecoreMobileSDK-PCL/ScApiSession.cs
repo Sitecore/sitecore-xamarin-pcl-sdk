@@ -5,9 +5,16 @@ namespace Sitecore.MobileSDK
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
+
+    using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.CrudTasks;
     using Sitecore.MobileSDK.PublicKey;
     using Sitecore.MobileSDK.TaskFlow;
+
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.UrlBuilder.WebApi;
+    using Sitecore.MobileSDK.UrlBuilder.ItemById;
+    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 
     public class ScApiSession
     {
@@ -17,6 +24,11 @@ namespace Sitecore.MobileSDK
 
         private readonly SessionConfig sessionConfig;
         private readonly ItemSource defaultSource;
+
+        private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
+        private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+        private readonly string itemWebApiVersion = "v1";
+
 
         private PublicKeyX509Certificate publicCertifiacte;
 
@@ -84,14 +96,32 @@ namespace Sitecore.MobileSDK
         #region GetItems
         public async Task<ScItemsResponse> GetItemById(string id)
         {
-            PublicKeyX509Certificate cert = await GetPublicKey();
+
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
             ItemRequestConfig config = new ItemRequestConfig(this.sessionConfig.InstanceUrl, id, cryptor);
 
-            var taskFlow = new GetItemsTasks(this.httpClient);
+            GetItemsByIdParameters config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
+
+            var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
 
             return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
         }
+        
+        public async Task<ScItemsResponse> GetItemByPath(string path)
+        {
+            ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
+
+            ReadItemByPathParameters config = new ReadItemByPathParameters(
+                this.sessionConfig, 
+                ItemSource.DefaultSource(), 
+                path, 
+                cryptor);
+
+            var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
+
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+        }
+
         #endregion GetItems
     }
 }

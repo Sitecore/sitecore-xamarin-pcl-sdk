@@ -1,4 +1,8 @@
+<<<<<<< HEAD:lib/SitecoreMobileSDK-PCL/CrudTasks/GetItemsTasks.cs
 ﻿
+=======
+﻿using Sitecore.MobileSDK.PublicKey;
+>>>>>>> master:lib/SitecoreMobileSDK-PCL/CrudTasks/AbstractGetItemTask.cs
 
 namespace Sitecore.MobileSDK.CrudTasks
 {
@@ -14,6 +18,7 @@ namespace Sitecore.MobileSDK.CrudTasks
     using Sitecore.MobileSDK.PublicKey;
 
 
+<<<<<<< HEAD:lib/SitecoreMobileSDK-PCL/CrudTasks/GetItemsTasks.cs
     public class GetItemsTasks : IRestApiCallTasks<ItemRequestConfig, HttpRequestMessage, string, ScItemsResponse>
     {
         public GetItemsTasks(HttpClient httpClient)
@@ -23,6 +28,14 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #region  IRestApiCallTasks
         public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(ItemRequestConfig request)
+=======
+    public abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
+        where TRequest : ICredentialCryptorOwner
+    {
+        #region  IRestApiCallTasks
+
+        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request)
+>>>>>>> master:lib/SitecoreMobileSDK-PCL/CrudTasks/AbstractGetItemTask.cs
         {
             string url = this.UrlToGetItemWithRequest(request);
             HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
@@ -48,6 +61,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #endregion IRestApiCallTasks
 
+<<<<<<< HEAD:lib/SitecoreMobileSDK-PCL/CrudTasks/GetItemsTasks.cs
         private string UrlToGetItemWithRequest(ItemRequestConfig request)
         {
             //TODO : extract me
@@ -58,6 +72,14 @@ namespace Sitecore.MobileSDK.CrudTasks
         }
 
         private readonly HttpClient httpClient;
+=======
+        protected abstract string UrlToGetItemWithRequest (TRequest request);
+
+        protected HttpClient httpClient;
+>>>>>>> master:lib/SitecoreMobileSDK-PCL/CrudTasks/AbstractGetItemTask.cs
     }
 }
+
+
+
 

@@ -32,33 +32,49 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Items\IItemSource.cs" />
+    <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
     <Compile Include="ScApiSession.cs" />
-    <Compile Include="SessionConfig.cs" />
+    <Compile Include="SessionSettings\ISessionConfig.cs" />
+    <Compile Include="SessionSettings\IWebApiCredentials.cs" />
+    <Compile Include="SessionSettings\SessionConfig.cs" />
     <Compile Include="PublicKeyX509Certificate.cs" />
+    <Compile Include="SessionSettings\SessionConfigUrlBuilder.cs" />
     <Compile Include="TaskFlow\IRestApiCallTasks.cs" />
     <Compile Include="TaskFlow\RestApiCallFlow.cs" />
     <Compile Include="PublicKey\GetPublicKeyTasks.cs" />
     <Compile Include="Items\ScItem.cs" />
     <Compile Include="Items\ScItemsResponse.cs" />
     <Compile Include="Items\ScItemsParser.cs" />
-    <Compile Include="Items\ItemsSource.cs" />
+    <Compile Include="Items\ItemSource.cs" />
     <Compile Include="ScResponseException.cs" />
     <Compile Include="ScErrorResponse.cs" />
-    <Compile Include="UrlBuilder\IRequestConfig.cs" />
-    <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\RestServiceGrammar.cs" />
-    <Compile Include="UrlBuilder\WebApiUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\WebApiUrlParameters.cs" />
-    <Compile Include="UrlBuilder\IRestServiceGrammar.cs" />
-    <Compile Include="UrlBuilder\IWebApiUrlParameters.cs" />
+    <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsTasks.cs" />
     <Compile Include="CrudTasks\ItemRequestConfig.cs" />
+    <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
+    <Compile Include="Items\GetItemsByIdParameters.cs" />
+    <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
+    <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
+    <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
+    <Compile Include="UrlBuilder\ItemById\IGetItemByIdRequest.cs" />
+    <Compile Include="UrlBuilder\ItemById\ItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\IGetItemByPathRequest.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
+    <Compile Include="Items\ItemSourceUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
+    <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
+    <Compile Include="UrlBuilder\ItemByQuery\IGetItemByQueryRequest.cs" />
+    <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
+    <Compile Include="Utils\UrlBuilderUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -111,5 +127,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <ItemGroup />
   <ItemGroup />
 </Project>

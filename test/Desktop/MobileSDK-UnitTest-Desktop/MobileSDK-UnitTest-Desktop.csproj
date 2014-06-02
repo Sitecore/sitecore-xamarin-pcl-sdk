@@ -63,6 +63,12 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\GetItemsParserTest.cs">
       <Link>GetItemsParserTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByIdUrlBuilderTests.cs">
+      <Link>ItemByIdUrlBuilderTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByPathUrlBuilderTests.cs">
+      <Link>ItemByPathUrlBuilderTests.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceTest.cs">
       <Link>ItemSourceTest.cs</Link>
     </Compile>
@@ -75,11 +81,17 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockReadItemByIdParameters.cs">
       <Link>Mock\MockReadItemByIdParameters.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockReadItemByPathParameters.cs">
+      <Link>Mock\MockReadItemByPathParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockSessionInfo.cs">
+      <Link>Mock\MockSessionInfo.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\PublicKeyParsingTest.cs">
       <Link>PublicKeyParsingTest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-UnitTest\UrlBuildingTests.cs">
-      <Link>UrlBuildingTests.cs</Link>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\SessionConfigUrlBuilderTest.cs">
+      <Link>SessionConfigUrlBuilderTest.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
