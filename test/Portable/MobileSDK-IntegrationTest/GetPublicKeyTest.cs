@@ -83,7 +83,7 @@ namespace MobileSDKIntegrationTest
 
             TestDelegate action = async () =>
             {
-                var response = await session.GetItemById("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
+                var response = await session.ReadItemByIdAsync("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
             };
 
             XmlException exception = Assert.Throws<XmlException>(action, "we should get error here");

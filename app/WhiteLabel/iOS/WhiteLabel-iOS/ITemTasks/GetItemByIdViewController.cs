@@ -18,14 +18,14 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 			
-			// Perform any additional setup after loading the view, typically from a nib.
+			this.itemIdTextField.ShouldReturn = this.HideKeyboard;
 		}
 
 		partial void getItem (MonoTouch.UIKit.UIButton sender)
 		{
 			if (String.IsNullOrEmpty(itemIdTextField.Text))
 			{
-				AlertHelper.ShowErrorAlertWithOkOption("Error", "Please type item Id");
+				AlertHelper.ShowAlertWithOkOption("Error", "Please type item Id");
 			}
 			else
 			{
@@ -35,22 +35,33 @@ namespace WhiteLabeliOS
 
 		partial void getChildren (MonoTouch.Foundation.NSObject sender)
 		{
-			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
 		private async void sendRequest ()
 		{
-			ScApiSession session = this.instanceSettings.GetSession();
-			string itemId = itemIdTextField.Text;
-			ScItemsResponse response = await session.GetItemById(itemId);
-			if (response.ResultCount > 0)
+			try
 			{
-				ScItem item = response.Items [0];
-				AlertHelper.ShowAlert ("Item received", "item title is \"" + item.DisplayName + "\"", "OK");
+				ScApiSession session = this.instanceSettings.GetSession();
+				string itemId = itemIdTextField.Text;
+				this.ShowLoader ();
+
+				ScItemsResponse response = await session.ReadItemByIdAsync(itemId);
+
+				this.HideLoader ();
+				if (response.ResultCount > 0)
+				{
+					ScItem item = response.Items [0];
+					AlertHelper.ShowAlertWithOkOption("Item received", "item title is \"" + item.DisplayName + "\"");
+				}
+				else
+				{
+					AlertHelper.ShowAlertWithOkOption("Message", "Item is not exist");
+				}
 			}
-			else
+			catch(Exception e) 
 			{
-				AlertHelper.ShowErrorAlertWithOkOption("Message", "Item is not exist");
+				AlertHelper.ShowAlertWithOkOption("Erorr", e.Message);
 			}
 		}
 	}
