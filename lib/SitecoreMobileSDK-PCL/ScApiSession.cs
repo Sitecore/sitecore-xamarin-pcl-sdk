@@ -77,7 +77,9 @@ namespace Sitecore.MobileSDK
         #endregion Encryption
 
         #region GetItems
-		public async Task<ScItemsResponse> GetItemById(string id)
+
+//        GetItemById ==> ReadItemByIdAsync
+		public async Task<ScItemsResponse> ReadItemByIdAsync(string id)
 		{
 			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
@@ -87,8 +89,10 @@ namespace Sitecore.MobileSDK
 
 			return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
 		}
-        
-        public async Task<ScItemsResponse> GetItemByPath(string path)
+
+
+//        GetItemByPath ==> ReadItemByPathAsync
+        public async Task<ScItemsResponse> ReadItemByPathAsync(string path)
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
@@ -103,7 +107,8 @@ namespace Sitecore.MobileSDK
             return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
         }
 
-        public async Task<ScItemsResponse> GetItemByQuery(string sitecoreQuery)
+        //        GetItemByQuery ==> ReadItemByQueryAsync
+        public async Task<ScItemsResponse> ReadItemByQueryAsync(string sitecoreQuery)
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
