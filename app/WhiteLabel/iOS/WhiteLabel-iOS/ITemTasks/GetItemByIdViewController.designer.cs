@@ -27,6 +27,7 @@ namespace WhiteLabeliOS
 				itemIdTextField.Dispose ();
 				itemIdTextField = null;
 			}
+				
 		}
 	}
 }

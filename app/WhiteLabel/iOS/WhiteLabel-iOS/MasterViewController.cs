@@ -51,7 +51,8 @@ namespace WhiteLabeliOS
 
 			this.InitFeaturesList ();
 
-			TableView.Source = dataSource = new DataSource (this);
+			this.dataSource = new DataSource (this);
+			TableView.Source = this.dataSource;
 			this.TableView.ReloadData();
 		}
 

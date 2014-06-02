@@ -12,11 +12,19 @@ namespace WhiteLabeliOS
 		public DeleteITemByIdViewController (IntPtr handle) : base (handle)
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("deleteItemById", null);
+
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			this.itemIdField.ShouldReturn = this.HideKeyboard;
 		}
 
 		partial void deleteItem (UIButton sender)
 		{
-			AlertHelper.ShowErrorAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}
 	}
 }

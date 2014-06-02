@@ -128,5 +128,12 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UrlBuilder\ItemById\" />
+    <Folder Include="UrlBuilder\ItemByPath\" />
+    <Folder Include="UrlBuilder\Rest\" />
+    <Folder Include="UrlBuilder\WebApi\" />
+    <Folder Include="UrlBuilder\ItemByQuery\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
 </Project>

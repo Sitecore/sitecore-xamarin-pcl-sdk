@@ -10,7 +10,7 @@ namespace WhiteLabeliOS
 		{
 		}
 
-		public static void ShowErrorAlertWithOkOption(string title, string message)
+		public static void ShowAlertWithOkOption(string title, string message)
 		{
 			UIAlertView alert = new UIAlertView () { 
 				Title = title, Message = message

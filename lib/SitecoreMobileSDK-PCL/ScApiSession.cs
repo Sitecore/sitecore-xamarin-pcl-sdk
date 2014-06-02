@@ -1,20 +1,19 @@
-﻿
 namespace Sitecore.MobileSDK
 {
-    using System;
-    using System.Net.Http;
-    using System.Threading.Tasks;
+	using System;
+	using System.Net.Http;
+	using System.Threading.Tasks;
 
-    using Sitecore.MobileSDK.SessionSettings;
-    using Sitecore.MobileSDK.CrudTasks;
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.PublicKey;
-    using Sitecore.MobileSDK.TaskFlow;
-    using Sitecore.MobileSDK.UrlBuilder.Rest;
-    using Sitecore.MobileSDK.UrlBuilder.WebApi;
-    using Sitecore.MobileSDK.UrlBuilder.ItemById;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+	using Sitecore.MobileSDK.SessionSettings;
+	using Sitecore.MobileSDK.CrudTasks;
+	using Sitecore.MobileSDK.Items;
+	using Sitecore.MobileSDK.PublicKey;
+	using Sitecore.MobileSDK.TaskFlow;
+	using Sitecore.MobileSDK.UrlBuilder.Rest;
+	using Sitecore.MobileSDK.UrlBuilder.WebApi;
+	using Sitecore.MobileSDK.UrlBuilder.ItemById;
+	using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+	using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
     public class ScApiSession
     {
@@ -27,6 +26,7 @@ namespace Sitecore.MobileSDK
 
         private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
         private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+
 
         private PublicKeyX509Certificate publicCertifiacte;
 
@@ -92,16 +92,16 @@ namespace Sitecore.MobileSDK
         #endregion Encryption
 
         #region GetItems
-        public async Task<ScItemsResponse> GetItemById(string id)
-        {
-            ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
+		public async Task<ScItemsResponse> GetItemById(string id)
+		{
+			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
 
             var config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
 
-            var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
+			var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
 
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
-        }
+			return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+		}
         
         public async Task<ScItemsResponse> GetItemByPath(string path)
         {
