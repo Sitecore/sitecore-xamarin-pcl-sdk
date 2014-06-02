@@ -1,3 +1,4 @@
+
 namespace Sitecore.MobileSDK
 {
 	using System;
@@ -14,6 +15,7 @@ namespace Sitecore.MobileSDK
 	using Sitecore.MobileSDK.UrlBuilder.ItemById;
 	using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 	using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+
 
     public class ScApiSession
     {
@@ -44,7 +46,7 @@ namespace Sitecore.MobileSDK
 
         #region Encryption
 
-        public async Task<PublicKeyX509Certificate> GetPublicKey()
+        protected virtual async Task<PublicKeyX509Certificate> GetPublicKeyAsync()
         {
             var taskFlow = new GetPublicKeyTasks(this.httpClient);
 
@@ -54,13 +56,7 @@ namespace Sitecore.MobileSDK
             return result;
         }
 
-        public string EncryptString(string data)
-        {
-            var cryptor = new EncryptionUtil(this.publicCertifiacte);
-            return cryptor.Encrypt(data);
-        }
-
-        public async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
+        protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
         {
             if (this.sessionConfig.IsAnonymous())
             {
@@ -69,8 +65,8 @@ namespace Sitecore.MobileSDK
             else
             {
                 // TODO : flow should be responsible for caching. Do not hard code here
-                PublicKeyX509Certificate cert = await this.GetPublicKey();
-                return new AuthenticedSessionCryptor(this.sessionConfig.Login, this.sessionConfig.Password, cert);
+                this.publicCertifiacte = await this.GetPublicKeyAsync();
+                return new AuthenticedSessionCryptor(this.sessionConfig.Login, this.sessionConfig.Password, this.publicCertifiacte);
             }
         }
 
