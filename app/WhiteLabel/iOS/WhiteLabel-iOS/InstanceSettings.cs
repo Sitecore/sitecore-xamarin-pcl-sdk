@@ -2,6 +2,7 @@
 using MonoTouch.Foundation;
 using Sitecore.MobileSDK.Items;
 using Sitecore.MobileSDK;
+using Sitecore.MobileSDK.SessionSettings;
 
 namespace WhiteLabeliOS
 {
