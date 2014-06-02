@@ -2,6 +2,6 @@
 {
     public interface IGetItemByQueryRequest : IBaseGetItemRequest
     {
-        string Query { get; }
+        string SitecoreQuery { get; }
     }
 }
