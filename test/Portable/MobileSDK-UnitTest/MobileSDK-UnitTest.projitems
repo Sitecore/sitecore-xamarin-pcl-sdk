@@ -20,6 +20,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ItemByIdUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemByPathUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemByQueryUrlBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mock\MockGetItemsByQueryParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Mock\" />

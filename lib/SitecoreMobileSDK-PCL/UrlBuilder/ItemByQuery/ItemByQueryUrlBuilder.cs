@@ -4,8 +4,13 @@
 namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
 {
     using System;
+
+    using Sitecore.MobileSDK.Utils;
+    using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
+
 
     public class ItemByQueryUrlBuilder
     {
@@ -21,14 +26,34 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
         {
             this.ValidateRequest (request);
 
-            throw new Exception ("Not implemented");
+            SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder (this.restGrammar, this.webApiGrammar);
+            string urlBase = sessionBuilder.BuildUrlString (request.SessionSettings);
+
+            ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
+            string source = sourceBuilder.BuildUrlQueryString ();
+
+
+            string escapedQuery = UrlBuilderUtils.EscapeDataString (request.SitecoreQuery);
+
+            string result = 
+                urlBase +
+                this.restGrammar.HostAndArgsSeparator +
+                source +
+                this.restGrammar.FieldSeparator +
+                this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
+
+            return result.ToLowerInvariant ();
         }
 
         private void ValidateRequest(IGetItemByQueryRequest request)
         {
             if (null == request)
             {
-                throw new ArgumentNullException("ItemByPathUrlBuilder.GetUrlForRequest() : request cannot be null");
+                throw new ArgumentNullException ("ItemByPathUrlBuilder.GetUrlForRequest() : request cannot be null");
+            }
+            else if (null == request.SitecoreQuery)
+            {
+                throw new ArgumentNullException ("ItemByPathUrlBuilder.GetUrlForRequest() : request.SitecoreQuery cannot be null");
             }
         }
             
