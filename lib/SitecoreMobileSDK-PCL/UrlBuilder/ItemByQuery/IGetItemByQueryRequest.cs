@@ -1,6 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
 {
-    interface IGetItemByQueryRequest : IBaseGetItemRequest
+    public interface IGetItemByQueryRequest : IBaseGetItemRequest
     {
         string Query { get; }
     }

@@ -19,7 +19,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
 
         public string GetUrlForRequest(IGetItemByQueryRequest request)
         {
-            this.ValidateRequest ();
+            this.ValidateRequest (request);
 
             throw new Exception ("Not implemented");
         }
