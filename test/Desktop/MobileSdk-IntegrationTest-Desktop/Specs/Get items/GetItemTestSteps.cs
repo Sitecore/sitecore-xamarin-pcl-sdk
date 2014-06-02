@@ -32,7 +32,7 @@ namespace MobileSdk_IntegrationTest_Desktop
         {
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
             string id = ConfigurationManager.AppSettings[itemId];
-            ScenarioContext.Current["Response"] = apiSession.GetItemById(id).Result;
+            ScenarioContext.Current["Response"] = apiSession.ReadItemByIdAsync(id).Result;
         }
 
         [When(@"I send request to get item by path ""(.*)""")]
@@ -40,7 +40,7 @@ namespace MobileSdk_IntegrationTest_Desktop
         {
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
             string path = ConfigurationManager.AppSettings[itemPath];
-            ScenarioContext.Current["Response"] = apiSession.GetItemByPath(path).Result;
+            ScenarioContext.Current["Response"] = apiSession.ReadItemByIdAsync(path).Result;
         }
 
         [Then(@"I've got (.*) items in response")]
