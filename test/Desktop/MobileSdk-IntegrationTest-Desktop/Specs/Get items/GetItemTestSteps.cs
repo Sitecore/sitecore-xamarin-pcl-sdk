@@ -35,6 +35,14 @@ namespace MobileSdk_IntegrationTest_Desktop
             ScenarioContext.Current["Response"] = apiSession.GetItemById(id).Result;
         }
 
+        [When(@"I send request to get item by path ""(.*)""")]
+        public void WhenISendRequestToGetItemByPath(string itemPath)
+        {
+            var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
+            string path = ConfigurationManager.AppSettings[itemPath];
+            ScenarioContext.Current["Response"] = apiSession.GetItemByPath(path).Result;
+        }
+
         [Then(@"I've got (.*) items in response")]
         public void ThenIVeGotItemsInResponse(int count)
         {
