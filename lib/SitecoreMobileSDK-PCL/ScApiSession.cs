@@ -17,21 +17,6 @@ namespace Sitecore.MobileSDK
 
     public class ScApiSession
     {
-        #region Private Variables
-
-        private readonly HttpClient httpClient;
-
-        private readonly SessionConfig sessionConfig;
-        private readonly ItemSource defaultSource;
-
-        private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-        private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
-
-
-        private PublicKeyX509Certificate publicCertifiacte;
-
-        #endregion Private Variables
-
         public ScApiSession(SessionConfig config, ItemSource defaultSource)
         {
             if (null == config)
@@ -109,7 +94,7 @@ namespace Sitecore.MobileSDK
 
             var config = new ReadItemByPathParameters(
                 this.sessionConfig, 
-                ItemSource.DefaultSource(), 
+                this.defaultSource, 
                 path, 
                 cryptor);
 
@@ -124,7 +109,7 @@ namespace Sitecore.MobileSDK
 
             var config = new ReadItemByQueryParameters(
                 this.sessionConfig, 
-                ItemSource.DefaultSource(), 
+                this.defaultSource, 
                 sitecoreQuery, 
                 cryptor);
 
@@ -134,5 +119,21 @@ namespace Sitecore.MobileSDK
         }
 
         #endregion GetItems
+
+
+        #region Private Variables
+
+        private readonly HttpClient httpClient;
+
+        private readonly SessionConfig sessionConfig;
+        private readonly ItemSource defaultSource;
+
+        private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
+        private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+
+
+        private PublicKeyX509Certificate publicCertifiacte;
+
+        #endregion Private Variables
     }
 }
