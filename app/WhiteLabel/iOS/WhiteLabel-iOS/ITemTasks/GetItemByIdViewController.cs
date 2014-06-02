@@ -46,7 +46,7 @@ namespace WhiteLabeliOS
 				string itemId = itemIdTextField.Text;
 				this.ShowLoader ();
 
-				ScItemsResponse response = await session.GetItemById(itemId);
+				ScItemsResponse response = await session.ReadItemByIdAsync(itemId);
 
 				this.HideLoader ();
 				if (response.ResultCount > 0)
