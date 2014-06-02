@@ -42,7 +42,7 @@ namespace WhiteLabeliOS
 				string itemPath = itemPathField.Text;
 				this.ShowLoader ();
 
-				ScItemsResponse response = await session.GetItemByPath (itemPath);
+				ScItemsResponse response = await session.ReadItemByPathAsync (itemPath);
 
 				this.HideLoader ();
 				if (response.ResultCount > 0)
