@@ -6,10 +6,12 @@
     <SharedGUID>{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>MobileSDK-IntegrationTest</Import_RootNamespace>
+    <Import_RootNamespace>MobileSDKIntegrationTest</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)GetPublicKeyTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScTestApiSession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CryptorConstructionTest.cs" />
   </ItemGroup>
 </Project>
