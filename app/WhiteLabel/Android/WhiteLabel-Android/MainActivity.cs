@@ -6,13 +6,14 @@
     using Android.Util;
     using Android.Views;
     using Android.Widget;
-
+    using FormsApp;
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.SessionSettings;
+    using Xamarin.Forms.Platform.Android;
 
     [Activity(Label = "WhiteLabel-Android", MainLauncher = true)]
-    public class MainActivity : Activity
+    public class MainActivity : AndroidActivity
     {
         private static readonly SessionConfig Config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:7119", "extranet\\creatorex", "creatorex");
 
@@ -38,20 +39,9 @@
         {
             base.OnCreate(bundle);
 
-            // Set our view from the "main" layout resource
-            this.SetContentView(Resource.Layout.Main);
+            Xamarin.Forms.Forms.Init(this, bundle);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = this.FindViewById<Button>(Resource.Id.myButton);
-
-            button.Click += async (sender, e) =>
-            {
-                ScApiSession session = new ScApiSession(Config, ItemSource.DefaultSource());
-                await session.GetPublicKey();
-                Log.Error("some tag", "login : " + session.EncryptString("extranet\\creatorex"));
-                Log.Error("some tag", "pass : " + session.EncryptString("creatorex"));
-            };
+            this.SetPage(App.GetMainPage());
         }
     }
 }
