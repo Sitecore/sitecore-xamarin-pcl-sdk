@@ -40,7 +40,7 @@ namespace MobileSdk_IntegrationTest_Desktop
         {
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
             string path = ConfigurationManager.AppSettings[itemPath];
-            ScenarioContext.Current["Response"] = apiSession.ReadItemByIdAsync(path).Result;
+            ScenarioContext.Current["Response"] = apiSession.ReadItemByPathAsync(path).Result;
         }
 
         [Then(@"I've got (.*) items in response")]
