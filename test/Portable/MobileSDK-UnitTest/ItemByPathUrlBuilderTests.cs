@@ -48,7 +48,7 @@
             mutableParameters.ItemPath = "/path/TO/iTEm";
             mutableParameters.SessionSettings = this.sessionConfig;
 
-            IGetItemByPathRequest request = mutableParameters;
+            IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
             string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&sc_lang=en";
@@ -64,7 +64,7 @@
             mutableParameters.ItemPath = "/path TO iTEm";
             mutableParameters.SessionSettings = this.sessionConfig;
 
-            IGetItemByPathRequest request = mutableParameters;
+            IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
             string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%20to%20item?sc_database=web&sc_lang=en";
@@ -87,7 +87,7 @@
             mutableParameters.ItemPath = "path without starting slash";
             mutableParameters.SessionSettings = this.sessionConfig;
 
-            IGetItemByPathRequest request = mutableParameters;
+            IReadItemsByPathRequest request = mutableParameters;
 
             TestDelegate action = () => this.builder.GetUrlForRequest(request);
             Assert.Throws<ArgumentException>(action);
@@ -101,7 +101,7 @@
             mutableParameters.ItemPath = "";
             mutableParameters.SessionSettings = this.sessionConfig;
 
-            IGetItemByPathRequest request = mutableParameters;
+            IReadItemsByPathRequest request = mutableParameters;
 
             TestDelegate action = () => this.builder.GetUrlForRequest(request);
             Assert.Throws<ArgumentException>(action);

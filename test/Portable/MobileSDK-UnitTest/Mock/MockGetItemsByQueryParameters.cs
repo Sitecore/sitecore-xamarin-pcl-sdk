@@ -7,7 +7,7 @@ namespace MobileSDKUnitTest.Mock
     using Sitecore.MobileSDK.UrlBuilder;
     using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
-    public class MockGetItemsByQueryParameters : IGetItemByQueryRequest
+    public class MockGetItemsByQueryParameters : IReadItemsByQueryRequest
     {
         public IItemSource ItemSource { get; set; }
 

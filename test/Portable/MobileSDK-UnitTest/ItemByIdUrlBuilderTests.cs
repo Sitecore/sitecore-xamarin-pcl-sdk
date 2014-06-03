@@ -58,7 +58,7 @@
 			mutableParameters.ItemSource = ItemSource.DefaultSource();
 			mutableParameters.ItemId = "someInvalidItemId";
 
-			IGetItemByIdRequest parameters = mutableParameters;
+			IReadItemsByIdRequest parameters = mutableParameters;
 
 			TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
 			Assert.Throws<ArgumentException>(action);
@@ -72,7 +72,7 @@
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
 
-            IGetItemByIdRequest parameters = mutableParameters;
+            IReadItemsByIdRequest parameters = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(parameters);
             string expected = "http://sitecore.net/-/item/v1?sc_database=web&sc_lang=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
@@ -88,7 +88,7 @@
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
 
-            IGetItemByIdRequest parameters = mutableParameters;
+            IReadItemsByIdRequest parameters = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(parameters);
             string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&sc_lang=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
@@ -104,7 +104,7 @@
             mutableParameters.ItemSource = null;
             mutableParameters.ItemId = null;
 
-            IGetItemByIdRequest parameters = mutableParameters;
+            IReadItemsByIdRequest parameters = mutableParameters;
 
             TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
 

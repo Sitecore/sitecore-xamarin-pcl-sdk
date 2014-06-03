@@ -1,6 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 {
-    public interface IGetItemByPathRequest : IBaseGetItemRequest
+    public interface IReadItemsByPathRequest : IBaseGetItemRequest
     {
         string ItemPath { get; }
     }

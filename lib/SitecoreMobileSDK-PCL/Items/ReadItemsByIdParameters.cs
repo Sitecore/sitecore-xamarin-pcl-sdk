@@ -6,7 +6,7 @@
     using Sitecore.MobileSDK.UrlBuilder;
     using Sitecore.MobileSDK.UrlBuilder.ItemById;
 
-    public class ReadItemsByIdParameters : IGetItemByIdRequest
+    public class ReadItemsByIdParameters : IReadItemsByIdRequest
     {
         public ReadItemsByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, string itemId)
         {

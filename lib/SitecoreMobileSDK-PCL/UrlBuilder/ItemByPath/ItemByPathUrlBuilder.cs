@@ -18,7 +18,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
             this.Validate();
         }
 
-        public string GetUrlForRequest(IGetItemByPathRequest request)
+        public string GetUrlForRequest(IReadItemsByPathRequest request)
         {
             this.ValidateRequest (request);
             string escapedPath = Uri.EscapeDataString(request.ItemPath);
@@ -37,7 +37,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
             return result.ToLowerInvariant();
         }
 
-        private void ValidateRequest(IGetItemByPathRequest request)
+        private void ValidateRequest(IReadItemsByPathRequest request)
         {
             if (null == request)
             {

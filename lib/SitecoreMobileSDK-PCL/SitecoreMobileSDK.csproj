@@ -60,21 +60,21 @@
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
     <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
     <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
-    <Compile Include="UrlBuilder\ItemById\IGetItemByIdRequest.cs" />
     <Compile Include="UrlBuilder\ItemById\ItemByIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\ItemByPath\IGetItemByPathRequest.cs" />
     <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
     <Compile Include="Items\ItemSourceUrlBuilder.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
-    <Compile Include="UrlBuilder\ItemByQuery\IGetItemByQueryRequest.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
     <Compile Include="Items\ReadItemsByIdParameters.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\IReadItemsByPathRequest.cs" />
+    <Compile Include="UrlBuilder\ItemByQuery\IReadItemsByQueryRequest.cs" />
+    <Compile Include="UrlBuilder\ItemById\IReadItemsByIdRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

@@ -22,7 +22,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
             this.Validate();
         }
 
-        public string GetUrlForRequest(IGetItemByQueryRequest request)
+        public string GetUrlForRequest(IReadItemsByQueryRequest request)
         {
             this.ValidateRequest (request);
 
@@ -45,7 +45,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
             return result.ToLowerInvariant ();
         }
 
-        private void ValidateRequest(IGetItemByQueryRequest request)
+        private void ValidateRequest(IReadItemsByQueryRequest request)
         {
             if (null == request)
             {

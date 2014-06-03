@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.Items
 
     using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 
-    public class ReadItemByPathParameters : IGetItemByPathRequest
+    public class ReadItemByPathParameters : IReadItemsByPathRequest
     {
         public ReadItemByPathParameters(
             ISessionConfig sessionSettings, 
@@ -24,7 +24,5 @@ namespace Sitecore.MobileSDK.Items
         public IItemSource ItemSource { get; private set; }
 
         public ISessionConfig SessionSettings { get; private set; }
-
-        public ICredentialsHeadersCryptor CredentialsCryptor { get; private set; }
     }
 }

@@ -7,7 +7,7 @@ namespace MobileSDKUnitTest.Mock
     using Sitecore.MobileSDK.UrlBuilder;
     using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 
-    public class MockGetItemsByPathParameters : IGetItemByPathRequest
+    public class MockGetItemsByPathParameters : IReadItemsByPathRequest
     {
         public IItemSource ItemSource { get; set; }
 

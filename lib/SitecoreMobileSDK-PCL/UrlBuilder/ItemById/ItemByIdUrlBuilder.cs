@@ -16,7 +16,7 @@
         }
 
 
-        public string GetUrlForRequest(IGetItemByIdRequest request)
+        public string GetUrlForRequest(IReadItemsByIdRequest request)
         {
             this.ValidateId(request.ItemId);
             string escapedId = Uri.EscapeDataString(request.ItemId);
