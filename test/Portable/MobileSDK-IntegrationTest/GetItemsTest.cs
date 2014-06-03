@@ -1,4 +1,6 @@
-﻿
+﻿using MobileSDKUnitTest.Mock;
+
+
 namespace MobileSDKIntegrationTest
 {
     using System;
@@ -25,7 +27,12 @@ namespace MobileSDKIntegrationTest
 		public async void TestValidGetItemsRequest ()
 		{
             string mediaLibraryId = "{3D6658D8-A0BF-4E75-B3E2-D050FABCF4E1}";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync (mediaLibraryId);
+
+            var request = new MockGetItemsByIdParameters ();
+            request.ItemId = mediaLibraryId;
+
+            
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync (request);
 			Assert.AreEqual (1, response.TotalCount);
 			Assert.AreEqual (1, response.ResultCount);
 			Assert.AreEqual (1, response.Items.Count);
@@ -37,7 +44,11 @@ namespace MobileSDKIntegrationTest
         public async void TestValidGetItemsByPathRequest()
         {
             string homePath = "/sitecore/content/home";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(homePath);
+
+            var request = new MockGetItemsByPathParameters ();
+            request.ItemPath = homePath;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
@@ -50,7 +61,12 @@ namespace MobileSDKIntegrationTest
         public async void TestValidGetItemsByQueryRequest()
         {
             string query = "/sitecore/content/HOME/AllowED_PARent/*";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(query);
+
+            var request = new MockGetItemsByQueryParameters ();
+            request.SitecoreQuery = query;
+
+            
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(request);
 
             Assert.AreEqual(2, response.TotalCount );
             Assert.AreEqual(2, response.ResultCount);
