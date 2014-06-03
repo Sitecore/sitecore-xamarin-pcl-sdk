@@ -4,7 +4,7 @@ namespace MobileSDKIntegrationTest
 {
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
-    using Sitecore.MobileSDK.PublicKey;
+
 
     using System;
     using System.Security;
@@ -13,8 +13,11 @@ namespace MobileSDKIntegrationTest
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
+    using MobileSDKUnitTest.Mock;
+
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.PublicKey;
     using Sitecore.MobileSDK.SessionSettings;
 
 
@@ -83,11 +86,12 @@ namespace MobileSDKIntegrationTest
         public async void TestGetPublicKeyWithInvalidInstanceUrl()
         {
             SessionConfig config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", "sitecore\\admin", "b");
-            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+            ScTestApiSession session = new ScTestApiSession(config, ItemSource.DefaultSource());
+
 
             TestDelegate action = async () =>
             {
-                var response = await session.ReadItemByIdAsync("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
+                var response = await session.GetPublicKeyAsync_Public();
             };
 
             XmlException exception = Assert.Throws<XmlException>(action, "we should get error here");

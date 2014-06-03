@@ -14,17 +14,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceUrlBuilderTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mock\MockReadItemByIdParameters.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mock\MockReadItemByPathParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemByIdUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemByPathUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemByQueryUrlBuilderTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mock\MockGetItemsByQueryParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigMergerTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Mock\" />
   </ItemGroup>
 </Project>
