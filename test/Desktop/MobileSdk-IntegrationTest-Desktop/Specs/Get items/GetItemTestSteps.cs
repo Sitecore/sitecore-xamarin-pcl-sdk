@@ -62,6 +62,16 @@ namespace MobileSdk_IntegrationTest_Desktop
             Assert.AreEqual("Sample/Sample Item", item.Template);
         }
 
+        [Then(@"This is ""(.*)"" item with path ""(.*)"" and template ""(.*)""")]
+        public void ThenThisIsItemWithPathAndTemplate(string itemName, string itemPath, string itemTemplate)
+        {
+            var response = ScenarioContext.Current.Get<ScItemsResponse>("Response");
+            var item = response.Items[0];
+            Assert.AreEqual(itemName, item.DisplayName);
+            Assert.AreEqual(ConfigurationManager.AppSettings[itemPath], item.Path);
+            Assert.AreEqual(itemTemplate, item.Template);
+        }
+
         public class UserTable
         {
             public string Username { get; set; }
