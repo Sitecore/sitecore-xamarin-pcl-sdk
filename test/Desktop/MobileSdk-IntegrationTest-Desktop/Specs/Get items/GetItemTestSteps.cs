@@ -14,8 +14,15 @@ namespace MobileSdk_IntegrationTest_Desktop
         [Given(@"I have logged in ""(.*)""")]
         public void GivenIHaveLoggedIn(string instance)
         {
-            ScenarioContext.Current["InstanceUrl"] = ConfigurationManager.AppSettings[instance];
+            ScenarioContext.Current["InstanceUrl"] = instance;
         }
+
+        [Given(@"I have logged in authenticated instance")]
+        public void GivenIHaveLoggedInAuthenticatedInstance()
+        {
+            ScenarioContext.Current["InstanceUrl"] = ConfigurationManager.AppSettings["authenticatedInstanceURL"];
+        }
+
 
         [Given(@"I have choosed user")]
         public void GivenIHaveChoosedUser(Table credentials)

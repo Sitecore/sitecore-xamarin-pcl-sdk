@@ -5,7 +5,7 @@
 
 @mytag
 Scenario: Get item with correct authentication parameters 
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username		  | Password |
 	| sitecore\\admin | b        |
@@ -14,7 +14,7 @@ Scenario: Get item with correct authentication parameters
 
 @mytag
 Scenario: Get item with invalid instance Url 
-	Given I have logged in "incorrectInstanceURL"
+	Given I have logged in "http://mobiledev1ua1.dddk.sitecore.net"
 	And I have choosed user
 	| Username		  | Password |
 	| sitecore\\admin | b        |
@@ -24,13 +24,13 @@ Scenario: Get item with invalid instance Url
 
 @mytag
 Scenario: Get item with empty instance Url 
-	Given I have logged in empty instance url
+	Given I have logged in ""
 	And I have tried to connect as admin user
 	Then the error message contains "Value cannot be null"
 
 @mytag
 Scenario: Get item with incorrect username and password 
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username		   | Password  |
 	| sitecore\\nouser | incorrect |
@@ -40,7 +40,7 @@ Scenario: Get item with incorrect username and password
 
 @mytag
 Scenario: Get item with empty password 
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username		  | Password  |
 	| sitecore\\admin |           |
@@ -50,7 +50,7 @@ Scenario: Get item with empty password
 
 @mytag
 Scenario: Get item with invalid password 
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username	  | Password   |
 	| tra-ta-ta$# | pwd^&- + " |

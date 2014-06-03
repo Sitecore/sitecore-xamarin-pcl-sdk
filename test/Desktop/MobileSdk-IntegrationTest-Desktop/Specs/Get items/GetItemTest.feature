@@ -5,7 +5,7 @@
 
 @mytag
 Scenario: Get Item by ID
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username		  | Password |
 	| sitecore\\admin | b        |
@@ -14,7 +14,7 @@ Scenario: Get Item by ID
 	And This is Home item
 
 Scenario: Get Item by invalid ID 
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
@@ -22,7 +22,7 @@ Scenario: Get Item by invalid ID
 	Then I've got 0 items in response
 
 Scenario: Get Item by not existent ID 
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
@@ -30,7 +30,7 @@ Scenario: Get Item by not existent ID
 	Then I've got 0 items in response
 	
 Scenario: Get Item by Path
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
@@ -39,7 +39,7 @@ Scenario: Get Item by Path
 	And This is Home item
 
 Scenario: Get Item by not existent Path 
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
@@ -48,7 +48,7 @@ Scenario: Get Item by not existent Path
 
 # for this scenario we should created item with path /sitecore/content/T E S T/i t e m
 Scenario: Get Item by Path with spaces
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
@@ -58,7 +58,7 @@ Scenario: Get Item by Path with spaces
 	
 # for this scenario we should created two the same items with path /sitecore/content/T E S T/i t e m
 Scenario: Get Item by Path for two items with same path exist
-	Given I have logged in "authenticatedInstanceURL"
+	Given I have logged in authenticated instance
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
