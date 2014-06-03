@@ -18,7 +18,7 @@ Scenario: Get Item by invalid ID
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
-	When I send request to get item by id "ItemIdInvalid"
+	When I send request to get item by id "{/invalid- item &ID}*"
 	Then I've got 0 items in response
 
 Scenario: Get Item by not existent ID 
@@ -26,7 +26,7 @@ Scenario: Get Item by not existent ID
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
-	When I send request to get item by id "ItemIdNotExistent"
+	When I send request to get item by id "{110D559F-QQQQ-QQQQ-QQQQ-8A5DF7E70EF9}"
 	Then I've got 0 items in response
 	
 Scenario: Get Item by Path
@@ -43,7 +43,7 @@ Scenario: Get Item by not existent Path
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
-	When I send request to get item by path "ItemPathNotExistent"
+	When I send request to get item by path "/Not/Existent/Path"
 	Then I've got 0 items in response
 
 # for this scenario we should created item with path /sitecore/content/T E S T/i t e m
@@ -52,7 +52,7 @@ Scenario: Get Item by Path with spaces
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
-	When I send request to get item by path "ItemPathWithSpaces"
+	When I send request to get item by path "/sitecore/content/T E S T/i t e m"
 	Then I've got 1 items in response
     And This is "i t e m" item with path "ItemPathWithSpaces" and template "Sample/Sample Item" 
 	
@@ -62,6 +62,6 @@ Scenario: Get Item by Path for two items with same path exist
 	And I have choosed user
 	| Username          | Password |
 	| sitecore\\admin   | b        |
-	When I send request to get item by path "ItemPathWithSpaces"
+	When I send request to get item by path "/sitecore/content/T E S T/i t e m"
 	Then I've got 1 items in response
 	And This is "i t e m" item with path "ItemPathWithSpaces" and template "Sample/Sample Item"
