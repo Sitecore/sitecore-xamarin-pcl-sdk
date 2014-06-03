@@ -57,7 +57,6 @@
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
-    <Compile Include="Items\GetItemsByIdParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
     <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
     <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
@@ -75,6 +74,7 @@
     <Compile Include="Utils\UrlBuilderUtils.cs" />
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
+    <Compile Include="Items\ReadItemsByIdParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
