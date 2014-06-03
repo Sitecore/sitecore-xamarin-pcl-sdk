@@ -6,23 +6,19 @@ using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
 namespace Sitecore.MobileSDK
 {
-    public class ReadItemByQueryParameters : IGetItemByQueryRequest, ICredentialCryptorOwner
+    public class ReadItemByQueryParameters : IGetItemByQueryRequest
     {
         public ReadItemByQueryParameters(
             ISessionConfig sessionSettings, 
             IItemSource itemSource, 
-            string sitecoreQuery, 
-            ICredentialsHeadersCryptor cryptor = null)
+            string sitecoreQuery)
         {
             this.SessionSettings = sessionSettings;
             this.ItemSource = itemSource;
             this.SitecoreQuery = sitecoreQuery;
-            this.CredentialsHeadersCryptor = cryptor;
         }
 
         public string SitecoreQuery { get; private set; }
-
-        public ICredentialsHeadersCryptor CredentialsHeadersCryptor { get; private set; }
 
         public IItemSource ItemSource { get; private set; }
 

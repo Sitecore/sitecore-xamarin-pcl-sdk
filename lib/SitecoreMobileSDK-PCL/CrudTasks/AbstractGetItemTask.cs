@@ -14,8 +14,19 @@ namespace Sitecore.MobileSDK.CrudTasks
     using Sitecore.MobileSDK.PublicKey;
 
     public abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
-        where TRequest : ICredentialCryptorOwner
     {
+        private AbstractGetItemTask()
+        {
+        }
+
+        public AbstractGetItemTask(HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+        {
+            this.httpClient = httpClient;
+            this.credentialsHeadersCryptor = credentialsHeadersCryptor;
+
+            this.Validate ();
+        }
+
         #region  IRestApiCallTasks
 
         public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request)
@@ -23,7 +34,7 @@ namespace Sitecore.MobileSDK.CrudTasks
             string url = this.UrlToGetItemWithRequest(request);
             HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-			result = await request.CredentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result);
+            result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result);
             return result;
         }
 
@@ -44,9 +55,23 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #endregion IRestApiCallTasks
 
+        private void Validate()
+        {
+            if (null == this.httpClient)
+            {
+                throw new ArgumentNullException ("AbstractGetItemTask.httpClient cannot be null");
+            }
+            else if (null == this.credentialsHeadersCryptor)
+            {
+                throw new ArgumentNullException ("AbstractGetItemTask.credentialsHeadersCryptor cannot be null");
+            }
+        }
+
         protected abstract string UrlToGetItemWithRequest (TRequest request);
 
-        protected HttpClient httpClient;
+
+        private HttpClient httpClient;
+        private ICredentialsHeadersCryptor credentialsHeadersCryptor;
     }
 }
 

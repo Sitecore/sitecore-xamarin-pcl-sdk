@@ -50,6 +50,17 @@ namespace Sitecore.MobileSdkUnitTest
 
             Assert.Throws<ArgumentNullException>(action);
         }
+
+		[Test]
+		public void TestBuildWithInvalidSite()
+		{
+			SessionConfigPOD mockConfig = new SessionConfigPOD();
+			mockConfig.InstanceUrl = "localhost";
+			mockConfig.ItemWebApiVersion = "v1";
+
+			TestDelegate action = () => mockConfig.Site = "sitecore/shell";
+			Assert.Throws<ArgumentException>(action, "site must starts with '/'");
+		}
     }
 }
 
