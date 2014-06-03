@@ -1,11 +1,12 @@
-﻿using System;
-using Sitecore.MobileSDK.PublicKey;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-
+﻿
 namespace Sitecore.MobileSDK
 {
+    using System;
+    using Sitecore.MobileSDK.PublicKey;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.SessionSettings;
+    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+
     public class ReadItemByQueryParameters : IGetItemByQueryRequest
     {
         public ReadItemByQueryParameters(
@@ -23,8 +24,6 @@ namespace Sitecore.MobileSDK
         public IItemSource ItemSource { get; private set; }
 
         public ISessionConfig SessionSettings { get; private set; }
-
-        public ICredentialsHeadersCryptor CredentialsCryptor { get; private set; }
     }
 }
 
