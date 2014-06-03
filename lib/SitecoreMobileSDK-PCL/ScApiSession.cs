@@ -30,9 +30,10 @@ namespace Sitecore.MobileSDK
                 throw new ArgumentNullException("ScApiSession.defaultSource cannot be null");
             }
 
+            this.requestMerger = new UserRequestMerger (config, defaultSource);
+
 
             this.sessionConfig = config;
-            this.defaultSource = defaultSource;
             this.httpClient = new HttpClient();
         }
 
@@ -74,43 +75,33 @@ namespace Sitecore.MobileSDK
 
         #region GetItems
 
-		public async Task<ScItemsResponse> ReadItemByIdAsync(string id)
+        public async Task<ScItemsResponse> ReadItemByIdAsync(IReadItemsByIdRequest request)
 		{
 			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
-
-            var config = new ReadItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id);
+            IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
 
             var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
-			return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
 		}
 
-        public async Task<ScItemsResponse> ReadItemByPathAsync(string path)
+        public async Task<ScItemsResponse> ReadItemByPathAsync(IReadItemsByPathRequest request)
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
-
-            var config = new ReadItemByPathParameters(
-                this.sessionConfig, 
-                this.defaultSource, 
-                path);
+            IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps (request);
 
             var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
         }
 
-        public async Task<ScItemsResponse> ReadItemByQueryAsync(string sitecoreQuery)
+        public async Task<ScItemsResponse> ReadItemByQueryAsync(IReadItemsByQueryRequest request)
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
-
-            var config = new ReadItemByQueryParameters(
-                this.sessionConfig, 
-                this.defaultSource, 
-                sitecoreQuery);
+            IReadItemsByQueryRequest autocompletedRequest = this.requestMerger.FillReadItemByQueryGaps (request);
 
             var taskFlow = new GetItemsByQueryTasks(new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
-
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
         }
 
         #endregion GetItems
@@ -118,10 +109,10 @@ namespace Sitecore.MobileSDK
 
         #region Private Variables
 
+        private readonly UserRequestMerger requestMerger;
         private readonly HttpClient httpClient;
 
         private readonly SessionConfig sessionConfig;
-        private readonly ItemSource defaultSource;
 
         private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
         private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();

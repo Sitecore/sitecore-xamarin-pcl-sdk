@@ -75,6 +75,11 @@
     <Compile Include="UrlBuilder\ItemByPath\IReadItemsByPathRequest.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\IReadItemsByQueryRequest.cs" />
     <Compile Include="UrlBuilder\ItemById\IReadItemsByIdRequest.cs" />
+    <Compile Include="UserRequest\UserRequestMerger.cs" />
+    <Compile Include="UserRequest\ItemSourceFieldMerger.cs" />
+    <Compile Include="Items\ItemSourcePOD.cs" />
+    <Compile Include="UserRequest\SessionConfigMerger.cs" />
+    <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -135,5 +140,6 @@
     <Folder Include="UrlBuilder\WebApi\" />
     <Folder Include="UrlBuilder\ItemByQuery\" />
     <Folder Include="Utils\" />
+    <Folder Include="UserRequest\" />
   </ItemGroup>
 </Project>
