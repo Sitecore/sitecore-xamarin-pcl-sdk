@@ -96,10 +96,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get Item by ID invalid")]
-        public virtual void GetItemByIDInvalid()
+        [NUnit.Framework.DescriptionAttribute("Get Item by invalid ID")]
+        public virtual void GetItemByInvalidID()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by ID invalid", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by invalid ID", ((string[])(null)));
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17
@@ -122,10 +122,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get Item by ID not existent")]
-        public virtual void GetItemByIDNotExistent()
+        [NUnit.Framework.DescriptionAttribute("Get Item by not existent ID")]
+        public virtual void GetItemByNotExistentID()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by ID not existent", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by not existent ID", ((string[])(null)));
 #line 24
 this.ScenarioSetup(scenarioInfo);
 #line 25
@@ -152,9 +152,9 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void GetItemByPath()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by Path", ((string[])(null)));
-#line 33
+#line 32
 this.ScenarioSetup(scenarioInfo);
-#line 34
+#line 33
  testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -163,26 +163,26 @@ this.ScenarioSetup(scenarioInfo);
             table4.AddRow(new string[] {
                         "sitecore\\admin",
                         "b"});
-#line 35
+#line 34
  testRunner.And("I have choosed user", ((string)(null)), table4, "And ");
-#line 38
+#line 37
  testRunner.When("I send request to get item by path \"HomeItemPath\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 39
+#line 38
  testRunner.Then("I\'ve got 1 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 40
+#line 39
  testRunner.And("This is Home item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get Item by Path Not Existent")]
-        public virtual void GetItemByPathNotExistent()
+        [NUnit.Framework.DescriptionAttribute("Get Item by not existent Path")]
+        public virtual void GetItemByNotExistentPath()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by Path Not Existent", ((string[])(null)));
-#line 43
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by not existent Path", ((string[])(null)));
+#line 41
 this.ScenarioSetup(scenarioInfo);
-#line 44
+#line 42
  testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -191,12 +191,70 @@ this.ScenarioSetup(scenarioInfo);
             table5.AddRow(new string[] {
                         "sitecore\\admin",
                         "b"});
-#line 45
+#line 43
  testRunner.And("I have choosed user", ((string)(null)), table5, "And ");
-#line 48
- testRunner.When("I send request to get item by path \"NotExistentItemPath\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 49
+#line 46
+ testRunner.When("I send request to get item by path \"ItemPathNotExistent\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 47
  testRunner.Then("I\'ve got 0 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get Item by Path with spaces")]
+        public virtual void GetItemByPathWithSpaces()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by Path with spaces", ((string[])(null)));
+#line 50
+this.ScenarioSetup(scenarioInfo);
+#line 51
+ testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Username",
+                        "Password"});
+            table6.AddRow(new string[] {
+                        "sitecore\\admin",
+                        "b"});
+#line 52
+ testRunner.And("I have choosed user", ((string)(null)), table6, "And ");
+#line 55
+ testRunner.When("I send request to get item by path \"ItemPathWithSpaces\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 56
+ testRunner.Then("I\'ve got 1 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 57
+    testRunner.And("This is \"i t e m\" item with path \"ItemPathWithSpaces\" and template \"Sample/Sample" +
+                    " Item\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get Item by Path for two items with same path exist")]
+        public virtual void GetItemByPathForTwoItemsWithSamePathExist()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Item by Path for two items with same path exist", ((string[])(null)));
+#line 60
+this.ScenarioSetup(scenarioInfo);
+#line 61
+ testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Username",
+                        "Password"});
+            table7.AddRow(new string[] {
+                        "sitecore\\admin",
+                        "b"});
+#line 62
+ testRunner.And("I have choosed user", ((string)(null)), table7, "And ");
+#line 65
+ testRunner.When("I send request to get item by path \"ItemPathWithSpaces\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 66
+ testRunner.Then("I\'ve got 1 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 67
+ testRunner.And("This is \"i t e m\" item with path \"ItemPathWithSpaces\" and template \"Sample/Sample" +
+                    " Item\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
