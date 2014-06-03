@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK.CrudTasks
     using Sitecore.MobileSDK.UrlBuilder.ItemById;
 
 
-    public class GetItemsByIdTasks : AbstractGetItemTask<ReadItemsByIdParameters>
+    public class GetItemsByIdTasks : AbstractGetItemTask<IReadItemsByIdRequest>
     {
         public GetItemsByIdTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
             : base(httpClient, credentialsHeadersCryptor)
@@ -19,7 +19,7 @@ namespace Sitecore.MobileSDK.CrudTasks
             this.urlBuilder = urlBuilder;
         }
 
-        protected override string UrlToGetItemWithRequest(ReadItemsByIdParameters request)
+        protected override string UrlToGetItemWithRequest(IReadItemsByIdRequest request)
         {
             return this.urlBuilder.GetUrlForRequest(request);
         }

@@ -6,7 +6,7 @@ using Sitecore.MobileSDK.PublicKey;
 
 namespace Sitecore.MobileSDK.CrudTasks
 {
-    public class GetItemsByQueryTasks : AbstractGetItemTask<ReadItemByQueryParameters>
+    public class GetItemsByQueryTasks : AbstractGetItemTask<IReadItemsByQueryRequest>
     {
         public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
             : base(httpClient, credentialsHeadersCryptor)
@@ -15,7 +15,7 @@ namespace Sitecore.MobileSDK.CrudTasks
             this.Validate ();
         }
 
-        protected override string UrlToGetItemWithRequest (ReadItemByQueryParameters request)
+        protected override string UrlToGetItemWithRequest (IReadItemsByQueryRequest request)
         {
             this.ValidateRequest (request);
 
@@ -23,7 +23,7 @@ namespace Sitecore.MobileSDK.CrudTasks
             return result;
         }
 
-        private void ValidateRequest(ReadItemByQueryParameters request)
+        private void ValidateRequest(IReadItemsByQueryRequest request)
         {
             if (null == request)
             {
