@@ -37,12 +37,6 @@ namespace MobileSdk_IntegrationTest_Desktop.Specs.Get_items
             Assert.True(ScenarioContext.Current.Get<string>("ExceptionMessage").Contains(message));
         }
 
-        [Given(@"I have logged in empty instance url")]
-        public void GivenIHaveLoggedInNullInstanceUrl()
-        {
-            ScenarioContext.Current["InstanceUrl"] = "";
-        }
-
         [Given(@"I have tried to connect as admin user")]
         public void GivenIHaveTriedToConnectAsAdminUser()
         {

@@ -75,7 +75,7 @@ namespace MobileSdk_IntegrationTest_Desktop.Specs.GetItems
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in authenticated instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
@@ -103,7 +103,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17
- testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in authenticated instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
@@ -114,7 +114,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 18
  testRunner.And("I have choosed user", ((string)(null)), table2, "And ");
 #line 21
- testRunner.When("I send request to get item by id \"ItemIdInvalid\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send request to get item by id \"{/invalid- item &ID}*\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 22
  testRunner.Then("I\'ve got 0 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -129,7 +129,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 24
 this.ScenarioSetup(scenarioInfo);
 #line 25
- testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in authenticated instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
@@ -140,7 +140,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 26
  testRunner.And("I have choosed user", ((string)(null)), table3, "And ");
 #line 29
- testRunner.When("I send request to get item by id \"ItemIdNotExistent\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send request to get item by id \"{110D559F-QQQQ-QQQQ-QQQQ-8A5DF7E70EF9}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 30
  testRunner.Then("I\'ve got 0 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -155,7 +155,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 32
 this.ScenarioSetup(scenarioInfo);
 #line 33
- testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in authenticated instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
@@ -183,7 +183,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 41
 this.ScenarioSetup(scenarioInfo);
 #line 42
- testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in authenticated instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
@@ -194,7 +194,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 43
  testRunner.And("I have choosed user", ((string)(null)), table5, "And ");
 #line 46
- testRunner.When("I send request to get item by path \"ItemPathNotExistent\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send request to get item by path \"/Not/Existent/Path\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 47
  testRunner.Then("I\'ve got 0 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -209,7 +209,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 50
 this.ScenarioSetup(scenarioInfo);
 #line 51
- testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in authenticated instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
@@ -220,7 +220,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 52
  testRunner.And("I have choosed user", ((string)(null)), table6, "And ");
 #line 55
- testRunner.When("I send request to get item by path \"ItemPathWithSpaces\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send request to get item by path \"/sitecore/content/T E S T/i t e m\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 56
  testRunner.Then("I\'ve got 1 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 57
@@ -238,7 +238,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 60
 this.ScenarioSetup(scenarioInfo);
 #line 61
- testRunner.Given("I have logged in \"authenticatedInstanceURL\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in authenticated instance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Username",
@@ -249,7 +249,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 62
  testRunner.And("I have choosed user", ((string)(null)), table7, "And ");
 #line 65
- testRunner.When("I send request to get item by path \"ItemPathWithSpaces\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send request to get item by path \"/sitecore/content/T E S T/i t e m\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 66
  testRunner.Then("I\'ve got 1 items in response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 67
