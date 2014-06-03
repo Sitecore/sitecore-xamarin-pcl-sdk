@@ -146,6 +146,7 @@ namespace MobileSDKIntegrationTest
             Assert.AreEqual(ItemInterationalPath, response.Items[0].Path);
             Assert.AreEqual(SampleitemTemplate, response.Items[0].Template);
         }
+
         [Test]
         public async void TestGetItemsByQuery()
         {
@@ -180,6 +181,48 @@ namespace MobileSDKIntegrationTest
             Assert.AreEqual(0, response.ResultCount);
             Assert.AreEqual(0, response.Items.Count);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async void TestGetItemByNullId()
+        {
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async void TestGetItemByNullPath()
+        {
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async void TestGetItemByNullQuery()
+        {
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public async void TestGetItemByEmptyPath()
+        {
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync("");
+        }
+
+        [Test]
+        public async void TestGetItemByEmptyQuery()
+        {
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync("");
+            Assert.AreEqual(1, response.TotalCount);
+            Assert.AreEqual(1, response.ResultCount);
+            Assert.AreEqual(1, response.Items.Count);
+
+            Assert.AreEqual(HomeitemName, response.Items[0].DisplayName);
+            Assert.AreEqual(HomeitemId, response.Items[0].Id);
+            Assert.AreEqual(SampleitemTemplate, response.Items[0].Template);
+        }
+
         [TearDown]
         public void TearDown()
         {
