@@ -1,10 +1,9 @@
-﻿
+﻿using System.Configuration;
 
 namespace MobileSDKIntegrationTest
 {
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
-    using Sitecore.MobileSDK.PublicKey;
 
     using System;
     using System.Security;
@@ -21,101 +20,146 @@ namespace MobileSDKIntegrationTest
     [TestFixture]
     public class GetPublicKeyTest
     {
-//        private ScTestApiSession sessionWithAnonymousAccess;
-        private ScTestApiSession sessionWithNoAnonymousAccess;
 
-        private HttpClient httpClient;
+        private HttpClient _httpClient;
+        private string _authenticatedUrl;
+        private string _adminUsername;
+        private string _adminPassword;
+        private string _itemId;
 
         [SetUp]
         public void Setup()
         {
-            SessionConfig config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:7119", "sitecore\\admin", "b");
-            this.sessionWithNoAnonymousAccess = new ScTestApiSession(config, ItemSource.DefaultSource());
-
-//            config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:722", "sitecore\\admin", "b");
-//            this.sessionWithAnonymousAccess = new ScTestApiSession(config, ItemSource.DefaultSource());
-
-            this.httpClient = new HttpClient();
+            this._httpClient = new HttpClient();
+            this._authenticatedUrl = ConfigurationManager.AppSettings["authenticatedInstanceURL"];
+            this._adminUsername = ConfigurationManager.AppSettings["adminUsername"];
+            this._adminPassword = ConfigurationManager.AppSettings["adminPassword"];
+            this._itemId = ConfigurationManager.AppSettings["HomeItemId"];
         }
 
         [TearDown]
         public void TearDown()
         {
-            this.sessionWithNoAnonymousAccess = null;
-//            this.sessionWithAnonymousAccess = null;
+            this._httpClient = null;
         }
 
         [Test]
-        public async void TestRestrictedInstanceReturnsErrorByDefault()
+        public async void TestGetItemAsAuthenticatedUser()
         {
-            string url = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v1";
-            string response = await this.httpClient.GetStringAsync(url);
+            var config = new SessionConfig(_authenticatedUrl, _adminUsername, _adminPassword);
+            var session = new ScApiSession(config, ItemSource.DefaultSource());
 
-            string expectedResponse = "{\"statusCode\":401,\"error\":{\"message\":\"Access to site is not granted.\"}}";
-            Assert.AreEqual(response, expectedResponse);
+            var response = await session.ReadItemByIdAsync(_itemId);
+            Assert.AreEqual(1, response.Items.Count);
+            Assert.AreEqual("Home", response.Items[0].DisplayName);
         }
 
         [Test]
-        public async void TestRestrictedInstanceReturnsItemsWhenAuthenticated()
+        public async void TestGetPublicKeyWithNotExistentInstanceUrl()
         {
-            PublicKeyX509Certificate publicKey = await this.sessionWithNoAnonymousAccess.GetPublicKeyAsync_Public();
-
-            var cryptor = new EncryptionUtil (publicKey);
-
-            string encryptedLogin = cryptor.Encrypt("sitecore\\admin");
-            string encryptedPassword = cryptor.Encrypt("b");
-
-            this.httpClient.DefaultRequestHeaders.Add("X-Scitemwebapi-Username", encryptedLogin);
-            this.httpClient.DefaultRequestHeaders.Add("X-Scitemwebapi-Password", encryptedPassword);
-            this.httpClient.DefaultRequestHeaders.Add("X-Scitemwebapi-Encrypted", "1");
-
-            string url = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v1";
-            string response = await this.httpClient.GetStringAsync(url);
-
-
-            JObject json = JObject.Parse(response);
-            int statusCode = (int)json.SelectToken("$.statusCode");
-
-            Assert.AreEqual(200, statusCode);
-        }
-
-        [Test]
-        public async void TestGetPublicKeyWithInvalidInstanceUrl()
-        {
-            SessionConfig config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", "sitecore\\admin", "b");
+            SessionConfig config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", _adminUsername, _adminPassword);
             ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
 
-            TestDelegate action = async () =>
+            try
             {
-                var response = await session.ReadItemByIdAsync("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}");
-            };
-
-            XmlException exception = Assert.Throws<XmlException>(action, "we should get error here");
+                await session.ReadItemByIdAsync(_itemId);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+                Assert.True(exception.Message.Contains("Unable to connect to the specified url"));
+            }
         }
 
         [Test]
-        public async void TestGetPublicKeyWithNullInstanceUrl()
+        public async void TestGetItemWithNullInstanceUrl()
         {
-            // ???
-            //            InvalidOperationException exception = Assert.Throws<InvalidOperationException>( action, "we should get error here");
-
-            var exception = Assert.Throws<ArgumentNullException> (() => new SessionConfig (null, "sitecore\\admin", "b"));
+            var exception = Assert.Throws<ArgumentNullException> (() => new SessionConfig (null, _adminUsername, _adminPassword));
             Assert.IsTrue( 
                 exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required") 
             );
         }
 
         [Test]
-        public void TestGetPublicKeyWithNullItemsSource()
+        public void TestGetItemWithNullItemsSource()
         {
-            SessionConfig config = new SessionConfig("localhost", "sitecore\\admin", "b");
+            SessionConfig config = new SessionConfig(_authenticatedUrl, _adminUsername, _adminPassword);
 
             TestDelegate action = () => new ScApiSession(config, null);
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(action, "we should get error here");
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(action, "we should get exception here");
 
             Assert.IsTrue( 
                 exception.GetBaseException().ToString().Contains("ScApiSession.defaultSource cannot be null") 
             );
+        }
+
+        [Test]
+        public async void TestGetItemWithEmptyPassword()
+        {
+            SessionConfig config = new SessionConfig(_authenticatedUrl, _adminUsername, "");
+            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+
+            try
+            {
+                await session.ReadItemByIdAsync(_itemId);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+                Assert.True(exception.Message.Contains("Unable to login with specified username and password"));
+            }
+        }
+
+        [Test]
+        public async void TestGetItemWithNotExistentUser()
+        {
+            SessionConfig config = new SessionConfig(_authenticatedUrl, "sitecore\\notexistent", "notexistent");
+            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+
+            try
+            {
+                await session.ReadItemByIdAsync(_itemId);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+                string s = exception.Message;
+                Assert.True(exception.Message.Contains("Unable to login with specified username and password"));
+            }
+        }
+
+        [Test]
+        public async void TestGetItemWithInvalidUsernameAndPassword()
+        {
+            SessionConfig config = new SessionConfig(_authenticatedUrl, "inval|d u$er№ame", null);
+            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+
+            try
+            {
+                await session.ReadItemByIdAsync(_itemId);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+                Assert.True(exception.Message.Contains("Unable to login with specified username and password"));
+            }
+        }
+
+        [Test]
+        public async void TestGetItemAsAnonymousWithoutReadAccess()
+        {
+            SessionConfig config = new SessionConfig(_authenticatedUrl, null, null);
+            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+            
+            try
+            {
+                await session.ReadItemByIdAsync(_itemId);
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+                Assert.True(exception.Message.Contains("Access to site is not granted"));
+            }
         }
     }
 }
