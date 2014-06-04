@@ -80,6 +80,8 @@
     <Compile Include="Items\ItemSourcePOD.cs" />
     <Compile Include="UserRequest\SessionConfigMerger.cs" />
     <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
+    <Compile Include="ItemWebApiRequestBuilder.cs" />
+    <Compile Include="UserRequest\IGetItemRequestParametersBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
