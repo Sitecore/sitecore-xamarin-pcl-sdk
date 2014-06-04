@@ -75,6 +75,46 @@ namespace Sitecore.MobileSdkUnitTest
 
             Assert.AreEqual(expected, result);
         }
+
+        [Test]
+        public void TestQueryCannotBeNull()
+        {
+            MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
+            mutableParameters.ItemSource = ItemSource.DefaultSource ();
+            mutableParameters.SitecoreQuery = null;
+            mutableParameters.SessionSettings = this.sessionConfig;
+
+            IReadItemsByQueryRequest request = mutableParameters;
+
+            Assert.Throws<ArgumentNullException> (() => this.builder.GetUrlForRequest (request));
+        }
+
+        [Test]
+        public void TestQueryCannotBeEmpty()
+        {
+            MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
+            mutableParameters.ItemSource = ItemSource.DefaultSource ();
+            mutableParameters.SitecoreQuery = "";
+            mutableParameters.SessionSettings = this.sessionConfig;
+
+            IReadItemsByQueryRequest request = mutableParameters;
+
+            Assert.Throws<ArgumentNullException> (() => this.builder.GetUrlForRequest (request));
+        }
+
+
+        [Test]
+        public void TestQueryCannotBeWhitespace()
+        {
+            MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
+            mutableParameters.ItemSource = ItemSource.DefaultSource ();
+            mutableParameters.SitecoreQuery = "   \t \r \n   ";
+            mutableParameters.SessionSettings = this.sessionConfig;
+
+            IReadItemsByQueryRequest request = mutableParameters;
+
+            Assert.Throws<ArgumentNullException> (() => this.builder.GetUrlForRequest (request));
+        }
     }
 
 }
