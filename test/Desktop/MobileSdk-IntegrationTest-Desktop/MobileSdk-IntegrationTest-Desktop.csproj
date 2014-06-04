@@ -67,11 +67,17 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CryptorConstructionTest.cs">
+      <Link>CryptorConstructionTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsTest.cs">
       <Link>GetItemsTest.cs</Link>
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetPublicKeyTest.cs">
       <Link>GetPublicKeyTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ScTestApiSession.cs">
+      <Link>ScTestApiSession.cs</Link>
     </Compile>
     <Compile Include="Specs\Get items\GetItemTest.feature.cs">
       <AutoGen>True</AutoGen>
@@ -91,6 +97,10 @@
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
       <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
       <Name>SitecoreMobileSDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj">
+      <Project>{b99eee93-6176-438f-b601-e0382545166a}</Project>
+      <Name>SitecoreMobileSDK-MockObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
