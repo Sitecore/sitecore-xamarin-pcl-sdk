@@ -9,6 +9,8 @@ using TechTalk.SpecFlow;
 
 namespace MobileSdk_IntegrationTest_Desktop.Specs.Get_items
 {
+    using MobileSDKUnitTest.Mock;
+
     [Binding]
     public class GetPublicKeyTestSteps
     {
@@ -16,9 +18,13 @@ namespace MobileSdk_IntegrationTest_Desktop.Specs.Get_items
         public void WhenITryToGetAnItemById(string itemId)
         {
             var session = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
+            var request = new MockGetItemsByIdParameters
+            {
+                ItemId = ConfigurationManager.AppSettings[itemId]
+            };
             TestDelegate action = async () =>
             {
-                await session.ReadItemByIdAsync(ConfigurationManager.AppSettings[itemId]);
+                ScItemsResponse scItemsResponse = await session.ReadItemByIdAsync(request);
             };
             ScenarioContext.Current["Action"] = action;
         }

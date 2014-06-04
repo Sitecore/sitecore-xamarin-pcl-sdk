@@ -5,28 +5,57 @@ namespace MobileSDKUnitTest.Mock
     {
         public static TestEnvironment DefaultTestEnvironment()
         {
-            TestEnvironment result = new TestEnvironment();
+            var result = new TestEnvironment
+            {
+                AnonymousInstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:750",
+                AuthenticatedInstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119"
+            };
 
-            result.AnonymousInstanceURL = "http://mobiledev1ua1.dk.sitecore.net:750";
-            result.AuthenticatedInstanceURL = "http://mobiledev1ua1.dk.sitecore.net:7119";
-            result.AdminUsername = "sitecore\\admin";
-            result.AdminPassword = "b";
-            result.HomeItemId = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
-            result.HomeItemPath = "/sitecore/content/Home";
+            result.Users.Admin.Username = "sitecore\\admin";
+            result.Users.Admin.Password = "b";
+            result.Users.Anonymous.Username = null;
+            result.Users.Anonymous.Password = null;
+
+            result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
+            result.Items.Home.Path = "/sitecore/content/Home";
+            result.Items.Home.Name = "Home";
 
             return result;
         }
 
-        private TestEnvironment ()
+        private TestEnvironment () { }
+        public string AnonymousInstanceUrl { get; private set; }
+        public string AuthenticatedInstanceUrl { get; private set; }
+
+        public UsersList Users = new UsersList();
+        public ItemsList Items = new ItemsList();
+
+        public class UsersList
         {
+            public User Admin = new User();
+            public User Anonymous = new User();
+        }        
+        
+        public class ItemsList
+        {
+            public Item Home = new Item();
+            public Item MediaLibrary = new Item();
         }
 
-        public string AnonymousInstanceURL { get; private set; }
-        public string AuthenticatedInstanceURL { get; private set; }
-        public string AdminUsername { get; private set; }
-        public string AdminPassword { get; private set; }
-        public string HomeItemId { get; private set; }
-        public string HomeItemPath { get; private set; }
+        public class Item
+        {
+            public string Id { get; set; }
+            public string Path { get; set; }
+            public string Name { get; set; }
+        }
+
+        public class User
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
+        }
+
+        
     }
 }
 

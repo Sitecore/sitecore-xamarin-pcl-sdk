@@ -8,6 +8,8 @@ using TechTalk.SpecFlow.Assist;
 
 namespace MobileSdk_IntegrationTest_Desktop
 {
+    using MobileSDKUnitTest.Mock;
+
     [Binding]
     public class GetItemTestSteps
     {
@@ -38,16 +40,19 @@ namespace MobileSdk_IntegrationTest_Desktop
         public void WhenISendRequestToGetItemById(string itemId)
         {
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
-            string id = ConfigurationManager.AppSettings[itemId];
-            ScenarioContext.Current["Response"] = apiSession.ReadItemByIdAsync(id).Result;
+            var request = new MockGetItemsByIdParameters
+            {
+                ItemId = ConfigurationManager.AppSettings[itemId]
+            };
+            ScenarioContext.Current["Response"] = apiSession.ReadItemByIdAsync(request).Result;
         }
 
         [When(@"I send request to get item by path ""(.*)""")]
         public void WhenISendRequestToGetItemByPath(string itemPath)
         {
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
-            string path = ConfigurationManager.AppSettings[itemPath];
-            ScenarioContext.Current["Response"] = apiSession.ReadItemByPathAsync(path).Result;
+          //  string path = ConfigurationManager.AppSettings[itemPath];
+          //  ScenarioContext.Current["Response"] = apiSession.ReadItemByPathAsync(path).Result;
         }
 
         [Then(@"I've got (.*) items in response")]

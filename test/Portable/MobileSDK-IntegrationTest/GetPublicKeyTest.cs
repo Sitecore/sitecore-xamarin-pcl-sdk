@@ -1,7 +1,4 @@
-﻿
-
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
@@ -22,58 +19,49 @@ namespace MobileSDKIntegrationTest
     [TestFixture]
     public class GetPublicKeyTest
     {
-        private string authenticatedUrl;
-        private string adminUsername;
-        private string adminPassword;
-        private string itemId;
+        private TestEnvironment testData;
 
         IReadItemsByIdRequest requestWithItemId;
 
         [SetUp]
         public void Setup()
         {
-            var env = TestEnvironment.DefaultTestEnvironment();
-            this.authenticatedUrl = env.AuthenticatedInstanceURL;
-            this.adminUsername = env.AdminUsername;
-            this.adminPassword = env.AdminPassword;
-            this.itemId = env.HomeItemId;
+            testData = TestEnvironment.DefaultTestEnvironment();
 
-
-            var request = new MockGetItemsByIdParameters ();
-            request.ItemId = this.itemId;
+            var request = new MockGetItemsByIdParameters
+            {
+                ItemId = this.testData.Items.Home.Id
+            };
             this.requestWithItemId = request;
         }
 
         [TearDown]
         public void TearDown()
         {
-            this.requestWithItemId = null;
-
-            this.authenticatedUrl = null;
-            this.adminUsername = null;
-            this.adminPassword = null;
-            this.itemId = null;
+            this.testData = null;
         }
 
         [Test]
         public async void TestGetItemAsAuthenticatedUser()
         {
-            var config = new SessionConfig(authenticatedUrl, adminUsername, adminPassword);
+            var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
             var session = new ScApiSession(config, ItemSource.DefaultSource());
 
-            var request = new MockGetItemsByIdParameters ();
-            request.ItemId = this.itemId;
+            var request = new MockGetItemsByIdParameters
+            {
+                ItemId = this.testData.Items.Home.Id
+            };
 
             var response = await session.ReadItemByIdAsync(request);
             Assert.AreEqual(1, response.Items.Count);
-            Assert.AreEqual("Home", response.Items[0].DisplayName);
+            Assert.AreEqual(testData.Items.Home.Name, response.Items[0].DisplayName);
         }
 
         [Test]
         public async void TestGetPublicKeyWithNotExistentInstanceUrl()
         {
-            SessionConfig config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", adminUsername, adminPassword);
-            ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+            var config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
+            var session = new ScApiSession(config, ItemSource.DefaultSource());
 
             try
             {
@@ -93,7 +81,7 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemWithNullInstanceUrl()
         {
-            var exception = Assert.Throws<ArgumentNullException> (() => new SessionConfig (null, adminUsername, adminPassword));
+            var exception = Assert.Throws<ArgumentNullException>(() => new SessionConfig(null, testData.Users.Admin.Username, testData.Users.Admin.Password));
             Assert.IsTrue( 
                 exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required") 
             );
@@ -102,7 +90,7 @@ namespace MobileSDKIntegrationTest
         [Test]
         public void TestGetItemWithNullItemsSource()
         {
-            SessionConfig config = new SessionConfig(authenticatedUrl, adminUsername, adminPassword);
+            SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
 
             TestDelegate action = () => new ScApiSession(config, null);
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(action, "we should get exception here");
@@ -115,7 +103,7 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemWithEmptyPassword()
         {
-            SessionConfig config = new SessionConfig(authenticatedUrl, adminUsername, "");
+            SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, "");
             ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
 
             try
@@ -136,7 +124,7 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemWithNotExistentUser()
         {
-            SessionConfig config = new SessionConfig(authenticatedUrl, "sitecore\\notexistent", "notexistent");
+            SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, "sitecore\\notexistent", "notexistent");
             ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
 
             try
@@ -159,7 +147,7 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemWithInvalidUsernameAndPassword()
         {
-            SessionConfig config = new SessionConfig(authenticatedUrl, "inval|d u$er№ame", null);
+            SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, "inval|d u$er№ame", null);
             ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
 
             try
@@ -180,7 +168,7 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemAsAnonymousWithoutReadAccess()
         {
-            SessionConfig config = new SessionConfig(authenticatedUrl, null, null);
+            SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, null, null);
             ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
             
             try
