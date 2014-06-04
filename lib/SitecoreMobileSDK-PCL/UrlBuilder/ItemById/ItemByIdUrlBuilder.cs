@@ -48,7 +48,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 
             bool hasOpeningBrace = itemId.StartsWith("{");
             bool hasClosingBrace = itemId.EndsWith("}");
-            bool isValidId = hasOpeningBrace && hasClosingBrace;
+            bool hasNonBraceSymbols = (itemId.Length > 2);
+
+            bool isValidId = hasOpeningBrace && hasClosingBrace && hasNonBraceSymbols;
             if (!isValidId)
             {
                 throw new ArgumentException("ItemByIdUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");

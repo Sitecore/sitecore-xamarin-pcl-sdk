@@ -51,7 +51,7 @@
         }
 
 		[Test]
-		public void TestInvaliSite()
+        public void TestInvaliItemIdCausesArgumentException()
 		{
 			MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
 			mutableParameters.SessionSettings = this.sessionConfig;
@@ -109,6 +109,20 @@
             TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
 
             Assert.Throws<ArgumentNullException>(action);
+        }
+
+        [Test]
+        public void TestBracesIdWithoutTextIsInvalid()
+        {
+            MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+            mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.ItemSource = ItemSource.DefaultSource();
+            mutableParameters.ItemId = "{}";
+
+            IReadItemsByIdRequest parameters = mutableParameters;
+
+            TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
+            Assert.Throws<ArgumentException>(action);
         }
     }
 }
