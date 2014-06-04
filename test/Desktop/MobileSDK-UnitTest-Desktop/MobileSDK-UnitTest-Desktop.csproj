@@ -69,6 +69,9 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByPathUrlBuilderTests.cs">
       <Link>ItemByPathUrlBuilderTests.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceMergerTest.cs">
+      <Link>ItemSourceMergerTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceTest.cs">
       <Link>ItemSourceTest.cs</Link>
     </Compile>
@@ -78,17 +81,11 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\LoginAndPasswordEncryptionTest.cs">
       <Link>LoginAndPasswordEncryptionTest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockReadItemByIdParameters.cs">
-      <Link>Mock\MockReadItemByIdParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockReadItemByPathParameters.cs">
-      <Link>Mock\MockReadItemByPathParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-UnitTest\Mock\MockSessionInfo.cs">
-      <Link>Mock\MockSessionInfo.cs</Link>
-    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\PublicKeyParsingTest.cs">
       <Link>PublicKeyParsingTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\SessionConfigMergerTest.cs">
+      <Link>SessionConfigMergerTest.cs</Link>
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\SessionConfigUrlBuilderTest.cs">
       <Link>SessionConfigUrlBuilderTest.cs</Link>
@@ -99,6 +96,10 @@
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
       <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
       <Name>SitecoreMobileSDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj">
+      <Project>{b99eee93-6176-438f-b601-e0382545166a}</Project>
+      <Name>SitecoreMobileSDK-MockObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
