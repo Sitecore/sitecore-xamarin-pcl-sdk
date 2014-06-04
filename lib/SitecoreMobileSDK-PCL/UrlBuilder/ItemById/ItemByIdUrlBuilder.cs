@@ -1,10 +1,13 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemById
+﻿
+
+namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 {
     using System;
     using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
+    using Sitecore.MobileSDK.Utils;
 
 
     public class ItemByIdUrlBuilder 
@@ -19,7 +22,7 @@
         public string GetUrlForRequest(IReadItemsByIdRequest request)
         {
             this.ValidateId(request.ItemId);
-            string escapedId = Uri.EscapeDataString(request.ItemId);
+            string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
 
             SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
             string result = sessionBuilder.BuildUrlString(request.SessionSettings);

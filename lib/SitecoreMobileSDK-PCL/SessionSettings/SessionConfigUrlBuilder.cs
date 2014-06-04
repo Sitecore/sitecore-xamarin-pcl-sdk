@@ -26,7 +26,7 @@
                 autocompletedInstanceUrl = autocompletedInstanceUrl.Insert(0, "http://");
             }
 
-            string escapedVersion = Uri.EscapeDataString(request.ItemWebApiVersion);
+            string escapedVersion = UrlBuilderUtils.EscapeDataString(request.ItemWebApiVersion);
 
 
             string result =
