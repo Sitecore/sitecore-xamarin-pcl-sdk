@@ -52,7 +52,11 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByInvalidId()
         {
             string itemInvalidId = "{4%75_B3E2 D050FA|cF4E1}";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync(itemInvalidId);
+            var request = new MockGetItemsByIdParameters ();
+            request.ItemId = itemInvalidId;
+
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync(request);
             Assert.AreEqual(0, response.TotalCount);
             Assert.AreEqual(0, response.ResultCount);
             Assert.AreEqual(0, response.Items.Count);
@@ -62,7 +66,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByNotExistentId()
         {
             string NotExistentId = "{3D6658D8-QQQQ-QQQQ-B3E2-D050FABCF4E1}";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync(NotExistentId);
+            var request = new MockGetItemsByIdParameters ();
+            request.ItemId = NotExistentId;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync(request);
             Assert.AreEqual(0, response.TotalCount);
             Assert.AreEqual(0, response.ResultCount);
             Assert.AreEqual(0, response.Items.Count);
@@ -71,7 +78,10 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemByPath()
         {
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(HomeitemPath);
+            var request = new MockGetItemsByPathParameters ();
+            request.ItemPath = this.HomeitemPath;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
@@ -86,7 +96,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByPathWithSpaces() 
        // for this scenario we should created item with path /sitecore/content/T E S T/i t e m
         {
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(ItemWithSpacesPath);
+            var request = new MockGetItemsByPathParameters ();
+            request.ItemPath = this.ItemWithSpacesPath;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
@@ -101,7 +114,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByPathForTwoItemsWithTheSamePathExist()
         // for this scenario we should created two the same items with path /sitecore/content/T E S T/i t e m
         {
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(ItemWithSpacesPath);
+            var request = new MockGetItemsByPathParameters ();
+            request.ItemPath = this.ItemWithSpacesPath;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
@@ -116,7 +132,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByNotExistentPath()
       {
             string PathNotExistent = "/not/existent/path";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(PathNotExistent);
+            var request = new MockGetItemsByPathParameters ();
+            request.ItemPath = PathNotExistent;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
             Assert.AreEqual(0, response.TotalCount);
             Assert.AreEqual(0, response.ResultCount);
@@ -127,7 +146,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByPathWithInternationalName()
         {
             string ItemInterationalPath = "/sitecore/content/Home/Android/Folder for create items/Japanese/宇都宮";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(ItemInterationalPath);
+            var request = new MockGetItemsByPathParameters ();
+            request.ItemPath = ItemInterationalPath;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
@@ -152,8 +174,8 @@ namespace MobileSDKIntegrationTest
             Assert.AreEqual(1, response.Items.Count);
 
             Assert.AreEqual("ではまた明日", response.Items[0].DisplayName);
-            Assert.AreEqual(ItemInterationalPath, response.Items[0].Path);
-            Assert.AreEqual(SampleitemTemplate, response.Items[0].Template);
+            Assert.AreEqual(itemInterationalPath, response.Items[0].Path);
+            Assert.AreEqual(this.SampleitemTemplate, response.Items[0].Template);
         }
 
         [Test]
@@ -176,7 +198,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByInternationalQuery()
         {
             string queryInternational = "/sitecore/content/HOME//*[@title='宇都宮']";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(queryInternational);
+            var request = new MockGetItemsByQueryParameters ();
+            request.SitecoreQuery = queryInternational;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(request);
 
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
@@ -189,7 +214,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByInvalidQuery()
         {
             string queryInvalid = "/sitecore/content/HOME/AllowED_PARent//*[@@templatekey123='sample item']";
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(queryInvalid);
+            var request = new MockGetItemsByQueryParameters ();
+            request.SitecoreQuery = queryInvalid;
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(request);
 
             Assert.AreEqual(0, response.TotalCount);
             Assert.AreEqual(0, response.ResultCount);
@@ -200,34 +228,40 @@ namespace MobileSDKIntegrationTest
         [ExpectedException(typeof(ArgumentNullException))]
         public async void TestGetItemByNullId()
         {
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync(null);
+            await this.sessionWithAnonymousAccess.ReadItemByIdAsync(null);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public async void TestGetItemByNullPath()
         {
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(null);
+            await this.sessionWithAnonymousAccess.ReadItemByPathAsync(null);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public async void TestGetItemByNullQuery()
         {
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(null);
+            await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(null);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public async void TestGetItemByEmptyPath()
         {
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync("");
+            var request = new MockGetItemsByPathParameters ();
+            request.ItemPath = "";
+
+            await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
         }
 
         [Test]
         public async void TestGetItemByEmptyQuery()
         {
-            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync("");
+            var request = new MockGetItemsByQueryParameters ();
+            request.SitecoreQuery = "";
+
+            ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(request);
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
             Assert.AreEqual(1, response.Items.Count);
