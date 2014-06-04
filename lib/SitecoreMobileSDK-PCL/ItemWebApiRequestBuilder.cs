@@ -5,6 +5,7 @@ namespace Sitecore.MobileSDK
     using System;
     using Sitecore.MobileSDK.UrlBuilder.ItemById;
     using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
 
     public class ItemWebApiRequestBuilder
@@ -15,13 +16,21 @@ namespace Sitecore.MobileSDK
 
         public IGetItemRequestParametersBuilder<IReadItemsByIdRequest> RequestWithId( string itemId )
         {
-            return null;
+            return new ReadItemByIdRequestBuilder( itemId );
         }
 
         public IGetItemRequestParametersBuilder<IReadItemsByPathRequest> RequestWithPath( string itemPath )
         {
-            return null;
+            return new ReadItemByPathRequestBuilder( itemPath );
         }
+
+        public IGetItemRequestParametersBuilder<IReadItemsByQueryRequest> RequestWithSitecoreQuery( string sitecoreQuery )
+        {
+            return new ReadItemByQueryRequestBuilder( sitecoreQuery );
+        }
+
+
+
     }
 }
 
