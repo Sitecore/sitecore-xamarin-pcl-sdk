@@ -1,11 +1,17 @@
-﻿namespace Sitecore.MobileSDK
+﻿
+
+namespace Sitecore.MobileSDK
 {
     using System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
+    using System.Threading;
     using System.Collections.Generic;
 
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.Exceptions;
+
 
     public class ScItemsParser
     {
@@ -13,7 +19,7 @@
         {
         }
 
-        public static ScItemsResponse Parse(string responseString)
+        public static ScItemsResponse Parse(string responseString, CancellationToken cancelToken)
         {
             if (string.IsNullOrEmpty(responseString))
             {
@@ -25,8 +31,8 @@
             int statusCode = ParseOrFail<int>(response, "$.statusCode");
             if (200 != statusCode)
             {
-                var error = new ScErrorResponse(statusCode, ParseOrFail<string>(response, "$.error.message"));
-                throw new ScResponseException(error);
+                var error = new WebApiJsonError(statusCode, ParseOrFail<string>(response, "$.error.message"));
+                throw new WebApiJsonErrorException(error);
             }
 
             int totalCount = ParseOrFail<int>(response, "$.result.totalCount");
@@ -37,6 +43,8 @@
 
             foreach (JObject item in responseItems)
             {
+                cancelToken.ThrowIfCancellationRequested ();
+
                 var source = ParseItemSource(item);
 
                 var displayName = (string)item.GetValue("DisplayName");

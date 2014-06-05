@@ -1,8 +1,12 @@
 
+
+
 namespace Sitecore.MobileSDK
 {
 	using System;
 	using System.Net.Http;
+
+    using System.Threading;
 	using System.Threading.Tasks;
 
 	using Sitecore.MobileSDK.SessionSettings;
@@ -47,17 +51,17 @@ namespace Sitecore.MobileSDK
 
         #region Encryption
 
-        protected virtual async Task<PublicKeyX509Certificate> GetPublicKeyAsync()
+        protected virtual async Task<PublicKeyX509Certificate> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken) )
         {
             var taskFlow = new GetPublicKeyTasks(this.httpClient);
 
-            PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
+            PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow, cancelToken);
             this.publicCertifiacte = result;
 
             return result;
         }
 
-        protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
+        protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync(CancellationToken cancelToken = default(CancellationToken))
         {
             if (this.sessionConfig.IsAnonymous())
             {
@@ -66,7 +70,7 @@ namespace Sitecore.MobileSDK
             else
             {
                 // TODO : flow should be responsible for caching. Do not hard code here
-                this.publicCertifiacte = await this.GetPublicKeyAsync();
+                this.publicCertifiacte = await this.GetPublicKeyAsync(cancelToken);
                 return new AuthenticedSessionCryptor(this.sessionConfig.Login, this.sessionConfig.Password, this.publicCertifiacte);
             }
         }
@@ -75,33 +79,33 @@ namespace Sitecore.MobileSDK
 
         #region GetItems
 
-        public async Task<ScItemsResponse> ReadItemByIdAsync(IReadItemsByIdRequest request)
+        public async Task<ScItemsResponse> ReadItemByIdAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
 		{
 			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
             IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
 
             var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
 		}
 
-        public async Task<ScItemsResponse> ReadItemByPathAsync(IReadItemsByPathRequest request)
+        public async Task<ScItemsResponse> ReadItemByPathAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
             IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps (request);
 
             var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
         }
 
-        public async Task<ScItemsResponse> ReadItemByQueryAsync(IReadItemsByQueryRequest request)
+        public async Task<ScItemsResponse> ReadItemByQueryAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
             IReadItemsByQueryRequest autocompletedRequest = this.requestMerger.FillReadItemByQueryGaps (request);
 
             var taskFlow = new GetItemsByQueryTasks(new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
         }
 
         #endregion GetItems

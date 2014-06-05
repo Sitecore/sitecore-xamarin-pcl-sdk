@@ -42,14 +42,14 @@ namespace WhiteLabeliOS
 
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-				var request =  builder.RequestWithPath(itemPathField.Text)
+				var request = builder.RequestWithPath(itemPathField.Text)
 					.Build();
 
-				this.ShowLoader ();
+				this.ShowLoader();
 
 				ScItemsResponse response = await session.ReadItemByPathAsync(request);
 
-				this.HideLoader ();
+				this.HideLoader();
 				if (response.ResultCount > 0)
 				{
 					ScItem item = response.Items [0];
@@ -62,6 +62,7 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
+				this.HideLoader();
 				AlertHelper.ShowAlertWithOkOption("Erorr", e.Message);
 			}
 		}
