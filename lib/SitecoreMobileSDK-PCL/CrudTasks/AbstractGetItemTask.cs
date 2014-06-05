@@ -16,6 +16,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
 
     public abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
+        where TRequest: class
     {
         private AbstractGetItemTask()
         {

@@ -9,6 +9,10 @@ namespace Sitecore.MobileSDK.TaskFlow
 
 
 	public interface IRestApiCallTasks<TRequest, THttpRequest, THttpResult, TResult>
+        where TRequest: class
+        where THttpRequest: class
+        where THttpResult: class
+        where TResult: class
     {
         Task<THttpRequest> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken);
 
