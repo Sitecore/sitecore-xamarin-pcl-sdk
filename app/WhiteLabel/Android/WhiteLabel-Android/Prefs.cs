@@ -82,8 +82,8 @@ namespace WhiteLabelAndroid
         #region Database
         public string GetDatabase()
         {
-            string databaseKey = this.context.GetString(Resource.String.key_site);
-            string defaultDatabase = this.context.GetString(Resource.String.text_default_site);
+            string databaseKey = this.context.GetString(Resource.String.key_database);
+            string defaultDatabase = this.context.GetString(Resource.String.text_default_database);
 
             return this.GetString(databaseKey, defaultDatabase);
         }
