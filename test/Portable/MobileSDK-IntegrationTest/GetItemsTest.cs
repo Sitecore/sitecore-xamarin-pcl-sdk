@@ -44,30 +44,6 @@ namespace MobileSDKIntegrationTest
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
     }
 
-    private async Task<ScItemsResponse> GetItemById(string id)
-    {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId(id).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
-      return response;
-    }
-
-    private async Task<ScItemsResponse> GetItemByPath(string path)
-    {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(path).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
-      return response;
-    }
-
-    private async Task<ScItemsResponse> GetItemByQuery(string query)
-    {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
-      return response;
-    }
-
     [Test]
     public async void TestGetItemByInvalidId()
     {
@@ -308,16 +284,15 @@ namespace MobileSDKIntegrationTest
     public async void TestGetItemByQueryWithturnedOffItemWebApi()
     {
 
-      var config = new SessionConfig("http://ws-alr1.dk.sitecore.net:75", "sitecore\\admin", "b"); //this string should be deleted
-      var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource()); //this string should be deleted
+      var config = new SessionConfig("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource()); // = sessionAuthenticatedUser;
 
       var requestBuilder = new ItemWebApiRequestBuilder();
       var request = requestBuilder.RequestWithPath(this.testData.Items.Home.Path).Build();
 
       try
       {
-        // await sessionAuthenticatedUser.ReadItemByPathAsync(request);  // this string should be uncommented
-        await sessionWithoutAccess.ReadItemByPathAsync(request); //this string should be deleted
+        await sessionWithoutAccess.ReadItemByPathAsync(request); 
       }
       catch (Exception exception)
       {
@@ -327,6 +302,30 @@ namespace MobileSDKIntegrationTest
       }
 
       Assert.Fail("Exception not thrown");
+    }
+
+    private async Task<ScItemsResponse> GetItemById(string id)
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithId(id).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      return response;
+    }
+
+    private async Task<ScItemsResponse> GetItemByPath(string path)
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithPath(path).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      return response;
+    }
+
+    private async Task<ScItemsResponse> GetItemByQuery(string query)
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      return response;
     }
   }
 }

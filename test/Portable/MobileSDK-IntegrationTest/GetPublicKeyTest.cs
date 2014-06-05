@@ -50,7 +50,7 @@
     }
 
     [Test]
-    public async void TestGetPublicKeyWithNotExistentInstanceUrl()
+    public async void TestGetItemsWithNotExistentInstanceUrl()
     {
       var config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
       var session = new ScApiSession(config, ItemSource.DefaultSource());
@@ -61,9 +61,10 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScNetworkException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Unable to connect to the specified url"));
-
+        Assert.AreEqual("System.Net.Http.HttpRequestException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("An error occurred while sending the request"));
+        Assert.AreEqual("System.Net.WebException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Unable to connect to the remote server"));
         return;
       }
 
@@ -105,7 +106,7 @@
       catch (Exception exception)
       {
         Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Unable to login with specified username and password"));
+        Assert.True(exception.Message.Contains("Access to site is not granted"));
 
         return;
       }
@@ -128,7 +129,7 @@
         Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
 
         string message = exception.Message;
-        Assert.True(message.Contains("Unable to login with specified username and password"));
+        Assert.True(message.Contains("Access to site is not granted"));
 
         return;
       }
@@ -149,7 +150,7 @@
       catch (Exception exception)
       {
         Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Unable to login with specified username and password"));
+        Assert.True(exception.Message.Contains("Access to site is not granted"));
 
         return;
       }
