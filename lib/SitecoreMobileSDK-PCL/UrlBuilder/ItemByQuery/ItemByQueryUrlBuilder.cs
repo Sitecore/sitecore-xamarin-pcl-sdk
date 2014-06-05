@@ -51,10 +51,8 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
             {
                 throw new ArgumentNullException ("ItemByPathUrlBuilder.GetUrlForRequest() : request cannot be null");
             }
-            else if ( string.IsNullOrWhiteSpace(request.SitecoreQuery) )
-            {
-                throw new ArgumentNullException ("ItemByPathUrlBuilder.GetUrlForRequest() : request.SitecoreQuery cannot be null");
-            }
+
+            SitecoreQueryValidator.ValidateSitecoreQuery (request.SitecoreQuery);
         }
             
         private void Validate()

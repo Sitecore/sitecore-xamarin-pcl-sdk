@@ -1,8 +1,10 @@
-﻿using MobileSDKUnitTest.Mock;
+﻿
 
 namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Threading.Tasks;
+  using MobileSDKUnitTest.Mock;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
@@ -36,27 +38,41 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemById()
     {
-      var request = new MockGetItemsByIdParameters
-      {
-        ItemId = this.testData.Items.Home.Id
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var response = await GetItemById(this.testData.Items.Home.Id);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+    }
+
+    private async Task<ScItemsResponse> GetItemById(string id)
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithId(id).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      return response;
+    }
+
+    private async Task<ScItemsResponse> GetItemByPath(string path)
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithPath(path).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      return response;
+    }
+
+    private async Task<ScItemsResponse> GetItemByQuery(string query)
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      return response;
     }
 
     [Test]
     public async void TestGetItemByInvalidId()
     {
       const string ItemInvalidId = "{4%75_B3E2 D050FA|cF4E1}";
-      var request = new MockGetItemsByIdParameters
-      {
-        ItemId = ItemInvalidId
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var response = await GetItemById(ItemInvalidId);
       testData.AssertItemsCount(0, response);
     }
 
@@ -64,24 +80,14 @@ namespace MobileSDKIntegrationTest
     public async void TestGetItemByNotExistentId()
     {
       const string NotExistentId = "{3D6658D8-QQQQ-QQQQ-B3E2-D050FABCF4E1}";
-      var request = new MockGetItemsByIdParameters
-      {
-        ItemId = NotExistentId
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var response = await GetItemById(NotExistentId);
       testData.AssertItemsCount(0, response);
     }
 
     [Test]
     public async void TestGetItemByPath()
     {
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = this.testData.Items.Home.Path
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var response = await GetItemByPath(testData.Items.Home.Path);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
@@ -90,12 +96,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemByPathWithSpaces()
     {
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = ItemWithSpacesPath
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var response = await GetItemByPath(ItemWithSpacesPath);
 
       testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
@@ -110,12 +111,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemByPathForTwoItemsWithTheSamePathExist()
     {
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = ItemWithSpacesPath
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var response = await GetItemByPath(ItemWithSpacesPath);
 
       testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
@@ -125,18 +121,14 @@ namespace MobileSDKIntegrationTest
         Template = testData.Items.Home.Template
       };
       testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
+
     }
 
     [Test]
     public async void TestGetItemByNotExistentPath()
     {
       const string PathNotExistent = "/not/existent/path";
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = PathNotExistent
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var response = await GetItemByPath(PathNotExistent);
       testData.AssertItemsCount(0, response);
     }
 
@@ -144,13 +136,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetItemByPathWithInternationalName()
     {
       const string ItemInterationalPath = "/sitecore/content/Home/Android/Folder for create items/Japanese/宇都宮";
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = ItemInterationalPath
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
-
+      var response = await GetItemByPath(ItemInterationalPath);
       testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
       {
@@ -165,15 +151,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetItemByInternationalPath()
     {
       const string ItemInterationalPath = "/sitecore/content/Home/Android/Folder for create items/Japanese/宇都宮/ではまた明日";
-
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = ItemInterationalPath
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
-
-      testData.AssertItemsCount(1, response);
+      var response = await GetItemByPath(ItemInterationalPath);
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = "ではまた明日",
@@ -181,7 +159,6 @@ namespace MobileSDKIntegrationTest
         Template = testData.Items.Home.Template
       };
       testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
-
     }
 
     [Test]
@@ -189,12 +166,7 @@ namespace MobileSDKIntegrationTest
     {
       const string Query = "/sitecore/content/HOME/AllowED_PARent/*";
 
-      var request = new MockGetItemsByQueryParameters
-      {
-        SitecoreQuery = Query
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var response = await this.GetItemByQuery(Query);
 
       testData.AssertItemsCount(2, response);
       Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
@@ -204,12 +176,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetItemByInternationalQuery()
     {
       const string QueryInternational = "/sitecore/content/HOME//*[@title='宇都宮']";
-      var request = new MockGetItemsByQueryParameters
-      {
-        SitecoreQuery = QueryInternational
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var response = await this.GetItemByQuery(QueryInternational);
 
       testData.AssertItemsCount(1, response);
       Assert.AreEqual("宇都宮", response.Items[0].DisplayName);
@@ -219,32 +186,22 @@ namespace MobileSDKIntegrationTest
     public async void TestGetItemByInvalidQuery()
     {
       const string QueryInvalid = "/sitecore/content/HOME/AllowED_PARent//*[@@templatekey123='sample item']";
-      var request = new MockGetItemsByQueryParameters
-      {
-        SitecoreQuery = QueryInvalid
-      };
-
-      ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var response = await this.GetItemByQuery(QueryInvalid);
 
       testData.AssertItemsCount(0, response);
     }
 
     [Test]
-   public async void TestGetItemByNullId()
+    public async void TestGetItemByNullId()
     {
-      var request = new MockGetItemsByIdParameters
-      {
-        ItemId = null
-      };
-
       try
       {
-        await sessionAuthenticatedUser.ReadItemByIdAsync(request);
+        var response = await this.GetItemById(null);
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScConnectionException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Value cannot be empty or null"));
+        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Item id cannot be null"));
 
         return;
       }
@@ -253,21 +210,16 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
- public async void TestGetItemByNullPath()
+    public async void TestGetItemByNullPath()
     {
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = null
-      };
-
       try
       {
-        await sessionAuthenticatedUser.ReadItemByPathAsync(request);
+        var response = await this.GetItemByPath(null);
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScConnectionException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Value cannot be empty or null"));
+        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Item path cannot be null"));
 
         return;
       }
@@ -276,21 +228,16 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-   public async void TestGetItemByNullQuery()
+    public async void TestGetItemByNullQuery()
     {
-      var request = new MockGetItemsByQueryParameters
-      {
-        SitecoreQuery = null
-      };
-
       try
       {
-        await sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+        var response = await this.GetItemByQuery(null);
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScConnectionException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Value cannot be empty or null"));
+        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
 
         return;
       }
@@ -301,19 +248,14 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemByEmptyPath()
     {
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = ""
-      };
-
       try
       {
-        await sessionAuthenticatedUser.ReadItemByPathAsync(request);
+        var response = await this.GetItemByPath("");
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScConnectionException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Value cannot be empty or null"));
+        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Item path cannot be null or empty"));
 
         return;
       }
@@ -322,21 +264,16 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-   public async void TestGetItemByEmptyQuery()
+    public async void TestGetItemByEmptyQuery()
     {
-      var request = new MockGetItemsByQueryParameters
-      {
-        SitecoreQuery = ""
-      };
-
       try
       {
-        await sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+        var response = await this.GetItemByQuery("");
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScConnectionException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Value cannot be empty or null"));
+        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
 
         return;
       }
@@ -347,18 +284,12 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetOneHundredItemsByQuery()
     {
-      var request = new MockGetItemsByQueryParameters
-      {
-        SitecoreQuery = "/sitecore/content/Home/Android/Static/100Items/*"
-      };
-
-      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var response = await this.GetItemByQuery("/sitecore/content/Home/Android/Static/100Items/*");
 
       testData.AssertItemsCount(100, response);
 
       Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
     }
-
 
     [Test]
     public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
@@ -366,42 +297,36 @@ namespace MobileSDKIntegrationTest
       var config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:7119", "extranet\\noreadaccess", "noreadaccess");
       var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource());
 
-      var request = new MockGetItemsByPathParameters
-      {
-        ItemPath = this.testData.Items.Home.Path
-      };
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithPath(this.testData.Items.Home.Path).Build();
+      var response = await sessionWithoutAccess.ReadItemByPathAsync(request);
 
-      ScItemsResponse response = await sessionWithoutAccess.ReadItemByPathAsync(request);
       testData.AssertItemsCount(0, response);
     }
 
-    [Test]        //this case should be changed for another instance
-   public async void TestGetItemByQueryWithturnedOffItemWebApi()
+    [Test] //this case should be changed for another instance
+    public async void TestGetItemByQueryWithturnedOffItemWebApi()
     {
 
-      var config = new SessionConfig("http://ws-elt.dk.sitecore.net:7212", "sitecore\\admin", "b");   //this string should be deleted
-      var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource());                //this string should be deleted
+      var config = new SessionConfig("http://ws-alr1.dk.sitecore.net:75", "sitecore\\admin", "b"); //this string should be deleted
+      var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource()); //this string should be deleted
 
-      var request = new MockGetItemsByPathParameters
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithPath(this.testData.Items.Home.Path).Build();
+
+      try
       {
-        ItemPath = this.testData.Items.Home.Path
-      };
-  
-       try
-      {
-       // await sessionAuthenticatedUser.ReadItemByPathAsync(request);  // this string should be uncommented
-        await sessionWithoutAccess.ReadItemByPathAsync(request);                                      //this string should be deleted
+        // await sessionAuthenticatedUser.ReadItemByPathAsync(request);  // this string should be uncommented
+        await sessionWithoutAccess.ReadItemByPathAsync(request); //this string should be deleted
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScConnectionException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Response status code does not indicate success: 404 (Not Found)"));
-
+        Assert.AreEqual("System.Net.Http.HttpRequestException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("404 (Not Found)"));
         return;
       }
 
       Assert.Fail("Exception not thrown");
     }
-
   }
 }

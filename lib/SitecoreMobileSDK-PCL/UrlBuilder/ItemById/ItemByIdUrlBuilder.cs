@@ -41,20 +41,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 
         private void ValidateId(string itemId)
         {
-            if (null == itemId)
-            {
-                throw new ArgumentNullException("ItemByIdUrlBuilder.GetUrlForRequest() : item id cannot be null");
-            }
-
-            bool hasOpeningBrace = itemId.StartsWith("{");
-            bool hasClosingBrace = itemId.EndsWith("}");
-            bool hasNonBraceSymbols = (itemId.Length > 2);
-
-            bool isValidId = hasOpeningBrace && hasClosingBrace && hasNonBraceSymbols;
-            if (!isValidId)
-            {
-                throw new ArgumentException("ItemByIdUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
-            }
+            ItemIdValidator.ValidateItemId (itemId);
         }
 
         private void Validate()

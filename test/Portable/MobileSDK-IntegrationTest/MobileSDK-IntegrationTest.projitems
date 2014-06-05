@@ -13,5 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScTestApiSession.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CryptorConstructionTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestEnvironment.cs" />
   </ItemGroup>
 </Project>

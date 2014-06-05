@@ -4,3 +4,4 @@
 "deleteItemById" = "Delete Item by ID";
 "createEditItem" = "Create & Edit Item";
 "uploadImageVC" = "Upload Image";
+"getItemByQuery" = "Item by Query";

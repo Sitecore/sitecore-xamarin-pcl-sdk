@@ -1,15 +1,15 @@
-﻿using System;
-using System.Configuration;
-using System.Xml;
-using NUnit.Framework;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.SessionSettings;
-using TechTalk.SpecFlow;
+﻿
 
 namespace MobileSdk_IntegrationTest_Desktop.Specs.Get_items
 {
-    using MobileSDKUnitTest.Mock;
+    using System;
+    using System.Configuration;
+    using System.Xml;
+    using NUnit.Framework;
+    using Sitecore.MobileSDK;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.SessionSettings;
+    using TechTalk.SpecFlow;
 
     [Binding]
     public class GetPublicKeyTestSteps
@@ -18,13 +18,13 @@ namespace MobileSdk_IntegrationTest_Desktop.Specs.Get_items
         public void WhenITryToGetAnItemById(string itemId)
         {
             var session = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
-            var request = new MockGetItemsByIdParameters
-            {
-                ItemId = ConfigurationManager.AppSettings[itemId]
-            };
             TestDelegate action = async () =>
             {
-                ScItemsResponse scItemsResponse = await session.ReadItemByIdAsync(request);
+                var itemIdFromSettings = ConfigurationManager.AppSettings[itemId];
+                var requestBuilder = new ItemWebApiRequestBuilder();
+                var request = requestBuilder.RequestWithId(itemIdFromSettings).Build();
+
+                await session.ReadItemByIdAsync(request);
             };
             ScenarioContext.Current["Action"] = action;
         }

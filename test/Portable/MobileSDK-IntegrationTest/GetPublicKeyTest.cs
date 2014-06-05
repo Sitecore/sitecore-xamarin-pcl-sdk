@@ -28,11 +28,8 @@
     {
       testData = TestEnvironment.DefaultTestEnvironment();
 
-      var request = new MockGetItemsByIdParameters
-      {
-        ItemId = this.testData.Items.Home.Id
-      };
-      this.requestWithItemId = request;
+      var requestBuilder = new ItemWebApiRequestBuilder ();
+      this.requestWithItemId = requestBuilder.RequestWithId (this.testData.Items.Home.Id).Build();
     }
 
     [TearDown]
@@ -47,13 +44,8 @@
       var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       var session = new ScApiSession(config, ItemSource.DefaultSource());
 
-      var request = new MockGetItemsByIdParameters
-      {
-        ItemId = this.testData.Items.Home.Id
-      };
-
-      var response = await session.ReadItemByIdAsync(request);
-      Assert.AreEqual(1, response.Items.Count);
+      var response = await session.ReadItemByIdAsync(requestWithItemId);
+      testData.AssertItemsCount(1, response);
       Assert.AreEqual(testData.Items.Home.DisplayName, response.Items[0].DisplayName);
     }
 
@@ -90,10 +82,10 @@
     [Test]
     public void TestGetItemWithNullItemsSource()
     {
-      SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       TestDelegate action = () => new ScApiSession(config, null);
-      ArgumentNullException exception = Assert.Throws<ArgumentNullException>(action, "we should get exception here");
+      var exception = Assert.Throws<ArgumentNullException>(action, "we should get exception here");
 
       Assert.IsTrue(
           exception.GetBaseException().ToString().Contains("ScApiSession.defaultSource cannot be null")
@@ -112,7 +104,7 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+        Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to login with specified username and password"));
 
         return;
@@ -133,7 +125,7 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+        Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
 
         string message = exception.Message;
         Assert.True(message.Contains("Unable to login with specified username and password"));
@@ -156,7 +148,7 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+        Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to login with specified username and password"));
 
         return;

@@ -1,5 +1,5 @@
 ﻿
-namespace MobileSDKUnitTest.Mock
+namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
   using Sitecore.MobileSDK.Items;

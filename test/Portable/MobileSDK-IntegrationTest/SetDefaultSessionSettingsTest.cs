@@ -4,6 +4,7 @@ namespace MobileSdk_IntegrationTest_Desktop
 {
   using System;
   using System.Threading.Tasks;
+  using MobileSDKIntegrationTest;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;

@@ -8,6 +8,8 @@ namespace Sitecore.MobileSDK
     {
         public ReadItemByIdRequestBuilder (string itemId)
         {
+            ItemIdValidator.ValidateItemId (itemId);
+
             this.itemId = itemId;
         }
 

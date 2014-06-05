@@ -12,6 +12,9 @@ namespace Sitecore.MobileSDK.Utils
             result = result.Replace("(", "%28");
             result = result.Replace(")", "%29");
 
+            result = result.Replace("*", "%2a");
+            result = result.Replace("'", "%27");
+
             return result;
         }
     }

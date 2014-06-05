@@ -79,6 +79,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ScTestApiSession.cs">
       <Link>ScTestApiSession.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\TestEnvironment.cs">
+      <Link>TestEnvironment.cs</Link>
+    </Compile>
 	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\SetDefaultSessionSettingsTest.cs">
       <Link>SetDefaultSessionSettingsTest.cs</Link>
     </Compile>

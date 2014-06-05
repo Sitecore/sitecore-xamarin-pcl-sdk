@@ -8,6 +8,8 @@ namespace Sitecore.MobileSDK
     {
         public ReadItemByQueryRequestBuilder (string sitecoreQuery)
         {
+            SitecoreQueryValidator.ValidateSitecoreQuery( sitecoreQuery );
+
             this.sitecoreQuery = sitecoreQuery;
         }
 
