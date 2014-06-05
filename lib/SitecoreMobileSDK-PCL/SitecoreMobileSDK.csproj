@@ -90,6 +90,10 @@
     <Compile Include="Exceptions\SitecoreMobileSdkException.cs" />
     <Compile Include="Exceptions\WebApiJsonError.cs" />
     <Compile Include="Exceptions\WebApiJsonErrorException.cs" />
+    <Compile Include="Exceptions\RsaHandshakeException.cs" />
+    <Compile Include="Exceptions\LoadDataFromNetworkException.cs" />
+    <Compile Include="Exceptions\ParserException.cs" />
+    <Compile Include="Exceptions\ProcessUserRequestException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
