@@ -1,14 +1,16 @@
-﻿using Sitecore.MobileSDK.PublicKey;
-using System.Threading;
-
+﻿
 
 namespace MobileSDKIntegrationTest
 {
     using System;
-    using Sitecore.MobileSDK;
-    using Sitecore.MobileSDK.SessionSettings;
-    using Sitecore.MobileSDK.Items;
+    using System.Threading;
     using System.Threading.Tasks;
+
+    using Sitecore.MobileSDK;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.PublicKey;
+    using Sitecore.MobileSDK.SessionSettings;
+
 
 
     public class ScTestApiSession : ScApiSession
