@@ -4,6 +4,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.Items;
+using Sitecore.MobileSDK.UrlBuilder;
 
 namespace WhiteLabeliOS
 {
@@ -43,10 +44,15 @@ namespace WhiteLabeliOS
 			try
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
-				string itemId = itemIdTextField.Text;
+
+				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+
+				var request =  builder.RequestWithId(itemIdTextField.Text)
+					.Build();
+					
 				this.ShowLoader ();
 
-				ScItemsResponse response = await session.ReadItemByIdAsync(itemId);
+				ScItemsResponse response = await session.ReadItemByIdAsync(request);
 
 				this.HideLoader ();
 				if (response.ResultCount > 0)
