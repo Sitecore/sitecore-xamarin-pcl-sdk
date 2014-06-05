@@ -135,6 +135,10 @@
       <DependentUpon>UploadImageViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LoadingOverlay.cs" />
+    <Compile Include="ITemTasks\GetItemByQueryViewController.cs" />
+    <Compile Include="ITemTasks\GetItemByQueryViewController.designer.cs">
+      <DependentUpon>GetItemByQueryViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
