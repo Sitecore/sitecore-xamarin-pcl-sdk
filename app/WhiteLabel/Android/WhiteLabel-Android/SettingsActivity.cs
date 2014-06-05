@@ -30,6 +30,7 @@
             {
                 this.SaveFieldsToPrefs();
                 Toast.MakeText(this, "Saved instance", ToastLength.Short).Show();
+                this.Finish();
             };
         }
 
@@ -56,7 +57,6 @@
             this.site.Text = this.prefs.GetSite();
             this.database.Text = this.prefs.GetDatabase();
         }
-
     }
 }
 
