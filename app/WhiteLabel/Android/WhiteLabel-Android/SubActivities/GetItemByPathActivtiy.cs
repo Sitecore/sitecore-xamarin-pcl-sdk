@@ -9,7 +9,6 @@ namespace WhiteLabelAndroid.SubActivities
     [Activity(Label = "GetItemByPathActivtiy")]
     public class GetItemByPathActivtiy : Activity
     {
-        private EditText itemIdField;
         private Prefs prefs;
 
         protected override void OnCreate(Bundle bundle)
@@ -22,8 +21,8 @@ namespace WhiteLabelAndroid.SubActivities
             var label = this.FindViewById<TextView>(Resource.Id.label);
             label.Text = "Type Item Path:";
 
-            this.itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-            this.itemIdField.Hint = "Item Path";
+            var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
+            itemIdField.Hint = "Item Path";
 
             var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
             getItemButton.Click += (sender, args) =>
