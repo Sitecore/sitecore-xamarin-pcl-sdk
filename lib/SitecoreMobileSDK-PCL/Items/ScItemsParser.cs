@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK
     using Newtonsoft.Json.Linq;
 
     using Sitecore.MobileSDK.Items;
-
+    using Sitecore.MobileSDK.Exceptions;
 
 
     public class ScItemsParser

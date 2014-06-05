@@ -1,7 +1,8 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK.Exceptions
 {
+    using System;
+
 	public class ScErrorResponse
 	{
 		public int StatusCode { get; private set;}
@@ -13,5 +14,9 @@ namespace Sitecore.MobileSDK
 			this.StatusCode = statusCode;
 			this.Message = message;
 		}
+
+        private ScErrorResponse()
+        {
+        }
 	}
 }

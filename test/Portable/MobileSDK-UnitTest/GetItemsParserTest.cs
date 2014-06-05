@@ -1,5 +1,4 @@
 ﻿
-
 namespace Sitecore.MobileSdkUnitTest
 {
     using System;
@@ -9,6 +8,7 @@ namespace Sitecore.MobileSdkUnitTest
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.Exceptions;
 
     // @adk.review : waybe we should we wrap this? 
     using Newtonsoft.Json;
