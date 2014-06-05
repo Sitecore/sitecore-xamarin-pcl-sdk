@@ -5,18 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteLabel-Android", "..\ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Test", "Unit Test", "{36BE87A6-AEEA-45A7-8A66-1119DEE7FD2E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKTest-Android", "..\test\Android\MobileSDKTest-Android\MobileSDKTest-Android.csproj", "{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.shproj", "{8A52A2A6-20A1-42BD-B586-242F77089B1D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration Test", "Integration Test", "{936F2661-0B44-4470-AEE1-D7CF620B6A50}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-IntegrationTest-Android", "..\test\Android\MobileSDK-IntegrationTest-Android\MobileSDK-IntegrationTest-Android.csproj", "{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -68,36 +56,6 @@ Global
 		{0FB3744C-B9F5-4565-A6B8-F7019F840B20}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0FB3744C-B9F5-4565-A6B8-F7019F840B20}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0FB3744C-B9F5-4565-A6B8-F7019F840B20}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Ad-Hoc|Any CPU.Deploy.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Ad-Hoc|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Ad-Hoc|Mixed Platforms.Build.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Ad-Hoc|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.AppStore|Any CPU.Deploy.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.AppStore|Mixed Platforms.Build.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.AppStore|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
@@ -122,47 +80,11 @@ Global
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Ad-Hoc|Any CPU.Deploy.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Ad-Hoc|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Ad-Hoc|Mixed Platforms.Build.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Ad-Hoc|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.AppStore|Any CPU.Deploy.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.AppStore|Mixed Platforms.Build.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.AppStore|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{F2E9C2BB-A4B9-46B4-940F-435E39A9E02F} = {36BE87A6-AEEA-45A7-8A66-1119DEE7FD2E}
-		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {36BE87A6-AEEA-45A7-8A66-1119DEE7FD2E}
-		{BCCB39A2-CC69-4EE1-AFA4-2822E4332331} = {936F2661-0B44-4470-AEE1-D7CF620B6A50}
-		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {936F2661-0B44-4470-AEE1-D7CF620B6A50}
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\app\WhiteLabel\Android\WhiteLabel-Android\WhiteLabel-Android.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\app\WhiteLabel\Android\WhiteLabel-Android\WhiteLabel-Android.csproj
 	EndGlobalSection
 EndGlobal
