@@ -63,6 +63,7 @@ namespace WhiteLabeliOS
 			this.features.Insert (0, "deleteItemById");
 			this.features.Insert (0, "createEditItem");
 			this.features.Insert (0, "uploadImageVC");
+			this.features.Insert (0, "getItemByQuery");
 
 		}
 

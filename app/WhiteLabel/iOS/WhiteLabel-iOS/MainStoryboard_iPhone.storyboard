@@ -526,6 +526,65 @@
             </objects>
             <point key="canvasLocation" x="24" y="1557"/>
         </scene>
+        <!--Get Item By Query View Controller-->
+        <scene sceneID="bUk-a6-t9y">
+            <objects>
+                <viewController storyboardIdentifier="getItemByQuery" id="YSW-Sn-ezD" customClass="GetItemByQueryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eTw-I3-PAr"/>
+                        <viewControllerLayoutGuide type="bottom" id="O9V-ef-VdU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qOh-Of-nLt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type query:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2r-DQ-Ns4">
+                                <rect key="frame" x="20" y="81" width="89" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="pZ8-2R-VTM">
+                                <rect key="frame" x="20" y="110" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="nup-Vr-hKd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1Z-jI-jqW">
+                                <rect key="frame" x="93" y="148" width="135" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Get Item">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getItem:" destination="YSW-Sn-ezD" eventType="touchUpInside" id="hCq-jG-cjw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pZ8-2R-VTM" firstAttribute="top" secondItem="A2r-DQ-Ns4" secondAttribute="bottom" constant="8" symbolic="YES" id="9av-tF-Jno"/>
+                            <constraint firstItem="pZ8-2R-VTM" firstAttribute="leading" secondItem="A2r-DQ-Ns4" secondAttribute="leading" id="ECl-2c-OUr"/>
+                            <constraint firstItem="A2r-DQ-Ns4" firstAttribute="top" secondItem="eTw-I3-PAr" secondAttribute="bottom" constant="17" id="aXe-22-zFh"/>
+                            <constraint firstItem="Z1Z-jI-jqW" firstAttribute="leading" secondItem="qOh-Of-nLt" secondAttribute="leading" constant="93" id="fAN-04-GgX"/>
+                            <constraint firstAttribute="trailing" secondItem="pZ8-2R-VTM" secondAttribute="trailing" constant="20" symbolic="YES" id="l8w-RH-kOk"/>
+                            <constraint firstItem="pZ8-2R-VTM" firstAttribute="centerX" secondItem="Z1Z-jI-jqW" secondAttribute="centerX" id="nbN-Gh-Swo"/>
+                            <constraint firstItem="Z1Z-jI-jqW" firstAttribute="top" secondItem="pZ8-2R-VTM" secondAttribute="bottom" constant="8" symbolic="YES" id="nnN-Bf-wcv"/>
+                            <constraint firstItem="A2r-DQ-Ns4" firstAttribute="leading" secondItem="qOh-Of-nLt" secondAttribute="leading" constant="20" id="xxM-ff-6ZB"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="queryTextField" destination="pZ8-2R-VTM" id="hyG-zp-zhq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lmJ-US-Avg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="395" y="1557"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
