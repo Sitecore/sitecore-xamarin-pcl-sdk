@@ -28,9 +28,6 @@ namespace Sitecore.MobileSDK
         {
             return new ReadItemByQueryRequestBuilder( sitecoreQuery );
         }
-
-
-
     }
 }
 
