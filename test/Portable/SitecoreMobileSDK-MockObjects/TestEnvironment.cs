@@ -18,7 +18,7 @@ namespace MobileSDKUnitTest.Mock
 
             result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
             result.Items.Home.Path = "/sitecore/content/Home";
-            result.Items.Home.Name = "Home";
+            result.Items.Home.DisplayName = "Home";
             result.Items.Home.Template = "Sample/Sample Item";
 
             return result;
@@ -47,7 +47,7 @@ namespace MobileSDKUnitTest.Mock
         {
             public string Id { get; set; }
             public string Path { get; set; }
-            public string Name { get; set; }
+            public string DisplayName { get; set; }
             public string Template { get; set;}
         }
 

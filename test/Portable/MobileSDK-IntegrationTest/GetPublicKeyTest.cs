@@ -54,7 +54,7 @@
 
             var response = await session.ReadItemByIdAsync(request);
             Assert.AreEqual(1, response.Items.Count);
-            Assert.AreEqual(testData.Items.Home.Name, response.Items[0].DisplayName);
+            Assert.AreEqual(testData.Items.Home.DisplayName, response.Items[0].DisplayName);
         }
 
         [Test]
@@ -69,7 +69,7 @@
             }
             catch (Exception exception)
             {
-                Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+                Assert.AreEqual("Sitecore.MobileSDK.ScNetworkException", exception.GetType().ToString());
                 Assert.True(exception.Message.Contains("Unable to connect to the specified url"));
 
                 return;
@@ -177,7 +177,7 @@
             }
             catch (Exception exception)
             {
-                Assert.AreEqual("Sitecore.MobileSDK.ScAuthenticationException", exception.GetType().ToString());
+                Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
                 Assert.True(exception.Message.Contains("Access to site is not granted"));
                 return;
             }
