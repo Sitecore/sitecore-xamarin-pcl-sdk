@@ -24,9 +24,9 @@ namespace MobileSDKIntegrationTest
       result.Items.Home.DisplayName = "Home";
       result.Items.Home.Template = "Sample/Sample Item";
 
-      result.Items.ItemWithVersions.Id = "{7272BE8E-8C4C-4F2A-8EC8-F04F512B04CB}";
-      result.Items.ItemWithVersions.Path = "/sitecore/content/Language Test/Language Item Versions";
-      result.Items.ItemWithVersions.DisplayName = "Language Item Versions";
+      result.Items.ItemWithVersions.Id = "{B86C2CBB-7808-4798-A461-1FB3EB0A43E5}";
+      result.Items.ItemWithVersions.Path = "/sitecore/content/FieldsTest/TestFieldsVersionsAndDB";
+      result.Items.ItemWithVersions.DisplayName = "TestFieldsVersionsAndDB";
 
       return result;
     }

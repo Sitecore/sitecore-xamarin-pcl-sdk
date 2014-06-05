@@ -24,10 +24,8 @@ namespace MobileSdk_IntegrationTest_Desktop
     {
       testData = TestEnvironment.DefaultTestEnvironment();
       sessionConfig = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      requestWithItemId = new MockGetItemsByIdParameters
-      {
-        ItemId = this.testData.Items.ItemWithVersions.Id
-      };
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      requestWithItemId = requestBuilder.RequestWithId(testData.Items.ItemWithVersions.Id).Build();
     }
 
     [TearDown]
@@ -50,6 +48,23 @@ namespace MobileSdk_IntegrationTest_Desktop
       ScItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       //Assert.AreEqual(version, resultItem.Version);
+      //Assert.AreEqual("Danish version 1 master", resultItem.Fields["Title"]);
+    }
+    [Test]
+    public async void TestGetItemWithNotExistentLanguage()
+    {
+      const string Language = "da";
+      var itemSource = new ItemSource("web", Language);
+      var session = new ScApiSession(this.sessionConfig, itemSource);
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Build();
+      var response = await session.ReadItemByIdAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      ScItem resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
+      //Assert.AreEqual("en", resultItem.Language);
+
     }
 
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)
