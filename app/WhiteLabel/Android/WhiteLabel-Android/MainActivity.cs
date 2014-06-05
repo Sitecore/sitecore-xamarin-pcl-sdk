@@ -39,8 +39,9 @@
 
             Button itemIdButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_id);
             itemIdButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(GetItemByIdActivity)));
-        }
 
-        
+            Button itemPathButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_path);
+            itemPathButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(GetItemByPathActivtiy)));
+        }
     }
 }

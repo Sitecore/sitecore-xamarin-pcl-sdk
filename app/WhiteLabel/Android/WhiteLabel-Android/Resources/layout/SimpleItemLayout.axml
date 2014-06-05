@@ -10,21 +10,23 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/field_item_id" />
+        android:id="@+id/field_item" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:weightSum="2"
         android:layout_height="wrap_content">
         <Button
-            android:text="Get Item"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:text="Get Item"
             android:layout_height="match_parent"
             android:id="@+id/button_get_item" />
         <Button
             android:text="Get Item Childeren"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:id="@+id/button_get_children" />
     </LinearLayout>

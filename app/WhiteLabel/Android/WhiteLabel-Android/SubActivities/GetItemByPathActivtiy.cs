@@ -6,8 +6,8 @@ namespace WhiteLabelAndroid.SubActivities
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
 
-    [Activity(Label = "GetItemByIdActivity")]
-    public class GetItemByIdActivity : Activity
+    [Activity(Label = "GetItemByPathActivtiy")]
+    public class GetItemByPathActivtiy : Activity
     {
         private EditText itemIdField;
         private Prefs prefs;
@@ -20,10 +20,10 @@ namespace WhiteLabelAndroid.SubActivities
             this.SetContentView(Resource.Layout.SimpleItemLayout);
 
             var label = this.FindViewById<TextView>(Resource.Id.label);
-            label.Text = "Type Item Id:";
+            label.Text = "Type Item Path:";
 
             this.itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-            this.itemIdField.Hint = "Item Id";
+            this.itemIdField.Hint = "Item Path";
 
             var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
             getItemButton.Click += (sender, args) =>
@@ -32,19 +32,19 @@ namespace WhiteLabelAndroid.SubActivities
                 {
                     return;
                 }
-                
+
                 this.PerformGetItemRequest(itemIdField.Text);
             };
         }
 
-        private async void PerformGetItemRequest(string id)
+        private async void PerformGetItemRequest(string path)
         {
             ScApiSession session = new ScApiSession(this.prefs.GetSessionConfig(), this.prefs.GetItemSource());
 
             ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
-            var request = requestBuilder.RequestWithId(id).Build();
+            var request = requestBuilder.RequestWithPath(path).Build();
 
-            ScItemsResponse response = await session.ReadItemByIdAsync(request);
+            ScItemsResponse response = await session.ReadItemByPathAsync(request);
 
             if (response.ResultCount > 0)
             {
@@ -52,8 +52,8 @@ namespace WhiteLabelAndroid.SubActivities
             }
             else
             {
-                Toast.MakeText(this, "No items with this Id", ToastLength.Long).Show();
+                Toast.MakeText(this, "No items with this path", ToastLength.Long).Show();
             }
         }
-   }
+    }
 }

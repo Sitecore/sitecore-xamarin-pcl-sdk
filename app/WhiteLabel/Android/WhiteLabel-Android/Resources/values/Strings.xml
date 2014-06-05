@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="text_get_item_by_id">Item By Id</string>
 	<string name="app_name">WhiteLabel-Android</string>
 	<string name="text_settings">Settings</string>
 
@@ -15,5 +14,8 @@
 	<string name="text_default_password">creatorex</string>
 	<string name="text_default_site"></string>
 	<string name="text_default_database">web</string>
-	
+
+	<string name="text_get_item_by_id">Item By Id</string>
+	<string name="text_get_item_by_path">Item By Path</string>
+
 </resources>
