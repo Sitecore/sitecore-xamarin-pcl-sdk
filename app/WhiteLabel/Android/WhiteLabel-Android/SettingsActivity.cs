@@ -35,11 +35,11 @@
 
         private void SaveFieldsToPrefs()
         {
-            this.prefs.PutString(this.GetString(Resource.String.key_instance_url), this.instanceUrl.Text);
-            this.prefs.PutString(this.GetString(Resource.String.key_login), this.login.Text);
-            this.prefs.PutString(this.GetString(Resource.String.key_password), this.password.Text);
-            this.prefs.PutString(this.GetString(Resource.String.key_site), this.site.Text);
-            this.prefs.PutString(this.GetString(Resource.String.key_database), this.database.Text);
+            this.prefs.SaveInstanceUrl(this.instanceUrl.Text);
+            this.prefs.SaveLogin(this.login.Text);
+            this.prefs.SavePassword(this.password.Text);
+            this.prefs.SaveSite(this.site.Text);
+            this.prefs.SaveDatabase(this.database.Text);
         }
 
         private void InitFields()
@@ -50,11 +50,11 @@
             this.site = this.FindViewById<EditText>(Resource.Id.instance_site);
             this.database = this.FindViewById<EditText>(Resource.Id.instance_database);
 
-            this.instanceUrl.Text = this.prefs.GetString(this.GetString(Resource.String.key_instance_url), "http://mobiledev1ua1.dk.sitecore.net:722");
-            this.login.Text = this.prefs.GetString(this.GetString(Resource.String.key_login), "extranet\\creatorex");
-            this.password.Text = this.prefs.GetString(this.GetString(Resource.String.key_password), "creatorex");
-            this.site.Text = this.prefs.GetString(this.GetString(Resource.String.key_site), string.Empty);
-            this.database.Text = this.prefs.GetString(this.GetString(Resource.String.key_database), "web");
+            this.instanceUrl.Text = this.prefs.GetInstanceUrl();
+            this.login.Text = this.prefs.GetLogin();
+            this.password.Text = this.prefs.GetPassword();
+            this.site.Text = this.prefs.GetSite();
+            this.database.Text = this.prefs.GetDatabase();
         }
 
     }

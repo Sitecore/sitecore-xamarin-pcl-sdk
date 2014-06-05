@@ -63,6 +63,9 @@ namespace WhiteLabelAndroid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f060000
+			public const int button_get_item_by_id = 2131099648;
+			
 			// aapt resource value: 0x7f060006
 			public const int button_use = 2131099654;
 			
@@ -80,9 +83,6 @@ namespace WhiteLabelAndroid
 			
 			// aapt resource value: 0x7f060001
 			public const int instance_url = 2131099649;
-			
-			// aapt resource value: 0x7f060000
-			public const int myButton = 2131099648;
 			
 			// aapt resource value: 0x7f060007
 			public const int settings = 2131099655;
@@ -138,9 +138,6 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f040001
 			public const int app_name = 2130968577;
 			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
-			
 			// aapt resource value: 0x7f040007
 			public const int key_database = 2130968583;
 			
@@ -155,6 +152,24 @@ namespace WhiteLabelAndroid
 			
 			// aapt resource value: 0x7f040006
 			public const int key_site = 2130968582;
+			
+			// aapt resource value: 0x7f04000c
+			public const int text_default_database = 2130968588;
+			
+			// aapt resource value: 0x7f040008
+			public const int text_default_instance_url = 2130968584;
+			
+			// aapt resource value: 0x7f040009
+			public const int text_default_login = 2130968585;
+			
+			// aapt resource value: 0x7f04000a
+			public const int text_default_password = 2130968586;
+			
+			// aapt resource value: 0x7f04000b
+			public const int text_default_site = 2130968587;
+			
+			// aapt resource value: 0x7f040000
+			public const int text_get_item_by_id = 2130968576;
 			
 			// aapt resource value: 0x7f040002
 			public const int text_settings = 2130968578;
