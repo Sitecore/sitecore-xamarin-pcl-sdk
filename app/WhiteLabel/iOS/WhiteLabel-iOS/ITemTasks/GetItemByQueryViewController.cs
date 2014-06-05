@@ -44,14 +44,14 @@ namespace WhiteLabeliOS
 
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-				var request =  builder.RequestWithSitecoreQuery(queryTextField.Text)
+				var request = builder.RequestWithSitecoreQuery(queryTextField.Text)
 					.Build();
 
-				this.ShowLoader ();
+				this.ShowLoader();
 
 				ScItemsResponse response = await session.ReadItemByQueryAsync(request);
 
-				this.HideLoader ();
+				this.HideLoader();
 				if (response.ResultCount > 0)
 				{
 					AlertHelper.ShowAlertWithOkOption("Item received", "items count is \"" + response.Items.Count.ToString() + "\"");
@@ -63,6 +63,7 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
+				this.HideLoader();
 				AlertHelper.ShowAlertWithOkOption("Erorr", e.Message);
 			}
 		}
