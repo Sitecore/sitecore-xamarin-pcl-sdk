@@ -63,11 +63,20 @@ namespace WhiteLabelAndroid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f06000a
+			public const int button_get_children = 2131099658;
+			
+			// aapt resource value: 0x7f060009
+			public const int button_get_item = 2131099657;
+			
 			// aapt resource value: 0x7f060000
 			public const int button_get_item_by_id = 2131099648;
 			
 			// aapt resource value: 0x7f060006
 			public const int button_use = 2131099654;
+			
+			// aapt resource value: 0x7f060008
+			public const int field_item_id = 2131099656;
 			
 			// aapt resource value: 0x7f060005
 			public const int instance_database = 2131099653;
@@ -85,7 +94,10 @@ namespace WhiteLabelAndroid
 			public const int instance_url = 2131099649;
 			
 			// aapt resource value: 0x7f060007
-			public const int settings = 2131099655;
+			public const int label = 2131099655;
+			
+			// aapt resource value: 0x7f06000b
+			public const int settings = 2131099659;
 			
 			static Id()
 			{
@@ -105,6 +117,9 @@ namespace WhiteLabelAndroid
 			
 			// aapt resource value: 0x7f030001
 			public const int Settings = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int SimpleItemLayout = 2130903042;
 			
 			static Layout()
 			{
