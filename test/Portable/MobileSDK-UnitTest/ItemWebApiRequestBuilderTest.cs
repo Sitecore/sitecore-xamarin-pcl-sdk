@@ -117,8 +117,7 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual ("master", result.ItemSource.Database);
             Assert.AreEqual ("100500", result.ItemSource.Version);
         }
-
-
+            
         [Test]
         public void TestItemPathRequestBuilderWithPathOnly()
         {
@@ -190,6 +189,45 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual ("core", result.ItemSource.Database);
             Assert.AreEqual ("341", result.ItemSource.Version);
         }
+
+        [Test]
+        public void TestQueryRequestBuilderWithQueryOnly()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+            IReadItemsByQueryRequest result =  builder.RequestWithSitecoreQuery ("sitecore/content/HOME/*").Build();
+
+
+            Assert.IsNotNull (result);
+            Assert.IsNotNull (result.ItemSource);
+            Assert.IsNotNull (result.SitecoreQuery);
+            Assert.IsNull (result.SessionSettings);
+
+            Assert.AreEqual ("sitecore/content/HOME/*", result.SitecoreQuery);
+            Assert.IsNull (result.ItemSource.Language);
+            Assert.IsNull (result.ItemSource.Database);
+            Assert.IsNull (result.ItemSource.Version);
+        }
+
+        [Test]
+        public void TestQueryRequestBuilderWithNullQueryCrashes()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+            Assert.Throws<ArgumentNullException> (() => builder.RequestWithSitecoreQuery (null));
+        }
+
+        [Test]
+        public void TestItemQueryRequestBuilderWithEmptyQueryCrashes()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+            Assert.Throws<ArgumentNullException> (() => builder.RequestWithSitecoreQuery (""));
+        }
+
+        [Test]
+        public void TestQueryRequestBuilderWithWhitespaceQueryCrashes()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+            Assert.Throws<ArgumentNullException> (() => builder.RequestWithSitecoreQuery ("\t \r \n"));
+        }            
         #endregion SitecoreQuery
     }
 }
