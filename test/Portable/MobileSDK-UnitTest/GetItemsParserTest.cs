@@ -76,7 +76,7 @@ namespace Sitecore.MobileSdkUnitTest
         {
             string rawResponse = "{\"statusCode\":401,\"error\":{\"message\":\"Access to the \\u0027master\\u0027 database is denied. Only members of the Sitecore Client Users role can switch databases.\"}}";
             TestDelegate action = () => ScItemsParser.Parse(rawResponse, CancellationToken.None);
-            ScResponseException exception = Assert.Throws<ScResponseException>(action, "ScResponseException should be here");
+            WebApiJsonErrorException exception = Assert.Throws<WebApiJsonErrorException>(action, "ScResponseException should be here");
 
             Assert.AreEqual(401, exception.Response.StatusCode);
             Assert.AreEqual("Access to the 'master' database is denied. Only members of the Sitecore Client Users role can switch databases.", exception.Response.Message);

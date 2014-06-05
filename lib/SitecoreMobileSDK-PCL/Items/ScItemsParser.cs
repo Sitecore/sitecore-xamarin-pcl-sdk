@@ -31,8 +31,8 @@ namespace Sitecore.MobileSDK
             int statusCode = ParseOrFail<int>(response, "$.statusCode");
             if (200 != statusCode)
             {
-                var error = new ScErrorResponse(statusCode, ParseOrFail<string>(response, "$.error.message"));
-                throw new ScResponseException(error);
+                var error = new WebApiJsonError(statusCode, ParseOrFail<string>(response, "$.error.message"));
+                throw new WebApiJsonErrorException(error);
             }
 
             int totalCount = ParseOrFail<int>(response, "$.result.totalCount");

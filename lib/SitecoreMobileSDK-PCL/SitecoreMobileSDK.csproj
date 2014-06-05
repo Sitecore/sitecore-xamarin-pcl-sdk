@@ -88,8 +88,8 @@
     <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\SitecoreQueryValidator.cs" />
     <Compile Include="Exceptions\SitecoreMobileSdkException.cs" />
-    <Compile Include="Exceptions\ScResponseException.cs" />
-    <Compile Include="Exceptions\ScErrorResponse.cs" />
+    <Compile Include="Exceptions\WebApiJsonError.cs" />
+    <Compile Include="Exceptions\WebApiJsonErrorException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
