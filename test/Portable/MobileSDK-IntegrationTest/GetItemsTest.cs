@@ -43,8 +43,8 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
 
-      AssertItemsCount(1, response);
-      this.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
     }
 
     [Test]
@@ -57,7 +57,7 @@ namespace MobileSDKIntegrationTest
       };
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
-      AssertItemsCount(0, response);
+      testData.AssertItemsCount(0, response);
     }
 
     [Test]
@@ -70,7 +70,7 @@ namespace MobileSDKIntegrationTest
       };
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
-      AssertItemsCount(0, response);
+      testData.AssertItemsCount(0, response);
     }
 
     [Test]
@@ -83,8 +83,8 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
 
-      AssertItemsCount(1, response);
-      this.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
     }
 
     [Test]
@@ -97,14 +97,14 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
 
-      AssertItemsCount(1, response);
+      testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = ItemWithSpacesName,
         Path = ItemWithSpacesPath,
         Template = testData.Items.Home.Template
       };
-      this.AssertItemsAreEqual(expectedItem, response.Items[0]);
+      testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
     }
 
     [Test]
@@ -117,14 +117,14 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
 
-      AssertItemsCount(1, response);
+      testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = ItemWithSpacesName,
         Path = ItemWithSpacesPath,
         Template = testData.Items.Home.Template
       };
-      this.AssertItemsAreEqual(expectedItem, response.Items[0]);
+      testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
     }
 
     [Test]
@@ -137,7 +137,7 @@ namespace MobileSDKIntegrationTest
       };
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
-      AssertItemsCount(0, response);
+      testData.AssertItemsCount(0, response);
     }
 
     [Test]
@@ -151,14 +151,14 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
 
-      AssertItemsCount(1, response);
+      testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = "宇都宮",
         Path = ItemInterationalPath,
         Template = testData.Items.Home.Template
       };
-      this.AssertItemsAreEqual(expectedItem, response.Items[0]);
+      testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
     }
 
     [Test]
@@ -173,14 +173,14 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
 
-      AssertItemsCount(1, response);
+      testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = "ではまた明日",
         Path = ItemInterationalPath,
         Template = testData.Items.Home.Template
       };
-      this.AssertItemsAreEqual(expectedItem, response.Items[0]);
+      testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
 
     }
 
@@ -196,7 +196,7 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
 
-      AssertItemsCount(2, response);
+      testData.AssertItemsCount(2, response);
       Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
     }
 
@@ -211,7 +211,7 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
 
-      AssertItemsCount(1, response);
+      testData.AssertItemsCount(1, response);
       Assert.AreEqual("宇都宮", response.Items[0].DisplayName);
     }
 
@@ -226,7 +226,7 @@ namespace MobileSDKIntegrationTest
 
       ScItemsResponse response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
 
-      AssertItemsCount(0, response);
+      testData.AssertItemsCount(0, response);
     }
 
     [Test]
@@ -354,7 +354,7 @@ namespace MobileSDKIntegrationTest
 
       var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
 
-      AssertItemsCount(100, response);
+      testData.AssertItemsCount(100, response);
 
       Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
     }
@@ -372,7 +372,7 @@ namespace MobileSDKIntegrationTest
       };
 
       ScItemsResponse response = await sessionWithoutAccess.ReadItemByPathAsync(request);
-      AssertItemsCount(0, response);
+      testData.AssertItemsCount(0, response);
     }
 
     [Test]        //this case should be changed for another instance
@@ -401,33 +401,6 @@ namespace MobileSDKIntegrationTest
       }
 
       Assert.Fail("Exception not thrown");
-    }
-
-    private void AssertItemsAreEqual(TestEnvironment.Item expected, ScItem actual)
-    {
-      if (null != expected.DisplayName)
-      {
-        Assert.AreEqual(expected.DisplayName, actual.DisplayName);
-      }
-      if (null != expected.Id)
-      {
-        Assert.AreEqual(expected.Id, actual.Id);
-      }
-      if (null != expected.Path)
-      {
-        Assert.AreEqual(expected.Path, actual.Path);
-      }
-      if (null != expected.Template)
-      {
-        Assert.AreEqual(expected.Template, actual.Template);
-      }
-    }
-
-    private static void AssertItemsCount(int itemCount, ScItemsResponse response)
-    {
-      Assert.AreEqual(itemCount, response.TotalCount);
-      Assert.AreEqual(itemCount, response.ResultCount);
-      Assert.AreEqual(itemCount, response.Items.Count);
     }
 
   }
