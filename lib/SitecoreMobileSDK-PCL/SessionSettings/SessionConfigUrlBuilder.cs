@@ -1,9 +1,8 @@
-﻿
-
-namespace Sitecore.MobileSDK.SessionSettings
+﻿namespace Sitecore.MobileSDK.SessionSettings
 {
     using System;
-    using Sitecore.MobileSDK.Utils;
+	using Sitecore.MobileSDK.Utils;
+    using Sitecore.MobileSDK.UrlBuilder;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
@@ -40,7 +39,7 @@ namespace Sitecore.MobileSDK.SessionSettings
             if (!string.IsNullOrEmpty (request.Site))
             {
                 string escapedSite = UrlBuilderUtils.EscapeDataString(request.Site);
-                result += 
+				result +=
                     escapedSite;
             }
 

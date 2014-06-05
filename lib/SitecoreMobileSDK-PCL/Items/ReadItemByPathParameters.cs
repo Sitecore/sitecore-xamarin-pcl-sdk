@@ -7,28 +7,22 @@ namespace Sitecore.MobileSDK.Items
 
     using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 
-    public class ReadItemByPathParameters : IGetItemByPathRequest, ICredentialCryptorOwner
+    public class ReadItemByPathParameters : IReadItemsByPathRequest
     {
         public ReadItemByPathParameters(
             ISessionConfig sessionSettings, 
             IItemSource itemSource, 
-            string itemPath, 
-            ICredentialsHeadersCryptor cryptor = null)
+            string itemPath)
         {
             this.SessionSettings = sessionSettings;
             this.ItemSource = itemSource;
             this.ItemPath = itemPath;
-            this.CredentialsHeadersCryptor = cryptor;
         }
 
         public string ItemPath { get; private set; }
 
-        public ICredentialsHeadersCryptor CredentialsHeadersCryptor { get; private set; }
-
         public IItemSource ItemSource { get; private set; }
 
         public ISessionConfig SessionSettings { get; private set; }
-
-        public ICredentialsHeadersCryptor CredentialsCryptor { get; private set; }
     }
 }

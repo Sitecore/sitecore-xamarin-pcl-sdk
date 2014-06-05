@@ -10,6 +10,7 @@ namespace WhiteLabeliOS
 	public partial class BaseTaskViewController : UIViewController
 	{
 		public InstanceSettings instanceSettings {get; set;}
+		private LoadingOverlay loadingOverlay;
 
 		public BaseTaskViewController (IntPtr handle) : base (handle)
 		{
@@ -20,6 +21,17 @@ namespace WhiteLabeliOS
 		{
 			sender.ResignFirstResponder();
 			return true;
+		}
+
+		public void ShowLoader()
+		{
+			loadingOverlay = new LoadingOverlay (this.View.Bounds, "Loading Data...");
+			View.Add (loadingOverlay);
+		}
+
+		public void HideLoader()
+		{
+			loadingOverlay.Hide ();
 		}
 	}
 }

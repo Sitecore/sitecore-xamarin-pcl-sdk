@@ -1,4 +1,4 @@
-﻿namespace MobileSDK_UnitTest_Desktop
+﻿namespace Sitecore.MobileSdkUnitTest
 {
     using System;
     using NUnit.Framework;
@@ -50,19 +50,19 @@
             this.sessionConfig = null;
         }
 
-        [Test]
-        public void TestInvalidItemId()
-        {
-            MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-            mutableParameters.SessionSettings = this.sessionConfig;
-            mutableParameters.ItemSource = ItemSource.DefaultSource();
-            mutableParameters.ItemId = "someInvalidItemId";
+		[Test]
+        public void TestInvaliItemIdCausesArgumentException()
+		{
+			MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+			mutableParameters.SessionSettings = this.sessionConfig;
+			mutableParameters.ItemSource = ItemSource.DefaultSource();
+			mutableParameters.ItemId = "someInvalidItemId";
 
-            IGetItemByIdRequest parameters = mutableParameters;
+			IReadItemsByIdRequest parameters = mutableParameters;
 
-            TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
-            Assert.Throws<ArgumentException>(action);
-        }
+			TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
+			Assert.Throws<ArgumentException>(action);
+		}
 
         [Test]
         public void TestUrlBuilderExcapesArgs()
@@ -72,7 +72,7 @@
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
 
-            IGetItemByIdRequest parameters = mutableParameters;
+            IReadItemsByIdRequest parameters = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(parameters);
             string expected = "http://sitecore.net/-/item/v1?sc_database=web&sc_lang=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
@@ -88,7 +88,7 @@
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
 
-            IGetItemByIdRequest parameters = mutableParameters;
+            IReadItemsByIdRequest parameters = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(parameters);
             string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&sc_lang=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
@@ -104,11 +104,25 @@
             mutableParameters.ItemSource = null;
             mutableParameters.ItemId = null;
 
-            IGetItemByIdRequest parameters = mutableParameters;
+            IReadItemsByIdRequest parameters = mutableParameters;
 
             TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
 
             Assert.Throws<ArgumentNullException>(action);
+        }
+
+        [Test]
+        public void TestBracesIdWithoutTextIsInvalid()
+        {
+            MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+            mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.ItemSource = ItemSource.DefaultSource();
+            mutableParameters.ItemId = "{}";
+
+            IReadItemsByIdRequest parameters = mutableParameters;
+
+            TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
+            Assert.Throws<ArgumentException>(action);
         }
     }
 }

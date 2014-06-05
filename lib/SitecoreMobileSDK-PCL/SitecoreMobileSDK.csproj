@@ -57,22 +57,38 @@
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
-    <Compile Include="Items\GetItemsByIdParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
     <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
     <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
-    <Compile Include="UrlBuilder\ItemById\IGetItemByIdRequest.cs" />
     <Compile Include="UrlBuilder\ItemById\ItemByIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\ItemByPath\IGetItemByPathRequest.cs" />
     <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
     <Compile Include="Items\ItemSourceUrlBuilder.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
-    <Compile Include="UrlBuilder\ItemByQuery\IGetItemByQueryRequest.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
+    <Compile Include="Items\ReadItemByQueryParameters.cs" />
+    <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
+    <Compile Include="Items\ReadItemsByIdParameters.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\IReadItemsByPathRequest.cs" />
+    <Compile Include="UrlBuilder\ItemByQuery\IReadItemsByQueryRequest.cs" />
+    <Compile Include="UrlBuilder\ItemById\IReadItemsByIdRequest.cs" />
+    <Compile Include="UserRequest\UserRequestMerger.cs" />
+    <Compile Include="UserRequest\ItemSourceFieldMerger.cs" />
+    <Compile Include="Items\ItemSourcePOD.cs" />
+    <Compile Include="UserRequest\SessionConfigMerger.cs" />
+    <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
+    <Compile Include="ItemWebApiRequestBuilder.cs" />
+    <Compile Include="UserRequest\IGetItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\AbstractGetItemRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadItemByIdRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\ItemById\ItemIdValidator.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
+    <Compile Include="UrlBuilder\ItemByQuery\SitecoreQueryValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -126,5 +142,13 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UrlBuilder\ItemById\" />
+    <Folder Include="UrlBuilder\ItemByPath\" />
+    <Folder Include="UrlBuilder\Rest\" />
+    <Folder Include="UrlBuilder\WebApi\" />
+    <Folder Include="UrlBuilder\ItemByQuery\" />
+    <Folder Include="Utils\" />
+    <Folder Include="UserRequest\" />
+  </ItemGroup>
 </Project>

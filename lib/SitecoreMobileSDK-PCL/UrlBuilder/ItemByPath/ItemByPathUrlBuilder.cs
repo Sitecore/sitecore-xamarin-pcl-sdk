@@ -6,8 +6,8 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
-    using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.Utils;
+    using Sitecore.MobileSDK.SessionSettings;
 
 
     public class ItemByPathUrlBuilder
@@ -20,7 +20,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
             this.Validate();
         }
 
-        public string GetUrlForRequest(IGetItemByPathRequest request)
+        public string GetUrlForRequest(IReadItemsByPathRequest request)
         {
             this.ValidateRequest (request);
             string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath);
@@ -39,7 +39,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
             return result.ToLowerInvariant();
         }
 
-        private void ValidateRequest(IGetItemByPathRequest request)
+        private void ValidateRequest(IReadItemsByPathRequest request)
         {
             if (null == request)
             {
@@ -51,18 +51,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 
         private void ValidatePath(string itemPath)
         {
-            if (null == itemPath)
-            {
-                throw new ArgumentNullException ("ItemByPathUrlBuilder.GetUrlForRequest() : item path cannot be null or empty");
-            }
-            else if (string.Empty.Equals (itemPath))
-            {
-                throw new ArgumentException ("ItemByPathUrlBuilder.GetUrlForRequest() : item path cannot be null or empty");
-            }
-            else if (!itemPath.StartsWith("/"))
-            {
-                throw new ArgumentException("ItemByPathUrlBuilder.GetUrlForRequest() : item path should begin with '/'");
-            }
+            ItemPathValidator.ValidateItemPath (itemPath);
         }
             
         private void Validate()

@@ -1,36 +1,24 @@
-﻿namespace Sitecore.MobileSDK
-{
-    using System;
-    using System.Net.Http;
-    using System.Threading.Tasks;
 
-    using Sitecore.MobileSDK.SessionSettings;
-    using Sitecore.MobileSDK.CrudTasks;
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.PublicKey;
-    using Sitecore.MobileSDK.TaskFlow;
-    using Sitecore.MobileSDK.UrlBuilder.Rest;
-    using Sitecore.MobileSDK.UrlBuilder.WebApi;
-    using Sitecore.MobileSDK.UrlBuilder.ItemById;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+namespace Sitecore.MobileSDK
+{
+	using System;
+	using System.Net.Http;
+	using System.Threading.Tasks;
+
+	using Sitecore.MobileSDK.SessionSettings;
+	using Sitecore.MobileSDK.CrudTasks;
+	using Sitecore.MobileSDK.Items;
+	using Sitecore.MobileSDK.PublicKey;
+	using Sitecore.MobileSDK.TaskFlow;
+	using Sitecore.MobileSDK.UrlBuilder.Rest;
+	using Sitecore.MobileSDK.UrlBuilder.WebApi;
+	using Sitecore.MobileSDK.UrlBuilder.ItemById;
+	using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+	using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+
 
     public class ScApiSession
     {
-        #region Private Variables
-
-        private readonly HttpClient httpClient;
-
-        private readonly SessionConfig sessionConfig;
-        private readonly ItemSource defaultSource;
-
-        private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-        private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
-        private readonly string itemWebApiVersion = "v1";
-
-        private PublicKeyX509Certificate publicCertifiacte;
-
-        #endregion Private Variables
-
         public ScApiSession(SessionConfig config, ItemSource defaultSource)
         {
             if (null == config)
@@ -42,9 +30,10 @@
                 throw new ArgumentNullException("ScApiSession.defaultSource cannot be null");
             }
 
+            this.requestMerger = new UserRequestMerger (config, defaultSource);
+
 
             this.sessionConfig = config;
-            this.defaultSource = defaultSource;
             this.httpClient = new HttpClient();
         }
 
@@ -58,9 +47,9 @@
 
         #region Encryption
 
-        public async Task<PublicKeyX509Certificate> GetPublicKey()
+        protected virtual async Task<PublicKeyX509Certificate> GetPublicKeyAsync()
         {
-            GetPublicKeyTasks taskFlow = new GetPublicKeyTasks(this.httpClient);
+            var taskFlow = new GetPublicKeyTasks(this.httpClient);
 
             PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow);
             this.publicCertifiacte = result;
@@ -68,13 +57,7 @@
             return result;
         }
 
-        public string EncryptString(string data)
-        {
-            EncryptionUtil cryptor = new EncryptionUtil(this.publicCertifiacte);
-            return cryptor.Encrypt(data);
-        }
-
-        public async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
+        protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
         {
             if (this.sessionConfig.IsAnonymous())
             {
@@ -83,40 +66,60 @@
             else
             {
                 // TODO : flow should be responsible for caching. Do not hard code here
-                PublicKeyX509Certificate cert = await this.GetPublicKey();
-                return new AuthenticedSessionCryptor(this.sessionConfig.Login, this.sessionConfig.Password, cert);
+                this.publicCertifiacte = await this.GetPublicKeyAsync();
+                return new AuthenticedSessionCryptor(this.sessionConfig.Login, this.sessionConfig.Password, this.publicCertifiacte);
             }
         }
 
         #endregion Encryption
 
         #region GetItems
-        public async Task<ScItemsResponse> GetItemById(string id)
+
+        public async Task<ScItemsResponse> ReadItemByIdAsync(IReadItemsByIdRequest request)
+		{
+			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
+            IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
+
+            var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
+
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
+		}
+
+        public async Task<ScItemsResponse> ReadItemByPathAsync(IReadItemsByPathRequest request)
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
+            IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps (request);
 
-            GetItemsByIdParameters config = new GetItemsByIdParameters(this.sessionConfig, ItemSource.DefaultSource(), id, cryptor);
+            var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
-            var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
-
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
         }
-        
-        public async Task<ScItemsResponse> GetItemByPath(string path)
+
+        public async Task<ScItemsResponse> ReadItemByQueryAsync(IReadItemsByQueryRequest request)
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
+            IReadItemsByQueryRequest autocompletedRequest = this.requestMerger.FillReadItemByQueryGaps (request);
 
-            ReadItemByPathParameters config = new ReadItemByPathParameters(
-                this.sessionConfig, 
-                ItemSource.DefaultSource(), 
-                path, 
-                cryptor);
-
-            var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient);
-
-            return await RestApiCallFlow.LoadRequestFromNetworkFlow(config, taskFlow);
+            var taskFlow = new GetItemsByQueryTasks(new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
+            return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow);
         }
 
         #endregion GetItems
+
+
+        #region Private Variables
+
+        private readonly UserRequestMerger requestMerger;
+        private readonly HttpClient httpClient;
+
+        private readonly SessionConfig sessionConfig;
+
+        private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
+        private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+
+
+        private PublicKeyX509Certificate publicCertifiacte;
+
+        #endregion Private Variables
     }
 }

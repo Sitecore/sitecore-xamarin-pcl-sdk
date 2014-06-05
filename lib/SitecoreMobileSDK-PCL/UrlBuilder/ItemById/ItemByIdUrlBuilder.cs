@@ -1,4 +1,4 @@
-﻿using Sitecore.MobileSDK.Utils;
+﻿
 
 namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 {
@@ -7,6 +7,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
+    using Sitecore.MobileSDK.Utils;
 
 
     public class ItemByIdUrlBuilder 
@@ -18,7 +19,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
         }
 
 
-        public string GetUrlForRequest(IGetItemByIdRequest request)
+        public string GetUrlForRequest(IReadItemsByIdRequest request)
         {
             this.ValidateId(request.ItemId);
             string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
@@ -40,18 +41,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 
         private void ValidateId(string itemId)
         {
-            if (null == itemId)
-            {
-                throw new ArgumentNullException("ItemByIdUrlBuilder.GetUrlForRequest() : item id cannot be null");
-            }
-
-            bool hasOpeningBrace = itemId.StartsWith("{");
-            bool hasClosingBrace = itemId.EndsWith("}");
-            bool isValidId = hasOpeningBrace && hasClosingBrace;
-            if (!isValidId)
-            {
-                throw new ArgumentException("ItemByIdUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
-            }
+            ItemIdValidator.ValidateItemId (itemId);
         }
 
         private void Validate()

@@ -1,4 +1,4 @@
-﻿namespace MobileSDK_UnitTest_Desktop
+﻿namespace Sitecore.MobileSdkUnitTest
 {
     using System;
     using NUnit.Framework;
@@ -48,7 +48,7 @@
             mutableParameters.ItemPath = "/path/TO/iTEm";
             mutableParameters.SessionSettings = this.sessionConfig;
 
-            IGetItemByPathRequest request = mutableParameters;
+            IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
             string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&sc_lang=en";
@@ -64,7 +64,7 @@
             mutableParameters.ItemPath = "/path TO iTEm";
             mutableParameters.SessionSettings = this.sessionConfig;
 
-            IGetItemByPathRequest request = mutableParameters;
+            IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
             string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%20to%20item?sc_database=web&sc_lang=en";
@@ -87,24 +87,39 @@
             mutableParameters.ItemPath = "path without starting slash";
             mutableParameters.SessionSettings = this.sessionConfig;
 
-            IGetItemByPathRequest request = mutableParameters;
+            IReadItemsByPathRequest request = mutableParameters;
 
             TestDelegate action = () => this.builder.GetUrlForRequest(request);
             Assert.Throws<ArgumentException>(action);
         }
 
         [Test]
-        public void TestBuildWithEmptyPathCausesArgumentException()
+        public void TestBuildWithEmptyPathCausesArgumentNullException()
         {
             MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.ItemPath = "";
             mutableParameters.SessionSettings = this.sessionConfig;
 
-            IGetItemByPathRequest request = mutableParameters;
+            IReadItemsByPathRequest request = mutableParameters;
 
             TestDelegate action = () => this.builder.GetUrlForRequest(request);
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ArgumentNullException>(action);
+        }
+
+
+        [Test]
+        public void TestBuildWithWhitespacePathCausesArgumentNullException()
+        {
+            MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
+            mutableParameters.ItemSource = ItemSource.DefaultSource ();
+            mutableParameters.ItemPath = "\r\n\t";
+            mutableParameters.SessionSettings = this.sessionConfig;
+
+            IReadItemsByPathRequest request = mutableParameters;
+
+            TestDelegate action = () => this.builder.GetUrlForRequest(request);
+            Assert.Throws<ArgumentNullException>(action);
         }
     }
 }
