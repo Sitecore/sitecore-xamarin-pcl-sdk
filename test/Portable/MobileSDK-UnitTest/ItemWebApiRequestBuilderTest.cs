@@ -117,6 +117,53 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual ("master", result.ItemSource.Database);
             Assert.AreEqual ("100500", result.ItemSource.Version);
         }
+
+
+        [Test]
+        public void TestItemPathRequestBuilderWithPathOnly()
+        {
+            var builder = new ItemWebApiRequestBuilder();
+            IReadItemsByPathRequest result =  builder.RequestWithPath("/sitecore/content").Build();
+
+
+            Assert.IsNotNull (result);
+            Assert.IsNotNull (result.ItemSource);
+            Assert.IsNotNull (result.ItemPath);
+            Assert.IsNull (result.SessionSettings);
+
+            Assert.AreEqual ("/sitecore/content", result.ItemPath);
+            Assert.IsNull (result.ItemSource.Language);
+            Assert.IsNull (result.ItemSource.Database);
+            Assert.IsNull (result.ItemSource.Version);
+        }
+
+        [Test]
+        public void TestItemPathRequestBuilderWithNullPathCrashes()
+        {
+            var builder = new ItemWebApiRequestBuilder();
+            Assert.Throws<ArgumentNullException> (() => builder.RequestWithPath (null));
+        }
+
+        [Test]
+        public void TestItemPathRequestBuilderWithEmptyPathCrashes()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+            Assert.Throws<ArgumentNullException> (() => builder.RequestWithPath (""));
+        }
+
+        [Test]
+        public void TestItemPathRequestBuilderWithWhitespacePathCrashes()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+            Assert.Throws<ArgumentNullException> (() => builder.RequestWithPath ("\t \r \n"));
+        }
+
+        [Test]
+        public void TestItemPathWithoutStartingSlashCrashesBuilder()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+            Assert.Throws<ArgumentException> (() => builder.RequestWithPath ("blablabla"));
+        }
         #endregion ItemPath
 
 
