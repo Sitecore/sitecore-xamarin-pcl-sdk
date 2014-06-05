@@ -39,10 +39,15 @@ namespace WhiteLabeliOS
 			try
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
-				string itemPath = itemPathField.Text;
+
+				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+
+				var request =  builder.RequestWithPath(itemPathField.Text)
+					.Build();
+
 				this.ShowLoader ();
 
-				ScItemsResponse response = await session.ReadItemByPathAsync (itemPath);
+				ScItemsResponse response = await session.ReadItemByPathAsync(request);
 
 				this.HideLoader ();
 				if (response.ResultCount > 0)
