@@ -2,6 +2,8 @@ namespace WhiteLabelAndroid
 {
     using Android.Content;
     using Android.Preferences;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.SessionSettings;
 
     public class Prefs
     {
@@ -93,6 +95,16 @@ namespace WhiteLabelAndroid
             this.PutString(this.context.GetString(Resource.String.key_database), database);
         }
         #endregion Database
+
+        public SessionConfig GetSessionConfig()
+        {
+            return new SessionConfig(this.GetInstanceUrl(), this.GetLogin(), this.GetPassword(), this.GetSite());
+        }
+
+        public ItemSource GetItemSource()
+        {
+            return new ItemSource(this.GetDatabase(), "en");
+        }
 
         private string GetString(string key, string defaultValue)
         {

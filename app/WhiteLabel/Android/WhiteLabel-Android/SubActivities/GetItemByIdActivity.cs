@@ -5,7 +5,6 @@ namespace WhiteLabelAndroid.SubActivities
     using Android.Widget;
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.SessionSettings;
 
     [Activity(Label = "GetItemByIdActivity")]
     public class GetItemByIdActivity : Activity
@@ -41,7 +40,7 @@ namespace WhiteLabelAndroid.SubActivities
 
         private async void PerformGetItemRequest(string id)
         {
-            ScApiSession session = new ScApiSession(this.PrepareSessionConfig(), this.PrepareItemSource());
+            ScApiSession session = new ScApiSession(this.prefs.GetSessionConfig(), this.prefs.GetItemSource());
 
             ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
             var request = requestBuilder.RequestWithId(id).Build();
@@ -57,15 +56,5 @@ namespace WhiteLabelAndroid.SubActivities
                 Toast.MakeText(this, "No items with this Id", ToastLength.Long).Show();
             }
         }
-
-        private SessionConfig PrepareSessionConfig()
-        {
-            return new SessionConfig(this.prefs.GetInstanceUrl(), this.prefs.GetLogin(), this.prefs.GetPassword(), this.prefs.GetSite());
-        }
-
-        private ItemSource PrepareItemSource()
-        {
-            return new ItemSource(this.prefs.GetDatabase(), "en");
-        }
-    }
+   }
 }
