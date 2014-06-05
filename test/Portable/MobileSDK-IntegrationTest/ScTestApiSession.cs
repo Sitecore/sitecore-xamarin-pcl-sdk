@@ -1,4 +1,5 @@
 ﻿using Sitecore.MobileSDK.PublicKey;
+using System.Threading;
 
 
 namespace MobileSDKIntegrationTest
@@ -18,26 +19,26 @@ namespace MobileSDKIntegrationTest
             this.GetPublicKeyInvocationsCount = 0;
         }
 
-        public async Task<PublicKeyX509Certificate> GetPublicKeyAsync_Public()
+        public async Task<PublicKeyX509Certificate> GetPublicKeyAsync_Public(CancellationToken cancelToken = default(CancellationToken))
         {
-            return await this.GetPublicKeyAsync ();
+            return await this.GetPublicKeyAsync (cancelToken);
         }
 
-        public async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync_Public()
+        public async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync_Public(CancellationToken cancelToken = default(CancellationToken))
         {
-            return await this.GetCredentialsCryptorAsync ();
+            return await this.GetCredentialsCryptorAsync (cancelToken);
         }
 
 
-        protected override async Task<PublicKeyX509Certificate> GetPublicKeyAsync()
+        protected override async Task<PublicKeyX509Certificate> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken) )
         {
             ++this.GetPublicKeyInvocationsCount;
-            return await base.GetPublicKeyAsync ();
+            return await base.GetPublicKeyAsync (cancelToken);
         }
 
-        protected override async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync()
+        protected override async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync(CancellationToken cancelToken = default(CancellationToken))
         {
-            return await base.GetCredentialsCryptorAsync ();
+            return await base.GetCredentialsCryptorAsync (cancelToken);
         }
 
         public int GetPublicKeyInvocationsCount { get; private set; }

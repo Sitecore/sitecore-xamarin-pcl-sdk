@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 using System.IO;
+using System.Threading;
 
 
 namespace Sitecore.MobileSDK.PublicKey
@@ -12,7 +13,7 @@ namespace Sitecore.MobileSDK.PublicKey
     public class PublicKeyXmlParser
     {
         /// <exception cref="ArgumentNullException">PublicKeyXmlParser : xmlText cannot be null</exception>
-        public PublicKeyX509Certificate Parse(Stream xmlStream)
+        public PublicKeyX509Certificate Parse(Stream xmlStream, CancellationToken cancelToken)
         {
             if (null == xmlStream)
             {
@@ -27,6 +28,8 @@ namespace Sitecore.MobileSDK.PublicKey
 
                 while (true)
                 {
+                    cancelToken.ThrowIfCancellationRequested ();
+
                     if (reader.Name.Equals("Modulus"))
                     {
                         modulus = reader.ReadElementContentAsString();

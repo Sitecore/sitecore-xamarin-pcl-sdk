@@ -1,11 +1,17 @@
-﻿namespace Sitecore.MobileSDK
+﻿
+
+namespace Sitecore.MobileSDK
 {
     using System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
+    using System.Threading;
     using System.Collections.Generic;
 
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     using Sitecore.MobileSDK.Items;
+
+
 
     public class ScItemsParser
     {
@@ -13,7 +19,7 @@
         {
         }
 
-        public static ScItemsResponse Parse(string responseString)
+        public static ScItemsResponse Parse(string responseString, CancellationToken cancelToken)
         {
             if (string.IsNullOrEmpty(responseString))
             {
@@ -37,6 +43,8 @@
 
             foreach (JObject item in responseItems)
             {
+                cancelToken.ThrowIfCancellationRequested ();
+
                 var source = ParseItemSource(item);
 
                 var displayName = (string)item.GetValue("DisplayName");
