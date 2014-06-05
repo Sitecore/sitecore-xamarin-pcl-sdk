@@ -11,7 +11,6 @@ namespace MobileSDKIntegrationTest
     using System.Net.Http;
     using System.Xml;
 
-    using MobileSDKUnitTest.Mock;
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
@@ -39,9 +38,8 @@ namespace MobileSDKIntegrationTest
             this.itemId = env.HomeItemId;
 
 
-            var request = new MockGetItemsByIdParameters ();
-            request.ItemId = this.itemId;
-            this.requestWithItemId = request;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            this.requestWithItemId = requestBuilder.RequestWithId (this.itemId).Build();
         }
 
         [TearDown]
@@ -61,8 +59,9 @@ namespace MobileSDKIntegrationTest
             var config = new SessionConfig(authenticatedUrl, adminUsername, adminPassword);
             var session = new ScApiSession(config, ItemSource.DefaultSource());
 
-            var request = new MockGetItemsByIdParameters ();
-            request.ItemId = this.itemId;
+
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithId (this.itemId).Build();
 
             var response = await session.ReadItemByIdAsync(request);
             Assert.AreEqual(1, response.Items.Count);
@@ -91,7 +90,7 @@ namespace MobileSDKIntegrationTest
         }
 
         [Test]
-        public async void TestGetItemWithNullInstanceUrl()
+        public void TestGetItemWithNullInstanceUrl()
         {
             var exception = Assert.Throws<ArgumentNullException> (() => new SessionConfig (null, adminUsername, adminPassword));
             Assert.IsTrue( 

@@ -1,10 +1,12 @@
-﻿using MobileSDKUnitTest.Mock;
+﻿
 
 
 namespace MobileSDKIntegrationTest
 {
     using System;
     using NUnit.Framework;
+
+    using MobileSDKUnitTest.Mock;
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
@@ -34,8 +36,8 @@ namespace MobileSDKIntegrationTest
 		[Test]
 		public async void TestGetItemById()
 		{
-            var request = new MockGetItemsByIdParameters ();
-            request.ItemId = this.HomeitemId;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithId (this.HomeitemId).Build();
 
             
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync (request);
@@ -52,8 +54,9 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByInvalidId()
         {
             string itemInvalidId = "{4%75_B3E2 D050FA|cF4E1}";
-            var request = new MockGetItemsByIdParameters ();
-            request.ItemId = itemInvalidId;
+
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithId (itemInvalidId).Build();
 
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync(request);
@@ -66,8 +69,9 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByNotExistentId()
         {
             string NotExistentId = "{3D6658D8-QQQQ-QQQQ-B3E2-D050FABCF4E1}";
-            var request = new MockGetItemsByIdParameters ();
-            request.ItemId = NotExistentId;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithId (NotExistentId).Build();
+
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByIdAsync(request);
             Assert.AreEqual(0, response.TotalCount);
@@ -78,8 +82,8 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemByPath()
         {
-            var request = new MockGetItemsByPathParameters ();
-            request.ItemPath = this.HomeitemPath;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithPath (this.HomeitemPath).Build();
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
@@ -96,8 +100,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByPathWithSpaces() 
        // for this scenario we should created item with path /sitecore/content/T E S T/i t e m
         {
-            var request = new MockGetItemsByPathParameters ();
-            request.ItemPath = this.ItemWithSpacesPath;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithPath (this.ItemWithSpacesPath).Build();
+
+
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
@@ -114,8 +120,8 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByPathForTwoItemsWithTheSamePathExist()
         // for this scenario we should created two the same items with path /sitecore/content/T E S T/i t e m
         {
-            var request = new MockGetItemsByPathParameters ();
-            request.ItemPath = this.ItemWithSpacesPath;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithPath (this.ItemWithSpacesPath).Build();
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
@@ -131,9 +137,10 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemByNotExistentPath()
       {
-            string PathNotExistent = "/not/existent/path";
-            var request = new MockGetItemsByPathParameters ();
-            request.ItemPath = PathNotExistent;
+            string pathNotExistent = "/not/existent/path";
+
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithPath (pathNotExistent).Build();
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
 
@@ -145,18 +152,18 @@ namespace MobileSDKIntegrationTest
         [Test]
         public async void TestGetItemByPathWithInternationalName()
         {
-            string ItemInterationalPath = "/sitecore/content/Home/Android/Folder for create items/Japanese/宇都宮";
-            var request = new MockGetItemsByPathParameters ();
-            request.ItemPath = ItemInterationalPath;
+            string itemInterationalPath = "/sitecore/content/Home/Android/Folder for create items/Japanese/宇都宮";
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithPath (itemInterationalPath).Build();
+
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
-
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
             Assert.AreEqual(1, response.Items.Count);
 
             Assert.AreEqual("宇都宮", response.Items[0].DisplayName);
-            Assert.AreEqual(ItemInterationalPath, response.Items[0].Path);
+            Assert.AreEqual(itemInterationalPath, response.Items[0].Path);
             Assert.AreEqual(SampleitemTemplate, response.Items[0].Template);
         }
 
@@ -164,9 +171,8 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByInternationalPath()
         {
             string itemInterationalPath = "/sitecore/content/Home/Android/Folder for create items/Japanese/宇都宮/ではまた明日";
-
-            var request = new MockGetItemsByPathParameters ();
-            request.ItemPath = itemInterationalPath;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithPath (itemInterationalPath).Build();
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByPathAsync(request);
             Assert.AreEqual(1, response.TotalCount);
@@ -183,12 +189,10 @@ namespace MobileSDKIntegrationTest
         {
             string query = "/sitecore/content/HOME/AllowED_PARent/*";
 
-            var request = new MockGetItemsByQueryParameters ();
-            request.SitecoreQuery = query;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithSitecoreQuery (query).Build();
 
-            
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(request);
-
             Assert.AreEqual(2, response.TotalCount );
             Assert.AreEqual(2, response.ResultCount);
             Assert.AreEqual(2, response.Items.Count);
@@ -198,11 +202,10 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByInternationalQuery()
         {
             string queryInternational = "/sitecore/content/HOME//*[@title='宇都宮']";
-            var request = new MockGetItemsByQueryParameters ();
-            request.SitecoreQuery = queryInternational;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithSitecoreQuery (queryInternational).Build();
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(request);
-
             Assert.AreEqual(1, response.TotalCount);
             Assert.AreEqual(1, response.ResultCount);
             Assert.AreEqual(1, response.Items.Count);
@@ -214,8 +217,8 @@ namespace MobileSDKIntegrationTest
         public async void TestGetItemByInvalidQuery()
         {
             string queryInvalid = "/sitecore/content/HOME/AllowED_PARent//*[@@templatekey123='sample item']";
-            var request = new MockGetItemsByQueryParameters ();
-            request.SitecoreQuery = queryInvalid;
+            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder ();
+            var request = requestBuilder.RequestWithSitecoreQuery (queryInvalid).Build();
 
             ScItemsResponse response = await this.sessionWithAnonymousAccess.ReadItemByQueryAsync(request);
 
