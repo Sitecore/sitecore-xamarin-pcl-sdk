@@ -51,18 +51,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 
         private void ValidatePath(string itemPath)
         {
-            if (null == itemPath)
-            {
-                throw new ArgumentNullException ("ItemByPathUrlBuilder.GetUrlForRequest() : item path cannot be null or empty");
-            }
-            else if (string.Empty.Equals (itemPath))
-            {
-                throw new ArgumentException ("ItemByPathUrlBuilder.GetUrlForRequest() : item path cannot be null or empty");
-            }
-            else if (!itemPath.StartsWith("/"))
-            {
-                throw new ArgumentException("ItemByPathUrlBuilder.GetUrlForRequest() : item path should begin with '/'");
-            }
+            ItemPathValidator.ValidateItemPath (itemPath);
         }
             
         private void Validate()

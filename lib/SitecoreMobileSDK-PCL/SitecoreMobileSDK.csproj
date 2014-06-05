@@ -87,6 +87,7 @@
     <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
     <Compile Include="UrlBuilder\ItemById\ItemIdValidator.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

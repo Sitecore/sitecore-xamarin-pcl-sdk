@@ -12,7 +12,7 @@ namespace Sitecore.MobileSDK
         {
             if (string.IsNullOrWhiteSpace(itemId))
             {
-                throw new ArgumentNullException("ItemByIdUrlBuilder.GetUrlForRequest() : item id cannot be null");
+                throw new ArgumentNullException("Item id cannot be null");
             }
 
             bool hasOpeningBrace = itemId.StartsWith("{");
@@ -22,7 +22,7 @@ namespace Sitecore.MobileSDK
             bool isValidId = hasOpeningBrace && hasClosingBrace && hasNonBraceSymbols;
             if (!isValidId)
             {
-                throw new ArgumentException("ItemByIdUrlBuilder.GetUrlForRequest() : item id must have curly braces '{}'");
+                throw new ArgumentException("Item id must have curly braces '{}'");
             }
         }
     }

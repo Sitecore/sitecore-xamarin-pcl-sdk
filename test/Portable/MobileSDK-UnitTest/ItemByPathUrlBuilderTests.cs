@@ -94,7 +94,7 @@
         }
 
         [Test]
-        public void TestBuildWithEmptyPathCausesArgumentException()
+        public void TestBuildWithEmptyPathCausesArgumentNullException()
         {
             MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
@@ -104,7 +104,22 @@
             IReadItemsByPathRequest request = mutableParameters;
 
             TestDelegate action = () => this.builder.GetUrlForRequest(request);
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ArgumentNullException>(action);
+        }
+
+
+        [Test]
+        public void TestBuildWithWhitespacePathCausesArgumentNullException()
+        {
+            MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
+            mutableParameters.ItemSource = ItemSource.DefaultSource ();
+            mutableParameters.ItemPath = "\r\n\t";
+            mutableParameters.SessionSettings = this.sessionConfig;
+
+            IReadItemsByPathRequest request = mutableParameters;
+
+            TestDelegate action = () => this.builder.GetUrlForRequest(request);
+            Assert.Throws<ArgumentNullException>(action);
         }
     }
 }

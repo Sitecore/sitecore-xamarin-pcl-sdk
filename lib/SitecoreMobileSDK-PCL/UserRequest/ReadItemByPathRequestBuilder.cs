@@ -10,6 +10,8 @@ namespace Sitecore.MobileSDK
     {
         public ReadItemByPathRequestBuilder (string itemPath)
         {
+            ItemPathValidator.ValidateItemPath (itemPath);
+
             this.itemPath = itemPath;
         }
 
