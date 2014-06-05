@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Instance URL"
-        android:text="http://mobiledev1ua1.dk.sitecore.net:722"
         android:id="@+id/instance_url" />
     <View
         android:layout_width="match_parent"
@@ -16,13 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Login"
-        android:text="extranet\\creatorex"
         android:id="@+id/instance_login" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:text="creatorex"
         android:inputType="textPassword"
         android:id="@+id/instance_password" />
     <EditText
@@ -34,7 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Database"
-        android:text="web"
         android:id="@+id/instance_database" />
     <Button
         android:text="Use"
