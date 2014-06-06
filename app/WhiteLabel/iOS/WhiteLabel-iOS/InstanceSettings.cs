@@ -13,6 +13,7 @@ namespace WhiteLabeliOS
 		private string instancePassword;
 		private string instanceSite;
 		private string instanceDataBase;
+		private string instanceLanguage;
 
 		public InstanceSettings ()
 		{
@@ -27,12 +28,34 @@ namespace WhiteLabeliOS
 			this.instancePassword 	= userDefaults.StringForKey ("instancePassword");
 			this.instanceSite 		= userDefaults.StringForKey ("instanceSite");
 			this.instanceDataBase 	= userDefaults.StringForKey ("instanceDataBase");
+			this.instanceLanguage 	= userDefaults.StringForKey ("instanceLanguage");
 		}
 
 		public ScApiSession GetSession()
 		{
 			SessionConfig config = new SessionConfig (this.instanceUrl, this.instanceLogin, this.instancePassword, this.instanceSite);
-			ItemSource defaultSource = ItemSource.DefaultSource ();
+
+			string db;
+			if (string.IsNullOrEmpty(this.instanceDataBase))
+			{
+				db = this.instanceDataBase;
+			}
+			else
+			{
+				db = ItemSource.DefaultDatabase;
+			}
+
+			string language;
+			if (string.IsNullOrEmpty(this.instanceLanguage))
+			{
+				language = this.instanceLanguage;
+			}
+			else
+			{
+				language = ItemSource.DefaultLanguage;
+			}
+
+			ItemSource defaultSource = new ItemSource( db, language, null);
 
 			return new ScApiSession (config, defaultSource);
 		}
@@ -134,6 +157,23 @@ namespace WhiteLabeliOS
 				this.SaveValueToStorage (value, "instanceDataBase");
 			} 
 		}
+
+		public string InstanceLanguage	
+		{ 
+			get
+			{ 
+				#if DEBUG
+				if (instanceLanguage == null) {
+					instanceLanguage = "en";
+				}
+				#endif
+				return instanceLanguage;
+			}
+			set
+			{ 
+				this.instanceLanguage = value;
+				this.SaveValueToStorage (value, "instanceLanguage");
+			} 
+		}
 	}
 }
-

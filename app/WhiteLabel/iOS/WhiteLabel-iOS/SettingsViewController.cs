@@ -21,6 +21,7 @@ namespace WhiteLabeliOS
 			this.loginField.ShouldReturn = this.HideKeyboard;
 			this.siteField.ShouldReturn = this.HideKeyboard;
 			this.dbField.ShouldReturn = this.HideKeyboard;
+			this.languageField.ShouldReturn = this.HideKeyboard;
 		}
 
 		public override void ViewWillAppear(bool animated)
@@ -32,6 +33,7 @@ namespace WhiteLabeliOS
 			this.loginField.Text = this.instanceSettings.InstanceLogin;
 			this.siteField.Text = this.instanceSettings.InstanceSite;
 			this.dbField.Text = this.instanceSettings.InstanceDataBase;
+			this.languageField.Text = this.instanceSettings.InstanceLanguage;
 		}
 
 		public override void ViewWillDisappear(bool animated)
@@ -45,6 +47,7 @@ namespace WhiteLabeliOS
 			settings.InstanceLogin 		= this.loginField.Text;
 			settings.InstanceSite 		= this.siteField.Text;
 			settings.InstanceDataBase 	= this.dbField.Text;
+			settings.InstanceLanguage 	= this.languageField.Text;
 		}
 	}
 }
