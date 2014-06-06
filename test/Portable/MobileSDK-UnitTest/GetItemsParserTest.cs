@@ -42,6 +42,20 @@ namespace Sitecore.MobileSdkUnitTest
         }
 
         [Test]
+        public void TestAll20XCodesAreValid()
+        {
+            string responseFormat = "{\"statusCode\":{0},\"result\":{\"totalCount\":0,\"resultCount\":0,\"items\":[]}}";;
+
+            for (int i = 200; i < 300; ++i)
+            {
+                string rawResponse = string.Format(responseFormat, i);
+
+                ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
+                Assert.AreEqual(0, response.Items.Count);
+            }
+        }
+
+        [Test]
         public void TestParseEmptyResponse()
         {
             TestDelegate action = () => ScItemsParser.Parse(string.Empty, CancellationToken.None);
