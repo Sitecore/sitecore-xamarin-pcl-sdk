@@ -57,6 +57,7 @@
     <Compile Include="SettingsActivity.cs" />
     <Compile Include="SubActivities\GetItemByPathActivtiy.cs" />
     <Compile Include="SubActivities\GetItemByIdActivity.cs" />
+    <Compile Include="SubActivities\GetItemByQueryActivtiy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

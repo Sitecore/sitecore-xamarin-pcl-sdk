@@ -3,12 +3,8 @@
     using Android.App;
     using Android.Content;
     using Android.OS;
-    using Android.Util;
     using Android.Views;
     using Android.Widget;
-    using Sitecore.MobileSDK;
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.SessionSettings;
     using WhiteLabelAndroid.SubActivities;
 
     [Activity(Label = "WhiteLabel-Android", MainLauncher = true)]
@@ -42,6 +38,9 @@
 
             Button itemPathButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_path);
             itemPathButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(GetItemByPathActivtiy)));
+
+            Button itemQueryButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_query);
+            itemQueryButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(GetItemByQueryActivtiy)));
         }
     }
 }

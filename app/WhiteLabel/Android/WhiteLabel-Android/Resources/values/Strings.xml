@@ -17,5 +17,6 @@
 
 	<string name="text_get_item_by_id">Item By Id</string>
 	<string name="text_get_item_by_path">Item By Path</string>
+	<string name="text_get_item_by_query">Item By Query</string>
 
 </resources>
