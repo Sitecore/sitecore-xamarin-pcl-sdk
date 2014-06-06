@@ -13,7 +13,7 @@ namespace MobileSDKIntegrationTest
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
 
   [TestFixture]
-  public class SetDefaultSessionSettingsTest
+  public class SetLanguageDbVersionTest
   {
     private TestEnvironment testData;
     private SessionConfig sessionConfig;
@@ -36,19 +36,19 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public async void TestGetItemWithDefaultDbLanguageAndVersion()
+    public async void TestGetItemWithNotExistentLanguage()
     {
-      const string Db = "web";
       const string Language = "da";
-      const string Version = "1";
-      var itemSource = new ItemSource(Db, Language, Version);
-      var response = await this.GetItemByIdWithItemSource(itemSource);
+      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Language(Language).Build();
+      var response = await session.ReadItemByIdAsync(request);
 
       testData.AssertItemsCount(1, response);
       ScItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      //Assert.AreEqual(version, resultItem.Version);
-      //Assert.AreEqual("Danish version 1 master", resultItem.Fields["Title"].RawValue);
+      testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
+      //Assert.AreEqual("", resultItem.Fields["Title"].RawValue);
+
     }
 
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)
