@@ -1,5 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">WhiteLabel-Android</string>
+	<string name="text_settings">Settings</string>
+
+	<string name="key_instance_url">instance_url</string>
+	<string name="key_login">login</string>
+	<string name="key_password">pass</string>
+	<string name="key_site">site</string>
+	<string name="key_database">database</string>
+
+	<string name="text_default_instance_url">http://mobiledev1ua1.dk.sitecore.net:722</string>
+	<string name="text_default_login">extranet\\creatorex</string>
+	<string name="text_default_password">creatorex</string>
+	<string name="text_default_site"></string>
+	<string name="text_default_database">web</string>
+
+	<string name="text_get_item_by_id">Item By Id</string>
+	<string name="text_get_item_by_path">Item By Path</string>
+	<string name="text_get_item_by_query">Item By Query</string>
+
 </resources>
