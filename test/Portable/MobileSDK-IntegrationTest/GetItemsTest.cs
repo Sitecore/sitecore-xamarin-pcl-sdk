@@ -296,8 +296,8 @@ namespace MobileSDKIntegrationTest
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("System.Net.Http.HttpRequestException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("404 (Not Found)"));
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
         return;
       }
 

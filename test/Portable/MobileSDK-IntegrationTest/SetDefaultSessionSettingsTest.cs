@@ -36,7 +36,7 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public async void TestGetItemWithDefaultDbLanguageAndVersion()
+    public async void TestGetItemWithDbLanguageAndVersionFromSession()
     {
       const string Db = "web";
       const string Language = "da";
@@ -47,8 +47,63 @@ namespace MobileSDKIntegrationTest
       testData.AssertItemsCount(1, response);
       ScItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      //Assert.AreEqual(version, resultItem.Version);
+      Assert.AreEqual(Version, resultItem.Source.Version);
+      Assert.AreEqual(Language, resultItem.Source.Language);
+      Assert.AreEqual(Db, resultItem.Source.Database);
+      //Assert.AreEqual("Danish version 2 web", resultItem.Fields["Title"].RawValue);
+    }
+    [Test]
+    public async void TestGetItemWithDefaultDbLanguageAndVersion()
+    {
+      var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
+      const string Db = "web";
+      const string Language = "en";
+      const string Version = "1";
+      testData.AssertItemsCount(1, response);
+      var resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+
+      var source = new ItemSource(Db, Language, Version);
+      testData.AssertItemSourcesAreEqual(source, resultItem.Source);
+      //Assert.AreEqual("English version 2 web", resultItem.Fields["Title"].RawValue);
+    }
+    [Test]
+    public async void TestGetItemWithDbLanguageAndVersionFromRequest()
+    {
+      const string Db = "master";
+      const string Language = "da";
+      const string Version = "1";
+
+      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithId(testData.Items.ItemWithVersions.Id).Database(Db).Language(Language).Version(Version).Build();
+      var response = await session.ReadItemByIdAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      ScItem resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      var source = new ItemSource(Db, Language, Version);
+      testData.AssertItemSourcesAreEqual(source, resultItem.Source);
       //Assert.AreEqual("Danish version 1 master", resultItem.Fields["Title"].RawValue);
+    }
+    [Test]
+    public async void TestGetItemWithOverridenLanguageFromRequest()
+    {
+      const string Db = "master";
+      const string Language = "en";
+      const string Version = "2";
+      var source = new ItemSource(Db, "da", Version);
+      var session = new ScApiSession(this.sessionConfig, source);
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithId(testData.Items.ItemWithVersions.Id).Language(Language).Build();
+      var response = await session.ReadItemByIdAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      ScItem resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      var sourceExpected = new ItemSource(Db, Language, Version);
+      testData.AssertItemSourcesAreEqual(sourceExpected, resultItem.Source);
+      //Assert.AreEqual("English version 2 master", resultItem.Fields["Title"].RawValue);
     }
 
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)

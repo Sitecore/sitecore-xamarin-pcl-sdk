@@ -85,6 +85,16 @@ namespace MobileSDKIntegrationTest
       }
     }
 
+    public void AssertItemSourcesAreEqual(ItemSource expected, ItemSource actual)
+    {
+      if (null != expected)
+      {
+        Assert.AreEqual(expected.Database, actual.Database);
+        Assert.AreEqual(expected.Language, actual.Language);
+        Assert.AreEqual(expected.Version, actual.Version);
+      }
+    }
+
     public void AssertItemsCount(int itemCount, ScItemsResponse response)
     {
       Assert.AreEqual(itemCount, response.TotalCount);
