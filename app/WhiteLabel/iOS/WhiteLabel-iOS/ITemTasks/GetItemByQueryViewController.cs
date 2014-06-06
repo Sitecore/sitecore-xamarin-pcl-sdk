@@ -1,32 +1,34 @@
-﻿using System;
+﻿
+using System;
 using System.Drawing;
+
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+
 using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.Items;
 
 namespace WhiteLabeliOS
 {
-	public partial class GetItemByPathViewController : BaseTaskViewController
+	public partial class GetItemByQueryViewController : BaseTaskViewController
 	{
-
-		public GetItemByPathViewController (IntPtr handle) : base (handle)
+		public GetItemByQueryViewController (IntPtr handle) : base (handle)
 		{
-			Title = NSBundle.MainBundle.LocalizedString ("getItemByPath", null);
+			Title = NSBundle.MainBundle.LocalizedString ("getItemByQuery", null);
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-
-			this.itemPathField.ShouldReturn = this.HideKeyboard;
+			queryTextField.Text = "/Sitecore/Content/Home/*";
+			
 		}
 
-		partial void getItem (MonoTouch.UIKit.UIButton sender)
+		partial void getItem (MonoTouch.Foundation.NSObject sender)
 		{
-			if (String.IsNullOrEmpty(itemPathField.Text))
+			if (String.IsNullOrEmpty(queryTextField.Text))
 			{
-				AlertHelper.ShowAlertWithOkOption("Error", "Please type item Id");
+				AlertHelper.ShowAlertWithOkOption("Error", "Please type query");
 			}
 			else
 			{
@@ -42,18 +44,17 @@ namespace WhiteLabeliOS
 
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-				var request = builder.RequestWithPath(itemPathField.Text)
+				var request = builder.RequestWithSitecoreQuery(queryTextField.Text)
 					.Build();
 
 				this.ShowLoader();
 
-				ScItemsResponse response = await session.ReadItemByPathAsync(request);
+				ScItemsResponse response = await session.ReadItemByQueryAsync(request);
 
 				this.HideLoader();
 				if (response.ResultCount > 0)
 				{
-					ScItem item = response.Items [0];
-					AlertHelper.ShowAlertWithOkOption("Item received", "item title is \"" + item.DisplayName + "\"");
+					AlertHelper.ShowAlertWithOkOption("Item received", "items count is \"" + response.Items.Count.ToString() + "\"");
 				}
 				else
 				{

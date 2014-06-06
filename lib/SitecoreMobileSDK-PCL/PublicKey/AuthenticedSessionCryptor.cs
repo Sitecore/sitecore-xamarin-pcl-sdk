@@ -3,7 +3,8 @@
 namespace Sitecore.MobileSDK.PublicKey
 {
 	using System;
-	using System.Threading.Tasks;
+    using System.Threading;
+    using System.Threading.Tasks;
 	using System.Net.Http;
 
 
@@ -17,13 +18,13 @@ namespace Sitecore.MobileSDK.PublicKey
 			this.certificate = certificate;
 		}
 
-		public async Task<HttpRequestMessage> AddEncryptedCredentialHeadersAsync (HttpRequestMessage httpRequest)
+        public async Task<HttpRequestMessage> AddEncryptedCredentialHeadersAsync (HttpRequestMessage httpRequest, CancellationToken cancelToken)
 		{
 			Func<HttpRequestMessage> setupEncryptedHeaders = () =>
 			{
 				return this.AddEncryptedCredentialHeaders( httpRequest );
 			};
-			HttpRequestMessage requestMessage = await Task.Factory.StartNew (setupEncryptedHeaders);
+            HttpRequestMessage requestMessage = await Task.Factory.StartNew (setupEncryptedHeaders, cancelToken);
 			return requestMessage;
 		}
 

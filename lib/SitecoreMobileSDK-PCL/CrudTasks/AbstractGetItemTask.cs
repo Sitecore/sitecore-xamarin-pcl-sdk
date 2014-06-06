@@ -1,4 +1,4 @@
-﻿using Sitecore.MobileSDK.PublicKey;
+﻿
 
 namespace Sitecore.MobileSDK.CrudTasks
 {
@@ -6,6 +6,7 @@ namespace Sitecore.MobileSDK.CrudTasks
     using System.IO;
     using System.Net.Http;
     using System.Diagnostics;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Sitecore.MobileSDK;
@@ -13,7 +14,9 @@ namespace Sitecore.MobileSDK.CrudTasks
     using Sitecore.MobileSDK.TaskFlow;
     using Sitecore.MobileSDK.PublicKey;
 
+
     public abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
+        where TRequest: class
     {
         private AbstractGetItemTask()
         {
@@ -29,28 +32,28 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         #region  IRestApiCallTasks
 
-        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request)
+        public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
         {
             string url = this.UrlToGetItemWithRequest(request);
             HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-            result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result);
+            result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
             return result;
         }
 
-        public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl)
+        public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
         {
-            HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl);
+            HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
             return await httpResponse.Content.ReadAsStringAsync();
         }
 
-        public async Task<ScItemsResponse> ParseResponseDataAsync(string data)
+        public async Task<ScItemsResponse> ParseResponseDataAsync(string data, CancellationToken cancelToken)
         {
             Func<ScItemsResponse> syncParseResponse = () =>
             {
-                return ScItemsParser.Parse(data);
+                return ScItemsParser.Parse(data, cancelToken);
             };
-            return await Task.Factory.StartNew(syncParseResponse);
+            return await Task.Factory.StartNew(syncParseResponse, cancelToken);
         }
 
         #endregion IRestApiCallTasks

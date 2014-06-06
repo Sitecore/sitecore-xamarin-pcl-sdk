@@ -69,6 +69,9 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByPathUrlBuilderTests.cs">
       <Link>ItemByPathUrlBuilderTests.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByQueryUrlBuilderTest.cs">
+      <Link>ItemByQueryUrlBuilderTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceMergerTest.cs">
       <Link>ItemSourceMergerTest.cs</Link>
     </Compile>
@@ -77,6 +80,9 @@
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceUrlBuilderTest.cs">
       <Link>ItemSourceUrlBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemWebApiRequestBuilderTest.cs">
+      <Link>ItemWebApiRequestBuilderTest.cs</Link>
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\LoginAndPasswordEncryptionTest.cs">
       <Link>LoginAndPasswordEncryptionTest.cs</Link>

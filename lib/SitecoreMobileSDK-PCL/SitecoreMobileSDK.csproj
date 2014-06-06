@@ -50,8 +50,6 @@
     <Compile Include="Items\ScItemsResponse.cs" />
     <Compile Include="Items\ScItemsParser.cs" />
     <Compile Include="Items\ItemSource.cs" />
-    <Compile Include="ScResponseException.cs" />
-    <Compile Include="ScErrorResponse.cs" />
     <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
@@ -89,6 +87,13 @@
     <Compile Include="UrlBuilder\ItemById\ItemIdValidator.cs" />
     <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\SitecoreQueryValidator.cs" />
+    <Compile Include="Exceptions\SitecoreMobileSdkException.cs" />
+    <Compile Include="Exceptions\WebApiJsonError.cs" />
+    <Compile Include="Exceptions\WebApiJsonErrorException.cs" />
+    <Compile Include="Exceptions\RsaHandshakeException.cs" />
+    <Compile Include="Exceptions\LoadDataFromNetworkException.cs" />
+    <Compile Include="Exceptions\ParserException.cs" />
+    <Compile Include="Exceptions\ProcessUserRequestException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -150,5 +155,6 @@
     <Folder Include="UrlBuilder\ItemByQuery\" />
     <Folder Include="Utils\" />
     <Folder Include="UserRequest\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

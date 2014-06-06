@@ -1,13 +1,15 @@
-﻿using System.Configuration;
-using NUnit.Framework;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.SessionSettings;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-
+﻿
 namespace MobileSdk_IntegrationTest_Desktop
 {
+    using System.Configuration;
+    using NUnit.Framework;
+    using Sitecore.MobileSDK;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.SessionSettings;
+    using TechTalk.SpecFlow;
+    using TechTalk.SpecFlow.Assist;
+
+
     [Binding]
     public class GetItemTestSteps
     {
@@ -35,19 +37,27 @@ namespace MobileSdk_IntegrationTest_Desktop
 
 
         [When(@"I send request to get item by id ""(.*)""")]
-        public void WhenISendRequestToGetItemById(string itemId)
+        public async void WhenISendRequestToGetItemById(string itemId)
         {
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
             string id = ConfigurationManager.AppSettings[itemId];
-            ScenarioContext.Current["Response"] = apiSession.ReadItemByIdAsync(id).Result;
+
+            var requestBuilder = new ItemWebApiRequestBuilder();
+            var request = requestBuilder.RequestWithId(id).Build();
+
+            ScenarioContext.Current["Response"] = await apiSession.ReadItemByIdAsync(request);
         }
 
         [When(@"I send request to get item by path ""(.*)""")]
-        public void WhenISendRequestToGetItemByPath(string itemPath)
+        public async void WhenISendRequestToGetItemByPath(string itemPath)
         {
             var apiSession = ScenarioContext.Current.Get<ScApiSession>("ApiSession");
             string path = ConfigurationManager.AppSettings[itemPath];
-            ScenarioContext.Current["Response"] = apiSession.ReadItemByPathAsync(path).Result;
+
+            var requestBuilder = new ItemWebApiRequestBuilder();
+            var request = requestBuilder.RequestWithPath(path).Build();
+
+            ScenarioContext.Current["Response"] = await apiSession.ReadItemByPathAsync(request);
         }
 
         [Then(@"I've got (.*) items in response")]

@@ -1,5 +1,5 @@
 ﻿
-namespace MobileSDKUnitTest.Mock
+namespace MobileSDKIntegrationTest
 {
     public class TestEnvironment
     {

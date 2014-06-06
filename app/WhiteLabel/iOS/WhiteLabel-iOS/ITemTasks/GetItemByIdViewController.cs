@@ -4,6 +4,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.Items;
+using Sitecore.MobileSDK.UrlBuilder;
 
 namespace WhiteLabeliOS
 {
@@ -38,17 +39,22 @@ namespace WhiteLabeliOS
 			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
-		private async void sendRequest ()
+		private async void sendRequest()
 		{
 			try
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
-				string itemId = itemIdTextField.Text;
-				this.ShowLoader ();
 
-				ScItemsResponse response = await session.ReadItemByIdAsync(itemId);
+				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-				this.HideLoader ();
+				var request = builder.RequestWithId(itemIdTextField.Text)
+					.Build();
+					
+				this.ShowLoader();
+
+				ScItemsResponse response = await session.ReadItemByIdAsync(request);
+
+				this.HideLoader();
 				if (response.ResultCount > 0)
 				{
 					ScItem item = response.Items [0];
@@ -61,6 +67,7 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
+				this.HideLoader();
 				AlertHelper.ShowAlertWithOkOption("Erorr", e.Message);
 			}
 		}

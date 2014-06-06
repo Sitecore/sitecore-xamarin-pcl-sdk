@@ -98,7 +98,7 @@ namespace WhiteLabeliOS
 			get
 			{ 
 				if (instanceSite == null) {
-					instanceSite = "sitecore/shell";
+					instanceSite = "/sitecore/shell";
 				}
 				return instanceSite;
 			}
