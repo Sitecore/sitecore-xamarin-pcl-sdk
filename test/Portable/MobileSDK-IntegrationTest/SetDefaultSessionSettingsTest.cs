@@ -57,5 +57,8 @@ namespace MobileSDKIntegrationTest
       var response = await session.ReadItemByIdAsync(this.requestWithItemId);
       return response;
     }
+
+
+
   }
 }
