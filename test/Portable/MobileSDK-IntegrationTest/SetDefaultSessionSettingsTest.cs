@@ -106,6 +106,25 @@ namespace MobileSDKIntegrationTest
       //Assert.AreEqual("English version 2 master", resultItem.Fields["Title"].RawValue);
     }
 
+    public async void TestGetItemWithOverridenVersionAndDbFromRequest()
+    {
+      const string Db = "master";
+      const string Language = "en";
+      const string Version = "2";
+      var source = new ItemSource("web", Language, "1");
+      var session = new ScApiSession(this.sessionConfig, source);
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithId(testData.Items.ItemWithVersions.Id).Version(Version).Database(Db).Build();
+      var response = await session.ReadItemByIdAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      ScItem resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      var sourceExpected = new ItemSource(Db, Language, Version);
+      testData.AssertItemSourcesAreEqual(sourceExpected, resultItem.Source);
+      //Assert.AreEqual("English version 2 master", resultItem.Fields["Title"].RawValue);
+    }
+
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)
     {
       var session = new ScApiSession(this.sessionConfig, itemSource);
