@@ -48,9 +48,11 @@ namespace WhiteLabeliOS
 		{ 
 			get
 			{ 
+				#if DEBUG
 				if (instanceUrl == null) {
 					instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722/";
 				}
+				#endif
 				return instanceUrl;
 			}
 			set
@@ -64,9 +66,11 @@ namespace WhiteLabeliOS
 		{ 
 			get
 			{ 
+				#if DEBUG
 				if (instanceLogin == null) {
 					instanceLogin = "admin";
 				}
+				#endif
 				return instanceLogin;
 			}
 			set
@@ -80,9 +84,11 @@ namespace WhiteLabeliOS
 		{ 
 			get
 			{ 
+				#if DEBUG
 				if (instancePassword == null) {
 					instancePassword = "b";
 				}
+				#endif
 				return instancePassword;
 			} 
 			set
@@ -97,9 +103,11 @@ namespace WhiteLabeliOS
 		{ 
 			get
 			{ 
+				#if DEBUG
 				if (instanceSite == null) {
 					instanceSite = "/sitecore/shell";
 				}
+				#endif
 				return instanceSite;
 			}
 			set
@@ -113,9 +121,11 @@ namespace WhiteLabeliOS
 		{ 
 			get
 			{ 
+				#if DEBUG
 				if (instanceDataBase == null) {
 					instanceDataBase = "web";
 				}
+				#endif
 				return instanceDataBase;
 			}
 			set
