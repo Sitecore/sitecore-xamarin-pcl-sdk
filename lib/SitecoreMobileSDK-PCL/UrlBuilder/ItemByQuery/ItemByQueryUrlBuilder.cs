@@ -28,13 +28,8 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
             return result;
         }
 
-        private void ValidateRequest(IReadItemsByQueryRequest request)
+        protected override void ValidateSpecificRequest(IReadItemsByQueryRequest request)
         {
-            if (null == request)
-            {
-                throw new ArgumentNullException ("ItemByPathUrlBuilder.GetUrlForRequest() : request cannot be null");
-            }
-
             SitecoreQueryValidator.ValidateSitecoreQuery (request.SitecoreQuery);
         }
     }

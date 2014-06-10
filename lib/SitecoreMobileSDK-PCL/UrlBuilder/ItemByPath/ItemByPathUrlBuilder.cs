@@ -41,19 +41,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
             return result.ToLowerInvariant();
         }
 
-        private void ValidateRequest(IReadItemsByPathRequest request)
+        protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)
         {
-            if (null == request)
-            {
-                throw new ArgumentNullException("ItemByPathUrlBuilder.GetUrlForRequest() : request cannot be null");
-            }
-
-            this.ValidatePath (request.ItemPath);
+            ItemPathValidator.ValidateItemPath (request.ItemPath);
         }
-
-        private void ValidatePath(string itemPath)
-        {
-            ItemPathValidator.ValidateItemPath (itemPath);
-        }            
     }
 }

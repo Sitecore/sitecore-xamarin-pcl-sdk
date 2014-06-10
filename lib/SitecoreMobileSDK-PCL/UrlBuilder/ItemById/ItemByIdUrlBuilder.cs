@@ -19,12 +19,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 
         protected override string GetSpecificPartForRequest(IReadItemsByIdRequest request)
         {
-            ItemIdValidator.ValidateItemId(request.ItemId);
-
             string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
             string result = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator +  escapedId;
 
             return result;
+        }
+
+        protected override void ValidateSpecificRequest(IReadItemsByIdRequest request)
+        {
+            ItemIdValidator.ValidateItemId(request.ItemId);
         }
     }
 }
