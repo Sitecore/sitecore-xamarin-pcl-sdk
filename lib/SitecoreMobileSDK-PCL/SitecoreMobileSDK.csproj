@@ -94,6 +94,9 @@
     <Compile Include="Exceptions\LoadDataFromNetworkException.cs" />
     <Compile Include="Exceptions\ParserException.cs" />
     <Compile Include="Exceptions\ProcessUserRequestException.cs" />
+    <Compile Include="Items\Fields\ScField.cs" />
+    <Compile Include="Items\Fields\IField.cs" />
+    <Compile Include="Items\Fields\ScFieldsParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -156,5 +159,6 @@
     <Folder Include="Utils\" />
     <Folder Include="UserRequest\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Items\Fields\" />
   </ItemGroup>
 </Project>
