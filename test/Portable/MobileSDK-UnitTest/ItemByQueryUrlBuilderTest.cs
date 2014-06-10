@@ -1,4 +1,4 @@
-﻿
+﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
 
 namespace Sitecore.MobileSdkUnitTest
@@ -20,6 +20,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
         private ItemByQueryUrlBuilder builder;
         private ISessionConfig sessionConfig;
+        private QueryParameters payload;
 
         [SetUp]
         public void SetUp()
@@ -34,6 +35,8 @@ namespace Sitecore.MobileSdkUnitTest
             mutableSession.ItemWebApiVersion = "v13";
             mutableSession.Site = null;
             this.sessionConfig = mutableSession;
+
+            this.payload = new QueryParameters( PayloadType.Full );
         }
 
         [TearDown]
@@ -41,6 +44,7 @@ namespace Sitecore.MobileSdkUnitTest
         {
             this.builder = null;
             this.sessionConfig = null;
+            this.payload = null;
         }
 
 
@@ -51,11 +55,12 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.SitecoreQuery = "fast:/sitecore/content/Home/Products/*[@@name = 'Hammer']";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByQueryRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
-            string expected = "http://mobiledev1ua1.dk.sitecore.net:722/-/item/v13?sc_database=web&sc_lang=en&query=fast%3a%2fsitecore%2fcontent%2fhome%2fproducts%2f%2a%5b%40%40name%20%3d%20%27hammer%27%5d";
+            string expected = "http://mobiledev1ua1.dk.sitecore.net:722/-/item/v13?sc_database=web&sc_lang=en&payload=full&query=fast%3a%2fsitecore%2fcontent%2fhome%2fproducts%2f%2a%5b%40%40name%20%3d%20%27hammer%27%5d";
 
             Assert.AreEqual(expected, result);
         }
@@ -67,11 +72,12 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.SitecoreQuery = "/Sitecore/Content/*";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByQueryRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
-            string expected = "http://mobiledev1ua1.dk.sitecore.net:722/-/item/v13?sc_database=web&sc_lang=en&query=%2fsitecore%2fcontent%2f%2a";
+            string expected = "http://mobiledev1ua1.dk.sitecore.net:722/-/item/v13?sc_database=web&sc_lang=en&payload=full&query=%2fsitecore%2fcontent%2f%2a";
 
             Assert.AreEqual(expected, result);
         }
@@ -83,6 +89,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.SitecoreQuery = null;
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByQueryRequest request = mutableParameters;
 
@@ -96,6 +103,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.SitecoreQuery = "";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByQueryRequest request = mutableParameters;
 
@@ -110,6 +118,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.SitecoreQuery = "   \t \r \n   ";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByQueryRequest request = mutableParameters;
 
