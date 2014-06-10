@@ -1,16 +1,11 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
-  using NUnit.Framework.Constraints;
 
   using System;
-  using System.Security;
-  using System.Net.Http;
-  using System.Xml;
-
-  using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.SessionSettings;
@@ -59,10 +54,9 @@
       {
         await session.ReadItemByIdAsync(this.requestWithItemId);
       }
-      catch (Exception exception)
+      catch (RsaHandshakeException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.LoadDataFromNetworkException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        Assert.True(exception.Message.Contains("Public key not received properly"));
 
         Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
         Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request."));
@@ -73,7 +67,7 @@
     }
 
     [Test]
-    public async void TestGetItemWithNullInstanceUrl()
+    public void TestGetItemWithNullInstanceUrl()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => new SessionConfig(null, testData.Users.Admin.Username, testData.Users.Admin.Password));
       Assert.IsTrue(
@@ -97,16 +91,15 @@
     [Test]
     public async void TestGetItemWithEmptyPassword()
     {
-      SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, "");
-      ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, "");
+      var session = new ScApiSession(config, ItemSource.DefaultSource());
 
       try
       {
         await session.ReadItemByIdAsync(this.requestWithItemId);
       }
-      catch (Exception exception)
+      catch (ParserException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
         Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
@@ -121,16 +114,15 @@
     [Test]
     public async void TestGetItemWithNotExistentUser()
     {
-      SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, "sitecore\\notexistent", "notexistent");
-      ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, "sitecore\\notexistent", "notexistent");
+      var session = new ScApiSession(config, ItemSource.DefaultSource());
 
       try
       {
         await session.ReadItemByIdAsync(this.requestWithItemId);
       }
-      catch (Exception exception)
+      catch (ParserException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
         Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
@@ -138,23 +130,21 @@
 
         return;
       }
-
       Assert.Fail("Exception not thrown");
     }
 
     [Test]
     public async void TestGetItemWithInvalidUsernameAndPassword()
     {
-      SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, "inval|d u$er№ame", null);
-      ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, "inval|d u$er№ame", null);
+      var session = new ScApiSession(config, ItemSource.DefaultSource());
 
       try
       {
         await session.ReadItemByIdAsync(this.requestWithItemId);
       }
-      catch (Exception exception)
+      catch (ParserException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
         Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
@@ -169,16 +159,15 @@
     [Test]
     public async void TestGetItemAsAnonymousWithoutReadAccess()
     {
-      SessionConfig config = new SessionConfig(testData.AuthenticatedInstanceUrl, null, null);
-      ScApiSession session = new ScApiSession(config, ItemSource.DefaultSource());
+      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, null, null);
+      var session = new ScApiSession(config, ItemSource.DefaultSource());
 
       try
       {
         await session.ReadItemByIdAsync(this.requestWithItemId);
       }
-      catch (Exception exception)
+      catch (ParserException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
         Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());

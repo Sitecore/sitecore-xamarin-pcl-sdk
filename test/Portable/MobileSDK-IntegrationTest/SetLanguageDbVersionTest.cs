@@ -1,13 +1,11 @@
-﻿using MobileSDKUnitTest.Mock;
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading.Tasks;
-  using MobileSDKIntegrationTest;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
@@ -63,16 +61,15 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public async void TestGetItemWithNullLanguage()
+    public void TestGetItemWithNullLanguage()
     {
       const string Db = "master";
       try
       {
         var itemSource = new ItemSource(Db, null, "1");
       }
-      catch (Exception exception)
+      catch (ArgumentNullException exception)
       {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Value cannot be null"));
         return;
       }
@@ -80,16 +77,15 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public async void TestGetItemWithNullDb()
+    public void TestGetItemWithNullDb()
     {
       const string Db = null;      
       try
       {
          var itemSource = new ItemSource(Db, "en", "1");
       }
-      catch (Exception exception)
+      catch (ArgumentNullException exception)
       {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Value cannot be null"));
         return;
       }
@@ -170,7 +166,7 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public async void TestGetItemWithDefaultDbNotExistedLanguageAndNotExistedVersion()
+    public async void TestGetItemWithDefaultDbInvalidLanguageAndNotExistedVersion()
     {
       const string Db = "web";
       const string Language = "UKRAINIAN";
@@ -197,12 +193,11 @@ namespace MobileSDKIntegrationTest
         var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
         var requestBuilder = new ItemWebApiRequestBuilder();
         var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Database(Database).Build();
-        var response = await session.ReadItemByIdAsync(request);
+        await session.ReadItemByIdAsync(request);
       }
-      catch (Exception exception)
+      catch (ParserException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("[Sitecore Mobile SDK] Unable to download data from the internet"));
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
         Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
         Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Database + "']"));
@@ -241,9 +236,8 @@ namespace MobileSDKIntegrationTest
         var itemSource = new ItemSource(Db, Language, Version);
         await this.GetItemByIdWithItemSource(itemSource);
       }
-      catch (Exception exception)
+      catch (ParserException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
         Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
@@ -265,9 +259,8 @@ namespace MobileSDKIntegrationTest
         var itemSource = new ItemSource(Db, Language);
         await this.GetItemByIdWithItemSource(itemSource);
       }
-      catch (Exception exception)
+      catch (ParserException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
         Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
@@ -331,9 +324,8 @@ namespace MobileSDKIntegrationTest
         this.BuildVersionItemRequest(this.testData.AuthenticatedInstanceUrl, this.testData.Users.Creatorex.Username, this.testData.Users.Creatorex.Password, Site);
         await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
       }
-      catch (Exception exception)
+      catch (ParserException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
         Assert.AreEqual("Newtonsoft.Json.JsonReaderException", exception.InnerException.GetType().ToString());
@@ -347,8 +339,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemWithNullSite()
     {
-      const string Site =null;
-      this.BuildVersionItemRequest(this.testData.AuthenticatedInstanceUrl, this.testData.Users.Creatorex.Username, this.testData.Users.Creatorex.Password, Site);
+      this.BuildVersionItemRequest(this.testData.AuthenticatedInstanceUrl, this.testData.Users.Creatorex.Username, this.testData.Users.Creatorex.Password, null);
       var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
 
       testData.AssertItemsCount(1, response);

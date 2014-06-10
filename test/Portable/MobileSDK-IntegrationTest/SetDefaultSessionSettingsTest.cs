@@ -1,10 +1,6 @@
-﻿using MobileSDKUnitTest.Mock;
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
-  using System;
   using System.Threading.Tasks;
-  using MobileSDKIntegrationTest;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;

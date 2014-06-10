@@ -1,13 +1,11 @@
-﻿
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading.Tasks;
-  using MobileSDKUnitTest.Mock;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
 
@@ -172,16 +170,13 @@ namespace MobileSDKIntegrationTest
     {
       try
       {
-        var response = await this.GetItemById(null);
+        await this.GetItemById(null);
       }
-      catch (Exception exception)
+      catch (ArgumentNullException exception)
       {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Item id cannot be null"));
-
         return;
       }
-
       Assert.Fail("Exception not thrown");
     }
 
@@ -190,16 +185,13 @@ namespace MobileSDKIntegrationTest
     {
       try
       {
-        var response = await this.GetItemByPath(null);
+        await this.GetItemByPath(null);
       }
-      catch (Exception exception)
+      catch (ArgumentNullException exception)
       {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Item path cannot be null"));
-
         return;
       }
-
       Assert.Fail("Exception not thrown");
     }
 
@@ -208,16 +200,13 @@ namespace MobileSDKIntegrationTest
     {
       try
       {
-        var response = await this.GetItemByQuery(null);
+        await this.GetItemByQuery(null);
       }
-      catch (Exception exception)
+      catch (ArgumentNullException exception)
       {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
-
         return;
       }
-
       Assert.Fail("Exception not thrown");
     }
 
@@ -226,16 +215,13 @@ namespace MobileSDKIntegrationTest
     {
       try
       {
-        var response = await this.GetItemByPath("");
+        await this.GetItemByPath("");
       }
-      catch (Exception exception)
+      catch (ArgumentNullException exception)
       {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("Item path cannot be null or empty"));
-
         return;
       }
-
       Assert.Fail("Exception not thrown");
     }
 
@@ -244,16 +230,14 @@ namespace MobileSDKIntegrationTest
     {
       try
       {
-        var response = await this.GetItemByQuery("");
+        await this.GetItemByQuery("");
       }
-      catch (Exception exception)
+      catch (ArgumentNullException exception)
       {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
         Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
 
         return;
       }
-
       Assert.Fail("Exception not thrown");
     }
 
@@ -261,9 +245,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetOneHundredItemsByQuery()
     {
       var response = await this.GetItemByQuery("/sitecore/content/Home/Android/Static/100Items/*");
-
       testData.AssertItemsCount(100, response);
-
       Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
     }
 
@@ -294,13 +276,11 @@ namespace MobileSDKIntegrationTest
       {
         await sessionWithoutAccess.ReadItemByPathAsync(request); 
       }
-      catch (Exception exception)
+      catch (RsaHandshakeException exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        Assert.True(exception.Message.Contains("Public key not received properly"));
         return;
       }
-
       Assert.Fail("Exception not thrown");
     }
 
