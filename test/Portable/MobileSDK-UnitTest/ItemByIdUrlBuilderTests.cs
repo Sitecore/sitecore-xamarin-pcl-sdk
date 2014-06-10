@@ -1,17 +1,18 @@
-﻿namespace Sitecore.MobileSdkUnitTest
+﻿
+
+namespace Sitecore.MobileSdkUnitTest
 {
     using System;
     using NUnit.Framework;
 
     using MobileSDKUnitTest.Mock;
 
-    using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.SessionSettings;
-    using Sitecore.MobileSDK.UrlBuilder;
     using Sitecore.MobileSDK.UrlBuilder.ItemById;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
     [TestFixture]
     public class ItemByIdUrlBuilderTests
@@ -19,7 +20,7 @@
         private ItemByIdUrlBuilder builder;
         private ISessionConfig sessionConfig;
         private ISessionConfig sitecoreShellConfig;
-
+        private QueryParameters payload;
 
         [SetUp]
         public void SetUp()
@@ -41,6 +42,8 @@
             mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
             mutableSessionConfig.Site = "/sitecore/shell";
             this.sitecoreShellConfig = mutableSessionConfig;
+
+            this.payload = new QueryParameters( PayloadType.Min );
         }
 
         [TearDown]
@@ -57,6 +60,7 @@
 			mutableParameters.SessionSettings = this.sessionConfig;
 			mutableParameters.ItemSource = ItemSource.DefaultSource();
 			mutableParameters.ItemId = "someInvalidItemId";
+            mutableParameters.QueryParameters = this.payload;
 
 			IReadItemsByIdRequest parameters = mutableParameters;
 
@@ -71,11 +75,12 @@
             mutableParameters.SessionSettings = this.sessionConfig;
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByIdRequest parameters = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(parameters);
-            string expected = "http://sitecore.net/-/item/v1?sc_database=web&sc_lang=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+            string expected = "http://sitecore.net/-/item/v1?sc_database=web&sc_lang=en&payload=min&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
 
             Assert.AreEqual(expected, result);
         }
@@ -87,11 +92,12 @@
             mutableParameters.SessionSettings = this.sitecoreShellConfig;
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByIdRequest parameters = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(parameters);
-            string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&sc_lang=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+            string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&sc_lang=en&payload=min&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
 
             Assert.AreEqual(expected, result);
         }
@@ -103,6 +109,7 @@
             mutableParameters.SessionSettings = this.sessionConfig;
             mutableParameters.ItemSource = null;
             mutableParameters.ItemId = null;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByIdRequest parameters = mutableParameters;
 
@@ -118,6 +125,7 @@
             mutableParameters.SessionSettings = this.sessionConfig;
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{}";
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByIdRequest parameters = mutableParameters;
 
