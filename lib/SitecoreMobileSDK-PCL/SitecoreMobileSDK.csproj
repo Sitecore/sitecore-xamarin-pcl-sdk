@@ -98,6 +98,7 @@
     <Compile Include="Exceptions\LoadDataFromNetworkException.cs" />
     <Compile Include="Exceptions\ParserException.cs" />
     <Compile Include="Exceptions\ProcessUserRequestException.cs" />
+    <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

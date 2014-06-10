@@ -10,14 +10,11 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
     using Sitecore.MobileSDK.SessionSettings;
 
 
-    public class ItemByPathUrlBuilder
+    public class ItemByPathUrlBuilder : AbstractGetItemUrlBuilder
     {
         public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+            : base( restGrammar, webApiGrammar )
         {
-            this.restGrammar = restGrammar;
-            this.webApiGrammar = webApiGrammar;
-
-            this.Validate();
         }
 
         public string GetUrlForRequest(IReadItemsByPathRequest request)
@@ -52,23 +49,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
         private void ValidatePath(string itemPath)
         {
             ItemPathValidator.ValidateItemPath (itemPath);
-        }
-            
-        private void Validate()
-        {
-            if (null == this.restGrammar)
-            {
-                throw new ArgumentNullException ("[SessionConfigUrlBuilder] restGrammar cannot be null");
-            }
-            else if (null == this.webApiGrammar)
-            {
-                throw new ArgumentNullException ("[SessionConfigUrlBuilder] webApiGrammar cannot be null");
-            }
-        }
-
-
-
-        private IRestServiceGrammar restGrammar;
-        private IWebApiUrlParameters webApiGrammar;
+        }            
     }
 }
