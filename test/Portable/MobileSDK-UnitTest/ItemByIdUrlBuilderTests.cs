@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSdkUnitTest
+﻿
+
+namespace Sitecore.MobileSdkUnitTest
 {
     using System;
     using NUnit.Framework;
@@ -10,6 +12,7 @@
     using Sitecore.MobileSDK.UrlBuilder.ItemById;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
     [TestFixture]
     public class ItemByIdUrlBuilderTests
@@ -17,7 +20,7 @@
         private ItemByIdUrlBuilder builder;
         private ISessionConfig sessionConfig;
         private ISessionConfig sitecoreShellConfig;
-
+        private QueryParameters payload;
 
         [SetUp]
         public void SetUp()
@@ -39,6 +42,8 @@
             mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
             mutableSessionConfig.Site = "/sitecore/shell";
             this.sitecoreShellConfig = mutableSessionConfig;
+
+            this.payload = new QueryParameters( PayloadType.Min );
         }
 
         [TearDown]
@@ -55,6 +60,7 @@
 			mutableParameters.SessionSettings = this.sessionConfig;
 			mutableParameters.ItemSource = ItemSource.DefaultSource();
 			mutableParameters.ItemId = "someInvalidItemId";
+            mutableParameters.QueryParameters = this.payload;
 
 			IReadItemsByIdRequest parameters = mutableParameters;
 
@@ -69,6 +75,7 @@
             mutableParameters.SessionSettings = this.sessionConfig;
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByIdRequest parameters = mutableParameters;
 
@@ -85,6 +92,7 @@
             mutableParameters.SessionSettings = this.sitecoreShellConfig;
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{   xxx   }";
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByIdRequest parameters = mutableParameters;
 
@@ -101,6 +109,7 @@
             mutableParameters.SessionSettings = this.sessionConfig;
             mutableParameters.ItemSource = null;
             mutableParameters.ItemId = null;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByIdRequest parameters = mutableParameters;
 
@@ -116,6 +125,7 @@
             mutableParameters.SessionSettings = this.sessionConfig;
             mutableParameters.ItemSource = ItemSource.DefaultSource();
             mutableParameters.ItemId = "{}";
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByIdRequest parameters = mutableParameters;
 
