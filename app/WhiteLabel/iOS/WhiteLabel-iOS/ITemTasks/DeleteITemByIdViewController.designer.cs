@@ -16,7 +16,7 @@ namespace WhiteLabeliOS
 		MonoTouch.UIKit.UITextField itemIdField { get; set; }
 
 		[Action ("OnDeleteItemButtonTouched:")]
-		partial void OnDeleteItemButtonTouched (MonoTouch.UIKit.UIButton sender);
+		partial void OnDeleteItemButtonTouched (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

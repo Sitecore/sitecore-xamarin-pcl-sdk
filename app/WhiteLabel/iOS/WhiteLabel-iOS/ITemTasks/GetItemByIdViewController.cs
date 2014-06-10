@@ -58,6 +58,7 @@ namespace WhiteLabeliOS
 				if (response.ResultCount > 0)
 				{
 					ScItem item = response.Items [0];
+					string message = NSBundle.MainBundle.LocalizedString("item title is", null);
 					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
 				}
 				else
