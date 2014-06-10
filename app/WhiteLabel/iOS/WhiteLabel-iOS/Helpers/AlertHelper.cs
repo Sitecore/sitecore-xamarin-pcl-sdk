@@ -13,10 +13,16 @@ namespace WhiteLabeliOS
 
 		public static void ShowAlertWithOkOption(string title, string message)
 		{
+			AlertHelper.ShowAlertWithSingleButton (title, message, "OK");
+		}
+
+		public static void ShowAlertWithSingleButton(string title, string message, string buttonTitle)
+		{
 			UIAlertView alert = new UIAlertView () { 
 				Title = title, Message = message
 			};
-			alert.AddButton("OK");
+
+			alert.AddButton(buttonTitle);
 			alert.Show ();
 		}
 
@@ -24,7 +30,9 @@ namespace WhiteLabeliOS
 		{
 			string localizedTitle = NSBundle.MainBundle.LocalizedString (title, null);
 			string localizedMessage = NSBundle.MainBundle.LocalizedString (message, null);
-			AlertHelper.ShowAlertWithOkOption(localizedTitle, localizedMessage);
+			string localizedButtonTitle = NSBundle.MainBundle.LocalizedString ("OK", null);
+
+			AlertHelper.ShowAlertWithSingleButton (title, message, localizedButtonTitle);
 		}
 
 		public static Task<int> ShowAlert(string title, string message, params string [] buttons)

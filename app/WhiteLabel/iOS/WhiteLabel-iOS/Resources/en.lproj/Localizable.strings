@@ -11,6 +11,7 @@
 "Alert" = "Alert";
 "Error" = "Error";
 "Message" = "Message";
+"OK" = "OK";
 
 //messages
 "Loading Data" = "Loading Data...";
