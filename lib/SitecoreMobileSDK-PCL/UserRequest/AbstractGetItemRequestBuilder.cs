@@ -40,14 +40,14 @@ namespace Sitecore.MobileSDK
 
         public IGetItemRequestParametersBuilder<T> Payload(PayloadType payload)
         {
-            this.queryParameters = new QueryParameters(this.queryParameters.Payload);
+            this.queryParameters = new QueryParameters(payload);
             return this;
         }
 
         public abstract T Build();
 
         protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
-        protected QueryParameters queryParameters = new QueryParameters(UrlBuilder.QueryParameters.PayloadType.None);
+        protected QueryParameters queryParameters = new QueryParameters(PayloadType.None);
     }
 }
 
