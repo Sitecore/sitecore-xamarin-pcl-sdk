@@ -66,23 +66,36 @@ namespace MobileSDKIntegrationTest
     public async void TestGetItemWithNullLanguage()
     {
       const string Db = "master";
-      var itemSource = new ItemSource(Db, null, "1");
-     
       try
       {
-     await this.GetItemByIdWithItemSource(itemSource);
+        var itemSource = new ItemSource(Db, null, "1");
       }
       catch (Exception exception)
       {
-       // Assert.AreEqual("System.ArgumentNullException", exception.GetBaseException().ToString());
-         //Assert.True(exception.Message.Contains("Do not pass null to constructor"));
-
-      // Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      // Assert.True(exception.Message.Contains("Do not pass null to constructor"));
+        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Value cannot be null"));
         return;
       }
       Assert.Fail("Exception not thrown");
     }
+
+    [Test]
+    public async void TestGetItemWithNullDb()
+    {
+      const string Db = null;      
+      try
+      {
+         var itemSource = new ItemSource(Db, "en", "1");
+      }
+      catch (Exception exception)
+      {
+        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Value cannot be null"));
+        return;
+      }
+      Assert.Fail("Exception not thrown");
+    }
+
     [Test]
     public async void TestGetItemWithMasterDbLanguageAndVersion()
     {
@@ -329,6 +342,74 @@ namespace MobileSDKIntegrationTest
         return;
       }
       Assert.Fail("Exception not thrown");
+    }
+
+    [Test]
+    public async void TestGetItemWithNullSite()
+    {
+      const string Site =null;
+      this.BuildVersionItemRequest(this.testData.AuthenticatedInstanceUrl, this.testData.Users.Creatorex.Username, this.testData.Users.Creatorex.Password, Site);
+      var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
+
+      testData.AssertItemsCount(1, response);
+      ScItem resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+    }
+
+    [Test]
+    public async void TestGetItemWithEmptyDb()
+    {
+      const string Db = "";
+      const string Language = "da";
+      const string Version = "1";
+
+      var itemSource = new ItemSource(Db, Language, Version);
+      var response = await this.GetItemByIdWithItemSource(itemSource);
+
+      testData.AssertItemsCount(1, response);
+      ScItem resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+
+      var expectedSource = new ItemSource("web", Language, Version);
+      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+      //Assert.AreEqual("Danish version 2 web", resultItem.Fields["Title"].RawValue);
+    }
+
+    [Test]
+    public async void TestGetItemWithEmptyLanguage()
+    {
+      const string Db = "master";
+      const string Language = "";
+      const string Version = "1";
+
+      var itemSource = new ItemSource(Db, Language, Version);
+      var response = await this.GetItemByIdWithItemSource(itemSource);
+
+      testData.AssertItemsCount(1, response);
+      ScItem resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+
+      var expectedSource = new ItemSource(Db,"en", Version);
+      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+      //Assert.AreEqual("English version 1 master", resultItem.Fields["Title"].RawValue);
+    }
+    [Test]
+    public async void TestGetItemWithEmptyVersion()
+    {
+      const string Db = "master";
+      const string Language = "da";
+      const string Version = "";
+
+      var itemSource = new ItemSource(Db, Language, Version);
+      var response = await this.GetItemByIdWithItemSource(itemSource);
+
+      testData.AssertItemsCount(1, response);
+      ScItem resultItem = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+
+      var expectedSource = new ItemSource(Db, Language,"2");
+      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+      //Assert.AreEqual("Danish version 2 master", resultItem.Fields["Title"].RawValue);
     }
 
   }
