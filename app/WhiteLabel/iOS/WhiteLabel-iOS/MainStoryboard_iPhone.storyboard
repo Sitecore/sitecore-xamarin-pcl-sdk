@@ -498,7 +498,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnUploadImageButtonTouched:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="i1U-vt-SgO"/>
                                     <action selector="startUpload:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="6cs-sg-cO3"/>
                                 </connections>
                             </button>
@@ -513,7 +512,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnCancelUploadButtonTouched:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="8XZ-VC-P1p"/>
                                     <action selector="cancelUpload:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="df7-G7-tPQ"/>
                                 </connections>
                             </button>
@@ -575,7 +573,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnGetItemButtonTouched:" destination="YSW-Sn-ezD" eventType="touchUpInside" id="H5t-aj-OWK"/>
                                     <action selector="getItem:" destination="YSW-Sn-ezD" eventType="touchUpInside" id="hCq-jG-cjw"/>
                                 </connections>
                             </button>
