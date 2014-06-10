@@ -26,7 +26,7 @@ namespace WhiteLabeliOS
 		{
 			if (String.IsNullOrEmpty(itemPathField.Text))
 			{
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item Id");
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item path");
 			}
 			else
 			{

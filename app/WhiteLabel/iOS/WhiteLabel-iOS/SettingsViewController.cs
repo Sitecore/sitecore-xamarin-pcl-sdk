@@ -16,12 +16,20 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
-			this.instanceUrlField.ShouldReturn = this.HideKeyboard;
-			this.passwordField.ShouldReturn = this.HideKeyboard;
-			this.loginField.ShouldReturn = this.HideKeyboard;
-			this.siteField.ShouldReturn = this.HideKeyboard;
-			this.dbField.ShouldReturn = this.HideKeyboard;
-			this.languageField.ShouldReturn = this.HideKeyboard;
+
+			this.instanceUrlField.Placeholder	= NSBundle.MainBundle.LocalizedString ("Instance Url", null);
+			this.passwordField.Placeholder		= NSBundle.MainBundle.LocalizedString ("Password", null);
+			this.loginField.Placeholder    		= NSBundle.MainBundle.LocalizedString ("Login", null);
+			this.siteField.Placeholder     		= NSBundle.MainBundle.LocalizedString ("Site", null);
+			this.dbField.Placeholder       		= NSBundle.MainBundle.LocalizedString ("Database", null);
+			this.languageField.Placeholder 		= NSBundle.MainBundle.LocalizedString ("Language", null);
+
+			this.instanceUrlField.ShouldReturn	= this.HideKeyboard;
+			this.passwordField.ShouldReturn		= this.HideKeyboard;
+			this.loginField.ShouldReturn    	= this.HideKeyboard;
+			this.siteField.ShouldReturn     	= this.HideKeyboard;
+			this.dbField.ShouldReturn       	= this.HideKeyboard;
+			this.languageField.ShouldReturn 	= this.HideKeyboard;
 		}
 
 		public override void ViewWillAppear(bool animated)
