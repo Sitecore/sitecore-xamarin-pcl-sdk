@@ -27,6 +27,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
             SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
             string result = sessionBuilder.BuildUrlString(request.SessionSettings);
 
+            QueryParametersUrlBuilder queryParametersUrlBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
+            string queryParamsUrl = queryParametersUrlBuilder.BuildUrlString(request.QueryParameters);
+
             ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
             string itemSourceArgs = sourceBuilder.BuildUrlQueryString ();
 
@@ -48,7 +51,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
         {
             if (null == this.restGrammar)
             {
-                throw new ArgumentNullException ("[SessionConfigUrlBuilder] restGrammar cannot be null");
+                throw new ArgumentNullException ("[SessionConfigUrlBuilder] restGrammar cannot be null"); 
             }
             else if (null == this.webApiGrammar)
             {
