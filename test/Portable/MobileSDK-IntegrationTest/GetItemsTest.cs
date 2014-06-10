@@ -170,9 +170,12 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemByNullId()
     {
+      ScItemsResponse response = null;
+
       try
       {
-        var response = await this.GetItemById(null);
+        response = await this.GetItemById(null);
+        Assert.IsNull( response );
       }
       catch (Exception exception)
       {
@@ -188,37 +191,43 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemByNullPath()
     {
-      try
-      {
-        var response = await this.GetItemByPath(null);
-      }
-      catch (Exception exception)
-      {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Item path cannot be null"));
+        ScItemsResponse response = null;
 
-        return;
-      }
+        try
+        {
+            response = await this.GetItemByPath(null);
+            Assert.IsNull( response );
+        }
+        catch (Exception exception)
+        {
+            Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+            Assert.True(exception.Message.Contains("Item path cannot be null"));
 
-      Assert.Fail("Exception not thrown");
+            return;
+        }
+
+        Assert.Fail("Exception not thrown");
     }
 
     [Test]
     public async void TestGetItemByNullQuery()
     {
-      try
-      {
-        var response = await this.GetItemByQuery(null);
-      }
-      catch (Exception exception)
-      {
-        Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
+        ScItemsResponse response = null;
 
-        return;
-      }
+        try
+        {
+            response = await this.GetItemByQuery(null);
+            Assert.IsNull( response );
+        }
+        catch (Exception exception)
+        {
+            Assert.AreEqual("System.ArgumentNullException", exception.GetType().ToString());
+            Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
 
-      Assert.Fail("Exception not thrown");
+            return;
+        }
+
+        Assert.Fail("Exception not thrown");
     }
 
     [Test]
@@ -226,7 +235,7 @@ namespace MobileSDKIntegrationTest
     {
       try
       {
-        var response = await this.GetItemByPath("");
+        await this.GetItemByPath("");
       }
       catch (Exception exception)
       {
@@ -244,7 +253,7 @@ namespace MobileSDKIntegrationTest
     {
       try
       {
-        var response = await this.GetItemByQuery("");
+        await this.GetItemByQuery("");
       }
       catch (Exception exception)
       {
