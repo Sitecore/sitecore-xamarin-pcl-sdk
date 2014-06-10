@@ -83,7 +83,7 @@
       //Assert.AreEqual("Danish version 1 master", resultItem.Fields["Title"].RawValue);
     }
     [Test]
-    public async void TestGetItemWithOverridenLanguageFromRequest()
+    public async void TestOverrideLanguageInRequest()
     {
       const string Db = "master";
       const string Language = "en";
@@ -102,7 +102,7 @@
       //Assert.AreEqual("English version 2 master", resultItem.Fields["Title"].RawValue);
     }
 
-    public async void TestGetItemWithOverridenVersionAndDbFromRequest()
+    public async void TestOverrideVersionAndDbInRequest()
     {
       const string Db = "master";
       const string Language = "en";
