@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Diagnostics;
 
 
 namespace Sitecore.MobileSdkUnitTest
@@ -39,6 +40,21 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual("/sitecore/content/Home", item1.Path);
             Assert.AreEqual("Sample/Sample Item", item1.Template);
             Assert.AreEqual(1, item1.Source.VersionNumber);
+        }
+
+        [Test]
+        public void TestAll20XCodesAreValid()
+        {
+            string responseBegin = "{\"statusCode\":";
+            string responseEnd   = ",\"result\":{\"totalCount\":0,\"resultCount\":0,\"items\":[]}}";
+
+            for (int i = 200; i < 300; ++i)
+            {
+                string rawResponse = responseBegin + i.ToString() + responseEnd;
+
+                ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
+                Assert.AreEqual(0, response.Items.Count);
+            }
         }
 
         [Test]
