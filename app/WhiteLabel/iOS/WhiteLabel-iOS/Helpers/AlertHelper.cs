@@ -7,33 +7,34 @@ namespace WhiteLabeliOS
 {
 	public class AlertHelper
 	{
-		public AlertHelper ()
+		public AlertHelper()
 		{
 		}
 
 		public static void ShowAlertWithOkOption(string title, string message)
 		{
-			AlertHelper.ShowAlertWithSingleButton (title, message, "OK");
+			AlertHelper.ShowAlertWithSingleButton(title, message, "OK");
 		}
 
 		public static void ShowAlertWithSingleButton(string title, string message, string buttonTitle)
 		{
-			UIAlertView alert = new UIAlertView () { 
+			UIAlertView alert = new UIAlertView() 
+			{ 
 				Title = title, 
 				Message = message
 			};
 
 			alert.AddButton(buttonTitle);
-			alert.Show ();
+			alert.Show();
 		}
 
 		public static void ShowLocalizedAlertWithOkOption(string title, string message)
 		{
-			string localizedTitle 		= NSBundle.MainBundle.LocalizedString (title, null);
-			string localizedMessage 	= NSBundle.MainBundle.LocalizedString (message, null);
-			string localizedButtonTitle = NSBundle.MainBundle.LocalizedString ("OK", null);
+			string localizedTitle 		= NSBundle.MainBundle.LocalizedString(title, null);
+			string localizedMessage 	= NSBundle.MainBundle.LocalizedString(message, null);
+			string localizedButtonTitle = NSBundle.MainBundle.LocalizedString("OK", null);
 
-			AlertHelper.ShowAlertWithSingleButton (localizedTitle, localizedMessage, localizedButtonTitle);
+			AlertHelper.ShowAlertWithSingleButton(localizedTitle, localizedMessage, localizedButtonTitle);
 		}
 
 		public static void ShowLocalizedNotImlementedAlert()
@@ -43,19 +44,19 @@ namespace WhiteLabeliOS
 
 		public static Task<int> ShowAlert(string title, string message, params string [] buttons)
 		{
-			var tcs 	= new TaskCompletionSource<int> ();
+			var tcs 	= new TaskCompletionSource<int>();
 			var alert 	= new UIAlertView 
 			{
 				Title = title,
 				Message = message
 			};
-			foreach (var button in buttons) 
+			foreach(var button in buttons) 
 			{
-				alert.AddButton (button);
+				alert.AddButton(button);
 			}
 
-			alert.Clicked += (s, e) => tcs.TrySetResult (e.ButtonIndex);
-			alert.Show ();
+			alert.Clicked += (s, e) => tcs.TrySetResult(e.ButtonIndex);
+			alert.Show();
 			return tcs.Task;
 		}
 	}
