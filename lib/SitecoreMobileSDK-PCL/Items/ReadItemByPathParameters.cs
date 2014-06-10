@@ -6,17 +6,20 @@ namespace Sitecore.MobileSDK.Items
     using Sitecore.MobileSDK.SessionSettings;
 
     using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
     public class ReadItemByPathParameters : IReadItemsByPathRequest
     {
         public ReadItemByPathParameters(
-            ISessionConfig sessionSettings, 
+            ISessionConfig sessionSettings,
             IItemSource itemSource, 
+            IQueryParameters queryParameters, 
             string itemPath)
         {
             this.SessionSettings = sessionSettings;
             this.ItemSource = itemSource;
             this.ItemPath = itemPath;
+            this.QueryParameters = queryParameters;
         }
 
         public string ItemPath { get; private set; }
@@ -24,5 +27,7 @@ namespace Sitecore.MobileSDK.Items
         public IItemSource ItemSource { get; private set; }
 
         public ISessionConfig SessionSettings { get; private set; }
+
+        public IQueryParameters QueryParameters { get; private set; }
     }
 }

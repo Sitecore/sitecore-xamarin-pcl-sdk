@@ -1,8 +1,8 @@
 ﻿
 namespace Sitecore.MobileSDK
 {
-    using System;
     using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
 
     public abstract class AbstractGetItemRequestBuilder<T> : IGetItemRequestParametersBuilder<T>
@@ -38,9 +38,16 @@ namespace Sitecore.MobileSDK
             return this;
         }
 
+        public IGetItemRequestParametersBuilder<T> Payload(PayloadType payload)
+        {
+            this.queryParameters = new QueryParameters(this.queryParameters.Payload);
+            return this;
+        }
+
         public abstract T Build();
 
         protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
+        protected QueryParameters queryParameters = new QueryParameters(UrlBuilder.QueryParameters.PayloadType.None);
     }
 }
 
