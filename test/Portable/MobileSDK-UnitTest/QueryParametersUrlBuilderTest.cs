@@ -39,8 +39,8 @@ namespace MobileSDK_UnitTest_Desktop
             result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Min));
             Assert.AreEqual("payload=min", result);
 
-            result = this.builder.BuildUrlString(new QueryParameters(PayloadType.None));
-            Assert.AreEqual(string.Empty, result);
+            result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Default));
+            Assert.AreEqual("payload=min", result);
         }
 
         [Test]

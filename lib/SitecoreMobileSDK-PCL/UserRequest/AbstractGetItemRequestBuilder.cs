@@ -47,7 +47,7 @@ namespace Sitecore.MobileSDK
         public abstract T Build();
 
         protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
-        protected QueryParameters queryParameters = new QueryParameters(PayloadType.None);
+        protected QueryParameters queryParameters = new QueryParameters(PayloadType.Default);
     }
 }
 

@@ -2,6 +2,9 @@
 {
     public enum PayloadType
     {
-        Min, Content, Full, None
+        Min, 
+        Content, 
+        Full, 
+        Default = Min
     }
 }

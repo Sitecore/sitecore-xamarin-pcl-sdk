@@ -42,7 +42,6 @@
             enumNamesMap.Add( PayloadType.Content, "content" );
             enumNamesMap.Add( PayloadType.Full   , "full"    );
             enumNamesMap.Add( PayloadType.Min    , "min"     );
-            enumNamesMap.Add( PayloadType.None   , null      );
 
             string result = enumNamesMap[payload];
             return result;
