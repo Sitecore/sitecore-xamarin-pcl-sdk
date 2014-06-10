@@ -21,8 +21,11 @@ namespace Sitecore.MobileSDK
             this.Validate();
         }
 
+        #region Entry Point
         public virtual string GetUrlForRequest(TRequest request)
         {
+            this.ValidateRequest( request );
+
             string baseUrl = this.GetCommonPartForRequest( request );
             string specificParameters = this.GetSpecificPartForRequest( request );
 
@@ -30,6 +33,14 @@ namespace Sitecore.MobileSDK
             return result.ToLowerInvariant();
         }
 
+        protected virtual void ValidateRequest(TRequest request)
+        {
+            this.ValidateCommonRequest( request );
+            this.ValidateSpecificRequest( request );
+        }
+        #endregion Entry Point
+
+        #region Common Logic
         private string GetCommonPartForRequest(TRequest request)
         {
             SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
@@ -50,8 +61,25 @@ namespace Sitecore.MobileSDK
             return result;
         }
 
-        protected abstract string GetSpecificPartForRequest(TRequest request);
-
+        private void ValidateCommonRequest(TRequest request)
+        {
+            if ( null == request )
+            {
+                throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request cannot be null" );
+            }
+            else if ( null == request.ItemSource )
+            {
+                throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.ItemSource cannot be null" );
+            }
+            else if ( null == request.SessionSettings )
+            {
+                throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings cannot be null" );
+            }
+            else if ( null == request.QueryParameters )
+            {
+                throw new ArgumentNullException( "AbstractGetItemUrlBuilder.QueryParameters() : request.SessionSettings cannot be null" );
+            }
+        }
 
         private void Validate()
         {
@@ -64,10 +92,18 @@ namespace Sitecore.MobileSDK
                 throw new ArgumentNullException ("[GetItemUrlBuilder] webApiGrammar cannot be null");
             }
         }
+        #endregion Common Logic
 
+        #region Abstract Methods
+        protected abstract string GetSpecificPartForRequest(TRequest request);
 
+        protected abstract void ValidateSpecificRequest(TRequest request);
+        #endregion Abstract Methods
+
+        #region instance variables
         protected IRestServiceGrammar restGrammar;
         protected IWebApiUrlParameters webApiGrammar;
+        #endregion instance variables
     }
 }
 
