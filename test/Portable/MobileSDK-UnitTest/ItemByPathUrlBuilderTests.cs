@@ -54,6 +54,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.ItemPath = "/path/TO/iTEm";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByPathRequest request = mutableParameters;
 
@@ -76,9 +77,7 @@ namespace Sitecore.MobileSdkUnitTest
 
             Assert.Throws<ArgumentNullException>( () => this.builder.GetUrlForRequest( request ) );
         }
-
-
-
+            
         [Test]
         public void TestBuildWithUnEscapedPath()
         {
@@ -86,6 +85,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.ItemPath = "/path TO iTEm";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByPathRequest request = mutableParameters;
 
@@ -109,6 +109,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.ItemPath = "path without starting slash";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByPathRequest request = mutableParameters;
 
@@ -123,6 +124,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.ItemPath = "";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
 
             IReadItemsByPathRequest request = mutableParameters;
 
@@ -138,6 +140,8 @@ namespace Sitecore.MobileSdkUnitTest
             mutableParameters.ItemSource = ItemSource.DefaultSource ();
             mutableParameters.ItemPath = "\r\n\t";
             mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = this.payload;
+
 
             IReadItemsByPathRequest request = mutableParameters;
 
