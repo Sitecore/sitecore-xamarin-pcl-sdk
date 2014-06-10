@@ -22,7 +22,7 @@ namespace MobileSDKIntegrationTest
         {
             this.env = TestEnvironment.DefaultTestEnvironment ();
 
-            SessionConfig config = new SessionConfig (this.env.AuthenticatedInstanceURL, this.env.AdminUsername, this.env.AdminPassword);
+            SessionConfig config = new SessionConfig (this.env.AuthenticatedInstanceUrl, this.env.Users.Admin.Username, this.env.Users.Admin.Password);
             ItemSource defaultSource = ItemSource.DefaultSource();
 
             this.session = new ScTestApiSession (config, defaultSource);
@@ -60,7 +60,7 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.RequestWithId (this.env.HomeItemId).Build();
+            var request = this.requestBuilder.RequestWithId (this.env.Items.Home.Id).Build();
 
             Task<ScItemsResponse> action = this.session.ReadItemByIdAsync (request, cancel.Token);
             cancel.Cancel();
