@@ -19,7 +19,8 @@ namespace WhiteLabeliOS
 		public static void ShowAlertWithSingleButton(string title, string message, string buttonTitle)
 		{
 			UIAlertView alert = new UIAlertView () { 
-				Title = title, Message = message
+				Title = title, 
+				Message = message
 			};
 
 			alert.AddButton(buttonTitle);
@@ -28,17 +29,22 @@ namespace WhiteLabeliOS
 
 		public static void ShowLocalizedAlertWithOkOption(string title, string message)
 		{
-			string localizedTitle = NSBundle.MainBundle.LocalizedString (title, null);
-			string localizedMessage = NSBundle.MainBundle.LocalizedString (message, null);
+			string localizedTitle 		= NSBundle.MainBundle.LocalizedString (title, null);
+			string localizedMessage 	= NSBundle.MainBundle.LocalizedString (message, null);
 			string localizedButtonTitle = NSBundle.MainBundle.LocalizedString ("OK", null);
 
-			AlertHelper.ShowAlertWithSingleButton (title, message, localizedButtonTitle);
+			AlertHelper.ShowAlertWithSingleButton (localizedTitle, localizedMessage, localizedButtonTitle);
+		}
+
+		public static void ShowLocalizedNotImlementedAlert()
+		{
+			AlertHelper.ShowLocalizedAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
 		public static Task<int> ShowAlert(string title, string message, params string [] buttons)
 		{
-			var tcs = new TaskCompletionSource<int> ();
-			var alert = new UIAlertView 
+			var tcs 	= new TaskCompletionSource<int> ();
+			var alert 	= new UIAlertView 
 			{
 				Title = title,
 				Message = message
@@ -51,11 +57,6 @@ namespace WhiteLabeliOS
 			alert.Clicked += (s, e) => tcs.TrySetResult (e.ButtonIndex);
 			alert.Show ();
 			return tcs.Task;
-		}
-
-		public static void ShowLocalizedNotImlementedAlert()
-		{
-			AlertHelper.ShowLocalizedAlertWithOkOption("Alert", "Not implemented yet" , "OK");
 		}
 	}
 }
