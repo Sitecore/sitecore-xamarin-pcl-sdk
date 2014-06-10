@@ -12,34 +12,20 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
 
-    public class ItemByQueryUrlBuilder : AbstractGetItemUrlBuilder
+    public class ItemByQueryUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByQueryRequest>
     {
         public ItemByQueryUrlBuilder (IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
             : base( restGrammar, webApiGrammar )
         {
         }
 
-        public string GetUrlForRequest(IReadItemsByQueryRequest request)
+        protected override string GetSpecificPartForRequest(IReadItemsByQueryRequest request)
         {
             this.ValidateRequest (request);
-
-            SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder (this.restGrammar, this.webApiGrammar);
-            string urlBase = sessionBuilder.BuildUrlString (request.SessionSettings);
-
-            ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
-            string source = sourceBuilder.BuildUrlQueryString ();
-
-
             string escapedQuery = UrlBuilderUtils.EscapeDataString (request.SitecoreQuery);
+            string result = this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
 
-            string result = 
-                urlBase +
-                this.restGrammar.HostAndArgsSeparator +
-                source +
-                this.restGrammar.FieldSeparator +
-                this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
-
-            return result.ToLowerInvariant ();
+            return result;
         }
 
         private void ValidateRequest(IReadItemsByQueryRequest request)

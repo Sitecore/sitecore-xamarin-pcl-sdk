@@ -10,14 +10,19 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
     using Sitecore.MobileSDK.SessionSettings;
 
 
-    public class ItemByPathUrlBuilder : AbstractGetItemUrlBuilder
+    public class ItemByPathUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByPathRequest>
     {
         public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
             : base( restGrammar, webApiGrammar )
         {
         }
 
-        public string GetUrlForRequest(IReadItemsByPathRequest request)
+        protected override string GetSpecificPartForRequest(IReadItemsByPathRequest request)
+        {
+            throw new InvalidOperationException("ItemByPathUrlBuilder.GetSpecificPartForRequest() - Unexpected instruction");
+        }
+
+        public override string GetUrlForRequest(IReadItemsByPathRequest request)
         {
             this.ValidateRequest (request);
             string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath);

@@ -10,41 +10,21 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
     using Sitecore.MobileSDK.Utils;
 
 
-    public class ItemByIdUrlBuilder : AbstractGetItemUrlBuilder
+    public class ItemByIdUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByIdRequest>
     {
         public ItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
             : base( restGrammar, webApiGrammar )
         {
         }
 
-        public string GetUrlForRequest(IReadItemsByIdRequest request)
+        protected override string GetSpecificPartForRequest(IReadItemsByIdRequest request)
         {
-            this.ValidateId(request.ItemId);
+            ItemIdValidator.ValidateItemId(request.ItemId);
+
             string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
+            string result = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator +  escapedId;
 
-            SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
-            string result = sessionBuilder.BuildUrlString(request.SessionSettings);
-
-            QueryParametersUrlBuilder queryParametersUrlBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
-            string queryParamsUrl = queryParametersUrlBuilder.BuildUrlString(request.QueryParameters);
-
-            ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
-            string itemSourceArgs = sourceBuilder.BuildUrlQueryString ();
-
-            result += 
-                this.restGrammar.HostAndArgsSeparator + 
-                itemSourceArgs +
-                this.restGrammar.FieldSeparator +
-                queryParamsUrl +
-                this.restGrammar.FieldSeparator + 
-                this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator +  escapedId;
-
-            return result.ToLowerInvariant();
-        }
-
-        private void ValidateId(string itemId)
-        {
-            ItemIdValidator.ValidateItemId (itemId);
+            return result;
         }
     }
 }
