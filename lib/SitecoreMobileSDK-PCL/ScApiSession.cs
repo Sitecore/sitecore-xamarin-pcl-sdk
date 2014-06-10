@@ -1,4 +1,4 @@
-
+using Sitecore.MobileSDK.Exceptions;
 
 
 namespace Sitecore.MobileSDK
@@ -53,12 +53,35 @@ namespace Sitecore.MobileSDK
 
         protected virtual async Task<PublicKeyX509Certificate> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken) )
         {
-            var taskFlow = new GetPublicKeyTasks(this.httpClient);
+            try
+            {
+                var taskFlow = new GetPublicKeyTasks(this.httpClient);
 
-            PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow, cancelToken);
-            this.publicCertifiacte = result;
+                PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow, cancelToken);
+                this.publicCertifiacte = result;
+            }
+            catch (ObjectDisposedException)
+            {
+                // CancellationToken.ThrowIfCancellationRequested()
+                throw;
+            }
+            catch (OperationCanceledException)
+            {
+                // CancellationToken.ThrowIfCancellationRequested()
+                // and TaskCanceledException
+                throw;
+            }
+            catch (SitecoreMobileSdkException ex)
+            {
+                // throw unwrapped exception as if GetPublicKeyAsync() is an atomic phase
+                throw new RsaHandshakeException("[Sitecore Mobile SDK] Public key not received properly", ex.InnerException);
+            }
+            catch (Exception ex)
+            {
+                throw new RsaHandshakeException("[Sitecore Mobile SDK] Public key not received properly", ex);
+            }
 
-            return result;
+            return this.publicCertifiacte;
         }
 
         protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync(CancellationToken cancelToken = default(CancellationToken))

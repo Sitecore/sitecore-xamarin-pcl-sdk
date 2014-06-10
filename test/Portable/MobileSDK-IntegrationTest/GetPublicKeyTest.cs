@@ -61,10 +61,11 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("System.Net.Http.HttpRequestException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("An error occurred while sending the request"));
-        Assert.AreEqual("System.Net.WebException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Unable to connect to the remote server"));
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.LoadDataFromNetworkException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+
+        Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request."));
         return;
       }
 
@@ -105,8 +106,11 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Access to site is not granted"));
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
 
         return;
       }
@@ -126,10 +130,11 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
-        string message = exception.Message;
-        Assert.True(message.Contains("Access to site is not granted"));
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
 
         return;
       }
@@ -149,8 +154,11 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Access to site is not granted"));
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
 
         return;
       }
@@ -170,8 +178,11 @@
       }
       catch (Exception exception)
       {
-        Assert.AreEqual("Sitecore.MobileSDK.ScResponseException", exception.GetType().ToString());
-        Assert.True(exception.Message.Contains("Access to site is not granted"));
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.ParserException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+
+        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
         return;
       }
 

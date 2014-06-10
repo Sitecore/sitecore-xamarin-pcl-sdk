@@ -29,7 +29,9 @@ namespace Sitecore.MobileSDK
             JObject response = JObject.Parse(responseString);
 
             int statusCode = ParseOrFail<int>(response, "$.statusCode");
-            if (200 != statusCode)
+            bool isSuccessfulCode = (200 <= statusCode) && (statusCode <= 299);
+
+            if (!isSuccessfulCode)
             {
                 var error = new WebApiJsonError(statusCode, ParseOrFail<string>(response, "$.error.message"));
                 throw new WebApiJsonErrorException(error);
