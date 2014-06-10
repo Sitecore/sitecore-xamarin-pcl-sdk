@@ -55,9 +55,7 @@ namespace WhiteLabeliOS
 
 		public static void ShowLocalizedNotImlementedAlert()
 		{
-			string title = NSBundle.MainBundle.LocalizedString ("Alert", null);
-			string message = NSBundle.MainBundle.LocalizedString ("Not implemented yet", null);
-			AlertHelper.ShowAlertWithOkOption(title, message);
+			AlertHelper.ShowLocalizedAlertWithOkOption("Alert", "Not implemented yet" , "OK");
 		}
 	}
 }
