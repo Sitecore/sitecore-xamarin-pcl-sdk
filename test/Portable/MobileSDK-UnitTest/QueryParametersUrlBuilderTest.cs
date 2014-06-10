@@ -30,16 +30,16 @@ namespace MobileSDK_UnitTest_Desktop
         [Test]
         public void TestBuildValidQueryParams()
         {
-            string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content));
+            string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, null));
             Assert.AreEqual("payload=content", result);
 
-            result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Full));
+            result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Full, null));
             Assert.AreEqual("payload=full", result);
 
-            result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Min));
+            result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Min, null));
             Assert.AreEqual("payload=min", result);
 
-            result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Default));
+            result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Default, null));
             Assert.AreEqual("payload=min", result);
         }
 

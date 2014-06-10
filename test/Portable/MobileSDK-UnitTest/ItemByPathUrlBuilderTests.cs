@@ -36,7 +36,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableSession.Site = "";
             this.sessionConfig = mutableSession;
 
-            this.payload = new QueryParameters( PayloadType.Content );
+            this.payload = new QueryParameters( PayloadType.Content, null );
         }
 
         [TearDown]

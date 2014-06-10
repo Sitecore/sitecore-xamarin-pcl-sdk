@@ -43,7 +43,7 @@ namespace Sitecore.MobileSdkUnitTest
             mutableSessionConfig.Site = "/sitecore/shell";
             this.sitecoreShellConfig = mutableSessionConfig;
 
-            this.payload = new QueryParameters( PayloadType.Min );
+            this.payload = new QueryParameters( PayloadType.Min, null );
         }
 
         [TearDown]
