@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSdkUnitTest
+﻿
+
+namespace Sitecore.MobileSdkUnitTest
 {
     using System;
     using NUnit.Framework;
@@ -11,12 +13,14 @@
     using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
     [TestFixture]
     public class ItemByPathUrlBuilderTests
     {
         private ItemByPathUrlBuilder builder;
         private ISessionConfig sessionConfig;
+        private QueryParameters payload;
 
         [SetUp]
         public void SetUp()
@@ -31,6 +35,8 @@
             mutableSession.ItemWebApiVersion = "v2";
             mutableSession.Site = "";
             this.sessionConfig = mutableSession;
+
+            this.payload = new QueryParameters( PayloadType.Content );
         }
 
         [TearDown]
@@ -38,6 +44,7 @@
         {
             this.builder = null;
             this.sessionConfig = null;
+            this.payload = null;
         }
 
         [Test]
@@ -55,6 +62,22 @@
 
             Assert.AreEqual(expected, result);
         }
+
+        [Test]
+        public void TestBuildWithoutPayloadCausesArgumentNullException()
+        {
+            MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
+            mutableParameters.ItemSource = ItemSource.DefaultSource ();
+            mutableParameters.ItemPath = "/path/TO/iTEm";
+            mutableParameters.SessionSettings = this.sessionConfig;
+            mutableParameters.QueryParameters = null;
+
+            IReadItemsByPathRequest request = mutableParameters;
+
+            Assert.Throws<ArgumentNullException>( () => this.builder.GetUrlForRequest( request ) );
+        }
+
+
 
         [Test]
         public void TestBuildWithUnEscapedPath()
