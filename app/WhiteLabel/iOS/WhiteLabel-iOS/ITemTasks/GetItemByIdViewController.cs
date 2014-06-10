@@ -26,7 +26,7 @@ namespace WhiteLabeliOS
 		{
 			if (String.IsNullOrEmpty(itemIdTextField.Text))
 			{
-				AlertHelper.ShowAlertWithOkOption("Error", "Please type item Id");
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item Id");
 			}
 			else
 			{
@@ -36,7 +36,7 @@ namespace WhiteLabeliOS
 
 		partial void OnGetItemCheldrenButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
-			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowLocalizedNotImlementedAlert();
 		}
 
 		private async void SendRequest()
@@ -58,17 +58,17 @@ namespace WhiteLabeliOS
 				if (response.ResultCount > 0)
 				{
 					ScItem item = response.Items [0];
-					AlertHelper.ShowAlertWithOkOption("Item received", "item title is \"" + item.DisplayName + "\"");
+					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
 				}
 				else
 				{
-					AlertHelper.ShowAlertWithOkOption("Message", "Item is not exist");
+					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
 				}
 			}
 			catch(Exception e) 
 			{
 				this.HideLoader();
-				AlertHelper.ShowAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
 		}
 	}

@@ -5,3 +5,14 @@
 "createEditItem" = "Create & Edit Item";
 "uploadImageVC" = "Upload Image";
 "getItemByQuery" = "Item by Query";
+"Loading Data" = "Loading Data...";
+"Alert" = "Alert";
+"Not implemented yet" = "Not implemented yet";
+"Video uploading is not supported" = "Video uploading is not supported";
+"Error" = "Error";
+"Please type item Id" = "Please type item Id";
+"Item received" = "Item received";
+"item title is" = "item title is";
+"Message" = "Message";
+"Item is not exist" = "Item is not exist";
+"Please type query" = "Please type query";

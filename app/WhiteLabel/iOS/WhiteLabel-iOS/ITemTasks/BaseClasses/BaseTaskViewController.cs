@@ -25,7 +25,7 @@ namespace WhiteLabeliOS
 
 		public void ShowLoader()
 		{
-			loadingOverlay = new LoadingOverlay (this.View.Bounds, "Loading Data...");
+			loadingOverlay = new LoadingOverlay (this.View.Bounds, NSBundle.MainBundle.LocalizedString ("Loading Data", null));
 			View.Add (loadingOverlay);
 		}
 

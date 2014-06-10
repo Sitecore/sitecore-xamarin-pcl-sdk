@@ -498,7 +498,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startUpload:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="6cs-sg-cO3"/>
+                                    <action selector="OnUploadImageButtonTouched:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="ivY-N0-ZYL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSM-hz-6En">
@@ -512,7 +512,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelUpload:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="df7-G7-tPQ"/>
+                                    <action selector="OnCancelUploadButtonTouched:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="kv2-jr-eFb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -573,7 +573,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="getItem:" destination="YSW-Sn-ezD" eventType="touchUpInside" id="hCq-jG-cjw"/>
+                                    <action selector="OnGetItemButtonTouched:" destination="YSW-Sn-ezD" eventType="touchUpInside" id="Bih-g4-V4u"/>
                                 </connections>
                             </button>
                         </subviews>

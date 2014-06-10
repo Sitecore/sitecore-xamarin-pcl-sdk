@@ -19,6 +19,13 @@ namespace WhiteLabeliOS
 			alert.Show ();
 		}
 
+		public static void ShowLocalizedAlertWithOkOption(string title, string message)
+		{
+			string localizedTitle = NSBundle.MainBundle.LocalizedString (title, null);
+			string localizedMessage = NSBundle.MainBundle.LocalizedString (message, null);
+			AlertHelper.ShowAlertWithOkOption(localizedTitle, localizedMessage);
+		}
+
 		public static Task<int> ShowAlert(string title, string message, params string [] buttons)
 		{
 			var tcs = new TaskCompletionSource<int> ();
@@ -35,6 +42,13 @@ namespace WhiteLabeliOS
 			alert.Clicked += (s, e) => tcs.TrySetResult (e.ButtonIndex);
 			alert.Show ();
 			return tcs.Task;
+		}
+
+		public static void ShowLocalizedNotImlementedAlert()
+		{
+			string title = NSBundle.MainBundle.LocalizedString ("Alert", null);
+			string message = NSBundle.MainBundle.LocalizedString ("Not implemented yet", null);
+			AlertHelper.ShowAlertWithOkOption(title, message);
 		}
 	}
 }

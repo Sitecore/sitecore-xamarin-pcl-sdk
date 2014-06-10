@@ -12,7 +12,7 @@ namespace WhiteLabeliOS
 
 		public GetItemByPathViewController (IntPtr handle) : base (handle)
 		{
-			Title = NSBundle.MainBundle.LocalizedString ("getItemByPath", null);
+			Title = NSBundle.MainBundle.LocalizedString("getItemByPath", null);
 		}
 
 		public override void ViewDidLoad ()
@@ -26,7 +26,7 @@ namespace WhiteLabeliOS
 		{
 			if (String.IsNullOrEmpty(itemPathField.Text))
 			{
-				AlertHelper.ShowAlertWithOkOption("Error", "Please type item Id");
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item Id");
 			}
 			else
 			{
@@ -53,17 +53,18 @@ namespace WhiteLabeliOS
 				if (response.ResultCount > 0)
 				{
 					ScItem item = response.Items [0];
-					AlertHelper.ShowAlertWithOkOption("Item received", "item title is \"" + item.DisplayName + "\"");
+					string message = NSBundle.MainBundle.LocalizedString("item title is", null);
+					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
 				}
 				else
 				{
-					AlertHelper.ShowAlertWithOkOption("Message", "Item is not exist");
+					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
 				}
 			}
 			catch(Exception e) 
 			{
 				this.HideLoader();
-				AlertHelper.ShowAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
 		}
 	}

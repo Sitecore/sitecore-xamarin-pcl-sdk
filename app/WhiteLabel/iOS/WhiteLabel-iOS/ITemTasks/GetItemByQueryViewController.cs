@@ -28,7 +28,7 @@ namespace WhiteLabeliOS
 		{
 			if (String.IsNullOrEmpty(queryTextField.Text))
 			{
-				AlertHelper.ShowAlertWithOkOption("Error", "Please type query");
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type query");
 			}
 			else
 			{
@@ -54,17 +54,18 @@ namespace WhiteLabeliOS
 				this.HideLoader();
 				if (response.ResultCount > 0)
 				{
-					AlertHelper.ShowAlertWithOkOption("Item received", "items count is \"" + response.Items.Count.ToString() + "\"");
+					string message = NSBundle.MainBundle.LocalizedString ("items count is", null);
+					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + response.Items.Count.ToString() + "\"");
 				}
 				else
 				{
-					AlertHelper.ShowAlertWithOkOption("Message", "Item is not exist");
+					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
 				}
 			}
 			catch(Exception e) 
 			{
 				this.HideLoader();
-				AlertHelper.ShowAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
 		}
 	}
