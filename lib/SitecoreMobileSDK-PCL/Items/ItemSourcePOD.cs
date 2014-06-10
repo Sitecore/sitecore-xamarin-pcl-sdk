@@ -4,9 +4,9 @@ namespace Sitecore.MobileSDK.Items
 {
     public class ItemSourcePOD : IItemSource
     {
-        public static IItemSource DefaultSource()
+        public static IItemSource DefaultItemSourcePOD()
         {
-            return new ItemSourcePOD ("web", "en", null);
+            return new ItemSourcePOD (ItemSource.DefaultDatabase, ItemSource.DefaultLanguage, null);
         }
 
         public ItemSourcePOD(string database, string language, string version = null)
