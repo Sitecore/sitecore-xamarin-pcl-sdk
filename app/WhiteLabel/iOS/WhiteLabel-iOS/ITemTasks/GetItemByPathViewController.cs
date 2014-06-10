@@ -22,7 +22,7 @@ namespace WhiteLabeliOS
 			this.itemPathField.ShouldReturn = this.HideKeyboard;
 		}
 
-		partial void getItem (MonoTouch.UIKit.UIButton sender)
+		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			if (String.IsNullOrEmpty(itemPathField.Text))
 			{
@@ -30,11 +30,11 @@ namespace WhiteLabeliOS
 			}
 			else
 			{
-				this.sendRequest();
+				this.SendRequest();
 			}
 		}
 
-		private async void sendRequest ()
+		private async void SendRequest ()
 		{
 			try
 			{

@@ -23,13 +23,13 @@ namespace WhiteLabeliOS
 			this.titleField.ShouldReturn = this.HideKeyboard;
 		}
 
-		partial void createITemTouched (MonoTouch.Foundation.NSObject sender)
+		partial void OnCreateItemButtonTapped (MonoTouch.Foundation.NSObject sender)
 		{
 			this.saveButton.Enabled = true;
 			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
-		partial void saveItemTouched (MonoTouch.Foundation.NSObject sender)
+		partial void OnSaveItemButtonTapped (MonoTouch.Foundation.NSObject sender)
 		{
 			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}

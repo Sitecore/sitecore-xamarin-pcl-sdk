@@ -22,7 +22,7 @@ namespace WhiteLabeliOS
 			this.itemIdField.ShouldReturn = this.HideKeyboard;
 		}
 
-		partial void deleteItem (UIButton sender)
+		partial void OnDeleteItemButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}

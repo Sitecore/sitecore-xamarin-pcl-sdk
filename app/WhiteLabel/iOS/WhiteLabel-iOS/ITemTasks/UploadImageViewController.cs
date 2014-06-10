@@ -16,19 +16,19 @@ namespace WhiteLabeliOS
 			Title = NSBundle.MainBundle.LocalizedString ("uploadImageVC", null);
 		}
 
-		partial void cancelUpload (MonoTouch.Foundation.NSObject sender)
+		partial void OnCancelUploadButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 			this.cancelButton.Enabled = false;
 		}
 
-		partial void startUpload (MonoTouch.Foundation.NSObject sender)
+		partial void OnUploadImageButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			this.cancelButton.Enabled = true;
-			this.chooseImageFromLibrary();
+			this.ChooseImageFromLibrary();
 		}
 
-		private void chooseImageFromLibrary()
+		private void ChooseImageFromLibrary()
 		{
 		    imagePicker = new UIImagePickerController ();
 			imagePicker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;

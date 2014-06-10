@@ -53,7 +53,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="getItem:" destination="X0y-MS-f8R" eventType="touchUpInside" id="PLr-Mu-fHT"/>
+                                    <action selector="OnGetItemButtonTouched:" destination="X0y-MS-f8R" eventType="touchUpInside" id="L3t-oD-Hf6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -115,7 +115,7 @@
                     <navigationItem key="navigationItem" title="Master" id="tQt-TN-PWz">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="GP7-eZ-abX">
                             <connections>
-                                <action selector="settingsButtonTouched:" destination="pGg-6v-bdr" id="QsU-u7-BIP"/>
+                                <action selector="SettingsButtonTouched:" destination="pGg-6v-bdr" id="a6g-Qr-06V"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -266,7 +266,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="getItem:" destination="7Eu-4h-pPF" eventType="touchUpInside" id="CBY-fR-3Ny"/>
+                                    <action selector="OnGetItemButtonTouched:" destination="7Eu-4h-pPF" eventType="touchUpInside" id="TVy-o4-gbQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usY-t8-y1O">
@@ -280,7 +280,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="getChildren:" destination="7Eu-4h-pPF" eventType="touchUpInside" id="YLS-Et-nlv"/>
+                                    <action selector="OnGetItemCheldrenButtonTouched:" destination="7Eu-4h-pPF" eventType="touchUpInside" id="qte-Dg-j35"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -346,7 +346,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="deleteItem:" destination="y4l-nL-zVW" eventType="touchUpInside" id="vN2-P8-j7S"/>
+                                    <action selector="OnDeleteItemButtonTouched:" destination="y4l-nL-zVW" eventType="touchUpInside" id="G6e-lf-gGj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -422,7 +422,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="createITemTouched:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="c09-Ys-7vx"/>
+                                    <action selector="OnCreateItemButtonTapped:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="PQ5-SQ-HUY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLz-4a-di3">
@@ -436,7 +436,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="saveItemTouched:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="rkh-Cx-159"/>
+                                    <action selector="OnSaveItemButtonTapped:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="4UL-Vo-Oyw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -498,6 +498,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="OnUploadImageButtonTouched:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="i1U-vt-SgO"/>
                                     <action selector="startUpload:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="6cs-sg-cO3"/>
                                 </connections>
                             </button>
@@ -512,6 +513,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="OnCancelUploadButtonTouched:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="8XZ-VC-P1p"/>
                                     <action selector="cancelUpload:" destination="0L4-Zu-wJq" eventType="touchUpInside" id="df7-G7-tPQ"/>
                                 </connections>
                             </button>
@@ -573,6 +575,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="OnGetItemButtonTouched:" destination="YSW-Sn-ezD" eventType="touchUpInside" id="H5t-aj-OWK"/>
                                     <action selector="getItem:" destination="YSW-Sn-ezD" eventType="touchUpInside" id="hCq-jG-cjw"/>
                                 </connections>
                             </button>

@@ -22,7 +22,7 @@ namespace WhiteLabeliOS
 			this.itemIdTextField.ShouldReturn = this.HideKeyboard;
 		}
 
-		partial void getItem (MonoTouch.UIKit.UIButton sender)
+		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			if (String.IsNullOrEmpty(itemIdTextField.Text))
 			{
@@ -30,16 +30,16 @@ namespace WhiteLabeliOS
 			}
 			else
 			{
-				this.sendRequest();
+				this.SendRequest();
 			}
 		}
 
-		partial void getChildren (MonoTouch.Foundation.NSObject sender)
+		partial void OnGetItemCheldrenButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
-		private async void sendRequest()
+		private async void SendRequest()
 		{
 			try
 			{

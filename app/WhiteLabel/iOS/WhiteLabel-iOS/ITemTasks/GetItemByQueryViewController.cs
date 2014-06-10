@@ -24,7 +24,7 @@ namespace WhiteLabeliOS
 			
 		}
 
-		partial void getItem (MonoTouch.Foundation.NSObject sender)
+		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			if (String.IsNullOrEmpty(queryTextField.Text))
 			{
@@ -32,11 +32,11 @@ namespace WhiteLabeliOS
 			}
 			else
 			{
-				this.sendRequest();
+				this.SendRequest();
 			}
 		}
 
-		private async void sendRequest ()
+		private async void SendRequest ()
 		{
 			try
 			{

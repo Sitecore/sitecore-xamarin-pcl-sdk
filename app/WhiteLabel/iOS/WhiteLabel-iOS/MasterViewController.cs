@@ -17,12 +17,12 @@ namespace WhiteLabeliOS
 			Title = NSBundle.MainBundle.LocalizedString ("Master", "Master");
 		}
 
-		partial void settingsButtonTouched (MonoTouch.UIKit.UIBarButtonItem sender)
+		partial void SettingsButtonTouched (MonoTouch.UIKit.UIBarButtonItem sender)
 		{
-			this.showSeetingsView();
+			this.ShowSettingsView();
 		}
 
-		private void showSeetingsView()
+		private void ShowSettingsView()
 		{
 			UINavigationController navController = this.NavigationController;
 
@@ -36,11 +36,12 @@ namespace WhiteLabeliOS
 		public override void ViewDidAppear(bool animated)
 		{
 			base.ViewDidAppear (animated);
-			System.Console.WriteLine ("Current settings:\nURL: " + this.settings.InstanceUrl
-				+ "\nLogin:    " + this.settings.InstanceLogin
-				+ "\nPassword: " + this.settings.InstancePassword
-				+ "\nSite:     " + this.settings.InstanceSite
-				+ "\nDtaBase:  " + this.settings.InstanceDataBase);
+			System.Console.WriteLine ("Current settings:\n"
+				+ "\nURL:       " + this.settings.InstanceUrl
+				+ "\nLogin:     " + this.settings.InstanceLogin
+				+ "\nPassword:  " + this.settings.InstancePassword
+				+ "\nSite:      " + this.settings.InstanceSite
+				+ "\nDataBase:  " + this.settings.InstanceDataBase);
 		}
 
 		public override void ViewDidLoad ()
