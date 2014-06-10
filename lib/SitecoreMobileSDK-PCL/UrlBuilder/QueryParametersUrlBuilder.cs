@@ -25,14 +25,25 @@
                 switch (queryParameters.Payload)
                 {
                     case PayloadType.Content:
+                    {
                         payload = "content";
                         break;
+                    }
                     case PayloadType.Full:
+                    {
                         payload = "full";
                         break;
+                    }
                     case PayloadType.Min:
+                    {
                         payload = "min";
                         break;
+                    }
+                    default:
+                    {
+                        throw new ArgumentException("[QueryParametersUrlBuilder] Unexpected payload enum value");
+                        break;
+                    }
                 }
 
                 result += this.webApiGrammar.PayloadParameterName + this.restGrammar.KeyValuePairSeparator + payload;
