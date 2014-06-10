@@ -1,4 +1,6 @@
-﻿
+﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+
 namespace Sitecore.MobileSdkUnitTest
 {
     using System;
@@ -20,22 +22,26 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByIdRequest result =  builder.RequestWithId ("{dead-beef}")
-                .Database ("web")
-                .Language ("en")
-                .Version ("1")
+            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-beef}")
+                .Database("web")
+                .Language("en")
+                .Version("1")
+                .Payload(PayloadType.Full)
                 .Build();
 
-            Assert.IsNotNull (result);
-            Assert.IsNotNull (result.ItemSource);
-            Assert.IsNotNull (result.ItemId);
-            Assert.IsNull (result.SessionSettings);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemId);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
 
 
-            Assert.AreEqual ("{dead-beef}", result.ItemId);
-            Assert.AreEqual ("en", result.ItemSource.Language);
-            Assert.AreEqual ("web", result.ItemSource.Database);
-            Assert.AreEqual ("1", result.ItemSource.Version);
+
+            Assert.AreEqual("{dead-beef}", result.ItemId);
+            Assert.AreEqual("en", result.ItemSource.Language);
+            Assert.AreEqual("web", result.ItemSource.Database);
+            Assert.AreEqual("1", result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Full, result.QueryParameters.Payload );
         }
 
         [Test]
@@ -43,53 +49,55 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByIdRequest result =  builder.RequestWithId ("{abra-kadabra}").Build();
+            IReadItemsByIdRequest result =  builder.RequestWithId("{abra-kadabra}").Build();
 
-            Assert.IsNotNull (result);
-            Assert.IsNotNull (result.ItemSource);
-            Assert.IsNotNull (result.ItemId);
-            Assert.IsNull (result.SessionSettings);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemId);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
 
 
-            Assert.AreEqual ("{abra-kadabra}", result.ItemId);
-            Assert.IsNull (result.ItemSource.Language);
-            Assert.IsNull (result.ItemSource.Database);
-            Assert.IsNull (result.ItemSource.Version);
+            Assert.AreEqual("{abra-kadabra}", result.ItemId);
+            Assert.IsNull(result.ItemSource.Language);
+            Assert.IsNull(result.ItemSource.Database);
+            Assert.IsNull(result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Min, result.QueryParameters.Payload );
         }
 
         [Test]
         public void TestItemIdRequestBuilderWithNullIdCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithId (null));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithId(null));
         }
 
         [Test]
         public void TestItemIdRequestBuilderWithEmptyIdCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithId (""));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithId(""));
         }
 
         [Test]
         public void TestItemIdRequestBuilderWithWhitespaceIdCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithId ("\t \r \n"));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithId("\t \r \n"));
         }
 
         [Test]
         public void TestItemIdWithoutBracesCrashesBuilder()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentException> (() => builder.RequestWithId ("ololololo"));
+            Assert.Throws<ArgumentException>(() => builder.RequestWithId("ololololo"));
         }
 
         [Test]
         public void TestItemIdWithBracesOnlyCrashesBuilder()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentException> (() => builder.RequestWithId ("{}"));
+            Assert.Throws<ArgumentException>(() => builder.RequestWithId("{}"));
         }
         #endregion ItemId
 
@@ -100,22 +108,25 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByPathRequest result =  builder.RequestWithPath ("/sitecore/content")
-                .Database ("master")
-                .Language ("da")
-                .Version ("100500")
+            IReadItemsByPathRequest result =  builder.RequestWithPath("/sitecore/content")
+                .Database("master")
+                .Language("da")
+                .Version("100500")
+                .Payload( PayloadType.Content )
                 .Build();
 
 
-            Assert.IsNotNull (result);
-            Assert.IsNotNull (result.ItemSource);
-            Assert.IsNotNull (result.ItemPath);
-            Assert.IsNull (result.SessionSettings);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemPath);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
 
-            Assert.AreEqual ("/sitecore/content", result.ItemPath);
-            Assert.AreEqual ("da", result.ItemSource.Language);
-            Assert.AreEqual ("master", result.ItemSource.Database);
-            Assert.AreEqual ("100500", result.ItemSource.Version);
+            Assert.AreEqual("/sitecore/content", result.ItemPath);
+            Assert.AreEqual("da", result.ItemSource.Language);
+            Assert.AreEqual("master", result.ItemSource.Database);
+            Assert.AreEqual("100500", result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Content, result.QueryParameters.Payload );
         }
             
         [Test]
@@ -125,43 +136,45 @@ namespace Sitecore.MobileSdkUnitTest
             IReadItemsByPathRequest result =  builder.RequestWithPath("/sitecore/content").Build();
 
 
-            Assert.IsNotNull (result);
-            Assert.IsNotNull (result.ItemSource);
-            Assert.IsNotNull (result.ItemPath);
-            Assert.IsNull (result.SessionSettings);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemPath);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
 
-            Assert.AreEqual ("/sitecore/content", result.ItemPath);
-            Assert.IsNull (result.ItemSource.Language);
-            Assert.IsNull (result.ItemSource.Database);
-            Assert.IsNull (result.ItemSource.Version);
+            Assert.AreEqual("/sitecore/content", result.ItemPath);
+            Assert.IsNull(result.ItemSource.Language);
+            Assert.IsNull(result.ItemSource.Database);
+            Assert.IsNull(result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Min, result.QueryParameters.Payload );
         }
 
         [Test]
         public void TestItemPathRequestBuilderWithNullPathCrashes()
         {
             var builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithPath (null));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithPath(null));
         }
 
         [Test]
         public void TestItemPathRequestBuilderWithEmptyPathCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithPath (""));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithPath(""));
         }
 
         [Test]
         public void TestItemPathRequestBuilderWithWhitespacePathCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithPath ("\t \r \n"));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithPath("\t \r \n"));
         }
 
         [Test]
         public void TestItemPathWithoutStartingSlashCrashesBuilder()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentException> (() => builder.RequestWithPath ("blablabla"));
+            Assert.Throws<ArgumentException>(() => builder.RequestWithPath("blablabla"));
         }
         #endregion ItemPath
 
@@ -172,61 +185,67 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByQueryRequest result =  builder.RequestWithSitecoreQuery ("fast:/sitecore/content/HOME/*")
-                .Database ("core")
-                .Language ("de")
-                .Version ("341")
+            IReadItemsByQueryRequest result =  builder.RequestWithSitecoreQuery("fast:/sitecore/content/HOME/*")
+                .Database("core")
+                .Language("de")
+                .Version("341")
                 .Build();
 
 
-            Assert.IsNotNull (result);
-            Assert.IsNotNull (result.ItemSource);
-            Assert.IsNotNull (result.SitecoreQuery);
-            Assert.IsNull (result.SessionSettings);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.SitecoreQuery);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
 
-            Assert.AreEqual ("fast:/sitecore/content/HOME/*", result.SitecoreQuery);
-            Assert.AreEqual ("de", result.ItemSource.Language);
-            Assert.AreEqual ("core", result.ItemSource.Database);
-            Assert.AreEqual ("341", result.ItemSource.Version);
+            Assert.AreEqual("fast:/sitecore/content/HOME/*", result.SitecoreQuery);
+            Assert.AreEqual("de", result.ItemSource.Language);
+            Assert.AreEqual("core", result.ItemSource.Database);
+            Assert.AreEqual("341", result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Min, result.QueryParameters.Payload );
         }
 
         [Test]
         public void TestQueryRequestBuilderWithQueryOnly()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            IReadItemsByQueryRequest result =  builder.RequestWithSitecoreQuery ("sitecore/content/HOME/*").Build();
+            IReadItemsByQueryRequest result =  builder.RequestWithSitecoreQuery("sitecore/content/HOME/*").Build();
 
 
-            Assert.IsNotNull (result);
-            Assert.IsNotNull (result.ItemSource);
-            Assert.IsNotNull (result.SitecoreQuery);
-            Assert.IsNull (result.SessionSettings);
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.SitecoreQuery);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
 
-            Assert.AreEqual ("sitecore/content/HOME/*", result.SitecoreQuery);
-            Assert.IsNull (result.ItemSource.Language);
-            Assert.IsNull (result.ItemSource.Database);
-            Assert.IsNull (result.ItemSource.Version);
+            Assert.AreEqual("sitecore/content/HOME/*", result.SitecoreQuery);
+            Assert.AreEqual( PayloadType.Min, result.QueryParameters.Payload );
+
+            Assert.IsNull(result.ItemSource.Language);
+            Assert.IsNull(result.ItemSource.Database);
+            Assert.IsNull(result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Min, result.QueryParameters.Payload );
         }
 
         [Test]
         public void TestQueryRequestBuilderWithNullQueryCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithSitecoreQuery (null));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithSitecoreQuery(null));
         }
 
         [Test]
         public void TestItemQueryRequestBuilderWithEmptyQueryCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithSitecoreQuery (""));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithSitecoreQuery(""));
         }
 
         [Test]
         public void TestQueryRequestBuilderWithWhitespaceQueryCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException> (() => builder.RequestWithSitecoreQuery ("\t \r \n"));
+            Assert.Throws<ArgumentNullException>(() => builder.RequestWithSitecoreQuery("\t \r \n"));
         }            
         #endregion SitecoreQuery
     }
