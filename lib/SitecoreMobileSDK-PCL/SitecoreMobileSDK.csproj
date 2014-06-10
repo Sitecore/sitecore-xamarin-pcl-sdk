@@ -60,7 +60,11 @@
     <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
     <Compile Include="UrlBuilder\ItemById\ItemByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
-    <Compile Include="Items\ItemSourceUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\QueryParametersUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\IQueryParameters.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\PayloadType.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\QueryParameters.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
@@ -147,14 +151,5 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="UrlBuilder\ItemById\" />
-    <Folder Include="UrlBuilder\ItemByPath\" />
-    <Folder Include="UrlBuilder\Rest\" />
-    <Folder Include="UrlBuilder\WebApi\" />
-    <Folder Include="UrlBuilder\ItemByQuery\" />
-    <Folder Include="Utils\" />
-    <Folder Include="UserRequest\" />
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
