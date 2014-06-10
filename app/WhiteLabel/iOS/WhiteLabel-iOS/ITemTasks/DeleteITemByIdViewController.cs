@@ -12,7 +12,6 @@ namespace WhiteLabeliOS
 		public DeleteITemByIdViewController (IntPtr handle) : base (handle)
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("deleteItemById", null);
-
 		}
 
 		public override void ViewDidLoad ()
@@ -22,9 +21,9 @@ namespace WhiteLabeliOS
 			this.itemIdField.ShouldReturn = this.HideKeyboard;
 		}
 
-		partial void deleteItem (UIButton sender)
+		partial void OnDeleteItemButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
-			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowLocalizedNotImlementedAlert();
 		}
 	}
 }

@@ -15,8 +15,8 @@ namespace WhiteLabeliOS
 		[Outlet]
 		MonoTouch.UIKit.UITextField queryTextField { get; set; }
 
-		[Action ("getItem:")]
-		partial void getItem (MonoTouch.Foundation.NSObject sender);
+		[Action ("OnGetItemButtonTouched:")]
+		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

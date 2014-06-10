@@ -18,22 +18,22 @@ namespace WhiteLabeliOS
 		[Outlet]
 		MonoTouch.UIKit.UIProgressView uploadProgress { get; set; }
 
-		[Action ("cancelUpload:")]
-		partial void cancelUpload (MonoTouch.Foundation.NSObject sender);
+		[Action ("OnCancelUploadButtonTouched:")]
+		partial void OnCancelUploadButtonTouched (MonoTouch.Foundation.NSObject sender);
 
-		[Action ("startUpload:")]
-		partial void startUpload (MonoTouch.Foundation.NSObject sender);
+		[Action ("OnUploadImageButtonTouched:")]
+		partial void OnUploadImageButtonTouched (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (uploadProgress != null) {
-				uploadProgress.Dispose ();
-				uploadProgress = null;
-			}
-
 			if (cancelButton != null) {
 				cancelButton.Dispose ();
 				cancelButton = null;
+			}
+
+			if (uploadProgress != null) {
+				uploadProgress.Dispose ();
+				uploadProgress = null;
 			}
 		}
 	}

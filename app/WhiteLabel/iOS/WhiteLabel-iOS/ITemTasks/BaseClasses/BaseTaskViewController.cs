@@ -25,13 +25,13 @@ namespace WhiteLabeliOS
 
 		public void ShowLoader()
 		{
-			loadingOverlay = new LoadingOverlay (this.View.Bounds, "Loading Data...");
+			this.loadingOverlay = new LoadingOverlay (this.View.Bounds, NSBundle.MainBundle.LocalizedString ("Loading Data", null));
 			View.Add (loadingOverlay);
 		}
 
 		public void HideLoader()
 		{
-			loadingOverlay.Hide ();
+			this.loadingOverlay.Hide ();
 		}
 	}
 }

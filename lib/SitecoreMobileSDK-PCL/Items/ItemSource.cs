@@ -4,14 +4,21 @@ namespace Sitecore.MobileSDK.Items
 {
     public class ItemSource : ItemSourcePOD
     {
+
+		public static string DefaultDatabase = "web";
+		public static string DefaultLanguage = "en";
+
         public static ItemSource DefaultSource()
         {
-            return new ItemSource ("web", "en", null);
+
+			return new ItemSource (ItemSource.DefaultDatabase, ItemSource.DefaultLanguage, null);
         }
 
-        public ItemSource(string database, string language, string version = null) 
+		public ItemSource(string database, string language, string version = null) 
             : base(database, language, version)
         {
+
+
             this.Validate ();
         }
 

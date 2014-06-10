@@ -15,11 +15,11 @@ namespace WhiteLabeliOS
 		[Outlet]
 		MonoTouch.UIKit.UITextField itemIdTextField { get; set; }
 
-		[Action ("getChildren:")]
-		partial void getChildren (MonoTouch.Foundation.NSObject sender);
+		[Action ("OnGetItemButtonTouched:")]
+		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
 
-		[Action ("getItem:")]
-		partial void getItem (MonoTouch.UIKit.UIButton sender);
+		[Action ("OnGetItemCheldrenButtonTouched:")]
+		partial void OnGetItemCheldrenButtonTouched (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -27,7 +27,6 @@ namespace WhiteLabeliOS
 				itemIdTextField.Dispose ();
 				itemIdTextField = null;
 			}
-				
 		}
 	}
 }

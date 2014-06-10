@@ -1,7 +1,36 @@
-﻿"Settings" = "Settings";
+﻿//features
+"Settings" = "Settings";
 "getItemByPath" = "Item by Path";
 "getItemById" = "Item by ID & item children";
 "deleteItemById" = "Delete Item by ID";
 "createEditItem" = "Create & Edit Item";
 "uploadImageVC" = "Upload Image";
 "getItemByQuery" = "Item by Query";
+
+//titles
+"Alert" = "Alert";
+"Error" = "Error";
+"Message" = "Message";
+"OK" = "OK";
+
+//messages
+"Loading Data" = "Loading Data...";
+
+"Not implemented yet" = "Not implemented yet";
+"Video uploading is not supported" = "Video uploading is not supported";
+
+"Please type item Id" = "Please type item Id";
+"Please type item path" = "Please type item path";
+"Please type query" = "Please type query";
+
+"Item received" = "Item received";
+"Item is not exist" = "Item is not exist";
+"item title is" = "item title is";
+
+//settings screen placeholders
+"Instance Url" = "Instance Url";
+"Password" = "Password";
+"Login" = "Login";
+"Site" = "Site";
+"Database" = "Database";
+"Language" = "Language";

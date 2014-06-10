@@ -16,19 +16,19 @@ namespace WhiteLabeliOS
 			Title = NSBundle.MainBundle.LocalizedString ("uploadImageVC", null);
 		}
 
-		partial void cancelUpload (MonoTouch.Foundation.NSObject sender)
+		partial void OnCancelUploadButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
-			AlertHelper.ShowAlertWithOkOption("Alert", "Not implemented yet");
+			AlertHelper.ShowLocalizedNotImlementedAlert();
 			this.cancelButton.Enabled = false;
 		}
 
-		partial void startUpload (MonoTouch.Foundation.NSObject sender)
+		partial void OnUploadImageButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
 			this.cancelButton.Enabled = true;
-			this.chooseImageFromLibrary();
+			this.ChooseImageFromLibrary();
 		}
 
-		private void chooseImageFromLibrary()
+		private void ChooseImageFromLibrary()
 		{
 		    imagePicker = new UIImagePickerController ();
 			imagePicker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
@@ -57,12 +57,12 @@ namespace WhiteLabeliOS
 				UIImage originalImage = e.Info[UIImagePickerController.OriginalImage] as UIImage;
 				if(originalImage != null) 
 				{
-					AlertHelper.ShowAlertWithOkOption("Alert", "Image uploading is not implemented yet");
+					AlertHelper.ShowLocalizedNotImlementedAlert();
 				}
 			} 
 			else 
 			{ 
-				AlertHelper.ShowAlertWithOkOption("Alert", "Video uploading is not supported");
+				AlertHelper.ShowLocalizedAlertWithOkOption("Alert", "Video uploading is not supported");
 			}          
 
 			imagePicker.DismissViewController (true, null);

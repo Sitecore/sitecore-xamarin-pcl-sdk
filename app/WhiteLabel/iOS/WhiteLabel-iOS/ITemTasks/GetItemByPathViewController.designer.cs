@@ -1,12 +1,10 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Xamarin Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
-using System;
 using MonoTouch.Foundation;
-using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
 namespace WhiteLabeliOS
@@ -15,13 +13,11 @@ namespace WhiteLabeliOS
 	partial class GetItemByPathViewController
 	{
 		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		MonoTouch.UIKit.UITextField itemPathField { get; set; }
 
-		[Action ("getItem:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void getItem (MonoTouch.UIKit.UIButton sender);
-
+		[Action ("OnGetItemButtonTouched:")]
+		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
+		
 		void ReleaseDesignerOutlets ()
 		{
 			if (itemPathField != null) {
