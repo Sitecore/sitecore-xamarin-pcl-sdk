@@ -35,7 +35,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 
             result += 
                 this.restGrammar.HostAndArgsSeparator + 
-                itemSourceArgs + 
+                itemSourceArgs +
+                this.restGrammar.FieldSeparator +
+                queryParamsUrl +
                 this.restGrammar.FieldSeparator + 
                 this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator +  escapedId;
 
