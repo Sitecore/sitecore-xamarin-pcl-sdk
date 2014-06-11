@@ -60,7 +60,11 @@
     <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
     <Compile Include="UrlBuilder\ItemById\ItemByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
-    <Compile Include="Items\ItemSourceUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\QueryParametersUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\IQueryParameters.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\PayloadType.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\QueryParameters.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="Items\Fields\ScField.cs" />
     <Compile Include="Items\Fields\IField.cs" />
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
+    <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -161,4 +166,5 @@
     <Folder Include="Exceptions\" />
     <Folder Include="Items\Fields\" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

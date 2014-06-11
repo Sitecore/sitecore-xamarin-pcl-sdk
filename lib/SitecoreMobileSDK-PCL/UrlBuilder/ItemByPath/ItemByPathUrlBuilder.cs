@@ -10,17 +10,19 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
     using Sitecore.MobileSDK.SessionSettings;
 
 
-    public class ItemByPathUrlBuilder
+    public class ItemByPathUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByPathRequest>
     {
         public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+            : base( restGrammar, webApiGrammar )
         {
-            this.restGrammar = restGrammar;
-            this.webApiGrammar = webApiGrammar;
-
-            this.Validate();
         }
 
-        public string GetUrlForRequest(IReadItemsByPathRequest request)
+        protected override string GetSpecificPartForRequest(IReadItemsByPathRequest request)
+        {
+            throw new InvalidOperationException("ItemByPathUrlBuilder.GetSpecificPartForRequest() - Unexpected instruction");
+        }
+
+        public override string GetUrlForRequest(IReadItemsByPathRequest request)
         {
             this.ValidateRequest (request);
             string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath);
@@ -39,36 +41,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
             return result.ToLowerInvariant();
         }
 
-        private void ValidateRequest(IReadItemsByPathRequest request)
+        protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)
         {
-            if (null == request)
-            {
-                throw new ArgumentNullException("ItemByPathUrlBuilder.GetUrlForRequest() : request cannot be null");
-            }
-
-            this.ValidatePath (request.ItemPath);
+            ItemPathValidator.ValidateItemPath (request.ItemPath);
         }
-
-        private void ValidatePath(string itemPath)
-        {
-            ItemPathValidator.ValidateItemPath (itemPath);
-        }
-            
-        private void Validate()
-        {
-            if (null == this.restGrammar)
-            {
-                throw new ArgumentNullException ("[SessionConfigUrlBuilder] restGrammar cannot be null");
-            }
-            else if (null == this.webApiGrammar)
-            {
-                throw new ArgumentNullException ("[SessionConfigUrlBuilder] webApiGrammar cannot be null");
-            }
-        }
-
-
-
-        private IRestServiceGrammar restGrammar;
-        private IWebApiUrlParameters webApiGrammar;
     }
 }
