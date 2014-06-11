@@ -370,6 +370,100 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual( expectedFields, result.QueryParameters.Fields );
         }
 
+
+        [Test]
+        public void TestSingleItemFieldsCanBeAddedIncrementally()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+
+            string[] expectedFields = { "Мыла", "Раму", "Мама" };
+
+            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
+                .AddSingleField("Мыла")
+                .AddSingleField("Раму")
+                .AddSingleField("Мама")
+                .Build();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemId);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
+
+
+
+            Assert.AreEqual("{dead-c0de}", result.ItemId);
+            Assert.IsNull(result.ItemSource.Language);
+            Assert.IsNull(result.ItemSource.Database);
+            Assert.IsNull(result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
+            Assert.AreEqual( expectedFields, result.QueryParameters.Fields );
+        }
+
+
+        [Test]
+        public void TestIncrementalFieldsCanBeUsedWithLoadFields()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+
+            string[] fields = { "Мама", "Мыла", "Раму" };
+            string[] moarFields = { "1", "2", "4" };
+            string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4", "gigity goo" };
+
+            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
+                .LoadFields(fields)
+                .AddMultipleFields(moarFields)
+                .AddSingleField("gigity goo")
+                .Build();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemId);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
+
+
+
+            Assert.AreEqual("{dead-c0de}", result.ItemId);
+            Assert.IsNull(result.ItemSource.Language);
+            Assert.IsNull(result.ItemSource.Database);
+            Assert.IsNull(result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
+            Assert.AreEqual( expectedFields, result.QueryParameters.Fields );
+        }
+
+
+        [Test]
+        public void TestLoadFieldsOverridesIncrementalFields()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+
+            string[] fields = { "Мама", "Мыла", "Раму" };
+            string[] moarFields = { "1", "2", "4" };
+
+            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
+                .LoadFields(fields)
+                .AddMultipleFields(moarFields)
+                .AddSingleField("gigity goo")
+                .LoadFields(moarFields)
+                .Build();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemId);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
+
+
+
+            Assert.AreEqual("{dead-c0de}", result.ItemId);
+            Assert.IsNull(result.ItemSource.Language);
+            Assert.IsNull(result.ItemSource.Database);
+            Assert.IsNull(result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
+            Assert.AreEqual( moarFields, result.QueryParameters.Fields );
+        }
+
         #endregion Fields
     }
 }

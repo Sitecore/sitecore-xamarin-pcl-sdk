@@ -69,7 +69,11 @@ namespace Sitecore.MobileSDK
             return this;
         }
 
-
+        public IGetItemRequestParametersBuilder<T> AddSingleField( string singleField )
+        {
+            string[] arrayOfNewField = {singleField};
+            return this.AddMultipleFields( arrayOfNewField );
+        }
 
         public abstract T Build();
 
