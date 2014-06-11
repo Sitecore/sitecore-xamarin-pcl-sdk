@@ -11,6 +11,7 @@ namespace Sitecore.MobileSdkUnitTest
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
+	using Sitecore.MobileSDK.Fields;
     using Sitecore.MobileSDK.Exceptions;
 
     // @adk.review : waybe we should we wrap this? 
@@ -40,6 +41,12 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual("/sitecore/content/Home", item1.Path);
             Assert.AreEqual("Sample/Sample Item", item1.Template);
             Assert.AreEqual(1, item1.Source.VersionNumber);
+
+			Assert.IsTrue (item1.Fields.Count == 2);
+			ScField field1 = (ScField)item1.Fields [0];
+			Assert.AreEqual(field1.FieldId, "{75577384-3C97-45DA-A847-81B00500E250}");
+			ScField field2 = (ScField)item1.Fields [1];
+			Assert.AreEqual(field2.FieldId, "{A60ACD61-A6DB-4182-8329-C957982CEC74}");
         }
 
         [Test]
