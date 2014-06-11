@@ -109,7 +109,7 @@
     [Test]
     public async void TestGetItemByPathWithInternationalName()
     {
-      const string ItemInterationalPath = "/sitecore/content/Home/Android/Folder for create items/Japanese/宇都宮";
+      const string ItemInterationalPath = "/sitecore/content/Home/Android/Static/Static/宇都宮";
       var response = await GetItemByPath(ItemInterationalPath);
       testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
@@ -124,7 +124,7 @@
     [Test]
     public async void TestGetItemByInternationalPath()
     {
-      const string ItemInterationalPath = "/sitecore/content/Home/Android/Folder for create items/Japanese/宇都宮/ではまた明日";
+      const string ItemInterationalPath = "/sitecore/content/Home/Android/Static/Japanese/宇都宮/ではまた明日";
       var response = await GetItemByPath(ItemInterationalPath);
       var expectedItem = new TestEnvironment.Item
       {

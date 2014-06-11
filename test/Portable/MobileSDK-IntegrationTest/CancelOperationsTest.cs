@@ -34,7 +34,7 @@
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
       var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Build();
-      var cancelToken = CreateCancelTokenWithDelay(100);
+      var cancelToken = CreateCancelTokenWithDelay(20);
       ScItemsResponse response = null;
       try
       {
@@ -55,7 +55,7 @@
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
       var request = requestBuilder.RequestWithPath(testData.Items.Home.Path).Build();
-      var cancelToken = CreateCancelTokenWithDelay(100);
+      var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
       try
       {
@@ -84,7 +84,7 @@
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
       var request = requestBuilder.RequestWithSitecoreQuery(testData.Items.Home.Path).Build();
-      var cancelToken = CreateCancelTokenWithDelay(100);
+      var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
       try
       {

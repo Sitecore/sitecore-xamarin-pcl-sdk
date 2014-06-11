@@ -30,6 +30,10 @@ namespace MobileSDKIntegrationTest
       result.Items.ItemWithVersions.Path = "/sitecore/content/FieldsTest/TestFieldsVersionsAndDB";
       result.Items.ItemWithVersions.DisplayName = "TestFieldsVersionsAndDB";
 
+      result.Items.TestFieldsItem.Id = "{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}";
+      result.Items.TestFieldsItem.DisplayName = "Test Fields";
+      result.Items.TestFieldsItem.Template = "Test Templates/Sample fields";
+
       return result;
     }
 
@@ -51,6 +55,7 @@ namespace MobileSDKIntegrationTest
     {
       public Item Home = new Item();
       public Item ItemWithVersions = new Item();
+      public Item TestFieldsItem = new Item();
       public Item MediaLibrary = new Item();
     }
 
