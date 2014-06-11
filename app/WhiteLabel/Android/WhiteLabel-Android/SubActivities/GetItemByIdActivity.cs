@@ -38,7 +38,7 @@ namespace WhiteLabelAndroid.SubActivities
 
         private async void PerformGetItemRequest(string id)
         {
-            ScApiSession session = new ScApiSession(this.prefs.GetSessionConfig(), this.prefs.GetItemSource());
+            ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
 
             ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
             var request = requestBuilder.RequestWithId(id).Build();
