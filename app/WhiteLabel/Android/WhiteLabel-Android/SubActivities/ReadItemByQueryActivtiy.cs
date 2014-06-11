@@ -7,8 +7,8 @@ namespace WhiteLabelAndroid.SubActivities
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
 
-    [Activity(Label = "GetItemByIdActivity")]
-    public class GetItemByIdActivity : Activity
+    [Activity]
+    public class ReadItemByQueryActivtiy : Activity
     {
         private Prefs prefs;
 
@@ -17,20 +17,22 @@ namespace WhiteLabelAndroid.SubActivities
             base.OnCreate(bundle);
             this.prefs = Prefs.From(this);
 
+            this.Title = this.GetString(Resource.String.text_get_item_by_query);
+
             this.SetContentView(Resource.Layout.SimpleItemLayout);
 
             var label = this.FindViewById<TextView>(Resource.Id.label);
-            label.Text = "Type Item Id:";
+            label.Text = "Type Sitecore Query:";
 
             var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-            itemIdField.Hint = "Item Id";
+            itemIdField.Hint = "Query";
 
             var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
             getItemButton.Click += (sender, args) =>
             {
                 if (string.IsNullOrEmpty(itemIdField.Text))
                 {
-                    Toast.MakeText(this, "Item Id cannot be mepty", ToastLength.Short).Show();
+                    Toast.MakeText(this, "Query cannot be mepty", ToastLength.Short).Show();
                     return;
                 }
 
@@ -38,15 +40,16 @@ namespace WhiteLabelAndroid.SubActivities
             };
         }
 
-        private async void PerformGetItemRequest(string id)
+        private async void PerformGetItemRequest(string query)
         {
-            ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
-
-            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
-            var request = requestBuilder.RequestWithId(id).Build();
             try
             {
-                ScItemsResponse response = await session.ReadItemByIdAsync(request);
+                ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
+
+                ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
+                var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
+
+                ScItemsResponse response = await session.ReadItemByQueryAsync(request);
 
                 if (response.ResultCount > 0)
                 {
@@ -54,7 +57,7 @@ namespace WhiteLabelAndroid.SubActivities
                 }
                 else
                 {
-                    Toast.MakeText(this, "No items with this Id", ToastLength.Long).Show();
+                    Toast.MakeText(this, "No items with this query", ToastLength.Long).Show();
                 }
             }
             catch (Exception exception)

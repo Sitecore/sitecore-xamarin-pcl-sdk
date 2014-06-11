@@ -55,9 +55,9 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsActivity.cs" />
-    <Compile Include="SubActivities\GetItemByPathActivtiy.cs" />
-    <Compile Include="SubActivities\GetItemByIdActivity.cs" />
-    <Compile Include="SubActivities\GetItemByQueryActivtiy.cs" />
+    <Compile Include="SubActivities\ReadItemByPathActivtiy.cs" />
+    <Compile Include="SubActivities\ReadItemByIdActivity.cs" />
+    <Compile Include="SubActivities\ReadItemByQueryActivtiy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

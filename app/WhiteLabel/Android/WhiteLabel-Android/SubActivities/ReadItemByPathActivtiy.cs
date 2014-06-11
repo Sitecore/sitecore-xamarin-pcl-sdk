@@ -7,8 +7,8 @@ namespace WhiteLabelAndroid.SubActivities
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
 
-    [Activity(Label = "GetItemByQueryActivtiy")]
-    public class GetItemByQueryActivtiy : Activity
+    [Activity]
+    public class ReadItemByPathActivtiy : Activity
     {
         private Prefs prefs;
 
@@ -17,20 +17,22 @@ namespace WhiteLabelAndroid.SubActivities
             base.OnCreate(bundle);
             this.prefs = Prefs.From(this);
 
+            this.Title = this.GetString(Resource.String.text_get_item_by_path);
+
             this.SetContentView(Resource.Layout.SimpleItemLayout);
 
             var label = this.FindViewById<TextView>(Resource.Id.label);
-            label.Text = "Type Sitecore Query:";
+            label.Text = "Type Item Path:";
 
             var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-            itemIdField.Hint = "Query";
+            itemIdField.Hint = "Item Path";
 
             var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
             getItemButton.Click += (sender, args) =>
             {
                 if (string.IsNullOrEmpty(itemIdField.Text))
                 {
-                    Toast.MakeText(this, "Query cannot be mepty", ToastLength.Short).Show();
+                    Toast.MakeText(this, "Item path cannot be mepty", ToastLength.Short).Show();
                     return;
                 }
 
@@ -38,15 +40,16 @@ namespace WhiteLabelAndroid.SubActivities
             };
         }
 
-        private async void PerformGetItemRequest(string query)
+        private async void PerformGetItemRequest(string path)
         {
-            ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
-
-            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
-            var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
             try
             {
-                ScItemsResponse response = await session.ReadItemByQueryAsync(request);
+                ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
+
+                ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
+                var request = requestBuilder.RequestWithPath(path).Build();
+
+                ScItemsResponse response = await session.ReadItemByPathAsync(request);
 
                 if (response.ResultCount > 0)
                 {
@@ -54,7 +57,7 @@ namespace WhiteLabelAndroid.SubActivities
                 }
                 else
                 {
-                    Toast.MakeText(this, "No items with this query", ToastLength.Long).Show();
+                    Toast.MakeText(this, "No items with this path", ToastLength.Long).Show();
                 }
             }
             catch (Exception exception)
