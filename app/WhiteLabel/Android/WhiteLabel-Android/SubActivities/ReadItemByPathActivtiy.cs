@@ -51,8 +51,7 @@ namespace WhiteLabelAndroid.SubActivities
 
                 ScItemsResponse response = await session.ReadItemByPathAsync(request);
 
-                string message = null;
-                message = response.ResultCount > 0 ? string.Format("item title is \"{0}\"", response.Items[0].DisplayName) : "Item doesn't exist";
+                var message = response.ResultCount > 0 ? string.Format("item title is \"{0}\"", response.Items[0].DisplayName) : "Item doesn't exist";
 
                 DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, message);
             }
