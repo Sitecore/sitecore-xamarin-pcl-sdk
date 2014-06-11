@@ -68,5 +68,24 @@ namespace MobileSDK_UnitTest_Desktop
             string expected = "payload=content&fields=%d0%a1%d0%bb%d0%b0%d0%b2%d0%b0%20%d0%a3%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%96%21|%d0%93%d0%b5%d1%80%d0%be%d1%8f%d0%bc%20%d1%81%d0%bb%d0%b0%d0%b2%d0%b0%21";
             Assert.AreEqual(expected, result);
         }
+
+        [Test]
+        public void TestSimpleFieldListOfIdsIsProcessedCorrectly()
+        {
+            string[] fields = {"{0000-1111-2222}", "{1123-5813-21-34}"};
+
+            string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, fields));
+            Assert.AreEqual("payload=content&fields=%7b0000-1111-2222%7d|%7b1123-5813-21-34%7d", result);
+        }
+
+        [Test]
+        public void TestMixedFieldList()
+        {
+            string[] fields = {"Слава Україні!", "{0000-1111-2222}", "Героям слава!"};
+
+            string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, fields));
+            string expected = "payload=content&fields=%d0%a1%d0%bb%d0%b0%d0%b2%d0%b0%20%d0%a3%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%96%21|%7b0000-1111-2222%7d|%d0%93%d0%b5%d1%80%d0%be%d1%8f%d0%bc%20%d1%81%d0%bb%d0%b0%d0%b2%d0%b0%21";
+            Assert.AreEqual(expected, result);
+        }
     }
 }
