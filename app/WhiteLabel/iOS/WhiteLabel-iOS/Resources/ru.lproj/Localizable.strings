@@ -1,0 +1,36 @@
+﻿//features
+"Settings" = "******";
+"getItemByPath" = "**************";
+"getItemById" = "****************";
+"deleteItemById" = "*******************";
+"createEditItem" = "******************";
+"uploadImageVC" = "******************";
+"getItemByQuery" = "************";
+
+//titles
+"Alert" = "*******";
+"Error" = "*******";
+"Message" = "********";
+"OK" = "***";
+
+//messages
+"Loading Data" = "************...";
+
+"Not implemented yet" = "***************";
+"Video uploading is not supported" = "*****************";
+
+"Please type item Id" = "*********************";
+"Please type item path" = "*****************";
+"Please type query" = "*************";
+
+"Item received" = "************";
+"Item is not exist" = "***********";
+"item title is" = "**************";
+
+//settings screen placeholders
+"Instance Url" = "***********";
+"Password" = "***********";
+"Login" = "******";
+"Site" = "******";
+"Database" = "******";
+"Language" = "******";
