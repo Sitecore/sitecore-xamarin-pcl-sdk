@@ -22,7 +22,7 @@
 
 		public string Template { get; private set; }
 
-		//		public List<ScField> mFields;
+		public List<IField> mFields;
 
 		#endregion Class verialbles;
 
