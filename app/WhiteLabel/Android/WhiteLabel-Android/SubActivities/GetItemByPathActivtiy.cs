@@ -1,5 +1,6 @@
 namespace WhiteLabelAndroid.SubActivities
 {
+    using System;
     using Android.App;
     using Android.OS;
     using Android.Widget;
@@ -29,6 +30,7 @@ namespace WhiteLabelAndroid.SubActivities
             {
                 if (string.IsNullOrEmpty(itemIdField.Text))
                 {
+                    Toast.MakeText(this, "Item path cannot be mepty", ToastLength.Short).Show();
                     return;
                 }
 
@@ -38,20 +40,26 @@ namespace WhiteLabelAndroid.SubActivities
 
         private async void PerformGetItemRequest(string path)
         {
-            ScApiSession session = new ScApiSession(this.prefs.GetSessionConfig(), this.prefs.GetItemSource());
+            ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
 
             ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
             var request = requestBuilder.RequestWithPath(path).Build();
-
-            ScItemsResponse response = await session.ReadItemByPathAsync(request);
-
-            if (response.ResultCount > 0)
+            try
             {
-                Toast.MakeText(this, "Display name : " + response.Items[0].DisplayName, ToastLength.Long).Show();
+                ScItemsResponse response = await session.ReadItemByPathAsync(request);
+
+                if (response.ResultCount > 0)
+                {
+                    Toast.MakeText(this, "Display name : " + response.Items[0].DisplayName, ToastLength.Long).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "No items with this path", ToastLength.Long).Show();
+                }
             }
-            else
+            catch (Exception exception)
             {
-                Toast.MakeText(this, "No items with this path", ToastLength.Long).Show();
+                Toast.MakeText(this, "Erorr :" + exception.Message, ToastLength.Long).Show();
             }
         }
     }
