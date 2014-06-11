@@ -1,6 +1,6 @@
 ﻿
 
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.Fields
 {
 	using System;
 	using System.Threading;
@@ -18,6 +18,11 @@ namespace Sitecore.MobileSDK
 
 		public static List<IField> ParseFieldsData(JObject fieldsData, CancellationToken cancelToken)
 		{
+			if (fieldsData == null)
+			{
+				throw new ArgumentException("data cannot be null");
+			}
+
 			var fields = new List<IField>();
 
 			IList<string> propertyNames = fieldsData.Properties().Select(p => p.Name).ToList();
