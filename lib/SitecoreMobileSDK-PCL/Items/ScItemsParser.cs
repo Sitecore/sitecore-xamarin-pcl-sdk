@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK
 
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.Exceptions;
-
+	using Sitecore.MobileSDK.Fields;
 
     public class ScItemsParser
     {
@@ -56,9 +56,11 @@ namespace Sitecore.MobileSDK
                 var path 		= (string)item.GetValue("Path");
                 var template 	= (string)item.GetValue("Template");
 
-				ScItem newItem = new ScItem (source, displayName, hasChildren, id, longId, path, template);
 				JObject fieldsJSON = (JObject)item.GetValue ("Fields");
-				newItem.mFields = ScFieldsParser.ParseFieldsData(fieldsJSON , cancelToken);
+				List<IField> fields =  ScFieldsParser.ParseFieldsData(fieldsJSON , cancelToken);
+
+				ScItem newItem = new ScItem (source, displayName, hasChildren, id, longId, path, template, fields);
+
 
 				items.Add(newItem);
             }
