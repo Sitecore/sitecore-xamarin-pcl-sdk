@@ -12,7 +12,7 @@ namespace Sitecore.MobileSDK.Fields
 
 	public class ScFieldsParser
 	{
-		public ScFieldsParser ()
+		public ScFieldsParser()
 		{
 		}
 
@@ -20,7 +20,7 @@ namespace Sitecore.MobileSDK.Fields
 		{
 			if (fieldsData == null)
 			{
-				throw new ArgumentException("data cannot be null");
+				throw new ArgumentNullException();
 			}
 
 			var fields = new List<IField>();
