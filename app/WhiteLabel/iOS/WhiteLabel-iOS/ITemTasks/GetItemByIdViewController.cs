@@ -1,13 +1,15 @@
-﻿using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.UrlBuilder;
-
+﻿
 namespace WhiteLabeliOS
 {
+	using System;
+	using System.Drawing;
+	using MonoTouch.Foundation;
+	using MonoTouch.UIKit;
+	using Sitecore.MobileSDK;
+	using Sitecore.MobileSDK.Items;
+	using Sitecore.MobileSDK.UrlBuilder;
+	using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
 	public partial class GetItemByIdViewController : BaseTaskViewController
 	{
 		public GetItemByIdViewController (IntPtr handle) : base (handle)
@@ -48,6 +50,7 @@ namespace WhiteLabeliOS
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
 				var request = builder.RequestWithId(itemIdTextField.Text)
+					.Payload(PayloadType.Full)
 					.Build();
 					
 				this.ShowLoader();
