@@ -53,11 +53,28 @@ namespace Sitecore.MobileSDK
         }
 
 
+        public IGetItemRequestParametersBuilder<T> AddMultipleFields( ICollection<string> fields )
+        {
+            int myFieldsCount = this.queryParameters.Fields.Count;
+            int newFieldsCount = fields.Count;
+
+            int appendedFieldsCount = myFieldsCount + newFieldsCount;
+            string[] newFields = new string[appendedFieldsCount];
+
+
+            this.queryParameters.Fields.CopyTo( newFields, 0 );
+            fields.CopyTo( newFields, myFieldsCount );
+
+            this.queryParameters = new QueryParameters( this.queryParameters.Payload, newFields );
+            return this;
+        }
+
+
+
         public abstract T Build();
 
         protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
-        protected QueryParameters queryParameters = new QueryParameters( PayloadType.Default, null );
-        protected ICollection<string> fields = null;
+        protected QueryParameters queryParameters = new QueryParameters( PayloadType.Default, new string[0] );
     }
 }
 

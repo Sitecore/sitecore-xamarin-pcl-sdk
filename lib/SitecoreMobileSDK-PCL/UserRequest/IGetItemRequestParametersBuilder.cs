@@ -13,7 +13,9 @@ namespace Sitecore.MobileSDK
         IGetItemRequestParametersBuilder<T> Language (string itemLanguage);
         IGetItemRequestParametersBuilder<T> Version (string itemVersion);
         IGetItemRequestParametersBuilder<T> Payload(PayloadType payload);
+
         IGetItemRequestParametersBuilder<T> LoadFields( ICollection<string> fields );
+        IGetItemRequestParametersBuilder<T> AddMultipleFields( ICollection<string> fields );
 
         T Build();
     }
