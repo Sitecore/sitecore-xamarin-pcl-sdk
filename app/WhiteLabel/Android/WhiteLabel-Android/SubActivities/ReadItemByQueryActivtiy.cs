@@ -51,18 +51,14 @@ namespace WhiteLabelAndroid.SubActivities
 
                 ScItemsResponse response = await session.ReadItemByQueryAsync(request);
 
-                if (response.ResultCount > 0)
-                {
-                    Toast.MakeText(this, string.Format("items count is \"{0}\"", response.Items.Count), ToastLength.Long).Show();
-                }
-                else
-                {
-                    Toast.MakeText(this, "Items doesn't exist", ToastLength.Long).Show();
-                }
+                 string message = null;
+                message = response.ResultCount > 0 ? string.Format("items count is \"{0}\"", response.Items.Count): "Item doesn't exist";
+
+                DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, message);
             }
             catch (Exception exception)
             {
-                Toast.MakeText(this, "Erorr :" + exception.Message, ToastLength.Long).Show();
+                DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, "Erorr :" + exception.Message);
             }
         }
     }

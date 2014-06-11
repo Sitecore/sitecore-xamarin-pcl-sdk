@@ -19,4 +19,6 @@
 	<string name="text_get_item_by_path">Item by Path</string>
 	<string name="text_get_item_by_query">Item by Query</string>
 
+	<string name="text_item_received">Item received</string>
+
 </resources>

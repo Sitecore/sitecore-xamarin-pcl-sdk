@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DialogHelper.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Prefs.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
