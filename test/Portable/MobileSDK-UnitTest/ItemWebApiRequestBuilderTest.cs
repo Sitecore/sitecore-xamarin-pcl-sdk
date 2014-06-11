@@ -45,6 +45,39 @@ namespace Sitecore.MobileSdkUnitTest
         }
 
         [Test]
+        public void TestLatestCallsOverrideFirstOnes()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+
+            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-beef}")
+                .Database("web")
+                .Language("en")
+                .Version("1")
+                .Payload(PayloadType.Full)
+
+                .Database("core")
+                .Language("fr")
+                .Version("3872")
+                .Payload(PayloadType.Content)
+
+                .Build();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemId);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
+
+
+
+            Assert.AreEqual("{dead-beef}", result.ItemId);
+            Assert.AreEqual("fr", result.ItemSource.Language);
+            Assert.AreEqual("core", result.ItemSource.Database);
+            Assert.AreEqual("3872", result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Content, result.QueryParameters.Payload );
+        }
+
+        [Test]
         public void TestItemIdRequestBuilderWithIdOnly()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
@@ -248,6 +281,64 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.Throws<ArgumentNullException>(() => builder.RequestWithSitecoreQuery("\t \r \n"));
         }            
         #endregion SitecoreQuery
+
+
+        [Test]
+        public void TestRequestBuilderWithItemFields()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+
+            string[] fields = { "Мама", "Мыла", "Раму" };
+
+            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
+                .LoadFields(fields)
+                .Build();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemId);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
+
+
+
+            Assert.AreEqual("{dead-c0de}", result.ItemId);
+            Assert.IsNull(result.ItemSource.Language);
+            Assert.IsNull(result.ItemSource.Database);
+            Assert.IsNull(result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
+            Assert.AreEqual( fields, result.QueryParameters.Fields );
+        }
+
+        [Test]
+        public void TestLaterItemFieldsOverridePreviousOnes()
+        {
+            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
+
+            string[] fields = { "Мама", "Мыла", "Раму" };
+            string[] moarFields = { "1", "2", "4" };
+
+            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
+                .LoadFields(fields)
+                .LoadFields(moarFields)
+                .Build();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ItemSource);
+            Assert.IsNotNull(result.ItemId);
+            Assert.IsNotNull( result.QueryParameters );
+            Assert.IsNull(result.SessionSettings);
+
+
+
+            Assert.AreEqual("{dead-c0de}", result.ItemId);
+            Assert.IsNull(result.ItemSource.Language);
+            Assert.IsNull(result.ItemSource.Database);
+            Assert.IsNull(result.ItemSource.Version);
+            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
+            Assert.AreEqual( moarFields, result.QueryParameters.Fields );
+        }
+
     }
 }
 
