@@ -88,8 +88,11 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\SetLanguageDbVersionTest.cs">
       <Link>SetLanguageDbVersionTest.cs</Link>
     </Compile>
-	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CancelOperationsTest.cs">
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CancelOperationsTest.cs">
       <Link>CancelOperationsTest.cs</Link>
+    </Compile>
+	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetFieldsTest.cs">
+      <Link>GetFieldsTest.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
