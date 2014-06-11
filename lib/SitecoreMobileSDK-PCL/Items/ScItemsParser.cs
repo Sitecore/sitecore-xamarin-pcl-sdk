@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK
 
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.Exceptions;
-	using Sitecore.MobileSDK.Fields;
+	using Sitecore.MobileSDK.Items.Fields;
 
     public class ScItemsParser
     {

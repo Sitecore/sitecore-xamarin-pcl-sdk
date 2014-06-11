@@ -11,7 +11,7 @@ namespace Sitecore.MobileSdkUnitTest
 
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
-	using Sitecore.MobileSDK.Fields;
+	using Sitecore.MobileSDK.Items.Fields;
     using Sitecore.MobileSDK.Exceptions;
 
     // @adk.review : waybe we should we wrap this? 

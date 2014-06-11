@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sitecore.MobileSDK.Fields
+namespace Sitecore.MobileSDK.Items.Fields
 {
 	public interface IField
 	{

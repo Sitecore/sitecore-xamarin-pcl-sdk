@@ -1,6 +1,6 @@
 ﻿
 
-namespace Sitecore.MobileSDK.Fields
+namespace Sitecore.MobileSDK.Items.Fields
 {
 	using System;
 	using System.Threading;

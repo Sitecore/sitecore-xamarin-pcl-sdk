@@ -1,7 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.Items
 {
 	using System.Collections.Generic;
-	using Sitecore.MobileSDK.Fields;
+	using Sitecore.MobileSDK.Items.Fields;
 
 	public class ScItem
 	{
