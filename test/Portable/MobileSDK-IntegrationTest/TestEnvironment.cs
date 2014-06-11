@@ -31,6 +31,7 @@ namespace MobileSDKIntegrationTest
       result.Items.ItemWithVersions.DisplayName = "TestFieldsVersionsAndDB";
 
       result.Items.TestFieldsItem.Id = "{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}";
+      result.Items.TestFieldsItem.Path = "/sitecore/content/Home/Test Fields";
       result.Items.TestFieldsItem.DisplayName = "Test Fields";
       result.Items.TestFieldsItem.Template = "Test Templates/Sample fields";
 

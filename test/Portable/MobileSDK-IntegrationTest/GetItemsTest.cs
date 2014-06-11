@@ -109,9 +109,9 @@
     [Test]
     public async void TestGetItemByPathWithInternationalName()
     {
-      const string ItemInterationalPath = "/sitecore/content/Home/Android/Static/Static/宇都宮";
+      const string ItemInterationalPath = "/sitecore/content/Home/Android/Static/Japanese/宇都宮";
       var response = await GetItemByPath(ItemInterationalPath);
-      testData.AssertItemsCount(1, response);
+     testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = "宇都宮",
