@@ -11,6 +11,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.Rest
             result.FieldSeparator        = "&";
             result.HostAndArgsSeparator  = "?";
             result.PathComponentSeparator = "/";
+            result.ItemFieldSeparator = "|";
 
             return result;
         }
@@ -19,10 +20,11 @@ namespace Sitecore.MobileSDK.UrlBuilder.Rest
         {
         }
 
-        public string KeyValuePairSeparator { get; private set; }
-        public string FieldSeparator        { get; private set; }
-        public string HostAndArgsSeparator  { get; private set; }
-        public string PathComponentSeparator{ get; private set; }
+        public string KeyValuePairSeparator   { get; private set; }
+        public string FieldSeparator          { get; private set; }
+        public string HostAndArgsSeparator    { get; private set; }
+        public string PathComponentSeparator  { get; private set; }
+        public string ItemFieldSeparator      { get; private set; }
     }
 }
 

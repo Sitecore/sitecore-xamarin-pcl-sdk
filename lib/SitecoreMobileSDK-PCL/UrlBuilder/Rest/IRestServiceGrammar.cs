@@ -8,6 +8,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.Rest
         string KeyValuePairSeparator { get; }
         string FieldSeparator        { get; }
         string HostAndArgsSeparator { get; }
+        string ItemFieldSeparator { get; }
     }
 }
 

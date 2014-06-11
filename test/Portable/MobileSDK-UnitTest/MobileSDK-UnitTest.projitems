@@ -21,5 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemWebApiRequestBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)QueryParametersUrlBuilderTest.cs" />
   </ItemGroup>
 </Project>
