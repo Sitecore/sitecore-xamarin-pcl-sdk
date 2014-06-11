@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿
 
 namespace Sitecore.MobileSDK
 {
+	using System;
+	using System.Threading;
+	using System.Collections.Generic;
+	using System.Linq;
+
+	using Newtonsoft.Json;
+	using Newtonsoft.Json.Linq;
+
 	public class ScFieldsParser
 	{
 		public ScFieldsParser ()
 		{
 		}
 
-		public static List<IField> ParseFieldsData(JObject fieldsData)
+		public static List<IField> ParseFieldsData(JObject fieldsData, CancellationToken cancelToken)
 		{
 			var fields = new List<IField>();
 
@@ -22,10 +25,11 @@ namespace Sitecore.MobileSDK
 
 			foreach (string fieldId in propertyNames)
 			{
-				//TODO: @igk make canceling
+				cancelToken.ThrowIfCancellationRequested ();
+
 				JObject fieldData = (JObject)fieldsData.GetValue(fieldId);
-				var name = (string)fieldData.GetValue("Name");
-				var type = (string)fieldData.GetValue("Type");
+				var name  = (string)fieldData.GetValue("Name");
+				var type  = (string)fieldData.GetValue("Type");
 				var value = (string)fieldData.GetValue("Value");
 
 				ScField newField = new ScField (fieldId, name, type, value);

@@ -45,20 +45,20 @@ namespace Sitecore.MobileSDK
 
             foreach (JObject item in responseItems)
             {
-                cancelToken.ThrowIfCancellationRequested ();
+				cancelToken.ThrowIfCancellationRequested ();
 
                 var source = ParseItemSource(item);
 
                 var displayName = (string)item.GetValue("DisplayName");
-                var hasChildren = (bool)item.GetValue("HasChildren");
-                var id = (string)item.GetValue("ID");
-                var longId = (string)item.GetValue("LongID");
-                var path = (string)item.GetValue("Path");
-                var template = (string)item.GetValue("Template");
+				var hasChildren = (bool)  item.GetValue("HasChildren");
+                var id 			= (string)item.GetValue("ID");
+                var longId 		= (string)item.GetValue("LongID");
+                var path 		= (string)item.GetValue("Path");
+                var template 	= (string)item.GetValue("Template");
 
 				ScItem newItem = new ScItem (source, displayName, hasChildren, id, longId, path, template);
-				string fieldsJSON = (string)item.GetValue ("Fields");
-				newItem.mFields = ScFieldsParser.ParseFieldsData((JObject)fieldsJSON);
+				JObject fieldsJSON = (JObject)item.GetValue ("Fields");
+				newItem.mFields = ScFieldsParser.ParseFieldsData(fieldsJSON , cancelToken);
 
 				items.Add(newItem);
             }
@@ -69,7 +69,7 @@ namespace Sitecore.MobileSDK
         {
             var language = (string)json.GetValue("Language");
             var database = (string)json.GetValue("Database");
-            var version = (string)json.GetValue("Version");
+			var version  = (string)json.GetValue("Version");
 
             return new ItemSource(database, language, version);
         }
