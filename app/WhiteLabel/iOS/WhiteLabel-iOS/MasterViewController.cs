@@ -43,7 +43,7 @@ namespace WhiteLabeliOS
         {
             base.PrepareForSegue(segue, sender);
 
-            if (segue.Identifier == "configurationViewController")
+            if ("configurationViewController" == segue.Identifier)
             {
                 var settingsViewController = segue.DestinationViewController as SettingsViewController;
                 settingsViewController.instanceSettings = this.settings;
