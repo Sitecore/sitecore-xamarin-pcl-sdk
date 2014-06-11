@@ -56,7 +56,11 @@ namespace Sitecore.MobileSDK
                 var path = (string)item.GetValue("Path");
                 var template = (string)item.GetValue("Template");
 
-                items.Add(new ScItem(source, displayName, hasChildren, id, longId, path, template));
+				ScItem newItem = new ScItem (source, displayName, hasChildren, id, longId, path, template);
+				string fieldsJSON = (string)item.GetValue ("Fields");
+				newItem.mFields = ScFieldsParser.ParseFieldsData((JObject)fieldsJSON);
+
+				items.Add(newItem);
             }
             return new ScItemsResponse(totalCount, resultCount, items);
         }
