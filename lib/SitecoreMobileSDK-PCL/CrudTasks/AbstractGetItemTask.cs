@@ -43,6 +43,8 @@ namespace Sitecore.MobileSDK.CrudTasks
 
         public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
         {
+			//TODO: @igk debug request output, remove later
+			Debug.WriteLine("REQUEST: " + requestUrl);
             HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
             return await httpResponse.Content.ReadAsStringAsync();
         }
@@ -51,6 +53,8 @@ namespace Sitecore.MobileSDK.CrudTasks
         {
             Func<ScItemsResponse> syncParseResponse = () =>
             {
+				//TODO: @igk debug response output, remove later
+				Debug.WriteLine("RESPONSE: " + data);
                 return ScItemsParser.Parse(data, cancelToken);
             };
             return await Task.Factory.StartNew(syncParseResponse, cancelToken);
