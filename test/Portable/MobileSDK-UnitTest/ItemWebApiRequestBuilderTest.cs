@@ -338,7 +338,6 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
             Assert.AreEqual( moarFields, result.QueryParameters.Fields );
         }
-
     }
 }
 
