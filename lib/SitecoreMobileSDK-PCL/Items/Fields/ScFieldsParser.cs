@@ -22,7 +22,7 @@ namespace Sitecore.MobileSDK
 
 			foreach (string fieldId in propertyNames)
 			{
-				//TODP: @igk make canceling
+				//TODO: @igk make canceling
 				JObject fieldData = (JObject)fieldsData.GetValue(fieldId);
 				var name = (string)fieldData.GetValue("Name");
 				var type = (string)fieldData.GetValue("Type");
