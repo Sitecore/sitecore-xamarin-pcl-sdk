@@ -37,16 +37,18 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual(true, item1.HasChildren);
             Assert.AreEqual("en", item1.Source.Language);
             Assert.AreEqual("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", item1.Id);
-            Assert.AreEqual("/{11111111-1111-1111-1111-111111111111}/{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", item1.LongId);
+
+			string expectedFullId = "/{11111111-1111-1111-1111-111111111111}/{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
+			Assert.AreEqual(expectedFullId, item1.LongId);
             Assert.AreEqual("/sitecore/content/Home", item1.Path);
             Assert.AreEqual("Sample/Sample Item", item1.Template);
             Assert.AreEqual(1, item1.Source.VersionNumber);
 
 			Assert.IsTrue (item1.Fields.Count == 2);
 			ScField field1 = (ScField)item1.Fields [0];
-			Assert.AreEqual(field1.FieldId, "{75577384-3C97-45DA-A847-81B00500E250}");
+			Assert.AreEqual("{75577384-3C97-45DA-A847-81B00500E250}", field1.FieldId);
 			ScField field2 = (ScField)item1.Fields [1];
-			Assert.AreEqual(field2.FieldId, "{A60ACD61-A6DB-4182-8329-C957982CEC74}");
+			Assert.AreEqual("{A60ACD61-A6DB-4182-8329-C957982CEC74}", field2.FieldId);
         }
 
         [Test]

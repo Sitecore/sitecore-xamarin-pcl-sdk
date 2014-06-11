@@ -37,7 +37,7 @@ namespace Sitecore.MobileSdkUnitTest
 			List<IField> fields = ScFieldsParser.ParseFieldsData (fieldsData, CancellationToken.None);;
 			Assert.True (fields.Count == 2);
 			ScField field1 = (ScField)fields[0];
-			Assert.AreEqual(field1.FieldId, "{75577384-3C97-45DA-A847-81B00500E250}");
+			Assert.AreEqual("{75577384-3C97-45DA-A847-81B00500E250}", field1.FieldId);
 			ScField field2 = (ScField)fields[1];
 			Assert.AreEqual(field2.FieldId, "{A60ACD61-A6DB-4182-8329-C957982CEC74}");
 		}
