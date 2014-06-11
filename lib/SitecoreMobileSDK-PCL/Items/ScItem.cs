@@ -1,10 +1,11 @@
 ﻿namespace Sitecore.MobileSDK.Items
 {
 	using System.Collections.Generic;
+	using Sitecore.MobileSDK.Items.Fields;
 
 	public class ScItem
 	{
-		#region Class verialbles;
+		#region Class variables;
 
 		public const string RootItemId = "{11111111-1111-1111-1111-111111111111}";
 
@@ -22,15 +23,15 @@
 
 		public string Template { get; private set; }
 
-		//		public List<ScField> mFields;
+		public List<IField> Fields { get; private set; }
 
-		#endregion Class verialbles;
+		#endregion Class variables;
 
 		private ScItem ()
 		{
 		}
 
-		public ScItem (ItemSource source, string displayName, bool hasChildren, string id, string longId, string path, string template)
+		public ScItem (ItemSource source, string displayName, bool hasChildren, string id, string longId, string path, string template, List<IField> fields)
 		{
 			this.Source = source;
 			this.DisplayName = displayName;
@@ -39,6 +40,7 @@
 			this.LongId = longId;
 			this.Path = path;
 			this.Template = template;
+			this.Fields = fields;
 		}
 	}
 }

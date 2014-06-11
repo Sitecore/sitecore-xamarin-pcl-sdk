@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK
 
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.Exceptions;
-
+	using Sitecore.MobileSDK.Items.Fields;
 
     public class ScItemsParser
     {
@@ -45,18 +45,24 @@ namespace Sitecore.MobileSDK
 
             foreach (JObject item in responseItems)
             {
-                cancelToken.ThrowIfCancellationRequested ();
+				cancelToken.ThrowIfCancellationRequested ();
 
                 var source = ParseItemSource(item);
 
                 var displayName = (string)item.GetValue("DisplayName");
-                var hasChildren = (bool)item.GetValue("HasChildren");
-                var id = (string)item.GetValue("ID");
-                var longId = (string)item.GetValue("LongID");
-                var path = (string)item.GetValue("Path");
-                var template = (string)item.GetValue("Template");
+				var hasChildren = (bool)  item.GetValue("HasChildren");
+                var id 			= (string)item.GetValue("ID");
+                var longId 		= (string)item.GetValue("LongID");
+                var path 		= (string)item.GetValue("Path");
+                var template 	= (string)item.GetValue("Template");
 
-                items.Add(new ScItem(source, displayName, hasChildren, id, longId, path, template));
+				JObject fieldsJSON = (JObject)item.GetValue ("Fields");
+				List<IField> fields =  ScFieldsParser.ParseFieldsData(fieldsJSON , cancelToken);
+
+				ScItem newItem = new ScItem (source, displayName, hasChildren, id, longId, path, template, fields);
+
+
+				items.Add(newItem);
             }
             return new ScItemsResponse(totalCount, resultCount, items);
         }
@@ -65,7 +71,7 @@ namespace Sitecore.MobileSDK
         {
             var language = (string)json.GetValue("Language");
             var database = (string)json.GetValue("Database");
-            var version = (string)json.GetValue("Version");
+			var version  = (string)json.GetValue("Version");
 
             return new ItemSource(database, language, version);
         }
