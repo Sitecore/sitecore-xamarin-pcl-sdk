@@ -53,11 +53,11 @@ namespace WhiteLabelAndroid.SubActivities
 
                 if (response.ResultCount > 0)
                 {
-                    Toast.MakeText(this, "Display name : " + response.Items[0].DisplayName, ToastLength.Long).Show();
+                    Toast.MakeText(this, string.Format("items count is \"{0}\"", response.Items.Count), ToastLength.Long).Show();
                 }
                 else
                 {
-                    Toast.MakeText(this, "No items with this query", ToastLength.Long).Show();
+                    Toast.MakeText(this, "Items doesn't exist", ToastLength.Long).Show();
                 }
             }
             catch (Exception exception)
