@@ -29,6 +29,7 @@ namespace WhiteLabelAndroid.SubActivities
             {
                 if (string.IsNullOrEmpty(itemIdField.Text))
                 {
+                    Toast.MakeText(this, "Item Id cannot be mepty", ToastLength.Short).Show();
                     return;
                 }
                 
