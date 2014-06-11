@@ -1,5 +1,6 @@
 namespace WhiteLabelAndroid.SubActivities
 {
+    using System;
     using Android.App;
     using Android.OS;
     using Android.Widget;
@@ -32,7 +33,7 @@ namespace WhiteLabelAndroid.SubActivities
                     Toast.MakeText(this, "Item Id cannot be mepty", ToastLength.Short).Show();
                     return;
                 }
-                
+
                 this.PerformGetItemRequest(itemIdField.Text);
             };
         }
@@ -43,17 +44,23 @@ namespace WhiteLabelAndroid.SubActivities
 
             ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
             var request = requestBuilder.RequestWithId(id).Build();
-
-            ScItemsResponse response = await session.ReadItemByIdAsync(request);
-
-            if (response.ResultCount > 0)
+            try
             {
-                Toast.MakeText(this, "Display name : " + response.Items[0].DisplayName, ToastLength.Long).Show();
+                ScItemsResponse response = await session.ReadItemByIdAsync(request);
+
+                if (response.ResultCount > 0)
+                {
+                    Toast.MakeText(this, "Display name : " + response.Items[0].DisplayName, ToastLength.Long).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "No items with this Id", ToastLength.Long).Show();
+                }
             }
-            else
+            catch (Exception exception)
             {
-                Toast.MakeText(this, "No items with this Id", ToastLength.Long).Show();
+                Toast.MakeText(this, "Erorr :" + exception.Message, ToastLength.Long).Show();
             }
         }
-   }
+    }
 }
