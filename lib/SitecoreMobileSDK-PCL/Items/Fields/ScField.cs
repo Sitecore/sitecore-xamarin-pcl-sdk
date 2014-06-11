@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.Fields
 {
 	public class ScField : IField
 	{
