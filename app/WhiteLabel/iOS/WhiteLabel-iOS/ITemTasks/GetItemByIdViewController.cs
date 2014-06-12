@@ -48,6 +48,22 @@ namespace WhiteLabeliOS
 			AlertHelper.ShowLocalizedNotImlementedAlert();
 		}
 
+		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
+		{
+			switch (sender.SelectedSegment)
+			{
+			case 0:
+				this.currentPayloadType = PayloadType.Full;
+				break;
+			case 1:
+				this.currentPayloadType = PayloadType.Content;
+				break;
+			case 2:
+				this.currentPayloadType = PayloadType.Min;
+				break;
+			}
+		}
+
 		private async void SendRequest()
 		{
 			try
@@ -57,9 +73,10 @@ namespace WhiteLabeliOS
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
 				var request = builder.RequestWithId(itemIdTextField.Text)
-					.Payload(PayloadType.Full)
-					.Build();
-					
+					.Payload(this.currentPayloadType)
+					.AddSingleField(this.fieldNameTextField.Text)
+				    .Build();
+
 				this.ShowLoader();
 
 				ScItemsResponse response = await session.ReadItemByIdAsync(request);
