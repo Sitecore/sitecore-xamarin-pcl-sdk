@@ -75,11 +75,7 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
-                this.FieldsTableView.DataSource = null;
-                this.FieldsTableView.Delegate = null;
-                this.fieldsDataSource.Dispose();
-                this.fieldsDataSource = null;
-                this.fieldsTableDelegate = null;
+                CleanupTableViewBindings();
 
 				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
@@ -89,6 +85,15 @@ namespace WhiteLabeliOS
                 this.HideLoader();
             }
 		}
+
+        void CleanupTableViewBindings()
+        {
+            this.FieldsTableView.DataSource = null;
+            this.FieldsTableView.Delegate = null;
+            this.fieldsDataSource.Dispose();
+            this.fieldsDataSource = null;
+            this.fieldsTableDelegate = null;
+        }
 
         private void ShowFieldsForItem( ScItem item )
         {

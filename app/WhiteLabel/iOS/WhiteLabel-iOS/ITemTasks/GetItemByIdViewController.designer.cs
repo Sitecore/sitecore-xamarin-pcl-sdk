@@ -13,6 +13,9 @@ namespace WhiteLabeliOS
 	partial class GetItemByIdViewController
 	{
 		[Outlet]
+		MonoTouch.UIKit.UITableView FieldsTableView { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UITextField itemIdTextField { get; set; }
 
 		[Action ("OnGetItemButtonTouched:")]
@@ -23,6 +26,11 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (FieldsTableView != null) {
+				FieldsTableView.Dispose ();
+				FieldsTableView = null;
+			}
+
 			if (itemIdTextField != null) {
 				itemIdTextField.Dispose ();
 				itemIdTextField = null;
