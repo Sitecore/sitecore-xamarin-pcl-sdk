@@ -18,7 +18,8 @@ namespace Sitecore.MobileSdkUnitTest
 		public void TestParseNullData ()
 		{
 			JObject fieldsData = null;
-			TestDelegate action = () =>  ScFieldsParser.ParseFieldsData (fieldsData, CancellationToken.None);;
+		
+			TestDelegate action = () =>  ScFieldsParser.ParseFieldsData (fieldsData, CancellationToken.None);
 			Assert.Throws<ArgumentNullException>(action, "cannot parse null response");
 		}
 
@@ -26,7 +27,7 @@ namespace Sitecore.MobileSdkUnitTest
 		public void TestParseEmptyData ()
 		{
 			JObject fieldsData = JObject.Parse("{}");
-			List<IField> fields = ScFieldsParser.ParseFieldsData (fieldsData, CancellationToken.None);;
+			List<IField> fields = ScFieldsParser.ParseFieldsData (fieldsData, CancellationToken.None);
 			Assert.True (fields.Count == 0);
 		}
 
