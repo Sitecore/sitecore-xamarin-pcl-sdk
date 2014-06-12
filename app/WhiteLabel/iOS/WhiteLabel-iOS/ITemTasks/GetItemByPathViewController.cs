@@ -19,12 +19,12 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 
-			this.itemPathField.ShouldReturn = this.HideKeyboard;
+            this.ItemPathField.ShouldReturn = this.HideKeyboard;
 		}
 
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
-			if (String.IsNullOrEmpty(itemPathField.Text))
+            if (String.IsNullOrEmpty(this.ItemPathField.Text))
 			{
 				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item path");
 			}
@@ -42,18 +42,20 @@ namespace WhiteLabeliOS
 
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-				var request = builder.RequestWithPath(itemPathField.Text)
+                var request = builder.RequestWithPath(this.ItemPathField.Text)
 					.Build();
 
 				this.ShowLoader();
 
 				ScItemsResponse response = await session.ReadItemByPathAsync(request);
 
-				this.HideLoader();
+				
 				if (response.ResultCount > 0)
 				{
 					ScItem item = response.Items [0];
-					string message = NSBundle.MainBundle.LocalizedString("item title is", null);
+                    this.ShowFieldsForItem(item);
+
+                    string message = NSBundle.MainBundle.LocalizedString("item title is", null);
 					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
 				}
 				else
@@ -63,10 +65,29 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
-				this.HideLoader();
 				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
+            finally
+            {
+                this.HideLoader();
+            }
 		}
+
+        private void ShowFieldsForItem( ScItem item )
+        {
+            this.fieldsDataSource = new FieldsDataSource();
+
+
+            FieldsDataSource dataSource = this.fieldsDataSource;
+            dataSource.SitecoreItem = item;
+            dataSource.TableView = this.FieldsTableView;
+            this.FieldsTableView.DataSource = dataSource;
+
+            this.FieldsTableView.ReloadData();
+        }
+
+
+        private FieldsDataSource fieldsDataSource;
 	}
 }
 
