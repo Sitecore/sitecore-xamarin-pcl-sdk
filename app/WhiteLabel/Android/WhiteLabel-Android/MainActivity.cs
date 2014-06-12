@@ -34,13 +34,13 @@
             this.SetContentView(Resource.Layout.Main);
 
             Button itemIdButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_id);
-            itemIdButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(GetItemByIdActivity)));
+            itemIdButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByIdActivity)));
 
             Button itemPathButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_path);
-            itemPathButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(GetItemByPathActivtiy)));
+            itemPathButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByPathActivtiy)));
 
             Button itemQueryButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_query);
-            itemQueryButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(GetItemByQueryActivtiy)));
+            itemQueryButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByQueryActivtiy)));
         }
     }
 }

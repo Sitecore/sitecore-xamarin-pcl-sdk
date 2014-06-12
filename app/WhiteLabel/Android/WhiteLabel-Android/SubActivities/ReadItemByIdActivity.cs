@@ -3,12 +3,13 @@ namespace WhiteLabelAndroid.SubActivities
     using System;
     using Android.App;
     using Android.OS;
+    using Android.Views;
     using Android.Widget;
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
 
-    [Activity(Label = "GetItemByIdActivity")]
-    public class GetItemByIdActivity : Activity
+    [Activity]
+    public class ReadItemByIdActivity : Activity
     {
         private Prefs prefs;
 
@@ -17,6 +18,8 @@ namespace WhiteLabelAndroid.SubActivities
             base.OnCreate(bundle);
             this.prefs = Prefs.From(this);
 
+            this.Title = this.GetString(Resource.String.text_get_item_by_id);
+
             this.SetContentView(Resource.Layout.SimpleItemLayout);
 
             var label = this.FindViewById<TextView>(Resource.Id.label);
@@ -24,6 +27,9 @@ namespace WhiteLabelAndroid.SubActivities
 
             var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
             itemIdField.Hint = "Item Id";
+
+            var getItemChildrenButton = this.FindViewById<Button>(Resource.Id.button_get_children);
+            getItemChildrenButton.Visibility = ViewStates.Visible;
 
             var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
             getItemButton.Click += (sender, args) =>
@@ -40,26 +46,22 @@ namespace WhiteLabelAndroid.SubActivities
 
         private async void PerformGetItemRequest(string id)
         {
-            ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
-
-            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
-            var request = requestBuilder.RequestWithId(id).Build();
             try
             {
+                ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
+
+                ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
+                var request = requestBuilder.RequestWithId(id).Build();
+
                 ScItemsResponse response = await session.ReadItemByIdAsync(request);
 
-                if (response.ResultCount > 0)
-                {
-                    Toast.MakeText(this, "Display name : " + response.Items[0].DisplayName, ToastLength.Long).Show();
-                }
-                else
-                {
-                    Toast.MakeText(this, "No items with this Id", ToastLength.Long).Show();
-                }
+                var message = response.ResultCount > 0 ? string.Format("item title is \"{0}\"", response.Items[0].DisplayName) : "Item doesn't exist";
+
+                DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, message);
             }
             catch (Exception exception)
             {
-                Toast.MakeText(this, "Erorr :" + exception.Message, ToastLength.Long).Show();
+                DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, "Erorr :" + exception.Message);
             }
         }
     }
