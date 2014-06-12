@@ -27,16 +27,21 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
             this.ValidateRequest (request);
             string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath);
 
-            SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+            var sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
             string result = sessionBuilder.BuildUrlString(request.SessionSettings);
 
-            ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
+            var sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
             string itemSourceArgs = sourceBuilder.BuildUrlQueryString ();
+
+            var itemLoadParamsBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
+            string itemLoadParams = itemLoadParamsBuilder.BuildUrlString(request.QueryParameters);
 
             result += 
                 escapedPath + 
                 this.restGrammar.HostAndArgsSeparator + 
-                itemSourceArgs;
+                itemSourceArgs +
+                this.restGrammar.FieldSeparator +
+                itemLoadParams;
 
             return result.ToLowerInvariant();
         }

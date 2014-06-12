@@ -59,7 +59,7 @@ namespace Sitecore.MobileSdkUnitTest
             IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
-            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&sc_lang=en";
+            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&sc_lang=en&payload=content";
 
             Assert.AreEqual(expected, result);
         }
@@ -90,7 +90,7 @@ namespace Sitecore.MobileSdkUnitTest
             IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
-            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%20to%20item?sc_database=web&sc_lang=en";
+            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%20to%20item?sc_database=web&sc_lang=en&payload=content";
 
             Assert.AreEqual(expected, result);
         }
@@ -147,6 +147,26 @@ namespace Sitecore.MobileSdkUnitTest
 
             TestDelegate action = () => this.builder.GetUrlForRequest(request);
             Assert.Throws<ArgumentNullException>(action);
+        }
+
+
+        [Test]
+        public void TestBuildRequestWithPathAndFieldList()
+        {
+            MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
+            mutableParameters.ItemSource = ItemSource.DefaultSource ();
+            mutableParameters.ItemPath = "/path/TO/iTEm";
+            mutableParameters.SessionSettings = this.sessionConfig;
+
+            QueryParameters fieldsList = new QueryParameters(PayloadType.Default, new string[2]{ "x", "y" });
+            mutableParameters.QueryParameters = fieldsList;
+
+            IReadItemsByPathRequest request = mutableParameters;
+
+            string result = this.builder.GetUrlForRequest(request);
+            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&sc_lang=en&payload=min&fields=x|y";
+
+            Assert.AreEqual(expected, result);
         }
     }
 }
