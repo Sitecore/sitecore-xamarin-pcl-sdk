@@ -1,12 +1,22 @@
-﻿using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
+﻿
+
 
 namespace WhiteLabeliOS
 {
+    using System;
+    using System.Drawing;
+
+    using MonoTouch.Foundation;
+    using MonoTouch.UIKit;
+
+    using Sitecore.MobileSDK;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.Items.Fields;
+
+    using WhiteLabeliOS.FieldsTableView;
+
+
+
 	public partial class GetItemByPathViewController : BaseTaskViewController
 	{
 
@@ -65,10 +75,15 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
+                this.FieldsTableView.DataSource = null;
+                this.fieldsDataSource.Dispose();
+                this.fieldsDataSource = null;
+
 				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
             finally
             {
+                this.FieldsTableView.ReloadData();
                 this.HideLoader();
             }
 		}
@@ -76,6 +91,7 @@ namespace WhiteLabeliOS
         private void ShowFieldsForItem( ScItem item )
         {
             this.fieldsDataSource = new FieldsDataSource();
+            this.fieldsTableDelegate = new FieldCellSelectionHandler();
 
 
             FieldsDataSource dataSource = this.fieldsDataSource;
@@ -83,11 +99,26 @@ namespace WhiteLabeliOS
             dataSource.TableView = this.FieldsTableView;
             this.FieldsTableView.DataSource = dataSource;
 
+            FieldCellSelectionHandler tableDelegate = this.fieldsTableDelegate;
+            tableDelegate.TableView = this.FieldsTableView;
+            tableDelegate.SitecoreItem = item;
+
+            FieldCellSelectionHandler.TableViewDidSelectFieldAtIndexPath onFieldSelected = 
+                delegate (UITableView tableView, IField itemField, NSIndexPath indexPath)
+                {
+                AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
+                };
+
+            tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
+
+            this.FieldsTableView.Delegate = tableDelegate;
+
             this.FieldsTableView.ReloadData();
         }
 
 
         private FieldsDataSource fieldsDataSource;
+        private FieldCellSelectionHandler fieldsTableDelegate;
 	}
 }
 
