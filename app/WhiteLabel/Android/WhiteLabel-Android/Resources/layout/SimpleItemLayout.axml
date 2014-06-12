@@ -15,10 +15,10 @@
         android:id="@+id/field_item" />
 
 	<TextView
-			android:paddingLeft="8dp"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:text="Payload" />
+		android:paddingLeft="8dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Payload" />
 
 	<RadioGroup
 	  android:id="@+id/group_payload_type"
@@ -61,6 +61,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:visibility="gone"
+			android:enabled="false"
             android:layout_height="match_parent"
             android:id="@+id/button_get_children" />
 	</LinearLayout>
