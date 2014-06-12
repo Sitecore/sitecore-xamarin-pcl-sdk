@@ -6,13 +6,13 @@ namespace Sitecore.MobileSDK.Items
     using Sitecore.MobileSDK.Items.Fields;
 
 
-	public class ScItem
+    public class ScItem : ISitecoreItem
 	{
 		#region Class variables;
 
 		public const string RootItemId = "{11111111-1111-1111-1111-111111111111}";
 
-		public ItemSource Source { get; private set; }
+        public IItemSource Source { get; private set; }
 
 		public string DisplayName { get; private set; }
 
@@ -26,7 +26,7 @@ namespace Sitecore.MobileSDK.Items
 
 		public string Template { get; private set; }
 
-		public List<IField> Fields { get; private set; }
+        public IList<IField> Fields { get; private set; }
 
 		#endregion Class variables;
 
@@ -34,7 +34,7 @@ namespace Sitecore.MobileSDK.Items
 		{
 		}
 
-		public ScItem (ItemSource source, string displayName, bool hasChildren, string id, string longId, string path, string template, List<IField> fields)
+        public ScItem (IItemSource source, string displayName, bool hasChildren, string id, string longId, string path, string template, IList<IField> fields)
 		{
 			this.Source = source;
 			this.DisplayName = displayName;
