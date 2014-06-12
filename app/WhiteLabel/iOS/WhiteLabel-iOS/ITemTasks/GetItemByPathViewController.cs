@@ -76,8 +76,10 @@ namespace WhiteLabeliOS
 			catch(Exception e) 
 			{
                 this.FieldsTableView.DataSource = null;
+                this.FieldsTableView.Delegate = null;
                 this.fieldsDataSource.Dispose();
                 this.fieldsDataSource = null;
+                this.fieldsTableDelegate = null;
 
 				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
@@ -97,7 +99,7 @@ namespace WhiteLabeliOS
             FieldsDataSource dataSource = this.fieldsDataSource;
             dataSource.SitecoreItem = item;
             dataSource.TableView = this.FieldsTableView;
-            this.FieldsTableView.DataSource = dataSource;
+
 
             FieldCellSelectionHandler tableDelegate = this.fieldsTableDelegate;
             tableDelegate.TableView = this.FieldsTableView;
@@ -106,13 +108,14 @@ namespace WhiteLabeliOS
             FieldCellSelectionHandler.TableViewDidSelectFieldAtIndexPath onFieldSelected = 
                 delegate (UITableView tableView, IField itemField, NSIndexPath indexPath)
                 {
-                AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
+                    AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
                 };
-
             tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
 
-            this.FieldsTableView.Delegate = tableDelegate;
 
+
+            this.FieldsTableView.DataSource = dataSource;
+            this.FieldsTableView.Delegate = tableDelegate;
             this.FieldsTableView.ReloadData();
         }
 
