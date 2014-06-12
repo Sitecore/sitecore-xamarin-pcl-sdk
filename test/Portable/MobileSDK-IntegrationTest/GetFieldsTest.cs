@@ -189,5 +189,99 @@
       //Assert.AreEqual(1, item.Fields.Count());
       //Assert.AreEqual("Danish version 2 web",item.Fields("title").RawValue);
     }
+    [Test]
+    public async void TestGetItemByIdWithInvalidFieldName()
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var fields = new Collection<string>
+      {
+        "!@#$%^&*()_+*/"
+      };
+      var request = requestBuilder.RequestWithId(testData.Items.ItemWithVersions.Id).LoadFields(fields).Language("da").Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
+      ScItem item = response.Items[0];
+     // Assert.AreEqual(0, item.Fields.Count());
+    }
+
+    [Test]
+    public async void TestGetSeveralItemsByQueryWithContentFields()
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithSitecoreQuery(testData.Items.Home.Path + "/*").Payload(PayloadType.Full).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+
+      testData.AssertItemsCount(4, response);
+      var expectedItemSamleTemplate = new TestEnvironment.Item
+      {
+        DisplayName = "Allowed_Parent",
+        Id = "{2075CBFF-C330-434D-9E1B-937782E0DE49}",
+        Path = "/sitecore/content/Home/Allowed_Parent",
+        Template = "Sample/Sample Item"
+      };
+      testData.AssertItemsAreEqual(expectedItemSamleTemplate, response.Items[0]);
+      //Assert.AreEqual("Danish version 2 web",response.Items[0].Fields("title").RawValue);
+      //Assert.AreEqual("",response.Items[0].Fields("Text").RawValue);
+
+      var expectedItemTestTemplate = new TestEnvironment.Item
+      {
+        DisplayName = "Test Fields",
+        Template = "Test Templates/Sample fields"
+      };
+      testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[3]);
+      //Assert.AreEqual("Normal Text",response.Items[3].Fields("Normal Text").RawValue);
+      // Assert.AreEqual("1", response.Items[3].Fields("CheckBoxField").RawValue);
+    }
+
+    [Test]
+    public async void TestGetItemByIdWithAllFieldsWithoutReadAcessToSomeFields()
+    {
+      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password);
+      this.sessionAuthenticatedUser = new ScApiSession(config, ItemSource.DefaultSource());
+
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var request = requestBuilder.RequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Payload(PayloadType.Full).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+
+      testData.AssertItemsCount(1, response);
+
+      var expectedItemTestTemplate = new TestEnvironment.Item
+      {
+        DisplayName = "Test Fields",
+        Template = "Test Templates/Sample fields"
+      };
+      testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
+      ScItem item = response.Items[0];
+
+      //Assert.AreEqual("20120201T120000", item.Fields("DateTimeField").RawValue);
+     // Assert.AreEqual("Text", item.Fields("Text").RawValue);  //this field doesn't exist
+    }
+
+    [Test]
+    public async void TestGetFieldsWithSymbolsAndSpacesInNameFields()
+    {
+      var requestBuilder = new ItemWebApiRequestBuilder();
+      var fields = new Collection<string>
+      {
+        "Normal Text",
+       "__Owner"  
+      };
+      var request = requestBuilder.RequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").LoadFields(fields).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      var expectedItemTestTemplate = new TestEnvironment.Item
+      {
+        DisplayName = "Test Fields",
+        Template = "Test Templates/Sample fields"
+      };
+      testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
+      ScItem item = response.Items[0];
+      //Assert.AreEqual(2, item.Fields.Count());
+      //Assert.AreEqual("sitecore\admin",item.Fields("__Owner").RawValue);
+      //Assert.AreEqual("Normal Text",item.Fields("Normal Text").RawValue);
+    }
   }
 }
