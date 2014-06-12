@@ -21,7 +21,12 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 			queryTextField.Text = "/Sitecore/Content/Home/*";
-			
+
+
+			string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
+			getItemButton.SetTitle (getChildrenButtonTitle, UIControlState.Normal);
+
+			nameLabel.Text = NSBundle.MainBundle.LocalizedString ("Type query", null);
 		}
 
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)

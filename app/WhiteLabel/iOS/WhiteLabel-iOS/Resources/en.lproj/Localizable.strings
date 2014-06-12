@@ -29,6 +29,8 @@
 "Item is not exist" = "Item is not exist";
 "item title is" = "item title is";
 
+"Type query" = "Type Sitecore query:";
+
 //settings screen placeholders
 "Instance Url" = "Instance Url";
 "Password" = "Password";

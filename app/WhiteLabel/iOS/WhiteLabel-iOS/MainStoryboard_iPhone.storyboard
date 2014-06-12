@@ -676,6 +676,8 @@
                     <navigationItem key="navigationItem" id="k2c-Ij-ewC"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="getItemButton" destination="Z1Z-jI-jqW" id="4Rg-eE-xEu"/>
+                        <outlet property="nameLabel" destination="A2r-DQ-Ns4" id="sLs-gl-QvI"/>
                         <outlet property="queryTextField" destination="pZ8-2R-VTM" id="hyG-zp-zhq"/>
                     </connections>
                 </viewController>
