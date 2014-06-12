@@ -53,7 +53,7 @@
                                     <action selector="OnGetItemButtonTouched:" destination="X0y-MS-f8R" eventType="touchUpInside" id="L3t-oD-Hf6"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eCC-MK-XUO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eCC-MK-XUO">
                                 <rect key="frame" x="0.0" y="217" width="320" height="351"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -86,14 +86,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ipi-Wb-XmQ" firstAttribute="top" secondItem="TUT-kc-nlH" secondAttribute="bottom" constant="7" id="3Ww-1B-xwK"/>
+                            <constraint firstItem="eCC-MK-XUO" firstAttribute="leading" secondItem="6zV-PT-Eve" secondAttribute="leading" id="5R9-ud-rcQ"/>
                             <constraint firstAttribute="trailing" secondItem="Ipi-Wb-XmQ" secondAttribute="trailing" constant="20" id="E3h-pm-EfN"/>
                             <constraint firstItem="UUI-Bx-5L0" firstAttribute="top" secondItem="Ipi-Wb-XmQ" secondAttribute="bottom" constant="15" id="MGB-gd-IMN"/>
                             <constraint firstItem="Ipi-Wb-XmQ" firstAttribute="leading" secondItem="6zV-PT-Eve" secondAttribute="leading" constant="20" id="SCZ-dD-cPV"/>
                             <constraint firstAttribute="trailing" secondItem="2fg-Dy-Lio" secondAttribute="trailing" constant="20" id="ShI-Pu-xwP"/>
                             <constraint firstItem="2fg-Dy-Lio" firstAttribute="top" secondItem="EWb-Bs-Rza" secondAttribute="bottom" constant="5" id="VOv-Sn-mj4"/>
                             <constraint firstItem="2fg-Dy-Lio" firstAttribute="leading" secondItem="6zV-PT-Eve" secondAttribute="leading" constant="20" id="Wx2-ub-smb"/>
+                            <constraint firstAttribute="trailing" secondItem="eCC-MK-XUO" secondAttribute="trailing" id="eBp-3i-CUa"/>
+                            <constraint firstItem="Eec-aD-PoB" firstAttribute="top" secondItem="eCC-MK-XUO" secondAttribute="bottom" id="eFb-VH-vAS"/>
                             <constraint firstItem="UUI-Bx-5L0" firstAttribute="leading" secondItem="6zV-PT-Eve" secondAttribute="leading" constant="20" id="g1O-Mz-9g6"/>
                             <constraint firstAttribute="trailing" secondItem="EWb-Bs-Rza" secondAttribute="trailing" constant="20" id="jB0-Bu-aZ3"/>
+                            <constraint firstItem="eCC-MK-XUO" firstAttribute="top" secondItem="2fg-Dy-Lio" secondAttribute="bottom" constant="2" id="n0Z-Cg-Ckh"/>
                             <constraint firstAttribute="trailing" secondItem="UUI-Bx-5L0" secondAttribute="trailing" constant="20" id="qH5-fO-DCj"/>
                             <constraint firstItem="EWb-Bs-Rza" firstAttribute="top" secondItem="UUI-Bx-5L0" secondAttribute="bottom" constant="6" id="rsc-WP-t20"/>
                             <constraint firstItem="EWb-Bs-Rza" firstAttribute="leading" secondItem="6zV-PT-Eve" secondAttribute="leading" constant="20" id="vgb-tp-WrD"/>
@@ -320,7 +324,7 @@
                                     <action selector="OnGetItemCheldrenButtonTouched:" destination="7Eu-4h-pPF" eventType="touchUpInside" id="qte-Dg-j35"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GpE-GE-1rd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GpE-GE-1rd">
                                 <rect key="frame" x="0.0" y="217" width="320" height="351"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -354,10 +358,14 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="a5S-Sp-ruV" secondAttribute="trailing" constant="20" id="3iP-nt-FAc"/>
                             <constraint firstAttribute="trailing" secondItem="AlI-6Y-OvX" secondAttribute="trailing" constant="20" id="44D-Bw-hie"/>
+                            <constraint firstItem="GpE-GE-1rd" firstAttribute="leading" secondItem="4Jt-Ur-9R5" secondAttribute="leading" id="7HU-gK-gI4"/>
                             <constraint firstItem="usY-t8-y1O" firstAttribute="top" secondItem="a5S-Sp-ruV" secondAttribute="bottom" constant="6" id="8Vp-1V-x19"/>
                             <constraint firstItem="a5S-Sp-ruV" firstAttribute="leading" secondItem="4Jt-Ur-9R5" secondAttribute="leading" constant="20" id="Erj-TD-GzB"/>
                             <constraint firstAttribute="trailing" secondItem="usY-t8-y1O" secondAttribute="trailing" constant="20" id="IiF-8Q-5O2"/>
+                            <constraint firstItem="GpE-GE-1rd" firstAttribute="top" secondItem="usY-t8-y1O" secondAttribute="bottom" constant="2" id="KIy-nj-Eo0"/>
+                            <constraint firstAttribute="trailing" secondItem="GpE-GE-1rd" secondAttribute="trailing" id="M8o-ET-fnt"/>
                             <constraint firstItem="AlI-6Y-OvX" firstAttribute="leading" secondItem="4Jt-Ur-9R5" secondAttribute="leading" constant="20" id="P31-v8-r2a"/>
+                            <constraint firstItem="3UN-sr-W7s" firstAttribute="top" secondItem="GpE-GE-1rd" secondAttribute="bottom" id="Qjb-8k-rk5"/>
                             <constraint firstAttribute="trailing" secondItem="2Nl-wT-nTp" secondAttribute="trailing" constant="20" id="YCo-Zj-sXa"/>
                             <constraint firstItem="Ofg-uZ-LaS" firstAttribute="top" secondItem="a5S-Sp-ruV" secondAttribute="bottom" constant="6" id="cem-02-Yvo"/>
                             <constraint firstItem="AlI-6Y-OvX" firstAttribute="top" secondItem="2Nl-wT-nTp" secondAttribute="bottom" constant="15" id="g9o-ci-s8U"/>
