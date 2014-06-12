@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace WhiteLabeliOS
+namespace WhiteLabeliOS.FieldsTableView
 {
     using System;
 
@@ -86,7 +86,7 @@ namespace WhiteLabeliOS
             }
 
             this.ValidateFields();
-            return this.sitecoreItem.mFields.Count;
+            return this.sitecoreItem.Fields.Count;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -101,10 +101,15 @@ namespace WhiteLabeliOS
                 result = new UITableViewCell(UITableViewCellStyle.Default, FIELD_CELL_ID);
             }
 
-            IField currentField = this.sitecoreItem.mFields[indexPath.Row];
+            IField currentField = this.sitecoreItem.Fields[indexPath.Row];
             result.TextLabel.Text = currentField.Name;
 
             return result;
+        }
+
+        public override string TitleForHeader (UITableView tableView, int section)
+        {
+            return this.sitecoreItem.DisplayName;
         }
         #endregion UITableViewDataSource
 
