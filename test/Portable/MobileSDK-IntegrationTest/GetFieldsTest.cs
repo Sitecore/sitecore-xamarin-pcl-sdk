@@ -42,8 +42,9 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
       ScItem item = response.Items[0];
-      //Assert.AreEqual(2, item.Fields.Count());
-      //Assert.AreEqual("Sitecore", item.Fields("Title").RawValue);
+      Assert.AreEqual(2, item.Fields.Count);
+      Assert.AreEqual("Sitecore", item.Fields[0].RawValue);
+      Assert.AreEqual("Title", item.Fields[0].Name);
     }
 
     [Test]
@@ -55,10 +56,10 @@
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ScItem item = response.Items[0];
-      //Assert.Greater(50, item.Fields.Count());
-      //Assert.AreEqual("Home", item.Fields("__Display name").RawValue);
-      //Assert.AreEqual("The Home item is the default starting point for a website.", item.Fields("__Long description").RawValue);
+
+      Assert.Greater(response.Items[0].Fields.Count,70);
+      Assert.AreEqual("__Display name",  response.Items[0].Fields[6].Name);
+      Assert.AreEqual("Home", response.Items[0].Fields[6].RawValue);
     }
 
     [Test]
@@ -70,8 +71,7 @@
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ScItem item = response.Items[0];
-      //Assert.AreEqual(0, item.Fields.Count());
+      Assert.AreEqual(0, response.Items[0].Fields.Count);
     }
 
     [Test]
@@ -83,9 +83,10 @@
 
       testData.AssertItemsCount(3, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ScItem item = response.Items[0];
-      //Assert.AreEqual(3, item.Fields.Count());
-      //Assert.AreEqual("Sitecore", item.Fields("Title").RawValue);
+      ScItem item = response.Items[0];  
+      Assert.AreEqual(2, item.Fields.Count);
+      Assert.AreEqual("Sitecore", item.Fields[0].RawValue);
+      Assert.AreEqual("Title", item.Fields[0].Name);
     }
 
     [Test]
@@ -99,8 +100,9 @@
       Assert.AreEqual("宇都宮", response.Items[0].DisplayName);
       Assert.AreEqual("/sitecore/content/Home/Android/Static/Japanese/宇都宮", response.Items[0].Path);
       ScItem item = response.Items[0];
-      //Assert.AreEqual(2, item.Fields.Count());
-      //Assert.AreEqual("宇都宮", item.Fields("Title").RawValue);
+      Assert.AreEqual(2, item.Fields.Count);
+      Assert.AreEqual("Title", item.Fields[0].Name);
+      Assert.AreEqual("宇都宮", item.Fields[0].RawValue);
     }
 
     [Test]
@@ -113,8 +115,9 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
       ScItem item = response.Items[0];
-      //Assert.AreEqual(2, item.Fields.Count());
-      //Assert.True(item.Fields("Title").RawValue.Contains("<div>Welcome to Sitecore!</div>"));
+      Assert.AreEqual(2, item.Fields.Count);
+      Assert.AreEqual("Text", item.Fields[1].Name);
+      Assert.True(item.Fields[1].RawValue.Contains("<div>Welcome to Sitecore!</div>"));
     }
 
     [Test]
@@ -132,7 +135,7 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.TestFieldsItem, response.Items[0]);
       ScItem item = response.Items[0];
-      //Assert.AreEqual(2, item.Fields.Count());
+      Assert.AreEqual(2, item.Fields.Count);
       //Assert.AreEqual(item.Fields("CheckBoxField").RawValue, "1");
       //Assert.AreEqual(item.Fields("MultiListField").RawValue, "{2075CBFF-C330-434D-9E1B-937782E0DE49}");
     }
@@ -150,8 +153,7 @@
 
      testData.AssertItemsCount(1, response);
      testData.AssertItemsAreEqual(testData.Items.TestFieldsItem, response.Items[0]);
-      ScItem item = response.Items[0];
-    //  Assert.AreEqual(0, item.Fields.Count());
+     Assert.AreEqual(0, response.Items[0].Fields.Count);
     }
 
     [Test]
@@ -168,7 +170,9 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
       ScItem item = response.Items[0];
-      //Assert.AreEqual(1, item.Fields.Count());
+      Assert.AreEqual(1, item.Fields.Count);
+      Assert.AreEqual("Title", item.Fields[0].Name);
+      Assert.AreEqual("English version 2 web", item.Fields[0].RawValue);
       //Assert.AreEqual("English version 2 web",item.Fields("title").RawValue);
     }
 
@@ -186,9 +190,12 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
       ScItem item = response.Items[0];
-      //Assert.AreEqual(1, item.Fields.Count());
+      Assert.AreEqual(1, item.Fields.Count);
+      Assert.AreEqual("Title", item.Fields[0].Name);
+      Assert.AreEqual("Danish version 2 web", item.Fields[0].RawValue);
       //Assert.AreEqual("Danish version 2 web",item.Fields("title").RawValue);
     }
+
     [Test]
     public async void TestGetItemByIdWithInvalidFieldName()
     {
@@ -203,7 +210,7 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
       ScItem item = response.Items[0];
-     // Assert.AreEqual(0, item.Fields.Count());
+      Assert.AreEqual(0, item.Fields.Count);
     }
 
     [Test]
@@ -222,6 +229,11 @@
         Template = "Sample/Sample Item"
       };
       testData.AssertItemsAreEqual(expectedItemSamleTemplate, response.Items[0]);
+
+      Assert.AreEqual("Title", response.Items[0].Fields[0].Name);
+      Assert.AreEqual("Allowed_Parent", response.Items[0].Fields[0].RawValue);
+      Assert.AreEqual("Text", response.Items[0].Fields[1].Name);
+      Assert.AreEqual("", response.Items[0].Fields[1].RawValue);
       //Assert.AreEqual("Danish version 2 web",response.Items[0].Fields("title").RawValue);
       //Assert.AreEqual("",response.Items[0].Fields("Text").RawValue);
 
@@ -231,6 +243,11 @@
         Template = "Test Templates/Sample fields"
       };
       testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[3]);
+
+      Assert.AreEqual("Text", response.Items[3].Fields[0].Name);
+      Assert.AreEqual("Text", response.Items[3].Fields[0].RawValue);
+      Assert.AreEqual("CheckBoxField", response.Items[3].Fields[2].Name);
+      Assert.AreEqual("1", response.Items[3].Fields[2].RawValue);
       //Assert.AreEqual("Normal Text",response.Items[3].Fields("Normal Text").RawValue);
       // Assert.AreEqual("1", response.Items[3].Fields("CheckBoxField").RawValue);
     }
@@ -253,9 +270,9 @@
         Template = "Test Templates/Sample fields"
       };
       testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
-      ScItem item = response.Items[0];
 
-      //Assert.AreEqual("20120201T120000", item.Fields("DateTimeField").RawValue);
+      Assert.AreEqual("DateTimeField", response.Items[0].Fields[3].Name);
+      Assert.AreEqual("20120201T120000", response.Items[0].Fields[3].RawValue);
      // Assert.AreEqual("Text", item.Fields("Text").RawValue);  //this field doesn't exist
     }
 
@@ -279,9 +296,9 @@
       };
       testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
       ScItem item = response.Items[0];
-      //Assert.AreEqual(2, item.Fields.Count());
-      //Assert.AreEqual("sitecore\admin",item.Fields("__Owner").RawValue);
-      //Assert.AreEqual("Normal Text",item.Fields("Normal Text").RawValue);
+      Assert.AreEqual(2, item.Fields.Count);
+      // Assert.AreEqual("Normal Text", item.Fields("Normal Text").Name);
+      //Assert.AreEqual("__Owner", item.Fields("__Owner").Name);
     }
   }
 }
