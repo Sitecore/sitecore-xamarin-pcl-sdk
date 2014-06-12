@@ -18,6 +18,8 @@ namespace MobileSDKIntegrationTest
       result.Users.Admin.Password = "b";
       result.Users.Anonymous.Username = null;
       result.Users.Anonymous.Password = null;
+      result.Users.Creatorex.Username = "extranet\\creatorex";
+      result.Users.Creatorex.Password = "creatorex";
 
       result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
       result.Items.Home.Path = "/sitecore/content/Home";
@@ -27,6 +29,11 @@ namespace MobileSDKIntegrationTest
       result.Items.ItemWithVersions.Id = "{B86C2CBB-7808-4798-A461-1FB3EB0A43E5}";
       result.Items.ItemWithVersions.Path = "/sitecore/content/FieldsTest/TestFieldsVersionsAndDB";
       result.Items.ItemWithVersions.DisplayName = "TestFieldsVersionsAndDB";
+
+      result.Items.TestFieldsItem.Id = "{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}";
+      result.Items.TestFieldsItem.Path = "/sitecore/content/Home/Test Fields";
+      result.Items.TestFieldsItem.DisplayName = "Test Fields";
+      result.Items.TestFieldsItem.Template = "Test Templates/Sample fields";
 
       return result;
     }
@@ -42,12 +49,14 @@ namespace MobileSDKIntegrationTest
     {
       public User Admin = new User();
       public User Anonymous = new User();
+      public User Creatorex = new User();
     }
 
     public class ItemsList
     {
       public Item Home = new Item();
       public Item ItemWithVersions = new Item();
+      public Item TestFieldsItem = new Item();
       public Item MediaLibrary = new Item();
     }
 
@@ -87,12 +96,9 @@ namespace MobileSDKIntegrationTest
 
     public void AssertItemSourcesAreEqual(ItemSource expected, ItemSource actual)
     {
-      if (null != expected)
-      {
         Assert.AreEqual(expected.Database, actual.Database);
         Assert.AreEqual(expected.Language, actual.Language);
         Assert.AreEqual(expected.Version, actual.Version);
-      }
     }
 
     public void AssertItemsCount(int itemCount, ScItemsResponse response)

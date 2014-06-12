@@ -85,22 +85,16 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\SetDefaultSessionSettingsTest.cs">
       <Link>SetDefaultSessionSettingsTest.cs</Link>
     </Compile>
-	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\SetLanguageDbVersionTest.cs">
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\SetLanguageDbVersionTest.cs">
       <Link>SetLanguageDbVersionTest.cs</Link>
     </Compile>
-    <Compile Include="Specs\Get items\GetItemTest.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GetItemTest.feature</DependentUpon>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CancelOperationsTest.cs">
+      <Link>CancelOperationsTest.cs</Link>
     </Compile>
-    <Compile Include="Specs\Get items\GetItemTestSteps.cs" />
+	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetFieldsTest.cs">
+      <Link>GetFieldsTest.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Specs\Get items\GetPublicKeyTest.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GetPublicKeyTest.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Specs\Get items\GetPublicKeyTestSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
@@ -116,15 +110,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Specs\Get items\GetItemTest.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>GetItemTest.feature.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
-    <None Include="Specs\Get items\GetPublicKeyTest.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>GetPublicKeyTest.feature.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
