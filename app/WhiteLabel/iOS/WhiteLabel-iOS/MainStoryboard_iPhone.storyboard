@@ -105,7 +105,7 @@
                         <outlet property="FieldsTableView" destination="eCC-MK-XUO" id="JI1-Nv-RNF"/>
                         <outlet property="ItemPathField" destination="Ipi-Wb-XmQ" id="gJD-UJ-Zp3"/>
                         <outlet property="fieldNameTextField" destination="UUI-Bx-5L0" id="HXA-ZK-Jk6"/>
-                        <outlet property="getItemButton" destination="2fg-Dy-Lio" id="6AS-xb-4vJ"/>
+                        <outlet property="getItemButton" destination="2fg-Dy-Lio" id="YRb-eO-M9n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vks-fu-8oK" userLabel="First Responder" sceneMemberID="firstResponder"/>
