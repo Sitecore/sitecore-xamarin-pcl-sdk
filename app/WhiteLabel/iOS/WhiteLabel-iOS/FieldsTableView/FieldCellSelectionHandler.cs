@@ -10,6 +10,9 @@ namespace WhiteLabeliOS.FieldsTableView
     using Sitecore.MobileSDK.Items.Fields;
 
 
+// https://github.com/sami1971/SimplyMobile/wiki/Cross-platform-data-source
+// http://components.xamarin.com/view/gmgsoftware
+
     public class FieldCellSelectionHandler : UITableViewDelegate
     {
         public delegate void TableViewDidSelectFieldAtIndexPath(UITableView tableView, IField itemField, NSIndexPath indexPath);
