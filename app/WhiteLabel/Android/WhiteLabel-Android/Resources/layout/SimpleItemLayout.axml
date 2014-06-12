@@ -30,4 +30,16 @@
             android:layout_height="match_parent"
             android:id="@+id/button_get_children" />
     </LinearLayout>
+    <TextView
+        android:paddingLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/item_name" />
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fields_list" />
 </LinearLayout>

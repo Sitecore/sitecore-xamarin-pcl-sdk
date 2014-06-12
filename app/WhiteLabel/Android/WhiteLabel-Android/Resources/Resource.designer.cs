@@ -84,6 +84,9 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f06000a
 			public const int field_item = 2131099658;
 			
+			// aapt resource value: 0x7f06000e
+			public const int fields_list = 2131099662;
+			
 			// aapt resource value: 0x7f060007
 			public const int instance_database = 2131099655;
 			
@@ -99,11 +102,14 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f060003
 			public const int instance_url = 2131099651;
 			
+			// aapt resource value: 0x7f06000d
+			public const int item_name = 2131099661;
+			
 			// aapt resource value: 0x7f060009
 			public const int label = 2131099657;
 			
-			// aapt resource value: 0x7f06000d
-			public const int settings = 2131099661;
+			// aapt resource value: 0x7f06000f
+			public const int settings = 2131099663;
 			
 			static Id()
 			{
