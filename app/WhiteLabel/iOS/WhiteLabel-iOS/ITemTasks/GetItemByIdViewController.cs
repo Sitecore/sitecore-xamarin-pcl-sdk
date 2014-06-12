@@ -29,6 +29,14 @@ namespace WhiteLabeliOS
 			base.ViewDidLoad ();
 			
 			this.itemIdTextField.ShouldReturn = this.HideKeyboard;
+
+			fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);
+			itemIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item ID", null);
+
+			string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item children", null);
+			getChildrenButton.SetTitle (getChildrenButtonTitle, UIControlState.Normal);
+			string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
+			getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
 		}
 
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
@@ -112,18 +120,29 @@ namespace WhiteLabeliOS
         {
             BeginInvokeOnMainThread(delegate
             {
-                this.FieldsTableView.DataSource = null;
-                this.FieldsTableView.Delegate = null;
-                this.fieldsDataSource.Dispose();
-                this.fieldsDataSource = null;
-                this.fieldsTableDelegate = null;
+				this.CleanupTableViewBindingsSync();
             });
         }
+
+		void CleanupTableViewBindingsSync()
+		{
+			this.FieldsTableView.DataSource = null;
+			this.FieldsTableView.Delegate = null;
+
+			if (this.fieldsDataSource != null)
+			{
+				this.fieldsDataSource.Dispose ();
+				this.fieldsDataSource = null;
+				this.fieldsTableDelegate = null;
+			}
+		}
 
         private void ShowFieldsForItem( ScItem item )
         {
             BeginInvokeOnMainThread(delegate
             {
+				this.CleanupTableViewBindingsSync();
+
                 this.fieldsDataSource = new FieldsDataSource();
                 this.fieldsTableDelegate = new FieldCellSelectionHandler();
 
