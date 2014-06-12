@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿
 
 
 namespace WhiteLabeliOS
 {
     using System;
     using System.Drawing;
+	using System.Linq;
 
     using MonoTouch.Foundation;
     using MonoTouch.UIKit;
@@ -12,6 +13,7 @@ namespace WhiteLabeliOS
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.Items.Fields;
+	using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
     using WhiteLabeliOS.FieldsTableView;
 
@@ -44,6 +46,22 @@ namespace WhiteLabeliOS
 			}
 		}
 
+		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
+		{
+			switch (sender.SelectedSegment)
+			{
+			case 0:
+				this.currentPayloadType = PayloadType.Full;
+				break;
+			case 1:
+				this.currentPayloadType = PayloadType.Content;
+				break;
+			case 2:
+				this.currentPayloadType = PayloadType.Min;
+				break;
+			}
+		}
+
 		private async void SendRequest ()
 		{
 			try
@@ -52,7 +70,10 @@ namespace WhiteLabeliOS
 
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-                var request = builder.RequestWithPath(this.ItemPathField.Text).Build();
+                var request = builder.RequestWithPath(this.ItemPathField.Text)
+					.Payload(this.currentPayloadType)
+					.AddSingleField(this.fieldNameTextField.Text)
+					.Build();
 
 				this.ShowLoader();
 

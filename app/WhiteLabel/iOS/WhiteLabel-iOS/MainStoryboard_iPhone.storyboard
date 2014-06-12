@@ -65,10 +65,13 @@
                                     <constraint firstAttribute="height" constant="28" id="vAs-4t-Tts"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                    <segment title=""/>
+                                    <segment title="Full"/>
+                                    <segment title="Content"/>
+                                    <segment title="Min"/>
                                 </segments>
+                                <connections>
+                                    <action selector="OnPayloadValueChanged:" destination="X0y-MS-f8R" eventType="valueChanged" id="gDB-X5-hkw"/>
+                                </connections>
                             </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Type field Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="UUI-Bx-5L0">
                                 <rect key="frame" x="20" y="116" width="280" height="30"/>
@@ -101,6 +104,8 @@
                     <connections>
                         <outlet property="FieldsTableView" destination="eCC-MK-XUO" id="JI1-Nv-RNF"/>
                         <outlet property="ItemPathField" destination="Ipi-Wb-XmQ" id="gJD-UJ-Zp3"/>
+                        <outlet property="fieldNameTextField" destination="UUI-Bx-5L0" id="HXA-ZK-Jk6"/>
+                        <outlet property="getItemButton" destination="2fg-Dy-Lio" id="6AS-xb-4vJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vks-fu-8oK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -367,6 +372,8 @@
                     <connections>
                         <outlet property="FieldsTableView" destination="GpE-GE-1rd" id="Ckz-gc-PRd"/>
                         <outlet property="fieldNameTextField" destination="AlI-6Y-OvX" id="muF-eu-1zI"/>
+                        <outlet property="getChildrenButton" destination="usY-t8-y1O" id="EhZ-Jp-I5U"/>
+                        <outlet property="getItemButton" destination="Ofg-uZ-LaS" id="6fd-3d-AhU"/>
                         <outlet property="itemIdTextField" destination="2Nl-wT-nTp" id="7hK-7U-2bd"/>
                     </connections>
                 </viewController>

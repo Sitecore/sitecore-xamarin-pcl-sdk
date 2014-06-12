@@ -19,6 +19,12 @@ namespace WhiteLabeliOS
 		MonoTouch.UIKit.UITableView FieldsTableView { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UIButton getChildrenButton { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UIButton getItemButton { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UITextField itemIdTextField { get; set; }
 
 		[Action ("OnGetItemButtonTouched:")]
@@ -32,6 +38,11 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (fieldNameTextField != null) {
+				fieldNameTextField.Dispose ();
+				fieldNameTextField = null;
+			}
+
 			if (FieldsTableView != null) {
 				FieldsTableView.Dispose ();
 				FieldsTableView = null;
@@ -42,9 +53,14 @@ namespace WhiteLabeliOS
 				itemIdTextField = null;
 			}
 
-			if (fieldNameTextField != null) {
-				fieldNameTextField.Dispose ();
-				fieldNameTextField = null;
+			if (getItemButton != null) {
+				getItemButton.Dispose ();
+				getItemButton = null;
+			}
+
+			if (getChildrenButton != null) {
+				getChildrenButton.Dispose ();
+				getChildrenButton = null;
 			}
 		}
 	}
