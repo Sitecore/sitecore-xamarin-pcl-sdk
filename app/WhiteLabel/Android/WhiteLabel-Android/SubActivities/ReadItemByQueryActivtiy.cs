@@ -1,13 +1,14 @@
 namespace WhiteLabelAndroid.SubActivities
 {
+    using System;
     using Android.App;
     using Android.OS;
     using Android.Widget;
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
 
-    [Activity(Label = "GetItemByQueryActivtiy")]
-    public class GetItemByQueryActivtiy : Activity
+    [Activity]
+    public class ReadItemByQueryActivtiy : Activity
     {
         private Prefs prefs;
 
@@ -15,6 +16,8 @@ namespace WhiteLabelAndroid.SubActivities
         {
             base.OnCreate(bundle);
             this.prefs = Prefs.From(this);
+
+            this.Title = this.GetString(Resource.String.text_get_item_by_query);
 
             this.SetContentView(Resource.Layout.SimpleItemLayout);
 
@@ -29,6 +32,7 @@ namespace WhiteLabelAndroid.SubActivities
             {
                 if (string.IsNullOrEmpty(itemIdField.Text))
                 {
+                    Toast.MakeText(this, "Query cannot be mepty", ToastLength.Short).Show();
                     return;
                 }
 
@@ -38,20 +42,22 @@ namespace WhiteLabelAndroid.SubActivities
 
         private async void PerformGetItemRequest(string query)
         {
-            ScApiSession session = new ScApiSession(this.prefs.GetSessionConfig(), this.prefs.GetItemSource());
-
-            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
-            var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
-
-            ScItemsResponse response = await session.ReadItemByQueryAsync(request);
-
-            if (response.ResultCount > 0)
+            try
             {
-                Toast.MakeText(this, "Display name : " + response.Items[0].DisplayName, ToastLength.Long).Show();
+                ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
+
+                ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
+                var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
+
+                ScItemsResponse response = await session.ReadItemByQueryAsync(request);
+
+                var message = response.ResultCount > 0 ? string.Format("items count is \"{0}\"", response.Items.Count): "Item doesn't exist";
+
+                DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, message);
             }
-            else
+            catch (Exception exception)
             {
-                Toast.MakeText(this, "No items with this query", ToastLength.Long).Show();
+                DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, "Erorr :" + exception.Message);
             }
         }
     }

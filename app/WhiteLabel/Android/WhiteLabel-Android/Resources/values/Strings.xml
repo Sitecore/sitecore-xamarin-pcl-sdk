@@ -15,8 +15,10 @@
 	<string name="text_default_site"></string>
 	<string name="text_default_database">web</string>
 
-	<string name="text_get_item_by_id">Item By Id</string>
-	<string name="text_get_item_by_path">Item By Path</string>
-	<string name="text_get_item_by_query">Item By Query</string>
+	<string name="text_get_item_by_id"><![CDATA[Item by ID & item children]]></string>
+	<string name="text_get_item_by_path">Item by Path</string>
+	<string name="text_get_item_by_query">Item by Query</string>
+
+	<string name="text_item_received">Item received</string>
 
 </resources>

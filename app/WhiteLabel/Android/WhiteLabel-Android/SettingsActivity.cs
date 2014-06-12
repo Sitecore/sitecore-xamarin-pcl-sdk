@@ -36,11 +36,11 @@
 
         private void SaveFieldsToPrefs()
         {
-            this.prefs.SaveInstanceUrl(this.instanceUrl.Text);
-            this.prefs.SaveLogin(this.login.Text);
-            this.prefs.SavePassword(this.password.Text);
-            this.prefs.SaveSite(this.site.Text);
-            this.prefs.SaveDatabase(this.database.Text);
+            this.prefs.InstanceUrl = this.instanceUrl.Text;
+            this.prefs.Login = this.login.Text;
+            this.prefs.Password = this.password.Text;
+            this.prefs.Site = this.site.Text;
+            this.prefs.Database = this.database.Text;
         }
 
         private void InitFields()
@@ -51,11 +51,11 @@
             this.site = this.FindViewById<EditText>(Resource.Id.instance_site);
             this.database = this.FindViewById<EditText>(Resource.Id.instance_database);
 
-            this.instanceUrl.Text = this.prefs.GetInstanceUrl();
-            this.login.Text = this.prefs.GetLogin();
-            this.password.Text = this.prefs.GetPassword();
-            this.site.Text = this.prefs.GetSite();
-            this.database.Text = this.prefs.GetDatabase();
+            this.instanceUrl.Text = this.prefs.InstanceUrl;
+            this.login.Text = this.prefs.Login;
+            this.password.Text = this.prefs.Password;
+            this.site.Text = this.prefs.Site;
+            this.database.Text = this.prefs.Database;
         }
     }
 }

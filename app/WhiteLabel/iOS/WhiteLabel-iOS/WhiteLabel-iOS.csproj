@@ -140,6 +140,8 @@
     <Compile Include="ITemTasks\GetItemByQueryViewController.designer.cs">
       <DependentUpon>GetItemByQueryViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="FieldsTableView\FieldsDataSource.cs" />
+    <Compile Include="FieldsTableView\FieldCellSelectionHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
@@ -151,6 +153,7 @@
     <Folder Include="ITemTasks\BaseClasses\" />
     <Folder Include="Helpers\" />
     <Folder Include="Resources\ru.lproj\" />
+    <Folder Include="FieldsTableView\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">

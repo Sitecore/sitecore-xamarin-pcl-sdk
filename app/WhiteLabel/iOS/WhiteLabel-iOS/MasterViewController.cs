@@ -8,29 +8,10 @@ namespace WhiteLabeliOS
 {
 	public partial class MasterViewController : UITableViewController
 	{
-		DataSource dataSource;
-		InstanceSettings settings;
-		List<object> features = new List<object> ();
-
+        #region UIViewController
 		public MasterViewController (IntPtr handle) : base (handle)
 		{
-			Title = NSBundle.MainBundle.LocalizedString ("Master", "Master");
-		}
-
-		partial void SettingsButtonTouched (MonoTouch.UIKit.UIBarButtonItem sender)
-		{
-			this.ShowSettingsView();
-		}
-
-		private void ShowSettingsView()
-		{
-			UINavigationController navController = this.NavigationController;
-
-			UIStoryboard myStoryboard = this.Storyboard as UIStoryboard;
-			SettingsViewController settingsViewController = myStoryboard.InstantiateViewController ("configurationViewController") as SettingsViewController;
-			settingsViewController.instanceSettings = this.settings;
-
-			navController.PushViewController (settingsViewController, true);
+            this.Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
 		}
 
 		public override void ViewDidAppear(bool animated)
@@ -49,30 +30,53 @@ namespace WhiteLabeliOS
 			base.ViewDidLoad ();
 
 			this.settings = new InstanceSettings();
-
 			this.InitFeaturesList ();
 
 			this.dataSource = new DataSource (this);
-			TableView.Source = this.dataSource;
+            this.TableView.Source = this.dataSource;
 			this.TableView.ReloadData();
 		}
+        #endregion UIViewController
 
-		private void InitFeaturesList()
-		{
-			this.features.Insert (0, "getItemByPath");
-			this.features.Insert (0, "getItemById");
-			this.features.Insert (0, "deleteItemById");
-			this.features.Insert (0, "createEditItem");
-			this.features.Insert (0, "uploadImageVC");
-			this.features.Insert (0, "getItemByQuery");
+        #region Navigation
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            base.PrepareForSegue(segue, sender);
 
-		}
+            if ("configurationViewController" == segue.Identifier)
+            {
+                var settingsViewController = segue.DestinationViewController as SettingsViewController;
+                settingsViewController.instanceSettings = this.settings;
+            }
+            else
+            {
+                var targetController = segue.DestinationViewController as BaseTaskViewController;
+                targetController.instanceSettings = this.settings;
+
+            }
+        }
+
+        private void InitFeaturesList()
+        {
+            this.features.Insert(0, "getItemByPath");
+            this.features.Insert(0, "getItemById");
+            this.features.Insert(0, "deleteItemById");
+            this.features.Insert(0, "createEditItem");
+            this.features.Insert(0, "uploadImageVC");
+            this.features.Insert(0, "getItemByQuery");
+
+        }
+        #endregion Navigation
+
+        #region Instance Variables
+        private DataSource dataSource;
+        private InstanceSettings settings;
+        private List<object> features = new List<object> ();
+        #endregion Instance Variables
 
 		class DataSource : UITableViewSource
 		{
-			static readonly NSString CellIdentifier = new NSString ("Cell");
-			readonly MasterViewController controller;
-
+            #region UITableViewDataSource
 			public DataSource (MasterViewController controller)
 			{
 				this.controller = controller;
@@ -87,31 +91,35 @@ namespace WhiteLabeliOS
 			{
 				return controller.features.Count;
 			}
-			// Customize the appearance of table view cells.
+
 			public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 			{
-				var cell = (UITableViewCell)tableView.DequeueReusableCell (CellIdentifier, indexPath);
+                var cell = tableView.DequeueReusableCell (CellIdentifier, indexPath);
 				string featureKey = controller.features [indexPath.Row].ToString ();
 				string featureTitle = NSBundle.MainBundle.LocalizedString (featureKey, null);
 				cell.TextLabel.Text = featureTitle;
 
 				return cell;
 			}
+            #endregion UITableViewDataSource
 
+
+            #region UITableViewDelegate
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
 				UINavigationController navController = controller.NavigationController;
 				string featureKey = controller.features [indexPath.Row].ToString ();
 
-				UIStoryboard myStoryboard = controller.Storyboard as UIStoryboard;
-				BaseTaskViewController detailViewController = myStoryboard.InstantiateViewController (featureKey) as BaseTaskViewController;
-
-				detailViewController.instanceSettings = controller.settings;
-
-				navController.PushViewController (detailViewController, true);
+                this.controller.PerformSegue(featureKey, this.controller);
 			}
+            #endregion UITableViewDelegate
+
+
+            #region Instance Variables
+            private static readonly NSString CellIdentifier = new NSString ("Cell");
+            private readonly MasterViewController controller;
+            #endregion Instance Variables
 		}
-			
 	}
 }
 

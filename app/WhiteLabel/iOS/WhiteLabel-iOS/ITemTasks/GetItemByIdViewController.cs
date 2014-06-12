@@ -1,13 +1,22 @@
-﻿using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.UrlBuilder;
+﻿using Sitecore.MobileSDK.Items.Fields;
+
 
 namespace WhiteLabeliOS
 {
+	using System;
+    using System.Linq;
+
+    using MonoTouch.UIKit;
+	using MonoTouch.Foundation;
+
+	using Sitecore.MobileSDK;
+	using Sitecore.MobileSDK.Items;
+	using Sitecore.MobileSDK.UrlBuilder;
+	using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+    using WhiteLabeliOS.FieldsTableView;
+
+
 	public partial class GetItemByIdViewController : BaseTaskViewController
 	{
 		public GetItemByIdViewController (IntPtr handle) : base (handle)
@@ -48,16 +57,17 @@ namespace WhiteLabeliOS
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
 				var request = builder.RequestWithId(itemIdTextField.Text)
+					.Payload(PayloadType.Full)
 					.Build();
 					
 				this.ShowLoader();
 
 				ScItemsResponse response = await session.ReadItemByIdAsync(request);
-
-				this.HideLoader();
-				if (response.ResultCount > 0)
+                if (response.Items.Any())
 				{
-					ScItem item = response.Items [0];
+					ScItem item = response.Items[0];
+                    this.ShowFieldsForItem( item );
+
 					string message = NSBundle.MainBundle.LocalizedString("item title is", null);
 					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
 				}
@@ -68,10 +78,56 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
-				this.HideLoader();
+                this.CleanupTableViewBindings();
 				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
+            finally
+            {
+                this.HideLoader();
+                this.FieldsTableView.ReloadData();
+            }
 		}
+
+        void CleanupTableViewBindings()
+        {
+            this.FieldsTableView.DataSource = null;
+            this.FieldsTableView.Delegate = null;
+            this.fieldsDataSource.Dispose();
+            this.fieldsDataSource = null;
+            this.fieldsTableDelegate = null;
+        }
+
+        private void ShowFieldsForItem( ScItem item )
+        {
+            this.fieldsDataSource = new FieldsDataSource();
+            this.fieldsTableDelegate = new FieldCellSelectionHandler();
+
+
+            FieldsDataSource dataSource = this.fieldsDataSource;
+            dataSource.SitecoreItem = item;
+            dataSource.TableView = this.FieldsTableView;
+
+
+            FieldCellSelectionHandler tableDelegate = this.fieldsTableDelegate;
+            tableDelegate.TableView = this.FieldsTableView;
+            tableDelegate.SitecoreItem = item;
+
+            FieldCellSelectionHandler.TableViewDidSelectFieldAtIndexPath onFieldSelected = 
+                delegate (UITableView tableView, IField itemField, NSIndexPath indexPath)
+            {
+                AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
+            };
+            tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
+
+
+
+            this.FieldsTableView.DataSource = dataSource;
+            this.FieldsTableView.Delegate = tableDelegate;
+            this.FieldsTableView.ReloadData();
+        }
+
+        private FieldsDataSource fieldsDataSource;
+        private FieldCellSelectionHandler fieldsTableDelegate;
 	}
 }
 

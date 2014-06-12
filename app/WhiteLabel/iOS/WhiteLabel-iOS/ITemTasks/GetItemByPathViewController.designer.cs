@@ -13,16 +13,24 @@ namespace WhiteLabeliOS
 	partial class GetItemByPathViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UITextField itemPathField { get; set; }
+		MonoTouch.UIKit.UITableView FieldsTableView { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UITextField ItemPathField { get; set; }
 
 		[Action ("OnGetItemButtonTouched:")]
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (itemPathField != null) {
-				itemPathField.Dispose ();
-				itemPathField = null;
+			if (ItemPathField != null) {
+				ItemPathField.Dispose ();
+				ItemPathField = null;
+			}
+
+			if (FieldsTableView != null) {
+				FieldsTableView.Dispose ();
+				FieldsTableView = null;
 			}
 		}
 	}
