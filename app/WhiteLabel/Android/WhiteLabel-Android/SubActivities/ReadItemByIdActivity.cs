@@ -15,6 +15,7 @@ namespace WhiteLabelAndroid.SubActivities
     {
         private ListView fieldsListView;
         private TextView itemNameTextView;
+        private RadioGroup payloadRadioGroup;
 
         private ScItem item;
         private Prefs prefs;
@@ -38,6 +39,8 @@ namespace WhiteLabelAndroid.SubActivities
 
         private void InitViews()
         {
+            this.payloadRadioGroup = this.FindViewById<RadioGroup>(Resource.Id.group_payload_type);
+
             this.itemNameTextView = this.FindViewById<TextView>(Resource.Id.item_name);
 
             this.fieldsListView = this.FindViewById<ListView>(Resource.Id.fields_list);
@@ -65,6 +68,20 @@ namespace WhiteLabelAndroid.SubActivities
             };
         }
 
+        private PayloadType GetSelectedPayload()
+        {
+            switch (this.payloadRadioGroup.CheckedRadioButtonId)
+            {
+                case Resource.Id.payload_min:
+                    return PayloadType.Min;
+                case Resource.Id.payload_content:
+                    return PayloadType.Content;
+                case Resource.Id.payload_full:
+                    return PayloadType.Full;
+                default: return PayloadType.Min;
+            }
+        }
+
         private async void PerformGetItemRequest(string id)
         {
             try
@@ -72,7 +89,8 @@ namespace WhiteLabelAndroid.SubActivities
                 ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
 
                 ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
-                var request = requestBuilder.RequestWithId(id).Payload(PayloadType.Full).Build();
+                
+                var request = requestBuilder.RequestWithId(id).Payload(this.GetSelectedPayload()).Build();
 
                 ScItemsResponse response = await session.ReadItemByIdAsync(request);
 
