@@ -15,8 +15,11 @@ namespace WhiteLabeliOS.FieldsTableView
     {
         protected override void Dispose (bool disposing)
         {
-            this.sitecoreItem = null;
-            this.myTable.DataSource = null;
+            InvokeOnMainThread(delegate
+            {
+                this.sitecoreItem = null;
+                this.myTable.DataSource = null;
+            });
 
             base.Dispose(disposing);
         }
