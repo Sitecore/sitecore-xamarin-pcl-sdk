@@ -6,6 +6,7 @@
 "createEditItem" = "******************";
 "uploadImageVC" = "******************";
 "getItemByQuery" = "************";
+"Master" = "*********";
 
 //titles
 "Alert" = "*******";
@@ -34,3 +35,8 @@
 "Site" = "******";
 "Database" = "******";
 "Language" = "******";
+"Type field name" = "*********";
+"Type item Path" = "********";
+"Type item ID" = "********";
+"Get Item children" = "*************";
+"Get Item" = "********";

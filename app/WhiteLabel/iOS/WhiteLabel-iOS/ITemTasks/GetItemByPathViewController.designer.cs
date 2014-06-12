@@ -32,6 +32,16 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (getItemButton != null) {
+				getItemButton.Dispose ();
+				getItemButton = null;
+			}
+
+			if (fieldNameTextField != null) {
+				fieldNameTextField.Dispose ();
+				fieldNameTextField = null;
+			}
+
 			if (FieldsTableView != null) {
 				FieldsTableView.Dispose ();
 				FieldsTableView = null;
@@ -40,16 +50,6 @@ namespace WhiteLabeliOS
 			if (ItemPathField != null) {
 				ItemPathField.Dispose ();
 				ItemPathField = null;
-			}
-
-			if (fieldNameTextField != null) {
-				fieldNameTextField.Dispose ();
-				fieldNameTextField = null;
-			}
-
-			if (getItemButton != null) {
-				getItemButton.Dispose ();
-				getItemButton = null;
 			}
 		}
 	}
