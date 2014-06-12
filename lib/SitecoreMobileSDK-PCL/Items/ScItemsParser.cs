@@ -10,7 +10,6 @@ namespace Sitecore.MobileSDK
     using Newtonsoft.Json.Linq;
 
     using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.Items.Fields;
     using Sitecore.MobileSDK.Exceptions;
 	using Sitecore.MobileSDK.Items.Fields;
 
