@@ -7,8 +7,8 @@ namespace WhiteLabelAndroid.SubActivities
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
 
-    [Activity(Label = "GetItemByPathActivtiy")]
-    public class GetItemByPathActivtiy : Activity
+    [Activity]
+    public class ReadItemByPathActivtiy : Activity
     {
         private Prefs prefs;
 
@@ -16,6 +16,8 @@ namespace WhiteLabelAndroid.SubActivities
         {
             base.OnCreate(bundle);
             this.prefs = Prefs.From(this);
+
+            this.Title = this.GetString(Resource.String.text_get_item_by_path);
 
             this.SetContentView(Resource.Layout.SimpleItemLayout);
 
@@ -40,26 +42,22 @@ namespace WhiteLabelAndroid.SubActivities
 
         private async void PerformGetItemRequest(string path)
         {
-            ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
-
-            ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
-            var request = requestBuilder.RequestWithPath(path).Build();
             try
             {
+                ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
+
+                ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
+                var request = requestBuilder.RequestWithPath(path).Build();
+
                 ScItemsResponse response = await session.ReadItemByPathAsync(request);
 
-                if (response.ResultCount > 0)
-                {
-                    Toast.MakeText(this, "Display name : " + response.Items[0].DisplayName, ToastLength.Long).Show();
-                }
-                else
-                {
-                    Toast.MakeText(this, "No items with this path", ToastLength.Long).Show();
-                }
+                var message = response.ResultCount > 0 ? string.Format("item title is \"{0}\"", response.Items[0].DisplayName) : "Item doesn't exist";
+
+                DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, message);
             }
             catch (Exception exception)
             {
-                Toast.MakeText(this, "Erorr :" + exception.Message, ToastLength.Long).Show();
+                DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, "Erorr :" + exception.Message);
             }
         }
     }

@@ -22,5 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemWebApiRequestBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)QueryParametersUrlBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FieldsParserTest.cs" />
   </ItemGroup>
 </Project>

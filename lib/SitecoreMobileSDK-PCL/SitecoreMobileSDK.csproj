@@ -98,6 +98,9 @@
     <Compile Include="Exceptions\LoadDataFromNetworkException.cs" />
     <Compile Include="Exceptions\ParserException.cs" />
     <Compile Include="Exceptions\ProcessUserRequestException.cs" />
+    <Compile Include="Items\Fields\ScField.cs" />
+    <Compile Include="Items\Fields\IField.cs" />
+    <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -152,5 +155,16 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UrlBuilder\ItemById\" />
+    <Folder Include="UrlBuilder\ItemByPath\" />
+    <Folder Include="UrlBuilder\Rest\" />
+    <Folder Include="UrlBuilder\WebApi\" />
+    <Folder Include="UrlBuilder\ItemByQuery\" />
+    <Folder Include="Utils\" />
+    <Folder Include="UserRequest\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Items\Fields\" />
+  </ItemGroup>
   <ItemGroup />
 </Project>

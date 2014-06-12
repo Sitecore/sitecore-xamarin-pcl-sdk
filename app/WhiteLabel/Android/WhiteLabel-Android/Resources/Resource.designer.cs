@@ -198,6 +198,9 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f04000e
 			public const int text_get_item_by_query = 2130968590;
 			
+			// aapt resource value: 0x7f04000f
+			public const int text_item_received = 2130968591;
+			
 			// aapt resource value: 0x7f040001
 			public const int text_settings = 2130968577;
 			

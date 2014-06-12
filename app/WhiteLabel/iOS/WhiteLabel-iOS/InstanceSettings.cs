@@ -36,7 +36,7 @@ namespace WhiteLabeliOS
 			SessionConfig config = new SessionConfig (this.instanceUrl, this.instanceLogin, this.instancePassword, this.instanceSite);
 
 			string db;
-			if (string.IsNullOrEmpty(this.instanceDataBase))
+            if (!string.IsNullOrEmpty(this.instanceDataBase))
 			{
 				db = this.instanceDataBase;
 			}
@@ -46,7 +46,7 @@ namespace WhiteLabeliOS
 			}
 
 			string language;
-			if (string.IsNullOrEmpty(this.instanceLanguage))
+            if (!string.IsNullOrEmpty(this.instanceLanguage))
 			{
 				language = this.instanceLanguage;
 			}
