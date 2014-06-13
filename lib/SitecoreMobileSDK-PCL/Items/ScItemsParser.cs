@@ -45,7 +45,7 @@ namespace Sitecore.MobileSDK
 
             foreach (JObject item in responseItems)
             {
-				cancelToken.ThrowIfCancellationRequested ();
+				cancelToken.ThrowIfCancellationRequested();
 
                 var source = ParseItemSource(item);
 
@@ -58,10 +58,17 @@ namespace Sitecore.MobileSDK
 
 				JObject fieldsJSON = (JObject)item.GetValue ("Fields");
 				List<IField> fields =  ScFieldsParser.ParseFieldsData(fieldsJSON , cancelToken);
+                var fieldsByName = new Dictionary<string, IField>(fields.Count);
+                foreach (IField singleField in fields)
+                {
+                    cancelToken.ThrowIfCancellationRequested();
 
-				ScItem newItem = new ScItem (source, displayName, hasChildren, id, longId, path, template, fields);
+                    string lowercaseName = singleField.Name.ToLowerInvariant();
+                    fieldsByName[lowercaseName] = singleField;
+                }
 
 
+                ScItem newItem = new ScItem (source, displayName, hasChildren, id, longId, path, template, fieldsByName);
 				items.Add(newItem);
             }
             return new ScItemsResponse(totalCount, resultCount, items);
