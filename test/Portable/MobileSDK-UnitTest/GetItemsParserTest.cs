@@ -30,7 +30,7 @@ namespace Sitecore.MobileSdkUnitTest
             ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
             Assert.AreEqual(1, response.Items.Count);
 
-            ScItem item1 = response.Items[0];
+            ISitecoreItem item1 = response.Items[0];
 
             Assert.AreEqual("Home", item1.DisplayName);
             Assert.AreEqual("web", item1.Source.Database);
