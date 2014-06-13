@@ -130,8 +130,13 @@ namespace WhiteLabeliOS
 			{
 				this.fieldsDataSource.Dispose ();
 				this.fieldsDataSource = null;
-				this.fieldsTableDelegate = null;
 			}
+
+            if (this.fieldsTableDelegate != null)
+            {
+                this.fieldsDataSource.Dispose ();
+                this.fieldsTableDelegate = null;
+            }
 		}
 
         private void ShowFieldsForItem( ScItem item )
