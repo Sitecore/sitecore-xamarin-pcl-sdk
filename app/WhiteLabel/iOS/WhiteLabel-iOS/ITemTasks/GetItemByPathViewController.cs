@@ -12,6 +12,7 @@ namespace WhiteLabeliOS
     using Sitecore.MobileSDK;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.Items.Fields;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
     using WhiteLabeliOS.FieldsTableView;
 
@@ -52,7 +53,9 @@ namespace WhiteLabeliOS
 
 				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-                var request = builder.RequestWithPath(this.ItemPathField.Text).Build();
+                var request = builder.RequestWithPath(this.ItemPathField.Text)
+                    .Payload(PayloadType.Full)
+                    .Build();
 
 				this.ShowLoader();
 
