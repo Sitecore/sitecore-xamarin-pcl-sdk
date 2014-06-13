@@ -10,21 +10,23 @@ namespace Sitecore.MobileSDK.Items
 
     public interface ISitecoreItem
     {
-         IItemSource Source { get; }
+        IItemSource Source { get; }
 
-         string DisplayName { get; }
+        string DisplayName { get; }
 
-         bool HasChildren { get; }
+        bool HasChildren { get; }
 
-         string Id { get; }
+        string Id { get; }
 
-         string LongId { get; }
+        string LongId { get; }
 
-         string Path { get; }
+        string Path { get; }
 
-         string Template { get; }
+        string Template { get; }
 
-         IList<IField> Fields { get; }
+        IList<IField> Fields { get; }
+
+        IField FieldWithName(string caseInsensitiveFieldName);
     }
 }
 

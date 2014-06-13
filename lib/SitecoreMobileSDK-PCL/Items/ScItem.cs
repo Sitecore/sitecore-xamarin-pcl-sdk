@@ -28,13 +28,29 @@ namespace Sitecore.MobileSDK.Items
 
         public IList<IField> Fields { get; private set; }
 
+        private Dictionary<string, IField> FieldsByName { get; set; }
+
+        public IField FieldWithName(string caseInsensitiveFieldName)
+        {
+            string lowercaseName = caseInsensitiveFieldName.ToLowerInvariant();
+            return this.FieldsByName[lowercaseName];
+        }
+
 		#endregion Class variables;
 
-		private ScItem ()
+		private ScItem()
 		{
 		}
 
-        public ScItem (IItemSource source, string displayName, bool hasChildren, string id, string longId, string path, string template, IList<IField> fields)
+        public ScItem(
+            IItemSource source, 
+            string displayName, 
+            bool hasChildren, 
+            string id, 
+            string longId, 
+            string path, 
+            string template, 
+            Dictionary<string, IField> fieldsByName)
 		{
 			this.Source = source;
 			this.DisplayName = displayName;
@@ -43,7 +59,14 @@ namespace Sitecore.MobileSDK.Items
 			this.LongId = longId;
 			this.Path = path;
 			this.Template = template;
-			this.Fields = fields;
+            this.FieldsByName = fieldsByName;
+
+
+
+            int fieldsCount = fieldsByName.Count;
+            IField[] fields = new IField[fieldsCount];
+            fieldsByName.Values.CopyTo(fields, 0);
+            this.Fields = fields;
 		}
 	}
 }
