@@ -18,7 +18,12 @@ namespace WhiteLabeliOS.FieldsTableView
             InvokeOnMainThread(delegate
             {
                 this.sitecoreItem = null;
-                this.myTable.DataSource = null;
+
+                if (null != this.myTable)
+                {
+                    this.myTable.DataSource = null;
+                }
+                this.myTable = null;
             });
 
             base.Dispose(disposing);

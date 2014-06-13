@@ -23,7 +23,12 @@ namespace WhiteLabeliOS.FieldsTableView
             {
                 this.handler = null;
                 this.sitecoreItem = null;
-                this.myTable.Delegate = null;
+
+                if (null != this.myTable)
+                {
+                    this.myTable.Delegate = null;
+                }
+                this.myTable = null;
             });
 
 
