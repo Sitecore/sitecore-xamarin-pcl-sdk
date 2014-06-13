@@ -24,7 +24,7 @@
       testData = TestEnvironment.DefaultTestEnvironment();
 
       var requestBuilder = new ItemWebApiRequestBuilder ();
-      this.requestWithItemId = requestBuilder.RequestWithId (this.testData.Items.Home.Id).Build();
+      this.requestWithItemId = requestBuilder.ReadItemsRequestWithId (this.testData.Items.Home.Id).Build();
     }
 
     [TearDown]

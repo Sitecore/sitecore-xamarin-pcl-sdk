@@ -60,7 +60,7 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.RequestWithId (this.env.Items.Home.Id).Build();
+            var request = this.requestBuilder.ReadItemsRequestWithId (this.env.Items.Home.Id).Build();
 
             Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();
@@ -78,7 +78,7 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.RequestWithPath ("/sitecore/content/home").Build();
+            var request = this.requestBuilder.ReadItemsRequestWithPath ("/sitecore/content/home").Build();
 
             Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();
@@ -95,7 +95,7 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.RequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
+            var request = this.requestBuilder.ReadItemsRequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
 
             Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();

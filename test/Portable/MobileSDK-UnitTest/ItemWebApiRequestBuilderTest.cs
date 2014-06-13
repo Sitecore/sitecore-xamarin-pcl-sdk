@@ -22,7 +22,7 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-beef}")
+            IReadItemsByIdRequest result =  builder.ReadItemsRequestWithId("{dead-beef}")
                 .Database("web")
                 .Language("en")
                 .Version("1")
@@ -49,7 +49,7 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-beef}")
+            IReadItemsByIdRequest result =  builder.ReadItemsRequestWithId("{dead-beef}")
                 .Database("web")
                 .Language("en")
                 .Version("1")
@@ -82,7 +82,7 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByIdRequest result =  builder.RequestWithId("{abra-kadabra}").Build();
+            IReadItemsByIdRequest result =  builder.ReadItemsRequestWithId("{abra-kadabra}").Build();
 
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.ItemSource);
@@ -102,35 +102,35 @@ namespace Sitecore.MobileSdkUnitTest
         public void TestItemIdRequestBuilderWithNullIdCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithId(null));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithId(null));
         }
 
         [Test]
         public void TestItemIdRequestBuilderWithEmptyIdCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithId(""));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithId(""));
         }
 
         [Test]
         public void TestItemIdRequestBuilderWithWhitespaceIdCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithId("\t \r \n"));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithId("\t \r \n"));
         }
 
         [Test]
         public void TestItemIdWithoutBracesCrashesBuilder()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentException>(() => builder.RequestWithId("ololololo"));
+            Assert.Throws<ArgumentException>(() => builder.ReadItemsRequestWithId("ololololo"));
         }
 
         [Test]
         public void TestItemIdWithBracesOnlyCrashesBuilder()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentException>(() => builder.RequestWithId("{}"));
+            Assert.Throws<ArgumentException>(() => builder.ReadItemsRequestWithId("{}"));
         }
         #endregion ItemId
 
@@ -141,7 +141,7 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByPathRequest result =  builder.RequestWithPath("/sitecore/content")
+            IReadItemsByPathRequest result =  builder.ReadItemsRequestWithPath("/sitecore/content")
                 .Database("master")
                 .Language("da")
                 .Version("100500")
@@ -166,7 +166,7 @@ namespace Sitecore.MobileSdkUnitTest
         public void TestItemPathRequestBuilderWithPathOnly()
         {
             var builder = new ItemWebApiRequestBuilder();
-            IReadItemsByPathRequest result =  builder.RequestWithPath("/sitecore/content").Build();
+            IReadItemsByPathRequest result =  builder.ReadItemsRequestWithPath("/sitecore/content").Build();
 
 
             Assert.IsNotNull(result);
@@ -186,28 +186,28 @@ namespace Sitecore.MobileSdkUnitTest
         public void TestItemPathRequestBuilderWithNullPathCrashes()
         {
             var builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithPath(null));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithPath(null));
         }
 
         [Test]
         public void TestItemPathRequestBuilderWithEmptyPathCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithPath(""));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithPath(""));
         }
 
         [Test]
         public void TestItemPathRequestBuilderWithWhitespacePathCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithPath("\t \r \n"));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithPath("\t \r \n"));
         }
 
         [Test]
         public void TestItemPathWithoutStartingSlashCrashesBuilder()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentException>(() => builder.RequestWithPath("blablabla"));
+            Assert.Throws<ArgumentException>(() => builder.ReadItemsRequestWithPath("blablabla"));
         }
         #endregion ItemPath
 
@@ -218,7 +218,7 @@ namespace Sitecore.MobileSdkUnitTest
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
 
-            IReadItemsByQueryRequest result =  builder.RequestWithSitecoreQuery("fast:/sitecore/content/HOME/*")
+            IReadItemsByQueryRequest result =  builder.ReadItemsRequestWithSitecoreQuery("fast:/sitecore/content/HOME/*")
                 .Database("core")
                 .Language("de")
                 .Version("341")
@@ -242,7 +242,7 @@ namespace Sitecore.MobileSdkUnitTest
         public void TestQueryRequestBuilderWithQueryOnly()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            IReadItemsByQueryRequest result =  builder.RequestWithSitecoreQuery("sitecore/content/HOME/*").Build();
+            IReadItemsByQueryRequest result =  builder.ReadItemsRequestWithSitecoreQuery("sitecore/content/HOME/*").Build();
 
 
             Assert.IsNotNull(result);
@@ -264,21 +264,21 @@ namespace Sitecore.MobileSdkUnitTest
         public void TestQueryRequestBuilderWithNullQueryCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithSitecoreQuery(null));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithSitecoreQuery(null));
         }
 
         [Test]
         public void TestItemQueryRequestBuilderWithEmptyQueryCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithSitecoreQuery(""));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithSitecoreQuery(""));
         }
 
         [Test]
         public void TestQueryRequestBuilderWithWhitespaceQueryCrashes()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.RequestWithSitecoreQuery("\t \r \n"));
+            Assert.Throws<ArgumentNullException>(() => builder.ReadItemsRequestWithSitecoreQuery("\t \r \n"));
         }            
         #endregion SitecoreQuery
 
@@ -293,7 +293,7 @@ namespace Sitecore.MobileSdkUnitTest
             string[] moarFields = { "1", "2", "4" };
             string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
 
-            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
+            IReadItemsByIdRequest result =  builder.ReadItemsRequestWithId("{dead-c0de}")
                 .AddFields(fields)
                 .AddFields(moarFields)
                 .Build();
@@ -322,7 +322,7 @@ namespace Sitecore.MobileSdkUnitTest
 
             string[] expectedFields = { "Мыла", "Раму", "Мама" };
 
-            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
+            IReadItemsByIdRequest result =  builder.ReadItemsRequestWithId("{dead-c0de}")
                 .AddFields("Мыла")
                 .AddFields("Раму")
                 .AddFields("Мама")

@@ -256,7 +256,7 @@
       var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource());
 
       var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(this.testData.Items.Home.Path).Build();
+      var request = requestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
       var response = await sessionWithoutAccess.ReadItemAsync(request);
 
       testData.AssertItemsCount(0, response);
@@ -270,7 +270,7 @@
       var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource()); // = sessionAuthenticatedUser;
 
       var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(this.testData.Items.Home.Path).Build();
+      var request = requestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
       try
       {
@@ -287,7 +287,7 @@
     private async Task<ScItemsResponse> GetItemById(string id)
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId(id).Build();
+      var request = requestBuilder.ReadItemsRequestWithId(id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
@@ -295,7 +295,7 @@
     private async Task<ScItemsResponse> GetItemByPath(string path)
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(path).Build();
+      var request = requestBuilder.ReadItemsRequestWithPath(path).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
@@ -303,7 +303,7 @@
     private async Task<ScItemsResponse> GetItemByQuery(string query)
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
+      var request = requestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
