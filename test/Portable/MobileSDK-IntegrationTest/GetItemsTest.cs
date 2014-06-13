@@ -255,8 +255,7 @@
       var config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:7119", "extranet\\noreadaccess", "noreadaccess");
       var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource());
 
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
       var response = await sessionWithoutAccess.ReadItemAsync(request);
 
       testData.AssertItemsCount(0, response);
@@ -269,8 +268,8 @@
       var config = new SessionConfig("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
       var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource()); // = sessionAuthenticatedUser;
 
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
+      
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
       try
       {
@@ -286,24 +285,24 @@
 
     private async Task<ScItemsResponse> GetItemById(string id)
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.ReadItemsRequestWithId(id).Build();
+      
+            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
     private async Task<ScItemsResponse> GetItemByPath(string path)
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.ReadItemsRequestWithPath(path).Build();
+      
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
     private async Task<ScItemsResponse> GetItemByQuery(string query)
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
+      
+            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }

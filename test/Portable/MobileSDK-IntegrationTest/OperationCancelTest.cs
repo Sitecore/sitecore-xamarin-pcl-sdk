@@ -26,7 +26,6 @@ namespace MobileSDKIntegrationTest
             ItemSource defaultSource = ItemSource.DefaultSource();
 
             this.session = new ScTestApiSession (config, defaultSource);
-            this.requestBuilder = new ItemWebApiRequestBuilder ();
         }
 
         [TearDown]
@@ -60,7 +59,7 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.ReadItemsRequestWithId (this.env.Items.Home.Id).Build();
+            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId (this.env.Items.Home.Id).Build();
 
             Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();
@@ -78,7 +77,7 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.ReadItemsRequestWithPath ("/sitecore/content/home").Build();
+            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath ("/sitecore/content/home").Build();
 
             Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();
@@ -95,7 +94,7 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.ReadItemsRequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
+            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
 
             Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();
