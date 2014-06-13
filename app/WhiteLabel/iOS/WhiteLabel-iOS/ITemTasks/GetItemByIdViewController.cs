@@ -137,7 +137,7 @@ namespace WhiteLabeliOS
 
             if (this.fieldsTableDelegate != null)
             {
-                this.fieldsDataSource.Dispose ();
+                this.fieldsTableDelegate.Dispose ();
                 this.fieldsTableDelegate = null;
             }
 		}
