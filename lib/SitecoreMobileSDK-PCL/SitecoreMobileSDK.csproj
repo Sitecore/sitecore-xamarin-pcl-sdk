@@ -11,7 +11,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile136</TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\solutions\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <RestorePackages>false</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -102,6 +102,7 @@
     <Compile Include="Items\Fields\IField.cs" />
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
+    <Compile Include="Items\ISitecoreItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

@@ -44,6 +44,18 @@ namespace Sitecore.MobileSDK.Items
         public string Database  { get; private set; }
         public string Language  { get; private set; }
         public string Version   { get; private set; }
+        public int VersionNumber 
+        { 
+            get 
+            { 
+                if (null == this.Version)
+                {
+                    throw new ArgumentNullException ("[ItemSource.VersionNumber] : Cannot convert nil version to int");
+                }
+
+                return Convert.ToInt32 (this.Version); 
+            } 
+        }
     }
 }
 

@@ -102,7 +102,7 @@ namespace Sitecore.MobileSDK
 
         #region GetItems
 
-        public async Task<ScItemsResponse> ReadItemByIdAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+        public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
 		{
 			ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
             IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
@@ -112,7 +112,7 @@ namespace Sitecore.MobileSDK
             return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
 		}
 
-        public async Task<ScItemsResponse> ReadItemByPathAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
+        public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
             IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps (request);
@@ -122,7 +122,7 @@ namespace Sitecore.MobileSDK
             return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
         }
 
-        public async Task<ScItemsResponse> ReadItemByQueryAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
+        public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
         {
             ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
             IReadItemsByQueryRequest autocompletedRequest = this.requestMerger.FillReadItemByQueryGaps (request);

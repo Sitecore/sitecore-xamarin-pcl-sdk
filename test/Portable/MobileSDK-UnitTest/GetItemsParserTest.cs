@@ -30,7 +30,7 @@ namespace Sitecore.MobileSdkUnitTest
             ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
             Assert.AreEqual(1, response.Items.Count);
 
-            ScItem item1 = response.Items[0];
+            ISitecoreItem item1 = response.Items[0];
 
             Assert.AreEqual("Home", item1.DisplayName);
             Assert.AreEqual("web", item1.Source.Database);
@@ -44,10 +44,10 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual("Sample/Sample Item", item1.Template);
             Assert.AreEqual(1, item1.Source.VersionNumber);
 
-			Assert.IsTrue (item1.Fields.Count == 2);
-			ScField field1 = (ScField)item1.Fields [0];
+            Assert.AreEqual(2, item1.Fields.Count);
+            IField field1 = item1.Fields [0];
 			Assert.AreEqual("{75577384-3C97-45DA-A847-81B00500E250}", field1.FieldId);
-			ScField field2 = (ScField)item1.Fields [1];
+            IField field2 = item1.Fields [1];
 			Assert.AreEqual("{A60ACD61-A6DB-4182-8329-C957982CEC74}", field2.FieldId);
         }
 

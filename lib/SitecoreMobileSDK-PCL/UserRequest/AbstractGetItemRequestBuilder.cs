@@ -53,7 +53,7 @@ namespace Sitecore.MobileSDK
         }
 
 
-        public IGetItemRequestParametersBuilder<T> AddMultipleFields( ICollection<string> fields )
+        public IGetItemRequestParametersBuilder<T> AddFields( ICollection<string> fields )
         {
             int myFieldsCount = this.queryParameters.Fields.Count;
             int newFieldsCount = fields.Count;
@@ -69,10 +69,10 @@ namespace Sitecore.MobileSDK
             return this;
         }
 
-        public IGetItemRequestParametersBuilder<T> AddSingleField( string singleField )
+        public IGetItemRequestParametersBuilder<T> AddFields( string singleField )
         {
             string[] arrayOfNewField = {singleField};
-            return this.AddMultipleFields( arrayOfNewField );
+            return this.AddFields( arrayOfNewField );
         }
 
         public abstract T Build();
