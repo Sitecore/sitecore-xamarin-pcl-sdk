@@ -257,7 +257,7 @@
 
       var requestBuilder = new ItemWebApiRequestBuilder();
       var request = requestBuilder.RequestWithPath(this.testData.Items.Home.Path).Build();
-      var response = await sessionWithoutAccess.ReadItemByPathAsync(request);
+      var response = await sessionWithoutAccess.ReadItemAsync(request);
 
       testData.AssertItemsCount(0, response);
     }
@@ -274,7 +274,7 @@
 
       try
       {
-        await sessionWithoutAccess.ReadItemByPathAsync(request); 
+        await sessionWithoutAccess.ReadItemAsync(request); 
       }
       catch (RsaHandshakeException exception)
       {
@@ -288,7 +288,7 @@
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
       var request = requestBuilder.RequestWithId(id).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
@@ -296,7 +296,7 @@
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
       var request = requestBuilder.RequestWithPath(path).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
@@ -304,7 +304,7 @@
     {
       var requestBuilder = new ItemWebApiRequestBuilder();
       var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
   }

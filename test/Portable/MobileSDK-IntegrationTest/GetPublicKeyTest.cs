@@ -39,7 +39,7 @@
       var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       var session = new ScApiSession(config, ItemSource.DefaultSource());
 
-      var response = await session.ReadItemByIdAsync(requestWithItemId);
+      var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
       Assert.AreEqual(testData.Items.Home.DisplayName, response.Items[0].DisplayName);
     }
@@ -52,7 +52,7 @@
 
       try
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
+        await session.ReadItemAsync(this.requestWithItemId);
       }
       catch (RsaHandshakeException exception)
       {
@@ -96,7 +96,7 @@
 
       try
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
+        await session.ReadItemAsync(this.requestWithItemId);
       }
       catch (ParserException exception)
       {
@@ -119,7 +119,7 @@
 
       try
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
+        await session.ReadItemAsync(this.requestWithItemId);
       }
       catch (ParserException exception)
       {
@@ -141,7 +141,7 @@
 
       try
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
+        await session.ReadItemAsync(this.requestWithItemId);
       }
       catch (ParserException exception)
       {
@@ -164,7 +164,7 @@
 
       try
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
+        await session.ReadItemAsync(this.requestWithItemId);
       }
       catch (ParserException exception)
       {
