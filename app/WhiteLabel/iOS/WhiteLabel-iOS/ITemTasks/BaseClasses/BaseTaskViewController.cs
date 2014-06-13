@@ -34,7 +34,7 @@ namespace WhiteLabeliOS
 
 		public void HideLoader()
 		{
-			if (loadingOverlay != null)
+			if (this.loadingOverlay != null)
 			{
 				this.loadingOverlay.Hide ();
 			}
