@@ -285,62 +285,6 @@ namespace Sitecore.MobileSdkUnitTest
 
         #region Fields
         [Test]
-        public void TestRequestBuilderWithItemFields()
-        {
-            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-
-            string[] fields = { "Мама", "Мыла", "Раму" };
-
-            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
-                .LoadFields(fields)
-                .Build();
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.ItemSource);
-            Assert.IsNotNull(result.ItemId);
-            Assert.IsNotNull( result.QueryParameters );
-            Assert.IsNull(result.SessionSettings);
-
-
-
-            Assert.AreEqual("{dead-c0de}", result.ItemId);
-            Assert.IsNull(result.ItemSource.Language);
-            Assert.IsNull(result.ItemSource.Database);
-            Assert.IsNull(result.ItemSource.Version);
-            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
-            Assert.AreEqual( fields, result.QueryParameters.Fields );
-        }
-
-        [Test]
-        public void TestLaterItemFieldsOverridePreviousOnes()
-        {
-            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-
-            string[] fields = { "Мама", "Мыла", "Раму" };
-            string[] moarFields = { "1", "2", "4" };
-
-            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
-                .LoadFields(fields)
-                .LoadFields(moarFields)
-                .Build();
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.ItemSource);
-            Assert.IsNotNull(result.ItemId);
-            Assert.IsNotNull( result.QueryParameters );
-            Assert.IsNull(result.SessionSettings);
-
-
-
-            Assert.AreEqual("{dead-c0de}", result.ItemId);
-            Assert.IsNull(result.ItemSource.Language);
-            Assert.IsNull(result.ItemSource.Database);
-            Assert.IsNull(result.ItemSource.Version);
-            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
-            Assert.AreEqual( moarFields, result.QueryParameters.Fields );
-        }
-       
-        [Test]
         public void TestMultipleItemFieldsCanBeAddedIncrementally()
         {
             ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
@@ -350,8 +294,8 @@ namespace Sitecore.MobileSdkUnitTest
             string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
 
             IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
-                .AddMultipleFields(fields)
-                .AddMultipleFields(moarFields)
+                .AddFields(fields)
+                .AddFields(moarFields)
                 .Build();
 
             Assert.IsNotNull(result);
@@ -379,9 +323,9 @@ namespace Sitecore.MobileSdkUnitTest
             string[] expectedFields = { "Мыла", "Раму", "Мама" };
 
             IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
-                .AddSingleField("Мыла")
-                .AddSingleField("Раму")
-                .AddSingleField("Мама")
+                .AddFields("Мыла")
+                .AddFields("Раму")
+                .AddFields("Мама")
                 .Build();
 
             Assert.IsNotNull(result);
@@ -399,71 +343,6 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
             Assert.AreEqual( expectedFields, result.QueryParameters.Fields );
         }
-
-
-        [Test]
-        public void TestIncrementalFieldsCanBeUsedWithLoadFields()
-        {
-            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-
-            string[] fields = { "Мама", "Мыла", "Раму" };
-            string[] moarFields = { "1", "2", "4" };
-            string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4", "gigity goo" };
-
-            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
-                .LoadFields(fields)
-                .AddMultipleFields(moarFields)
-                .AddSingleField("gigity goo")
-                .Build();
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.ItemSource);
-            Assert.IsNotNull(result.ItemId);
-            Assert.IsNotNull( result.QueryParameters );
-            Assert.IsNull(result.SessionSettings);
-
-
-
-            Assert.AreEqual("{dead-c0de}", result.ItemId);
-            Assert.IsNull(result.ItemSource.Language);
-            Assert.IsNull(result.ItemSource.Database);
-            Assert.IsNull(result.ItemSource.Version);
-            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
-            Assert.AreEqual( expectedFields, result.QueryParameters.Fields );
-        }
-
-
-        [Test]
-        public void TestLoadFieldsOverridesIncrementalFields()
-        {
-            ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-
-            string[] fields = { "Мама", "Мыла", "Раму" };
-            string[] moarFields = { "1", "2", "4" };
-
-            IReadItemsByIdRequest result =  builder.RequestWithId("{dead-c0de}")
-                .LoadFields(fields)
-                .AddMultipleFields(moarFields)
-                .AddSingleField("gigity goo")
-                .LoadFields(moarFields)
-                .Build();
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.ItemSource);
-            Assert.IsNotNull(result.ItemId);
-            Assert.IsNotNull( result.QueryParameters );
-            Assert.IsNull(result.SessionSettings);
-
-
-
-            Assert.AreEqual("{dead-c0de}", result.ItemId);
-            Assert.IsNull(result.ItemSource.Language);
-            Assert.IsNull(result.ItemSource.Database);
-            Assert.IsNull(result.ItemSource.Version);
-            Assert.AreEqual( PayloadType.Default, result.QueryParameters.Payload );
-            Assert.AreEqual( moarFields, result.QueryParameters.Fields );
-        }
-
         #endregion Fields
     }
 }
