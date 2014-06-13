@@ -46,6 +46,8 @@ namespace WhiteLabeliOS
 			}
 			else
 			{
+                this.HideKeyboard(this.ItemPathField);
+                this.HideKeyboard(this.fieldNameTextField);
 				this.SendRequest();
 			}
 		}
