@@ -78,7 +78,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
         }
 
-        public ScItem SitecoreItem
+        public ISitecoreItem SitecoreItem
         { 
             get
             {
@@ -115,7 +115,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
 
         #region Instance Variables
-        private ScItem sitecoreItem;
+        private ISitecoreItem sitecoreItem;
         private UITableView myTable;
         private TableViewDidSelectFieldAtIndexPath handler;
         #endregion Instance Variables

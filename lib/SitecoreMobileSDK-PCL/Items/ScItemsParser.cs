@@ -41,7 +41,7 @@ namespace Sitecore.MobileSDK
             int resultCount = ParseOrFail<int>(response, "$.result.resultCount");
 
             var responseItems = response.SelectToken("$.result.items");
-            var items = new List<ScItem>();
+            var items = new List<ISitecoreItem>();
 
             foreach (JObject item in responseItems)
             {

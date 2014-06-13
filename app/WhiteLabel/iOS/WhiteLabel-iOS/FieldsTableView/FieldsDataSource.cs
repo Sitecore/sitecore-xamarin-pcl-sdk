@@ -60,7 +60,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
         }
 
-        public ScItem SitecoreItem
+        public ISitecoreItem SitecoreItem
         { 
             get
             {
@@ -122,7 +122,7 @@ namespace WhiteLabeliOS.FieldsTableView
         #endregion UITableViewDataSource
 
         #region Instance Variables
-        private ScItem sitecoreItem;
+        private ISitecoreItem sitecoreItem;
         private UITableView myTable;
         #endregion Instance Variables
     }

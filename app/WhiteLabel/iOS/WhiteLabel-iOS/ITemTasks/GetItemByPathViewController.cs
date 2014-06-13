@@ -51,20 +51,18 @@ namespace WhiteLabeliOS
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
 
-				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-
-                var request = builder.RequestWithPath(this.ItemPathField.Text)
+                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
                     .Payload(PayloadType.Full)
                     .Build();
 
 				this.ShowLoader();
 
-				ScItemsResponse response = await session.ReadItemByPathAsync(request);
+				ScItemsResponse response = await session.ReadItemAsync(request);
 
 				
                 if (response.Items.Any())
 				{
-					ScItem item = response.Items [0];
+                    ISitecoreItem item = response.Items [0];
                     this.ShowFieldsForItem(item);
 
                     string message = NSBundle.MainBundle.LocalizedString("item title is", null);
@@ -103,7 +101,7 @@ namespace WhiteLabeliOS
             });
         }
 
-        private void ShowFieldsForItem( ScItem item )
+        private void ShowFieldsForItem( ISitecoreItem item )
         {
             BeginInvokeOnMainThread(delegate
             {

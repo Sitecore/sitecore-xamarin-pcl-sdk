@@ -48,14 +48,12 @@ namespace WhiteLabeliOS
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
 
-				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-
-				var request = builder.RequestWithSitecoreQuery(queryTextField.Text)
+                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(queryTextField.Text)
 					.Build();
 
 				this.ShowLoader();
 
-				ScItemsResponse response = await session.ReadItemByQueryAsync(request);
+				ScItemsResponse response = await session.ReadItemAsync(request);
 
 				this.HideLoader();
 				if (response.ResultCount > 0)
