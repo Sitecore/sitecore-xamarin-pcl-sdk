@@ -18,19 +18,6 @@ namespace Sitecore.MobileSDK.Items
             this.Validate ();
         }
 
-        public int VersionNumber 
-        { 
-            get 
-            { 
-                if (null == this.Version)
-                {
-                    throw new ArgumentNullException ("[ItemSource.VersionNumber] : Cannot convert nil version to int");
-                }
-
-                return Convert.ToInt32 (this.Version); 
-            } 
-        }
-
 
         /// <exception cref="ArgumentNullException">[ItemSource.Database] Do not pass null to constructor</exception>
         private void Validate()

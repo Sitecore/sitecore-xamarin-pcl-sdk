@@ -74,7 +74,7 @@ namespace MobileSDKIntegrationTest
       public string Password { get; set; }
     }
 
-    public void AssertItemsAreEqual(TestEnvironment.Item expected, ScItem actual)
+    public void AssertItemsAreEqual(TestEnvironment.Item expected, ISitecoreItem actual)
     {
       if (null != expected.DisplayName)
       {

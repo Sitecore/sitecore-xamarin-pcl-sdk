@@ -10,23 +10,23 @@ namespace Sitecore.MobileSDK
 
     public class ItemWebApiRequestBuilder
     {
-        public ItemWebApiRequestBuilder ()
+        private ItemWebApiRequestBuilder()
         {
         }
 
-        public IGetItemRequestParametersBuilder<IReadItemsByIdRequest> RequestWithId( string itemId )
+        public static IGetItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
         {
-            return new ReadItemByIdRequestBuilder( itemId );
+            return new ReadItemByIdRequestBuilder(itemId);
         }
 
-        public IGetItemRequestParametersBuilder<IReadItemsByPathRequest> RequestWithPath( string itemPath )
+        public static IGetItemRequestParametersBuilder<IReadItemsByPathRequest> ReadItemsRequestWithPath(string itemPath)
         {
-            return new ReadItemByPathRequestBuilder( itemPath );
+            return new ReadItemByPathRequestBuilder(itemPath);
         }
 
-        public IGetItemRequestParametersBuilder<IReadItemsByQueryRequest> RequestWithSitecoreQuery( string sitecoreQuery )
+        public static IGetItemRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
         {
-            return new ReadItemByQueryRequestBuilder( sitecoreQuery );
+            return new ReadItemByQueryRequestBuilder(sitecoreQuery);
         }
     }
 }

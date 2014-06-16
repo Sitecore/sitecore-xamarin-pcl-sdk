@@ -8,9 +8,9 @@
 
 		public int ResultCount { get; private set; }
 
-		public List<ScItem> Items { get; private set; }
+        public List<ISitecoreItem> Items { get; private set; }
 
-		public ScItemsResponse (int totalCount, int resultCount, List<ScItem> items)
+        public ScItemsResponse (int totalCount, int resultCount, List<ISitecoreItem> items)
 		{
 			this.TotalCount = totalCount;
 			this.ResultCount = resultCount;

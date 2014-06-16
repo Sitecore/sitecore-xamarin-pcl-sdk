@@ -15,8 +15,16 @@ namespace WhiteLabeliOS.FieldsTableView
     {
         protected override void Dispose (bool disposing)
         {
-            this.sitecoreItem = null;
-            this.myTable.DataSource = null;
+            InvokeOnMainThread(delegate
+            {
+                this.sitecoreItem = null;
+
+                if (null != this.myTable)
+                {
+                    this.myTable.DataSource = null;
+                }
+                this.myTable = null;
+            });
 
             base.Dispose(disposing);
         }
@@ -52,7 +60,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
         }
 
-        public ScItem SitecoreItem
+        public ISitecoreItem SitecoreItem
         { 
             get
             {
@@ -114,7 +122,7 @@ namespace WhiteLabeliOS.FieldsTableView
         #endregion UITableViewDataSource
 
         #region Instance Variables
-        private ScItem sitecoreItem;
+        private ISitecoreItem sitecoreItem;
         private UITableView myTable;
         #endregion Instance Variables
     }

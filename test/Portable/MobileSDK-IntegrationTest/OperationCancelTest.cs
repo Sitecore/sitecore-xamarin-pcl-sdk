@@ -26,7 +26,6 @@ namespace MobileSDKIntegrationTest
             ItemSource defaultSource = ItemSource.DefaultSource();
 
             this.session = new ScTestApiSession (config, defaultSource);
-            this.requestBuilder = new ItemWebApiRequestBuilder ();
         }
 
         [TearDown]
@@ -60,9 +59,9 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.RequestWithId (this.env.Items.Home.Id).Build();
+            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId (this.env.Items.Home.Id).Build();
 
-            Task<ScItemsResponse> action = this.session.ReadItemByIdAsync (request, cancel.Token);
+            Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();
 
             await action;
@@ -78,9 +77,9 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.RequestWithPath ("/sitecore/content/home").Build();
+            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath ("/sitecore/content/home").Build();
 
-            Task<ScItemsResponse> action = this.session.ReadItemByPathAsync (request, cancel.Token);
+            Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();
 
             await action;
@@ -95,9 +94,9 @@ namespace MobileSDKIntegrationTest
             //        [ExpectedException(typeof(OperationCanceledException))]
 
             var cancel = new CancellationTokenSource ();
-            var request = this.requestBuilder.RequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
+            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
 
-            Task<ScItemsResponse> action = this.session.ReadItemByQueryAsync (request, cancel.Token);
+            Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
             cancel.Cancel();
 
             await action;
