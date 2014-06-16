@@ -30,7 +30,7 @@ namespace Sitecore.MobileSDK
             string specificParameters = this.GetSpecificPartForRequest( request );
 
             string result = baseUrl + this.restGrammar.FieldSeparator + specificParameters;
-            return result.ToLowerInvariant();
+            return result;
         }
 
         protected virtual void ValidateRequest(TRequest request)
@@ -58,7 +58,7 @@ namespace Sitecore.MobileSDK
                 this.restGrammar.FieldSeparator +
                 queryParamsUrl;
 
-            return result;
+            return result.ToLowerInvariant();
         }
 
         private void ValidateCommonRequest(TRequest request)
