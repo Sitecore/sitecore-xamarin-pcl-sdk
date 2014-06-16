@@ -6,7 +6,6 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
-  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.SessionSettings;
 
@@ -23,7 +22,7 @@
     {
       testData = TestEnvironment.DefaultTestEnvironment();
 
-      this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId (this.testData.Items.Home.Id).Build();
+      this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
     }
 
     [TearDown]
@@ -35,8 +34,36 @@
     [Test]
     public async void TestGetItemAsAuthenticatedUser()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSessionWithDefaultSource(this.testData.AuthenticatedInstanceUrl, this.testData.Users.Admin.Username, this.testData.Users.Admin.Password);
+
+      var response = await session.ReadItemAsync(requestWithItemId);
+      testData.AssertItemsCount(1, response);
+      Assert.AreEqual(testData.Items.Home.DisplayName, response.Items[0].DisplayName);
+    }
+
+    [Test]
+    public async void TestAuthenticateToInstanceWithoutHttp()
+    {
+      var session = testData.GetSessionWithDefaultSource("mobiledev1ua1.dk.sitecore.net:7119", testData.Users.Admin.Username, testData.Users.Admin.Password);
+
+      try
+      {
+        await session.ReadItemAsync(this.requestWithItemId);
+      }
+      catch (RsaHandshakeException exception)
+      {
+        Assert.True(exception.Message.Contains("Public key not received properly"));
+
+        Assert.AreEqual("System.ArgumentException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Only 'http' and 'https' schemes are allowed."));
+        return;
+      }
+    }
+
+    [Test]
+    public async void TestAuthenticateWithSlashInTheEnd()
+    {
+      var session = testData.GetSessionWithDefaultSource("http://mobiledev1ua1.dk.sitecore.net:7119/", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
@@ -46,8 +73,7 @@
     [Test]
     public async void TestGetItemsWithNotExistentInstanceUrl()
     {
-      var config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSessionWithDefaultSource("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       try
       {
@@ -90,8 +116,7 @@
     [Test]
     public async void TestGetItemWithEmptyPassword()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, "");
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, "");
 
       try
       {
@@ -113,8 +138,7 @@
     [Test]
     public async void TestGetItemWithNotExistentUser()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, "sitecore\\notexistent", "notexistent");
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, "sitecore\\notexistent", "notexistent");
 
       try
       {
@@ -135,8 +159,7 @@
     [Test]
     public async void TestGetItemWithInvalidUsernameAndPassword()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, "inval|d u$er№ame", null);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, "inval|d u$er№ame", null);
 
       try
       {
@@ -158,8 +181,7 @@
     [Test]
     public async void TestGetItemAsAnonymousWithoutReadAccess()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, null, null);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
 
       try
       {

@@ -11,7 +11,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile136</TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\solutions\</SolutionDir>
-    <RestorePackages>false</RestorePackages>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -156,16 +156,6 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="UrlBuilder\ItemById\" />
-    <Folder Include="UrlBuilder\ItemByPath\" />
-    <Folder Include="UrlBuilder\Rest\" />
-    <Folder Include="UrlBuilder\WebApi\" />
-    <Folder Include="UrlBuilder\ItemByQuery\" />
-    <Folder Include="Utils\" />
-    <Folder Include="UserRequest\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="Items\Fields\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
 </Project>

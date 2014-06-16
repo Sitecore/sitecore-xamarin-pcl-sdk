@@ -6,7 +6,6 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
 
   [TestFixture]
   public class CancelOperationsTest
@@ -18,8 +17,7 @@
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      this.session = new ScApiSession(config, ItemSource.DefaultSource());
+      this.session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
     }
 
     [TearDown]

@@ -2,7 +2,9 @@
 namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
+  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.SessionSettings;
 
   public class TestEnvironment
   {
@@ -16,10 +18,16 @@ namespace MobileSDKIntegrationTest
 
       result.Users.Admin.Username = "sitecore\\admin";
       result.Users.Admin.Password = "b";
+
       result.Users.Anonymous.Username = null;
       result.Users.Anonymous.Password = null;
+
       result.Users.Creatorex.Username = "extranet\\creatorex";
       result.Users.Creatorex.Password = "creatorex";
+
+      result.Users.NoReadAccess.Username = "extranet\\noreadaccess";
+      result.Users.NoReadAccess.Password = "noreadaccess";
+
 
       result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
       result.Items.Home.Path = "/sitecore/content/Home";
@@ -50,6 +58,7 @@ namespace MobileSDKIntegrationTest
       public User Admin = new User();
       public User Anonymous = new User();
       public User Creatorex = new User();
+      public User NoReadAccess = new User();
     }
 
     public class ItemsList
@@ -106,6 +115,13 @@ namespace MobileSDKIntegrationTest
       Assert.AreEqual(itemCount, response.TotalCount);
       Assert.AreEqual(itemCount, response.ResultCount);
       Assert.AreEqual(itemCount, response.Items.Count);
+    }
+
+    public ScApiSession GetSessionWithDefaultSource(string url, string username, string password)
+    {
+      var config = new SessionConfig(url, username, password);
+      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      return session;
     }
   }
 }

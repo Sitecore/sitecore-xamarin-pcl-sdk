@@ -7,13 +7,13 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class SetDefaultSessionSettingsTest
   {
     private TestEnvironment testData;
+    private ScApiSession sessionAuthenticatedUser;
     private SessionConfig sessionConfig;
     IReadItemsByIdRequest requestWithItemId;
 
@@ -21,9 +21,9 @@
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      sessionConfig = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
-      requestWithItemId = requestBuilder.Payload(PayloadType.Content).Build();
+      this.sessionConfig = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      this.sessionAuthenticatedUser = new ScApiSession(sessionConfig, ItemSource.DefaultSource());
+      requestWithItemId = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id).Payload(PayloadType.Content).Build();
     }
 
     [TearDown]
@@ -31,6 +31,7 @@
     {
       this.testData = null;
       this.sessionConfig = null;
+      this.sessionAuthenticatedUser = null;
     }
 
     [Test]
@@ -45,9 +46,9 @@
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      Assert.AreEqual(Version, resultItem.Source.Version);
-      Assert.AreEqual(Language, resultItem.Source.Language);
-      Assert.AreEqual(Db, resultItem.Source.Database);
+
+      var source = new ItemSource(Db, Language, Version);
+      testData.AssertItemSourcesAreEqual(source, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
     [Test]
@@ -72,10 +73,13 @@
       const string Language = "da";
       const string Version = "1";
 
-      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
-      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
-      var request = requestBuilder.Database(Db).Language(Language).Version(Version).Payload(PayloadType.Content).Build();
-      var response = await session.ReadItemAsync(request);
+      var request = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id)
+        .Database(Db)
+        .Language(Language)
+        .Version(Version)
+        .Payload(PayloadType.Content)
+        .Build();
+      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
@@ -91,9 +95,11 @@
       const string Language = "en";
       const string Version = "2";
       var source = new ItemSource(Db, "da", Version);
-      var session = new ScApiSession(this.sessionConfig, source);
-      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
-      var request = requestBuilder.Language(Language).Payload(PayloadType.Content).Build();
+      var session = new ScApiSession(sessionConfig, source);
+      var request = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id)
+        .Language(Language)
+        .Payload(PayloadType.Content)
+        .Build();
       var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -112,8 +118,11 @@
       const string Version = "2";
       var source = new ItemSource("web", Language, "1");
       var session = new ScApiSession(this.sessionConfig, source);
-      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
-      var request = requestBuilder.Version(Version).Database(Db).Payload(PayloadType.Content).Build();
+      var request = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id)
+        .Version(Version)
+        .Database(Db)
+        .Payload(PayloadType.Content)
+        .Build();
       var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -128,27 +137,25 @@
     public async void TestOverrideDatabaseInRequestByPath()
     {
       const string Db = "master";
-      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
       var requestBuilder = new ReadItemByPathRequestBuilder(testData.Items.ItemWithVersions.Path);
       var request = requestBuilder.Database(Db).Build();
-      var response = await session.ReadItemAsync(request);
+      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
 
-      var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language,"2");
+      var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language, "2");
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      testData.AssertItemSourcesAreEqual(expectedSource,resultItem.Source);
+      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
 
     [Test]
     public async void TestOverrideDatabaseInRequestByPathSeveralTimes()
     {
       const string Db = "web";
-      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
       var requestBuilder = new ReadItemByPathRequestBuilder(testData.Items.ItemWithVersions.Path);
       var request = requestBuilder.Database("master").Database(null).Database(Db).Build();
-      var response = await session.ReadItemAsync(request);
+      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
@@ -161,10 +168,9 @@
     [Test]
     public async void TestGetItemInRequestByQueryAsConcatenationString()
     {
-      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
-      var requestBuilder = new ReadItemByQueryRequestBuilder(testData.Items.Home.Path+"/*");
+      var requestBuilder = new ReadItemByQueryRequestBuilder(testData.Items.Home.Path + "/*");
       var request = requestBuilder.Database("master").Build();
-      var response = await session.ReadItemAsync(request);
+      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
     }
@@ -175,10 +181,9 @@
       const string Db = "";
       const string Language = "";
       const string Version = "";
-      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
       var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
       var request = requestBuilder.Database(Db).Language(Language).Version(Version).Build();
-      var response = await session.ReadItemAsync(request);
+      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
@@ -192,10 +197,9 @@
     {
       const string Language = "da";
       const string Version = "1";
-      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
       var requestBuilder = new ReadItemByQueryRequestBuilder("/sitecore/content/Home/*");
       var request = requestBuilder.Version(Version).Language(Language).Build();
-      var response = await session.ReadItemAsync(request);
+      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
       ISitecoreItem resultItem = response.Items[3];
@@ -206,10 +210,9 @@
     [Test]
     public async void TestItemByQueryWithSpecifiedFieldCorrectValue()
     {
-      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
       var requestBuilder = new ReadItemByQueryRequestBuilder("/sitecore//*[@Title='English version 2 web']");
       var request = requestBuilder.Payload(PayloadType.Content).Build();
-      var response = await session.ReadItemAsync(request);
+      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
@@ -221,12 +224,11 @@
     [Test]
     public async void TestItemByQueryWithSpecifiedFieldNotCorrectValue()
     {
-      var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
       var requestBuilder = new ReadItemByQueryRequestBuilder("/sitecore/content//*[@Title='DANISH version 2 web']");
       var request = requestBuilder.Language("da").Database("master").Build();
-      var response = await session.ReadItemAsync(request);
+      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
-      testData.AssertItemsCount(0, response); 
+      testData.AssertItemsCount(0, response);
     }
 
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)
