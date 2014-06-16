@@ -35,39 +35,37 @@
     [Test]
     public async void TestGetItemByIdWithContentFields()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Payload(PayloadType.Content).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id);
+      var request = requestBuilder.Payload(PayloadType.Content).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ScItem item = response.Items[0];
+      ISitecoreItem item = response.Items[0];
       Assert.AreEqual(2, item.Fields.Count);
-      Assert.AreEqual("Sitecore", item.Fields[0].RawValue);
-      Assert.AreEqual("Title", item.Fields[0].Name);
-    }
+      Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
+     }
 
     [Test]
     public async void TestGetItemByPathWithAllFields()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Full).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var requestBuilder = new ReadItemByPathRequestBuilder(testData.Items.Home.Path);
+      var request = requestBuilder.Payload(PayloadType.Full).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
 
       Assert.Greater(response.Items[0].Fields.Count,70);
-      Assert.AreEqual("__Display name",  response.Items[0].Fields[6].Name);
-      Assert.AreEqual("Home", response.Items[0].Fields[6].RawValue);
+      Assert.AreEqual("Home", response.Items[0].FieldWithName("__Display name").RawValue);
     }
 
     [Test]
     public async void TestGetItemByPathWithoutFields()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Min).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var requestBuilder = new ReadItemByPathRequestBuilder(testData.Items.Home.Path);
+      var request = requestBuilder.Payload(PayloadType.Min).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
@@ -77,44 +75,42 @@
     [Test]
     public async void TestGetItemByQueryWithContentFields()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithSitecoreQuery("/sitecore/content/Home/ancestor-or-self::*").Payload(PayloadType.Content).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var requestBuilder = new ReadItemByQueryRequestBuilder("/sitecore/content/Home/ancestor-or-self::*");
+      var request = requestBuilder.Payload(PayloadType.Content).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(3, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ScItem item = response.Items[0];  
+      ISitecoreItem item = response.Items[0];  
       Assert.AreEqual(2, item.Fields.Count);
-      Assert.AreEqual("Sitecore", item.Fields[0].RawValue);
-      Assert.AreEqual("Title", item.Fields[0].Name);
+      Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
     }
 
     [Test]
     public async void TestGetItemWithInternationalFields()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath("/sitecore/content/Home/Android/Static/Japanese/宇都宮").Payload(PayloadType.Content).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var requestBuilder = new ReadItemByPathRequestBuilder("/sitecore/content/Home/Android/Static/Japanese/宇都宮");
+      var request = requestBuilder.Payload(PayloadType.Content).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       Assert.AreEqual("宇都宮", response.Items[0].DisplayName);
       Assert.AreEqual("/sitecore/content/Home/Android/Static/Japanese/宇都宮", response.Items[0].Path);
-      ScItem item = response.Items[0];
+      ISitecoreItem item = response.Items[0];
       Assert.AreEqual(2, item.Fields.Count);
-      Assert.AreEqual("Title", item.Fields[0].Name);
-      Assert.AreEqual("宇都宮", item.Fields[0].RawValue);
+      Assert.AreEqual("宇都宮", item.FieldWithName("Title").RawValue);
     }
 
     [Test]
     public async void TestGetHtmlField()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Content).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var requestBuilder = new ReadItemByPathRequestBuilder(testData.Items.Home.Path);
+      var request = requestBuilder.Payload(PayloadType.Content).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ScItem item = response.Items[0];
+      ISitecoreItem item = response.Items[0];
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("Text", item.Fields[1].Name);
       Assert.True(item.Fields[1].RawValue.Contains("<div>Welcome to Sitecore!</div>"));
@@ -123,33 +119,33 @@
     [Test]
     public async void TestGet2FieldsSpecifiedExplicitly()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
+      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.TestFieldsItem.Id);
       var fields = new Collection<string>
       {
         "CheckBoxField",
         "MultiListField"
       };
-      var request = requestBuilder.RequestWithId(testData.Items.TestFieldsItem.Id).LoadFields(fields).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var request = requestBuilder.LoadFields(fields).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.TestFieldsItem, response.Items[0]);
-      ScItem item = response.Items[0];
+      ISitecoreItem item = response.Items[0];
       Assert.AreEqual(2, item.Fields.Count);
-      //Assert.AreEqual(item.Fields("CheckBoxField").RawValue, "1");
-      //Assert.AreEqual(item.Fields("MultiListField").RawValue, "{2075CBFF-C330-434D-9E1B-937782E0DE49}");
+      Assert.AreEqual(item.FieldWithName("CheckBoxField").RawValue, "1");
+      Assert.AreEqual(item.FieldWithName("MultiListField").RawValue, "{2075CBFF-C330-434D-9E1B-937782E0DE49}");
     }
 
     [Test]
     public async void TestGetNotExistedFields()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
+      var requestBuilder = new ReadItemByQueryRequestBuilder(testData.Items.TestFieldsItem.Path);
       var fields = new Collection<string>
       {
         "",
       };
-      var request = requestBuilder.RequestWithSitecoreQuery(testData.Items.TestFieldsItem.Path).LoadFields(fields).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var request = requestBuilder.LoadFields(fields).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
      testData.AssertItemsCount(1, response);
      testData.AssertItemsAreEqual(testData.Items.TestFieldsItem, response.Items[0]);
@@ -159,66 +155,62 @@
     [Test]
     public async void TestGetFieldsWithEnglishLanguage()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
+      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
       var fields = new Collection<string>
       {
         "Title"
       };
-      var request = requestBuilder.RequestWithId(testData.Items.ItemWithVersions.Id).LoadFields(fields).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var request = requestBuilder.LoadFields(fields).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
-      ScItem item = response.Items[0];
+      ISitecoreItem item = response.Items[0];
       Assert.AreEqual(1, item.Fields.Count);
-      Assert.AreEqual("Title", item.Fields[0].Name);
-      Assert.AreEqual("English version 2 web", item.Fields[0].RawValue);
-      //Assert.AreEqual("English version 2 web",item.Fields("title").RawValue);
+      Assert.AreEqual("English version 2 web",item.FieldWithName("title").RawValue);
     }
 
     [Test]
     public async void TestGetFieldsWithDanishLanguage()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
+      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
       var fields = new Collection<string>
       {
         "Title"
       };
-      var request = requestBuilder.RequestWithId(testData.Items.ItemWithVersions.Id).LoadFields(fields).Language("da").Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var request = requestBuilder.LoadFields(fields).Language("da").Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
-      ScItem item = response.Items[0];
+      ISitecoreItem item = response.Items[0];
       Assert.AreEqual(1, item.Fields.Count);
-      Assert.AreEqual("Title", item.Fields[0].Name);
-      Assert.AreEqual("Danish version 2 web", item.Fields[0].RawValue);
-      //Assert.AreEqual("Danish version 2 web",item.Fields("title").RawValue);
+      Assert.AreEqual("Danish version 2 web",item.FieldWithName("title").RawValue);
     }
 
     [Test]
     public async void TestGetItemByIdWithInvalidFieldName()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
+      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
       var fields = new Collection<string>
       {
         "!@#$%^&*()_+*/"
       };
-      var request = requestBuilder.RequestWithId(testData.Items.ItemWithVersions.Id).LoadFields(fields).Language("da").Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var request = requestBuilder.LoadFields(fields).Language("da").Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
-      ScItem item = response.Items[0];
+      ISitecoreItem item = response.Items[0];
       Assert.AreEqual(0, item.Fields.Count);
     }
 
     [Test]
     public async void TestGetSeveralItemsByQueryWithContentFields()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithSitecoreQuery(testData.Items.Home.Path + "/*").Payload(PayloadType.Full).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var requestBuilder = new ReadItemByQueryRequestBuilder(testData.Items.Home.Path + "/*");
+      var request = requestBuilder.Payload(PayloadType.Full).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
       var expectedItemSamleTemplate = new TestEnvironment.Item
@@ -230,12 +222,8 @@
       };
       testData.AssertItemsAreEqual(expectedItemSamleTemplate, response.Items[0]);
 
-      Assert.AreEqual("Title", response.Items[0].Fields[0].Name);
-      Assert.AreEqual("Allowed_Parent", response.Items[0].Fields[0].RawValue);
-      Assert.AreEqual("Text", response.Items[0].Fields[1].Name);
-      Assert.AreEqual("", response.Items[0].Fields[1].RawValue);
-      //Assert.AreEqual("Danish version 2 web",response.Items[0].Fields("title").RawValue);
-      //Assert.AreEqual("",response.Items[0].Fields("Text").RawValue);
+      Assert.AreEqual("Allowed_Parent", response.Items[0].FieldWithName("Title").RawValue);
+      Assert.AreEqual("", response.Items[0].FieldWithName("Text").RawValue);
 
       var expectedItemTestTemplate = new TestEnvironment.Item
       {
@@ -244,49 +232,36 @@
       };
       testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[3]);
 
-      Assert.AreEqual("Text", response.Items[3].Fields[0].Name);
-      Assert.AreEqual("Text", response.Items[3].Fields[0].RawValue);
-      Assert.AreEqual("CheckBoxField", response.Items[3].Fields[2].Name);
-      Assert.AreEqual("1", response.Items[3].Fields[2].RawValue);
-      //Assert.AreEqual("Normal Text",response.Items[3].Fields("Normal Text").RawValue);
-      // Assert.AreEqual("1", response.Items[3].Fields("CheckBoxField").RawValue);
+      Assert.AreEqual("Text", response.Items[3].FieldWithName("Text").RawValue);
+      Assert.AreEqual("1", response.Items[3].FieldWithName("CheckBoxField").RawValue);
+      Assert.AreEqual("Normal Text",response.Items[3].FieldWithName("Normal Text").RawValue);     
     }
 
     [Test]
     public async void TestGetItemByIdWithAllFieldsWithoutReadAcessToSomeFields()
     {
       var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password);
-      this.sessionAuthenticatedUser = new ScApiSession(config, ItemSource.DefaultSource());
+      var sessionCreatorexUser = new ScApiSession(config, ItemSource.DefaultSource());
+      var requestBuilder = new ReadItemByIdRequestBuilder("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}");
+      var request = requestBuilder.Payload(PayloadType.Content).Build();
 
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Payload(PayloadType.Full).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var responseCreatorex = await sessionCreatorexUser.ReadItemAsync(request);
+      var responseAdmin = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
-      testData.AssertItemsCount(1, response);
-
-      var expectedItemTestTemplate = new TestEnvironment.Item
-      {
-        DisplayName = "Test Fields",
-        Template = "Test Templates/Sample fields"
-      };
-      testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
-
-      Assert.AreEqual("DateTimeField", response.Items[0].Fields[3].Name);
-      Assert.AreEqual("20120201T120000", response.Items[0].Fields[3].RawValue);
-     // Assert.AreEqual("Text", item.Fields("Text").RawValue);  //this field doesn't exist
+      Assert.Less(responseCreatorex.Items[0].Fields.Count, responseAdmin.Items[0].Fields.Count); 
     }
 
     [Test]
     public async void TestGetFieldsWithSymbolsAndSpacesInNameFields()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
+      var requestBuilder = new ReadItemByIdRequestBuilder("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}");
       var fields = new Collection<string>
       {
         "Normal Text",
        "__Owner"  
       };
-      var request = requestBuilder.RequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").LoadFields(fields).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var request = requestBuilder.LoadFields(fields).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       var expectedItemTestTemplate = new TestEnvironment.Item
@@ -295,10 +270,10 @@
         Template = "Test Templates/Sample fields"
       };
       testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
-      ScItem item = response.Items[0];
+      ISitecoreItem item = response.Items[0];
       Assert.AreEqual(2, item.Fields.Count);
-      // Assert.AreEqual("Normal Text", item.Fields("Normal Text").Name);
-      //Assert.AreEqual("__Owner", item.Fields("__Owner").Name);
+      Assert.AreEqual("Normal Text", item.FieldWithName("Normal Text").Name);
+      Assert.AreEqual("sitecore\\admin", item.FieldWithName("__Owner").RawValue);
     }
   }
 }

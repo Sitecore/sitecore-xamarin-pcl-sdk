@@ -27,8 +27,8 @@
     private void BuildVersionItemRequest(string instanceUrl, string username, string password, string site = null)
     {
       this.sessionConfig = new SessionConfig(instanceUrl, username, password, site);
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      this.requestWithItemId = requestBuilder.RequestWithId(this.testData.Items.ItemWithVersions.Id).Build();
+      var requestBuilder = new ReadItemByIdRequestBuilder(this.testData.Items.ItemWithVersions.Id);
+      this.requestWithItemId = requestBuilder.Build();
     }
 
     [TearDown]
@@ -47,7 +47,7 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(itemSource, resultItem.Source);
       //Assert.AreEqual("", resultItem.Fields["Title"].RawValue);
@@ -56,7 +56,7 @@
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)
     {
       var session = new ScApiSession(this.sessionConfig, itemSource);
-      var response = await session.ReadItemByIdAsync(this.requestWithItemId);
+      var response = await session.ReadItemAsync(this.requestWithItemId);
       return response;
     }
 
@@ -97,15 +97,15 @@
     {
       const string Db = "master";
       var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Database(Db).Build();
-      var response = await session.ReadItemByIdAsync(request);
+      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id);
+      var request = requestBuilder.Database(Db).Build();
+      var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
 
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      //Assert.AreEqual("Sitecore master", resultItem.Fields["Title"].RawValue);
+      Assert.AreEqual("Sitecore master", resultItem.FieldWithName("Title").RawValue);
     }
 
     [Test]
@@ -113,15 +113,15 @@
     {
       const string Db = "wEB";
       var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Database(Db).Build();
-      var response = await session.ReadItemByIdAsync(request);
+      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id);
+      var request = requestBuilder.Database(Db).Build();
+      var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
 
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      //Assert.AreEqual("Sitecore", resultItem.Fields["Title"].RawValue);
+      Assert.AreEqual("Sitecore", resultItem.FieldWithName("Title").RawValue);
     }
 
     [Test]
@@ -129,12 +129,12 @@
     {
       const string Db = "CoRE";
       var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Database(Db).Build();
-      var response = await session.ReadItemByIdAsync(request);
+      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id);
+      var request = requestBuilder.Database(Db).Build();
+      var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = this.testData.Items.Home.DisplayName,
@@ -143,7 +143,7 @@
         Template = "Sitecore Client/Home"
       };
       testData.AssertItemsAreEqual(expectedItem, resultItem);
-      //Assert.AreEqual("Welcome to Sitecore", resultItem.Fields["Title"].RawValue);
+      Assert.AreEqual("Welcome to Sitecore", resultItem.FieldWithName("Title").RawValue);
     }
 
     [Test]
@@ -157,12 +157,12 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var expectedSource = new ItemSource(Db, Language, "1");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      //Assert.AreEqual("Danish version 2 web", resultItem.Fields["Title"].RawValue);
+      Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
 
     [Test]
@@ -176,12 +176,12 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var expectedSource = new ItemSource(Db, "en", "1");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      //Assert.AreEqual("English version 2 web", resultItem.Fields["Title"].RawValue);
+      Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
 
     [Test]
@@ -191,9 +191,9 @@
       try
       {
         var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
-        var requestBuilder = new ItemWebApiRequestBuilder();
-        var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Database(Database).Build();
-        await session.ReadItemByIdAsync(request);
+        var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id);
+        var request = requestBuilder.Database(Database).Build();
+        await session.ReadItemAsync(request);
       }
       catch (ParserException exception)
       {
@@ -216,12 +216,12 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var expectedSource = new ItemSource(Db, "en", "1");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      //Assert.AreEqual("English version 2 web", resultItem.Fields["Title"].RawValue);
+      Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
 
     [Test]
@@ -289,7 +289,7 @@
       var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
     }
 
@@ -301,7 +301,7 @@
       var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
     }
     [Test]
@@ -312,7 +312,7 @@
       var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
     }
     [Test]
@@ -343,7 +343,7 @@
       var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
     }
 
@@ -358,7 +358,7 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var expectedSource = new ItemSource("web", Language, Version);
@@ -377,7 +377,7 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var expectedSource = new ItemSource(Db,"en", Version);
@@ -395,7 +395,7 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      ScItem resultItem = response.Items[0];
+      ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var expectedSource = new ItemSource(Db, Language,"2");
