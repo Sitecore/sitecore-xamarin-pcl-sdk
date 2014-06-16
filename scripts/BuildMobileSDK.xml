@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+<!-- "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" BuildMobileSDK.xml /t:log -->
+
+  <PropertyGroup>
+  	<!-- newline symbols matter -->
+    <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</RepositoryRoot>
+    <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
+  </PropertyGroup>
+
+  <Target Name="log">
+    <Message Text="RepositoryRoot : $(RepositoryRoot)" />
+    <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
+  </Target>
+
+</Project>
