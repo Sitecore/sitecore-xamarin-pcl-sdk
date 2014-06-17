@@ -15,6 +15,8 @@
 	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
 
 	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
+	<MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
+	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
   </ItemGroup>
 
   <Target Name="SitecoreMobileSDK">
@@ -24,6 +26,7 @@
   <Target Name="clean">
   	<RemoveDir Directories="@(ObjDirectories)" />
   	<RemoveDir Directories="@(BinDirectories)" />
+  	<RemoveDir Directories="$(DeploymentDirectory)" />
   </Target>
 
   <Target Name="log">
@@ -31,6 +34,11 @@
     <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
 
     <Message Text="MobileSdkProject : @(MobileSdkProject)" />
+    <Message Text="MobileSdkDll : @(MobileSdkDll)" />
+
+	<Message Text="===========" />
+    <Message Text="MobileSdkArtefacts : @(MobileSdkArtefacts, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
 
 	<Message Text="===========" />
     <Message Text="ObjDirectories : @(ObjDirectories, '&#x0d;&#x0a;')" />
