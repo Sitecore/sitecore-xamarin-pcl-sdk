@@ -103,6 +103,8 @@
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
     <Compile Include="Items\ISitecoreItem.cs" />
+    <Compile Include="MediaItems\DownloadMediaOptions.cs" />
+    <Compile Include="MediaItems\ResourceUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -166,6 +168,7 @@
     <Folder Include="UserRequest\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Items\Fields\" />
+    <Folder Include="MediaItems\" />
   </ItemGroup>
   <ItemGroup />
 </Project>
