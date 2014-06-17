@@ -9,9 +9,24 @@
     <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
   </PropertyGroup>
 
+  <ItemGroup>
+  	<!-- Attribute letter case matters -->
+
+	<ObjDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'obj', System.IO.SearchOption.AllDirectories))" />
+	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
+  </ItemGroup>
+
   <Target Name="log">
     <Message Text="RepositoryRoot : $(RepositoryRoot)" />
     <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
+
+	<Message Text="===========" />
+    <Message Text="ObjDirectories : @(ObjDirectories, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
+
+    <Message Text="===========" />
+    <Message Text="BinDirectories : @(BinDirectories, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
   </Target>
 
 </Project>
