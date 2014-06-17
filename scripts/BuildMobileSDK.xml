@@ -16,6 +16,11 @@
 	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
   </ItemGroup>
 
+  <Target Name="clean">
+  	<RemoveDir Directories="@(ObjDirectories)" />
+  	<RemoveDir Directories="@(BinDirectories)" />
+  </Target>
+
   <Target Name="log">
     <Message Text="RepositoryRoot : $(RepositoryRoot)" />
     <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
