@@ -1,4 +1,5 @@
 deployment
+*.nupkg
 *.log
 
 # Mac OS X
