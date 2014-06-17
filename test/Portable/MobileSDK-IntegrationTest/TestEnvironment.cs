@@ -12,8 +12,7 @@ namespace MobileSDKIntegrationTest
     {
       var result = new TestEnvironment
       {
-        AnonymousInstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:750",
-        AuthenticatedInstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119"
+        InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119"
       };
 
       result.Users.Admin.Username = "sitecore\\admin";
@@ -47,8 +46,7 @@ namespace MobileSDKIntegrationTest
     }
 
     private TestEnvironment() { }
-    public string AnonymousInstanceUrl { get; private set; }
-    public string AuthenticatedInstanceUrl { get; private set; }
+    public string InstanceUrl { get; private set; }
 
     public UsersList Users = new UsersList();
     public ItemsList Items = new ItemsList();
@@ -117,10 +115,14 @@ namespace MobileSDKIntegrationTest
       Assert.AreEqual(itemCount, response.Items.Count);
     }
 
-    public ScApiSession GetSessionWithDefaultSource(string url, string username, string password)
+    public ScApiSession GetSession(string url, string username, string password, ItemSource itemSource = null, string site = null)
     {
-      var config = new SessionConfig(url, username, password);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var config = new SessionConfig(url, username, password, site);
+      if (itemSource == null)
+      {
+        itemSource = ItemSource.DefaultSource();
+      }
+      var session = new ScApiSession(config, itemSource);
       return session;
     }
   }

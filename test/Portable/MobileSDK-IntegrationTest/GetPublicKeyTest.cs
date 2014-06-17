@@ -34,7 +34,7 @@
     [Test]
     public async void TestGetItemAsAuthenticatedUser()
     {
-      var session = testData.GetSessionWithDefaultSource(this.testData.AuthenticatedInstanceUrl, this.testData.Users.Admin.Username, this.testData.Users.Admin.Password);
+      var session = testData.GetSession(this.testData.InstanceUrl, this.testData.Users.Admin.Username, this.testData.Users.Admin.Password);
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
@@ -44,7 +44,7 @@
     [Test]
     public async void TestAuthenticateToInstanceWithoutHttp()
     {
-      var session = testData.GetSessionWithDefaultSource("mobiledev1ua1.dk.sitecore.net:7119", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = testData.GetSession("mobiledev1ua1.dk.sitecore.net:7119", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       try
       {
@@ -63,7 +63,7 @@
     [Test]
     public async void TestAuthenticateWithSlashInTheEnd()
     {
-      var session = testData.GetSessionWithDefaultSource("http://mobiledev1ua1.dk.sitecore.net:7119/", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = testData.GetSession("http://mobiledev1ua1.dk.sitecore.net:7119/", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
@@ -73,7 +73,7 @@
     [Test]
     public async void TestGetItemsWithNotExistentInstanceUrl()
     {
-      var session = testData.GetSessionWithDefaultSource("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = testData.GetSession("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       try
       {
@@ -103,7 +103,7 @@
     [Test]
     public void TestGetItemWithNullItemsSource()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       TestDelegate action = () => new ScApiSession(config, null);
       var exception = Assert.Throws<ArgumentNullException>(action, "we should get exception here");
@@ -116,7 +116,7 @@
     [Test]
     public async void TestGetItemWithEmptyPassword()
     {
-      var session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, "");
+      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "");
 
       try
       {
@@ -138,7 +138,7 @@
     [Test]
     public async void TestGetItemWithNotExistentUser()
     {
-      var session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, "sitecore\\notexistent", "notexistent");
+      var session = testData.GetSession(testData.InstanceUrl, "sitecore\\notexistent", "notexistent");
 
       try
       {
@@ -159,7 +159,7 @@
     [Test]
     public async void TestGetItemWithInvalidUsernameAndPassword()
     {
-      var session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, "inval|d u$er№ame", null);
+      var session = testData.GetSession(testData.InstanceUrl, "inval|d u$er№ame", null);
 
       try
       {
@@ -181,7 +181,7 @@
     [Test]
     public async void TestGetItemAsAnonymousWithoutReadAccess()
     {
-      var session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
+      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
 
       try
       {

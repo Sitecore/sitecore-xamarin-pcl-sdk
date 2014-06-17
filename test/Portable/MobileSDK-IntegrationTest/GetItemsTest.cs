@@ -21,7 +21,7 @@
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      this.sessionAuthenticatedUser = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      this.sessionAuthenticatedUser = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
     }
 
     [TearDown]
@@ -250,8 +250,8 @@
     [Test]
     public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
-      var sessionWithoutAccess = testData.GetSessionWithDefaultSource(
-        testData.AuthenticatedInstanceUrl,
+      var sessionWithoutAccess = testData.GetSession(
+        testData.InstanceUrl,
         testData.Users.NoReadAccess.Username,
         testData.Users.NoReadAccess.Password);
 
@@ -264,7 +264,7 @@
     [Test] //this case should be changed for another instance
     public async void TestGetItemByQueryWithturnedOffItemWebApi()
     {
-      var sessionWithoutAccess = testData.GetSessionWithDefaultSource("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
       try

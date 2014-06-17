@@ -17,8 +17,8 @@
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      this.sessionAuthenticatedUser = testData.GetSessionWithDefaultSource(
-        testData.AuthenticatedInstanceUrl,
+      this.sessionAuthenticatedUser = testData.GetSession(
+        testData.InstanceUrl,
         testData.Users.Admin.Username,
         testData.Users.Admin.Password);
     }
@@ -232,7 +232,7 @@
     [Test]
     public async void TestGetItemByIdWithAllFieldsWithoutReadAcessToSomeFields()
     {
-      var sessionCreatorexUser = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password);
+      var sessionCreatorexUser = testData.GetSession(testData.InstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password);
       var request = new ReadItemByIdRequestBuilder("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Payload(PayloadType.Content).Build();
 
       var responseCreatorex = await sessionCreatorexUser.ReadItemAsync(request);

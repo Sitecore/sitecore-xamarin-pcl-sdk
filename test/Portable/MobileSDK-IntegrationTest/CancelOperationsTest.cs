@@ -17,7 +17,7 @@
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = testData.GetSessionWithDefaultSource(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      this.session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
     }
 
     [TearDown]
