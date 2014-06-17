@@ -1,3 +1,5 @@
+deployment
+*.log
 
 # Mac OS X
 .DS_Store
