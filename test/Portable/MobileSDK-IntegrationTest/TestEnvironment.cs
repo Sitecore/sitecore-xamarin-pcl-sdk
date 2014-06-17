@@ -12,7 +12,8 @@ namespace MobileSDKIntegrationTest
     {
       var result = new TestEnvironment
       {
-        InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119"
+        InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119",
+        ShellSite = "/sitecore/shell"
       };
 
       result.Users.Admin.Username = "sitecore\\admin";
@@ -47,6 +48,7 @@ namespace MobileSDKIntegrationTest
 
     private TestEnvironment() { }
     public string InstanceUrl { get; private set; }
+    public string ShellSite { get; private set; }
 
     public UsersList Users = new UsersList();
     public ItemsList Items = new ItemsList();

@@ -46,7 +46,7 @@
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
+      Assert.AreEqual(testData.Items.Home.Id, resultItem.Id);
       testData.AssertItemSourcesAreEqual(itemSource, resultItem.Source);
       Assert.AreEqual("", resultItem.FieldWithName("Title").RawValue);
     }
@@ -269,8 +269,8 @@
     [Test]
     public async void TestGetItemWithShellSite()
     {
-      const string Site = "/sitecore/shell";
-      var session = this.CreateCreatorexSession(Site);
+      var site = testData.ShellSite;
+      var session = this.CreateCreatorexSession(site);
       var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
       testData.AssertItemsCount(0, response);

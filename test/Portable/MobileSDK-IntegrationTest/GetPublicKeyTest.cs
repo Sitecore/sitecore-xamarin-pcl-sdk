@@ -6,6 +6,7 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.SessionSettings;
 
@@ -116,7 +117,7 @@
     [Test]
     public async void TestGetItemWithEmptyPassword()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "");
+      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "", ItemSource.DefaultSource(), testData.ShellSite);
 
       try
       {
@@ -138,7 +139,7 @@
     [Test]
     public async void TestGetItemWithNotExistentUser()
     {
-      var session = testData.GetSession(testData.InstanceUrl, "sitecore\\notexistent", "notexistent");
+      var session = testData.GetSession(testData.InstanceUrl, "sitecore\\notexistent", "notexistent", ItemSource.DefaultSource(), testData.ShellSite);
 
       try
       {
@@ -159,7 +160,7 @@
     [Test]
     public async void TestGetItemWithInvalidUsernameAndPassword()
     {
-      var session = testData.GetSession(testData.InstanceUrl, "inval|d u$er№ame", null);
+      var session = testData.GetSession(testData.InstanceUrl, "inval|d u$er№ame", null, ItemSource.DefaultSource(), testData.ShellSite);
 
       try
       {
@@ -181,7 +182,11 @@
     [Test]
     public async void TestGetItemAsAnonymousWithoutReadAccess()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
+      var session = testData.GetSession(testData.InstanceUrl, 
+        testData.Users.Anonymous.Username, 
+        testData.Users.Anonymous.Password, 
+        ItemSource.DefaultSource(), 
+        testData.ShellSite);
 
       try
       {
