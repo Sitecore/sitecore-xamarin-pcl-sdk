@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
 <!-- "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" BuildMobileSDK.xml /t:log -->
+
+
+  <Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
+
+
 
   <PropertyGroup>
   	<!-- newline symbols matter -->
@@ -15,12 +19,37 @@
 	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
 
 	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
+
+	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
 	<MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
 	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
   </ItemGroup>
 
   <Target Name="SitecoreMobileSDK">
-  	<MSBuild Projects="@(MobileSdkProject)" Targets="Build" Properties="Configuration=Release;" />
+  	<MSBuild 
+      Projects="@(MobileSdkProject)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+
+   	<MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+
+  	<MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(MobileSdkArtefacts)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Full.zip" 
+      RemoveRoot="@(MobileSdkArtefactsDir)" 
+    />
+
+    <MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(MobileSdkDll)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Minimal.zip" 
+      RemoveRoot="@(MobileSdkArtefactsDir)" 
+    />
   </Target>
 
   <Target Name="clean">
@@ -30,11 +59,18 @@
   </Target>
 
   <Target Name="log">
+    <Message Text="MobileSdkProject : @(MobileSdkProject)" />
     <Message Text="RepositoryRoot : $(RepositoryRoot)" />
     <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
 
-    <Message Text="MobileSdkProject : @(MobileSdkProject)" />
+    
+    
+
+    
+    <Message Text="MobileSdkArtefactsDir : @(MobileSdkArtefactsDir)" />
     <Message Text="MobileSdkDll : @(MobileSdkDll)" />
+
+	
 
 	<Message Text="===========" />
     <Message Text="MobileSdkArtefacts : @(MobileSdkArtefacts, '&#x0d;&#x0a;')" />
