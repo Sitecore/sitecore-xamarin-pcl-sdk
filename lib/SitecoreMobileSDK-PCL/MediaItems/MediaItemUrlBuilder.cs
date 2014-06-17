@@ -41,11 +41,8 @@ namespace Sitecore.MobileSDK.MediaItems
 //		https://test.host/~/media/1.png.ashx?w=640&h=480
 		public string BuildUrlStringForPath(string path, DownloadMediaOptions options)
 		{
-			if (null == path)
-			{
-				throw new ArgumentNullException("ResourceUrlBuilder.BuildUrlStringForPath path cannot be null");
-			}
-
+			MediaItemPathValidator.ValidateMediaItemPath (path);
+		
 			string relativePath = path;
 			string result = this.sessionConfig.InstanceUrl;
 
@@ -86,21 +83,6 @@ namespace Sitecore.MobileSDK.MediaItems
 				result = result + relativePath + ResourceUrlBuilder.ashxExtension;
 			}
 
-//			string result =
-//				this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + escapedDatabase +
-//
-//				this.restGrammar.FieldSeparator +
-//				this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
-//
-//			if (null != this.itemSource.Version)
-//			{
-//				string escapedVersion = UrlBuilderUtils.EscapeDataString(this.itemSource.Version);
-//
-//				result +=
-//					this.restGrammar.FieldSeparator +
-//					this.webApiGrammar.VersionParameterName + this.restGrammar.KeyValuePairSeparator + escapedVersion;
-//			}
-//
 			return result;
 		}
 
