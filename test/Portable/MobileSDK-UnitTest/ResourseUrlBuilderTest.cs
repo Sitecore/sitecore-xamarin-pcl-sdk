@@ -85,6 +85,15 @@ namespace Sitecore.MobileSdkUnitTest
 
 			Assert.AreEqual(expected, result);
 		}
+
+		[Test ()]
+		public void ResourceNameIsCaseSensitiveTest ()
+		{
+			string result = builder.BuildUrlStringForPath ("~/media/Images/SoMe ImAGe", null);
+			string expected = "http://test.host/~/media/Images/SoMe%20ImAGe.ashx";
+
+			Assert.AreEqual(expected, result);
+		}
 	}
 }
 
