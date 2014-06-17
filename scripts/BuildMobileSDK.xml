@@ -11,10 +11,15 @@
 
   <ItemGroup>
   	<!-- Attribute letter case matters -->
-
 	<ObjDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'obj', System.IO.SearchOption.AllDirectories))" />
 	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
+
+	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
   </ItemGroup>
+
+  <Target Name="SitecoreMobileSDK">
+  	<MSBuild Projects="@(MobileSdkProject)" Targets="Build" Properties="Configuration=Release;" />
+  </Target>
 
   <Target Name="clean">
   	<RemoveDir Directories="@(ObjDirectories)" />
@@ -24,6 +29,8 @@
   <Target Name="log">
     <Message Text="RepositoryRoot : $(RepositoryRoot)" />
     <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
+
+    <Message Text="MobileSdkProject : @(MobileSdkProject)" />
 
 	<Message Text="===========" />
     <Message Text="ObjDirectories : @(ObjDirectories, '&#x0d;&#x0a;')" />
