@@ -9,20 +9,23 @@
 
   <PropertyGroup>
   	<!-- newline symbols matter -->
+    <ScriptsDirectory>$(MSBuildThisFileDirectory)</ScriptsDirectory>
     <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</RepositoryRoot>
     <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
+
+    <NugetExe>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.PackageManagement\NuGet.exe</NugetExe>
   </PropertyGroup>
 
   <ItemGroup>
-  	<!-- Attribute letter case matters -->
-	<ObjDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'obj', System.IO.SearchOption.AllDirectories))" />
-	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
+    	<!-- Attribute letter case matters -->
+  	<ObjDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'obj', System.IO.SearchOption.AllDirectories))" />
+  	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
 
-	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
+  	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
 
-	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
-	<MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
-	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
+  	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
+  	<MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
+  	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
   </ItemGroup>
 
   <Target Name="SitecoreMobileSDK">
@@ -56,6 +59,17 @@
   	<RemoveDir Directories="@(ObjDirectories)" />
   	<RemoveDir Directories="@(BinDirectories)" />
   	<RemoveDir Directories="$(DeploymentDirectory)" />
+  </Target>
+
+  <Target Name="package">
+    <Exec 
+      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
+      WorkingDirectory="$(ScriptsDirectory)\nuget" />
+
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.dll.1.0.0.nupkg"
+      DestinationFolder="$(DeploymentDirectory)"
+     />
   </Target>
 
   <Target Name="log">
