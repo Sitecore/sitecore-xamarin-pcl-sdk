@@ -104,7 +104,8 @@
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
     <Compile Include="Items\ISitecoreItem.cs" />
     <Compile Include="MediaItems\DownloadMediaOptions.cs" />
-    <Compile Include="MediaItems\ResourceUrlBuilder.cs" />
+    <Compile Include="MediaItems\MediaItemPathValidator.cs" />
+    <Compile Include="MediaItems\MediaItemUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
