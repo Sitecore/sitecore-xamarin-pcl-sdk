@@ -94,7 +94,7 @@ namespace MobileSDKIntegrationTest
       }
     }
 
-    public void AssertItemSourcesAreEqual(ItemSource expected, ItemSource actual)
+    public void AssertItemSourcesAreEqual(IItemSource expected, IItemSource actual)
     {
         Assert.AreEqual(expected.Database, actual.Database);
         Assert.AreEqual(expected.Language, actual.Language);
