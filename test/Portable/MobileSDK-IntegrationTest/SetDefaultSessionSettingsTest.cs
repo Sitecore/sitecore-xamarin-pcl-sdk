@@ -20,10 +20,11 @@
     [SetUp]
     public void Setup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+
       this.sessionConfig = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       this.sessionAuthenticatedUser = new ScApiSession(sessionConfig, ItemSource.DefaultSource());
-      requestWithItemId = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id).Payload(PayloadType.Content).Build();
+      this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).Build();
     }
 
     [TearDown]
@@ -73,7 +74,7 @@
       const string Language = "da";
       const string Version = "1";
 
-      var request = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id)
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Database(Db)
         .Language(Language)
         .Version(Version)
@@ -95,8 +96,9 @@
       const string Language = "en";
       const string Version = "2";
       var source = new ItemSource(Db, "da", Version);
+
       var session = new ScApiSession(sessionConfig, source);
-      var request = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id)
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Language(Language)
         .Payload(PayloadType.Content)
         .Build();
@@ -118,7 +120,7 @@
       const string Version = "2";
       var source = new ItemSource("web", Language, "1");
       var session = new ScApiSession(this.sessionConfig, source);
-      var request = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id)
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Version(Version)
         .Database(Db)
         .Payload(PayloadType.Content)
@@ -137,7 +139,8 @@
     public async void TestOverrideDatabaseInRequestByPath()
     {
       const string Db = "master";
-      var requestBuilder = new ReadItemByPathRequestBuilder(testData.Items.ItemWithVersions.Path);
+
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.ItemWithVersions.Path);
       var request = requestBuilder.Database(Db).Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -153,7 +156,8 @@
     public async void TestOverrideDatabaseInRequestByPathSeveralTimes()
     {
       const string Db = "web";
-      var requestBuilder = new ReadItemByPathRequestBuilder(testData.Items.ItemWithVersions.Path);
+
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.ItemWithVersions.Path);
       var request = requestBuilder.Database("master").Database(null).Database(Db).Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -168,7 +172,7 @@
     [Test]
     public async void TestGetItemInRequestByQueryAsConcatenationString()
     {
-      var requestBuilder = new ReadItemByQueryRequestBuilder(testData.Items.Home.Path + "/*");
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*");
       var request = requestBuilder.Database("master").Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -181,7 +185,8 @@
       const string Db = "";
       const string Language = "";
       const string Version = "";
-      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.ItemWithVersions.Id);
+
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id);
       var request = requestBuilder.Database(Db).Language(Language).Version(Version).Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -197,7 +202,8 @@
     {
       const string Language = "da";
       const string Version = "1";
-      var requestBuilder = new ReadItemByQueryRequestBuilder("/sitecore/content/Home/*");
+
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/*");
       var request = requestBuilder.Version(Version).Language(Language).Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -210,7 +216,7 @@
     [Test]
     public async void TestItemByQueryWithSpecifiedFieldCorrectValue()
     {
-      var requestBuilder = new ReadItemByQueryRequestBuilder("/sitecore//*[@Title='English version 2 web']");
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore//*[@Title='English version 2 web']");
       var request = requestBuilder.Payload(PayloadType.Content).Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -224,7 +230,7 @@
     [Test]
     public async void TestItemByQueryWithSpecifiedFieldNotCorrectValue()
     {
-      var requestBuilder = new ReadItemByQueryRequestBuilder("/sitecore/content//*[@Title='DANISH version 2 web']");
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content//*[@Title='DANISH version 2 web']");
       var request = requestBuilder.Language("da").Database("master").Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 

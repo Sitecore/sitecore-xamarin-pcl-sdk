@@ -30,8 +30,7 @@
     [Test]
     public async void TestCancelGetItemById()
     {
-      var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id);
-      var request = requestBuilder.Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var cancelToken = CreateCancelTokenWithDelay(20);
       ScItemsResponse response = null;
       try
@@ -51,8 +50,7 @@
     [Test]
     public async void TestCancelGetItemByPath()
     {
-      var requestBuilder = new ReadItemByPathRequestBuilder(testData.Items.Home.Path);
-      var request = requestBuilder.Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
       try
@@ -80,8 +78,7 @@
     [Test]
     public async void TestCancelGetItemByQuery()
     {
-      var requestBuilder = new ReadItemByQueryRequestBuilder(testData.Items.Home.Path);
-      var request = requestBuilder.Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).Build();
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
       try
