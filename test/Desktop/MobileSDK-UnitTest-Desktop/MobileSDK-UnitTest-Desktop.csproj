@@ -90,6 +90,9 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\PublicKeyParsingTest.cs">
       <Link>PublicKeyParsingTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\QueryParametersUrlBuilderTest.cs">
+      <Link>QueryParametersUrlBuilderTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\SessionConfigMergerTest.cs">
       <Link>SessionConfigMergerTest.cs</Link>
     </Compile>
@@ -97,7 +100,6 @@
       <Link>SessionConfigUrlBuilderTest.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryParametersUrlBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
