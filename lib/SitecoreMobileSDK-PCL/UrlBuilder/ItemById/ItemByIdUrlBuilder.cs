@@ -22,7 +22,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemById
             string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
             string result = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator +  escapedId;
 
-            return result;
+            return result.ToLowerInvariant();
         }
 
         protected override void ValidateSpecificRequest(IReadItemsByIdRequest request)

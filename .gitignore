@@ -1,3 +1,6 @@
+deployment
+*.nupkg
+*.log
 
 # Mac OS X
 .DS_Store

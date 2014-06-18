@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!-- "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" BuildMobileSDK.xml /t:log -->
+
+
+  <Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
+
+
+
+  <PropertyGroup>
+  	<!-- newline symbols matter -->
+    <ScriptsDirectory>$(MSBuildThisFileDirectory)</ScriptsDirectory>
+    <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</RepositoryRoot>
+    <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
+
+    <NugetExe>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.PackageManagement\NuGet.exe</NugetExe>
+  </PropertyGroup>
+
+  <ItemGroup>
+    	<!-- Attribute letter case matters -->
+  	<ObjDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'obj', System.IO.SearchOption.AllDirectories))" />
+  	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
+
+  	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
+
+  	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
+  	<MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
+  	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
+  </ItemGroup>
+
+  <Target Name="SitecoreMobileSDK">
+  	<MSBuild 
+      Projects="@(MobileSdkProject)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+
+   	<MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+
+  	<MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(MobileSdkArtefacts)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Full.zip" 
+      RemoveRoot="@(MobileSdkArtefactsDir)" 
+    />
+
+    <MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(MobileSdkDll)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Minimal.zip" 
+      RemoveRoot="@(MobileSdkArtefactsDir)" 
+    />
+  </Target>
+
+  <Target Name="clean">
+  	<RemoveDir Directories="@(ObjDirectories)" />
+  	<RemoveDir Directories="@(BinDirectories)" />
+  	<RemoveDir Directories="$(DeploymentDirectory)" />
+  </Target>
+
+  <Target Name="package">
+    <Exec 
+      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
+      WorkingDirectory="$(ScriptsDirectory)\nuget" />
+
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.dll.1.0.0.nupkg"
+      DestinationFolder="$(DeploymentDirectory)"
+     />
+  </Target>
+
+  <Target Name="log">
+    <Message Text="MobileSdkProject : @(MobileSdkProject)" />
+    <Message Text="RepositoryRoot : $(RepositoryRoot)" />
+    <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
+
+    
+    
+
+    
+    <Message Text="MobileSdkArtefactsDir : @(MobileSdkArtefactsDir)" />
+    <Message Text="MobileSdkDll : @(MobileSdkDll)" />
+
+	
+
+	<Message Text="===========" />
+    <Message Text="MobileSdkArtefacts : @(MobileSdkArtefacts, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
+
+	<Message Text="===========" />
+    <Message Text="ObjDirectories : @(ObjDirectories, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
+
+    <Message Text="===========" />
+    <Message Text="BinDirectories : @(BinDirectories, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
+  </Target>
+
+</Project>

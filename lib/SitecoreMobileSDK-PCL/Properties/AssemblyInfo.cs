@@ -3,13 +3,13 @@ using System.Runtime.CompilerServices;
 
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
-[assembly: AssemblyTitle ("SitecoreMobileSDK-PCL")]
-[assembly: AssemblyDescription ("")]
+[assembly: AssemblyTitle ("SitecoreMobileSDK")]
+[assembly: AssemblyDescription ("Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore.")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("sitecore")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("")]
-[assembly: AssemblyTrademark ("")]
+[assembly: AssemblyCopyright ("Sitecore Corporation")]
+[assembly: AssemblyTrademark ("Sitecore")]
 [assembly: AssemblyCulture ("")]
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
