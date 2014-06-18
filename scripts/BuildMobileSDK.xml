@@ -131,13 +131,9 @@
     <Message Text="RepositoryRoot : $(RepositoryRoot)" />
     <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
 
-    
-    
 
-    
     <Message Text="MobileSdkArtefactsDir : @(MobileSdkArtefactsDir)" />
     <Message Text="MobileSdkDll : @(MobileSdkDll)" />
-
 	
 
 	  <Message Text="===========" />
