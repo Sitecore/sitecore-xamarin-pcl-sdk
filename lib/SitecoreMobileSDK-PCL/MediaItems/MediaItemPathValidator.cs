@@ -14,9 +14,9 @@ namespace Sitecore.MobileSDK.MediaItems
 			{
 				throw new ArgumentNullException ("Media Item path cannot be null or empty");
 			}
-			else if (!itemPath.StartsWith("/"))
+			else if (!(itemPath.StartsWith("/") || itemPath.StartsWith("~")))
 			{
-				throw new ArgumentException("Media Item path should begin with '/'");
+				throw new ArgumentException("Media Item path should begin with '/' or '~'");
 			}
 		}
 	}
