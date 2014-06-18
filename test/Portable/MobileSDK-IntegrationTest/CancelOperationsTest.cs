@@ -6,7 +6,6 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
 
   [TestFixture]
   public class CancelOperationsTest
@@ -18,8 +17,7 @@
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      this.session = new ScApiSession(config, ItemSource.DefaultSource());
+      this.session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
     }
 
     [TearDown]
@@ -32,13 +30,12 @@
     [Test]
     public async void TestCancelGetItemById()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId(testData.Items.Home.Id).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var cancelToken = CreateCancelTokenWithDelay(20);
       ScItemsResponse response = null;
       try
       {
-        response = await session.ReadItemByIdAsync(request, cancelToken);
+        response = await session.ReadItemAsync(request, cancelToken);
       }
       catch (OperationCanceledException exception)
       {
@@ -53,13 +50,12 @@
     [Test]
     public async void TestCancelGetItemByPath()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(testData.Items.Home.Path).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
       try
       {
-        response = await session.ReadItemByPathAsync(request, cancelToken);
+        response = await session.ReadItemAsync(request, cancelToken);
       }
       catch (OperationCanceledException exception)
       {
@@ -82,13 +78,12 @@
     [Test]
     public async void TestCancelGetItemByQuery()
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithSitecoreQuery(testData.Items.Home.Path).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).Build();
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
       try
       {
-        response = await session.ReadItemByQueryAsync(request, cancelToken);
+        response = await session.ReadItemAsync(request, cancelToken);
       }
       catch (OperationCanceledException exception)
       {

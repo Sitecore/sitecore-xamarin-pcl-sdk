@@ -24,6 +24,7 @@ obj
 *.pdb
 *.ncb
 *.suo
+*.csproj.user
 *.userprefs
 TestResult.xml
 UpgradeLog.html

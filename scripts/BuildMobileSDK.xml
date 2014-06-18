@@ -3,31 +3,48 @@
 <!-- "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" BuildMobileSDK.xml /t:log -->
 
 
+  <!-- For NUnit -->
+  <!-- <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/> -->
+
+  <!-- For Zip Archiving -->
   <Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
 
 
-
+<!-- ====================================================  -->
   <PropertyGroup>
   	<!-- newline symbols matter -->
     <ScriptsDirectory>$(MSBuildThisFileDirectory)</ScriptsDirectory>
     <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</RepositoryRoot>
+
+    <SolutionsDirectory>$(RepositoryRoot)\solutions</SolutionsDirectory>
     <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
+
+    <UnitTestReportXml>$(RepositoryRoot)\deployment\UnitTestDesktopReport.xml</UnitTestReportXml>
+    <IntegrationTestReportXml>$(RepositoryRoot)\deployment\IntegrationTestDesktopReport.xml</IntegrationTestReportXml>
 
     <NugetExe>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.PackageManagement\NuGet.exe</NugetExe>
   </PropertyGroup>
 
+
+<!-- ====================================================  -->
   <ItemGroup>
     	<!-- Attribute letter case matters -->
   	<ObjDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'obj', System.IO.SearchOption.AllDirectories))" />
   	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
 
   	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
+    <UnitTestDesktopProject Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\*.csproj" />
 
   	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
   	<MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
   	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
+
+    <UnitTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\bin\Release\MobileSDK-UnitTest-Desktop.dll" />
+    <IntegrationTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-IntegrationTest-Desktop\bin\Release\MobileSDK-IntegrationTest-Desktop.dll" />
   </ItemGroup>
 
+
+<!-- ====================================================  -->
   <Target Name="SitecoreMobileSDK">
   	<MSBuild 
       Projects="@(MobileSdkProject)" 
@@ -55,12 +72,47 @@
     />
   </Target>
 
+<!-- ====================================================  -->
   <Target Name="clean">
   	<RemoveDir Directories="@(ObjDirectories)" />
   	<RemoveDir Directories="@(BinDirectories)" />
   	<RemoveDir Directories="$(DeploymentDirectory)" />
   </Target>
 
+
+<!-- ====================================================  -->
+<Target Name="UnitTest">
+    <MSBuild 
+      Projects="$(SolutionsDirectory)\MobileSDK-UnitTest-Desktop.sln" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+
+    <MSBuild.ExtensionPack.CodeQuality.NUnit
+      Assemblies="@(UnitTestDesktopDll)"
+      Configuration="Release"
+      OutputXmlFile="$(UnitTestReportXml)"
+      Version="2.6.3"
+    />
+</Target>
+
+<Target Name="IntegrationTest">
+    <MSBuild 
+      Projects="$(SolutionsDirectory)\MobileSdk-IntegrationTest-Desktop.sln" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+
+    <MSBuild.ExtensionPack.CodeQuality.NUnit
+      Assemblies="@(IntegrationTestDesktopDll)"
+      Configuration="Release"
+      OutputXmlFile="$(IntegrationTestReportXml)"
+      Version="2.6.3"
+    />
+</Target>
+
+
+<!-- ====================================================  -->
   <Target Name="package">
     <Exec 
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
@@ -68,35 +120,36 @@
 
     <Copy
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.dll.1.0.0.nupkg"
-      DestinationFolder="$(DeploymentDirectory)"
+      DestinationFolder="$(DeploymentDirectory) "
      />
   </Target>
 
+
+<!-- ====================================================  -->
   <Target Name="log">
     <Message Text="MobileSdkProject : @(MobileSdkProject)" />
     <Message Text="RepositoryRoot : $(RepositoryRoot)" />
     <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
 
-    
-    
 
-    
     <Message Text="MobileSdkArtefactsDir : @(MobileSdkArtefactsDir)" />
     <Message Text="MobileSdkDll : @(MobileSdkDll)" />
-
 	
 
-	<Message Text="===========" />
+	  <Message Text="===========" />
     <Message Text="MobileSdkArtefacts : @(MobileSdkArtefacts, '&#x0d;&#x0a;')" />
     <Message Text="===========" />
 
-	<Message Text="===========" />
+	  <Message Text="===========" />
     <Message Text="ObjDirectories : @(ObjDirectories, '&#x0d;&#x0a;')" />
     <Message Text="===========" />
 
     <Message Text="===========" />
     <Message Text="BinDirectories : @(BinDirectories, '&#x0d;&#x0a;')" />
     <Message Text="===========" />
+
+    <Message Text="UnitTestDesktopProject : @(UnitTestDesktopProject)" />
+    <Message Text="UnitTestReportXml : $(UnitTestReportXml)" />
   </Target>
 
 </Project>

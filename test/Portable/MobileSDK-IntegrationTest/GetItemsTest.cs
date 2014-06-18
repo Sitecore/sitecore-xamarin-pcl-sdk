@@ -7,7 +7,6 @@
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
 
   [TestFixture]
   public class GetItemsTest
@@ -15,15 +14,14 @@
     private TestEnvironment testData;
     private ScApiSession sessionAuthenticatedUser;
 
-    private const string ItemWithSpacesPath = "/sitecore/content/T E S T/i t e m";
-    private const string ItemWithSpacesName = "i t e m";
+    private const string ItemWithSpacesPath = "/sitecore/content/Home/Android/Static/Test item 1";
+    private const string ItemWithSpacesName = "Test item 1";
 
     [SetUp]
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      this.sessionAuthenticatedUser = new ScApiSession(config, ItemSource.DefaultSource());
+      this.sessionAuthenticatedUser = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
     }
 
     [TearDown]
@@ -111,7 +109,7 @@
     {
       const string ItemInterationalPath = "/sitecore/content/Home/Android/Static/Japanese/宇都宮";
       var response = await GetItemByPath(ItemInterationalPath);
-     testData.AssertItemsCount(1, response);
+      testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = "宇都宮",
@@ -241,6 +239,8 @@
       Assert.Fail("Exception not thrown");
     }
 
+    //TODO: create items for test first and remove them after test
+    /*
     [Test]
     public async void TestGetOneHundredItemsByQuery()
     {
@@ -248,12 +248,15 @@
       testData.AssertItemsCount(100, response);
       Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
     }
+    */
 
     [Test]
     public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
-      var config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:7119", "extranet\\noreadaccess", "noreadaccess");
-      var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource());
+      var sessionWithoutAccess = testData.GetSession(
+        testData.InstanceUrl,
+        testData.Users.NoReadAccess.Username,
+        testData.Users.NoReadAccess.Password);
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
       var response = await sessionWithoutAccess.ReadItemAsync(request);
@@ -264,16 +267,12 @@
     [Test] //this case should be changed for another instance
     public async void TestGetItemByQueryWithturnedOffItemWebApi()
     {
-
-      var config = new SessionConfig("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource()); // = sessionAuthenticatedUser;
-
-      
+      var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
       try
       {
-        await sessionWithoutAccess.ReadItemAsync(request); 
+        await sessionWithoutAccess.ReadItemAsync(request);
       }
       catch (RsaHandshakeException exception)
       {
@@ -285,15 +284,15 @@
 
     private async Task<ScItemsResponse> GetItemById(string id)
     {
-      
-            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Build();
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
     private async Task<ScItemsResponse> GetItemByPath(string path)
     {
-      
+
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
@@ -301,8 +300,8 @@
 
     private async Task<ScItemsResponse> GetItemByQuery(string query)
     {
-      
-            var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
