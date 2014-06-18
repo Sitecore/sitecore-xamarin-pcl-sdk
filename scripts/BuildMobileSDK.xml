@@ -20,6 +20,7 @@
     <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
 
     <UnitTestReportXml>$(RepositoryRoot)\deployment\UnitTestDesktopReport.xml</UnitTestReportXml>
+    <IntegrationTestReportXml>$(RepositoryRoot)\deployment\IntegrationTestDesktopReport.xml</IntegrationTestReportXml>
 
     <NugetExe>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.PackageManagement\NuGet.exe</NugetExe>
   </PropertyGroup>
@@ -39,6 +40,7 @@
   	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
 
     <UnitTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\bin\Release\MobileSDK-UnitTest-Desktop.dll" />
+    <IntegrationTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-IntegrationTest-Desktop\bin\Release\MobileSDK-IntegrationTest-Desktop.dll" />
   </ItemGroup>
 
 
@@ -92,11 +94,21 @@
       OutputXmlFile="$(UnitTestReportXml)"
       Version="2.6.3"
     />
-
 </Target>
 
 <Target Name="IntegrationTest">
+    <MSBuild 
+      Projects="$(SolutionsDirectory)\MobileSdk-IntegrationTest-Desktop.sln" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
 
+    <MSBuild.ExtensionPack.CodeQuality.NUnit
+      Assemblies="@(IntegrationTestDesktopDll)"
+      Configuration="Release"
+      OutputXmlFile="$(IntegrationTestReportXml)"
+      Version="2.6.3"
+    />
 </Target>
 
 
