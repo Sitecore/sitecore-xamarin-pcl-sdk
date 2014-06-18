@@ -1,25 +1,23 @@
 ﻿using System;
 using Sitecore.MobileSDK.Utils;
 using Sitecore.MobileSDK.SessionSettings;
+using System.Collections.Generic;
 
 namespace Sitecore.MobileSDK.MediaItems
 {
 	using Sitecore.MobileSDK.Items;
 	using Sitecore.MobileSDK.UrlBuilder.Rest;
 
-	public class ResourceUrlBuilder
+	public class MediaItemUrlBuilder
 	{
-		public ResourceUrlBuilder ()
-		{
-		}
 
-		public ResourceUrlBuilder(IRestServiceGrammar restGrammar, ISessionConfig sessionConfig, IItemSource itemSource)
+		public MediaItemUrlBuilder(IRestServiceGrammar restGrammar, ISessionConfig sessionConfig, IItemSource itemSource)
 		{
 			this.itemSource = itemSource;
 			this.restGrammar = restGrammar;
 			this.sessionConfig = sessionConfig;
 
-			//this.Validate();
+			this.Validate();
 		}
 
 		private void Validate()
@@ -47,8 +45,8 @@ namespace Sitecore.MobileSDK.MediaItems
 			string result = this.sessionConfig.InstanceUrl;
 
 
-			bool isMediaHookAvailable = (path.IndexOf (ResourceUrlBuilder.mediaHook, StringComparison.CurrentCultureIgnoreCase) >= 0);
-			bool isExtensionAvailable = (path.IndexOf (ResourceUrlBuilder.ashxExtension, StringComparison.CurrentCultureIgnoreCase) >= 0);
+			bool isMediaHookAvailable = (path.IndexOf (MediaItemUrlBuilder.mediaHook, StringComparison.CurrentCultureIgnoreCase) >= 0);
+			bool isExtensionAvailable = (path.IndexOf (MediaItemUrlBuilder.ashxExtension, StringComparison.CurrentCultureIgnoreCase) >= 0);
 
 			if (isMediaHookAvailable)
 			{
@@ -56,19 +54,19 @@ namespace Sitecore.MobileSDK.MediaItems
 
 				if ( !isExtensionAvailable )
 				{
-					result = result + ResourceUrlBuilder.ashxExtension;
+					result = result + MediaItemUrlBuilder.ashxExtension;
 				}
 			}
 			else
 			{
-				result = result + this.restGrammar.PathComponentSeparator + ResourceUrlBuilder.mediaHook;
+				result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
 
-				int rootStartIndex = path.IndexOf (ResourceUrlBuilder.mediaRoot, StringComparison.CurrentCultureIgnoreCase);
+				int rootStartIndex = path.IndexOf (MediaItemUrlBuilder.mediaRoot, StringComparison.CurrentCultureIgnoreCase);
 				bool isMediaRootAvailable = (rootStartIndex >= 0);
 
 				if ( isMediaRootAvailable )
 				{
-					relativePath = path.Remove(rootStartIndex, ResourceUrlBuilder.mediaRoot.Length);
+					relativePath = path.Remove(rootStartIndex, MediaItemUrlBuilder.mediaRoot.Length);
 				}
 
 
@@ -80,20 +78,63 @@ namespace Sitecore.MobileSDK.MediaItems
 
 				relativePath = Uri.EscapeUriString (relativePath);
 
-				result = result + relativePath + ResourceUrlBuilder.ashxExtension;
+				result = result + relativePath + MediaItemUrlBuilder.ashxExtension;
 			}
+				
+			result = this.AppendUrlStringWithDownloadOptions (result, options);
 
 			return result;
 		}
 
-		//TODO: @igk move to Session!!!
-		private const string mediaRoot = "/sitecore/media library";
+		private string AppendUrlStringWithDownloadOptions(string path, DownloadMediaOptions options)
+		{
+			if (DownloadMediaOptions.IsEmptyOrEmpty (options))
+			{
+				return path;
+			}
 
-		private const string mediaHook = "~/media";
-		private const string ashxExtension = ".ashx";
-		private IItemSource itemSource;
+			path += this.restGrammar.HostAndArgsSeparator;
+
+			Dictionary<string, string> optionsDictionary = options.OptionsDictionary;
+			foreach (var pair in optionsDictionary)
+			{
+				path = this.AddOptionValueToPath (path, pair.Key, pair.Value);
+			}
+
+			if (this.itemSource.Database != null)
+			{
+				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.databaseKey, this.itemSource.Database);
+			}
+
+			if (this.itemSource.Language != null)
+			{
+				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.languageKey, this.itemSource.Language);
+			}
+
+			if (this.itemSource.Version != null)
+			{
+				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.versionKey, this.itemSource.Version);
+			}
+
+			return path = path.Remove(path.Length - this.restGrammar.FieldSeparator.Length);
+
+		}
+
+		private string AddOptionValueToPath(string path, string key, string value)
+		{
+			return path += key + this.restGrammar.KeyValuePairSeparator + value + this.restGrammar.FieldSeparator;
+		}
+			
+		private const string mediaHook 		= "~/media";
+		private const string ashxExtension 	= ".ashx";
+
+		private const string languageKey 		= "la";
+		private const string versionKey 		= "vs";
+		private const string databaseKey 		= "db";
+
+		private IItemSource 		itemSource;
 		private IRestServiceGrammar restGrammar;
-		private ISessionConfig sessionConfig;
+		private ISessionConfig 		sessionConfig;
 	}
 }
 
