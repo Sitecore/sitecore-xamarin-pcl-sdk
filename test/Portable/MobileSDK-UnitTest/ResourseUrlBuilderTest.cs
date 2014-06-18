@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using Sitecore.MobileSDK.SessionSettings;
+using Sitecore.MobileSDK.Items;
 
 
 namespace Sitecore.MobileSdkUnitTest
@@ -11,7 +12,7 @@ namespace Sitecore.MobileSdkUnitTest
 	[TestFixture ()]
 	public class ResourseUrlBuilderTest
 	{
-		ResourceUrlBuilder builder;
+		MediaItemUrlBuilder builder;
 
 		[SetUp]
 		public void SetUp()
@@ -23,7 +24,8 @@ namespace Sitecore.MobileSdkUnitTest
 			sessionConfig.InstanceUrl = "http://test.host";
 			sessionConfig.Site = null;
 
-			builder = new ResourceUrlBuilder (restGrammar, sessionConfig, null);
+			ItemSource itemSource = ItemSource.DefaultSource ();
+			builder = new MediaItemUrlBuilder (restGrammar, sessionConfig, itemSource);
 		}
 
 		[TearDown]
@@ -91,6 +93,49 @@ namespace Sitecore.MobileSdkUnitTest
 		{
 			string result = builder.BuildUrlStringForPath ("~/media/Images/SoMe ImAGe", null);
 			string expected = "http://test.host/~/media/Images/SoMe%20ImAGe.ashx";
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[Test ()]
+		public void EmptyDownloadOptionsTest ()
+		{
+			DownloadMediaOptions options = new DownloadMediaOptions ();
+
+			string result = builder.BuildUrlStringForPath ("~/media/1.png", options);
+			string expected = "http://test.host/~/media/1.png.ashx";
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[Test ()]
+		public void CorrectDownloadOptionsTest ()
+		{
+			DownloadMediaOptions options = new DownloadMediaOptions ();
+			options.SetWidth (100);
+			options.SetBackgroundColor ("white");
+			options.SetDisplayAsThumbnail (true);
+
+			string result = builder.BuildUrlStringForPath ("~/media/1.png", options);
+			string expected = "http://test.host/~/media/1.png.ashx?w=100&bc=white&thn=1&db=web&la=en";
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[Test ()]
+		public void CorrectDownloadOptionsWithNullValuesTest ()
+		{
+			DownloadMediaOptions options = new DownloadMediaOptions ();
+			options.SetWidth (100);
+
+			options.SetBackgroundColor ("white");
+			options.SetBackgroundColor (null);
+
+			options.SetDisplayAsThumbnail (true);
+			options.SetDisplayAsThumbnail (false);
+
+			string result = builder.BuildUrlStringForPath ("~/media/1.png", options);
+			string expected = "http://test.host/~/media/1.png.ashx?w=100&db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
