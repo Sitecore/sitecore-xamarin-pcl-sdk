@@ -2,7 +2,7 @@
 namespace Sitecore.MobileSDK
 {
 	using System;
-	using Sitecore.MobileSDK.MediaItems;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 	public interface IGetMediaItemRequestParametersBuilder<T>
 		where T : class

@@ -2,11 +2,13 @@
 using System;
 using Sitecore.MobileSDK.SessionSettings;
 using Sitecore.MobileSDK.Items;
+using Sitecore.MobileSDK;
+using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 
 namespace Sitecore.MobileSdkUnitTest
 {
-	using Sitecore.MobileSDK.MediaItems;
 	using Sitecore.MobileSDK.UrlBuilder.Rest;
 
 	[TestFixture ()]
@@ -29,6 +31,35 @@ namespace Sitecore.MobileSdkUnitTest
 		public void TearDown()
 		{
 			this.builder = null;
+		}
+
+    [Test]
+    public void RequestBuiolderTest()
+    {
+      DownloadMediaOptions options = new DownloadMediaOptions ();
+      options.SetWidth (100);
+      options.SetBackgroundColor ("white");
+      options.SetDisplayAsThumbnail (true);
+
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/1.png")
+        .DownloadOptions(options)
+        .Database("master")
+        .Build();
+
+    }
+
+		[Test]
+		public void TestInvalidPathException()
+		{
+			TestDelegate action = () => builder.BuildUrlStringForPath ("sitecore/media library/1.png", null);;
+			Assert.Throws<ArgumentException>(action);
+		}
+
+		[Test]
+		public void TestNullPathException()
+		{
+			TestDelegate action = () => builder.BuildUrlStringForPath (null, null);;
+			Assert.Throws<ArgumentNullException>(action);
 		}
 
 		[Test ()]

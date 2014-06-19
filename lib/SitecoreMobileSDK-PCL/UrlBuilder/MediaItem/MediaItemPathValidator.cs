@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sitecore.MobileSDK.MediaItems
+namespace Sitecore.MobileSDK
 {
 	public class MediaItemPathValidator
 	{

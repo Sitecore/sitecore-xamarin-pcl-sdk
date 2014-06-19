@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sitecore.MobileSDK.MediaItems
+namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
 	using System.Collections.Generic;
 

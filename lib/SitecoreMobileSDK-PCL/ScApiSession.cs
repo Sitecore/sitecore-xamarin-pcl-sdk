@@ -1,9 +1,9 @@
 using Sitecore.MobileSDK.Exceptions;
 
-
 namespace Sitecore.MobileSDK
 {
 	using System;
+	using System.IO;
 	using System.Net.Http;
 
     using System.Threading;
@@ -19,7 +19,7 @@ namespace Sitecore.MobileSDK
 	using Sitecore.MobileSDK.UrlBuilder.ItemById;
 	using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 	using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
     public class ScApiSession
     {
@@ -133,6 +133,36 @@ namespace Sitecore.MobileSDK
 
         #endregion GetItems
 
+		#region DownloadMedia
+
+    public async Task<ScItemsResponse> ReadItemAsync(IReadMediaItemRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+//      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync();
+//      IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps (request);
+//
+//      var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
+//
+//      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      return null;
+    }
+
+//		public async Task<Stream> GetImageFromUrl(string url)
+//		{
+//			try
+//			{
+//				HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+//
+//				HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse();
+//
+//				return httpWebReponse.GetResponseStream()
+//			}
+//			catch (WebException ex)
+//			{
+//				return null;
+//			}
+//		}
+//
+		#endregion DownloadMedia
 
         #region Private Variables
 

@@ -1,11 +1,10 @@
 ﻿
 
-
 namespace Sitecore.MobileSDK
 {
 	using System;
-	using Sitecore.MobileSDK.MediaItems;
 	using Sitecore.MobileSDK.UrlBuilder;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 	public class ReadMediaItemRequestBuilder : AbstractGetMediaItemRequestBuilder<IReadMediaItemRequest>
 	{

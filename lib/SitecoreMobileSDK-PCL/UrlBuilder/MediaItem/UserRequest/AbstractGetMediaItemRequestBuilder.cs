@@ -5,7 +5,7 @@ namespace Sitecore.MobileSDK
 	using System.Collections.Generic;
 
 	using Sitecore.MobileSDK.Items;
-	using Sitecore.MobileSDK.MediaItems;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 	using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
 
