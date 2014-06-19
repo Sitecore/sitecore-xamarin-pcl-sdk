@@ -22,7 +22,7 @@ namespace MobileSDKIntegrationTest
         {
             this.env = TestEnvironment.DefaultTestEnvironment ();
 
-            SessionConfig config = new SessionConfig (this.env.AuthenticatedInstanceUrl, this.env.Users.Admin.Username, this.env.Users.Admin.Password);
+            SessionConfig config = new SessionConfig (this.env.InstanceUrl, this.env.Users.Admin.Username, this.env.Users.Admin.Password);
             ItemSource defaultSource = ItemSource.DefaultSource();
 
             this.session = new ScTestApiSession (config, defaultSource);
@@ -44,7 +44,7 @@ namespace MobileSDKIntegrationTest
 
             var cancel = new CancellationTokenSource ();
 
-            Task<PublicKeyX509Certificate> action = this.session.GetPublicKeyAsync_Public(cancel.Token);
+            Task<PublicKeyX509Certificate> action = this.session.GetPublicKeyAsyncPublic(cancel.Token);
             cancel.Cancel();
          
             await action;
