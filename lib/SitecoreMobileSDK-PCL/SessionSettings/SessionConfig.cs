@@ -45,6 +45,22 @@
             private set;
         }
 
+		public string MediaLybraryRoot 
+		{
+			get
+			{ 
+				if (null == this.mediaLybraryRoot)
+				{
+					return SessionConfig.DefaultMediaLybraryRoot;
+				}
+				return this.mediaLybraryRoot;
+			}
+			set
+			{ 
+				this.mediaLybraryRoot = value;
+			}
+		}
+
         public bool IsAnonymous()
         {
             return string.IsNullOrEmpty(this.Login) && string.IsNullOrEmpty(this.Password);
@@ -61,6 +77,9 @@
                 throw new ArgumentNullException ("SessionConfig.ItemWebApiVersion is required");
             }
         }
+
+		private const string DefaultMediaLybraryRoot = "/sitecore/media library";
+		private string mediaLybraryRoot;
     }
 }
 

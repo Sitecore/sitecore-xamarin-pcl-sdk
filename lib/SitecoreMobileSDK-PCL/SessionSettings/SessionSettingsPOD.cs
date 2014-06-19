@@ -42,6 +42,8 @@ namespace Sitecore.MobileSDK.SessionSettings
 			}
 		}
 
+		public string MediaLybraryRoot { get; set; }
+
         public override bool Equals (object obj)
         {
             if (object.ReferenceEquals (this, obj))

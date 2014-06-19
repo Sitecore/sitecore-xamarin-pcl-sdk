@@ -61,12 +61,14 @@ namespace Sitecore.MobileSDK.MediaItems
 			{
 				result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
 
-				int rootStartIndex = path.IndexOf (MediaItemUrlBuilder.mediaRoot, StringComparison.CurrentCultureIgnoreCase);
+				string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot;
+
+				int rootStartIndex = path.IndexOf (mediaLibraryRoot, StringComparison.CurrentCultureIgnoreCase);
 				bool isMediaRootAvailable = (rootStartIndex >= 0);
 
 				if ( isMediaRootAvailable )
 				{
-					relativePath = path.Remove(rootStartIndex, MediaItemUrlBuilder.mediaRoot.Length);
+					relativePath = path.Remove(rootStartIndex, this.sessionConfig.MediaLybraryRoot.Length);
 				}
 
 
@@ -128,9 +130,9 @@ namespace Sitecore.MobileSDK.MediaItems
 		private const string mediaHook 		= "~/media";
 		private const string ashxExtension 	= ".ashx";
 
-		private const string languageKey 		= "la";
-		private const string versionKey 		= "vs";
-		private const string databaseKey 		= "db";
+		private const string languageKey 	= "la";
+		private const string versionKey 	= "vs";
+		private const string databaseKey 	= "db";
 
 		private IItemSource 		itemSource;
 		private IRestServiceGrammar restGrammar;

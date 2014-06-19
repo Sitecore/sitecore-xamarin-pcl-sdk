@@ -19,10 +19,7 @@ namespace Sitecore.MobileSdkUnitTest
 		{
 			IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
 
-			SessionConfigPOD sessionConfig = new SessionConfigPOD();
-			sessionConfig.ItemWebApiVersion = "v1";
-			sessionConfig.InstanceUrl = "http://test.host";
-			sessionConfig.Site = null;
+			SessionConfig sessionConfig = new SessionConfig ("http://test.host", "a", "b");
 
 			ItemSource itemSource = ItemSource.DefaultSource ();
 			builder = new MediaItemUrlBuilder (restGrammar, sessionConfig, itemSource);
@@ -127,7 +124,6 @@ namespace Sitecore.MobileSdkUnitTest
 		{
 			DownloadMediaOptions options = new DownloadMediaOptions ();
 			options.SetWidth (100);
-
 			options.SetBackgroundColor ("white");
 			options.SetBackgroundColor (null);
 

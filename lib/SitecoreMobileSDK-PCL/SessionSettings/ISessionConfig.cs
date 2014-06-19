@@ -21,5 +21,10 @@ namespace Sitecore.MobileSDK.SessionSettings
         {
             get;
         }
+
+		string MediaLybraryRoot
+		{
+			get;
+		}
     }
 }

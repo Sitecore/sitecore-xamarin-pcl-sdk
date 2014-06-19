@@ -6,6 +6,10 @@ namespace Sitecore.MobileSDK.MediaItems
 
 	public class DownloadMediaOptions
 	{
+		public object Clone()
+		{
+			return this.MemberwiseClone();
+		}
 
 		public static bool IsEmptyOrEmpty(DownloadMediaOptions options)
 		{
