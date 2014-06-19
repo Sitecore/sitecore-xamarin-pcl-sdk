@@ -69,7 +69,7 @@
       TestDelegate testCode = () =>
       {
         var itemSource = new ItemSource(Db, null, "1");
-        Assert.Fail("Initialization should not pass");
+        Assert.IsNull(itemSource, "Unreachable code should not be executed");
       };
 
       Exception exception = Assert.Throws<ArgumentNullException>(testCode);
@@ -84,7 +84,7 @@
       TestDelegate testCode = () =>
       {
         var itemSource = new ItemSource(Db, "en", "1");
-        Assert.Fail("Initialization should not pass");
+        Assert.IsNull(itemSource, "Unreachable code should not be executed");
       };
 
       Exception exception = Assert.Throws<ArgumentNullException>(testCode);
