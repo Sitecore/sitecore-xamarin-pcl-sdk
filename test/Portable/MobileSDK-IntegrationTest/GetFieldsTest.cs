@@ -53,7 +53,7 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
 
-      Assert.Greater(response.Items[0].Fields.Count, 70);
+      Assert.IsTrue(response.Items[0].Fields.Count > 70);
       Assert.AreEqual("Home", response.Items[0].FieldWithName("__Display name").RawValue);
     }
 
@@ -245,7 +245,7 @@
       var responseCreatorex = await sessionCreatorexUser.ReadItemAsync(request);
       var responseAdmin = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
-      Assert.Less(responseCreatorex.Items[0].Fields.Count, responseAdmin.Items[0].Fields.Count);
+      Assert.IsTrue(responseCreatorex.Items[0].Fields.Count < responseAdmin.Items[0].Fields.Count);
     }
 
     [Test]
