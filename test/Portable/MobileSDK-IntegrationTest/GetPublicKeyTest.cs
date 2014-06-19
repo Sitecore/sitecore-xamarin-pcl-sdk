@@ -46,20 +46,11 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public void TestAuthenticateToInstanceWithoutHttp()
+    public async void TestMissingHttpIsAutocompletedDuringAuthentication()
     {
       var session = testData.GetSession("mobiledev1ua1.dk.sitecore.net:7119", testData.Users.Admin.Username, testData.Users.Admin.Password);
-
-      TestDelegate testCode = async() =>
-      {
-        var task = session.ReadItemAsync(this.requestWithItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
-
-      Assert.True(exception.Message.Contains("Public key not received properly"));
-      Assert.AreEqual("System.ArgumentException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Only 'http' and 'https' schemes are allowed."));
+      var certrificate = await session.ReadItemAsync(this.requestWithItemId);
+      Assert.IsNotNull(certrificate);
     }
 
     [Test]
@@ -85,8 +76,10 @@ namespace MobileSDKIntegrationTest
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
       Assert.True(exception.Message.Contains("Public key not received properly"));
-      Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request."));
+
+      //@adk : changed exception type due to using different HTTP Client API
+      Assert.AreEqual("System.Net.WebException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Error: NameResolutionFailure"));
     }
 
     [Test]
