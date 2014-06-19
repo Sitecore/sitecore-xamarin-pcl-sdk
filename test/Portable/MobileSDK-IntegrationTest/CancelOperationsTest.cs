@@ -49,22 +49,16 @@ namespace MobileSDKIntegrationTest
     {
       using (FunctionTracer logger = new FunctionTracer("CancelOperationsTest->TestCancelGetItemById()", CancelOperationsTest.DebugWriteLineBlock))
       {
-        var cancelTokenSource = new CancellationTokenSource();
-        var cancelToken = cancelTokenSource.Token;
-
-
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
-//        var cancelToken = CreateCancelTokenWithDelay(20);
+        var cancelToken = CreateCancelTokenWithDelay(20);
         ScItemsResponse response = null;
 
-        // @adk : do not fix async related warnings if any
+        // @adk : do not use Task.WaitAll() since it may cause deadlocks
         TestDelegate testCode = async () =>
         {
           using (FunctionTracer sessionLogger = new FunctionTracer("session.ReadItemAsync()", CancelOperationsTest.DebugWriteLineBlock))
           {
             var task = session.ReadItemAsync(request, cancelToken);
-            cancelTokenSource.CancelAfter(20);
-
             response = await task;
           }
         };
@@ -78,7 +72,8 @@ namespace MobileSDKIntegrationTest
         //      iOS               : "The Task was canceled"
         Assert.IsTrue(exception.Message.ToLowerInvariant().Contains("task was canceled"));
 
-        //      Assert.AreEqual(cancelToken, exception.CancellationToken);
+        // @adk : CancellationToken class comparison or scheduling works differently on iOS
+        // Assert.AreEqual(cancelToken, exception.CancellationToken);
       }
     }
 
@@ -102,7 +97,9 @@ namespace MobileSDKIntegrationTest
       //      iOS               : "The Task was canceled"
       Assert.IsTrue(exception.Message.ToLowerInvariant().Contains("task was canceled"));
 
-      //      Assert.AreEqual(cancelToken, exception.CancellationToken);
+
+      // @adk : CancellationToken class comparison or scheduling works differently on iOS
+      // Assert.AreEqual(cancelToken, exception.CancellationToken);
     }
 
     private static CancellationToken CreateCancelTokenWithDelay(Int32 delay)
@@ -135,7 +132,9 @@ namespace MobileSDKIntegrationTest
       //      iOS               : "The Task was canceled"
       Assert.IsTrue(exception.Message.ToLowerInvariant().Contains("task was canceled"));
 
-//      Assert.AreEqual(cancelToken, exception.CancellationToken);
+
+      // @adk : CancellationToken class comparison or scheduling works differently on iOS
+      // Assert.AreEqual(cancelToken, exception.CancellationToken);
     }
   }
 }
