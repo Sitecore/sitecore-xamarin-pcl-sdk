@@ -14,7 +14,6 @@ namespace MobileSDKIntegrationTest
     public class OperationCancelTest
     {
         private ScTestApiSession session;
-        private ItemWebApiRequestBuilder requestBuilder;
         private TestEnvironment env;
 
         [SetUp]
@@ -32,7 +31,6 @@ namespace MobileSDKIntegrationTest
         public void TearDown()
         {
             this.session = null;
-            this.requestBuilder = null;
         }
 
 
