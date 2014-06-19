@@ -36,6 +36,7 @@
     <Compile Include="MockGetItemsByQueryParameters.cs" />
     <Compile Include="MockReadItemByIdParameters.cs" />
     <Compile Include="MockReadItemByPathParameters.cs" />
+    <Compile Include="FunctionTracer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
