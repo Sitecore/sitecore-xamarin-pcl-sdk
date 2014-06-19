@@ -164,79 +164,63 @@
     }
 
     [Test]
-    public async void TestGetItemByNullId()
+    public void TestGetItemByNullId()
     {
-      try
+      TestDelegate testCode = () =>
       {
-        await this.GetItemById(null);
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("Item id cannot be null"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = this.GetItemById(null);
+        Task.WaitAll(task);
+      };
+
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
-    public async void TestGetItemByNullPath()
+    public void TestGetItemByNullPath()
     {
-      try
+      TestDelegate testCode = () =>
       {
-        await this.GetItemByPath(null);
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("Item path cannot be null"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = this.GetItemByPath(null);
+        Task.WaitAll(task);
+      };
+
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
-    public async void TestGetItemByNullQuery()
+    public void TestGetItemByNullQuery()
     {
-      try
+      TestDelegate testCode = () =>
       {
-        await this.GetItemByQuery(null);
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = this.GetItemByQuery(null);
+        Task.WaitAll(task);
+      };
+
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
-    public async void TestGetItemByEmptyPath()
+    public void TestGetItemByEmptyPath()
     {
-      try
+      TestDelegate testCode = () =>
       {
-        await this.GetItemByPath("");
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("Item path cannot be null or empty"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = this.GetItemByPath("");
+        Task.WaitAll(task);
+      };
+
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
-    public async void TestGetItemByEmptyQuery()
+    public void TestGetItemByEmptyQuery()
     {
-      try
+      TestDelegate testCode = () =>
       {
-        await this.GetItemByQuery("");
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
+        var task = this.GetItemByQuery("");
+        Task.WaitAll(task);
+      };
 
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     //TODO: create items for test first and remove them after test
@@ -265,26 +249,22 @@
     }
 
     [Test] //this case should be changed for another instance
-    public async void TestGetItemByQueryWithturnedOffItemWebApi()
+    public void TestGetItemByQueryWithturnedOffItemWebApi()
     {
       var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
-      try
+      TestDelegate testCode = () =>
       {
-        await sessionWithoutAccess.ReadItemAsync(request);
-      }
-      catch (RsaHandshakeException exception)
-      {
-        Assert.True(exception.Message.Contains("Public key not received properly"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = sessionWithoutAccess.ReadItemAsync(request);
+        Task.WaitAll(task);
+      };
+
+      Assert.Throws<RsaHandshakeException>(testCode);
     }
 
     private async Task<ScItemsResponse> GetItemById(string id)
     {
-
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
@@ -292,7 +272,6 @@
 
     private async Task<ScItemsResponse> GetItemByPath(string path)
     {
-
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
@@ -300,7 +279,6 @@
 
     private async Task<ScItemsResponse> GetItemByQuery(string query)
     {
-
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;

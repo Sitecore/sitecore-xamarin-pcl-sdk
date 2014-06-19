@@ -1,8 +1,11 @@
-﻿namespace MobileSDKIntegrationTest
+﻿
+
+namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
 
   using System;
+  using System.Threading.Tasks;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
@@ -43,22 +46,20 @@
     }
 
     [Test]
-    public async void TestAuthenticateToInstanceWithoutHttp()
+    public void TestAuthenticateToInstanceWithoutHttp()
     {
       var session = testData.GetSession("mobiledev1ua1.dk.sitecore.net:7119", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
-      try
+      TestDelegate testCode = () =>
       {
-        await session.ReadItemAsync(this.requestWithItemId);
-      }
-      catch (RsaHandshakeException exception)
-      {
-        Assert.True(exception.Message.Contains("Public key not received properly"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-        Assert.AreEqual("System.ArgumentException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Only 'http' and 'https' schemes are allowed."));
-        return;
-      }
+      Assert.True(exception.Message.Contains("Public key not received properly"));
+      Assert.AreEqual("System.ArgumentException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Only 'http' and 'https' schemes are allowed."));
     }
 
     [Test]
@@ -72,24 +73,20 @@
     }
 
     [Test]
-    public async void TestGetItemsWithNotExistentInstanceUrl()
+    public void TestGetItemsWithNotExistentInstanceUrl()
     {
       var session = testData.GetSession("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
-      try
+      TestDelegate testCode = () =>
       {
-        await session.ReadItemAsync(this.requestWithItemId);
-      }
-      catch (RsaHandshakeException exception)
-      {
-        Assert.True(exception.Message.Contains("Public key not received properly"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-        Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request."));
-        return;
-      }
-
-      Assert.Fail("Excption not thrown");
+      Assert.True(exception.Message.Contains("Public key not received properly"));
+      Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request."));
     }
 
     [Test]
@@ -115,72 +112,60 @@
     }
 
     [Test]
-    public async void TestGetItemWithEmptyPassword()
+    public void TestGetItemWithEmptyPassword()
     {
       var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "", ItemSource.DefaultSource(), testData.ShellSite);
 
-      try
+      TestDelegate testCode = () =>
       {
-        await session.ReadItemAsync(this.requestWithItemId);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
-
-        return;
-      }
-
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
 
     [Test]
-    public async void TestGetItemWithNotExistentUser()
+    public void TestGetItemWithNotExistentUser()
     {
       var session = testData.GetSession(testData.InstanceUrl, "sitecore\\notexistent", "notexistent", ItemSource.DefaultSource(), testData.ShellSite);
 
-      try
+      TestDelegate testCode = () =>
       {
-        await session.ReadItemAsync(this.requestWithItemId);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
 
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
 
     [Test]
-    public async void TestGetItemWithInvalidUsernameAndPassword()
+    public void TestGetItemWithInvalidUsernameAndPassword()
     {
       var session = testData.GetSession(testData.InstanceUrl, "inval|d u$er№ame", null, ItemSource.DefaultSource(), testData.ShellSite);
 
-      try
+      TestDelegate testCode = () =>
       {
-        await session.ReadItemAsync(this.requestWithItemId);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
 
-        return;
-      }
-
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
 
     [Test]
-    public async void TestGetItemAsAnonymousWithoutReadAccess()
+    public void TestGetItemAsAnonymousWithoutReadAccess()
     {
       var session = testData.GetSession(testData.InstanceUrl, 
         testData.Users.Anonymous.Username, 
@@ -188,20 +173,17 @@
         ItemSource.DefaultSource(), 
         testData.ShellSite);
 
-      try
-      {
-        await session.ReadItemAsync(this.requestWithItemId);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
-        return;
-      }
+      TestDelegate testCode = () =>
+      {
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
   }
 }

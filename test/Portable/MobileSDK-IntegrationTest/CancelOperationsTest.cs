@@ -1,7 +1,11 @@
-﻿namespace MobileSDKIntegrationTest
+﻿
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading;
+  using System.Threading.Tasks;
+
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
@@ -28,43 +32,42 @@
     }
 
     [Test]
-    public async void TestCancelGetItemById()
+    public void TestCancelGetItemById()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var cancelToken = CreateCancelTokenWithDelay(20);
       ScItemsResponse response = null;
-      try
+
+      TestDelegate testCode = () =>
       {
-        response = await session.ReadItemAsync(request, cancelToken);
-      }
-      catch (OperationCanceledException exception)
-      {
-        Assert.IsNull(response);
-        Assert.AreEqual(cancelToken, exception.CancellationToken);
-        Assert.AreEqual("A task was canceled.", exception.Message);
-        return;
-      }
-      Assert.Fail("Operation should be cancelled");
+        var task = session.ReadItemAsync(request, cancelToken);
+        Task.WaitAll(task);
+      };
+      OperationCanceledException exception = Assert.Throws<OperationCanceledException>(testCode);
+
+      Assert.IsNull(response);
+      Assert.AreEqual(cancelToken, exception.CancellationToken);
+      Assert.AreEqual("A task was canceled.", exception.Message);
     }
 
     [Test]
-    public async void TestCancelGetItemByPath()
+    public void TestCancelGetItemByPath()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
-      try
+
+
+      TestDelegate testCode = () =>
       {
-        response = await session.ReadItemAsync(request, cancelToken);
-      }
-      catch (OperationCanceledException exception)
-      {
-        Assert.IsNull(response);
-        Assert.AreEqual(cancelToken, exception.CancellationToken);
-        Assert.AreEqual("A task was canceled.", exception.Message);
-        return;
-      }
-      Assert.Fail("Operation should be cancelled");
+        var task = session.ReadItemAsync(request, cancelToken);
+        Task.WaitAll(task);
+      };
+      OperationCanceledException exception = Assert.Throws<OperationCanceledException>(testCode);
+
+      Assert.IsNull(response);
+      Assert.AreEqual(cancelToken, exception.CancellationToken);
+      Assert.AreEqual("A task was canceled.", exception.Message);
     }
 
     private static CancellationToken CreateCancelTokenWithDelay(Int32 delay)
@@ -72,27 +75,27 @@
       var cancelTokenSource = new CancellationTokenSource();
       cancelTokenSource.CancelAfter(delay);
       var cancelToken = cancelTokenSource.Token;
+
       return cancelToken;
     }
 
     [Test]
-    public async void TestCancelGetItemByQuery()
+    public void TestCancelGetItemByQuery()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).Build();
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
-      try
+
+      TestDelegate testCode = () =>
       {
-        response = await session.ReadItemAsync(request, cancelToken);
-      }
-      catch (OperationCanceledException exception)
-      {
-        Assert.IsNull(response);
-        Assert.AreEqual(cancelToken, exception.CancellationToken);
-        Assert.AreEqual("A task was canceled.", exception.Message);
-        return;
-      }
-      Assert.Fail("Operation should be cancelled");
+        var task = session.ReadItemAsync(request, cancelToken);
+        Task.WaitAll(task);
+      };
+      OperationCanceledException exception = Assert.Throws<OperationCanceledException>(testCode);
+
+      Assert.IsNull(response);
+      Assert.AreEqual(cancelToken, exception.CancellationToken);
+      Assert.AreEqual("A task was canceled.", exception.Message);
     }
   }
 }

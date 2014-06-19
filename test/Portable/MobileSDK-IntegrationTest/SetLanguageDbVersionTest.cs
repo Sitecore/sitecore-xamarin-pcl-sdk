@@ -57,6 +57,7 @@
     {
       var session = new ScApiSession(this.sessionConfig, itemSource);
       var response = await session.ReadItemAsync(this.requestWithItemId);
+
       return response;
     }
 
@@ -64,32 +65,30 @@
     public void TestGetItemWithNullLanguage()
     {
       const string Db = "master";
-      try
+
+      TestDelegate testCode = () =>
       {
         var itemSource = new ItemSource(Db, null, "1");
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("Value cannot be null"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        Assert.Fail("Initialization should not pass");
+      };
+
+      Exception exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.True(exception.Message.Contains("Value cannot be null"));
     }
 
     [Test]
     public void TestGetItemWithNullDb()
     {
       const string Db = null;      
-      try
+
+      TestDelegate testCode = () =>
       {
-         var itemSource = new ItemSource(Db, "en", "1");
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("Value cannot be null"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var itemSource = new ItemSource(Db, "en", "1");
+        Assert.Fail("Initialization should not pass");
+      };
+
+      Exception exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.True(exception.Message.Contains("Value cannot be null"));
     }
 
     [Test]
@@ -188,22 +187,22 @@
     public async void TestGetItemWithNotExistedDb()
     {
       const string Database = "new_database";
-      try
+
+
+      TestDelegate testCode = () =>
       {
         var session = new ScApiSession(this.sessionConfig, ItemSource.DefaultSource());
-        
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Database(Database).Build();
-        await session.ReadItemAsync(request);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Database + "']"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = session.ReadItemAsync(request);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
+
+
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Database + "']"));
     }
 
     [Test]
@@ -225,50 +224,44 @@
     }
 
     [Test]
-    public async void TestGetItemWithInvalidVersion()
+    public void TestGetItemWithInvalidVersion()
     {
       const string Db = "web";
       const string Language = "da";
       const string Version = "Version";
 
-      try
+      TestDelegate testCode = () =>
       {
         var itemSource = new ItemSource(Db, Language, Version);
-        await this.GetItemByIdWithItemSource(itemSource);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = this.GetItemByIdWithItemSource(itemSource);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Cannot recognize item version."));
 
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Cannot recognize item version."));
     }
 
     [Test]
-    public async void TestGetItemWithInvalidDb()
+    public void TestGetItemWithInvalidDb()
     {
       const string Db = "@#er$#";
       const string Language = "da";
 
-      try
+      TestDelegate testCode = () =>
       {
         var itemSource = new ItemSource(Db, Language);
-        await this.GetItemByIdWithItemSource(itemSource);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = this.GetItemByIdWithItemSource(itemSource);
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Db + "']"));
 
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Db + "']"));
     }
 
     [Test]
@@ -304,6 +297,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
     }
+
     [Test]
     public async void TestGetItemWithEmptySite()
     {
@@ -315,25 +309,26 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
     }
+
     [Test]
-    public async void TestGetItemWithInvalidSite()
+    public void TestGetItemWithInvalidSite()
     {
       const string Site = "/@$%/";
-      try
+
+
+      TestDelegate testCode = () =>
       {
         this.BuildVersionItemRequest(this.testData.InstanceUrl, this.testData.Users.Creatorex.Username, this.testData.Users.Creatorex.Password, Site);
-        await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
 
-        Assert.AreEqual("Newtonsoft.Json.JsonReaderException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Unexpected character encountered while parsing value: <. Path '', line 0, position 0"));
+        Task.WaitAll(task);
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Newtonsoft.Json.JsonReaderException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Unexpected character encountered while parsing value: <. Path '', line 0, position 0"));
     }
 
     [Test]
