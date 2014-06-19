@@ -8,6 +8,16 @@ namespace Sitecore.MobileSDK.SessionSettings
     {
     }
 
+    public static string AutocompleteInstanceUrl(string url)
+    {
+      if (SessionConfigValidator.IsValidSchemeOfInstanceUrl(url))
+      {
+        return url;
+      }
+
+      string result = "http://" + url;
+      return result;
+    }
 
     public static bool IsValidSchemeOfInstanceUrl(string url)
     {

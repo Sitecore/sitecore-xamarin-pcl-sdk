@@ -20,14 +20,8 @@
     {
       this.ValidateRequest(request);
 
-      string autocompletedInstanceUrl = request.InstanceUrl;
-      if (!SessionConfigValidator.IsValidSchemeOfInstanceUrl(autocompletedInstanceUrl))
-      {
-        autocompletedInstanceUrl = autocompletedInstanceUrl.Insert(0, "http://");
-      }
-
+      string autocompletedInstanceUrl = SessionConfigValidator.AutocompleteInstanceUrl(request.InstanceUrl);
       string escapedVersion = UrlBuilderUtils.EscapeDataString(request.ItemWebApiVersion);
-
 
       string result =
         autocompletedInstanceUrl;
