@@ -50,10 +50,10 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession("mobiledev1ua1.dk.sitecore.net:7119", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
@@ -77,10 +77,10 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
@@ -116,10 +116,10 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "", ItemSource.DefaultSource(), testData.ShellSite);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -133,10 +133,10 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession(testData.InstanceUrl, "sitecore\\notexistent", "notexistent", ItemSource.DefaultSource(), testData.ShellSite);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -151,10 +151,10 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession(testData.InstanceUrl, "inval|d u$er№ame", null, ItemSource.DefaultSource(), testData.ShellSite);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -174,10 +174,10 @@ namespace MobileSDKIntegrationTest
         testData.ShellSite);
 
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 

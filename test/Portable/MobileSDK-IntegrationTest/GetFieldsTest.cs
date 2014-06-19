@@ -204,7 +204,9 @@
     [Test]
     public async void TestGetSeveralItemsByQueryWithContentFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*").Payload(PayloadType.Full).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*")
+        .Payload(PayloadType.Content)
+        .Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
