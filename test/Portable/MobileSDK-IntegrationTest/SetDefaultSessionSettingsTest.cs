@@ -24,7 +24,9 @@
 
       this.sessionConfig = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       this.sessionAuthenticatedUser = new ScApiSession(sessionConfig, ItemSource.DefaultSource());
-      this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).Build();
+      this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+        .Payload(PayloadType.Content)
+        .Build();
     }
 
     [TearDown]
@@ -52,6 +54,7 @@
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
+
     [Test]
     public async void TestGetItemWithDefaultDbLanguageAndVersion()
     {
