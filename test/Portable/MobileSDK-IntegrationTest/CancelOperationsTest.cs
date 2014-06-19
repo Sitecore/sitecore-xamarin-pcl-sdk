@@ -1,4 +1,5 @@
-﻿
+﻿using System.Diagnostics;
+using MobileSDKUnitTest.Mock;
 
 namespace MobileSDKIntegrationTest
 {
@@ -10,30 +11,43 @@ namespace MobileSDKIntegrationTest
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
+ 
 
   [TestFixture]
   public class CancelOperationsTest
   {
+    private static Action<string> DebugWriteLineBlock  = (string message) =>
+    {
+      Debug.WriteLine(message);
+    };
+
     private TestEnvironment testData;
     private ScApiSession session;
 
     [SetUp]
     public void Setup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      using ( FunctionTracer logger = new FunctionTracer("CancelOperationsTest->setup()", CancelOperationsTest.DebugWriteLineBlock) )
+      {
+        this.testData = TestEnvironment.DefaultTestEnvironment();
+        this.session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      }
     }
 
     [TearDown]
     public void TearDown()
     {
+      Debug.WriteLine("[Begin] CancelOperationsTest->tearDown()");
       this.testData = null;
       this.session = null;
+      Debug.WriteLine("[End] CancelOperationsTest->tearDown()");
     }
 
     [Test]
     public void TestCancelGetItemById()
     {
+      Debug.WriteLine("[Begin] CancelOperationsTest->TestCancelGetItemById()");
+
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var cancelToken = CreateCancelTokenWithDelay(20);
       ScItemsResponse response = null;
@@ -48,6 +62,8 @@ namespace MobileSDKIntegrationTest
       Assert.IsNull(response);
       Assert.AreEqual(cancelToken, exception.CancellationToken);
       Assert.AreEqual("A task was canceled.", exception.Message);
+
+      Debug.WriteLine("[Begin] CancelOperationsTest->TestCancelGetItemById()");
     }
 
     [Test]
