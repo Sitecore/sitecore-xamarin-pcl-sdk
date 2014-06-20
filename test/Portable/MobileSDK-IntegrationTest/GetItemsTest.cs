@@ -254,7 +254,7 @@
       var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = sessionWithoutAccess.ReadItemAsync(request);
         await task;
