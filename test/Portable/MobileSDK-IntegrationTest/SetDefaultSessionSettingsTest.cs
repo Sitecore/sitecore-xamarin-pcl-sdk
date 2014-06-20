@@ -162,14 +162,14 @@
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.ItemWithVersions.Path);
       var request = requestBuilder.Database("master").Database(null).Database(Db).Build();
-      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
-      testData.AssertItemsCount(1, response);
+      this.testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
 
       var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language, "1");
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+      this.testData.AssertItemsAreEqual(this.testData.Items.ItemWithVersions, resultItem);
+      this.testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
 
     [Test]
@@ -177,9 +177,9 @@
     {
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*");
       var request = requestBuilder.Database("master").Build();
-      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
-      testData.AssertItemsCount(4, response);
+      this.testData.AssertItemsCount(4, response);
     }
 
     [Test]
