@@ -48,7 +48,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestMissingHttpIsAutocompletedDuringAuthentication()
     {
-      string urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
+      var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
 
       var session = testData.GetSession(urlWithoutHttp, testData.Users.Admin.Username, testData.Users.Admin.Password);
       var certrificate = await session.ReadItemAsync(this.requestWithItemId);

@@ -29,7 +29,7 @@
     [Test]
     public async void TestWithoutHttpInUrlByPath()
     {
-      string urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
+      var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
       var response = await this.GetAuthencationRequestWithHomeItemPath(urlWithoutHttp);
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
@@ -38,8 +38,8 @@
     [Test]
     public async void TestWithoutHttpInUrlAndWithTwoSlashInTheEndByPath()
     {
-      string urlWithTwoSlash = testData.InstanceUrl + "//";
-      string url = urlWithTwoSlash.Remove(0, 7);
+      var urlWithTwoSlash = testData.InstanceUrl + "//";
+      var url = urlWithTwoSlash.Remove(0, 7);
       var response = await this.GetAuthencationRequestWithHomeItemPath(url);
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
@@ -48,7 +48,7 @@
     [Test]
     public async void TestWithoutHttpInUrlByQuery()
     {
-      string urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
+      var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
       var response = await this.GetAuthencationRequestWithHomeItemQuery(urlWithoutHttp);
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
@@ -57,7 +57,7 @@
     [Test]
     public async void TestWithHttpInUrlAndWithOneSlashInTheEndByQuery()
     {
-      string urlWithOneSlash = testData.InstanceUrl + "/";
+      var urlWithOneSlash = testData.InstanceUrl + "/";
       var response = await this.GetAuthencationRequestWithHomeItemQuery(urlWithOneSlash);
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
