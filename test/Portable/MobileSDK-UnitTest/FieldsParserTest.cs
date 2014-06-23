@@ -55,7 +55,7 @@ namespace Sitecore.MobileSdkUnitTest
 		}
 
 		[Test]
-		public async void TestCancellationCausesOperationCanceledException()
+		public void TestCancellationCausesOperationCanceledException()
 		{
       TestDelegate testAction = async () =>
       {
