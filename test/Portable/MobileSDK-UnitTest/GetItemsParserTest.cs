@@ -114,22 +114,23 @@ namespace Sitecore.MobileSdkUnitTest
 
 
     [Test]
-    [ExpectedException(typeof(OperationCanceledException))]
-    public async void TestCancellationCausesOperationCanceledException()
+    public void TestCancellationCausesOperationCanceledException()
     {
-      var cancel = new CancellationTokenSource ();
-
-      Task<ScItemsResponse> action = Task.Factory.StartNew( ()=> 
+      TestDelegate testAction = async () =>
       {
-        int millisecondTimeout = 10;
-        Thread.Sleep(millisecondTimeout);    
+        var cancel = new CancellationTokenSource ();
 
-        return ScItemsParser.Parse(VALID_RESPONSE, cancel.Token);
-      });
-      cancel.Cancel();
-      await action;
+        Task<ScItemsResponse> action = Task.Factory.StartNew( ()=> 
+        {
+          int millisecondTimeout = 10;
+          Thread.Sleep(millisecondTimeout);    
 
-      Assert.Fail ("OperationCanceledException not thrown");
+          return ScItemsParser.Parse(VALID_RESPONSE, cancel.Token);
+        });
+        cancel.Cancel();
+        await action;
+      };
+      Assert.Catch<OperationCanceledException>(testAction);
     }
   }
 }
