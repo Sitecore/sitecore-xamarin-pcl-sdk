@@ -48,7 +48,9 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestMissingHttpIsAutocompletedDuringAuthentication()
     {
-      var session = testData.GetSession("mobiledev1ua1.dk.sitecore.net:7119", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      string urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
+
+      var session = testData.GetSession(urlWithoutHttp, testData.Users.Admin.Username, testData.Users.Admin.Password);
       var certrificate = await session.ReadItemAsync(this.requestWithItemId);
       Assert.IsNotNull(certrificate);
     }
@@ -56,7 +58,8 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestAuthenticateWithSlashInTheEnd()
     {
-      var session = testData.GetSession("http://mobiledev1ua1.dk.sitecore.net:7119/", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      string urlWithSlahInTheEnd = testData.InstanceUrl+'/';
+      var session = testData.GetSession(urlWithSlahInTheEnd, testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
