@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK
 		IGetMediaItemRequestParametersBuilder<T> Language (string itemLanguage);
 		IGetMediaItemRequestParametersBuilder<T> Version (string itemVersion);
 
-		IGetMediaItemRequestParametersBuilder<T> DownloadOptions (DownloadMediaOptions downloadMediaOptions);
+    IGetMediaItemRequestParametersBuilder<T> DownloadOptions (IDownloadMediaOptions downloadMediaOptions);
 		T Build();
 	}
 }

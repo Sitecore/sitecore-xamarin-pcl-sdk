@@ -4,25 +4,24 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
 	using System.Collections.Generic;
 
-	public class DownloadMediaOptions
+  public class DownloadMediaOptions : IDownloadMediaOptions
 	{
 
-    public static bool IsNullOrEmpty(DownloadMediaOptions options)
+    public bool IsEmpty
 		{
-			if (null == options)
-			{
-				return true;
-			}
-				return  	
-					null == options.Width
-				&&  null == options.Height
-				&&	null == options.MaxWidth
-				&&	null == options.MaxHeight
-				&&	null == options.BackgroundColor
-				&&	null == options.DisableMediaCache
-				&&	null == options.AllowStrech
-				&&	null == options.Scale
-				&&	null == options.DisplayAsThumbnail;
+      get
+      {
+          return  	
+              null == this.Width
+          &&  null == this.Height
+          &&	null == this.MaxWidth
+          &&	null == this.MaxHeight
+          &&	null == this.BackgroundColor
+          &&	null == this.DisableMediaCache
+          &&	null == this.AllowStrech
+          &&	null == this.Scale
+          &&	null == this.DisplayAsThumbnail;
+      }
 		}
 
 		public DownloadMediaOptions ()
@@ -268,14 +267,14 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		private const string PositiveBoolValue = "1";
 
-		private const string widthKey 			= "w";
-		private const string heightKey 			= "h";
-		private const string maxWidthKey 		= "mw";
-		private const string maxHeightKey 		= "mh";
-		private const string strechKey 			= "as";
-		private const string mediaCacheKey 		= "dmc";
-		private const string scaleKey 			= "sc";
-		private const string thumbnailKey 		= "thn";
+		private const string widthKey 			    = "w";
+		private const string heightKey 			    = "h";
+		private const string maxWidthKey 		    = "mw";
+		private const string maxHeightKey 	    = "mh";
+		private const string strechKey 			    = "as";
+		private const string mediaCacheKey 	    = "dmc";
+		private const string scaleKey 			    = "sc";
+		private const string thumbnailKey 		  = "thn";
 		private const string backgroundColorKey = "bc";
 	}
 }

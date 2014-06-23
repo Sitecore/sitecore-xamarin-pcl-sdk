@@ -37,7 +37,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 		}
 
 //		https://test.host/~/media/1.png.ashx?w=640&h=480
-		public string BuildUrlStringForPath(string path, DownloadMediaOptions options)
+    public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
 		{
 			MediaItemPathValidator.ValidateMediaItemPath (path);
 		
@@ -88,9 +88,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			return result;
 		}
 
-		private string AppendUrlStringWithDownloadOptions(string path, DownloadMediaOptions options)
+    private string AppendUrlStringWithDownloadOptions(string path, IDownloadMediaOptions options)
 		{
-			if (DownloadMediaOptions.IsEmptyOrEmpty (options))
+      if (null == options || options.IsEmpty)
 			{
 				return path;
 			}

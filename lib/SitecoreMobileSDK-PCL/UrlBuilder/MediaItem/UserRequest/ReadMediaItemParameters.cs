@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK
 		public ReadMediaItemParameters(
 			ISessionConfig sessionSettings,
 			IItemSource itemSource, 
-			DownloadMediaOptions downloadOptions,
+      IDownloadMediaOptions downloadOptions,
 			string mediaItemPath)
 		{
 			this.SessionSettings = sessionSettings;
@@ -26,6 +26,6 @@ namespace Sitecore.MobileSDK
 
 		public ISessionConfig SessionSettings { get; private set; }
 
-		public DownloadMediaOptions DownloadOptions { get; private set; }
+    public IDownloadMediaOptions DownloadOptions { get; private set; }
 	}
 }

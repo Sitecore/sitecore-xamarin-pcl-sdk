@@ -42,7 +42,7 @@ namespace Sitecore.MobileSDK
 			return this;
 		}
 
-		public IGetMediaItemRequestParametersBuilder<T> DownloadOptions (DownloadMediaOptions downloadMediaOptions)
+    public IGetMediaItemRequestParametersBuilder<T> DownloadOptions (IDownloadMediaOptions downloadMediaOptions)
 		{
 			//TODO:!!! make downloadMediaOptions object copy here !!!
 			this.downloadMediaOptions = downloadMediaOptions;
@@ -53,7 +53,7 @@ namespace Sitecore.MobileSDK
 		public abstract T Build();
 
 		protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
-		protected DownloadMediaOptions downloadMediaOptions = null;
+    protected IDownloadMediaOptions downloadMediaOptions = null;
 	}
 }
 
