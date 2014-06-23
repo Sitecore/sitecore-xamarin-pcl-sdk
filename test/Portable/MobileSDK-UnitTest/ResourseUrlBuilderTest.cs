@@ -6,7 +6,6 @@ using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
-
 namespace Sitecore.MobileSdkUnitTest
 {
 	using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -36,15 +35,20 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void RequestBuiolderTest()
     {
-      DownloadMediaOptions options = new DownloadMediaOptions ();
-      options.SetWidth (100);
-      options.SetBackgroundColor ("white");
-      options.SetDisplayAsThumbnail (true);
 
+      IDownloadMediaOptions options = new MediaOptionsBuilder()
+        .SetWidth(100)
+        .SetHeight(200)
+        .SetBackgroundColor("white")
+        .SetDisplayAsThumbnail(true)
+        .Build();
+        
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/1.png")
         .DownloadOptions(options)
         .Database("master")
         .Build();
+
+//      request.ItemSource.Database = "web";
 
     }
 
