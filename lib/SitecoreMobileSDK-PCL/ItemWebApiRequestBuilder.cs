@@ -1,4 +1,5 @@
-﻿
+﻿using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+
 
 namespace Sitecore.MobileSDK
 {
@@ -6,7 +7,6 @@ namespace Sitecore.MobileSDK
     using Sitecore.MobileSDK.UrlBuilder.ItemById;
     using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
     using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-    using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
     public class ItemWebApiRequestBuilder
     {

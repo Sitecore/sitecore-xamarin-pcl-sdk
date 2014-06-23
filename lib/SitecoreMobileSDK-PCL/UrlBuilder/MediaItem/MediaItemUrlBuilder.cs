@@ -1,10 +1,11 @@
-﻿using System;
-using Sitecore.MobileSDK.Utils;
-using Sitecore.MobileSDK.SessionSettings;
-using System.Collections.Generic;
-
+﻿
 namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
+  using System;
+  using Sitecore.MobileSDK.Utils;
+  using Sitecore.MobileSDK.SessionSettings;
+  using System.Collections.Generic;
+
 	using Sitecore.MobileSDK.Items;
 	using Sitecore.MobileSDK.UrlBuilder.Rest;
 

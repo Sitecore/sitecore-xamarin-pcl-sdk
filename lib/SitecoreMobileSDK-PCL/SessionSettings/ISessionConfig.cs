@@ -5,26 +5,26 @@ using System.Text;
 
 namespace Sitecore.MobileSDK.SessionSettings
 {
-    public interface ISessionConfig
+  public interface ISessionConfig
+  {
+    string InstanceUrl
     {
-        string InstanceUrl
-        {
-            get;
-        }
-
-        string Site      
-        { 
-            get; 
-        }
-
-        string ItemWebApiVersion
-        {
-            get;
-        }
-
-		string MediaLybraryRoot
-		{
-			get;
-		}
+        get;
     }
+
+    string Site      
+    { 
+        get; 
+    }
+
+    string ItemWebApiVersion
+    {
+        get;
+    }
+
+  	string MediaLybraryRoot
+  	{
+  		get;
+  	}
+  }
 }
