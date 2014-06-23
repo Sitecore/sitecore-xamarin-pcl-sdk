@@ -113,6 +113,7 @@
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\MediaOptionsBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\IDownloadMediaOptions.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\DownloadMediaOptions.cs" />
+    <Compile Include="SessionSettings\SessionConfigValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

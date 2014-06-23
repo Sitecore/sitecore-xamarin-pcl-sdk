@@ -166,10 +166,10 @@
     [Test]
     public void TestGetItemByNullId()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemById(null);
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -178,10 +178,10 @@
     [Test]
     public void TestGetItemByNullPath()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemByPath(null);
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -190,10 +190,10 @@
     [Test]
     public void TestGetItemByNullQuery()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemByQuery(null);
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -202,10 +202,10 @@
     [Test]
     public void TestGetItemByEmptyPath()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemByPath("");
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -214,10 +214,10 @@
     [Test]
     public void TestGetItemByEmptyQuery()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemByQuery("");
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -254,10 +254,10 @@
       var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = sessionWithoutAccess.ReadItemAsync(request);
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<RsaHandshakeException>(testCode);

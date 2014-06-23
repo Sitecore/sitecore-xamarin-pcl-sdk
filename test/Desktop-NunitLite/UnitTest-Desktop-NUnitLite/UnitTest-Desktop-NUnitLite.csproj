@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{458B812E-CBDC-45D5-89FE-DC7791D8EDBB}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UnitTest_Desktop_NUnitLite</RootNamespace>
+    <AssemblyName>UnitTest-Desktop-NUnitLite</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\solutions\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="crypto">
+      <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\solutions\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunitlite">
+      <HintPath>..\..\..\solutions\packages\NUnitLite.1.0.0\lib\net45\nunitlite.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\FieldsParserTest.cs">
+      <Link>FieldsParserTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\GetItemsParserTest.cs">
+      <Link>GetItemsParserTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByIdUrlBuilderTests.cs">
+      <Link>ItemByIdUrlBuilderTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByPathUrlBuilderTests.cs">
+      <Link>ItemByPathUrlBuilderTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByQueryUrlBuilderTest.cs">
+      <Link>ItemByQueryUrlBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceMergerTest.cs">
+      <Link>ItemSourceMergerTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceTest.cs">
+      <Link>ItemSourceTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemSourceUrlBuilderTest.cs">
+      <Link>ItemSourceUrlBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemWebApiRequestBuilderTest.cs">
+      <Link>ItemWebApiRequestBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\LoginAndPasswordEncryptionTest.cs">
+      <Link>LoginAndPasswordEncryptionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\PublicKeyParsingTest.cs">
+      <Link>PublicKeyParsingTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\QueryParametersUrlBuilderTest.cs">
+      <Link>QueryParametersUrlBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\SessionConfigMergerTest.cs">
+      <Link>SessionConfigMergerTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\SessionConfigUrlBuilderTest.cs">
+      <Link>SessionConfigUrlBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
+      <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
+      <Name>SitecoreMobileSDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj">
+      <Project>{b99eee93-6176-438f-b601-e0382545166a}</Project>
+      <Name>SitecoreMobileSDK-MockObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

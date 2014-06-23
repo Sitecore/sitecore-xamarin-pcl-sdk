@@ -59,7 +59,7 @@ namespace Sitecore.MobileSdkUnitTest
             IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
-            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&sc_lang=en&payload=content";
+            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en&payload=content";
 
             Assert.AreEqual(expected, result);
         }
@@ -90,7 +90,7 @@ namespace Sitecore.MobileSdkUnitTest
             IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
-            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%20to%20item?sc_database=web&sc_lang=en&payload=content";
+            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%20to%20item?sc_database=web&language=en&payload=content";
 
             Assert.AreEqual(expected, result);
         }
@@ -163,7 +163,7 @@ namespace Sitecore.MobileSdkUnitTest
             IReadItemsByPathRequest request = mutableParameters;
 
             string result = this.builder.GetUrlForRequest(request);
-            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&sc_lang=en&payload=min&fields=x|y";
+            string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en&payload=min&fields=x|y";
 
             Assert.AreEqual(expected, result);
         }

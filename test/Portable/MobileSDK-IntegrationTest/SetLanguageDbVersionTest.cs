@@ -58,11 +58,11 @@
 
       TestDelegate testCode = () =>
       {
-        var itemSource = new ItemSource(Db, null, "1");
+        var itemSource = new ItemSource(Db, null, "\t1");
         Assert.IsNull(itemSource, "unreachable code");
         Assert.Fail("unreachable code");
       };
-      Exception exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
@@ -76,7 +76,7 @@
         Assert.IsNull(itemSource, "unreachable code");
         Assert.Fail("unreachable code");
       };
-      Exception exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
@@ -182,10 +182,10 @@
       var session = this.CreateAdminSession();
 
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = GetItemByIdWithRequestBuilder(requestBuilder, session);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -224,10 +224,10 @@
       var session = this.CreateAdminSession(itemSource);
 
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -245,10 +245,10 @@
       var session = this.CreateAdminSession(itemSource);
 
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -310,10 +310,10 @@
       const string Site = "/@$%/";
       var session = this.CreateCreatorexSession(Site);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
