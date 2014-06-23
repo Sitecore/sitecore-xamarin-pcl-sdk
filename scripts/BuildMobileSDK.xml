@@ -23,6 +23,9 @@
     <IntegrationTestReportXml>$(RepositoryRoot)\deployment\IntegrationTestDesktopReport.xml</IntegrationTestReportXml>
 
     <NugetExe>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.PackageManagement\NuGet.exe</NugetExe>
+
+    <UnitTestDesktopBuildDirectory>$(RepositoryRoot)\test\Desktop-NunitLite\UnitTest-Desktop-NUnitLite\bin\Release</UnitTestDesktopBuildDirectory>
+    <IntegrationTestDesktopBuildDirectory>$(RepositoryRoot)\test\Desktop-NunitLite\IntegrationTest-Desktop-NUnitLite\bin\Release</IntegrationTestDesktopBuildDirectory>
   </PropertyGroup>
 
 
@@ -38,6 +41,7 @@
   	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
   	<MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
   	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
+
 
     <UnitTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\bin\Release\MobileSDK-UnitTest-Desktop.dll" />
     <IntegrationTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-IntegrationTest-Desktop\bin\Release\MobileSDK-IntegrationTest-Desktop.dll" />
@@ -83,31 +87,27 @@
 <!-- ====================================================  -->
 <Target Name="UnitTest">
     <MSBuild 
-      Projects="$(SolutionsDirectory)\MobileSDK-UnitTest-Desktop.sln" 
+      Projects="$(SolutionsDirectory)\MobileSDK-UnitTest-Desktop-NUnitLite.sln" 
       Targets="Build" 
       Properties="Configuration=Release;" 
     />
 
-    <MSBuild.ExtensionPack.CodeQuality.NUnit
-      Assemblies="@(UnitTestDesktopDll)"
-      Configuration="Release"
-      OutputXmlFile="$(UnitTestReportXml)"
-      Version="2.6.3"
-    />
+    <Exec
+      Command="UnitTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\UnitTestReport.txt -result:$(DeploymentDirectory)\UnitTestReport.xml"
+      WorkingDirectory="$(UnitTestDesktopBuildDirectory)"
+      />
 </Target>
 
 <Target Name="IntegrationTest">
     <MSBuild 
-      Projects="$(SolutionsDirectory)\MobileSdk-IntegrationTest-Desktop.sln" 
+      Projects="$(SolutionsDirectory)\MobileSdk-IntegrationTest-Desktop-NUnitLite.sln" 
       Targets="Build" 
       Properties="Configuration=Release;" 
     />
 
-    <MSBuild.ExtensionPack.CodeQuality.NUnit
-      Assemblies="@(IntegrationTestDesktopDll)"
-      Configuration="Release"
-      OutputXmlFile="$(IntegrationTestReportXml)"
-      Version="2.6.3"
+    <Exec
+      Command="IntegrationTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\InegrationTestReport.txt -result:$(DeploymentDirectory)\IntegrationTestReport.xml"
+      WorkingDirectory="$(IntegrationTestDesktopBuildDirectory)"
     />
 </Target>
 
