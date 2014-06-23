@@ -28,6 +28,13 @@ namespace MobileSDK_UnitTest_Desktop
     }
 
     [Test]
+    public void TestQueryParametersWithNullFieldsProduceNullString()
+    {
+      string result = this.builder.BuildUrlString(new QueryParameters(null, null));
+      Assert.AreEqual(string.Empty, result);
+    }
+
+    [Test]
     public void TestBuildValidQueryParams()
     {
       string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, null));
