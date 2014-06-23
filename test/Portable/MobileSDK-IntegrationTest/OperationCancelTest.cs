@@ -38,70 +38,70 @@ namespace MobileSDKIntegrationTest
 
 
     [Test]
-    [ExpectedException(typeof(TaskCanceledException))]
     public async void TestCancelExceptionIsNotWrappedForGetPublicKeyRequest()
     {
-      //        [ExpectedException(typeof(OperationCanceledException))]
+      TestDelegate testAction = async () =>
+      {
+        var cancel = new CancellationTokenSource ();
 
-      var cancel = new CancellationTokenSource ();
+        Task<PublicKeyX509Certificate> action = this.session.GetPublicKeyAsyncPublic(cancel.Token);
+        cancel.Cancel();
 
-      Task<PublicKeyX509Certificate> action = this.session.GetPublicKeyAsyncPublic(cancel.Token);
-      cancel.Cancel();
-
-      await action;
-      Assert.Fail ("OperationCanceledException not thrown");
+        await action;
+      };
+      Assert.Catch<OperationCanceledException>(testAction);
     }
 
 
     [Test]
-    [ExpectedException(typeof(TaskCanceledException))]
     public async void TestCancelExceptionIsNotWrappedForItemByIdRequest()
     {
-      //        [ExpectedException(typeof(OperationCanceledException))]
+      TestDelegate testAction = async () =>
+      {
+        var cancel = new CancellationTokenSource ();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId (this.env.Items.Home.Id).Build();
 
-      var cancel = new CancellationTokenSource ();
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId (this.env.Items.Home.Id).Build();
+        Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
+        cancel.Cancel();
 
-      Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
-      cancel.Cancel();
-
-      await action;
-      Assert.Fail ("OperationCanceledException not thrown");
+        await action;
+      };
+      Assert.Catch<OperationCanceledException>(testAction);
     }
 
 
 
     [Test]
-    [ExpectedException(typeof(TaskCanceledException))]
     public async void TestCancelExceptionIsNotWrappedForItemByPathRequest()
     {
-      //        [ExpectedException(typeof(OperationCanceledException))]
+      TestDelegate testAction = async () =>
+      {
+        var cancel = new CancellationTokenSource ();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath ("/sitecore/content/home").Build();
 
-      var cancel = new CancellationTokenSource ();
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath ("/sitecore/content/home").Build();
+        Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
+        cancel.Cancel();
 
-      Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
-      cancel.Cancel();
-
-      await action;
-      Assert.Fail ("OperationCanceledException not thrown");
+        await action;
+      };
+      Assert.Catch<OperationCanceledException>(testAction);
     }
 
 
     [Test]
-    [ExpectedException(typeof(TaskCanceledException))]
     public async void TestCancelExceptionIsNotWrappedForItemByQueryRequest()
     {
-      //        [ExpectedException(typeof(OperationCanceledException))]
+      TestDelegate testAction = async () =>
+      {
+        var cancel = new CancellationTokenSource ();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
 
-      var cancel = new CancellationTokenSource ();
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
+        Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
+        cancel.Cancel();
 
-      Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
-      cancel.Cancel();
-
-      await action;
-      Assert.Fail ("OperationCanceledException not thrown");
+        await action;
+      };
+      Assert.Catch<OperationCanceledException>(testAction);
     }
   }
 }
