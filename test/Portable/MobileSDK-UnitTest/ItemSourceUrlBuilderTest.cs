@@ -36,7 +36,7 @@ namespace Sitecore.MobileSdkUnitTest
             ItemSource data = ItemSource.DefaultSource();
             ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters(), data);
 
-            string expected = "sc_database=web&sc_lang=en";
+            string expected = "sc_database=web&language=en";
             Assert.AreEqual(expected, builder.BuildUrlQueryString());
         }
 
@@ -46,7 +46,7 @@ namespace Sitecore.MobileSdkUnitTest
             ItemSource data = new ItemSource("master", "da", "100500");
             ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters(), data);
 
-            string expected = "sc_database=master&sc_lang=da&sc_itemversion=100500";
+            string expected = "sc_database=master&language=da&sc_itemversion=100500";
             Assert.AreEqual(expected, builder.BuildUrlQueryString());
         }
 
@@ -59,7 +59,7 @@ namespace Sitecore.MobileSdkUnitTest
             ItemSource data = new ItemSource("{master}", "da???", ";()//");
             ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters(), data);
 
-            string expected = "sc_database=%7bmaster%7d&sc_lang=da%3f%3f%3f&sc_itemversion=%3b%28%29%2f%2f";
+            string expected = "sc_database=%7bmaster%7d&language=da%3f%3f%3f&sc_itemversion=%3b%28%29%2f%2f";
             Assert.AreEqual(expected, builder.BuildUrlQueryString());
         }
     }
