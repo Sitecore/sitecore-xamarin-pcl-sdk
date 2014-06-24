@@ -32,10 +32,17 @@ namespace Sitecore.MobileSDK
       }
 
       this.requestMerger = new UserRequestMerger(config, defaultSource);
-
-
       this.sessionConfig = config;
+
       this.httpClient = new HttpClient();
+    }
+
+    public IItemSource DefaultSource
+    { 
+      get
+      {
+        return this.requestMerger.ItemSourceMerger.DefaultSource;
+      }
     }
 
     #region Forbidden Methods
@@ -136,7 +143,7 @@ namespace Sitecore.MobileSDK
     private readonly UserRequestMerger requestMerger;
     private readonly HttpClient httpClient;
 
-    private readonly SessionConfig sessionConfig;
+    protected readonly SessionConfig sessionConfig;
 
     private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
     private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
