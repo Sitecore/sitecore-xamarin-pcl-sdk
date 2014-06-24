@@ -186,5 +186,63 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.AreEqual(expected, result);
     }
+
+    [Test]
+    public void TestOptionalSourceAndExplicitPayload()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+        .Payload(PayloadType.Full)
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?payload=full&sc_itemid=%7bxxx-yyy-zzz%7d";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestExplicitDatabase()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+        .Database("master")
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?sc_database=master&sc_itemid=%7bxxx-yyy-zzz%7d";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestDatabaseAndExplicitLanguageAndPayload()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+        .Language("da")
+        .Payload(PayloadType.Content)
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?language=da&payload=content&sc_itemid=%7bxxx-yyy-zzz%7d";
+
+      Assert.AreEqual(expected, result);
+    }
   }
 }
