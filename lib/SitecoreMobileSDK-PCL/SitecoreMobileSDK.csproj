@@ -114,6 +114,8 @@
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\DownloadMediaOptions.cs" />
     <Compile Include="SessionSettings\SessionConfigValidator.cs" />
     <Compile Include="Items\ReadMediaItemParameters.cs" />
+    <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
+    <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -178,6 +180,7 @@
     <Folder Include="Exceptions\" />
     <Folder Include="Items\Fields\" />
     <Folder Include="UrlBuilder\MediaItem\MediaOptionsBuilder\" />
+    <Folder Include="CrudTasks\Resource\" />
   </ItemGroup>
   <ItemGroup />
 </Project>
