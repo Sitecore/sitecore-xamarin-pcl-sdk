@@ -13,11 +13,18 @@ namespace Sitecore.MobileSDK
 
     public IItemSource FillItemSourceGaps(IItemSource userSource)
     {
-      if (null == userSource)
+      bool isNullSource = (null == this.defaultSource);
+      bool isNullInput = (null == userSource);
+
+      if (isNullSource && isNullInput)
+      {
+        return null;
+      }
+      else if (isNullInput)
       {
         return this.defaultSource.ShallowCopy();
       }
-      else if (null == this.defaultSource)
+      else if (isNullSource)
       {
         return userSource.ShallowCopy();
       }
