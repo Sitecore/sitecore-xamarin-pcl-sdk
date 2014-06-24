@@ -45,7 +45,7 @@
       {
         result = 
           result +
-          this.restGrammar.FieldSeparator +
+          this.restGrammar.FieldSeparator + 
           this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
       }
 
