@@ -43,7 +43,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableSessionConfig.Site = "/sitecore/shell";
       this.sitecoreShellConfig = mutableSessionConfig;
 
-      this.payload = new QueryParameters( null, null );
+      this.payload = new QueryParameters( PayloadType.Min, null );
     }
 
     [TearDown]
@@ -51,6 +51,41 @@ namespace Sitecore.MobileSdkUnitTest
     {
       this.builder = null;
       this.sessionConfig = null;
+    }
+
+    [Test]
+    public void TestNullPayloadIsNotReplacedWithDefault()
+    {
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
+      mutableParameters.QueryParameters = new QueryParameters(null, null);
+
+      IReadItemsByIdRequest parameters = mutableParameters;
+
+      string result = this.builder.GetUrlForRequest(parameters);
+      string expected = "http://sitecore.net/-/item/v1?sc_database=web&language=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+
+      Assert.AreEqual(expected, result);
+    }
+
+
+    [Test]
+    public void TestNullPayloadStructIsIgnored()
+    {
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
+      mutableParameters.QueryParameters = null;
+
+      IReadItemsByIdRequest parameters = mutableParameters;
+
+      string result = this.builder.GetUrlForRequest(parameters);
+      string expected = "http://sitecore.net/-/item/v1?sc_database=web&language=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+
+      Assert.AreEqual(expected, result);
     }
 
     [Test]
@@ -103,11 +138,11 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestUrlBuilderHandlesNullItemId()
+    public void TestUrlBuilderThrowsExceptionForNullItemId()
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = null;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
       mutableParameters.ItemId = null;
       mutableParameters.QueryParameters = this.payload;
 
