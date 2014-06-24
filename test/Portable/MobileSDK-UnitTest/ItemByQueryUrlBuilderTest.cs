@@ -1,4 +1,5 @@
 ﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+using Sitecore.MobileSDK;
 
 
 namespace Sitecore.MobileSdkUnitTest
@@ -156,6 +157,81 @@ namespace Sitecore.MobileSdkUnitTest
       IReadItemsByQueryRequest request = mutableParameters;
 
       Assert.Throws<ArgumentNullException> (() => this.builder.GetUrlForRequest (request));
+    }
+  
+    [Test]
+    public void TestOptionalSourceInSessionAndUserRequest()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/home/*").Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByQueryGaps(request);
+
+      var urlBuilder = new ItemByQueryUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?query=%2fsitecore%2fcontent%2fhome%2f%2a";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestOptionalSourceAndExplicitPayload()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/home/*")
+        .Payload(PayloadType.Full)
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByQueryGaps(request);
+
+      var urlBuilder = new ItemByQueryUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?payload=full&query=%2fsitecore%2fcontent%2fhome%2f%2a";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestExplicitDatabase()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/home/*")
+        .Database("master")
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByQueryGaps(request);
+
+      var urlBuilder = new ItemByQueryUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?sc_database=master&query=%2fsitecore%2fcontent%2fhome%2f%2a";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestDatabaseAndExplicitLanguageAndPayload()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/home/*")
+        .Language("da")
+        .Payload(PayloadType.Content)
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByQueryGaps(request);
+
+      var urlBuilder = new ItemByQueryUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?language=da&payload=content&query=%2fsitecore%2fcontent%2fhome%2f%2a";
+
+      Assert.AreEqual(expected, result);
     }
   }
 }
