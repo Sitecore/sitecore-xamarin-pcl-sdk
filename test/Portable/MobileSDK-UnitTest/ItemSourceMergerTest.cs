@@ -14,33 +14,35 @@ namespace Sitecore.MobileSdkUnitTest
   public class ItemSourceMergerTest
   {
     [Test]
-    public void TestMergerRequiresDefaultValues()
+    public void TestItemSourceMergerDefaultValuesAreOptional()
     {
-      Assert.Throws<ArgumentNullException>( () => new ItemSourceFieldMerger(null) );
+      var result = new ItemSourceFieldMerger(null);
+      Assert.IsNotNull(result);
     }
 
     [Test]
-    public void TestDatabaseAndLanguageMustBeSetOnDefaultSource()
+    public void TestDatabaseAndLanguageAreOptionalForDefaultSource()
     {
-      IItemSource noDatabase = new ItemSourcePOD (null, "en", "1");
-      IItemSource noLanguage = new ItemSourcePOD ("master", null, "1");
-      IItemSource noVersion = new ItemSourcePOD ("master", "en", null);
+      IItemSource noDatabase = new ItemSourcePOD(null    , "en", "1" );
+      IItemSource noLanguage = new ItemSourcePOD("master", null, "1" );
+      IItemSource noVersion  = new ItemSourcePOD("master", "en", null);
 
 
-      Assert.Throws<ArgumentNullException>( () => new ItemSourceFieldMerger(noDatabase) );
-      Assert.Throws<ArgumentNullException>( () => new ItemSourceFieldMerger(noLanguage) );
-      Assert.DoesNotThrow( () => new ItemSourceFieldMerger(noVersion) );
+      Assert.DoesNotThrow( () => new ItemSourceFieldMerger(noDatabase) );
+      Assert.DoesNotThrow( () => new ItemSourceFieldMerger(noLanguage) );
+      Assert.DoesNotThrow( () => new ItemSourceFieldMerger(noVersion ) );
     }
 
     [Test]
-    public void TestMergerReturnsDefaultSourceForNilInput()
+    public void TestMergerReturnsDefaultSourceCopyForNilInput()
     {
-      ItemSource defaultSource = ItemSource.DefaultSource ();
+      ItemSource defaultSource = ItemSource.DefaultSource();
 
-      var merger = new ItemSourceFieldMerger (defaultSource);
-      IItemSource result = merger.FillItemSourceGaps (null);
+      var merger = new ItemSourceFieldMerger(defaultSource);
+      IItemSource result = merger.FillItemSourceGaps(null);
 
-      Assert.AreSame (defaultSource, result);
+      Assert.AreNotSame(defaultSource, result);
+      Assert.AreEqual(defaultSource, result);
     }
 
 
