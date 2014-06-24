@@ -22,15 +22,32 @@
     }
 
     public string BuildUrlQueryString()
-    {            
-      string escapedDatabase = UrlBuilderUtils.EscapeDataString(this.itemSource.Database);
-      string escapedLanguage = UrlBuilderUtils.EscapeDataString(this.itemSource.Language);
+    { 
+      string escapedDatabase = null;
+      string escapedLanguage = null;
 
-      string result =
-        this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + escapedDatabase +
+      if (null != this.itemSource)
+      {
+        escapedDatabase = UrlBuilderUtils.EscapeDataString(this.itemSource.Database);
+        escapedLanguage = UrlBuilderUtils.EscapeDataString(this.itemSource.Language);
+      }
 
-        this.restGrammar.FieldSeparator +
-        this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
+      string result = string.Empty;
+
+      if (!string.IsNullOrEmpty(escapedDatabase))
+      {
+        result = 
+          result +
+          this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + escapedDatabase;
+      }
+
+      if (!string.IsNullOrEmpty(escapedLanguage))
+      {
+        result = 
+          result +
+          this.restGrammar.FieldSeparator +
+          this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
+      }
 
       if (null != this.itemSource.Version)
       {
