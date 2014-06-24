@@ -48,6 +48,40 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
+    public void TestNullPayloadIsNotReplacedWithDefault()
+    {
+      MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
+      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemPath = "/path/TO/iTEm";
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.QueryParameters = new QueryParameters(null, null);
+
+      IReadItemsByPathRequest request = mutableParameters;
+
+      string result = this.builder.GetUrlForRequest(request);
+      string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestNullPayloadStructIsIgnored()
+    {
+      MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
+      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemPath = "/path/TO/iTEm";
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.QueryParameters = null;
+
+      IReadItemsByPathRequest request = mutableParameters;
+
+      string result = this.builder.GetUrlForRequest(request);
+      string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
     public void TestBuildWithValidPath()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
