@@ -51,9 +51,10 @@ namespace MobileSDK_UnitTest_Desktop
     }
 
     [Test]
-    public void TestBuildNullQueryParams()
+    public void TestNullQueryParamsProduceNullString()
     {
-      Assert.Throws<ArgumentNullException>(() => this.builder.BuildUrlString(null));
+      string result = this.builder.BuildUrlString(null);
+      Assert.IsNull(result);
     }
 
     [Test]
