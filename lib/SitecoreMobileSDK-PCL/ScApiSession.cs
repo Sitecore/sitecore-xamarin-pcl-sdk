@@ -138,10 +138,10 @@ namespace Sitecore.MobileSDK
       ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
       IReadMediaItemRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(request);
 
-      //TODO: @igk do we need taskFlow for media request?
-//      var taskFlow = new GetItemsByQueryTasks(new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
-//      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-      return null;
+      MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(this.restGrammar, this.sessionConfig, autocompletedRequest.ItemSource);
+     
+      var taskFlow = new GetResourceTask(urlBuilder, this.httpClient, cryptor);
+      return  await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
     #endregion GetItems
