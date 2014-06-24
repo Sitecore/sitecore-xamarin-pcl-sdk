@@ -15,13 +15,13 @@ namespace Sitecore.MobileSDK.CrudTasks
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
-  public class GetMediaItemTask : IDownloadApiCallTasks<IReadMediaItemRequest, HttpRequestMessage, Stream>
+  public class GetResourceTask : IDownloadApiCallTasks<IReadMediaItemRequest, HttpRequestMessage, Stream>
   {
-    private GetMediaItemTask()
+    private GetResourceTask()
     {
     }
 
-    public GetMediaItemTask(MediaItemUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+    public GetResourceTask(MediaItemUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
