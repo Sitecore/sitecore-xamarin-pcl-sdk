@@ -16,6 +16,11 @@ namespace Sitecore.MobileSDK.Items
       : base(database, language, version)
     {
     }
+
+    public override IItemSource ShallowCopy()
+    {
+      return new ItemSource(this.Database, this.Language, this.Version);
+    }
   } 
 }
 

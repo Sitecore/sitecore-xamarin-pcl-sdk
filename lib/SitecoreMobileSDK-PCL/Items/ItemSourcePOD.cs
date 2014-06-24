@@ -16,6 +16,11 @@ namespace Sitecore.MobileSDK.Items
       this.Version  = version ;
     }
 
+    public virtual IItemSource ShallowCopy()
+    {
+      return new ItemSourcePOD(this.Database, this.Language, this.Version);
+    }
+
     public override bool Equals (object obj)
     {
       if (object.ReferenceEquals(this, obj))
