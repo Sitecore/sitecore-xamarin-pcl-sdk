@@ -26,10 +26,29 @@ namespace Sitecore.MobileSDK
     {
       this.ValidateRequest( request );
 
-      string baseUrl = this.GetCommonPartForRequest( request );
+      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+      string hostUrl = sessionBuilder.BuildUrlString(request.SessionSettings);
+
+      string baseUrl = this.GetCommonPartForRequest( request ).ToLowerInvariant();
       string specificParameters = this.GetSpecificPartForRequest( request );
 
-      string result = baseUrl + this.restGrammar.FieldSeparator + specificParameters;
+      string allParameters = 
+        baseUrl + 
+        this.restGrammar.FieldSeparator + specificParameters;
+        
+      bool shouldTruncateBaseUrl = ( !string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator) );
+      while (shouldTruncateBaseUrl)
+      {
+          allParameters = allParameters.Substring(1);
+          shouldTruncateBaseUrl = ( !string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator) );
+      }
+
+
+      string result = 
+        hostUrl +
+        this.restGrammar.HostAndArgsSeparator + allParameters;
+
+
       return result;
     }
 
@@ -43,29 +62,26 @@ namespace Sitecore.MobileSDK
     #region Common Logic
     private string GetCommonPartForRequest(TRequest request)
     {
-      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
-      string result = sessionBuilder.BuildUrlString(request.SessionSettings);
-
       QueryParametersUrlBuilder queryParametersUrlBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
       string queryParamsUrl = queryParametersUrlBuilder.BuildUrlString(request.QueryParameters);
 
       ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
       string itemSourceArgs = sourceBuilder.BuildUrlQueryString ();
 
+      string result = string.Empty;
+
       if (!string.IsNullOrEmpty(itemSourceArgs))
       {
-        result =
-          result +
-          this.restGrammar.HostAndArgsSeparator +
-          itemSourceArgs;
+        result = 
+          result + 
+          this.restGrammar.FieldSeparator + itemSourceArgs;
       }
 
       if (!string.IsNullOrEmpty(queryParamsUrl))
       {
         result =
           result +
-          this.restGrammar.FieldSeparator +
-          queryParamsUrl;
+          this.restGrammar.FieldSeparator + queryParamsUrl;
       }
 
       return result.ToLowerInvariant();
@@ -77,13 +93,17 @@ namespace Sitecore.MobileSDK
       {
         throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request cannot be null" );
       }
-      else if ( null == request.ItemSource )
-      {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.ItemSource cannot be null" );
-      }
       else if ( null == request.SessionSettings )
       {
         throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings cannot be null" );
+      }
+      else if ( null == request.SessionSettings.InstanceUrl )
+      {
+        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null" );
+      }
+      else if ( null == request.SessionSettings.ItemWebApiVersion )
+      {
+        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null" );
       }
     }
 
