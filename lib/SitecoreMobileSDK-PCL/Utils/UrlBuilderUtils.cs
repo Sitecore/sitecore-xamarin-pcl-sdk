@@ -7,6 +7,11 @@ namespace Sitecore.MobileSDK.Utils
   {
     public static string EscapeDataString(string originalString)
     {
+      if (string.IsNullOrEmpty(originalString))
+      {
+        return originalString;
+      }
+
       string result = Uri.EscapeDataString(originalString);
 
       result = result.Replace("=", "%3d");
