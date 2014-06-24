@@ -51,10 +51,7 @@ namespace MobileSDKIntegrationTest
         .Build();
         
       var response = await this.sessionAuthenticatedUser.DownloadResourceAsync(request);
-
-
-      StreamReader reader = new StreamReader(response);
-
+     
       byte[] data;
 
       using (BinaryReader br = new BinaryReader(response))
