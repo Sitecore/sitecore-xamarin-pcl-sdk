@@ -21,7 +21,10 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
     public string BuildUrlString(IQueryParameters queryParameters)
     {
-      this.Validate(queryParameters);
+      if (null == queryParameters)
+      {
+        return null;
+      }
 
       string result = string.Empty;
 
@@ -102,14 +105,6 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
       string result = enumNamesMap[payload];
       return result;
-    }
-
-    private void Validate(IQueryParameters queryParameters)
-    {
-      if (null == queryParameters)
-      {
-        throw new ArgumentNullException("QueryParameters cannot be null");
-      }
     }
 
     private IRestServiceGrammar restGrammar;
