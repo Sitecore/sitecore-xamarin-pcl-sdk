@@ -47,6 +47,18 @@ namespace Sitecore.MobileSdkUnitTest
 
 
     [Test]
+    public void TestMergerReturnsInputSourceCopyForNilDefault()
+    {
+      ItemSource defaultSource = ItemSource.DefaultSource();
+
+      var merger = new ItemSourceFieldMerger(null);
+      IItemSource result = merger.FillItemSourceGaps(defaultSource);
+
+      Assert.AreNotSame(defaultSource, result);
+      Assert.AreEqual(defaultSource, result);
+    }
+
+    [Test]
     public void TestUserFieldsHaveHigherPriority()
     {
       var defaultSource = new ItemSourcePOD ("master", "en", "1");

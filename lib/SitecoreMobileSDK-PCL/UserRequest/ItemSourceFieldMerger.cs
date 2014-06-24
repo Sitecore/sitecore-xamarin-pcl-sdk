@@ -17,9 +17,9 @@ namespace Sitecore.MobileSDK
       {
         return this.defaultSource.ShallowCopy();
       }
-      else if (null == this.defaultSource.ShallowCopy())
+      else if (null == this.defaultSource)
       {
-        return userSource;
+        return userSource.ShallowCopy();
       }
 
 
