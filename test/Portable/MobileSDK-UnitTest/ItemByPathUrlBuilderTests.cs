@@ -222,5 +222,64 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.AreEqual(expected, result);
     }
+
+
+    [Test]
+    public void TestOptionalSourceAndExplicitPayload()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
+        .Payload(PayloadType.Full)
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
+
+      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?payload=full";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestExplicitDatabase()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
+        .Database("master")
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
+
+      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?sc_database=master";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestDatabaseAndExplicitLanguageAndPayload()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
+        .Language("da")
+        .Payload(PayloadType.Content)
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
+
+      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?language=da&payload=content";
+
+      Assert.AreEqual(expected, result);
+    }
   }
 }
