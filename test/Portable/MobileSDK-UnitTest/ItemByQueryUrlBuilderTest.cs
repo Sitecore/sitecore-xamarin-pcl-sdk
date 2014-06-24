@@ -158,6 +158,5 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.Throws<ArgumentNullException> (() => this.builder.GetUrlForRequest (request));
     }
   }
-
 }
 

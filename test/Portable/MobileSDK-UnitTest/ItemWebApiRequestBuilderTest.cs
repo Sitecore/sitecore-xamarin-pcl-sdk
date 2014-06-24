@@ -78,8 +78,6 @@ namespace Sitecore.MobileSdkUnitTest
         [Test]
         public void TestItemIdRequestBuilderWithIdOnly()
         {
-            
-
             IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{abra-kadabra}").Build();
 
             Assert.IsNotNull(result);
@@ -99,7 +97,6 @@ namespace Sitecore.MobileSdkUnitTest
         [Test]
         public void TestItemIdRequestBuilderWithNullIdCrashes()
         {
-            
             Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(null));
         }
 
