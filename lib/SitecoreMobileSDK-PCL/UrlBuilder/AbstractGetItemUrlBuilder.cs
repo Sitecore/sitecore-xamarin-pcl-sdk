@@ -26,15 +26,18 @@ namespace Sitecore.MobileSDK
     {
       this.ValidateRequest( request );
 
-      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
-      string hostUrl = sessionBuilder.BuildUrlString(request.SessionSettings);
-
+      string hostUrl = this.GetHostUrlForRequest(request);
       string baseUrl = this.GetCommonPartForRequest( request ).ToLowerInvariant();
       string specificParameters = this.GetSpecificPartForRequest( request );
 
-      string allParameters = 
-        baseUrl + 
-        this.restGrammar.FieldSeparator + specificParameters;
+      string allParameters = baseUrl;
+
+      if (!string.IsNullOrEmpty(specificParameters))
+      {
+        allParameters = 
+          allParameters +
+          this.restGrammar.FieldSeparator + specificParameters;
+      }
         
       bool shouldTruncateBaseUrl = ( !string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator) );
       while (shouldTruncateBaseUrl)
@@ -44,10 +47,14 @@ namespace Sitecore.MobileSDK
       }
 
 
-      string result = 
-        hostUrl +
-        this.restGrammar.HostAndArgsSeparator + allParameters;
+      string result = hostUrl;
 
+      if (!string.IsNullOrEmpty(allParameters))
+      {
+        result = 
+          result +
+          this.restGrammar.HostAndArgsSeparator + allParameters;
+      }
 
       return result;
     }
@@ -60,6 +67,14 @@ namespace Sitecore.MobileSDK
     #endregion Entry Point
 
     #region Common Logic
+    protected virtual string GetHostUrlForRequest(TRequest request)
+    {
+      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+      string hostUrl = sessionBuilder.BuildUrlString(request.SessionSettings);
+
+      return hostUrl;
+    }
+
     private string GetCommonPartForRequest(TRequest request)
     {
       QueryParametersUrlBuilder queryParametersUrlBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
