@@ -52,10 +52,13 @@ namespace Sitecore.MobileSDK
       ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
       string itemSourceArgs = sourceBuilder.BuildUrlQueryString ();
 
-      result =
-        result +
-        this.restGrammar.HostAndArgsSeparator +
-        itemSourceArgs;
+      if (!string.IsNullOrEmpty(itemSourceArgs))
+      {
+        result =
+          result +
+          this.restGrammar.HostAndArgsSeparator +
+          itemSourceArgs;
+      }
 
       if (!string.IsNullOrEmpty(queryParamsUrl))
       {

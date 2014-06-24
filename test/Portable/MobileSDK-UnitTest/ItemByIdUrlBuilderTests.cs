@@ -7,12 +7,14 @@ namespace Sitecore.MobileSdkUnitTest
 
   using MobileSDKUnitTest.Mock;
 
+  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
 
   [TestFixture]
   public class ItemByIdUrlBuilderTests
@@ -166,6 +168,23 @@ namespace Sitecore.MobileSdkUnitTest
 
       TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
       Assert.Throws<ArgumentException>(action);
+    }
+
+    [Test]
+    public void TestOptionalSourceInSessionAndUserRequest()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}").Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?sc_iteid=%7bxxx%2dyyy%2dzzz%7d";
+
+      Assert.AreEqual(expected, result);
     }
   }
 }
