@@ -85,18 +85,15 @@ namespace Sitecore.MobileSDK
 
       string result = string.Empty;
 
-      if (!string.IsNullOrEmpty(itemSourceArgs))
+      string[] restSubQueries = { itemSourceArgs, queryParamsUrl };
+      foreach (string currentSubQuery in restSubQueries)
       {
-        result = 
-          result + 
-          this.restGrammar.FieldSeparator + itemSourceArgs;
-      }
-
-      if (!string.IsNullOrEmpty(queryParamsUrl))
-      {
-        result =
-          result +
-          this.restGrammar.FieldSeparator + queryParamsUrl;
+        if (!string.IsNullOrEmpty(currentSubQuery))
+        {
+          result = 
+            result +
+            this.restGrammar.FieldSeparator + currentSubQuery;
+        }
       }
 
       return result.ToLowerInvariant();
