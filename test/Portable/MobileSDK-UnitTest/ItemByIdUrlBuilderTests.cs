@@ -182,7 +182,7 @@ namespace Sitecore.MobileSdkUnitTest
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?sc_iteid=%7bxxx%2dyyy%2dzzz%7d";
+      string expected = "http://localhost/-/item/v1?sc_itemid=%7bxxx-yyy-zzz%7d";
 
       Assert.AreEqual(expected, result);
     }
