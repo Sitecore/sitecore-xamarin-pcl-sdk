@@ -20,13 +20,8 @@ namespace Sitecore.MobileSdkUnitTest
     {
       SessionConfig config = new SessionConfig ("localhost", "alex.fergusson", "man u is a champion");
 
-      TestDelegate initSessionAction = () =>
-      {
-        ScApiSession result = new ScApiSession (config, null);
-        Debug.WriteLine( result );
-      };
-
-      Assert.Throws<ArgumentNullException>(initSessionAction);
+      ScApiSession result = new ScApiSession (config, null);
+      Assert.IsNotNull(result);
     }
 
 
@@ -45,21 +40,30 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestItemSourceRequiresDatabase()
+    public void TestItemSourceDatabaseIsOptional()
     {
-      Assert.Throws<ArgumentNullException> (() => new ItemSource (null, "en", "1"));
+      var result = new ItemSource (null, "en", "1");
+
+      Assert.IsNotNull(result);
+      Assert.IsNull(result.Database);
     }
 
     [Test]
-    public void TestItemSourceRequiresLanguage()
+    public void TestItemSourceLanguageIsOptional()
     {
-      Assert.Throws<ArgumentNullException> (() => new ItemSource ("master", null, "1"));
+      var result = new ItemSource("master", null, "1");
+
+      Assert.IsNotNull(result);
+      Assert.IsNull(result.Language);
     }
 
     [Test]
-    public void TestLanguageIsOptionalForItemSource()
+    public void TestItemVersionIsOptionalForItemSource()
     {
-      Assert.DoesNotThrow (() => new ItemSource ("core", "da", null));
+      var result = new ItemSource ("core", "da", null);
+
+      Assert.IsNotNull(result);
+      Assert.IsNull(result.Version);
     }
 
     [Test]
