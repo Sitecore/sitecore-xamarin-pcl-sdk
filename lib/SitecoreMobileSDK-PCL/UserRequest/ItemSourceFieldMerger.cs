@@ -38,6 +38,14 @@ namespace Sitecore.MobileSDK
       return new ItemSource (database, language, version);
     }
 
+    public IItemSource DefaultSource
+    { 
+      get
+      {
+        return this.defaultSource;
+      }
+    }
+
     private readonly IItemSource defaultSource;
   }
 }

@@ -14,6 +14,16 @@ namespace Sitecore.MobileSdkUnitTest
   public class ItemSourceMergerTest
   {
     [Test]
+    public void TestItemSourceMergerCopiesInputStruct()
+    {
+      IItemSource source = new ItemSourcePOD("master", "da", "100500" );
+      var merger = new ItemSourceFieldMerger(source);
+
+      Assert.AreNotSame(source, merger.DefaultSource);
+      Assert.AreEqual(source, merger.DefaultSource);
+    }
+
+    [Test]
     public void TestItemSourceMergerDefaultValuesAreOptional()
     {
       var result = new ItemSourceFieldMerger(null);
