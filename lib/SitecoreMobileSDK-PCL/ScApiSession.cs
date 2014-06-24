@@ -30,12 +30,8 @@ namespace Sitecore.MobileSDK
       {
         throw new ArgumentNullException("ScApiSession.config cannot be null");
       }
-      if (null == defaultSource)
-      {
-        throw new ArgumentNullException("ScApiSession.defaultSource cannot be null");
-      }
 
-      this.requestMerger = new UserRequestMerger (config, defaultSource);
+      this.requestMerger = new UserRequestMerger(config, defaultSource);
 
 
       this.sessionConfig = config;
