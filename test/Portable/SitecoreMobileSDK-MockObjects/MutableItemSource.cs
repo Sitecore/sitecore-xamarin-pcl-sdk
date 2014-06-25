@@ -1,8 +1,9 @@
-﻿using System;
-using Sitecore.MobileSDK.Items;
-
+﻿
 namespace SitecoreMobileSDKMockObjects
 {
+  using System;
+  using Sitecore.MobileSDK.Items;
+
   public class MutableItemSource : ItemSource
   {
     public MutableItemSource(string database, string language, string version = null) 
