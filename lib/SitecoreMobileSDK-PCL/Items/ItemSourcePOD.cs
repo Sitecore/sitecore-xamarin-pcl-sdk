@@ -46,9 +46,9 @@ namespace Sitecore.MobileSDK.Items
       return base.GetHashCode() + this.Database.GetHashCode () + this.Language.GetHashCode () + this.Version.GetHashCode ();
     }
 
-    public string Database  { get; private set; }
-    public string Language  { get; private set; }
-    public string Version   { get; private set; }
+    public string Database  { get; protected set; }
+    public string Language  { get; protected set; }
+    public string Version   { get; protected set; }
     public int VersionNumber 
     { 
       get 
