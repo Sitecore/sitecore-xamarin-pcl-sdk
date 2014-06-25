@@ -8,7 +8,12 @@ namespace Sitecore.MobileSDK
   {
     public ItemSourceFieldMerger (IItemSource defaultSource)
     {
-      this.defaultSource = defaultSource;
+      if (null == defaultSource)
+      {
+        return;
+      }
+
+      this.defaultSource = defaultSource.ShallowCopy();
     }
 
     public IItemSource FillItemSourceGaps(IItemSource userSource)
