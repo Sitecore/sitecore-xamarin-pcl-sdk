@@ -105,7 +105,6 @@
     <Compile Include="Items\ISitecoreItem.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaItemPathValidator.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\UserRequest\AbstractGetMediaItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\UserRequest\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\UserRequest\ReadMediaItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\IReadMediaItemRequest.cs" />
