@@ -20,31 +20,31 @@ namespace Sitecore.MobileSDK.SessionSettings
     public string InstanceUrl
     {
       get;
-      private set;
+      protected set;
     }
 
     public string Site      
     { 
       get; 
-      private set; 
+      protected set; 
     }
 
     public string Login
     {
       get;
-      private set;
+      protected set;
     }
 
     public string Password
     {
       get;
-      private set;
+      protected set;
     }
 
     public string ItemWebApiVersion
     {
       get; 
-      private set;
+      protected set;
     }
 
     public bool IsAnonymous()
