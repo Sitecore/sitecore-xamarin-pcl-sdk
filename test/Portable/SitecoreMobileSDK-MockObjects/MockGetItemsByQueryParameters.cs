@@ -11,6 +11,11 @@ namespace MobileSDKUnitTest.Mock
 
   public class MockGetItemsByQueryParameters : IReadItemsByQueryRequest
   {
+    public IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    {
+      return null;
+    }
+
     public IItemSource ItemSource { get; set; }
 
     public ISessionConfig SessionSettings { get; set; }

@@ -55,11 +55,12 @@ namespace MobileSDKIntegrationTest
       mockMutableRequest.ItemSource = new ItemSourcePOD(null, null, null);
 
       Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
-      mockMutableRequest.ItemId = this.env.Items.MediaLibrary.Id;
+//      await Task.Factory.StartNew(() => mockMutableRequest.ItemId = this.env.Items.MediaLibrary.Id);
       ScItemsResponse response = await loadItemsTask;
-      var item = response.Items[0];
+//      var item = response.Items[0];
+//      Assert.AreEqual(homeId, item.Id);
 
-      Assert.AreEqual(homeId, item.Id);
+      Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
     }
 
 

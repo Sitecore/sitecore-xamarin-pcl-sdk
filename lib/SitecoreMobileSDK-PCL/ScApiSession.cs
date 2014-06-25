@@ -117,8 +117,10 @@ namespace Sitecore.MobileSDK
 
     public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
+      IReadItemsByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
+
       ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
-      IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
+      IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (requestCopy);
 
       var taskFlow = new GetItemsByIdTasks(new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 

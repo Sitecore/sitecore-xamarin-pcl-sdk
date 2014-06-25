@@ -6,6 +6,8 @@
 
   public interface IBaseGetItemRequest
   {
+    IBaseGetItemRequest DeepCopyBaseGetItemRequest();
+
     IItemSource ItemSource { get; }
 
     ISessionConfig SessionSettings { get; }
