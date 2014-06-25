@@ -44,8 +44,7 @@ namespace Sitecore.MobileSDK
 
     public IGetMediaItemRequestParametersBuilder<T> DownloadOptions (IDownloadMediaOptions downloadMediaOptions)
 		{
-			//TODO:!!! make downloadMediaOptions object copy here !!!
-			this.downloadMediaOptions = downloadMediaOptions;
+      this.downloadMediaOptions = (DownloadMediaOptions)downloadMediaOptions.ShallowCopy();
 
 			return this;
 		}
