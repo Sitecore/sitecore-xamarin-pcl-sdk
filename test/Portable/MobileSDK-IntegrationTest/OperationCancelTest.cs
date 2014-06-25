@@ -38,7 +38,7 @@ namespace MobileSDKIntegrationTest
 
 
     [Test]
-    public async void TestCancelExceptionIsNotWrappedForGetPublicKeyRequest()
+    public void TestCancelExceptionIsNotWrappedForGetPublicKeyRequest()
     {
       TestDelegate testAction = async () =>
       {
@@ -54,7 +54,7 @@ namespace MobileSDKIntegrationTest
 
 
     [Test]
-    public async void TestCancelExceptionIsNotWrappedForItemByIdRequest()
+    public void TestCancelExceptionIsNotWrappedForItemByIdRequest()
     {
       TestDelegate testAction = async () =>
       {
@@ -72,7 +72,7 @@ namespace MobileSDKIntegrationTest
 
 
     [Test]
-    public async void TestCancelExceptionIsNotWrappedForItemByPathRequest()
+    public void TestCancelExceptionIsNotWrappedForItemByPathRequest()
     {
       TestDelegate testAction = async () =>
       {
@@ -89,7 +89,7 @@ namespace MobileSDKIntegrationTest
 
 
     [Test]
-    public async void TestCancelExceptionIsNotWrappedForItemByQueryRequest()
+    public void TestCancelExceptionIsNotWrappedForItemByQueryRequest()
     {
       TestDelegate testAction = async () =>
       {

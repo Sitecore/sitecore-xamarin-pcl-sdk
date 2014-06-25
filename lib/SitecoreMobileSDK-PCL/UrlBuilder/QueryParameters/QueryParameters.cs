@@ -1,17 +1,17 @@
 ﻿
 namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
 {
-    using System.Collections.Generic;
+  using System.Collections.Generic;
 
-    public class QueryParameters : IQueryParameters
+  public class QueryParameters : IQueryParameters
+  {
+    public QueryParameters(PayloadType? payload, ICollection<string> fields)
     {
-        public QueryParameters(PayloadType payload, ICollection<string> fields)
-        {
-            this.Payload = payload;
-            this.Fields = fields;
-        }
-
-        public PayloadType Payload { get; private set; }
-        public ICollection<string> Fields { get; private set; }
+      this.Payload = payload;
+      this.Fields = fields;
     }
+
+    public PayloadType? Payload { get; private set; }
+    public ICollection<string> Fields { get; private set; }
+  }
 }

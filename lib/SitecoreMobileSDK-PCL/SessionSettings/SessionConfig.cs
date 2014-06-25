@@ -17,34 +17,49 @@ namespace Sitecore.MobileSDK.SessionSettings
       this.Validate ();
     }
 
+    public SessionConfig ShallowCopy()
+    {
+      return new SessionConfig(this.InstanceUrl, this.Login, this.Password, this.Site, this.ItemWebApiVersion);
+    }
+
+    public ISessionConfig SessionConfigShallowCopy()
+    {
+      return this.ShallowCopy();
+    }
+
+    public IWebApiCredentials CredentialsShallowCopy()
+    {
+      return this.ShallowCopy();
+    }
+
     public string InstanceUrl
     {
       get;
-      private set;
+      protected set;
     }
 
     public string Site      
     { 
       get; 
-      private set; 
+      protected set; 
     }
 
     public string Login
     {
       get;
-      private set;
+      protected set;
     }
 
     public string Password
     {
       get;
-      private set;
+      protected set;
     }
 
     public string ItemWebApiVersion
     {
       get; 
-      private set;
+      protected set;
     }
 
     public bool IsAnonymous()
@@ -67,6 +82,26 @@ namespace Sitecore.MobileSDK.SessionSettings
         throw new ArgumentNullException ("SessionConfig.ItemWebApiVersion is required");
       }
     }
+
+    public string MediaLybraryRoot 
+    {
+      get
+      { 
+        if (null == this.mediaLybraryRoot)
+        {
+          return SessionConfig.DefaultMediaLybraryRoot;
+        }
+        return this.mediaLybraryRoot;
+      }
+      set
+      { 
+        this.mediaLybraryRoot = value;
+      }
+    }
+
+    private const string DefaultMediaLybraryRoot = "/sitecore/media library";
+    private string mediaLybraryRoot;
+
   }
 }
 

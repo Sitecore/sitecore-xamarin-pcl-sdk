@@ -1,14 +1,15 @@
 
 
-
 namespace Sitecore.MobileSDK
 {
   using System;
+  using System.IO;
   using System.Net.Http;
-
   using System.Threading;
   using System.Threading.Tasks;
 
+
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.CrudTasks;
@@ -30,16 +31,27 @@ namespace Sitecore.MobileSDK
       {
         throw new ArgumentNullException("ScApiSession.config cannot be null");
       }
-      if (null == defaultSource)
-      {
-        throw new ArgumentNullException("ScApiSession.defaultSource cannot be null");
-      }
 
-      this.requestMerger = new UserRequestMerger (config, defaultSource);
+      this.requestMerger = new UserRequestMerger(config, defaultSource);
+      this.sessionConfig = config.ShallowCopy();
 
-
-      this.sessionConfig = config;
       this.httpClient = new HttpClient();
+    }
+
+    public IItemSource DefaultSource
+    { 
+      get
+      {
+        return this.requestMerger.ItemSourceMerger.DefaultSource;
+      }
+    }
+
+    public SessionConfig Config
+    {
+      get
+      {
+        return this.sessionConfig;
+      }
     }
 
     #region Forbidden Methods
@@ -132,6 +144,17 @@ namespace Sitecore.MobileSDK
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
+    public async Task<Stream> DownloadResourceAsync(IReadMediaItemRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+      IReadMediaItemRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(request);
+
+      MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(this.restGrammar, this.sessionConfig, autocompletedRequest.ItemSource);
+     
+      var taskFlow = new GetResourceTask(urlBuilder, this.httpClient, cryptor);
+      return  await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
     #endregion GetItems
 
 
@@ -140,7 +163,7 @@ namespace Sitecore.MobileSDK
     private readonly UserRequestMerger requestMerger;
     private readonly HttpClient httpClient;
 
-    private readonly SessionConfig sessionConfig;
+    protected readonly SessionConfig sessionConfig;
 
     private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
     private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
