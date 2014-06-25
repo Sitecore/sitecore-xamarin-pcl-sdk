@@ -1,9 +1,10 @@
-﻿using SitecoreMobileSDKMockObjects;
+﻿
 
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
+  using SitecoreMobileSDKMockObjects;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
