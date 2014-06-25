@@ -45,9 +45,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			string relativePath = path;
 			string result = this.sessionConfig.InstanceUrl;
 
+      string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
 
-			bool isMediaHookAvailable = (path.IndexOf (MediaItemUrlBuilder.mediaHook, StringComparison.CurrentCultureIgnoreCase) >= 0);
-			bool isExtensionAvailable = (path.IndexOf (MediaItemUrlBuilder.ashxExtension, StringComparison.CurrentCultureIgnoreCase) >= 0);
+      bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.mediaHook);
+      bool isExtensionAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.ashxExtension);
 
 			if (isMediaHookAvailable)
 			{
@@ -62,9 +63,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			{
 				result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
 
-				string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot;
+        string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot.ToLowerInvariant();
 
-				int rootStartIndex = path.IndexOf (mediaLibraryRoot, StringComparison.CurrentCultureIgnoreCase);
+        int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
+
 				bool isMediaRootAvailable = (rootStartIndex >= 0);
 
 				if ( isMediaRootAvailable )
