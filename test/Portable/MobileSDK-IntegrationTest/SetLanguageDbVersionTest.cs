@@ -1,12 +1,16 @@
-﻿namespace MobileSDKIntegrationTest
+﻿
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading.Tasks;
+
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
@@ -52,31 +56,33 @@
     }
 
     [Test]
-    public void TestGetItemWithNullLanguage()
+    public async void TestGetItemWithNullLanguage()
     {
-      const string Db = "master";
+      var itemSource = new ItemSource("master", null, "\t1");
+      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = new ScApiSession(config, itemSource);
 
-      TestDelegate testCode = () =>
-      {
-        var itemSource = new ItemSource(Db, null, "\t1");
-        Assert.IsNull(itemSource, "unreachable code");
-        Assert.Fail("unreachable code");
-      };
-      Assert.Throws<ArgumentNullException>(testCode);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Build();
+
+      var itemRequest = await session.ReadItemAsync(request);
+      Assert.IsNotNull(itemRequest);
+      Assert.AreEqual(1, itemRequest.ResultCount);
     }
 
     [Test]
-    public void TestGetItemWithNullDb()
+    public async void TestGetItemWithNullDb()
     {
-      const string Db = null;
+      var itemSource = new ItemSource(null, "en", "1");
+      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = new ScApiSession(config, itemSource);
 
-      TestDelegate testCode = () =>
-      {
-        var itemSource = new ItemSource(Db, "en", "1");
-        Assert.IsNull(itemSource, "unreachable code");
-        Assert.Fail("unreachable code");
-      };
-      Assert.Throws<ArgumentNullException>(testCode);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Build();
+
+      var itemRequest = await session.ReadItemAsync(request);
+      Assert.IsNotNull(itemRequest);
+      Assert.AreEqual(1, itemRequest.ResultCount);
     }
 
     [Test]
