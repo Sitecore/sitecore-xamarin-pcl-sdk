@@ -91,36 +91,40 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
     private string AppendUrlStringWithDownloadOptions(string path, IDownloadMediaOptions options)
 		{
-      if (null == options || options.IsEmpty)
+      string paramsString = "";
+
+      if (!(null == options || options.IsEmpty))
 			{
-				return path;
+        Dictionary<string, string> optionsDictionary = options.OptionsDictionary;
+        foreach (var pair in optionsDictionary)
+        {
+          paramsString = this.AddOptionValueToPath (paramsString, pair.Key, pair.Value);
+        }
 			}
 
-			path += this.restGrammar.HostAndArgsSeparator;
+      if (this.itemSource.Database != null)
+      {
+        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.databaseKey, this.itemSource.Database);
+      }
 
-			Dictionary<string, string> optionsDictionary = options.OptionsDictionary;
-			foreach (var pair in optionsDictionary)
-			{
-				path = this.AddOptionValueToPath (path, pair.Key, pair.Value);
-			}
+      if (this.itemSource.Language != null)
+      {
+        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.languageKey, this.itemSource.Language);
+      }
 
-			if (this.itemSource.Database != null)
-			{
-				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.databaseKey, this.itemSource.Database);
-			}
+      if (this.itemSource.Version != null)
+      {
+        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.versionKey, this.itemSource.Version);
+      }
 
-			if (this.itemSource.Language != null)
-			{
-				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.languageKey, this.itemSource.Language);
-			}
+      if (!String.IsNullOrEmpty(paramsString))
+      {
+        paramsString = paramsString.Remove(paramsString.Length - this.restGrammar.FieldSeparator.Length);
+        path += this.restGrammar.HostAndArgsSeparator;
+        path += paramsString;
+      }
 
-			if (this.itemSource.Version != null)
-			{
-				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.versionKey, this.itemSource.Version);
-			}
-
-			return path = path.Remove(path.Length - this.restGrammar.FieldSeparator.Length);
-
+      return path;
 		}
 
 		private string AddOptionValueToPath(string path, string key, string value)
