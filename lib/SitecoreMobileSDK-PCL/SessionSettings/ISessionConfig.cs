@@ -7,6 +7,8 @@ namespace Sitecore.MobileSDK.SessionSettings
 {
   public interface ISessionConfig
   {
+    ISessionConfig SessionConfigShallowCopy();
+
     string InstanceUrl
     {
         get;

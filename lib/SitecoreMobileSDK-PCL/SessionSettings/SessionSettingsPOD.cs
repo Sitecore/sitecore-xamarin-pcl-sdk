@@ -7,8 +7,18 @@ namespace Sitecore.MobileSDK.SessionSettings
 
   public class SessionConfigPOD : ISessionConfig
   {
-    private string site;
+    public ISessionConfig SessionConfigShallowCopy()
+    {
+      SessionConfigPOD result = new SessionConfigPOD();
+      result.InstanceUrl = this.InstanceUrl;
+      result.ItemWebApiVersion = this.ItemWebApiVersion;
+      result.Site = this.Site;
+      result.MediaLybraryRoot = this.MediaLybraryRoot;
 
+      return result;
+    }
+
+    #region ISessionConfig
     public string InstanceUrl { get; set; }
 
     public string ItemWebApiVersion { get; set; }
@@ -43,7 +53,10 @@ namespace Sitecore.MobileSDK.SessionSettings
     }
 
     public string MediaLybraryRoot { get; set; }
+    #endregion ISessionConfig
 
+
+    #region Comparator
     public override bool Equals (object obj)
     {
       if (object.ReferenceEquals (this, obj))
@@ -69,5 +82,8 @@ namespace Sitecore.MobileSDK.SessionSettings
     {
       return base.GetHashCode() + this.InstanceUrl.GetHashCode () + this.ItemWebApiVersion.GetHashCode () + this.Site.GetHashCode ();
     }
+    #endregion Comparator
+
+    private string site;
   }
 }

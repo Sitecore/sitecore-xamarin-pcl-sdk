@@ -17,6 +17,21 @@ namespace Sitecore.MobileSDK.SessionSettings
       this.Validate ();
     }
 
+    public SessionConfig ShallowCopy()
+    {
+      return new SessionConfig(this.InstanceUrl, this.Login, this.Password, this.Site, this.ItemWebApiVersion);
+    }
+
+    public ISessionConfig SessionConfigShallowCopy()
+    {
+      return this.ShallowCopy();
+    }
+
+    public IWebApiCredentials CredentialsShallowCopy()
+    {
+      return this.ShallowCopy();
+    }
+
     public string InstanceUrl
     {
       get;

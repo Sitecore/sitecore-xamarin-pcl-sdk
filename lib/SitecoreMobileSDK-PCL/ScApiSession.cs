@@ -1,15 +1,15 @@
-using System.IO;
-using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 
 namespace Sitecore.MobileSDK
 {
   using System;
+  using System.IO;
   using System.Net.Http;
-
   using System.Threading;
   using System.Threading.Tasks;
 
+
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.CrudTasks;
@@ -33,7 +33,7 @@ namespace Sitecore.MobileSDK
       }
 
       this.requestMerger = new UserRequestMerger(config, defaultSource);
-      this.sessionConfig = config;
+      this.sessionConfig = config.ShallowCopy();
 
       this.httpClient = new HttpClient();
     }
@@ -43,6 +43,14 @@ namespace Sitecore.MobileSDK
       get
       {
         return this.requestMerger.ItemSourceMerger.DefaultSource;
+      }
+    }
+
+    public SessionConfig Config
+    {
+      get
+      {
+        return this.sessionConfig;
       }
     }
 

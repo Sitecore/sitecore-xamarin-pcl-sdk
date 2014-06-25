@@ -29,8 +29,8 @@ namespace Sitecore.MobileSdkUnitTest
       anonymous.SetLogin("admin");
       anonymous.SetPassword("b");
 
-      Assert.AreNotEqual(defaultSource, session.DefaultSource);
-      Assert.AreNotSame(defaultSource, session.DefaultSource);
+      Assert.AreNotEqual(anonymous, session.Config);
+      Assert.AreNotSame(anonymous, session.Config);
     }
 
     [Test]
