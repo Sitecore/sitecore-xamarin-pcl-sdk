@@ -57,13 +57,53 @@ namespace MobileSDKIntegrationTest
       Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
 //      await Task.Factory.StartNew(() => mockMutableRequest.ItemId = this.env.Items.MediaLibrary.Id);
       ScItemsResponse response = await loadItemsTask;
-//      var item = response.Items[0];
-//      Assert.AreEqual(homeId, item.Id);
+      var item = response.Items[0];
+      Assert.AreEqual(homeId, item.Id);
 
       Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
     }
 
+    [Test]
+    public async void TestItemByPathRequestMutationDoesNotAffectSession()
+    {
+      string homePath = "/sitecore/content/home";
 
+      IQueryParameters payload = new QueryParameters(PayloadType.Min, null);
+
+      MockGetItemsByPathParameters mockMutableRequest = new MockGetItemsByPathParameters();
+      mockMutableRequest.ItemPath = homePath;
+      mockMutableRequest.QueryParameters = payload;
+      mockMutableRequest.ItemSource = new ItemSourcePOD(null, null, null);
+
+      Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
+      //      await Task.Factory.StartNew(() => mockMutableRequest.ItemPath = this.env.Items.MediaLibrary.Path);
+      ScItemsResponse response = await loadItemsTask;
+      var item = response.Items[0];
+      Assert.AreEqual(homePath.ToLowerInvariant(), item.Path.ToLowerInvariant());
+
+      Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
+    }
+
+    [Test]
+    public async void TestItemByQueryRequestMutationDoesNotAffectSession()
+    {
+      string homePath = "/sitecore/content/home";
+
+      IQueryParameters payload = new QueryParameters(PayloadType.Min, null);
+
+      MockGetItemsByQueryParameters mockMutableRequest = new MockGetItemsByQueryParameters();
+      mockMutableRequest.SitecoreQuery = homePath;
+      mockMutableRequest.QueryParameters = payload;
+      mockMutableRequest.ItemSource = new ItemSourcePOD(null, null, null);
+
+      Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
+      //      await Task.Factory.StartNew(() => mockMutableRequest.SitecoreQuery = "/sitecore/content/media library");
+      ScItemsResponse response = await loadItemsTask;
+      var item = response.Items[0];
+      Assert.AreEqual(homePath.ToLowerInvariant(), item.Path.ToLowerInvariant());
+
+      Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
+    }
   }
 }
 

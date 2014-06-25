@@ -129,8 +129,10 @@ namespace Sitecore.MobileSDK
 
     public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
+      IReadItemsByPathRequest requestCopy = request.DeepCopyGetItemByPathRequest();
+
       ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
-      IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps (request);
+      IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps(requestCopy);
 
       var taskFlow = new GetItemsByPathTasks(new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
@@ -139,8 +141,10 @@ namespace Sitecore.MobileSDK
 
     public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
+      IReadItemsByQueryRequest requestCopy = request.DeepCopyGetItemByQueryRequest();
+
       ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
-      IReadItemsByQueryRequest autocompletedRequest = this.requestMerger.FillReadItemByQueryGaps (request);
+      IReadItemsByQueryRequest autocompletedRequest = this.requestMerger.FillReadItemByQueryGaps(requestCopy);
 
       var taskFlow = new GetItemsByQueryTasks(new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);

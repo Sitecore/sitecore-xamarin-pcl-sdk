@@ -21,9 +21,34 @@ namespace Sitecore.MobileSDK
       this.QueryParameters = queryParameters;
     }
 
+
+    public IReadItemsByQueryRequest DeepCopyGetItemByQueryRequest()
+    {
+      ISessionConfig connection = null;
+      IItemSource itemSrc = null;
+      IQueryParameters payload = null;
+
+      if (null != this.SessionSettings)
+      {
+        connection = this.SessionSettings.SessionConfigShallowCopy();
+      }
+
+      if (null != this.ItemSource)
+      {
+        itemSrc = this.ItemSource.ShallowCopy();
+      }
+
+      if (null != this.QueryParameters)
+      {
+        payload = this.QueryParameters.DeepCopy();
+      }
+
+      return new ReadItemByQueryParameters(connection, itemSrc, payload, this.SitecoreQuery);
+    }
+
     public IBaseGetItemRequest DeepCopyBaseGetItemRequest()
     {
-      return null;
+      return this.DeepCopyGetItemByQueryRequest();
     }
 
     public string SitecoreQuery { get; private set; }

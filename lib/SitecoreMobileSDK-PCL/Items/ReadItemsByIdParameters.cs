@@ -19,6 +19,25 @@ namespace Sitecore.MobileSDK
 
     public IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
     {
+      ISessionConfig connection = null;
+      IItemSource itemSrc = null;
+      IQueryParameters payload = null;
+
+      if (null != this.SessionSettings)
+      {
+        connection = this.SessionSettings.SessionConfigShallowCopy();
+      }
+
+      if (null != this.ItemSource)
+      {
+        itemSrc = this.ItemSource.ShallowCopy();
+      }
+
+      if (null != this.QueryParameters)
+      {
+        payload = this.QueryParameters.DeepCopy();
+      }
+
       return new ReadItemsByIdParameters(this.SessionSettings, this.ItemSource, this.QueryParameters, this.ItemId);
     }
 

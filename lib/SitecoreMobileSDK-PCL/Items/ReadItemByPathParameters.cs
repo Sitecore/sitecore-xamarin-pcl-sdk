@@ -22,9 +22,33 @@ namespace Sitecore.MobileSDK.Items
       this.QueryParameters = queryParameters;
     }
 
+    public IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
+    {
+      ISessionConfig connection = null;
+      IItemSource itemSrc = null;
+      IQueryParameters payload = null;
+
+      if (null != this.SessionSettings)
+      {
+        connection = this.SessionSettings.SessionConfigShallowCopy();
+      }
+
+      if (null != this.ItemSource)
+      {
+        itemSrc = this.ItemSource.ShallowCopy();
+      }
+
+      if (null != this.QueryParameters)
+      {
+        payload = this.QueryParameters.DeepCopy();
+      }
+
+      return new ReadItemByPathParameters(connection, itemSrc, payload, this.ItemPath);
+    }
+
     public IBaseGetItemRequest DeepCopyBaseGetItemRequest()
     {
-      return null;
+      return this.DeepCopyGetItemByPathRequest();
     }
 
     public string ItemPath { get; private set; }
