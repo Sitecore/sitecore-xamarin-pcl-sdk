@@ -55,7 +55,7 @@ namespace Sitecore.MobileSdkUnitTest
 		[Test]
 		public void TestInvalidPathException()
 		{
-			TestDelegate action = () => builder.BuildUrlStringForPath ("sitecore/media library/1.png", null);;
+			TestDelegate action = () => builder.BuildUrlStringForPath ("sitecore/media library/1.png", null);
 			Assert.Throws<ArgumentException>(action);
 		}
 
@@ -67,7 +67,7 @@ namespace Sitecore.MobileSdkUnitTest
 		}
 
 		[Test ()]
-		public void AbsolutePathTest ()
+    public void AbsolutePathWithoutOptionsTest ()
 		{
 			string result = builder.BuildUrlStringForPath ("/sitecore/media library/1.png", null);
       string expected = "http://test.host/~/media/1.png.ashx?db=web&la=en";
