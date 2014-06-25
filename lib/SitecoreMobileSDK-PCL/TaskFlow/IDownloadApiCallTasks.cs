@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace Sitecore.MobileSDK.TaskFlow
 {
     using System;
