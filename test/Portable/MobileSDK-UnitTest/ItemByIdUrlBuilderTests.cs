@@ -1,4 +1,4 @@
-﻿
+﻿using Sitecore.MobileSDK;
 
 namespace Sitecore.MobileSdkUnitTest
 {

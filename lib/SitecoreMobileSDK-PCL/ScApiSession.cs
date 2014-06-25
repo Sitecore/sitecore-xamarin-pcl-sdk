@@ -1,4 +1,5 @@
-
+using System.IO;
+using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 
 namespace Sitecore.MobileSDK
@@ -130,6 +131,17 @@ namespace Sitecore.MobileSDK
 
       var taskFlow = new GetItemsByQueryTasks(new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    public async Task<Stream> DownloadResourceAsync(IReadMediaItemRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+      IReadMediaItemRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(request);
+
+      MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(this.restGrammar, this.sessionConfig, autocompletedRequest.ItemSource);
+     
+      var taskFlow = new GetResourceTask(urlBuilder, this.httpClient, cryptor);
+      return  await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
     #endregion GetItems

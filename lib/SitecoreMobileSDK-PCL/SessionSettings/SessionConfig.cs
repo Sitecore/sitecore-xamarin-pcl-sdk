@@ -67,6 +67,26 @@ namespace Sitecore.MobileSDK.SessionSettings
         throw new ArgumentNullException ("SessionConfig.ItemWebApiVersion is required");
       }
     }
+
+    public string MediaLybraryRoot 
+    {
+      get
+      { 
+        if (null == this.mediaLybraryRoot)
+        {
+          return SessionConfig.DefaultMediaLybraryRoot;
+        }
+        return this.mediaLybraryRoot;
+      }
+      set
+      { 
+        this.mediaLybraryRoot = value;
+      }
+    }
+
+    private const string DefaultMediaLybraryRoot = "/sitecore/media library";
+    private string mediaLybraryRoot;
+
   }
 }
 

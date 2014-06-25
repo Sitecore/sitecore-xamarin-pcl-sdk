@@ -132,7 +132,6 @@ namespace Sitecore.MobileSdkUnitTest
             Assert.Throws<ArgumentNullException>(action);
         }
 
-
         [Test]
         public void TestBuildWithWhitespacePathCausesArgumentNullException()
         {
