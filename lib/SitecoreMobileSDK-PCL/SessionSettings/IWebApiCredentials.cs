@@ -5,16 +5,16 @@ using System.Text;
 
 namespace Sitecore.MobileSDK.SessionSettings
 {
-    interface IWebApiCredentials
+  interface IWebApiCredentials
+  {
+    string Login
     {
-        string Login
-        {
-            get;
-        }
-
-        string Password
-        {
-            get;
-        }
+      get;
     }
+
+    string Password
+    {
+      get;
+    }
+  }
 }
