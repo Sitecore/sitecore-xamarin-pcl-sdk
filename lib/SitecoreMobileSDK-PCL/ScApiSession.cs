@@ -8,8 +8,6 @@ namespace Sitecore.MobileSDK
   using System.Threading;
   using System.Threading.Tasks;
 
-
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.CrudTasks;
@@ -21,6 +19,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 
   public class ScApiSession
