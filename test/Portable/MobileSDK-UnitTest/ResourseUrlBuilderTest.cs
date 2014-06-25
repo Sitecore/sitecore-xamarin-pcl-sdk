@@ -70,7 +70,7 @@ namespace Sitecore.MobileSdkUnitTest
 		public void AbsolutePathTest ()
 		{
 			string result = builder.BuildUrlStringForPath ("/sitecore/media library/1.png", null);
-			string expected = "http://test.host/~/media/1.png.ashx";
+      string expected = "http://test.host/~/media/1.png.ashx?db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
@@ -79,7 +79,7 @@ namespace Sitecore.MobileSdkUnitTest
 		public void RelativePathTest ()
 		{
 			string result = builder.BuildUrlStringForPath ("/mediaXYZ/1.png", null);
-			string expected = "http://test.host/~/media/mediaXYZ/1.png.ashx";
+      string expected = "http://test.host/~/media/mediaXYZ/1.png.ashx?db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
@@ -88,7 +88,7 @@ namespace Sitecore.MobileSdkUnitTest
 		public void RelativePathAndExtensionTest ()
 		{
 			string result = builder.BuildUrlStringForPath ("/mediaXYZ/1.png.ashx", null);
-			string expected = "http://test.host/~/media/mediaXYZ/1.png.ashx.ashx";
+      string expected = "http://test.host/~/media/mediaXYZ/1.png.ashx.ashx?db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
@@ -97,7 +97,7 @@ namespace Sitecore.MobileSdkUnitTest
 		public void PathContaignMediaHookTest ()
 		{
 			string result = builder.BuildUrlStringForPath ("~/media/1.png", null);
-			string expected = "http://test.host/~/media/1.png.ashx";
+      string expected = "http://test.host/~/media/1.png.ashx?db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
@@ -106,7 +106,7 @@ namespace Sitecore.MobileSdkUnitTest
 		public void PathContaignMediaHookAndExtensionTest ()
 		{
 			string result = builder.BuildUrlStringForPath ("~/media/1.png.ashx", null);
-			string expected = "http://test.host/~/media/1.png.ashx";
+      string expected = "http://test.host/~/media/1.png.ashx?db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
@@ -115,7 +115,7 @@ namespace Sitecore.MobileSdkUnitTest
 		public void PathProperlyEscapedTest ()
 		{
 			string result = builder.BuildUrlStringForPath ("~/media/Images/test image", null);
-			string expected = "http://test.host/~/media/Images/test%20image.ashx";
+      string expected = "http://test.host/~/media/Images/test%20image.ashx?db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
@@ -124,7 +124,7 @@ namespace Sitecore.MobileSdkUnitTest
 		public void ResourceNameIsCaseSensitiveTest ()
 		{
 			string result = builder.BuildUrlStringForPath ("~/media/Images/SoMe ImAGe", null);
-			string expected = "http://test.host/~/media/Images/SoMe%20ImAGe.ashx";
+      string expected = "http://test.host/~/media/Images/SoMe%20ImAGe.ashx?db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
@@ -135,7 +135,7 @@ namespace Sitecore.MobileSdkUnitTest
 			DownloadMediaOptions options = new DownloadMediaOptions ();
 
 			string result = builder.BuildUrlStringForPath ("~/media/1.png", options);
-			string expected = "http://test.host/~/media/1.png.ashx";
+      string expected = "http://test.host/~/media/1.png.ashx?db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
