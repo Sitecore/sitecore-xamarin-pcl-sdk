@@ -249,9 +249,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 				throw new ArgumentException("[DownloadMediaOptions] scale must be > 0");
 			}
 
-      string convertedScale = scale.ToString ();
-      convertedScale.Replace(",", ".");
-
+      string convertedScale = scale.ToString("#.#");
       this.scale = convertedScale;
 		}
 
