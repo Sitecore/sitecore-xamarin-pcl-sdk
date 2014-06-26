@@ -39,56 +39,56 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 //		https://test.host/~/media/1.png.ashx?w=640&h=480
     public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
+	{
+		MediaPathValidator.ValidateMediaPath (path);
+
+		string relativePath = path;
+		string result = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
+
+		string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
+
+		bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.mediaHook);
+		bool isExtensionAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.ashxExtension);
+
+		if (isMediaHookAvailable)
 		{
-			MediaPathValidator.ValidateMediaPath (path);
-		
-			string relativePath = path;
-			string result = this.sessionConfig.InstanceUrl;
+			result = result + this.restGrammar.PathComponentSeparator + Uri.EscapeUriString (relativePath);
 
-      string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
-
-      bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.mediaHook);
-      bool isExtensionAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.ashxExtension);
-
-			if (isMediaHookAvailable)
+			if ( !isExtensionAvailable )
 			{
-				result = result + this.restGrammar.PathComponentSeparator + Uri.EscapeUriString (relativePath);
-
-				if ( !isExtensionAvailable )
-				{
-					result = result + MediaItemUrlBuilder.ashxExtension;
-				}
+				result = result + MediaItemUrlBuilder.ashxExtension;
 			}
-			else
+		}
+		else
+		{
+			result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
+
+		string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot.ToLowerInvariant();
+
+		int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
+
+			bool isMediaRootAvailable = (rootStartIndex >= 0);
+
+			if ( isMediaRootAvailable )
 			{
-				result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
-
-        string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot.ToLowerInvariant();
-
-        int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
-
-				bool isMediaRootAvailable = (rootStartIndex >= 0);
-
-				if ( isMediaRootAvailable )
-				{
-					relativePath = path.Remove(rootStartIndex, this.sessionConfig.MediaLybraryRoot.Length);
-				}
-
-
-				bool isInvalidRelativePath = string.IsNullOrEmpty(relativePath);
-				if (isInvalidRelativePath)
-				{
-					throw new ArgumentException("ResourceUrlBuilder.BuildUrlStringForPath invalid path");
-				}
-
-				relativePath = Uri.EscapeUriString (relativePath);
-
-				result = result + relativePath + MediaItemUrlBuilder.ashxExtension;
+				relativePath = path.Remove(rootStartIndex, this.sessionConfig.MediaLybraryRoot.Length);
 			}
-				
-			result = this.AppendUrlStringWithDownloadOptions (result, options);
 
-			return result;
+
+			bool isInvalidRelativePath = string.IsNullOrEmpty(relativePath);
+			if (isInvalidRelativePath)
+			{
+				throw new ArgumentException("ResourceUrlBuilder.BuildUrlStringForPath invalid path");
+			}
+
+			relativePath = Uri.EscapeUriString (relativePath);
+
+			result = result + relativePath + MediaItemUrlBuilder.ashxExtension;
+		}
+			
+		result = this.AppendUrlStringWithDownloadOptions (result, options);
+
+		return result;
 		}
 
     private string AppendUrlStringWithDownloadOptions(string path, IDownloadMediaOptions options)
