@@ -17,17 +17,17 @@ namespace Sitecore.MobileSDK.SessionSettings
       this.Validate ();
     }
 
-    public SessionConfig ShallowCopy()
+    public virtual SessionConfig ShallowCopy()
     {
       return new SessionConfig(this.InstanceUrl, this.Login, this.Password, this.Site, this.ItemWebApiVersion);
     }
 
-    public ISessionConfig SessionConfigShallowCopy()
+    public virtual ISessionConfig SessionConfigShallowCopy()
     {
       return this.ShallowCopy();
     }
 
-    public IWebApiCredentials CredentialsShallowCopy()
+    public virtual IWebApiCredentials CredentialsShallowCopy()
     {
       return this.ShallowCopy();
     }

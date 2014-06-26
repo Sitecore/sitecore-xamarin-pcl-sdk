@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
       this.Fields = fields;
     }
 
-    public IQueryParameters DeepCopy()
+    public virtual IQueryParameters DeepCopy()
     {
       string[] fields = null;
       if (null != this.Fields)

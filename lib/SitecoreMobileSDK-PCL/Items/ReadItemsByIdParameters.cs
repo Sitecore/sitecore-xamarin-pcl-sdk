@@ -17,7 +17,7 @@ namespace Sitecore.MobileSDK
       this.QueryParameters = queryParameters;
     }
 
-    public IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
+    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
@@ -41,7 +41,7 @@ namespace Sitecore.MobileSDK
       return new ReadItemsByIdParameters(this.SessionSettings, this.ItemSource, this.QueryParameters, this.ItemId);
     }
 
-    public IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyGetItemByIdRequest();
     }

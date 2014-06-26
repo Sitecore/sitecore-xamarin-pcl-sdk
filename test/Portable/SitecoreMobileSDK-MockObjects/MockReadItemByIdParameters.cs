@@ -15,12 +15,12 @@ namespace MobileSDKUnitTest.Mock
       this.CopyInvocationCount = 0;
     }
 
-    public IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyGetItemByIdRequest();
     }
 
-    public IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
+    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
     {
       ++this.CopyInvocationCount;
 

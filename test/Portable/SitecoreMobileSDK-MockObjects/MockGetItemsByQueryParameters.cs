@@ -16,7 +16,7 @@ namespace MobileSDKUnitTest.Mock
       this.CopyInvocationCount = 0;
     }
 
-    public IReadItemsByQueryRequest DeepCopyGetItemByQueryRequest()
+    public virtual IReadItemsByQueryRequest DeepCopyGetItemByQueryRequest()
     {
       ++this.CopyInvocationCount;
 
@@ -41,7 +41,7 @@ namespace MobileSDKUnitTest.Mock
       return result;
     }
 
-    public IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyGetItemByQueryRequest();
     }
