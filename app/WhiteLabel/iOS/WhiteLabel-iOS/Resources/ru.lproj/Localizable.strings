@@ -6,6 +6,7 @@
 "createEditItem" = "******************";
 "uploadImageVC" = "******************";
 "getItemByQuery" = "************";
+"getMediaItem" = "**********";
 "Master" = "*********";
 
 //titles
@@ -29,6 +30,7 @@
 "item title is" = "**************";
 "items count is" = "******* *** **";
 "Field Raw Value" = "*** * * * * * *";
+"Please type media path" = "*** * ** * ****";
 
 "Type query" = "*************";
 //settings screen placeholders
@@ -43,3 +45,4 @@
 "Type item ID" = "********";
 "Get Item children" = "*************";
 "Get Item" = "********";
+"Download" = "*********";
