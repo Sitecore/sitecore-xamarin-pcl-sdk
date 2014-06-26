@@ -12,19 +12,7 @@ namespace SitecoreMobileSDKMockObjects
     {
       ++this.copyConstructorInvocationCount;
 
-      MockMutableMediaOptions result = new MockMutableMediaOptions();
-
-      result.width = this.width;
-      result.height = this.height;
-      result.maxWidth = this.maxWidth;
-      result.maxHeight = this.maxHeight;
-      result.backgroundColor = this.backgroundColor;
-      result.disableMediaCache = this.disableMediaCache;
-      result.allowStrech = this.allowStrech;
-      result.scale = this.scale;
-      result.displayAsThumbnail = this.displayAsThumbnail;
-
-      return result;
+      return base.DeepCopyMutableMediaDownloadOptions();
     }
 
     public int CopyConstructorInvocationCount 
