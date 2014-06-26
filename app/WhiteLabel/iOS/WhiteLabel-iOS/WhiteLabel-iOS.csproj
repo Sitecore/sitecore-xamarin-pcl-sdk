@@ -142,6 +142,10 @@
     </Compile>
     <Compile Include="FieldsTableView\FieldsDataSource.cs" />
     <Compile Include="FieldsTableView\FieldCellSelectionHandler.cs" />
+    <Compile Include="ITemTasks\GetMediaItemViewController.cs" />
+    <Compile Include="ITemTasks\GetMediaItemViewController.designer.cs">
+      <DependentUpon>GetMediaItemViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />

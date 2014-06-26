@@ -46,6 +46,8 @@ namespace Sitecore.MobileSdkUnitTest
         .DownloadOptions(options)
         .Database("master")
         .Build();
+      //      request.ItemSource.Database = "web";
+
       //ALR: Where is asserts?
     }
 
@@ -196,7 +198,7 @@ namespace Sitecore.MobileSdkUnitTest
       var options = new DownloadMediaOptions();
       options.SetScale(3.0005f);
       options.SetMaxWidth(10);
-      
+
 
       string result = builder.BuildUrlStringForPath("~/media/1", options);
       const string Expected = "http://test.host/~/media/1.ashx?mw=10&sc=3.0005&db=web&la=en";

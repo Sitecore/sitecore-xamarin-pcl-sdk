@@ -165,6 +165,7 @@
                         <segue destination="hDq-Kn-IbD" kind="push" identifier="createEditItem" id="H1f-Yk-BzS"/>
                         <segue destination="0L4-Zu-wJq" kind="push" identifier="uploadImageVC" id="EqT-q1-BRj"/>
                         <segue destination="YSW-Sn-ezD" kind="push" identifier="getItemByQuery" id="ElA-dM-oAo"/>
+                        <segue destination="2Pb-gb-fR4" kind="push" identifier="getMediaItem" id="Zq9-Tr-eq8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
@@ -602,7 +603,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eSM-hz-6En" firstAttribute="leading" secondItem="dCo-Ji-Eea" secondAttribute="trailing" constant="10" id="Ccb-sJ-Ab0"/>
-                            <constraint firstItem="hKo-4g-LfN" firstAttribute="top" secondItem="68n-jk-5ca" secondAttribute="bottom" constant="25" id="KEm-oy-NPE"/>
+                            <constraint firstItem="hKo-4g-LfN" firstAttribute="top" secondItem="68n-jk-5ca" secondAttribute="bottom" constant="25" id="J17-wQ-ocZ"/>
                             <constraint firstItem="eSM-hz-6En" firstAttribute="trailing" secondItem="hKo-4g-LfN" secondAttribute="trailing" id="Ozu-xN-TbX"/>
                             <constraint firstItem="dCo-Ji-Eea" firstAttribute="top" secondItem="hKo-4g-LfN" secondAttribute="bottom" constant="18" id="Zi0-8b-vbl"/>
                             <constraint firstAttribute="trailing" secondItem="eSM-hz-6En" secondAttribute="trailing" constant="20" id="aXF-Qs-LEg"/>
@@ -684,6 +685,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lmJ-US-Avg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2289" y="373"/>
+        </scene>
+        <!--Get Media Item View Controller-->
+        <scene sceneID="tmg-Nb-hGb">
+            <objects>
+                <viewController storyboardIdentifier="getMediaItem" id="2Pb-gb-fR4" customClass="GetMediaItemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="den-Db-Rpt"/>
+                        <viewControllerLayoutGuide type="bottom" id="01T-Rt-rum"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y2y-V8-sqF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOp-lK-nf5">
+                                <rect key="frame" x="93" y="109" width="135" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Download">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnDownloadButtonTouched:" destination="2Pb-gb-fR4" eventType="touchUpInside" id="r7u-Um-RDn"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="idF-9b-eYa">
+                                <rect key="frame" x="20" y="71" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IrD-Bg-uIL">
+                                <rect key="frame" x="20" y="143" width="280" height="239"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Jae-tz-QiU"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="DownloadButton" destination="vOp-lK-nf5" id="T51-Gi-NKK"/>
+                        <outlet property="ImageView" destination="IrD-Bg-uIL" id="ecz-JK-hKL"/>
+                        <outlet property="MediaPathTextField" destination="idF-9b-eYa" id="Q1M-F4-6jo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qmL-ka-eOW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="342" y="1118"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
