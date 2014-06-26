@@ -23,6 +23,7 @@ namespace MobileSDKIntegrationTest
   {
     private ScTestApiSession session;
     private TestEnvironment env;
+    private MutableItemSource itemSource;
 
     [SetUp]
     public void Setup()
@@ -37,11 +38,14 @@ namespace MobileSDKIntegrationTest
 
       this.session = new ScTestApiSession(connection, defaultSource);
       this.env = env;
+
+      this.itemSource = new MutableItemSource("master", "en", "3872");
     }
 
     [TearDown]
     public void TearDown()
     {
+      this.itemSource = null;
       this.session = null;
       this.env = null;
     }
@@ -56,7 +60,7 @@ namespace MobileSDKIntegrationTest
       MockGetItemsByIdParameters mockMutableRequest = new MockGetItemsByIdParameters();
       mockMutableRequest.ItemId = homeId;
       mockMutableRequest.QueryParameters = payload;
-      mockMutableRequest.ItemSource = new ItemSourcePOD(null, null, null);
+      mockMutableRequest.ItemSource = this.itemSource;
 
       try
       {
@@ -72,6 +76,7 @@ namespace MobileSDKIntegrationTest
       }
       finally
       {
+        Assert.AreEqual(1, this.itemSource.CopyInvocationCount);
         Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
       }
     }
@@ -86,7 +91,7 @@ namespace MobileSDKIntegrationTest
       MockGetItemsByPathParameters mockMutableRequest = new MockGetItemsByPathParameters();
       mockMutableRequest.ItemPath = homePath;
       mockMutableRequest.QueryParameters = payload;
-      mockMutableRequest.ItemSource = new ItemSourcePOD(null, null, null);
+      mockMutableRequest.ItemSource = this.itemSource;
 
       try
       {
@@ -102,6 +107,7 @@ namespace MobileSDKIntegrationTest
       }
       finally
       {
+        Assert.AreEqual(1, this.itemSource.CopyInvocationCount);
         Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
       }
     }
@@ -116,7 +122,7 @@ namespace MobileSDKIntegrationTest
       MockGetItemsByQueryParameters mockMutableRequest = new MockGetItemsByQueryParameters();
       mockMutableRequest.SitecoreQuery = homePath;
       mockMutableRequest.QueryParameters = payload;
-      mockMutableRequest.ItemSource = new ItemSourcePOD(null, null, null);
+      mockMutableRequest.ItemSource = this.itemSource;
 
       try
       {
@@ -132,6 +138,7 @@ namespace MobileSDKIntegrationTest
       }
       finally
       {
+        Assert.AreEqual(1, this.itemSource.CopyInvocationCount);
         Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
       }
     }
@@ -147,7 +154,7 @@ namespace MobileSDKIntegrationTest
 
       try
       {
-        IReadMediaItemRequest request = new ReadMediaItemParameters(null, ItemSource.DefaultSource(), resizing, mediaPath);
+        IReadMediaItemRequest request = new ReadMediaItemParameters(null, this.itemSource, resizing, mediaPath);
 
         using (Stream imageStream = await this.session.DownloadResourceAsync(request))
         {
@@ -161,6 +168,7 @@ namespace MobileSDKIntegrationTest
       finally
       {
         Assert.AreEqual(1, resizing.CopyConstructorInvocationCount);
+        Assert.AreEqual(1, this.itemSource.CopyInvocationCount);
       }
     }
   }
