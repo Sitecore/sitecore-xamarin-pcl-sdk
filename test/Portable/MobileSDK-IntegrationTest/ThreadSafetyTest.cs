@@ -1,8 +1,10 @@
-﻿
+﻿using Sitecore.MobileSDK;
+using SitecoreMobileSDKMockObjects;
 
 namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.IO;
   using System.Threading.Tasks;
 
   using NUnit.Framework;
@@ -10,6 +12,7 @@ namespace MobileSDKIntegrationTest
   using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
 
@@ -103,6 +106,34 @@ namespace MobileSDKIntegrationTest
       Assert.AreEqual(homePath.ToLowerInvariant(), item.Path.ToLowerInvariant());
 
       Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
+    }
+
+    [Test]
+    public async void TestMediaOptionsMutationDoesNotAffectSession()
+    {
+      var resizing = new MockMutableMediaOptions();
+      resizing.SetWidth(100);
+      resizing.SetHeight(500);
+        
+      string mediaPath = "/sitecore/media library/xyz.png.ashx";
+
+      try
+      {
+        IReadMediaItemRequest request = new ReadMediaItemParameters(null, ItemSource.DefaultSource(), resizing, mediaPath);
+
+        using (Stream imageStream = await this.session.DownloadResourceAsync(request))
+        {
+          Assert.IsNotNull(imageStream);
+        }
+      }
+      catch (Exception)
+      {
+        //IDLE
+      }
+      finally
+      {
+        Assert.AreEqual(1, resizing.CopyConstructorInvocationCount);
+      }
     }
   }
 }
