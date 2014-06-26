@@ -31,8 +31,9 @@
 "items count is" = "******* *** **";
 "Field Raw Value" = "*** * * * * * *";
 "Please type media path" = "*** * ** * ****";
-
+"Incorect width or height value" = "****** * * * ** * *****";
 "Type query" = "*************";
+
 //settings screen placeholders
 "Instance Url" = "***********";
 "Password" = "***********";
@@ -46,3 +47,5 @@
 "Get Item children" = "*************";
 "Get Item" = "********";
 "Download" = "*********";
+"Height:" = "*****";
+"Width:" = "****";

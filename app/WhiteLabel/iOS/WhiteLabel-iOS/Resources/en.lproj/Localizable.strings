@@ -32,7 +32,7 @@
 "items count is" = "items count is";
 "Field Raw Value" = "Field Raw Value";
 "Please type media path" = "Please type media path";
-
+"Incorect width or height value" = "Incorect width or height value";
 "Type query" = "Type Sitecore query:";
 
 //settings screen placeholders
@@ -48,3 +48,5 @@
 "Get Item children" = "Get Item children";
 "Get Item" = "Get Item";
 "Download" = "Download";
+"Height:" = "Height:";
+"Width:" = "Width:";

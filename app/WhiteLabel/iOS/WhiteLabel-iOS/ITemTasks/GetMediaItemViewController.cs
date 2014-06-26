@@ -24,21 +24,45 @@ namespace WhiteLabeliOS
 			string ButtonTitle = NSBundle.MainBundle.LocalizedString ("Download", null);
 			this.DownloadButton.SetTitle (ButtonTitle, UIControlState.Normal);
 
+			this.HeightLabel.Text = NSBundle.MainBundle.LocalizedString ("Height:", null);
+			this.WidthLabel.Text = NSBundle.MainBundle.LocalizedString ("Width:", null);
+
 			this.MediaPathTextField.Text = "/sitecore/media library/fffffffff";
+		}
+
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+
+			this.maxWidth = (int)Math.Round (this.ImageView.Bounds.Width);
+			this.maxHeight = (int)Math.Round (this.ImageView.Bounds.Height);
+
+			this.WidthTextField.Text = maxWidth.ToString ();
+			this.HeightTextField.Text = maxHeight.ToString ();
 		}
 
 		partial void OnDownloadButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
+			this.width = Convert.ToInt32(this.WidthTextField.Text);
+			this.height = Convert.ToInt32(this.HeightTextField.Text);
+
 			if (String.IsNullOrEmpty(this.MediaPathTextField.Text))
 			{
 				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type media path");
 			}
 			else
-			{
-				this.HideKeyboard(this.MediaPathTextField);
+				if (this.width<=0||this.width>this.maxWidth||this.height<=0||this.height>this.maxHeight)
+				{
+					AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Incorect width or height value");
+				}
+				else
+					{
+						this.HideKeyboard(this.MediaPathTextField);
+						this.HideKeyboard(this.WidthTextField);
+						this.HideKeyboard(this.HeightTextField);
 
-				this.SendRequest();
-			}
+						this.SendRequest();
+					}
 		}
 
 		private async void SendRequest ()
@@ -48,8 +72,8 @@ namespace WhiteLabeliOS
 				ScApiSession session = this.instanceSettings.GetSession();
 
 				IDownloadMediaOptions options = new MediaOptionsBuilder()
-					.SetWidth((int) Math.Round (this.ImageView.Bounds.Width))
-					.SetHeight((int) Math.Round (this.ImageView.Bounds.Height))
+					.SetWidth(this.width)
+					.SetHeight(this.height)
 					.SetBackgroundColor("white")
 					.Build();
 
@@ -90,6 +114,12 @@ namespace WhiteLabeliOS
 				});
 			}
 		}
+
+		public int width;
+		public int height;
+
+		public int maxWidth;
+		public int maxHeight;
 	}
 }
 
