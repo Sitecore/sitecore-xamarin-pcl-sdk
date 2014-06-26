@@ -173,7 +173,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			}
 			else
 			{
-				this.disableMediaCache = null;
+        this.disableMediaCache = DownloadMediaOptions.NegativeBoolValue;
 			}
 		}
 
@@ -200,7 +200,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			}
 			else
 			{
-				this.allowStrech = null;
+        this.allowStrech = DownloadMediaOptions.NegativeBoolValue;
 			}
 		}
 
@@ -227,7 +227,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			}
 			else
 			{
-				this.displayAsThumbnail = null;
+        this.displayAsThumbnail = DownloadMediaOptions.NegativeBoolValue;
 			}
 		}
 
@@ -320,6 +320,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 		private string displayAsThumbnail;
 
 		private const string PositiveBoolValue = "1";
+    private const string NegativeBoolValue = "0";
 
 		private const string widthKey 			    = "w";
 		private const string heightKey 			    = "h";
