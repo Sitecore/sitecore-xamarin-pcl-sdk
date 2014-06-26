@@ -78,11 +78,8 @@ namespace MobileSDKIntegrationTest
       };
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-      Assert.True(exception.Message.Contains("Public key not received properly"));
-
-      //@adk : changed exception type due to using different HTTP Client API
-      Assert.AreEqual("System.Net.WebException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Error: NameResolutionFailure"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Public key not received properly"));
     }
 
     [Test]
