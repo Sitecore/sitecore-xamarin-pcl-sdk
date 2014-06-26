@@ -161,7 +161,7 @@
           .Build();
       };
       var exception = Assert.Throws<ArgumentNullException>(testCode);
-     Assert.True(exception.Message.Contains("Media path cannot be null or empty"));
+      Assert.True(exception.Message.Contains("Media path cannot be null or empty"));
     }
 
     [Test]
@@ -228,14 +228,15 @@
     [Test]
     public void TestGetMediaItemWithNegativeHeightValue()
     {
+
       TestDelegate testCode = () =>
       {
         var options = new MediaOptionsBuilder()
-         .SetHeight(-55)
-         .Build();
+           .SetHeight(-55)
+           .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("Height must be > 0"));
+      Assert.True(exception.Message.Contains("height must be > 0"));
     }
 
     [Test]
@@ -244,11 +245,33 @@
       TestDelegate testCode = () =>
       {
         var options = new MediaOptionsBuilder()
-         .SetHeight(-55)
+         .SetWidth(0)
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("Height must be > 0"));
+      Assert.True(exception.Message.Contains("width must be > 0"));
+    }
+
+    [Test]
+    public async void TestGetMediaItemFromUploadedImageWithError()
+    {
+       var options = new MediaOptionsBuilder()
+         .SetHeight(100)
+         .Build();
+
+       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/nexus")
+        .DownloadOptions(options)
+        .Build();
+
+      TestDelegate testCode = async () =>
+      {
+        var task = this.session.DownloadResourceAsync(request);
+        await task;
+      };
+      Exception exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Response status code does not indicate success: 404 (Not Found)"));
     }
   }
 }
