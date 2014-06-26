@@ -40,7 +40,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 //		https://test.host/~/media/1.png.ashx?w=640&h=480
     public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
 		{
-			MediaItemPathValidator.ValidateMediaItemPath (path);
+			MediaPathValidator.ValidateMediaPath (path);
 		
 			string relativePath = path;
 			string result = this.sessionConfig.InstanceUrl;

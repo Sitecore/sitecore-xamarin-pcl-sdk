@@ -12,9 +12,9 @@ namespace Sitecore.MobileSDK
 
     public ReadMediaItemRequestBuilder(string itemPath)
     {
-      MediaItemPathValidator.ValidateMediaItemPath(itemPath);
+      MediaPathValidator.ValidateMediaPath(itemPath);
 
-      this.mediaItemPath = itemPath;
+      this.mediaPath = itemPath;
     }
       
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database (string sitecoreDatabase)
@@ -57,14 +57,14 @@ namespace Sitecore.MobileSDK
 		
 		public IReadMediaItemRequest Build()
 		{
-			var result = new ReadMediaItemParameters(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaItemPath);
+			var result = new ReadMediaItemParameters(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaPath);
 			return result;
 		}
 
     protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
     protected IDownloadMediaOptions downloadMediaOptions = null;
 
-		private string mediaItemPath;
+		private string mediaPath;
 	}
 }
 

@@ -2,21 +2,21 @@
 
 namespace Sitecore.MobileSDK
 {
-	public class MediaItemPathValidator
+	public class MediaPathValidator
 	{
-		public MediaItemPathValidator ()
+		public MediaPathValidator ()
 		{
 		}
 
-		public static void ValidateMediaItemPath(string itemPath)
+		public static void ValidateMediaPath(string itemPath)
 		{
 			if ( string.IsNullOrWhiteSpace(itemPath) )
 			{
-				throw new ArgumentNullException ("Media Item path cannot be null or empty");
+				throw new ArgumentNullException ("Media path cannot be null or empty");
 			}
 			else if (!(itemPath.StartsWith("/") || itemPath.StartsWith("~")))
 			{
-				throw new ArgumentException("Media Item path should begin with '/' or '~'");
+				throw new ArgumentException("Media path should begin with '/' or '~'");
 			}
 		}
 	}

@@ -12,15 +12,15 @@ namespace Sitecore.MobileSDK
 			ISessionConfig sessionSettings,
 			IItemSource itemSource, 
       IDownloadMediaOptions downloadOptions,
-			string mediaItemPath)
+			string mediaPath)
 		{
 			this.SessionSettings = sessionSettings;
 			this.ItemSource = itemSource;
-			this.MediaItemPath = mediaItemPath;
+			this.MediaPath = mediaPath;
 			this.DownloadOptions = downloadOptions;
 		}
 
-		public string MediaItemPath { get; private set; }
+		public string MediaPath { get; private set; }
 
 		public IItemSource ItemSource { get; private set; }
 

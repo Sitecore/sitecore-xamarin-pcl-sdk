@@ -60,7 +60,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
     protected string UrlToGetItemWithRequest(IReadMediaItemRequest request)
     {
-      return this.urlBuilder.BuildUrlStringForPath(request.MediaItemPath, request.DownloadOptions);
+      return this.urlBuilder.BuildUrlStringForPath(request.MediaPath, request.DownloadOptions);
     }
 
     private readonly MediaItemUrlBuilder urlBuilder;
