@@ -16,19 +16,46 @@ namespace WhiteLabeliOS
 		MonoTouch.UIKit.UIButton DownloadButton { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UILabel HeightLabel { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UITextField HeightTextField { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UIImageView ImageView { get; set; }
 
 		[Outlet]
 		MonoTouch.UIKit.UITextField MediaPathTextField { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UILabel WidthLabel { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UITextField WidthTextField { get; set; }
 
 		[Action ("OnDownloadButtonTouched:")]
 		partial void OnDownloadButtonTouched (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (MediaPathTextField != null) {
-				MediaPathTextField.Dispose ();
-				MediaPathTextField = null;
+			if (WidthLabel != null) {
+				WidthLabel.Dispose ();
+				WidthLabel = null;
+			}
+
+			if (HeightLabel != null) {
+				HeightLabel.Dispose ();
+				HeightLabel = null;
+			}
+
+			if (DownloadButton != null) {
+				DownloadButton.Dispose ();
+				DownloadButton = null;
+			}
+
+			if (HeightTextField != null) {
+				HeightTextField.Dispose ();
+				HeightTextField = null;
 			}
 
 			if (ImageView != null) {
@@ -36,9 +63,14 @@ namespace WhiteLabeliOS
 				ImageView = null;
 			}
 
-			if (DownloadButton != null) {
-				DownloadButton.Dispose ();
-				DownloadButton = null;
+			if (MediaPathTextField != null) {
+				MediaPathTextField.Dispose ();
+				MediaPathTextField = null;
+			}
+
+			if (WidthTextField != null) {
+				WidthTextField.Dispose ();
+				WidthTextField = null;
 			}
 		}
 	}
