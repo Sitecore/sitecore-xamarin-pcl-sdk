@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
@@ -249,9 +250,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 				throw new ArgumentException("[DownloadMediaOptions] scale must be > 0");
 			}
 
-      string convertedScale = scale.ToString ();
-      convertedScale.Replace(",", ".");
-
+      string convertedScale = scale.ToString(CultureInfo.InvariantCulture);
       this.scale = convertedScale;
 		}
 

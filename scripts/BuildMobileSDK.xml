@@ -39,7 +39,6 @@
     <UnitTestDesktopProject Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\*.csproj" />
 
   	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
-  	<MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
   	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
 
 
@@ -47,6 +46,19 @@
     <IntegrationTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-IntegrationTest-Desktop\bin\Release\MobileSDK-IntegrationTest-Desktop.dll" />
   </ItemGroup>
 
+
+<!-- ====================================================  -->
+  <Target Name="QuickBuild">
+    <CallTarget Targets="clean"/>
+    <CallTarget Targets="UnitTest"/>
+    <CallTarget Targets="SitecoreMobileSDK"/>
+    <CallTarget Targets="package"/>
+  </Target>
+
+  <Target Name="FullBuild">
+    <CallTarget Targets="QuickBuild"/>
+    <CallTarget Targets="IntegrationTest"/>
+  </Target>
 
 <!-- ====================================================  -->
   <Target Name="SitecoreMobileSDK">
@@ -60,6 +72,10 @@
       Condition="!Exists('$(DeploymentDirectory)')"
       Directories="$(DeploymentDirectory)" 
     />
+
+    <ItemGroup>
+      <MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
+    </ItemGroup>
 
   	<MSBuild.ExtensionPack.Compression.Zip 
       TaskAction="Create" 
@@ -86,6 +102,11 @@
 
 <!-- ====================================================  -->
 <Target Name="UnitTest">
+    <MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+
     <MSBuild 
       Projects="$(SolutionsDirectory)\MobileSDK-UnitTest-Desktop-NUnitLite.sln" 
       Targets="Build" 
@@ -99,6 +120,11 @@
 </Target>
 
 <Target Name="IntegrationTest">
+    <MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+
     <MSBuild 
       Projects="$(SolutionsDirectory)\MobileSdk-IntegrationTest-Desktop-NUnitLite.sln" 
       Targets="Build" 
