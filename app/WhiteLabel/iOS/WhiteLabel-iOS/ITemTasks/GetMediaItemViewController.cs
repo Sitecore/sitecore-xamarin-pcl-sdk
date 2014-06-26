@@ -24,6 +24,7 @@ namespace WhiteLabeliOS
 			string ButtonTitle = NSBundle.MainBundle.LocalizedString ("Download", null);
 			this.DownloadButton.SetTitle (ButtonTitle, UIControlState.Normal);
 
+			this.MediaPathTextField.Text = "/sitecore/media library/fffffffff";
 		}
 
 		partial void OnDownloadButtonTouched (MonoTouch.Foundation.NSObject sender)
