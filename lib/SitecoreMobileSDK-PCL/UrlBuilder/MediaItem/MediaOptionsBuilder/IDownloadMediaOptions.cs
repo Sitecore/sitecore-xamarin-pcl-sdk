@@ -19,6 +19,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     string DisplayAsThumbnail{ get; }
     Dictionary<string, string> OptionsDictionary{ get; }
 
+    IDownloadMediaOptions ShallowCopy();
   }
 }
 

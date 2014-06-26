@@ -95,16 +95,17 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public void TestGetItemWithNullItemsSource()
+    public async void TestGetItemWithNullItemsSource()
     {
       var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = new ScApiSession(config, null);
 
-      TestDelegate action = () => new ScApiSession(config, null);
-      var exception = Assert.Throws<ArgumentNullException>(action, "we should get exception here");
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Build();
 
-      Assert.IsTrue(
-          exception.GetBaseException().ToString().Contains("ScApiSession.defaultSource cannot be null")
-      );
+      var itemRequest = await session.ReadItemAsync(request);
+      Assert.IsNotNull(itemRequest);
+      Assert.AreEqual(1, itemRequest.ResultCount);
     }
 
     [Test]
