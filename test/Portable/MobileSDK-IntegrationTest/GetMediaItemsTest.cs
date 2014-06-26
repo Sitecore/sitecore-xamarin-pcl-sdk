@@ -7,6 +7,7 @@
   using System.Drawing;
   using MobileSDKIntegrationTest;
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
   [TestFixture]
@@ -32,10 +33,10 @@
     [Test]
     public async void TestGetMediaItemWithScaleValue()
     {
-      const int Height = 1800;
+      const int Height = 180;
 
       var options = new MediaOptionsBuilder()
-       .SetScale(0.5f)
+        .SetScale(0.5f)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
@@ -68,7 +69,6 @@
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/butterfly2_large")
         .DownloadOptions(options)
-        //.Database("master")
         .Build();
 
       using (Stream response = await this.session.DownloadResourceAsync(request))
@@ -95,7 +95,6 @@
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/kirkorov")
         .DownloadOptions(options)
-        // .Database("master")
         .Build();
 
       using (Stream response = await this.session.DownloadResourceAsync(request))
@@ -117,7 +116,7 @@
        .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/mouse-icon")
-        .DownloadOptions(options) //wili be failed until fix bug
+        .DownloadOptions(options)
         .Database("master")
         .Build();
 
@@ -131,37 +130,148 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithEmptyPath()
+    public void TestGetMediaItemWithEmptyPath()
     {
       var options = new MediaOptionsBuilder()
         .SetAllowStrech(true)
         .Build();
 
-      TestDelegate testCode = async () =>
+      TestDelegate testCode = () =>
       {
         var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("")
-          .DownloadOptions(options)
-          .Database("master");
-        //.Build();
+         .DownloadOptions(options)
+         .Database("master");
       };
-      Assert.Throws<ArgumentNullException>(testCode);
+      var exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.True(exception.GetBaseException().ToString().Contains("Media path cannot be null or empty"));
     }
 
     [Test]
-    public async void TestGetMediaItemWithNullPath()
+    public void TestGetMediaItemWithNullPath()
     {
       var options = new MediaOptionsBuilder()
         .SetAllowStrech(true)
         .Build();
 
-      TestDelegate testCode = async () =>
+      TestDelegate testCode = () =>
       {
         var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(null)
           .DownloadOptions(options)
-          .Database("master");
-       // .Build();
+          .Database("master")
+          .Build();
       };
-      Assert.Throws<ArgumentNullException>(testCode);
+      var exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.True(exception.Message.Contains("Media path cannot be null or empty"));
+    }
+
+    [Test]
+    public void TestGetMediaItemWithNotExistentPath()
+    {
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/images/not existent")
+        .Database("master")
+        .Build();
+
+      TestDelegate testCode = async () =>
+      {
+        var task = this.session.DownloadResourceAsync(request);
+        await task;
+      };
+      Exception exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Response status code does not indicate success: 404 (Not Found)"));
+    }
+
+    [Test]
+    public void TestGetMediaItemWithPathBeginsWithoutSlash()
+    {
+      var options = new MediaOptionsBuilder()
+         .SetHeight(100)
+         .Build();
+
+      TestDelegate testCode = () =>
+      {
+        var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("sitecore/media library/images/kirkorov")
+          .DownloadOptions(options)
+          .Database("master");
+      };
+      Exception exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.True(exception.Message.Contains("Media path should begin with '/' or '~'"));
+    }
+
+    [Test]
+    public void TestGetMediaItemWithNegativeScaleValue()
+    {
+      TestDelegate testCode = () =>
+      {
+        var options = new MediaOptionsBuilder()
+         .SetScale(-2.0f)
+         .Build();
+      };
+      Exception exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.True(exception.Message.Contains("scale must be > 0"));
+    }
+
+    [Test]
+    public void TestGetMediaItemWithNegativeMaxWidthValue()
+    {
+      TestDelegate testCode = () =>
+      {
+        var options = new MediaOptionsBuilder()
+         .SetMaxWidth(-55)
+         .Build();
+      };
+      Exception exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.True(exception.Message.Contains("maxWidth must be > 0"));
+    }
+
+    [Test]
+    public void TestGetMediaItemWithNegativeHeightValue()
+    {
+
+      TestDelegate testCode = () =>
+      {
+        var options = new MediaOptionsBuilder()
+           .SetHeight(-55)
+           .Build();
+      };
+      Exception exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.True(exception.Message.Contains("height must be > 0"));
+    }
+
+    [Test]
+    public void TestGetMediaItemWithZeroWidthValue()
+    {
+      TestDelegate testCode = () =>
+      {
+        var options = new MediaOptionsBuilder()
+         .SetWidth(0)
+         .Build();
+      };
+      Exception exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.True(exception.Message.Contains("width must be > 0"));
+    }
+
+    [Test]
+    public async void TestGetMediaItemFromUploadedImageWithError()
+    {
+       var options = new MediaOptionsBuilder()
+         .SetHeight(100)
+         .Build();
+
+       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/nexus")
+        .DownloadOptions(options)
+        .Build();
+
+      TestDelegate testCode = async () =>
+      {
+        var task = this.session.DownloadResourceAsync(request);
+        await task;
+      };
+      Exception exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Response status code does not indicate success: 404 (Not Found)"));
     }
   }
 }
