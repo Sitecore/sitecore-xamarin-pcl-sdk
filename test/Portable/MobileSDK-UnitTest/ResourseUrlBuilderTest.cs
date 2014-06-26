@@ -78,7 +78,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void RelativePathTest()
     {
       string result = builder.BuildUrlStringForPath("/mediaXYZ/1.png", null);
-      const string Expected = "http://test.host/~/media/mediaXYZ/1.png.ashx?db=web&la=en";
+      const string Expected = "http://test.host/~/media/mediaXYZ/1.png?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -87,7 +87,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void RelativePathAndExtensionTest()
     {
       string result = builder.BuildUrlStringForPath("/mediaXYZ/1.png.ashx", null);
-      const string Expected = "http://test.host/~/media/mediaXYZ/1.png.ashx.ashx?db=web&la=en";
+      const string Expected = "http://test.host/~/media/mediaXYZ/1.png.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -96,7 +96,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void PathContaignMediaHookTest()
     {
       string result = builder.BuildUrlStringForPath("~/media/1", null);
-      const string Expected = "http://test.host/~/media/1.png.ashx?db=web&la=en";
+      const string Expected = "http://test.host/~/media/1.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -105,7 +105,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void PathContaignMediaHookAndExtensionTest()
     {
       string result = builder.BuildUrlStringForPath("~/media/1.ashx", null);
-      const string Expected = "http://test.host/~/media/1.png.ashx?db=web&la=en";
+      const string Expected = "http://test.host/~/media/1.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -134,8 +134,8 @@ namespace Sitecore.MobileSdkUnitTest
     {
       var options = new DownloadMediaOptions();
 
-      string result = builder.BuildUrlStringForPath("~/media/1.png", options);
-      const string Expected = "http://test.host/~/media/1.png.ashx?db=web&la=en";
+      string result = builder.BuildUrlStringForPath("~/media/1", options);
+      const string Expected = "http://test.host/~/media/1.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -208,9 +208,8 @@ namespace Sitecore.MobileSdkUnitTest
     public void DownloadOptionsWithNegativeHeightTest()
     {
       var options = new DownloadMediaOptions();
-      options.SetHeight(-4);
 
-      TestDelegate action = () => builder.BuildUrlStringForPath("~/media/1.png", options);
+      TestDelegate action = () => options.SetHeight(-4);
       var exception = Assert.Throws<ArgumentException>(action);
       Assert.True(exception.Message.Contains("height must be > 0"));
     }
@@ -219,9 +218,8 @@ namespace Sitecore.MobileSdkUnitTest
     public void DownloadOptionsWithZeroMaxWidthTest()
     {
       var options = new DownloadMediaOptions();
-      options.SetMaxWidth(0);
 
-      TestDelegate action = () => builder.BuildUrlStringForPath("~/media/1.png", options);
+      TestDelegate action = () => options.SetMaxWidth(0);
       var exception = Assert.Throws<ArgumentException>(action);
       Assert.True(exception.Message.Contains("maxWidth must be > 0"));
     }
@@ -230,9 +228,8 @@ namespace Sitecore.MobileSdkUnitTest
     public void DownloadOptionsWithInvalidScaleTest()
     {
       var options = new DownloadMediaOptions();
-      options.SetScale(-0.00f);
 
-      TestDelegate action = () => builder.BuildUrlStringForPath("~/media/1.png", options);
+      TestDelegate action = () => options.SetScale(-0.00f);
       var exception = Assert.Throws<ArgumentException>(action);
       Assert.True(exception.Message.Contains("scale must be > 0"));
     }

@@ -253,7 +253,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemFromUploadedImageWithError()
+    public void TestGetMediaItemFromUploadedImageWithError()
     {
        var options = new MediaOptionsBuilder()
          .SetHeight(100)
