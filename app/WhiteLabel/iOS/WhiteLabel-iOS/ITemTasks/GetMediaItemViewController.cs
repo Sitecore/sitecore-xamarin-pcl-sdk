@@ -47,12 +47,15 @@ namespace WhiteLabeliOS
 				ScApiSession session = this.instanceSettings.GetSession();
 
 				IDownloadMediaOptions options = new MediaOptionsBuilder()
-					.SetDisplayAsThumbnail(true)
+					.SetWidth((int) Math.Round (this.ImageView.Bounds.Width))
+					.SetHeight((int) Math.Round (this.ImageView.Bounds.Height))
+					.SetBackgroundColor("white")
 					.Build();
 
-				var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
+				string path = this.MediaPathTextField.Text;
+
+				var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(path)
 					.DownloadOptions(options)
-					.Database("master")
 					.Build();
 
 				var response = await session.DownloadResourceAsync(request);

@@ -142,9 +142,6 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="2Pb-gb-fR4" kind="push" identifier="getMediaItem" id="owp-HF-5DQ"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -168,6 +165,7 @@
                         <segue destination="hDq-Kn-IbD" kind="push" identifier="createEditItem" id="H1f-Yk-BzS"/>
                         <segue destination="0L4-Zu-wJq" kind="push" identifier="uploadImageVC" id="EqT-q1-BRj"/>
                         <segue destination="YSW-Sn-ezD" kind="push" identifier="getItemByQuery" id="ElA-dM-oAo"/>
+                        <segue destination="2Pb-gb-fR4" kind="push" identifier="getMediaItem" id="Zq9-Tr-eq8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
