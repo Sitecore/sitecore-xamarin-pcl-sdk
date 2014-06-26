@@ -10,6 +10,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 		IItemSource ItemSource { get; }
 		ISessionConfig SessionSettings { get; }
     IDownloadMediaOptions DownloadOptions { get; }
-		string MediaItemPath { get; }
+		string MediaPath { get; }
 	}
 }
