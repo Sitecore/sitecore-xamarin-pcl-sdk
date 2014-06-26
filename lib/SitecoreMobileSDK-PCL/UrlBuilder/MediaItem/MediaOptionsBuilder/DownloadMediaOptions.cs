@@ -158,10 +158,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       }
 			get
 			{ 
-				if (this.disableMediaCache != null)
-					return DownloadMediaOptions.PositiveBoolValue;
-
-				return null;
+        return this.disableMediaCache;
 			}
 		}
 
@@ -185,10 +182,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       }
 			get
 			{ 
-				if (this.allowStrech != null)
-					return DownloadMediaOptions.PositiveBoolValue;
-
-				return null;
+        return this.allowStrech;
 			}
 		}
 
@@ -212,10 +206,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       }
 			get
 			{ 
-				if (this.displayAsThumbnail != null)
-					return DownloadMediaOptions.PositiveBoolValue;
-
-				return null;
+        return this.displayAsThumbnail;
 			}
 		}
 

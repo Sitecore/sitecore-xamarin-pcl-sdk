@@ -166,7 +166,7 @@ namespace Sitecore.MobileSdkUnitTest
 			options.SetDisplayAsThumbnail (false);
 
 			string result = builder.BuildUrlStringForPath ("~/media/1.png", options);
-			string expected = "http://test.host/~/media/1.png.ashx?w=100&db=web&la=en";
+      string expected = "http://test.host/~/media/1.png.ashx?w=100&thn=0&db=web&la=en";
 
 			Assert.AreEqual(expected, result);
 		}
