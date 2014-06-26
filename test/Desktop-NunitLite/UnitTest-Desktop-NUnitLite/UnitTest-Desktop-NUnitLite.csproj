@@ -95,6 +95,9 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\SessionConfigUrlBuilderTest.cs">
       <Link>SessionConfigUrlBuilderTest.cs</Link>
     </Compile>
+	<Compile Include="..\..\Portable\MobileSDK-UnitTest\ResourseUrlBuilderTest.cs">
+      <Link>ResourseUrlBuilderTest.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
