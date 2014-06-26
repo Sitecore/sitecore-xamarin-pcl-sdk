@@ -21,11 +21,10 @@ namespace Sitecore.MobileSDK.CrudTasks
     {
     }
 
-    public GetResourceTask(MediaItemUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+    public GetResourceTask(MediaItemUrlBuilder urlBuilder, HttpClient httpClient)
     {
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
-      this.credentialsHeadersCryptor = credentialsHeadersCryptor;
 
       this.Validate ();
     }
@@ -37,7 +36,6 @@ namespace Sitecore.MobileSDK.CrudTasks
       string url = this.UrlToGetItemWithRequest((IReadMediaItemRequest)request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
 
@@ -58,20 +56,15 @@ namespace Sitecore.MobileSDK.CrudTasks
       {
         throw new ArgumentNullException ("AbstractGetItemTask.httpClient cannot be null");
       }
-      else if (null == this.credentialsHeadersCryptor)
-      {
-        throw new ArgumentNullException ("AbstractGetItemTask.credentialsHeadersCryptor cannot be null");
-      }
     }
 
     protected string UrlToGetItemWithRequest(IReadMediaItemRequest request)
     {
-      return this.urlBuilder.BuildUrlStringForPath(request.MediaItemPath, request.DownloadOptions);
+      return this.urlBuilder.BuildUrlStringForPath(request.MediaPath, request.DownloadOptions);
     }
 
     private readonly MediaItemUrlBuilder urlBuilder;
     private HttpClient httpClient;
-    private ICredentialsHeadersCryptor credentialsHeadersCryptor;
   }
 }
 

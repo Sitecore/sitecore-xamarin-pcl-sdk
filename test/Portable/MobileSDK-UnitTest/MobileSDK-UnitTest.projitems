@@ -25,5 +25,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)FieldsParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResourseUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ThreadSafetyTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DownloadMediaOptionsTest.cs" />
   </ItemGroup>
 </Project>

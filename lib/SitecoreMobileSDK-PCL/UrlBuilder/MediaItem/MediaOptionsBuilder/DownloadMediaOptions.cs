@@ -6,6 +6,26 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
   public class DownloadMediaOptions : IDownloadMediaOptions
 	{
+    public DownloadMediaOptions ()
+    {
+    }
+
+    public IDownloadMediaOptions ShallowCopy()
+    {
+      DownloadMediaOptions copy = new DownloadMediaOptions();
+
+      copy.Width              = this.width;
+      copy.Height             = this.height;
+      copy.MaxWidth           = this.maxWidth;
+      copy.MaxHeight          = this.maxHeight;
+      copy.BackgroundColor    = this.backgroundColor;
+      copy.DisableMediaCache  = this.disableMediaCache;
+      copy.AllowStrech        = this.allowStrech;
+      copy.Scale              = this.scale;
+      copy.DisplayAsThumbnail = this.displayAsThumbnail;
+
+      return copy;
+    }
 
     public bool IsEmpty
 		{
@@ -24,12 +44,12 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       }
 		}
 
-		public DownloadMediaOptions ()
-		{
-		}
-
 		public string Width
 		{
+      private set 
+      {
+        this.width = value;
+      }
 			get
 			{ 
 				return this.width;
@@ -48,6 +68,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		public string Height
 		{
+      private set
+      {
+        this.height = value;
+      }
 			get
 			{ 
 				return this.height;
@@ -66,6 +90,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		public string MaxWidth
 		{
+      private set
+      {
+        this.maxWidth = value;
+      }
 			get
 			{ 
 				return this.maxWidth;
@@ -84,6 +112,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		public string MaxHeight
 		{
+      private set
+      {
+        this.maxHeight = value;
+      }
 			get
 			{ 
 				return this.maxHeight;
@@ -102,6 +134,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		public string BackgroundColor
 		{
+      private set
+      {
+        this.backgroundColor = value;
+      }
 			get
 			{ 
 				return this.backgroundColor;
@@ -115,6 +151,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		public string DisableMediaCache
 		{
+      private set
+      {
+        this.disableMediaCache = value;
+      }
 			get
 			{ 
 				if (this.disableMediaCache != null)
@@ -138,6 +178,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		public string AllowStrech
 		{
+      private set
+      {
+        this.allowStrech = value;
+      }
 			get
 			{ 
 				if (this.allowStrech != null)
@@ -161,6 +205,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		public string DisplayAsThumbnail
 		{
+      private set
+      {
+        this.displayAsThumbnail = value;
+      }
 			get
 			{ 
 				if (this.displayAsThumbnail != null)
@@ -184,6 +232,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 		public string Scale
 		{
+      private set
+      {
+        this.scale = value;
+      }
 			get
 			{ 
 				return this.scale;
@@ -197,7 +249,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 				throw new ArgumentException("[DownloadMediaOptions] scale must be > 0");
 			}
 
-			this.scale = scale.ToString ();
+      string convertedScale = scale.ToString ();
+      convertedScale.Replace(",", ".");
+
+      this.scale = convertedScale;
 		}
 
 		public Dictionary<string, string> OptionsDictionary

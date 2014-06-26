@@ -40,14 +40,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 //		https://test.host/~/media/1.png.ashx?w=640&h=480
     public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
 		{
-			MediaItemPathValidator.ValidateMediaItemPath (path);
+			MediaPathValidator.ValidateMediaPath (path);
 		
 			string relativePath = path;
 			string result = this.sessionConfig.InstanceUrl;
 
+      string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
 
-			bool isMediaHookAvailable = (path.IndexOf (MediaItemUrlBuilder.mediaHook, StringComparison.CurrentCultureIgnoreCase) >= 0);
-			bool isExtensionAvailable = (path.IndexOf (MediaItemUrlBuilder.ashxExtension, StringComparison.CurrentCultureIgnoreCase) >= 0);
+      bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.mediaHook);
+      bool isExtensionAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.ashxExtension);
 
 			if (isMediaHookAvailable)
 			{
@@ -62,9 +63,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			{
 				result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
 
-				string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot;
+        string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot.ToLowerInvariant();
 
-				int rootStartIndex = path.IndexOf (mediaLibraryRoot, StringComparison.CurrentCultureIgnoreCase);
+        int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
+
 				bool isMediaRootAvailable = (rootStartIndex >= 0);
 
 				if ( isMediaRootAvailable )
@@ -91,36 +93,40 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
     private string AppendUrlStringWithDownloadOptions(string path, IDownloadMediaOptions options)
 		{
-      if (null == options || options.IsEmpty)
+      string paramsString = "";
+
+      if (!(null == options || options.IsEmpty))
 			{
-				return path;
+        Dictionary<string, string> optionsDictionary = options.OptionsDictionary;
+        foreach (var pair in optionsDictionary)
+        {
+          paramsString = this.AddOptionValueToPath (paramsString, pair.Key, pair.Value);
+        }
 			}
 
-			path += this.restGrammar.HostAndArgsSeparator;
+      if (this.itemSource.Database != null)
+      {
+        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.databaseKey, this.itemSource.Database);
+      }
 
-			Dictionary<string, string> optionsDictionary = options.OptionsDictionary;
-			foreach (var pair in optionsDictionary)
-			{
-				path = this.AddOptionValueToPath (path, pair.Key, pair.Value);
-			}
+      if (this.itemSource.Language != null)
+      {
+        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.languageKey, this.itemSource.Language);
+      }
 
-			if (this.itemSource.Database != null)
-			{
-				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.databaseKey, this.itemSource.Database);
-			}
+      if (this.itemSource.Version != null)
+      {
+        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.versionKey, this.itemSource.Version);
+      }
 
-			if (this.itemSource.Language != null)
-			{
-				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.languageKey, this.itemSource.Language);
-			}
+      if (!String.IsNullOrEmpty(paramsString))
+      {
+        paramsString = paramsString.Remove(paramsString.Length - this.restGrammar.FieldSeparator.Length);
+        path += this.restGrammar.HostAndArgsSeparator;
+        path += paramsString;
+      }
 
-			if (this.itemSource.Version != null)
-			{
-				path = this.AddOptionValueToPath (path, MediaItemUrlBuilder.versionKey, this.itemSource.Version);
-			}
-
-			return path = path.Remove(path.Length - this.restGrammar.FieldSeparator.Length);
-
+      return path;
 		}
 
 		private string AddOptionValueToPath(string path, string key, string value)
