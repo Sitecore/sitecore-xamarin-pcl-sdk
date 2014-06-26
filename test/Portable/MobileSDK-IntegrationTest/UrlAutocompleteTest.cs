@@ -29,7 +29,7 @@
     [Test]
     public async void TestWithoutHttpInUrlByPath()
     {
-      var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
+      var urlWithoutHttp = this.RemoveHttpSymbols(this.testData.InstanceUrl);
       var response = await this.GetAuthencationRequestWithHomeItemPath(urlWithoutHttp);
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
@@ -39,7 +39,7 @@
     public async void TestWithoutHttpInUrlAndWithTwoSlashInTheEndByPath()
     {
       var urlWithTwoSlash = testData.InstanceUrl + "//";
-      var url = urlWithTwoSlash.Remove(0, 7);
+      var url = this.RemoveHttpSymbols(urlWithTwoSlash);
       var response = await this.GetAuthencationRequestWithHomeItemPath(url);
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
@@ -48,11 +48,13 @@
     [Test]
     public async void TestWithoutHttpInUrlByQuery()
     {
-      var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
+      var urlWithoutHttp = this.RemoveHttpSymbols(this.testData.InstanceUrl);
       var response = await this.GetAuthencationRequestWithHomeItemQuery(urlWithoutHttp);
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
     }
+
+
 
     [Test]
     public async void TestWithHttpInUrlAndWithOneSlashInTheEndByQuery()
@@ -93,6 +95,11 @@
       var requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Payload(PayloadType.Content).Build();
       var response = await session.ReadItemAsync(requestWithItemId);
       return response;
+    }
+
+    private string RemoveHttpSymbols(string url)
+    {
+      return url.Remove(0, 7);
     }
   }
 }

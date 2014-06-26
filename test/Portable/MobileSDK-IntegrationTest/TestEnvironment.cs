@@ -120,10 +120,6 @@ namespace MobileSDKIntegrationTest
     public ScApiSession GetSession(string url, string username, string password, ItemSource itemSource = null, string site = null)
     {
       var config = new SessionConfig(url, username, password, site);
-      if (itemSource == null)
-      {
-        itemSource = ItemSource.DefaultSource();
-      }
       var session = new ScApiSession(config, itemSource);
       return session;
     }
