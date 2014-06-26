@@ -152,8 +152,10 @@ namespace Sitecore.MobileSDK
 
     public async Task<Stream> DownloadResourceAsync(IReadMediaItemRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
+      IReadMediaItemRequest requestCopy = request.DeepCopyReadMediaRequest();
+
       ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
-      IReadMediaItemRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(request);
+      IReadMediaItemRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
 
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(this.restGrammar, this.sessionConfig, autocompletedRequest.ItemSource);
      

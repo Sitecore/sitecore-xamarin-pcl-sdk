@@ -6,6 +6,28 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
   public class DownloadMediaOptions : IDownloadMediaOptions
 	{
+    public virtual IDownloadMediaOptions DeepCopyMutableMediaDownloadOptions()
+    {
+      DownloadMediaOptions result = new DownloadMediaOptions();
+
+      result.width = this.width;
+      result.height = this.height;
+      result.maxWidth = this.maxWidth;
+      result.maxHeight = this.maxHeight;
+      result.backgroundColor = this.backgroundColor;
+      result.disableMediaCache = this.disableMediaCache;
+      result.allowStrech = this.allowStrech;
+      result.scale = this.scale;
+      result.displayAsThumbnail = this.displayAsThumbnail;
+
+      return result;
+    }
+
+    public virtual IDownloadMediaOptions DeepCopyMediaDownloadOptions()
+    {
+      return this.DeepCopyMutableMediaDownloadOptions();
+    }
+
 
     public bool IsEmpty
 		{
@@ -255,15 +277,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			}
 		}
 
-		private string width;
-		private string height;
-		private string maxWidth;
-		private string maxHeight;
-		private string backgroundColor;
-		private string disableMediaCache;
-		private string allowStrech;
-		private string scale;
-		private string displayAsThumbnail;
+    protected string width;
+    protected string height;
+    protected string maxWidth;
+    protected string maxHeight;
+    protected string backgroundColor;
+    protected string disableMediaCache;
+    protected string allowStrech;
+    protected string scale;
+    protected string displayAsThumbnail;
 
 		private const string PositiveBoolValue = "1";
 

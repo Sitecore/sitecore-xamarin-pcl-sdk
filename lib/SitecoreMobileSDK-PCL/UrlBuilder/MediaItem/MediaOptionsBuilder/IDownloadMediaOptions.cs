@@ -7,6 +7,8 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
   public interface IDownloadMediaOptions
   {
+    IDownloadMediaOptions DeepCopyMediaDownloadOptions();
+
     bool IsEmpty{ get; }
     string Width{ get; }
     string Height{ get; }

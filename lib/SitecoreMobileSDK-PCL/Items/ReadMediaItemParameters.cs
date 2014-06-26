@@ -20,6 +20,30 @@ namespace Sitecore.MobileSDK
 			this.DownloadOptions = downloadOptions;
 		}
 
+    public virtual IReadMediaItemRequest DeepCopyReadMediaRequest()
+    {
+      ISessionConfig connection = null;
+      IItemSource itemSource = null;
+      IDownloadMediaOptions resizingOptions = null;
+
+      if (null != this.SessionSettings)
+      {
+        connection = this.SessionSettings.SessionConfigShallowCopy();
+      }
+
+      if (null != this.ItemSource)
+      {
+        itemSource = this.ItemSource.ShallowCopy();
+      }
+
+      if (null != this.DownloadOptions)
+      {
+        resizingOptions = this.DownloadOptions.DeepCopyMediaDownloadOptions();
+      }
+
+      return new ReadMediaItemParameters(connection, itemSource, resizingOptions, this.MediaItemPath);
+    }
+
 		public string MediaItemPath { get; private set; }
 
 		public IItemSource ItemSource { get; private set; }
