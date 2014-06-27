@@ -2,6 +2,8 @@
 {
   using System;
   using System.IO;
+  using System.Linq;
+  using System.Net.Configuration;
   using NUnit.Framework;
 
   using System.Drawing;
@@ -33,28 +35,19 @@
     [Test]
     public async void TestGetMediaItemWithScaleValue()
     {
-      const int Height = 180;
-
       var options = new MediaOptionsBuilder()
-        .SetScale(0.5f)
+       .SetScale(0.5f)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
         .DownloadOptions(options)
         .Build();
+      var response = await this.session.DownloadResourceAsync(request);
 
-      using (Stream response = await this.session.DownloadResourceAsync(request))
-      {
-        using (Image image = Image.FromStream(response))
-        {
-          Assert.AreEqual(Height, image.Height);
-        }
-      }
-      // //@elt - get bytes array from stream
-      //Stream response = await this.session.DownloadResourceAsync(request);
-      //MemoryStream ms = new MemoryStream();
-      //response.CopyTo(ms);
-      //byte[] data = ms.ToArray();
+      var ms = new MemoryStream();
+      response.CopyTo(ms);
+     // byte[] data = ms.ToArray();
+      Assert.IsTrue(8000> ms.Length);
     }
 
     [Test]
@@ -71,9 +64,9 @@
         .DownloadOptions(options)
         .Build();
 
-      using (Stream response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadResourceAsync(request))
       {
-        using (Image image = Image.FromStream(response))
+        using (var image = Image.FromStream(response))
         {
           Assert.AreEqual(HeightAsThumbnail, image.Height);
           Assert.AreEqual(WidthAsThumbnail, image.Width);
@@ -87,7 +80,7 @@
       const int Height = 200;
       const int Width = 300;
 
-      IDownloadMediaOptions options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder()
         .SetHeight(Height)
         .SetWidth(Width)
         .SetAllowStrech(true)
@@ -97,9 +90,9 @@
         .DownloadOptions(options)
         .Build();
 
-      using (Stream response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadResourceAsync(request))
       {
-        using (Image image = Image.FromStream(response))
+        using (var image = Image.FromStream(response))
         {
           Assert.AreEqual(Height, image.Height);
           Assert.AreEqual(Width, image.Width);
@@ -110,9 +103,7 @@
     [Test]
     public async void TestGetMediaItemWithPngExtension()
     {
-      const int ExpectedHeight = 256;
-
-      var options = new MediaOptionsBuilder()
+    var options = new MediaOptionsBuilder()
        .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/mouse-icon")
@@ -120,13 +111,10 @@
         .Database("master")
         .Build();
 
-      using (Stream response = await this.session.DownloadResourceAsync(request))
-      {
-        using (Image image = Image.FromStream(response))
-        {
-          Assert.AreEqual(ExpectedHeight, image.Height);
-        }
-      }
+      var response = await this.session.DownloadResourceAsync(request);
+      var ms = new MemoryStream();
+      response.CopyTo(ms);
+      Assert.IsTrue(15000 > ms.Length);
     }
 
     [Test]
@@ -255,13 +243,13 @@
     [Test]
     public async void TestGetMediaItemFromUploadedImageWithError()
     {
-       var options = new MediaOptionsBuilder()
-         .SetHeight(100)
-         .Build();
-
-       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/nexus")
-        .DownloadOptions(options)
+      var options = new MediaOptionsBuilder()
+        .SetHeight(100)
         .Build();
+
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/nexus")
+       .DownloadOptions(options)
+       .Build();
 
       TestDelegate testCode = async () =>
       {
@@ -273,5 +261,31 @@
       Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("Response status code does not indicate success: 404 (Not Found)"));
     }
+
+    [Test]
+    public async void TestMediaItemWithoutAccessToFolder()
+    {
+      const int Height = 100;
+      var sessionNoReadAccess = testData.GetSession(testData.InstanceUrl, testData.Users.NoReadAccess.Username, testData.Users.NoReadAccess.Password);
+      var options = new MediaOptionsBuilder()
+        .SetHeight(Height)
+        .Build();
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/kirkorov")
+        .DownloadOptions(options)
+        .Build();
+
+      var response = await sessionNoReadAccess.DownloadResourceAsync(request);
+       var ms = new MemoryStream();
+      response.CopyTo(ms);
+      Assert.IsTrue(5000>ms.Length);
+    }
+
+    [Test]
+    public async void TestMediaItemFromField()
+    {
+      string str = "Extension methods have all the capabilities of regular static methods.";
+      int first = str.IndexOf("methods");
+    }
+
   }
 }
