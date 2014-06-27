@@ -4,11 +4,9 @@ using MobileSDKUnitTest.Mock;
 namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.IO;
   using System.Threading;
-  using System.Threading.Tasks;
-
   using NUnit.Framework;
-
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
  
@@ -62,7 +60,7 @@ namespace MobileSDKIntegrationTest
             response = await task;
           }
         };
-        OperationCanceledException exception = Assert.Catch<OperationCanceledException>(testCode);
+        var exception = Assert.Catch<OperationCanceledException>(testCode);
         Debug.WriteLine("Expected token : " + cancelToken.ToString());
         Debug.WriteLine("Received token : " + exception.CancellationToken.ToString());
 
@@ -84,19 +82,40 @@ namespace MobileSDKIntegrationTest
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
 
-
       TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(request, cancelToken);
-        await task;
+        response = await task;
       };
-      OperationCanceledException exception = Assert.Catch<OperationCanceledException>(testCode);
+      var exception = Assert.Catch<OperationCanceledException>(testCode);
 
       Assert.IsNull(response);
       //      Desktop (Windows) : "A task was canceled."
       //      iOS               : "The Task was canceled"
       Assert.IsTrue(exception.Message.ToLowerInvariant().Contains("task was canceled"));
 
+      // @adk : CancellationToken class comparison or scheduling works differently on iOS
+      // Assert.AreEqual(cancelToken, exception.CancellationToken);
+    }
+
+    [Test]
+    public void TestCancelGetMedia()
+    {
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/test image").Build();
+      var cancelToken = CreateCancelTokenWithDelay(5);
+      Stream response = null;
+
+      TestDelegate testCode = async () =>
+      {
+        var task = session.DownloadResourceAsync(request, cancelToken);
+        response = await task;
+      };
+      var exception = Assert.Catch<OperationCanceledException>(testCode);
+
+      Assert.IsNull(response);
+      //      Desktop (Windows) : "A task was canceled."
+      //      iOS               : "The Task was canceled"
+      Assert.IsTrue(exception.Message.ToLowerInvariant().Contains("task was canceled"));
 
       // @adk : CancellationToken class comparison or scheduling works differently on iOS
       // Assert.AreEqual(cancelToken, exception.CancellationToken);
