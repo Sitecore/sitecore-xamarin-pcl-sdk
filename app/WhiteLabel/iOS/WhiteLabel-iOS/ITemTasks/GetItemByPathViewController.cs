@@ -18,7 +18,7 @@ namespace WhiteLabeliOS
 
 
 
-	public partial class GetItemByPathViewController : BaseTaskViewController
+	public partial class GetItemByPathViewController : BaseTaskTableViewController
 	{
 
 		public GetItemByPathViewController (IntPtr handle) : base (handle)
@@ -29,6 +29,7 @@ namespace WhiteLabeliOS
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			this.TableView = this.FieldsTableView;
 
             this.ItemPathField.ShouldReturn = this.HideKeyboard;
 		}
@@ -48,6 +49,22 @@ namespace WhiteLabeliOS
 			}
 		}
 
+		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
+		{
+			switch (sender.SelectedSegment)
+			{
+			case 0:
+				this.currentPayloadType = PayloadType.Full;
+				break;
+			case 1:
+				this.currentPayloadType = PayloadType.Content;
+				break;
+			case 2:
+				this.currentPayloadType = PayloadType.Min;
+				break;
+			}
+		}
+
 		private async void SendRequest ()
 		{
 			try
@@ -55,7 +72,7 @@ namespace WhiteLabeliOS
 				ScApiSession session = this.instanceSettings.GetSession();
 
                 var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-                    .Payload(PayloadType.Full)
+					.Payload(this.currentPayloadType)
                     .Build();
 
 				this.ShowLoader();
@@ -78,8 +95,7 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
-                CleanupTableViewBindings();
-
+				this.CleanupTableViewBindings();
 				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
 			}
             finally
@@ -91,54 +107,7 @@ namespace WhiteLabeliOS
                 });
             }
 		}
-
-        void CleanupTableViewBindings()
-        {
-            BeginInvokeOnMainThread(delegate
-            {
-                this.FieldsTableView.DataSource = null;
-                this.FieldsTableView.Delegate = null;
-                this.fieldsDataSource.Dispose();
-                this.fieldsDataSource = null;
-                this.fieldsTableDelegate = null;
-            });
-        }
-
-        private void ShowFieldsForItem( ISitecoreItem item )
-        {
-            BeginInvokeOnMainThread(delegate
-            {
-                this.fieldsDataSource = new FieldsDataSource();
-                this.fieldsTableDelegate = new FieldCellSelectionHandler();
-
-
-                FieldsDataSource dataSource = this.fieldsDataSource;
-                dataSource.SitecoreItem = item;
-                dataSource.TableView = this.FieldsTableView;
-
-
-                FieldCellSelectionHandler tableDelegate = this.fieldsTableDelegate;
-                tableDelegate.TableView = this.FieldsTableView;
-                tableDelegate.SitecoreItem = item;
-
-                FieldCellSelectionHandler.TableViewDidSelectFieldAtIndexPath onFieldSelected = 
-                    delegate (UITableView tableView, IField itemField, NSIndexPath indexPath)
-                    {
-                        AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
-                    };
-                tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
-
-
-
-                this.FieldsTableView.DataSource = dataSource;
-                this.FieldsTableView.Delegate = tableDelegate;
-                this.FieldsTableView.ReloadData();
-            });
-        }
-
-
-        private FieldsDataSource fieldsDataSource;
-        private FieldCellSelectionHandler fieldsTableDelegate;
+			
 	}
 }
 

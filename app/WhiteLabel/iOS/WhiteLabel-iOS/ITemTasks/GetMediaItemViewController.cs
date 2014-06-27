@@ -43,26 +43,47 @@ namespace WhiteLabeliOS
 
 		partial void OnDownloadButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
-			this.width = Convert.ToInt32(this.WidthTextField.Text);
-			this.height = Convert.ToInt32(this.HeightTextField.Text);
-
-			if (String.IsNullOrEmpty(this.MediaPathTextField.Text))
+			try
 			{
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type media path");
-			}
-			else
-				if (this.width<=0||this.width>this.maxWidth||this.height<=0||this.height>this.maxHeight)
+				if (String.IsNullOrEmpty(this.WidthTextField.Text)
+					||String.IsNullOrEmpty(this.HeightTextField.Text))
 				{
 					AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Incorect width or height value");
+					return;
+				}
+
+				this.width = Convert.ToInt32(this.WidthTextField.Text);
+				this.height = Convert.ToInt32(this.HeightTextField.Text);
+
+				if (String.IsNullOrEmpty(this.MediaPathTextField.Text))
+				{
+					AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type media path");
 				}
 				else
-					{
-						this.HideKeyboard(this.MediaPathTextField);
-						this.HideKeyboard(this.WidthTextField);
-						this.HideKeyboard(this.HeightTextField);
+				{
+					bool wrongSizeData = this.width<=0
+						||this.width>this.maxWidth
+						||this.height<=0
+						||this.height>this.maxHeight;
 
-						this.SendRequest();
+					if (wrongSizeData)
+					{
+						AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Incorect width or height value");
 					}
+					else
+						{
+							this.HideKeyboard(this.MediaPathTextField);
+							this.HideKeyboard(this.WidthTextField);
+							this.HideKeyboard(this.HeightTextField);
+
+							this.SendRequest();
+						}
+				}
+			}
+			catch(Exception e) 
+			{
+				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
+			}
 		}
 
 		private async void SendRequest ()

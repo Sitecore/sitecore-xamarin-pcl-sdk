@@ -17,7 +17,7 @@ namespace WhiteLabeliOS
     using WhiteLabeliOS.FieldsTableView;
 
 
-	public partial class GetItemByIdViewController : BaseTaskViewController
+	public partial class GetItemByIdViewController : BaseTaskTableViewController
 	{
 		public GetItemByIdViewController (IntPtr handle) : base (handle)
 		{
@@ -27,7 +27,9 @@ namespace WhiteLabeliOS
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			
+
+			this.TableView = this.FieldsTableView;
+
 			this.itemIdTextField.ShouldReturn = this.HideKeyboard;
 
 			fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);
@@ -116,68 +118,9 @@ namespace WhiteLabeliOS
             }
 		}
 
-        void CleanupTableViewBindings()
-        {
-            BeginInvokeOnMainThread(delegate
-            {
-				this.CleanupTableViewBindingsSync();
-            });
-        }
+        
 
-		void CleanupTableViewBindingsSync()
-		{
-			this.FieldsTableView.DataSource = null;
-			this.FieldsTableView.Delegate = null;
-
-			if (this.fieldsDataSource != null)
-			{
-				this.fieldsDataSource.Dispose ();
-				this.fieldsDataSource = null;
-			}
-
-            if (this.fieldsTableDelegate != null)
-            {
-                this.fieldsTableDelegate.Dispose ();
-                this.fieldsTableDelegate = null;
-            }
-		}
-
-        private void ShowFieldsForItem( ISitecoreItem item )
-        {
-            BeginInvokeOnMainThread(delegate
-            {
-				this.CleanupTableViewBindingsSync();
-
-                this.fieldsDataSource = new FieldsDataSource();
-                this.fieldsTableDelegate = new FieldCellSelectionHandler();
-
-
-                FieldsDataSource dataSource = this.fieldsDataSource;
-                dataSource.SitecoreItem = item;
-                dataSource.TableView = this.FieldsTableView;
-
-
-                FieldCellSelectionHandler tableDelegate = this.fieldsTableDelegate;
-                tableDelegate.TableView = this.FieldsTableView;
-                tableDelegate.SitecoreItem = item;
-
-                FieldCellSelectionHandler.TableViewDidSelectFieldAtIndexPath onFieldSelected = 
-                    delegate (UITableView tableView, IField itemField, NSIndexPath indexPath)
-                    {
-                        AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
-                    };
-                tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
-
-
-
-                this.FieldsTableView.DataSource = dataSource;
-                this.FieldsTableView.Delegate = tableDelegate;
-                this.FieldsTableView.ReloadData();
-            });
-        }
-
-        private FieldsDataSource fieldsDataSource;
-        private FieldCellSelectionHandler fieldsTableDelegate;
+       
 	}
 }
 
