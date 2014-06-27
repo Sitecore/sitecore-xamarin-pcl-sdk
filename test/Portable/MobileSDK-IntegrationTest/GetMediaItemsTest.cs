@@ -406,6 +406,30 @@
       Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
+    [Test]
+    public async void TestMediaItemFromField()
+    {
+      var expectedItem = await this.GetItemByPath("/sitecore/content/Home/Test fields");
+      var str = expectedItem.FieldWithName("image").RawValue;
+      var z = str.Split(new char[] { '\"' }, StringSplitOptions.RemoveEmptyEntries);
+
+      // z[5]: src="~/media/4F20B519D5654472B01891CB6103C667.ashx"
+      var requestWithSrcParameter = ItemWebApiRequestBuilder.ReadMediaItemRequest(z[5])
+          .Build();
+      var responseWithSrcParameter = await this.session.DownloadResourceAsync(requestWithSrcParameter);
+      var msWithSrcParameter = new MemoryStream();
+      responseWithSrcParameter.CopyTo(msWithSrcParameter);
+
+      // z[3]: mediapath="/Images/test image"
+      var requestWithMediapathParameter = ItemWebApiRequestBuilder.ReadMediaItemRequest(z[3])
+         .Build();
+      var responseWithMediapathParameter = await this.session.DownloadResourceAsync(requestWithMediapathParameter);
+      var msWithMediapathParameter = new MemoryStream();
+      responseWithMediapathParameter.CopyTo(msWithMediapathParameter);
+
+      Assert.AreEqual(msWithSrcParameter, msWithMediapathParameter);
+    }
+
     private async Task<ISitecoreItem> GetItemByPath(string path, string db = null)
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Payload(PayloadType.Content).Database(db).Build();
@@ -413,12 +437,5 @@
       var item = response.Items[0];
       return item;
     }
-
-    //[Test]
-    //public async void TestMediaItemFromField()
-    //{
-    //  string str = "Extension methods have all the capabilities of regular static methods.";
-    //  int first = str.IndexOf("methods");
-    //}
   }
 }    

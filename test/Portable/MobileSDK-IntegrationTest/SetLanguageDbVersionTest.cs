@@ -276,7 +276,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemWithWebSite()
     {
-      const string Site = "/sitecore/website";
+      const string Site = "/";
 
       var session = this.CreateCreatorexSession(Site);
       var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
@@ -289,7 +289,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemWithShellSiteWithoutDomain()
     {
-      const string Site = "/website";
+      const string Site = "/";
 
       var session = this.CreateCreatorexSession(Site);
       var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
