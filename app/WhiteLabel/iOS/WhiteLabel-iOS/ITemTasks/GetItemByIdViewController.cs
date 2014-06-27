@@ -108,7 +108,7 @@ namespace WhiteLabeliOS
 			catch(Exception e) 
 			{
                 this.CleanupTableViewBindings();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
 			}
             finally
             {
@@ -119,10 +119,7 @@ namespace WhiteLabeliOS
                 });
             }
 		}
-
-        
-
-       
+			
 	}
 }
 

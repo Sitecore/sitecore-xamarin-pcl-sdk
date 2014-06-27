@@ -69,7 +69,7 @@ namespace WhiteLabeliOS
 			catch(Exception e) 
 			{
 				this.HideLoader();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
 			}
 		}
 	}
