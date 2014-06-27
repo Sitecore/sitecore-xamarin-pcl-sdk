@@ -53,7 +53,7 @@ namespace Sitecore.MobileSdkUnitTest
       options.SetDisableMediaCache(false);
 
       Assert.AreEqual("1", options.DisplayAsThumbnail);
-      Assert.IsNull(options.DisableMediaCache);
+      Assert.AreEqual("0", options.DisableMediaCache);
     }
 
   }

@@ -158,10 +158,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       }
 			get
 			{ 
-				if (this.disableMediaCache != null)
-					return DownloadMediaOptions.PositiveBoolValue;
-
-				return null;
+        return this.disableMediaCache;
 			}
 		}
 
@@ -173,7 +170,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			}
 			else
 			{
-				this.disableMediaCache = null;
+        this.disableMediaCache = DownloadMediaOptions.NegativeBoolValue;
 			}
 		}
 
@@ -185,10 +182,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       }
 			get
 			{ 
-				if (this.allowStrech != null)
-					return DownloadMediaOptions.PositiveBoolValue;
-
-				return null;
+        return this.allowStrech;
 			}
 		}
 
@@ -200,7 +194,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			}
 			else
 			{
-				this.allowStrech = null;
+        this.allowStrech = DownloadMediaOptions.NegativeBoolValue;
 			}
 		}
 
@@ -212,10 +206,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       }
 			get
 			{ 
-				if (this.displayAsThumbnail != null)
-					return DownloadMediaOptions.PositiveBoolValue;
-
-				return null;
+        return this.displayAsThumbnail;
 			}
 		}
 
@@ -227,7 +218,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			}
 			else
 			{
-				this.displayAsThumbnail = null;
+        this.displayAsThumbnail = DownloadMediaOptions.NegativeBoolValue;
 			}
 		}
 
@@ -320,6 +311,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 		private string displayAsThumbnail;
 
 		private const string PositiveBoolValue = "1";
+    private const string NegativeBoolValue = "0";
 
 		private const string widthKey 			    = "w";
 		private const string heightKey 			    = "h";

@@ -6,6 +6,7 @@
 "createEditItem" = "******************";
 "uploadImageVC" = "******************";
 "getItemByQuery" = "************";
+"getMediaItem" = "**********";
 "Master" = "*********";
 
 //titles
@@ -29,8 +30,10 @@
 "item title is" = "**************";
 "items count is" = "******* *** **";
 "Field Raw Value" = "*** * * * * * *";
-
+"Please type media path" = "*** * ** * ****";
+"Incorect width or height value" = "****** * * * ** * *****";
 "Type query" = "*************";
+
 //settings screen placeholders
 "Instance Url" = "***********";
 "Password" = "***********";
@@ -43,3 +46,6 @@
 "Type item ID" = "********";
 "Get Item children" = "*************";
 "Get Item" = "********";
+"Download" = "*********";
+"Height:" = "*****";
+"Width:" = "****";

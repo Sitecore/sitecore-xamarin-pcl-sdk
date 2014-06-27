@@ -6,6 +6,7 @@
 "createEditItem" = "Create & Edit Item";
 "uploadImageVC" = "Upload Image";
 "getItemByQuery" = "Item by Query";
+"getMediaItem" = "Download Image";
 "Master" = "Master";
 
 //titles
@@ -30,7 +31,8 @@
 "item title is" = "item title is";
 "items count is" = "items count is";
 "Field Raw Value" = "Field Raw Value";
-
+"Please type media path" = "Please type media path";
+"Incorect width or height value" = "Incorect width or height value";
 "Type query" = "Type Sitecore query:";
 
 //settings screen placeholders
@@ -45,3 +47,6 @@
 "Type item ID" = "Type item ID";
 "Get Item children" = "Get Item children";
 "Get Item" = "Get Item";
+"Download" = "Download";
+"Height:" = "Height:";
+"Width:" = "Width:";
