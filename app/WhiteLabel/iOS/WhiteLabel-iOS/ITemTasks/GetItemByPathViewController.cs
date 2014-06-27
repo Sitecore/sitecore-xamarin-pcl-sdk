@@ -34,6 +34,13 @@ namespace WhiteLabeliOS
 			this.ItemPathField.Text = "/sitecore/content/Home";
 
             this.ItemPathField.ShouldReturn = this.HideKeyboard;
+
+			this.ItemPathField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item Path", null);
+			this.fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);;
+
+			string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
+			getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
+
 		}
 
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
@@ -99,7 +106,7 @@ namespace WhiteLabeliOS
 			catch(Exception e) 
 			{
 				this.CleanupTableViewBindings();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
 			}
             finally
             {

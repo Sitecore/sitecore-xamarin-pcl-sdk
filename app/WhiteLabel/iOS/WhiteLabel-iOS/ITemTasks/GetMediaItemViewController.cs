@@ -21,6 +21,8 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 
+			this.MediaPathTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type Media Path", null);
+
 			string ButtonTitle = NSBundle.MainBundle.LocalizedString ("Download", null);
 			this.DownloadButton.SetTitle (ButtonTitle, UIControlState.Normal);
 
@@ -82,7 +84,7 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
-				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
 			}
 		}
 
@@ -125,7 +127,7 @@ namespace WhiteLabeliOS
 			}
 			catch(Exception e) 
 			{
-				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
 			}
 			finally
 			{
