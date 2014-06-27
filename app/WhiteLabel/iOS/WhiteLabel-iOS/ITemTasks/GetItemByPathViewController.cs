@@ -31,6 +31,8 @@ namespace WhiteLabeliOS
 			base.ViewDidLoad ();
 			this.TableView = this.FieldsTableView;
 
+			this.ItemPathField.Text = "/sitecore/content/Home";
+
             this.ItemPathField.ShouldReturn = this.HideKeyboard;
 		}
 
@@ -73,6 +75,7 @@ namespace WhiteLabeliOS
 
                 var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
 					.Payload(this.currentPayloadType)
+					.AddFields(this.fieldNameTextField.Text)
                     .Build();
 
 				this.ShowLoader();

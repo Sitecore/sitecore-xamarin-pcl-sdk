@@ -32,6 +32,8 @@ namespace WhiteLabeliOS
 
 			this.itemIdTextField.ShouldReturn = this.HideKeyboard;
 
+			this.itemIdTextField.Text = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
+
 			fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);
 			itemIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item ID", null);
 
