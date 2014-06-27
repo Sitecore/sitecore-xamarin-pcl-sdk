@@ -8,11 +8,13 @@ namespace Sitecore.MobileSDK
 
 	public class ReadMediaItemParameters : IReadMediaItemRequest
 	{
-		public ReadMediaItemParameters(
-			ISessionConfig sessionSettings,
-			IItemSource itemSource, 
-      IDownloadMediaOptions downloadOptions,
-			string mediaPath)
+		public ReadMediaItemParameters
+		(
+			ISessionConfig 			sessionSettings,
+			IItemSource 			itemSource, 
+      		IDownloadMediaOptions 	downloadOptions,
+			string 					mediaPath
+		)
 		{
 			this.SessionSettings = sessionSettings;
 			this.ItemSource = itemSource;

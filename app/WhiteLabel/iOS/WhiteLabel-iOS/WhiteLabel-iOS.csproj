@@ -146,6 +146,10 @@
     <Compile Include="ITemTasks\GetMediaItemViewController.designer.cs">
       <DependentUpon>GetMediaItemViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.cs" />
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs">
+      <DependentUpon>BaseTaskTableViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />

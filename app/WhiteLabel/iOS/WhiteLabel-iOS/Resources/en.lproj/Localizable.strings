@@ -34,6 +34,7 @@
 "Please type media path" = "Please type media path";
 "Incorect width or height value" = "Incorect width or height value";
 "Type query" = "Type Sitecore query:";
+"Type Media Path" = "Type Media Path";
 
 //settings screen placeholders
 "Instance Url" = "Instance Url";
