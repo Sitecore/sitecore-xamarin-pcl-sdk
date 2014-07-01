@@ -46,10 +46,9 @@ namespace WhiteLabelAndroid.SubActivities
             {
                 ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
 
-                ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
-                var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
+                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
 
-                ScItemsResponse response = await session.ReadItemByQueryAsync(request);
+                ScItemsResponse response = await session.ReadItemAsync(request);
 
                 var message = response.ResultCount > 0 ? string.Format("items count is \"{0}\"", response.Items.Count): "Item doesn't exist";
 

@@ -17,7 +17,7 @@ namespace WhiteLabelAndroid.SubActivities
         private TextView itemNameTextView;
         private RadioGroup payloadRadioGroup;
 
-        private ScItem item;
+        private ISitecoreItem item;
         private Prefs prefs;
 
         void AdapterView.IOnItemClickListener.OnItemClick(AdapterView parent, View view, int position, long id)
@@ -88,11 +88,9 @@ namespace WhiteLabelAndroid.SubActivities
             {
                 ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
 
-                ItemWebApiRequestBuilder requestBuilder = new ItemWebApiRequestBuilder();
+                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Payload(this.GetSelectedPayload()).Build();
 
-                var request = requestBuilder.RequestWithPath(path).Payload(this.GetSelectedPayload()).Build();
-
-                ScItemsResponse response = await session.ReadItemByPathAsync(request);
+                ScItemsResponse response = await session.ReadItemAsync(request);
 
                 if (response.ResultCount > 0)
                 {
