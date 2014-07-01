@@ -48,17 +48,17 @@ namespace WhiteLabelAndroid.SubActivities
       this.fieldsListView.OnItemClickListener = this;
 
       var label = this.FindViewById<TextView>(Resource.Id.label);
-      label.Text = "Type Item Path:";
+      label.Text = GetString(Resource.String.text_path_label);
 
       var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-      itemIdField.Hint = "Item Path";
+      itemIdField.Hint = GetString(Resource.String.hint_path);
 
       var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
       getItemButton.Click += (sender, args) =>
       {
         if (string.IsNullOrEmpty(itemIdField.Text))
         {
-          DialogHelper.ShowSimpleDialog(this, "Error", "Item path cannot be empty");
+          DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_error), GetString(Resource.String.text_empty_path));
           return;
         }
 
@@ -102,12 +102,13 @@ namespace WhiteLabelAndroid.SubActivities
         }
         else
         {
-          DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, "Item doesn't exist");
+          DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, Resource.String.text_no_item);
         }
       }
       catch (Exception exception)
       {
-        DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, "Erorr :" + exception.Message);
+        var title = GetString(Resource.String.text_item_received);
+        DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
       }
     }
 

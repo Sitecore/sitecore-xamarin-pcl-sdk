@@ -23,17 +23,17 @@ namespace WhiteLabelAndroid.SubActivities
       this.SetContentView(Resource.Layout.SimpleItemLayout);
 
       var label = this.FindViewById<TextView>(Resource.Id.label);
-      label.Text = "Type Sitecore Query:";
+      label.Text = GetString(Resource.String.text_query_label);
 
       var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-      itemIdField.Hint = "Query";
+      itemIdField.Hint = GetString(Resource.String.hint_query);
 
       var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
       getItemButton.Click += (sender, args) =>
       {
         if (string.IsNullOrEmpty(itemIdField.Text))
         {
-          DialogHelper.ShowSimpleDialog(this, "Error", "Query cannot be empty");
+          DialogHelper.ShowSimpleDialog(this, Resource.String.text_error, Resource.String.text_empty_query);
           return;
         }
 
@@ -53,11 +53,12 @@ namespace WhiteLabelAndroid.SubActivities
 
         var message = response.ResultCount > 0 ? string.Format("items count is \"{0}\"", response.Items.Count) : "Item doesn't exist";
 
-        DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, message);
+        DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_item_received), message);
       }
       catch (Exception exception)
       {
-        DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, "Erorr :" + exception.Message);
+        var title = GetString(Resource.String.text_item_received);
+        DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
       }
     }
   }

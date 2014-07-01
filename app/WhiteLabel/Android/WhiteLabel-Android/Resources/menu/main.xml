@@ -3,5 +3,5 @@
 	<item android:id="@+id/settings"
 		android:icon="@drawable/ic_lock_power_off"
 		android:showAsAction="always"
-		android:title="@string/text_settings" />
+		android:title="@string/menu_text_settings" />
 </menu>

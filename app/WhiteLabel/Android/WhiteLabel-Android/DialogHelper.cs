@@ -5,9 +5,10 @@ namespace WhiteLabelAndroid
 
   public class DialogHelper
   {
-    public static void ShowSimpleDialog(Context context, int title, string message)
+    public static void ShowSimpleDialog(Context context, int titleId, int messageId)
     {
-      var titleString = context.GetString(title);
+      var titleString = context.GetString(titleId);
+      var message = context.GetString(messageId);
       ShowSimpleDialog(context, titleString, message);
     }
 
