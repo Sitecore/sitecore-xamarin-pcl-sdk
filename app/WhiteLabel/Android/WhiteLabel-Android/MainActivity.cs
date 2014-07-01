@@ -2,12 +2,13 @@
 {
   using Android.App;
   using Android.Content;
+  using Android.Content.PM;
   using Android.OS;
   using Android.Views;
   using Android.Widget;
   using WhiteLabelAndroid.SubActivities;
 
-  [Activity(Label = "WhiteLabel-Android", MainLauncher = true)]
+  [Activity(Label = "WhiteLabel-Android", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
   public class MainActivity : Activity
   {
     public override bool OnCreateOptionsMenu(IMenu menu)

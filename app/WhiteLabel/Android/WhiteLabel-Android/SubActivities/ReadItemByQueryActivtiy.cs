@@ -2,12 +2,13 @@ namespace WhiteLabelAndroid.SubActivities
 {
   using System;
   using Android.App;
+  using Android.Content.PM;
   using Android.OS;
   using Android.Widget;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
 
-  [Activity]
+  [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class ReadItemByQueryActivtiy : Activity
   {
     private Prefs prefs;

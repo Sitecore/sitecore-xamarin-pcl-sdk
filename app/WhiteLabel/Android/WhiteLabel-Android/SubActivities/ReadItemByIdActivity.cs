@@ -2,6 +2,7 @@ namespace WhiteLabelAndroid.SubActivities
 {
   using System;
   using Android.App;
+  using Android.Content.PM;
   using Android.OS;
   using Android.Views;
   using Android.Widget;
@@ -10,7 +11,7 @@ namespace WhiteLabelAndroid.SubActivities
   using Sitecore.MobileSDK.Items.Fields;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  [Activity]
+  [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class ReadItemByIdActivity : Activity, AdapterView.IOnItemClickListener
   {
     private ListView fieldsListView;

@@ -1,10 +1,11 @@
 ﻿namespace WhiteLabelAndroid
 {
   using Android.App;
+  using Android.Content.PM;
   using Android.OS;
   using Android.Widget;
 
-  [Activity(Label = "SettingsActivity")]
+  [Activity(Label = "SettingsActivity", ScreenOrientation = ScreenOrientation.Portrait)]
   public class SettingsActivity : Activity
   {
     private Prefs prefs;
