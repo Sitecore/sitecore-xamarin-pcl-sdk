@@ -1,9 +1,11 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
 {
-	public struct ScopeType
+	public enum ScopeType
 	{
+		Self, 
+		Children, 
+		Parent, 
+		Default = Self
 	}
 }
 
