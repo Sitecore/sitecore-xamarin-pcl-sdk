@@ -33,7 +33,7 @@ namespace WhiteLabelAndroid.SubActivities
       {
         if (string.IsNullOrEmpty(itemIdField.Text))
         {
-          Toast.MakeText(this, "Query cannot be mepty", ToastLength.Short).Show();
+          DialogHelper.ShowSimpleDialog(this, "Error", "Query cannot be mepty");
           return;
         }
 
