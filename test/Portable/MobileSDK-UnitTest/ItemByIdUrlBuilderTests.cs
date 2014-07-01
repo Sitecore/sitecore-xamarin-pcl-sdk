@@ -45,7 +45,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableSessionConfig.Site = "/sitecore/shell";
       this.sitecoreShellConfig = mutableSessionConfig;
 
-      this.payload = new QueryParameters( PayloadType.Min, null );
+      this.payload = new QueryParameters( PayloadType.Min, null, null );
     }
 
     [TearDown]
@@ -62,7 +62,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.ItemSource = ItemSource.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
-      mutableParameters.QueryParameters = new QueryParameters(null, null);
+      mutableParameters.QueryParameters = new QueryParameters(null, null, null);
 
       IReadItemsByIdRequest parameters = mutableParameters;
 

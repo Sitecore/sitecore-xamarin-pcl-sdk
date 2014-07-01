@@ -55,7 +55,7 @@ namespace MobileSDKIntegrationTest
     {
       string homeId = this.env.Items.Home.Id;
 
-      IQueryParameters payload = new QueryParameters(PayloadType.Min, null);
+      IQueryParameters payload = new QueryParameters(PayloadType.Min, null, null);
 
       MockGetItemsByIdParameters mockMutableRequest = new MockGetItemsByIdParameters();
       mockMutableRequest.ItemId = homeId;
@@ -86,7 +86,7 @@ namespace MobileSDKIntegrationTest
     {
       string homePath = "/sitecore/content/home";
 
-      IQueryParameters payload = new QueryParameters(PayloadType.Min, null);
+      IQueryParameters payload = new QueryParameters(PayloadType.Min, null, null);
 
       MockGetItemsByPathParameters mockMutableRequest = new MockGetItemsByPathParameters();
       mockMutableRequest.ItemPath = homePath;
@@ -117,7 +117,7 @@ namespace MobileSDKIntegrationTest
     {
       string homePath = "/sitecore/content/home";
 
-      IQueryParameters payload = new QueryParameters(PayloadType.Min, null);
+      IQueryParameters payload = new QueryParameters(PayloadType.Min, null, null);
 
       MockGetItemsByQueryParameters mockMutableRequest = new MockGetItemsByQueryParameters();
       mockMutableRequest.SitecoreQuery = homePath;
