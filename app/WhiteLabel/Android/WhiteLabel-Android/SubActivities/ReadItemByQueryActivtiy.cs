@@ -33,7 +33,7 @@ namespace WhiteLabelAndroid.SubActivities
       {
         if (string.IsNullOrEmpty(itemIdField.Text))
         {
-          DialogHelper.ShowSimpleDialog(this, "Error", "Query cannot be mepty");
+          DialogHelper.ShowSimpleDialog(this, "Error", "Query cannot be empty");
           return;
         }
 

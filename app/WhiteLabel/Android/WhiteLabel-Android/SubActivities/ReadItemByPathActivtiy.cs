@@ -58,7 +58,7 @@ namespace WhiteLabelAndroid.SubActivities
       {
         if (string.IsNullOrEmpty(itemIdField.Text))
         {
-          DialogHelper.ShowSimpleDialog(this, "Error", "Item path cannot be mepty");
+          DialogHelper.ShowSimpleDialog(this, "Error", "Item path cannot be empty");
           return;
         }
 
