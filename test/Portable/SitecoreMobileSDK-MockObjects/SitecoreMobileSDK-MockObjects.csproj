@@ -36,6 +36,10 @@
     <Compile Include="MockGetItemsByQueryParameters.cs" />
     <Compile Include="MockReadItemByIdParameters.cs" />
     <Compile Include="MockReadItemByPathParameters.cs" />
+    <Compile Include="FunctionTracer.cs" />
+    <Compile Include="MutableItemSource.cs" />
+    <Compile Include="MutableSessionConfig.cs" />
+    <Compile Include="MockMutableMediaOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -43,11 +47,6 @@
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>SitecoreMobileSDK</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\solutions\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -60,4 +59,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\solutions\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

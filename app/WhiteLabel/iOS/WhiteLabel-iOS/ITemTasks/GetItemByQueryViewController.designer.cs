@@ -13,6 +13,12 @@ namespace WhiteLabeliOS
 	partial class GetItemByQueryViewController
 	{
 		[Outlet]
+		MonoTouch.UIKit.UIButton getItemButton { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UILabel nameLabel { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UITextField queryTextField { get; set; }
 
 		[Action ("OnGetItemButtonTouched:")]
@@ -20,6 +26,16 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (nameLabel != null) {
+				nameLabel.Dispose ();
+				nameLabel = null;
+			}
+
+			if (getItemButton != null) {
+				getItemButton.Dispose ();
+				getItemButton = null;
+			}
+
 			if (queryTextField != null) {
 				queryTextField.Dispose ();
 				queryTextField = null;

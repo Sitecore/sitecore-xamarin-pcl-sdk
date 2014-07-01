@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Sitecore.MobileSDK.SessionSettings
 {
-    interface IWebApiCredentials
-    {
-        string Login
-        {
-            get;
-        }
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Text;
 
-        string Password
-        {
-            get;
-        }
+
+  public interface IWebApiCredentials
+  {
+    IWebApiCredentials CredentialsShallowCopy();
+
+    string Login
+    {
+      get;
     }
+
+    string Password
+    {
+      get;
+    }
+  }
 }

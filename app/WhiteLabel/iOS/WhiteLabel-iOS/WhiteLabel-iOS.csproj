@@ -92,6 +92,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\ru.lproj\Localizable.strings" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -141,6 +142,14 @@
     </Compile>
     <Compile Include="FieldsTableView\FieldsDataSource.cs" />
     <Compile Include="FieldsTableView\FieldCellSelectionHandler.cs" />
+    <Compile Include="ITemTasks\GetMediaItemViewController.cs" />
+    <Compile Include="ITemTasks\GetMediaItemViewController.designer.cs">
+      <DependentUpon>GetMediaItemViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.cs" />
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs">
+      <DependentUpon>BaseTaskTableViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
@@ -151,6 +160,7 @@
     <Folder Include="ITemTasks\" />
     <Folder Include="ITemTasks\BaseClasses\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Resources\ru.lproj\" />
     <Folder Include="FieldsTableView\" />
   </ItemGroup>
   <ItemGroup>

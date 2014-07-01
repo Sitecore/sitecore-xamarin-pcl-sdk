@@ -1,0 +1,3 @@
+http://json.codeplex.com/SourceControl/latest#trunk/Build/build.ps1
+http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview
+http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-package

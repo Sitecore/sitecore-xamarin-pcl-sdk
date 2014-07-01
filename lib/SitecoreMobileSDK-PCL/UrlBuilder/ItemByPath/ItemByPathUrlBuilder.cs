@@ -2,53 +2,38 @@
 
 namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 {
-    using System;
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.UrlBuilder.Rest;
-    using Sitecore.MobileSDK.UrlBuilder.WebApi;
-    using Sitecore.MobileSDK.Utils;
-    using Sitecore.MobileSDK.SessionSettings;
+  using System;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UrlBuilder.Rest;
+  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.Utils;
+  using Sitecore.MobileSDK.SessionSettings;
 
 
-    public class ItemByPathUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByPathRequest>
+  public class ItemByPathUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByPathRequest>
+  {
+    public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+      : base( restGrammar, webApiGrammar )
     {
-        public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-            : base( restGrammar, webApiGrammar )
-        {
-        }
-
-        protected override string GetSpecificPartForRequest(IReadItemsByPathRequest request)
-        {
-            throw new InvalidOperationException("ItemByPathUrlBuilder.GetSpecificPartForRequest() - Unexpected instruction");
-        }
-
-        public override string GetUrlForRequest(IReadItemsByPathRequest request)
-        {
-            this.ValidateRequest (request);
-            string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath);
-
-            var sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
-            string result = sessionBuilder.BuildUrlString(request.SessionSettings);
-
-            var sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
-            string itemSourceArgs = sourceBuilder.BuildUrlQueryString ();
-
-            var itemLoadParamsBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
-            string itemLoadParams = itemLoadParamsBuilder.BuildUrlString(request.QueryParameters);
-
-            result += 
-                escapedPath + 
-                this.restGrammar.HostAndArgsSeparator + 
-                itemSourceArgs +
-                this.restGrammar.FieldSeparator +
-                itemLoadParams;
-
-            return result.ToLowerInvariant();
-        }
-
-        protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)
-        {
-            ItemPathValidator.ValidateItemPath (request.ItemPath);
-        }
     }
+
+    protected override string GetHostUrlForRequest(IReadItemsByPathRequest request)
+    {
+      string hostUrl = base.GetHostUrlForRequest(request);
+      string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
+
+      string result = hostUrl + escapedPath;
+      return result;
+    }
+
+    protected override string GetSpecificPartForRequest(IReadItemsByPathRequest request)
+    {
+      return null;
+    }
+
+    protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)
+    {
+      ItemPathValidator.ValidateItemPath (request.ItemPath);
+    }
+  }
 }

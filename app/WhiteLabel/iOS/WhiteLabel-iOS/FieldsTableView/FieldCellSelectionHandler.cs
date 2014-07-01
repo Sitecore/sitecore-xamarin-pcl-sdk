@@ -10,15 +10,26 @@ namespace WhiteLabeliOS.FieldsTableView
     using Sitecore.MobileSDK.Items.Fields;
 
 
+// https://github.com/sami1971/SimplyMobile/wiki/Cross-platform-data-source
+// http://components.xamarin.com/view/gmgsoftware
+
     public class FieldCellSelectionHandler : UITableViewDelegate
     {
         public delegate void TableViewDidSelectFieldAtIndexPath(UITableView tableView, IField itemField, NSIndexPath indexPath);
 
         protected override void Dispose (bool disposing)
         {
-            this.handler = null;
-            this.sitecoreItem = null;
-            this.myTable.Delegate = null;
+            InvokeOnMainThread(delegate
+            {
+                this.handler = null;
+                this.sitecoreItem = null;
+
+                if (null != this.myTable)
+                {
+                    this.myTable.Delegate = null;
+                }
+                this.myTable = null;
+            });
 
 
             base.Dispose(disposing);
@@ -67,7 +78,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
         }
 
-        public ScItem SitecoreItem
+        public ISitecoreItem SitecoreItem
         { 
             get
             {
@@ -104,7 +115,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
 
         #region Instance Variables
-        private ScItem sitecoreItem;
+        private ISitecoreItem sitecoreItem;
         private UITableView myTable;
         private TableViewDidSelectFieldAtIndexPath handler;
         #endregion Instance Variables

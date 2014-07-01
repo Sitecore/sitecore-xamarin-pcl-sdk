@@ -1,4 +1,6 @@
-﻿namespace MobileSDKIntegrationTest
+﻿
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading.Tasks;
@@ -7,7 +9,12 @@
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
+
+//  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+//  using System.IO;
+//  using System.Threading;
+//  using MonoTouch.UIKit;
+//  using MonoTouch.Foundation;
 
   [TestFixture]
   public class GetItemsTest
@@ -15,15 +22,14 @@
     private TestEnvironment testData;
     private ScApiSession sessionAuthenticatedUser;
 
-    private const string ItemWithSpacesPath = "/sitecore/content/T E S T/i t e m";
-    private const string ItemWithSpacesName = "i t e m";
+    private const string ItemWithSpacesPath = "/sitecore/content/Home/Android/Static/Test item 1";
+    private const string ItemWithSpacesName = "Test item 1";
 
     [SetUp]
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      this.sessionAuthenticatedUser = new ScApiSession(config, ItemSource.DefaultSource());
+      this.sessionAuthenticatedUser = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
     }
 
     [TearDown]
@@ -32,6 +38,45 @@
       this.sessionAuthenticatedUser = null;
       this.testData = null;
     }
+
+//    [Test]
+//    public async void TestGetMediaItem()
+//    {
+//      // @igk !!! TEMPORARY TEST FOR CUSTOM USE, DO NOT DELETE, PLEASE !!!
+//      IDownloadMediaOptions options = new MediaOptionsBuilder()
+//        .SetDisplayAsThumbnail(true)
+//        .Build();
+//
+//      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
+//        .DownloadOptions(options)
+//        .Database("master")
+//        .Build();
+//        
+//      var response = await this.sessionAuthenticatedUser.DownloadResourceAsync(request);
+//     
+//      byte[] data;
+//
+//      using (BinaryReader br = new BinaryReader(response))
+//      {
+//        data = br.ReadBytes((int)response.Length);
+//      }
+//
+//      UIImage image = null;
+//      image = new UIImage(NSData.FromArray(data));
+//      //string text = reader.ReadToEnd();
+//
+//      var documentsDirectory = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+//      string jpgFilename = System.IO.Path.Combine (documentsDirectory, "Photo.jpg"); // hardcoded filename, overwrites each time
+//      NSData imgData = image.AsJPEG();
+//      NSError err = null;
+//      if (imgData.Save(jpgFilename, false, out err))
+//      {
+//        Console.WriteLine("saved as " + jpgFilename);
+//      } else {
+//        Console.WriteLine("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
+//      }
+//     
+//    }
 
     [Test]
     public async void TestGetItemById()
@@ -111,7 +156,7 @@
     {
       const string ItemInterationalPath = "/sitecore/content/Home/Android/Static/Japanese/宇都宮";
       var response = await GetItemByPath(ItemInterationalPath);
-     testData.AssertItemsCount(1, response);
+      testData.AssertItemsCount(1, response);
       var expectedItem = new TestEnvironment.Item
       {
         DisplayName = "宇都宮",
@@ -166,81 +211,67 @@
     }
 
     [Test]
-    public async void TestGetItemByNullId()
+    public void TestGetItemByNullId()
     {
-      try
+      TestDelegate testCode = async() =>
       {
-        await this.GetItemById(null);
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("Item id cannot be null"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = this.GetItemById(null);
+        await task;
+      };
+
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
-    public async void TestGetItemByNullPath()
+    public void TestGetItemByNullPath()
     {
-      try
+      TestDelegate testCode = async() =>
       {
-        await this.GetItemByPath(null);
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("Item path cannot be null"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = this.GetItemByPath(null);
+        await task;
+      };
+
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
-    public async void TestGetItemByNullQuery()
+    public void TestGetItemByNullQuery()
     {
-      try
+      TestDelegate testCode = async() =>
       {
-        await this.GetItemByQuery(null);
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = this.GetItemByQuery(null);
+        await task;
+      };
+
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
-    public async void TestGetItemByEmptyPath()
+    public void TestGetItemByEmptyPath()
     {
-      try
+      TestDelegate testCode = async() =>
       {
-        await this.GetItemByPath("");
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("Item path cannot be null or empty"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = this.GetItemByPath("");
+        await task;
+      };
+
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
     [Test]
-    public async void TestGetItemByEmptyQuery()
+    public void TestGetItemByEmptyQuery()
     {
-      try
+      TestDelegate testCode = async() =>
       {
-        await this.GetItemByQuery("");
-      }
-      catch (ArgumentNullException exception)
-      {
-        Assert.True(exception.Message.Contains("SitecoreQuery cannot be null"));
+        var task = this.GetItemByQuery("");
+        await task;
+      };
 
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+      Assert.Throws<ArgumentNullException>(testCode);
     }
 
+    //TODO: create items for test first and remove them after test
+    /*
     [Test]
     public async void TestGetOneHundredItemsByQuery()
     {
@@ -248,63 +279,55 @@
       testData.AssertItemsCount(100, response);
       Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
     }
+    */
 
     [Test]
     public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
-      var config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:7119", "extranet\\noreadaccess", "noreadaccess");
-      var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource());
+      var sessionWithoutAccess = testData.GetSession(
+        testData.InstanceUrl,
+        testData.Users.NoReadAccess.Username,
+        testData.Users.NoReadAccess.Password);
 
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(this.testData.Items.Home.Path).Build();
-      var response = await sessionWithoutAccess.ReadItemByPathAsync(request);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
+      var response = await sessionWithoutAccess.ReadItemAsync(request);
 
       testData.AssertItemsCount(0, response);
     }
 
     [Test] //this case should be changed for another instance
-    public async void TestGetItemByQueryWithturnedOffItemWebApi()
+    public void TestGetItemByQueryWithturnedOffItemWebApi()
     {
+      var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
-      var config = new SessionConfig("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var sessionWithoutAccess = new ScApiSession(config, ItemSource.DefaultSource()); // = sessionAuthenticatedUser;
-
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(this.testData.Items.Home.Path).Build();
-
-      try
+      TestDelegate testCode = async () =>
       {
-        await sessionWithoutAccess.ReadItemByPathAsync(request); 
-      }
-      catch (RsaHandshakeException exception)
-      {
-        Assert.True(exception.Message.Contains("Public key not received properly"));
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+        var task = sessionWithoutAccess.ReadItemAsync(request);
+        await task;
+      };
+
+      Assert.Throws<RsaHandshakeException>(testCode);
     }
 
     private async Task<ScItemsResponse> GetItemById(string id)
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithId(id).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByIdAsync(request);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
     private async Task<ScItemsResponse> GetItemByPath(string path)
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithPath(path).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByPathAsync(request);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
     private async Task<ScItemsResponse> GetItemByQuery(string query)
     {
-      var requestBuilder = new ItemWebApiRequestBuilder();
-      var request = requestBuilder.RequestWithSitecoreQuery(query).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemByQueryAsync(request);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
   }

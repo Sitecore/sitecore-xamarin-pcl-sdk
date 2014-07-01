@@ -1,8 +1,11 @@
-﻿namespace MobileSDKIntegrationTest
+﻿
+
+namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
 
   using System;
+  using System.Threading.Tasks;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
@@ -23,8 +26,7 @@
     {
       testData = TestEnvironment.DefaultTestEnvironment();
 
-      var requestBuilder = new ItemWebApiRequestBuilder ();
-      this.requestWithItemId = requestBuilder.RequestWithId (this.testData.Items.Home.Id).Build();
+      this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
     }
 
     [TearDown]
@@ -36,34 +38,48 @@
     [Test]
     public async void TestGetItemAsAuthenticatedUser()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSession(this.testData.InstanceUrl, this.testData.Users.Admin.Username, this.testData.Users.Admin.Password);
 
-      var response = await session.ReadItemByIdAsync(requestWithItemId);
+      var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
       Assert.AreEqual(testData.Items.Home.DisplayName, response.Items[0].DisplayName);
     }
 
     [Test]
-    public async void TestGetItemsWithNotExistentInstanceUrl()
+    public async void TestMissingHttpIsAutocompletedDuringAuthentication()
     {
-      var config = new SessionConfig("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
 
-      try
+      var session = testData.GetSession(urlWithoutHttp, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var certrificate = await session.ReadItemAsync(this.requestWithItemId);
+      Assert.IsNotNull(certrificate);
+    }
+
+    [Test]
+    public async void TestAuthenticateWithSlashInTheEnd()
+    {
+      string urlWithSlahInTheEnd = testData.InstanceUrl+'/';
+      var session = testData.GetSession(urlWithSlahInTheEnd, testData.Users.Admin.Username, testData.Users.Admin.Password);
+
+      var response = await session.ReadItemAsync(requestWithItemId);
+      testData.AssertItemsCount(1, response);
+      Assert.AreEqual(testData.Items.Home.DisplayName, response.Items[0].DisplayName);
+    }
+
+    [Test]
+    public void TestGetItemsWithNotExistentInstanceUrl()
+    {
+      var session = testData.GetSession("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
+
+      TestDelegate testCode = async() =>
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
-      }
-      catch (RsaHandshakeException exception)
-      {
-        Assert.True(exception.Message.Contains("Public key not received properly"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        await task;
+      };
+      Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-        Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request."));
-        return;
-      }
-
-      Assert.Fail("Excption not thrown");
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Public key not received properly"));
     }
 
     [Test]
@@ -76,106 +92,92 @@
     }
 
     [Test]
-    public void TestGetItemWithNullItemsSource()
+    public async void TestGetItemWithNullItemsSource()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = new ScApiSession(config, null);
 
-      TestDelegate action = () => new ScApiSession(config, null);
-      var exception = Assert.Throws<ArgumentNullException>(action, "we should get exception here");
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Build();
 
-      Assert.IsTrue(
-          exception.GetBaseException().ToString().Contains("ScApiSession.defaultSource cannot be null")
-      );
+      var itemRequest = await session.ReadItemAsync(request);
+      Assert.IsNotNull(itemRequest);
+      Assert.AreEqual(1, itemRequest.ResultCount);
     }
 
     [Test]
-    public async void TestGetItemWithEmptyPassword()
+    public void TestGetItemWithEmptyPassword()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, testData.Users.Admin.Username, "");
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "", ItemSource.DefaultSource(), testData.ShellSite);
 
-      try
+      TestDelegate testCode = async() =>
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        await task;
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
-
-        return;
-      }
-
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
 
     [Test]
-    public async void TestGetItemWithNotExistentUser()
+    public void TestGetItemWithNotExistentUser()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, "sitecore\\notexistent", "notexistent");
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSession(testData.InstanceUrl, "sitecore\\notexistent", "notexistent", ItemSource.DefaultSource(), testData.ShellSite);
 
-      try
+      TestDelegate testCode = async() =>
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        await task;
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
 
-        return;
-      }
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
 
     [Test]
-    public async void TestGetItemWithInvalidUsernameAndPassword()
+    public void TestGetItemWithInvalidUsernameAndPassword()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, "inval|d u$er№ame", null);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSession(testData.InstanceUrl, "inval|d u$er№ame", null, ItemSource.DefaultSource(), testData.ShellSite);
 
-      try
+      TestDelegate testCode = async() =>
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        await task;
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
 
-        return;
-      }
-
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
 
     [Test]
-    public async void TestGetItemAsAnonymousWithoutReadAccess()
+    public void TestGetItemAsAnonymousWithoutReadAccess()
     {
-      var config = new SessionConfig(testData.AuthenticatedInstanceUrl, null, null);
-      var session = new ScApiSession(config, ItemSource.DefaultSource());
+      var session = testData.GetSession(testData.InstanceUrl, 
+        testData.Users.Anonymous.Username, 
+        testData.Users.Anonymous.Password, 
+        ItemSource.DefaultSource(), 
+        testData.ShellSite);
 
-      try
+
+      TestDelegate testCode = async() =>
       {
-        await session.ReadItemByIdAsync(this.requestWithItemId);
-      }
-      catch (ParserException exception)
-      {
-        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        var task = session.ReadItemAsync(this.requestWithItemId);
+        await task;
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
 
-        Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
-        return;
-      }
-
-      Assert.Fail("Exception not thrown");
+      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
   }
 }

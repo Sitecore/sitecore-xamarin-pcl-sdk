@@ -2,7 +2,9 @@
 namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
+  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.SessionSettings;
 
   public class TestEnvironment
   {
@@ -10,16 +12,22 @@ namespace MobileSDKIntegrationTest
     {
       var result = new TestEnvironment
       {
-        AnonymousInstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:750",
-        AuthenticatedInstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119"
+        InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119",
+        ShellSite = "/sitecore/shell"
       };
 
       result.Users.Admin.Username = "sitecore\\admin";
       result.Users.Admin.Password = "b";
+
       result.Users.Anonymous.Username = null;
       result.Users.Anonymous.Password = null;
+
       result.Users.Creatorex.Username = "extranet\\creatorex";
       result.Users.Creatorex.Password = "creatorex";
+
+      result.Users.NoReadAccess.Username = "extranet\\noreadaccess";
+      result.Users.NoReadAccess.Password = "noreadaccess";
+
 
       result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
       result.Items.Home.Path = "/sitecore/content/Home";
@@ -39,8 +47,8 @@ namespace MobileSDKIntegrationTest
     }
 
     private TestEnvironment() { }
-    public string AnonymousInstanceUrl { get; private set; }
-    public string AuthenticatedInstanceUrl { get; private set; }
+    public string InstanceUrl { get; private set; }
+    public string ShellSite { get; private set; }
 
     public UsersList Users = new UsersList();
     public ItemsList Items = new ItemsList();
@@ -50,6 +58,7 @@ namespace MobileSDKIntegrationTest
       public User Admin = new User();
       public User Anonymous = new User();
       public User Creatorex = new User();
+      public User NoReadAccess = new User();
     }
 
     public class ItemsList
@@ -74,7 +83,7 @@ namespace MobileSDKIntegrationTest
       public string Password { get; set; }
     }
 
-    public void AssertItemsAreEqual(TestEnvironment.Item expected, ScItem actual)
+    public void AssertItemsAreEqual(TestEnvironment.Item expected, ISitecoreItem actual)
     {
       if (null != expected.DisplayName)
       {
@@ -94,7 +103,7 @@ namespace MobileSDKIntegrationTest
       }
     }
 
-    public void AssertItemSourcesAreEqual(ItemSource expected, ItemSource actual)
+    public void AssertItemSourcesAreEqual(IItemSource expected, IItemSource actual)
     {
         Assert.AreEqual(expected.Database, actual.Database);
         Assert.AreEqual(expected.Language, actual.Language);
@@ -106,6 +115,13 @@ namespace MobileSDKIntegrationTest
       Assert.AreEqual(itemCount, response.TotalCount);
       Assert.AreEqual(itemCount, response.ResultCount);
       Assert.AreEqual(itemCount, response.Items.Count);
+    }
+
+    public ScApiSession GetSession(string url, string username, string password, ItemSource itemSource = null, string site = null)
+    {
+      var config = new SessionConfig(url, username, password, site);
+      var session = new ScApiSession(config, itemSource);
+      return session;
     }
   }
 }

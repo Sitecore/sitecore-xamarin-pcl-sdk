@@ -21,7 +21,12 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 			queryTextField.Text = "/Sitecore/Content/Home/*";
-			
+
+
+			string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
+			getItemButton.SetTitle (getChildrenButtonTitle, UIControlState.Normal);
+
+			nameLabel.Text = NSBundle.MainBundle.LocalizedString ("Type query", null);
 		}
 
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
@@ -32,6 +37,7 @@ namespace WhiteLabeliOS
 			}
 			else
 			{
+                this.HideKeyboard(this.queryTextField);
 				this.SendRequest();
 			}
 		}
@@ -42,14 +48,12 @@ namespace WhiteLabeliOS
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
 
-				ItemWebApiRequestBuilder builder = new ItemWebApiRequestBuilder();
-
-				var request = builder.RequestWithSitecoreQuery(queryTextField.Text)
+                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(queryTextField.Text)
 					.Build();
 
 				this.ShowLoader();
 
-				ScItemsResponse response = await session.ReadItemByQueryAsync(request);
+				ScItemsResponse response = await session.ReadItemAsync(request);
 
 				this.HideLoader();
 				if (response.ResultCount > 0)
@@ -65,7 +69,7 @@ namespace WhiteLabeliOS
 			catch(Exception e) 
 			{
 				this.HideLoader();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
 			}
 		}
 	}

@@ -1,3 +1,6 @@
+deployment
+*.nupkg
+*.log
 
 # Mac OS X
 .DS_Store
@@ -21,6 +24,7 @@ obj
 *.pdb
 *.ncb
 *.suo
+*.csproj.user
 *.userprefs
 TestResult.xml
 UpgradeLog.html

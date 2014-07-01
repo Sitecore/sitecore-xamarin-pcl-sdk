@@ -1,4 +1,5 @@
-﻿
+﻿using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+
 
 namespace Sitecore.MobileSDK
 {
@@ -7,27 +8,31 @@ namespace Sitecore.MobileSDK
     using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
     using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
-
     public class ItemWebApiRequestBuilder
     {
-        public ItemWebApiRequestBuilder ()
-        {
-        }
+    private ItemWebApiRequestBuilder()
+    {
+    }
 
-        public IGetItemRequestParametersBuilder<IReadItemsByIdRequest> RequestWithId( string itemId )
-        {
-            return new ReadItemByIdRequestBuilder( itemId );
-        }
+    public static IGetItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
+    {
+        return new ReadItemByIdRequestBuilder(itemId);
+    }
 
-        public IGetItemRequestParametersBuilder<IReadItemsByPathRequest> RequestWithPath( string itemPath )
-        {
-            return new ReadItemByPathRequestBuilder( itemPath );
-        }
+    public static IGetItemRequestParametersBuilder<IReadItemsByPathRequest> ReadItemsRequestWithPath(string itemPath)
+    {
+        return new ReadItemByPathRequestBuilder(itemPath);
+    }
 
-        public IGetItemRequestParametersBuilder<IReadItemsByQueryRequest> RequestWithSitecoreQuery( string sitecoreQuery )
-        {
-            return new ReadItemByQueryRequestBuilder( sitecoreQuery );
-        }
+    public static IGetItemRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
+    {
+        return new ReadItemByQueryRequestBuilder(sitecoreQuery);
+    }
+
+		public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
+		{
+			return new ReadMediaItemRequestBuilder(mediaPath);
+		}
     }
 }
 
