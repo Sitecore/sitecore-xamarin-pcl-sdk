@@ -407,11 +407,9 @@
     }
 
     [Test]
-    public async void TestMediaItemFromField()
+    public async void TestMediaItemFromSrcAndMediapathInField()
     {
-      var expectedItem = await this.GetItemByPath("/sitecore/content/Home/Test fields");
-      var str = expectedItem.FieldWithName("image").RawValue;
-      var z = str.Split(new char[] { '\"' }, StringSplitOptions.RemoveEmptyEntries);
+      var z = await this.GetMediaFieldAsStringArray("/sitecore/content/Home/Test fields");
 
       // z[5]: src="~/media/4F20B519D5654472B01891CB6103C667.ashx"
       var requestWithSrcParameter = ItemWebApiRequestBuilder.ReadMediaItemRequest(z[5])
@@ -428,6 +426,31 @@
       responseWithMediapathParameter.CopyTo(msWithMediapathParameter);
 
       Assert.AreEqual(msWithSrcParameter, msWithMediapathParameter);
+    }
+
+    [Test]
+    public async void TestMediaItemFromField()
+    {
+      var z = await this.GetMediaFieldAsStringArray("/sitecore/content/Home/Test fields");
+     
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(z[3])   // z[3]: mediapath="/Images/test image"
+         .Build();
+      var responseWithMediapathParameter = await this.session.DownloadResourceAsync(request);
+      var ms = new MemoryStream();
+      responseWithMediapathParameter.CopyTo(ms);
+
+      Assert.AreEqual(5257, ms.Length);
+    }
+
+    private async Task<string[]> GetMediaFieldAsStringArray(string path)
+    {
+      var expectedItem = await this.GetItemByPath(path);
+      var str = expectedItem.FieldWithName("image").RawValue;
+      var z = str.Split(new char[]
+      {
+        '\"'
+      }, StringSplitOptions.RemoveEmptyEntries);
+      return z;
     }
 
     private async Task<ISitecoreItem> GetItemByPath(string path, string db = null)
