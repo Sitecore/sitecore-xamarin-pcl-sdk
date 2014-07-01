@@ -5,10 +5,11 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
 
   public class QueryParameters : IQueryParameters
   {
-    public QueryParameters(PayloadType? payload, ICollection<string> fields)
+    public QueryParameters(PayloadType? payload, ScopeParameters scopeParameters, ICollection<string> fields)
     {
-      this.Payload = payload;
-      this.Fields = fields;
+      this.Payload         = payload;
+      this.ScopeParameters = scopeParameters;
+		  this.Fields          = fields;
     }
 
     public virtual IQueryParameters DeepCopy()
@@ -20,9 +21,12 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
         this.Fields.CopyTo(fields, 0);
       }
 
-      return new QueryParameters(this.Payload, fields);
+      ScopeParameters scopeParameters = this.ScopeParameters.ShallowCopy();
+
+      return new QueryParameters(this.Payload, scopeParameters, fields);
     }
 
+    public ScopeParameters ScopeParameters { get; private set; }
     public PayloadType? Payload { get; private set; }
     public ICollection<string> Fields { get; private set; }
   }
