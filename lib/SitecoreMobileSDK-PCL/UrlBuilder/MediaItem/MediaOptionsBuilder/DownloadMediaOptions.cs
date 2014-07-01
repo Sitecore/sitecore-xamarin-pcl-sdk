@@ -11,22 +11,28 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     {
     }
 
-    public IDownloadMediaOptions ShallowCopy()
+    public virtual IDownloadMediaOptions DeepCopyMutableMediaDownloadOptions()
     {
-      DownloadMediaOptions copy = new DownloadMediaOptions();
+      DownloadMediaOptions result = new DownloadMediaOptions();
 
-      copy.Width              = this.width;
-      copy.Height             = this.height;
-      copy.MaxWidth           = this.maxWidth;
-      copy.MaxHeight          = this.maxHeight;
-      copy.BackgroundColor    = this.backgroundColor;
-      copy.DisableMediaCache  = this.disableMediaCache;
-      copy.AllowStrech        = this.allowStrech;
-      copy.Scale              = this.scale;
-      copy.DisplayAsThumbnail = this.displayAsThumbnail;
+      result.width = this.width;
+      result.height = this.height;
+      result.maxWidth = this.maxWidth;
+      result.maxHeight = this.maxHeight;
+      result.backgroundColor = this.backgroundColor;
+      result.disableMediaCache = this.disableMediaCache;
+      result.allowStrech = this.allowStrech;
+      result.scale = this.scale;
+      result.displayAsThumbnail = this.displayAsThumbnail;
 
-      return copy;
+      return result;
     }
+
+    public virtual IDownloadMediaOptions DeepCopyMediaDownloadOptions()
+    {
+      return this.DeepCopyMutableMediaDownloadOptions();
+    }
+
 
     public bool IsEmpty
 		{
@@ -300,15 +306,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 			}
 		}
 
-		private string width;
-		private string height;
-		private string maxWidth;
-		private string maxHeight;
-		private string backgroundColor;
-		private string disableMediaCache;
-		private string allowStrech;
-		private string scale;
-		private string displayAsThumbnail;
+    protected string width;
+    protected string height;
+    protected string maxWidth;
+    protected string maxHeight;
+    protected string backgroundColor;
+    protected string disableMediaCache;
+    protected string allowStrech;
+    protected string scale;
+    protected string displayAsThumbnail;
 
 		private const string PositiveBoolValue = "1";
     private const string NegativeBoolValue = "0";

@@ -13,7 +13,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestCopyEmptyOptions()
     {
       DownloadMediaOptions options = new DownloadMediaOptions();
-      DownloadMediaOptions copy = (DownloadMediaOptions)options.ShallowCopy();
+      DownloadMediaOptions copy = (DownloadMediaOptions)options.DeepCopyMediaDownloadOptions();
       Assert.True (copy.IsEmpty);
     }
 
@@ -24,7 +24,7 @@ namespace Sitecore.MobileSdkUnitTest
       options.SetWidth(100);
       options.SetScale(1.5f);
 
-      DownloadMediaOptions copy = (DownloadMediaOptions)options.ShallowCopy();
+      DownloadMediaOptions copy = (DownloadMediaOptions)options.DeepCopyMediaDownloadOptions();
       Assert.AreEqual("100", copy.Width);
       Assert.AreEqual("1.5", copy.Scale);
     }
@@ -36,7 +36,7 @@ namespace Sitecore.MobileSdkUnitTest
       options.SetWidth(100);
       options.SetScale(1.5f);
 
-      DownloadMediaOptions copy = (DownloadMediaOptions)options.ShallowCopy();
+      DownloadMediaOptions copy = (DownloadMediaOptions)options.DeepCopyMediaDownloadOptions();
 
       options.SetWidth(200);
 

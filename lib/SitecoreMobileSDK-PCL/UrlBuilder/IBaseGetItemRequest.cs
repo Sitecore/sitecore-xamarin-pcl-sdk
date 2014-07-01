@@ -1,15 +1,17 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder
 {
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.SessionSettings;
-    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-    public interface IBaseGetItemRequest
-    {
-        IItemSource ItemSource { get; }
+  public interface IBaseGetItemRequest
+  {
+    IBaseGetItemRequest DeepCopyBaseGetItemRequest();
 
-        ISessionConfig SessionSettings { get; }
+    IItemSource ItemSource { get; }
 
-        IQueryParameters QueryParameters { get; }
-    }
+    ISessionConfig SessionSettings { get; }
+
+    IQueryParameters QueryParameters { get; }
+  }
 }

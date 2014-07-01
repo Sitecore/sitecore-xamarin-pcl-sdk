@@ -11,6 +11,18 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
       this.Fields = fields;
     }
 
+    public virtual IQueryParameters DeepCopy()
+    {
+      string[] fields = null;
+      if (null != this.Fields)
+      {
+        fields = new string[this.Fields.Count];
+        this.Fields.CopyTo(fields, 0);
+      }
+
+      return new QueryParameters(this.Payload, fields);
+    }
+
     public PayloadType? Payload { get; private set; }
     public ICollection<string> Fields { get; private set; }
   }

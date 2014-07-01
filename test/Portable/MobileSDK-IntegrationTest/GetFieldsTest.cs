@@ -243,7 +243,7 @@
     }
 
     [Test]
-    public async void TestGetItemByIdWithAllFieldsWithoutReadAcessToSomeFields()
+    public async void TestGetItemByIdWithAllFieldsWithoutReadAccessToSomeFields()
     {
       var sessionCreatorexUser = testData.GetSession(testData.InstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password);
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Payload(PayloadType.Full).Build();

@@ -7,6 +7,8 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
 	public interface IReadMediaItemRequest
 	{
+    IReadMediaItemRequest DeepCopyReadMediaRequest();
+
 		IItemSource ItemSource { get; }
 		ISessionConfig SessionSettings { get; }
     IDownloadMediaOptions DownloadOptions { get; }

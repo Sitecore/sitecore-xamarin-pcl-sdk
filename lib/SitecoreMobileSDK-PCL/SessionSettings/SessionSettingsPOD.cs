@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
   public class SessionConfigPOD : ISessionConfig
   {
-    public ISessionConfig SessionConfigShallowCopy()
+    public virtual ISessionConfig SessionConfigShallowCopy()
     {
       SessionConfigPOD result = new SessionConfigPOD();
       result.InstanceUrl = this.InstanceUrl;
