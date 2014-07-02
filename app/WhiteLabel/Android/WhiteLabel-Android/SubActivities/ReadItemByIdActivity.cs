@@ -2,9 +2,12 @@ namespace WhiteLabelAndroid.SubActivities
 {
   using System;
   using Android.App;
+  using Android.Content;
   using Android.Content.PM;
+  using Android.Hardware.Input;
   using Android.OS;
   using Android.Views;
+  using Android.Views.InputMethods;
   using Android.Widget;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
@@ -65,8 +68,16 @@ namespace WhiteLabelAndroid.SubActivities
           return;
         }
 
+
+        this.HideKeyboard(itemIdField);
         this.PerformGetItemRequest(itemIdField.Text);
       };
+    }
+
+    private void HideKeyboard(View view)
+    {
+      var inputMethodManager = this.GetSystemService(Context.InputMethodService) as InputMethodManager;
+      inputMethodManager.HideSoftInputFromWindow(view.WindowToken, HideSoftInputFlags.None);
     }
 
     private PayloadType GetSelectedPayload()

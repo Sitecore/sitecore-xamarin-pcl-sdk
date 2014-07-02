@@ -2,8 +2,11 @@ namespace WhiteLabelAndroid.SubActivities
 {
   using System;
   using Android.App;
+  using Android.Content;
   using Android.Content.PM;
   using Android.OS;
+  using Android.Views;
+  using Android.Views.InputMethods;
   using Android.Widget;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
@@ -25,20 +28,27 @@ namespace WhiteLabelAndroid.SubActivities
       var label = this.FindViewById<TextView>(Resource.Id.label);
       label.Text = GetString(Resource.String.text_query_label);
 
-      var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-      itemIdField.Hint = GetString(Resource.String.hint_query);
+      var queryField = this.FindViewById<EditText>(Resource.Id.field_item);
+      queryField.Hint = GetString(Resource.String.hint_query);
 
       var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
       getItemButton.Click += (sender, args) =>
       {
-        if (string.IsNullOrEmpty(itemIdField.Text))
+        if (string.IsNullOrEmpty(queryField.Text))
         {
           DialogHelper.ShowSimpleDialog(this, Resource.String.text_error, Resource.String.text_empty_query);
           return;
         }
 
-        this.PerformGetItemRequest(itemIdField.Text);
+        this.HideKeyboard(queryField);
+        this.PerformGetItemRequest(queryField.Text);
       };
+    }
+
+    private void HideKeyboard(View view)
+    {
+      var inputMethodManager = this.GetSystemService(Context.InputMethodService) as InputMethodManager;
+      inputMethodManager.HideSoftInputFromWindow(view.WindowToken, HideSoftInputFlags.None);
     }
 
     private async void PerformGetItemRequest(string query)

@@ -2,9 +2,11 @@ namespace WhiteLabelAndroid.SubActivities
 {
   using System;
   using Android.App;
+  using Android.Content;
   using Android.Content.PM;
   using Android.OS;
   using Android.Views;
+  using Android.Views.InputMethods;
   using Android.Widget;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
@@ -50,19 +52,20 @@ namespace WhiteLabelAndroid.SubActivities
       var label = this.FindViewById<TextView>(Resource.Id.label);
       label.Text = GetString(Resource.String.text_path_label);
 
-      var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-      itemIdField.Hint = GetString(Resource.String.hint_path);
+      var itemPathField = this.FindViewById<EditText>(Resource.Id.field_item);
+      itemPathField.Hint = GetString(Resource.String.hint_item_path);
 
       var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
       getItemButton.Click += (sender, args) =>
       {
-        if (string.IsNullOrEmpty(itemIdField.Text))
+        if (string.IsNullOrEmpty(itemPathField.Text))
         {
           DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_error), GetString(Resource.String.text_empty_path));
           return;
         }
 
-        this.PerformGetItemRequest(itemIdField.Text);
+        this.HideKeyboard(itemPathField);
+        this.PerformGetItemRequest(itemPathField.Text);
       };
 
       var getItemChildrenButton = this.FindViewById<Button>(Resource.Id.button_get_children);
@@ -81,6 +84,12 @@ namespace WhiteLabelAndroid.SubActivities
           return PayloadType.Full;
         default: return PayloadType.Min;
       }
+    }
+
+    private void HideKeyboard(View view)
+    {
+      var inputMethodManager = this.GetSystemService(Context.InputMethodService) as InputMethodManager;
+      inputMethodManager.HideSoftInputFromWindow(view.WindowToken, HideSoftInputFlags.None);
     }
 
     private async void PerformGetItemRequest(string path)
