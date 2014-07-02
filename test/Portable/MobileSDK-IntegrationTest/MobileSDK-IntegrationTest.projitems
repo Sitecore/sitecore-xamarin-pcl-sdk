@@ -19,5 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GetFieldsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SetDefaultSessionSettingsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SetLanguageDbVersionTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ThreadSafetyTest.cs" />
   </ItemGroup>
 </Project>

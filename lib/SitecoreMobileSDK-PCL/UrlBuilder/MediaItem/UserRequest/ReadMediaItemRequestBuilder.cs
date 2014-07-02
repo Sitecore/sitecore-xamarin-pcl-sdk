@@ -49,7 +49,7 @@ namespace Sitecore.MobileSDK
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> DownloadOptions (IDownloadMediaOptions downloadMediaOptions)
     {
-      this.downloadMediaOptions = (DownloadMediaOptions)downloadMediaOptions.ShallowCopy();
+      this.downloadMediaOptions = (DownloadMediaOptions)downloadMediaOptions.DeepCopyMediaDownloadOptions();
 
       return this;
     }

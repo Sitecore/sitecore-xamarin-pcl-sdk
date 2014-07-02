@@ -25,6 +25,21 @@ namespace SitecoreMobileSDKMockObjects
     {
       this.Version = value;
     }
+
+    public override IItemSource ShallowCopy()
+    {
+      ++this.copyInvocationCount;
+      return base.ShallowCopy();
+    }
+
+    public int CopyInvocationCount 
+    { 
+      get 
+      { 
+        return this.copyInvocationCount;
+      } 
+    }
+    private int copyInvocationCount = 0;
   }
 }
 
