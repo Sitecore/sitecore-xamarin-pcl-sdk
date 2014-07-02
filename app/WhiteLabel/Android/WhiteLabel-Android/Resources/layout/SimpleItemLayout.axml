@@ -3,31 +3,80 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+
+	<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/label" />
-    <EditText
+
+	<EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/field_item" />
-    <LinearLayout
+
+	<TextView
+		android:paddingLeft="8dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Payload" />
+
+	<RadioGroup
+	  android:id="@+id/group_payload_type"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+		<RadioButton android:id="@+id/payload_min"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:checked="true"
+			android:text="Min" />
+
+		<RadioButton android:id="@+id/payload_content"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Content" />
+
+		<RadioButton android:id="@+id/payload_full"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Full" />
+	</RadioGroup>
+
+	<LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:weightSum="2"
         android:layout_height="wrap_content">
-        <Button
+
+		<Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="Get Item"
             android:layout_height="match_parent"
             android:id="@+id/button_get_item" />
-        <Button
+
+		<Button
             android:text="Get Item Childeren"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:visibility="gone"
+			android:enabled="false"
             android:layout_height="match_parent"
             android:id="@+id/button_get_children" />
-    </LinearLayout>
+	</LinearLayout>
+
+	<TextView
+        android:paddingLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/item_name" />
+
+	<ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fields_list" />
 </LinearLayout>
