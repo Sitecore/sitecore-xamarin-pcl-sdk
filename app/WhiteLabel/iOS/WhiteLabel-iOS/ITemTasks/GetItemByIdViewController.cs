@@ -51,16 +51,29 @@ namespace WhiteLabeliOS
 			}
 			else
 			{
-                this.HideKeyboard(this.itemIdTextField);
-                this.HideKeyboard(this.fieldNameTextField);
+        this.HideKeyboardForAllFields();
 				this.SendRequest();
 			}
 		}
 
 		partial void OnGetItemCheldrenButtonTouched (MonoTouch.Foundation.NSObject sender)
 		{
-			AlertHelper.ShowLocalizedNotImlementedAlert();
+      if (String.IsNullOrEmpty(itemIdTextField.Text))
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item Id");
+      }
+      else
+      {
+        this.HideKeyboardForAllFields();
+        this.SendRequestWithChildrenScope();
+      }
 		}
+
+    private void HideKeyboardForAllFields()
+    {
+      this.HideKeyboard(this.itemIdTextField);
+      this.HideKeyboard(this.fieldNameTextField);
+    }
 
 		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
 		{
@@ -79,46 +92,86 @@ namespace WhiteLabeliOS
 		}
 
 		private async void SendRequest()
-		{
-			try
-			{
-				ScApiSession session = this.instanceSettings.GetSession();
+    {
+      try
+      {
+        ScApiSession session = this.instanceSettings.GetSession();
 
-                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
-					.Payload(this.currentPayloadType)
-                    .AddFields(this.fieldNameTextField.Text)
-				    .Build();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+          .Payload(this.currentPayloadType)
+          .AddFields(this.fieldNameTextField.Text)
+          .Build();
 
-				this.ShowLoader();
+        this.ShowLoader();
 
-				ScItemsResponse response = await session.ReadItemAsync(request);
-                if (response.Items.Any())
-				{
-                    ISitecoreItem item = response.Items[0];
-                    this.ShowFieldsForItem( item );
+        ScItemsResponse response = await session.ReadItemAsync(request);
+        if (response.Items.Any())
+        {
+          ISitecoreItem item = response.Items[0];
+          this.ShowFieldsForItem( item );
 
-					string message = NSBundle.MainBundle.LocalizedString("item title is", null);
-					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
-				}
-				else
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-				}
-			}
-			catch(Exception e) 
-			{
-                this.CleanupTableViewBindings();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-			}
-            finally
-            {
-                BeginInvokeOnMainThread(delegate
-                {
-                    this.HideLoader();
-                    this.FieldsTableView.ReloadData();
-                });
-            }
-		}
+          string message = NSBundle.MainBundle.LocalizedString("item title is", null);
+          AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
+        }
+        else
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+        }
+      }
+      catch(Exception e) 
+      {
+        this.CleanupTableViewBindings();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.HideLoader();
+          this.FieldsTableView.ReloadData();
+        });
+      }
+    }
+
+    private async void SendRequestWithChildrenScope()
+    {
+      try
+      {
+        ScApiSession session = this.instanceSettings.GetSession();
+
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+          .Payload(this.currentPayloadType)
+          .AddFields(this.fieldNameTextField.Text)
+          .AddScope(ScopeType.Children)
+          .Build();
+
+        this.ShowLoader();
+
+        ScItemsResponse response = await session.ReadItemAsync(request);
+        if (response.Items.Any())
+        {
+          string message = NSBundle.MainBundle.LocalizedString ("children count is", null);
+          AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + response.Items.Count.ToString() + "\"");
+        }
+        else
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item has no children");
+        }
+      }
+      catch(Exception e) 
+      {
+        this.CleanupTableViewBindings();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.HideLoader();
+          this.FieldsTableView.ReloadData();
+        });
+      }
+    }
 			
 	}
 }
