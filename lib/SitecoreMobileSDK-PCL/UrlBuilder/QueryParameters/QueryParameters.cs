@@ -21,8 +21,12 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
         this.Fields.CopyTo(fields, 0);
       }
 
-      ScopeParameters scopeParameters = this.ScopeParameters.ShallowCopy();
+      ScopeParameters scopeParameters = null;
 
+      if (null != this.ScopeParameters)
+      {
+        scopeParameters = this.ScopeParameters.ShallowCopy();
+      }
       return new QueryParameters(this.Payload, scopeParameters, fields);
     }
 
