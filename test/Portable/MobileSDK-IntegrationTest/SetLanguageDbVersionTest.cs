@@ -1,10 +1,7 @@
-﻿
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading.Tasks;
-
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;

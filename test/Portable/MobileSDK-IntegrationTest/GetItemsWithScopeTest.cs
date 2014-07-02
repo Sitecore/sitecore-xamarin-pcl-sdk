@@ -1,8 +1,6 @@
-﻿namespace IntegrationTest_Desktop_NUnitLite
+﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
-  using System.IO;
-  using MobileSDKIntegrationTest;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;

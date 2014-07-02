@@ -1,13 +1,11 @@
-﻿namespace IntegrationTest_Desktop_NUnitLite
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Globalization;
   using System.IO;
-  using System.Runtime.InteropServices;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
-  using MobileSDKIntegrationTest;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
