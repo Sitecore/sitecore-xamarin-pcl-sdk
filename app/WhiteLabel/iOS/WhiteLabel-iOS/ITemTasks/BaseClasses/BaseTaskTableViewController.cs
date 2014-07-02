@@ -69,8 +69,6 @@ namespace WhiteLabeliOS
 				};
 				tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
 
-
-
 				this.TableView.DataSource = dataSource;
 				this.TableView.Delegate = tableDelegate;
 				this.TableView.ReloadData();
