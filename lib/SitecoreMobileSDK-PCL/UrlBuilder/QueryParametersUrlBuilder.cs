@@ -107,6 +107,42 @@ namespace Sitecore.MobileSDK.UrlBuilder
       return result;
     }
 
+    private string ScopeToRestArgumentStatement(ScopeParameters scopeParameters)
+    {
+      if (null == scopeParameters)
+      {
+        return string.Empty;
+      }
+
+      string scopeString = string.Empty;
+
+      if (scopeParameters.ParentScopeIsSet)
+      {
+        scopeString += this.restGrammar.ItemFieldSeparator + "p";
+      }
+
+      if (scopeParameters.SelfScopeIsSet)
+      {
+        scopeString += this.restGrammar.ItemFieldSeparator + "s";
+      }
+
+      if (scopeParameters.ChildrenScopeIsSet)
+      {
+        scopeString += this.restGrammar.ItemFieldSeparator + "c";
+      }
+
+      if (string.IsNullOrEmpty(scopeString))
+      {
+        return string.Empty;
+      }
+
+      scopeString = scopeString.Substring(1);
+
+      string result = this.webApiGrammar.ScopeParameterName + this.restGrammar.KeyValuePairSeparator + scopeString;
+
+      return result;
+    }
+
     private IRestServiceGrammar restGrammar;
     private IWebApiUrlParameters webApiGrammar;
   }
