@@ -31,6 +31,17 @@ namespace Sitecore.MobileSDK.UrlBuilder
       string payloadStatement = this.PayloadTypeToRestArgumentStatement( queryParameters.Payload );
       result = payloadStatement.ToLowerInvariant();
 
+      string scopeString = string.Empty;
+      scopeString = this.ScopeToRestArgumentStatement(queryParameters.ScopeParameters);
+
+      if (!string.IsNullOrEmpty(scopeString))
+      {
+        if (!string.IsNullOrEmpty(result))
+        {
+          result += this.restGrammar.FieldSeparator;
+        }
+        result += scopeString.ToLowerInvariant();
+      }
 
       bool isCollectionValid = ( null != queryParameters.Fields );
       if ( !isCollectionValid )
@@ -49,7 +60,11 @@ namespace Sitecore.MobileSDK.UrlBuilder
       string fieldsStatement = this.GetFieldsStatementFromCollection( queryParameters.Fields );
       if ( null != fieldsStatement )
       {
-        result += this.restGrammar.FieldSeparator + fieldsStatement;
+        if (!string.IsNullOrEmpty(result))
+        {
+          result += this.restGrammar.FieldSeparator;
+        }
+        result += fieldsStatement;
       }
 
       return result.ToLowerInvariant();
