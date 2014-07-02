@@ -31,6 +31,9 @@ namespace WhiteLabelAndroid.SubActivities
       var queryField = this.FindViewById<EditText>(Resource.Id.field_item);
       queryField.Hint = GetString(Resource.String.hint_query);
 
+      var payloadGroup = this.FindViewById<RadioGroup>(Resource.Id.group_payload_type);
+      payloadGroup.Visibility = ViewStates.Gone;
+
       var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
       getItemButton.Click += (sender, args) =>
       {
