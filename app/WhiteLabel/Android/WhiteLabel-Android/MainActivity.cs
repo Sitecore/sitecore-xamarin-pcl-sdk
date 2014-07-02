@@ -8,7 +8,7 @@
   using Android.Widget;
   using WhiteLabelAndroid.SubActivities;
 
-  [Activity(Label = "WhiteLabel-Android", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
+  [Activity(Label = "WhiteLabel", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
   public class MainActivity : Activity
   {
     public override bool OnCreateOptionsMenu(IMenu menu)
