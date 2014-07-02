@@ -80,28 +80,28 @@ namespace WhiteLabeliOS
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
 
-                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-					.Payload(this.currentPayloadType)
-					.AddFields(this.fieldNameTextField.Text)
-                    .Build();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+          .Payload(this.currentPayloadType)
+          .AddFields(this.fieldNameTextField.Text)
+          .Build();
 
 				this.ShowLoader();
 
 				ScItemsResponse response = await session.ReadItemAsync(request);
-
 				
-                if (response.Items.Any())
-				{
-                    ISitecoreItem item = response.Items [0];
-                    this.ShowFieldsForItem(item);
+        if (response.Items.Any())
+        {
+          ISitecoreItem item = response.Items [0];
+          this.ShowFieldsForItem(item);
 
-                    string message = NSBundle.MainBundle.LocalizedString("item title is", null);
-					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
-				}
-				else
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-				}
+          string message = NSBundle.MainBundle.LocalizedString("item title is", null);
+          AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
+        }
+        else
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+        }
+
 			}
 			catch(Exception e) 
 			{
