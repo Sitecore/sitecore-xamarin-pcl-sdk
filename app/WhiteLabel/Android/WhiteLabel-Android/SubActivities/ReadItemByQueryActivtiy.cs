@@ -19,11 +19,11 @@ namespace WhiteLabelAndroid.SubActivities
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
-      this.prefs = Prefs.From(this);
-
-      this.Title = this.GetString(Resource.String.text_get_item_by_query);
-
+      this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
       this.SetContentView(Resource.Layout.SimpleItemLayout);
+
+      this.prefs = Prefs.From(this);
+      this.Title = this.GetString(Resource.String.text_get_item_by_query);
 
       var label = this.FindViewById<TextView>(Resource.Id.label);
       label.Text = GetString(Resource.String.text_query_label);
@@ -58,15 +58,18 @@ namespace WhiteLabelAndroid.SubActivities
         ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
 
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
+        this.SetProgressBarIndeterminateVisibility(true);
 
         ScItemsResponse response = await session.ReadItemAsync(request);
 
+        this.SetProgressBarIndeterminateVisibility(false);
         var message = response.ResultCount > 0 ? string.Format("items count is \"{0}\"", response.Items.Count) : "Item doesn't exist";
 
         DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_item_received), message);
       }
       catch (Exception exception)
       {
+        this.SetProgressBarIndeterminateVisibility(false);
         var title = GetString(Resource.String.text_item_received);
         DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
       }

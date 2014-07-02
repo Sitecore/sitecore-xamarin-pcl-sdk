@@ -31,11 +31,11 @@ namespace WhiteLabelAndroid.SubActivities
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
-      this.prefs = Prefs.From(this);
-
-      this.Title = this.GetString(Resource.String.text_get_item_by_path);
-
+      this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
       this.SetContentView(Resource.Layout.SimpleItemLayout);
+
+      this.prefs = Prefs.From(this);
+      this.Title = this.GetString(Resource.String.text_get_item_by_path);
 
       this.InitViews();
     }
@@ -99,9 +99,11 @@ namespace WhiteLabelAndroid.SubActivities
         ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
 
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Payload(this.GetSelectedPayload()).Build();
+        this.SetProgressBarIndeterminateVisibility(true);
 
         ScItemsResponse response = await session.ReadItemAsync(request);
 
+        this.SetProgressBarIndeterminateVisibility(false);
         if (response.ResultCount > 0)
         {
           this.item = response.Items[0];
@@ -116,6 +118,7 @@ namespace WhiteLabelAndroid.SubActivities
       }
       catch (Exception exception)
       {
+        this.SetProgressBarIndeterminateVisibility(false);
         var title = GetString(Resource.String.text_item_received);
         DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
       }
