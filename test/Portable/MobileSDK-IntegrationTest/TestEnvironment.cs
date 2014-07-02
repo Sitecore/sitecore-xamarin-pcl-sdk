@@ -1,5 +1,4 @@
-﻿
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
   using Sitecore.MobileSDK;

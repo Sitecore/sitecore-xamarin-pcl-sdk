@@ -1,12 +1,10 @@
-﻿namespace IntegrationTest_Desktop_NUnitLite
+﻿namespace MobileSDKIntegrationTest
 {
   using System.Threading.Tasks;
   using NUnit.Framework;
 
-  using MobileSDKIntegrationTest;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
@@ -53,8 +51,6 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
     }
-
-
 
     [Test]
     public async void TestWithHttpInUrlAndWithOneSlashInTheEndByQuery()
