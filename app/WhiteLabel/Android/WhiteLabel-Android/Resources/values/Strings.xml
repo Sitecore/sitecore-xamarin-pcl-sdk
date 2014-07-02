@@ -31,7 +31,7 @@
   <string name="text_error">Error</string>
   <string name="text_empty_query">Query cannot be empty</string>
   <string name="text_empty_path">Item path cannot be empty</string>
-  <string name="text_empty_id">IItem Id cannot be empty</string>
+  <string name="text_empty_id">Item Id cannot be empty</string>
   <string name="text_no_item">Item doesn\'t exist</string>
   
 </resources>
