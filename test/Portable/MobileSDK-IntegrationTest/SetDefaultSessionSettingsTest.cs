@@ -47,7 +47,7 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
+      var resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var source = new ItemSource(Db, Language, Version);
@@ -86,7 +86,7 @@
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
+      var resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
@@ -108,7 +108,7 @@
       var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
+      var resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var sourceExpected = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(sourceExpected, resultItem.Source);
@@ -131,7 +131,7 @@
       var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
+      var resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var sourceExpected = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(sourceExpected, resultItem.Source);
@@ -148,7 +148,7 @@
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
+      var resultItem = response.Items[0];
 
       var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language, "2");
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
@@ -165,7 +165,7 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       this.testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
+      var resultItem = response.Items[0];
 
       var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language, "1");
       this.testData.AssertItemsAreEqual(this.testData.Items.ItemWithVersions, resultItem);
@@ -211,7 +211,7 @@
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
-      ISitecoreItem resultItem = response.Items[3];
+      var resultItem = response.Items[3];
       var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, Language, Version);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
@@ -224,7 +224,7 @@
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
+      var resultItem = response.Items[0];
       var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, ItemSource.DefaultSource().Language, "1");
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);

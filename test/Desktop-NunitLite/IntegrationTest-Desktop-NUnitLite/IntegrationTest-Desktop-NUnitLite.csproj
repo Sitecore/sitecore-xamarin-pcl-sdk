@@ -83,6 +83,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsTest.cs">
       <Link>GetMediaItemsTest.cs</Link>
     </Compile>
+	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsWithScopeTest.cs">
+      <Link>GetItemsWithScopeTest.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
