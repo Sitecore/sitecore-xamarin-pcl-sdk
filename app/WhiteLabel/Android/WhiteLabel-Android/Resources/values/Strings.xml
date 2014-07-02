@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">WhiteLabel-Android</string>
-	<string name="text_settings">Settings</string>
+  
+	<string name="menu_text_settings">Settings</string>
 
 	<string name="key_instance_url">instance_url</string>
 	<string name="key_login">login</string>
@@ -18,7 +19,19 @@
 	<string name="text_get_item_by_id"><![CDATA[Item by ID & item children]]></string>
 	<string name="text_get_item_by_path">Item by Path</string>
 	<string name="text_get_item_by_query">Item by Query</string>
+  <string name="text_query_label">Type Sitecore Query:</string>
+  <string name="text_path_label">Type Item Path:</string>
+  <string name="text_id_label">Type Item Id:</string>
+
+  <string name="hint_query">Query</string>
+  <string name="hint_item_path">Item Path</string>
+  <string name="hint_item_id">Item Id</string>
 
 	<string name="text_item_received">Item received</string>
-
+  <string name="text_error">Error</string>
+  <string name="text_empty_query">Query cannot be empty</string>
+  <string name="text_empty_path">Item path cannot be empty</string>
+  <string name="text_empty_id">IItem Id cannot be empty</string>
+  <string name="text_no_item">Item doesn\'t exist</string>
+  
 </resources>
