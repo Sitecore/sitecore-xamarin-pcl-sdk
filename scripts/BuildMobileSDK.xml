@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTarget="QuickBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 <!-- "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" BuildMobileSDK.xml /t:log -->
 
 
@@ -22,7 +22,7 @@
     <UnitTestReportXml>$(RepositoryRoot)\deployment\UnitTestDesktopReport.xml</UnitTestReportXml>
     <IntegrationTestReportXml>$(RepositoryRoot)\deployment\IntegrationTestDesktopReport.xml</IntegrationTestReportXml>
 
-    <NugetExe>C:\Program Files (x86)\Xamarin Studio\AddIns\MonoDevelop.PackageManagement\NuGet.exe</NugetExe>
+    <NugetExe>$(RepositoryRoot)\solutions\.nuget\NuGet.exe</NugetExe>
 
     <UnitTestDesktopBuildDirectory>$(RepositoryRoot)\test\Desktop-NunitLite\UnitTest-Desktop-NUnitLite\bin\Release</UnitTestDesktopBuildDirectory>
     <IntegrationTestDesktopBuildDirectory>$(RepositoryRoot)\test\Desktop-NunitLite\IntegrationTest-Desktop-NUnitLite\bin\Release</IntegrationTestDesktopBuildDirectory>
