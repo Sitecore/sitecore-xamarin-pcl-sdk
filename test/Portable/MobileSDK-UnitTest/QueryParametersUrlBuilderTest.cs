@@ -51,6 +51,60 @@ namespace MobileSDK_UnitTest_Desktop
     }
 
     [Test]
+    public void TestBuildValidScopeParams()
+    {
+      ScopeParameters scope = new ScopeParameters();
+      scope.AddScope(ScopeType.Parent);
+      QueryParameters qp = new QueryParameters(null, scope, null);
+      string result = this.builder.BuildUrlString(qp);
+      Assert.AreEqual("scope=p", result);
+
+      scope = new ScopeParameters();
+      scope.AddScope(ScopeType.Self);
+      qp = new QueryParameters(null, scope, null);
+      result = this.builder.BuildUrlString(qp);
+      Assert.AreEqual("scope=s", result);
+
+      scope = new ScopeParameters();
+      scope.AddScope(ScopeType.Children);
+      qp = new QueryParameters(null, scope, null);
+      result = this.builder.BuildUrlString(qp);
+      Assert.AreEqual("scope=c", result);
+
+      scope = new ScopeParameters();
+      scope.AddScope(ScopeType.Parent);
+      scope.AddScope(ScopeType.Self);
+      scope.AddScope(ScopeType.Children);
+      qp = new QueryParameters(null, scope, null);
+      result = this.builder.BuildUrlString(qp);
+      Assert.AreEqual("scope=p|s|c", result);
+    }
+
+    [Test]
+    public void TestScopeParamsOrderDoesNotMatter()
+    {
+      ScopeParameters scope = new ScopeParameters();
+      scope.AddScope(ScopeType.Children);
+      scope.AddScope(ScopeType.Self);
+      scope.AddScope(ScopeType.Parent);
+      QueryParameters qp = new QueryParameters(null, scope, null);
+      string result = this.builder.BuildUrlString(qp);
+      Assert.AreEqual("scope=p|s|c", result);
+    }
+
+    [Test]
+    public void TestScopeParamsCanBeSetTwice()
+    {
+      ScopeParameters scope = new ScopeParameters();
+      scope.AddScope(ScopeType.Children);
+      scope.AddScope(ScopeType.Self);
+      scope.AddScope(ScopeType.Children);
+      QueryParameters qp = new QueryParameters(null, scope, null);
+      string result = this.builder.BuildUrlString(qp);
+      Assert.AreEqual("scope=s|c", result);
+    }
+
+    [Test]
     public void TestNullQueryParamsProduceNullString()
     {
       string result = this.builder.BuildUrlString(null);
@@ -93,6 +147,16 @@ namespace MobileSDK_UnitTest_Desktop
 
       string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, null, fields));
       string expected = "payload=content&fields=%d0%a1%d0%bb%d0%b0%d0%b2%d0%b0%20%d0%a3%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%96%21|%7b0000-1111-2222%7d|%d0%93%d0%b5%d1%80%d0%be%d1%8f%d0%bc%20%d1%81%d0%bb%d0%b0%d0%b2%d0%b0%21";
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestFieldsOnly()
+    {
+      string[] fields = {"Слава Україні!", "{0000-1111-2222}", "Героям слава!"};
+
+      string result = this.builder.BuildUrlString(new QueryParameters(null, null, fields));
+      string expected = "fields=%d0%a1%d0%bb%d0%b0%d0%b2%d0%b0%20%d0%a3%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%96%21|%7b0000-1111-2222%7d|%d0%93%d0%b5%d1%80%d0%be%d1%8f%d0%bc%20%d1%81%d0%bb%d0%b0%d0%b2%d0%b0%21";
       Assert.AreEqual(expected, result);
     }
   }
