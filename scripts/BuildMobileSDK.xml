@@ -62,6 +62,7 @@
 
 <!-- ====================================================  -->
   <Target Name="SitecoreMobileSDK">
+    <Message Text="Building SitecoreMobileSDK..." />
   	<MSBuild 
       Projects="@(MobileSdkProject)" 
       Targets="Build" 
@@ -106,7 +107,7 @@
       Condition="!Exists('$(DeploymentDirectory)')"
       Directories="$(DeploymentDirectory)" 
     />
-
+    <Message Text="Building MobileSDK-UnitTest-Desktop-NUnitLite..." />
     <MSBuild 
       Projects="$(SolutionsDirectory)\MobileSDK-UnitTest-Desktop-NUnitLite.sln" 
       Targets="Build" 
@@ -124,7 +125,7 @@
       Condition="!Exists('$(DeploymentDirectory)')"
       Directories="$(DeploymentDirectory)" 
     />
-
+    <Message Text="Building MobileSdk-IntegrationTest-Desktop-NUnitLite..." />
     <MSBuild 
       Projects="$(SolutionsDirectory)\MobileSdk-IntegrationTest-Desktop-NUnitLite.sln" 
       Targets="Build" 
