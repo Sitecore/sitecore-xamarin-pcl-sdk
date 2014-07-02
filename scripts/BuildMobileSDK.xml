@@ -110,7 +110,7 @@
     <MSBuild 
       Projects="$(SolutionsDirectory)\MobileSDK-UnitTest-Desktop-NUnitLite.sln" 
       Targets="Build" 
-      Properties="Configuration=Release;" 
+      Properties="Configuration=Release" 
     />
 
     <Exec
@@ -128,7 +128,7 @@
     <MSBuild 
       Projects="$(SolutionsDirectory)\MobileSdk-IntegrationTest-Desktop-NUnitLite.sln" 
       Targets="Build" 
-      Properties="Configuration=Release;" 
+      Properties="Configuration=Release" 
     />
 
     <Exec
