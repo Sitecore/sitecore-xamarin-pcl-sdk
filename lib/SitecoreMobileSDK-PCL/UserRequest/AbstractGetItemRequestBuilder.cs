@@ -48,7 +48,16 @@ namespace Sitecore.MobileSDK
 
     public IGetItemRequestParametersBuilder<T> AddScope(ScopeType scope)
     {
-      ScopeParameters scopeParameters = this.queryParameters.ScopeParameters.ShallowCopy();
+      ScopeParameters scopeParameters;
+
+      if (null == this.queryParameters.ScopeParameters)
+      {
+        scopeParameters = new ScopeParameters ();
+      }
+      else
+      {
+        scopeParameters = this.queryParameters.ScopeParameters.ShallowCopy ();
+      }
       scopeParameters.AddScope(scope);
       this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields );
       return this;
