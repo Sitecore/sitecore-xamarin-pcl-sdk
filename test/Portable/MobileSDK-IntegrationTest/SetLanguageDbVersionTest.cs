@@ -152,7 +152,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, Language, "1");
+      var expectedSource = new ItemSource(Db, Language, "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -172,7 +172,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", "1");
+      var expectedSource = new ItemSource(Db, "en", "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -212,7 +212,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", "1");
+      var expectedSource = new ItemSource(Db, "en", "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }

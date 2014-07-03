@@ -26,7 +26,7 @@
       this.session = null;
     }
 
-    [Test]
+   /* [Test]
     public async void TestGetItemWithParentScopeByPath()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path)
@@ -179,6 +179,6 @@
       var response = await sessionWithNoReadAccessUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(0, response);
-    }
-  }
+    }  */
+  }  
 }
