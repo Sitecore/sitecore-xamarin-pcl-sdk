@@ -150,6 +150,8 @@
     <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs">
       <DependentUpon>BaseTaskTableViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="FieldsTableView\ItemsDataSource.cs" />
+    <Compile Include="FieldsTableView\ItemCellSelectionHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
