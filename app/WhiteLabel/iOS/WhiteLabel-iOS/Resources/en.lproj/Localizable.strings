@@ -1,7 +1,7 @@
 ﻿//features
 "Settings" = "Settings";
 "getItemByPath" = "Item by Path";
-"getItemById" = "Item by ID & Children scope";
+"getItemById" = "Item by ID & Scope";
 "deleteItemById" = "Delete Item by ID";
 "createEditItem" = "Create & Edit Item";
 "uploadImageVC" = "Upload Image";
@@ -14,6 +14,7 @@
 "Error" = "Error";
 "Message" = "Message";
 "OK" = "OK";
+"Items List" = "Items List";
 
 //messages
 "Loading Data" = "Loading Data...";
