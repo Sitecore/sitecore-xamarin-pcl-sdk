@@ -7,6 +7,7 @@ using MonoTouch.UIKit;
 using WhiteLabeliOS.FieldsTableView;
 using Sitecore.MobileSDK.Items.Fields;
 using Sitecore.MobileSDK.Items;
+using System.Collections.Generic;
 
 namespace WhiteLabeliOS
 {
@@ -36,12 +37,44 @@ namespace WhiteLabeliOS
 				this.fieldsDataSource = null;
 			}
 
-			if (this.fieldsTableDelegate != null)
+      if (this.itemsTableDelegate != null)
 			{
-				this.fieldsTableDelegate.Dispose ();
-				this.fieldsTableDelegate = null;
+        this.itemsTableDelegate.Dispose ();
+        this.itemsTableDelegate = null;
 			}
 		}
+
+    protected void ShowItemsList( List<ISitecoreItem> items )
+    {
+      BeginInvokeOnMainThread(delegate
+      {
+        this.CleanupTableViewBindingsSync();
+
+        this.itemsDataSource = new ItemsDataSource();
+        this.itemsTableDelegate = new ItemCellSelectionHandler();
+
+
+        ItemsDataSource dataSource = this.itemsDataSource;
+        dataSource.SitecoreItems = items;
+        dataSource.TableView = this.TableView;
+
+
+        ItemCellSelectionHandler tableDelegate = this.itemsTableDelegate;
+        tableDelegate.TableView = this.TableView;
+        tableDelegate.SitecoreItems = items;
+
+        ItemCellSelectionHandler.TableViewDidSelectItemAtIndexPath onItemSelected = 
+          delegate (UITableView tableView, ISitecoreItem item, NSIndexPath indexPath)
+        {
+         //TODO: @igk show fields list here!!!
+        };
+        tableDelegate.OnItemCellSelectedDelegate = onItemSelected;
+
+        this.TableView.DataSource = dataSource;
+        this.TableView.Delegate = tableDelegate;
+        this.TableView.ReloadData();
+      });
+    }
 
 		protected void ShowFieldsForItem( ISitecoreItem item )
 		{
@@ -78,7 +111,10 @@ namespace WhiteLabeliOS
 		protected MonoTouch.UIKit.UITableView TableView;
 
 		protected FieldsDataSource fieldsDataSource;
-		protected FieldCellSelectionHandler fieldsTableDelegate;
+    protected ItemsDataSource itemsDataSource;
+
+    protected FieldCellSelectionHandler fieldsTableDelegate;
+    protected ItemCellSelectionHandler itemsTableDelegate;
 	}
 }
 
