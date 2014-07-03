@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <Button
-        android:id="@+id/button_get_item_by_id"
-        android:layout_width="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <Button
+      android:id="@+id/button_get_item_by_id"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/text_get_item_by_id" />
+  <Button
+      android:id="@+id/button_get_item_by_path"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/text_get_item_by_path" />
+  <Button
+      android:id="@+id/button_get_item_by_query"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/text_get_item_by_query" />
+  <Button
+        android:id="@+id/button_download_image"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_get_item_by_id" />
-    <Button
-        android:id="@+id/button_get_item_by_path"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_get_item_by_path" />
-    <Button
-        android:id="@+id/button_get_item_by_query"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_get_item_by_query" />
+        android:text="@string/text_download_image" />
 </LinearLayout>

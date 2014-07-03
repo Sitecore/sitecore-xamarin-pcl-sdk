@@ -19,6 +19,11 @@
 	<string name="text_get_item_by_id"><![CDATA[Item by ID & item children]]></string>
 	<string name="text_get_item_by_path">Item by Path</string>
 	<string name="text_get_item_by_query">Item by Query</string>
+	<string name="text_download_image">Download Image</string>
+	<string name="text_width">Width</string>
+	<string name="text_height">Height</string>
+  
+  
   <string name="text_query_label">Type Sitecore Query:</string>
   <string name="text_path_label">Type Item Path:</string>
   <string name="text_id_label">Type Item Id:</string>
@@ -33,5 +38,7 @@
   <string name="text_empty_path">Item path cannot be empty</string>
   <string name="text_empty_id">Item Id cannot be empty</string>
   <string name="text_no_item">Item doesn\'t exist</string>
+
+  <string name="text_button_download">Download</string>
   
 </resources>

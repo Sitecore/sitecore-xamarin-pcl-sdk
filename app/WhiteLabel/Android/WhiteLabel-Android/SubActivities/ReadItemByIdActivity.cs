@@ -4,7 +4,6 @@ namespace WhiteLabelAndroid.SubActivities
   using Android.App;
   using Android.Content;
   using Android.Content.PM;
-  using Android.Hardware.Input;
   using Android.OS;
   using Android.Views;
   using Android.Views.InputMethods;
