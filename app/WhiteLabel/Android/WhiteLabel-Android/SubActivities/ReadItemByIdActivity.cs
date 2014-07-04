@@ -4,7 +4,6 @@ namespace WhiteLabelAndroid.SubActivities
   using Android.App;
   using Android.Content;
   using Android.Content.PM;
-  using Android.Hardware.Input;
   using Android.OS;
   using Android.Views;
   using Android.Views.InputMethods;
@@ -15,7 +14,7 @@ namespace WhiteLabelAndroid.SubActivities
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
-  public class ReadItemByIdActivity : Activity, AdapterView.IOnItemClickListener
+  public class ReadItemByIdActivity : BaseActivity, AdapterView.IOnItemClickListener
   {
     private ListView fieldsListView;
     private TextView itemNameTextView;
@@ -74,33 +73,13 @@ namespace WhiteLabelAndroid.SubActivities
       };
     }
 
-    private void HideKeyboard(View view)
-    {
-      var inputMethodManager = this.GetSystemService(Context.InputMethodService) as InputMethodManager;
-      inputMethodManager.HideSoftInputFromWindow(view.WindowToken, HideSoftInputFlags.None);
-    }
-
-    private PayloadType GetSelectedPayload()
-    {
-      switch (this.payloadRadioGroup.CheckedRadioButtonId)
-      {
-        case Resource.Id.payload_min:
-          return PayloadType.Min;
-        case Resource.Id.payload_content:
-          return PayloadType.Content;
-        case Resource.Id.payload_full:
-          return PayloadType.Full;
-        default: return PayloadType.Min;
-      }
-    }
-
     private async void PerformGetItemRequest(string id)
     {
       try
       {
         ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
 
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Payload(this.GetSelectedPayload()).Build();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Payload(this.GetSelectedPayload(this.payloadRadioGroup)).Build();
         this.SetProgressBarIndeterminateVisibility(true);
 
         ScItemsResponse response = await session.ReadItemAsync(request);
@@ -111,7 +90,7 @@ namespace WhiteLabelAndroid.SubActivities
           this.item = response.Items[0];
           this.itemNameTextView.Text = this.item.DisplayName;
 
-          this.PopulateList();
+          this.PopulateFieldsList(fieldsListView, item.Fields);
         }
         else
         {
@@ -122,19 +101,8 @@ namespace WhiteLabelAndroid.SubActivities
       {
         this.SetProgressBarIndeterminateVisibility(false);
         var title = GetString(Resource.String.text_item_received);
-        DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
+        DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
-    }
-
-    private void PopulateList()
-    {
-      var items = new string[this.item.Fields.Count];
-      foreach (IField field in this.item.Fields)
-      {
-        items[this.item.Fields.IndexOf(field)] = field.Name;
-      }
-
-      this.fieldsListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, items);
     }
   }
 }

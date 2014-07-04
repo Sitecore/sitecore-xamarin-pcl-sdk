@@ -8,7 +8,7 @@
   using Android.Widget;
   using WhiteLabelAndroid.SubActivities;
 
-  [Activity(Label = "WhiteLabel-Android", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
+  [Activity(MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
   public class MainActivity : Activity
   {
     public override bool OnCreateOptionsMenu(IMenu menu)
@@ -33,7 +33,7 @@
     {
       base.OnCreate(bundle);
       this.SetContentView(Resource.Layout.Main);
-
+      this.SetTitle(Resource.String.app_name);
       Button itemIdButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_id);
       itemIdButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByIdActivity)));
 
@@ -42,6 +42,9 @@
 
       Button itemQueryButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_query);
       itemQueryButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByQueryActivtiy)));
+
+      Button downloadImageButton = this.FindViewById<Button>(Resource.Id.button_download_image);
+      downloadImageButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(DownloadImageActivtiy)));
     }
   }
 }
