@@ -111,15 +111,7 @@ namespace WhiteLabeliOS
         ScItemsResponse response = await session.ReadItemAsync(request);
         if (response.Items.Any())
         {
-         // ISitecoreItem item = response.Items[0];
           this.ShowItemsList(response.Items);
-
-//          string message = NSBundle.MainBundle.LocalizedString("item title is", null);
-//          AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
-
-          string message = NSBundle.MainBundle.LocalizedString ("items count is", null);
-          AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + response.Items.Count.ToString() + "\"");
-
         }
         else
         {
