@@ -2,6 +2,7 @@ using Android.App;
 
 namespace WhiteLabelAndroid.SubActivities
 {
+  using Android.Content.PM;
   using Android.Graphics;
   using Android.OS;
   using Android.Views;
@@ -10,7 +11,7 @@ namespace WhiteLabelAndroid.SubActivities
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
-  [Activity(Label = "Test")]
+  [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class DownloadImageActivtiy : BaseActivity
   {
     private Prefs prefs;
@@ -40,7 +41,6 @@ namespace WhiteLabelAndroid.SubActivities
           DialogHelper.ShowSimpleDialog(this, Resource.String.text_error, Resource.String.text_empty_path);
           return;
         }
-
 
         this.HideKeyboard(itemPathField);
         this.DownloadImage(itemPathField.Text, imageWidth.Text, imageHeight.Text);
@@ -78,11 +78,11 @@ namespace WhiteLabelAndroid.SubActivities
 
         this.targetImageView.SetImageBitmap(imageBitmep);
       }
-      catch (Exception exception)
+      catch (System.Exception exception)
       {
         this.SetProgressBarIndeterminateVisibility(false);
         var title = GetString(Resource.String.text_item_received);
-        DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
+        DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }
   }

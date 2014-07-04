@@ -121,7 +121,7 @@ namespace WhiteLabelAndroid.SubActivities
       {
         this.SetProgressBarIndeterminateVisibility(false);
         var title = GetString(Resource.String.text_item_received);
-        DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
+        DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }
 

@@ -113,14 +113,15 @@ namespace WhiteLabelAndroid.SubActivities
         }
         else
         {
-          DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, Resource.String.text_no_item);
+          DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received,
+            Resource.String.text_no_item);
         }
       }
       catch (Exception exception)
       {
         this.SetProgressBarIndeterminateVisibility(false);
         var title = GetString(Resource.String.text_item_received);
-        DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
+        DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }
 
@@ -132,7 +133,8 @@ namespace WhiteLabelAndroid.SubActivities
         items[this.item.Fields.IndexOf(field)] = field.Name;
       }
 
-      this.fieldsListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, items);
+      this.fieldsListView.Adapter = new ArrayAdapter<string>(this,
+        Android.Resource.Layout.SimpleListItem1, items);
     }
   }
 }

@@ -6,7 +6,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Instance URL"
+        android:hint="@string/hint_instance_url"
         android:singleLine="true"
         android:imeOptions="actionNext"
         android:id="@+id/instance_url" />
@@ -16,14 +16,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Login"
+        android:hint="@string/hint_login"
         android:singleLine="true"
         android:imeOptions="actionNext"
         android:id="@+id/instance_login" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/hint_password"
         android:singleLine="true"
         android:imeOptions="actionNext"
         android:inputType="textPassword"
@@ -31,19 +31,19 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Site"
+        android:hint="@string/hint_site"
         android:singleLine="true"
         android:imeOptions="actionNext"
         android:id="@+id/instance_site" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Database"
+        android:hint="@string/hint_database"
         android:singleLine="true"
         android:imeOptions="actionDone"
         android:id="@+id/instance_database" />
     <Button
-        android:text="Use"
+        android:text="@string/text_button_use"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button_use" />

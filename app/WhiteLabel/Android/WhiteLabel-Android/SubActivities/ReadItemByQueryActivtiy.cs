@@ -39,7 +39,8 @@ namespace WhiteLabelAndroid.SubActivities
       {
         if (string.IsNullOrEmpty(queryField.Text))
         {
-          DialogHelper.ShowSimpleDialog(this, Resource.String.text_error, Resource.String.text_empty_query);
+          DialogHelper.ShowSimpleDialog(this, Resource.String.text_error,
+            Resource.String.text_empty_query);
           return;
         }
 
@@ -66,7 +67,9 @@ namespace WhiteLabelAndroid.SubActivities
         ScItemsResponse response = await session.ReadItemAsync(request);
 
         this.SetProgressBarIndeterminateVisibility(false);
-        var message = response.ResultCount > 0 ? string.Format("items count is \"{0}\"", response.Items.Count) : "Item doesn't exist";
+        var message = response.ResultCount > 0 ?
+          this.GetString(Resource.String.text_num_of_items_received, response.Items.Count)
+          : GetString(Resource.String.text_no_item);
 
         DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_item_received), message);
       }
@@ -74,7 +77,7 @@ namespace WhiteLabelAndroid.SubActivities
       {
         this.SetProgressBarIndeterminateVisibility(false);
         var title = GetString(Resource.String.text_item_received);
-        DialogHelper.ShowSimpleDialog(this, title, GetString(Resource.String.text_error) + ":" + exception.Message);
+        DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }
   }

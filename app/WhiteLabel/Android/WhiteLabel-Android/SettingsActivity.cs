@@ -5,7 +5,7 @@
   using Android.OS;
   using Android.Widget;
 
-  [Activity(Label = "SettingsActivity", ScreenOrientation = ScreenOrientation.Portrait)]
+  [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class SettingsActivity : Activity
   {
     private Prefs prefs;
@@ -20,7 +20,7 @@
     {
       base.OnCreate(bundle);
       this.SetContentView(Resource.Layout.Settings);
-
+      this.SetTitle(Resource.String.text_settings_screen);
       this.prefs = Prefs.From(this);
 
       this.InitFields();
