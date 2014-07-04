@@ -72,7 +72,7 @@ namespace WhiteLabelAndroid.SubActivities
 
         this.SetProgressBarIndeterminateVisibility(true);
         var response = await session.DownloadResourceAsync(request);
-        
+
         this.SetProgressBarIndeterminateVisibility(false);
         var imageBitmep = BitmapFactory.DecodeStream(response);
 

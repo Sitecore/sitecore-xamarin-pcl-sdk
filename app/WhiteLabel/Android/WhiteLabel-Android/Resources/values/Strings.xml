@@ -48,6 +48,7 @@
   <string name="text_empty_id">Item Id cannot be empty</string>
   <string name="text_no_item">Item doesn\'t exist</string>
   <string name="text_num_of_items_received">items count is \"%1$s\"</string>
+  <string name="text_instance_saved">Saved instance</string>
 
   <string name="text_button_download">Download</string>
   <string name="text_button_use">Use</string>

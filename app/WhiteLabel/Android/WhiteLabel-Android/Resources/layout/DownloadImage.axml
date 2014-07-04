@@ -3,51 +3,51 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="@string/hint_item_path"
-      android:id="@+id/field_item_path" />
-  <LinearLayout
-      android:orientation="horizontal"
-      android:gravity="center_vertical"
-      android:weightSum="4"
-      android:paddingLeft="20dp"
-      android:paddingRight="40dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-    <TextView
-        android:text="@string/text_width"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|right" />
     <EditText
-        android:inputType="number"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:id="@+id/field_image_width" />
-    <TextView
-        android:text="@string/text_width"
-        android:gravity="center_vertical|right"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent" />
-    <EditText
-        android:inputType="number"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:id="@+id/field_image_height" />
-  </LinearLayout>
-  <Button
-      android:text="@string/text_button_download"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/button_download" />
-  <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/downloaded_image" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_item_path"
+        android:id="@+id/field_item_path" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="4"
+        android:paddingLeft="20dp"
+        android:paddingRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/text_width"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right" />
+        <EditText
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/field_image_width" />
+        <TextView
+            android:text="@string/text_width"
+            android:gravity="center_vertical|right"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <EditText
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/field_image_height" />
+    </LinearLayout>
+    <Button
+        android:text="@string/text_button_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_download" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/downloaded_image" />
 </LinearLayout>

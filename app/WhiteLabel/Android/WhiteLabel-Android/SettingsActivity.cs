@@ -30,7 +30,7 @@
       useButton.Click += (sender, args) =>
       {
         this.SaveFieldsToPrefs();
-        Toast.MakeText(this, "Saved instance", ToastLength.Short).Show();
+        Toast.MakeText(this, GetString(Resource.String.text_instance_saved), ToastLength.Short).Show();
         this.Finish();
       };
     }

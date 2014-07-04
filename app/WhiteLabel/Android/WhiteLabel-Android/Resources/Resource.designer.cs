@@ -240,20 +240,20 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f040001
 			public const int menu_text_settings = 2130968577;
 			
-			// aapt resource value: 0x7f040029
-			public const int text_button_download = 2130968617;
-			
-			// aapt resource value: 0x7f04002b
-			public const int text_button_get_item = 2130968619;
+			// aapt resource value: 0x7f04002a
+			public const int text_button_download = 2130968618;
 			
 			// aapt resource value: 0x7f04002c
-			public const int text_button_get_item_children = 2130968620;
+			public const int text_button_get_item = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int text_button_ok = 2130968621;
+			public const int text_button_get_item_children = 2130968621;
 			
-			// aapt resource value: 0x7f04002a
-			public const int text_button_use = 2130968618;
+			// aapt resource value: 0x7f04002e
+			public const int text_button_ok = 2130968622;
+			
+			// aapt resource value: 0x7f04002b
+			public const int text_button_use = 2130968619;
 			
 			// aapt resource value: 0x7f04000b
 			public const int text_default_database = 2130968587;
@@ -299,6 +299,9 @@ namespace WhiteLabelAndroid
 			
 			// aapt resource value: 0x7f040019
 			public const int text_id_label = 2130968601;
+			
+			// aapt resource value: 0x7f040029
+			public const int text_instance_saved = 2130968617;
 			
 			// aapt resource value: 0x7f040022
 			public const int text_item_received = 2130968610;
