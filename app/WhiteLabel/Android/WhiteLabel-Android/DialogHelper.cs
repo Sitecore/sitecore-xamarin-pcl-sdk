@@ -19,7 +19,8 @@ namespace WhiteLabelAndroid
       builder.SetMessage(message);
 
       AlertDialog dialog = builder.Create();
-      dialog.SetButton("OK", (sender, args) => dialog.Dismiss());
+      dialog.SetButton(context.GetString(Resource.String.text_button_ok),
+        (sender, args) => dialog.Dismiss());
       dialog.Show();
     }
   }
