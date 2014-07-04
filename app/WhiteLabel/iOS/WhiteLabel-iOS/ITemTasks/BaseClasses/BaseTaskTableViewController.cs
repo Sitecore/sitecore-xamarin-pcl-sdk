@@ -31,11 +31,11 @@ namespace WhiteLabeliOS
 			this.TableView.DataSource = null;
 			this.TableView.Delegate = null;
 
-			if (this.fieldsDataSource != null)
-			{
-				this.fieldsDataSource.Dispose ();
-				this.fieldsDataSource = null;
-			}
+      if (this.itemsDataSource != null)
+      {
+        this.itemsDataSource.Dispose ();
+        this.itemsDataSource = null;
+      }
 
       if (this.itemsTableDelegate != null)
 			{
@@ -67,6 +67,9 @@ namespace WhiteLabeliOS
           delegate (UITableView tableView, ISitecoreItem item, NSIndexPath indexPath)
         {
          //TODO: @igk show fields list here!!!
+          this.selectedItem = item;
+          this.PerformSegue("showFieldsViewController", this);
+          //AlertHelper.ShowLocalizedAlertWithOkOption("Message", item.DisplayName);
         };
         tableDelegate.OnItemCellSelectedDelegate = onItemSelected;
 
@@ -76,44 +79,21 @@ namespace WhiteLabeliOS
       });
     }
 
-		protected void ShowFieldsForItem( ISitecoreItem item )
-		{
-			BeginInvokeOnMainThread(delegate
-			{
-				this.CleanupTableViewBindingsSync();
+    public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+    {
+      base.PrepareForSegue(segue, sender);
 
-				this.fieldsDataSource = new FieldsDataSource();
-				this.fieldsTableDelegate = new FieldCellSelectionHandler();
-
-
-				FieldsDataSource dataSource = this.fieldsDataSource;
-				dataSource.SitecoreItem = item;
-				dataSource.TableView = this.TableView;
-
-
-				FieldCellSelectionHandler tableDelegate = this.fieldsTableDelegate;
-				tableDelegate.TableView = this.TableView;
-				tableDelegate.SitecoreItem = item;
-
-				FieldCellSelectionHandler.TableViewDidSelectFieldAtIndexPath onFieldSelected = 
-					delegate (UITableView tableView, IField itemField, NSIndexPath indexPath)
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
-				};
-				tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
-
-				this.TableView.DataSource = dataSource;
-				this.TableView.Delegate = tableDelegate;
-				this.TableView.ReloadData();
-			});
-		}
+      if ("showFieldsViewController" == segue.Identifier)
+      {
+        FieldsViewController viewController = segue.DestinationViewController as FieldsViewController;
+        viewController.ShowFieldsForItem (this.selectedItem);
+      }
+    
+    }
 
 		protected MonoTouch.UIKit.UITableView TableView;
-
-		protected FieldsDataSource fieldsDataSource;
+    protected ISitecoreItem selectedItem;
     protected ItemsDataSource itemsDataSource;
-
-    protected FieldCellSelectionHandler fieldsTableDelegate;
     protected ItemCellSelectionHandler itemsTableDelegate;
 	}
 }
