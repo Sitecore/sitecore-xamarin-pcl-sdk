@@ -9,6 +9,9 @@
 "getMediaItem" = "Download Image";
 "Master" = "Master";
 
+"MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
+
+
 //titles
 "Alert" = "Alert";
 "Error" = "Error";
