@@ -25,16 +25,16 @@
 "Not implemented yet" = "Not implemented yet";
 "Video uploading is not supported" = "Video uploading is not supported";
 
-"Please type item Id" = "Please type item Id";
-"Please type item path" = "Please type item path";
-"Please type query" = "Please type query";
+"Please type item Id" = "Item id cannot be empty";
+"Please type item path" = "Item path cannot be empty";
+"Please type query" = "Sitecore query cannot be empty";
 
 "Item received" = "Item received";
 "Item is not exist" = "Item is not exist";
 "item title is" = "item title is";
 "items count is" = "items count is";
 "Field Raw Value" = "Field Raw Value";
-"Please type media path" = "Please type media path";
+"Please type media path" = "Media path cannot be empty";
 "Incorect width or height value" = "Incorect width or height value";
 "Type query" = "Type Sitecore query:";
 "Type Media Path" = "Type Media Path";
