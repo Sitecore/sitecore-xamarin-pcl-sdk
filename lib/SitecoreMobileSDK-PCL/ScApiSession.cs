@@ -162,6 +162,10 @@ namespace Sitecore.MobileSDK
 
     #endregion GetItems
 
+    #region Authentication
+
+    #endregion Authentication
+
 
     #region Private Variables
 
