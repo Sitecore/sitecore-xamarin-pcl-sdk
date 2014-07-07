@@ -1,4 +1,5 @@
 ﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+using MonoTouch.Foundation;
 
 namespace WhiteLabeliOS
 {
@@ -33,17 +34,17 @@ namespace WhiteLabeliOS
 
     public static string MinPayloadButtonName()
     {
-      return "Min";
+      return NSBundle.MainBundle.LocalizedString("PAYLOAD_BUTTON_MIN", null);
     }
 
     public static string ContentPayloadButtonName()
     {
-      return "Content";
+      return NSBundle.MainBundle.LocalizedString("PAYLOAD_BUTTON_CONTENT", null);
     }
 
     public static string FullPayloadButtonName()
     {
-      return "Full";
+      return NSBundle.MainBundle.LocalizedString("PAYLOAD_BUTTON_FULL", null);
     }
   }
 }
