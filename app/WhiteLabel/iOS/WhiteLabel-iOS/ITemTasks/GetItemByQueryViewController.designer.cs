@@ -29,6 +29,7 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+
 			if (ItemsTableView != null) {
 				ItemsTableView.Dispose ();
 				ItemsTableView = null;

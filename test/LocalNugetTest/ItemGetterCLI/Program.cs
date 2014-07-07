@@ -32,9 +32,15 @@ namespace ItemGetterCLI
             ScItemsResponse items = readHomeItemTask.Result;
             string fieldText = items.Items[0].FieldWithName("Text").RawValue;
 
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
+
             Console.WriteLine("Home Item Text");
             Console.WriteLine();
             Console.WriteLine(fieldText);
+
+            Console.ReadKey();
         }
     }
 }

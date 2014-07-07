@@ -11,7 +11,7 @@
     {
       var result = new TestEnvironment
       {
-        InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119",
+        InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7220",
         ShellSite = "/sitecore/shell"
       };
 
@@ -42,6 +42,10 @@
       result.Items.TestFieldsItem.DisplayName = "Test Fields";
       result.Items.TestFieldsItem.Template = "Test Templates/Sample fields";
 
+      result.Items.AllowedItem.Id = "{387B69B2-B2EA-4618-8C3E-2785DC0469A7}";
+
+      result.Items.AllowedItem.DisplayName = "Allowed_Item";
+
       return result;
     }
 
@@ -65,7 +69,7 @@
       public Item Home = new Item();
       public Item ItemWithVersions = new Item();
       public Item TestFieldsItem = new Item();
-      public Item MediaLibrary = new Item();
+      public Item AllowedItem = new Item();
     }
 
     public class Item

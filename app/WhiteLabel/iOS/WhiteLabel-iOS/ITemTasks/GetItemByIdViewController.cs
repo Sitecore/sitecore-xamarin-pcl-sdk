@@ -4,9 +4,9 @@
 namespace WhiteLabeliOS
 {
 	using System;
-    using System.Linq;
+  using System.Linq;
 
-    using MonoTouch.UIKit;
+  using MonoTouch.UIKit;
 	using MonoTouch.Foundation;
 
 	using Sitecore.MobileSDK;
@@ -132,7 +132,6 @@ namespace WhiteLabeliOS
         });
       }
     }
-			
 	}
 }
 

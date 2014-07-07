@@ -13,7 +13,7 @@
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
-  public class GetMediaItemsTest
+  public class GetMediaTest
   {
     private TestEnvironment testData;
     private ScApiSession session;
@@ -33,7 +33,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithScaleValue()
+    public async void TestGetMediaWithScale()
     {
       var options = new MediaOptionsBuilder()
        .SetScale(0.5f)
@@ -50,7 +50,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemAsThumbnail()
+    public async void TestGetMediaAsThumbnail()
     {
       var options = new MediaOptionsBuilder()
         .SetDisplayAsThumbnail(true)
@@ -67,7 +67,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithHeightAndWidthAndAllowSrtech()
+    public async void TestGetMediaWithHeightAndWidthAndAllowSrtech()
     {
       const int Height = 200;
       const int Width = 300;
@@ -89,7 +89,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithPngExtension()
+    public async void TestGetMediaWithPngExtension()
     {
       const string MediaPath = "/sitecore/media library/Images/mouse-icon";
       const string Db = "master";
@@ -106,29 +106,23 @@
     }
 
     [Test]
-    public void TestGetMediaItemWithEmptyPath()
+    public void TestGetMediaWithEmptyPath()
     {
-      TestDelegate testCode = () =>
-      {
-        var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("");
-      };
+      TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest("");
       var exception = Assert.Throws<ArgumentNullException>(testCode);
       Assert.True(exception.GetBaseException().ToString().Contains("Media path cannot be null or empty"));
     }
 
     [Test]
-    public void TestGetMediaItemWithNullPath()
+    public void TestGetMediaWithNullPath()
     {
-      TestDelegate testCode = () =>
-      {
-        var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(null);
-      };
+      TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest(null);
       var exception = Assert.Throws<ArgumentNullException>(testCode);
       Assert.True(exception.Message.Contains("Media path cannot be null or empty"));
     }
 
     [Test]
-    public void TestGetMediaItemWithNotExistentPath()
+    public void TestGetMediaWithNotExistentPath()
     {
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/images/not existent")
         .Build();
@@ -145,22 +139,15 @@
     }
 
     [Test]
-    public void TestGetMediaItemWithPathBeginsWithoutSlash()
+    public void TestGetMediaWithPathBeginsWithoutSlash()
     {
-      var options = new MediaOptionsBuilder()
-         .SetHeight(100)
-         .Build();
-
-      TestDelegate testCode = () =>
-      {
-        var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("sitecore/media library/images/kirkorov");
-      };
+      TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest("sitecore/media library/images/kirkorov");
       Exception exception = Assert.Throws<ArgumentException>(testCode);
       Assert.True(exception.Message.Contains("Media path should begin with '/' or '~'"));
     }
 
     [Test]
-    public void TestGetMediaItemWithNegativeScaleValue()
+    public void TestGetMediaWithNegativeScaleValue()
     {
       TestDelegate testCode = () =>
       {
@@ -173,7 +160,7 @@
     }
 
     [Test]
-    public void TestGetMediaItemWithNegativeMaxWidthValue()
+    public void TestGetMediaWithNegativeMaxWidthValue()
     {
       TestDelegate testCode = () =>
       {
@@ -186,7 +173,7 @@
     }
 
     [Test]
-    public void TestGetMediaItemWithNegativeHeightValue()
+    public void TestGetMediaWithNegativeHeightValue()
     {
       TestDelegate testCode = () =>
       {
@@ -199,7 +186,7 @@
     }
 
     [Test]
-    public void TestGetMediaItemWithZeroWidthValue()
+    public void TestGetMediaWithZeroWidthValue()
     {
       TestDelegate testCode = () =>
       {
@@ -212,7 +199,7 @@
     }
 
     [Test]
-    public void TestGetMediaItemFromUploadedImageWithError()
+    public void TestGetMediaFromUploadedImageWithError()
     {
       var options = new MediaOptionsBuilder()
         .SetHeight(100)
@@ -234,7 +221,7 @@
     }
 
     [Test]
-    public async void TestMediaItemWithoutAccessToFolder()
+    public async void TestMediaWithoutAccessToFolder()
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
       var sessionNoReadAccess = testData.GetSession(testData.InstanceUrl, testData.Users.NoReadAccess.Username, testData.Users.NoReadAccess.Password);
@@ -253,7 +240,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithAbsolutePath()
+    public async void TestGetMediaWithAbsolutePath()
     {
       const string MediaPath = "/sitecore/media library/Images/testname222";
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
@@ -267,7 +254,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithRelativePath()
+    public async void TestGetMediaWithRelativePath()
     {
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/Images/green_mineraly1.jpg")
         .Build();
@@ -281,7 +268,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithTildaInPath()
+    public async void TestGetItemWithTildaInPath()
     {
       var options = new MediaOptionsBuilder()
         .SetDisplayAsThumbnail(false)
@@ -300,9 +287,9 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithPdfExtension()
+    public async void TestGetMediaWithPdfExtension()
     {
-      const string MediaPath = "/sitecore/media library/Files/pdf example";
+      const string MediaPath = "/sitecore/media library/Images/Files/pdf example.pdf";
       const string Db = "master";
       var options = new MediaOptionsBuilder()
          .Build();
@@ -322,7 +309,7 @@
     [Test]
     public async void TestGetMediaItemWithMp4Extension()
     {
-      const string MediaPath = "/sitecore/media library/Files/Video_01";
+      const string MediaPath = "/sitecore/media library/Images/Files/Video_01.mp4";
       const string Db = "master";
 
       var options = new MediaOptionsBuilder()
@@ -342,7 +329,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemFromDifferentDb()
+    public async void TestGetMediaFromDifferentDb()
     {
       const string Path = "/sitecore/media library/images/mouse-icon";
       var requestFromMasterDb = ItemWebApiRequestBuilder.ReadMediaItemRequest(Path)
@@ -371,13 +358,13 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithInternationalPath()
+    public async void TestGetMediaWithInternationalPath()
     {
       var options = new MediaOptionsBuilder()
         .SetWidth(50)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/files/では/flowers")
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/Images/files/では/flowers")
         .DownloadOptions(options)
         .Database("master")
         .Build();
@@ -389,7 +376,7 @@
     }
 
     [Test]
-    public async void TestGetMediaItemWithLanguageAndVersion()
+    public async void TestGetMediaWithLanguageAndVersion()
     {
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/images/test image")
         .Language("en")
@@ -405,7 +392,7 @@
     }
 
     [Test]
-    public async void TestMediaItemFromSrcAndMediapathInField()
+    public async void TestMediaFromSrcAndMediapathInField()
     {
       var z = await this.GetMediaFieldAsStringArray("/sitecore/content/Home/Test fields");
 
@@ -427,10 +414,10 @@
     }
 
     [Test]
-    public async void TestMediaItemFromField()
+    public async void TestMediaFromField()
     {
       var z = await this.GetMediaFieldAsStringArray("/sitecore/content/Home/Test fields");
-     
+
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(z[3])   // z[3]: mediapath="/Images/test image"
          .Build();
       var responseWithMediapathParameter = await this.session.DownloadResourceAsync(request);

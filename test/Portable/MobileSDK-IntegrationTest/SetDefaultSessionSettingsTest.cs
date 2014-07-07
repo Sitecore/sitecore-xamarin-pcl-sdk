@@ -61,7 +61,7 @@
       var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
       const string Db = "web";
       const string Language = "en";
-      const string Version = "1";
+      const string Version = "2";
       testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
@@ -167,7 +167,7 @@
       this.testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
 
-      var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language, "1");
+      var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language, "2");
       this.testData.AssertItemsAreEqual(this.testData.Items.ItemWithVersions, resultItem);
       this.testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
@@ -195,7 +195,7 @@
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
-      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, ItemSource.DefaultSource().Language, "1");
+      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, ItemSource.DefaultSource().Language, "2");
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
@@ -217,7 +217,7 @@
     }
 
     [Test]
-    public async void TestItemByQueryWithSpecifiedFieldCorrectValue()
+    public async void TestGetItemByQueryWithCorrectField()
     {
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore//*[@Title='English version 2 web']");
       var request = requestBuilder.Payload(PayloadType.Content).Build();
@@ -225,13 +225,13 @@
 
       testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
-      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, ItemSource.DefaultSource().Language, "1");
+      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, ItemSource.DefaultSource().Language, "2");
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
 
     [Test]
-    public async void TestItemByQueryWithSpecifiedFieldNotCorrectValue()
+    public async void TestGetItemByQueryWithNotCorrectField()
     {
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content//*[@Title='DANISH version 2 web']");
       var request = requestBuilder.Language("da").Database("master").Build();

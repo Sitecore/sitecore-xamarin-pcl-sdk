@@ -37,7 +37,7 @@
     }
 
     [Test]
-    public async void TestGetItemWithNotExistedLanguage()
+    public async void TestGetItemWithNotExistentLanguage()
     {
       const string Db = "web";
       const string Language = "da";
@@ -55,7 +55,7 @@
     [Test]
     public async void TestGetItemWithNullLanguage()
     {
-      var itemSource = new ItemSource("master", null, "\t1");
+      var itemSource = new ItemSource("master", null, "1");
       var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       var session = new ScApiSession(config, itemSource);
 
@@ -83,7 +83,7 @@
     }
 
     [Test]
-    public async void TestGetItemWithMasterDbLanguageAndVersion()
+    public async void TestGetItemWithMasterDb()
     {
       const string Db = "master";
       var session = this.CreateAdminSession();
@@ -152,7 +152,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, Language, "1");
+      var expectedSource = new ItemSource(Db, Language, "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -172,7 +172,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", "1");
+      var expectedSource = new ItemSource(Db, "en", "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -212,7 +212,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", "1");
+      var expectedSource = new ItemSource(Db, "en", "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }

@@ -168,6 +168,7 @@
                     <connections>
                         <outlet property="FieldsTableView" destination="eCC-MK-XUO" id="JI1-Nv-RNF"/>
                         <outlet property="ItemPathField" destination="Ipi-Wb-XmQ" id="gJD-UJ-Zp3"/>
+                        <outlet property="PayloadSelectionView" destination="EWb-Bs-Rza" id="5Bd-ev-e07"/>
                         <outlet property="childrenScopeButton" destination="DDJ-lV-TdM" id="PuE-kC-fPN"/>
                         <outlet property="fieldNameTextField" destination="UUI-Bx-5L0" id="HXA-ZK-Jk6"/>
                         <outlet property="getItemButton" destination="2fg-Dy-Lio" id="YRb-eO-M9n"/>
@@ -517,6 +518,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="FieldsTableView" destination="GpE-GE-1rd" id="Ckz-gc-PRd"/>
+                        <outlet property="PayloadSelectionView" destination="a5S-Sp-ruV" id="9I7-dT-M3i"/>
                         <outlet property="childrenScopeButton" destination="RQN-4b-7X6" id="SJK-8a-j7C"/>
                         <outlet property="fieldNameTextField" destination="AlI-6Y-OvX" id="muF-eu-1zI"/>
                         <outlet property="getItemButton" destination="Ofg-uZ-LaS" id="6fd-3d-AhU"/>

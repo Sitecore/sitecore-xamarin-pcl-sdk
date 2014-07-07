@@ -116,23 +116,23 @@ namespace WhiteLabeliOS
         {
           AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
         }
+      }
+      catch(Exception e) 
+      {
+        this.CleanupTableViewBindings();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.FieldsTableView.ReloadData();
+          this.HideLoader();
+        });
+      }
+    }
 
-			}
-			catch(Exception e) 
-			{
-				this.CleanupTableViewBindings();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-			}
-            finally
-            {
-                BeginInvokeOnMainThread(delegate
-                {
-                    this.FieldsTableView.ReloadData();
-                    this.HideLoader();
-                });
-            }
-		}
-			
-	}
+  }
+
 }
 

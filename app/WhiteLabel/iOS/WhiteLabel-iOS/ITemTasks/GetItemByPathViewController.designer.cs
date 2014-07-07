@@ -28,6 +28,9 @@ namespace WhiteLabeliOS
 		MonoTouch.UIKit.UITextField ItemPathField { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UISegmentedControl PayloadSelectionView { get; set; }
+
+    [Outlet]
 		MonoTouch.UIKit.UIButton parentScopeButton { get; set; }
 
 		[Outlet]
@@ -44,6 +47,7 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+
 			if (parentScopeButton != null) {
 				parentScopeButton.Dispose ();
 				parentScopeButton = null;
@@ -77,6 +81,11 @@ namespace WhiteLabeliOS
 			if (ItemPathField != null) {
 				ItemPathField.Dispose ();
 				ItemPathField = null;
+			}
+
+			if (PayloadSelectionView != null) {
+				PayloadSelectionView.Dispose ();
+				PayloadSelectionView = null;
 			}
 		}
 	}
