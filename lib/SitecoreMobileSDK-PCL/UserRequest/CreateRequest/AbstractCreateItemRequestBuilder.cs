@@ -1,12 +1,38 @@
-﻿using System;
-
+﻿
 namespace Sitecore.MobileSDK
 {
-  public class AbstractCreateItemRequestBuilder
+  using System;
+  using System.Collections.Generic;
+
+  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractGetItemRequestBuilder<T>
+    where T : class
   {
-    public AbstractCreateItemRequestBuilder ()
+
+    public AbstractCreateItemRequestBuilder<T> ItemName (string itemName)
     {
+      this.itemName = itemName;
+      return this;
     }
+
+    public AbstractCreateItemRequestBuilder<T> ItemTemplate (string itemTemplate)
+    {
+      this.itemTemplate = itemTemplate;
+      return this;
+    }
+
+    public AbstractCreateItemRequestBuilder<T> AddFieldsRawValuesByName (Dictionary<string, string> fieldsRawValuesByName)
+    {
+      return this;
+    }
+
+    public AbstractCreateItemRequestBuilder<T> AddFieldsRawValuesByName (string fieldKey, string fieldValue)
+    {
+      return this;
+    }
+
+    protected string itemName;
+    protected string itemTemplate;
+    protected Dictionary<string, string> fieldsRawValuesByName;
   }
 }
 

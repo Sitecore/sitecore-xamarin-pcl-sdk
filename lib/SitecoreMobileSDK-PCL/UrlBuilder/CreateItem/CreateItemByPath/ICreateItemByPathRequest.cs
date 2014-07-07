@@ -1,15 +1,13 @@
 ﻿
-namespace Sitecore.MobileSDK.UrlBuilder.CreateItemByPath
+namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 
-  public interface ICreateItemByPathRequest : IReadItemsByPathRequest
+  public interface ICreateItemByPathRequest : IBaseCreateItemRequest
   {
-    string ItemName{ get; }
-    string ItemTemplate{ get; }
-    Dictionary<string, string> FieldsRawValuesByName{ get; }
+    string ItemPath { get; }
   }
 }
 

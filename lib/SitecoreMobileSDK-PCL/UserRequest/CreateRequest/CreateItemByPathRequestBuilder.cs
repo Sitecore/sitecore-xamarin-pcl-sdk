@@ -1,12 +1,22 @@
 ﻿using System;
 
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
-  public class CreateItemByPathRequestBuilder
+  public class CreateItemByPathRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByIdRequest>
   {
-    public CreateItemByPathRequestBuilder ()
+    public CreateItemByPathRequestBuilder (string itemId)
     {
+      ItemIdValidator.ValidateItemId(itemId);
+
+      this.itemId = itemId;
     }
+
+    public override ICreateItemByIdRequest Build()
+    {
+      return null;
+    }
+
+    private readonly string itemId;
   }
 }
 
