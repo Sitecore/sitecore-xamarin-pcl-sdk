@@ -150,6 +150,7 @@
     <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs">
       <DependentUpon>BaseTaskTableViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PayloadSelectorViewHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />

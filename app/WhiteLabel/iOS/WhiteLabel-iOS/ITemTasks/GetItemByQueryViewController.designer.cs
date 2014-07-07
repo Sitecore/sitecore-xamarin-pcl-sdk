@@ -26,14 +26,14 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (nameLabel != null) {
-				nameLabel.Dispose ();
-				nameLabel = null;
-			}
-
 			if (getItemButton != null) {
 				getItemButton.Dispose ();
 				getItemButton = null;
+			}
+
+			if (nameLabel != null) {
+				nameLabel.Dispose ();
+				nameLabel = null;
 			}
 
 			if (queryTextField != null) {

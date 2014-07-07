@@ -27,6 +27,9 @@ namespace WhiteLabeliOS
 		[Outlet]
 		MonoTouch.UIKit.UITextField itemIdTextField { get; set; }
 
+		[Outlet]
+		MonoTouch.UIKit.UISegmentedControl PayloadSelectionView { get; set; }
+
 		[Action ("OnGetItemButtonTouched:")]
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
 
@@ -48,9 +51,9 @@ namespace WhiteLabeliOS
 				FieldsTableView = null;
 			}
 
-			if (itemIdTextField != null) {
-				itemIdTextField.Dispose ();
-				itemIdTextField = null;
+			if (getChildrenButton != null) {
+				getChildrenButton.Dispose ();
+				getChildrenButton = null;
 			}
 
 			if (getItemButton != null) {
@@ -58,9 +61,14 @@ namespace WhiteLabeliOS
 				getItemButton = null;
 			}
 
-			if (getChildrenButton != null) {
-				getChildrenButton.Dispose ();
-				getChildrenButton = null;
+			if (itemIdTextField != null) {
+				itemIdTextField.Dispose ();
+				itemIdTextField = null;
+			}
+
+			if (PayloadSelectionView != null) {
+				PayloadSelectionView.Dispose ();
+				PayloadSelectionView = null;
 			}
 		}
 	}
