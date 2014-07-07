@@ -289,7 +289,7 @@
     [Test]
     public async void TestGetMediaWithPdfExtension()
     {
-      const string MediaPath = "/sitecore/media library/Files/pdf example.pdf";
+      const string MediaPath = "/sitecore/media library/Images/Files/pdf example.pdf";
       const string Db = "master";
       var options = new MediaOptionsBuilder()
          .Build();
@@ -309,7 +309,7 @@
     [Test]
     public async void TestGetMediaItemWithMp4Extension()
     {
-      const string MediaPath = "/sitecore/media library/Files/Video_01.mp4";
+      const string MediaPath = "/sitecore/media library/Images/Files/Video_01.mp4";
       const string Db = "master";
 
       var options = new MediaOptionsBuilder()
@@ -364,7 +364,7 @@
         .SetWidth(50)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/files/では/flowers")
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/Images/files/では/flowers")
         .DownloadOptions(options)
         .Database("master")
         .Build();
