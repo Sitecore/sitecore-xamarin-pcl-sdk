@@ -17,6 +17,7 @@
 "Error" = "*******";
 "Message" = "********";
 "OK" = "***";
+"Items List" = "********";
 
 
 "PAYLOAD_BUTTON_MIN"     = "Min";
@@ -48,6 +49,8 @@
 "Incorect width or height value" = "****** * * * ** * *****";
 "Type query" = "*************";
 "Type Media Path" = "*** * ** *****";
+"Item has no children" = "*** ** * ******";
+"children count is" = "********* *****";
 
 //settings screen placeholders
 "Instance Url" = "***********";

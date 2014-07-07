@@ -12,6 +12,15 @@ namespace WhiteLabeliOS
 	[Register ("GetItemByIdViewController")]
 	partial class GetItemByIdViewController
 	{
+    [Outlet]
+    MonoTouch.UIKit.UIButton parentScopeButton { get; set; }
+
+    [Outlet]
+    MonoTouch.UIKit.UIButton selfScopeButton { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UIButton childrenScopeButton { get; set; }
+
 		[Outlet]
 		MonoTouch.UIKit.UITextField fieldNameTextField { get; set; }
 
@@ -30,11 +39,11 @@ namespace WhiteLabeliOS
 		[Outlet]
 		MonoTouch.UIKit.UISegmentedControl PayloadSelectionView { get; set; }
 
+		[Action ("OnButtonChangeState:")]
+		partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender);
+
 		[Action ("OnGetItemButtonTouched:")]
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
-
-		[Action ("OnGetItemCheldrenButtonTouched:")]
-		partial void OnGetItemCheldrenButtonTouched (MonoTouch.Foundation.NSObject sender);
 
 		[Action ("OnPayloadValueChanged:")]
 		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender);
@@ -66,10 +75,27 @@ namespace WhiteLabeliOS
 				itemIdTextField = null;
 			}
 
-			if (PayloadSelectionView != null) {
-				PayloadSelectionView.Dispose ();
-				PayloadSelectionView = null;
+      if (PayloadSelectionView != null)
+      {
+        PayloadSelectionView.Dispose ();
+        PayloadSelectionView = null;
+      }
+
+      if (parentScopeButton != null) {
+				parentScopeButton.Dispose ();
+				parentScopeButton = null;
 			}
-		}
-	}
+
+			if (selfScopeButton != null) {
+				selfScopeButton.Dispose ();
+				selfScopeButton = null;
+			}
+
+			if (childrenScopeButton != null) {
+				childrenScopeButton.Dispose ();
+				childrenScopeButton = null;
+			}
+
+	  }
+  }
 }

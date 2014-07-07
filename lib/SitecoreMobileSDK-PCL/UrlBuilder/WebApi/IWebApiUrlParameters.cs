@@ -18,6 +18,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.WebApi
 
         #region query parameters
         string PayloadParameterName { get; }
+        string ScopeParameterName { get; }
         string FieldsListParameterName { get; }
         #endregion query parameters
 
