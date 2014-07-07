@@ -37,7 +37,7 @@
     }
 
     [Test]
-    public async void TestGetItemWithNotExistedLanguage()
+    public async void TestGetItemWithNotExistentLanguage()
     {
       const string Db = "web";
       const string Language = "da";
@@ -55,7 +55,7 @@
     [Test]
     public async void TestGetItemWithNullLanguage()
     {
-      var itemSource = new ItemSource("master", null, "\t1");
+      var itemSource = new ItemSource("master", null, "1");
       var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       var session = new ScApiSession(config, itemSource);
 
@@ -83,7 +83,7 @@
     }
 
     [Test]
-    public async void TestGetItemWithMasterDbLanguageAndVersion()
+    public async void TestGetItemWithMasterDb()
     {
       const string Db = "master";
       var session = this.CreateAdminSession();

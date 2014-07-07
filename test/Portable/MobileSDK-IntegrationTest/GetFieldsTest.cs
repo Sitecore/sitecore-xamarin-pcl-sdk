@@ -100,15 +100,15 @@
     [Test]
     public async void TestGetHtmlField()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Content).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields(new Collection<string>{"Text"}).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
       ISitecoreItem item = response.Items[0];
 
-      Assert.AreEqual(2, item.Fields.Count);
-      Assert.AreEqual("Text", item.Fields[1].Name);
+      Assert.AreEqual(1, item.Fields.Count);
+      Assert.AreEqual("Text", item.Fields[0].Name);
       Assert.True(item.Fields[1].RawValue.Contains("<div>Welcome to Sitecore!</div>"));
     }
 
@@ -133,7 +133,7 @@
     }
 
     [Test]
-    public async void TestGetNotExistedFields()
+    public async void TestGetNotExistedField()
     {
       var fields = new Collection<string>
       {
@@ -159,7 +159,7 @@
       {
         "Title"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Language("en").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -193,7 +193,7 @@
     {
       var fields = new Collection<string>
       {
-        "!@#$%^&*()_+*/"
+        ".!@#$%^&*()_+*/"
       };
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Language("da").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);

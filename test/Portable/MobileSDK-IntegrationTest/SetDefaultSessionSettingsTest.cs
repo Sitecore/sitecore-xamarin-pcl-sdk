@@ -217,7 +217,7 @@
     }
 
     [Test]
-    public async void TestItemByQueryWithSpecifiedFieldCorrectValue()
+    public async void TestGetItemByQueryWithCorrectField()
     {
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore//*[@Title='English version 2 web']");
       var request = requestBuilder.Payload(PayloadType.Content).Build();
@@ -231,7 +231,7 @@
     }
 
     [Test]
-    public async void TestItemByQueryWithSpecifiedFieldNotCorrectValue()
+    public async void TestGetItemByQueryWithNotCorrectField()
     {
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content//*[@Title='DANISH version 2 web']");
       var request = requestBuilder.Language("da").Database("master").Build();
