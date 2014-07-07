@@ -30,7 +30,7 @@
 "Please type query" = "Sitecore query cannot be empty";
 
 "Item received" = "Item received";
-"Item is not exist" = "Item is not exist";
+"Item is not exist" = "Item does not exist";
 "item title is" = "item title is";
 "items count is" = "items count is";
 "Field Raw Value" = "Field Raw Value";
