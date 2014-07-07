@@ -1,24 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">WhiteLabel-Android</string>
-	<string name="text_settings">Settings</string>
+  <string name="app_name">WhiteLabel</string>
 
-	<string name="key_instance_url">instance_url</string>
-	<string name="key_login">login</string>
-	<string name="key_password">pass</string>
-	<string name="key_site">site</string>
-	<string name="key_database">database</string>
+  <string name="menu_text_settings">Settings</string>
 
-	<string name="text_default_instance_url">http://mobiledev1ua1.dk.sitecore.net:722</string>
-	<string name="text_default_login">extranet\\creatorex</string>
-	<string name="text_default_password">creatorex</string>
-	<string name="text_default_site"></string>
-	<string name="text_default_database">web</string>
+  <string name="key_instance_url">instance_url</string>
+  <string name="key_login">login</string>
+  <string name="key_password">pass</string>
+  <string name="key_site">site</string>
+  <string name="key_database">database</string>
 
-	<string name="text_get_item_by_id"><![CDATA[Item by ID & item children]]></string>
-	<string name="text_get_item_by_path">Item by Path</string>
-	<string name="text_get_item_by_query">Item by Query</string>
+  <string name="text_default_instance_url">http://mobiledev1ua1.dk.sitecore.net:722</string>
+  <string name="text_default_login">extranet\\creatorex</string>
+  <string name="text_default_password">creatorex</string>
+  <string name="text_default_site"></string>
+  <string name="text_default_database">web</string>
 
-	<string name="text_item_received">Item received</string>
+  <string name="text_get_item_by_id"><![CDATA[Item by ID & item children]]></string>
+  <string name="text_get_item_by_path">Item by Path</string>
+  <string name="text_get_item_by_query">Item by Query</string>
+  <string name="text_download_image">Download Image</string>
+  <string name="text_settings_screen">SettingsActivity</string>
 
+  <string name="text_width">Width</string>
+  <string name="text_height">Height</string>
+  <string name="text_payload_title">Payload</string>
+  <string name="text_payload_min">Min</string>
+  <string name="text_payload_content">Content</string>
+  <string name="text_payload_full">Full</string>
+  <string name="text_query_label">Type Sitecore Query:</string>
+  <string name="text_path_label">Type Item Path:</string>
+  <string name="text_id_label">Type Item Id:</string>
+
+  <string name="hint_query">Query</string>
+  <string name="hint_item_path">Item Path</string>
+  <string name="hint_item_id">Item Id</string>
+  <string name="hint_instance_url">Instance URL</string>
+  <string name="hint_login">Login</string>
+  <string name="hint_password">Password</string>
+  <string name="hint_site">Site</string>
+  <string name="hint_database">Database</string>
+
+  <string name="text_item_received">Item received</string>
+  <string name="text_error">Error</string>
+  <string name="text_empty_query">Query cannot be empty</string>
+  <string name="text_empty_path">Item path cannot be empty</string>
+  <string name="text_empty_id">Item Id cannot be empty</string>
+  <string name="text_no_item">Item doesn\'t exist</string>
+  <string name="text_num_of_items_received">items count is \"%1$s\"</string>
+  <string name="text_instance_saved">Saved instance</string>
+
+  <string name="text_button_download">Download</string>
+  <string name="text_button_use">Use</string>
+  <string name="text_button_get_item">Get Item</string>
+  <string name="text_button_get_item_children">Get Item Children</string>
+  <string name="text_button_ok">OK</string>
 </resources>

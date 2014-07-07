@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Sitecore.MobileSDK.dll</id>
+    <id>Sitecore.MobileSDK.PCL</id>
     <version>1.0.0</version>
     <authors>Sitecore Mobile Team</authors>
     <owners>Sitecore Corporation</owners>
