@@ -9,6 +9,8 @@
 "getMediaItem" = "**********";
 "Master" = "*********";
 
+"MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
+
 //titles
 "Alert" = "*******";
 "Error" = "*******";
