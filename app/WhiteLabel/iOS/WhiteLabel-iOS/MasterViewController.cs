@@ -29,6 +29,8 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 
+      this.Title = NSBundle.MainBundle.LocalizedString("MASTER_VIEW_CONTROLLER_TITLE", null);
+
 			this.settings = new InstanceSettings();
 			this.InitFeaturesList ();
 

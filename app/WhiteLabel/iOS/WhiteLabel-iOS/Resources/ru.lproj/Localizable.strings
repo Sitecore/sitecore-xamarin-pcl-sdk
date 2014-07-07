@@ -9,11 +9,25 @@
 "getMediaItem" = "**********";
 "Master" = "*********";
 
+"MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
+
+
 //titles
 "Alert" = "*******";
 "Error" = "*******";
 "Message" = "********";
 "OK" = "***";
+
+
+"PAYLOAD_BUTTON_MIN"     = "Min";
+"PAYLOAD_BUTTON_CONTENT" = "Content";
+"PAYLOAD_BUTTON_FULL"    = "Full";
+
+
+"SCOPE_BUTTON_SELF"   = "Self";
+"SCOPE_BUTTON_PARENT" = "Parent";
+"SCOPE_BUTTON_CHILD"  = "Child";
+
 
 //messages
 "Loading Data" = "************...";
