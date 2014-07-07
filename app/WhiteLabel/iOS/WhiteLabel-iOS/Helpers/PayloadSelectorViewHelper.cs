@@ -24,11 +24,26 @@ namespace WhiteLabeliOS
         throw new Exception("[PAYLOAD] Unexpected segments count");
       }
 
-      payloadSelectionView.SetTitle("Min", PayloadSelectorViewHelper.PAYLOAD_MIN_BUTTON_INDEX);
-      payloadSelectionView.SetTitle("Content", PayloadSelectorViewHelper.PAYLOAD_CONTENT_BUTTON_INDEX);
-      payloadSelectionView.SetTitle("Full", PayloadSelectorViewHelper.PAYLOAD_FULL_BUTTON_INDEX);
+      payloadSelectionView.SetTitle(PayloadSelectorViewHelper.MinPayloadButtonName(), PayloadSelectorViewHelper.PAYLOAD_MIN_BUTTON_INDEX);
+      payloadSelectionView.SetTitle(PayloadSelectorViewHelper.ContentPayloadButtonName(), PayloadSelectorViewHelper.PAYLOAD_CONTENT_BUTTON_INDEX);
+      payloadSelectionView.SetTitle(PayloadSelectorViewHelper.FullPayloadButtonName(), PayloadSelectorViewHelper.PAYLOAD_FULL_BUTTON_INDEX);
 
       payloadSelectionView.SelectedSegment = PayloadSelectorViewHelper.DEFAULT_PAYLOAD_BUTTON_INDEX;
+    }
+
+    public static string MinPayloadButtonName()
+    {
+      return "Min";
+    }
+
+    public static string ContentPayloadButtonName()
+    {
+      return "Content";
+    }
+
+    public static string FullPayloadButtonName()
+    {
+      return "Full";
     }
   }
 }
