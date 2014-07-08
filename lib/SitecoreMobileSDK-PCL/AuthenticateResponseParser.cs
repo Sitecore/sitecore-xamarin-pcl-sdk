@@ -1,4 +1,4 @@
-﻿namespace UnitTest_Desktop_NUnitLite
+﻿namespace Sitecore.MobileSDK
 {
   using System;
   using System.Threading;
