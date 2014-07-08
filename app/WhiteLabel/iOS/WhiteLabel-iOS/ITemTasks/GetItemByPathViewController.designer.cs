@@ -13,6 +13,9 @@ namespace WhiteLabeliOS
 	partial class GetItemByPathViewController
 	{
 		[Outlet]
+		MonoTouch.UIKit.UIButton childrenScopeButton { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UITextField fieldNameTextField { get; set; }
 
 		[Outlet]
@@ -27,6 +30,15 @@ namespace WhiteLabeliOS
 		[Outlet]
 		MonoTouch.UIKit.UISegmentedControl PayloadSelectionView { get; set; }
 
+    [Outlet]
+		MonoTouch.UIKit.UIButton parentScopeButton { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UIButton selfScopeButton { get; set; }
+
+		[Action ("OnButtonChangeState:")]
+		partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender);
+
 		[Action ("OnGetItemButtonTouched:")]
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
 
@@ -35,6 +47,22 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+
+			if (parentScopeButton != null) {
+				parentScopeButton.Dispose ();
+				parentScopeButton = null;
+			}
+
+			if (selfScopeButton != null) {
+				selfScopeButton.Dispose ();
+				selfScopeButton = null;
+			}
+
+			if (childrenScopeButton != null) {
+				childrenScopeButton.Dispose ();
+				childrenScopeButton = null;
+			}
+
 			if (fieldNameTextField != null) {
 				fieldNameTextField.Dispose ();
 				fieldNameTextField = null;

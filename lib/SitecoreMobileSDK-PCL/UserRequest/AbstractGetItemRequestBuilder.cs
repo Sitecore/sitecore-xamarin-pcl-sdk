@@ -42,7 +42,24 @@ namespace Sitecore.MobileSDK
 
     public IGetItemRequestParametersBuilder<T> Payload(PayloadType payload)
     {
-      this.queryParameters = new QueryParameters(payload, this.queryParameters.Fields );
+      this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields );
+      return this;
+    }
+
+    public IGetItemRequestParametersBuilder<T> AddScope(ScopeType scope)
+    {
+      ScopeParameters scopeParameters;
+
+      if (null == this.queryParameters.ScopeParameters)
+      {
+        scopeParameters = new ScopeParameters ();
+      }
+      else
+      {
+        scopeParameters = this.queryParameters.ScopeParameters.ShallowCopy ();
+      }
+      scopeParameters.AddScope(scope);
+      this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields );
       return this;
     }
 
@@ -75,7 +92,7 @@ namespace Sitecore.MobileSDK
       currentFields.CopyTo( newFields, 0 );
       fields.CopyTo( newFields, myFieldsCount );
 
-      this.queryParameters = new QueryParameters( this.queryParameters.Payload, newFields );
+      this.queryParameters = new QueryParameters( this.queryParameters.Payload, this.queryParameters.ScopeParameters, newFields );
       return this;
     }
 
@@ -93,7 +110,7 @@ namespace Sitecore.MobileSDK
     public abstract T Build();
 
     protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
-    protected QueryParameters queryParameters = new QueryParameters( null, null );
+    protected QueryParameters queryParameters = new QueryParameters( null, null, null );
   }
 }
 

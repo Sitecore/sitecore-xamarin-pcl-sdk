@@ -3,108 +3,114 @@
 
 namespace WhiteLabeliOS
 {
-  using System;
-  using System.Drawing;
+    using System;
+    using System.Drawing;
 
-  using MonoTouch.Foundation;
-  using MonoTouch.UIKit;
+    using MonoTouch.Foundation;
+    using MonoTouch.UIKit;
 
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Items.Fields;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+    using Sitecore.MobileSDK;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.Items.Fields;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  using WhiteLabeliOS.FieldsTableView;
+    using WhiteLabeliOS.FieldsTableView;
 
 
 
-  public partial class GetItemByPathViewController : BaseTaskTableViewController
-  {
+	public partial class GetItemByPathViewController : BaseTaskTableViewController
+	{
 
-    public GetItemByPathViewController(IntPtr handle) : base(handle)
+		public GetItemByPathViewController (IntPtr handle) : base (handle)
+		{
+			Title = NSBundle.MainBundle.LocalizedString("getItemByPath", null);
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+			this.TableView = this.FieldsTableView;
+
+			this.ItemPathField.Text = "/sitecore/content/Home";
+
+            this.ItemPathField.ShouldReturn = this.HideKeyboard;
+
+			this.ItemPathField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item Path", null);
+			this.fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);;
+
+			string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
+			getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
+
+		}
+
+		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
+		{
+            if (String.IsNullOrEmpty(this.ItemPathField.Text))
+			{
+				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item path");
+			}
+			else
+			{
+                this.HideKeyboard(this.ItemPathField);
+                this.HideKeyboard(this.fieldNameTextField);
+
+				this.SendRequest();
+			}
+		}
+
+		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
+		{
+			switch (sender.SelectedSegment)
+			{
+			case 0:
+				this.currentPayloadType = PayloadType.Full;
+				break;
+			case 1:
+				this.currentPayloadType = PayloadType.Content;
+				break;
+			case 2:
+				this.currentPayloadType = PayloadType.Min;
+				break;
+			}
+		}
+
+    partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender)
     {
-      Title = NSBundle.MainBundle.LocalizedString("getItemByPath", null);
+      sender.Selected = !sender.Selected;
     }
 
-    public override void ViewDidLoad ()
-    {
-      base.ViewDidLoad ();
+		private async void SendRequest ()
+		{
+			try
+			{
+				ScApiSession session = this.instanceSettings.GetSession();
 
-      PayloadSelectorViewHelper.ConfigureSegmentedControllerForPayload(this.PayloadSelectionView);
-      this.TableView = this.FieldsTableView;
-
-      this.ItemPathField.Text = "/sitecore/content/Home";
-
-      this.ItemPathField.ShouldReturn = this.HideKeyboard;
-
-      this.ItemPathField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item Path", null);
-      this.fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);;
-
-      string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
-      getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
-
-    }
-
-    partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
-    {
-      if (String.IsNullOrEmpty(this.ItemPathField.Text))
-      {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item path");
-      }
-      else
-      {
-        this.HideKeyboard(this.ItemPathField);
-        this.HideKeyboard(this.fieldNameTextField);
-
-        this.SendRequest();
-      }
-    }
-
-    partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
-    {
-      switch (sender.SelectedSegment)
-      {
-        case PayloadSelectorViewHelper.PAYLOAD_FULL_BUTTON_INDEX:
-        {
-          this.currentPayloadType = PayloadType.Full;
-          break;
-        }
-        case PayloadSelectorViewHelper.PAYLOAD_CONTENT_BUTTON_INDEX:
-        {
-          this.currentPayloadType = PayloadType.Content;
-          break;
-        }
-        case PayloadSelectorViewHelper.PAYLOAD_MIN_BUTTON_INDEX:
-        {
-          this.currentPayloadType = PayloadType.Min;
-          break;
-        }
-      }
-    }
-
-    private async void SendRequest()
-    {
-      try
-      {
-        ScApiSession session = this.instanceSettings.GetSession();
-
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
           .Payload(this.currentPayloadType)
-          .AddFields(this.fieldNameTextField.Text)
-          .Build();
+          .AddFields(this.fieldNameTextField.Text);
 
-        this.ShowLoader();
+        if (this.parentScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Parent);
+        }
+        if (this.selfScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Self);
+        }
+        if (this.childrenScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Children);
+        }
 
-        ScItemsResponse response = await session.ReadItemAsync(request);
+        var request = builder.Build();
 
+				this.ShowLoader();
 
+				ScItemsResponse response = await session.ReadItemAsync(request);
+				
         if (response.Items.Any())
         {
-          ISitecoreItem item = response.Items [0];
-          this.ShowFieldsForItem(item);
-
-          string message = NSBundle.MainBundle.LocalizedString("item title is", null);
-          AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
+          this.ShowItemsList(response.Items);
         }
         else
         {
@@ -127,5 +133,6 @@ namespace WhiteLabeliOS
     }
 
   }
+
 }
 

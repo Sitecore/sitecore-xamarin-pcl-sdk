@@ -16,6 +16,9 @@ namespace WhiteLabeliOS
 		MonoTouch.UIKit.UIButton getItemButton { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UITableView ItemsTableView { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UILabel nameLabel { get; set; }
 
 		[Outlet]
@@ -26,6 +29,12 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+
+			if (ItemsTableView != null) {
+				ItemsTableView.Dispose ();
+				ItemsTableView = null;
+			}
+
 			if (getItemButton != null) {
 				getItemButton.Dispose ();
 				getItemButton = null;

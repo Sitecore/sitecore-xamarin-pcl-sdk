@@ -1,4 +1,5 @@
 ﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+using MonoTouch.Foundation;
 
 namespace WhiteLabeliOS
 {
@@ -24,11 +25,26 @@ namespace WhiteLabeliOS
         throw new Exception("[PAYLOAD] Unexpected segments count");
       }
 
-      payloadSelectionView.SetTitle("Min", PayloadSelectorViewHelper.PAYLOAD_MIN_BUTTON_INDEX);
-      payloadSelectionView.SetTitle("Content", PayloadSelectorViewHelper.PAYLOAD_CONTENT_BUTTON_INDEX);
-      payloadSelectionView.SetTitle("Full", PayloadSelectorViewHelper.PAYLOAD_FULL_BUTTON_INDEX);
+      payloadSelectionView.SetTitle(PayloadSelectorViewHelper.MinPayloadButtonName(), PayloadSelectorViewHelper.PAYLOAD_MIN_BUTTON_INDEX);
+      payloadSelectionView.SetTitle(PayloadSelectorViewHelper.ContentPayloadButtonName(), PayloadSelectorViewHelper.PAYLOAD_CONTENT_BUTTON_INDEX);
+      payloadSelectionView.SetTitle(PayloadSelectorViewHelper.FullPayloadButtonName(), PayloadSelectorViewHelper.PAYLOAD_FULL_BUTTON_INDEX);
 
       payloadSelectionView.SelectedSegment = PayloadSelectorViewHelper.DEFAULT_PAYLOAD_BUTTON_INDEX;
+    }
+
+    public static string MinPayloadButtonName()
+    {
+      return NSBundle.MainBundle.LocalizedString("PAYLOAD_BUTTON_MIN", null);
+    }
+
+    public static string ContentPayloadButtonName()
+    {
+      return NSBundle.MainBundle.LocalizedString("PAYLOAD_BUTTON_CONTENT", null);
+    }
+
+    public static string FullPayloadButtonName()
+    {
+      return NSBundle.MainBundle.LocalizedString("PAYLOAD_BUTTON_FULL", null);
     }
   }
 }

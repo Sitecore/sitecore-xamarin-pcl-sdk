@@ -37,7 +37,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableSession.Site = null;
       this.sessionConfig = mutableSession;
 
-      this.payload = new QueryParameters( PayloadType.Full, null );
+      this.payload = new QueryParameters( PayloadType.Full, null, null );
     }
 
     [TearDown]
@@ -55,7 +55,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableParameters.ItemSource = ItemSource.DefaultSource ();
       mutableParameters.SitecoreQuery = "/Sitecore/Content/*";
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.QueryParameters = new QueryParameters(null, null);
+      mutableParameters.QueryParameters = new QueryParameters(null, null, null);
 
       IReadItemsByQueryRequest request = mutableParameters;
 

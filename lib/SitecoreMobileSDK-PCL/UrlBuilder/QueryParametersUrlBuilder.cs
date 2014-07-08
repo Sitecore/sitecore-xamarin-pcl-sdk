@@ -31,6 +31,17 @@ namespace Sitecore.MobileSDK.UrlBuilder
       string payloadStatement = this.PayloadTypeToRestArgumentStatement( queryParameters.Payload );
       result = payloadStatement.ToLowerInvariant();
 
+      string scopeString = string.Empty;
+      scopeString = this.ScopeToRestArgumentStatement(queryParameters.ScopeParameters);
+
+      if (!string.IsNullOrEmpty(scopeString))
+      {
+        if (!string.IsNullOrEmpty(result))
+        {
+          result += this.restGrammar.FieldSeparator;
+        }
+        result += scopeString.ToLowerInvariant();
+      }
 
       bool isCollectionValid = ( null != queryParameters.Fields );
       if ( !isCollectionValid )
@@ -49,7 +60,11 @@ namespace Sitecore.MobileSDK.UrlBuilder
       string fieldsStatement = this.GetFieldsStatementFromCollection( queryParameters.Fields );
       if ( null != fieldsStatement )
       {
-        result += this.restGrammar.FieldSeparator + fieldsStatement;
+        if (!string.IsNullOrEmpty(result))
+        {
+          result += this.restGrammar.FieldSeparator;
+        }
+        result += fieldsStatement;
       }
 
       return result.ToLowerInvariant();
@@ -104,6 +119,42 @@ namespace Sitecore.MobileSDK.UrlBuilder
       enumNamesMap.Add( PayloadType.Min    , "min"     );
 
       string result = enumNamesMap[payload];
+      return result;
+    }
+
+    private string ScopeToRestArgumentStatement(ScopeParameters scopeParameters)
+    {
+      if (null == scopeParameters)
+      {
+        return string.Empty;
+      }
+
+      string scopeString = string.Empty;
+
+      if (scopeParameters.ParentScopeIsSet)
+      {
+        scopeString += this.restGrammar.ItemFieldSeparator + "p";
+      }
+
+      if (scopeParameters.SelfScopeIsSet)
+      {
+        scopeString += this.restGrammar.ItemFieldSeparator + "s";
+      }
+
+      if (scopeParameters.ChildrenScopeIsSet)
+      {
+        scopeString += this.restGrammar.ItemFieldSeparator + "c";
+      }
+
+      if (string.IsNullOrEmpty(scopeString))
+      {
+        return string.Empty;
+      }
+
+      scopeString = scopeString.Substring(1);
+
+      string result = this.webApiGrammar.ScopeParameterName + this.restGrammar.KeyValuePairSeparator + scopeString;
+
       return result;
     }
 
