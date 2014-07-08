@@ -32,7 +32,8 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AuthenticateResponseParser.cs" />
+    <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
+    <Compile Include="Authenticate\AuthenticateTask.cs" />
     <Compile Include="Items\IItemSource.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\SitecoreQueryValidator.cs" />
     <Compile Include="Exceptions\SitecoreMobileSdkException.cs" />
-    <Compile Include="Exceptions\WebApiJsonError.cs" />
+    <Compile Include="Exceptions\WebApiJsonStatusMessage.cs" />
     <Compile Include="Exceptions\WebApiJsonErrorException.cs" />
     <Compile Include="Exceptions\RsaHandshakeException.cs" />
     <Compile Include="Exceptions\LoadDataFromNetworkException.cs" />

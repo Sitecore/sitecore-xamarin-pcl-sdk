@@ -33,7 +33,7 @@ namespace Sitecore.MobileSDK
 
       if (!isSuccessfulCode)
       {
-        var error = new WebApiJsonError(statusCode, ParseOrFail<string>(response, "$.error.message"));
+        var error = new WebApiJsonStatusMessage(statusCode, ParseOrFail<string>(response, "$.error.message"));
         throw new WebApiJsonErrorException(error);
       }
 

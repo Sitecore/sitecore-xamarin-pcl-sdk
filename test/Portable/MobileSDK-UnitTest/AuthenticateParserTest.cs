@@ -4,7 +4,8 @@
   using System;
   using System.Threading;
   using System.Threading.Tasks;
-  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Authenticate;
+  using Sitecore.MobileSDK.Exceptions;
 
   [TestFixture()]
   public class AuthenticateResponseParserTest
@@ -29,26 +30,26 @@
     public void TestParseCorrectData()
     {
       var response = "{\"statusCode\":200,\"result\":{}}";
-      Boolean isValid = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
+      WebApiJsonStatusMessage message = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
 
-      Assert.True(isValid);
+      Assert.AreEqual(200, message.StatusCode);
     }
 
     public void TestParseBrokenData()
     {
       var response = "{}";
-			Boolean isValid = AuthenticateResponseParser.ParseResponse (response, CancellationToken.None);
-
-			Assert.False (isValid);
-		}
+      TestDelegate action = () => AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
+      Assert.Throws<ArgumentNullException>(action, "cannot parse null response");
+    }
 
     [Test]
     public void TestParseDeniedResponseData()
     {
       var response = "{\"statusCode\":401,\"error\":{\"message\":\"Access to site is not granted.\"}}";
-      Boolean isValid = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
+      WebApiJsonStatusMessage message = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
 
-      Assert.False(isValid);
+      Assert.AreEqual(401, message.StatusCode);
+      Assert.AreEqual("Access to site is not granted.", message.Message);
     }
 
     [Test]
@@ -58,7 +59,7 @@
       {
         var cancel = new CancellationTokenSource();
 
-        Task<Boolean> action = Task.Factory.StartNew(() =>
+        Task<WebApiJsonStatusMessage> action = Task.Factory.StartNew(() =>
         {
           var millisecondTimeout = 10;
           Thread.Sleep(millisecondTimeout);
