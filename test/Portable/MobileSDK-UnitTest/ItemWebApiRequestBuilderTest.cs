@@ -1,9 +1,8 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-
+﻿
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
+  using System.Collections.Generic;
   using NUnit.Framework;
 
 
@@ -11,6 +10,8 @@ namespace Sitecore.MobileSdkUnitTest
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
 
 
   [TestFixture]
@@ -316,6 +317,55 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNull(result.ItemSource.Version);
       Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
+    }
+
+
+    [Test]
+    public void TestDuplicatedFieldsCauseException()
+    {
+      Assert.Throws<ArgumentException>(() => 
+      ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("XXXXX")
+        .AddFields("YYY")
+        .AddFields("XXXXX")
+        .Build());
+    }
+
+    [Test]
+    public void TestCaseInsensitiveDuplicatedFieldsCauseException()
+    {
+      Assert.Throws<ArgumentException>(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("XXXXX")
+        .AddFields("YYY")
+        .AddFields("xxXXx")
+        .Build());
+    }
+
+
+    [Test]
+    public void TestEmptyFieldsAreIgnored()
+    {
+      Assert.DoesNotThrow(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("")
+        .Build());
+    }
+
+    [Test]
+    public void TestNullFieldsAreIgnored()
+    {
+      Assert.DoesNotThrow(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields((string)null)
+        .Build());
+
+
+      Assert.DoesNotThrow(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields((ICollection<string>)null)
+        .Build());
+
     }
     #endregion Fields
   }

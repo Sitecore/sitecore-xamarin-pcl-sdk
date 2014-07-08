@@ -1,4 +1,7 @@
-﻿
+﻿using System;
+using Sitecore.MobileSDK.Validators;
+
+
 namespace Sitecore.MobileSDK
 {
   using System.Collections.Generic;
@@ -91,6 +94,11 @@ namespace Sitecore.MobileSDK
 
       currentFields.CopyTo( newFields, 0 );
       fields.CopyTo( newFields, myFieldsCount );
+
+      if (DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields))
+      {
+        throw new ArgumentException("RequestBuilder : duplicate fields are not allowed");
+      }
 
       this.queryParameters = new QueryParameters( this.queryParameters.Payload, this.queryParameters.ScopeParameters, newFields );
       return this;
