@@ -1,6 +1,7 @@
 ﻿using Sitecore.MobileSDK.UrlBuilder;
 using Sitecore.MobileSDK.SessionSettings;
 using Sitecore.MobileSDK.Items;
+using System.Collections.Generic;
 
 
 namespace Sitecore.MobileSDK
@@ -116,6 +117,32 @@ namespace Sitecore.MobileSDK
       else if ( null == request.SessionSettings.ItemWebApiVersion )
       {
         throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null" );
+      }
+
+      if (null != request.QueryParameters)
+      {
+        this.ValidateFields(request.QueryParameters.Fields);
+      }
+    }
+
+    private void ValidateFields(ICollection<string> fields)
+    {
+      if (null == fields)
+      {
+        return;
+      }
+
+      var uniqueFields = new HashSet<string>();
+      foreach (string singleField in fields)
+      {
+        string lowercaseSingleField = singleField.ToLowerInvariant();
+
+        if (uniqueFields.Contains(lowercaseSingleField))
+        {
+          throw new ArgumentException("AbstractGetItemUrlBuilder.GetUrlForRequest() : request.QueryParameters.Fields must contain NO duplicates");
+        }
+
+        uniqueFields.Add(lowercaseSingleField);
       }
     }
 
