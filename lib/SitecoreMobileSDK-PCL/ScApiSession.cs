@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
-
+  using Sitecore.MobileSDK.Authenticate;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.CrudTasks;
@@ -163,6 +163,18 @@ namespace Sitecore.MobileSDK
     #endregion GetItems
 
     #region Authentication
+
+    public async Task<bool> AuthenticateAsync(CancellationToken cancelToken = default(CancellationToken))
+    {
+      var sessionUrlBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+      var cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+
+      var taskFlow = new AuthenticateTask(sessionUrlBuilder, this.httpClient, cryptor);
+
+      WebApiJsonStatusMessage result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
+
+      return result.StatusCode == 200;
+    }
 
     #endregion Authentication
 
