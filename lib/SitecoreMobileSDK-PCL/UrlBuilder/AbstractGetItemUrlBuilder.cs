@@ -12,6 +12,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.Validators;
 
 
   public abstract class AbstractGetItemUrlBuilder<TRequest>
@@ -128,24 +129,11 @@ namespace Sitecore.MobileSDK
       }
     }
 
-    private void ValidateFields(ICollection<string> fields)
+    private void ValidateFields(IEnumerable<string> fields)
     {
-      if (null == fields)
+      if (DuplicateEntryValidator.IsDuplicatedFieldsInTheList(fields))
       {
-        return;
-      }
-
-      var uniqueFields = new HashSet<string>();
-      foreach (string singleField in fields)
-      {
-        string lowercaseSingleField = singleField.ToLowerInvariant();
-
-        if (uniqueFields.Contains(lowercaseSingleField))
-        {
-          throw new ArgumentException("AbstractGetItemUrlBuilder.GetUrlForRequest() : request.QueryParameters.Fields must contain NO duplicates");
-        }
-
-        uniqueFields.Add(lowercaseSingleField);
+        throw new ArgumentException("AbstractGetItemUrlBuilder.GetUrlForRequest() : request.QueryParameters.Fields must contain NO duplicates");
       }
     }
 
