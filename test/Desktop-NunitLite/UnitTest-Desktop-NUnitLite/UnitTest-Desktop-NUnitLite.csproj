@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\AuthenticateParserTest.cs">
+      <Link>AuthenticateParserTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\FieldsParserTest.cs">
       <Link>FieldsParserTest.cs</Link>
     </Compile>
@@ -95,7 +98,7 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\SessionConfigUrlBuilderTest.cs">
       <Link>SessionConfigUrlBuilderTest.cs</Link>
     </Compile>
-	<Compile Include="..\..\Portable\MobileSDK-UnitTest\ResourseUrlBuilderTest.cs">
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ResourseUrlBuilderTest.cs">
       <Link>ResourseUrlBuilderTest.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />

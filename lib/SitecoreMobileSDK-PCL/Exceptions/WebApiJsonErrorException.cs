@@ -4,9 +4,9 @@
 
     public class WebApiJsonErrorException : SitecoreMobileSdkException
 	{
-        public WebApiJsonError Response { get; private set; }
+        public WebApiJsonStatusMessage Response { get; private set; }
 
-        public WebApiJsonErrorException (WebApiJsonError response, Exception inner = null) 
+        public WebApiJsonErrorException (WebApiJsonStatusMessage response, Exception inner = null) 
             : base( response.Message, inner )
 		{
 			this.Response = response;
