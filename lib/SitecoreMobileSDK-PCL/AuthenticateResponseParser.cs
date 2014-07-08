@@ -13,6 +13,8 @@
         throw new ArgumentException("response", "response shouldn't be empty or null");
       }
 
+      token.ThrowIfCancellationRequested();
+
       JObject responseJObject = JObject.Parse(response);
       int statusCode = (int)responseJObject.SelectToken("statusCode");
       

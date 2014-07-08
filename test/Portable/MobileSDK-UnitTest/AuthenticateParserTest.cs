@@ -1,8 +1,6 @@
-﻿using NUnit.Framework;
-
-
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
+  using NUnit.Framework;
   using System;
   using System.Threading;
   using System.Threading.Tasks;
@@ -21,7 +19,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestParseEmptyData()
     {
-      string response = "";
+      var response = "";
       TestDelegate action = () => AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
 
       Assert.Throws<ArgumentException>(action, "cannot parse null response");
@@ -30,7 +28,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestParseCorrectData()
     {
-      string response = "{\"statudddddsCode\":200,\"result\":{}}";
+      var response = "{\"statusCode\":200,\"result\":{}}";
       Boolean isValid = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
 
       Assert.True(isValid);
@@ -38,7 +36,7 @@ namespace Sitecore.MobileSdkUnitTest
 
     public void TestParseBrokenData()
     {
-      string response = "{}";
+      var response = "{}";
 			Boolean isValid = AuthenticateResponseParser.ParseResponse (response, CancellationToken.None);
 
 			Assert.False (isValid);
@@ -47,7 +45,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestParseDeniedResponseData()
     {
-      string response = "{\"statusCode\":401,\"error\":{\"message\":\"Access to site is not granted.\"}}";
+      var response = "{\"statusCode\":401,\"error\":{\"message\":\"Access to site is not granted.\"}}";
       Boolean isValid = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
 
       Assert.False(isValid);
@@ -62,9 +60,10 @@ namespace Sitecore.MobileSdkUnitTest
 
         Task<Boolean> action = Task.Factory.StartNew(() =>
         {
-          int millisecondTimeout = 10;
+          var millisecondTimeout = 10;
           Thread.Sleep(millisecondTimeout);
-          string response = "{\"statusCode\":200,\"result\":{}}";
+
+          var response = "{\"statusCode\":200,\"result\":{}}";
 
           return AuthenticateResponseParser.ParseResponse(response, cancel.Token);
         });
