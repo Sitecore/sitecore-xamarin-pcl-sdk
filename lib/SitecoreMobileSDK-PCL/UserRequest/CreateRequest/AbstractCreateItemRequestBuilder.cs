@@ -4,7 +4,7 @@ namespace Sitecore.MobileSDK
   using System;
   using System.Collections.Generic;
 
-  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractGetItemRequestBuilder<T>
+  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractGetItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T> 
     where T : class
   {
 
@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    public AbstractCreateItemRequestBuilder<T> ItemTemplate (string itemTemplate)
+    public ICreateItemRequestParametersBuilder<T> ItemTemplate (string itemTemplate)
     {
       this.itemTemplate = itemTemplate;
       return this;

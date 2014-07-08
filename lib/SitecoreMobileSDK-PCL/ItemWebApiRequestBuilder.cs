@@ -1,15 +1,17 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+﻿
 
 
 namespace Sitecore.MobileSDK
 {
-    using System;
-    using Sitecore.MobileSDK.UrlBuilder.ItemById;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using System;
+  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
-    public class ItemWebApiRequestBuilder
-    {
+  public class ItemWebApiRequestBuilder
+  {
     private ItemWebApiRequestBuilder()
     {
     }
@@ -33,6 +35,11 @@ namespace Sitecore.MobileSDK
 		{
 			return new ReadMediaItemRequestBuilder(mediaPath);
 		}
+
+    public static ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
+    {
+      return new CreateItemByIdRequestBuilder(itemId);
     }
+  }
 }
 

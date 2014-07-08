@@ -13,7 +13,8 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 
     public override ICreateItemByIdRequest Build()
     {
-      return null;
+      CreateItemByIdParameters result = new CreateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemId);
+      return result;
     }
 
     private readonly string itemId;
