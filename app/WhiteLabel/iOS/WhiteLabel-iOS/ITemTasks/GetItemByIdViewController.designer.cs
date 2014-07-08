@@ -75,8 +75,7 @@ namespace WhiteLabeliOS
 				itemIdTextField = null;
 			}
 
-      if (PayloadSelectionView != null)
-      {
+      if (PayloadSelectionView != null) {
         PayloadSelectionView.Dispose ();
         PayloadSelectionView = null;
       }
