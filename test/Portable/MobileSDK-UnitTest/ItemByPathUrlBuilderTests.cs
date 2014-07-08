@@ -37,7 +37,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableSession.Site = "";
       this.sessionConfig = mutableSession;
 
-      this.payload = new QueryParameters( PayloadType.Content, null );
+      this.payload = new QueryParameters( PayloadType.Content, null, null );
     }
 
     [TearDown]
@@ -55,7 +55,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableParameters.ItemSource = ItemSource.DefaultSource ();
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.QueryParameters = new QueryParameters(null, null);
+      mutableParameters.QueryParameters = new QueryParameters(null, null, null);
 
       IReadItemsByPathRequest request = mutableParameters;
 
@@ -195,7 +195,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
 
-      QueryParameters fieldsList = new QueryParameters(PayloadType.Default, new string[2]{ "x", "y" });
+      QueryParameters fieldsList = new QueryParameters(PayloadType.Default, null, new string[2]{ "x", "y" });
       mutableParameters.QueryParameters = fieldsList;
 
       IReadItemsByPathRequest request = mutableParameters;

@@ -74,50 +74,65 @@ namespace WhiteLabeliOS
 			}
 		}
 
+    partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender)
+    {
+      sender.Selected = !sender.Selected;
+    }
+
 		private async void SendRequest ()
 		{
 			try
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
 
-                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-					.Payload(this.currentPayloadType)
-					.AddFields(this.fieldNameTextField.Text)
-                    .Build();
+        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+          .Payload(this.currentPayloadType)
+          .AddFields(this.fieldNameTextField.Text);
+
+        if (this.parentScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Parent);
+        }
+        if (this.selfScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Self);
+        }
+        if (this.childrenScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Children);
+        }
+
+        var request = builder.Build();
 
 				this.ShowLoader();
 
 				ScItemsResponse response = await session.ReadItemAsync(request);
-
 				
-                if (response.Items.Any())
-				{
-                    ISitecoreItem item = response.Items [0];
-                    this.ShowFieldsForItem(item);
+        if (response.Items.Any())
+        {
+          this.ShowItemsList(response.Items);
+        }
+        else
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+        }
+      }
+      catch(Exception e) 
+      {
+        this.CleanupTableViewBindings();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.FieldsTableView.ReloadData();
+          this.HideLoader();
+        });
+      }
+    }
 
-                    string message = NSBundle.MainBundle.LocalizedString("item title is", null);
-					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
-				}
-				else
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-				}
-			}
-			catch(Exception e) 
-			{
-				this.CleanupTableViewBindings();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-			}
-            finally
-            {
-                BeginInvokeOnMainThread(delegate
-                {
-                    this.FieldsTableView.ReloadData();
-                    this.HideLoader();
-                });
-            }
-		}
-			
-	}
+  }
+
 }
 

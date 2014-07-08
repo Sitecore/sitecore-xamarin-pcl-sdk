@@ -1,7 +1,7 @@
 ﻿//features
 "Settings" = "Settings";
 "getItemByPath" = "Item by Path";
-"getItemById" = "Item by ID & item children";
+"getItemById" = "Item by ID & Scope";
 "deleteItemById" = "Delete Item by ID";
 "createEditItem" = "Create & Edit Item";
 "uploadImageVC" = "Upload Image";
@@ -17,6 +17,7 @@
 "Error" = "Error";
 "Message" = "Message";
 "OK" = "OK";
+"Items List" = "Items List";
 
 
 "PAYLOAD_BUTTON_MIN"     = "Min";
@@ -50,6 +51,8 @@
 "Incorect width or height value" = "Incorect width or height value";
 "Type query" = "Type Sitecore query:";
 "Type Media Path" = "Type Media Path";
+"Item has no children" = "Item has no children";
+"children count is" = "children count is";
 
 //settings screen placeholders
 "Instance Url" = "Instance Url";

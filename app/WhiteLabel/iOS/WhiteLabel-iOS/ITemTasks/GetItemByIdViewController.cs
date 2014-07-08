@@ -4,9 +4,9 @@
 namespace WhiteLabeliOS
 {
 	using System;
-    using System.Linq;
+  using System.Linq;
 
-    using MonoTouch.UIKit;
+  using MonoTouch.UIKit;
 	using MonoTouch.Foundation;
 
 	using Sitecore.MobileSDK;
@@ -37,8 +37,6 @@ namespace WhiteLabeliOS
 			fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);
 			itemIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item ID", null);
 
-			string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item children", null);
-			getChildrenButton.SetTitle (getChildrenButtonTitle, UIControlState.Normal);
 			string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
 			getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
 		}
@@ -51,16 +49,16 @@ namespace WhiteLabeliOS
 			}
 			else
 			{
-                this.HideKeyboard(this.itemIdTextField);
-                this.HideKeyboard(this.fieldNameTextField);
+        this.HideKeyboardForAllFields();
 				this.SendRequest();
 			}
 		}
 
-		partial void OnGetItemCheldrenButtonTouched (MonoTouch.Foundation.NSObject sender)
-		{
-			AlertHelper.ShowLocalizedNotImlementedAlert();
-		}
+    private void HideKeyboardForAllFields()
+    {
+      this.HideKeyboard(this.itemIdTextField);
+      this.HideKeyboard(this.fieldNameTextField);
+    }
 
 		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
 		{
@@ -78,48 +76,62 @@ namespace WhiteLabeliOS
 			}
 		}
 
+    partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender)
+    {
+      sender.Selected = !sender.Selected;
+    }
+
 		private async void SendRequest()
-		{
-			try
-			{
-				ScApiSession session = this.instanceSettings.GetSession();
+    {
+      try
+      {
+        ScApiSession session = this.instanceSettings.GetSession();
 
-                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
-					.Payload(this.currentPayloadType)
-                    .AddFields(this.fieldNameTextField.Text)
-				    .Build();
+        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+          .Payload(this.currentPayloadType)
+          .AddFields(this.fieldNameTextField.Text);
 
-				this.ShowLoader();
+        if (this.parentScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Parent);
+        }
+        if (this.selfScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Self);
+        }
+        if (this.childrenScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Children);
+        }
 
-				ScItemsResponse response = await session.ReadItemAsync(request);
-                if (response.Items.Any())
-				{
-                    ISitecoreItem item = response.Items[0];
-                    this.ShowFieldsForItem( item );
+        var request = builder.Build();
 
-					string message = NSBundle.MainBundle.LocalizedString("item title is", null);
-					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
-				}
-				else
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-				}
-			}
-			catch(Exception e) 
-			{
-                this.CleanupTableViewBindings();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-			}
-            finally
-            {
-                BeginInvokeOnMainThread(delegate
-                {
-                    this.HideLoader();
-                    this.FieldsTableView.ReloadData();
-                });
-            }
-		}
-			
+        this.ShowLoader();
+
+        ScItemsResponse response = await session.ReadItemAsync(request);
+        if (response.Items.Any())
+        {
+          this.ShowItemsList(response.Items);
+        }
+        else
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+        }
+      }
+      catch(Exception e) 
+      {
+        this.CleanupTableViewBindings();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.HideLoader();
+          this.FieldsTableView.ReloadData();
+        });
+      }
+    }
 	}
 }
 
