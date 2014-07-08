@@ -1,12 +1,15 @@
-﻿using Sitecore.MobileSDK.UrlBuilder;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.Items;
-using System.Collections.Generic;
+﻿
 
 
 namespace Sitecore.MobileSDK
 {
   using System;
+  using System.Collections.Generic;
+
+
+  using Sitecore.MobileSDK.UrlBuilder;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
