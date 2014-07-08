@@ -1,4 +1,4 @@
-
+using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
 namespace Sitecore.MobileSDK
 {
@@ -162,6 +162,23 @@ namespace Sitecore.MobileSDK
 
     #endregion GetItems
 
+    public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      //TODO: @igk
+      //ICreateItemByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
+      ICreateItemByIdRequest requestCopy = request;
+
+
+      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+
+      //TODO: @igk
+      //ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (requestCopy);
+      ICreateItemByIdRequest autocompletedRequest = requestCopy;
+
+      var taskFlow = new CreateItemByIdTask(new CreateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
 
     #region Private Variables
 
