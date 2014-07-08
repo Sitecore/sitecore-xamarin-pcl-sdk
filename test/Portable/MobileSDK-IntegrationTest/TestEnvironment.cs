@@ -86,7 +86,7 @@
       public string Password { get; set; }
     }
 
-    public void AssertItemsAreEqual(TestEnvironment.Item expected, ISitecoreItem actual)
+    public void AssertItemsAreEqual(Item expected, ISitecoreItem actual)
     {
       if (null != expected.DisplayName)
       {

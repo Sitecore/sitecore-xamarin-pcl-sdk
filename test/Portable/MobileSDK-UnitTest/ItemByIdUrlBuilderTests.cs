@@ -244,5 +244,76 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.AreEqual(expected, result);
     }
+
+    [Test]
+    public void TestExplicitPayloadTwice()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+        .Payload(PayloadType.Content)
+        .Payload(PayloadType.Full)
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      string result = urlBuilder.GetUrlForRequest(mergedRequest);
+      string expected = "http://localhost/-/item/v1?payload=full&sc_itemid=%7bxxx-yyy-zzz%7d";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestNullDatabase()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+        .Database(null)
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
+      Assert.Throws<ArgumentException>(action);
+    }
+
+    [Test]
+    public void TestEmptyDatabase()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+        .Database("")
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
+      Assert.Throws<ArgumentException>(action);
+    }
+
+    [Test]
+    public void TestDatabaseWithWhiteSpaces()
+    {
+      var anonymous = new SessionConfig("localhost", null, null);
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+        .Database("  ")
+        .Build();
+      var requestMerger = new UserRequestMerger(anonymous, null);
+      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+
+      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
+      Assert.Throws<ArgumentException>(action);
+    }
   }
 }
