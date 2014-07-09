@@ -1,10 +1,11 @@
-﻿using System;
-
+﻿
 namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
-  public interface ICreateItemByIdRequest : IBaseCreateItemRequest
+  using System;
+  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+
+  public interface ICreateItemByIdRequest : IReadItemsByIdRequest, IBaseCreateItemRequest
   {
-    string ItemId { get; }
   }
 }
 
