@@ -7,6 +7,7 @@
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
   public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, Stream, PublicKeyX509Certificate>
@@ -14,14 +15,16 @@
     #region Private Variables
 
     private readonly SessionConfigUrlBuilder sessionConfigBuilder;
+    private readonly IRestServiceGrammar restGrammar;
     private readonly IWebApiUrlParameters webApiGrammar;
     private readonly HttpClient httpClient;
 
     #endregion Private Variables
 
-    public GetPublicKeyTasks(SessionConfigUrlBuilder sessionConfigBuilder, IWebApiUrlParameters webApiGrammar, HttpClient httpClient)
+    public GetPublicKeyTasks(SessionConfigUrlBuilder sessionConfigBuilder, IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar, HttpClient httpClient)
     {
       this.sessionConfigBuilder = sessionConfigBuilder;
+      this.restGrammar = restGrammar;
       this.webApiGrammar = webApiGrammar;
       this.httpClient = httpClient;
     }
@@ -59,7 +62,7 @@
     private string PrepareRequestUrl(ISessionConfig instanceUrl)
     {
       return this.sessionConfigBuilder.BuildUrlString(instanceUrl)
-        + "/"
+        + this.restGrammar.PathComponentSeparator
         + this.webApiGrammar.ItemWebApiActionsEndpoint
         + this.webApiGrammar.ItemWebApiGetPublicKeyAction;
     }

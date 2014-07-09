@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
-    <Compile Include="Authenticate\AuthenticateTask.cs" />
+    <Compile Include="Authenticate\AuthenticateTasks.cs" />
     <Compile Include="Items\IItemSource.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -177,7 +177,5 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Validators\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
