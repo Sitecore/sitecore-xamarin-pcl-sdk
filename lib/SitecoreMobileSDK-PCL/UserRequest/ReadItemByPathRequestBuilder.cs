@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.UserRequest
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  public class ReadItemByPathRequestBuilder : AbstractGetItemRequestBuilder<IReadItemsByPathRequest>
+  public class ReadItemByPathRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByPathRequest>
   {
     public ReadItemByPathRequestBuilder(string itemPath)
     {

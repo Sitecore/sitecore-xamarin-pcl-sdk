@@ -3,7 +3,7 @@ namespace Sitecore.MobileSDK.UserRequest
 {
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
 
-  public class ReadItemByIdRequestBuilder : AbstractGetItemRequestBuilder<IReadItemsByIdRequest>
+  public class ReadItemByIdRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByIdRequest>
   {
     public ReadItemByIdRequestBuilder(string itemId)
     {
