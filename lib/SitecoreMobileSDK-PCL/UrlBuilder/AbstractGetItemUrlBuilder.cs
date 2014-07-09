@@ -1,13 +1,18 @@
-﻿using Sitecore.MobileSDK.UrlBuilder;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.Items;
+﻿
 
 
 namespace Sitecore.MobileSDK
 {
   using System;
+  using System.Collections.Generic;
+
+
+  using Sitecore.MobileSDK.UrlBuilder;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.Validators;
 
 
   public abstract class AbstractGetItemUrlBuilder<TRequest>
@@ -116,6 +121,19 @@ namespace Sitecore.MobileSDK
       else if ( null == request.SessionSettings.ItemWebApiVersion )
       {
         throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null" );
+      }
+
+      if (null != request.QueryParameters)
+      {
+        this.ValidateFields(request.QueryParameters.Fields);
+      }
+    }
+
+    private void ValidateFields(IEnumerable<string> fields)
+    {
+      if (DuplicateEntryValidator.IsDuplicatedFieldsInTheList(fields))
+      {
+        throw new ArgumentException("AbstractGetItemUrlBuilder.GetUrlForRequest() : request.QueryParameters.Fields must contain NO duplicates");
       }
     }
 
