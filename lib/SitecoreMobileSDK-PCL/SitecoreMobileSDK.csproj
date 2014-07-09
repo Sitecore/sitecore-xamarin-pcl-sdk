@@ -119,17 +119,17 @@
     <Compile Include="UrlBuilder\MediaItem\MediaPathValidator.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeType.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\ICreateItemByPathRequest.cs" />
     <Compile Include="UrlBuilder\CreateItem\IBaseCreateItemRequest.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemById\ICreateItemByIdRequest.cs" />
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
-    <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemById\CreateItemByIdUrlBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\ICreateItemRequestParametersBuilder.cs" />
     <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
     <Compile Include="Items\CreateItemByIdParameters.cs" />
     <Compile Include="Validators\DuplicateEntryValidator.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
+    <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -188,7 +188,6 @@
   <ItemGroup>
     <Folder Include="UrlBuilder\CreateItem\" />
     <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
-    <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
     <Folder Include="UserRequest\CreateRequest\" />
     <Folder Include="Validators\" />
   </ItemGroup>
