@@ -1,6 +1,4 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-using Sitecore.MobileSDK;
-
+﻿
 
 namespace Sitecore.MobileSdkUnitTest
 {
@@ -9,11 +7,16 @@ namespace Sitecore.MobileSdkUnitTest
 
   using MobileSDKUnitTest.Mock;
 
+  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+
 
 
   [TestFixture]

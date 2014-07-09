@@ -206,7 +206,9 @@ namespace Sitecore.MobileSdkUnitTest
       IReadItemsByQueryRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("fast:/sitecore/content/HOME/*")
         .Database("core")
         .Language("de")
-        .Version("341")
+
+        // @adk : does not compile by design
+        //        .Version("341")
         .Build();
 
 
@@ -219,7 +221,10 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual("fast:/sitecore/content/HOME/*", result.SitecoreQuery);
       Assert.AreEqual("de", result.ItemSource.Language);
       Assert.AreEqual("core", result.ItemSource.Database);
-      Assert.AreEqual("341", result.ItemSource.Version);
+
+//      Assert.AreEqual("341", result.ItemSource.Version);
+      Assert.IsNull(result.ItemSource.Version);
+
       Assert.IsNull(result.QueryParameters.Payload);
     }
 
@@ -469,7 +474,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestEmptyVersionCannotBeAssignedExplicitly()
     {
       Assert.Throws<ArgumentException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/pppp/sss")
         .Version(string.Empty)
       );
     }

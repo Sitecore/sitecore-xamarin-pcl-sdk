@@ -102,15 +102,17 @@
     [Test]
     public async void TestGetHtmlField()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields(new Collection<string>{"Title"}).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields(new Collection<string>{"Text"}).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
       ISitecoreItem item = response.Items[0];
 
-      Assert.AreEqual(1, item.Fields.Count);;
-      Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
+     
+      Assert.AreEqual(1, item.Fields.Count);
+      Assert.AreEqual("Text", item.Fields[0].Name);
+      Assert.True(item.FieldWithName("Text").RawValue.Contains("<div>Welcome to Sitecore!</div>"));
     }
 
     [Test]
@@ -294,9 +296,9 @@
     }
 
     [Test]
-    public void TestGetItemByQueryWithDuplicateFields()
+    public void TestGetItemByQueryWithDuplicateAndEmptyField()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFields("Title", "title", "text", "Text").Build());
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFields("Title", "", "Title").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
       Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);

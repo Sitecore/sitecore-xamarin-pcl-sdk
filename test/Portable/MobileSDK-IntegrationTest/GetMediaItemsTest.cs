@@ -253,7 +253,7 @@
       Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
-    [Test]
+    [Test] //should be passed after .ashx fix
     public async void TestGetMediaWithRelativePath()
     {
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/Images/green_mineraly1.jpg")
@@ -286,7 +286,7 @@
       Assert.AreEqual(16284, ms.Length);
     }
 
-    [Test]
+    [Test]  //should be passed after .ashx fix
     public async void TestGetMediaWithPdfExtension()
     {
       const string MediaPath = "/sitecore/media library/Images/Files/pdf example.pdf";
@@ -306,7 +306,7 @@
       Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
-    [Test]
+    [Test] //should be passed after .ashx fix
     public async void TestGetMediaItemWithMp4Extension()
     {
       const string MediaPath = "/sitecore/media library/Images/Files/Video_01.mp4";
@@ -379,6 +379,7 @@
     public async void TestGetMediaWithLanguageAndVersion()
     {
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/images/test image")
+        .Database("web")
         .Language("en")
         .Version("1")
         .Build();
@@ -440,7 +441,12 @@
 
     private async Task<ISitecoreItem> GetItemByPath(string path, string db = null)
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Payload(PayloadType.Content).Database(db).Build();
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Payload(PayloadType.Content);
+      if (db != null)
+      {
+        requestBuilder.Database(db);
+      }
+      var request = requestBuilder.Build();
       var response = await this.session.ReadItemAsync(request);
       var item = response.Items[0];
       return item;
