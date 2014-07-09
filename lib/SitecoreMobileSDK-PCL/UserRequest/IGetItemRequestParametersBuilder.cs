@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.UserRequest
 {
   using System;
   using System.Collections.Generic;
@@ -11,7 +11,6 @@ namespace Sitecore.MobileSDK
   {
     IGetItemRequestParametersBuilder<T> Database (string sitecoreDatabase);
     IGetItemRequestParametersBuilder<T> Language (string itemLanguage);
-    IGetItemRequestParametersBuilder<T> Version (string itemVersion);
     IGetItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
     IGetItemRequestParametersBuilder<T> AddFields( ICollection<string> fields );

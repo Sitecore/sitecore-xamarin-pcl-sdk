@@ -1,5 +1,6 @@
 ﻿namespace MobileSDKIntegrationTest
 {
+  using System;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
@@ -155,21 +156,44 @@
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
 
-    [Test]
+    [Test] //ALR: If we deny multiple invocations for Database we should fix the Mobile SDK for .NET documentation and modify this test to get an appropriate exception
     public async void TestOverrideDatabaseInRequestByPathSeveralTimes()
     {
       const string Db = "web";
 
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.ItemWithVersions.Path);
-      var request = requestBuilder.Database("master").Database(null).Database(Db).Build();
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
+      var request = requestBuilder.Database("master").Database(Db).Payload(PayloadType.Content).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       this.testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
 
       var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language, "2");
-      this.testData.AssertItemsAreEqual(this.testData.Items.ItemWithVersions, resultItem);
+      this.testData.AssertItemsAreEqual(this.testData.Items.Home, resultItem);
+      Assert.AreEqual(2, resultItem.Fields.Count);
+      Assert.AreEqual("Sitecore", resultItem.FieldWithName("Title").RawValue);
       this.testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+    }
+
+    [Test]
+    public void TestGetItemByIdWithNullDatabase()
+    {
+
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id);
+      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Database(null).Payload(PayloadType.Content).Build());
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+    }
+
+    //ALR: shouldn't be failed
+    [Test]
+    public void TestGetItemByPathWithEmptyDatabase()
+    {
+
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
+      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Database(" ").Payload(PayloadType.Content).Build());
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The input cannot be null or emptyl", exception.Message);
     }
 
     [Test]
@@ -183,21 +207,25 @@
     }
 
     [Test]
-    public async void TestOverrideDbLanguageAndVersionWithEmptyValuesInRequestById()
+    public async void TestOverrideLanguageWithEmptyValueInRequestById()
     {
-      const string Db = "";
       const string Language = "";
-      const string Version = "";
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id);
-      var request = requestBuilder.Database(Db).Language(Language).Version(Version).Build();
-      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
+      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Language(Language).Build());
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+    }
 
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, ItemSource.DefaultSource().Language, "2");
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+    [Test]
+    public async void TestOverrideVersionWithEmptyValueInRequestByPath()
+    {
+      const string Version = "";
+
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
+      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(Version).Build());
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Version : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -207,7 +235,11 @@
       const string Version = "1";
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/*");
-      var request = requestBuilder.Version(Version).Language(Language).Build();
+      var request = requestBuilder
+        // @adk : does not compile by design
+//        .Version(Version)
+        .Language(Language)
+        .Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);

@@ -70,7 +70,7 @@
       Assert.AreEqual("Not_Allowed_Child", response.Items[1].DisplayName);
     }
 
-    [Test]
+    [Test] //ALR: test will pass after fix scope ordering
     public async void TestGetItemWithChildrenAndParentScopeById()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.AllowedItem.Id)
@@ -108,7 +108,7 @@
       testData.AssertItemsCount(0, response);
     }
 
-    [Test]
+    [Test] //ALR: test will pass after fix scope ordering
     public async void TestGetItemWithChildrenAndSelfAndParentScopeByQuery()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/Allowed_Parent/Allowed_Item/ancestor-or-self::*")
@@ -119,11 +119,11 @@
         .Payload(PayloadType.Content)
         .Build();
       var response = await this.session.ReadItemAsync(request);
-      //TODO: check with Item Web API request directly
       testData.AssertItemsCount(28, response);
       Assert.AreEqual("Allowed_Child", response.Items[0].DisplayName);
       Assert.AreEqual("Not_Allowed_Child", response.Items[1].DisplayName);
       Assert.AreEqual("Allowed_Item", response.Items[2].DisplayName);
+      Assert.AreEqual("Allowed_Parent", response.Items[3].DisplayName);
     }
 
     [Test]
@@ -145,20 +145,20 @@
       }
     }
 
-    [Test]
+    [Test]  //ALR: test will pass after fix scope ordering
     public async void TestGetItemWithChildrenScopeByQueryWithSpecifiedFields()        //children in name
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home//*[@title='Allowed_Parent']")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/descendant::*[@title='Allowed_Item']")
        .AddScope(ScopeType.Children)
        .Language("en")
        .AddScope(ScopeType.Self)
        .Build();
       var response = await this.session.ReadItemAsync(request);
-      //TODO: check items count and order
-      testData.AssertItemsCount(3, response);
-      Assert.AreEqual("Allowed_Item", response.Items[0].DisplayName);
-      Assert.AreEqual("Not_Allowed_Item", response.Items[1].DisplayName);
-      Assert.AreEqual("Allowed_Parent", response.Items[2].DisplayName); 
+
+      testData.AssertItemsCount(6, response);
+      Assert.AreEqual("Allowed_Child", response.Items[0].DisplayName);
+      Assert.AreEqual("Not_Allowed_Child", response.Items[1].DisplayName);
+      Assert.AreEqual("Allowed_Item", response.Items[2].DisplayName); 
     }
 
     [Test]
@@ -176,7 +176,7 @@
     [Test]
     public async void TestGetItemWitParentAndSelfScopeWhenParentItemIsNotAllowedByPath()
     {
-      var sessionWithNoReadAccessUser = testData.GetSession(testData.InstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
+      var sessionWithNoReadAccessUser = testData.GetSession(testData.InstanceUrl, "extranet\\FakeAnonymous", "b");
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/Home/Not_Allowed_Parent/Allowed_Item")
        .AddScope(ScopeType.Parent)
        .AddScope(ScopeType.Self)
