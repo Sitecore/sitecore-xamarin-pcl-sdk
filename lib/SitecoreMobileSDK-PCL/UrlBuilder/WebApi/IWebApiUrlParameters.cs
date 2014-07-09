@@ -21,6 +21,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.WebApi
     string TemplateParameterName { get; }
     string ScopeParameterName { get; }
     string FieldsListParameterName { get; }
+    string ItemNameParameterName { get; }
     #endregion query parameters
 
     #region Item Web API Actions

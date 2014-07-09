@@ -15,6 +15,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.WebApi
       result.ScopeParameterName = "scope";
       result.FieldsListParameterName = "fields";
       result.TemplateParameterName = "template";
+      result.ItemNameParameterName = "name";
 
       result.ItemIdParameterName = "sc_itemid";
       result.SitecoreQueryParameterName = "query";
@@ -36,6 +37,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.WebApi
     public string TemplateParameterName { get; private set; }
     public string ScopeParameterName { get; private set; }
     public string FieldsListParameterName { get;  private set; }
+    public string ItemNameParameterName { get;  private set; }
 
     public string ItemIdParameterName { get; private set; }
     public string SitecoreQueryParameterName { get; private set; }
