@@ -44,8 +44,9 @@ namespace WhiteLabeliOS
       {
         ScApiSession session = this.instanceSettings.GetSession();
 
-        var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(pathField.Text)
+        var request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
           .ItemTemplate("Sample/Sample Item")
+          .ItemName(titleField.Text)
           .Build();
 
         this.ShowLoader();
