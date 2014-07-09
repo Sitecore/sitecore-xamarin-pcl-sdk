@@ -37,14 +37,14 @@ namespace Sitecore.MobileSDK.UrlBuilder.WebApi
 
     public string PayloadParameterName { get; private set; }
     public string ScopeParameterName { get; private set; }
-    public string FieldsListParameterName { get;  private set; }
+    public string FieldsListParameterName { get; private set; }
 
     public string ItemIdParameterName { get; private set; }
     public string SitecoreQueryParameterName { get; private set; }
 
     public string ItemWebApiEndpoint { get; private set; }
     public string ItemWebApiActionsEndpoint { get; private set; }
-    
+
     public string ItemWebApiAuthenticateAction { get; private set; }
     public string ItemWebApiGetPublicKeyAction { get; private set; }
   }
