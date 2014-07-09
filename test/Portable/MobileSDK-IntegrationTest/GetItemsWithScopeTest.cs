@@ -121,6 +121,9 @@
       var response = await this.session.ReadItemAsync(request);
       //TODO: check with Item Web API request directly
       testData.AssertItemsCount(28, response);
+      Assert.AreEqual("Allowed_Child", response.Items[0].DisplayName);
+      Assert.AreEqual("Not_Allowed_Child", response.Items[1].DisplayName);
+      Assert.AreEqual("Allowed_Item", response.Items[2].DisplayName);
     }
 
     [Test]
@@ -153,6 +156,9 @@
       var response = await this.session.ReadItemAsync(request);
       //TODO: check items count and order
       testData.AssertItemsCount(3, response);
+      Assert.AreEqual("Allowed_Item", response.Items[0].DisplayName);
+      Assert.AreEqual("Not_Allowed_Item", response.Items[1].DisplayName);
+      Assert.AreEqual("Allowed_Parent", response.Items[2].DisplayName); 
     }
 
     [Test]

@@ -273,10 +273,36 @@
       testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
       ISitecoreItem item = response.Items[0];
 
-
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("Normal Text", item.FieldWithName("Normal Text").Name);
       Assert.AreEqual("sitecore\\admin", item.FieldWithName("__Owner").RawValue);
+    }
+
+    [Test]
+    public async void TestGetItemByIdWithDefaultPayload()     // should be documented
+    {
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Payload(PayloadType.Default).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      var item = response.Items[0];
+
+      Assert.AreEqual(0, item.Fields.Count);
+    }
+
+    [Test]
+    public async void TestGetItemByIdWithoutPayload()     
+    {
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      var item = response.Items[0];
+
+      Assert.AreEqual(2, item.Fields.Count);
+      Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
     }
   }
 }
