@@ -15,6 +15,11 @@ namespace Sitecore.MobileSDK
   {
     public IGetItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
+      if (string.IsNullOrEmpty(sitecoreDatabase))
+      {
+        throw new ArgumentException("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty");
+      }
+
       this.itemSourceAccumulator = new ItemSourcePOD(
         sitecoreDatabase, 
         this.itemSourceAccumulator.Language, 
