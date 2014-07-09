@@ -8,6 +8,7 @@ namespace Sitecore.MobileSdkUnitTest
   using Sitecore.MobileSDK;
   using MobileSDKUnitTest.Mock;
 
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder;
@@ -281,6 +282,42 @@ namespace Sitecore.MobileSdkUnitTest
       string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?language=da&payload=content";
 
       Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestDuplicateFieldsCauseException()
+    {
+      var mutableParameters = new MockGetItemsByPathParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemPath = "/aaa/bbb/ccc/ddd";
+
+      string[] fields = { "x", "y", "x" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByPathRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+    }
+
+
+    [Test]
+    public void TestDuplicateFieldsWithDifferentCaseCauseException()
+    {
+      var mutableParameters = new MockGetItemsByPathParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemPath = "/aaa/bbb/ccc/ddd";
+
+
+      string[] fields = { "x", "y", "X" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByPathRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
     }
   }
 }

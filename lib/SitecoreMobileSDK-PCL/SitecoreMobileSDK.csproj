@@ -119,6 +119,9 @@
     <Compile Include="UrlBuilder\MediaItem\MediaPathValidator.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeType.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
+    <Compile Include="Validators\DuplicateEntryValidator.cs" />
+    <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -174,4 +177,7 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Validators\" />
+  </ItemGroup>
 </Project>

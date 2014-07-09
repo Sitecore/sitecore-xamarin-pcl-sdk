@@ -1,6 +1,4 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-using Sitecore.MobileSDK;
-
+﻿
 
 namespace Sitecore.MobileSdkUnitTest
 {
@@ -9,11 +7,16 @@ namespace Sitecore.MobileSdkUnitTest
 
   using MobileSDKUnitTest.Mock;
 
+  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+
 
 
   [TestFixture]
@@ -232,6 +235,42 @@ namespace Sitecore.MobileSdkUnitTest
       string expected = "http://localhost/-/item/v1?language=da&payload=content&query=%2fsitecore%2fcontent%2fhome%2f%2a";
 
       Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestDuplicateFieldsCauseException()
+    {
+      var mutableParameters = new MockGetItemsByQueryParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.SitecoreQuery = "/aaa/bbb/ccc/*";
+
+      string[] fields = { "x", "y", "x" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByQueryRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+    }
+
+
+    [Test]
+    public void TestDuplicateFieldsWithDifferentCaseCauseException()
+    {
+      var mutableParameters = new MockGetItemsByQueryParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.SitecoreQuery = "/aaa/bbb/ccc/*";
+
+
+      string[] fields = { "x", "y", "X" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByQueryRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
     }
   }
 }

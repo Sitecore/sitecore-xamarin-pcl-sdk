@@ -109,7 +109,7 @@
 
       Assert.AreEqual(1, item.Fields.Count);
       Assert.AreEqual("Text", item.Fields[0].Name);
-      Assert.True(item.Fields[1].RawValue.Contains("<div>Welcome to Sitecore!</div>"));
+      Assert.True(item.Fields[0].RawValue.Contains("<div>Welcome to Sitecore!</div>"));
     }
 
     [Test]

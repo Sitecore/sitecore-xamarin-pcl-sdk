@@ -1,5 +1,4 @@
-﻿using Sitecore.MobileSDK;
-
+﻿
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
@@ -7,6 +6,7 @@ namespace Sitecore.MobileSdkUnitTest
 
   using MobileSDKUnitTest.Mock;
 
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
@@ -243,6 +243,75 @@ namespace Sitecore.MobileSdkUnitTest
       string expected = "http://localhost/-/item/v1?language=da&payload=content&sc_itemid=%7bxxx-yyy-zzz%7d";
 
       Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestDuplicateFieldsCauseException()
+    {
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sitecoreShellConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
+
+      string[] fields = { "x", "y", "x" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByIdRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+    }
+
+
+    [Test]
+    public void TestDuplicateFieldsWithDifferentCaseCauseException()
+    {
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sitecoreShellConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
+
+      string[] fields = { "x", "y", "X" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByIdRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+    }
+
+    [Test]
+    public void TestNullFieldEntriesCaseCauseException()
+    {
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sitecoreShellConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
+
+      string[] fields = { "x", "y", null };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByIdRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+    }
+
+    [Test]
+    public void TestEmptyFieldEntriesCaseCauseException()
+    {
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sitecoreShellConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
+
+      string[] fields = { "x", "y", "" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByIdRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
     }
   }
 }

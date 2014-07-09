@@ -207,7 +207,11 @@
       const string Version = "1";
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/*");
-      var request = requestBuilder.Version(Version).Language(Language).Build();
+      var request = requestBuilder
+        // @adk : does not compile by design
+//        .Version(Version)
+        .Language(Language)
+        .Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);

@@ -1,15 +1,15 @@
-﻿using System.Diagnostics;
-using MobileSDKUnitTest.Mock;
-
+﻿
 namespace MobileSDKIntegrationTest
 {
   using System;
   using System.IO;
+  using System.Diagnostics;
   using System.Threading;
   using NUnit.Framework;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
- 
+
+  using MobileSDKUnitTest.Mock;
 
   [TestFixture]
   public class CancelOperationsTest
