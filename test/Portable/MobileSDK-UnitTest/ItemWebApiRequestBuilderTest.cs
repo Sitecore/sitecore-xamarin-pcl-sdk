@@ -102,7 +102,6 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemIdRequestBuilderWithEmptyIdCrashes()
     {
-
       Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(""));
     }
 
@@ -393,6 +392,37 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
     #endregion Fields
+
+    #region Validation
+    [Test]
+    public void TestNullDatabaseCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+        .Database(null)
+      );
+    }
+
+    [Test]
+    public void TestEmptyDatabaseCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Database(string.Empty)
+      );
+    }
+
+    [Test]
+    public void TestDatabaseCannotBeAssignedTwice()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+        .Database("master")
+        .Database("web")
+      );
+    }
+
+    #endregion Validation
   }
 }
 
