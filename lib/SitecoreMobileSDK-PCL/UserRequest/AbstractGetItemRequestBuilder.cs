@@ -13,9 +13,9 @@ namespace Sitecore.MobileSDK
   public abstract class AbstractGetItemRequestBuilder<T> : IGetItemRequestParametersBuilder<T>
     where T : class
   {
-    public IGetItemRequestParametersBuilder<T> Database (string sitecoreDatabase)
+    public IGetItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
-      this.itemSourceAccumulator = new ItemSourcePOD (
+      this.itemSourceAccumulator = new ItemSourcePOD(
         sitecoreDatabase, 
         this.itemSourceAccumulator.Language, 
         this.itemSourceAccumulator.Version);
@@ -23,9 +23,9 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    public IGetItemRequestParametersBuilder<T> Language (string itemLanguage)
+    public IGetItemRequestParametersBuilder<T> Language(string itemLanguage)
     {
-      this.itemSourceAccumulator = new ItemSourcePOD (
+      this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
         itemLanguage, 
         this.itemSourceAccumulator.Version);
@@ -33,7 +33,7 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    public IGetItemRequestParametersBuilder<T> Version (string itemVersion)
+    public IGetItemRequestParametersBuilder<T> Version(string itemVersion)
     {
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
@@ -55,11 +55,11 @@ namespace Sitecore.MobileSDK
 
       if (null == this.queryParameters.ScopeParameters)
       {
-        scopeParameters = new ScopeParameters ();
+        scopeParameters = new ScopeParameters();
       }
       else
       {
-        scopeParameters = this.queryParameters.ScopeParameters.ShallowCopy ();
+        scopeParameters = this.queryParameters.ScopeParameters.ShallowCopy();
       }
       scopeParameters.AddScope(scope);
       this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields);
@@ -97,10 +97,11 @@ namespace Sitecore.MobileSDK
       string[] newFields = new string[appendedFieldsCount];
 
 
-      currentFields.CopyTo( newFields, 0 );
-      validFields.CopyTo( newFields, myFieldsCount );
+      currentFields.CopyTo(newFields, 0);
+      validFields.CopyTo(newFields, myFieldsCount);
 
-      if (DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields))
+      bool isFieldListHasDuplicates = DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields);
+      if (isFieldListHasDuplicates)
       {
         throw new ArgumentException("RequestBuilder : duplicate fields are not allowed");
       }
@@ -109,7 +110,7 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    public IGetItemRequestParametersBuilder<T> AddFields( params string[] fieldParams )
+    public IGetItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
     {
       if (null == fieldParams)
       {
@@ -128,8 +129,8 @@ namespace Sitecore.MobileSDK
 
     public abstract T Build();
 
-    protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
-    protected QueryParameters queryParameters = new QueryParameters( null, null, null );
+    protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
+    protected QueryParameters queryParameters = new QueryParameters(null, null, null);
   }
 }
 
