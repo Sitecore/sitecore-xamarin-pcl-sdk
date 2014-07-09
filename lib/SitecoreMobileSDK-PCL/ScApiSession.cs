@@ -162,6 +162,8 @@ namespace Sitecore.MobileSDK
 
     #endregion GetItems
 
+    #region CreateItems
+
     public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       //TODO: @igk
@@ -172,13 +174,14 @@ namespace Sitecore.MobileSDK
       ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
 
       //TODO: @igk
-      //ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (requestCopy);
-      ICreateItemByIdRequest autocompletedRequest = requestCopy;
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (requestCopy);
 
       var taskFlow = new CreateItemByIdTask(new CreateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
+
+    #endregion CreateItems
 
     #region Authentication
 
