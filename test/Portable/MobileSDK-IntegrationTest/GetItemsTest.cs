@@ -295,7 +295,9 @@ namespace MobileSDKIntegrationTest
       testData.AssertItemsCount(0, response);
     }
 
-    [Test] //this case should be changed for another instance
+    //TODO: test manually with preconfigured Sitecore instance
+    /*
+    [Test] 
     public void TestGetItemByQueryWithturnedOffItemWebApi()
     {
       var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
@@ -309,6 +311,7 @@ namespace MobileSDKIntegrationTest
 
       Assert.Throws<RsaHandshakeException>(testCode);
     }
+    */
 
     private async Task<ScItemsResponse> GetItemById(string id)
     {
