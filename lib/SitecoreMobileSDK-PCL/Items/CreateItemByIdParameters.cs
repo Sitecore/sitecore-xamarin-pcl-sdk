@@ -1,22 +1,24 @@
-﻿using System;
-using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-using System.Collections.Generic;
-using Sitecore.MobileSDK.UrlBuilder.ItemById;
-using Sitecore.MobileSDK.UrlBuilder;
-
+﻿
 namespace Sitecore.MobileSDK
 {
+  using System;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using System.Collections.Generic;
+  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.UrlBuilder;
+
   public class CreateItemByIdParameters : ICreateItemByIdRequest
   {
-    public CreateItemByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, string itemId)
+    public CreateItemByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
       this.ItemId = itemId;
       this.QueryParameters = queryParameters;
+      this.CreateParameters = createParameters;
     }
 
     public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
@@ -58,9 +60,8 @@ namespace Sitecore.MobileSDK
     public IQueryParameters QueryParameters { get; private set; }
 
 
-    public string ItemName { get; private set; }
-    public string ItemTemplate { get; private set; }
-    public Dictionary<string, string> FieldsRawValuesByName{ get; private set; }
+    public CreateItemParameters CreateParameters { get; private set; }
+
   }
 }
 
