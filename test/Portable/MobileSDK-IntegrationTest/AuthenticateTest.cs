@@ -5,7 +5,7 @@
   using Sitecore.MobileSDK.SessionSettings;
 
   [TestFixture]
-  public class AuthnticateTest
+  public class AuthenticateTest
   {
     private ScApiSession sessionWithValidConfig;
     private ScApiSession sessionWithWrongUsernameConfig;
