@@ -3,6 +3,7 @@ namespace Sitecore.MobileSDK
 {
   using System;
   using System.Collections.Generic;
+  using Sitecore.MobileSDK.UserRequest;
 
   public interface ICreateItemRequestParametersBuilder<T> : IGetItemRequestParametersBuilder<T>
     where T : class

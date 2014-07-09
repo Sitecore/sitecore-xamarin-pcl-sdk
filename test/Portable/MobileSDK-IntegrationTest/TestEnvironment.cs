@@ -43,7 +43,7 @@
       result.Items.TestFieldsItem.Template = "Test Templates/Sample fields";
 
       result.Items.AllowedItem.Id = "{387B69B2-B2EA-4618-8C3E-2785DC0469A7}";
-
+      result.Items.AllowedItem.Path = "/sitecore/content/Home/Allowed_Parent/Allowed_Item";
       result.Items.AllowedItem.DisplayName = "Allowed_Item";
 
       return result;
@@ -86,7 +86,7 @@
       public string Password { get; set; }
     }
 
-    public void AssertItemsAreEqual(TestEnvironment.Item expected, ISitecoreItem actual)
+    public void AssertItemsAreEqual(Item expected, ISitecoreItem actual)
     {
       if (null != expected.DisplayName)
       {

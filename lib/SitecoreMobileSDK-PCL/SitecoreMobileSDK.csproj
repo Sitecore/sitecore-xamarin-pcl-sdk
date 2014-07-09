@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
-    <Compile Include="Authenticate\AuthenticateTask.cs" />
+    <Compile Include="Authenticate\AuthenticateTasks.cs" />
     <Compile Include="Items\IItemSource.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,6 +130,8 @@
     <Compile Include="Validators\DuplicateEntryValidator.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
+    <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

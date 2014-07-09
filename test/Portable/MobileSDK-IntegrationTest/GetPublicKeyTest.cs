@@ -5,8 +5,7 @@ namespace MobileSDKIntegrationTest
   using NUnit.Framework;
 
   using System;
-  using System.Threading.Tasks;
-
+  using System.Net.Http;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
@@ -78,8 +77,8 @@ namespace MobileSDKIntegrationTest
       };
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Public key not received properly"));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+      Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
     }
 
     [Test]

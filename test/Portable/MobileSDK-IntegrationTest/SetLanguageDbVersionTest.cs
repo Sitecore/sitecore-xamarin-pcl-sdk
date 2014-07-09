@@ -7,6 +7,7 @@
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
@@ -98,7 +99,10 @@
 
     private async Task<ScItemsResponse> GetHomeItem(ScApiSession session, string db = null)
     {
-      this.homeItemRequestBuilder.Database(db);
+      if (db != null)
+      {
+        this.homeItemRequestBuilder.Database(db);
+      }
       var response = await GetItemByIdWithRequestBuilder(this.homeItemRequestBuilder, session);
       return response;
     }

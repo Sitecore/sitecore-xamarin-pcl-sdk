@@ -1,6 +1,5 @@
 ﻿
-
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.UserRequest
 {
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;

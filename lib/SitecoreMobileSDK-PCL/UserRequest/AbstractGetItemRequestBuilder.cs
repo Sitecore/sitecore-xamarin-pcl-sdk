@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.UserRequest
 {
   using System;
   using System.Linq;
@@ -49,25 +49,6 @@ namespace Sitecore.MobileSDK
         this.itemSourceAccumulator.Database, 
         itemLanguage, 
         this.itemSourceAccumulator.Version);
-
-      return this;
-    }
-
-    public IGetItemRequestParametersBuilder<T> Version(string itemVersion)
-    {
-      if (string.IsNullOrEmpty(itemVersion))
-      {
-        throw new ArgumentException("AbstractGetItemRequestBuilder.Version : The input cannot be null or empty");
-      }
-      else if (null != this.itemSourceAccumulator.Version)
-      {
-        throw new InvalidOperationException("AbstractGetItemRequestBuilder.Version : The item's version cannot be assigned twice");
-      }
-
-      this.itemSourceAccumulator = new ItemSourcePOD(
-        this.itemSourceAccumulator.Database, 
-        this.itemSourceAccumulator.Language,
-        itemVersion);
 
       return this;
     }

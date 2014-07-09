@@ -1,5 +1,4 @@
-﻿using Sitecore.MobileSDK;
-
+﻿
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
@@ -7,6 +6,7 @@ namespace Sitecore.MobileSdkUnitTest
 
   using MobileSDKUnitTest.Mock;
 
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
