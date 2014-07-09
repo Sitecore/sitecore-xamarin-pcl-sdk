@@ -126,23 +126,42 @@
       Assert.AreEqual("Allowed_Parent", response.Items[3].DisplayName);
     }
 
-    [Test]
-    public async void TestGetItemWithSelfScopeSeveralTimesById()
+    [Test] //ALR: should fail due to duplicates politics
+    public void TestGetItemWithDuplicateScopesById()
     {
-      try
-      {
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
-          // .AddScope(ScopeType.Self)
+       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
+          .AddScope(ScopeType.Self)
           .Language("en")
-          // .AddScope(ScopeType.Childern)
-          // .AddScope(ScopeType.Self)
-          .Build();
-      }
-      //TODO: catch argument exception
-      catch (Exception e)
-      {
+          .AddScope(ScopeType.Children)
+          .AddScope(ScopeType.Self)
+          .Build());
+       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+       Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+    }
 
-      }
+    [Test] //ALR: should fail due to duplicates politics
+    public void TestGetItemWithDuplicateScopeByPath()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.ItemWithVersions.Path)
+        .Language("en") 
+        .AddScope(ScopeType.Parent)
+        .Database("web")
+        .AddScope(ScopeType.Parent)
+        .AddScope(ScopeType.Self)
+        .Build());
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+    }
+
+    [Test] //ALR: should fail due to duplicates politics
+    public void TestGetItemWithDuplicateScopeByQuery()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.ItemWithVersions.Path)
+        .AddScope(ScopeType.Children)
+        .AddScope(ScopeType.Children)
+        .Build());
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]  //ALR: test will pass after fix scope ordering
