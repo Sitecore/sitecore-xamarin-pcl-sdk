@@ -8,20 +8,27 @@
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.TaskFlow;
+  using Sitecore.MobileSDK.UrlBuilder.Rest;
+  using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
-  class AuthenticateTask : IRestApiCallTasks<ISessionConfig, HttpRequestMessage, string, WebApiJsonStatusMessage>
+  class AuthenticateTasks : IRestApiCallTasks<ISessionConfig, HttpRequestMessage, string, WebApiJsonStatusMessage>
   {
 
     #region Private Variables
 
+    private readonly IRestServiceGrammar restGrammar;
+    private readonly IWebApiUrlParameters webApiGrammar;
     private readonly SessionConfigUrlBuilder urlBuilder;
     private readonly HttpClient httpClient;
     private readonly ICredentialsHeadersCryptor credentialsCryptor;
 
     #endregion Private Variables
 
-    public AuthenticateTask(SessionConfigUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor cryptor)
+    public AuthenticateTasks(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar,
+      SessionConfigUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor cryptor)
     {
+      this.restGrammar = restGrammar;
+      this.webApiGrammar = webApiGrammar;
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
       this.credentialsCryptor = cryptor;
@@ -31,8 +38,7 @@
 
     public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(ISessionConfig request, CancellationToken cancelToken)
     {
-
-      string url = this.urlBuilder.BuildUrlString(request) + "/-/item/v1/-/actions/authenticate";
+      string url = this.PrepareRequestUrl(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
       return await this.credentialsCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
@@ -54,6 +60,14 @@
       };
 
       return await Task.Factory.StartNew(syncParsePublicKey, cancelToken);
+    }
+
+    private string PrepareRequestUrl(ISessionConfig request)
+    {
+      return this.urlBuilder.BuildUrlString(request)
+        + this.restGrammar.PathComponentSeparator
+        + this.webApiGrammar.ItemWebApiActionsEndpoint
+        + this.webApiGrammar.ItemWebApiAuthenticateAction;
     }
 
     #endregion IRestApiCallTasks
