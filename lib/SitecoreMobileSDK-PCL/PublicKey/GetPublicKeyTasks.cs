@@ -9,26 +9,28 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
-  public class GetPublicKeyTasks : IRestApiCallTasks<string, string, Stream, PublicKeyX509Certificate>
+  public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, Stream, PublicKeyX509Certificate>
   {
     #region Private Variables
 
+    private readonly SessionConfigUrlBuilder sessionConfigBuilder;
     private readonly IWebApiUrlParameters webApiGrammar;
     private readonly HttpClient httpClient;
 
     #endregion Private Variables
 
-    public GetPublicKeyTasks(IWebApiUrlParameters webApiGrammar, HttpClient httpClient)
+    public GetPublicKeyTasks(SessionConfigUrlBuilder sessionConfigBuilder, IWebApiUrlParameters webApiGrammar, HttpClient httpClient)
     {
+      this.sessionConfigBuilder = sessionConfigBuilder;
       this.webApiGrammar = webApiGrammar;
       this.httpClient = httpClient;
     }
 
     #region IRestApiCallTasks
 
-    public async Task<string> BuildRequestUrlForRequestAsync(string instanceUrl, CancellationToken cancelToken)
+    public async Task<string> BuildRequestUrlForRequestAsync(ISessionConfig request, CancellationToken cancelToken)
     {
-      return await Task.Factory.StartNew(() => this.PrepareRequestUrl(instanceUrl), cancelToken);
+      return await Task.Factory.StartNew(() => this.PrepareRequestUrl(request), cancelToken);
     }
 
     public async Task<Stream> SendRequestForUrlAsync(string requestUrl, CancellationToken cancelToken)
@@ -54,12 +56,12 @@
       }
     }
 
-    private string PrepareRequestUrl(string instanceUrl)
+    private string PrepareRequestUrl(ISessionConfig instanceUrl)
     {
-      return SessionConfigValidator.AutocompleteInstanceUrl(instanceUrl)
+      return this.sessionConfigBuilder.BuildUrlString(instanceUrl)
         + "/"
         + this.webApiGrammar.ItemWebApiActionsEndpoint
-        + this.webApiGrammar.ItemWebApiAuthenticateAction;
+        + this.webApiGrammar.ItemWebApiGetPublicKeyAction;
     }
 
     #endregion IRestApiCallTasks

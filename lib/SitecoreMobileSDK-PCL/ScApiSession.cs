@@ -67,9 +67,10 @@ namespace Sitecore.MobileSDK
     {
       try
       {
-        var taskFlow = new GetPublicKeyTasks(this.webApiGrammar, this.httpClient);
+        var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar); 
+        var taskFlow = new GetPublicKeyTasks(sessionConfigBuilder, this.webApiGrammar, this.httpClient);
 
-        PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow, cancelToken);
+        PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
         this.publicCertifiacte = result;
       }
       catch (ObjectDisposedException)
