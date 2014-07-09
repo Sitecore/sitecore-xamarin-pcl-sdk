@@ -53,9 +53,9 @@ namespace MobileSDK_UnitTest_Desktop
     [Test]
     public void TestBuildValidScopeParams()
     {
-      ScopeParameters scope = new ScopeParameters();
+      var scope = new ScopeParameters();
       scope.AddScope(ScopeType.Parent);
-      QueryParameters qp = new QueryParameters(null, scope, null);
+      var qp = new QueryParameters(null, scope, null);
       string result = this.builder.BuildUrlString(qp);
       Assert.AreEqual("scope=p", result);
 
@@ -83,11 +83,11 @@ namespace MobileSDK_UnitTest_Desktop
     [Test]
     public void TestScopeParamsOrderDoesNotMatter()
     {
-      ScopeParameters scope = new ScopeParameters();
+      var scope = new ScopeParameters();
       scope.AddScope(ScopeType.Children);
       scope.AddScope(ScopeType.Self);
       scope.AddScope(ScopeType.Parent);
-      QueryParameters qp = new QueryParameters(null, scope, null);
+      var qp = new QueryParameters(null, scope, null);
       string result = this.builder.BuildUrlString(qp);
       Assert.AreEqual("scope=p|s|c", result);
     }
@@ -95,11 +95,11 @@ namespace MobileSDK_UnitTest_Desktop
     [Test]
     public void TestScopeParamsCanBeSetTwice()
     {
-      ScopeParameters scope = new ScopeParameters();
+      var scope = new ScopeParameters();
       scope.AddScope(ScopeType.Children);
       scope.AddScope(ScopeType.Self);
       scope.AddScope(ScopeType.Children);
-      QueryParameters qp = new QueryParameters(null, scope, null);
+      var qp = new QueryParameters(null, scope, null);
       string result = this.builder.BuildUrlString(qp);
       Assert.AreEqual("scope=s|c", result);
     }
@@ -116,8 +116,8 @@ namespace MobileSDK_UnitTest_Desktop
     {
       string[] fields = {"abra", "shwabra", "kadabra"};
 
-      string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, null, fields));
-      Assert.AreEqual("payload=content&fields=abra|shwabra|kadabra", result);
+      string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Full, null, fields));
+      Assert.AreEqual("payload=full&fields=abra|shwabra|kadabra", result);
     }
 
 
@@ -135,9 +135,10 @@ namespace MobileSDK_UnitTest_Desktop
     public void TestSimpleFieldListOfIdsIsProcessedCorrectly()
     {
       string[] fields = {"{0000-1111-2222}", "{1123-5813-21-34}"};
-
-      string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, null, fields));
-      Assert.AreEqual("payload=content&fields=%7b0000-1111-2222%7d|%7b1123-5813-21-34%7d", result);
+      var scope = new ScopeParameters();
+      scope.AddScope(ScopeType.Children);
+      string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Min, scope, fields));
+      Assert.AreEqual("payload=min&scope=c&fields=%7b0000-1111-2222%7d|%7b1123-5813-21-34%7d", result);
     }
 
     [Test]
