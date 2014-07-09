@@ -367,6 +367,31 @@ namespace Sitecore.MobileSdkUnitTest
         .Build());
 
     }
+
+    [Test]
+    public void TestAddFieldMethodSupportsParamsKeyword()
+    {
+      string[] expectedFields = { "alpha", "beta", "gamma" };
+
+      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("alpha", "beta", "gamma")
+        .Build();
+
+      Assert.IsNotNull(result);
+      Assert.IsNotNull(result.ItemSource);
+      Assert.IsNotNull(result.ItemId);
+      Assert.IsNotNull( result.QueryParameters );
+      Assert.IsNull(result.SessionSettings);
+
+
+
+      Assert.AreEqual("{dead-c0de}", result.ItemId);
+      Assert.IsNull(result.ItemSource.Language);
+      Assert.IsNull(result.ItemSource.Database);
+      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.QueryParameters.Payload);
+      Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
+    }
     #endregion Fields
   }
 }
