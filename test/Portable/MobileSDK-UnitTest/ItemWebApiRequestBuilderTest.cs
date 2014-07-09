@@ -454,6 +454,18 @@ namespace Sitecore.MobileSdkUnitTest
       );
     }
     #endregion Language Validation
+
+    #region Payload Validation
+    [Test]
+    public void TestPayloadCannotBeAssignedTwice()
+    {
+      Assert.Throws<InvalidOperationException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Payload(PayloadType.Content)
+        .Payload(PayloadType.Min)
+      );
+    }
+    #endregion Payload Validation
   }
 }
 

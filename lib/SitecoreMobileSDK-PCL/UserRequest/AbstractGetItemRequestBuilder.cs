@@ -65,6 +65,11 @@ namespace Sitecore.MobileSDK
 
     public IGetItemRequestParametersBuilder<T> Payload(PayloadType payload)
     {
+      if (null != this.queryParameters.Payload)
+      {
+        throw new InvalidOperationException("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice");
+      }
+
       this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields);
       return this;
     }
