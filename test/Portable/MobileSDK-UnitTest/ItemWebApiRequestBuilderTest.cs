@@ -43,36 +43,37 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual( PayloadType.Full, result.QueryParameters.Payload );
     }
 
-    [Test]
-    public void TestLatestCallsOverrideFirstOnes()
-    {
-      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
-        .Database("web")
-        .Language("en")
-        .Version("1")
-        .Payload(PayloadType.Full)
 
-        .Database("core")
-        .Language("fr")
-        .Version("3872")
-        .Payload(PayloadType.Content)
-
-        .Build();
-
-      Assert.IsNotNull(result);
-      Assert.IsNotNull(result.ItemSource);
-      Assert.IsNotNull(result.ItemId);
-      Assert.IsNotNull( result.QueryParameters );
-      Assert.IsNull(result.SessionSettings);
-
-
-
-      Assert.AreEqual("{dead-beef}", result.ItemId);
-      Assert.AreEqual("fr", result.ItemSource.Language);
-      Assert.AreEqual("core", result.ItemSource.Database);
-      Assert.AreEqual("3872", result.ItemSource.Version);
-      Assert.AreEqual( PayloadType.Content, result.QueryParameters.Payload );
-    }
+//    [Test]
+//    public void TestLatestCallsOverrideFirstOnes()
+//    {
+//      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+//        .Database("web")
+//        .Language("en")
+//        .Version("1")
+//        .Payload(PayloadType.Full)
+//
+//        .Database("core")
+//        .Language("fr")
+//        .Version("3872")
+//        .Payload(PayloadType.Content)
+//
+//        .Build();
+//
+//      Assert.IsNotNull(result);
+//      Assert.IsNotNull(result.ItemSource);
+//      Assert.IsNotNull(result.ItemId);
+//      Assert.IsNotNull( result.QueryParameters );
+//      Assert.IsNull(result.SessionSettings);
+//
+//
+//
+//      Assert.AreEqual("{dead-beef}", result.ItemId);
+//      Assert.AreEqual("fr", result.ItemSource.Language);
+//      Assert.AreEqual("core", result.ItemSource.Database);
+//      Assert.AreEqual("3872", result.ItemSource.Version);
+//      Assert.AreEqual( PayloadType.Content, result.QueryParameters.Payload );
+//    }
 
     [Test]
     public void TestItemIdRequestBuilderWithIdOnly()
@@ -415,13 +416,12 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestDatabaseCannotBeAssignedTwice()
     {
-      Assert.Throws<ArgumentException>( () =>
+      Assert.Throws<InvalidOperationException>( () =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
         .Database("master")
         .Database("web")
       );
     }
-
     #endregion Validation
   }
 }

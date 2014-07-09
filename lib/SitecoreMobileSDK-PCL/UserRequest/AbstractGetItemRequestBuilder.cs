@@ -19,6 +19,11 @@ namespace Sitecore.MobileSDK
       {
         throw new ArgumentException("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty");
       }
+      else if (null != this.itemSourceAccumulator.Database)
+      {
+        throw new InvalidOperationException("AbstractGetItemRequestBuilder.Database : The database cannot be assigned twice");
+      }
+
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         sitecoreDatabase, 
