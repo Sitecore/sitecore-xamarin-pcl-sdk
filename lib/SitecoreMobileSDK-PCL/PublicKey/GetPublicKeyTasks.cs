@@ -1,6 +1,4 @@
-﻿
-
-namespace Sitecore.MobileSDK.PublicKey
+﻿namespace Sitecore.MobileSDK.PublicKey
 {
   using System;
   using System.IO;
@@ -9,17 +7,20 @@ namespace Sitecore.MobileSDK.PublicKey
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
   public class GetPublicKeyTasks : IRestApiCallTasks<string, string, Stream, PublicKeyX509Certificate>
   {
     #region Private Variables
 
+    private readonly IWebApiUrlParameters webApiGrammar;
     private readonly HttpClient httpClient;
 
     #endregion Private Variables
 
-    public GetPublicKeyTasks(HttpClient httpClient)
+    public GetPublicKeyTasks(IWebApiUrlParameters webApiGrammar, HttpClient httpClient)
     {
+      this.webApiGrammar = webApiGrammar;
       this.httpClient = httpClient;
     }
 
@@ -27,8 +28,7 @@ namespace Sitecore.MobileSDK.PublicKey
 
     public async Task<string> BuildRequestUrlForRequestAsync(string instanceUrl, CancellationToken cancelToken)
     {
-      string autocompletedInstanceUrl = SessionConfigValidator.AutocompleteInstanceUrl(instanceUrl);
-      return await Task.Factory.StartNew(() => autocompletedInstanceUrl + "/-/item/v1/-/actions/getpublickey", cancelToken);
+      return await Task.Factory.StartNew(() => this.PrepareRequestUrl(instanceUrl), cancelToken);
     }
 
     public async Task<Stream> SendRequestForUrlAsync(string requestUrl, CancellationToken cancelToken)
@@ -52,6 +52,14 @@ namespace Sitecore.MobileSDK.PublicKey
         PublicKeyX509Certificate result = await Task.Factory.StartNew(syncParsePublicKey, cancelToken);
         return result;
       }
+    }
+
+    private string PrepareRequestUrl(string instanceUrl)
+    {
+      return SessionConfigValidator.AutocompleteInstanceUrl(instanceUrl)
+        + "/"
+        + this.webApiGrammar.ItemWebApiActionsEndpoint
+        + this.webApiGrammar.ItemWebApiAuthenticateAction;
     }
 
     #endregion IRestApiCallTasks

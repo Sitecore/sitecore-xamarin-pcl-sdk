@@ -67,7 +67,7 @@ namespace Sitecore.MobileSDK
     {
       try
       {
-        var taskFlow = new GetPublicKeyTasks(this.httpClient);
+        var taskFlow = new GetPublicKeyTasks(this.webApiGrammar, this.httpClient);
 
         PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig.InstanceUrl, taskFlow, cancelToken);
         this.publicCertifiacte = result;

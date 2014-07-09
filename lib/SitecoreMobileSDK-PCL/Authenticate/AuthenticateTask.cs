@@ -40,14 +40,6 @@
       return await this.credentialsCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
     }
 
-    private string PrepareRequestUrl(ISessionConfig request)
-    {
-      return this.urlBuilder.BuildUrlString(request)
-        + "/"
-        + this.webApiGrammar.ItemWebApiActionsEndpoint
-        + this.webApiGrammar.ItemWebApiAuthenticateAction;
-    }
-
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestMessage, CancellationToken cancelToken)
     {
       HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestMessage, cancelToken);
@@ -64,6 +56,14 @@
       };
 
       return await Task.Factory.StartNew(syncParsePublicKey, cancelToken);
+    }
+
+    private string PrepareRequestUrl(ISessionConfig request)
+    {
+      return this.urlBuilder.BuildUrlString(request)
+        + "/"
+        + this.webApiGrammar.ItemWebApiActionsEndpoint
+        + this.webApiGrammar.ItemWebApiAuthenticateAction;
     }
 
     #endregion IRestApiCallTasks
