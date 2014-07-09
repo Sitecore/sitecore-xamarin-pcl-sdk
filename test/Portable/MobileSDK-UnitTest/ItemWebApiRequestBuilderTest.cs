@@ -423,6 +423,37 @@ namespace Sitecore.MobileSdkUnitTest
       );
     }
     #endregion Database Validation
+
+
+    #region Language Validation
+    [Test]
+    public void TestNullLanguageCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+        .Language(null)
+      );
+    }
+
+    [Test]
+    public void TestEmptyLanguageCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+        .Language(string.Empty)
+      );
+    }
+
+    [Test]
+    public void TestLanguageCannotBeAssignedTwice()
+    {
+      Assert.Throws<InvalidOperationException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Language("en")
+        .Language("fr")
+      );
+    }
+    #endregion Language Validation
   }
 }
 

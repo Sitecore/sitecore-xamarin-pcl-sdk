@@ -35,6 +35,16 @@ namespace Sitecore.MobileSDK
 
     public IGetItemRequestParametersBuilder<T> Language(string itemLanguage)
     {
+      if (string.IsNullOrEmpty(itemLanguage))
+      {
+        throw new ArgumentException("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty");
+      }
+      else if (null != this.itemSourceAccumulator.Language)
+      {
+        throw new InvalidOperationException("AbstractGetItemRequestBuilder.Language : The language cannot be assigned twice");
+      }
+
+
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
         itemLanguage, 
