@@ -233,6 +233,42 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.AreEqual(expected, result);
     }
+
+    [Test]
+    public void TestDuplicateFieldsCauseException()
+    {
+      var mutableParameters = new MockGetItemsByQueryParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.SitecoreQuery = "/aaa/bbb/ccc/*";
+
+      string[] fields = { "x", "y", "x" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByQueryRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+    }
+
+
+    [Test]
+    public void TestDuplicateFieldsWithDifferentCaseCauseException()
+    {
+      var mutableParameters = new MockGetItemsByQueryParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.SitecoreQuery = "/aaa/bbb/ccc/*";
+
+
+      string[] fields = { "x", "y", "X" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByQueryRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+    }
   }
 }
 
