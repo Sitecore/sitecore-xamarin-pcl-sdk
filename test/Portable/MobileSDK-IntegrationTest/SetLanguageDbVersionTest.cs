@@ -7,6 +7,7 @@
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;

@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.UserRequest
 {
   using System;
   using Sitecore.MobileSDK.Items;

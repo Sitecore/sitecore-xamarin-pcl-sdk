@@ -1,14 +1,16 @@
-﻿using MobileSDKUnitTest.Mock;
-using Sitecore.MobileSDK.SessionSettings;
-
+﻿
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
 
+  using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.SessionSettings;
+
 
 
   [TestFixture]

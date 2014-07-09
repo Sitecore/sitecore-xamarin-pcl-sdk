@@ -14,6 +14,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.TaskFlow;
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
