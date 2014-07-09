@@ -455,6 +455,36 @@ namespace Sitecore.MobileSdkUnitTest
     }
     #endregion Language Validation
 
+    #region Version Validation
+    [Test]
+    public void TestNullVersionCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Version(null)
+      );
+    }
+
+    [Test]
+    public void TestEmptyVersionCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+        .Version(string.Empty)
+      );
+    }
+
+    [Test]
+    public void TestVersionCannotBeAssignedTwice()
+    {
+      Assert.Throws<InvalidOperationException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+        .Version("2")
+        .Version("99")
+      );
+    }
+    #endregion Version Validation
+
     #region Payload Validation
     [Test]
     public void TestPayloadCannotBeAssignedTwice()
