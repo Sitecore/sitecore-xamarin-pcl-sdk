@@ -169,7 +169,7 @@ namespace Sitecore.MobileSDK
       var sessionUrlBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
       var cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
 
-      var taskFlow = new AuthenticateTask(sessionUrlBuilder, this.httpClient, cryptor);
+      var taskFlow = new AuthenticateTask(this.webApiGrammar, sessionUrlBuilder, this.httpClient, cryptor);
 
       WebApiJsonStatusMessage result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
 

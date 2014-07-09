@@ -20,9 +20,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.WebApi
 
       result.ItemWebApiEndpoint = "/-/item/";
 
-      result.ItemWebApiActionsEndpoint = "/actions";
-      result.ItemWebApiAuthenticateAction = "authenticate";
-      result.ItemWebApiGetPublicKeyAction = "getpublickey";
+      result.ItemWebApiActionsEndpoint = "-/actions";
+      result.ItemWebApiAuthenticateAction = "/authenticate";
+      result.ItemWebApiGetPublicKeyAction = "/getpublickey";
 
       return result;
     }
