@@ -246,74 +246,72 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestExplicitPayloadTwice()
+    public void TestDuplicateFieldsCauseException()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sitecoreShellConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Payload(PayloadType.Content)
-        .Payload(PayloadType.Full)
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+      string[] fields = { "x", "y", "x" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
 
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
 
-      string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?payload=full&sc_itemid=%7bxxx-yyy-zzz%7d";
+      IReadItemsByIdRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+    }
 
-      Assert.AreEqual(expected, result);
+
+    [Test]
+    public void TestDuplicateFieldsWithDifferentCaseCauseException()
+    {
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sitecoreShellConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
+
+      string[] fields = { "x", "y", "X" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
+
+
+      IReadItemsByIdRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
     }
 
     [Test]
-    public void TestNullDatabase()
+    public void TestNullFieldEntriesCaseCauseException()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sitecoreShellConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Database(null)
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+      string[] fields = { "x", "y", null };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
 
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
 
-      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
-      Assert.Throws<ArgumentException>(action);
+      IReadItemsByIdRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
     }
 
     [Test]
-    public void TestEmptyDatabase()
+    public void TestEmptyFieldEntriesCaseCauseException()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
+      mutableParameters.SessionSettings = this.sitecoreShellConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemId = "{   xxx   }";
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Database("")
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
+      string[] fields = { "x", "y", "" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
 
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
 
-      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
-      Assert.Throws<ArgumentException>(action);
-    }
-
-    [Test]
-    public void TestDatabaseWithWhiteSpaces()
-    {
-      var anonymous = new SessionConfig("localhost", null, null);
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Database("  ")
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
-
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
-
-      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
-      Assert.Throws<ArgumentException>(action);
+      IReadItemsByIdRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
     }
   }
 }

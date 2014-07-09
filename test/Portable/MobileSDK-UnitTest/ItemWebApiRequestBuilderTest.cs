@@ -1,9 +1,8 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-
+﻿
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
+  using System.Collections.Generic;
   using NUnit.Framework;
 
 
@@ -11,6 +10,8 @@ namespace Sitecore.MobileSdkUnitTest
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
 
 
   [TestFixture]
@@ -42,36 +43,37 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual( PayloadType.Full, result.QueryParameters.Payload );
     }
 
-    [Test]
-    public void TestLatestCallsOverrideFirstOnes()
-    {
-      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
-        .Database("web")
-        .Language("en")
-        .Version("1")
-        .Payload(PayloadType.Full)
 
-        .Database("core")
-        .Language("fr")
-        .Version("3872")
-        .Payload(PayloadType.Content)
-
-        .Build();
-
-      Assert.IsNotNull(result);
-      Assert.IsNotNull(result.ItemSource);
-      Assert.IsNotNull(result.ItemId);
-      Assert.IsNotNull( result.QueryParameters );
-      Assert.IsNull(result.SessionSettings);
-
-
-
-      Assert.AreEqual("{dead-beef}", result.ItemId);
-      Assert.AreEqual("fr", result.ItemSource.Language);
-      Assert.AreEqual("core", result.ItemSource.Database);
-      Assert.AreEqual("3872", result.ItemSource.Version);
-      Assert.AreEqual( PayloadType.Content, result.QueryParameters.Payload );
-    }
+//    [Test]
+//    public void TestLatestCallsOverrideFirstOnes()
+//    {
+//      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+//        .Database("web")
+//        .Language("en")
+//        .Version("1")
+//        .Payload(PayloadType.Full)
+//
+//        .Database("core")
+//        .Language("fr")
+//        .Version("3872")
+//        .Payload(PayloadType.Content)
+//
+//        .Build();
+//
+//      Assert.IsNotNull(result);
+//      Assert.IsNotNull(result.ItemSource);
+//      Assert.IsNotNull(result.ItemId);
+//      Assert.IsNotNull( result.QueryParameters );
+//      Assert.IsNull(result.SessionSettings);
+//
+//
+//
+//      Assert.AreEqual("{dead-beef}", result.ItemId);
+//      Assert.AreEqual("fr", result.ItemSource.Language);
+//      Assert.AreEqual("core", result.ItemSource.Database);
+//      Assert.AreEqual("3872", result.ItemSource.Version);
+//      Assert.AreEqual( PayloadType.Content, result.QueryParameters.Payload );
+//    }
 
     [Test]
     public void TestItemIdRequestBuilderWithIdOnly()
@@ -101,7 +103,6 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemIdRequestBuilderWithEmptyIdCrashes()
     {
-
       Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(""));
     }
 
@@ -317,7 +318,184 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
+
+
+    [Test]
+    public void TestDuplicatedFieldsCauseException()
+    {
+      Assert.Throws<ArgumentException>(() => 
+      ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("XXXXX")
+        .AddFields("YYY")
+        .AddFields("XXXXX")
+        .Build());
+    }
+
+    [Test]
+    public void TestCaseInsensitiveDuplicatedFieldsCauseException()
+    {
+      Assert.Throws<ArgumentException>(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("XXXXX")
+        .AddFields("YYY")
+        .AddFields("xxXXx")
+        .Build());
+    }
+
+
+    [Test]
+    public void TestEmptyFieldsAreIgnored()
+    {
+      Assert.DoesNotThrow(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("")
+        .Build());
+    }
+
+    [Test]
+    public void TestNullFieldsAreIgnored()
+    {
+      Assert.DoesNotThrow(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields((string)null)
+        .Build());
+
+
+      Assert.DoesNotThrow(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields((ICollection<string>)null)
+        .Build());
+
+    }
+
+    [Test]
+    public void TestAddFieldMethodSupportsParamsKeyword()
+    {
+      string[] expectedFields = { "alpha", "beta", "gamma" };
+
+      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("alpha", "beta", "gamma")
+        .Build();
+
+      Assert.IsNotNull(result);
+      Assert.IsNotNull(result.ItemSource);
+      Assert.IsNotNull(result.ItemId);
+      Assert.IsNotNull( result.QueryParameters );
+      Assert.IsNull(result.SessionSettings);
+
+
+
+      Assert.AreEqual("{dead-c0de}", result.ItemId);
+      Assert.IsNull(result.ItemSource.Language);
+      Assert.IsNull(result.ItemSource.Database);
+      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.QueryParameters.Payload);
+      Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
+    }
     #endregion Fields
+
+    #region Database Validation
+    [Test]
+    public void TestNullDatabaseCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+        .Database(null)
+      );
+    }
+
+    [Test]
+    public void TestEmptyDatabaseCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Database(string.Empty)
+      );
+    }
+
+    [Test]
+    public void TestDatabaseCannotBeAssignedTwice()
+    {
+      Assert.Throws<InvalidOperationException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+        .Database("master")
+        .Database("web")
+      );
+    }
+    #endregion Database Validation
+
+
+    #region Language Validation
+    [Test]
+    public void TestNullLanguageCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+        .Language(null)
+      );
+    }
+
+    [Test]
+    public void TestEmptyLanguageCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+        .Language(string.Empty)
+      );
+    }
+
+    [Test]
+    public void TestLanguageCannotBeAssignedTwice()
+    {
+      Assert.Throws<InvalidOperationException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Language("en")
+        .Language("fr")
+      );
+    }
+    #endregion Language Validation
+
+    #region Version Validation
+    [Test]
+    public void TestNullVersionCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Version(null)
+      );
+    }
+
+    [Test]
+    public void TestEmptyVersionCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+        .Version(string.Empty)
+      );
+    }
+
+    [Test]
+    public void TestVersionCannotBeAssignedTwice()
+    {
+      Assert.Throws<InvalidOperationException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+        .Version("2")
+        .Version("99")
+      );
+    }
+    #endregion Version Validation
+
+    #region Payload Validation
+    [Test]
+    public void TestPayloadCannotBeAssignedTwice()
+    {
+      Assert.Throws<InvalidOperationException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Payload(PayloadType.Content)
+        .Payload(PayloadType.Min)
+      );
+    }
+    #endregion Payload Validation
   }
 }
 

@@ -11,7 +11,6 @@ namespace Sitecore.MobileSdkUnitTest
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
@@ -285,74 +284,39 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestExplicitPayloadTwice()
+    public void TestDuplicateFieldsCauseException()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var mutableParameters = new MockGetItemsByPathParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemPath = "/aaa/bbb/ccc/ddd";
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
-        .Payload(PayloadType.Content)
-        .Payload(PayloadType.Full)
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
+      string[] fields = { "x", "y", "x" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
 
-      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
 
-      string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?payload=full";
-
-      Assert.AreEqual(expected, result);
+      IReadItemsByPathRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
     }
 
-    [Test]
-    public void TestNullDatabase()
-    {
-      var anonymous = new SessionConfig("localhost", null, null);
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
-        .Database(null)
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
-
-      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
-
-      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
-      Assert.Throws<ArgumentException>(action);
-    }
 
     [Test]
-    public void TestEmptyDatabase()
+    public void TestDuplicateFieldsWithDifferentCaseCauseException()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var mutableParameters = new MockGetItemsByPathParameters();
+      mutableParameters.SessionSettings = this.sessionConfig;
+      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemPath = "/aaa/bbb/ccc/ddd";
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
-        .Database("")
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
-      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      string[] fields = { "x", "y", "X" };
+      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      mutableParameters.QueryParameters = duplicatedFields;
 
-      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
-      Assert.Throws<ArgumentException>(action);
-    }
 
-    [Test]
-    public void TestDatabaseWithWhiteSpaces()
-    {
-      var anonymous = new SessionConfig("localhost", null, null);
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
-        .Database("  ")
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
-
-      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
-
-      TestDelegate action = () => urlBuilder.GetUrlForRequest(mergedRequest);
-      Assert.Throws<ArgumentException>(action);
+      IReadItemsByPathRequest parameters = mutableParameters;
+      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
     }
   }
 }
