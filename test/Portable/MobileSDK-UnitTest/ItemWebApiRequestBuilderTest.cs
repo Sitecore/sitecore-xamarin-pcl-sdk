@@ -394,7 +394,7 @@ namespace Sitecore.MobileSdkUnitTest
     }
     #endregion Fields
 
-    #region Validation
+    #region Database Validation
     [Test]
     public void TestNullDatabaseCannotBeAssignedExplicitly()
     {
@@ -422,7 +422,7 @@ namespace Sitecore.MobileSdkUnitTest
         .Database("web")
       );
     }
-    #endregion Validation
+    #endregion Database Validation
   }
 }
 
