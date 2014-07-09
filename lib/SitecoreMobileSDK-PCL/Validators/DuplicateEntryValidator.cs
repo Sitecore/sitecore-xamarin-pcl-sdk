@@ -22,7 +22,7 @@
         bool isSingleFieldInvalid = String.IsNullOrEmpty(singleField);
         if (isSingleFieldInvalid)
         {
-          return false;
+          return true;
         }
 
         string lowercaseSingleField = singleField.ToLowerInvariant();
