@@ -16,12 +16,12 @@ namespace Sitecore.MobileSDK
     {
     }
 
-    public static IGetItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
+    public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
     {
       return new ReadItemByIdRequestBuilder(itemId);
     }
 
-    public static IGetItemRequestParametersBuilder<IReadItemsByPathRequest> ReadItemsRequestWithPath(string itemPath)
+    public static IGetVersionedItemRequestParametersBuilder<IReadItemsByPathRequest> ReadItemsRequestWithPath(string itemPath)
     {
       return new ReadItemByPathRequestBuilder(itemPath);
     }
