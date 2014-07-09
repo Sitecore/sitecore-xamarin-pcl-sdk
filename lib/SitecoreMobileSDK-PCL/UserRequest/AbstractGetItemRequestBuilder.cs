@@ -1,12 +1,12 @@
-﻿using System;
-using Sitecore.MobileSDK.Validators;
-
-
+﻿
 namespace Sitecore.MobileSDK
 {
+  using System;
+  using System.Linq;
   using System.Collections.Generic;
 
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
 
@@ -35,7 +35,7 @@ namespace Sitecore.MobileSDK
 
     public IGetItemRequestParametersBuilder<T> Version (string itemVersion)
     {
-      this.itemSourceAccumulator = new ItemSourcePOD (
+      this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
         this.itemSourceAccumulator.Language,
         itemVersion);
@@ -45,7 +45,7 @@ namespace Sitecore.MobileSDK
 
     public IGetItemRequestParametersBuilder<T> Payload(PayloadType payload)
     {
-      this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields );
+      this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields);
       return this;
     }
 
@@ -62,11 +62,11 @@ namespace Sitecore.MobileSDK
         scopeParameters = this.queryParameters.ScopeParameters.ShallowCopy ();
       }
       scopeParameters.AddScope(scope);
-      this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields );
+      this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields);
       return this;
     }
 
-    public IGetItemRequestParametersBuilder<T> AddFields( ICollection<string> fields )
+    public IGetItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
     {
       if (null == fields)
       {
@@ -77,6 +77,11 @@ namespace Sitecore.MobileSDK
         return this;
       }
 
+      Func<string, bool> fieldNameValidator = 
+        fieldName => !string.IsNullOrEmpty(fieldName);
+      var validFields = fields.Where(fieldNameValidator).ToList();
+
+
 
       ICollection<string> currentFields = this.queryParameters.Fields;
       if (null == currentFields)
@@ -86,14 +91,14 @@ namespace Sitecore.MobileSDK
 
 
       int myFieldsCount = currentFields.Count;
-      int newFieldsCount = fields.Count;
+      int newFieldsCount = validFields.Count;
 
       int appendedFieldsCount = myFieldsCount + newFieldsCount;
       string[] newFields = new string[appendedFieldsCount];
 
 
       currentFields.CopyTo( newFields, 0 );
-      fields.CopyTo( newFields, myFieldsCount );
+      validFields.CopyTo( newFields, myFieldsCount );
 
       if (DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields))
       {
