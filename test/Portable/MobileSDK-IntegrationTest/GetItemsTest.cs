@@ -10,11 +10,11 @@ namespace MobileSDKIntegrationTest
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
 
-//  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-//  using System.IO;
-//  using System.Threading;
-//  using MonoTouch.UIKit;
-//  using MonoTouch.Foundation;
+  //  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  //  using System.IO;
+  //  using System.Threading;
+  //  using MonoTouch.UIKit;
+  //  using MonoTouch.Foundation;
 
   [TestFixture]
   public class GetItemsTest
@@ -39,44 +39,44 @@ namespace MobileSDKIntegrationTest
       this.testData = null;
     }
 
-//    [Test]
-//    public async void TestGetMediaItem()
-//    {
-//      // @igk !!! TEMPORARY TEST FOR CUSTOM USE, DO NOT DELETE, PLEASE !!!
-//      IDownloadMediaOptions options = new MediaOptionsBuilder()
-//        .SetDisplayAsThumbnail(true)
-//        .Build();
-//
-//      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
-//        .DownloadOptions(options)
-//        .Database("master")
-//        .Build();
-//        
-//      var response = await this.sessionAuthenticatedUser.DownloadResourceAsync(request);
-//     
-//      byte[] data;
-//
-//      using (BinaryReader br = new BinaryReader(response))
-//      {
-//        data = br.ReadBytes((int)response.Length);
-//      }
-//
-//      UIImage image = null;
-//      image = new UIImage(NSData.FromArray(data));
-//      //string text = reader.ReadToEnd();
-//
-//      var documentsDirectory = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-//      string jpgFilename = System.IO.Path.Combine (documentsDirectory, "Photo.jpg"); // hardcoded filename, overwrites each time
-//      NSData imgData = image.AsJPEG();
-//      NSError err = null;
-//      if (imgData.Save(jpgFilename, false, out err))
-//      {
-//        Console.WriteLine("saved as " + jpgFilename);
-//      } else {
-//        Console.WriteLine("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
-//      }
-//     
-//    }
+    //    [Test]
+    //    public async void TestGetMediaItem()
+    //    {
+    //      // @igk !!! TEMPORARY TEST FOR CUSTOM USE, DO NOT DELETE, PLEASE !!!
+    //      IDownloadMediaOptions options = new MediaOptionsBuilder()
+    //        .SetDisplayAsThumbnail(true)
+    //        .Build();
+    //
+    //      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
+    //        .DownloadOptions(options)
+    //        .Database("master")
+    //        .Build();
+    //        
+    //      var response = await this.sessionAuthenticatedUser.DownloadResourceAsync(request);
+    //     
+    //      byte[] data;
+    //
+    //      using (BinaryReader br = new BinaryReader(response))
+    //      {
+    //        data = br.ReadBytes((int)response.Length);
+    //      }
+    //
+    //      UIImage image = null;
+    //      image = new UIImage(NSData.FromArray(data));
+    //      //string text = reader.ReadToEnd();
+    //
+    //      var documentsDirectory = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+    //      string jpgFilename = System.IO.Path.Combine (documentsDirectory, "Photo.jpg"); // hardcoded filename, overwrites each time
+    //      NSData imgData = image.AsJPEG();
+    //      NSError err = null;
+    //      if (imgData.Save(jpgFilename, false, out err))
+    //      {
+    //        Console.WriteLine("saved as " + jpgFilename);
+    //      } else {
+    //        Console.WriteLine("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
+    //      }
+    //     
+    //    }
 
     [Test]
     public async void TestGetItemById()
@@ -221,7 +221,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemByNullId()
     {
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = this.GetItemById(null);
         await task;
@@ -233,7 +233,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemByNullPath()
     {
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = this.GetItemByPath(null);
         await task;
@@ -245,7 +245,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemByNullQuery()
     {
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = this.GetItemByQuery(null);
         await task;
@@ -257,7 +257,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemByEmptyPath()
     {
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = this.GetItemByPath("");
         await task;
@@ -269,7 +269,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemByEmptyQuery()
     {
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = this.GetItemByQuery("");
         await task;

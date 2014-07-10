@@ -17,6 +17,7 @@
   {
     private TestEnvironment testData;
     private ScApiSession session;
+    const string SitecoreMouseIconPath = "/sitecore/media library/images/mouse-icon";
 
     [SetUp]
     public void Setup()
@@ -91,7 +92,7 @@
     [Test]
     public async void TestGetMediaWithPngExtension()
     {
-      const string MediaPath = "/sitecore/media library/Images/mouse-icon";
+      const string MediaPath = SitecoreMouseIconPath;
       const string Db = "master";
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
@@ -331,7 +332,8 @@
     [Test]
     public async void TestGetMediaFromDifferentDb()
     {
-      const string Path = "/sitecore/media library/images/mouse-icon";
+
+      const string Path = SitecoreMouseIconPath;
       var requestFromMasterDb = ItemWebApiRequestBuilder.ReadMediaItemRequest(Path)
         .Database("master")
         .Build();
@@ -427,6 +429,66 @@
 
       Assert.AreEqual(5257, ms.Length);
     }
+
+    [Test]
+    public async void TestGetMediaWithOverridenDatabase()
+    {
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(SitecoreMouseIconPath)
+        .Database("web")
+        .Database("web")
+        .Database("master")
+        .Build();
+      var response = await this.session.DownloadResourceAsync(request);
+
+      var ms = new MemoryStream();
+      response.CopyTo(ms);
+      Assert.True(1 < ms.Length);
+    }
+
+    [Test] 
+    public async void TestGetMediaWithEmptyDatabase()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database("").Build());
+      Assert.AreEqual("AbstractGetdMediaRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public async void TestGetMediaWithNullDatabase()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(null).Build());
+      Assert.AreEqual("AbstractGetdMediaRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public async void TestGetMediaWithSpacesInLanguage()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language("  ").Build());
+      Assert.AreEqual("AbstractGetdMediaRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public async void TestGetMediaWithNullLanguage()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language(null).Build());
+      Assert.AreEqual("AbstractGetdMediaRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public async void TestGetMediaWithEmptyVersion()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version("").Build());
+      Assert.AreEqual("AbstractGetdMediaRequestBuilder.Version : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public async void TestGetMediaWithNullVersion()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(null).Build());
+      Assert.AreEqual("AbstractGetdMediaRequestBuilder.Version : The input cannot be null or empty", exception.Message);
+    }
+
+    //TODO: add tests to check version and language overriden
+    //TODO: add tests for MediaOptions (null, empty, override)
 
     private async Task<string[]> GetMediaFieldAsStringArray(string path)
     {
