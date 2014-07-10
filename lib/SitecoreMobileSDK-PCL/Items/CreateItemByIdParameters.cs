@@ -21,11 +21,12 @@ namespace Sitecore.MobileSDK
       this.CreateParameters = createParameters;
     }
 
-    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
+    public virtual ICreateItemByIdRequest DeepCopyCreateItemByIdRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
       IQueryParameters payload = null;
+      CreateItemParameters createParameters = null;
 
       if (null != this.SessionSettings)
       {
@@ -42,12 +43,22 @@ namespace Sitecore.MobileSDK
         payload = this.QueryParameters.DeepCopy();
       }
 
-      return new ReadItemsByIdParameters(this.SessionSettings, this.ItemSource, this.QueryParameters, this.ItemId);
+      if (null != this.CreateParameters)
+      {
+        createParameters = this.CreateParameters.ShallowCopy();
+      }
+
+      return new CreateItemByIdParameters(connection, itemSrc, payload, createParameters, this.ItemId);
+    }
+
+    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
+    {
+      return this.DeepCopyCreateItemByIdRequest();
     }
 
     public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
     {
-      return this.DeepCopyGetItemByIdRequest();
+      return this.DeepCopyCreateItemByIdRequest();
     }
 
 
