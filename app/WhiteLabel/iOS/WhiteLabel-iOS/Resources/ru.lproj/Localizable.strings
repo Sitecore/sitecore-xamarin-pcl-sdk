@@ -51,6 +51,8 @@
 "Type Media Path" = "*** * ** *****";
 "Item has no children" = "*** ** * ******";
 "children count is" = "********* *****";
+"The item created successfully" = "*** ****** ** **";
+"Item path: " = "**** ** ";
 
 //settings screen placeholders
 "Instance Url" = "***********";

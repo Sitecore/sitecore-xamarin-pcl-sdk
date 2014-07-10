@@ -28,14 +28,8 @@ namespace WhiteLabeliOS
 
 		partial void OnCreateItemButtonTapped (MonoTouch.Foundation.NSObject sender)
 		{
-			this.saveButton.Enabled = true;
 			//AlertHelper.ShowLocalizedNotImlementedAlert();
       this.SendRequest();
-		}
-
-		partial void OnSaveItemButtonTapped (MonoTouch.Foundation.NSObject sender)
-		{
-			AlertHelper.ShowLocalizedNotImlementedAlert();
 		}
 
     private async void SendRequest()
@@ -44,9 +38,11 @@ namespace WhiteLabeliOS
       {
         ScApiSession session = this.instanceSettings.GetSession();
 
-        var request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.pathField.Text)
           .ItemTemplate("Sample/Sample Item")
-          .ItemName(titleField.Text)
+          .ItemName(this.nameField.Text)
+          .AddFieldsRawValuesByName("Title", titleField.Text)
+          .AddFieldsRawValuesByName("Text", textField.Text)
           .Build();
 
         this.ShowLoader();
@@ -54,7 +50,8 @@ namespace WhiteLabeliOS
         ScItemsResponse response = await session.CreateItemAsync(request);
         if (response.Items.Any())
         {
-          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "OK");
+          ISitecoreItem item = response.Items[0];
+          AlertHelper.ShowLocalizedAlertWithOkOption("The item created successfully", "Item path: " + item.Path);
         }
         else
         {
