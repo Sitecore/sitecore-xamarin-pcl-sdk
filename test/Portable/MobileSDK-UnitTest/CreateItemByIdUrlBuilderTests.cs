@@ -1,28 +1,25 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
-
-  using Sitecore.MobileSDK.UserRequest;
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK;
 
   [TestFixture]
-  public class ItemByIdUrlBuilderTests
+  public class CreateItemByIdUrlBuilderTests
   {
-    private ItemByIdUrlBuilder builder;
-    private ISessionConfig sessionConfig;
+    private CreateItemByIdUrlBuilder builder;
     private ISessionConfig sitecoreShellConfig;
     private QueryParameters payload;
+    private UserRequestMerger requestMerger;
 
     [SetUp]
     public void SetUp()
@@ -30,20 +27,16 @@ namespace Sitecore.MobileSdkUnitTest
       IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
       IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
 
-      this.builder = new ItemByIdUrlBuilder(restGrammar, webApiGrammar);
+      this.builder = new CreateItemByIdUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemWebApiVersion = "v1";
-      mutableSessionConfig.InstanceUrl = "sitecore.net";
-      mutableSessionConfig.Site = null;
-      this.sessionConfig = mutableSessionConfig;
-
-
-      mutableSessionConfig = new SessionConfigPOD();
       mutableSessionConfig.ItemWebApiVersion = "v234";
       mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
       mutableSessionConfig.Site = "/sitecore/shell";
       this.sitecoreShellConfig = mutableSessionConfig;
+
+      ItemSource source = ItemSource.DefaultSource();
+      this.requestMerger = new UserRequestMerger(mutableSessionConfig, source);
 
       this.payload = new QueryParameters( PayloadType.Min, null, null );
     }
@@ -52,266 +45,168 @@ namespace Sitecore.MobileSdkUnitTest
     public void TearDown()
     {
       this.builder = null;
-      this.sessionConfig = null;
     }
-
+      
     [Test]
-    public void TestNullPayloadIsNotReplacedWithDefault()
+    public void TestCorrectParamsWithoutFields()
     {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-      mutableParameters.QueryParameters = new QueryParameters(null, null, null);
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemTemplate("Sample/Sample Item")
+        .ItemName("item name")
+        .Build();
 
-      IReadItemsByIdRequest parameters = mutableParameters;
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
 
-      string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://sitecore.net/-/item/v1?sc_database=web&language=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+      string result = this.builder.GetUrlForRequest(autocompletedRequest);
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=item%20name";
+
+      string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
+      string expectedFieldsResult = "";
 
       Assert.AreEqual(expected, result);
+      Assert.AreEqual(expectedFieldsResult, fieldsResult);
     }
 
-
     [Test]
-    public void TestNullPayloadStructIsIgnored()
+    public void TestCorrectParamsWithFields()
     {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-      mutableParameters.QueryParameters = null;
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemTemplate("Sample/Sample Item")
+        .ItemName("item name")
+        .AddFieldsRawValuesByName("field1","value1")
+        .AddFieldsRawValuesByName("field2","value2")
+        .Build();
 
-      IReadItemsByIdRequest parameters = mutableParameters;
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
 
-      string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://sitecore.net/-/item/v1?sc_database=web&language=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+      string result = this.builder.GetUrlForRequest(autocompletedRequest);
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=item%20name";
+
+      string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
+      string expectedFieldsResult = "field1=value1&field2=value2";
 
       Assert.AreEqual(expected, result);
+      Assert.AreEqual(expectedFieldsResult, fieldsResult);
     }
 
     [Test]
-    public void TestInvaliItemIdCausesArgumentException()
+    public void TestFieldsValuesIsCaseInsensitive()
     {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "someInvalidItemId";
-      mutableParameters.QueryParameters = this.payload;
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemTemplate("Sample/Sample Item")
+        .ItemName("item name")
+        .AddFieldsRawValuesByName("field1","VaLuE1")
+        .AddFieldsRawValuesByName("field2","VaLuE2")
+        .Build();
 
-      IReadItemsByIdRequest parameters = mutableParameters;
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
 
-      TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
+      string result = this.builder.GetUrlForRequest(autocompletedRequest);
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=item%20name";
+
+      string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
+      string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2";
+
+      Assert.AreEqual(expected, result);
+      Assert.AreEqual(expectedFieldsResult, fieldsResult);
+    }
+
+    [Test]
+    public void TestItemNameIsCaseInsensitive()
+    {
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemTemplate("Sample/Sample Item")
+        .ItemName("ItEmNaMe")
+        .AddFieldsRawValuesByName("field1","VaLuE1")
+        .AddFieldsRawValuesByName("field2","VaLuE2")
+        .Build();
+
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
+
+      string result = this.builder.GetUrlForRequest(autocompletedRequest);
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=ItEmNaMe";
+
+      string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
+      string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2";
+
+      Assert.AreEqual(expected, result);
+      Assert.AreEqual(expectedFieldsResult, fieldsResult);
+    }
+
+    [Test]
+    public void TestFieldWithDoublicatedKeyWillCrash()
+    {
+      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemTemplate("Sample/Sample Item")
+        .ItemName("ItEmNaMe")
+        .AddFieldsRawValuesByName("field1", "VaLuE1")
+        .AddFieldsRawValuesByName("field2", "VaLuE2");
+        
+      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
       Assert.Throws<ArgumentException>(action);
     }
 
     [Test]
-    public void TestUrlBuilderExcapesArgs()
+    public void TestAppendingFields()
     {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-      mutableParameters.QueryParameters = this.payload;
+      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemTemplate("Sample/Sample Item")
+        .ItemName("ItEmNaMe")
+        .AddFieldsRawValuesByName("field1", "VaLuE1")
+        .AddFieldsRawValuesByName("field2", "VaLuE2");
 
-      IReadItemsByIdRequest parameters = mutableParameters;
-
-      string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://sitecore.net/-/item/v1?sc_database=web&language=en&payload=min&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
-
-      Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    public void TestUrlBuilderAddsItemSource()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-      mutableParameters.QueryParameters = this.payload;
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-
-      string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&payload=min&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
-
-      Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    public void TestUrlBuilderThrowsExceptionForNullItemId()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = null;
-      mutableParameters.QueryParameters = this.payload;
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-
-      TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
-
-      Assert.Throws<ArgumentNullException>(action);
-    }
-
-    [Test]
-    public void TestBracesIdWithoutTextIsInvalid()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{}";
-      mutableParameters.QueryParameters = this.payload;
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-
-      TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
+      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
       Assert.Throws<ArgumentException>(action);
     }
 
     [Test]
-    public void TestOptionalSourceInSessionAndUserRequest()
+    public void TestNameIsMandatoryField()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemTemplate("Sample/Sample Item")
+        .AddFieldsRawValuesByName("field1", "VaLuE1")
+        .AddFieldsRawValuesByName("field2", "VaLuE2");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}").Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
-
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
-
-      string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?sc_itemid=%7bxxx-yyy-zzz%7d";
-
-      Assert.AreEqual(expected, result);
+      TestDelegate action = () => requestBuilder.Build();
+      Assert.Throws<ArgumentException>(action);
     }
 
     [Test]
-    public void TestOptionalSourceAndExplicitPayload()
+    public void TestTemplateIsMandatoryField()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemName("ItEmNaMe")
+        .AddFieldsRawValuesByName("field1", "VaLuE1")
+        .AddFieldsRawValuesByName("field2", "VaLuE2");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Payload(PayloadType.Full)
+      TestDelegate action = () => requestBuilder.Build();
+      Assert.Throws<ArgumentException>(action);
+    }
+
+    [Test]
+    public void TestFieldsAppending()
+    {
+      Dictionary<string,string> fields = new Dictionary<string,string>();
+      fields.Add("field1","VaLuE1");
+      fields.Add("field2","VaLuE2");
+
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .ItemTemplate("Sample/Sample Item")
+        .ItemName("ItEmNaMe")
+        .AddFieldsRawValuesByName(fields)
+        .AddFieldsRawValuesByName("field3","VaLuE3")
         .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
 
-      string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?payload=full&sc_itemid=%7bxxx-yyy-zzz%7d";
+      string result = this.builder.GetUrlForRequest(autocompletedRequest);
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=ItEmNaMe";
 
-      Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    public void TestExplicitDatabase()
-    {
-      var anonymous = new SessionConfig("localhost", null, null);
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Database("master")
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
-
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
-
-      string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?sc_database=master&sc_itemid=%7bxxx-yyy-zzz%7d";
+      string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
+      string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2&field3=VaLuE3";
 
       Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    public void TestDatabaseAndExplicitLanguageAndPayload()
-    {
-      var anonymous = new SessionConfig("localhost", null, null);
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Language("da")
-        .Payload(PayloadType.Content)
-        .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
-
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
-
-      string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?language=da&payload=content&sc_itemid=%7bxxx-yyy-zzz%7d";
-
-      Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    public void TestDuplicateFieldsCauseException()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-
-      string[] fields = { "x", "y", "x" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
-      mutableParameters.QueryParameters = duplicatedFields;
-
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
-    }
-
-
-    [Test]
-    public void TestDuplicateFieldsWithDifferentCaseCauseException()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-
-      string[] fields = { "x", "y", "X" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
-      mutableParameters.QueryParameters = duplicatedFields;
-
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
-    }
-
-    [Test]
-    public void TestNullFieldEntriesCaseCauseException()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-
-      string[] fields = { "x", "y", null };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
-      mutableParameters.QueryParameters = duplicatedFields;
-
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
-    }
-
-    [Test]
-    public void TestEmptyFieldEntriesCaseCauseException()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-
-      string[] fields = { "x", "y", "" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
-      mutableParameters.QueryParameters = duplicatedFields;
-
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+      Assert.AreEqual(expectedFieldsResult, fieldsResult);
     }
   }
 }
