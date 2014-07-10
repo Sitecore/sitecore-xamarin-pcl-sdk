@@ -6,13 +6,29 @@
 "createEditItem" = "******************";
 "uploadImageVC" = "******************";
 "getItemByQuery" = "************";
+"getMediaItem" = "**********";
 "Master" = "*********";
+
+"MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
+
 
 //titles
 "Alert" = "*******";
 "Error" = "*******";
 "Message" = "********";
 "OK" = "***";
+"Items List" = "********";
+
+
+"PAYLOAD_BUTTON_MIN"     = "Min";
+"PAYLOAD_BUTTON_CONTENT" = "Content";
+"PAYLOAD_BUTTON_FULL"    = "Full";
+
+
+"SCOPE_BUTTON_SELF"   = "Self";
+"SCOPE_BUTTON_PARENT" = "Parent";
+"SCOPE_BUTTON_CHILD"  = "Child";
+
 
 //messages
 "Loading Data" = "************...";
@@ -29,8 +45,13 @@
 "item title is" = "**************";
 "items count is" = "******* *** **";
 "Field Raw Value" = "*** * * * * * *";
-
+"Please type media path" = "*** * ** * ****";
+"Incorect width or height value" = "****** * * * ** * *****";
 "Type query" = "*************";
+"Type Media Path" = "*** * ** *****";
+"Item has no children" = "*** ** * ******";
+"children count is" = "********* *****";
+
 //settings screen placeholders
 "Instance Url" = "***********";
 "Password" = "***********";
@@ -43,3 +64,6 @@
 "Type item ID" = "********";
 "Get Item children" = "*************";
 "Get Item" = "********";
+"Download" = "*********";
+"Height:" = "*****";
+"Width:" = "****";

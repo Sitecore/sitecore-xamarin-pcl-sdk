@@ -29,6 +29,8 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 
+      this.Title = NSBundle.MainBundle.LocalizedString("MASTER_VIEW_CONTROLLER_TITLE", null);
+
 			this.settings = new InstanceSettings();
 			this.InitFeaturesList ();
 
@@ -64,7 +66,7 @@ namespace WhiteLabeliOS
             this.features.Insert(0, "createEditItem");
             this.features.Insert(0, "uploadImageVC");
             this.features.Insert(0, "getItemByQuery");
-
+			this.features.Insert(0, "getMediaItem");
         }
         #endregion Navigation
 

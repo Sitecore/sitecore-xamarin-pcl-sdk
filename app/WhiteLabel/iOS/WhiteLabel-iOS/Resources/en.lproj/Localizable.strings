@@ -1,18 +1,35 @@
 ﻿//features
 "Settings" = "Settings";
 "getItemByPath" = "Item by Path";
-"getItemById" = "Item by ID & item children";
+"getItemById" = "Item by ID & Scope";
 "deleteItemById" = "Delete Item by ID";
 "createEditItem" = "Create & Edit Item";
 "uploadImageVC" = "Upload Image";
 "getItemByQuery" = "Item by Query";
+"getMediaItem" = "Download Image";
 "Master" = "Master";
+
+"MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
+
 
 //titles
 "Alert" = "Alert";
 "Error" = "Error";
 "Message" = "Message";
 "OK" = "OK";
+"Items List" = "Items List";
+
+
+"PAYLOAD_BUTTON_MIN"     = "Min";
+"PAYLOAD_BUTTON_CONTENT" = "Content";
+"PAYLOAD_BUTTON_FULL"    = "Full";
+
+
+"SCOPE_BUTTON_SELF"   = "Self";
+"SCOPE_BUTTON_PARENT" = "Parent";
+"SCOPE_BUTTON_CHILD"  = "Child";
+
+
 
 //messages
 "Loading Data" = "Loading Data...";
@@ -21,17 +38,21 @@
 "Not implemented yet" = "Not implemented yet";
 "Video uploading is not supported" = "Video uploading is not supported";
 
-"Please type item Id" = "Please type item Id";
-"Please type item path" = "Please type item path";
-"Please type query" = "Please type query";
+"Please type item Id" = "Item id cannot be empty";
+"Please type item path" = "Item path cannot be empty";
+"Please type query" = "Sitecore query cannot be empty";
 
 "Item received" = "Item received";
-"Item is not exist" = "Item is not exist";
+"Item is not exist" = "Item does not exist";
 "item title is" = "item title is";
 "items count is" = "items count is";
 "Field Raw Value" = "Field Raw Value";
-
+"Please type media path" = "Media path cannot be empty";
+"Incorect width or height value" = "Incorect width or height value";
 "Type query" = "Type Sitecore query:";
+"Type Media Path" = "Type Media Path";
+"Item has no children" = "Item has no children";
+"children count is" = "children count is";
 
 //settings screen placeholders
 "Instance Url" = "Instance Url";
@@ -45,3 +66,6 @@
 "Type item ID" = "Type item ID";
 "Get Item children" = "Get Item children";
 "Get Item" = "Get Item";
+"Download" = "Download";
+"Height:" = "Height:";
+"Width:" = "Width:";

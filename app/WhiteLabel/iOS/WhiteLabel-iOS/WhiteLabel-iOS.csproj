@@ -142,6 +142,21 @@
     </Compile>
     <Compile Include="FieldsTableView\FieldsDataSource.cs" />
     <Compile Include="FieldsTableView\FieldCellSelectionHandler.cs" />
+    <Compile Include="ITemTasks\GetMediaItemViewController.cs" />
+    <Compile Include="ITemTasks\GetMediaItemViewController.designer.cs">
+      <DependentUpon>GetMediaItemViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.cs" />
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs">
+      <DependentUpon>BaseTaskTableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\PayloadSelectorViewHelper.cs" />
+    <Compile Include="FieldsTableView\ItemsDataSource.cs" />
+    <Compile Include="FieldsTableView\ItemCellSelectionHandler.cs" />
+    <Compile Include="ITemTasks\FieldsViewController.cs" />
+    <Compile Include="ITemTasks\FieldsViewController.designer.cs">
+      <DependentUpon>FieldsViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />

@@ -1,5 +1,4 @@
-﻿
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
   using Sitecore.MobileSDK;
@@ -12,7 +11,7 @@ namespace MobileSDKIntegrationTest
     {
       var result = new TestEnvironment
       {
-        InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7119",
+        InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7220",
         ShellSite = "/sitecore/shell"
       };
 
@@ -43,6 +42,10 @@ namespace MobileSDKIntegrationTest
       result.Items.TestFieldsItem.DisplayName = "Test Fields";
       result.Items.TestFieldsItem.Template = "Test Templates/Sample fields";
 
+      result.Items.AllowedItem.Id = "{387B69B2-B2EA-4618-8C3E-2785DC0469A7}";
+      result.Items.AllowedItem.Path = "/sitecore/content/Home/Allowed_Parent/Allowed_Item";
+      result.Items.AllowedItem.DisplayName = "Allowed_Item";
+
       return result;
     }
 
@@ -66,7 +69,7 @@ namespace MobileSDKIntegrationTest
       public Item Home = new Item();
       public Item ItemWithVersions = new Item();
       public Item TestFieldsItem = new Item();
-      public Item MediaLibrary = new Item();
+      public Item AllowedItem = new Item();
     }
 
     public class Item
@@ -83,7 +86,7 @@ namespace MobileSDKIntegrationTest
       public string Password { get; set; }
     }
 
-    public void AssertItemsAreEqual(TestEnvironment.Item expected, ISitecoreItem actual)
+    public void AssertItemsAreEqual(Item expected, ISitecoreItem actual)
     {
       if (null != expected.DisplayName)
       {
@@ -120,10 +123,6 @@ namespace MobileSDKIntegrationTest
     public ScApiSession GetSession(string url, string username, string password, ItemSource itemSource = null, string site = null)
     {
       var config = new SessionConfig(url, username, password, site);
-      if (itemSource == null)
-      {
-        itemSource = ItemSource.DefaultSource();
-      }
       var session = new ScApiSession(config, itemSource);
       return session;
     }

@@ -1,9 +1,11 @@
 ﻿namespace MobileSDKIntegrationTest
 {
+  using System;
   using System.Collections.ObjectModel;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
@@ -100,16 +102,17 @@
     [Test]
     public async void TestGetHtmlField()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Content).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields(new Collection<string>{"Text"}).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
       ISitecoreItem item = response.Items[0];
 
-      Assert.AreEqual(2, item.Fields.Count);
-      Assert.AreEqual("Text", item.Fields[1].Name);
-      Assert.True(item.Fields[1].RawValue.Contains("<div>Welcome to Sitecore!</div>"));
+     
+      Assert.AreEqual(1, item.Fields.Count);
+      Assert.AreEqual("Text", item.Fields[0].Name);
+      Assert.True(item.FieldWithName("Text").RawValue.Contains("<div>Welcome to Sitecore!</div>"));
     }
 
     [Test]
@@ -133,14 +136,18 @@
     }
 
     [Test]
-    public async void TestGetNotExistedFields()
+    public async void TestGetNotExistedField()
     {
       var fields = new Collection<string>
       {
         "",
       };
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.TestFieldsItem.Path).AddFields(fields).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.TestFieldsItem.Path)
+        .AddFields(fields)
+        .Payload(PayloadType.Default)
+        .Build();
+
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -155,7 +162,7 @@
       {
         "Title"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Language("en").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -189,7 +196,7 @@
     {
       var fields = new Collection<string>
       {
-        "!@#$%^&*()_+*/"
+        ".!@#$%^&*()_+*/"
       };
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Language("da").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
@@ -204,7 +211,9 @@
     [Test]
     public async void TestGetSeveralItemsByQueryWithContentFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*").Payload(PayloadType.Full).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*")
+        .Payload(PayloadType.Content)
+        .Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
@@ -237,7 +246,7 @@
     }
 
     [Test]
-    public async void TestGetItemByIdWithAllFieldsWithoutReadAcessToSomeFields()
+    public async void TestGetItemByIdWithAllFieldsWithoutReadAccessToSomeFields()
     {
       var sessionCreatorexUser = testData.GetSession(testData.InstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password);
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Payload(PayloadType.Full).Build();
@@ -251,12 +260,7 @@
     [Test]
     public async void TestGetFieldsWithSymbolsAndSpacesInNameFields()
     {
-      var fields = new Collection<string>
-      {
-        "Normal Text",
-       "__Owner"  
-      };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").AddFields(fields).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").AddFields("Normal Text", "__Owner").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -268,10 +272,63 @@
       testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
       ISitecoreItem item = response.Items[0];
 
-
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("Normal Text", item.FieldWithName("Normal Text").Name);
       Assert.AreEqual("sitecore\\admin", item.FieldWithName("__Owner").RawValue);
+    }
+
+    [Test]
+    public void TestGetItemByIdWithDuplicateFields()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFields("Title", "Text").AddFields("title").Build());
+
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemByPathWithDuplicateFields()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields("Text", "Text").Build());
+
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemByQueryWithDuplicateAndEmptyField()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFields("Title", "", "Title").Build());
+
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+    }
+
+    [Test]
+    public async void TestGetItemByIdWithDefaultPayload()     // ALR: PayloadType.Default constant should be removed
+    {
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Payload(PayloadType.Default).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      var item = response.Items[0];
+
+      Assert.AreEqual(0, item.Fields.Count);
+    }
+
+    [Test]
+    public async void TestGetItemByIdWithoutPayload()     
+    {
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      var item = response.Items[0];
+
+      Assert.AreEqual(2, item.Fields.Count);
+      Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
     }
   }
 }

@@ -5,8 +5,10 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
@@ -36,7 +38,7 @@
     }
 
     [Test]
-    public async void TestGetItemWithNotExistedLanguage()
+    public async void TestGetItemWithNotExistentLanguage()
     {
       const string Db = "web";
       const string Language = "da";
@@ -52,35 +54,37 @@
     }
 
     [Test]
-    public void TestGetItemWithNullLanguage()
+    public async void TestGetItemWithNullLanguage()
     {
-      const string Db = "master";
+      var itemSource = new ItemSource("master", null, "1");
+      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = new ScApiSession(config, itemSource);
 
-      TestDelegate testCode = () =>
-      {
-        var itemSource = new ItemSource(Db, null, "1");
-        Assert.IsNull(itemSource, "unreachable code");
-        Assert.Fail("unreachable code");
-      };
-      Exception exception = Assert.Throws<ArgumentNullException>(testCode);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Build();
+
+      var itemRequest = await session.ReadItemAsync(request);
+      Assert.IsNotNull(itemRequest);
+      Assert.AreEqual(1, itemRequest.ResultCount);
     }
 
     [Test]
-    public void TestGetItemWithNullDb()
+    public async void TestGetItemWithNullDb()
     {
-      const string Db = null;
+      var itemSource = new ItemSource(null, "en", "1");
+      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = new ScApiSession(config, itemSource);
 
-      TestDelegate testCode = () =>
-      {
-        var itemSource = new ItemSource(Db, "en", "1");
-        Assert.IsNull(itemSource, "unreachable code");
-        Assert.Fail("unreachable code");
-      };
-      Exception exception = Assert.Throws<ArgumentNullException>(testCode);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Build();
+
+      var itemRequest = await session.ReadItemAsync(request);
+      Assert.IsNotNull(itemRequest);
+      Assert.AreEqual(1, itemRequest.ResultCount);
     }
 
     [Test]
-    public async void TestGetItemWithMasterDbLanguageAndVersion()
+    public async void TestGetItemWithMasterDb()
     {
       const string Db = "master";
       var session = this.CreateAdminSession();
@@ -95,7 +99,10 @@
 
     private async Task<ScItemsResponse> GetHomeItem(ScApiSession session, string db = null)
     {
-      this.homeItemRequestBuilder.Database(db);
+      if (db != null)
+      {
+        this.homeItemRequestBuilder.Database(db);
+      }
       var response = await GetItemByIdWithRequestBuilder(this.homeItemRequestBuilder, session);
       return response;
     }
@@ -149,7 +156,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, Language, "1");
+      var expectedSource = new ItemSource(Db, Language, "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -169,7 +176,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", "1");
+      var expectedSource = new ItemSource(Db, "en", "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -182,10 +189,10 @@
       var session = this.CreateAdminSession();
 
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = GetItemByIdWithRequestBuilder(requestBuilder, session);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -209,7 +216,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", "1");
+      var expectedSource = new ItemSource(Db, "en", "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -224,10 +231,10 @@
       var session = this.CreateAdminSession(itemSource);
 
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -245,10 +252,10 @@
       var session = this.CreateAdminSession(itemSource);
 
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -270,7 +277,7 @@
     [Test]
     public async void TestGetItemWithWebSite()
     {
-      const string Site = "/sitecore/website";
+      const string Site = "/";
 
       var session = this.CreateCreatorexSession(Site);
       var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
@@ -283,7 +290,7 @@
     [Test]
     public async void TestGetItemWithShellSiteWithoutDomain()
     {
-      const string Site = "/website";
+      const string Site = "/";
 
       var session = this.CreateCreatorexSession(Site);
       var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
@@ -310,10 +317,10 @@
       const string Site = "/@$%/";
       var session = this.CreateCreatorexSession(Site);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 

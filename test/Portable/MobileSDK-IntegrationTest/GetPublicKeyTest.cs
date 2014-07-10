@@ -5,8 +5,7 @@ namespace MobileSDKIntegrationTest
   using NUnit.Framework;
 
   using System;
-  using System.Threading.Tasks;
-
+  using System.Net.Http;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
@@ -46,26 +45,20 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public void TestAuthenticateToInstanceWithoutHttp()
+    public async void TestMissingHttpIsAutocompletedDuringAuthentication()
     {
-      var session = testData.GetSession("mobiledev1ua1.dk.sitecore.net:7119", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
 
-      TestDelegate testCode = () =>
-      {
-        var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
-      };
-      Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
-
-      Assert.True(exception.Message.Contains("Public key not received properly"));
-      Assert.AreEqual("System.ArgumentException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Only 'http' and 'https' schemes are allowed."));
+      var session = testData.GetSession(urlWithoutHttp, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var certrificate = await session.ReadItemAsync(this.requestWithItemId);
+      Assert.IsNotNull(certrificate);
     }
 
     [Test]
     public async void TestAuthenticateWithSlashInTheEnd()
     {
-      var session = testData.GetSession("http://mobiledev1ua1.dk.sitecore.net:7119/", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      string urlWithSlahInTheEnd = testData.InstanceUrl+'/';
+      var session = testData.GetSession(urlWithSlahInTheEnd, testData.Users.Admin.Username, testData.Users.Admin.Password);
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
@@ -77,16 +70,15 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession("http://mobiledev1ua1.dddk.sitecore.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-      Assert.True(exception.Message.Contains("Public key not received properly"));
-      Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request."));
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+      Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
     }
 
     [Test]
@@ -99,16 +91,17 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public void TestGetItemWithNullItemsSource()
+    public async void TestGetItemWithNullItemsSource()
     {
       var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = new ScApiSession(config, null);
 
-      TestDelegate action = () => new ScApiSession(config, null);
-      var exception = Assert.Throws<ArgumentNullException>(action, "we should get exception here");
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Build();
 
-      Assert.IsTrue(
-          exception.GetBaseException().ToString().Contains("ScApiSession.defaultSource cannot be null")
-      );
+      var itemRequest = await session.ReadItemAsync(request);
+      Assert.IsNotNull(itemRequest);
+      Assert.AreEqual(1, itemRequest.ResultCount);
     }
 
     [Test]
@@ -116,10 +109,10 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "", ItemSource.DefaultSource(), testData.ShellSite);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -133,10 +126,10 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession(testData.InstanceUrl, "sitecore\\notexistent", "notexistent", ItemSource.DefaultSource(), testData.ShellSite);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -151,10 +144,10 @@ namespace MobileSDKIntegrationTest
     {
       var session = testData.GetSession(testData.InstanceUrl, "inval|d u$er№ame", null, ItemSource.DefaultSource(), testData.ShellSite);
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 
@@ -174,10 +167,10 @@ namespace MobileSDKIntegrationTest
         testData.ShellSite);
 
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
-        Task.WaitAll(task);
+        await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
 

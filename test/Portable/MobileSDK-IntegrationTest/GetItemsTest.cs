@@ -1,4 +1,6 @@
-﻿namespace MobileSDKIntegrationTest
+﻿
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading.Tasks;
@@ -7,6 +9,12 @@
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
+
+//  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+//  using System.IO;
+//  using System.Threading;
+//  using MonoTouch.UIKit;
+//  using MonoTouch.Foundation;
 
   [TestFixture]
   public class GetItemsTest
@@ -30,6 +38,45 @@
       this.sessionAuthenticatedUser = null;
       this.testData = null;
     }
+
+//    [Test]
+//    public async void TestGetMediaItem()
+//    {
+//      // @igk !!! TEMPORARY TEST FOR CUSTOM USE, DO NOT DELETE, PLEASE !!!
+//      IDownloadMediaOptions options = new MediaOptionsBuilder()
+//        .SetDisplayAsThumbnail(true)
+//        .Build();
+//
+//      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
+//        .DownloadOptions(options)
+//        .Database("master")
+//        .Build();
+//        
+//      var response = await this.sessionAuthenticatedUser.DownloadResourceAsync(request);
+//     
+//      byte[] data;
+//
+//      using (BinaryReader br = new BinaryReader(response))
+//      {
+//        data = br.ReadBytes((int)response.Length);
+//      }
+//
+//      UIImage image = null;
+//      image = new UIImage(NSData.FromArray(data));
+//      //string text = reader.ReadToEnd();
+//
+//      var documentsDirectory = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+//      string jpgFilename = System.IO.Path.Combine (documentsDirectory, "Photo.jpg"); // hardcoded filename, overwrites each time
+//      NSData imgData = image.AsJPEG();
+//      NSError err = null;
+//      if (imgData.Save(jpgFilename, false, out err))
+//      {
+//        Console.WriteLine("saved as " + jpgFilename);
+//      } else {
+//        Console.WriteLine("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
+//      }
+//     
+//    }
 
     [Test]
     public async void TestGetItemById()
@@ -166,10 +213,10 @@
     [Test]
     public void TestGetItemByNullId()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemById(null);
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -178,10 +225,10 @@
     [Test]
     public void TestGetItemByNullPath()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemByPath(null);
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -190,10 +237,10 @@
     [Test]
     public void TestGetItemByNullQuery()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemByQuery(null);
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -202,10 +249,10 @@
     [Test]
     public void TestGetItemByEmptyPath()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemByPath("");
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -214,10 +261,10 @@
     [Test]
     public void TestGetItemByEmptyQuery()
     {
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async() =>
       {
         var task = this.GetItemByQuery("");
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<ArgumentNullException>(testCode);
@@ -248,20 +295,23 @@
       testData.AssertItemsCount(0, response);
     }
 
-    [Test] //this case should be changed for another instance
+    //TODO: test manually with preconfigured Sitecore instance
+    /*
+    [Test] 
     public void TestGetItemByQueryWithturnedOffItemWebApi()
     {
       var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 
-      TestDelegate testCode = () =>
+      TestDelegate testCode = async () =>
       {
         var task = sessionWithoutAccess.ReadItemAsync(request);
-        Task.WaitAll(task);
+        await task;
       };
 
       Assert.Throws<RsaHandshakeException>(testCode);
     }
+    */
 
     private async Task<ScItemsResponse> GetItemById(string id)
     {

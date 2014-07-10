@@ -1,19 +1,27 @@
 namespace WhiteLabelAndroid
 {
-    using Android.App;
-    using Android.Content;
+  using Android.App;
+  using Android.Content;
 
-    public class DialogHelper
+  public class DialogHelper
+  {
+    public static void ShowSimpleDialog(Context context, int titleId, int messageId)
     {
-        public static void ShowSimpleDialog(Context context, int title, string message)
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.SetTitle(title);
-            builder.SetMessage(message);
-
-            AlertDialog dialog = builder.Create();
-            dialog.SetButton("OK", (sender, args) => dialog.Dismiss());
-            dialog.Show();
-        }
+      var titleString = context.GetString(titleId);
+      var message = context.GetString(messageId);
+      ShowSimpleDialog(context, titleString, message);
     }
+
+    public static void ShowSimpleDialog(Context context, string title, string message)
+    {
+      AlertDialog.Builder builder = new AlertDialog.Builder(context);
+      builder.SetTitle(title);
+      builder.SetMessage(message);
+
+      AlertDialog dialog = builder.Create();
+      dialog.SetButton(context.GetString(Resource.String.text_button_ok),
+        (sender, args) => dialog.Dismiss());
+      dialog.Show();
+    }
+  }
 }

@@ -18,7 +18,7 @@ namespace WhiteLabeliOS
 
 
 
-	public partial class GetItemByPathViewController : BaseTaskViewController
+	public partial class GetItemByPathViewController : BaseTaskTableViewController
 	{
 
 		public GetItemByPathViewController (IntPtr handle) : base (handle)
@@ -29,8 +29,18 @@ namespace WhiteLabeliOS
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			this.TableView = this.FieldsTableView;
+
+			this.ItemPathField.Text = "/sitecore/content/Home";
 
             this.ItemPathField.ShouldReturn = this.HideKeyboard;
+
+			this.ItemPathField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item Path", null);
+			this.fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);;
+
+			string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
+			getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
+
 		}
 
 		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
@@ -48,97 +58,81 @@ namespace WhiteLabeliOS
 			}
 		}
 
+		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
+		{
+			switch (sender.SelectedSegment)
+			{
+			case 0:
+				this.currentPayloadType = PayloadType.Full;
+				break;
+			case 1:
+				this.currentPayloadType = PayloadType.Content;
+				break;
+			case 2:
+				this.currentPayloadType = PayloadType.Min;
+				break;
+			}
+		}
+
+    partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender)
+    {
+      sender.Selected = !sender.Selected;
+    }
+
 		private async void SendRequest ()
 		{
 			try
 			{
 				ScApiSession session = this.instanceSettings.GetSession();
 
-                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-                    .Payload(PayloadType.Full)
-                    .Build();
+        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+          .Payload(this.currentPayloadType)
+          .AddFields(this.fieldNameTextField.Text);
+
+        if (this.parentScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Parent);
+        }
+        if (this.selfScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Self);
+        }
+        if (this.childrenScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Children);
+        }
+
+        var request = builder.Build();
 
 				this.ShowLoader();
 
 				ScItemsResponse response = await session.ReadItemAsync(request);
-
 				
-                if (response.Items.Any())
-				{
-                    ISitecoreItem item = response.Items [0];
-                    this.ShowFieldsForItem(item);
-
-                    string message = NSBundle.MainBundle.LocalizedString("item title is", null);
-					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
-				}
-				else
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-				}
-			}
-			catch(Exception e) 
-			{
-                CleanupTableViewBindings();
-
-				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
-			}
-            finally
-            {
-                BeginInvokeOnMainThread(delegate
-                {
-                    this.FieldsTableView.ReloadData();
-                    this.HideLoader();
-                });
-            }
-		}
-
-        void CleanupTableViewBindings()
+        if (response.Items.Any())
         {
-            BeginInvokeOnMainThread(delegate
-            {
-                this.FieldsTableView.DataSource = null;
-                this.FieldsTableView.Delegate = null;
-                this.fieldsDataSource.Dispose();
-                this.fieldsDataSource = null;
-                this.fieldsTableDelegate = null;
-            });
+          this.ShowItemsList(response.Items);
         }
-
-        private void ShowFieldsForItem( ISitecoreItem item )
+        else
         {
-            BeginInvokeOnMainThread(delegate
-            {
-                this.fieldsDataSource = new FieldsDataSource();
-                this.fieldsTableDelegate = new FieldCellSelectionHandler();
-
-
-                FieldsDataSource dataSource = this.fieldsDataSource;
-                dataSource.SitecoreItem = item;
-                dataSource.TableView = this.FieldsTableView;
-
-
-                FieldCellSelectionHandler tableDelegate = this.fieldsTableDelegate;
-                tableDelegate.TableView = this.FieldsTableView;
-                tableDelegate.SitecoreItem = item;
-
-                FieldCellSelectionHandler.TableViewDidSelectFieldAtIndexPath onFieldSelected = 
-                    delegate (UITableView tableView, IField itemField, NSIndexPath indexPath)
-                    {
-                        AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
-                    };
-                tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
-
-
-
-                this.FieldsTableView.DataSource = dataSource;
-                this.FieldsTableView.Delegate = tableDelegate;
-                this.FieldsTableView.ReloadData();
-            });
+          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
         }
+      }
+      catch(Exception e) 
+      {
+        this.CleanupTableViewBindings();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.FieldsTableView.ReloadData();
+          this.HideLoader();
+        });
+      }
+    }
 
+  }
 
-        private FieldsDataSource fieldsDataSource;
-        private FieldCellSelectionHandler fieldsTableDelegate;
-	}
 }
 

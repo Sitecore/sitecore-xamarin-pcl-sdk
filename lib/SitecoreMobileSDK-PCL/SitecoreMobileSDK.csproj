@@ -11,7 +11,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile136</TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\solutions\</SolutionDir>
-    <RestorePackages>false</RestorePackages>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +32,8 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
+    <Compile Include="Authenticate\AuthenticateTasks.cs" />
     <Compile Include="Items\IItemSource.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,7 +94,7 @@
     <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\SitecoreQueryValidator.cs" />
     <Compile Include="Exceptions\SitecoreMobileSdkException.cs" />
-    <Compile Include="Exceptions\WebApiJsonError.cs" />
+    <Compile Include="Exceptions\WebApiJsonStatusMessage.cs" />
     <Compile Include="Exceptions\WebApiJsonErrorException.cs" />
     <Compile Include="Exceptions\RsaHandshakeException.cs" />
     <Compile Include="Exceptions\LoadDataFromNetworkException.cs" />
@@ -103,6 +105,23 @@
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
     <Compile Include="Items\ISitecoreItem.cs" />
+    <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\MediaItem\UserRequest\IGetMediaItemRequestParametersBuilder.cs" />
+    <Compile Include="UrlBuilder\MediaItem\UserRequest\ReadMediaItemRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\MediaItem\IReadMediaItemRequest.cs" />
+    <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\MediaOptionsBuilder.cs" />
+    <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\IDownloadMediaOptions.cs" />
+    <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\DownloadMediaOptions.cs" />
+    <Compile Include="SessionSettings\SessionConfigValidator.cs" />
+    <Compile Include="Items\ReadMediaItemParameters.cs" />
+    <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
+    <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
+    <Compile Include="UrlBuilder\MediaItem\MediaPathValidator.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\ScopeType.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
+    <Compile Include="Validators\DuplicateEntryValidator.cs" />
+    <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -155,6 +174,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <ItemGroup />
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />

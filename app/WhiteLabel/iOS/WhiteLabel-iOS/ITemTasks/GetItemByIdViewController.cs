@@ -4,9 +4,9 @@
 namespace WhiteLabeliOS
 {
 	using System;
-    using System.Linq;
+  using System.Linq;
 
-    using MonoTouch.UIKit;
+  using MonoTouch.UIKit;
 	using MonoTouch.Foundation;
 
 	using Sitecore.MobileSDK;
@@ -17,7 +17,7 @@ namespace WhiteLabeliOS
     using WhiteLabeliOS.FieldsTableView;
 
 
-	public partial class GetItemByIdViewController : BaseTaskViewController
+	public partial class GetItemByIdViewController : BaseTaskTableViewController
 	{
 		public GetItemByIdViewController (IntPtr handle) : base (handle)
 		{
@@ -27,14 +27,16 @@ namespace WhiteLabeliOS
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			
+
+			this.TableView = this.FieldsTableView;
+
 			this.itemIdTextField.ShouldReturn = this.HideKeyboard;
+
+			this.itemIdTextField.Text = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
 
 			fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);
 			itemIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item ID", null);
 
-			string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item children", null);
-			getChildrenButton.SetTitle (getChildrenButtonTitle, UIControlState.Normal);
 			string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
 			getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
 		}
@@ -47,16 +49,16 @@ namespace WhiteLabeliOS
 			}
 			else
 			{
-                this.HideKeyboard(this.itemIdTextField);
-                this.HideKeyboard(this.fieldNameTextField);
+        this.HideKeyboardForAllFields();
 				this.SendRequest();
 			}
 		}
 
-		partial void OnGetItemCheldrenButtonTouched (MonoTouch.Foundation.NSObject sender)
-		{
-			AlertHelper.ShowLocalizedNotImlementedAlert();
-		}
+    private void HideKeyboardForAllFields()
+    {
+      this.HideKeyboard(this.itemIdTextField);
+      this.HideKeyboard(this.fieldNameTextField);
+    }
 
 		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
 		{
@@ -74,110 +76,62 @@ namespace WhiteLabeliOS
 			}
 		}
 
+    partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender)
+    {
+      sender.Selected = !sender.Selected;
+    }
+
 		private async void SendRequest()
-		{
-			try
-			{
-				ScApiSession session = this.instanceSettings.GetSession();
+    {
+      try
+      {
+        ScApiSession session = this.instanceSettings.GetSession();
 
-                var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
-					.Payload(this.currentPayloadType)
-                    .AddFields(this.fieldNameTextField.Text)
-				    .Build();
+        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+          .Payload(this.currentPayloadType)
+          .AddFields(this.fieldNameTextField.Text);
 
-				this.ShowLoader();
-
-				ScItemsResponse response = await session.ReadItemAsync(request);
-                if (response.Items.Any())
-				{
-                    ISitecoreItem item = response.Items[0];
-                    this.ShowFieldsForItem( item );
-
-					string message = NSBundle.MainBundle.LocalizedString("item title is", null);
-					AlertHelper.ShowLocalizedAlertWithOkOption("Item received", message + " \"" + item.DisplayName + "\"");
-				}
-				else
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-				}
-			}
-			catch(Exception e) 
-			{
-                this.CleanupTableViewBindings();
-				AlertHelper.ShowLocalizedAlertWithOkOption("Erorr", e.Message);
-			}
-            finally
-            {
-                BeginInvokeOnMainThread(delegate
-                {
-                    this.HideLoader();
-                    this.FieldsTableView.ReloadData();
-                });
-            }
-		}
-
-        void CleanupTableViewBindings()
+        if (this.parentScopeButton.Selected)
         {
-            BeginInvokeOnMainThread(delegate
-            {
-				this.CleanupTableViewBindingsSync();
-            });
+          builder = builder.AddScope(ScopeType.Parent);
+        }
+        if (this.selfScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Self);
+        }
+        if (this.childrenScopeButton.Selected)
+        {
+          builder = builder.AddScope(ScopeType.Children);
         }
 
-		void CleanupTableViewBindingsSync()
-		{
-			this.FieldsTableView.DataSource = null;
-			this.FieldsTableView.Delegate = null;
+        var request = builder.Build();
 
-			if (this.fieldsDataSource != null)
-			{
-				this.fieldsDataSource.Dispose ();
-				this.fieldsDataSource = null;
-			}
+        this.ShowLoader();
 
-            if (this.fieldsTableDelegate != null)
-            {
-                this.fieldsTableDelegate.Dispose ();
-                this.fieldsTableDelegate = null;
-            }
-		}
-
-        private void ShowFieldsForItem( ISitecoreItem item )
+        ScItemsResponse response = await session.ReadItemAsync(request);
+        if (response.Items.Any())
         {
-            BeginInvokeOnMainThread(delegate
-            {
-				this.CleanupTableViewBindingsSync();
-
-                this.fieldsDataSource = new FieldsDataSource();
-                this.fieldsTableDelegate = new FieldCellSelectionHandler();
-
-
-                FieldsDataSource dataSource = this.fieldsDataSource;
-                dataSource.SitecoreItem = item;
-                dataSource.TableView = this.FieldsTableView;
-
-
-                FieldCellSelectionHandler tableDelegate = this.fieldsTableDelegate;
-                tableDelegate.TableView = this.FieldsTableView;
-                tableDelegate.SitecoreItem = item;
-
-                FieldCellSelectionHandler.TableViewDidSelectFieldAtIndexPath onFieldSelected = 
-                    delegate (UITableView tableView, IField itemField, NSIndexPath indexPath)
-                    {
-                        AlertHelper.ShowLocalizedAlertWithOkOption("Field Raw Value", itemField.RawValue);
-                    };
-                tableDelegate.OnFieldCellSelectedDelegate = onFieldSelected;
-
-
-
-                this.FieldsTableView.DataSource = dataSource;
-                this.FieldsTableView.Delegate = tableDelegate;
-                this.FieldsTableView.ReloadData();
-            });
+          this.ShowItemsList(response.Items);
         }
-
-        private FieldsDataSource fieldsDataSource;
-        private FieldCellSelectionHandler fieldsTableDelegate;
+        else
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+        }
+      }
+      catch(Exception e) 
+      {
+        this.CleanupTableViewBindings();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.HideLoader();
+          this.FieldsTableView.ReloadData();
+        });
+      }
+    }
 	}
 }
 
