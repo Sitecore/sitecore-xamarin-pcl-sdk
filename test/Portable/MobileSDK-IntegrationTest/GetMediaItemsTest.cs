@@ -445,42 +445,42 @@
       Assert.True(1 < ms.Length);
     }
 
-    [Test] 
+    [Test] //ALR: Argument exception should appear
     public async void TestGetMediaWithEmptyDatabase()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database("").Build());
       Assert.AreEqual("AbstractGetdMediaRequestBuilder.Database : The input cannot be null or empty", exception.Message);
     }
 
-    [Test]
+    [Test] //ALR: Argument exception should appear
     public async void TestGetMediaWithNullDatabase()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(null).Build());
       Assert.AreEqual("AbstractGetdMediaRequestBuilder.Database : The input cannot be null or empty", exception.Message);
     }
 
-    [Test]
+    [Test] //ALR: Argument exception should appear
     public async void TestGetMediaWithSpacesInLanguage()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language("  ").Build());
       Assert.AreEqual("AbstractGetdMediaRequestBuilder.Language : The input cannot be null or empty", exception.Message);
     }
 
-    [Test]
+    [Test] //ALR: Argument exception should appear
     public async void TestGetMediaWithNullLanguage()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language(null).Build());
       Assert.AreEqual("AbstractGetdMediaRequestBuilder.Language : The input cannot be null or empty", exception.Message);
     }
 
-    [Test]
+    [Test] //ALR: Argument exception should appear
     public async void TestGetMediaWithEmptyVersion()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version("").Build());
       Assert.AreEqual("AbstractGetdMediaRequestBuilder.Version : The input cannot be null or empty", exception.Message);
     }
 
-    [Test]
+    [Test] //ALR: Argument exception should appear
     public async void TestGetMediaWithNullVersion()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(null).Build());
