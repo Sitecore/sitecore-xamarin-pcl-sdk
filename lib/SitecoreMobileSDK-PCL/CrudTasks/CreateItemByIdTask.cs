@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-
+﻿
 namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
@@ -26,6 +24,11 @@ namespace Sitecore.MobileSDK.CrudTasks
       return this.urlBuilder.GetUrlForRequest(request);
     }
       
+    public override string GetFieldsListString(ICreateItemByIdRequest request)
+    {
+      return this.urlBuilder.GetFieldValuesList(request);
+    }
+
     private readonly CreateItemByIdUrlBuilder urlBuilder;
   }
 }

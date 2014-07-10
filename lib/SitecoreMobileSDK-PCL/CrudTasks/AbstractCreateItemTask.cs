@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -24,10 +22,13 @@ namespace Sitecore.MobileSDK
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
-      result.Content = new StringContent("",  Encoding.UTF8, "application/x-www-form-urlencoded");
+      string fieldsList = this.GetFieldsListString(request);
+      result.Content = new StringContent(fieldsList,  Encoding.UTF8, "application/x-www-form-urlencoded");
       result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
+
+    public abstract string GetFieldsListString(TRequest request);
   }
 }
 
