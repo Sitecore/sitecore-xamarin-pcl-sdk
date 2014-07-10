@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK-MockObjec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKUnitTest-Android", "..\test\Android\MobileSDKUnitTest-Android\MobileSDKUnitTest-Android.csproj", "{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Tests", "..\test\Android\MobileSDK-Android-Tests\MobileSDK-Android-Tests.csproj", "{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,6 @@ Global
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\test\Android\MobileSDKUnitTest-Android\MobileSDKUnitTest-Android.csproj
+		StartupItem = ..\test\Android\MobileSDK-Android-Tests\MobileSDK-Android-Tests.csproj
 	EndGlobalSection
 EndGlobal

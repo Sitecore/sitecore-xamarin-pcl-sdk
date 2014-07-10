@@ -322,12 +322,11 @@
         var task = session.ReadItemAsync(this.requestWithVersionsItemId);
         await task;
       };
-      Exception exception = Assert.Throws<ParserException>(testCode);
-
-
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Newtonsoft.Json.JsonReaderException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Unexpected character encountered while parsing value: <. Path '', line 0, position 0"));
+      Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+      Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
+      Assert.AreEqual("System.Xml.XmlException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("For security reasons DTD is prohibited in this XML document."));
     }
 
     [Test]
@@ -342,7 +341,7 @@
     }
 
     [Test]
-    public async void TestGetItemWithEmptyDb()
+    public async void TestGetItemWithEmptyDbInItemSource()
     {
       const string Db = "";
       const string Language = "da";
@@ -362,8 +361,8 @@
     }
 
     [Test]
-    public async void TestGetItemWithEmptyLanguage()
-    {
+    public async void TestGetItemWithEmptyLanguageInItemSource()
+    {                                                       
       const string Db = "master";
       const string Language = "";
       const string Version = "1";
@@ -382,7 +381,7 @@
     }
 
     [Test]
-    public async void TestGetItemWithEmptyVersion()
+    public async void TestGetItemWithEmptyVersionInItemSource()
     {
       const string Db = "master";
       const string Language = "da";
@@ -396,10 +395,90 @@
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-
+      Assert.AreEqual(Db, resultItem.Source.Database);
+      Assert.AreEqual(Language, resultItem.Source.Language);
       var expectedSource = new ItemSource(Db, Language, "2");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("Danish version 2 master", resultItem.FieldWithName("Title").RawValue);
+    }
+
+    [Test]
+    public void TestGetItemWithNullVersionInRequestByPath()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Version(null).Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Version : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test] //ALR: Argument exception should appear
+    public void TestGetItemWithSpacesInVersionInRequestById()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(" ").Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Version : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemWithEmpryLanguageInRequestByQuery()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Id).Language("").Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]  //ALR: Argument exception should appear
+    public void TestGetItemWithSpacesInLanguageInRequestByPath()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Language("   ").Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemWithNullLanguageInRequestById()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Language(null).Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemWithEmptyDatabaseInRequestById()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Database("").Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]  
+    public void TestGetItemWithNullDatabaseInRequestByPath()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Database(null).Build());
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test] //ALR: Argument exception should appear
+    public void TestGetItemWithSpacesInDatabaseInRequestByQuery()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Id).Database(" 	").Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test] //ALR: if we deny multiple invocations - we should fix description in Mobile SDK doc and apply error validation to this test
+    public async void TestGetItemByPathWithOverrideLanguageTwice()
+    {
+      var session = this.CreateAdminSession();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Language("da").Language("en").Build();
+      var response = await session.ReadItemAsync(request);
+      
+      testData.AssertItemsCount(1, response);
+      Assert.AreEqual("en", response.Items[0].Source.Language);
+    }
+
+    [Test] //ALR: if we deny multiple invocations - we should fix description in Mobile SDK doc and apply error validation to this test
+    public async void TestGetItemByIdWithOverrideVersionTwice()
+    {
+      var session = this.CreateAdminSession();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).Version("2").Version("1").Build();
+      var response = await session.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      Assert.AreEqual("1", response.Items[0].Source.Version);
     }
 
     private ScApiSession CreateAdminSession(ItemSource itemSource = null)
