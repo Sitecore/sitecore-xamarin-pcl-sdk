@@ -104,6 +104,14 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
+    public void TestGetItemByIdWithPathInParams()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Path).Build());
+      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
+      Assert.AreEqual("Item id must have curly braces '{}'", exception.Message);
+    }
+
+    [Test]
     public async void TestGetItemByPath()
     {
       var response = await GetItemByPath(testData.Items.Home.Path);

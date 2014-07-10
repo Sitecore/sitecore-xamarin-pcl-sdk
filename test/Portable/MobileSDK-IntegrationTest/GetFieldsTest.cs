@@ -136,7 +136,7 @@
     }
 
     [Test]
-    public async void TestGetNotExistedField()
+    public async void TestGetEmptyField()
     {
       var fields = new Collection<string>
       {
@@ -163,6 +163,43 @@
         "Title"
       };
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Language("en").Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
+      ISitecoreItem item = response.Items[0];
+
+      Assert.AreEqual(1, item.Fields.Count);
+      Assert.AreEqual("English version 2 web", item.FieldWithName("title").RawValue);
+    }
+
+    [Test]
+    public async void TestGetFieldsById()
+    {
+      var fields = new Collection<string>
+      {
+        "{75577384-3C97-45DA-A847-81B00500E250}"
+      };
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
+      ISitecoreItem item = response.Items[0];
+
+      Assert.AreEqual(1, item.Fields.Count);
+      Assert.AreEqual("English version 2 web", item.FieldWithName("title").RawValue);
+    }
+
+    [Test]
+    public async void TestGetFieldsByIdAndPathSimultaneously()
+    {
+      var fields = new Collection<string>
+      {
+        "{75577384-3C97-45DA-A847-81B00500E250}",
+        "Title"
+      };
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -329,6 +366,39 @@
 
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
+    }
+
+    [Test] //ALR: if we deny multiple invocations - we should fix description in Mobile SDK doc and apply error validation to this test
+    public async void TestGetItemByIdWithOverridenPayload()
+    {
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Payload(PayloadType.Content).Payload(PayloadType.Full).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      ISitecoreItem item = response.Items[0];
+      Assert.True(10 < item.Fields.Count);
+    }
+
+    [Test] //ALR: if we deny multiple invocations - we should fix description in Mobile SDK doc and apply error validation to this test
+    public async void TestGetItemByPathWithOverridenPayload()
+    {
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Full).Payload(PayloadType.Min).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      ISitecoreItem item = response.Items[0];
+      Assert.AreEqual(0, item.Fields.Count);
+    }
+
+    [Test] //ALR: if we deny multiple invocations - we should fix description in Mobile SDK doc and apply error validation to this test
+    public async void TestGetItemByQueryWithOverridenPayload()
+    {
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).Payload(PayloadType.Content).Payload(PayloadType.Content).Build();
+      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+
+      testData.AssertItemsCount(1, response);
+      ISitecoreItem item = response.Items[0];
+      Assert.AreEqual(2, item.Fields.Count);
     }
   }
 }
