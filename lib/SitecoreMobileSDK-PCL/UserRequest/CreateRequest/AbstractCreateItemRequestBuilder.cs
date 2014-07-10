@@ -3,9 +3,10 @@ namespace Sitecore.MobileSDK
 {
   using System;
   using System.Collections.Generic;
+  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
-  public abstract class AbstractCreateItemRequestBuilder<T> : Sitecore.MobileSDK.UserRequest.AbstractGetItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T> 
+  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractGetItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T> 
     where T : class
   {
 
