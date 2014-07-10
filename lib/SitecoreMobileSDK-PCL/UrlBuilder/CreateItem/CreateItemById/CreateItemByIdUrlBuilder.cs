@@ -22,9 +22,17 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
       string escapedTemplate = UrlBuilderUtils.EscapeDataString(request.CreateParameters.ItemTemplate).ToLowerInvariant();
       string escapedName = UrlBuilderUtils.EscapeDataString(request.CreateParameters.ItemName);
 
-      string result = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
-      result += this.restGrammar.FieldSeparator + this.webApiGrammar.TemplateParameterName + this.restGrammar.KeyValuePairSeparator + escapedTemplate;
-      result += this.restGrammar.FieldSeparator + this.webApiGrammar.ItemNameParameterName + this.restGrammar.KeyValuePairSeparator + escapedName;
+      string result = this.webApiGrammar.ItemIdParameterName 
+        + this.restGrammar.KeyValuePairSeparator 
+        + escapedId
+        + this.restGrammar.FieldSeparator 
+        + this.webApiGrammar.TemplateParameterName 
+        + this.restGrammar.KeyValuePairSeparator 
+        + escapedTemplate
+        + this.restGrammar.FieldSeparator 
+        + this.webApiGrammar.ItemNameParameterName
+        + this.restGrammar.KeyValuePairSeparator 
+        + escapedName;
 
       return result;
     }
@@ -33,7 +41,11 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
     {
       string result = string.Empty;
 
-      bool fieldsAvailable = (null == request.CreateParameters.FieldsRawValuesByName || request.CreateParameters.FieldsRawValuesByName.Count > 0);
+      bool fieldsAvailable = (null != request.CreateParameters.FieldsRawValuesByName);
+      if (fieldsAvailable)
+      {
+        fieldsAvailable = (request.CreateParameters.FieldsRawValuesByName.Count > 0);
+      }
 
       if (fieldsAvailable)
       {
@@ -41,7 +53,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
         {
           string escapedFieldName = UrlBuilderUtils.EscapeDataString (fieldElem.Key);
           string escapedFieldValue = UrlBuilderUtils.EscapeDataString (fieldElem.Value);
-          result += escapedFieldName + this.restGrammar.KeyValuePairSeparator + escapedFieldValue + this.restGrammar.FieldSeparator;
+          result += escapedFieldName 
+            + this.restGrammar.KeyValuePairSeparator 
+            + escapedFieldValue 
+            + this.restGrammar.FieldSeparator;
         }
         result = result.Remove (result.Length - 1);
       }
