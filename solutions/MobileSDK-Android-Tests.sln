@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.shproj", "{8A52A2A6-20A1-42BD-B586-242F77089B1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK-MockObjects", "..\test\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj", "{B99EEE93-6176-438F-B601-E0382545166A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Tests", "..\test\Android\MobileSDK-Android-Tests\MobileSDK-Android-Tests.csproj", "{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\test\Android\MobileSDK-Android-Tests\MobileSDK-Android-Tests.csproj
+	EndGlobalSection
+EndGlobal
