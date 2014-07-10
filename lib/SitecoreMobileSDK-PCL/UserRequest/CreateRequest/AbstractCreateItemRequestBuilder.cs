@@ -44,7 +44,7 @@ namespace Sitecore.MobileSDK
 
       foreach (var fieldElem in fieldsRawValuesByName)
       {
-        newFields.Add (fieldElem.Key, fieldElem.Value);
+        newFields.Add (fieldElem.Key.ToLowerInvariant(), fieldElem.Value);
       }
 
       this.itemParametersAccumulator = 
@@ -69,7 +69,7 @@ namespace Sitecore.MobileSDK
           newFields.Add (fieldElem.Key, fieldElem.Value);
         }
       }
-      newFields.Add (fieldKey, fieldValue);
+      newFields.Add (fieldKey.ToLowerInvariant(), fieldValue);
 
       this.itemParametersAccumulator = 
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, newFields);
