@@ -1,15 +1,9 @@
 ﻿
 namespace Sitecore.MobileSDK.CrudTasks
 {
-  using System;
-  using System.Net.Http;
-  using System.Net.Http.Headers;
-  using System.Threading.Tasks;
-  using System.Threading;
-  using System.Diagnostics;
-
-  using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using System.Net.Http;
+  using Sitecore.MobileSDK.PublicKey;
 
   public class CreateItemByIdTask : AbstractCreateItemTask<ICreateItemByIdRequest>
   {
