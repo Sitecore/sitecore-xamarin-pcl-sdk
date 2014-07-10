@@ -63,6 +63,12 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsTest.cs">
       <Link>GetItemsTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsWithScopeTest.cs">
+      <Link>GetItemsWithScopeTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsTest.cs">
+      <Link>GetMediaItemsTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetPublicKeyTest.cs">
       <Link>GetPublicKeyTest.cs</Link>
     </Compile>
@@ -81,14 +87,11 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\TestEnvironment.cs">
       <Link>TestEnvironment.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ThreadSafetyTest.cs">
+      <Link>ThreadSafetyTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UrlAutocompleteTest.cs">
       <Link>UrlAutocompleteTest.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsTest.cs">
-      <Link>GetMediaItemsTest.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsWithScopeTest.cs">
-      <Link>GetItemsWithScopeTest.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,9 +4,9 @@ using Android.App;
 using Android.OS;
 using Xamarin.Android.NUnitLite;
 
-namespace MobileSDKUnitTestAndroid
+namespace MobileSDKAndroidTests
 {
-    [Activity(Label = "MobileSDKUnitTest-Android", MainLauncher = true)]
+    [Activity(Label = "MobileSDK-Android-Tests", MainLauncher = true)]
     public class MainActivity : TestSuiteActivity
     {
         protected override void OnCreate(Bundle bundle)
