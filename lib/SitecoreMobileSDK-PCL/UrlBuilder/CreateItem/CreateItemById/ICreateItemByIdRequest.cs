@@ -6,6 +6,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 
   public interface ICreateItemByIdRequest : IReadItemsByIdRequest, IBaseCreateItemRequest
   {
+    ICreateItemByIdRequest DeepCopyCreateItemByIdRequest();
   }
 }
 
