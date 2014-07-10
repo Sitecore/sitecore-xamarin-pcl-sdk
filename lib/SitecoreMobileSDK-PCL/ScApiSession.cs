@@ -168,14 +168,10 @@ namespace Sitecore.MobileSDK
 
     public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      //TODO: @igk
-      //ICreateItemByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
-      ICreateItemByIdRequest requestCopy = request;
-
+      ICreateItemByIdRequest requestCopy = request.DeepCopyCreateItemByIdRequest();
 
       ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
 
-      //TODO: @igk
       ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (requestCopy);
 
       var taskFlow = new CreateItemByIdTask(new CreateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
