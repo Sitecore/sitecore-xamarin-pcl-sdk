@@ -8,7 +8,6 @@
     string VersionParameterName { get; }
     #endregion Item Source
 
-
     #region Item Identifiers
     string SitecoreQueryParameterName { get; }
     string ItemIdParameterName { get; }
@@ -16,8 +15,10 @@
 
     #region query parameters
     string PayloadParameterName { get; }
+    string TemplateParameterName { get; }
     string ScopeParameterName { get; }
     string FieldsListParameterName { get; }
+    string ItemNameParameterName { get; }
     #endregion query parameters
 
     #region Item Web API Endpoints

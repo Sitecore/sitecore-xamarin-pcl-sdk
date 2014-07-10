@@ -2,13 +2,12 @@
 namespace Sitecore.MobileSDK
 {
   using System;
-
-
-  using Sitecore.MobileSDK.UserRequest;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UserRequest;
 
   public class ItemWebApiRequestBuilder
   {
@@ -31,9 +30,14 @@ namespace Sitecore.MobileSDK
       return new ReadItemByQueryRequestBuilder(sitecoreQuery);
     }
 
-    public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
+		public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
+		{
+			return new ReadMediaItemRequestBuilder(mediaPath);
+		}
+
+    public static ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
     {
-      return new ReadMediaItemRequestBuilder(mediaPath);
+      return new CreateItemByIdRequestBuilder(itemId);
     }
   }
 }

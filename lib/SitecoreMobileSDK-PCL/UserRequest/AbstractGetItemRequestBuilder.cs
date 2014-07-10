@@ -9,7 +9,6 @@ namespace Sitecore.MobileSDK.UserRequest
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-
   public abstract class AbstractGetItemRequestBuilder<T> : IGetItemRequestParametersBuilder<T>
     where T : class
   {
