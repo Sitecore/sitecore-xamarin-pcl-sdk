@@ -55,10 +55,10 @@ namespace Sitecore.MobileSdkUnitTest
         .ItemName("item name")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=item%20name";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&template=sample%2fsample%20item&name=item%20name&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "";
@@ -77,10 +77,10 @@ namespace Sitecore.MobileSdkUnitTest
         .AddFieldsRawValuesByName("field2","value2")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=item%20name";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&template=sample%2fsample%20item&name=item%20name&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=value1&field2=value2";
@@ -99,10 +99,10 @@ namespace Sitecore.MobileSdkUnitTest
         .AddFieldsRawValuesByName("field2","VaLuE2")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=item%20name";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&template=sample%2fsample%20item&name=item%20name&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2";
@@ -121,10 +121,10 @@ namespace Sitecore.MobileSdkUnitTest
         .AddFieldsRawValuesByName("field2","VaLuE2")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=ItEmNaMe";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&template=sample%2fsample%20item&name=ItEmNaMe&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2";
@@ -197,10 +197,10 @@ namespace Sitecore.MobileSdkUnitTest
         .AddFieldsRawValuesByName("field3","VaLuE3")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (request);
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d&template=sample%2fsample%20item&name=ItEmNaMe";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&template=sample%2fsample%20item&name=ItEmNaMe&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2&field3=VaLuE3";
