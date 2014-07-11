@@ -296,6 +296,37 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
 
+    [Test]
+    public void TestMultipleItemFieldsCanBeAddedByAnyCollection()
+    {
+      string[] fields = { "Мама", "Мыла", "Раму" };
+      string[] moarFields = { "1", "2", "4" };
+      List<string> moarFieldsList = new List<string>(moarFields);
+
+      string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
+
+      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields(fields)
+        .AddFields(moarFieldsList)
+        .Build();
+
+      Assert.IsNotNull(result);
+      Assert.IsNotNull(result.ItemSource);
+      Assert.IsNotNull(result.ItemId);
+      Assert.IsNotNull( result.QueryParameters );
+      Assert.IsNull(result.SessionSettings);
+
+
+
+      Assert.AreEqual("{dead-c0de}", result.ItemId);
+      Assert.IsNull(result.ItemSource.Language);
+      Assert.IsNull(result.ItemSource.Database);
+      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.QueryParameters.Payload);
+      Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
+    }
+
+
 
     [Test]
     public void TestSingleItemFieldsCanBeAddedIncrementally()
@@ -598,6 +629,24 @@ namespace Sitecore.MobileSdkUnitTest
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/aaaa")
         .AddScope(scopeArgsList);
       Assert.IsNotNull(request);
+    }
+
+
+    [Test]
+    public void TestAddScopeThrowsExceptionOnDuplicatesInParams()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        .AddScope(ScopeType.Self, ScopeType.Parent, ScopeType.Self ) );
+    }
+
+    [Test]
+    public void TestAddScopeThrowsExceptionOnDuplicatesInIncrementCalls()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        .AddScope(ScopeType.Self, ScopeType.Parent )
+        .AddScope(ScopeType.Self) );
     }
     #endregion Scope
   }

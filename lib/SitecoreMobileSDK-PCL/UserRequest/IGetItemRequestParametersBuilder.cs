@@ -15,6 +15,8 @@ namespace Sitecore.MobileSDK.UserRequest
 
     IGetItemRequestParametersBuilder<T> AddFields(ICollection<string> fields);
     IGetItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
+
+    IGetItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope);
     IGetItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
 
     T Build();

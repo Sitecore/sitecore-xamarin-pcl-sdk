@@ -61,6 +61,11 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
     }
+
+    public IGetVersionedItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    {
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
+    }
     #endregion Compatibility Casts
   }
 }

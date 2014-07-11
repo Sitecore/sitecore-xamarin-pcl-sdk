@@ -63,7 +63,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IGetItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
+    public IGetItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
       ScopeParameters scopeParameters;
 
@@ -83,6 +83,12 @@ namespace Sitecore.MobileSDK.UserRequest
 
       this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields);
       return this;
+    }
+
+    public IGetItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
+    {
+      ICollection<ScopeType> castedScope = (ICollection<ScopeType>)scope;
+      return this.AddScope(castedScope);
     }
 
     public IGetItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
