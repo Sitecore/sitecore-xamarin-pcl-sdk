@@ -19,22 +19,39 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
       return copy;
     }
 
+
+
     public void AddScope(ScopeType scope)
     {
       switch (scope)
       {
         case ScopeType.Self:
         {
+          if (this.SelfScopeIsSet)
+          {
+            this.OnValidationError();
+          }
+
           this.SelfScopeIsSet = true;
         }
         break;
         case ScopeType.Parent:
         {
+          if (this.ParentScopeIsSet)
+          {
+            this.OnValidationError();
+          }
+
           this.ParentScopeIsSet = true;
         }
         break;
         case ScopeType.Children:
         {
+          if (this.ChildrenScopeIsSet)
+          {
+            this.OnValidationError();
+          }
+
           this.ChildrenScopeIsSet = true;
         }
         break;
@@ -81,10 +98,14 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
       }
     }
 
+    private void OnValidationError()
+    {
+      throw new InvalidOperationException("Adding scope parameter duplicates is forbidden");
+    }
+
     private bool parentScopeIsSet    = false;
     private bool selfScopeIsSet      = false;
     private bool childrenScopeIsSet  = false;
-
   }
 }
 

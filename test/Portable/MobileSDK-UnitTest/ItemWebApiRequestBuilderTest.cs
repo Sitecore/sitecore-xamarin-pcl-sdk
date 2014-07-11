@@ -569,6 +569,17 @@ namespace Sitecore.MobileSdkUnitTest
       );
     }
     #endregion Payload Validation
+  
+    #region Scope
+    [Test]
+    public void TestAddScopeThrowsExceptionOnDuplicates()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        .AddScope(ScopeType.Self)
+        .AddScope(ScopeType.Self));
+    }
+    #endregion Scope
   }
 }
 
