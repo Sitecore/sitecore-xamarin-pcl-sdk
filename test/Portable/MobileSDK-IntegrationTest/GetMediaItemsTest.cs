@@ -430,21 +430,6 @@
       Assert.AreEqual(5257, ms.Length);
     }
 
-    [Test]
-    public async void TestGetMediaWithOverridenDatabase()
-    {
-      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(SitecoreMouseIconPath)
-        .Database("web")
-        .Database("web")
-        .Database("master")
-        .Build();
-      var response = await this.session.DownloadResourceAsync(request);
-
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      Assert.True(1 < ms.Length);
-    }
-
     [Test] //ALR: Argument exception should appear
     public async void TestGetMediaWithEmptyDatabase()
     {
@@ -474,19 +459,48 @@
     }
 
     [Test] //ALR: Argument exception should appear
-    public async void TestGetMediaWithEmptyVersion()
+    public void TestGetMediaWithEmptyVersion()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version("").Build());
       Assert.AreEqual("AbstractGetdMediaRequestBuilder.Version : The input cannot be null or empty", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public async void TestGetMediaWithNullVersion()
+    public void TestGetMediaWithNullVersion()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(null).Build());
       Assert.AreEqual("AbstractGetdMediaRequestBuilder.Version : The input cannot be null or empty", exception.Message);
     }
 
+    [Test] //ALR: InvalidOperationException should appear
+    public void TestGetMediaWithOverridenVersion()
+    {
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+        .Version("2")
+        .Version("1")
+        .Build());
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The media item's version cannot be assigned twice", exception.Message);
+    }
+
+    [Test] //ALR: InvalidOperationException should appear
+    public async void TestGetMediaWithOverridenLanguage()
+    {
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+        .Language("en")
+        .Language("da")
+        .Build());
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : The media item's language cannot be assigned twice", exception.Message);
+    }
+
+    [Test] //ALR: InvalidOperationException should appear
+    public async void TestGetMediaWithOverridenDatabase()
+    {
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+        .Database("master")
+        .Database("web")
+        .Build());
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The media item's database cannot be assigned twice", exception.Message);
+    }
     //TODO: add tests to check version and language overriden
     //TODO: add tests for MediaOptions (null, empty, override)
 
