@@ -9,13 +9,12 @@ namespace Sitecore.MobileSDK.UserRequest
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-
   public abstract class AbstractGetItemRequestBuilder<T> : IGetItemRequestParametersBuilder<T>
     where T : class
   {
     public IGetItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
-      if (string.IsNullOrEmpty(sitecoreDatabase))
+      if (string.IsNullOrWhiteSpace(sitecoreDatabase))
       {
         throw new ArgumentException("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty");
       }
@@ -35,7 +34,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IGetItemRequestParametersBuilder<T> Language(string itemLanguage)
     {
-      if (string.IsNullOrEmpty(itemLanguage))
+      if (string.IsNullOrWhiteSpace(itemLanguage))
       {
         throw new ArgumentException("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty");
       }
@@ -64,7 +63,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IGetItemRequestParametersBuilder<T> AddScope(ScopeType scope)
+    public IGetItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
       ScopeParameters scopeParameters;
 
@@ -76,9 +75,20 @@ namespace Sitecore.MobileSDK.UserRequest
       {
         scopeParameters = this.queryParameters.ScopeParameters.ShallowCopy();
       }
-      scopeParameters.AddScope(scope);
+
+      foreach (ScopeType singleScope in scope)
+      {
+        scopeParameters.AddScope(singleScope);
+      }
+
       this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields);
       return this;
+    }
+
+    public IGetItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
+    {
+      ICollection<ScopeType> castedScope = (ICollection<ScopeType>)scope;
+      return this.AddScope(castedScope);
     }
 
     public IGetItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
@@ -93,7 +103,7 @@ namespace Sitecore.MobileSDK.UserRequest
       }
 
       Func<string, bool> fieldNameValidator = 
-        fieldName => !string.IsNullOrEmpty(fieldName);
+        fieldName => !string.IsNullOrWhiteSpace(fieldName);
       var validFields = fields.Where(fieldNameValidator).ToList();
 
 

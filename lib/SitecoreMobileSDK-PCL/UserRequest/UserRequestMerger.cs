@@ -7,6 +7,7 @@ namespace Sitecore.MobileSDK.UserRequest
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
 
   public class UserRequestMerger
@@ -47,6 +48,14 @@ namespace Sitecore.MobileSDK.UserRequest
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps (userRequest.SessionSettings);
 
       return new ReadMediaItemParameters(mergedSessionConfig, mergedSource, userRequest.DownloadOptions, userRequest.MediaPath);
+    }
+
+    public ICreateItemByIdRequest FillReadItemByIdGaps(ICreateItemByIdRequest userRequest)
+    {
+      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps (userRequest.ItemSource);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps (userRequest.SessionSettings);
+
+      return new CreateItemByIdParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, userRequest.CreateParameters, userRequest.ItemId);
     }
 
     public ItemSourceFieldMerger ItemSourceMerger { get; private set; }

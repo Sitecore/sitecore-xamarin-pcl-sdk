@@ -13,10 +13,10 @@ namespace WhiteLabeliOS
 	partial class CreateEditItemViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UITextField pathField { get; set; }
+		MonoTouch.UIKit.UITextField nameField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton saveButton { get; set; }
+		MonoTouch.UIKit.UITextField pathField { get; set; }
 
 		[Outlet]
 		MonoTouch.UIKit.UITextField textField { get; set; }
@@ -27,19 +27,12 @@ namespace WhiteLabeliOS
 		[Action ("OnCreateItemButtonTapped:")]
 		partial void OnCreateItemButtonTapped (MonoTouch.Foundation.NSObject sender);
 
-		[Action ("OnSaveItemButtonTapped:")]
-		partial void OnSaveItemButtonTapped (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
 			if (pathField != null) {
 				pathField.Dispose ();
 				pathField = null;
-			}
-
-			if (saveButton != null) {
-				saveButton.Dispose ();
-				saveButton = null;
 			}
 
 			if (textField != null) {
@@ -50,6 +43,11 @@ namespace WhiteLabeliOS
 			if (titleField != null) {
 				titleField.Dispose ();
 				titleField = null;
+			}
+
+			if (nameField != null) {
+				nameField.Dispose ();
+				nameField = null;
 			}
 		}
 	}

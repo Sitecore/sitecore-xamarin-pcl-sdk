@@ -93,15 +93,14 @@ namespace MobileSDK_UnitTest_Desktop
     }
 
     [Test]
-    public void TestScopeParamsCanBeSetTwice()
+    public void TestScopeParamsCanNotBeSetTwice()
     {
       var scope = new ScopeParameters();
       scope.AddScope(ScopeType.Children);
       scope.AddScope(ScopeType.Self);
-      scope.AddScope(ScopeType.Children);
-      var qp = new QueryParameters(null, scope, null);
-      string result = this.builder.BuildUrlString(qp);
-      Assert.AreEqual("scope=s|c", result);
+
+      Assert.Throws<InvalidOperationException>(() =>
+        scope.AddScope(ScopeType.Children) );
     }
 
     [Test]

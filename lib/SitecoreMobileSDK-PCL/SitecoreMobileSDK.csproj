@@ -119,7 +119,17 @@
     <Compile Include="UrlBuilder\MediaItem\MediaPathValidator.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeType.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
+    <Compile Include="UrlBuilder\CreateItem\IBaseCreateItemRequest.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemById\ICreateItemByIdRequest.cs" />
+    <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
+    <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemById\CreateItemByIdUrlBuilder.cs" />
+    <Compile Include="UserRequest\CreateRequest\ICreateItemRequestParametersBuilder.cs" />
+    <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
+    <Compile Include="Items\CreateItemByIdParameters.cs" />
     <Compile Include="Validators\DuplicateEntryValidator.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
+    <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
   </ItemGroup>
@@ -177,5 +187,10 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UrlBuilder\CreateItem\" />
+    <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
+    <Folder Include="UserRequest\CreateRequest\" />
+    <Folder Include="Validators\" />
+  </ItemGroup>
 </Project>

@@ -32,7 +32,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
     #region  IRestApiCallTasks
 
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
+    public virtual async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
@@ -78,7 +78,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
 
     private HttpClient httpClient;
-    private ICredentialsHeadersCryptor credentialsHeadersCryptor;
+    protected ICredentialsHeadersCryptor credentialsHeadersCryptor;
     }
 }
 

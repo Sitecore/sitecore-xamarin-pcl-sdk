@@ -3,7 +3,7 @@
 "getItemByPath" = "Item by Path";
 "getItemById" = "Item by ID & Scope";
 "deleteItemById" = "Delete Item by ID";
-"createEditItem" = "Create & Edit Item";
+"createEditItem" = "Create Item by ID";
 "uploadImageVC" = "Upload Image";
 "getItemByQuery" = "Item by Query";
 "getMediaItem" = "Download Image";
@@ -53,6 +53,8 @@
 "Type Media Path" = "Type Media Path";
 "Item has no children" = "Item has no children";
 "children count is" = "children count is";
+"The item created successfully" = "The item created successfully";
+"Item path: " = "Item path: ";
 
 //settings screen placeholders
 "Instance Url" = "Instance Url";
