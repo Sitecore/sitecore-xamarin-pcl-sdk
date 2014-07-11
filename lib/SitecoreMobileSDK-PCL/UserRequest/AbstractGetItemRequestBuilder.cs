@@ -92,7 +92,7 @@ namespace Sitecore.MobileSDK.UserRequest
       }
 
       Func<string, bool> fieldNameValidator = 
-        fieldName => !string.IsNullOrEmpty(fieldName);
+        fieldName => !string.IsNullOrWhiteSpace(fieldName);
       var validFields = fields.Where(fieldNameValidator).ToList();
 
 

@@ -19,7 +19,7 @@
       var uniqueFields = new HashSet<string>();
       foreach (string singleField in fields)
       {
-        bool isSingleFieldInvalid = String.IsNullOrEmpty(singleField);
+        bool isSingleFieldInvalid = String.IsNullOrWhiteSpace(singleField);
         if (isSingleFieldInvalid)
         {
           return true;

@@ -374,6 +374,22 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
+    public void TestWhitespaceFieldsAreIgnored()
+    {
+      var request = 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("\n   \t   \r")
+        .Build();
+
+      Assert.IsNotNull(request);
+      Assert.IsNotNull(request.QueryParameters);
+      if (null != request.QueryParameters.Fields)
+      {
+        Assert.AreEqual(0, request.QueryParameters.Fields.Count);
+      }
+    }
+
+    [Test]
     public void TestAddFieldMethodSupportsParamsKeyword()
     {
       string[] expectedFields = { "alpha", "beta", "gamma" };
