@@ -21,6 +21,7 @@ namespace WhiteLabeliOS
 		{
 			base.ViewDidLoad ();
 			
+      this.nameField.ShouldReturn = this.HideKeyboard;
 			this.pathField.ShouldReturn = this.HideKeyboard;
 			this.textField.ShouldReturn = this.HideKeyboard;
 			this.titleField.ShouldReturn = this.HideKeyboard;
@@ -28,7 +29,6 @@ namespace WhiteLabeliOS
 
 		partial void OnCreateItemButtonTapped (MonoTouch.Foundation.NSObject sender)
 		{
-			//AlertHelper.ShowLocalizedNotImlementedAlert();
       this.SendRequest();
 		}
 
