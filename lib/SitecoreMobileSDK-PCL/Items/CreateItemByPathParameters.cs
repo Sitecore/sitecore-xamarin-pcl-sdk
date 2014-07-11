@@ -1,4 +1,6 @@
-﻿
+﻿using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+
+
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -10,18 +12,18 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder;
 
-  public class CreateItemByIdParameters : ICreateItemByIdRequest
+  public class CreateItemByPathParameters : ICreateItemByPathRequest
   {
-    public CreateItemByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemId)
+    public CreateItemByPathParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemPath)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
-      this.ItemId = itemId;
+      this.ItemPath = itemPath;
       this.QueryParameters = queryParameters;
       this.CreateParameters = createParameters;
     }
 
-    public virtual ICreateItemByIdRequest DeepCopyCreateItemByIdRequest()
+    public virtual ICreateItemByPathRequest DeepCopyCreateItemByPathRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
@@ -48,21 +50,21 @@ namespace Sitecore.MobileSDK
         createParameters = this.CreateParameters.ShallowCopy();
       }
 
-      return new CreateItemByIdParameters(connection, itemSrc, payload, createParameters, this.ItemId);
+      return new CreateItemByPathParameters(connection, itemSrc, payload, createParameters, this.ItemPath);
     }
 
-    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
+    public virtual IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
     {
-      return this.DeepCopyCreateItemByIdRequest();
+      return this.DeepCopyCreateItemByPathRequest();
     }
 
     public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
     {
-      return this.DeepCopyCreateItemByIdRequest();
+      return this.DeepCopyCreateItemByPathRequest();
     }
 
 
-    public string ItemId { get; private set; }
+    public string ItemPath { get; private set; }
 
     public IItemSource ItemSource { get; private set; }
 

@@ -39,6 +39,11 @@ namespace Sitecore.MobileSDK
     {
       return new CreateItemByIdRequestBuilder(itemId);
     }
+
+    public static ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
+    {
+      return new CreateItemByPathRequestBuilder(itemPath);
+    }
   }
 }
 

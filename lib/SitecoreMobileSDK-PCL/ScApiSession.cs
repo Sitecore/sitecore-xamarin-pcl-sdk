@@ -172,9 +172,22 @@ namespace Sitecore.MobileSDK
 
       ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps (requestCopy);
+      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (requestCopy);
 
       var taskFlow = new CreateItemByIdTask(new CreateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      ICreateItemByPathRequest requestCopy = request.DeepCopyCreateItemByPathRequest();
+
+      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+
+      ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps (requestCopy);
+
+      var taskFlow = new CreateItemByPathTask(new CreateItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }

@@ -1,9 +1,12 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
-  public interface ICreateItemByPathRequest
+  using System;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+
+  public interface ICreateItemByPathRequest : IReadItemsByPathRequest, IBaseCreateItemRequest
   {
+    ICreateItemByPathRequest DeepCopyCreateItemByPathRequest();
   }
 }
 

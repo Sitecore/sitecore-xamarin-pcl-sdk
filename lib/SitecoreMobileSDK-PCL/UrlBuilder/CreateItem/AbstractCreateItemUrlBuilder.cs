@@ -20,8 +20,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
       string escapedName = UrlBuilderUtils.EscapeDataString(request.CreateParameters.ItemName);
 
       string result =
-          this.restGrammar.FieldSeparator 
-        + this.webApiGrammar.TemplateParameterName 
+          this.webApiGrammar.TemplateParameterName 
         + this.restGrammar.KeyValuePairSeparator 
         + escapedTemplate
         + this.restGrammar.FieldSeparator 

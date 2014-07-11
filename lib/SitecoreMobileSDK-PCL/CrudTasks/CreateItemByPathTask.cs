@@ -5,25 +5,25 @@ namespace Sitecore.MobileSDK.CrudTasks
   using System.Net.Http;
   using Sitecore.MobileSDK.PublicKey;
 
-  public class CreateItemByIdTask : AbstractCreateItemTask<ICreateItemByIdRequest>
+  public class CreateItemByPathTask : AbstractCreateItemTask<ICreateItemByPathRequest>
   {
-    public CreateItemByIdTask(CreateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
+    public CreateItemByPathTask(CreateItemByPathUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
       : base(httpClient, credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;
     }
 
-    protected override string UrlToGetItemWithRequest(ICreateItemByIdRequest request)
+    protected override string UrlToGetItemWithRequest(ICreateItemByPathRequest request)
     {
       return this.urlBuilder.GetUrlForRequest(request);
     }
       
-    public override string GetFieldsListString(ICreateItemByIdRequest request)
+    public override string GetFieldsListString(ICreateItemByPathRequest request)
     {
       return this.urlBuilder.GetFieldValuesList(request);
     }
 
-    private readonly CreateItemByIdUrlBuilder urlBuilder;
+    private readonly CreateItemByPathUrlBuilder urlBuilder;
   }
 }
 

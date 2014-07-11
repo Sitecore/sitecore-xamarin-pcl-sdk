@@ -3,16 +3,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;
 
-  public class CreateItemByIdRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByIdRequest>
+  public class CreateItemByPathRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByPathRequest>
   {
-    public CreateItemByIdRequestBuilder (string itemId)
+    public CreateItemByPathRequestBuilder (string itemPath)
     {
-      ItemIdValidator.ValidateItemId(itemId);
-
-      this.itemId = itemId;
+      ItemPathValidator.ValidateItemPath(itemPath);
+      this.ItemPath = itemPath;
     }
 
-    public override ICreateItemByIdRequest Build()
+    public override ICreateItemByPathRequest Build()
     {
       if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemName))
       {
@@ -24,11 +23,12 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
         throw new ArgumentException("CreateItemByIdRequestBuilder.ItemTemplate : The input cannot be null or empty");
       }
 
-      CreateItemByIdParameters result = new CreateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemId);
+      CreateItemByPathParameters result = 
+        new CreateItemByPathParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.ItemPath);
       return result;
     }
 
-    private readonly string itemId;
+    private readonly string ItemPath;
   }
 }
 
