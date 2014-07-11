@@ -368,37 +368,35 @@
       Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
     }
 
-    [Test] //ALR: if we deny multiple invocations - we should fix description in Mobile SDK doc and apply error validation to this test
+    [Test]
     public async void TestGetItemByIdWithOverridenPayload()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Payload(PayloadType.Content).Payload(PayloadType.Full).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+        .Payload(PayloadType.Content)
+        .Payload(PayloadType.Full)
+        .Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
 
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem item = response.Items[0];
-      Assert.True(10 < item.Fields.Count);
     }
 
-    [Test] //ALR: if we deny multiple invocations - we should fix description in Mobile SDK doc and apply error validation to this test
+    [Test]
     public async void TestGetItemByPathWithOverridenPayload()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Full).Payload(PayloadType.Min).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem item = response.Items[0];
-      Assert.AreEqual(0, item.Fields.Count);
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
+        .Payload(PayloadType.Full)
+        .Payload(PayloadType.Min)
+        .Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
     }
 
-    [Test] //ALR: if we deny multiple invocations - we should fix description in Mobile SDK doc and apply error validation to this test
+    [Test]
     public async void TestGetItemByQueryWithOverridenPayload()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).Payload(PayloadType.Content).Payload(PayloadType.Content).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem item = response.Items[0];
-      Assert.AreEqual(2, item.Fields.Count);
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
+        .Payload(PayloadType.Content)
+        .Payload(PayloadType.Content)
+        .Build());
+      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
     }
   }
 }

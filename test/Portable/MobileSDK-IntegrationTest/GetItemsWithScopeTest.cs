@@ -126,42 +126,39 @@
       Assert.AreEqual("Allowed_Parent", response.Items[3].DisplayName);
     }
 
-    [Test] //ALR: should pass due to duplicates politics
+    [Test]
     public void TestGetItemWithDuplicateScopesById()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
          .AddScope(ScopeType.Self)
          .Language("en")
          .AddScope(ScopeType.Children)
          .AddScope(ScopeType.Self)
          .Build());
-      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
-    [Test] //ALR: should pass due to duplicates politics
+    [Test]
     public void TestGetItemWithDuplicateScopeByPath()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.ItemWithVersions.Path)
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.ItemWithVersions.Path)
         .Language("en")
         .AddScope(ScopeType.Parent)
         .Database("web")
         .AddScope(ScopeType.Parent)
         .AddScope(ScopeType.Self)
         .Build());
-      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
-    [Test] //ALR: should pass due to duplicates politics
+    [Test]
     public void TestGetItemWithDuplicateScopeByQuery()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.ItemWithVersions.Path)
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.ItemWithVersions.Path)
         .AddScope(ScopeType.Children)
         .AddScope(ScopeType.Children)
         .Build());
-      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicates are not allowed", exception.Message);
+      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
     [Test]  //ALR: test will pass after fix scope ordering
