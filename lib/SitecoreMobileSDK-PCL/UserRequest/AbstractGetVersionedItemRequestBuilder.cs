@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK.UserRequest
   {
     public IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion)
     {
-      if (string.IsNullOrEmpty(itemVersion))
+      if (string.IsNullOrWhiteSpace(itemVersion))
       {
         throw new ArgumentException("AbstractGetItemRequestBuilder.Version : The input cannot be null or empty");
       }
@@ -57,7 +57,12 @@ namespace Sitecore.MobileSDK.UserRequest
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
     }
 
-    public IGetVersionedItemRequestParametersBuilder<T> AddScope(ScopeType scope)
+    public IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
+    {
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
+    }
+
+    public IGetVersionedItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
     }

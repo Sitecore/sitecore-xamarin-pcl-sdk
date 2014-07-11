@@ -362,7 +362,7 @@
 
     [Test]
     public async void TestGetItemWithEmptyLanguageInItemSource()
-    {                                                       
+    {
       const string Db = "master";
       const string Language = "";
       const string Version = "1";
@@ -444,7 +444,7 @@
       Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
     }
 
-    [Test]  
+    [Test]
     public void TestGetItemWithNullDatabaseInRequestByPath()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Database(null).Build());
@@ -465,7 +465,7 @@
       var session = this.CreateAdminSession();
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Language("da").Language("en").Build();
       var response = await session.ReadItemAsync(request);
-      
+
       testData.AssertItemsCount(1, response);
       Assert.AreEqual("en", response.Items[0].Source.Language);
     }

@@ -296,6 +296,37 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
 
+    [Test]
+    public void TestMultipleItemFieldsCanBeAddedByAnyCollection()
+    {
+      string[] fields = { "Мама", "Мыла", "Раму" };
+      string[] moarFields = { "1", "2", "4" };
+      List<string> moarFieldsList = new List<string>(moarFields);
+
+      string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
+
+      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields(fields)
+        .AddFields(moarFieldsList)
+        .Build();
+
+      Assert.IsNotNull(result);
+      Assert.IsNotNull(result.ItemSource);
+      Assert.IsNotNull(result.ItemId);
+      Assert.IsNotNull( result.QueryParameters );
+      Assert.IsNull(result.SessionSettings);
+
+
+
+      Assert.AreEqual("{dead-c0de}", result.ItemId);
+      Assert.IsNull(result.ItemSource.Language);
+      Assert.IsNull(result.ItemSource.Database);
+      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.QueryParameters.Payload);
+      Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
+    }
+
+
 
     [Test]
     public void TestSingleItemFieldsCanBeAddedIncrementally()
@@ -351,26 +382,67 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestEmptyFieldsAreIgnored()
     {
-      Assert.DoesNotThrow(() => 
+      var request = 
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFields("")
-        .Build());
+        .Build();
+
+      Assert.IsNotNull(request);
+      Assert.IsNotNull(request.QueryParameters);
+      if (null != request.QueryParameters.Fields)
+      {
+        Assert.AreEqual(0, request.QueryParameters.Fields.Count);
+      }
     }
 
     [Test]
     public void TestNullFieldsAreIgnored()
     {
-      Assert.DoesNotThrow(() => 
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      {
+        var request = 
+          ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFields((string)null)
-        .Build());
+        .Build();
+
+        Assert.IsNotNull(request);
+        Assert.IsNotNull(request.QueryParameters);
+        if (null != request.QueryParameters.Fields)
+        {
+          Assert.AreEqual(0, request.QueryParameters.Fields.Count);
+        }
+      }
 
 
-      Assert.DoesNotThrow(() => 
+      {
+        var request = 
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFields((ICollection<string>)null)
-        .Build());
+        .Build();
 
+        Assert.IsNotNull(request);
+        Assert.IsNotNull(request.QueryParameters);
+        if (null != request.QueryParameters.Fields)
+        {
+          Assert.AreEqual(0, request.QueryParameters.Fields.Count);
+        }
+      }
+
+    }
+
+    [Test]
+    public void TestWhitespaceFieldsAreIgnored()
+    {
+      var request = 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields("\n   \t   \r")
+        .Build();
+
+      Assert.IsNotNull(request);
+      Assert.IsNotNull(request.QueryParameters);
+      if (null != request.QueryParameters.Fields)
+      {
+        Assert.AreEqual(0, request.QueryParameters.Fields.Count);
+      }
     }
 
     [Test]
@@ -427,6 +499,15 @@ namespace Sitecore.MobileSdkUnitTest
         .Database("web")
       );
     }
+
+    [Test]
+    public void TestWhitespaceDatabaseCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Database("\t   \r  \n")
+      );
+    }
     #endregion Database Validation
 
 
@@ -456,6 +537,15 @@ namespace Sitecore.MobileSdkUnitTest
         ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
         .Language("en")
         .Language("fr")
+      );
+    }
+
+    [Test]
+    public void TestWhitespaceLanguageCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Language("\t   \r  \n")
       );
     }
     #endregion Language Validation
@@ -488,6 +578,15 @@ namespace Sitecore.MobileSdkUnitTest
         .Version("99")
       );
     }
+
+    [Test]
+    public void TestWhitespaceItemVersionCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Version("\t   \r  \n")
+      );
+    }
     #endregion Version Validation
 
     #region Payload Validation
@@ -501,6 +600,55 @@ namespace Sitecore.MobileSdkUnitTest
       );
     }
     #endregion Payload Validation
+  
+    #region Scope
+    [Test]
+    public void TestAddScopeThrowsExceptionOnDuplicates()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        .AddScope(ScopeType.Self)
+        .AddScope(ScopeType.Self));
+    }
+
+    [Test]
+    public void TestAddScopeSupportsParamsSyntax()
+    {
+      var request = 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/sHell")
+          .AddScope(ScopeType.Self, ScopeType.Parent, ScopeType.Children);
+
+      Assert.IsNotNull(request);
+    }
+
+    [Test]
+    public void TestAddScopeSupportsCollection()
+    {
+      ScopeType[] scopeArgs = { ScopeType.Self, ScopeType.Parent, ScopeType.Children };
+      var scopeArgsList = new List<ScopeType>(scopeArgs);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/aaaa")
+        .AddScope(scopeArgsList);
+      Assert.IsNotNull(request);
+    }
+
+
+    [Test]
+    public void TestAddScopeThrowsExceptionOnDuplicatesInParams()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        .AddScope(ScopeType.Self, ScopeType.Parent, ScopeType.Self ) );
+    }
+
+    [Test]
+    public void TestAddScopeThrowsExceptionOnDuplicatesInIncrementCalls()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        .AddScope(ScopeType.Self, ScopeType.Parent )
+        .AddScope(ScopeType.Self) );
+    }
+    #endregion Scope
   }
 }
 

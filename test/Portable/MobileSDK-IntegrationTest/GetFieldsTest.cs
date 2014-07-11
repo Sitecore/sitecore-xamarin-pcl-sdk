@@ -102,14 +102,14 @@
     [Test]
     public async void TestGetHtmlField()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields(new Collection<string>{"Text"}).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields(new Collection<string> { "Text" }).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
       ISitecoreItem item = response.Items[0];
 
-     
+
       Assert.AreEqual(1, item.Fields.Count);
       Assert.AreEqual("Text", item.Fields[0].Name);
       Assert.True(item.FieldWithName("Text").RawValue.Contains("<div>Welcome to Sitecore!</div>"));
@@ -355,7 +355,7 @@
     }
 
     [Test]
-    public async void TestGetItemByIdWithoutPayload()     
+    public async void TestGetItemByIdWithoutPayload()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
