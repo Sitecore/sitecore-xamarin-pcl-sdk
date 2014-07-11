@@ -351,25 +351,50 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestEmptyFieldsAreIgnored()
     {
-      Assert.DoesNotThrow(() => 
+      var request = 
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFields("")
-        .Build());
+        .Build();
+
+      Assert.IsNotNull(request);
+      Assert.IsNotNull(request.QueryParameters);
+      if (null != request.QueryParameters.Fields)
+      {
+        Assert.AreEqual(0, request.QueryParameters.Fields.Count);
+      }
     }
 
     [Test]
     public void TestNullFieldsAreIgnored()
     {
-      Assert.DoesNotThrow(() => 
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      {
+        var request = 
+          ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFields((string)null)
-        .Build());
+        .Build();
+
+        Assert.IsNotNull(request);
+        Assert.IsNotNull(request.QueryParameters);
+        if (null != request.QueryParameters.Fields)
+        {
+          Assert.AreEqual(0, request.QueryParameters.Fields.Count);
+        }
+      }
 
 
-      Assert.DoesNotThrow(() => 
+      {
+        var request = 
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFields((ICollection<string>)null)
-        .Build());
+        .Build();
+
+        Assert.IsNotNull(request);
+        Assert.IsNotNull(request.QueryParameters);
+        if (null != request.QueryParameters.Fields)
+        {
+          Assert.AreEqual(0, request.QueryParameters.Fields.Count);
+        }
+      }
 
     }
 
