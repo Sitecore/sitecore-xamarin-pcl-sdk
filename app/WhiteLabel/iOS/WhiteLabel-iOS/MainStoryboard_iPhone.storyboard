@@ -266,6 +266,7 @@
                         <segue destination="0L4-Zu-wJq" kind="push" identifier="uploadImageVC" id="EqT-q1-BRj"/>
                         <segue destination="YSW-Sn-ezD" kind="push" identifier="getItemByQuery" id="ElA-dM-oAo"/>
                         <segue destination="2Pb-gb-fR4" kind="push" identifier="getMediaItem" id="Zq9-Tr-eq8"/>
+                        <segue destination="Eg0-WD-ucD" kind="push" identifier="createItemByPath" id="Idd-jG-cb8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
@@ -593,7 +594,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Poa-J4-tWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-503" y="1118"/>
+            <point key="canvasLocation" x="85" y="1134"/>
         </scene>
         <!--Create Edit Item View Controller-->
         <scene sceneID="50f-BP-j3U">
@@ -690,7 +691,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Xb-x1-fNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-887" y="1126"/>
+            <point key="canvasLocation" x="-895" y="1134"/>
         </scene>
         <!--Upload Image View Controller-->
         <scene sceneID="Agw-51-XZA">
@@ -759,7 +760,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYz-Zo-fGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-100" y="1118"/>
+            <point key="canvasLocation" x="488" y="1134"/>
         </scene>
         <!--Get Item By Query View Controller-->
         <scene sceneID="bUk-a6-t9y">
@@ -951,7 +952,105 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qmL-ka-eOW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="342" y="1118"/>
+            <point key="canvasLocation" x="930" y="1134"/>
+        </scene>
+        <!--CreateI Tem By Path View Controller-->
+        <scene sceneID="Sjs-to-f7A">
+            <objects>
+                <viewController storyboardIdentifier="createItemByPath" id="Eg0-WD-ucD" customClass="CreateITemByPathViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KoW-w2-QPa"/>
+                        <viewControllerLayoutGuide type="bottom" id="woY-Mp-SPu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ue5-X8-jSW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Test title" borderStyle="line" placeholder="type item title" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="E4c-H8-m5W">
+                                <rect key="frame" x="20" y="118" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="zl8-Gc-n4g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Test text" borderStyle="line" placeholder="type item text" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="o3L-Qu-Yzw">
+                                <rect key="frame" x="20" y="156" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ANG-q8-aWF"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="QhS-OI-QzW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="/sitecore/content/Home" borderStyle="line" placeholder="parent item path" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="JLv-iX-xgf">
+                                <rect key="frame" x="20" y="206" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="VwF-8C-Sc7"/>
+                                    <constraint firstAttribute="height" constant="30" id="YpR-ZR-HZo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yg6-Xi-Rko">
+                                <rect key="frame" x="93" y="244" width="135" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="qLg-Zu-avD"/>
+                                    <constraint firstAttribute="width" constant="135" id="ukS-0X-c8l"/>
+                                </constraints>
+                                <state key="normal" title="Create">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnCreateItemButtonTapped:" destination="Eg0-WD-ucD" eventType="touchUpInside" id="5bq-cj-I4G"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Test name" borderStyle="line" placeholder="type item name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="P8c-qD-0Cq">
+                                <rect key="frame" x="20" y="71" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Q6m-7X-5Fa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JLv-iX-xgf" firstAttribute="top" secondItem="o3L-Qu-Yzw" secondAttribute="bottom" constant="20" id="2QB-DN-6He"/>
+                            <constraint firstItem="E4c-H8-m5W" firstAttribute="top" secondItem="KoW-w2-QPa" secondAttribute="bottom" constant="54" id="3ey-76-Ez6"/>
+                            <constraint firstItem="P8c-qD-0Cq" firstAttribute="top" secondItem="KoW-w2-QPa" secondAttribute="bottom" constant="7" id="Nbb-A4-yvp"/>
+                            <constraint firstItem="JLv-iX-xgf" firstAttribute="leading" secondItem="Ue5-X8-jSW" secondAttribute="leading" constant="20" id="PGk-wO-gWl"/>
+                            <constraint firstItem="o3L-Qu-Yzw" firstAttribute="top" secondItem="E4c-H8-m5W" secondAttribute="bottom" constant="8" id="QUE-rd-O0R"/>
+                            <constraint firstItem="P8c-qD-0Cq" firstAttribute="leading" secondItem="E4c-H8-m5W" secondAttribute="leading" id="Qwg-4M-jdS"/>
+                            <constraint firstItem="yg6-Xi-Rko" firstAttribute="top" secondItem="JLv-iX-xgf" secondAttribute="bottom" constant="8" id="V0L-vs-sBe"/>
+                            <constraint firstItem="yg6-Xi-Rko" firstAttribute="leading" secondItem="JLv-iX-xgf" secondAttribute="leading" constant="73" id="WK7-WS-rSS"/>
+                            <constraint firstItem="yg6-Xi-Rko" firstAttribute="leading" secondItem="Ue5-X8-jSW" secondAttribute="leading" constant="93" id="Woa-Id-But"/>
+                            <constraint firstAttribute="trailing" secondItem="o3L-Qu-Yzw" secondAttribute="trailing" constant="20" id="ZsI-08-Qmf"/>
+                            <constraint firstAttribute="trailing" secondItem="E4c-H8-m5W" secondAttribute="trailing" constant="20" id="c1s-9W-sor"/>
+                            <constraint firstItem="E4c-H8-m5W" firstAttribute="leading" secondItem="Ue5-X8-jSW" secondAttribute="leading" constant="20" id="hKb-bU-klA"/>
+                            <constraint firstAttribute="trailing" secondItem="JLv-iX-xgf" secondAttribute="trailing" constant="20" id="hrb-ZN-5bx"/>
+                            <constraint firstItem="P8c-qD-0Cq" firstAttribute="trailing" secondItem="E4c-H8-m5W" secondAttribute="trailing" id="rfV-bd-FdZ"/>
+                            <constraint firstItem="o3L-Qu-Yzw" firstAttribute="leading" secondItem="Ue5-X8-jSW" secondAttribute="leading" constant="20" id="xi7-lh-t7R"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="JEp-0u-bph"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="createButton" destination="yg6-Xi-Rko" id="0AT-3C-i4v"/>
+                        <outlet property="nameField" destination="P8c-qD-0Cq" id="xaC-D8-6HA"/>
+                        <outlet property="pathField" destination="JLv-iX-xgf" id="PYg-VD-paY"/>
+                        <outlet property="textField" destination="o3L-Qu-Yzw" id="b7P-zO-06v"/>
+                        <outlet property="titleField" destination="E4c-H8-m5W" id="PR0-QE-ErB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LNK-n2-e0s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-423" y="1134"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -157,6 +157,10 @@
     <Compile Include="ITemTasks\FieldsViewController.designer.cs">
       <DependentUpon>FieldsViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITemTasks\CreateITemByPathViewController.cs" />
+    <Compile Include="ITemTasks\CreateITemByPathViewController.designer.cs">
+      <DependentUpon>CreateITemByPathViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
