@@ -132,6 +132,12 @@
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\ICreateItemByPathRequest.cs" />
+    <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
+    <Compile Include="Items\CreateItemByPathParameters.cs" />
+    <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
+    <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -192,5 +198,6 @@
     <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
     <Folder Include="UserRequest\CreateRequest\" />
     <Folder Include="Validators\" />
+    <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
   </ItemGroup>
 </Project>
