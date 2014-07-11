@@ -57,7 +57,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
     }
 
-    public IGetVersionedItemRequestParametersBuilder<T> AddScope(ScopeType scope)
+    public IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
     }

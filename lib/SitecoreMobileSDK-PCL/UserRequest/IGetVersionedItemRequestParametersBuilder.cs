@@ -19,7 +19,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     IGetVersionedItemRequestParametersBuilder<T> AddFields(ICollection<string> fields);
     IGetVersionedItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
-    IGetVersionedItemRequestParametersBuilder<T> AddScope(ScopeType scope);
+    IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
   }
 }
 

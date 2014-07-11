@@ -579,6 +579,26 @@ namespace Sitecore.MobileSdkUnitTest
         .AddScope(ScopeType.Self)
         .AddScope(ScopeType.Self));
     }
+
+    [Test]
+    public void TestAddScopeSupportsParamsSyntax()
+    {
+      var request = 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/sHell")
+          .AddScope(ScopeType.Self, ScopeType.Parent, ScopeType.Children);
+
+      Assert.IsNotNull(request);
+    }
+
+    [Test]
+    public void TestAddScopeSupportsCollection()
+    {
+      ScopeType[] scopeArgs = { ScopeType.Self, ScopeType.Parent, ScopeType.Children };
+      var scopeArgsList = new List<ScopeType>(scopeArgs);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/aaaa")
+        .AddScope(scopeArgsList);
+      Assert.IsNotNull(request);
+    }
     #endregion Scope
   }
 }
