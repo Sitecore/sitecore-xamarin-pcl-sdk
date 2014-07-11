@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK.UserRequest
   {
     public IGetItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
-      if (string.IsNullOrEmpty(sitecoreDatabase))
+      if (string.IsNullOrWhiteSpace(sitecoreDatabase))
       {
         throw new ArgumentException("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty");
       }
@@ -34,7 +34,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IGetItemRequestParametersBuilder<T> Language(string itemLanguage)
     {
-      if (string.IsNullOrEmpty(itemLanguage))
+      if (string.IsNullOrWhiteSpace(itemLanguage))
       {
         throw new ArgumentException("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty");
       }

@@ -427,6 +427,15 @@ namespace Sitecore.MobileSdkUnitTest
         .Database("web")
       );
     }
+
+    [Test]
+    public void TestWhitespaceDatabaseCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Database("\t   \r  \n")
+      );
+    }
     #endregion Database Validation
 
 
@@ -458,6 +467,15 @@ namespace Sitecore.MobileSdkUnitTest
         .Language("fr")
       );
     }
+
+    [Test]
+    public void TestWhitespaceLanguageCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Language("\t   \r  \n")
+      );
+    }
     #endregion Language Validation
 
     #region Version Validation
@@ -486,6 +504,15 @@ namespace Sitecore.MobileSdkUnitTest
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Version("2")
         .Version("99")
+      );
+    }
+
+    [Test]
+    public void TestWhitespaceItemVersionCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        .Version("\t   \r  \n")
       );
     }
     #endregion Version Validation

@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK.UserRequest
   {
     public IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion)
     {
-      if (string.IsNullOrEmpty(itemVersion))
+      if (string.IsNullOrWhiteSpace(itemVersion))
       {
         throw new ArgumentException("AbstractGetItemRequestBuilder.Version : The input cannot be null or empty");
       }
