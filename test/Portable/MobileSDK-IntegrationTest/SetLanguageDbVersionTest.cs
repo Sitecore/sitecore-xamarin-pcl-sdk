@@ -326,7 +326,12 @@
       Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.GetType().ToString());
       Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
       Assert.AreEqual("System.Xml.XmlException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("For security reasons DTD is prohibited in this XML document."));
+
+
+      // Windows : "For security reasons DTD is prohibited in this XML document."
+      // iOS : {System.Xml.XmlException: Document Type Declaration (DTD) is prohibited in this XML.  Line 1, position 10.
+      Assert.True(exception.InnerException.Message.Contains("is prohibited in this XML"));
+      Assert.True(exception.InnerException.Message.Contains("DTD"));
     }
 
     [Test]
