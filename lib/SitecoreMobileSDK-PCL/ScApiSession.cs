@@ -1,4 +1,3 @@
-using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
 namespace Sitecore.MobileSDK
 {
@@ -21,6 +20,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
 
   public class ScApiSession
