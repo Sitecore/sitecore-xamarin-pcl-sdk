@@ -74,10 +74,9 @@
     public async void TestGetItemWithChildrenAndParentScopeById()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.AllowedItem.Id)
-        .AddScope(ScopeType.Children)
+        .AddScope(ScopeType.Children, ScopeType.Parent)
         .Database("master")
         .AddFields("title")
-        .AddScope(ScopeType.Parent)
         .Payload(PayloadType.Full)
         .Build();
       var response = await this.session.ReadItemAsync(request);
@@ -112,10 +111,8 @@
     public async void TestGetItemWithChildrenAndSelfAndParentScopeByQuery()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/Allowed_Parent/Allowed_Item/ancestor-or-self::*")
-        .AddScope(ScopeType.Children)
-        .AddScope(ScopeType.Self)
+        .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Parent)
         .Language("en")
-        .AddScope(ScopeType.Parent)
         .Payload(PayloadType.Content)
         .Build();
       var response = await this.session.ReadItemAsync(request);
