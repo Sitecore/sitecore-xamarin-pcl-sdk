@@ -1,111 +1,88 @@
-﻿using System;
+﻿
 
 namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
 {
+  using System;
+  using System.Collections;
+  using System.Collections.Generic;
+
+
   public class ScopeParameters
   {
     public ScopeParameters()
     {
     }
 
+    #region Copy Constructor
     public ScopeParameters ShallowCopy()
     {
       ScopeParameters copy = new ScopeParameters();
-
-      copy.parentScopeIsSet    = this.parentScopeIsSet;
-      copy.selfScopeIsSet      = this.selfScopeIsSet;
-      copy.childrenScopeIsSet  = this.childrenScopeIsSet;
+      copy.accumulatedScope = this.CopyAccumulatedScope();
 
       return copy;
     }
 
+    private List<ScopeType> CopyAccumulatedScope()
+    {
+      if (null == this.accumulatedScope)
+      {
+        return null;
+      }
+
+      var result = new List<ScopeType>(this.accumulatedScope);
+      return result;
+    }
+    #endregion Copy Constructor
 
 
     public void AddScope(ScopeType scope)
     {
-      switch (scope)
+      if (this.accumulatedScope.Contains(scope))
       {
-        case ScopeType.Self:
-        {
-          if (this.SelfScopeIsSet)
-          {
-            this.OnValidationError();
-          }
-
-          this.SelfScopeIsSet = true;
-        }
-        break;
-        case ScopeType.Parent:
-        {
-          if (this.ParentScopeIsSet)
-          {
-            this.OnValidationError();
-          }
-
-          this.ParentScopeIsSet = true;
-        }
-        break;
-        case ScopeType.Children:
-        {
-          if (this.ChildrenScopeIsSet)
-          {
-            this.OnValidationError();
-          }
-
-          this.ChildrenScopeIsSet = true;
-        }
-        break;
+        throw new InvalidOperationException("Adding scope parameter duplicates is forbidden");
       }
 
+      this.accumulatedScope.Add(scope);
+    }
+
+    #region Properties
+    public IEnumerable<ScopeType> AccumulatedScope
+    {
+      get
+      {
+        return this.accumulatedScope;
+      }
     }
 
     public bool ParentScopeIsSet
     {
-      private set
-      { 
-        this.parentScopeIsSet = value;
-      }
-
       get
       { 
-        return this.parentScopeIsSet;
+        return this.accumulatedScope.Contains(ScopeType.Parent);
       }
     }
 
     public bool SelfScopeIsSet
     {
-      private set
-      { 
-        this.selfScopeIsSet = value;
-      }
-
       get
       { 
-        return this.selfScopeIsSet;
+        return this.accumulatedScope.Contains(ScopeType.Self);
       }
     }
 
     public bool ChildrenScopeIsSet
     {
-      private set
-      { 
-        this.childrenScopeIsSet = value;
-      }
-
       get
       { 
-        return this.childrenScopeIsSet;
+        return this.accumulatedScope.Contains(ScopeType.Children);
       }
     }
+    #endregion Properties
 
-    private void OnValidationError()
-    {
-      throw new InvalidOperationException("Adding scope parameter duplicates is forbidden");
-    }
-
-    private bool parentScopeIsSet    = false;
-    private bool selfScopeIsSet      = false;
-    private bool childrenScopeIsSet  = false;
+    #region Instance Variables
+    private const int MAX_SCOPE_ARGS_COUNT = 3;
+    private List<ScopeType> accumulatedScope = new List<ScopeType>(MAX_SCOPE_ARGS_COUNT);
+    #endregion Instance Variables
   }
 }
 

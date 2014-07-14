@@ -91,6 +91,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
       return result;
     }
 
+    #region Payload
     private string PayloadTypeToRestArgumentStatement(PayloadType? payload)
     {
       string strPayload = this.PayloadTypeToString( payload );
@@ -121,7 +122,9 @@ namespace Sitecore.MobileSDK.UrlBuilder
       string result = enumNamesMap[payload];
       return result;
     }
+    #endregion Payload
 
+    #region Scope
     private string ScopeToRestArgumentStatement(ScopeParameters scopeParameters)
     {
       if (null == scopeParameters)
@@ -131,19 +134,10 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
       string scopeString = string.Empty;
 
-      if (scopeParameters.ParentScopeIsSet)
+      foreach (ScopeType singleScopeEntry in scopeParameters.AccumulatedScope)
       {
-        scopeString += this.restGrammar.ItemFieldSeparator + "p";
-      }
-
-      if (scopeParameters.SelfScopeIsSet)
-      {
-        scopeString += this.restGrammar.ItemFieldSeparator + "s";
-      }
-
-      if (scopeParameters.ChildrenScopeIsSet)
-      {
-        scopeString += this.restGrammar.ItemFieldSeparator + "c";
+        string urlParameterForScope = this.ScopeTypeToString(singleScopeEntry);
+        scopeString += this.restGrammar.ItemFieldSeparator + urlParameterForScope;
       }
 
       if (string.IsNullOrEmpty(scopeString))
@@ -157,6 +151,18 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
       return result;
     }
+
+    private string ScopeTypeToString(ScopeType scope)
+    {
+      var enumNamesMap = new Dictionary<ScopeType, string>();
+      enumNamesMap.Add( ScopeType.Parent  , "p" );
+      enumNamesMap.Add( ScopeType.Self    , "s" );
+      enumNamesMap.Add( ScopeType.Children, "c" );
+
+      string result = enumNamesMap[scope];
+      return result;
+    }
+    #endregion Scope
 
     private IRestServiceGrammar restGrammar;
     private IWebApiUrlParameters webApiGrammar;
