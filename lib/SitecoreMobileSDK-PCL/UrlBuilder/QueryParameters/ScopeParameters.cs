@@ -7,19 +7,27 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
   using System.Collections.Generic;
 
 
-  public class ScopeParameters
+  public class ScopeParameters : IScopeParameters
   {
-    public ScopeParameters()
+    #region Copy Constructor
+    public ScopeParameters(IScopeParameters other = null)
     {
+      if (null == other)
+      {
+        return;
+      }
+
+      this.accumulatedScope = new List<ScopeType>(other.OrderedScopeSequence);
     }
 
-    #region Copy Constructor
-    public ScopeParameters ShallowCopy()
+    public ScopeParameters ShallowCopyScopeParametersClass()
     {
-      ScopeParameters copy = new ScopeParameters();
-      copy.accumulatedScope = this.CopyAccumulatedScope();
+      return new ScopeParameters(this);
+    }
 
-      return copy;
+    public IScopeParameters ShallowCopyScopeParametersInterface()
+    {
+      return this.ShallowCopyScopeParametersClass();
     }
 
     private List<ScopeType> CopyAccumulatedScope()
@@ -46,7 +54,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
     }
 
     #region Properties
-    public IEnumerable<ScopeType> AccumulatedScope
+    public IEnumerable<ScopeType> OrderedScopeSequence
     {
       get
       {
