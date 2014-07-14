@@ -1,12 +1,24 @@
-﻿using System.Diagnostics;
+﻿
 
 namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
+  using System.Diagnostics;
 
   public class SessionConfig : ISessionConfig, IWebApiCredentials
   {
-    public SessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
+
+    public static SessionConfig NewAnonymousSessionConfig(string instanceUrl, string site = null, string itemWebApiVersion = "v1")
+    {
+      return new SessionConfig(instanceUrl, null, null, site, itemWebApiVersion);
+    }
+
+    public static SessionConfig NewAuthenticatedSessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
+    {
+      return new SessionConfig(instanceUrl, login, password, site, itemWebApiVersion);
+    }
+
+    protected SessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
     {
       this.InstanceUrl = instanceUrl;
       this.Login       = login      ;
@@ -14,7 +26,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       this.Site        = site       ;
       this.ItemWebApiVersion = itemWebApiVersion;
 
-      this.Validate ();
+      this.Validate();
     }
 
     public virtual SessionConfig ShallowCopy()
@@ -69,17 +81,25 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     private void Validate()
     {
-      if (string.IsNullOrEmpty(this.InstanceUrl))
+      if (string.IsNullOrWhiteSpace(this.InstanceUrl))
       {
         throw new ArgumentNullException("SessionConfig.InstanceUrl is required");
       }
-      else if (!SessionConfigValidator.IsValidSchemeOfInstanceUrl(this.InstanceUrl))
+      else if (string.IsNullOrWhiteSpace(this.ItemWebApiVersion))
+      {
+        throw new ArgumentNullException("SessionConfig.ItemWebApiVersion is required");
+      }
+
+      bool hasLogin = !string.IsNullOrWhiteSpace(this.Login);
+      bool hasPassword = !string.IsNullOrWhiteSpace(this.Password);
+      if (hasLogin && !hasPassword)
+      {
+        throw new ArgumentNullException("SessionConfig.Credentials : password is required for authenticated session");
+      }
+
+      if (!SessionConfigValidator.IsValidSchemeOfInstanceUrl(this.InstanceUrl))
       {
         Debug.WriteLine("[WARNING] : SessionConfig - instance URL does not have a scheme");
-      }
-      else if (string.IsNullOrEmpty (this.ItemWebApiVersion))
-      {
-        throw new ArgumentNullException ("SessionConfig.ItemWebApiVersion is required");
       }
     }
 

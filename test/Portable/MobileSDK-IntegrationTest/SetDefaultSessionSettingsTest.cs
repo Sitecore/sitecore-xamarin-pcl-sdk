@@ -23,7 +23,7 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      this.sessionConfig = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      this.sessionConfig = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       this.sessionAuthenticatedUser = new ScApiSession(sessionConfig, ItemSource.DefaultSource());
       this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Payload(PayloadType.Content)

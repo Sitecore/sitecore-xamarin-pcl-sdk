@@ -57,7 +57,7 @@
     public async void TestGetItemWithNullLanguage()
     {
       var itemSource = new ItemSource("master", null, "1");
-      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       var session = new ScApiSession(config, itemSource);
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
@@ -72,7 +72,7 @@
     public async void TestGetItemWithNullDb()
     {
       var itemSource = new ItemSource(null, "en", "1");
-      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
       var session = new ScApiSession(config, itemSource);
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")

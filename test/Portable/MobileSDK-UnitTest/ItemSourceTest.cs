@@ -18,7 +18,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestApiSessionConstructorDoesNotRequiresDefaultSource()
     {
-      SessionConfig config = new SessionConfig ("localhost", "alex.fergusson", "man u is a champion");
+      SessionConfig config = SessionConfig.NewAuthenticatedSessionConfig("localhost", "alex.fergusson", "man u is a champion");
 
       ScApiSession result = new ScApiSession (config, null);
       Assert.IsNotNull(result);
@@ -28,7 +28,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestApiSessionConstructorRequiresConfig()
     {
-      ItemSource defaultSource = ItemSource.DefaultSource ();
+      ItemSource defaultSource = ItemSource.DefaultSource();
 
       TestDelegate initSessionAction = () =>
       {
