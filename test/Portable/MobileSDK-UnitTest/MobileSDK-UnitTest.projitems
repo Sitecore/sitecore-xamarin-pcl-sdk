@@ -28,5 +28,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ThreadSafetyTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateItemByIdUrlBuilderTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CreateSessionTest.cs" />
   </ItemGroup>
 </Project>
