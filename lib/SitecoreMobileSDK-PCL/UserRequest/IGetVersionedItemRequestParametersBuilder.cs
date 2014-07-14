@@ -8,7 +8,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
 
 
-  public interface IGetVersionedItemRequestParametersBuilder<T> : IGetItemRequestParametersBuilder<T>
+  public interface IGetVersionedItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
     where T : class
   {
     IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion);

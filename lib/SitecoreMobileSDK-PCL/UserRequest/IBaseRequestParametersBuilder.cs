@@ -6,18 +6,18 @@ namespace Sitecore.MobileSDK.UserRequest
 
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  public interface IBaseItemRequestParametersBuilder<T>
+  public interface IBaseRequestParametersBuilder<T>
     where T : class
   {
-    IBaseItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
-    IBaseItemRequestParametersBuilder<T> Language(string itemLanguage);
-    IBaseItemRequestParametersBuilder<T> Payload(PayloadType payload);
+    IBaseRequestParametersBuilder<T> Database(string sitecoreDatabase);
+    IBaseRequestParametersBuilder<T> Language(string itemLanguage);
+    IBaseRequestParametersBuilder<T> Payload(PayloadType payload);
 
-    IBaseItemRequestParametersBuilder<T> AddFields(ICollection<string> fields);
-    IBaseItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
+    IBaseRequestParametersBuilder<T> AddFields(ICollection<string> fields);
+    IBaseRequestParametersBuilder<T> AddFields(params string[] fieldParams);
 
-    IBaseItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope);
-    IBaseItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
+    IBaseRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope);
+    IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
 
     T Build();
   }

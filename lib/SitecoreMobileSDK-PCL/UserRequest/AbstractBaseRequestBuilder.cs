@@ -9,10 +9,10 @@ namespace Sitecore.MobileSDK.UserRequest
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  public abstract class AbstractBaseItemRequestBuilder<T> : IBaseItemRequestParametersBuilder<T>
+  public abstract class AbstractBaseRequestBuilder<T> : IBaseRequestParametersBuilder<T>
     where T : class
   {
-    public IBaseItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
+    public IBaseRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
       if (string.IsNullOrWhiteSpace(sitecoreDatabase))
       {
@@ -32,7 +32,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IBaseItemRequestParametersBuilder<T> Language(string itemLanguage)
+    public IBaseRequestParametersBuilder<T> Language(string itemLanguage)
     {
       if (string.IsNullOrWhiteSpace(itemLanguage))
       {
@@ -52,7 +52,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IBaseItemRequestParametersBuilder<T> Payload(PayloadType payload)
+    public IBaseRequestParametersBuilder<T> Payload(PayloadType payload)
     {
       if (null != this.queryParameters.Payload)
       {
@@ -63,7 +63,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IBaseItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    public IBaseRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
       ScopeParameters scopeParameters = new ScopeParameters(this.queryParameters.ScopeParameters);
 
@@ -76,13 +76,13 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IBaseItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
+    public IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
       ICollection<ScopeType> castedScope = (ICollection<ScopeType>)scope;
       return this.AddScope(castedScope);
     }
 
-    public IBaseItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
+    public IBaseRequestParametersBuilder<T> AddFields(ICollection<string> fields)
     {
       if (null == fields)
       {
@@ -126,7 +126,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IBaseItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    public IBaseRequestParametersBuilder<T> AddFields(params string[] fieldParams)
     {
       if (null == fieldParams)
       {

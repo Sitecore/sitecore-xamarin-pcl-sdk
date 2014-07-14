@@ -1,4 +1,6 @@
-﻿
+﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -6,7 +8,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
-  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractGetItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T> 
+  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>, ICreateItemRequestParametersBuilder<T> 
     where T : class
   {
 
@@ -76,6 +78,41 @@ namespace Sitecore.MobileSDK
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, newFields);
 
       return this;
+    }
+
+    new public ICreateItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
+    {
+      return (ICreateItemRequestParametersBuilder<T>)base.Database(sitecoreDatabase);
+    }
+
+    new public ICreateItemRequestParametersBuilder<T> Language(string itemLanguage)
+    {
+      return (ICreateItemRequestParametersBuilder<T>)base.Language(itemLanguage);
+    }
+
+    new public ICreateItemRequestParametersBuilder<T> Payload(PayloadType payload)
+    {
+      return (ICreateItemRequestParametersBuilder<T>)base.Payload(payload);
+    }
+
+    new public ICreateItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
+    {
+      return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fields);
+    }
+
+    new public ICreateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    {
+      return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
+    }
+
+    new public ICreateItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    {
+      return (ICreateItemRequestParametersBuilder<T>)base.AddScope(scope);
+    }
+
+    new public ICreateItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
+    {
+      return (ICreateItemRequestParametersBuilder<T>)base.AddScope(scope);
     }
 
     protected CreateItemParameters itemParametersAccumulator = new CreateItemParameters(null, null, null);

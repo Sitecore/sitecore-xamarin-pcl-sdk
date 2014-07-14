@@ -25,7 +25,7 @@ namespace Sitecore.MobileSDK
       return new ReadItemByPathRequestBuilder(itemPath);
     }
 
-    public static IGetItemRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
+    public static IBaseRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
     {
       return new ReadItemByQueryRequestBuilder(sitecoreQuery);
     }

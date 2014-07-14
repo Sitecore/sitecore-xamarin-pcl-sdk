@@ -5,7 +5,7 @@ namespace Sitecore.MobileSDK.UserRequest
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  public class ReadItemByQueryRequestBuilder : AbstractGetItemRequestBuilder<IReadItemsByQueryRequest>
+  public class ReadItemByQueryRequestBuilder : AbstractBaseRequestBuilder<IReadItemsByQueryRequest>
   {
     public ReadItemByQueryRequestBuilder(string sitecoreQuery)
     {
