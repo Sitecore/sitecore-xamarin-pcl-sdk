@@ -13,15 +13,15 @@ namespace Sitecore.MobileSDK.UserRequest
   {
     IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion);
 
-    IGetVersionedItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
-    IGetVersionedItemRequestParametersBuilder<T> Language(string itemLanguage);
-    IGetVersionedItemRequestParametersBuilder<T> Payload(PayloadType payload);
+    new IGetVersionedItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
+    new IGetVersionedItemRequestParametersBuilder<T> Language(string itemLanguage);
+    new IGetVersionedItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
-    IGetVersionedItemRequestParametersBuilder<T> AddFields(ICollection<string> fields);
-    IGetVersionedItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
+    new IGetVersionedItemRequestParametersBuilder<T> AddFields(ICollection<string> fields);
+    new IGetVersionedItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
 
-    IGetVersionedItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope);
-    IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
+    new IGetVersionedItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope);
+    new IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
   }
 }
 
