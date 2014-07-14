@@ -125,7 +125,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
     #endregion Payload
 
     #region Scope
-    private string ScopeToRestArgumentStatement(ScopeParameters scopeParameters)
+    private string ScopeToRestArgumentStatement(IScopeParameters scopeParameters)
     {
       if (null == scopeParameters)
       {
@@ -134,7 +134,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
       string scopeString = string.Empty;
 
-      foreach (ScopeType singleScopeEntry in scopeParameters.AccumulatedScope)
+      foreach (ScopeType singleScopeEntry in scopeParameters.OrderedScopeSequence)
       {
         string urlParameterForScope = this.ScopeTypeToString(singleScopeEntry);
         scopeString += this.restGrammar.ItemFieldSeparator + urlParameterForScope;
