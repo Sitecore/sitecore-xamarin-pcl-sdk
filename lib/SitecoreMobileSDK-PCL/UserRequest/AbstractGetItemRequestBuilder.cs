@@ -65,16 +65,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IGetItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
-      ScopeParameters scopeParameters;
-
-      if (null == this.queryParameters.ScopeParameters)
-      {
-        scopeParameters = new ScopeParameters();
-      }
-      else
-      {
-        scopeParameters = this.queryParameters.ScopeParameters.ShallowCopy();
-      }
+      ScopeParameters scopeParameters = new ScopeParameters(this.queryParameters.ScopeParameters);
 
       foreach (ScopeType singleScope in scope)
       {

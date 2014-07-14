@@ -81,7 +81,7 @@ namespace MobileSDK_UnitTest_Desktop
     }
 
     [Test]
-    public void TestScopeParamsOrderDoesNotMatter()
+    public void TestScopeParamsOrderIsPreserved()
     {
       var scope = new ScopeParameters();
       scope.AddScope(ScopeType.Children);
@@ -89,7 +89,7 @@ namespace MobileSDK_UnitTest_Desktop
       scope.AddScope(ScopeType.Parent);
       var qp = new QueryParameters(null, scope, null);
       string result = this.builder.BuildUrlString(qp);
-      Assert.AreEqual("scope=p|s|c", result);
+      Assert.AreEqual("scope=c|s|p", result);
     }
 
     [Test]

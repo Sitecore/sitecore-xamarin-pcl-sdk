@@ -132,6 +132,7 @@
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\IScopeParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
