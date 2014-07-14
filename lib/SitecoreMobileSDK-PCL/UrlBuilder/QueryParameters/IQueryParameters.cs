@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
   {
     IQueryParameters DeepCopy();
 
-    ScopeParameters ScopeParameters{ get; }
+    IScopeParameters ScopeParameters{ get; }
     PayloadType? Payload { get; }
     ICollection<string> Fields {get;}
   }

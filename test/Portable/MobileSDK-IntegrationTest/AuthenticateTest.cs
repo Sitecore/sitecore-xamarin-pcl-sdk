@@ -157,6 +157,10 @@
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
       Assert.True(exception.Message.Contains("Public key not received properly"));
 
+
+      // TODO : create platform specific files for this test case
+      // Windows : System.Net.Http.HttpRequestException
+      // iOS : System.Net.WebException
       Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request"));
     }

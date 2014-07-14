@@ -46,6 +46,10 @@
       result.Items.AllowedItem.Path = "/sitecore/content/Home/Allowed_Parent/Allowed_Item";
       result.Items.AllowedItem.DisplayName = "Allowed_Item";
 
+      result.Items.AllowedParent.Id = "{2075CBFF-C330-434D-9E1B-937782E0DE49}";
+      result.Items.AllowedParent.Path = "/sitecore/content/Home/Allowed_Parent";
+      result.Items.AllowedParent.DisplayName = "Allowed_Parent";
+
       return result;
     }
 
@@ -70,6 +74,7 @@
       public Item ItemWithVersions = new Item();
       public Item TestFieldsItem = new Item();
       public Item AllowedItem = new Item();
+      public Item AllowedParent = new Item();
     }
 
     public class Item

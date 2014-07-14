@@ -84,7 +84,7 @@
 
       testData.AssertItemsCount(3, response);
       Assert.AreEqual("Allowed_Child", response.Items[0].DisplayName);
-      testData.AssertItemsAreEqual(this.testData.Items.AllowedItem, response.Items[2]);
+      testData.AssertItemsAreEqual(this.testData.Items.AllowedParent, response.Items[2]);
     }
 
     [Test]
