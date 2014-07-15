@@ -1,4 +1,3 @@
-using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
 namespace Sitecore.MobileSDK
 {
@@ -21,7 +20,8 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
 
   public class ScApiSession
   {
@@ -193,6 +193,23 @@ namespace Sitecore.MobileSDK
     }
 
     #endregion CreateItems
+
+    #region Update Items
+
+    public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IUpdateItemByIdRequest requestCopy = request.DeepCopyUpdateItemByIdRequest();
+
+      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+
+      IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (requestCopy);
+
+      var taskFlow = new UpdateItemByIdTask(new UpdateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    #endregion Update Items
 
     #region Authentication
 

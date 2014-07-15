@@ -52,7 +52,6 @@
     <Compile Include="Items\ScItemsResponse.cs" />
     <Compile Include="Items\ScItemsParser.cs" />
     <Compile Include="Items\ItemSource.cs" />
-    <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
@@ -139,6 +138,17 @@
     <Compile Include="UrlBuilder\QueryParameters\IScopeParameters.cs" />
     <Compile Include="UserRequest\IBaseRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\IBaseItemRequest.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\IBaseUpdateItemRequest.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\UpdateItemById\IUpdateItemByIdRequest.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\UpdateItemById\UpdateItemByIdUrlBuilder.cs" />
+    <Compile Include="Items\UpdateItemByIdParameters.cs" />
+    <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
+    <Compile Include="CrudTasks\AbstractUpdateItemTask.cs" />
+    <Compile Include="UserRequest\UpdateRequest\IUpdateItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -200,5 +210,8 @@
     <Folder Include="UserRequest\CreateRequest\" />
     <Folder Include="Validators\" />
     <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
+    <Folder Include="UrlBuilder\UpdateItem\" />
+    <Folder Include="UrlBuilder\UpdateItem\UpdateItemById\" />
+    <Folder Include="UserRequest\UpdateRequest\" />
   </ItemGroup>
 </Project>

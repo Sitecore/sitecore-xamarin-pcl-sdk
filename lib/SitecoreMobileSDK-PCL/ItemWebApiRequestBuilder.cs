@@ -7,6 +7,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.UserRequest;
 
   public class ItemWebApiRequestBuilder
@@ -43,6 +44,11 @@ namespace Sitecore.MobileSDK
     public static ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
     {
       return new CreateItemByPathRequestBuilder(itemPath);
+    }
+
+    public static IUpdateItemRequestParametersBuilder<IUpdateItemByIdRequest> UpdateItemRequestWithId(string itemId)
+    {
+      return new UpdateItemByIdRequestBuilder(itemId);
     }
   }
 }
