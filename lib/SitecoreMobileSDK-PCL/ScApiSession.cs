@@ -46,7 +46,15 @@ namespace Sitecore.MobileSDK
       }
     }
 
-    public SessionConfig Config
+    public ISessionConfig Config
+    {
+      get
+      {
+        return this.sessionConfig;
+      }
+    }
+
+    public IWebApiCredentials Credentials
     {
       get
       {
