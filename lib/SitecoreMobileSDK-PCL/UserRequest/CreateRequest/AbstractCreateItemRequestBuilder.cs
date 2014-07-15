@@ -1,12 +1,11 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-
+﻿
 namespace Sitecore.MobileSDK
 {
   using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   public abstract class AbstractCreateItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>, ICreateItemRequestParametersBuilder<T> 
     where T : class
