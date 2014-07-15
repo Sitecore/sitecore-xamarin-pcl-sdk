@@ -139,6 +139,7 @@
     <Compile Include="Session\IBaseSessionBuilder.cs" />
     <Compile Include="Session\IAnonymousSessionBuilder.cs" />
     <Compile Include="Session\IAuthenticatedSessionBuilder.cs" />
+    <Compile Include="Session\SessionBuilderImpl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
