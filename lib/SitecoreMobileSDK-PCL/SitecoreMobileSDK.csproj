@@ -85,8 +85,6 @@
     <Compile Include="UserRequest\SessionConfigMerger.cs" />
     <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
     <Compile Include="ItemWebApiRequestBuilder.cs" />
-    <Compile Include="UserRequest\IGetItemRequestParametersBuilder.cs" />
-    <Compile Include="UserRequest\AbstractGetItemRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
@@ -132,10 +130,17 @@
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\ICreateItemByPathRequest.cs" />
+    <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
+    <Compile Include="Items\CreateItemByPathParameters.cs" />
+    <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
+    <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UrlBuilder\QueryParameters\IScopeParameters.cs" />
+    <Compile Include="UserRequest\IBaseRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -172,13 +177,12 @@
       <HintPath>..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-
   <ItemGroup>
     <Folder Include="UrlBuilder\CreateItem\" />
     <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
     <Folder Include="UserRequest\CreateRequest\" />
     <Folder Include="Validators\" />
+    <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
   </ItemGroup>
 </Project>
