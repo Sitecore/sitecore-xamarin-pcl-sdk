@@ -6,11 +6,17 @@ namespace MobileSDKIntegrationTest
 
   using System;
   using System.Net.Http;
+
+
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.SessionSettings;
+
+
+  using SitecoreMobileSDKMockObjects;
+
 
 
   [TestFixture]
@@ -107,7 +113,14 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemWithEmptyPassword()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "", ItemSource.DefaultSource(), testData.ShellSite);
+      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
+      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
+      sessionConfig.SetLogin(testData.Users.Admin.Username);
+      sessionConfig.SetPassword("");
+      sessionConfig.SetSite(testData.ShellSite);
+
+      var defaultItemSource = ItemSource.DefaultSource();
+      var session = new ScApiSession(sessionConfig, defaultItemSource);
 
       TestDelegate testCode = async() =>
       {
@@ -142,7 +155,14 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemWithInvalidUsernameAndPassword()
     {
-      var session = testData.GetSession(testData.InstanceUrl, "inval|d u$er№ame", null, ItemSource.DefaultSource(), testData.ShellSite);
+      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
+      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
+      sessionConfig.SetLogin("inval|d u$er№ame");
+      sessionConfig.SetPassword(null);
+      sessionConfig.SetSite(testData.ShellSite);
+
+      var defaultItemSource = ItemSource.DefaultSource();
+      var session = new ScApiSession(sessionConfig, defaultItemSource);
 
       TestDelegate testCode = async() =>
       {
