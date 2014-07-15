@@ -1,4 +1,7 @@
-﻿namespace MobileSDKIntegrationTest
+﻿using SitecoreMobileSDKMockObjects;
+using Sitecore.MobileSDK;
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using NUnit.Framework;
@@ -99,7 +102,15 @@
     [Test]
     public async void TestGetAuthenticationWithEmptyUsername()
     {
-      var session = testData.GetSession(testData.InstanceUrl, "", testData.Users.Admin.Password);
+      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
+      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
+      sessionConfig.SetLogin("");
+      sessionConfig.SetPassword(testData.Users.Admin.Password);
+
+      MutableItemSource defaultItemSource = null;
+      var session = new ScApiSession(sessionConfig, defaultItemSource);
+
+
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
     }
@@ -107,7 +118,14 @@
     [Test]
     public async void TestGetAuthenticationWithEmptyPassword()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "");
+      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
+      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
+      sessionConfig.SetLogin(testData.Users.Admin.Username);
+      sessionConfig.SetPassword("");
+
+      MutableItemSource defaultItemSource = null;
+      var session = new ScApiSession(sessionConfig, defaultItemSource);
+
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
     }
@@ -115,7 +133,15 @@
     [Test]
     public async void TestGetAuthenticationWithNullUsername()
     {
-      var session = testData.GetSession(testData.InstanceUrl, null, testData.Users.Admin.Password);
+      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
+      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
+      sessionConfig.SetLogin(null);
+      sessionConfig.SetPassword(testData.Users.Admin.Password);
+
+      MutableItemSource defaultItemSource = null;
+      var session = new ScApiSession(sessionConfig, defaultItemSource);
+
+
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
     }
@@ -123,7 +149,14 @@
     [Test]
     public async void TestGetAuthenticationWithNullPassword()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, null);
+      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
+      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
+      sessionConfig.SetLogin(testData.Users.Admin.Username);
+      sessionConfig.SetPassword(null);
+
+      MutableItemSource defaultItemSource = null;
+      var session = new ScApiSession(sessionConfig, defaultItemSource);
+
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
     }
@@ -147,7 +180,7 @@
     }
 
     [Test]
-    public void TestGetAuthenticationWithNotExistentUrl()
+    public void TestGetPublicKeyWithNotExistentUrl()
     {
       var session = testData.GetSession("http://mobiled.sitecore.net:7220", testData.Users.Admin.Username, testData.Users.Admin.Password);
       TestDelegate testCode = async () =>
