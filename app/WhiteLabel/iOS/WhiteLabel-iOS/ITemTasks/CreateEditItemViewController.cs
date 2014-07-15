@@ -32,23 +32,33 @@ namespace WhiteLabeliOS
       this.SendRequest();
 		}
 
-    private async void SendRequest()
+    partial void OnUpdateItemButtonTapped (MonoTouch.UIKit.UIButton sender)
+    {
+      if (null == this.CreatedItemId)
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Create item at first");
+      }
+      else
+      {
+        this.SendUpdateRequest();
+      }
+    }
+
+    private async void SendUpdateRequest()
     {
       try
       {
         ScApiSession session = this.instanceSettings.GetSession();
 
-        var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.pathField.Text)
+        var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.CreatedItemId)
           .Database("web")
-          .ItemTemplate("Sample/Sample Item")
-          .ItemName(this.nameField.Text)
           .AddFieldsRawValuesByName("Title", titleField.Text)
           .AddFieldsRawValuesByName("Text", textField.Text)
           .Build();
 
         this.ShowLoader();
 
-        ScItemsResponse response = await session.CreateItemAsync(request);
+        ScItemsResponse response = await session.UpdateItemAsync(request);
         if (response.Items.Any())
         {
           ISitecoreItem item = response.Items[0];
@@ -71,6 +81,50 @@ namespace WhiteLabeliOS
         });
       }
     }
+
+    private async void SendRequest()
+    {
+      try
+      {
+        ScApiSession session = this.instanceSettings.GetSession();
+
+        var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.pathField.Text)
+          .Database("web")
+          .ItemTemplate("Sample/Sample Item")
+          .ItemName(this.nameField.Text)
+          .AddFieldsRawValuesByName("Title", titleField.Text)
+          .AddFieldsRawValuesByName("Text", textField.Text)
+          .Build();
+
+        this.ShowLoader();
+
+        ScItemsResponse response = await session.CreateItemAsync(request);
+        if (response.Items.Any())
+        {
+          ISitecoreItem item = response.Items[0];
+          this.CreatedItemId = item.Id;
+          AlertHelper.ShowLocalizedAlertWithOkOption("The item created successfully", "Item path: " + item.Path);
+        }
+        else
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+        }
+      }
+      catch(Exception e) 
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.HideLoader();
+        });
+      }
+    }
+
+    private string CreatedItemId;
+
 	}
 }
 
