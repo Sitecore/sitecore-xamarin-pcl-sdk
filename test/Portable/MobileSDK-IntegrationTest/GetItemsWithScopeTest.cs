@@ -70,14 +70,13 @@
       Assert.AreEqual("Not_Allowed_Child", response.Items[1].DisplayName);
     }
 
-    [Test] //ALR: test will pass after fix scope ordering
+    [Test]
     public async void TestGetItemWithChildrenAndParentScopeById()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.AllowedItem.Id)
-        .AddScope(ScopeType.Children)
+        .AddScope(ScopeType.Children, ScopeType.Parent)
         .Database("master")
         .AddFields("title")
-        .AddScope(ScopeType.Parent)
         .Payload(PayloadType.Full)
         .Build();
       var response = await this.session.ReadItemAsync(request);
@@ -108,14 +107,12 @@
       testData.AssertItemsCount(0, response);
     }
 
-    [Test] //ALR: test will pass after fix scope ordering
+    [Test]
     public async void TestGetItemWithChildrenAndSelfAndParentScopeByQuery()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/Allowed_Parent/Allowed_Item/ancestor-or-self::*")
-        .AddScope(ScopeType.Children)
-        .AddScope(ScopeType.Self)
+        .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Parent)
         .Language("en")
-        .AddScope(ScopeType.Parent)
         .Payload(PayloadType.Content)
         .Build();
       var response = await this.session.ReadItemAsync(request);
@@ -161,7 +158,7 @@
       Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
-    [Test]  //ALR: test will pass after fix scope ordering
+    [Test] 
     public async void TestGetItemWithChildrenScopeByQueryWithSpecifiedFields()        //children in name
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/descendant::*[@title='Allowed_Item']")
@@ -201,6 +198,38 @@
 
       testData.AssertItemsCount(1, response);
       Assert.AreEqual("Allowed_Item", response.Items[0].DisplayName);
+    }
+
+    [Test]
+    public void TestGetItemByPathDuplicateScopeParams()
+    {
+      
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
+       .AddScope(ScopeType.Parent)
+       .AddScope(ScopeType.Children)
+       .AddScope(ScopeType.Parent)
+       .Build());
+      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemByIdDuplicateScopeParams()
+    {
+
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+       .AddScope(ScopeType.Self, ScopeType.Self)
+       .Build());
+      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemByQueryDuplicateScopeParams()
+    {
+
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
+       .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Children)
+       .Build());
+      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
   }
 }

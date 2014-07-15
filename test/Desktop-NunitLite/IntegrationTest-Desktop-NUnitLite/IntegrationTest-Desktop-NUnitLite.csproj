@@ -93,6 +93,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UrlAutocompleteTest.cs">
       <Link>UrlAutocompleteTest.cs</Link>
     </Compile>
+	 <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateItemsTest.cs">
+      <Link>CreateItemsTest.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

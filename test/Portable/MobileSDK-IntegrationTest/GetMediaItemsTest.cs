@@ -501,7 +501,7 @@
         .Build());
       Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The media item's database cannot be assigned twice", exception.Message);
     }
-    //TODO: add tests to check version and language overriden
+
     //TODO: add tests for MediaOptions (null, empty, override)
 
     private async Task<string[]> GetMediaFieldAsStringArray(string path)

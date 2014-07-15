@@ -50,6 +50,10 @@
       result.Items.AllowedParent.Path = "/sitecore/content/Home/Allowed_Parent";
       result.Items.AllowedParent.DisplayName = "Allowed_Parent";
 
+      result.Items.CreateItemsHere.Id = "{C50613DC-D792-467C-832F-F93BB121D775}";
+      result.Items.CreateItemsHere.Path = "/sitecore/content/Home/Android/Folder for create items";
+      result.Items.CreateItemsHere.DisplayName = "Folder for create items";
+
       return result;
     }
 
@@ -75,6 +79,7 @@
       public Item TestFieldsItem = new Item();
       public Item AllowedItem = new Item();
       public Item AllowedParent = new Item();
+      public Item CreateItemsHere = new Item();
     }
 
     public class Item
