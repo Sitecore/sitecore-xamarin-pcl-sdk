@@ -39,7 +39,7 @@
       Assert.False(response);
     }
 
-    //TODO: This testcase should fail due to WebApi bug.
+    //TODO: This testcase will fail after Item Web Api bugfix.
     [Test]
     public async void TestGetAuthenticationAsUserInExtranetDomainToShellSite()
     {
