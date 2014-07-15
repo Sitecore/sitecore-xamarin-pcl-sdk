@@ -1,12 +1,34 @@
-﻿using System;
-
+﻿
 namespace Sitecore.MobileSDK
 {
-  public class AbstractUpdateItemTask
+  using System;
+  using System.Threading.Tasks;
+  using System.Net.Http;
+  using System.Threading;
+  using System.Text;
+  using Sitecore.MobileSDK.PublicKey;
+  using Sitecore.MobileSDK.CrudTasks;
+
+  public abstract class AbstractUpdateItemTask<TRequest> : AbstractGetItemTask<TRequest>
+    where TRequest: class
   {
-    public AbstractUpdateItemTask ()
+    public AbstractUpdateItemTask(HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+      : base(httpClient, credentialsHeadersCryptor)
     {
+
     }
+
+    public override async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
+    {
+      string url = this.UrlToGetItemWithRequest(request);
+      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Put, url);
+      string fieldsList = this.GetFieldsListString(request);
+      result.Content = new StringContent(fieldsList,  Encoding.UTF8, "application/x-www-form-urlencoded");
+      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
+      return result;
+    }
+
+    public abstract string GetFieldsListString(TRequest request);
   }
 }
 

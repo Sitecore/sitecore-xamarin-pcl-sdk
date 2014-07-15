@@ -1,20 +1,18 @@
-﻿using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-using Sitecore.MobileSDK.UrlBuilder.ItemById;
-using Sitecore.MobileSDK.UrlBuilder;
-
-
+﻿
 namespace Sitecore.MobileSDK
 {
   using System;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
+  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.UrlBuilder;
 
-
-  public class UpdateItembyIdParameters : IUpdateItemByIdRequest
+  public class UpdateItemByIdParameters : IUpdateItemByIdRequest
   {
-    public UpdateItembyIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemId)
+    public UpdateItemByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;

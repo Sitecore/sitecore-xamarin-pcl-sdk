@@ -1,9 +1,27 @@
-﻿using System;
-
+﻿
 namespace Sitecore.MobileSDK
 {
-  public interface IUpdateItemRequestParametersBuilder
+  using System;
+  using System.Collections.Generic;
+  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+  public interface IUpdateItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
+    where T : class
   {
+    IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (Dictionary<string, string> fieldsRawValuesByName);
+    IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (string fieldKey, string fieldValue);
+
+    new IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
+    new IUpdateItemRequestParametersBuilder<T> Language(string itemLanguage);
+    new IUpdateItemRequestParametersBuilder<T> Payload(PayloadType payload);
+
+    new IUpdateItemRequestParametersBuilder<T> AddFields(ICollection<string> fields);
+    new IUpdateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
+
+    new IUpdateItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope);
+    new IUpdateItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
   }
 }
+
 

@@ -1,12 +1,24 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 {
-  public class UpdateItemByIdRequestBuilder
+  using System;
+
+  public class UpdateItemByIdRequestBuilder : AbstractUpdateItemRequestBuilder<IUpdateItemByIdRequest>
   {
-    public UpdateItemByIdRequestBuilder ()
+    public UpdateItemByIdRequestBuilder (string itemId)
     {
+      ItemIdValidator.ValidateItemId(itemId);
+
+      this.itemId = itemId;
     }
+
+    public override IUpdateItemByIdRequest Build()
+    {
+
+      UpdateItemByIdParameters result = new UpdateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemId);
+      return result;
+    }
+
+    private readonly string itemId;
   }
 }
-

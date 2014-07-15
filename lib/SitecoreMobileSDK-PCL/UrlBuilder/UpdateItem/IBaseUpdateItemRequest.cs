@@ -1,12 +1,17 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 {
-  public class IBaseUpdateItemRequest
+  using System;
+  using System.Collections.Generic;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+
+  public interface IBaseUpdateItemRequest : IBaseItemRequest
   {
-    public IBaseUpdateItemRequest ()
-    {
-    }
+
+    //TODO: igk we need only 
+    //public Dictionary<string, string> FieldsRawValuesByName{ get; private set; }
+    //fix this!!!
+    CreateItemParameters CreateParameters{ get; }
   }
 }
 

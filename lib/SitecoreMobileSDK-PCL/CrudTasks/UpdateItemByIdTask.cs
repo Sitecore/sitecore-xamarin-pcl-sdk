@@ -1,12 +1,29 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK.CrudTasks
 {
-  public class UpdateItemByIdTask
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
+  using System.Net.Http;
+  using Sitecore.MobileSDK.PublicKey;
+
+  public class UpdateItemByIdTask : AbstractUpdateItemTask<IUpdateItemByIdRequest>
   {
-    public UpdateItemByIdTask ()
+    public UpdateItemByIdTask(UpdateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
+      : base(httpClient, credentialsHeadersCryptor)
     {
+      this.urlBuilder = urlBuilder;
     }
+
+    protected override string UrlToGetItemWithRequest(IUpdateItemByIdRequest request)
+    {
+      return this.urlBuilder.GetUrlForRequest(request);
+    }
+
+    public override string GetFieldsListString(IUpdateItemByIdRequest request)
+    {
+      return this.urlBuilder.GetFieldValuesList(request);
+    }
+
+    private readonly UpdateItemByIdUrlBuilder urlBuilder;
   }
 }
 

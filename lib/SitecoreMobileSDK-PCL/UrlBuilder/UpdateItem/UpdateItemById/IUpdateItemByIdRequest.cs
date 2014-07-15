@@ -1,9 +1,12 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 {
-  public interface IUpdateItemByIdRequest
+  using System;
+  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+
+  public interface IUpdateItemByIdRequest : IReadItemsByIdRequest, IBaseUpdateItemRequest
   {
+    IUpdateItemByIdRequest DeepCopyUpdateItemByIdRequest();
   }
 }
 
