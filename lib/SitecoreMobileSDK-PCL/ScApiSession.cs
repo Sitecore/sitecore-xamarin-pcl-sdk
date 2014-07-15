@@ -6,9 +6,13 @@ namespace Sitecore.MobileSDK
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
+
+  using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.SessionSettings;
+
   using Sitecore.MobileSDK.Authenticate;
   using Sitecore.MobileSDK.Exceptions;
-  using Sitecore.MobileSDK.SessionSettings;
+
   using Sitecore.MobileSDK.CrudTasks;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;
@@ -23,7 +27,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
 
-  public class ScApiSession
+  public class ScApiSession : ISitecoreWebApiSession
   {
     public ScApiSession(SessionConfig config, ItemSource defaultSource)
     {

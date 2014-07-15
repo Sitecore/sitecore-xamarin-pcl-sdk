@@ -4,7 +4,7 @@ namespace Sitecore.MobileSDK.Session
 {
   using System;
 
-  public interface ISitecoreWebApiSession
+  public interface ISitecoreWebApiSession : ISitecoreWebApiSessionState, ISitecoreWebApiSessionActions
   {
   }
 }

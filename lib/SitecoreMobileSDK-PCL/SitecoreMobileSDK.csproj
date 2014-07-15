@@ -140,6 +140,12 @@
     <Compile Include="Session\IAnonymousSessionBuilder.cs" />
     <Compile Include="Session\IAuthenticatedSessionBuilder.cs" />
     <Compile Include="Session\SessionBuilderImpl.cs" />
+    <Compile Include="Session\ISitecoreWebApiSessionState.cs" />
+    <Compile Include="Session\ISitecoreWebApiSessionActions.cs" />
+    <Compile Include="Session\IReadItemActions.cs" />
+    <Compile Include="Session\IMediaActions.cs" />
+    <Compile Include="Session\ICreateItemActions.cs" />
+    <Compile Include="Session\IConnectionActions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
