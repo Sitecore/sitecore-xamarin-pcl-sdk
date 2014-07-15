@@ -5,6 +5,14 @@
 
   internal class SessionBuilderImpl : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder
   {
+    public ISitecoreWebApiSession Build()
+    {
+
+
+      return null;
+    }
+
+    #region Constructor
     private SessionBuilderImpl()
     {
     }
@@ -16,6 +24,7 @@
 
       return result;
     }
+    #endregion Constructor
 
     #region IAuthenticatedSessionBuilder
     public IBaseSessionBuilder Credentials(IWebApiCredentials credentials)
@@ -30,11 +39,6 @@
 
 
     #region IAnonymousSessionBuilder
-    public ISitecoreWebApiSession Build()
-    {
-      return null;
-    }
-
     public IBaseSessionBuilder WebApiVersion(string webApiVersion)
     {
       this.webApiVersion = webApiVersion;
@@ -76,12 +80,14 @@
     }
     #endregion IAnonymousSessionBuilder
 
+    #region State
     private string             instanceUrl   ;
     private string             webApiVersion ;
     private string             mediaRoot     ;
     private string             mediaExtension;
     private IWebApiCredentials credentials   ;
     private ItemSourcePOD      itemSourceAccumulator = new ItemSourcePOD(null, null, null);
+    #endregion State
   }
 }
 
