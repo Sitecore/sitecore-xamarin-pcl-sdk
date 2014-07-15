@@ -1,5 +1,4 @@
 ﻿
-
 namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;

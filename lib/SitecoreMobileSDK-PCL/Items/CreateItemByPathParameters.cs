@@ -58,7 +58,7 @@ namespace Sitecore.MobileSDK
       return this.DeepCopyCreateItemByPathRequest();
     }
 
-    public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyCreateItemByPathRequest();
     }

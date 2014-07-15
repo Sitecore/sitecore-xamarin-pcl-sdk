@@ -4,7 +4,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
   using System;
   using System.Collections.Generic;
 
-  public interface IBaseCreateItemRequest : IBaseGetItemRequest
+  public interface IBaseCreateItemRequest : IBaseItemRequest
   {
     CreateItemParameters CreateParameters{ get; }
   }
