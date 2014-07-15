@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+        <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</SolutionDir>
 
         <!-- Enable the restore command to run before builds -->
         <RestorePackages Condition="  '$(RestorePackages)' == '' ">false</RestorePackages>
@@ -80,6 +80,7 @@
 
     <Target Name="CheckPrerequisites">
         <!-- Raise an error if we're unable to locate nuget.exe  -->
+		<Message Text="NuGet project folder $(MSBuildProjectDirectory)	" />
         <Error Condition="'$(DownloadNuGetExe)' != 'true' AND !Exists('$(NuGetExePath)')" Text="Unable to locate '$(NuGetExePath)'" />
         <!--
         Take advantage of MsBuild's build dependency tracking to make sure that we only ever download nuget.exe once.
@@ -93,12 +94,13 @@
         <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition=" '$(DownloadNuGetExe)' == 'true' AND !Exists('$(NuGetExePath)')" />
     </Target>
 
-    <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">        
+    <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">   
+		<Message Text="Restoring packages..." />
+		<Message Text="Packages file $(PackagesConfig)	" />
         <Exec Command="$(RestoreCommand)"
               Condition="'$(OS)' != 'Windows_NT' And Exists('$(PackagesConfig)')" />
 
         <Exec Command="$(RestoreCommand)"
-              LogStandardErrorAsError="true"
               Condition="'$(OS)' == 'Windows_NT' And Exists('$(PackagesConfig)')" />
     </Target>
 

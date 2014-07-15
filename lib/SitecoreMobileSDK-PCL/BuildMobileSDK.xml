@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project DefaultTarget="QuickBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="QuickBuild" InitialTargets="RestorePackages" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 <!-- "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" BuildMobileSDK.xml /t:log -->
 
 
@@ -13,9 +13,9 @@
 <!-- ====================================================  -->
   <PropertyGroup>
   	<!-- newline symbols matter -->
-    <ScriptsDirectory>$(MSBuildThisFileDirectory)</ScriptsDirectory>
-    <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</RepositoryRoot>
 
+    <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\..'))</RepositoryRoot>
+	<ScriptsDirectory>$(RepositoryRoot)\scripts</ScriptsDirectory>
     <SolutionsDirectory>$(RepositoryRoot)\solutions</SolutionsDirectory>
     <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
 
@@ -45,7 +45,8 @@
     <UnitTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\bin\Release\MobileSDK-UnitTest-Desktop.dll" />
     <IntegrationTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-IntegrationTest-Desktop\bin\Release\MobileSDK-IntegrationTest-Desktop.dll" />
   </ItemGroup>
-
+  
+  <Import Project="$(SolutionsDirectory)\.nuget\NuGet.targets" Condition="Exists('$(SolutionsDirectory)\.nuget\NuGet.targets')" />
 
 <!-- ====================================================  -->
   <Target Name="QuickBuild">
@@ -115,7 +116,7 @@
     />
 
     <Exec
-      Command="UnitTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\UnitTestReport.txt -result:$(DeploymentDirectory)\UnitTestReport.xml -format:nunit2"
+      Command="UnitTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\UnitTestReport.txt -result:$(DeploymentDirectory)\UnitTestReport.xml"
       WorkingDirectory="$(UnitTestDesktopBuildDirectory)"
       />
 </Target>

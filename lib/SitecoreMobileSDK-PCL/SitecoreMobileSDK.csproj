@@ -85,6 +85,8 @@
     <Compile Include="UserRequest\SessionConfigMerger.cs" />
     <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
     <Compile Include="ItemWebApiRequestBuilder.cs" />
+    <Compile Include="UserRequest\IGetItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\AbstractGetItemRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
@@ -130,17 +132,10 @@
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\ICreateItemByPathRequest.cs" />
-    <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
-    <Compile Include="Items\CreateItemByPathParameters.cs" />
-    <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
-    <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UrlBuilder\QueryParameters\IScopeParameters.cs" />
-    <Compile Include="UserRequest\IBaseRequestParametersBuilder.cs" />
-    <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -179,26 +174,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
-  <ItemGroup />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
-  <ItemGroup />
-  <ItemGroup />
-  <ItemGroup />
+
   <ItemGroup>
     <Folder Include="UrlBuilder\CreateItem\" />
     <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
     <Folder Include="UserRequest\CreateRequest\" />
     <Folder Include="Validators\" />
-    <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
   </ItemGroup>
 </Project>
