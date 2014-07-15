@@ -9,14 +9,16 @@ namespace Sitecore.MobileSDK.Session
     {
     }
 
-    public static IAnonymousSessionBuilder     AnonymousSessionWithHost    (string instanceUrl)
+    public static IAnonymousSessionBuilder AnonymousSessionWithHost(string instanceUrl)
     {
-      return null;
+      var result = SessionBuilderImpl.SessionBuilderWithHost(instanceUrl);
+      return result;
     }
 
     public static IAuthenticatedSessionBuilder AuthenticatedSessionWithHost(string instanceUrl)
     {
-      return null;
+      var result = SessionBuilderImpl.SessionBuilderWithHost(instanceUrl);
+      return result;
     }
   }
 }
