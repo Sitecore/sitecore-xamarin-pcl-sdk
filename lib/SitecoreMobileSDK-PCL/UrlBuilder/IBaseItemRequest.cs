@@ -4,9 +4,9 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  public interface IBaseGetItemRequest
+  public interface IBaseItemRequest
   {
-    IBaseGetItemRequest DeepCopyBaseGetItemRequest();
+    IBaseItemRequest DeepCopyBaseGetItemRequest();
 
     IItemSource ItemSource { get; }
 

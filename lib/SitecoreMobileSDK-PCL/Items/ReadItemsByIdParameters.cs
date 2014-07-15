@@ -41,7 +41,7 @@ namespace Sitecore.MobileSDK
       return new ReadItemsByIdParameters(connection, itemSrc, payload, this.ItemId);
     }
 
-    public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyGetItemByIdRequest();
     }

@@ -1,6 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 {
-  public interface IReadItemsByPathRequest : IBaseGetItemRequest
+  public interface IReadItemsByPathRequest : IBaseItemRequest
   {
     IReadItemsByPathRequest DeepCopyGetItemByPathRequest();
 

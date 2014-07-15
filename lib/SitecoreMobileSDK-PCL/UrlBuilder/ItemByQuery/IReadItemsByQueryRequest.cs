@@ -1,6 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
 {
-  public interface IReadItemsByQueryRequest : IBaseGetItemRequest
+  public interface IReadItemsByQueryRequest : IBaseItemRequest
   {
     IReadItemsByQueryRequest DeepCopyGetItemByQueryRequest();
 

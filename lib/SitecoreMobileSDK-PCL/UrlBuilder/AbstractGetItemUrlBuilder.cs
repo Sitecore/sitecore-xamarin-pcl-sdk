@@ -16,7 +16,7 @@ namespace Sitecore.MobileSDK
 
 
   public abstract class AbstractGetItemUrlBuilder<TRequest>
-    where TRequest : IBaseGetItemRequest
+    where TRequest : IBaseItemRequest
   {
     public AbstractGetItemUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
     {
