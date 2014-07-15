@@ -133,6 +133,12 @@
     <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\QueryParameters\IScopeParameters.cs" />
+    <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
+    <Compile Include="Session\ISitecoreWebApiSession.cs" />
+    <Compile Include="Session\SitecoreWebApiSessionBuilder.cs" />
+    <Compile Include="Session\IBaseSessionBuilder.cs" />
+    <Compile Include="Session\IAnonymousSessionBuilder.cs" />
+    <Compile Include="Session\IAuthenticatedSessionBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -193,5 +199,6 @@
     <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
     <Folder Include="UserRequest\CreateRequest\" />
     <Folder Include="Validators\" />
+    <Folder Include="Session\" />
   </ItemGroup>
 </Project>

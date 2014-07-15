@@ -5,6 +5,7 @@ namespace Sitecore.MobileSdkUnitTest
   using System;
   using NUnit.Framework;
 
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
 
 
@@ -23,7 +24,6 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
     }
-
 
     [Test]
     public void TestSessionConfigAllowsBothNullForAuthenticatedSession()
@@ -71,6 +71,37 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNull(conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
+    }
+
+    [Test]
+    public void TestAnonymousSessionShouldBeCreatedByTheBuilder()
+    {
+      ISitecoreWebApiSession session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .WebApiVersion("v1")
+        .DefaultDatabase("web")
+        .DefauldLanguage("en")
+        .MediaLibraryRoot("/sitecore/media library")
+        .DefaultMediaResourceExtension("ashx")
+        .Build();
+
+      Assert.IsNotNull(session);
+    }
+
+    [Test]
+    public void TestAuthenticatedSessionShouldBeCreatedByTheBuilder()
+    {
+      IWebApiCredentials credentials = new WebApiCredentialsPOD("admin", "b");
+
+      ISitecoreWebApiSession session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(credentials)
+        .WebApiVersion("v1")
+        .DefaultDatabase("web")
+        .DefauldLanguage("en")
+        .MediaLibraryRoot("/sitecore/media library")
+        .DefaultMediaResourceExtension("ashx")
+        .Build();
+
+      Assert.IsNotNull(session);
     }
   }
 }
