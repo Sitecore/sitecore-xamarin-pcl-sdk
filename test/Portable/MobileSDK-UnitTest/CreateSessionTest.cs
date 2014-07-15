@@ -81,6 +81,7 @@ namespace Sitecore.MobileSdkUnitTest
           .WebApiVersion("v1")
           .DefaultDatabase("web")
           .DefauldLanguage("en")
+          .Site("/sitecore/shell")
           .MediaLibraryRoot("/sitecore/media library")
           .DefaultMediaResourceExtension("ashx");
 
@@ -101,6 +102,7 @@ namespace Sitecore.MobileSdkUnitTest
         .WebApiVersion("v1")
         .DefaultDatabase("web")
         .DefauldLanguage("en")
+        .Site("/sitecore/shell")
         .MediaLibraryRoot("/sitecore/media library")
         .DefaultMediaResourceExtension("ashx");
 

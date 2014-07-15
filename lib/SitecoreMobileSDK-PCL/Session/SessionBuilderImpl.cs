@@ -7,7 +7,24 @@
   {
     public ISitecoreWebApiSession BuildSession()
     {
-      return null;
+      SessionConfig conf = SessionConfig.NewAuthenticatedSessionConfig(
+        this.instanceUrl, 
+
+        //@adk : TODO : do not store credentials in variables
+        this.credentials.Login,
+        this.credentials.Password,
+
+        this.site, 
+        this.webApiVersion);
+      conf.MediaLybraryRoot = this.mediaRoot;
+
+      var itemSource = new ItemSource(
+        this.itemSourceAccumulator.Database,
+        this.itemSourceAccumulator.Language,
+        this.itemSourceAccumulator.Version);
+
+      var result = new ScApiSession(conf, itemSource);
+      return result;
     }
 
     public ISitecoreWebApiReadonlySession BuildReadonlySession()
@@ -42,6 +59,12 @@
 
 
     #region IAnonymousSessionBuilder
+    public IBaseSessionBuilder Site(string site)
+    {
+      this.site = site;
+      return this;
+    }
+
     public IBaseSessionBuilder WebApiVersion(string webApiVersion)
     {
       this.webApiVersion = webApiVersion;
@@ -86,10 +109,11 @@
     #region State
     private string             instanceUrl   ;
     private string             webApiVersion ;
+    private string             site          ;
     private string             mediaRoot     ;
     private string             mediaExtension;
-    private IWebApiCredentials credentials   ;
-    private ItemSourcePOD      itemSourceAccumulator = new ItemSourcePOD(null, null, null);
+    private IWebApiCredentials credentials           = new WebApiCredentialsPOD(null, null);
+    private ItemSourcePOD      itemSourceAccumulator = new ItemSourcePOD       (null, null, null);
     #endregion State
   }
 }
