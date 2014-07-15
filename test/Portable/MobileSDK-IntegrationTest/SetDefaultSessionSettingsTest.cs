@@ -199,7 +199,7 @@
     }
 
     [Test]
-    public async void TestOverrideLanguageWithEmptyValueInRequestById()
+    public void TestOverrideLanguageWithEmptyValueInRequestById()
     {
       const string Language = "";
 
@@ -210,7 +210,7 @@
     }
 
     [Test]
-    public async void TestOverrideVersionWithEmptyValueInRequestByPath()
+    public void TestOverrideVersionWithEmptyValueInRequestByPath()
     {
       const string Version = "";
 
