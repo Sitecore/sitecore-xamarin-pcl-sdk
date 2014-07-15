@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
   public class SessionConfig : ISessionConfig, IWebApiCredentials
   {
-
+    #region Constructor
     public static SessionConfig NewAnonymousSessionConfig(string instanceUrl, string site = null, string itemWebApiVersion = "v1")
     {
       return new SessionConfig(instanceUrl, null, null, site, itemWebApiVersion);
@@ -28,7 +28,9 @@ namespace Sitecore.MobileSDK.SessionSettings
 
       this.Validate();
     }
+    #endregion Constructor
 
+    #region ICloneable
     public virtual SessionConfig ShallowCopy()
     {
       return new SessionConfig(this.InstanceUrl, this.Login, this.Password, this.Site, this.ItemWebApiVersion);
@@ -43,7 +45,9 @@ namespace Sitecore.MobileSDK.SessionSettings
     {
       return this.ShallowCopy();
     }
+    #endregion ICloneable
 
+    #region Properties
     public string InstanceUrl
     {
       get;
@@ -118,10 +122,12 @@ namespace Sitecore.MobileSDK.SessionSettings
         this.mediaLybraryRoot = value;
       }
     }
+    #endregion Properties
 
+    #region Instance Variables
     private const string DefaultMediaLybraryRoot = "/sitecore/media library";
     private string mediaLybraryRoot;
-
+    #endregion Instance Variables
   }
 }
 
