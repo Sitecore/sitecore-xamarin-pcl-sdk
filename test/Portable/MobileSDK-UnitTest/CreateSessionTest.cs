@@ -76,15 +76,19 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestAnonymousSessionShouldBeCreatedByTheBuilder()
     {
-      ISitecoreWebApiSession session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .WebApiVersion("v1")
-        .DefaultDatabase("web")
-        .DefauldLanguage("en")
-        .MediaLibraryRoot("/sitecore/media library")
-        .DefaultMediaResourceExtension("ashx")
-        .Build();
+      var builder = 
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+          .WebApiVersion("v1")
+          .DefaultDatabase("web")
+          .DefauldLanguage("en")
+          .MediaLibraryRoot("/sitecore/media library")
+          .DefaultMediaResourceExtension("ashx");
 
+      var session = builder.BuildSession();
       Assert.IsNotNull(session);
+
+      var roSession = builder.BuildReadonlySession();
+      Assert.IsNotNull(roSession);
     }
 
     [Test]
@@ -92,16 +96,20 @@ namespace Sitecore.MobileSdkUnitTest
     {
       IWebApiCredentials credentials = new WebApiCredentialsPOD("admin", "b");
 
-      ISitecoreWebApiSession session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+      var builder = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(credentials)
         .WebApiVersion("v1")
         .DefaultDatabase("web")
         .DefauldLanguage("en")
         .MediaLibraryRoot("/sitecore/media library")
-        .DefaultMediaResourceExtension("ashx")
-        .Build();
+        .DefaultMediaResourceExtension("ashx");
 
+
+      ISitecoreWebApiSession session = builder.BuildSession();
       Assert.IsNotNull(session);
+
+      var roSession = builder.BuildReadonlySession();
+      Assert.IsNotNull(roSession);
     }
   }
 }

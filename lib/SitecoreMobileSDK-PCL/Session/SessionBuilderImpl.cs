@@ -5,11 +5,14 @@
 
   internal class SessionBuilderImpl : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder
   {
-    public ISitecoreWebApiSession Build()
+    public ISitecoreWebApiSession BuildSession()
     {
-
-
       return null;
+    }
+
+    public ISitecoreWebApiReadonlySession BuildReadonlySession()
+    {
+      return this.BuildSession();
     }
 
     #region Constructor

@@ -2,7 +2,8 @@
 {
   public interface IBaseSessionBuilder
   {
-    ISitecoreWebApiSession Build();
+    ISitecoreWebApiSession BuildSession();
+    ISitecoreWebApiReadonlySession BuildReadonlySession();
 
     IBaseSessionBuilder WebApiVersion(string webApiVersion);
     IBaseSessionBuilder DefaultDatabase(string defaultDatabase);
