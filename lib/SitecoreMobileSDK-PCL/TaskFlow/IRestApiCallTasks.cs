@@ -8,7 +8,7 @@ namespace Sitecore.MobileSDK.TaskFlow
   using System.Threading.Tasks;
 
 
-  public interface IRestApiCallTasks<TRequest, THttpRequest, THttpResult, TResult> : IDownloadApiCallTasks<TRequest, THttpRequest, THttpResult>
+  internal interface IRestApiCallTasks<TRequest, THttpRequest, THttpResult, TResult> : IDownloadApiCallTasks<TRequest, THttpRequest, THttpResult>
     where TRequest: class
     where THttpRequest: class
     where THttpResult: class
