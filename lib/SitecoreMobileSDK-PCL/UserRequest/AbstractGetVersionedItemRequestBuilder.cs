@@ -9,7 +9,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
 
 
-  public abstract class AbstractGetVersionedItemRequestBuilder<T> : AbstractGetItemRequestBuilder<T>, IGetVersionedItemRequestParametersBuilder<T>
+  public abstract class AbstractGetVersionedItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>, IGetVersionedItemRequestParametersBuilder<T>
     where T : class
   {
     public IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion)
@@ -31,38 +31,39 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
+    //REVIEW: "new" modifier
     #region Compatibility Casts
-    public IGetVersionedItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
+    new public IGetVersionedItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.Database(sitecoreDatabase);
     }
 
-    public IGetVersionedItemRequestParametersBuilder<T> Language(string itemLanguage)
+    new public IGetVersionedItemRequestParametersBuilder<T> Language(string itemLanguage)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.Language(itemLanguage);
     }
 
-    public IGetVersionedItemRequestParametersBuilder<T> Payload(PayloadType payload)
+    new public IGetVersionedItemRequestParametersBuilder<T> Payload(PayloadType payload)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.Payload(payload);
     }
       
-    public IGetVersionedItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
+    new public IGetVersionedItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFields(fields);
     }
 
-    public IGetVersionedItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    new public IGetVersionedItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
     }
 
-    public IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
+    new public IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
     }
 
-    public IGetVersionedItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    new public IGetVersionedItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
     }

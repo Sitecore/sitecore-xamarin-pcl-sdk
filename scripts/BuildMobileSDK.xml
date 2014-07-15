@@ -115,7 +115,7 @@
     />
 
     <Exec
-      Command="UnitTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\UnitTestReport.txt -result:$(DeploymentDirectory)\UnitTestReport.xml"
+      Command="UnitTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\UnitTestReport.txt -result:$(DeploymentDirectory)\UnitTestReport.xml -format:nunit2"
       WorkingDirectory="$(UnitTestDesktopBuildDirectory)"
       />
 </Target>

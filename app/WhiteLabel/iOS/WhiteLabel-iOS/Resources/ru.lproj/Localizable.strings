@@ -4,6 +4,7 @@
 "getItemById" = "****************";
 "deleteItemById" = "*******************";
 "createEditItem" = "******************";
+"createItemByPath" = "**** * * * ***";
 "uploadImageVC" = "******************";
 "getItemByQuery" = "************";
 "getMediaItem" = "**********";

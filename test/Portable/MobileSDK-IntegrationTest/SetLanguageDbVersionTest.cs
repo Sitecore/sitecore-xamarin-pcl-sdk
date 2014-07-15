@@ -498,7 +498,7 @@
       return session;
     }
 
-    private static async Task<ScItemsResponse> GetItemByIdWithRequestBuilder(IGetItemRequestParametersBuilder<IReadItemsByIdRequest> requestBuilder, ScApiSession session)
+    private static async Task<ScItemsResponse> GetItemByIdWithRequestBuilder(IBaseRequestParametersBuilder<IReadItemsByIdRequest> requestBuilder, ScApiSession session)
     {
       var request = requestBuilder.Build();
       var response = await session.ReadItemAsync(request);

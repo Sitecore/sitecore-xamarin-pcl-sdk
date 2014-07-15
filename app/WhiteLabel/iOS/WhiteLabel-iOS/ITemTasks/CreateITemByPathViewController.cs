@@ -1,36 +1,36 @@
 ﻿
-using System;
-using System.Drawing;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
-using System.Linq;
-
 namespace WhiteLabeliOS
 {
-	public partial class CreateEditItemViewController : BaseTaskViewController
-	{
-		public CreateEditItemViewController (IntPtr handle) : base (handle)
-		{
-			Title = NSBundle.MainBundle.LocalizedString ("createEditItem", null);
-		}
+  using System;
+  using System.Drawing;
+  using System.Linq;
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
-			
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Items;
+
+  public partial class CreateITemByPathViewController : BaseTaskViewController
+  {
+    public CreateITemByPathViewController (IntPtr handle) : base (handle)
+    {
+      Title = NSBundle.MainBundle.LocalizedString ("createItemByPath", null);
+    }
+      
+    public override void ViewDidLoad ()
+    {
+      base.ViewDidLoad ();
+
       this.nameField.ShouldReturn = this.HideKeyboard;
-			this.pathField.ShouldReturn = this.HideKeyboard;
-			this.textField.ShouldReturn = this.HideKeyboard;
-			this.titleField.ShouldReturn = this.HideKeyboard;
-		}
+      this.pathField.ShouldReturn = this.HideKeyboard;
+      this.textField.ShouldReturn = this.HideKeyboard;
+      this.titleField.ShouldReturn = this.HideKeyboard;
+    }
 
-		partial void OnCreateItemButtonTapped (MonoTouch.Foundation.NSObject sender)
-		{
+    partial void OnCreateItemButtonTapped (MonoTouch.UIKit.UIButton sender)
+    {
       this.SendRequest();
-		}
+    }
 
     private async void SendRequest()
     {
@@ -38,7 +38,7 @@ namespace WhiteLabeliOS
       {
         ScApiSession session = this.instanceSettings.GetSession();
 
-        var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.pathField.Text)
+        var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.pathField.Text)
           .Database("web")
           .ItemTemplate("Sample/Sample Item")
           .ItemName(this.nameField.Text)
@@ -71,6 +71,7 @@ namespace WhiteLabeliOS
         });
       }
     }
-	}
+
+  }
 }
 

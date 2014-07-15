@@ -25,7 +25,7 @@ namespace Sitecore.MobileSDK
       return new ReadItemByPathRequestBuilder(itemPath);
     }
 
-    public static IGetItemRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
+    public static IBaseRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
     {
       return new ReadItemByQueryRequestBuilder(sitecoreQuery);
     }
@@ -38,6 +38,11 @@ namespace Sitecore.MobileSDK
     public static ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
     {
       return new CreateItemByIdRequestBuilder(itemId);
+    }
+
+    public static ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
+    {
+      return new CreateItemByPathRequestBuilder(itemPath);
     }
   }
 }
