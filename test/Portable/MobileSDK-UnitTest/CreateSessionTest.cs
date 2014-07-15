@@ -113,6 +113,44 @@ namespace Sitecore.MobileSdkUnitTest
       var roSession = builder.BuildReadonlySession();
       Assert.IsNotNull(roSession);
     }
+
+    [Test]
+    public void TestWebApiVersionIsWriteOnce()
+    {
+      Assert.Fail("Not implemented");
+    }
+
+    [Test]
+    public void TestDatabaseIsWriteOnce()
+    {
+      Assert.Fail("Not implemented");
+    }
+
+    [Test]
+    public void TestLanguageIsWriteOnce()
+    {
+      Assert.Fail("Not implemented");
+    }
+
+    [Test]
+    public void TestSiteIsWriteOnce()
+    {
+      Assert.Fail("Not implemented");
+    }
+
+
+    [Test]
+    public void TestMediaRootIsWriteOnce()
+    {
+      Assert.Fail("Not implemented");
+    }
+
+
+    [Test]
+    public void TestMediaExtIsWriteOnce()
+    {
+      Assert.Fail("Not implemented");
+    }
   }
 }
 
