@@ -263,7 +263,8 @@ namespace MobileSDKIntegrationTest
         await task;
       };
 
-      Assert.Throws<ArgumentNullException>(testCode);
+      var exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.AreEqual("AbstractGetItemRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -275,7 +276,34 @@ namespace MobileSDKIntegrationTest
         await task;
       };
 
-      Assert.Throws<ArgumentNullException>(testCode);
+      var exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.AreEqual("AbstractGetItemRequestBuilder.ItemQuery : The input cannot be null or empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemByIdWithSpacesOnly()
+    {
+      TestDelegate testCode = async () =>
+      {
+        var task = this.GetItemById(" ");
+        await task;
+      };
+
+      var exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.AreEqual("AbstractGetItemRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestGetItemByPathWithSpacesOnly()
+    {
+      TestDelegate testCode = async () =>
+      {
+        var task = this.GetItemByPath("  ");
+        await task;
+      };
+
+      var exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.AreEqual("AbstractGetItemRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
     }
 
     //TODO: create items for test first and remove them after test
