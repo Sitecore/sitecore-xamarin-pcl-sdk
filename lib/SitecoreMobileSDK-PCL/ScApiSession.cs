@@ -29,7 +29,7 @@ namespace Sitecore.MobileSDK
 
   public class ScApiSession : ISitecoreWebApiSession
   {
-    public ScApiSession(SessionConfig config, ItemSource defaultSource)
+    public ScApiSession(SessionConfig config, ItemSource defaultSource = null)
     {
       if (null == config)
       {
