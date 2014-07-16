@@ -9,21 +9,26 @@
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class GetMediaTest
   {
-    private TestEnvironment testData;
-    private ScApiSession session;
+    private TestEnvironment                testData;
+    private ISitecoreWebApiReadonlySession session ;
+
     const string SitecoreMouseIconPath = "/sitecore/media library/images/mouse-icon";
 
     [SetUp]
     public void Setup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+      this.session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession();
     }
 
     [TearDown]
@@ -225,7 +230,11 @@
     public async void TestMediaWithoutAccessToFolder()
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
-      var sessionNoReadAccess = testData.GetSession(testData.InstanceUrl, testData.Users.NoReadAccess.Username, testData.Users.NoReadAccess.Password);
+      var sessionNoReadAccess = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.NoReadAccess)
+          .BuildReadonlySession();
+
       var options = new MediaOptionsBuilder()
         .SetScale(1)
         .Build();
@@ -501,7 +510,7 @@
         .Build());
       Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The media item's database cannot be assigned twice", exception.Message);
     }
-    //TODO: add tests to check version and language overriden
+
     //TODO: add tests for MediaOptions (null, empty, override)
 
     private async Task<string[]> GetMediaFieldAsStringArray(string path)

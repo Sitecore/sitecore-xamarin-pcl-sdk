@@ -27,6 +27,18 @@
       result.Users.NoReadAccess.Username = "extranet\\noreadaccess";
       result.Users.NoReadAccess.Password = "noreadaccess";
 
+      result.Users.SitecoreCreator.Username = "sitecore\\creator";
+      result.Users.SitecoreCreator.Password = "creator";
+
+      result.Users.FakeAnonymous.Username = "extranet\\FakeAnonymous";
+      result.Users.FakeAnonymous.Password = "b";
+
+      result.Users.NotExistent.Username = "sitecore\\notexistent";
+      result.Users.NotExistent.Password = "notexistent";
+
+
+
+
 
       result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
       result.Items.Home.Path = "/sitecore/content/Home";
@@ -50,6 +62,10 @@
       result.Items.AllowedParent.Path = "/sitecore/content/Home/Allowed_Parent";
       result.Items.AllowedParent.DisplayName = "Allowed_Parent";
 
+      result.Items.CreateItemsHere.Id = "{C50613DC-D792-467C-832F-F93BB121D775}";
+      result.Items.CreateItemsHere.Path = "/sitecore/content/Home/Android/Folder for create items";
+      result.Items.CreateItemsHere.DisplayName = "Folder for create items";
+
       return result;
     }
 
@@ -65,7 +81,10 @@
       public User Admin = new User();
       public User Anonymous = new User();
       public User Creatorex = new User();
+      public User SitecoreCreator = new User();
       public User NoReadAccess = new User();
+      public User FakeAnonymous = new User();
+      public User NotExistent = new User();
     }
 
     public class ItemsList
@@ -75,6 +94,7 @@
       public Item TestFieldsItem = new Item();
       public Item AllowedItem = new Item();
       public Item AllowedParent = new Item();
+      public Item CreateItemsHere = new Item();
     }
 
     public class Item
@@ -85,10 +105,32 @@
       public string Template { get; set; }
     }
 
-    public class User
+    public class User : IWebApiCredentials
     {
       public string Username { get; set; }
       public string Password { get; set; }
+
+      public User UserShallowCopy()
+      {
+        var result = new User();
+        result.Username = this.Username;
+        result.Password = this.Password;
+
+        return result;
+      }
+
+      public IWebApiCredentials CredentialsShallowCopy()
+      {
+        return this.UserShallowCopy();
+      }
+
+      public string Login
+      {
+        get
+        {
+          return this.Username;
+        }
+      }
     }
 
     public void AssertItemsAreEqual(Item expected, ISitecoreItem actual)
@@ -123,13 +165,6 @@
       Assert.AreEqual(itemCount, response.TotalCount);
       Assert.AreEqual(itemCount, response.ResultCount);
       Assert.AreEqual(itemCount, response.Items.Count);
-    }
-
-    public ScApiSession GetSession(string url, string username, string password, ItemSource itemSource = null, string site = null)
-    {
-      var config = new SessionConfig(url, username, password, site);
-      var session = new ScApiSession(config, itemSource);
-      return session;
     }
   }
 }

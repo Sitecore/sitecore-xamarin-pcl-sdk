@@ -8,6 +8,7 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
@@ -56,11 +57,14 @@
     [Test]
     public async void TestGetItemWithNullLanguage()
     {
-      var itemSource = new ItemSource("master", null, "1");
-      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var session = new ScApiSession(config, itemSource);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .DefaultDatabase("master")
+          .BuildReadonlySession();
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Version("1")
         .Build();
 
       var itemRequest = await session.ReadItemAsync(request);
@@ -71,11 +75,15 @@
     [Test]
     public async void TestGetItemWithNullDb()
     {
-      var itemSource = new ItemSource(null, "en", "1");
-      var config = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var session = new ScApiSession(config, itemSource);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .DefaultLanguage("en")
+          .BuildReadonlySession();
+
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .Version("1")
         .Build();
 
       var itemRequest = await session.ReadItemAsync(request);
@@ -97,7 +105,7 @@
       Assert.AreEqual("Sitecore master", resultItem.FieldWithName("Title").RawValue);
     }
 
-    private async Task<ScItemsResponse> GetHomeItem(ScApiSession session, string db = null)
+    private async Task<ScItemsResponse> GetHomeItem(IReadItemActions session, string db = null)
     {
       if (db != null)
       {
@@ -477,31 +485,49 @@
     }
 
     [Test]
-    public async void TestGetItemByIdWithOverrideVersionTwice()
+    public void TestGetItemByIdWithOverrideVersionTwice()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
-        .Version("2")
-        .Version("1")
-        .Build());
+      Exception exception = Assert.Throws<InvalidOperationException>(() => 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+          .Version("2")
+          .Version("1")
+          .Build());
       Assert.AreEqual("AbstractGetItemRequestBuilder.Version : The item's version cannot be assigned twice", exception.Message);
     }
 
-    private ScApiSession CreateAdminSession(ItemSource itemSource = null)
+    private ISitecoreWebApiReadonlySession CreateAdminSession(ItemSource itemSource = null)
     {
-      var session = this.testData.GetSession(this.testData.InstanceUrl, this.testData.Users.Admin.Username, this.testData.Users.Admin.Password, itemSource);
+      var builder = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin);
+
+      if (null != itemSource)
+      {
+        builder.DefaultDatabase(itemSource.Database).DefaultLanguage(itemSource.Language);
+      }
+
+      var session = builder.BuildReadonlySession();
       return session;
     }
 
-    private ScApiSession CreateCreatorexSession(string site)
+    private ISitecoreWebApiReadonlySession CreateCreatorexSession(string site)
     {
-      var session = this.testData.GetSession(this.testData.InstanceUrl, this.testData.Users.Creatorex.Username, this.testData.Users.Creatorex.Password, ItemSource.DefaultSource(), site);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(this.testData.Users.Creatorex)
+          .Site(site)
+          .DefaultDatabase("web")
+          .DefaultLanguage("en")
+          .BuildReadonlySession();
+
       return session;
     }
 
-    private static async Task<ScItemsResponse> GetItemByIdWithRequestBuilder(IBaseRequestParametersBuilder<IReadItemsByIdRequest> requestBuilder, ScApiSession session)
+    private static async Task<ScItemsResponse> GetItemByIdWithRequestBuilder(IBaseRequestParametersBuilder<IReadItemsByIdRequest> requestBuilder, IReadItemActions session)
     {
       var request = requestBuilder.Build();
       var response = await session.ReadItemAsync(request);
+
       return response;
     }
   }

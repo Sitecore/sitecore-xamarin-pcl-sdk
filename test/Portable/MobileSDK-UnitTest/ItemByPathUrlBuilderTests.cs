@@ -211,7 +211,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestOptionalSourceInSessionAndUserRequest()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO").Build();
       var requestMerger = new UserRequestMerger(anonymous, null);
@@ -229,7 +229,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestOptionalSourceAndExplicitPayload()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Payload(PayloadType.Full)
@@ -248,7 +248,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestExplicitDatabase()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Database("master")
@@ -267,7 +267,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestDatabaseAndExplicitLanguageAndPayload()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Language("da")

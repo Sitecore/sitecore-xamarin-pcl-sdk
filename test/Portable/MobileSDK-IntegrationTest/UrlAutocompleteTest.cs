@@ -5,7 +5,9 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
 
   [TestFixture]
   public class UrlAutocompleteTest
@@ -71,7 +73,11 @@
 
     private async Task<ScItemsResponse> GetAuthencationRequestWithHomeItemPath(string url)
     {
-      var session = this.testData.GetSession(url, this.testData.Users.Admin.Username, this.testData.Users.Admin.Password);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession();
+
       var requestWithItemPath = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Payload(PayloadType.Content).Build();
       var response = await session.ReadItemAsync(requestWithItemPath);
       return response;
@@ -79,7 +85,11 @@
 
     private async Task<ScItemsResponse> GetAuthencationRequestWithHomeItemQuery(string url)
     {
-      var session = this.testData.GetSession(url, this.testData.Users.Admin.Username, this.testData.Users.Admin.Password);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession();
+
       var requestWithItemQuery = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).Payload(PayloadType.Content).Build();
       var response = await session.ReadItemAsync(requestWithItemQuery);
       return response;
@@ -87,7 +97,11 @@
 
     private async Task<ScItemsResponse> GetAuthencationRequestWithHomeItemId(string url)
     {
-      var session = this.testData.GetSession(url, this.testData.Users.Admin.Username, this.testData.Users.Admin.Password);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession();
+
       var requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Payload(PayloadType.Content).Build();
       var response = await session.ReadItemAsync(requestWithItemId);
       return response;
