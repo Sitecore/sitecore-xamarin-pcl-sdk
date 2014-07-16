@@ -9,15 +9,22 @@
   {
     public ISitecoreWebApiSession BuildSession()
     {
+      string localWebApiVersion = this.webApiVersion;
+      if (null == localWebApiVersion)
+      {
+        localWebApiVersion = "v1";
+      }
+
       SessionConfig conf = SessionConfig.NewAuthenticatedSessionConfig(
         this.instanceUrl, 
-
         //@adk : TODO : do not store credentials in variables
         this.credentials.Login,
         this.credentials.Password,
 
         this.site, 
-        this.webApiVersion);
+        localWebApiVersion);
+
+
       conf.MediaLybraryRoot = this.mediaRoot;
 
       var itemSource = new ItemSource(
