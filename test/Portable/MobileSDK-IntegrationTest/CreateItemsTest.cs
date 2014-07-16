@@ -7,6 +7,7 @@
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
@@ -14,14 +15,18 @@
   [TestFixture]
   public class CreateItemsTest
   {
-    private TestEnvironment testData;
-    private ScApiSession session;
+    private TestEnvironment        testData;
+    private ISitecoreWebApiSession session ;
 
     [SetUp]
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password, null, testData.ShellSite);
+      session =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .Site(testData.ShellSite)
+          .BuildSession();
     }
 
     [TearDown]
@@ -182,7 +187,8 @@
     public void TestCreateItemByIdAndGetDuplicateFields()
     {
       const string FieldName = "Text";
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+      Exception exception = Assert.Throws<ArgumentException>(() => 
+        ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
          .ItemTemplate(testData.Items.Home.Template)
@@ -303,11 +309,31 @@
     }
 
     [Test]
+    public void TestCreateItemByPathWithInvalidItemTemplate()
+    {
+      const string Template = "@*<<%#==_&@";
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .Database("master")
+        .ItemName("item with invalid template")
+        .ItemTemplate(Template)
+        .Build();
+      TestDelegate testCode = async () =>
+      {
+        var task = session.CreateItemAsync(request);
+        await task;
+      };
+      Exception exception = Assert.Throws<ParserException>(testCode);
+      Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
+      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Template item not found.", exception.InnerException.Message);
+    }
+
+    [Test]
     public void TestCreateItemByIdWithoutItemTemplate()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-         .ItemName("Item without template")
-         .Build());
+        .ItemName("Item without template")
+        .Build());
       Assert.AreEqual("AbstractCreateItemRequestBuilder.ItemTemplate : The input cannot be null or empty", exception.Message);
     }
 
@@ -330,6 +356,19 @@
          .Build());
       Assert.AreEqual("AbstractCreateItemRequestBuilder.ItemTemplate : The input cannot be null or empty", exception.Message);
     }
+
+    [Test]
+    public void TestCreateItemByIdhWithNullTemplate()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+         .ItemName("Item with empty template")
+         .ItemTemplate(null)
+         .Build());
+      Assert.AreEqual("AbstractCreateItemRequestBuilder.ItemTemplate : The input cannot be null or empty", exception.Message);
+    }
+
+
+
 
     private async void GetAndCheckItem(TestEnvironment.Item expectedItem, ISitecoreItem resultItem)
     {

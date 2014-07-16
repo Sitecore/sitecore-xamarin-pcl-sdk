@@ -6,6 +6,7 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
@@ -14,8 +15,7 @@
   public class SetDefaultSessionSettingsTest
   {
     private TestEnvironment testData;
-    private ScApiSession sessionAuthenticatedUser;
-    private SessionConfig sessionConfig;
+    private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
     IReadItemsByIdRequest requestWithItemId;
 
     [SetUp]
@@ -23,8 +23,13 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      this.sessionConfig = new SessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      this.sessionAuthenticatedUser = new ScApiSession(sessionConfig, ItemSource.DefaultSource());
+      this.sessionAuthenticatedUser = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .DefaultDatabase("web")
+          .DefaultLanguage("en")
+          .BuildReadonlySession();
+
       this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Payload(PayloadType.Content)
         .Build();
@@ -34,7 +39,6 @@
     public void TearDown()
     {
       this.testData = null;
-      this.sessionConfig = null;
       this.sessionAuthenticatedUser = null;
     }
 
@@ -101,9 +105,17 @@
       const string Version = "2";
       var source = new ItemSource(Db, "da", Version);
 
-      var session = new ScApiSession(sessionConfig, source);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .DefaultDatabase(Db)
+          .DefaultLanguage("da")
+          .BuildReadonlySession();
+
+
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Language(Language)
+        .Version(Version)
         .Payload(PayloadType.Content)
         .Build();
       var response = await session.ReadItemAsync(request);
@@ -123,7 +135,13 @@
       const string Language = "en";
       const string Version = "2";
       var source = new ItemSource("web", Language, "1");
-      var session = new ScApiSession(this.sessionConfig, source);
+
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .BuildReadonlySession();
+
+
+
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Version(Version)
         .Database(Db)
@@ -266,7 +284,12 @@
 
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)
     {
-      var session = new ScApiSession(this.sessionConfig, itemSource);
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .DefaultLanguage(itemSource.Language)
+        .DefaultDatabase(itemSource.Database)
+        .BuildReadonlySession();
+
       var response = await session.ReadItemAsync(this.requestWithItemId);
       return response;
     }

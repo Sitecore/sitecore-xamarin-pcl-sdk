@@ -37,7 +37,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestSessionDefaultSourceCannotBeMutated()
     {
-      var anonymous = new SessionConfig("localhost", null, null);
+      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
       var defaultSource = new MutableItemSource("master", "en");
       var session = new ScApiSession(anonymous, defaultSource);
 

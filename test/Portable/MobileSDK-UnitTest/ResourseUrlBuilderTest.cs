@@ -19,7 +19,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       var restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
 
-      var sessionConfig = new SessionConfig("http://test.host", "a", "b");
+      var sessionConfig = SessionConfig.NewAuthenticatedSessionConfig("http://test.host", "a", "b");
 
       ItemSource itemSource = ItemSource.DefaultSource();
       builder = new MediaItemUrlBuilder(restGrammar, sessionConfig, itemSource);

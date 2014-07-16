@@ -5,24 +5,26 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class GetFieldsTest
   {
-    private TestEnvironment testData;
-    private ScApiSession sessionAuthenticatedUser;
+    private TestEnvironment                testData                ;
+    private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
 
     [SetUp]
     public void Setup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      this.sessionAuthenticatedUser = testData.GetSession(
-        testData.InstanceUrl,
-        testData.Users.Admin.Username,
-        testData.Users.Admin.Password);
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+
+      this.sessionAuthenticatedUser =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession();
     }
 
     [TearDown]
@@ -285,7 +287,11 @@
     [Test]
     public async void TestGetItemByIdWithAllFieldsWithoutReadAccessToSomeFields()
     {
-      var sessionCreatorexUser = testData.GetSession(testData.InstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password);
+      var sessionCreatorexUser = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.Creatorex)
+          .BuildReadonlySession();
+
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Payload(PayloadType.Full).Build();
 
       var responseCreatorex = await sessionCreatorexUser.ReadItemAsync(request);

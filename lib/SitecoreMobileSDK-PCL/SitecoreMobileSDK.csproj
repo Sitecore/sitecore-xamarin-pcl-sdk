@@ -149,6 +149,20 @@
     <Compile Include="UserRequest\UpdateRequest\IUpdateItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
+    <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
+    <Compile Include="Session\ISitecoreWebApiSession.cs" />
+    <Compile Include="Session\SitecoreWebApiSessionBuilder.cs" />
+    <Compile Include="Session\IBaseSessionBuilder.cs" />
+    <Compile Include="Session\IAnonymousSessionBuilder.cs" />
+    <Compile Include="Session\IAuthenticatedSessionBuilder.cs" />
+    <Compile Include="Session\SessionBuilderImpl.cs" />
+    <Compile Include="Session\ISitecoreWebApiSessionState.cs" />
+    <Compile Include="Session\ISitecoreWebApiSessionActions.cs" />
+    <Compile Include="Session\IReadItemActions.cs" />
+    <Compile Include="Session\IMediaActions.cs" />
+    <Compile Include="Session\ICreateItemActions.cs" />
+    <Compile Include="Session\IConnectionActions.cs" />
+    <Compile Include="Session\ISitecoreWebApiReadonlySession.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -213,5 +227,6 @@
     <Folder Include="UrlBuilder\UpdateItem\" />
     <Folder Include="UrlBuilder\UpdateItem\UpdateItemById\" />
     <Folder Include="UserRequest\UpdateRequest\" />
+    <Folder Include="Session\" />
   </ItemGroup>
 </Project>
