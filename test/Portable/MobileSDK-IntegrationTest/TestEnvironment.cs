@@ -85,10 +85,27 @@
       public string Template { get; set; }
     }
 
-    public class User
+    public class User : IWebApiCredentials
     {
       public string Username { get; set; }
       public string Password { get; set; }
+
+      public IWebApiCredentials CredentialsShallowCopy()
+      {
+        var result = new User();
+        result.Username = this.Username;
+        result.Password = this.Password;
+
+        return result;
+      }
+
+      public string Login
+      {
+        get
+        {
+          return this.Username;
+        }
+      }
     }
 
     public void AssertItemsAreEqual(Item expected, ISitecoreItem actual)
