@@ -7,6 +7,7 @@ namespace MobileSDKIntegrationTest
   using System.Threading;
   using NUnit.Framework;
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.Items;
 
   using MobileSDKUnitTest.Mock;
@@ -19,8 +20,8 @@ namespace MobileSDKIntegrationTest
       Debug.WriteLine(message);
     };
 
-    private TestEnvironment testData;
-    private ScApiSession session;
+    private TestEnvironment                testData;
+    private ISitecoreWebApiReadonlySession session ;
 
     [SetUp]
     public void Setup()
@@ -28,7 +29,11 @@ namespace MobileSDKIntegrationTest
       using ( FunctionTracer logger = new FunctionTracer("CancelOperationsTest->setup()", CancelOperationsTest.DebugWriteLineBlock) )
       {
         this.testData = TestEnvironment.DefaultTestEnvironment();
-        this.session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+
+        this.session =
+          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+            .Credentials(this.testData.Users.Admin)
+            .BuildReadonlySession();
       }
     }
 

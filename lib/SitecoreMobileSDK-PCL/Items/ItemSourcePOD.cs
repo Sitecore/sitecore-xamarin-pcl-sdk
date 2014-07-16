@@ -1,7 +1,8 @@
-﻿using System;
-
+﻿
 namespace Sitecore.MobileSDK.Items
 {
+  using System;
+
   public class ItemSourcePOD : IItemSource
   {
     public static IItemSource DefaultItemSourcePOD()

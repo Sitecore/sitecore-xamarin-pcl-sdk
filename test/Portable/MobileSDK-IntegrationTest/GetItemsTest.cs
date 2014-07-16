@@ -7,8 +7,9 @@ namespace MobileSDKIntegrationTest
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.Exceptions;
 
   //  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   //  using System.IO;
@@ -19,8 +20,8 @@ namespace MobileSDKIntegrationTest
   [TestFixture]
   public class GetItemsTest
   {
-    private TestEnvironment testData;
-    private ScApiSession sessionAuthenticatedUser;
+    private TestEnvironment                testData                ;
+    private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
 
     private const string ItemWithSpacesPath = "/sitecore/content/Home/Android/Static/Test item 1";
     private const string ItemWithSpacesName = "Test item 1";
@@ -29,7 +30,10 @@ namespace MobileSDKIntegrationTest
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      this.sessionAuthenticatedUser = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      this.sessionAuthenticatedUser = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession();
     }
 
     [TearDown]
@@ -292,10 +296,10 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
-      var sessionWithoutAccess = testData.GetSession(
-        testData.InstanceUrl,
-        testData.Users.NoReadAccess.Username,
-        testData.Users.NoReadAccess.Password);
+      var sessionWithoutAccess = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.NoReadAccess)
+          .BuildReadonlySession();
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
       var response = await sessionWithoutAccess.ReadItemAsync(request);
