@@ -13,7 +13,7 @@ namespace MobileSDKIntegrationTest
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.SessionSettings;
-
+  using Sitecore.MobileSDK.Session;
 
   using SitecoreMobileSDKMockObjects;
 
@@ -90,7 +90,10 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemWithNullInstanceUrl()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => SessionConfig.NewAuthenticatedSessionConfig(null, testData.Users.Admin.Username, testData.Users.Admin.Password));
+      var exception = Assert.Throws<ArgumentNullException>(() => 
+        SessionConfig.NewAuthenticatedSessionConfig(null, testData.Users.Admin.Username, testData.Users.Admin.Password)
+      );
+
       Assert.IsTrue(
           exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required")
       );
@@ -99,8 +102,9 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemWithNullItemsSource()
     {
-      var config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var session = new ScApiSession(config, null);
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .BuildReadonlySession();
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
         .Build();
