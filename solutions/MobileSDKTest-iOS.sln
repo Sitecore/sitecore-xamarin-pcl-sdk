@@ -102,6 +102,9 @@ Global
 		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {E0E03E8E-2782-4217-9146-5A706CB30487}
 		{3099A100-12CA-45D0-A45F-087632139637} = {E0E03E8E-2782-4217-9146-5A706CB30487}
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\test\iOS\MobileSDKUnitTest-iOS\MobileSDKUnitTest-iOS.csproj
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
