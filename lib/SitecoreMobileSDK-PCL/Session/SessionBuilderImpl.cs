@@ -10,6 +10,7 @@
     public ISitecoreWebApiSession BuildSession()
     {
       SessionConfig conf = SessionConfig.NewAuthenticatedSessionConfig(
+//        new SessionConfig(
         this.instanceUrl, 
 
         //@adk : TODO : do not store credentials in variables
@@ -99,7 +100,7 @@
       return this;
     }
 
-    public IBaseSessionBuilder DefauldLanguage(string defaultLanguage)
+    public IBaseSessionBuilder DefaultLanguage(string defaultLanguage)
     {
       if (null != this.itemSourceAccumulator.Language)
       {

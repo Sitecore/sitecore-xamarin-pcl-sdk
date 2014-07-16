@@ -27,7 +27,7 @@
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .DefaultDatabase("web")
-          .DefauldLanguage("en")
+          .DefaultLanguage("en")
           .BuildReadonlySession();
 
       this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
@@ -109,7 +109,7 @@
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .DefaultDatabase(Db)
-          .DefauldLanguage("da")
+          .DefaultLanguage("da")
           .BuildReadonlySession();
 
 
@@ -286,7 +286,7 @@
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
-        .DefauldLanguage(itemSource.Language)
+        .DefaultLanguage(itemSource.Language)
         .DefaultDatabase(itemSource.Database)
         .BuildReadonlySession();
 

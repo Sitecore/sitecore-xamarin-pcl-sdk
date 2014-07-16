@@ -82,7 +82,7 @@ namespace Sitecore.MobileSdkUnitTest
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
           .WebApiVersion("v1")
           .DefaultDatabase("web")
-          .DefauldLanguage("en")
+          .DefaultLanguage("en")
           .Site("/sitecore/shell")
           .MediaLibraryRoot("/sitecore/media library")
           .DefaultMediaResourceExtension("ashx");
@@ -103,7 +103,7 @@ namespace Sitecore.MobileSdkUnitTest
         .Credentials(credentials)
         .WebApiVersion("v1")
         .DefaultDatabase("web")
-        .DefauldLanguage("en")
+        .DefaultLanguage("en")
         .Site("/sitecore/shell")
         .MediaLibraryRoot("/sitecore/media library")
         .DefaultMediaResourceExtension("ashx");
@@ -156,14 +156,14 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.Throws<InvalidOperationException>( ()=>
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
-        .DefauldLanguage("en")
-        .DefauldLanguage("es")
+        .DefaultLanguage("en")
+        .DefaultLanguage("es")
       );
 
       Assert.Throws<InvalidOperationException>( ()=>
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .DefauldLanguage("en")
-        .DefauldLanguage("en")
+        .DefaultLanguage("en")
+        .DefaultLanguage("en")
       );
     }
 
