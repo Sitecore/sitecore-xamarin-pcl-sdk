@@ -1,5 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.Session
 {
+  using System;
+
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
 
@@ -67,6 +69,11 @@
 
     public IBaseSessionBuilder WebApiVersion(string webApiVersion)
     {
+      if (null != this.webApiVersion)
+      {
+        throw new InvalidOperationException("[IBaseSessionBuilder.WebApiVersion] the property cannot be assigned twice");
+      }
+
       this.webApiVersion = webApiVersion;
       return this;
     }

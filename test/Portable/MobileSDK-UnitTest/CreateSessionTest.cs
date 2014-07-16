@@ -12,6 +12,8 @@ namespace Sitecore.MobileSdkUnitTest
   [TestFixture]
   public class CreateSessionTest
   {
+    private IWebApiCredentials adminCredentials = new WebApiCredentialsPOD("admin", "b");
+
     [Test]
     public void TestSessionConfigForAuthenticatedSession()
     {
@@ -95,7 +97,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestAuthenticatedSessionShouldBeCreatedByTheBuilder()
     {
-      IWebApiCredentials credentials = new WebApiCredentialsPOD("admin", "b");
+      IWebApiCredentials credentials = this.adminCredentials;
 
       var builder = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(credentials)
@@ -117,7 +119,18 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestWebApiVersionIsWriteOnce()
     {
-      Assert.Fail("Not implemented");
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .WebApiVersion("v1")
+        .WebApiVersion("v1")
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .WebApiVersion("v1")
+        .WebApiVersion("v1")
+      );
     }
 
     [Test]
