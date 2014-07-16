@@ -1,4 +1,4 @@
-﻿using Sitecore.MobileSDK.Items.Fields;
+﻿
 
 
 namespace WhiteLabeliOS
@@ -14,7 +14,9 @@ namespace WhiteLabeliOS
 	using Sitecore.MobileSDK.UrlBuilder;
 	using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-    using WhiteLabeliOS.FieldsTableView;
+  using WhiteLabeliOS.FieldsTableView;
+  using Sitecore.MobileSDK.Items.Fields;
+  using Sitecore.MobileSDK.Session;
 
 
 	public partial class GetItemByIdViewController : BaseTaskTableViewController
@@ -85,7 +87,7 @@ namespace WhiteLabeliOS
     {
       try
       {
-        ScApiSession session = this.instanceSettings.GetSession();
+        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
         var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
           .Payload(this.currentPayloadType)

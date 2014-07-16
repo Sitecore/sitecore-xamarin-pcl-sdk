@@ -1,7 +1,9 @@
 ﻿using System;
 using MonoTouch.Foundation;
-using Sitecore.MobileSDK.Items;
+
 using Sitecore.MobileSDK;
+using Sitecore.MobileSDK.Items;
+using Sitecore.MobileSDK.Session;
 using Sitecore.MobileSDK.SessionSettings;
 
 namespace WhiteLabeliOS
@@ -15,56 +17,44 @@ namespace WhiteLabeliOS
     private string instanceDataBase;
     private string instanceLanguage;
 
-    public InstanceSettings ()
+    public InstanceSettings()
     {
-      this.ReadValuesFromStorage ();
+      this.ReadValuesFromStorage();
     }
 
-    private void ReadValuesFromStorage ()
+    private void ReadValuesFromStorage()
     {
       NSUserDefaults userDefaults = NSUserDefaults.StandardUserDefaults;
-      this.instanceUrl    = userDefaults.StringForKey ("instanceUrl");
-      this.instanceLogin    = userDefaults.StringForKey ("instanceLogin");
-      this.instancePassword   = userDefaults.StringForKey ("instancePassword");
-      this.instanceSite     = userDefaults.StringForKey ("instanceSite");
-      this.instanceDataBase   = userDefaults.StringForKey ("instanceDataBase");
-      this.instanceLanguage   = userDefaults.StringForKey ("instanceLanguage");
+      this.instanceUrl            = userDefaults.StringForKey("instanceUrl"     );
+      this.instanceLogin          = userDefaults.StringForKey("instanceLogin"   );
+      this.instancePassword       = userDefaults.StringForKey("instancePassword");
+      this.instanceSite           = userDefaults.StringForKey("instanceSite"    );
+      this.instanceDataBase       = userDefaults.StringForKey("instanceDataBase");
+      this.instanceLanguage       = userDefaults.StringForKey("instanceLanguage");
     }
 
-    public ScApiSession GetSession()
+    public ISitecoreWebApiSession GetSession()
     {
-      SessionConfig config = new SessionConfig (this.instanceUrl, this.instanceLogin, this.instancePassword, this.instanceSite);
+      var credentials = 
+        new WebApiCredentialsPOD(
+          this.instanceLogin, 
+          this.instancePassword);
 
-      string db;
-      if (!string.IsNullOrEmpty(this.instanceDataBase))
-      {
-        db = this.instanceDataBase;
-      }
-      else
-      {
-        db = ItemSource.DefaultDatabase;
-      }
+      var result = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost (this.instanceUrl)
+        .Credentials (credentials)
+        .Site (this.instanceSite)
+        .DefaultDatabase (this.instanceDataBase)
+        .DefaultLanguage (this.instanceLanguage)
+        .BuildSession ();
 
-      string language;
-      if (!string.IsNullOrEmpty(this.instanceLanguage))
-      {
-        language = this.instanceLanguage;
-      }
-      else
-      {
-        language = ItemSource.DefaultLanguage;
-      }
-
-      ItemSource defaultSource = new ItemSource( db, language, null);
-
-      return new ScApiSession (config, defaultSource);
+      return result;
     }
 
     private void SaveValueToStorage(string value, string key)
     {
       NSUserDefaults userDefaults = NSUserDefaults.StandardUserDefaults;
-      userDefaults.SetString (value, key);
-      userDefaults.Synchronize ();
+      userDefaults.SetString(value, key);
+      userDefaults.Synchronize();
     }
 
     public string InstanceUrl   
@@ -82,7 +72,7 @@ namespace WhiteLabeliOS
       set
       { 
         this.instanceUrl = value;
-        this.SaveValueToStorage (value, "instanceUrl");
+        this.SaveValueToStorage(value, "instanceUrl");
       }
     }
 

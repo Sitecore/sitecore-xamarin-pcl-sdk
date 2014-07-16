@@ -1,9 +1,10 @@
-﻿using System.Linq;
+﻿
 
 
 namespace WhiteLabeliOS
 {
     using System;
+    using System.Linq;
     using System.Drawing;
 
     using MonoTouch.Foundation;
@@ -15,6 +16,8 @@ namespace WhiteLabeliOS
     using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
     using WhiteLabeliOS.FieldsTableView;
+
+    using Sitecore.MobileSDK.Session;
 
 
 
@@ -83,7 +86,7 @@ namespace WhiteLabeliOS
 		{
 			try
 			{
-				ScApiSession session = this.instanceSettings.GetSession();
+        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
         var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
           .Payload(this.currentPayloadType)

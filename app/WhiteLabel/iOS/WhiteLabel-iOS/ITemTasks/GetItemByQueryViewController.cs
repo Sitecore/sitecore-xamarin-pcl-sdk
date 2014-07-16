@@ -1,15 +1,19 @@
 ﻿
-using System;
-using System.Drawing;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
 
 namespace WhiteLabeliOS
 {
+  using System;
+  using System.Drawing;
+
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+
+  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Session;
+
+
   public partial class GetItemByQueryViewController : BaseTaskTableViewController
   {
     public GetItemByQueryViewController (IntPtr handle) : base (handle)
@@ -44,11 +48,11 @@ namespace WhiteLabeliOS
       }
     }
 
-    private async void SendRequest ()
+    private async void SendRequest()
     {
       try
       {
-        ScApiSession session = this.instanceSettings.GetSession();
+        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(queryTextField.Text)
           .Build();
