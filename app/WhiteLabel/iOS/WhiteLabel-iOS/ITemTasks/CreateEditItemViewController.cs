@@ -32,7 +32,7 @@ namespace WhiteLabeliOS
       this.SendRequest();
 		}
 
-    partial void OnUpdateItemButtonTapped (MonoTouch.UIKit.UIButton sender)
+    partial void OnUpdateItemButtonTapped (MonoTouch.Foundation.NSObject sender)
     {
       if (null == this.CreatedItemId)
       {

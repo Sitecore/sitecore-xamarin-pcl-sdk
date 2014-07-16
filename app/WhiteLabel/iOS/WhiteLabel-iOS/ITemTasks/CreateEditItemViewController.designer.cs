@@ -28,7 +28,7 @@ namespace WhiteLabeliOS
 		partial void OnCreateItemButtonTapped (MonoTouch.Foundation.NSObject sender);
 
 		[Action ("OnUpdateItemButtonTapped:")]
-		partial void OnUpdateItemButtonTapped (MonoTouch.UIKit.UIButton sender);
+		partial void OnUpdateItemButtonTapped (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

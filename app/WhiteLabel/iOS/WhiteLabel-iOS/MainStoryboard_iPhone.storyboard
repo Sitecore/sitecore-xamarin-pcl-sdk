@@ -671,7 +671,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnUpdateItemButtonTapped:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="XjO-ag-W22"/>
+                                    <action selector="OnUpdateItemButtonTapped:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="2a5-tP-jNE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -699,7 +699,6 @@
                     <navigationItem key="navigationItem" id="hhR-am-ao9"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="OnUpdateItemButtonTapped" destination="Bea-zj-CTF" id="bVf-7u-8GW"/>
                         <outlet property="nameField" destination="POP-nM-A7x" id="b9v-XJ-EWM"/>
                         <outlet property="pathField" destination="WH6-wC-5s6" id="GpO-Zq-t96"/>
                         <outlet property="textField" destination="Bmb-U1-Yxb" id="Ef8-Ny-JQg"/>
