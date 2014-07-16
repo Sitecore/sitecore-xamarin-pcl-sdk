@@ -163,6 +163,7 @@
     <Compile Include="Session\ICreateItemActions.cs" />
     <Compile Include="Session\IConnectionActions.cs" />
     <Compile Include="Session\ISitecoreWebApiReadonlySession.cs" />
+    <Compile Include="Session\IUpdateItemActions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

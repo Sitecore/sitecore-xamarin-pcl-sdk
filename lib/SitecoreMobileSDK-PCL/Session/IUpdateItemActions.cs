@@ -4,13 +4,13 @@
   using System.Threading.Tasks;
 
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
 
 
-  public interface ICreateItemActions
+  public interface IUpdateItemActions
   {
-    Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest   request, CancellationToken cancelToken = default(CancellationToken));
-    Task<ScItemsResponse> CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByIdRequest   request, CancellationToken cancelToken = default(CancellationToken));
+    //Task<ScItemsResponse> CreateItemAsync(IUpdateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken));
   }
 }
 
