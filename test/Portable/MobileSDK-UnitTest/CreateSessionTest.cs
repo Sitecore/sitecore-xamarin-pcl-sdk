@@ -128,41 +128,96 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.Throws<InvalidOperationException>( ()=>
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .WebApiVersion("v1")
-        .WebApiVersion("v1")
+        .WebApiVersion("v3")
+        .WebApiVersion("v4")
       );
     }
 
     [Test]
     public void TestDatabaseIsWriteOnce()
     {
-      Assert.Fail("Not implemented");
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefaultDatabase("web")
+        .DefaultDatabase("web")
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefaultDatabase("master")
+        .DefaultDatabase("core")
+      );
     }
 
     [Test]
     public void TestLanguageIsWriteOnce()
     {
-      Assert.Fail("Not implemented");
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefauldLanguage("en")
+        .DefauldLanguage("es")
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefauldLanguage("en")
+        .DefauldLanguage("en")
+      );
     }
 
     [Test]
     public void TestSiteIsWriteOnce()
     {
-      Assert.Fail("Not implemented");
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .Site("/sitecore/shell")
+        .Site("/baz/baz")
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .Site("/ololo/trololo")
+        .Site("/foo/bar")
+      );
     }
 
 
     [Test]
     public void TestMediaRootIsWriteOnce()
     {
-      Assert.Fail("Not implemented");
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .MediaLibraryRoot("/sitecore/media library")
+        .MediaLibraryRoot("/sitecore/other media library")
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .MediaLibraryRoot("/dev/null")
+        .MediaLibraryRoot("/sitecore/media library")
+      );
     }
 
 
     [Test]
     public void TestMediaExtIsWriteOnce()
     {
-      Assert.Fail("Not implemented");
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefaultMediaResourceExtension("ashx")
+        .DefaultMediaResourceExtension("pdf")
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefaultMediaResourceExtension("jpeg")
+        .DefaultMediaResourceExtension("jpg")
+      );
     }
   }
 }
