@@ -22,12 +22,12 @@ namespace MobileSDKIntegrationTest
     [SetUp]
     public void SetUp()
     {
-      this.env = TestEnvironment.DefaultTestEnvironment ();
+      this.env = TestEnvironment.DefaultTestEnvironment();
 
       SessionConfig config = SessionConfig.NewAuthenticatedSessionConfig(this.env.InstanceUrl, this.env.Users.Admin.Username, this.env.Users.Admin.Password);
       ItemSource defaultSource = ItemSource.DefaultSource();
 
-      this.session = new ScTestApiSession (config, defaultSource);
+      this.session = new ScTestApiSession(config, defaultSource);
     }
 
     [TearDown]
@@ -42,7 +42,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testAction = async () =>
       {
-        var cancel = new CancellationTokenSource ();
+        var cancel = new CancellationTokenSource();
 
         Task<PublicKeyX509Certificate> action = this.session.GetPublicKeyAsyncPublic(cancel.Token);
         cancel.Cancel();
@@ -58,10 +58,10 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testAction = async () =>
       {
-        var cancel = new CancellationTokenSource ();
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId (this.env.Items.Home.Id).Build();
+        var cancel = new CancellationTokenSource();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.env.Items.Home.Id).Build();
 
-        Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
+        Task<ScItemsResponse> action = this.session.ReadItemAsync(request, cancel.Token);
         cancel.Cancel();
 
         await action;
@@ -77,9 +77,9 @@ namespace MobileSDKIntegrationTest
       TestDelegate testAction = async () =>
       {
         var cancel = new CancellationTokenSource ();
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath ("/sitecore/content/home").Build();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home").Build();
 
-        Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
+        Task<ScItemsResponse> action = this.session.ReadItemAsync(request, cancel.Token);
         cancel.Cancel();
 
         await action;
@@ -93,10 +93,10 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testAction = async () =>
       {
-        var cancel = new CancellationTokenSource ();
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery ("/sitecore/content/home/*").Build();
+        var cancel = new CancellationTokenSource();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/home/*").Build();
 
-        Task<ScItemsResponse> action = this.session.ReadItemAsync (request, cancel.Token);
+        Task<ScItemsResponse> action = this.session.ReadItemAsync(request, cancel.Token);
         cancel.Cancel();
 
         await action;
