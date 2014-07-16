@@ -9,7 +9,8 @@
 
   public interface ICreateItemActions
   {
-    Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest   request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScItemsResponse> CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken));
   }
 }
 
