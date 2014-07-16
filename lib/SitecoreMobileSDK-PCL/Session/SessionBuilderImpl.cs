@@ -10,7 +10,6 @@
     public ISitecoreWebApiSession BuildSession()
     {
       SessionConfig conf = SessionConfig.NewAuthenticatedSessionConfig(
-//        new SessionConfig(
         this.instanceUrl, 
 
         //@adk : TODO : do not store credentials in variables
