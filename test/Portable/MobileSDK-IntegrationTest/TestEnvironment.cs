@@ -27,6 +27,18 @@
       result.Users.NoReadAccess.Username = "extranet\\noreadaccess";
       result.Users.NoReadAccess.Password = "noreadaccess";
 
+      result.Users.SitecoreCreator.Username = "sitecore\\creator";
+      result.Users.SitecoreCreator.Password = "creator";
+
+      result.Users.FakeAnonymous.Username = "extranet\\FakeAnonymous";
+      result.Users.FakeAnonymous.Password = "b";
+
+      result.Users.NotExistent.Username = "sitecore\\notexistent";
+      result.Users.NotExistent.Password = "notexistent";
+
+
+
+
 
       result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
       result.Items.Home.Path = "/sitecore/content/Home";
@@ -65,7 +77,10 @@
       public User Admin = new User();
       public User Anonymous = new User();
       public User Creatorex = new User();
+      public User SitecoreCreator = new User();
       public User NoReadAccess = new User();
+      public User FakeAnonymous = new User();
+      public User NotExistent = new User();
     }
 
     public class ItemsList
@@ -90,13 +105,18 @@
       public string Username { get; set; }
       public string Password { get; set; }
 
-      public IWebApiCredentials CredentialsShallowCopy()
+      public User UserShallowCopy()
       {
         var result = new User();
         result.Username = this.Username;
         result.Password = this.Password;
 
         return result;
+      }
+
+      public IWebApiCredentials CredentialsShallowCopy()
+      {
+        return this.UserShallowCopy();
       }
 
       public string Login
@@ -140,13 +160,6 @@
       Assert.AreEqual(itemCount, response.TotalCount);
       Assert.AreEqual(itemCount, response.ResultCount);
       Assert.AreEqual(itemCount, response.Items.Count);
-    }
-
-    public ScApiSession GetSession(string url, string username, string password, ItemSource itemSource = null, string site = null)
-    {
-      var config = SessionConfig.NewAuthenticatedSessionConfig(url, username, password, site);
-      var session = new ScApiSession(config, itemSource);
-      return session;
     }
   }
 }

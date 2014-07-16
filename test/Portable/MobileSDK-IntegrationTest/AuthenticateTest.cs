@@ -5,8 +5,12 @@ namespace MobileSDKIntegrationTest
 {
   using System;
   using NUnit.Framework;
-  using Sitecore.MobileSDK.Exceptions;
+
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.Exceptions;
+
+  using MobileSDKIntegrationTest;
 
 
   [TestFixture]
@@ -29,7 +33,11 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestCheckValidCredentials()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .BuildReadonlySession();
+
       bool response = await session.AuthenticateAsync();
       Assert.True(response);
     }
@@ -37,7 +45,15 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationWithNotExistentUsername()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username + "wrong", testData.Users.Admin.Password);
+      var badLogin = testData.Users.Admin.UserShallowCopy();
+      badLogin.Username = testData.Users.Admin.Username + "wrong";
+
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(badLogin)
+          .BuildReadonlySession();
+
+
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
     }
@@ -46,7 +62,12 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationAsUserInExtranetDomainToShellSite()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password, null, testData.ShellSite);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Creatorex)
+          .Site(testData.ShellSite)
+          .BuildReadonlySession();
+
       bool response = await session.AuthenticateAsync();
       Assert.True(response);
     }
@@ -54,7 +75,12 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationAstUserInExtraneDomainToWebsite()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Creatorex.Username, testData.Users.Creatorex.Password, null, "/");
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Creatorex)
+          .Site("/")
+          .BuildReadonlySession();
+
       bool response = await session.AuthenticateAsync();
       Assert.True(response);
     }
@@ -62,7 +88,12 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationAsUserInSitecoreDomainToWebsite()
     {
-      var session = testData.GetSession(testData.InstanceUrl, "sitecore\\creator", "creator", null, "/");
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.SitecoreCreator)
+          .Site("/")
+          .BuildReadonlySession();
+
       bool response = await session.AuthenticateAsync();
       Assert.True(response);
     }
@@ -70,7 +101,12 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationAsUserInSitecoreDomainToShellSite()
     {
-      var session = testData.GetSession(testData.InstanceUrl, "sitecore\\creator", "creator", null, testData.ShellSite);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.SitecoreCreator)
+          .Site(testData.ShellSite)
+          .BuildReadonlySession();
+
       bool response = await session.AuthenticateAsync();
       Assert.True(response);
     }
@@ -78,7 +114,15 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationWithNotExistentPassword()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "NotExistentPassword");
+      var badPassword = testData.Users.Admin.UserShallowCopy();
+      badPassword.Password = "NotExistentPassword";
+
+
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(badPassword)
+          .BuildReadonlySession();
+
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
     }
@@ -86,7 +130,16 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationWithInvalidPassword()
     {
-      var session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, "Password $#%^&^*");
+      var badPassword = testData.Users.Admin.UserShallowCopy();
+      badPassword.Password = "Password $#%^&^*";
+
+
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(badPassword)
+          .BuildReadonlySession();
+
+
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
     }
@@ -94,7 +147,14 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationWithInvalidUsername()
     {
-      var session = testData.GetSession(testData.InstanceUrl, "#%^&*^()", testData.Users.Admin.Password);
+      var badLogin = testData.Users.Admin.UserShallowCopy();
+      badLogin.Username = "#%^&*^()";
+
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(badLogin)
+          .BuildReadonlySession();
+
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
     }
@@ -188,7 +248,11 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetPublicKeyWithNotExistentUrl()
     {
-      var session = testData.GetSession("http://mobiled.sitecore.net:7220", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .BuildReadonlySession();
+
       TestDelegate testCode = async () =>
       {
         await session.AuthenticateAsync();
@@ -207,7 +271,11 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationWithInvalidUrl()
     {
-      var session = testData.GetSession("\\m.dk%&^&*(.net", testData.Users.Admin.Username, testData.Users.Admin.Password);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("\\m.dk%&^&*(.net")
+          .Credentials(testData.Users.Admin)
+          .BuildReadonlySession();
+
       TestDelegate testCode = async () =>
       {
         await session.AuthenticateAsync();
@@ -223,7 +291,12 @@ namespace MobileSDKIntegrationTest
     public async void TestGetAuthenticationForUrlWithoutHttp()
     {
       var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
-      var session = testData.GetSession(urlWithoutHttp, testData.Users.Admin.Username, testData.Users.Admin.Password);
+
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
+          .Credentials(testData.Users.Admin)
+          .BuildReadonlySession();
+
       bool response = await session.AuthenticateAsync();
       Assert.True(response);
     }

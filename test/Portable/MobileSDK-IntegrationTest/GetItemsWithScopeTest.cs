@@ -4,19 +4,23 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class GetItemsWithScopeTest
   {
-    private TestEnvironment testData;
-    private ScApiSession session;
+    private TestEnvironment                testData;
+    private ISitecoreWebApiReadonlySession session ;
 
     [SetUp]
     public void Setup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+      this.session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession();
     }
 
     [TearDown]
@@ -180,7 +184,11 @@
     [Test]
     public async void TestGetNotAllowedItemWithChildrenScopeById()
     {
-      var sessionWithNoReadAccessUser = testData.GetSession(testData.InstanceUrl, testData.Users.NoReadAccess.Username, testData.Users.NoReadAccess.Password);
+      var sessionWithNoReadAccessUser = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.NoReadAccess)
+          .BuildReadonlySession();
+          
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id)
         .AddScope(ScopeType.Children)
         .Build();
@@ -192,7 +200,12 @@
     [Test]
     public async void TestGetItemWitParentAndSelfScopeWhenParentItemIsNotAllowedByPath()
     {
-      var sessionWithNoReadAccessUser = testData.GetSession(testData.InstanceUrl, "extranet\\FakeAnonymous", "b");
+      var sessionWithNoReadAccessUser = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.FakeAnonymous)
+          .BuildReadonlySession();
+
+
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/Home/Not_Allowed_Parent/Allowed_Item")
        .AddScope(ScopeType.Parent)
        .AddScope(ScopeType.Self)
