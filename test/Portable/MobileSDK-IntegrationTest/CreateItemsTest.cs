@@ -7,6 +7,7 @@
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
@@ -14,14 +15,18 @@
   [TestFixture]
   public class CreateItemsTest
   {
-    private TestEnvironment testData;
-    private ScApiSession session;
+    private TestEnvironment        testData;
+    private ISitecoreWebApiSession session ;
 
     [SetUp]
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      session = testData.GetSession(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password, null, testData.ShellSite);
+      session =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .Site(testData.ShellSite)
+          .BuildSession();
     }
 
     [TearDown]
@@ -182,7 +187,8 @@
     public void TestCreateItemByIdAndGetDuplicateFields()
     {
       const string FieldName = "Text";
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+      Exception exception = Assert.Throws<ArgumentException>(() => 
+        ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
          .ItemTemplate(testData.Items.Home.Template)
