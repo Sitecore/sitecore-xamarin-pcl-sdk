@@ -30,7 +30,7 @@ namespace MobileSDKIntegrationTest
     {
       TestEnvironment env = TestEnvironment.DefaultTestEnvironment();
 
-      var connection = new SessionConfig(
+      var connection = SessionConfig.NewAuthenticatedSessionConfig(
                    env.InstanceUrl,
                    env.Users.Admin.Username,
                    env.Users.Admin.Password);

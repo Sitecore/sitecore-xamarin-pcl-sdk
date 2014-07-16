@@ -1,15 +1,18 @@
 ﻿
-using System;
-using System.Drawing;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-using System.IO;
 
 namespace WhiteLabeliOS
 {
+  using System;
+  using System.Drawing;
+
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using System.IO;
+  using Sitecore.MobileSDK.Session;
+
+
 	public partial class GetMediaItemViewController : BaseTaskViewController
 	{
 		public GetMediaItemViewController (IntPtr handle) : base (handle)
@@ -92,7 +95,7 @@ namespace WhiteLabeliOS
 		{
 			try
 			{
-				ScApiSession session = this.instanceSettings.GetSession();
+        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
 				IDownloadMediaOptions options = new MediaOptionsBuilder()
 					.SetWidth(this.width)

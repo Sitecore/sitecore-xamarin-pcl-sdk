@@ -13,7 +13,6 @@
 
   class AuthenticateTasks : IRestApiCallTasks<ISessionConfig, HttpRequestMessage, string, WebApiJsonStatusMessage>
   {
-
     #region Private Variables
 
     private readonly IRestServiceGrammar restGrammar;

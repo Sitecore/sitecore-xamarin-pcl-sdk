@@ -7,6 +7,7 @@ using MonoTouch.UIKit;
 using Sitecore.MobileSDK;
 using Sitecore.MobileSDK.Items;
 using System.Linq;
+using Sitecore.MobileSDK.Session;
 
 namespace WhiteLabeliOS
 {
@@ -36,7 +37,7 @@ namespace WhiteLabeliOS
     {
       try
       {
-        ScApiSession session = this.instanceSettings.GetSession();
+        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
         var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.pathField.Text)
           .Database("web")

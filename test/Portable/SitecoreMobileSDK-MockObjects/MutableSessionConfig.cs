@@ -12,6 +12,18 @@ namespace SitecoreMobileSDKMockObjects
     {
     }
 
+    public override SessionConfig ShallowCopy()
+    {
+      var result = new MutableSessionConfig("mock instance", "mock login", "mock password", "mock site", "v1");
+      result.SetInstanceUrl(this.InstanceUrl);
+      result.SetLogin(this.Login);
+      result.SetPassword(this.Password);
+      result.SetSite(this.Site);
+      result.SetItemWebApiVersion(this.ItemWebApiVersion);
+
+      return result;
+    }
+
     public void SetInstanceUrl(string value)
     {
       this.InstanceUrl = value;
