@@ -49,7 +49,7 @@ namespace WhiteLabeliOS
     {
       try
       {
-        ScApiSession session = this.instanceSettings.GetSession();
+        var session = this.instanceSettings.GetSession();
 
         var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.CreatedItemId)
           .Database("web")
