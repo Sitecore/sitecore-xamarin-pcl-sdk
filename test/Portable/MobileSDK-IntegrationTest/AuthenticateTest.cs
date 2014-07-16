@@ -164,7 +164,10 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetAuthenticationWithNullUrl()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => SessionConfig.NewAuthenticatedSessionConfig(null, testData.Users.Admin.Username, testData.Users.Admin.Password));
+      var exception = Assert.Throws<ArgumentNullException>(() => 
+        SessionConfig.NewAuthenticatedSessionConfig(null, testData.Users.Admin.Username, testData.Users.Admin.Password)
+      );
+
       Assert.IsTrue(
           exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required")
       );
@@ -173,7 +176,10 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetAuthenticationWithEmptyUrl()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => SessionConfig.NewAuthenticatedSessionConfig("", testData.Users.Admin.Username, testData.Users.Admin.Password));
+      var exception = Assert.Throws<ArgumentNullException>(() => 
+        SessionConfig.NewAuthenticatedSessionConfig("", testData.Users.Admin.Username, testData.Users.Admin.Password)
+      );
+
       Assert.IsTrue(
           exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required")
       );
