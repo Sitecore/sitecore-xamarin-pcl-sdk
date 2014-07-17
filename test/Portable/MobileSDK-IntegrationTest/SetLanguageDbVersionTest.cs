@@ -230,28 +230,6 @@
     }
 
     [Test]
-    public void TestGetItemWithInvalidVersion()
-    {
-      const string Db = "web";
-      const string Language = "da";
-      const string Version = "Version";
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-
-
-      TestDelegate testCode = async () =>
-      {
-        var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
-
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Cannot recognize item version."));
-    }
-
-    [Test]
     public void TestGetItemWithInvalidDb()
     {
       const string Db = "@#er$#";
@@ -475,7 +453,7 @@
     }
 
     [Test]
-    public async void TestGetItemByPathWithOverrideLanguageTwice()
+    public void TestGetItemByPathWithOverrideLanguageTwice()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Language("da")

@@ -1,23 +1,13 @@
-﻿
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
 
   using System;
-  using System.Net.Http;
-
-
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Exceptions;
-  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Session;
-
-  using SitecoreMobileSDKMockObjects;
-
-
 
   [TestFixture]
   public class GetPublicKeyTest
@@ -30,7 +20,6 @@ namespace MobileSDKIntegrationTest
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-
       this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
     }
 
@@ -43,10 +32,9 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemAsAuthenticatedUser()
     {
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-          .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession();
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .BuildReadonlySession();
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
@@ -57,11 +45,9 @@ namespace MobileSDKIntegrationTest
     public async void TestMissingHttpIsAutocompletedDuringAuthentication()
     {
       var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
-
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
-          .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession();
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
+        .Credentials(this.testData.Users.Admin)
+        .BuildReadonlySession();
 
       var certrificate = await session.ReadItemAsync(this.requestWithItemId);
       Assert.IsNotNull(certrificate);
@@ -70,11 +56,10 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestAuthenticateWithSlashInTheEnd()
     {
-      string urlWithSlahInTheEnd = testData.InstanceUrl+'/';
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithSlahInTheEnd)
-          .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession();
+      string urlWithSlahInTheEnd = testData.InstanceUrl + '/';
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithSlahInTheEnd)
+        .Credentials(this.testData.Users.Admin)
+        .BuildReadonlySession();
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
@@ -84,12 +69,11 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemsWithNotExistentInstanceUrl()
     {
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dddk.sitecore.net")
-          .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession();
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dddk.sitecore.net")
+        .Credentials(this.testData.Users.Admin)
+        .BuildReadonlySession();
 
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
         await task;
@@ -103,13 +87,10 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemWithNullInstanceUrl()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => 
-        SessionConfig.NewAuthenticatedSessionConfig(null, testData.Users.Admin.Username, testData.Users.Admin.Password)
-      );
-
-      Assert.IsTrue(
-          exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required")
-      );
+      var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(null)
+        .Credentials(this.testData.Users.Admin)
+        .BuildReadonlySession());
+      Assert.IsTrue(exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required"));
     }
 
     [Test]
@@ -128,48 +109,31 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public void TestGetItemWithEmptyPassword()
+    public void TestGetItemWithNullPassword()
     {
-      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
-      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
-      sessionConfig.SetLogin(testData.Users.Admin.Username);
-      sessionConfig.SetPassword("");
-      sessionConfig.SetSite(testData.ShellSite);
+      var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Password, null))
+        .BuildSession());
 
-      var defaultItemSource = ItemSource.DefaultSource();
-      var session = new ScApiSession(sessionConfig, defaultItemSource);
-
-      TestDelegate testCode = async() =>
-      {
-        var task = session.ReadItemAsync(this.requestWithItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
-
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
+      Assert.AreEqual("Value cannot be null.\r\nParameter name: SessionConfig.Credentials : password is required for authenticated session", exception.Message);
     }
 
     [Test]
     public void TestGetItemWithNotExistentUser()
     {
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(this.testData.Users.NotExistent)
-          .DefaultDatabase("web")
-          .DefaultLanguage("en")
-          .Site(testData.ShellSite)
-          .BuildReadonlySession();
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(this.testData.Users.NotExistent)
+        .DefaultDatabase("web")
+        .DefaultLanguage("en")
+        .Site(testData.ShellSite)
+        .BuildSession();
 
-
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
         await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
-
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
       Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
@@ -179,22 +143,16 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemWithInvalidUsernameAndPassword()
     {
-      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
-      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
-      sessionConfig.SetLogin("inval|d u$er№ame");
-      sessionConfig.SetPassword(null);
-      sessionConfig.SetSite(testData.ShellSite);
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(new WebApiCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd"))
+        .BuildSession();
 
-      var defaultItemSource = ItemSource.DefaultSource();
-      var session = new ScApiSession(sessionConfig, defaultItemSource);
-
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
         await task;
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
-
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
       Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
@@ -204,16 +162,13 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetItemAsAnonymousWithoutReadAccess()
     {
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(this.testData.Users.Anonymous)
-          .DefaultDatabase("web")
-          .DefaultLanguage("en")
-          .Site(testData.ShellSite)
-          .BuildReadonlySession();
+      var session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
+        .DefaultDatabase("web")
+        .DefaultLanguage("en")
+        .Site(testData.ShellSite)
+        .BuildReadonlySession();
 
-
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(this.requestWithItemId);
         await task;

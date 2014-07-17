@@ -15,31 +15,6 @@
         ShellSite = "/sitecore/shell"
       };
 
-      result.Users.Admin.Username = "sitecore\\admin";
-      result.Users.Admin.Password = "b";
-
-      result.Users.Anonymous.Username = null;
-      result.Users.Anonymous.Password = null;
-
-      result.Users.Creatorex.Username = "extranet\\creatorex";
-      result.Users.Creatorex.Password = "creatorex";
-
-      result.Users.NoReadAccess.Username = "extranet\\noreadaccess";
-      result.Users.NoReadAccess.Password = "noreadaccess";
-
-      result.Users.SitecoreCreator.Username = "sitecore\\creator";
-      result.Users.SitecoreCreator.Password = "creator";
-
-      result.Users.FakeAnonymous.Username = "extranet\\FakeAnonymous";
-      result.Users.FakeAnonymous.Password = "b";
-
-      result.Users.NotExistent.Username = "sitecore\\notexistent";
-      result.Users.NotExistent.Password = "notexistent";
-
-
-
-
-
       result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
       result.Items.Home.Path = "/sitecore/content/Home";
       result.Items.Home.DisplayName = "Home";
@@ -78,13 +53,14 @@
 
     public class UsersList
     {
-      public User Admin = new User();
-      public User Anonymous = new User();
-      public User Creatorex = new User();
-      public User SitecoreCreator = new User();
-      public User NoReadAccess = new User();
-      public User FakeAnonymous = new User();
-      public User NotExistent = new User();
+      public WebApiCredentialsPOD Admin = new WebApiCredentialsPOD("sitecore\\admin", "b");
+      public WebApiCredentialsPOD Anonymous = new WebApiCredentialsPOD(null, null);
+      public WebApiCredentialsPOD Creatorex = new WebApiCredentialsPOD("extranet\\creatorex", "creatorex");
+      public WebApiCredentialsPOD SitecoreCreator = new WebApiCredentialsPOD("sitecore\\creator", "creator");
+      public WebApiCredentialsPOD NoReadAccess = new WebApiCredentialsPOD("extranet\\noreadaccess", "noreadaccess");
+      public WebApiCredentialsPOD FakeAnonymous = new WebApiCredentialsPOD("extranet\\FakeAnonymous", "b");
+      public WebApiCredentialsPOD NotExistent = new WebApiCredentialsPOD("sitecore\\notexistent", "notexistent");
+      public WebApiCredentialsPOD NoCreateAccess = new WebApiCredentialsPOD("sitecore\\nocreate", "nocreate");
     }
 
     public class ItemsList
@@ -103,34 +79,6 @@
       public string Path { get; set; }
       public string DisplayName { get; set; }
       public string Template { get; set; }
-    }
-
-    public class User : IWebApiCredentials
-    {
-      public string Username { get; set; }
-      public string Password { get; set; }
-
-      public User UserShallowCopy()
-      {
-        var result = new User();
-        result.Username = this.Username;
-        result.Password = this.Password;
-
-        return result;
-      }
-
-      public IWebApiCredentials CredentialsShallowCopy()
-      {
-        return this.UserShallowCopy();
-      }
-
-      public string Login
-      {
-        get
-        {
-          return this.Username;
-        }
-      }
     }
 
     public void AssertItemsAreEqual(Item expected, ISitecoreItem actual)

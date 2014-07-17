@@ -175,7 +175,7 @@
     }
 
     [Test]
-    public async void TestOverrideDatabaseInRequestByPathSeveralTimes()
+    public void TestOverrideDatabaseInRequestByPathSeveralTimes()
     {
       const string Db = "web";
 
