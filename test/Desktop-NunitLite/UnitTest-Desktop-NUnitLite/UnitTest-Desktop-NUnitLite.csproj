@@ -56,6 +56,9 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\AuthenticateParserTest.cs">
       <Link>AuthenticateParserTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\DeleteItemsResponseParserTest.cs">
+      <Link>DeleteItemsResponseParserTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\FieldsParserTest.cs">
       <Link>FieldsParserTest.cs</Link>
     </Compile>
