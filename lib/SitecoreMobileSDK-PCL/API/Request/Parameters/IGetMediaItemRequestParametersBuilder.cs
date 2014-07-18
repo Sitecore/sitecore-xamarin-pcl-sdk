@@ -1,10 +1,7 @@
-﻿
-namespace Sitecore.MobileSDK
-{
-	using System;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
-	public interface IGetMediaItemRequestParametersBuilder<T>
+namespace Sitecore.MobileSDK.API.Request.Parameters
+{
+    public interface IGetMediaItemRequestParametersBuilder<T>
 		where T : class
 	{
 		IGetMediaItemRequestParametersBuilder<T> Database (string sitecoreDatabase);

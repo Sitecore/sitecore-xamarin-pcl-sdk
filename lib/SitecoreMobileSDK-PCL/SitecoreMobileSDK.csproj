@@ -41,6 +41,8 @@
     <Compile Include="API\Request\IReadItemsByPathRequest.cs" />
     <Compile Include="API\Request\IReadItemsByQueryRequest.cs" />
     <Compile Include="API\Request\IReadMediaItemRequest.cs" />
+    <Compile Include="API\Request\Parameters\IDownloadMediaOptions.cs" />
+    <Compile Include="API\Request\Parameters\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="API\Session\IAnonymousSessionBuilder.cs" />
     <Compile Include="API\Session\IAuthenticatedSessionBuilder.cs" />
     <Compile Include="API\Session\IBaseSessionBuilder.cs" />
@@ -120,10 +122,8 @@
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
     <Compile Include="Items\ISitecoreItem.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\UserRequest\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\UserRequest\ReadMediaItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\MediaOptionsBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\IDownloadMediaOptions.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\DownloadMediaOptions.cs" />
     <Compile Include="SessionSettings\SessionConfigValidator.cs" />
     <Compile Include="Items\ReadMediaItemParameters.cs" />
@@ -191,9 +191,7 @@
       <HintPath>..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="API\Request\Parameters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />

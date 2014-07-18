@@ -1,11 +1,8 @@
-﻿using System;
-
-
-namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
+namespace Sitecore.MobileSDK.API.Request.Parameters
 {
-  using System.Collections.Generic;
+    using System.Collections.Generic;
 
-  public interface IDownloadMediaOptions
+    public interface IDownloadMediaOptions
   {
     IDownloadMediaOptions DeepCopyMediaDownloadOptions();
 
