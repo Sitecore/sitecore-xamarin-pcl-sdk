@@ -12,20 +12,31 @@
   [TestFixture]
   public class DeleteItemByIdUrlBuilderTest
   {
-    private IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-    private IWebApiUrlParameters webApiUrlParameters = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+    private SessionConfig sessionConfig;
+    private ScopeParameters scopeParameters;
 
-    private SessionConfig sessionConfig = new MutableSessionConfig("http://testurl", null, null);
-    private ScopeParameters scopeParameters = new ScopeParameters();
+    private string id;
+    private string database;
 
-    private string id = "{B0ED4777-1F5D-478D-AF47-145CCA9E4311}";
-    private string database = "master";
+    private DeleteItemsByIdUrlBuilder builder;
+
+    [SetUp]
+    public void Setup()
+    {
+      this.sessionConfig = new MutableSessionConfig("http://testurl", null, null);
+      this.scopeParameters = new ScopeParameters();
+
+      this.id = "{B0ED4777-1F5D-478D-AF47-145CCA9E4311}";
+      this.database = "master";
+
+      this.builder = new DeleteItemsByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+    }
+
 
     [Test]
     public void TestNullRequest()
     {
-      TestDelegate action = () => new DeleteItemsByIdUrlBuilder(this.restGrammar, this.webApiUrlParameters)
-        .GetUrlForRequest(null);
+      TestDelegate action = () => this.builder.GetUrlForRequest(null);
 
       Assert.Throws<ArgumentNullException>(action);
     }
@@ -37,36 +48,67 @@
       {
         var parameters = new DeleteItemByIdParameters(null, this.scopeParameters, this.id, this.database);
 
-        new DeleteItemsByIdUrlBuilder(this.restGrammar, this.webApiUrlParameters)
-        .GetUrlForRequest(parameters);
+        this.builder.GetUrlForRequest(parameters);
       };
 
       Assert.Throws<ArgumentNullException>(action);
     }
 
     [Test]
-    public void TestNullIdInParams()
+    public void TestNullId()
     {
       TestDelegate action = () =>
       {
         var parameters = new DeleteItemByIdParameters(this.sessionConfig, this.scopeParameters, null, this.database);
 
-        new DeleteItemsByIdUrlBuilder(this.restGrammar, this.webApiUrlParameters)
-        .GetUrlForRequest(parameters);
+        this.builder.GetUrlForRequest(parameters);
       };
 
       Assert.Throws<ArgumentException>(action);
     }
 
     [Test]
-    public void TestCorrectParams()
+    public void TestCorrectId()
     {
       var parameters = new DeleteItemByIdParameters(this.sessionConfig, this.scopeParameters, null, this.id);
 
-      var url = new DeleteItemsByIdUrlBuilder(this.restGrammar, this.webApiUrlParameters)
-      .GetUrlForRequest(parameters);
+      var url = this.builder.GetUrlForRequest(parameters);
 
       Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7BB0ED4777-1F5D-478D-AF47-145CCA9E4311%7D", url);
+    }
+
+    [Test]
+    public void TestCorrectIdWithDatabase()
+    {
+      var parameters = new DeleteItemByIdParameters(this.sessionConfig, this.scopeParameters, this.database, this.id);
+
+      var url = this.builder.GetUrlForRequest(parameters);
+
+      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7BB0ED4777-1F5D-478D-AF47-145CCA9E4311%7D&sc_database=master", url);
+    }
+
+    [Test]
+    public void TestCorrectIdWithDatabaseAndScope()
+    {
+      scopeParameters.AddScope(ScopeType.Children);
+
+      var parameters = new DeleteItemByIdParameters(this.sessionConfig, this.scopeParameters, this.database, this.id);
+
+      var url = this.builder.GetUrlForRequest(parameters);
+
+      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7BB0ED4777-1F5D-478D-AF47-145CCA9E4311%7D&scope=c&sc_database=master", url);
+    }
+
+    [Test]
+    public void TestCorrectIdWithScope()
+    {
+      scopeParameters.AddScope(ScopeType.Children);
+
+      var parameters = new DeleteItemByIdParameters(this.sessionConfig, this.scopeParameters, null, this.id);
+
+      var url = this.builder.GetUrlForRequest(parameters);
+
+      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7BB0ED4777-1F5D-478D-AF47-145CCA9E4311%7D&scope=c", url);
     }
   }
 }

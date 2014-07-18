@@ -40,17 +40,17 @@
 
       if (!string.IsNullOrEmpty(scopeString))
       {
-        parametersString += this.restGrammar.HostAndArgsSeparator + scopeString + this.restGrammar.FieldSeparator;
+        parametersString += scopeString;
       }
 
       if (!string.IsNullOrEmpty(database))
       {
-        if (string.IsNullOrEmpty(parametersString))
+        if (!string.IsNullOrEmpty(parametersString))
         {
-          parametersString += this.restGrammar.HostAndArgsSeparator;
+          parametersString += this.restGrammar.FieldSeparator;
         }
-
-        parametersString += database;
+        parametersString += this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator 
+          + database;
       }
       return parametersString;
     }
