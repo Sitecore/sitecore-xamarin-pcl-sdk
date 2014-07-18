@@ -1,14 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+
+namespace Sitecore.MobileSDK.API.Request
 {
-  using System;
-  using System.Collections.Generic;
+    using System.Collections.Generic;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-
-
-  public interface IGetVersionedItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
+    public interface IGetVersionedItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
     where T : class
   {
     IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion);

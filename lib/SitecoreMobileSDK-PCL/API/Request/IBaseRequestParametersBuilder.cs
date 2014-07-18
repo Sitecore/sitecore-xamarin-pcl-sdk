@@ -1,12 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+
+namespace Sitecore.MobileSDK.API.Request
 {
-  using System;
-  using System.Collections.Generic;
+    using System.Collections.Generic;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-  public interface IBaseRequestParametersBuilder<T>
+    public interface IBaseRequestParametersBuilder<T>
     where T : class
   {
     IBaseRequestParametersBuilder<T> Database(string sitecoreDatabase);

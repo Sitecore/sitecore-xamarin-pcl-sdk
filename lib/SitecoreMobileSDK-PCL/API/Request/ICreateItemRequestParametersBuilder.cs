@@ -1,12 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK
-{
-  using System;
-  using System.Collections.Generic;
-  using Sitecore.MobileSDK.UserRequest;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  public interface ICreateItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
+namespace Sitecore.MobileSDK.API.Request
+{
+    using System.Collections.Generic;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+    public interface ICreateItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
     where T : class
   {
     ICreateItemRequestParametersBuilder<T> ItemTemplate(string template);

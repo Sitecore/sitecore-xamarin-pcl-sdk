@@ -38,8 +38,11 @@
     <Compile Include="API\ItemWebApiRequestBuilder.cs" />
     <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
     <Compile Include="API\Request\IBaseGetItemRequest.cs" />
+    <Compile Include="API\Request\IBaseRequestParametersBuilder.cs" />
     <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
     <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
+    <Compile Include="API\Request\ICreateItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IReadItemsByIdRequest.cs" />
     <Compile Include="API\Request\IReadItemsByPathRequest.cs" />
     <Compile Include="API\Request\IReadItemsByQueryRequest.cs" />
@@ -135,13 +138,11 @@
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemById\CreateItemByIdUrlBuilder.cs" />
-    <Compile Include="UserRequest\CreateRequest\ICreateItemRequestParametersBuilder.cs" />
     <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
     <Compile Include="Items\CreateItemByIdParameters.cs" />
     <Compile Include="Validators\DuplicateEntryValidator.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
-    <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
@@ -149,7 +150,6 @@
     <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UrlBuilder\QueryParameters\IScopeParameters.cs" />
-    <Compile Include="UserRequest\IBaseRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
     <Compile Include="Session\SessionBuilderImpl.cs" />
