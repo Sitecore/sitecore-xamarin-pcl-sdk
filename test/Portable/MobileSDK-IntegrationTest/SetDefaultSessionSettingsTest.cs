@@ -290,7 +290,21 @@
         .DefaultDatabase(itemSource.Database)
         .BuildReadonlySession();
 
-      var response = await session.ReadItemAsync(this.requestWithItemId);
+      IReadItemsByIdRequest request = null;
+
+      if (string.IsNullOrEmpty(itemSource.Version))
+      {
+        request = this.requestWithItemId;
+      }
+      else
+      {
+        request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+        .Payload(PayloadType.Content)
+        .Version(itemSource.Version)
+        .Build();
+      }
+
+      var response = await session.ReadItemAsync(request);
       return response;
     }
   }

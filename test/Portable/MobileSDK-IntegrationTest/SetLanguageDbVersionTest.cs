@@ -339,8 +339,22 @@
       const string Version = "1";
 
       var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          //          .DefaultDatabase("master") // throws exception
+          .DefaultLanguage("da")
+          .BuildReadonlySession();
+
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
+        .Payload(PayloadType.Content)
+        .Version("1")
+        .Build();
+
+
+
+      var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
@@ -359,8 +373,22 @@
       const string Version = "1";
 
       var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .DefaultDatabase("master")
+        //.DefaultLanguage(""); // throws exception
+          .BuildReadonlySession();
+
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
+        .Payload(PayloadType.Content)
+        .Version("1")
+        .Build();
+
+
+
+      var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
