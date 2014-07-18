@@ -7,7 +7,8 @@ using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 namespace Sitecore.MobileSdkUnitTest
 {
-  using Sitecore.MobileSDK.UrlBuilder.Rest;
+    using Sitecore.MobileSDK.API;
+    using Sitecore.MobileSDK.UrlBuilder.Rest;
 
   [TestFixture]
   public class ResourseUrlBuilderTest

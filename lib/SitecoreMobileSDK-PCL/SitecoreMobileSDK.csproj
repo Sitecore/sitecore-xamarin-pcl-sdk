@@ -32,6 +32,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="API\ItemWebApiRequestBuilder.cs" />
     <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
     <Compile Include="Authenticate\AuthenticateTasks.cs" />
     <Compile Include="Items\IItemSource.cs" />
@@ -84,7 +85,6 @@
     <Compile Include="Items\ItemSourcePOD.cs" />
     <Compile Include="UserRequest\SessionConfigMerger.cs" />
     <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
-    <Compile Include="ItemWebApiRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
@@ -208,12 +208,5 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="UrlBuilder\CreateItem\" />
-    <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
-    <Folder Include="UserRequest\CreateRequest\" />
-    <Folder Include="Validators\" />
-    <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
-    <Folder Include="Session\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

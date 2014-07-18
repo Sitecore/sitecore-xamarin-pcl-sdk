@@ -6,7 +6,7 @@ namespace MobileSDKIntegrationTest
   using System.Threading.Tasks;
 
   using NUnit.Framework;
-
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK;

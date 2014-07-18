@@ -1,15 +1,14 @@
-﻿
-namespace Sitecore.MobileSDK
-{
-  using System;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-  using Sitecore.MobileSDK.UserRequest;
 
-  public class ItemWebApiRequestBuilder
+namespace Sitecore.MobileSDK.API
+{
+    using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+    using Sitecore.MobileSDK.UrlBuilder.ItemById;
+    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+    using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+    using Sitecore.MobileSDK.UserRequest;
+
+    public class ItemWebApiRequestBuilder
   {
     private ItemWebApiRequestBuilder()
     {

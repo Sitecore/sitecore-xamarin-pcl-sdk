@@ -4,6 +4,7 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
