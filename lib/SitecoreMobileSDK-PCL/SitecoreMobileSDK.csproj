@@ -39,6 +39,7 @@
     <Compile Include="API\Exceptions\SitecoreMobileSdkException.cs" />
     <Compile Include="API\Exceptions\WebApiJsonErrorException.cs" />
     <Compile Include="API\Exceptions\WebApiJsonStatusMessage.cs" />
+    <Compile Include="API\Fields\IField.cs" />
     <Compile Include="API\ISessionConfig.cs" />
     <Compile Include="API\Items\IItemSource.cs" />
     <Compile Include="API\Items\ISitecoreItem.cs" />
@@ -123,7 +124,6 @@
     <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\SitecoreQueryValidator.cs" />
     <Compile Include="Items\Fields\ScField.cs" />
-    <Compile Include="Items\Fields\IField.cs" />
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />

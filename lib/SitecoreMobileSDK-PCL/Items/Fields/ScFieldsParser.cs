@@ -9,8 +9,9 @@ namespace Sitecore.MobileSDK.Items.Fields
 
 	using Newtonsoft.Json;
 	using Newtonsoft.Json.Linq;
+	using Sitecore.MobileSDK.API.Fields;
 
-	public class ScFieldsParser
+    public class ScFieldsParser
 	{
 		public ScFieldsParser()
 		{

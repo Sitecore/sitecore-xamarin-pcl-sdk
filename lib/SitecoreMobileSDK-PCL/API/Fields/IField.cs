@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK.Items.Fields
+namespace Sitecore.MobileSDK.API.Fields
 {
 	public interface IField
 	{

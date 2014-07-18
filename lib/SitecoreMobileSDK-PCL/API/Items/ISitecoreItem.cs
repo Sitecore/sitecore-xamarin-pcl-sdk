@@ -3,6 +3,7 @@
 namespace Sitecore.MobileSDK.API.Items
 {
     using System.Collections.Generic;
+    using Sitecore.MobileSDK.API.Fields;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.Items.Fields;
 

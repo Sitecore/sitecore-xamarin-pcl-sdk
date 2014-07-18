@@ -11,6 +11,7 @@ namespace Sitecore.MobileSdkUnitTest
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API.Exceptions;
+  using Sitecore.MobileSDK.API.Fields;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Items.Fields;
