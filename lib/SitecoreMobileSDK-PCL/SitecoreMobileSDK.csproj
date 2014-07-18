@@ -33,6 +33,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="API\ItemWebApiRequestBuilder.cs" />
+    <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
+    <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
+    <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
+    <Compile Include="API\Request\IReadItemsByIdRequest.cs" />
+    <Compile Include="API\Request\IReadItemsByPathRequest.cs" />
+    <Compile Include="API\Request\IReadItemsByQueryRequest.cs" />
+    <Compile Include="API\Request\IReadMediaItemRequest.cs" />
     <Compile Include="API\Session\IAnonymousSessionBuilder.cs" />
     <Compile Include="API\Session\IAuthenticatedSessionBuilder.cs" />
     <Compile Include="API\Session\IBaseSessionBuilder.cs" />
@@ -89,9 +96,6 @@
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
     <Compile Include="Items\ReadItemsByIdParameters.cs" />
-    <Compile Include="UrlBuilder\ItemByPath\IReadItemsByPathRequest.cs" />
-    <Compile Include="UrlBuilder\ItemByQuery\IReadItemsByQueryRequest.cs" />
-    <Compile Include="UrlBuilder\ItemById\IReadItemsByIdRequest.cs" />
     <Compile Include="UserRequest\UserRequestMerger.cs" />
     <Compile Include="UserRequest\ItemSourceFieldMerger.cs" />
     <Compile Include="Items\ItemSourcePOD.cs" />
@@ -118,7 +122,6 @@
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\UserRequest\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\UserRequest\ReadMediaItemRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\IReadMediaItemRequest.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\MediaOptionsBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\IDownloadMediaOptions.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\DownloadMediaOptions.cs" />
@@ -129,8 +132,6 @@
     <Compile Include="UrlBuilder\MediaItem\MediaPathValidator.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeType.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
-    <Compile Include="UrlBuilder\CreateItem\IBaseCreateItemRequest.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemById\ICreateItemByIdRequest.cs" />
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemById\CreateItemByIdUrlBuilder.cs" />
@@ -142,7 +143,6 @@
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\ICreateItemByPathRequest.cs" />
     <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
     <Compile Include="Items\CreateItemByPathParameters.cs" />

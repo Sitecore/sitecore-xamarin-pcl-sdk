@@ -4,7 +4,7 @@
 namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
 {
     using System;
-
+    using Sitecore.MobileSDK.API.Request;
     using Sitecore.MobileSDK.Utils;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder.Rest;

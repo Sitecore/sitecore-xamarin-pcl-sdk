@@ -11,7 +11,7 @@ namespace MobileSDKIntegrationTest
   using NUnit.Framework;
 
   using MobileSDKUnitTest.Mock;
-
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.SessionSettings;

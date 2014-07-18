@@ -6,6 +6,7 @@ namespace Sitecore.MobileSdkUnitTest
 
   using MobileSDKUnitTest.Mock;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;

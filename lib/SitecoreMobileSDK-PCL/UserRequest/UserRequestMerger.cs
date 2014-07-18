@@ -1,7 +1,8 @@
 ﻿
 namespace Sitecore.MobileSDK.UserRequest
 {
-  using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.API.Request;
+    using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
