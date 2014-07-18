@@ -120,7 +120,6 @@ namespace Sitecore.MobileSdkUnitTest
     }
     #endregion Builder Interface
 
-
     #region Write Once
     [Test]
     public void TestWebApiVersionIsWriteOnce()
@@ -226,6 +225,102 @@ namespace Sitecore.MobileSdkUnitTest
       );
     }
     #endregion Write Once
+
+    #region Validate Null
+    [Test]
+    public void TestWebApiVersionThrowsExceptionForNullInput()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .WebApiVersion(null)
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .WebApiVersion(null)
+      );
+    }
+
+    [Test]
+    public void TestDatabaseThrowsExceptionForNullInput()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefaultDatabase(null)
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefaultDatabase(null)
+      );
+    }
+
+    [Test]
+    public void TestLanguageThrowsExceptionForNullInput()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefaultLanguage(null)
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefaultLanguage(null)
+      );
+    }
+
+    [Test]
+    public void TestSiteThrowsExceptionForNullInput()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .Site(null)
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .Site(null)
+      );
+    }
+
+
+    [Test]
+    public void TestMediaThrowsExceptionForNullInput()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .MediaLibraryRoot(null)
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .MediaLibraryRoot(null)
+      );
+    }
+
+
+    [Test]
+    public void TestMediaExtThrowsExceptionForNullInput()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefaultMediaResourceExtension("ashx")
+        .DefaultMediaResourceExtension("pdf")
+      );
+
+      Assert.Throws<InvalidOperationException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefaultMediaResourceExtension("jpeg")
+        .DefaultMediaResourceExtension("jpg")
+      );
+    }
+    #endregion Validate Null
   }
 }
 
