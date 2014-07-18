@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
   using System;
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Utils;

@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder;
 

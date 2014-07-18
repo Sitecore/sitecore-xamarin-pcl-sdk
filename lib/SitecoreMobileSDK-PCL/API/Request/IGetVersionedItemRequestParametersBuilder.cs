@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK.API.Request
 {
     using System.Collections.Generic;
+    using Sitecore.MobileSDK.API.Request.Parameters;
     using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
     public interface IGetVersionedItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>

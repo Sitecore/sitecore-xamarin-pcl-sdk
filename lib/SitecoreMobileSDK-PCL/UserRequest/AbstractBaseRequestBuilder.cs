@@ -5,6 +5,7 @@ namespace Sitecore.MobileSDK.UserRequest
   using System.Linq;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;

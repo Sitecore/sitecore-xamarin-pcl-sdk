@@ -6,6 +6,8 @@ namespace Sitecore.MobileSDK
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Session;
@@ -13,8 +15,6 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.SessionSettings;
 
   using Sitecore.MobileSDK.Authenticate;
-  using Sitecore.MobileSDK.Exceptions;
-
   using Sitecore.MobileSDK.CrudTasks;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;

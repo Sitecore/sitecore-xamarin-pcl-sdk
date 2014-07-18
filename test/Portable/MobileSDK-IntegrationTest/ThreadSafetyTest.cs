@@ -1,6 +1,5 @@
 ﻿using Sitecore.MobileSDK;
 using SitecoreMobileSDKMockObjects;
-using Sitecore.MobileSDK.Exceptions;
 
 namespace MobileSDKIntegrationTest
 {
@@ -11,8 +10,10 @@ namespace MobileSDKIntegrationTest
   using NUnit.Framework;
 
   using MobileSDKUnitTest.Mock;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.SessionSettings;

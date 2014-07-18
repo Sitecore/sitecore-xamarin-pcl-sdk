@@ -6,6 +6,7 @@ namespace Sitecore.MobileSDK
   using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 

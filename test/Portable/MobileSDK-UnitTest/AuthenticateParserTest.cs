@@ -4,10 +4,10 @@
   using System;
   using System.Threading;
   using System.Threading.Tasks;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.Authenticate;
-  using Sitecore.MobileSDK.Exceptions;
 
-  [TestFixture()]
+    [TestFixture()]
   public class AuthenticateResponseParserTest
   {
     [Test]

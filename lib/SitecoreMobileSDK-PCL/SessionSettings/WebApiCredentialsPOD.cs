@@ -2,8 +2,9 @@
 namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
+  using Sitecore.MobileSDK.API;
 
-  public class WebApiCredentialsPOD : IWebApiCredentials
+    public class WebApiCredentialsPOD : IWebApiCredentials
   {
     public WebApiCredentialsPOD(string userName, string password)
     {
