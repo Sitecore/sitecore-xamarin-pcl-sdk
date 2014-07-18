@@ -1,11 +1,9 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
+namespace Sitecore.MobileSDK.API.Request.Parameters
 {
-  using System;
-  using System.Collections;
-  using System.Collections.Generic;
+    using System.Collections.Generic;
+    using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-
-  public interface IScopeParameters
+    public interface IScopeParameters
   {
     IScopeParameters ShallowCopyScopeParametersInterface();
     IEnumerable<ScopeType> OrderedScopeSequence { get; }

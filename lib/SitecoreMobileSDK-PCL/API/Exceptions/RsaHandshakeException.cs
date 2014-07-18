@@ -1,5 +1,5 @@
-﻿
-namespace Sitecore.MobileSDK.Exceptions
+
+namespace Sitecore.MobileSDK.API.Exceptions
 {
     using System;
 

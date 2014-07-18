@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
+namespace Sitecore.MobileSDK.API.Request.Parameters
 {
     public enum PayloadType
     {
