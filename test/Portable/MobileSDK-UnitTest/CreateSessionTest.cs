@@ -226,8 +226,6 @@ namespace Sitecore.MobileSdkUnitTest
       );
     }
     #endregion Write Once
-
-
   }
 }
 

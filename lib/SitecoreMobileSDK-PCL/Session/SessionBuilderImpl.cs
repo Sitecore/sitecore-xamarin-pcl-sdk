@@ -66,7 +66,6 @@
     }
     #endregion
 
-
     #region IAnonymousSessionBuilder
     public IBaseSessionBuilder Site(string site)
     {
