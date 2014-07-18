@@ -14,6 +14,7 @@ namespace Sitecore.MobileSdkUnitTest
   {
     private IWebApiCredentials adminCredentials = new WebApiCredentialsPOD("admin", "b");
 
+    #region Explicit Construction
     [Test]
     public void TestSessionConfigForAuthenticatedSession()
     {
@@ -74,7 +75,9 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
     }
+    #endregion Explicit Construction
 
+    #region Builder Interface
     [Test]
     public void TestAnonymousSessionShouldBeCreatedByTheBuilder()
     {
@@ -115,7 +118,10 @@ namespace Sitecore.MobileSdkUnitTest
       var roSession = builder.BuildReadonlySession();
       Assert.IsNotNull(roSession);
     }
+    #endregion Builder Interface
 
+
+    #region Write Once
     [Test]
     public void TestWebApiVersionIsWriteOnce()
     {
@@ -219,6 +225,9 @@ namespace Sitecore.MobileSdkUnitTest
         .DefaultMediaResourceExtension("jpg")
       );
     }
+    #endregion Write Once
+
+
   }
 }
 
