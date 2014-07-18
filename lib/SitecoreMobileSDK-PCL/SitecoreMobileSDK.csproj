@@ -58,6 +58,7 @@
     <Compile Include="UrlBuilder\DeleteItem\AbstractDeleteItemsUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByIdParameters.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByIdRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByPathParameters.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByPathUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\IBaseDeleteItemRequest.cs" />

@@ -1,7 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
 {
-  interface IDeleteItemsByPathRequest : IBaseDeleteItemRequest
+  public interface IDeleteItemsByPathRequest : IBaseDeleteItemRequest
   {
-    string Itempath { get; }
+    string ItemPath { get; }
   }
 }
