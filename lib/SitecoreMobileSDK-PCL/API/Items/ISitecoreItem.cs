@@ -1,12 +1,10 @@
-﻿
 
-namespace Sitecore.MobileSDK.Items
+
+namespace Sitecore.MobileSDK.API.Items
 {
-    using System;
     using System.Collections.Generic;
+    using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.Items.Fields;
-
-
 
     public interface ISitecoreItem
     {

@@ -1,5 +1,6 @@
 namespace Sitecore.MobileSDK.API.Session
 {
+    using Sitecore.MobileSDK.API.Items;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.SessionSettings;
 

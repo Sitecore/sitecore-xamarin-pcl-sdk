@@ -2,6 +2,7 @@
 
 namespace Sitecore.MobileSDK.Items
 {
+    using Sitecore.MobileSDK.API.Items;
     using Sitecore.MobileSDK.API.Request;
     using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.SessionSettings;

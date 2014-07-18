@@ -1,13 +1,8 @@
-﻿
 
-namespace Sitecore.MobileSDK.Items
+
+namespace Sitecore.MobileSDK.API.Items
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
-
-  public interface IItemSource
+    public interface IItemSource
   {
     IItemSource ShallowCopy();
 

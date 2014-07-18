@@ -5,6 +5,7 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;

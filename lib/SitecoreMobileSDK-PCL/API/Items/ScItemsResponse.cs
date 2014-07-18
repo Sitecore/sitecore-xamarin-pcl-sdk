@@ -1,8 +1,8 @@
-﻿namespace Sitecore.MobileSDK.Items
+namespace Sitecore.MobileSDK.API.Items
 {
-  using System.Collections.Generic;
+    using System.Collections.Generic;
 
-  public class ScItemsResponse
+    public class ScItemsResponse
   {
     public int TotalCount { get; private set; }
 

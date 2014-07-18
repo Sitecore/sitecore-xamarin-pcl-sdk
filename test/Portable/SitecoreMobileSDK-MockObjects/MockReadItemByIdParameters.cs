@@ -2,6 +2,7 @@
 
 namespace MobileSDKUnitTest.Mock
 {
+    using Sitecore.MobileSDK.API.Items;
     using Sitecore.MobileSDK.API.Request;
     using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;

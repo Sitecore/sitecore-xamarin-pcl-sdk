@@ -32,6 +32,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="API\Items\IItemSource.cs" />
+    <Compile Include="API\Items\ISitecoreItem.cs" />
+    <Compile Include="API\Items\ScItemsResponse.cs" />
     <Compile Include="API\ItemWebApiRequestBuilder.cs" />
     <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
     <Compile Include="API\Request\IBaseGetItemRequest.cs" />
@@ -57,7 +60,6 @@
     <Compile Include="API\SitecoreWebApiSessionBuilder.cs" />
     <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
     <Compile Include="Authenticate\AuthenticateTasks.cs" />
-    <Compile Include="Items\IItemSource.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKey\EncryptionUtil.cs" />
@@ -72,7 +74,6 @@
     <Compile Include="TaskFlow\RestApiCallFlow.cs" />
     <Compile Include="PublicKey\GetPublicKeyTasks.cs" />
     <Compile Include="Items\ScItem.cs" />
-    <Compile Include="Items\ScItemsResponse.cs" />
     <Compile Include="Items\ScItemsParser.cs" />
     <Compile Include="Items\ItemSource.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
@@ -120,7 +121,6 @@
     <Compile Include="Items\Fields\IField.cs" />
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
-    <Compile Include="Items\ISitecoreItem.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\UserRequest\ReadMediaItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\MediaOptionsBuilder.cs" />
