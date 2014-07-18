@@ -1,7 +1,7 @@
-﻿
-namespace Sitecore.MobileSDK.Session
+
+namespace Sitecore.MobileSDK.API.Session
 {
-  public interface ISitecoreWebApiSessionActions : 
+    public interface ISitecoreWebApiSessionActions : 
     IReadItemActions  , 
     ICreateItemActions, 
     IConnectionActions,

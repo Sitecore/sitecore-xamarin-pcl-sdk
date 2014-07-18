@@ -6,6 +6,7 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Session;

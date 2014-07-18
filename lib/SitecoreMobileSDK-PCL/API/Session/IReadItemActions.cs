@@ -1,17 +1,15 @@
-﻿
 
-namespace Sitecore.MobileSDK.Session
+
+namespace Sitecore.MobileSDK.API.Session
 {
-  using System.Threading;
-  using System.Threading.Tasks;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.UrlBuilder.ItemById;
+    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-
-
-  public interface IReadItemActions
+    public interface IReadItemActions
   {
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken));

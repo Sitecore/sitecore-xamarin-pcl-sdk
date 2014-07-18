@@ -33,6 +33,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="API\ItemWebApiRequestBuilder.cs" />
+    <Compile Include="API\Session\IAnonymousSessionBuilder.cs" />
+    <Compile Include="API\Session\IAuthenticatedSessionBuilder.cs" />
+    <Compile Include="API\Session\IBaseSessionBuilder.cs" />
+    <Compile Include="API\Session\IConnectionActions.cs" />
+    <Compile Include="API\Session\ICreateItemActions.cs" />
+    <Compile Include="API\Session\IMediaActions.cs" />
+    <Compile Include="API\Session\IReadItemActions.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiReadonlySession.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSession.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSessionActions.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSessionState.cs" />
     <Compile Include="API\SitecoreWebApiSessionBuilder.cs" />
     <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
     <Compile Include="Authenticate\AuthenticateTasks.cs" />
@@ -141,18 +152,7 @@
     <Compile Include="UserRequest\IBaseRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
-    <Compile Include="Session\ISitecoreWebApiSession.cs" />
-    <Compile Include="Session\IBaseSessionBuilder.cs" />
-    <Compile Include="Session\IAnonymousSessionBuilder.cs" />
-    <Compile Include="Session\IAuthenticatedSessionBuilder.cs" />
     <Compile Include="Session\SessionBuilderImpl.cs" />
-    <Compile Include="Session\ISitecoreWebApiSessionState.cs" />
-    <Compile Include="Session\ISitecoreWebApiSessionActions.cs" />
-    <Compile Include="Session\IReadItemActions.cs" />
-    <Compile Include="Session\IMediaActions.cs" />
-    <Compile Include="Session\ICreateItemActions.cs" />
-    <Compile Include="Session\IConnectionActions.cs" />
-    <Compile Include="Session\ISitecoreWebApiReadonlySession.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
