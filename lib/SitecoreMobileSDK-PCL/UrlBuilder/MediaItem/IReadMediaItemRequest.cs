@@ -3,7 +3,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
 	using Sitecore.MobileSDK.Items;
 	using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 	public interface IReadMediaItemRequest
 	{

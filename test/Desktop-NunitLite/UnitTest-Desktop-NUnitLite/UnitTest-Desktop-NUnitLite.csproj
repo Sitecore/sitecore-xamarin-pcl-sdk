@@ -104,6 +104,7 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ResourseUrlBuilderTest.cs">
       <Link>ResourseUrlBuilderTest.cs</Link>
     </Compile>
+    <Compile Include="DeleteItemByIdUrlBuilderTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

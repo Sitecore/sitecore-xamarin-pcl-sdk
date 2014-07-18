@@ -54,6 +54,16 @@
     <Compile Include="Items\ScItemsResponse.cs" />
     <Compile Include="Items\ScItemsParser.cs" />
     <Compile Include="Items\ItemSource.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\AbstractBaseDeleteRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\AbstractDeleteItemsUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByIdParameters.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByIdRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByPathUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\IBaseDeleteItemRequest.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\IBaseDeleteRequestParametersBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsByIdRequest.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsByPathRequest.cs" />
     <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
@@ -71,6 +81,7 @@
     <Compile Include="UrlBuilder\QueryParameters\QueryParameters.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\ScopeParametersUrlBuilder.cs" />
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
@@ -210,12 +221,5 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="UrlBuilder\CreateItem\" />
-    <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
-    <Folder Include="UserRequest\CreateRequest\" />
-    <Folder Include="Validators\" />
-    <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
-    <Folder Include="Session\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

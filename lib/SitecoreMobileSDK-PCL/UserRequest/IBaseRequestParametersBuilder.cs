@@ -1,7 +1,5 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest
 {
-  using System;
   using System.Collections.Generic;
 
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
