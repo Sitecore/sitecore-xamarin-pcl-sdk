@@ -18,7 +18,7 @@
       SessionConfig conf = SessionConfig.NewAuthenticatedSessionConfig(
         this.instanceUrl, 
         //@adk : TODO : do not store credentials in variables
-        this.credentials.Login,
+        this.credentials.UserName,
         this.credentials.Password,
 
         this.site, 

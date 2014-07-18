@@ -32,7 +32,7 @@ namespace MobileSDKIntegrationTest
 
       var connection = SessionConfig.NewAuthenticatedSessionConfig(
                    env.InstanceUrl,
-                   env.Users.Admin.Login,
+                   env.Users.Admin.UserName,
                    env.Users.Admin.Password);
       var defaultSource = ItemSource.DefaultSource();
 

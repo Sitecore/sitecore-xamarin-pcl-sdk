@@ -24,7 +24,7 @@ namespace MobileSDKIntegrationTest
     {
       this.env = TestEnvironment.DefaultTestEnvironment();
 
-      var config = SessionConfig.NewAuthenticatedSessionConfig(this.env.InstanceUrl, this.env.Users.Admin.Login, this.env.Users.Admin.Password);
+      var config = SessionConfig.NewAuthenticatedSessionConfig(this.env.InstanceUrl, this.env.Users.Admin.UserName, this.env.Users.Admin.Password);
       var defaultSource = ItemSource.DefaultSource();
 
       this.session = new ScTestApiSession(config, defaultSource);

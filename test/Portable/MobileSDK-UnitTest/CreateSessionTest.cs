@@ -22,7 +22,7 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(conf);
 
       Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.AreEqual("root", conf.Login);
+      Assert.AreEqual("root", conf.UserName);
       Assert.AreEqual("pass", conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
@@ -35,7 +35,7 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(conf);
 
       Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Login);
+      Assert.IsNull(conf.UserName);
       Assert.IsNull(conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
@@ -49,7 +49,7 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(conf);
 
       Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Login);
+      Assert.IsNull(conf.UserName);
       Assert.AreEqual("pass", conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
@@ -70,7 +70,7 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(conf);
 
       Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Login);
+      Assert.IsNull(conf.UserName);
       Assert.IsNull(conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);

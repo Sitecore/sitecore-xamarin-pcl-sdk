@@ -17,10 +17,10 @@ namespace MobileSDKIntegrationTest
     {
       testData = TestEnvironment.DefaultTestEnvironment();
 
-      var config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Anonymous.Login, testData.Users.Anonymous.Password);
+      var config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Anonymous.UserName, testData.Users.Anonymous.Password);
       this.anonymousSession = new ScTestApiSession(config, ItemSource.DefaultSource());
 
-      config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.Login, testData.Users.Admin.Password);
+      config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.UserName, testData.Users.Admin.Password);
       this.authenticatedSession = new ScTestApiSession(config, ItemSource.DefaultSource());
     }
 

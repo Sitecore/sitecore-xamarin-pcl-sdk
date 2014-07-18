@@ -106,7 +106,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetAuthenticationWithNotExistentPassword()
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Login, "wrongpassword"))
+        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.UserName, "wrongpassword"))
         .BuildReadonlySession();
 
       bool response = await session.AuthenticateAsync();
@@ -117,7 +117,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetAuthenticationWithInvalidPassword()
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Login, "Password $#%^&^*"))
+        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.UserName, "Password $#%^&^*"))
         .BuildReadonlySession();
 
       bool response = await session.AuthenticateAsync();
@@ -151,7 +151,7 @@ namespace MobileSDKIntegrationTest
     {
       var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
       sessionConfig.SetInstanceUrl(testData.InstanceUrl);
-      sessionConfig.SetLogin(testData.Users.Admin.Login);
+      sessionConfig.SetLogin(testData.Users.Admin.UserName);
       sessionConfig.SetPassword("");
 
       var session = new ScApiSession(sessionConfig);
@@ -185,7 +185,7 @@ namespace MobileSDKIntegrationTest
     public void TestGetAuthenticationWithNullUrl()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => 
-        SessionConfig.NewAuthenticatedSessionConfig(null, testData.Users.Admin.Login, testData.Users.Admin.Password)
+        SessionConfig.NewAuthenticatedSessionConfig(null, testData.Users.Admin.UserName, testData.Users.Admin.Password)
       );
 
       Assert.IsTrue(exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required"));
@@ -195,7 +195,7 @@ namespace MobileSDKIntegrationTest
     public void TestGetAuthenticationWithEmptyUrl()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => 
-        SessionConfig.NewAuthenticatedSessionConfig("", testData.Users.Admin.Login, testData.Users.Admin.Password)
+        SessionConfig.NewAuthenticatedSessionConfig("", testData.Users.Admin.UserName, testData.Users.Admin.Password)
       );
 
       Assert.IsTrue(exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required"));

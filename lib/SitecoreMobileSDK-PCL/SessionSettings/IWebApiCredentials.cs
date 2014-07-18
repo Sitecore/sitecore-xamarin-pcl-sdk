@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK.SessionSettings
   {
     IWebApiCredentials CredentialsShallowCopy();
 
-    string Login
+    string UserName
     {
       get;
     }
