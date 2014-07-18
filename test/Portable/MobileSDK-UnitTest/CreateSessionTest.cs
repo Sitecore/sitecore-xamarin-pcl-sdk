@@ -4,7 +4,7 @@ namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
-
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
 

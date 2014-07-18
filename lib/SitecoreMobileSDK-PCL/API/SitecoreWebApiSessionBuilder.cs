@@ -1,9 +1,9 @@
-﻿
-namespace Sitecore.MobileSDK.Session
-{
-  using System;
 
-  public class SitecoreWebApiSessionBuilder
+namespace Sitecore.MobileSDK.API
+{
+    using Sitecore.MobileSDK.Session;
+
+    public class SitecoreWebApiSessionBuilder
   {
     private SitecoreWebApiSessionBuilder()
     {
