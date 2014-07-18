@@ -2,7 +2,9 @@
 
 namespace Sitecore.MobileSDK.Items.Fields
 {
-	public class ScField : IField
+    using Sitecore.MobileSDK.API.Fields;
+
+    public class ScField : IField
 	{
 		public string FieldId 	{ get; private set; }
 		public string Name 		{ get; private set; }

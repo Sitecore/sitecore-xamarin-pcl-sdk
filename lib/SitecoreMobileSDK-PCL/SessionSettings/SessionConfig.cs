@@ -4,8 +4,9 @@ namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
   using System.Diagnostics;
+  using Sitecore.MobileSDK.API;
 
-  public class SessionConfig : ISessionConfig, IWebApiCredentials
+    public class SessionConfig : ISessionConfig, IWebApiCredentials
   {
     #region Constructor
     public static SessionConfig NewAnonymousSessionConfig(string instanceUrl, string site = null, string itemWebApiVersion = "v1")

@@ -4,6 +4,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;

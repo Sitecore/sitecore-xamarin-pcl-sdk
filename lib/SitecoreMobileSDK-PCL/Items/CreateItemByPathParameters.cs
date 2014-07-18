@@ -4,6 +4,10 @@
 namespace Sitecore.MobileSDK
 {
   using System;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;

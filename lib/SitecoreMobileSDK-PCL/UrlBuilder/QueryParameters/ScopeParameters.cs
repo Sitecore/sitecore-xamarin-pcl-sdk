@@ -5,9 +5,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
   using System;
   using System.Collections;
   using System.Collections.Generic;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
 
-  public class ScopeParameters : IScopeParameters
+    public class ScopeParameters : IScopeParameters
   {
     #region Copy Constructor
     public ScopeParameters(IScopeParameters other = null)

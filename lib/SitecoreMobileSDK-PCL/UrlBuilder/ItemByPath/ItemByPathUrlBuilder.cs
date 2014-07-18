@@ -3,6 +3,7 @@
 namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 {
   using System;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;

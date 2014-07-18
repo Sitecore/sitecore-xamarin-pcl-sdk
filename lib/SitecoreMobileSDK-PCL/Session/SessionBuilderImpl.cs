@@ -1,7 +1,8 @@
 ﻿namespace Sitecore.MobileSDK.Session
 {
   using System;
-
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
 

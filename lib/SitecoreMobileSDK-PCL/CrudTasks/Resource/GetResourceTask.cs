@@ -10,6 +10,7 @@ namespace Sitecore.MobileSDK.CrudTasks
   using System.Threading.Tasks;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.PublicKey;

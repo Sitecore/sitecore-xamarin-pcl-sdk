@@ -5,11 +5,10 @@ namespace MobileSDKIntegrationTest
 {
   using System;
   using NUnit.Framework;
-
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.Exceptions;
-
   using MobileSDKIntegrationTest;
 
 

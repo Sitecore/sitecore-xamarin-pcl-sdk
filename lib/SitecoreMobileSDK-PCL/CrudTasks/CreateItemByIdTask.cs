@@ -1,7 +1,8 @@
 ﻿
 namespace Sitecore.MobileSDK.CrudTasks
 {
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+    using Sitecore.MobileSDK.API.Request;
+    using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using System.Net.Http;
   using Sitecore.MobileSDK.PublicKey;
 

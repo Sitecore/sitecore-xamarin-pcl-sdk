@@ -3,9 +3,9 @@
   using System;
   using System.Threading;
   using Newtonsoft.Json.Linq;
-  using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.API.Exceptions;
 
-  public class AuthenticateResponseParser
+    public class AuthenticateResponseParser
   {
     public static WebApiJsonStatusMessage ParseResponse(string response, CancellationToken token)
     {

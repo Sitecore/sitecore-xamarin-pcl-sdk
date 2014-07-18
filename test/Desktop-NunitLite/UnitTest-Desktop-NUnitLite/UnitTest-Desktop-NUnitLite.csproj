@@ -56,6 +56,12 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\AuthenticateParserTest.cs">
       <Link>AuthenticateParserTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\CreateSessionTest.cs">
+      <Link>CreateSessionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\DownloadMediaOptionsTest.cs">
+      <Link>DownloadMediaOptionsTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\FieldsParserTest.cs">
       <Link>FieldsParserTest.cs</Link>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ResourseUrlBuilderTest.cs">
       <Link>ResourseUrlBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\ThreadSafetyTest.cs">
+      <Link>ThreadSafetyTest.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
