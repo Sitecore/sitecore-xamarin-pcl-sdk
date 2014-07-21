@@ -18,7 +18,7 @@
     private string path;
     private string database;
 
-    private DeleteItemsByPathUrlBuilder builder;
+    private IDeleteItemsUrlBuilder<IDeleteItemsByPathRequest> builder;
 
     [SetUp]
     public void Setup()

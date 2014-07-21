@@ -5,7 +5,7 @@
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
-  public abstract class AbstractDeleteItemsUrlBuilder<TRequest>
+  public abstract class AbstractDeleteItemsUrlBuilder<TRequest> : IDeleteItemsUrlBuilder<TRequest>
     where TRequest : IBaseDeleteItemRequest
   {
     private SessionConfigUrlBuilder sessionConfigUrlBuilder;
@@ -23,7 +23,9 @@
 
     public abstract void ValidateSpecificPart(TRequest request);
 
-    public virtual string GetUrlForRequest(TRequest request)
+    public abstract string GetUrlForRequest(TRequest request);
+
+    public virtual string GetBaseUrlForRequest(TRequest request)
     {
       this.Validate(request);
       this.ValidateSpecificPart(request);

@@ -18,7 +18,7 @@
     private string id;
     private string database;
 
-    private DeleteItemsByIdUrlBuilder builder;
+    private IDeleteItemsUrlBuilder<IDeleteItemsByIdRequest> builder;
 
     [SetUp]
     public void Setup()
