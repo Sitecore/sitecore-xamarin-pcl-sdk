@@ -32,16 +32,56 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="API\Exceptions\LoadDataFromNetworkException.cs" />
+    <Compile Include="API\Exceptions\ParserException.cs" />
+    <Compile Include="API\Exceptions\ProcessUserRequestException.cs" />
+    <Compile Include="API\Exceptions\RsaHandshakeException.cs" />
+    <Compile Include="API\Exceptions\SitecoreMobileSdkException.cs" />
+    <Compile Include="API\Exceptions\WebApiJsonErrorException.cs" />
+    <Compile Include="API\Exceptions\WebApiJsonStatusMessage.cs" />
+    <Compile Include="API\Fields\IField.cs" />
+    <Compile Include="API\ISessionConfig.cs" />
+    <Compile Include="API\Items\IItemSource.cs" />
+    <Compile Include="API\Items\ISitecoreItem.cs" />
+    <Compile Include="API\Items\ScItemsResponse.cs" />
+    <Compile Include="API\ItemWebApiRequestBuilder.cs" />
+    <Compile Include="API\IWebApiCredentials.cs" />
+    <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
+    <Compile Include="API\Request\IBaseGetItemRequest.cs" />
+    <Compile Include="API\Request\IBaseRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
+    <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
+    <Compile Include="API\Request\ICreateItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IGetVersionedItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IReadItemsByIdRequest.cs" />
+    <Compile Include="API\Request\IReadItemsByPathRequest.cs" />
+    <Compile Include="API\Request\IReadItemsByQueryRequest.cs" />
+    <Compile Include="API\Request\IReadMediaItemRequest.cs" />
+    <Compile Include="API\Request\Parameters\IDownloadMediaOptions.cs" />
+    <Compile Include="API\Request\Parameters\IGetMediaItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\Parameters\IQueryParameters.cs" />
+    <Compile Include="API\Request\Parameters\IScopeParameters.cs" />
+    <Compile Include="API\Request\Parameters\PayloadType.cs" />
+    <Compile Include="API\Request\Parameters\ScopeType.cs" />
+    <Compile Include="API\Session\IAnonymousSessionBuilder.cs" />
+    <Compile Include="API\Session\IAuthenticatedSessionBuilder.cs" />
+    <Compile Include="API\Session\IBaseSessionBuilder.cs" />
+    <Compile Include="API\Session\IConnectionActions.cs" />
+    <Compile Include="API\Session\ICreateItemActions.cs" />
+    <Compile Include="API\Session\IMediaActions.cs" />
+    <Compile Include="API\Session\IReadItemActions.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiReadonlySession.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSession.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSessionActions.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSessionState.cs" />
+    <Compile Include="API\SitecoreWebApiSessionBuilder.cs" />
     <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
     <Compile Include="Authenticate\AuthenticateTasks.cs" />
-    <Compile Include="Items\IItemSource.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
     <Compile Include="ScApiSession.cs" />
-    <Compile Include="SessionSettings\ISessionConfig.cs" />
-    <Compile Include="SessionSettings\IWebApiCredentials.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />
     <Compile Include="PublicKeyX509Certificate.cs" />
     <Compile Include="SessionSettings\SessionConfigUrlBuilder.cs" />
@@ -49,10 +89,8 @@
     <Compile Include="TaskFlow\RestApiCallFlow.cs" />
     <Compile Include="PublicKey\GetPublicKeyTasks.cs" />
     <Compile Include="Items\ScItem.cs" />
-    <Compile Include="Items\ScItemsResponse.cs" />
     <Compile Include="Items\ScItemsParser.cs" />
     <Compile Include="Items\ItemSource.cs" />
-    <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
@@ -64,8 +102,6 @@
     <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
     <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
     <Compile Include="UrlBuilder\QueryParametersUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\QueryParameters\IQueryParameters.cs" />
-    <Compile Include="UrlBuilder\QueryParameters\PayloadType.cs" />
     <Compile Include="UrlBuilder\QueryParameters\QueryParameters.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
@@ -76,83 +112,47 @@
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
     <Compile Include="Items\ReadItemsByIdParameters.cs" />
-    <Compile Include="UrlBuilder\ItemByPath\IReadItemsByPathRequest.cs" />
-    <Compile Include="UrlBuilder\ItemByQuery\IReadItemsByQueryRequest.cs" />
-    <Compile Include="UrlBuilder\ItemById\IReadItemsByIdRequest.cs" />
     <Compile Include="UserRequest\UserRequestMerger.cs" />
     <Compile Include="UserRequest\ItemSourceFieldMerger.cs" />
     <Compile Include="Items\ItemSourcePOD.cs" />
     <Compile Include="UserRequest\SessionConfigMerger.cs" />
     <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
-    <Compile Include="ItemWebApiRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
     <Compile Include="UrlBuilder\ItemById\ItemIdValidator.cs" />
     <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\SitecoreQueryValidator.cs" />
-    <Compile Include="Exceptions\SitecoreMobileSdkException.cs" />
-    <Compile Include="Exceptions\WebApiJsonStatusMessage.cs" />
-    <Compile Include="Exceptions\WebApiJsonErrorException.cs" />
-    <Compile Include="Exceptions\RsaHandshakeException.cs" />
-    <Compile Include="Exceptions\LoadDataFromNetworkException.cs" />
-    <Compile Include="Exceptions\ParserException.cs" />
-    <Compile Include="Exceptions\ProcessUserRequestException.cs" />
     <Compile Include="Items\Fields\ScField.cs" />
-    <Compile Include="Items\Fields\IField.cs" />
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
-    <Compile Include="Items\ISitecoreItem.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\UserRequest\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\UserRequest\ReadMediaItemRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\IReadMediaItemRequest.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\MediaOptionsBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\IDownloadMediaOptions.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\DownloadMediaOptions.cs" />
     <Compile Include="SessionSettings\SessionConfigValidator.cs" />
     <Compile Include="Items\ReadMediaItemParameters.cs" />
     <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
     <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaPathValidator.cs" />
-    <Compile Include="UrlBuilder\QueryParameters\ScopeType.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
-    <Compile Include="UrlBuilder\CreateItem\IBaseCreateItemRequest.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemById\ICreateItemByIdRequest.cs" />
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemById\CreateItemByIdUrlBuilder.cs" />
-    <Compile Include="UserRequest\CreateRequest\ICreateItemRequestParametersBuilder.cs" />
     <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
     <Compile Include="Items\CreateItemByIdParameters.cs" />
     <Compile Include="Validators\DuplicateEntryValidator.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
-    <Compile Include="UserRequest\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\ICreateItemByPathRequest.cs" />
     <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
     <Compile Include="Items\CreateItemByPathParameters.cs" />
     <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\QueryParameters\IScopeParameters.cs" />
-    <Compile Include="UserRequest\IBaseRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
-    <Compile Include="Session\ISitecoreWebApiSession.cs" />
-    <Compile Include="Session\SitecoreWebApiSessionBuilder.cs" />
-    <Compile Include="Session\IBaseSessionBuilder.cs" />
-    <Compile Include="Session\IAnonymousSessionBuilder.cs" />
-    <Compile Include="Session\IAuthenticatedSessionBuilder.cs" />
     <Compile Include="Session\SessionBuilderImpl.cs" />
-    <Compile Include="Session\ISitecoreWebApiSessionState.cs" />
-    <Compile Include="Session\ISitecoreWebApiSessionActions.cs" />
-    <Compile Include="Session\IReadItemActions.cs" />
-    <Compile Include="Session\IMediaActions.cs" />
-    <Compile Include="Session\ICreateItemActions.cs" />
-    <Compile Include="Session\IConnectionActions.cs" />
-    <Compile Include="Session\ISitecoreWebApiReadonlySession.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -192,12 +192,12 @@
     </Reference>
   </ItemGroup>
   <Import Project="..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <ItemGroup>
-    <Folder Include="UrlBuilder\CreateItem\" />
-    <Folder Include="UrlBuilder\CreateItem\CreateItemById\" />
-    <Folder Include="UserRequest\CreateRequest\" />
-    <Folder Include="Validators\" />
-    <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
-    <Folder Include="Session\" />
-  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>
