@@ -15,6 +15,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       result.ItemWebApiVersion = this.ItemWebApiVersion;
       result.Site = this.Site;
       result.MediaLybraryRoot = this.MediaLybraryRoot;
+      result.DefaultMediaResourceExtension = this.DefaultMediaResourceExtension;
 
       return result;
     }
@@ -54,6 +55,12 @@ namespace Sitecore.MobileSDK.SessionSettings
     }
 
     public string MediaLybraryRoot { get; set; }
+
+    public string DefaultMediaResourceExtension
+    {
+      get;
+      set;
+    }
     #endregion ISessionConfig
 
 

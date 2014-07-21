@@ -23,5 +23,10 @@ namespace Sitecore.MobileSDK.API
   	{
   		get;
   	}
+
+    string DefaultMediaResourceExtension
+    {
+      get;
+    }
   }
 }

@@ -9,15 +9,23 @@ namespace Sitecore.MobileSDK.SessionSettings
   using Sitecore.MobileSDK.Validators;
 
 
-    public class SessionConfig : ISessionConfig, IWebApiCredentials
+  public class SessionConfig : ISessionConfig, IWebApiCredentials
   {
     #region Constructor
-    public static SessionConfig NewAnonymousSessionConfig(string instanceUrl, string site = null, string itemWebApiVersion = "v1")
+    public static SessionConfig NewAnonymousSessionConfig(
+      string instanceUrl, 
+      string site = null, 
+      string itemWebApiVersion = "v1")
     {
       return new SessionConfig(instanceUrl, null, null, site, itemWebApiVersion);
     }
 
-    public static SessionConfig NewAuthenticatedSessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
+    public static SessionConfig NewAuthenticatedSessionConfig(
+      string instanceUrl, 
+      string login, 
+      string password, 
+      string site = null, 
+      string itemWebApiVersion = "v1")
     {
       return new SessionConfig(instanceUrl, login, password, site, itemWebApiVersion);
     }
@@ -37,7 +45,11 @@ namespace Sitecore.MobileSDK.SessionSettings
     #region ICloneable
     public virtual SessionConfig ShallowCopy()
     {
-      return new SessionConfig(this.InstanceUrl, this.UserName, this.Password, this.Site, this.ItemWebApiVersion);
+      SessionConfig result = new SessionConfig(this.InstanceUrl, this.UserName, this.Password, this.Site, this.ItemWebApiVersion);
+      result.mediaLybraryRoot = this.mediaLybraryRoot;
+      result.DefaultMediaResourceExtension = this.DefaultMediaResourceExtension;
+
+      return result;
     }
 
     public virtual ISessionConfig SessionConfigShallowCopy()
@@ -89,14 +101,16 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     private void Validate()
     {
-      if (string.IsNullOrWhiteSpace(this.InstanceUrl))
-      {
-        throw new ArgumentNullException("SessionConfig.InstanceUrl is required");
-      }
-      else if (string.IsNullOrWhiteSpace(this.ItemWebApiVersion))
-      {
-        throw new ArgumentNullException("SessionConfig.ItemWebApiVersion is required");
-      }
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage
+      (
+        this.InstanceUrl,
+        "SessionConfig.InstanceUrl is required"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage
+      (
+        this.ItemWebApiVersion,
+        "SessionConfig.ItemWebApiVersion is required"
+      );
 
       bool hasLogin = !string.IsNullOrWhiteSpace(this.UserName);
       bool hasPassword = !string.IsNullOrWhiteSpace(this.Password);
@@ -125,6 +139,12 @@ namespace Sitecore.MobileSDK.SessionSettings
       { 
         this.mediaLybraryRoot = value;
       }
+    }
+
+    public string DefaultMediaResourceExtension
+    {
+      get;
+      private set;
     }
     #endregion Properties
 
