@@ -12,105 +12,105 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
   using Sitecore.MobileSDK.SessionSettings;
   using System.Collections.Generic;
 
-	using Sitecore.MobileSDK.Items;
-	using Sitecore.MobileSDK.UrlBuilder.Rest;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.Validators;
 
 
-	public class MediaItemUrlBuilder
-	{
+  public class MediaItemUrlBuilder
+  {
 
-		public MediaItemUrlBuilder(IRestServiceGrammar restGrammar, ISessionConfig sessionConfig, IItemSource itemSource)
-		{
-			this.itemSource = itemSource;
-			this.restGrammar = restGrammar;
-			this.sessionConfig = sessionConfig;
+    public MediaItemUrlBuilder(IRestServiceGrammar restGrammar, ISessionConfig sessionConfig, IItemSource itemSource)
+    {
+      this.itemSource = itemSource;
+      this.restGrammar = restGrammar;
+      this.sessionConfig = sessionConfig;
 
-			this.Validate();
-		}
+      this.Validate();
+    }
 
-		private void Validate()
-		{
-			if (null == this.itemSource)
-			{
-				throw new ArgumentNullException("[ResourceUrlBuilder.itemSource] Do not pass null");
-			}
-			else if (null == this.restGrammar)
-			{
-				throw new ArgumentNullException("[ResourceUrlBuilder.grammar] Do not pass null");
-			}
-			else if (null == this.sessionConfig)
-			{
-				throw new ArgumentNullException("[ResourceUrlBuilder.sessionConfig] Do not pass null");
-			}
-		}
+    private void Validate()
+    {
+      if (null == this.itemSource)
+      {
+        throw new ArgumentNullException("[ResourceUrlBuilder.itemSource] Do not pass null");
+      }
+      else if (null == this.restGrammar)
+      {
+        throw new ArgumentNullException("[ResourceUrlBuilder.grammar] Do not pass null");
+      }
+      else if (null == this.sessionConfig)
+      {
+        throw new ArgumentNullException("[ResourceUrlBuilder.sessionConfig] Do not pass null");
+      }
+    }
 
-//		https://test.host/~/media/1.png.ashx?w=640&h=480
+    //    https://test.host/~/media/1.png.ashx?w=640&h=480
     public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
-	{
-		MediaPathValidator.ValidateMediaPath (path);
+    {
+      MediaPathValidator.ValidateMediaPath (path);
 
-		string relativePath = path;
-		string result = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
+      string relativePath = path;
+      string result = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
 
-		string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
+      string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
 
-		bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.mediaHook);
-		bool isExtensionAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.ashxExtension);
+      bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.mediaHook);
+      bool isExtensionAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.ashxExtension);
 
-		if (isMediaHookAvailable)
-		{
-			result = result + this.restGrammar.PathComponentSeparator + Uri.EscapeUriString (relativePath);
+      if (isMediaHookAvailable)
+      {
+        result = result + this.restGrammar.PathComponentSeparator + Uri.EscapeUriString (relativePath);
 
-			if ( !isExtensionAvailable )
-			{
-				result = result + MediaItemUrlBuilder.ashxExtension;
-			}
-		}
-		else
-		{
-			result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
+        if ( !isExtensionAvailable )
+        {
+          result = result + MediaItemUrlBuilder.ashxExtension;
+        }
+      }
+      else
+      {
+        result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
 
-		string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot.ToLowerInvariant();
+        string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot.ToLowerInvariant();
 
-		int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
+        int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
 
-			bool isMediaRootAvailable = (rootStartIndex >= 0);
+        bool isMediaRootAvailable = (rootStartIndex >= 0);
 
-			if ( isMediaRootAvailable )
-			{
-				relativePath = path.Remove(rootStartIndex, this.sessionConfig.MediaLybraryRoot.Length);
-			}
+        if ( isMediaRootAvailable )
+        {
+          relativePath = path.Remove(rootStartIndex, this.sessionConfig.MediaLybraryRoot.Length);
+        }
 
 
-			bool isInvalidRelativePath = string.IsNullOrEmpty(relativePath);
-			if (isInvalidRelativePath)
-			{
-				throw new ArgumentException("ResourceUrlBuilder.BuildUrlStringForPath invalid path");
-			}
+        bool isInvalidRelativePath = string.IsNullOrEmpty(relativePath);
+        if (isInvalidRelativePath)
+        {
+          throw new ArgumentException("ResourceUrlBuilder.BuildUrlStringForPath invalid path");
+        }
 
-			relativePath = Uri.EscapeUriString (relativePath);
+        relativePath = Uri.EscapeUriString (relativePath);
 
-			result = result + relativePath + MediaItemUrlBuilder.ashxExtension;
-		}
-			
-		result = this.AppendUrlStringWithDownloadOptions (result, options);
+        result = result + relativePath + MediaItemUrlBuilder.ashxExtension;
+      }
 
-		return result;
-		}
+      result = this.AppendUrlStringWithDownloadOptions (result, options);
+
+      return result;
+    }
 
     private string AppendUrlStringWithDownloadOptions(string path, IDownloadMediaOptions options)
-		{
+    {
       string paramsString = "";
 
       if (!(null == options || options.IsEmpty))
-			{
+      {
         Dictionary<string, string> optionsDictionary = options.OptionsDictionary;
         foreach (var pair in optionsDictionary)
         {
           paramsString = this.AddOptionValueToPath (paramsString, pair.Key, pair.Value);
         }
-			}
+      }
 
       if (this.itemSource.Database != null)
       {
@@ -135,23 +135,23 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       }
 
       return path;
-		}
+    }
 
-		private string AddOptionValueToPath(string path, string key, string value)
-		{
-			return path += key + this.restGrammar.KeyValuePairSeparator + value + this.restGrammar.FieldSeparator;
-		}
-			
-		private const string mediaHook 		= "~/media";
-		private const string ashxExtension 	= ".ashx";
+    private string AddOptionValueToPath(string path, string key, string value)
+    {
+      return path += key + this.restGrammar.KeyValuePairSeparator + value + this.restGrammar.FieldSeparator;
+    }
 
-		private const string languageKey 	= "la";
-		private const string versionKey 	= "vs";
-		private const string databaseKey 	= "db";
+    private const string mediaHook    = "~/media";
+    private const string ashxExtension  = ".ashx";
 
-		private IItemSource 		itemSource;
-		private IRestServiceGrammar restGrammar;
-		private ISessionConfig 		sessionConfig;
-	}
+    private const string languageKey  = "la";
+    private const string versionKey   = "vs";
+    private const string databaseKey  = "db";
+
+    private IItemSource     itemSource;
+    private IRestServiceGrammar restGrammar;
+    private ISessionConfig    sessionConfig;
+  }
 }
 
