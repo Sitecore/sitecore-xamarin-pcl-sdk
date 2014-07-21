@@ -57,6 +57,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CryptorConstructionTest.cs">
       <Link>CryptorConstructionTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\DeleteItemsItemsTest.cs">
+      <Link>DeleteItemsItemsTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetFieldsTest.cs">
       <Link>GetFieldsTest.cs</Link>
     </Compile>
@@ -93,7 +96,7 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UrlAutocompleteTest.cs">
       <Link>UrlAutocompleteTest.cs</Link>
     </Compile>
-	 <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateItemsTest.cs">
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateItemsTest.cs">
       <Link>CreateItemsTest.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />

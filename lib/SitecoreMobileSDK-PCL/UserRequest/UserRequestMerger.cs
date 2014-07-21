@@ -3,6 +3,7 @@ namespace Sitecore.MobileSDK.UserRequest
 {
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
@@ -64,6 +65,30 @@ namespace Sitecore.MobileSDK.UserRequest
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps (userRequest.SessionSettings);
 
       return new CreateItemByPathParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, userRequest.CreateParameters, userRequest.ItemPath);
+    }
+
+    public IDeleteItemsByIdRequest FillDeleteItemByIdGaps(IDeleteItemsByIdRequest userRequest)
+    {
+      string databse = userRequest.Database;
+      if (string.IsNullOrEmpty(databse))
+      {
+        databse = this.ItemSourceMerger.DefaultSource.Database;
+      }
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionConfig);
+
+      return new DeleteItemByIdParameters(mergedSessionConfig, userRequest.ScopeParameters, databse, userRequest.ItemId);
+    }
+
+    public IDeleteItemsByPathRequest FillDeleteItemByPathGaps(IDeleteItemsByPathRequest userRequest)
+    {
+      string databse = userRequest.Database;
+      if (string.IsNullOrEmpty(databse))
+      {
+        databse = this.ItemSourceMerger.DefaultSource.Database;
+      }
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionConfig);
+
+      return new DeleteItemByPathParameters(mergedSessionConfig, userRequest.ScopeParameters, databse, userRequest.ItemPath);
     }
 
     public ItemSourceFieldMerger ItemSourceMerger { get; private set; }

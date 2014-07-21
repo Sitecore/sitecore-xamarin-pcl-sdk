@@ -2,6 +2,8 @@
 {
   public interface IDeleteItemsByIdRequest : IBaseDeleteItemRequest 
   {
+    IDeleteItemsByIdRequest DeepCopyDeleteItemRequest();
+
     string ItemId { get; }
   }
 }

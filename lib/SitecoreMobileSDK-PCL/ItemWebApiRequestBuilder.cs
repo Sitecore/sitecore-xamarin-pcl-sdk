@@ -1,7 +1,6 @@
 ﻿
 namespace Sitecore.MobileSDK
 {
-  using System;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
@@ -46,9 +45,14 @@ namespace Sitecore.MobileSDK
       return new CreateItemByPathRequestBuilder(itemPath);
     }
 
-    public static DeleteItemByIdRequestBuilder DeleteItemRequestWithId(string itemId)
+    public static IBaseDeleteRequestParametersBuilder<IDeleteItemsByIdRequest> DeleteItemRequestWithId(string itemId)
     {
       return new DeleteItemByIdRequestBuilder(itemId);
+    }
+
+    public static IBaseDeleteRequestParametersBuilder<IDeleteItemsByPathRequest> DeleteItemRequestWithPath(string itemPath)
+    {
+      return new DeleteItemByPathRequestBuilder(itemPath);
     }
   }
 }
