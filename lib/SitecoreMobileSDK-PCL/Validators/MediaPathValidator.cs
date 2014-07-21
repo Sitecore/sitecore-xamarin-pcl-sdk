@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK
 {
+  using System;
+
 	public class MediaPathValidator
 	{
 		public MediaPathValidator ()
@@ -12,7 +12,7 @@ namespace Sitecore.MobileSDK
 		{
 			if ( string.IsNullOrWhiteSpace(itemPath) )
 			{
-				throw new ArgumentNullException ("Media path cannot be null or empty");
+        throw new ArgumentException("Media path cannot be null or empty");
 			}
 			else if (!(itemPath.StartsWith("/") || itemPath.StartsWith("~")))
 			{

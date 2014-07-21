@@ -1,24 +1,25 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK.Validators
 {
-    public class ItemPathValidator
-    {
-        private ItemPathValidator ()
-        {
-        }
+  using System;
 
-        public static void ValidateItemPath(string itemPath)
-        {
-            if ( string.IsNullOrWhiteSpace(itemPath) )
-            {
-                throw new ArgumentNullException ("Item path cannot be null or empty");
-            }
-            else if (!itemPath.StartsWith("/"))
-            {
-                throw new ArgumentException("Item path should begin with '/'");
-            }
-        }
+  public class ItemPathValidator
+  {
+    private ItemPathValidator ()
+    {
     }
+
+    public static void ValidateItemPath(string itemPath)
+    {
+      if ( string.IsNullOrWhiteSpace(itemPath) )
+      {
+        throw new ArgumentException("Item path cannot be null or empty");
+      }
+      else if (!itemPath.StartsWith("/"))
+      {
+        throw new ArgumentException("Item path should begin with '/'");
+      }
+    }
+  }
 }
 
