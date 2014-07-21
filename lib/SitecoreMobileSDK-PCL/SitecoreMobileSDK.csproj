@@ -59,12 +59,15 @@
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByIdParameters.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByIdRequestBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByPathParameters.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByPathRequestBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByPathUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemTasks.cs" />
     <Compile Include="UrlBuilder\DeleteItem\IBaseDeleteItemRequest.cs" />
     <Compile Include="UrlBuilder\DeleteItem\IBaseDeleteRequestParametersBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsByIdRequest.cs" />
     <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsByPathRequest.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsUrlBuilder.cs" />
     <Compile Include="UrlBuilder\IBaseGetItemRequest.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />

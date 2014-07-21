@@ -13,7 +13,7 @@
 
     public override string GetUrlForRequest(IDeleteItemsByPathRequest request)
     {
-      var baseUrl = base.GetUrlForRequest(request);
+      var baseUrl = base.GetBaseUrlForRequest(request);
 
       string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
 

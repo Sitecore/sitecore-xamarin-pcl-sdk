@@ -13,7 +13,7 @@
 
     public override string GetUrlForRequest(IDeleteItemsByIdRequest request)
     {
-      var baseUrl = base.GetUrlForRequest(request);
+      var baseUrl = base.GetBaseUrlForRequest(request);
       
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
 
