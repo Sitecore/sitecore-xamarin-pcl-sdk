@@ -65,7 +65,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
 
     #region Comparator
-    public override bool Equals (object obj)
+    public override bool Equals(object obj)
     {
       if (object.ReferenceEquals (this, obj))
       {
