@@ -14,7 +14,8 @@
       {
         throw new ArgumentException("AbstractBaseDeleteRequestBuilder.Database : The input cannot be null or empty");
       }
-      else if (!string.IsNullOrEmpty(this.database))
+      
+      if (!string.IsNullOrEmpty(this.database))
       {
         throw new InvalidOperationException("AbstractBaseDeleteRequestBuilder.Database : The database cannot be assigned twice");
       }

@@ -91,6 +91,18 @@ namespace Sitecore.MobileSDK.UserRequest
       return new DeleteItemByPathParameters(mergedSessionConfig, userRequest.ScopeParameters, databse, userRequest.ItemPath);
     }
 
+    public IDeleteItemsByQueryRequest FillDeleteItemByQueryGaps(IDeleteItemsByQueryRequest userRequest)
+    {
+      string databse = userRequest.Database;
+      if (string.IsNullOrEmpty(databse))
+      {
+        databse = this.ItemSourceMerger.DefaultSource.Database;
+      }
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionConfig);
+
+      return new DeleteItemByQueryParameters(mergedSessionConfig, userRequest.ScopeParameters, databse, userRequest.SitecoreQuery);
+    }
+
     public ItemSourceFieldMerger ItemSourceMerger { get; private set; }
     public SessionConfigMerger   SessionConfigMerger { get; private set; }
   }

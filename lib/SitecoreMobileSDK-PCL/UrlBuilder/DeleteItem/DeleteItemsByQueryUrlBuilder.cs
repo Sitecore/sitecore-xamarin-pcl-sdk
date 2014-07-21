@@ -10,7 +10,6 @@
     {
     }
 
-
     public override void ValidateSpecificPart(IDeleteItemsByQueryRequest request)
     {
       SitecoreQueryValidator.ValidateSitecoreQuery(request.SitecoreQuery);

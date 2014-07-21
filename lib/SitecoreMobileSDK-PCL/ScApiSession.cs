@@ -207,6 +207,7 @@ namespace Sitecore.MobileSDK
     #endregion CreateItems
 
     #region DeleteItems
+
     public async Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       IDeleteItemsByIdRequest requestCopy = request.DeepCopyDeleteItemRequest();
@@ -234,6 +235,21 @@ namespace Sitecore.MobileSDK
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
+
+    public async Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IDeleteItemsByQueryRequest requestCopy = request.DeepCopyDeleteItemRequest();
+
+      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+
+      IDeleteItemsByQueryRequest autocompletedRequest = this.requestMerger.FillDeleteItemByQueryGaps(requestCopy);
+
+      var taskFlow = new DeleteItemTasks<IDeleteItemsByQueryRequest>(new DeleteItemsByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), 
+        this.httpClient, cryptor);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
     #endregion DeleteItems
 
 

@@ -61,6 +61,7 @@
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByPathParameters.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByPathRequestBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByQueryParameters.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByQueryRequestBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByPathUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemsByQueryUrlBuilder.cs" />
