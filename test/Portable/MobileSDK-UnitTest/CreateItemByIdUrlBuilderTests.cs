@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+﻿
 
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
+  using System.Collections.Generic;
   using NUnit.Framework;
+
+  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
@@ -11,7 +18,8 @@ namespace Sitecore.MobileSdkUnitTest
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK;
+
+
 
   [TestFixture]
   public class CreateItemByIdUrlBuilderTests
