@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.Validators
 {
   using System;
 

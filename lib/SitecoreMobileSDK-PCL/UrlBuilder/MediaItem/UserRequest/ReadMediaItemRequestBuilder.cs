@@ -8,6 +8,7 @@ namespace Sitecore.MobileSDK
 	using Sitecore.MobileSDK.Items;
 	using Sitecore.MobileSDK.UrlBuilder;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.Validators;
 
   public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest>
 	{
