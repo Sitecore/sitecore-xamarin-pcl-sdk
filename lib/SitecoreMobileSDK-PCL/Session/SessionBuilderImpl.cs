@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSDK.Session
+﻿using Sitecore.MobileSDK.Validators;
+
+namespace Sitecore.MobileSDK.Session
 {
   using System;
   using Sitecore.MobileSDK.API;
@@ -70,14 +72,14 @@
     #region IAnonymousSessionBuilder
     public IBaseSessionBuilder Site(string site)
     {
-      if (string.IsNullOrWhiteSpace(site))
-      {
-        throw new ArgumentException("[SessionBuilder.WebApiVersion] the value cannot be null or empty");
-      }
-      if (null != this.site)
-      {
-        throw new InvalidOperationException("[IBaseSessionBuilder.Site] the property cannot be assigned twice");
-      }
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.site,
+        "[IBaseSessionBuilder.Site] the property cannot be assigned twice"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        site, 
+        "[SessionBuilder.Site] the value cannot be null or empty"
+      );
 
       this.site = site;
       return this;
@@ -85,14 +87,15 @@
 
     public IBaseSessionBuilder WebApiVersion(string webApiVersion)
     {
-      if (string.IsNullOrWhiteSpace(webApiVersion))
-      {
-        throw new ArgumentException("[SessionBuilder.WebApiVersion] the value cannot be null or empty");
-      }
-      if (null != this.webApiVersion)
-      {
-        throw new InvalidOperationException("[IBaseSessionBuilder.WebApiVersion] the property cannot be assigned twice");
-      }
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.webApiVersion,
+        "[IBaseSessionBuilder.WebApiVersion] the property cannot be assigned twice"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        webApiVersion, 
+        "[SessionBuilder.WebApiVersion] the value cannot be null or empty"
+      );
+
 
       this.webApiVersion = webApiVersion;
       return this;
@@ -100,14 +103,15 @@
 
     public IBaseSessionBuilder DefaultDatabase(string defaultDatabase)
     {
-      if (string.IsNullOrWhiteSpace(defaultDatabase))
-      {
-        throw new ArgumentException("[SessionBuilder.DefaultDatabase] the value cannot be null or empty");
-      }
-      if (null != this.itemSourceAccumulator.Database)
-      {
-        throw new InvalidOperationException("[IBaseSessionBuilder.DefaultDatabase] the property cannot be assigned twice");
-      }
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.itemSourceAccumulator.Database,
+        "[IBaseSessionBuilder.DefaultDatabase] the property cannot be assigned twice"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        defaultDatabase, 
+        "[SessionBuilder.DefaultDatabase] the value cannot be null or empty"
+      );
+
 
       this.itemSourceAccumulator = 
         new ItemSourcePOD(
@@ -120,10 +124,15 @@
 
     public IBaseSessionBuilder DefaultLanguage(string defaultLanguage)
     {
-      if (null != this.itemSourceAccumulator.Language)
-      {
-        throw new InvalidOperationException("[IBaseSessionBuilder.DefauldLanguage] the property cannot be assigned twice");
-      }
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.itemSourceAccumulator.Language,
+        "[IBaseSessionBuilder.DefaultLanguage] the property cannot be assigned twice"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        defaultLanguage, 
+        "[SessionBuilder.DefaultLanguage] the value cannot be null or empty"
+      );
+
 
       this.itemSourceAccumulator = 
         new ItemSourcePOD(
@@ -136,10 +145,11 @@
 
     public IBaseSessionBuilder MediaLibraryRoot(string mediaLibraryRootItem)
     {
-      if (null != this.mediaRoot)
-      {
-        throw new InvalidOperationException("[IBaseSessionBuilder.MediaLibraryRoot] the property cannot be assigned twice");
-      }
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.mediaRoot,
+        "[IBaseSessionBuilder.MediaLibraryRoot] the property cannot be assigned twice"
+      );
+      MediaPathValidator.ValidateMediaRoot(mediaLibraryRootItem); 
 
       this.mediaRoot = mediaLibraryRootItem;
       return this;
@@ -147,10 +157,14 @@
 
     public IBaseSessionBuilder DefaultMediaResourceExtension(string defaultExtension)
     {
-      if (null != this.mediaExtension)
-      {
-        throw new InvalidOperationException("[IBaseSessionBuilder.DefaultMediaResourceExtension] the property cannot be assigned twice");
-      }
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.mediaExtension,
+        "[IBaseSessionBuilder.DefaultMediaResourceExtension] the property cannot be assigned twice"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        defaultExtension, 
+        "[SessionBuilder.DefaultMediaResourceExtension] the value cannot be null or empty"
+      );
 
       this.mediaExtension = defaultExtension;
       return this;
