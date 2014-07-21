@@ -4,7 +4,10 @@ namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
   using System.Diagnostics;
+
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.Validators;
+
 
     public class SessionConfig : ISessionConfig, IWebApiCredentials
   {

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK.SessionSettings
+﻿namespace Sitecore.MobileSDK.Validators
 {
+  using System;
+
   public class SessionConfigValidator
   {
     private SessionConfigValidator()

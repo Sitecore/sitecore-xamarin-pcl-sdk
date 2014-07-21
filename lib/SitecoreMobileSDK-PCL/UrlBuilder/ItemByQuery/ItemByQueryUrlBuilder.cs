@@ -4,12 +4,14 @@
 namespace Sitecore.MobileSDK.UrlBuilder.ItemByQuery
 {
     using System;
+
     using Sitecore.MobileSDK.API.Request;
     using Sitecore.MobileSDK.Utils;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.Validators;
 
 
     public class ItemByQueryUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByQueryRequest>

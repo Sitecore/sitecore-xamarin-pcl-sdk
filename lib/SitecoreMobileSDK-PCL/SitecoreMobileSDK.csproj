@@ -120,9 +120,6 @@
     <Compile Include="UserRequest\ReadItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\ItemById\ItemIdValidator.cs" />
-    <Compile Include="UrlBuilder\ItemByPath\ItemPathValidator.cs" />
-    <Compile Include="UrlBuilder\ItemByQuery\SitecoreQueryValidator.cs" />
     <Compile Include="Items\Fields\ScField.cs" />
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
@@ -130,11 +127,9 @@
     <Compile Include="UrlBuilder\MediaItem\UserRequest\ReadMediaItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\MediaOptionsBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\DownloadMediaOptions.cs" />
-    <Compile Include="SessionSettings\SessionConfigValidator.cs" />
     <Compile Include="Items\ReadMediaItemParameters.cs" />
     <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
     <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
-    <Compile Include="UrlBuilder\MediaItem\MediaPathValidator.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
@@ -153,6 +148,12 @@
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
     <Compile Include="Session\SessionBuilderImpl.cs" />
+    <Compile Include="Validators\ItemIdValidator.cs" />
+    <Compile Include="Validators\ItemPathValidator.cs" />
+    <Compile Include="Validators\SitecoreQueryValidator.cs" />
+    <Compile Include="Validators\MediaPathValidator.cs" />
+    <Compile Include="Validators\SessionConfigValidator.cs" />
+    <Compile Include="Validators\WebApiParameterValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

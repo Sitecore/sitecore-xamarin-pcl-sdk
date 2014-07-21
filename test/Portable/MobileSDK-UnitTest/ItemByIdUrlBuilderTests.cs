@@ -154,7 +154,7 @@ namespace Sitecore.MobileSdkUnitTest
 
       TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
 
-      Assert.Throws<ArgumentNullException>(action);
+      Assert.Throws<ArgumentException>(action);
     }
 
     [Test]

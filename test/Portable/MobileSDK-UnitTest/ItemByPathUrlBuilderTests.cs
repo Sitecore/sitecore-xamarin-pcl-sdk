@@ -103,7 +103,7 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestBuildWithoutPayloadCausesArgumentNullException()
+    public void TestBuildWithoutPayloadIsAllowed()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
       mutableParameters.ItemSource = ItemSource.DefaultSource ();
@@ -158,7 +158,7 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestBuildWithEmptyPathCausesArgumentNullException()
+    public void TestBuildWithEmptyPathCausesArgumentException()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
       mutableParameters.ItemSource = ItemSource.DefaultSource ();
@@ -169,12 +169,12 @@ namespace Sitecore.MobileSdkUnitTest
       IReadItemsByPathRequest request = mutableParameters;
 
       TestDelegate action = () => this.builder.GetUrlForRequest(request);
-      Assert.Throws<ArgumentNullException>(action);
+      Assert.Throws<ArgumentException>(action);
     }
 
 
     [Test]
-    public void TestBuildWithWhitespacePathCausesArgumentNullException()
+    public void TestBuildWithWhitespacePathCausesArgumentException()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
       mutableParameters.ItemSource = ItemSource.DefaultSource ();
@@ -186,7 +186,7 @@ namespace Sitecore.MobileSdkUnitTest
       IReadItemsByPathRequest request = mutableParameters;
 
       TestDelegate action = () => this.builder.GetUrlForRequest(request);
-      Assert.Throws<ArgumentNullException>(action);
+      Assert.Throws<ArgumentException>(action);
     }
 
 
