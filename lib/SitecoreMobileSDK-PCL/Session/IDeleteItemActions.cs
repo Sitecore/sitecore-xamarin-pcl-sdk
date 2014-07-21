@@ -1,8 +1,9 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
+﻿namespace Sitecore.MobileSDK.Session
 {
   using System.Threading;
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Items.Delete;
 
   public interface IDeleteItemActions
   {

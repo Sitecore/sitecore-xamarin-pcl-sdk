@@ -2,6 +2,7 @@
 {
   using System;
   using NUnit.Framework;
+  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
@@ -29,7 +30,7 @@
       this.path = "/sitecore/content/Home/Android/Folder for deleting/1";
       this.database = "master";
 
-      this.builder = new DeleteItemsByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      this.builder = new DeleteItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
     }
 
     [TearDown]

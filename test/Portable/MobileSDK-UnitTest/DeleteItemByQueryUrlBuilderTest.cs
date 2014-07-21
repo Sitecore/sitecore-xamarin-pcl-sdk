@@ -2,6 +2,7 @@
 {
   using System;
   using NUnit.Framework;
+  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
@@ -32,7 +33,7 @@
       this.fastQuery = "fast:/sitecore/content/Home/Products/*[@@name = 'Hammer']";
       this.database = "master";
 
-      this.builder = new DeleteItemsByQueryUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      this.builder = new DeleteItemByQueryUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
     }
 
     [TearDown]

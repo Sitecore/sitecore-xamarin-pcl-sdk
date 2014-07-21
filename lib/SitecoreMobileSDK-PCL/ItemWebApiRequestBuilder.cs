@@ -1,6 +1,7 @@
 ﻿
 namespace Sitecore.MobileSDK
 {
+  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
@@ -8,6 +9,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 
   public class ItemWebApiRequestBuilder
   {
@@ -45,17 +47,17 @@ namespace Sitecore.MobileSDK
       return new CreateItemByPathRequestBuilder(itemPath);
     }
 
-    public static IBaseDeleteRequestParametersBuilder<IDeleteItemsByIdRequest> DeleteItemRequestWithId(string itemId)
+    public static IDeleteItemRequestBuilder<IDeleteItemsByIdRequest> DeleteItemRequestWithId(string itemId)
     {
       return new DeleteItemByIdRequestBuilder(itemId);
     }
 
-    public static IBaseDeleteRequestParametersBuilder<IDeleteItemsByPathRequest> DeleteItemRequestWithPath(string itemPath)
+    public static IDeleteItemRequestBuilder<IDeleteItemsByPathRequest> DeleteItemRequestWithPath(string itemPath)
     {
       return new DeleteItemItemByPathRequestBuilder(itemPath);
     }
 
-    public static IBaseDeleteRequestParametersBuilder<IDeleteItemsByQueryRequest> DeleteItemRequestWithSitecoreQuery(string sitecoreQuery)
+    public static IDeleteItemRequestBuilder<IDeleteItemsByQueryRequest> DeleteItemRequestWithSitecoreQuery(string sitecoreQuery)
     {
       return new DeleteItemItemByQueryRequestBuilder(sitecoreQuery);
     }

@@ -1,30 +1,30 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
+﻿namespace Sitecore.MobileSDK.Items.Delete
 {
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  public class DeleteItemByQueryParameters : IDeleteItemsByQueryRequest
+  public class DeleteItemByPathParameters : IDeleteItemsByPathRequest
   {
-    public DeleteItemByQueryParameters(ISessionConfig sessionConfig, IScopeParameters scopeParameters,
-      string database, string sitecoreQuery)
+    public DeleteItemByPathParameters(ISessionConfig sessionConfig, IScopeParameters scopeParameters,
+      string database, string itemPath)
     {
       this.SessionConfig = sessionConfig;
       this.ScopeParameters = scopeParameters;
       this.Database = database;
-      this.SitecoreQuery = sitecoreQuery;
+      this.ItemPath = itemPath;
     }
 
     public ISessionConfig SessionConfig { get; private set; }
     public IScopeParameters ScopeParameters { get; private set; }
     public string Database { get; private set; }
-    public string SitecoreQuery { get; private set; }
+    public string ItemPath { get; private set; }
 
-    public IDeleteItemsByQueryRequest DeepCopyDeleteItemRequest()
+    public IDeleteItemsByPathRequest DeepCopyDeleteItemRequest()
     {
       ISessionConfig sessionConfig = null;
       IScopeParameters scopeParameters = null;
       string database = null;
-      string query = null;
+      string itemPath = null;
 
       if (null != this.SessionConfig)
       {
@@ -41,12 +41,12 @@
         database = this.Database;
       }
 
-      if (null != this.SitecoreQuery)
+      if (null != this.ItemPath)
       {
-        query = this.SitecoreQuery;
+        itemPath = this.ItemPath;
       }
 
-      return new DeleteItemByQueryParameters(sessionConfig, scopeParameters, database, query);
+      return new DeleteItemByPathParameters(sessionConfig, scopeParameters, database, itemPath);
     }
   }
 }

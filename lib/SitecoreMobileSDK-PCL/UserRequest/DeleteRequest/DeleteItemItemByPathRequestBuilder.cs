@@ -1,5 +1,8 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
+﻿namespace Sitecore.MobileSDK.UserRequest.DeleteRequest
 {
+  using Sitecore.MobileSDK.Items.Delete;
+  using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
+
   public class DeleteItemItemByPathRequestBuilder : AbstractDeleteItemRequestBuilder<IDeleteItemsByPathRequest>
   {
     private string itemPath;

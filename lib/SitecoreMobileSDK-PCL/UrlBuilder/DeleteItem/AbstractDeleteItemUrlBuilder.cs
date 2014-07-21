@@ -1,6 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
 {
   using System;
+  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;

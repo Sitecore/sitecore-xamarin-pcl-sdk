@@ -4,8 +4,9 @@
   using System.Collections.Generic;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 
-  public abstract class AbstractDeleteItemRequestBuilder<T> : IBaseDeleteRequestParametersBuilder<T>
+  public abstract class AbstractDeleteItemRequestBuilder<T> : IDeleteItemRequestBuilder<T>
     where T : class
   {
     protected string database;
@@ -14,7 +15,7 @@
 
     public abstract T Build();
 
-    public IBaseDeleteRequestParametersBuilder<T> Database(string sitecoreDatabase)
+    public IDeleteItemRequestBuilder<T> Database(string sitecoreDatabase)
     {
       if (string.IsNullOrWhiteSpace(sitecoreDatabase))
       {
@@ -32,7 +33,7 @@
       return this;
     }
 
-    public IBaseDeleteRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    public IDeleteItemRequestBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
       var scopeParams = new ScopeParameters(this.scopeParameters);
 
@@ -45,7 +46,7 @@
       return this;
     }
 
-    public IBaseDeleteRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
+    public IDeleteItemRequestBuilder<T> AddScope(params ScopeType[] scope)
     {
       var castedScope = (ICollection<ScopeType>)scope;
       return this.AddScope(castedScope);

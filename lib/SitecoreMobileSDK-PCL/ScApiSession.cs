@@ -6,6 +6,7 @@ namespace Sitecore.MobileSDK
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
+  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
 

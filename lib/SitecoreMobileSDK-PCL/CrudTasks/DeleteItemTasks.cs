@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
+﻿namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
   using System.Diagnostics;
@@ -6,8 +6,10 @@
   using System.Threading;
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.TaskFlow;
+  using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
 
   class DeleteItemTasks<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScDeleteItemsResponse>
     where T : class, IBaseDeleteItemRequest

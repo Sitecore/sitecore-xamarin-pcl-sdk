@@ -2,6 +2,7 @@
 {
   using System;
   using NUnit.Framework;
+  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
@@ -29,7 +30,7 @@
       this.id = "{B0ED4777-1F5D-478D-AF47-145CCA9E4311}";
       this.database = "master";
 
-      this.builder = new DeleteItemsByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      this.builder = new DeleteItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
     }
 
     [TearDown]
