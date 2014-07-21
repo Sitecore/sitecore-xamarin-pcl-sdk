@@ -65,7 +65,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestNullPathException()
     {
       TestDelegate action = () => builder.BuildUrlStringForPath(null, null);
-      var exception = Assert.Throws<ArgumentNullException>(action);
+      var exception = Assert.Throws<ArgumentException>(action);
       Assert.True(exception.Message.Contains("Media path cannot be null or empty"));
     }
 
