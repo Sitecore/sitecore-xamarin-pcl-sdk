@@ -55,12 +55,16 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
       string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
 
-      bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.mediaHook);
-      bool isExtensionAvailable = lowerCasePathForComparisonNeeds.Contains (MediaItemUrlBuilder.ashxExtension);
+      bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains(MediaItemUrlBuilder.mediaHook);
+
+      int dotPosition = path.LastIndexOf(".");
+      bool isExtensionUnavailable = ( -1 == dotPosition );
+      bool isExtensionAvailable = !isExtensionUnavailable;
+//        lowerCasePathForComparisonNeeds.Contains(MediaItemUrlBuilder.ashxExtension);
 
       if (isMediaHookAvailable)
       {
-        result = result + this.restGrammar.PathComponentSeparator + Uri.EscapeUriString (relativePath);
+        result = result + this.restGrammar.PathComponentSeparator + Uri.EscapeUriString(relativePath);
 
         if ( !isExtensionAvailable )
         {
@@ -149,9 +153,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     private const string versionKey   = "vs";
     private const string databaseKey  = "db";
 
-    private IItemSource     itemSource;
+    private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;
-    private ISessionConfig    sessionConfig;
+    private ISessionConfig sessionConfig;
   }
 }
 
