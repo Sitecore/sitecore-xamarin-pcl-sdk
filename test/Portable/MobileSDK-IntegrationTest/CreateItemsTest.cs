@@ -245,7 +245,26 @@
       this.GetAndCheckItem(expectedItem, resultItem);
       //this.RemoveItem(resultItem);
     }
+     
     */
+
+    [Test]
+    public async void TestCreateItemByPathFromBranch()
+    {
+      TestEnvironment.Item expectedItem = this.CreateTestItem("Multiple item brunch");
+
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .Database("master")
+        .ItemTemplate("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
+        .Build();
+
+      var createResponse = await session.CreateItemAsync(request);
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+
+      this.GetAndCheckItem(expectedItem, resultItem);
+      //this.RemoveItem(resultItem);
+    }
+
     [Test]
     public void TestCreateItemByIdAndGetDuplicateFields()
     {
@@ -459,6 +478,28 @@
          .ItemTemplate("  	")
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByPathWithTwoTemplates()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+         .ItemName("Item with empty template")
+         .ItemTemplate("template1")
+         .ItemTemplate("template2")
+         .Build());
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be set twice", exception.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByIdWithTwoNames()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+         .ItemName("Item name 1")
+         .ItemName("Item name 2")
+         .ItemTemplate("template")
+         .Build());
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemName : The input cannot be set twice", exception.Message);
     }
 
     [Test]

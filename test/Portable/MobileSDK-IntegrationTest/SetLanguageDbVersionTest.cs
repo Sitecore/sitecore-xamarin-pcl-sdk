@@ -371,59 +371,31 @@
     }
 
     [Test]
-    public async void TestGetItemWithEmptyLanguageInItemSource()
+    public  void TestCreateSessionWithEmptyLanguage()
     {
       const string Db = "master";
       const string Language = "";
-      const string Version = "1";
 
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(this.testData.Users.Admin)
-          .DefaultDatabase("master")
-        //.DefaultLanguage(""); // throws exception
-          .BuildReadonlySession();
-
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
-        .Payload(PayloadType.Content)
-        .Version("1")
-        .Build();
-
-
-
-      var response = await session.ReadItemAsync(request);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-
-      var expectedSource = new ItemSource(Db, "en", Version);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("English version 1 master", resultItem.FieldWithName("Title").RawValue);
+      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .DefaultDatabase(Db)
+        .DefaultLanguage(Language) // ALR: should throw exception
+        .BuildReadonlySession());
+      Assert.AreEqual("SitecoreWebApiSessionBuilder.Language : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
-    public async void TestGetItemWithEmptyVersionInItemSource()
+    public void TestCreateSessionWithNullDatabase()
     {
-      const string Db = "master";
-      const string Language = "da";
-      const string Version = "";
+      const string Db = null;
+      const string Language = "en";
 
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      Assert.AreEqual(Db, resultItem.Source.Database);
-      Assert.AreEqual(Language, resultItem.Source.Language);
-      var expectedSource = new ItemSource(Db, Language, "2");
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("Danish version 2 master", resultItem.FieldWithName("Title").RawValue);
+      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .DefaultDatabase(Db)   // ALR: should throw exception
+        .DefaultLanguage(Language) 
+        .BuildReadonlySession());
+      Assert.AreEqual("SitecoreWebApiSessionBuilder.Database : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
