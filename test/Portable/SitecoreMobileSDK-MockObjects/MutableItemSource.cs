@@ -2,6 +2,7 @@
 namespace SitecoreMobileSDKMockObjects
 {
   using System;
+  using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items;
 
   public class MutableItemSource : ItemSource

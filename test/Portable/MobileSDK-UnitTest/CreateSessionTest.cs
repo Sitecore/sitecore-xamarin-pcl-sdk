@@ -4,8 +4,8 @@ namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
-
-  using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.SessionSettings;
 
 
@@ -14,6 +14,7 @@ namespace Sitecore.MobileSdkUnitTest
   {
     private IWebApiCredentials adminCredentials = new WebApiCredentialsPOD("admin", "b");
 
+    #region Explicit Construction
     [Test]
     public void TestSessionConfigForAuthenticatedSession()
     {
@@ -21,7 +22,7 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(conf);
 
       Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.AreEqual("root", conf.Login);
+      Assert.AreEqual("root", conf.UserName);
       Assert.AreEqual("pass", conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
@@ -34,7 +35,7 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(conf);
 
       Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Login);
+      Assert.IsNull(conf.UserName);
       Assert.IsNull(conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
@@ -48,7 +49,7 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(conf);
 
       Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Login);
+      Assert.IsNull(conf.UserName);
       Assert.AreEqual("pass", conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
@@ -69,12 +70,14 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(conf);
 
       Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Login);
+      Assert.IsNull(conf.UserName);
       Assert.IsNull(conf.Password);
       Assert.AreEqual("/sitecore/shell", conf.Site);
       Assert.AreEqual("v1", conf.ItemWebApiVersion);
     }
+    #endregion Explicit Construction
 
+    #region Builder Interface
     [Test]
     public void TestAnonymousSessionShouldBeCreatedByTheBuilder()
     {
@@ -115,7 +118,9 @@ namespace Sitecore.MobileSdkUnitTest
       var roSession = builder.BuildReadonlySession();
       Assert.IsNotNull(roSession);
     }
+    #endregion Builder Interface
 
+    #region Write Once
     [Test]
     public void TestWebApiVersionIsWriteOnce()
     {
@@ -219,6 +224,101 @@ namespace Sitecore.MobileSdkUnitTest
         .DefaultMediaResourceExtension("jpg")
       );
     }
+    #endregion Write Once
+
+    #region Validate Null
+    [Test]
+    public void TestWebApiVersionThrowsExceptionForNullInput()
+    {
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .WebApiVersion(null)
+      );
+
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .WebApiVersion(null)
+      );
+    }
+
+    [Test]
+    public void TestDatabaseThrowsExceptionForNullInput()
+    {
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefaultDatabase(null)
+      );
+
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefaultDatabase(null)
+      );
+    }
+
+    [Test]
+    public void TestLanguageThrowsExceptionForNullInput()
+    {
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefaultLanguage(null)
+      );
+
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefaultLanguage(null)
+      );
+    }
+
+    [Test]
+    public void TestSiteThrowsExceptionForNullInput()
+    {
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .Site(null)
+      );
+
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .Site(null)
+      );
+    }
+
+
+    [Test]
+    public void TestMediaThrowsExceptionForNullInput()
+    {
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .MediaLibraryRoot(null)
+      );
+
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .MediaLibraryRoot(null)
+      );
+    }
+
+
+    [Test]
+    public void TestMediaExtThrowsExceptionForNullInput()
+    {
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .DefaultMediaResourceExtension(null)
+      );
+
+      Assert.Throws<ArgumentException>( ()=>
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .DefaultMediaResourceExtension(null)
+      );
+    }
+    #endregion Validate Null
   }
 }
 

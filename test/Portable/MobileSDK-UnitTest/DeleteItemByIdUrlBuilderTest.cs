@@ -2,6 +2,7 @@
 {
   using System;
   using NUnit.Framework;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
@@ -76,7 +77,7 @@
         this.builder.GetUrlForRequest(parameters);
       };
 
-      Assert.Throws<ArgumentNullException>(action);
+      Assert.Throws<ArgumentException>(action);
     }
 
     [Test]

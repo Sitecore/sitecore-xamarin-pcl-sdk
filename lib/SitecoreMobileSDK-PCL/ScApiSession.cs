@@ -6,13 +6,15 @@ namespace Sitecore.MobileSDK
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.Items.Delete;
-  using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.API.Exceptions;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.SessionSettings;
 
   using Sitecore.MobileSDK.Authenticate;
-  using Sitecore.MobileSDK.Exceptions;
-
   using Sitecore.MobileSDK.CrudTasks;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;
@@ -121,7 +123,7 @@ namespace Sitecore.MobileSDK
       {
         // TODO : flow should be responsible for caching. Do not hard code here
         this.publicCertifiacte = await this.GetPublicKeyAsync(cancelToken);
-        return new AuthenticedSessionCryptor(this.sessionConfig.Login, this.sessionConfig.Password, this.publicCertifiacte);
+        return new AuthenticedSessionCryptor(this.sessionConfig.UserName, this.sessionConfig.Password, this.publicCertifiacte);
       }
     }
 

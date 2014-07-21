@@ -1,7 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.UserRequest.DeleteRequest
 {
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public interface IDeleteItemRequestBuilder<T>
     where T : class

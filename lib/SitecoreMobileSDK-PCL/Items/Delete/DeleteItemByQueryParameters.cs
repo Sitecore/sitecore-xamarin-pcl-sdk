@@ -1,7 +1,8 @@
 ﻿namespace Sitecore.MobileSDK.Items.Delete
 {
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public class DeleteItemByQueryParameters : IDeleteItemsByQueryRequest
   {

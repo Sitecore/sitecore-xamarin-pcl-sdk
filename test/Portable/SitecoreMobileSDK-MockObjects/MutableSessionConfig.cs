@@ -16,7 +16,7 @@ namespace SitecoreMobileSDKMockObjects
     {
       var result = new MutableSessionConfig("mock instance", "mock login", "mock password", "mock site", "v1");
       result.SetInstanceUrl(this.InstanceUrl);
-      result.SetLogin(this.Login);
+      result.SetLogin(this.UserName);
       result.SetPassword(this.Password);
       result.SetSite(this.Site);
       result.SetItemWebApiVersion(this.ItemWebApiVersion);
@@ -36,7 +36,7 @@ namespace SitecoreMobileSDKMockObjects
 
     public void SetLogin(string value)
     {
-      this.Login = value;
+      this.UserName = value;
     }
 
     public void SetPassword(string value)

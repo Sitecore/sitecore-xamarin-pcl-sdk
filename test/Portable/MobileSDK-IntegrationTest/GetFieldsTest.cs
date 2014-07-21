@@ -5,9 +5,12 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Session;
-  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
@@ -375,7 +378,7 @@
     }
 
     [Test]
-    public async void TestGetItemByIdWithOverridenPayload()
+    public void TestGetItemByIdWithOverridenPayload()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
         .Payload(PayloadType.Content)
@@ -386,7 +389,7 @@
     }
 
     [Test]
-    public async void TestGetItemByPathWithOverridenPayload()
+    public void TestGetItemByPathWithOverridenPayload()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Payload(PayloadType.Full)
@@ -396,7 +399,7 @@
     }
 
     [Test]
-    public async void TestGetItemByQueryWithOverridenPayload()
+    public void TestGetItemByQueryWithOverridenPayload()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
         .Payload(PayloadType.Content)

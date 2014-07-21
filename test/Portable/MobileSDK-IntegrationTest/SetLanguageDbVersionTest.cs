@@ -5,8 +5,13 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
@@ -206,7 +211,7 @@
 
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Database + "']"));
     }
 
@@ -230,28 +235,6 @@
     }
 
     [Test]
-    public void TestGetItemWithInvalidVersion()
-    {
-      const string Db = "web";
-      const string Language = "da";
-      const string Version = "Version";
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-
-
-      TestDelegate testCode = async () =>
-      {
-        var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
-
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Cannot recognize item version."));
-    }
-
-    [Test]
     public void TestGetItemWithInvalidDb()
     {
       const string Db = "@#er$#";
@@ -268,7 +251,7 @@
       Exception exception = Assert.Throws<ParserException>(testCode);
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Db + "']"));
     }
 
@@ -331,7 +314,7 @@
         await task;
       };
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
       Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
       Assert.AreEqual("System.Xml.XmlException", exception.InnerException.GetType().ToString());
 
@@ -361,8 +344,22 @@
       const string Version = "1";
 
       var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          //          .DefaultDatabase("master") // throws exception
+          .DefaultLanguage("da")
+          .BuildReadonlySession();
+
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
+        .Payload(PayloadType.Content)
+        .Version("1")
+        .Build();
+
+
+
+      var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
@@ -381,8 +378,22 @@
       const string Version = "1";
 
       var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      var session = 
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .DefaultDatabase("master")
+        //.DefaultLanguage(""); // throws exception
+          .BuildReadonlySession();
+
+
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
+        .Payload(PayloadType.Content)
+        .Version("1")
+        .Build();
+
+
+
+      var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
       ISitecoreItem resultItem = response.Items[0];
@@ -475,7 +486,7 @@
     }
 
     [Test]
-    public async void TestGetItemByPathWithOverrideLanguageTwice()
+    public void TestGetItemByPathWithOverrideLanguageTwice()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Language("da")

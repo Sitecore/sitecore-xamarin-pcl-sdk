@@ -2,6 +2,7 @@
 {
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
+  using Sitecore.MobileSDK.Validators;
 
   public class DeleteItemByIdRequestBuilder : AbstractDeleteItemRequestBuilder<IDeleteItemsByIdRequest>
   {

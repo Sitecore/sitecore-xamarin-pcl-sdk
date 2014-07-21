@@ -4,7 +4,7 @@
   using System.Threading;
   using System.Threading.Tasks;
   using NUnit.Framework;
-  using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.Items;
 
   [TestFixture]

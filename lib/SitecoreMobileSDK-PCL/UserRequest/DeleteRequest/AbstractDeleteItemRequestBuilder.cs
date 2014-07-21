@@ -2,7 +2,8 @@
 {
   using System;
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 

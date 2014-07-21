@@ -5,7 +5,11 @@ namespace Sitecore.MobileSDK.SessionSettings
   using System;
   using System.Diagnostics;
 
-  public class SessionConfig : ISessionConfig, IWebApiCredentials
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.Validators;
+
+
+    public class SessionConfig : ISessionConfig, IWebApiCredentials
   {
     #region Constructor
     public static SessionConfig NewAnonymousSessionConfig(string instanceUrl, string site = null, string itemWebApiVersion = "v1")
@@ -21,7 +25,7 @@ namespace Sitecore.MobileSDK.SessionSettings
     protected SessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
     {
       this.InstanceUrl = instanceUrl;
-      this.Login       = login      ;
+      this.UserName       = login      ;
       this.Password    = password   ;
       this.Site        = site       ;
       this.ItemWebApiVersion = itemWebApiVersion;
@@ -33,7 +37,7 @@ namespace Sitecore.MobileSDK.SessionSettings
     #region ICloneable
     public virtual SessionConfig ShallowCopy()
     {
-      return new SessionConfig(this.InstanceUrl, this.Login, this.Password, this.Site, this.ItemWebApiVersion);
+      return new SessionConfig(this.InstanceUrl, this.UserName, this.Password, this.Site, this.ItemWebApiVersion);
     }
 
     public virtual ISessionConfig SessionConfigShallowCopy()
@@ -60,7 +64,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       protected set; 
     }
 
-    public string Login
+    public string UserName
     {
       get;
       protected set;
@@ -80,7 +84,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     public bool IsAnonymous()
     {
-      return string.IsNullOrEmpty(this.Login) && string.IsNullOrEmpty(this.Password);
+      return string.IsNullOrEmpty(this.UserName) && string.IsNullOrEmpty(this.Password);
     }
 
     private void Validate()
@@ -94,7 +98,7 @@ namespace Sitecore.MobileSDK.SessionSettings
         throw new ArgumentNullException("SessionConfig.ItemWebApiVersion is required");
       }
 
-      bool hasLogin = !string.IsNullOrWhiteSpace(this.Login);
+      bool hasLogin = !string.IsNullOrWhiteSpace(this.UserName);
       bool hasPassword = !string.IsNullOrWhiteSpace(this.Password);
       if (hasLogin && !hasPassword)
       {

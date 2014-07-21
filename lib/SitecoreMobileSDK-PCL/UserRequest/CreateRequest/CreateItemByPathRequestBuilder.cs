@@ -2,10 +2,12 @@
 namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.Validators;
 
-  public class CreateItemByPathRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByPathRequest>
+    public class CreateItemByPathRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByPathRequest>
   {
-    public CreateItemByPathRequestBuilder (string itemPath)
+    public CreateItemByPathRequestBuilder(string itemPath)
     {
       ItemPathValidator.ValidateItemPath(itemPath);
       this.ItemPath = itemPath;

@@ -1,15 +1,15 @@
-﻿
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Session;
-  using Sitecore.MobileSDK.Exceptions;
 
   //  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   //  using System.IO;
@@ -20,7 +20,7 @@ namespace MobileSDKIntegrationTest
   [TestFixture]
   public class GetItemsTest
   {
-    private TestEnvironment                testData                ;
+    private TestEnvironment testData;
     private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
 
     private const string ItemWithSpacesPath = "/sitecore/content/Home/Android/Static/Test item 1";
@@ -30,7 +30,7 @@ namespace MobileSDKIntegrationTest
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      this.sessionAuthenticatedUser = 
+      this.sessionAuthenticatedUser =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
           .BuildReadonlySession();
@@ -324,7 +324,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
-      var sessionWithoutAccess = 
+      var sessionWithoutAccess =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.NoReadAccess)
           .BuildReadonlySession();

@@ -9,10 +9,8 @@ namespace Sitecore.MobileSDK.CrudTasks
   using System.Threading;
   using System.Threading.Tasks;
 
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.TaskFlow;
-  using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
   public class GetResourceTask : IDownloadApiCallTasks<IReadMediaItemRequest, HttpRequestMessage, Stream>

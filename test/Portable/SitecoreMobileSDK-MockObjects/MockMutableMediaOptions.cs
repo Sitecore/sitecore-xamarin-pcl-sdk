@@ -2,6 +2,7 @@
 namespace SitecoreMobileSDKMockObjects
 {
   using System;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
   // TODO : subclass from interface

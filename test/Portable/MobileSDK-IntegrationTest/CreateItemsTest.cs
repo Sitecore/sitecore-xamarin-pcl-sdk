@@ -5,9 +5,14 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
@@ -15,18 +20,17 @@
   [TestFixture]
   public class CreateItemsTest
   {
-    private TestEnvironment        testData;
-    private ISitecoreWebApiSession session ;
+    private TestEnvironment testData;
+    private ISitecoreWebApiSession session;
 
     [SetUp]
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Admin)
-          .Site(testData.ShellSite)
-          .BuildSession();
+      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .Site(testData.ShellSite)
+        .BuildSession();
     }
 
     [TearDown]
@@ -35,7 +39,7 @@
       this.testData = null;
       this.session = null;
     }
-    /*
+     /*
     [Test]
     public async void TestCreateItemByIdWithoutFieldsSet()
     {
@@ -53,6 +57,65 @@
       //this.RemoveItem(resultItem);
     }
 
+    [Test]
+    public async void TestCreateItemByIdWithOverridenDatabaseAndLanguageInRequest()
+    {
+      const string Db = "web";
+      const string Language = "da";
+      var expectedItem = this.CreateTestItem("Create danish version in web from request");
+
+      var adminSession =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .Site(testData.ShellSite)
+          .DefaultDatabase("master")
+          .DefaultLanguage("en")
+          .BuildSession();
+
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.CreateItemsHere.Id)
+         .ItemTemplate(expectedItem.Template)
+         .ItemName(expectedItem.DisplayName)
+         .Database(Db)
+         .Language(Language)
+         .Build();
+
+      var createResponse = await adminSession.CreateItemAsync(request);
+
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(Db, resultItem.Source.Database);
+      Assert.AreEqual(Language, resultItem.Source.Language);
+      //this.RemoveItem(resultItem);
+    }
+
+    [Test]
+    public async void TestCreateItemByPathWithDatabaseAndLanguageInSession()
+    {
+      const string Db = "web";
+      const string Language = "da";
+      var expectedItem = this.CreateTestItem("Create danish version in web from session");
+
+      var adminSession =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .Site(testData.ShellSite)
+          .DefaultDatabase(Db)
+          .DefaultLanguage(Language)
+          .BuildSession();
+
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(testData.Items.CreateItemsHere.Path)
+         .ItemTemplate(expectedItem.Template)
+         .ItemName(expectedItem.DisplayName)
+         .Build();
+
+      var createResponse = await adminSession.CreateItemAsync(request);
+
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(Db, resultItem.Source.Database);
+      Assert.AreEqual(Language, resultItem.Source.Language);
+      //this.RemoveItem(resultItem);
+    }
+
+   
     [Test]
     public async void TestCreateItemByPathAndTemplateIdWithoutFieldsSet()
     {
@@ -187,7 +250,7 @@
     public void TestCreateItemByIdAndGetDuplicateFields()
     {
       const string FieldName = "Text";
-      Exception exception = Assert.Throws<ArgumentException>(() => 
+      var exception = Assert.Throws<ArgumentException>(() =>
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
@@ -201,7 +264,7 @@
     {
       const string FieldName = "Text";
       const string FieldValue = "Duplicate value";
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
          .ItemName("Set duplicate fields")
          .AddFieldsRawValuesByName(FieldName, FieldValue)
          .ItemTemplate(testData.Items.Home.Template)
@@ -254,7 +317,7 @@
     [Test]
     public void TestCreateItemByIdWithEmptyName()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .ItemName("")
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
@@ -264,7 +327,7 @@
     [Test]
     public void TestCreateItemByPathWithSpacesOnlyInItemName()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
          .ItemName("  ")
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
@@ -274,7 +337,7 @@
     [Test]
     public void TestCreateItemByPathWithNullItemName()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
          .ItemName(null)
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
@@ -284,7 +347,7 @@
     [Test]
     public void TestCreateItemByPathWithoutItemName()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemName : The input cannot be null or empty", exception.Message);
@@ -302,9 +365,9 @@
         var task = session.CreateItemAsync(request);
         await task;
       };
-      Exception exception = Assert.Throws<ParserException>(testCode);
+      var exception = Assert.Throws<ParserException>(testCode);
       Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.AreEqual("An item name cannot contain any of the following characters: \\/:?\"<>|[] (controlled by the setting InvalidItemNameChars)", exception.InnerException.Message);
     }
 
@@ -322,10 +385,51 @@
         var task = session.CreateItemAsync(request);
         await task;
       };
+      var exception = Assert.Throws<ParserException>(testCode);
+      Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Template item not found.", exception.InnerException.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByPathWithAnonymousUser()
+    {
+      var anonymousSession = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
+        .Site(testData.ShellSite)
+        .BuildSession();
+      var request = this.CreateByPathRequestBuilder()
+        .ItemName("item created with anonymous user")
+        .Build();
+      TestDelegate testCode = async () =>
+      {
+        var task = anonymousSession.CreateItemAsync(request);
+        await task;
+      };
+      var exception = Assert.Throws<ParserException>(testCode);
+      Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Access to site is not granted.", exception.InnerException.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByIdWithUserWithoutCreateAccess()
+    {
+      var anonymousSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.NoCreateAccess)
+        .Site(testData.ShellSite)
+        .BuildSession();
+      var request = this.CreateByPathRequestBuilder()
+        .ItemName("item created with nocreate user")
+        .Build();
+      TestDelegate testCode = async () =>
+      {
+        var task = anonymousSession.CreateItemAsync(request);
+        await task;
+      };
       Exception exception = Assert.Throws<ParserException>(testCode);
       Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.AreEqual("Template item not found.", exception.InnerException.Message);
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("AddFromTemplate - Add access required"));
     }
 
     [Test]
@@ -380,11 +484,11 @@
     [Test]
     public void TestCreateItemByNullPath()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(null)
+      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(null)
          .ItemName("Item with null parent path")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("CreateItemByPathRequestBuilder.ParentPath : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("Value cannot be null.\r\nParameter name: Item path cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -418,6 +522,62 @@
         .Build();
       var createResponse = await session.CreateItemAsync(request);
       Assert.AreEqual(0, createResponse.Items.Count);
+    }
+
+    //ALR: AbstractGetItemRequestBuilder? Please, change with "Create" request builder
+    [Test]
+    public void TestCreateItemByIdWithNullDatabase()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.Home.Id)
+         .ItemName("Item with null db")
+         .ItemTemplate("Some template")
+         .Database(null)
+         .Build());
+      Assert.AreEqual("CreateItemByIdRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByIdWithEmptyDatabase()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.Home.Id)
+         .ItemName("Item with empty db")
+         .ItemTemplate("Some template")
+         .Database("")
+         .Build());
+      Assert.AreEqual("CreateItemByIdRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByPathWithNullLanguage()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(testData.Items.Home.Path)
+         .ItemName("Item with null language")
+         .ItemTemplate("Some template")
+         .Language(null)
+         .Build());
+      Assert.AreEqual("CreateItemByPathRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByIdWithSpacesOnlyInLanguage()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.Home.Id)
+         .ItemName("Item with empty language")
+         .ItemTemplate("Some template")
+         .Language("  ")
+         .Build());
+      Assert.AreEqual("CreateItemByIdRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByPathWithSpacesOnlyInDatabase()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(testData.Items.Home.Path)
+         .ItemName("Item with empty db")
+         .ItemTemplate("Some template")
+         .Database("   ")
+         .Build());
+      Assert.AreEqual("CreateItemByPathRequestBuilder.Database : The input cannot be null or empty", exception.Message);
     }
 
     private async void GetAndCheckItem(TestEnvironment.Item expectedItem, ISitecoreItem resultItem)

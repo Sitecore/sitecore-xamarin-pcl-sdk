@@ -2,8 +2,8 @@
 
 namespace Sitecore.MobileSdkUnitTest
 {
-  using System;
   using NUnit.Framework;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using SitecoreMobileSDKMockObjects;
 
   using Sitecore.MobileSDK;

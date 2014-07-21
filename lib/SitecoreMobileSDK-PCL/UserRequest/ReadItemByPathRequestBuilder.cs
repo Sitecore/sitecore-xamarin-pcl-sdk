@@ -2,10 +2,11 @@
 namespace Sitecore.MobileSDK.UserRequest
 {
   using System;
-
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.Validators;
 
   public class ReadItemByPathRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByPathRequest>
   {

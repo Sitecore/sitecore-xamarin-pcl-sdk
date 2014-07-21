@@ -2,8 +2,8 @@
 {
   using NUnit.Framework;
 
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Session;
 
   [TestFixture]
   public class DeleteItemsTest

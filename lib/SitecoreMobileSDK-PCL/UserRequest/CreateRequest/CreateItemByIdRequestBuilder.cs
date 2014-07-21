@@ -2,8 +2,10 @@
 namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.Validators;
 
-  public class CreateItemByIdRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByIdRequest>
+    public class CreateItemByIdRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByIdRequest>
   {
     public CreateItemByIdRequestBuilder (string itemId)
     {

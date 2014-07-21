@@ -5,7 +5,7 @@
   using System.Threading;
   using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
-  using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.API.Exceptions;
 
   public class DeleteItemsResponseParser
   {

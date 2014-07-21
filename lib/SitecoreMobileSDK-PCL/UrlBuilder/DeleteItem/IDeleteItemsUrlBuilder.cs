@@ -1,6 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
 {
-  using Sitecore.MobileSDK.Items.Delete;
+  using Sitecore.MobileSDK.API.Request;
 
   public interface IDeleteItemsUrlBuilder<in T> where T : IBaseDeleteItemRequest
   {

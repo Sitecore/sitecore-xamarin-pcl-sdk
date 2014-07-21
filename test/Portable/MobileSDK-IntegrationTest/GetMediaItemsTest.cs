@@ -7,7 +7,11 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
@@ -440,28 +444,28 @@
     }
 
     [Test] //ALR: Argument exception should appear
-    public async void TestGetMediaWithEmptyDatabase()
+    public void TestGetMediaWithEmptyDatabase()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database("").Build());
       Assert.AreEqual("AbstractGetMediaRequestBuilder.Database : The input cannot be null or empty", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public async void TestGetMediaWithNullDatabase()
+    public void TestGetMediaWithNullDatabase()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(null).Build());
       Assert.AreEqual("AbstractGetMediaRequestBuilder.Database : The input cannot be null or empty", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public async void TestGetMediaWithSpacesInLanguage()
+    public void TestGetMediaWithSpacesInLanguage()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language("  ").Build());
       Assert.AreEqual("AbstractGetMediaRequestBuilder.Language : The input cannot be null or empty", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public async void TestGetMediaWithNullLanguage()
+    public void TestGetMediaWithNullLanguage()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language(null).Build());
       Assert.AreEqual("AbstractGetMediaRequestBuilder.Language : The input cannot be null or empty", exception.Message);
@@ -492,7 +496,7 @@
     }
 
     [Test] //ALR: InvalidOperationException should appear
-    public async void TestGetMediaWithOverridenLanguage()
+    public void TestGetMediaWithOverridenLanguage()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Language("en")
@@ -502,7 +506,7 @@
     }
 
     [Test] //ALR: InvalidOperationException should appear
-    public async void TestGetMediaWithOverridenDatabase()
+    public void TestGetMediaWithOverridenDatabase()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Database("master")

@@ -1,7 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder
 {
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 

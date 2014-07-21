@@ -4,10 +4,10 @@ namespace Sitecore.MobileSDK.TaskFlow
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Sitecore.MobileSDK.Exceptions;
+    using Sitecore.MobileSDK.API.Exceptions;
 
 
-  internal class RestApiCallFlow
+    internal class RestApiCallFlow
   {
     private static async Task<TPhaseResult> IvokeTaskAndWrapExceptions<TPhaseResult, TWrapperException>(
       Task<TPhaseResult> task, Func<Exception, TWrapperException> exceptionWrapperDelegate)

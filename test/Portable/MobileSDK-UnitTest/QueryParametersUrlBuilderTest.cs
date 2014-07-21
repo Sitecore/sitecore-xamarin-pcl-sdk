@@ -2,6 +2,7 @@ namespace MobileSDK_UnitTest_Desktop
 {
   using System;
   using NUnit.Framework;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;

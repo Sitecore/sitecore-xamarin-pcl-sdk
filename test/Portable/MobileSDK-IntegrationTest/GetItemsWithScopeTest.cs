@@ -4,23 +4,25 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class GetItemsWithScopeTest
   {
-    private TestEnvironment                testData;
-    private ISitecoreWebApiReadonlySession session ;
+    private TestEnvironment testData;
+    private ISitecoreWebApiReadonlySession session;
 
     [SetUp]
     public void Setup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-          .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession();
+      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .BuildReadonlySession();
     }
 
     [TearDown]
@@ -131,11 +133,11 @@
     public void TestGetItemWithDuplicateScopesById()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
-         .AddScope(ScopeType.Self)
-         .Language("en")
-         .AddScope(ScopeType.Children)
-         .AddScope(ScopeType.Self)
-         .Build());
+        .AddScope(ScopeType.Self)
+        .Language("en")
+        .AddScope(ScopeType.Children)
+        .AddScope(ScopeType.Self)
+        .Build());
       Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
@@ -166,10 +168,10 @@
     public async void TestGetItemWithChildrenScopeByQueryWithSpecifiedFields()        //children in name
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/descendant::*[@title='Allowed_Item']")
-       .AddScope(ScopeType.Children)
-       .Language("en")
-       .AddScope(ScopeType.Self)
-       .Build();
+        .AddScope(ScopeType.Children)
+        .Language("en")
+        .AddScope(ScopeType.Self)
+        .Build();
       var response = await this.session.ReadItemAsync(request);
 
       testData.AssertItemsCount(6, response);
@@ -181,10 +183,9 @@
     [Test]
     public async void TestGetNotAllowedItemWithChildrenScopeById()
     {
-      var sessionWithNoReadAccessUser = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-          .Credentials(this.testData.Users.NoReadAccess)
-          .BuildReadonlySession();
+      var sessionWithNoReadAccessUser = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        .Credentials(this.testData.Users.NoReadAccess)
+        .BuildReadonlySession();
           
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id)
         .AddScope(ScopeType.Children)
@@ -197,16 +198,15 @@
     [Test]
     public async void TestGetItemWitParentAndSelfScopeWhenParentItemIsNotAllowedByPath()
     {
-      var sessionWithNoReadAccessUser = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-          .Credentials(this.testData.Users.FakeAnonymous)
-          .BuildReadonlySession();
+      var sessionWithNoReadAccessUser = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        .Credentials(this.testData.Users.FakeAnonymous)
+        .BuildReadonlySession();
 
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/Home/Not_Allowed_Parent/Allowed_Item")
-       .AddScope(ScopeType.Parent)
-       .AddScope(ScopeType.Self)
-       .Build();
+        .AddScope(ScopeType.Parent)
+        .AddScope(ScopeType.Self)
+        .Build();
       var response = await sessionWithNoReadAccessUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -216,32 +216,29 @@
     [Test]
     public void TestGetItemByPathDuplicateScopeParams()
     {
-      
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
-       .AddScope(ScopeType.Parent)
-       .AddScope(ScopeType.Children)
-       .AddScope(ScopeType.Parent)
-       .Build());
+        .AddScope(ScopeType.Parent)
+        .AddScope(ScopeType.Children)
+        .AddScope(ScopeType.Parent)
+        .Build());
       Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
     [Test]
     public void TestGetItemByIdDuplicateScopeParams()
     {
-
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
-       .AddScope(ScopeType.Self, ScopeType.Self)
-       .Build());
+        .AddScope(ScopeType.Self, ScopeType.Self)
+        .Build());
       Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
     [Test]
     public void TestGetItemByQueryDuplicateScopeParams()
     {
-
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
-       .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Children)
-       .Build());
+        .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Children)
+        .Build());
       Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
     }
   }

@@ -1,9 +1,11 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
 {
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Utils;
+  using Sitecore.MobileSDK.Validators;
 
   public class DeleteItemByIdUrlBuilder : AbstractDeleteItemUrlBuilder<IDeleteItemsByIdRequest>
   {
