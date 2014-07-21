@@ -6,7 +6,6 @@ namespace Sitecore.MobileSDK
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
-  using Org.BouncyCastle.Asn1.Misc;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
 

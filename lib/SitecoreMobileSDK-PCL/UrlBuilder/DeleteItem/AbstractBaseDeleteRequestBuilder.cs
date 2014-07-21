@@ -18,6 +18,7 @@
       {
         throw new InvalidOperationException("AbstractBaseDeleteRequestBuilder.Database : The database cannot be assigned twice");
       }
+      this.database = sitecoreDatabase;
 
       return this;
     }

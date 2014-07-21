@@ -1,5 +1,4 @@
 ﻿
-
 namespace Sitecore.MobileSDK.Session
 {
   public interface ISitecoreWebApiSession : 
