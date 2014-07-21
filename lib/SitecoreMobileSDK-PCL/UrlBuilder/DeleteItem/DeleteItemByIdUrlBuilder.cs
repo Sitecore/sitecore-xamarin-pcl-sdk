@@ -4,9 +4,9 @@
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Utils;
 
-  public class DeleteItemsByIdUrlBuilder : AbstractDeleteItemsUrlBuilder<IDeleteItemsByIdRequest>
+  public class DeleteItemByIdUrlBuilder : AbstractDeleteItemUrlBuilder<IDeleteItemsByIdRequest>
   {
-    public DeleteItemsByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    public DeleteItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base(restGrammar, webApiGrammar)
     {
     }
@@ -16,17 +16,17 @@
       this.Validate(request);
 
       var baseUrl = base.GetBaseUrlForRequest(request);
-      string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
+      var escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
 
-      string fullUrl = baseUrl
-                       + this.restGrammar.HostAndArgsSeparator
-                       + this.webApiGrammar.ItemIdParameterName
-                       + this.restGrammar.KeyValuePairSeparator
+      var fullUrl = baseUrl
+                       + this.RestGrammar.HostAndArgsSeparator
+                       + this.WebApiGrammar.ItemIdParameterName
+                       + this.RestGrammar.KeyValuePairSeparator
                        + escapedId;
 
       if (!string.IsNullOrEmpty(this.GetParametersString(request)))
       {
-        fullUrl += this.restGrammar.FieldSeparator 
+        fullUrl += this.RestGrammar.FieldSeparator
           + this.GetParametersString(request);
       }
 

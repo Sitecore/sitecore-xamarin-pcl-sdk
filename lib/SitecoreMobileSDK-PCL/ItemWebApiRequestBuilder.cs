@@ -52,12 +52,12 @@ namespace Sitecore.MobileSDK
 
     public static IBaseDeleteRequestParametersBuilder<IDeleteItemsByPathRequest> DeleteItemRequestWithPath(string itemPath)
     {
-      return new DeleteItemByPathRequestBuilder(itemPath);
+      return new DeleteItemItemByPathRequestBuilder(itemPath);
     }
 
     public static IBaseDeleteRequestParametersBuilder<IDeleteItemsByQueryRequest> DeleteItemRequestWithSitecoreQuery(string sitecoreQuery)
     {
-      return new DeleteItemByQueryRequestBuilder(sitecoreQuery);
+      return new DeleteItemItemByQueryRequestBuilder(sitecoreQuery);
     }
   }
 }

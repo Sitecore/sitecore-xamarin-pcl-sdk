@@ -3,7 +3,6 @@
   public interface IDeleteItemsByPathRequest : IBaseDeleteItemRequest
   {
     IDeleteItemsByPathRequest DeepCopyDeleteItemRequest();
-
     string ItemPath { get; }
   }
 }

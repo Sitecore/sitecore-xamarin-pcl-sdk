@@ -5,18 +5,19 @@
 
   public class DeleteItemByQueryParameters : IDeleteItemsByQueryRequest
   {
-    public ISessionConfig SessionConfig { get; private set; }
-    public IScopeParameters ScopeParameters { get; private set; }
-    public string Database { get; private set; }
-    public string SitecoreQuery { get; private set; }
-
-    public DeleteItemByQueryParameters(ISessionConfig sessionConfig, IScopeParameters scopeParameters, string database, string sitecoreQuery)
+    public DeleteItemByQueryParameters(ISessionConfig sessionConfig, IScopeParameters scopeParameters,
+      string database, string sitecoreQuery)
     {
       this.SessionConfig = sessionConfig;
       this.ScopeParameters = scopeParameters;
       this.Database = database;
       this.SitecoreQuery = sitecoreQuery;
     }
+
+    public ISessionConfig SessionConfig { get; private set; }
+    public IScopeParameters ScopeParameters { get; private set; }
+    public string Database { get; private set; }
+    public string SitecoreQuery { get; private set; }
 
     public IDeleteItemsByQueryRequest DeepCopyDeleteItemRequest()
     {

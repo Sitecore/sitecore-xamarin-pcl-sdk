@@ -5,7 +5,8 @@
 
   public class DeleteItemByIdParameters : IDeleteItemsByIdRequest
   {
-    public DeleteItemByIdParameters(ISessionConfig sessionConfig, IScopeParameters scopeParameters, string database, string itemId)
+    public DeleteItemByIdParameters(ISessionConfig sessionConfig, IScopeParameters scopeParameters,
+      string database, string itemId)
     {
       this.SessionConfig = sessionConfig;
       this.ScopeParameters = scopeParameters;
@@ -16,7 +17,6 @@
     public ISessionConfig SessionConfig { get; private set; }
     public IScopeParameters ScopeParameters { get; private set; }
     public string Database { get; private set; }
-    
     public string ItemId { get; private set; }
 
     public IDeleteItemsByIdRequest DeepCopyDeleteItemRequest()

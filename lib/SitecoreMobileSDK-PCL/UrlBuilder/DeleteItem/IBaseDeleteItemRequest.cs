@@ -7,7 +7,6 @@
   {
     ISessionConfig SessionConfig { get; }
     IScopeParameters ScopeParameters { get; }
-
     string Database { get; }
   }
 }

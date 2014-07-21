@@ -9,13 +9,15 @@
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.TaskFlow;
 
-  class DeleteItemTasks<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScDeleteItemsResponse> where T : class, IBaseDeleteItemRequest
+  class DeleteItemTasks<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScDeleteItemsResponse>
+    where T : class, IBaseDeleteItemRequest
   {
     private readonly IDeleteItemsUrlBuilder<T> deleteItemsBuilder;
     private readonly HttpClient httpClient;
     private readonly ICredentialsHeadersCryptor cryptor;
 
-    public DeleteItemTasks(IDeleteItemsUrlBuilder<T> deleteItemsBuilder, HttpClient httpClient, ICredentialsHeadersCryptor cryptor)
+    public DeleteItemTasks(IDeleteItemsUrlBuilder<T> deleteItemsBuilder, HttpClient httpClient,
+      ICredentialsHeadersCryptor cryptor)
     {
       this.deleteItemsBuilder = deleteItemsBuilder;
       this.httpClient = httpClient;
@@ -27,7 +29,7 @@
     public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(T request, CancellationToken cancelToken)
     {
 
-      string url = this.deleteItemsBuilder.GetUrlForRequest(request);
+      var url = this.deleteItemsBuilder.GetUrlForRequest(request);
       var result = new HttpRequestMessage(HttpMethod.Delete, url);
 
       return await this.cryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
@@ -54,17 +56,17 @@
     {
       if (null == this.httpClient)
       {
-        throw new ArgumentNullException("AbstractGetItemTask.httpClient cannot be null");
+        throw new ArgumentNullException("DeleteItemTasks.httpClient cannot be null");
       }
 
       if (null == this.cryptor)
       {
-        throw new ArgumentNullException("AbstractGetItemTask.cryptor cannot be null");
+        throw new ArgumentNullException("DeleteItemTasks.cryptor cannot be null");
       }
 
       if (null == this.deleteItemsBuilder)
       {
-        throw new ArgumentNullException("AbstractGetItemTask.deleteItemsBuilder cannot be null");
+        throw new ArgumentNullException("DeleteItemTasks.deleteItemsBuilder cannot be null");
       }
     }
   }

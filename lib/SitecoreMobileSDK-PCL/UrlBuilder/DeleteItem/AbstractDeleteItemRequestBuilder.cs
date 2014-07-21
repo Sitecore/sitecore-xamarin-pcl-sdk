@@ -5,30 +5,38 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
-  public abstract class AbstractBaseDeleteRequestBuilder<T> : IBaseDeleteRequestParametersBuilder<T>
+  public abstract class AbstractDeleteItemRequestBuilder<T> : IBaseDeleteRequestParametersBuilder<T>
     where T : class
   {
+    protected string database;
+    protected ScopeParameters scopeParameters;
+    protected ISessionConfig sessionConfig;
+
+    public abstract T Build();
+
     public IBaseDeleteRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
       if (string.IsNullOrWhiteSpace(sitecoreDatabase))
       {
-        throw new ArgumentException("AbstractBaseDeleteRequestBuilder.Database : The input cannot be null or empty");
+        throw new ArgumentException("AbstractDeleteItemRequestBuilder.Database : " +
+                                    "The input cannot be null or empty");
       }
-      
+
       if (!string.IsNullOrEmpty(this.database))
       {
-        throw new InvalidOperationException("AbstractBaseDeleteRequestBuilder.Database : The database cannot be assigned twice");
+        throw new InvalidOperationException("AbstractDeleteItemRequestBuilder.Database : " +
+                                            "The database cannot be assigned twice");
       }
-      this.database = sitecoreDatabase;
 
+      this.database = sitecoreDatabase;
       return this;
     }
 
     public IBaseDeleteRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
-      ScopeParameters scopeParams = new ScopeParameters(this.scopeParameters);
+      var scopeParams = new ScopeParameters(this.scopeParameters);
 
-      foreach (ScopeType singleScope in scope)
+      foreach (var singleScope in scope)
       {
         scopeParams.AddScope(singleScope);
       }
@@ -39,14 +47,8 @@
 
     public IBaseDeleteRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
-      ICollection<ScopeType> castedScope = (ICollection<ScopeType>)scope;
+      var castedScope = (ICollection<ScopeType>)scope;
       return this.AddScope(castedScope);
     }
-
-    public abstract T Build();
-
-    protected string database;
-    protected ScopeParameters scopeParameters;
-    protected ISessionConfig sessionConfig;
   }
 }

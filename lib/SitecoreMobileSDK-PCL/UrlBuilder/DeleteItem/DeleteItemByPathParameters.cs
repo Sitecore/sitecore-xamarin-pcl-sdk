@@ -5,7 +5,8 @@
 
   public class DeleteItemByPathParameters : IDeleteItemsByPathRequest
   {
-    public DeleteItemByPathParameters(ISessionConfig sessionConfig, IScopeParameters scopeParameters, string database, string itemPath)
+    public DeleteItemByPathParameters(ISessionConfig sessionConfig, IScopeParameters scopeParameters,
+      string database, string itemPath)
     {
       this.SessionConfig = sessionConfig;
       this.ScopeParameters = scopeParameters;
@@ -16,8 +17,6 @@
     public ISessionConfig SessionConfig { get; private set; }
     public IScopeParameters ScopeParameters { get; private set; }
     public string Database { get; private set; }
-    
-
     public string ItemPath { get; private set; }
 
     public IDeleteItemsByPathRequest DeepCopyDeleteItemRequest()

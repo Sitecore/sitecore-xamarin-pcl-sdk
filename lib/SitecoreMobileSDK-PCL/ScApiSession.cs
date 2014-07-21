@@ -216,7 +216,7 @@ namespace Sitecore.MobileSDK
 
       IDeleteItemsByIdRequest autocompletedRequest = this.requestMerger.FillDeleteItemByIdGaps(requestCopy);
 
-      var taskFlow = new DeleteItemTasks<IDeleteItemsByIdRequest>(new DeleteItemsByIdUrlBuilder(this.restGrammar, this.webApiGrammar),
+      var taskFlow = new DeleteItemTasks<IDeleteItemsByIdRequest>(new DeleteItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar),
         this.httpClient, cryptor);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -230,7 +230,7 @@ namespace Sitecore.MobileSDK
 
       IDeleteItemsByPathRequest autocompletedRequest = this.requestMerger.FillDeleteItemByPathGaps(requestCopy);
 
-      var taskFlow = new DeleteItemTasks<IDeleteItemsByPathRequest>(new DeleteItemsByPathUrlBuilder(this.restGrammar, this.webApiGrammar),
+      var taskFlow = new DeleteItemTasks<IDeleteItemsByPathRequest>(new DeleteItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar),
         this.httpClient, cryptor);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -244,7 +244,7 @@ namespace Sitecore.MobileSDK
 
       IDeleteItemsByQueryRequest autocompletedRequest = this.requestMerger.FillDeleteItemByQueryGaps(requestCopy);
 
-      var taskFlow = new DeleteItemTasks<IDeleteItemsByQueryRequest>(new DeleteItemsByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), 
+      var taskFlow = new DeleteItemTasks<IDeleteItemsByQueryRequest>(new DeleteItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar), 
         this.httpClient, cryptor);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);

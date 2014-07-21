@@ -5,18 +5,18 @@
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
-  public abstract class AbstractDeleteItemsUrlBuilder<TRequest> : IDeleteItemsUrlBuilder<TRequest>
+  public abstract class AbstractDeleteItemUrlBuilder<TRequest> : IDeleteItemsUrlBuilder<TRequest>
     where TRequest : IBaseDeleteItemRequest
   {
-    private SessionConfigUrlBuilder sessionConfigUrlBuilder;
+    private readonly SessionConfigUrlBuilder sessionConfigUrlBuilder;
     readonly ScopeParametersUrlBuilder scopeBuilder;
-    protected IRestServiceGrammar restGrammar;
-    protected IWebApiUrlParameters webApiGrammar;
+    protected IRestServiceGrammar RestGrammar;
+    protected IWebApiUrlParameters WebApiGrammar;
 
-    public AbstractDeleteItemsUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    protected AbstractDeleteItemUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
     {
-      this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.RestGrammar = restGrammar;
+      this.WebApiGrammar = webApiGrammar;
       this.sessionConfigUrlBuilder = new SessionConfigUrlBuilder(restGrammar, webApiGrammar);
       this.scopeBuilder = new ScopeParametersUrlBuilder(restGrammar, webApiGrammar);
     }
@@ -46,9 +46,9 @@
       {
         if (!string.IsNullOrEmpty(parametersString))
         {
-          parametersString += this.restGrammar.FieldSeparator;
+          parametersString += this.RestGrammar.FieldSeparator;
         }
-        parametersString += this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator 
+        parametersString += this.WebApiGrammar.DatabaseParameterName + this.RestGrammar.KeyValuePairSeparator
           + database;
       }
       return parametersString;
@@ -59,25 +59,26 @@
       if (null == request)
       {
         throw new ArgumentNullException("request",
-          "AbstractDeleteItemsUrlBuilder.GetBaseUrlForRequest() : do not pass null request");
+          "AbstractDeleteItemUrlBuilder.GetBaseUrlForRequest() : do not pass null request");
       }
 
       if (null == request.SessionConfig)
       {
         throw new ArgumentNullException("SessionConfig",
-          "AbstractDeleteItemsUrlBuilder.GetBaseUrlForRequest() : do not pass null SessionConfig");
+          "AbstractDeleteItemUrlBuilder.GetBaseUrlForRequest() : do not pass null SessionConfig");
       }
 
       if (null == request.SessionConfig.InstanceUrl)
       {
         throw new ArgumentNullException("InstanceUrl",
-          "AbstractDeleteItemsUrlBuilder.GetBaseUrlForRequest() : SessionSettings.InstanceUrl cannot be null");
+          "AbstractDeleteItemUrlBuilder.GetBaseUrlForRequest() : SessionSettings.InstanceUrl cannot be null");
       }
 
       if (null == request.SessionConfig.ItemWebApiVersion)
       {
         throw new ArgumentNullException("ItemWebApiVersion",
-          "AbstractDeleteItemsUrlBuilder.GetBaseUrlForRequest() : SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null");
+          "AbstractDeleteItemUrlBuilder.GetBaseUrlForRequest() : " +
+          "SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null");
       }
 
       this.ValidateSpecificPart(request);

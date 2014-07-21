@@ -1,6 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
 {
-  public class DeleteItemByIdRequestBuilder : AbstractBaseDeleteRequestBuilder<IDeleteItemsByIdRequest>
+  public class DeleteItemByIdRequestBuilder : AbstractDeleteItemRequestBuilder<IDeleteItemsByIdRequest>
   {
     private string itemId;
 
