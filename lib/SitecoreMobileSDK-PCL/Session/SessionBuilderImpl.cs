@@ -70,6 +70,10 @@
     #region IAnonymousSessionBuilder
     public IBaseSessionBuilder Site(string site)
     {
+      if (string.IsNullOrWhiteSpace(site))
+      {
+        throw new ArgumentException("[SessionBuilder.WebApiVersion] the value cannot be null or empty");
+      }
       if (null != this.site)
       {
         throw new InvalidOperationException("[IBaseSessionBuilder.Site] the property cannot be assigned twice");
@@ -81,6 +85,10 @@
 
     public IBaseSessionBuilder WebApiVersion(string webApiVersion)
     {
+      if (string.IsNullOrWhiteSpace(webApiVersion))
+      {
+        throw new ArgumentException("[SessionBuilder.WebApiVersion] the value cannot be null or empty");
+      }
       if (null != this.webApiVersion)
       {
         throw new InvalidOperationException("[IBaseSessionBuilder.WebApiVersion] the property cannot be assigned twice");
@@ -92,6 +100,10 @@
 
     public IBaseSessionBuilder DefaultDatabase(string defaultDatabase)
     {
+      if (string.IsNullOrWhiteSpace(defaultDatabase))
+      {
+        throw new ArgumentException("[SessionBuilder.DefaultDatabase] the value cannot be null or empty");
+      }
       if (null != this.itemSourceAccumulator.Database)
       {
         throw new InvalidOperationException("[IBaseSessionBuilder.DefaultDatabase] the property cannot be assigned twice");
