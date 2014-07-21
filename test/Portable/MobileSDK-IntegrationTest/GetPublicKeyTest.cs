@@ -82,7 +82,7 @@
       };
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
       Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
     }
 
@@ -138,7 +138,7 @@
       Exception exception = Assert.Throws<ParserException>(testCode);
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
 
@@ -157,7 +157,7 @@
       Exception exception = Assert.Throws<ParserException>(testCode);
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
 
@@ -178,7 +178,7 @@
       Exception exception = Assert.Throws<ParserException>(testCode);
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
     }
   }
