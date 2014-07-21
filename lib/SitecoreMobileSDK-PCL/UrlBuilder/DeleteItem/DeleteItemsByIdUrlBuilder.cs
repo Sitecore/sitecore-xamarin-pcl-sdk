@@ -13,8 +13,9 @@
 
     public override string GetUrlForRequest(IDeleteItemsByIdRequest request)
     {
+      this.Validate(request);
+
       var baseUrl = base.GetBaseUrlForRequest(request);
-      
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
 
       string fullUrl = baseUrl
@@ -29,7 +30,7 @@
           + this.GetParametersString(request);
       }
 
-      return fullUrl;
+      return fullUrl.ToLowerInvariant();
     }
 
     public override void ValidateSpecificPart(IDeleteItemsByIdRequest request)

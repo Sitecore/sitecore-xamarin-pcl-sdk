@@ -57,8 +57,8 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CryptorConstructionTest.cs">
       <Link>CryptorConstructionTest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\DeleteItemsItemsTest.cs">
-      <Link>DeleteItemsItemsTest.cs</Link>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\DeleteItemsTest.cs">
+      <Link>DeleteItemsTest.cs</Link>
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetFieldsTest.cs">
       <Link>GetFieldsTest.cs</Link>

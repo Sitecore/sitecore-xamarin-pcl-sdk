@@ -27,9 +27,6 @@
 
     public virtual string GetBaseUrlForRequest(TRequest request)
     {
-      this.Validate(request);
-      this.ValidateSpecificPart(request);
-
       return this.sessionConfigUrlBuilder.BuildUrlString(request.SessionConfig);
     }
 
@@ -82,6 +79,8 @@
         throw new ArgumentNullException("ItemWebApiVersion",
           "AbstractDeleteItemsUrlBuilder.GetBaseUrlForRequest() : SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null");
       }
+
+      this.ValidateSpecificPart(request);
     }
   }
 }

@@ -85,7 +85,7 @@
 
       var url = this.builder.GetUrlForRequest(parameters);
 
-      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7BB0ED4777-1F5D-478D-AF47-145CCA9E4311%7D", url);
+      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7bb0ed4777-1f5d-478d-af47-145cca9e4311%7d", url);
     }
 
     [Test]
@@ -95,7 +95,7 @@
 
       var url = this.builder.GetUrlForRequest(parameters);
 
-      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7BB0ED4777-1F5D-478D-AF47-145CCA9E4311%7D&sc_database=master", url);
+      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7bb0ed4777-1f5d-478d-af47-145cca9e4311%7d&sc_database=master", url);
     }
 
     [Test]
@@ -107,7 +107,7 @@
 
       var url = this.builder.GetUrlForRequest(parameters);
 
-      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7BB0ED4777-1F5D-478D-AF47-145CCA9E4311%7D&scope=c&sc_database=master", url);
+      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7bb0ed4777-1f5d-478d-af47-145cca9e4311%7d&scope=c&sc_database=master", url);
     }
 
     [Test]
@@ -119,7 +119,7 @@
 
       var url = this.builder.GetUrlForRequest(parameters);
 
-      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7BB0ED4777-1F5D-478D-AF47-145CCA9E4311%7D&scope=c", url);
+      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7bb0ed4777-1f5d-478d-af47-145cca9e4311%7d&scope=c", url);
     }
   }
 }

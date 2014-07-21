@@ -62,6 +62,9 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\DeleteItemByPathUrlBuilderTest.cs">
       <Link>DeleteItemByPathUrlBuilderTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\DeleteItemByQueryUrlBuilderTest.cs">
+      <Link>DeleteItemByQueryUrlBuilderTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\DeleteItemsResponseParserTest.cs">
       <Link>DeleteItemsResponseParserTest.cs</Link>
     </Compile>
