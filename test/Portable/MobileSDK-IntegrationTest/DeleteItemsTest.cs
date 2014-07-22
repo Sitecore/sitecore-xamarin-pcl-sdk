@@ -15,11 +15,11 @@
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dk.sitecore.net:722")
-          .Credentials(testData.Users.Admin)
-          .Site(testData.ShellSite)
-          .BuildSession();
+      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .Site(testData.ShellSite)
+        .DefaultDatabase("master")
+        .BuildSession();
     }
 
     [TearDown]
