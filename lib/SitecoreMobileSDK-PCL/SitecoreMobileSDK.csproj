@@ -154,6 +154,7 @@
     <Compile Include="Validators\MediaPathValidator.cs" />
     <Compile Include="Validators\SessionConfigValidator.cs" />
     <Compile Include="Validators\WebApiParameterValidator.cs" />
+    <Compile Include="Validators\MediaOptionsValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
