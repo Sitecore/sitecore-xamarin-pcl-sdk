@@ -16,6 +16,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       result.Site = this.Site;
       result.MediaLybraryRoot = this.MediaLybraryRoot;
       result.DefaultMediaResourceExtension = this.DefaultMediaResourceExtension;
+      result.MediaPrefix = this.MediaPrefix;
 
       return result;
     }
@@ -61,6 +62,13 @@ namespace Sitecore.MobileSDK.SessionSettings
       get;
       set;
     }
+
+    public string MediaPrefix
+    {
+      get;
+      set;
+    }
+
     #endregion ISessionConfig
 
 

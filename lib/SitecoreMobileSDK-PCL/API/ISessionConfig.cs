@@ -28,5 +28,10 @@ namespace Sitecore.MobileSDK.API
     {
       get;
     }
+
+    string MediaPrefix
+    {
+      get;
+    }
   }
 }

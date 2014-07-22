@@ -125,6 +125,10 @@ namespace Sitecore.MobileSDK.SessionSettings
       }
     }
 
+    #endregion Properties
+
+    #region Not Implemented Media Properties
+
     public string MediaLybraryRoot 
     {
       get
@@ -146,7 +150,14 @@ namespace Sitecore.MobileSDK.SessionSettings
       get;
       private set;
     }
-    #endregion Properties
+
+    public string MediaPrefix
+    {
+      get;
+      private set;
+    }
+
+    #endregion Not Implemented Media Properties
 
     #region Instance Variables
     private const string DefaultMediaLybraryRoot = "/sitecore/media library";
