@@ -60,7 +60,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       int dotPosition = path.LastIndexOf(".");
       bool isExtensionUnavailable = ( -1 == dotPosition );
       bool isExtensionAvailable = !isExtensionUnavailable;
-//        lowerCasePathForComparisonNeeds.Contains(MediaItemUrlBuilder.ashxExtension);
 
       if (isMediaHookAvailable)
       {
@@ -93,42 +92,51 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
           throw new ArgumentException("ResourceUrlBuilder.BuildUrlStringForPath invalid path");
         }
 
-        relativePath = Uri.EscapeUriString (relativePath);
+        relativePath = Uri.EscapeUriString(relativePath);
 
         result = result + relativePath + MediaItemUrlBuilder.ashxExtension;
       }
 
-      result = this.AppendUrlStringWithDownloadOptions (result, options);
+      result = this.AppendUrlStringWithDownloadOptions(result, options);
 
       return result;
     }
 
+    private string SerializeOptions(IDownloadMediaOptions options)
+    {
+      bool isValidMediaOptions = MediaOptionsValidator.IsValidMediaOptions(options);
+      if (!isValidMediaOptions)
+      {
+        return string.Empty;
+      }
+
+      Dictionary<string, string> optionsDictionary = options.OptionsDictionary;
+      string paramsString = string.Empty;
+      foreach (var pair in optionsDictionary)
+      {
+        paramsString = this.AddOptionValueToPath(paramsString, pair.Key, pair.Value);
+      }
+
+      return paramsString;
+    }
+
     private string AppendUrlStringWithDownloadOptions(string path, IDownloadMediaOptions options)
     {
-      string paramsString = "";
-
-      if (!(null == options || options.IsEmpty))
-      {
-        Dictionary<string, string> optionsDictionary = options.OptionsDictionary;
-        foreach (var pair in optionsDictionary)
-        {
-          paramsString = this.AddOptionValueToPath (paramsString, pair.Key, pair.Value);
-        }
-      }
+      string paramsString = this.SerializeOptions(options);
 
       if (this.itemSource.Database != null)
       {
-        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.databaseKey, this.itemSource.Database);
+        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.databaseKey, this.itemSource.Database);
       }
 
       if (this.itemSource.Language != null)
       {
-        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.languageKey, this.itemSource.Language);
+        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.languageKey, this.itemSource.Language);
       }
 
       if (this.itemSource.Version != null)
       {
-        paramsString = this.AddOptionValueToPath (paramsString, MediaItemUrlBuilder.versionKey, this.itemSource.Version);
+        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.versionKey, this.itemSource.Version);
       }
 
       if (!String.IsNullOrEmpty(paramsString))
@@ -146,12 +154,12 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       return path += key + this.restGrammar.KeyValuePairSeparator + value + this.restGrammar.FieldSeparator;
     }
 
-    private const string mediaHook    = "~/media";
+    private const string mediaHook = "~/media";
     private const string ashxExtension  = ".ashx";
 
-    private const string languageKey  = "la";
-    private const string versionKey   = "vs";
-    private const string databaseKey  = "db";
+    private const string languageKey = "la";
+    private const string versionKey = "vs";
+    private const string databaseKey = "db";
 
     private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;
