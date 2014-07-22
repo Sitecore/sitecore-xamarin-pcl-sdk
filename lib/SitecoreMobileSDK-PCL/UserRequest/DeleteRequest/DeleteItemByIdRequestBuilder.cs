@@ -1,5 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UserRequest.DeleteRequest
 {
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.Validators;

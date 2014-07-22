@@ -63,6 +63,9 @@
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(Db, resultItem.Source.Database);
+      Assert.AreEqual(Version, resultItem.Source.Version);
+      Assert.AreEqual(Language, resultItem.Source.Language);
     }
 
     [Test]

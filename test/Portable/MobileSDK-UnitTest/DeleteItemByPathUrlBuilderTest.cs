@@ -2,6 +2,7 @@
 {
   using System;
   using NUnit.Framework;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.SessionSettings;

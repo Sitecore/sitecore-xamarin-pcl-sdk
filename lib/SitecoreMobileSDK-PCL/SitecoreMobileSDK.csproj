@@ -47,11 +47,15 @@
     <Compile Include="API\ItemWebApiRequestBuilder.cs" />
     <Compile Include="API\IWebApiCredentials.cs" />
     <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
+    <Compile Include="API\Request\IBaseDeleteItemRequest.cs" />
     <Compile Include="API\Request\IBaseGetItemRequest.cs" />
     <Compile Include="API\Request\IBaseRequestParametersBuilder.cs" />
     <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
     <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
     <Compile Include="API\Request\ICreateItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IDeleteItemsByIdRequest.cs" />
+    <Compile Include="API\Request\IDeleteItemsByPathRequest.cs" />
+    <Compile Include="API\Request\IDeleteItemsByQueryRequest.cs" />
     <Compile Include="API\Request\IGetVersionedItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IReadItemsByIdRequest.cs" />
     <Compile Include="API\Request\IReadItemsByPathRequest.cs" />
@@ -68,6 +72,7 @@
     <Compile Include="API\Session\IBaseSessionBuilder.cs" />
     <Compile Include="API\Session\IConnectionActions.cs" />
     <Compile Include="API\Session\ICreateItemActions.cs" />
+    <Compile Include="API\Session\IDeleteItemActions.cs" />
     <Compile Include="API\Session\IMediaActions.cs" />
     <Compile Include="API\Session\IReadItemActions.cs" />
     <Compile Include="API\Session\ISitecoreWebApiReadonlySession.cs" />
@@ -82,10 +87,6 @@
     <Compile Include="Items\Delete\DeleteItemByIdParameters.cs" />
     <Compile Include="Items\Delete\DeleteItemByPathParameters.cs" />
     <Compile Include="Items\Delete\DeleteItemByQueryParameters.cs" />
-    <Compile Include="Items\Delete\IBaseDeleteItemRequest.cs" />
-    <Compile Include="Items\Delete\IDeleteItemsByIdRequest.cs" />
-    <Compile Include="Items\Delete\IDeleteItemsByPathRequest.cs" />
-    <Compile Include="Items\Delete\IDeleteItemsByQueryRequest.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
     <Compile Include="Items\ScDeleteItemsResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="SessionSettings\SessionConfig.cs" />
     <Compile Include="PublicKeyX509Certificate.cs" />
     <Compile Include="SessionSettings\SessionConfigUrlBuilder.cs" />
-    <Compile Include="Session\IDeleteItemActions.cs" />
     <Compile Include="TaskFlow\IRestApiCallTasks.cs" />
     <Compile Include="TaskFlow\RestApiCallFlow.cs" />
     <Compile Include="PublicKey\GetPublicKeyTasks.cs" />
