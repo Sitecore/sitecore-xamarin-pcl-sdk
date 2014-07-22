@@ -1,28 +1,27 @@
-﻿
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK
 {
 	using System;
+
+  using Sitecore.MobileSDK.API;
 	using Sitecore.MobileSDK.API.Request;
 	using Sitecore.MobileSDK.API.Request.Parameters;
+
 	using Sitecore.MobileSDK.Items;
 	using Sitecore.MobileSDK.UrlBuilder;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.Validators;
 
+
   public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest>
 	{
-
     public ReadMediaItemRequestBuilder(string itemPath)
     {
-      MediaPathValidator.ValidateMediaPath(itemPath);
-
       this.mediaPath = itemPath;
     }
       
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database (string sitecoreDatabase)
+    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database(string sitecoreDatabase)
     {
-      this.itemSourceAccumulator = new ItemSourcePOD (
+      this.itemSourceAccumulator = new ItemSourcePOD(
         sitecoreDatabase, 
         this.itemSourceAccumulator.Language, 
         this.itemSourceAccumulator.Version);
@@ -30,9 +29,9 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Language (string itemLanguage)
+    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Language(string itemLanguage)
     {
-      this.itemSourceAccumulator = new ItemSourcePOD (
+      this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
         itemLanguage, 
         this.itemSourceAccumulator.Version);
@@ -40,9 +39,9 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Version (string itemVersion)
+    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Version(string itemVersion)
     {
-      this.itemSourceAccumulator = new ItemSourcePOD (
+      this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
         this.itemSourceAccumulator.Language,
         itemVersion);
@@ -50,7 +49,7 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> DownloadOptions (IDownloadMediaOptions downloadMediaOptions)
+    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> DownloadOptions(IDownloadMediaOptions downloadMediaOptions)
     {
       this.downloadMediaOptions = (DownloadMediaOptions)downloadMediaOptions.DeepCopyMediaDownloadOptions();
 

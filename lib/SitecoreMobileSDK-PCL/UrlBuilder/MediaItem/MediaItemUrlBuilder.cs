@@ -19,8 +19,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
   public class MediaItemUrlBuilder
   {
-
-    public MediaItemUrlBuilder(IRestServiceGrammar restGrammar, ISessionConfig sessionConfig, IItemSource itemSource)
+    public MediaItemUrlBuilder(
+      IRestServiceGrammar restGrammar, 
+      ISessionConfig sessionConfig, 
+      IItemSource itemSource)
     {
       this.itemSource = itemSource;
       this.restGrammar = restGrammar;
@@ -48,18 +50,19 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     //    https://test.host/~/media/1.png.ashx?w=640&h=480
     public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
     {
-      MediaPathValidator.ValidateMediaPath (path);
+      MediaPathValidator mediaPathValidator = new MediaPathValidator(this.sessionConfig);
+      mediaPathValidator.ValidateMediaPath(path);
 
       string relativePath = path;
       string result = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
 
       string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
+      string lowerCaseMediaHook = this.sessionConfig.MediaPrefix.ToLowerInvariant();
 
-      bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains(MediaItemUrlBuilder.mediaHook);
+      bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains(lowerCaseMediaHook);
+      bool isExtensionAvailable = MediaPathValidator.IsItemPathHasExtension(path);
 
-      int dotPosition = path.LastIndexOf(".");
-      bool isExtensionUnavailable = ( -1 == dotPosition );
-      bool isExtensionAvailable = !isExtensionUnavailable;
+      string extensionWithDotPrefix = DOT_SEPARATOR + this.sessionConfig.DefaultMediaResourceExtension.ToLowerInvariant();
 
       if (isMediaHookAvailable)
       {
@@ -67,17 +70,16 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
         if ( !isExtensionAvailable )
         {
-          result = result + MediaItemUrlBuilder.ashxExtension;
+          result = result + extensionWithDotPrefix;
         }
       }
       else
       {
-        result = result + this.restGrammar.PathComponentSeparator + MediaItemUrlBuilder.mediaHook;
+        result = result + this.restGrammar.PathComponentSeparator + lowerCaseMediaHook;
 
         string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot.ToLowerInvariant();
 
         int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
-
         bool isMediaRootAvailable = (rootStartIndex >= 0);
 
         if ( isMediaRootAvailable )
@@ -94,12 +96,11 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
         relativePath = Uri.EscapeUriString(relativePath);
 
-        result = result + relativePath + MediaItemUrlBuilder.ashxExtension;
+        result = result + relativePath + extensionWithDotPrefix;
       }
 
       result = this.AppendUrlStringWithDownloadOptions(result, options);
-
-      return result;
+      return result.ToLowerInvariant();
     }
 
     private string SerializeOptions(IDownloadMediaOptions options)
@@ -126,17 +127,17 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
       if (this.itemSource.Database != null)
       {
-        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.databaseKey, this.itemSource.Database);
+        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.DATABASE_KEY, this.itemSource.Database);
       }
 
       if (this.itemSource.Language != null)
       {
-        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.languageKey, this.itemSource.Language);
+        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.LANGUAGE_KEY, this.itemSource.Language);
       }
 
       if (this.itemSource.Version != null)
       {
-        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.versionKey, this.itemSource.Version);
+        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.VERSION_KEY, this.itemSource.Version);
       }
 
       if (!String.IsNullOrEmpty(paramsString))
@@ -154,12 +155,11 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       return path += key + this.restGrammar.KeyValuePairSeparator + value + this.restGrammar.FieldSeparator;
     }
 
-    private const string mediaHook = "~/media";
-    private const string ashxExtension  = ".ashx";
 
-    private const string languageKey = "la";
-    private const string versionKey = "vs";
-    private const string databaseKey = "db";
+    private const string DOT_SEPARATOR = ".";
+    private const string LANGUAGE_KEY = "la";
+    private const string VERSION_KEY = "vs";
+    private const string DATABASE_KEY = "db";
 
     private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;
