@@ -292,15 +292,11 @@
     }
 
     [Test]
-    public async void TestGetItemWithEmptySite()
+    public void TestGetItemWithEmptySite()
     {
       const string Site = "";
-      var session = this.CreateCreatorexSession(Site);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      Exception exception = Assert.Throws<ArgumentException>(() => this.CreateCreatorexSession(Site));
+      Assert.AreEqual("[SessionBuilder.Site] the value cannot be null or empty", exception.Message);
     }
     [Test]
     public void TestGetItemWithInvalidSite()
@@ -326,48 +322,25 @@
     }
 
     [Test]
-    public async void TestGetItemWithNullSite()
+    public void TestGetItemWithNullSite()
     {
-      var session = this.CreateCreatorexSession(null);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      Exception exception = Assert.Throws<ArgumentException>(() => this.CreateCreatorexSession(null));
+      Assert.AreEqual("[SessionBuilder.Site] the value cannot be null or empty", exception.Message);
     }
 
     [Test]
-    public async void TestGetItemWithEmptyDbInItemSource()
+    public void TestGetItemWithEmptyDbInItemSource()
     {
       const string Db = "";
       const string Language = "da";
-      const string Version = "1";
 
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(this.testData.Users.Admin)
-        //          .DefaultDatabase("master") // throws exception
-          .DefaultLanguage("da")
-          .BuildReadonlySession();
+      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .DefaultDatabase(Db)
+        .DefaultLanguage(Language)
+        .BuildReadonlySession());
 
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
-        .Payload(PayloadType.Content)
-        .Version("1")
-        .Build();
-
-
-
-      var response = await session.ReadItemAsync(request);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-
-      var expectedSource = new ItemSource("web", Language, Version);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("[SessionBuilder.DefaultDatabase] the value cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -381,7 +354,7 @@
         .DefaultDatabase(Db)
         .DefaultLanguage(Language) // ALR: should throw exception
         .BuildReadonlySession());
-      Assert.AreEqual("SitecoreWebApiSessionBuilder.Language : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("[SessionBuilder.DefaultLanguage] the value cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -395,7 +368,7 @@
         .DefaultDatabase(Db)   // ALR: should throw exception
         .DefaultLanguage(Language)
         .BuildReadonlySession());
-      Assert.AreEqual("SitecoreWebApiSessionBuilder.Database : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("[SessionBuilder.DefaultDatabase] the value cannot be null or empty", exception.Message);
     }
 
     [Test]

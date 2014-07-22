@@ -231,7 +231,8 @@
         await task;
       };
 
-      Assert.Throws<ArgumentNullException>(testCode);
+      var exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.AreEqual("Item id cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -243,7 +244,8 @@
         await task;
       };
 
-      Assert.Throws<ArgumentNullException>(testCode);
+      var exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.AreEqual("Item path cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -255,7 +257,8 @@
         await task;
       };
 
-      Assert.Throws<ArgumentNullException>(testCode);
+      var exception = Assert.Throws<ArgumentException>(testCode);
+      Assert.AreEqual("SitecoreQuery cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -268,7 +271,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("AbstractGetItemRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("Item path cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -307,7 +310,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("AbstractGetItemRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("Item path cannot be null or empty", exception.Message);
     }
 
     //TODO: create items for test first and remove them after test

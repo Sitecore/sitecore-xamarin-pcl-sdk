@@ -111,14 +111,12 @@
       const string Db = "master";
       const string Language = "en";
       const string Version = "2";
-      var source = new ItemSource(Db, "da", Version);
 
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Admin)
-          .DefaultDatabase(Db)
-          .DefaultLanguage("da")
-          .BuildReadonlySession();
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .DefaultDatabase(Db)
+        .DefaultLanguage("da")
+        .BuildReadonlySession();
 
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
@@ -247,22 +245,19 @@
     }
 
     [Test]
-    public async void TestOverrideLanguageAndVersionInRequestByQuery()
+    public async void TestOverrideLanguageInRequestByQuery()
     {
       const string Language = "da";
-      const string Version = "1";
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/*");
       var request = requestBuilder
-        // @adk : does not compile by design
-        //        .Version(Version)
         .Language(Language)
         .Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
       var resultItem = response.Items[3];
-      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, Language, Version);
+      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, Language, "1");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
 
