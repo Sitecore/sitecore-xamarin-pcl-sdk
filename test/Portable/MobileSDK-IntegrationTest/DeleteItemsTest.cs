@@ -1,8 +1,11 @@
 ﻿namespace MobileSDKIntegrationTest
 {
+  using System.Threading.Tasks;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
 
   [TestFixture]
@@ -10,6 +13,21 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
+
+    [TestFixtureSetUp]
+    public async void TextFictureSetup()
+    {
+      testData = TestEnvironment.DefaultTestEnvironment();
+      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .Site(testData.ShellSite)
+        .DefaultDatabase("master")
+        .BuildSession();
+
+      await this.DeleteAllItems("master");
+      await this.DeleteAllItems("web");
+
+    }
 
     [SetUp]
     public void Setup()
@@ -30,44 +48,83 @@
     }
 
     [Test]
-    public async void TestCorrectDeleteItemWithId()
+    public async void TestDeleteItemByPathWithDb()
     {
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId("{92EDF93B-75DB-4BF3-99A8-754AE4070122}")
-        .Database("master")
+      const string Db = "web";
+      var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .Site(testData.ShellSite)
+        .DefaultDatabase(Db)
+        .BuildSession();
+      ISitecoreItem item = await this.CreateItem("Item in web", null, itemSession);
+
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(item.Path)
+        .Database(Db)
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
-
       Assert.AreEqual(1, result.Count);
-      Assert.AreEqual("{92EDF93B-75DB-4BF3-99A8-754AE4070122}", result.ItemsIds[0]);
+      Assert.AreEqual(item.Id, result.ItemsIds[0]);
     }
 
     [Test]
-    public async void TestCorrectDeleteItemWithPath()
+    public async void TestDeleteItemByIdWithParentScope()
     {
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sitecore/content/Home/Android/Folder for deleting/2")
-        .Database("master")
+
+      ISitecoreItem parentItem = await this.CreateItem("Parent item");
+      ISitecoreItem childItem = await this.CreateItem("Child item", parentItem);
+
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(childItem.Path)
+        .AddScope(ScopeType.Parent)
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
-
       Assert.AreEqual(1, result.Count);
-      Assert.AreEqual("{F0F2D78B-1D58-4B69-8A28-E8C8E1FCFB29}", result.ItemsIds[0]);
+      Assert.AreEqual(parentItem.Id, result.ItemsIds[0]);
     }
 
     [Test]
-    public async void TestCorrectDeleteItemWithSitecoreQuery()
+    public async void TestDeleteInternationalItemWithSpacesInNameByQuery()
     {
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("/sitecore/content/Home/Android/Folder for deleting/*")
-        .Database("master")
+
+      ISitecoreItem item1 = await this.CreateItem("International בינלאומי");
+      ISitecoreItem item2 = await this.CreateItem("インターナショナル عالمي");
+
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(testData.Items.CreateItemsHere.Path + "/*")
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
+      Assert.AreEqual(2, result.Count);
+      Assert.AreEqual(item1.Id, result.ItemsIds[0]);
+      Assert.AreEqual(item2.Id, result.ItemsIds[1]);
+    }
 
-      Assert.AreEqual(3, result.Count);
-      Assert.IsTrue(result.ItemsIds.Contains("{8C982575-8BF5-4894-BB8E-D153E9BA7F0C}"));
-      Assert.IsTrue(result.ItemsIds.Contains("{84558B18-2C02-4F0C-BE69-754C467F64E9}"));
-      Assert.IsTrue(result.ItemsIds.Contains("{C07000E2-7538-4F30-9D6C-976E09EA7971}"));
+
+
+    private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)
+    {
+      if (itemSession == null)
+      {
+        itemSession = session;
+      }
+      string parentPath = parentItem == null ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(parentPath)
+        .ItemName(itemName)
+        .ItemTemplate(testData.Items.Home.Template)
+        .Build();
+      var createResponse = await itemSession.CreateItemAsync(request);
+
+      Assert.AreEqual(1, createResponse.Items.Count);
+      return createResponse.Items[0];
+    }
+
+    private async Task DeleteAllItems(string database)
+    {
+      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+        .AddScope(ScopeType.Children)
+        .Database(database)
+        .Build();
+      await this.session.DeleteItemAsync(deleteFromMaster);
     }
   }
 }

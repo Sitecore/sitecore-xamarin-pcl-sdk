@@ -17,6 +17,19 @@
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
 
+    [TestFixtureSetUp]
+    public async void TextFictureSetup()
+    {
+      testData = TestEnvironment.DefaultTestEnvironment();
+      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .Site(testData.ShellSite)
+        .BuildSession();
+
+      await this.DeleteAllItems("master");
+      await this.DeleteAllItems("web");
+    }
+
     [SetUp]
     public void Setup()
     {
@@ -154,7 +167,7 @@
    [Test]
    public async void TestCreateItemByIdWithInternationalNameAndFields()
    {
-     var expectedItem = this.CreateTestItem("International Слава Україні _ ウクライナへの栄光");
+     var expectedItem = this.CreateTestItem("International Слава Україні ウクライナへの栄光 عالمي");
      const string CreatedTitle = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
      const string CreatedText = "युक्रेन गौरव גלורי לאוקראינה";
      var request = this.CreateByIdRequestBuilder()
@@ -674,5 +687,13 @@
       Assert.AreEqual(1, response.Count);
     }
 
+    private async Task DeleteAllItems(string database)
+    {
+      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+        .AddScope(ScopeType.Children)
+        .Database(database)
+        .Build();
+      await this.session.DeleteItemAsync(deleteFromMaster);
+    }
   }
 }
