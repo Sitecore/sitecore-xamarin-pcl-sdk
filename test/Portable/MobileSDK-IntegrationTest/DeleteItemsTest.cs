@@ -15,6 +15,7 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
+    private const string SampleID = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
 
     [TestFixtureSetUp]
     public async void TextFictureSetup()
@@ -210,7 +211,7 @@
     [Test]
     public  void TestDeleteItemByIdWithDuplicateScopeReturnsException()
     {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId("{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}")
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleID)
         .AddScope(ScopeType.Self)
         .AddScope(ScopeType.Self)
         .Build());
@@ -254,6 +255,26 @@
         .Database(null)
         .Build());
       Assert.AreEqual("DeleteItemItemByPathRequestBuilder.Database: The input cannot be null or empty", exception.Message);
+
+    }
+
+    [Test]
+    public void TestDeleteItemByIdWithEmptyDatabaseReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleID)
+        .Database("")
+        .Build());
+      Assert.AreEqual("DeleteItemItemByIdRequestBuilder.Database: The input cannot be null or empty", exception.Message);
+
+    }
+
+    [Test]
+    public void TestDeleteItemByQueryWithSpacesOnlyInDatabaseReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("/sample query")
+        .Database("  ")
+        .Build());
+      Assert.AreEqual("DeleteItemItemByIdRequestBuilder.Database: The input cannot be null or empty", exception.Message);
 
     }
 
