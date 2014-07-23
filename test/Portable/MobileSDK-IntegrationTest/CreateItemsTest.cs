@@ -47,209 +47,209 @@
       this.session = null;
     }
 
-   [Test]
-   public async void TestCreateItemByIdWithoutFieldsSet()
-   {
-     var expectedItem = this.CreateTestItem("Create by parent id");
+    [Test]
+    public async void TestCreateItemByIdWithoutFieldsSet()
+    {
+      var expectedItem = this.CreateTestItem("Create by parent id");
 
-     var request = this.CreateByIdRequestBuilder()
-        .ItemName(expectedItem.DisplayName)
-        .Build();
+      var request = this.CreateByIdRequestBuilder()
+         .ItemName(expectedItem.DisplayName)
+         .Build();
 
-     var createResponse = await session.CreateItemAsync(request);
+      var createResponse = await session.CreateItemAsync(request);
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     this.GetAndCheckItem(expectedItem, resultItem);
-     this.RemoveItem(resultItem);
-   }
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      this.GetAndCheckItem(expectedItem, resultItem);
+      this.RemoveItem(resultItem);
+    }
 
-   [Test]
-   public async void TestCreateItemByIdWithOverridenDatabaseAndLanguageInRequest()
-   {
-     const string Db = "web";
-     const string Language = "da";
-     var expectedItem = this.CreateTestItem("Create danish version in web from request");
+    [Test]
+    public async void TestCreateItemByIdWithOverridenDatabaseAndLanguageInRequest()
+    {
+      const string Db = "web";
+      const string Language = "da";
+      var expectedItem = this.CreateTestItem("Create danish version in web from request");
 
-     var adminSession =
-       SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-         .Credentials(testData.Users.Admin)
-         .Site(testData.ShellSite)
-         .DefaultDatabase("master")
-         .DefaultLanguage("en")
-         .BuildSession();
+      var adminSession =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .Site(testData.ShellSite)
+          .DefaultDatabase("master")
+          .DefaultLanguage("en")
+          .BuildSession();
 
-     var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.CreateItemsHere.Id)
-        .ItemTemplate(expectedItem.Template)
-        .ItemName(expectedItem.DisplayName)
-        .Database(Db)
-        .Language(Language)
-        .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.CreateItemsHere.Id)
+         .ItemTemplate(expectedItem.Template)
+         .ItemName(expectedItem.DisplayName)
+         .Database(Db)
+         .Language(Language)
+         .Build();
 
-     var createResponse = await adminSession.CreateItemAsync(request);
+      var createResponse = await adminSession.CreateItemAsync(request);
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     Assert.AreEqual(Db, resultItem.Source.Database);
-     Assert.AreEqual(Language, resultItem.Source.Language);
-     this.RemoveItem(resultItem, adminSession);
-   }
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(Db, resultItem.Source.Database);
+      Assert.AreEqual(Language, resultItem.Source.Language);
+      this.RemoveItem(resultItem, adminSession);
+    }
 
-   [Test]
-   public async void TestCreateItemByPathWithDatabaseAndLanguageInSession()
-   {
-     const string Db = "web";
-     const string Language = "da";
-     var expectedItem = this.CreateTestItem("Create danish version in web from session");
+    [Test]
+    public async void TestCreateItemByPathWithDatabaseAndLanguageInSession()
+    {
+      const string Db = "web";
+      const string Language = "da";
+      var expectedItem = this.CreateTestItem("Create danish version in web from session");
 
-     var adminSession =
-       SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-         .Credentials(testData.Users.Admin)
-         .Site(testData.ShellSite)
-         .DefaultDatabase(Db)
-         .DefaultLanguage(Language)
-         .BuildSession();
+      var adminSession =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .Site(testData.ShellSite)
+          .DefaultDatabase(Db)
+          .DefaultLanguage(Language)
+          .BuildSession();
 
-     var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(testData.Items.CreateItemsHere.Path)
-        .ItemTemplate(expectedItem.Template)
-        .ItemName(expectedItem.DisplayName)
-        .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(testData.Items.CreateItemsHere.Path)
+         .ItemTemplate(expectedItem.Template)
+         .ItemName(expectedItem.DisplayName)
+         .Build();
 
-     var createResponse = await adminSession.CreateItemAsync(request);
+      var createResponse = await adminSession.CreateItemAsync(request);
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     Assert.AreEqual(Db, resultItem.Source.Database);
-     Assert.AreEqual(Language, resultItem.Source.Language);
-     this.RemoveItem(resultItem, adminSession);
-   }
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(Db, resultItem.Source.Database);
+      Assert.AreEqual(Language, resultItem.Source.Language);
+      this.RemoveItem(resultItem, adminSession);
+    }
 
-   
-   [Test]
-   public async void TestCreateItemByPathAndTemplateIdWithoutFieldsSet()
-   {
-     var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
-     var request = this.CreateByIdRequestBuilder()
-        .ItemName(expectedItem.DisplayName)
-        .Build();
+    [Test]
+    public async void TestCreateItemByPathAndTemplateIdWithoutFieldsSet()
+    {
+      var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
-     var createResponse = await session.CreateItemAsync(request);
+      var request = this.CreateByIdRequestBuilder()
+         .ItemName(expectedItem.DisplayName)
+         .Build();
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     this.GetAndCheckItem(expectedItem, resultItem);
-     this.RemoveItem(resultItem);
-   }
-    
+      var createResponse = await session.CreateItemAsync(request);
 
-   [Test]
-   public async void TestCreateItemByPathWithSpecifiedFields()
-   {
-     var expectedItem = this.CreateTestItem("Create with fields");
-     const string CreatedTitle = "Created title";
-     const string CreatedText = "Created text";
-     var request = this.CreateByPathRequestBuilder()
-        .ItemName(expectedItem.DisplayName)
-        .AddFieldsRawValuesByName("Title", CreatedTitle)
-        .AddFieldsRawValuesByName("Text", CreatedText)
-        .AddFields("Text", "Title")
-        .Build();
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      this.GetAndCheckItem(expectedItem, resultItem);
+      this.RemoveItem(resultItem);
+    }
 
-     var createResponse = await session.CreateItemAsync(request);
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
-     Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
+    [Test]
+    public async void TestCreateItemByPathWithSpecifiedFields()
+    {
+      var expectedItem = this.CreateTestItem("Create with fields");
+      const string CreatedTitle = "Created title";
+      const string CreatedText = "Created text";
+      var request = this.CreateByPathRequestBuilder()
+         .ItemName(expectedItem.DisplayName)
+         .AddFieldsRawValuesByName("Title", CreatedTitle)
+         .AddFieldsRawValuesByName("Text", CreatedText)
+         .AddFields("Text", "Title")
+         .Build();
 
-     this.GetAndCheckItem(expectedItem, resultItem);
-     this.RemoveItem(resultItem);
-   }
+      var createResponse = await session.CreateItemAsync(request);
 
-   [Test]
-   public async void TestCreateItemByIdWithInternationalNameAndFields()
-   {
-     var expectedItem = this.CreateTestItem("International Слава Україні ウクライナへの栄光 عالمي");
-     const string CreatedTitle = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
-     const string CreatedText = "युक्रेन गौरव גלורי לאוקראינה";
-     var request = this.CreateByIdRequestBuilder()
-        .ItemName(expectedItem.DisplayName)
-        .AddFieldsRawValuesByName("Title", CreatedTitle)
-        .AddFieldsRawValuesByName("Text", CreatedText)
-        .Payload(PayloadType.Content)
-        .Build();
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
 
-     var createResponse = await session.CreateItemAsync(request);
+      this.GetAndCheckItem(expectedItem, resultItem);
+      this.RemoveItem(resultItem);
+    }
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
-     Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
+    [Test]
+    public async void TestCreateItemByIdWithInternationalNameAndFields()
+    {
+      var expectedItem = this.CreateTestItem("International Слава Україні ウクライナへの栄光 عالمي");
+      const string CreatedTitle = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
+      const string CreatedText = "युक्रेन गौरव גלורי לאוקראינה";
+      var request = this.CreateByIdRequestBuilder()
+         .ItemName(expectedItem.DisplayName)
+         .AddFieldsRawValuesByName("Title", CreatedTitle)
+         .AddFieldsRawValuesByName("Text", CreatedText)
+         .Payload(PayloadType.Content)
+         .Build();
 
-     this.GetAndCheckItem(expectedItem, resultItem);
-     this.RemoveItem(resultItem);
-   }
+      var createResponse = await session.CreateItemAsync(request);
 
-   [Test]
-   public async void TestCreateItemByIdWithNotExistentFields()
-   {
-     var expectedItem = this.CreateTestItem("Set not existent field");
-     const string CreatedTitle = "Existent title";
-     const string CreatedTexttt = "Not existent texttt";
-     var request = this.CreateByIdRequestBuilder()
-        .Payload(PayloadType.Content)
-        .ItemName(expectedItem.DisplayName)
-        .AddFieldsRawValuesByName("Title", CreatedTitle)
-        .AddFieldsRawValuesByName("Texttt", CreatedTexttt)
-        .Build();
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
 
-     var createResponse = await session.CreateItemAsync(request);
+      this.GetAndCheckItem(expectedItem, resultItem);
+      this.RemoveItem(resultItem);
+    }
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
+    [Test]
+    public async void TestCreateItemByIdWithNotExistentFields()
+    {
+      var expectedItem = this.CreateTestItem("Set not existent field");
+      const string CreatedTitle = "Existent title";
+      const string CreatedTexttt = "Not existent texttt";
+      var request = this.CreateByIdRequestBuilder()
+         .Payload(PayloadType.Content)
+         .ItemName(expectedItem.DisplayName)
+         .AddFieldsRawValuesByName("Title", CreatedTitle)
+         .AddFieldsRawValuesByName("Texttt", CreatedTexttt)
+         .Build();
 
-     this.GetAndCheckItem(expectedItem, resultItem);
-     this.RemoveItem(resultItem);
-   }
+      var createResponse = await session.CreateItemAsync(request);
 
-   [Test]
-   public async void TestCreateItemByPathAndSetFieldWithSpacesInName()
-   {
-     var expectedItem = this.CreateTestItem("Set standard field value");
-     const string FieldName = "__Standard values";
-     const string FieldValue = "Created standard value 000!! ))";
-     var request = CreateByPathRequestBuilder()
-        .AddFields(FieldName)
-        .ItemName(expectedItem.DisplayName)
-        .AddFieldsRawValuesByName(FieldName, FieldValue)
-        .Build();
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
 
-     var createResponse = await session.CreateItemAsync(request);
+      this.GetAndCheckItem(expectedItem, resultItem);
+      this.RemoveItem(resultItem);
+    }
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
+    [Test]
+    public async void TestCreateItemByPathAndSetFieldWithSpacesInName()
+    {
+      var expectedItem = this.CreateTestItem("Set standard field value");
+      const string FieldName = "__Standard values";
+      const string FieldValue = "Created standard value 000!! ))";
+      var request = CreateByPathRequestBuilder()
+         .AddFields(FieldName)
+         .ItemName(expectedItem.DisplayName)
+         .AddFieldsRawValuesByName(FieldName, FieldValue)
+         .Build();
 
-     this.GetAndCheckItem(expectedItem, resultItem);
-     this.RemoveItem(resultItem);
-   }
+      var createResponse = await session.CreateItemAsync(request);
 
-   [Test]
-   public async void TestCreateItemByIdAndSetHtmlFieldValue()
-   {
-     var expectedItem = this.CreateTestItem("Set HTML in field");
-     const string FieldName = "Text";
-     const string FieldValue = "<div>Welcome to Sitecore!</div><div><br /><a href=\"~/link.aspx?_id=A2EE64D5BD7A4567A27E708440CAA9CD&amp;_z=z\">Accelerometer</a></div>";
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
 
-     var request = CreateByPathRequestBuilder()
-        .AddFields(FieldName)
-        .ItemName(expectedItem.DisplayName)
-        .AddFieldsRawValuesByName(FieldName, FieldValue)
-        .Build();
+      this.GetAndCheckItem(expectedItem, resultItem);
+      this.RemoveItem(resultItem);
+    }
 
-     var createResponse = await session.CreateItemAsync(request);
+    [Test]
+    public async void TestCreateItemByIdAndSetHtmlFieldValue()
+    {
+      var expectedItem = this.CreateTestItem("Set HTML in field");
+      const string FieldName = "Text";
+      const string FieldValue = "<div>Welcome to Sitecore!</div><div><br /><a href=\"~/link.aspx?_id=A2EE64D5BD7A4567A27E708440CAA9CD&amp;_z=z\">Accelerometer</a></div>";
 
-     var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-     Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
+      var request = CreateByPathRequestBuilder()
+         .AddFields(FieldName)
+         .ItemName(expectedItem.DisplayName)
+         .AddFieldsRawValuesByName(FieldName, FieldValue)
+         .Build();
 
-     this.GetAndCheckItem(expectedItem, resultItem);
-     this.RemoveItem(resultItem);
-   }
-     
+      var createResponse = await session.CreateItemAsync(request);
+
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
+
+      this.GetAndCheckItem(expectedItem, resultItem);
+      this.RemoveItem(resultItem);
+    }
+
 
     [Test]
     [Ignore]
@@ -316,7 +316,7 @@
       this.GetAndCheckItem(expectedItem, resultItem);
       this.RemoveItem(resultItem);
     }
-    
+
     [Test]
     public async void TestCreateItemByIdAndSetInvalidEmptyAndNullFields()
     {
