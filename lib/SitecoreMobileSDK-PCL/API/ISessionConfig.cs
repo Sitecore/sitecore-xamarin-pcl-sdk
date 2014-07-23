@@ -1,6 +1,7 @@
 namespace Sitecore.MobileSDK.API
 {
-  public interface ISessionConfig
+  public interface ISessionConfig 
+    : IMediaLibrarySettings // TODO : remove inheritance
   {
     ISessionConfig SessionConfigShallowCopy();
 
@@ -18,10 +19,6 @@ namespace Sitecore.MobileSDK.API
     {
         get;
     }
-
-  	string MediaLybraryRoot
-  	{
-  		get;
-  	}
+      
   }
 }

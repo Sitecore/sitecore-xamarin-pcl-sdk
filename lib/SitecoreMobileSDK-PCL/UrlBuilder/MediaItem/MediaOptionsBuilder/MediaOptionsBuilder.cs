@@ -69,6 +69,11 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
     public IDownloadMediaOptions Build()
     {
+      if (null == this.options)
+      {
+        throw new InvalidOperationException("[MediaOptionsBuilder] Nothing to build since no options have been specified by the user");
+      }
+
       return this.options;
     }
 
