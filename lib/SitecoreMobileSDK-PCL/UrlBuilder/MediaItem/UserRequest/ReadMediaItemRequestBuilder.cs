@@ -21,6 +21,15 @@
       
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database(string sitecoreDatabase)
     {
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.itemSourceAccumulator.Database,
+        "[ReadMediaItemRequestBuilder.Database] the property cannot be assigned twice"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        sitecoreDatabase, 
+        "[ReadMediaItemRequestBuilder.Database] the value cannot be null or empty"
+      );
+
       this.itemSourceAccumulator = new ItemSourcePOD(
         sitecoreDatabase, 
         this.itemSourceAccumulator.Language, 
@@ -31,6 +40,15 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Language(string itemLanguage)
     {
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.itemSourceAccumulator.Language,
+        "[ReadMediaItemRequestBuilder.Language] the property cannot be assigned twice"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        itemLanguage, 
+        "[ReadMediaItemRequestBuilder.Language] the value cannot be null or empty"
+      );
+
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
         itemLanguage, 
@@ -41,6 +59,16 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Version(string itemVersion)
     {
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.itemSourceAccumulator.Version,
+        "[ReadMediaItemRequestBuilder.Version] the property cannot be assigned twice"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        itemVersion, 
+        "[ReadMediaItemRequestBuilder.Version] the value cannot be null or empty"
+      );
+
+
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
         this.itemSourceAccumulator.Language,
@@ -51,12 +79,23 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> DownloadOptions(IDownloadMediaOptions downloadMediaOptions)
     {
+      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
+        this.downloadMediaOptions,
+        "[ReadMediaItemRequestBuilder.DownloadOptions] the property cannot be assigned twice"
+      );
+
+      MediaOptionsValidator.ValidateMediaOptions
+      (
+        downloadMediaOptions,
+        "[ReadMediaItemRequestBuilder.DownloadOptions] the value cannot be null or empty"
+      );
+
+
       this.downloadMediaOptions = (DownloadMediaOptions)downloadMediaOptions.DeepCopyMediaDownloadOptions();
 
       return this;
     }
-      
-		
+
 		public IReadMediaItemRequest Build()
 		{
 			var result = new ReadMediaItemParameters(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaPath);
