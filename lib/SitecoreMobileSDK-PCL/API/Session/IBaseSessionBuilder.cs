@@ -13,6 +13,7 @@ namespace Sitecore.MobileSDK.API.Session
     IBaseSessionBuilder DefaultLanguage(string defaultLanguage);
     IBaseSessionBuilder MediaLibraryRoot(string mediaLibraryRootItem);
     IBaseSessionBuilder DefaultMediaResourceExtension(string defaultExtension);
+    IBaseSessionBuilder MediaPrefix(string mediaPrefix);
   }
 }
 

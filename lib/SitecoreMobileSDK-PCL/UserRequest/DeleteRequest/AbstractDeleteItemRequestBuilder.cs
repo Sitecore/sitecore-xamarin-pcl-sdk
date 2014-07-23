@@ -49,7 +49,7 @@
 
     public IDeleteItemRequestBuilder<T> AddScope(params ScopeType[] scope)
     {
-      var castedScope = (ICollection<ScopeType>)scope;
+      ICollection<ScopeType> castedScope = scope;
       return this.AddScope(castedScope);
     }
   }

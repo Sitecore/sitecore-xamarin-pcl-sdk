@@ -7,19 +7,38 @@ namespace SitecoreMobileSDKMockObjects
 
   public class MutableSessionConfig : SessionConfig
   {
-    public MutableSessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
-      : base(instanceUrl, login, password, site, itemWebApiVersion)
+    public MutableSessionConfig(
+      string instanceUrl, 
+      string login, 
+      string password, 
+      string site = null, 
+      string itemWebApiVersion = "v1",
+      string mediaLybraryRoot = "/sitecore/media library",
+      string defaultMediaResourceExtension = "ashx",
+      string mediaPrefix = "~/media")
+    : base(instanceUrl, login, password, site, itemWebApiVersion, mediaLybraryRoot, defaultMediaResourceExtension, mediaPrefix)
     {
     }
 
     public override SessionConfig ShallowCopy()
     {
-      var result = new MutableSessionConfig("mock instance", "mock login", "mock password", "mock site", "v1");
+      var result = new MutableSessionConfig(
+        "mock instance", 
+        "mock login", 
+        "mock password", 
+        "mock site", 
+        "v1", 
+        this.MediaLybraryRoot, 
+        this.DefaultMediaResourceExtension, 
+        this.MediaPrefix);
+
+      // @adk : skipping validation
       result.SetInstanceUrl(this.InstanceUrl);
       result.SetLogin(this.UserName);
       result.SetPassword(this.Password);
       result.SetSite(this.Site);
       result.SetItemWebApiVersion(this.ItemWebApiVersion);
+
 
       return result;
     }

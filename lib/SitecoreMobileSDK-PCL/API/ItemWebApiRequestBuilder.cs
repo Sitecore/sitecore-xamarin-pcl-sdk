@@ -1,4 +1,3 @@
-
 namespace Sitecore.MobileSDK.API
 {
     using Sitecore.MobileSDK.API.Request;
@@ -9,6 +8,7 @@ namespace Sitecore.MobileSDK.API
     using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
     using Sitecore.MobileSDK.UrlBuilder.MediaItem;
     using Sitecore.MobileSDK.UserRequest;
+    using Sitecore.MobileSDK.Validators;
 
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 
@@ -20,31 +20,45 @@ namespace Sitecore.MobileSDK.API
 
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
     {
+      ItemIdValidator.ValidateItemId(itemId);
       return new ReadItemByIdRequestBuilder(itemId);
     }
 
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByPathRequest> ReadItemsRequestWithPath(string itemPath)
     {
+      ItemPathValidator.ValidateItemPath(itemPath);
       return new ReadItemByPathRequestBuilder(itemPath);
     }
 
     public static IBaseRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
     {
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        sitecoreQuery, 
+        "[ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery] value path cannot be null or empty"
+      );
+
       return new ReadItemByQueryRequestBuilder(sitecoreQuery);
     }
 
-    public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
-    {
-      return new ReadMediaItemRequestBuilder(mediaPath);
-    }
+		public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
+		{
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        mediaPath, 
+        "[ItemWebApiRequestBuilder.ReadMediaItemRequest] value path cannot be null or empty"
+      );
+
+			return new ReadMediaItemRequestBuilder(mediaPath);
+		}
 
     public static ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
     {
+      ItemIdValidator.ValidateItemId(itemId);
       return new CreateItemByIdRequestBuilder(itemId);
     }
 
     public static ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
     {
+      ItemPathValidator.ValidateItemPath(itemPath);
       return new CreateItemByPathRequestBuilder(itemPath);
     }
 

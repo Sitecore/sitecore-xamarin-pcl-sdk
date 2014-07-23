@@ -88,7 +88,8 @@ namespace Sitecore.MobileSdkUnitTest
           .DefaultLanguage("en")
           .Site("/sitecore/shell")
           .MediaLibraryRoot("/sitecore/media library")
-          .DefaultMediaResourceExtension("ashx");
+          .DefaultMediaResourceExtension("ashx")
+          .MediaPrefix("~/media");
 
       var session = builder.BuildSession();
       Assert.IsNotNull(session);
