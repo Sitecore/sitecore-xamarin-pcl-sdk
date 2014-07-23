@@ -253,19 +253,19 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestQueryRequestBuilderWithNullQueryCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(null));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(null));
     }
 
     [Test]
     public void TestItemQueryRequestBuilderWithEmptyQueryCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(""));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(""));
     }
 
     [Test]
     public void TestQueryRequestBuilderWithWhitespaceQueryCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("\t \r \n"));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("\t \r \n"));
     }            
     #endregion SitecoreQuery
 
@@ -609,7 +609,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestAddScopeThrowsExceptionOnDuplicates()
     {
       Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/SitecoreDotShell")
         .AddScope(ScopeType.Self)
         .AddScope(ScopeType.Self));
     }
@@ -639,7 +639,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestAddScopeThrowsExceptionOnDuplicatesInParams()
     {
       Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecoreDOTshell")
         .AddScope(ScopeType.Self, ScopeType.Parent, ScopeType.Self ) );
     }
 
@@ -647,7 +647,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestAddScopeThrowsExceptionOnDuplicatesInIncrementCalls()
     {
       Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecoreDOTshell")
         .AddScope(ScopeType.Self, ScopeType.Parent )
         .AddScope(ScopeType.Self) );
     }
