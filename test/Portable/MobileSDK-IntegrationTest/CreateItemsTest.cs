@@ -53,7 +53,6 @@
      var expectedItem = this.CreateTestItem("Create by parent id");
 
      var request = this.CreateByIdRequestBuilder()
-        .ItemTemplate(expectedItem.Template)
         .ItemName(expectedItem.DisplayName)
         .Build();
 
@@ -129,7 +128,6 @@
      var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
      var request = this.CreateByIdRequestBuilder()
-        .ItemTemplate("{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}")
         .ItemName(expectedItem.DisplayName)
         .Build();
 
@@ -236,6 +234,7 @@
      var expectedItem = this.CreateTestItem("Set HTML in field");
      const string FieldName = "Text";
      const string FieldValue = "<div>Welcome to Sitecore!</div><div><br /><a href=\"~/link.aspx?_id=A2EE64D5BD7A4567A27E708440CAA9CD&amp;_z=z\">Accelerometer</a></div>";
+
      var request = CreateByPathRequestBuilder()
         .AddFields(FieldName)
         .ItemName(expectedItem.DisplayName)
@@ -253,6 +252,7 @@
      
 
     [Test]
+    [Ignore]
     public async void TestCreateItemByPathFromBranch()
     {
       TestEnvironment.Item expectedItem = this.CreateTestItem("Multiple item brunch");
@@ -273,13 +273,14 @@
     public void TestCreateItemByIdAndGetDuplicateFields()
     {
       const string FieldName = "Text";
-      var exception = Assert.Throws<ArgumentException>(() =>
+
+      var exception = Assert.Throws<InvalidOperationException>(() =>
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
@@ -287,13 +288,14 @@
     {
       const string FieldName = "Text";
       const string FieldValue = "Duplicate value";
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
          .ItemName("Set duplicate fields")
          .AddFieldsRawValuesByName(FieldName, FieldValue)
          .ItemTemplate(testData.Items.Home.Template)
          .AddFieldsRawValuesByName(FieldName, FieldValue)
          .Build());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
@@ -503,7 +505,7 @@
          .ItemName("Item name 2")
          .ItemTemplate("template")
          .Build());
-      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemName : The input cannot be set twice", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be set twice", exception.Message);
     }
 
     [Test]
@@ -523,7 +525,7 @@
          .ItemName("Item with empty parent id")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("Item id cannot be null or empty", exception.Message);
+      Assert.AreEqual("Item id cannot be null", exception.Message);
     }
 
     [Test]

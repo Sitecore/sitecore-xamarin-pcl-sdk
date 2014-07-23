@@ -17,12 +17,12 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
     {
       if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemName))
       {
-        throw new ArgumentException("CreateItemByIdRequestBuilder.ItemName : The input cannot be null or empty");
+        throw new ArgumentException(this.GetType().Name + ".ItemName : The input cannot be null or empty");
       }
 
       if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemTemplate))
       {
-        throw new ArgumentException("CreateItemByIdRequestBuilder.ItemTemplate : The input cannot be null or empty");
+        throw new ArgumentException(this.GetType().Name + ".ItemTemplate : The input cannot be null or empty");
       }
 
       CreateItemByPathParameters result = 
