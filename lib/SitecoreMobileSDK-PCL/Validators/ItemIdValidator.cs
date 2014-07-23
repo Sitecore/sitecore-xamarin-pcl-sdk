@@ -2,12 +2,8 @@
 {
   using System;
 
-  public class ItemIdValidator
+  public static class ItemIdValidator
   {
-    private ItemIdValidator ()
-    {
-    }
-
     public static void ValidateItemId(string itemId)
     {
       if (string.IsNullOrWhiteSpace(itemId))
