@@ -120,7 +120,7 @@ namespace Sitecore.MobileSDK.UserRequest
       bool isFieldListHasDuplicates = DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields);
       if (isFieldListHasDuplicates)
       {
-        throw new InvalidOperationException(this.GetType().Name + " : duplicate fields are not allowed");
+        throw new ArgumentException(this.GetType().Name + " : duplicate fields are not allowed");
       }
 
       this.queryParameters = new QueryParameters( this.queryParameters.Payload, this.queryParameters.ScopeParameters, newFields );
