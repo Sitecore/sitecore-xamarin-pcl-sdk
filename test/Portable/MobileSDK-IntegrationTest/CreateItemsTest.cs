@@ -18,7 +18,7 @@
     private ISitecoreWebApiSession session;
 
     [TestFixtureSetUp]
-    public async void TextFictureSetup()
+    public async void TestFixtureSetup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
       session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)

@@ -4,17 +4,12 @@
   using System.Threading.Tasks;
   using NUnit.Framework;
 
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Session;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class SetDefaultSessionSettingsTest
@@ -28,7 +23,7 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      this.sessionAuthenticatedUser = 
+      this.sessionAuthenticatedUser =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .DefaultDatabase("web")

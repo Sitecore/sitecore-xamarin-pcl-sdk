@@ -1,16 +1,10 @@
-﻿using SitecoreMobileSDKMockObjects;
-using Sitecore.MobileSDK;
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
-  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
-  using MobileSDKIntegrationTest;
-
 
   [TestFixture]
   public class AuthenticateTest
@@ -143,61 +137,6 @@ namespace MobileSDKIntegrationTest
 
       bool response = await session.AuthenticateAsync();
       Assert.False(response);
-    }
-
-    [Test]
-    public async void TestGetAuthenticationWithEmptyPassword()
-    {
-      var sessionConfig = new MutableSessionConfig("mock instance", "mock login", "mock password");
-      sessionConfig.SetInstanceUrl(testData.InstanceUrl);
-      sessionConfig.SetLogin(testData.Users.Admin.UserName);
-      sessionConfig.SetPassword("");
-
-      var session = new ScApiSession(sessionConfig);
-
-      bool response = await session.AuthenticateAsync();
-      Assert.False(response);
-    }
-
-    [Test]
-    public async void TestGetAuthenticationWithNullUsername()
-    {
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD(null, testData.Users.Admin.Password))
-        .BuildReadonlySession();
-
-
-      bool response = await session.AuthenticateAsync();
-      Assert.False(response);
-    }
-
-    [Test]
-    public void TestGetAuthenticationWithNullPassword()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() =>  SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-         .Credentials(new WebApiCredentialsPOD("Username $#%^&^*", null))
-         .BuildReadonlySession());
-      Assert.AreEqual("Value cannot be null.\r\nParameter name: SessionConfig.Credentials : password is required for authenticated session", exception.Message);
-    }
-
-    [Test]
-    public void TestGetAuthenticationWithNullUrl()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => 
-        SessionConfig.NewAuthenticatedSessionConfig(null, testData.Users.Admin.UserName, testData.Users.Admin.Password)
-      );
-
-      Assert.IsTrue(exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required"));
-    }
-
-    [Test]
-    public void TestGetAuthenticationWithEmptyUrl()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => 
-        SessionConfig.NewAuthenticatedSessionConfig("", testData.Users.Admin.UserName, testData.Users.Admin.Password)
-      );
-
-      Assert.IsTrue(exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required"));
     }
 
     [Test]
