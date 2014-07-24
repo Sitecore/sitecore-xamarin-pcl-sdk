@@ -576,7 +576,6 @@
       Assert.AreEqual(0, createResponse.Items.Count);
     }
 
-    //ALR: AbstractGetItemRequestBuilder? Please, change with "Create" request builder
     [Test]
     public void TestCreateItemByIdWithNullDatabase()
     {

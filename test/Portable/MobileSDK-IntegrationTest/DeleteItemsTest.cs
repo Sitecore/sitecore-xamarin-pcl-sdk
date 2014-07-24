@@ -18,7 +18,7 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
-    private const string SampleID = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
+    private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
 
     [TestFixtureSetUp]
     public async void TestFixtureSetup()
@@ -210,9 +210,37 @@
     }
 
     [Test]
+    public async void TestDeleteItemByNotExistentPath()
+    {
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/not existent item")
+        .Build();
+
+      var response = await session.DeleteItemAsync(request);
+      Assert.AreEqual(0, response.Count);
+    }
+
+    [Test]
+    public async void TestDeleteItemByNotExistentId()
+    {
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
+        .Build();
+
+      var response = await session.DeleteItemAsync(request);
+      Assert.AreEqual(0, response.Count);
+    }
+
+    [Test]
+    public void TestDeleteItemByInvalidIdReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId("invalid id")
+        .Build());
+      Assert.AreEqual("Item id must have curly braces '{}'", exception.Message);
+    }
+
+    [Test]
     public  void TestDeleteItemByIdWithDuplicateScopeReturnsException()
     {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleID)
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
         .AddScope(ScopeType.Self)
         .AddScope(ScopeType.Self)
         .Build());
@@ -257,7 +285,7 @@
     [Test]
     public void TestDeleteItemByIdWithEmptyDatabaseReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleID)
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
         .Database("")
         .Build());
       Assert.AreEqual("DeleteItemItemByIdRequestBuilder.Database: The input cannot be null or empty", exception.Message);
@@ -293,6 +321,8 @@
       Assert.AreEqual("DeleteItemItemByPathRequestBuilder.Path: The input cannot be null or empty", exception.Message);
     }
 
+
+
     private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)
     {
       if (itemSession == null)
@@ -322,7 +352,7 @@
       }
       catch (Exception ex)
       {
-        string message = "Error removing items : " + ex.ToString(); 
+        string message = "Error removing items : " + ex; 
         Debug.WriteLine(message);
 
         return null;
