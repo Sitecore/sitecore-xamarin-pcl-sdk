@@ -1,8 +1,11 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Diagnostics;
   using System.Threading.Tasks;
   using NUnit.Framework;
+
+  using Sitecore.MobileSDK.Items;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
@@ -20,14 +23,15 @@
     [TestFixtureSetUp]
     public async void TestFixtureSetup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
-        .BuildSession();
+        this.testData = TestEnvironment.DefaultTestEnvironment();
+        this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .Site(testData.ShellSite)
+          .BuildSession();
 
-      await this.DeleteAllItems("master");
-      await this.DeleteAllItems("web");
+        // @adk : must not throw
+        await this.DeleteAllItems("master");
+        await this.DeleteAllItems("web");
     }
 
     [SetUp]
@@ -249,6 +253,7 @@
       this.GetAndCheckItem(expectedItem, resultItem);
       this.RemoveItem(resultItem);
     }
+
 
 
     [Test]
@@ -689,13 +694,22 @@
       Assert.AreEqual(1, response.Count);
     }
 
-    private async Task DeleteAllItems(string database)
+    private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
-        .AddScope(ScopeType.Children)
-        .Database(database)
-        .Build();
-      await this.session.DeleteItemAsync(deleteFromMaster);
+      try
+      {
+        var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+          .AddScope(ScopeType.Children)
+          .Database(database)
+          .Build();
+        return await this.session.DeleteItemAsync(deleteFromMaster);
+      }
+      catch(Exception ex)
+      {
+        string message = "Error removing items : " + ex.ToString(); 
+        Debug.WriteLine(message);
+        return null;
+      }
     }
   }
 }

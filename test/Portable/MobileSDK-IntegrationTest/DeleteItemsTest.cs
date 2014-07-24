@@ -1,8 +1,11 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Diagnostics;
   using System.Threading.Tasks;
   using NUnit.Framework;
+
+  using Sitecore.MobileSDK.Items;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
@@ -20,23 +23,23 @@
     [TestFixtureSetUp]
     public async void TestFixtureSetup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
-        .DefaultDatabase("master")
-        .BuildSession();
+        this.testData = TestEnvironment.DefaultTestEnvironment();
+        this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(testData.Users.Admin)
+          .Site(testData.ShellSite)
+          .DefaultDatabase("master")
+          .BuildSession();
 
+      // @adk : must not throw
       await this.DeleteAllItems("master");
       await this.DeleteAllItems("web");
-
     }
 
     [SetUp]
     public void Setup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
@@ -124,7 +127,6 @@
     [Test]
     public async void TestDeleteInternationalItemByPathbWithChildrenScope()
     {
-
       ISitecoreItem selfItem = await this.CreateItem("インターナショナル عالمي JJ ж");
       ISitecoreItem childItem = await this.CreateItem("インターナショナル", selfItem);
 
@@ -308,13 +310,23 @@
       return createResponse.Items[0];
     }
 
-    private async Task DeleteAllItems(string database)
+    private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
-        .AddScope(ScopeType.Children)
-        .Database(database)
-        .Build();
-      await this.session.DeleteItemAsync(deleteFromMaster);
+      try
+      {
+        var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+          .AddScope(ScopeType.Children)
+          .Database(database)
+          .Build();
+        return await this.session.DeleteItemAsync(deleteFromMaster);
+      }
+      catch (Exception ex)
+      {
+        string message = "Error removing items : " + ex.ToString(); 
+        Debug.WriteLine(message);
+
+        return null;
+      }
     }
   }
 }
