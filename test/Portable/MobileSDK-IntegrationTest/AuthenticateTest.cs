@@ -129,17 +129,6 @@
     }
 
     [Test]
-    public async void TestGetAuthenticationWithEmptyUsername()
-    {
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-       .Credentials(new WebApiCredentialsPOD("", testData.Users.Admin.Password))
-       .BuildReadonlySession();
-
-      bool response = await session.AuthenticateAsync();
-      Assert.False(response);
-    }
-
-    [Test]
     public void TestGetPublicKeyWithNotExistentUrl()
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobilesdk-notexistent.com")

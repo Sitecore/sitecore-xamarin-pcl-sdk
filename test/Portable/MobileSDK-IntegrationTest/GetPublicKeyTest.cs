@@ -1,15 +1,11 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
-
   using System;
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.Session;
 
   [TestFixture]
   public class GetPublicKeyTest
@@ -84,40 +80,6 @@
 
       Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
       Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
-    }
-
-    [Test]
-    public void TestGetItemWithNullInstanceUrl()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(null)
-        .Credentials(this.testData.Users.Admin)
-        .BuildReadonlySession());
-      Assert.IsTrue(exception.GetBaseException().ToString().Contains("SessionConfig.InstanceUrl is required"));
-    }
-
-    [Test]
-    public async void TestGetItemWithNullItemsSource()
-    {
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.Admin)
-        .BuildReadonlySession();
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-        .Build();
-
-      var itemRequest = await session.ReadItemAsync(request);
-      Assert.IsNotNull(itemRequest);
-      Assert.AreEqual(1, itemRequest.ResultCount);
-    }
-
-    [Test]
-    public void TestGetItemWithNullPassword()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Password, null))
-        .BuildSession());
-
-      Assert.AreEqual("Value cannot be null.\r\nParameter name: SessionConfig.Credentials : password is required for authenticated session", exception.Message);
     }
 
     [Test]

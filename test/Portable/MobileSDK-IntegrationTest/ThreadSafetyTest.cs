@@ -152,7 +152,7 @@ namespace MobileSDKIntegrationTest
       resizing.SetWidth(100);
       resizing.SetHeight(500);
         
-      string mediaPath = "/sitecore/media library/xyz.png.ashx";
+      string mediaPath = "/sitecore/media library/xyz";
 
       try
       {

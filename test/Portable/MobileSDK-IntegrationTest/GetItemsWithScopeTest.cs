@@ -3,12 +3,9 @@
   using System;
   using NUnit.Framework;
 
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
-  using Sitecore.MobileSDK.Session;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class GetItemsWithScopeTest
@@ -129,41 +126,6 @@
       Assert.AreEqual("Allowed_Parent", response.Items[3].DisplayName);
     }
 
-    [Test]
-    public void TestGetItemWithDuplicateScopesById()
-    {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.ItemWithVersions.Id)
-        .AddScope(ScopeType.Self)
-        .Language("en")
-        .AddScope(ScopeType.Children)
-        .AddScope(ScopeType.Self)
-        .Build());
-      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
-    }
-
-    [Test]
-    public void TestGetItemWithDuplicateScopeByPath()
-    {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.ItemWithVersions.Path)
-        .Language("en")
-        .AddScope(ScopeType.Parent)
-        .Database("web")
-        .AddScope(ScopeType.Parent)
-        .AddScope(ScopeType.Self)
-        .Build());
-      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
-    }
-
-    [Test]
-    public void TestGetItemWithDuplicateScopeByQuery()
-    {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.ItemWithVersions.Path)
-        .AddScope(ScopeType.Children)
-        .AddScope(ScopeType.Children)
-        .Build());
-      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
-    }
-
     [Test] 
     public async void TestGetItemWithChildrenScopeByQueryWithSpecifiedFields()        //children in name
     {
@@ -221,7 +183,7 @@
         .AddScope(ScopeType.Children)
         .AddScope(ScopeType.Parent)
         .Build());
-      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Scope : duplicates are not allowed", exception.Message);
     }
 
     [Test]
@@ -230,7 +192,7 @@
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
         .AddScope(ScopeType.Self, ScopeType.Self)
         .Build());
-      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Scope : duplicates are not allowed", exception.Message);
     }
 
     [Test]
@@ -239,7 +201,7 @@
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
         .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Children)
         .Build());
-      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.Scope : duplicates are not allowed", exception.Message);
     }
   }
 }

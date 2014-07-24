@@ -4,19 +4,15 @@
   using System.Collections.ObjectModel;
   using NUnit.Framework;
 
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Session;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class GetFieldsTest
   {
-    private TestEnvironment                testData                ;
+    private TestEnvironment testData;
     private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
 
     [SetUp]
@@ -290,7 +286,7 @@
     [Test]
     public async void TestGetItemByIdWithAllFieldsWithoutReadAccessToSomeFields()
     {
-      var sessionCreatorexUser = 
+      var sessionCreatorexUser =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Creatorex)
           .BuildReadonlySession();
@@ -329,7 +325,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFields("Title", "Text").AddFields("title").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("ReadItemByIdRequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Fields : duplicates are not allowed", exception.Message);
     }
 
     [Test]
@@ -338,7 +334,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields("Text", "Text").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("ReadItemByPathRequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Fields : duplicates are not allowed", exception.Message);
     }
 
     [Test]
@@ -347,7 +343,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFields("Title", "", "Title").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("ReadItemByQueryRequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.Fields : duplicates are not allowed", exception.Message);
     }
 
     [Test]

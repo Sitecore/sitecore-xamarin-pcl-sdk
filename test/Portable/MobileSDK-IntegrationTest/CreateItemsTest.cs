@@ -705,7 +705,7 @@
       }
       catch(Exception ex)
       {
-        string message = "Error removing items : " + ex.ToString(); 
+        string message = "Error removing items : " + ex; 
         Debug.WriteLine(message);
         return null;
       }

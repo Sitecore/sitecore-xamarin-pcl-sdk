@@ -1,6 +1,5 @@
 ﻿using Sitecore.MobileSDK.SessionSettings;
 using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.PublicKey;
 
 namespace MobileSDKIntegrationTest
 {
