@@ -168,9 +168,14 @@ namespace Sitecore.MobileSDK.SessionSettings
 
       bool hasLogin = !string.IsNullOrWhiteSpace(this.UserName);
       bool hasPassword = !string.IsNullOrWhiteSpace(this.Password);
+      if (!hasLogin && hasPassword)
+      {
+        throw new ArgumentException("SessionConfig.Credentials : login is required for authenticated session");
+      }
+
       if (hasLogin && !hasPassword)
       {
-        throw new ArgumentNullException("SessionConfig.Credentials : password is required for authenticated session");
+        throw new ArgumentException("SessionConfig.Credentials : password is required for authenticated session");
       }
 
       if (!SessionConfigValidator.IsValidSchemeOfInstanceUrl(this.InstanceUrl))

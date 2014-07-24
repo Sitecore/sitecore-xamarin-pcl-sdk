@@ -48,7 +48,7 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD(null, "password"))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionConfig.Credentials.Username : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("SessionConfig.Credentials : login is required for authenticated session", exception.Message);
     }
 
     [Test]

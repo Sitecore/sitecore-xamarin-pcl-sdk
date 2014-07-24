@@ -19,14 +19,14 @@ namespace Sitecore.MobileSDK.Session
       string optionalMediaPrefix = OptionalMediaPrefix();
 
 
-////////
+      ////////
       SessionConfig conf = SessionConfig.NewSessionConfig(
-        this.instanceUrl, 
+        this.instanceUrl,
         //@adk : TODO : do not store credentials in variables
         this.credentials.UserName,
         this.credentials.Password,
 
-        this.site, 
+        this.site,
         optionalWebApiVersion,
         optionalMediaRoot,
         optionalMediaExtension,
@@ -125,7 +125,7 @@ namespace Sitecore.MobileSDK.Session
         "[IBaseSessionBuilder.Site] the property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        site, 
+        site,
         "[SessionBuilder.Site] the value cannot be null or empty"
       );
 
@@ -140,7 +140,7 @@ namespace Sitecore.MobileSDK.Session
         "[IBaseSessionBuilder.WebApiVersion] the property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        webApiVersion, 
+        webApiVersion,
         "[SessionBuilder.WebApiVersion] the value cannot be null or empty"
       );
 
@@ -156,15 +156,15 @@ namespace Sitecore.MobileSDK.Session
         "[IBaseSessionBuilder.DefaultDatabase] the property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        defaultDatabase, 
+        defaultDatabase,
         "[SessionBuilder.DefaultDatabase] the value cannot be null or empty"
       );
 
 
-      this.itemSourceAccumulator = 
+      this.itemSourceAccumulator =
         new ItemSourcePOD(
-          defaultDatabase, 
-          this.itemSourceAccumulator.Language, 
+          defaultDatabase,
+          this.itemSourceAccumulator.Language,
           itemSourceAccumulator.Version);
 
       return this;
@@ -177,15 +177,15 @@ namespace Sitecore.MobileSDK.Session
         "[IBaseSessionBuilder.DefaultLanguage] the property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        defaultLanguage, 
+        defaultLanguage,
         "[SessionBuilder.DefaultLanguage] the value cannot be null or empty"
       );
 
 
-      this.itemSourceAccumulator = 
+      this.itemSourceAccumulator =
         new ItemSourcePOD(
-          this.itemSourceAccumulator.Database, 
-          defaultLanguage, 
+          this.itemSourceAccumulator.Database,
+          defaultLanguage,
           itemSourceAccumulator.Version);
 
       return this;
@@ -197,7 +197,7 @@ namespace Sitecore.MobileSDK.Session
         this.mediaRoot,
         "[IBaseSessionBuilder.MediaLibraryRoot] the property cannot be assigned twice"
       );
-      MediaPathValidator.ValidateMediaRoot(mediaLibraryRootItem); 
+      MediaPathValidator.ValidateMediaRoot(mediaLibraryRootItem);
 
       this.mediaRoot = mediaLibraryRootItem;
       return this;
@@ -210,7 +210,7 @@ namespace Sitecore.MobileSDK.Session
         "[IBaseSessionBuilder.DefaultMediaResourceExtension] the property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        defaultExtension, 
+        defaultExtension,
         "[SessionBuilder.DefaultMediaResourceExtension] the value cannot be null or empty"
       );
 
@@ -225,7 +225,7 @@ namespace Sitecore.MobileSDK.Session
         "[IBaseSessionBuilder.MediaPrefix] the property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        mediaPrefix, 
+        mediaPrefix,
         "[SessionBuilder.MediaPrefix] the value cannot be null or empty"
       );
 
