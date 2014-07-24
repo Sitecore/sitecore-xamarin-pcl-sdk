@@ -329,7 +329,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFields("Title", "Text").AddFields("title").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
@@ -338,7 +338,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields("Text", "Text").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
@@ -347,7 +347,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFields("Title", "", "Title").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
@@ -384,7 +384,7 @@
         .Payload(PayloadType.Content)
         .Payload(PayloadType.Full)
         .Build());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
 
     }
 
@@ -395,7 +395,7 @@
         .Payload(PayloadType.Full)
         .Payload(PayloadType.Min)
         .Build());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
     }
 
     [Test]
@@ -405,7 +405,7 @@
         .Payload(PayloadType.Content)
         .Payload(PayloadType.Content)
         .Build());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
     }
   }
 }

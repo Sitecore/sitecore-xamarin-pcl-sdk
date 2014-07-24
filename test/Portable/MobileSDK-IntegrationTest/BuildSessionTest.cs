@@ -24,13 +24,13 @@
     }
 
     [Test]
-    public void TestGetAuthenticationWithEmptyUsernameReturnsException()
+    public void TestBuildSessionWithEmptyUsernameReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
        .Credentials(new WebApiCredentialsPOD("", testData.Users.Admin.Password))
        .BuildReadonlySession());
 
-      Assert.AreEqual("SessionConfig.Credentials.Username : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.Credentials.Username : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -39,7 +39,7 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD("username", ""))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionConfig.Credentials.Password : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.Credentials.Password : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -48,7 +48,7 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD(null, "password"))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionConfig.Credentials.Username : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.Credentials.Username : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -57,7 +57,7 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD("username", null))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionConfig.Credentials.Password : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.Credentials.Password : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -66,16 +66,16 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(null)
         .Credentials(new WebApiCredentialsPOD("Username", "Password"))
         .BuildReadonlySession());
-      Assert.AreEqual("SessionConfig.InstanceUrl : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.InstanceUrl : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetAuthenticationWithEmptyUrlReturnsException()
+    public void TestBuildSessionWithEmptyUrlReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("")
         .Credentials(new WebApiCredentialsPOD("Username", "Password"))
         .BuildReadonlySession());
-      Assert.AreEqual("SessionConfig.InstanceUrl : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.InstanceUrl : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -84,7 +84,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .DefaultDatabase(null)
         .BuildReadonlySession());
-      Assert.AreEqual("SessionConfig.DefaultDatabase : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.DefaultDatabase : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -93,7 +93,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .DefaultLanguage(" ")
         .BuildReadonlySession());
-      Assert.AreEqual("SessionConfig.DefaultLanguage : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.DefaultLanguage : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -102,7 +102,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .DefaultMediaResourceExtension(null)
         .BuildSession());
-      Assert.AreEqual("SessionConfig.DefaultMediaResourceExtension : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.DefaultMediaResourceExtension : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -111,7 +111,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .MediaLibraryRoot("")
         .BuildSession());
-      Assert.AreEqual("SessionConfig.MediaLibraryRoot : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.MediaLibraryRoot : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -120,7 +120,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .Site(null)
         .BuildSession());
-      Assert.AreEqual("SessionConfig.Site : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.Site : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -129,7 +129,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .MediaPrefix(" ")
         .BuildSession());
-      Assert.AreEqual("SessionConfig.MediaPrefix : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("IAuthenticatedSessionBuilder.MediaPrefix : The input cannot be null or empty", exception.Message);
     }
 
     private IBaseSessionBuilder NewSession()

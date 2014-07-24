@@ -3,19 +3,9 @@
   using System;
   using System.Threading.Tasks;
   using NUnit.Framework;
-
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Session;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Session;
-
-  //  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-  //  using System.IO;
-  //  using System.Threading;
-  //  using MonoTouch.UIKit;
-  //  using MonoTouch.Foundation;
 
   [TestFixture]
   public class GetItemsTest
@@ -232,7 +222,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("Item id cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Id : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -245,7 +235,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("Item path cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Path : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -258,7 +248,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("SitecoreQuery cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.SitecoreQuery : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -271,7 +261,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("Item path cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Path : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -284,7 +274,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("AbstractGetItemRequestBuilder.ItemQuery : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.SitecoreQuery : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -297,7 +287,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("AbstractGetItemRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Id : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -310,7 +300,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("Item path cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Path : The input cannot be null or empty", exception.Message);
     }
 
     //TODO: create items for test first and remove them after test
@@ -337,24 +327,6 @@
 
       testData.AssertItemsCount(0, response);
     }
-
-    //TODO: test manually with preconfigured Sitecore instance
-    /*
-    [Test] 
-    public void TestGetItemByQueryWithturnedOffItemWebApi()
-    {
-      var sessionWithoutAccess = testData.GetSession("http://ws-alr1.dk.sitecore.net:75", testData.Users.Admin.Username, testData.Users.Admin.Password);
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
-
-      TestDelegate testCode = async () =>
-      {
-        var task = sessionWithoutAccess.ReadItemAsync(request);
-        await task;
-      };
-
-      Assert.Throws<RsaHandshakeException>(testCode);
-    }
-    */
 
     private async Task<ScItemsResponse> GetItemById(string id)
     {

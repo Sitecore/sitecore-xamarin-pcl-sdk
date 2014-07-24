@@ -279,7 +279,7 @@
     {
       const string FieldName = "Text";
 
-      var exception = Assert.Throws<InvalidOperationException>(() =>
+      var exception = Assert.Throws<ArgumentException>(() =>
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
@@ -530,7 +530,7 @@
          .ItemName("Item with empty parent id")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("Item id cannot be null", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemId : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -540,7 +540,7 @@
          .ItemName("Item with null parent path")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("Item path cannot be null or empty", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -550,7 +550,7 @@
          .ItemName("Item with invalid parent id")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("Item id must have curly braces '{}'", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
 
     [Test]
@@ -560,7 +560,7 @@
          .ItemName("Item with empty parent path")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("Item path cannot be null or empty", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : The input cannot be null or empty", exception.Message);
     }
 
     [Test]
