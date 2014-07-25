@@ -47,8 +47,8 @@ namespace Sitecore.MobileSDK
 
       this.requestMerger = new UserRequestMerger(config, defaultSource);
       this.sessionConfig = config.SessionConfigShallowCopy();
-      this.credentials = credentials;
-      this.mediaSettings = mediaSettings;
+      this.credentials = credentials.CredentialsShallowCopy();
+      this.mediaSettings = mediaSettings.MediaSettingsShallowCopy();
 
       this.httpClient = new HttpClient();
     }
