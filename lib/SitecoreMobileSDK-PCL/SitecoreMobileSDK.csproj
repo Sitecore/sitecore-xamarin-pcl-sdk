@@ -178,6 +178,7 @@
     <Compile Include="Validators\WebApiParameterValidator.cs" />
     <Compile Include="Validators\MediaOptionsValidator.cs" />
     <Compile Include="API\IMediaLibrarySettings.cs" />
+    <Compile Include="Validators\WebApiCredentialsValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
