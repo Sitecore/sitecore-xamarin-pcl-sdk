@@ -31,10 +31,10 @@ namespace MobileSDKIntegrationTest
         "ashx",
         "~/media/");
 
-      var config = SessionConfig.NewAuthenticatedSessionConfig(this.env.InstanceUrl, this.env.Users.Admin.Username, this.env.Users.Admin.Password);
+      var config = new SessionConfig(this.env.InstanceUrl);
       var defaultSource = ItemSource.DefaultSource();
 
-      this.session = new ScTestApiSession(config, config, mediaSettings, defaultSource);
+      this.session = new ScTestApiSession(config, this.env.Users.Admin, mediaSettings, defaultSource);
     }
 
     [TearDown]

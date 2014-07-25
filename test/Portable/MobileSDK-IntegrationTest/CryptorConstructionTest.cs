@@ -25,15 +25,14 @@ namespace MobileSDKIntegrationTest
         "/sitecore/media library",
         "ashx",
         "~/media/");
-
-
+        
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      var config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
-      this.anonymousSession = new ScTestApiSession(config, config, this.mediaSettings,ItemSource.DefaultSource());
+      var config = new SessionConfig(testData.InstanceUrl);
+      this.anonymousSession = new ScTestApiSession(config, null, this.mediaSettings,ItemSource.DefaultSource());
 
-      config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      this.authenticatedSession = new ScTestApiSession(config, config, this.mediaSettings,ItemSource.DefaultSource());
+      config = new SessionConfig(testData.InstanceUrl);
+      this.authenticatedSession = new ScTestApiSession(config, testData.Users.Admin, this.mediaSettings,ItemSource.DefaultSource());
     }
 
     [TearDown]

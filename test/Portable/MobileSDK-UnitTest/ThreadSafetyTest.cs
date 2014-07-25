@@ -36,28 +36,54 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestSessionConfigCannotBeMutated()
     {
-      var anonymous = new MutableSessionConfig("localhost", null, null);
+      var connection = new MutableSessionConfig("localhost");
+      var anonymous = new MutableWebApiCredentialsPOD(null, null);
+
       var defaultSource = ItemSource.DefaultSource();
 
-      var session = new ScApiSession(anonymous, anonymous, this.mediaSettings, defaultSource);
+      var session = new ScApiSession(connection, anonymous, this.mediaSettings, defaultSource);
 
       Assert.AreEqual(defaultSource, session.DefaultSource);
       Assert.AreNotSame(defaultSource, session.DefaultSource);
 
-      anonymous.SetInstanceUrl("sitecore.net");
-      anonymous.SetLogin("admin");
-      anonymous.SetPassword("b");
+      connection.SetInstanceUrl("sitecore.net");
+      connection.SetSite("/sitecore/shell");
+      connection.SetItemWebApiVersion("v100500");
 
-      Assert.AreNotEqual(anonymous, session.Config);
-      Assert.AreNotSame(anonymous, session.Config);
+      anonymous.Username = "admin";
+      anonymous.Password = "b";
+
+      Assert.AreNotEqual(connection, session.Config);
+      Assert.AreNotSame(connection, session.Config);
+    }
+
+    [Test]
+    public void TestCredentialsCannotBeMutated()
+    {
+      var connection = new MutableSessionConfig("localhost");
+      var anonymous = new MutableWebApiCredentialsPOD(null, null);
+
+      var defaultSource = ItemSource.DefaultSource();
+
+      var session = new ScApiSession(connection, anonymous, this.mediaSettings, defaultSource);
+
+      Assert.AreEqual(defaultSource, session.DefaultSource);
+      Assert.AreNotSame(defaultSource, session.DefaultSource);
+
+      anonymous.Username = "admin";
+      anonymous.Password = "b";
+
+      Assert.AreNotEqual(anonymous, session.Credentials);
+      Assert.AreNotSame(anonymous, session.Credentials);
     }
 
     [Test]
     public void TestSessionDefaultSourceCannotBeMutated()
     {
-      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
+      var connection = new SessionConfig("localhost");
+
       var defaultSource = new MutableItemSource("master", "en");
-      var session = new ScApiSession(anonymous, anonymous, this.mediaSettings, defaultSource);
+      var session = new ScApiSession(connection, null, this.mediaSettings, defaultSource);
 
       Assert.AreEqual(defaultSource, session.DefaultSource);
       Assert.AreNotSame(defaultSource, session.DefaultSource);
@@ -75,7 +101,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestReadItemByIdCopiesSessionSettings()
     {
       var defaultSource = new MutableItemSource("master", "en", "33");
-      var sessionSettings = new MutableSessionConfig("localhost", "user", "pass", "/sitecore/shell", "v100500");
+      var sessionSettings = new MutableSessionConfig("localhost", "/sitecore/shell", "v100500");
 
       ScopeParameters scope = new ScopeParameters();
       scope.AddScope(ScopeType.Parent);
@@ -85,7 +111,11 @@ namespace Sitecore.MobileSdkUnitTest
       var queryParameters = new QueryParameters(PayloadType.Content, scope, fields);
 
 
-      ReadItemsByIdParameters request = new ReadItemsByIdParameters(sessionSettings, defaultSource, queryParameters, "{aaaa-aa-bb}");
+      ReadItemsByIdParameters request = new ReadItemsByIdParameters(
+        sessionSettings, 
+        defaultSource, 
+        queryParameters, 
+        "{aaaa-aa-bb}");
       var otherRequest = request.DeepCopyGetItemByIdRequest();
 
       {
@@ -102,7 +132,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestReadItemByIdCopiesItemSource()
     {
       var defaultSource = new MutableItemSource("master", "en", "33");
-      var sessionSettings = new MutableSessionConfig("localhost", "user", "pass", "/sitecore/shell", "v100500");
+      var sessionSettings = new MutableSessionConfig("localhost", "/sitecore/shell", "v100500");
 
       ScopeParameters scope = new ScopeParameters();
       scope.AddScope(ScopeType.Parent);

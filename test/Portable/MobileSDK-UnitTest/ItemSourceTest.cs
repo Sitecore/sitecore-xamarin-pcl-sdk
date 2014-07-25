@@ -20,31 +20,38 @@ namespace Sitecore.MobileSdkUnitTest
   public class ItemSourceTest
   {
     IMediaLibrarySettings mediaSettings;
-//    IWebApiCredentials credentials;
+    IWebApiCredentials credentials;
+    ISessionConfig localhostConnection;
 
 
     [SetUp]
     public void SetUp()
     {
+      this.credentials = new WebApiCredentialsPOD(
+        "alex.fergusson", 
+        "man u is a champion");
+
       this.mediaSettings = new MediaLibrarySettings(
         "/sitecore/media library",
         "ashx",
         "~/media/");
+
+      this.localhostConnection = new SessionConfig("localhost");
     }
 
     [TearDown]
     public void TearDown()
     {
       this.mediaSettings = null;
+      this.credentials = null;
+      this.localhostConnection = null;
     }
 
 
     [Test]
     public void TestApiSessionConstructorDoesNotRequiresDefaultSource()
     {
-      SessionConfig config = SessionConfig.NewAuthenticatedSessionConfig("localhost", "alex.fergusson", "man u is a champion");
-
-      ScApiSession result = new ScApiSession(config, config, this.mediaSettings, null);
+      ScApiSession result = new ScApiSession(this.localhostConnection, this.credentials, this.mediaSettings, null);
       Assert.IsNotNull(result);
     }
 
@@ -54,12 +61,9 @@ namespace Sitecore.MobileSdkUnitTest
     {
       ItemSource defaultSource = ItemSource.DefaultSource();
 
-      var config = SessionConfig.NewAuthenticatedSessionConfig("localhost", "alex.fergusson", "man u is a champion");
-      var credentials = config;
-
       TestDelegate initSessionAction = () =>
       {
-        ScApiSession result = new ScApiSession(null, credentials, this.mediaSettings, defaultSource);
+        ScApiSession result = new ScApiSession(null, this.credentials, this.mediaSettings, defaultSource);
         Debug.WriteLine( result );
       };
 

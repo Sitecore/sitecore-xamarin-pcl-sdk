@@ -39,13 +39,10 @@
         "ashx",
         "~/media/");
 
-      var connection = SessionConfig.NewAuthenticatedSessionConfig(
-                   env.InstanceUrl,
-                   env.Users.Admin.Username,
-                   env.Users.Admin.Password);
+      var connection = new SessionConfig(this.env.InstanceUrl);
       var defaultSource = ItemSource.DefaultSource();
 
-      this.session = new ScTestApiSession(connection, connection, this.mediaSettings, defaultSource);
+      this.session = new ScTestApiSession(connection, env.Users.Admin, this.mediaSettings, defaultSource);
       this.env = env;
 
       this.itemSource = new MutableItemSource("master", "en", "3872");
