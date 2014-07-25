@@ -1,9 +1,12 @@
-﻿using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.Items;
+﻿
 
 namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
+
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.Items;
+
 
   [TestFixture]
   public class CryptorConstructionTest
@@ -11,16 +14,26 @@ namespace MobileSDKIntegrationTest
     private ScTestApiSession anonymousSession;
     private ScTestApiSession authenticatedSession;
     private TestEnvironment testData;
+    private MediaLibrarySettings mediaSettings;
+
+
+
     [SetUp]
     public void SetUp()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
+      this.mediaSettings = new MediaLibrarySettings(
+        "/sitecore/media library",
+        "ashx",
+        "~/media/");
+
+
+      this.testData = TestEnvironment.DefaultTestEnvironment();
 
       var config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
-      this.anonymousSession = new ScTestApiSession(config, ItemSource.DefaultSource());
+      this.anonymousSession = new ScTestApiSession(config, config, this.mediaSettings,ItemSource.DefaultSource());
 
       config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
-      this.authenticatedSession = new ScTestApiSession(config, ItemSource.DefaultSource());
+      this.authenticatedSession = new ScTestApiSession(config, config, this.mediaSettings,ItemSource.DefaultSource());
     }
 
     [TearDown]
@@ -28,6 +41,8 @@ namespace MobileSDKIntegrationTest
     {
       this.anonymousSession = null;
       this.authenticatedSession = null;
+      this.mediaSettings = null;
+      this.testData = null;
     }
 
     [Test]

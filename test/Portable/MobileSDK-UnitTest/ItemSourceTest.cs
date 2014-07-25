@@ -1,10 +1,14 @@
 ﻿
+
+
 namespace Sitecore.MobileSdkUnitTest
 {
   using NUnit.Framework;
 
   using System;
   using System.Diagnostics;
+
+  using Sitecore.MobileSDK.API;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
@@ -15,12 +19,32 @@ namespace Sitecore.MobileSdkUnitTest
   [TestFixture]
   public class ItemSourceTest
   {
+    IMediaLibrarySettings mediaSettings;
+//    IWebApiCredentials credentials;
+
+
+    [SetUp]
+    public void SetUp()
+    {
+      this.mediaSettings = new MediaLibrarySettings(
+        "/sitecore/media library",
+        "ashx",
+        "~/media/");
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+      this.mediaSettings = null;
+    }
+
+
     [Test]
     public void TestApiSessionConstructorDoesNotRequiresDefaultSource()
     {
       SessionConfig config = SessionConfig.NewAuthenticatedSessionConfig("localhost", "alex.fergusson", "man u is a champion");
 
-      ScApiSession result = new ScApiSession (config, null);
+      ScApiSession result = new ScApiSession(config, config, this.mediaSettings, null);
       Assert.IsNotNull(result);
     }
 
@@ -30,9 +54,12 @@ namespace Sitecore.MobileSdkUnitTest
     {
       ItemSource defaultSource = ItemSource.DefaultSource();
 
+      var config = SessionConfig.NewAuthenticatedSessionConfig("localhost", "alex.fergusson", "man u is a champion");
+      var credentials = config;
+
       TestDelegate initSessionAction = () =>
       {
-        ScApiSession result = new ScApiSession (null, defaultSource);
+        ScApiSession result = new ScApiSession(null, credentials, this.mediaSettings, defaultSource);
         Debug.WriteLine( result );
       };
 
@@ -42,7 +69,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemSourceDatabaseIsOptional()
     {
-      var result = new ItemSource (null, "en", "1");
+      var result = new ItemSource(null, "en", "1");
 
       Assert.IsNotNull(result);
       Assert.IsNull(result.Database);

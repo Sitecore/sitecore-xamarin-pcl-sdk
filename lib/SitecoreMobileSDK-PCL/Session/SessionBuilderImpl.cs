@@ -32,13 +32,17 @@ namespace Sitecore.MobileSDK.Session
         optionalMediaExtension,
         optionalMediaPrefix);
 
+      var mediaSettings = new MediaLibrarySettings(
+        optionalMediaRoot,
+        optionalMediaExtension,
+        optionalMediaPrefix);
 
       var itemSource = new ItemSource(
         this.itemSourceAccumulator.Database,
         this.itemSourceAccumulator.Language,
         this.itemSourceAccumulator.Version);
 
-      var result = new ScApiSession(conf, itemSource);
+      var result = new ScApiSession(conf, this.credentials, mediaSettings, itemSource);
       return result;
     }
 

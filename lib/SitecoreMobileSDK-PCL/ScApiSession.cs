@@ -1,3 +1,5 @@
+using Sitecore.MobileSDK.Validators;
+
 
 namespace Sitecore.MobileSDK
 {
@@ -6,11 +8,11 @@ namespace Sitecore.MobileSDK
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.SessionSettings;
 
@@ -32,7 +34,11 @@ namespace Sitecore.MobileSDK
 
   public class ScApiSession : ISitecoreWebApiSession
   {
-    public ScApiSession(SessionConfig config, ItemSource defaultSource = null)
+    public ScApiSession(
+      ISessionConfig config, 
+      IWebApiCredentials credentials,
+      IMediaLibrarySettings mediaSettings,
+      ItemSource defaultSource = null)
     {
       if (null == config)
       {
@@ -40,7 +46,9 @@ namespace Sitecore.MobileSDK
       }
 
       this.requestMerger = new UserRequestMerger(config, defaultSource);
-      this.sessionConfig = config.ShallowCopy();
+      this.sessionConfig = config.SessionConfigShallowCopy();
+      this.credentials = credentials;
+      this.mediaSettings = mediaSettings;
 
       this.httpClient = new HttpClient();
     }
@@ -65,7 +73,7 @@ namespace Sitecore.MobileSDK
     {
       get
       {
-        return this.sessionConfig;
+        return this.credentials;
       }
     }
 
@@ -115,15 +123,24 @@ namespace Sitecore.MobileSDK
 
     protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync(CancellationToken cancelToken = default(CancellationToken))
     {
-      if (this.sessionConfig.IsAnonymous())
+      bool isAnonymous = (null == this.Credentials) || WebApiCredentialsValidator.IsAnonymousSession(this.Credentials);
+
+      if (isAnonymous)
       {
         return new AnonymousSessionCryptor();
       }
-      else
+      else if (WebApiCredentialsValidator.IsValidCredentials(this.Credentials))
       {
         // TODO : flow should be responsible for caching. Do not hard code here
         this.publicCertifiacte = await this.GetPublicKeyAsync(cancelToken);
-        return new AuthenticedSessionCryptor(this.sessionConfig.Username, this.sessionConfig.Password, this.publicCertifiacte);
+
+        // TODO : credentials should not be passed as plain text strings. 
+        // TODO : Use ```SecureString``` class
+        return new AuthenticedSessionCryptor(this.credentials.Username, this.credentials.Password, this.publicCertifiacte);
+      }
+      else
+      {
+        throw new ArgumentException(this.GetType().Name + " : web API credentials are not valid");
       }
     }
 
@@ -174,7 +191,7 @@ namespace Sitecore.MobileSDK
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar, 
         this.sessionConfig, 
-        this.sessionConfig,
+        this.mediaSettings,
         autocompletedRequest.ItemSource);
 
       var taskFlow = new GetResourceTask(urlBuilder, this.httpClient);
@@ -282,7 +299,10 @@ namespace Sitecore.MobileSDK
     private readonly UserRequestMerger requestMerger;
     private readonly HttpClient httpClient;
 
-    protected readonly SessionConfig sessionConfig;
+    protected readonly ISessionConfig sessionConfig;
+    private readonly IWebApiCredentials credentials;
+    private readonly IMediaLibrarySettings mediaSettings;
+
 
     private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
     private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();

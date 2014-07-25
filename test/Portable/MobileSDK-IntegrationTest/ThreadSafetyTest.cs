@@ -1,7 +1,4 @@
-﻿using Sitecore.MobileSDK;
-using SitecoreMobileSDKMockObjects;
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using System.IO;
@@ -9,11 +6,15 @@ namespace MobileSDKIntegrationTest
 
   using NUnit.Framework;
 
+  using SitecoreMobileSDKMockObjects;
   using MobileSDKUnitTest.Mock;
+
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
+ 
+  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.SessionSettings;
@@ -26,11 +27,17 @@ namespace MobileSDKIntegrationTest
     private ScTestApiSession session;
     private TestEnvironment env;
     private MutableItemSource itemSource;
+    private MediaLibrarySettings mediaSettings;
 
     [SetUp]
     public void Setup()
     {
       TestEnvironment env = TestEnvironment.DefaultTestEnvironment();
+
+      this.mediaSettings = new MediaLibrarySettings(
+        "/sitecore/media library",
+        "ashx",
+        "~/media/");
 
       var connection = SessionConfig.NewAuthenticatedSessionConfig(
                    env.InstanceUrl,
@@ -38,7 +45,7 @@ namespace MobileSDKIntegrationTest
                    env.Users.Admin.Password);
       var defaultSource = ItemSource.DefaultSource();
 
-      this.session = new ScTestApiSession(connection, defaultSource);
+      this.session = new ScTestApiSession(connection, connection, this.mediaSettings, defaultSource);
       this.env = env;
 
       this.itemSource = new MutableItemSource("master", "en", "3872");
@@ -50,6 +57,7 @@ namespace MobileSDKIntegrationTest
       this.itemSource = null;
       this.session = null;
       this.env = null;
+      this.mediaSettings = null;
     }
 
     [Test]

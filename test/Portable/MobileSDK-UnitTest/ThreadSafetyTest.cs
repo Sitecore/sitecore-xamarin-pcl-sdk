@@ -15,13 +15,31 @@ namespace Sitecore.MobileSdkUnitTest
   [TestFixture]
   public class ThreadSafetyTest
   {
+    MediaLibrarySettings mediaSettings;
+
+    [SetUp]
+    public void SetUp()
+    {
+      this.mediaSettings = new MediaLibrarySettings(
+        "/sitecore/media library",
+        "ashx",
+        "~/media/");
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+      this.mediaSettings = null;
+    }
+
+
     [Test]
     public void TestSessionConfigCannotBeMutated()
     {
       var anonymous = new MutableSessionConfig("localhost", null, null);
       var defaultSource = ItemSource.DefaultSource();
 
-      var session = new ScApiSession(anonymous, defaultSource);
+      var session = new ScApiSession(anonymous, anonymous, this.mediaSettings, defaultSource);
 
       Assert.AreEqual(defaultSource, session.DefaultSource);
       Assert.AreNotSame(defaultSource, session.DefaultSource);
@@ -39,7 +57,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
       var defaultSource = new MutableItemSource("master", "en");
-      var session = new ScApiSession(anonymous, defaultSource);
+      var session = new ScApiSession(anonymous, anonymous, this.mediaSettings, defaultSource);
 
       Assert.AreEqual(defaultSource, session.DefaultSource);
       Assert.AreNotSame(defaultSource, session.DefaultSource);
