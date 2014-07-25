@@ -254,7 +254,7 @@
     [Test]
     public void TestDeleteItemByQueryWithNullScopeReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
         .AddScope(null)
         .Build());
       Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Scope: The input cannot be null or empty", exception.Message);
@@ -307,7 +307,7 @@
     [Test]
     public void TestDeleteItemByNullQueryReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(null).Build());
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(null));
       Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Query: The input cannot be null or empty", exception.Message);
     }
 

@@ -12,7 +12,7 @@
     {
       if ( string.IsNullOrWhiteSpace(sitecoreQuery) )
       {
-        throw new ArgumentNullException ("SitecoreQuery cannot be null");
+        throw new ArgumentException("SitecoreQuery cannot be null");
       }
     }
   }

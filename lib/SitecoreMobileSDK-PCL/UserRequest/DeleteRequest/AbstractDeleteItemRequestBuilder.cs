@@ -36,6 +36,11 @@
 
     public IDeleteItemRequestBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
+      if (null == scope)
+      {
+        throw new ArgumentNullException(this.GetType().Name + " : null scope is not allowed");
+      }
+
       var scopeParams = new ScopeParameters(this.scopeParameters);
 
       foreach (var singleScope in scope)
