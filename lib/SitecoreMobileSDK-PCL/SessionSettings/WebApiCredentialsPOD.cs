@@ -6,18 +6,18 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     public class WebApiCredentialsPOD : IWebApiCredentials
   {
-    public WebApiCredentialsPOD(string userName, string password)
+    public WebApiCredentialsPOD(string username, string password)
     {
-      this.UserName = userName;
+      this.Username = username;
       this.Password = password;
     }
 
     public IWebApiCredentials CredentialsShallowCopy()
     {
-      return new WebApiCredentialsPOD(this.UserName, this.Password);
+      return new WebApiCredentialsPOD(this.Username, this.Password);
     }
 
-    public string UserName
+    public string Username
     {
       get;
       private set;

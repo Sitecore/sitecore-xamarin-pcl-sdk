@@ -34,7 +34,7 @@ namespace SitecoreMobileSDKMockObjects
 
       // @adk : skipping validation
       result.SetInstanceUrl(this.InstanceUrl);
-      result.SetLogin(this.UserName);
+      result.SetLogin(this.Username);
       result.SetPassword(this.Password);
       result.SetSite(this.Site);
       result.SetItemWebApiVersion(this.ItemWebApiVersion);
@@ -55,7 +55,7 @@ namespace SitecoreMobileSDKMockObjects
 
     public void SetLogin(string value)
     {
-      this.UserName = value;
+      this.Username = value;
     }
 
     public void SetPassword(string value)

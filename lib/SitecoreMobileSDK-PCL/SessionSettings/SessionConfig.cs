@@ -77,7 +77,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       string mediaPrefix)
     {
       this.InstanceUrl = instanceUrl;
-      this.UserName    = login;
+      this.Username    = login;
       this.Password    = password;
       this.Site        = site;
       this.ItemWebApiVersion = itemWebApiVersion;
@@ -95,7 +95,7 @@ namespace Sitecore.MobileSDK.SessionSettings
     {
       SessionConfig result = new SessionConfig(
         this.InstanceUrl, 
-        this.UserName, 
+        this.Username, 
         this.Password, 
         this.Site, 
         this.ItemWebApiVersion,
@@ -130,7 +130,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       protected set; 
     }
 
-    public string UserName
+    public string Username
     {
       get;
       protected set;
@@ -150,7 +150,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     public bool IsAnonymous()
     {
-      return string.IsNullOrEmpty(this.UserName) && string.IsNullOrEmpty(this.Password);
+      return string.IsNullOrEmpty(this.Username) && string.IsNullOrEmpty(this.Password);
     }
 
     private void Validate()
@@ -166,7 +166,7 @@ namespace Sitecore.MobileSDK.SessionSettings
         "SessionConfig.ItemWebApiVersion is required"
       );
 
-      bool hasLogin = !string.IsNullOrWhiteSpace(this.UserName);
+      bool hasLogin = !string.IsNullOrWhiteSpace(this.Username);
       bool hasPassword = !string.IsNullOrWhiteSpace(this.Password);
       if (!hasLogin && hasPassword)
       {

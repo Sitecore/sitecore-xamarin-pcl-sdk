@@ -5,7 +5,7 @@ namespace Sitecore.MobileSDK.API
   {
     IWebApiCredentials CredentialsShallowCopy();
 
-    string UserName
+    string Username
     {
       get;
     }

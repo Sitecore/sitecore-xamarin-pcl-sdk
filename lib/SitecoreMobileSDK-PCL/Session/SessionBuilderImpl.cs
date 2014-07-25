@@ -23,7 +23,7 @@ namespace Sitecore.MobileSDK.Session
       SessionConfig conf = SessionConfig.NewSessionConfig(
         this.instanceUrl,
         //@adk : TODO : do not store credentials in variables
-        this.credentials.UserName,
+        this.credentials.Username,
         this.credentials.Password,
 
         this.site,

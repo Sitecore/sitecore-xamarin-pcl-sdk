@@ -123,7 +123,7 @@ namespace Sitecore.MobileSDK
       {
         // TODO : flow should be responsible for caching. Do not hard code here
         this.publicCertifiacte = await this.GetPublicKeyAsync(cancelToken);
-        return new AuthenticedSessionCryptor(this.sessionConfig.UserName, this.sessionConfig.Password, this.publicCertifiacte);
+        return new AuthenticedSessionCryptor(this.sessionConfig.Username, this.sessionConfig.Password, this.publicCertifiacte);
       }
     }
 

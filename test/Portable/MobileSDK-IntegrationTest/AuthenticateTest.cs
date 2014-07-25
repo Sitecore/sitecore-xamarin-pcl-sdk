@@ -99,7 +99,7 @@
     public async void TestGetAuthenticationWithNotExistentPassword()
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.UserName, "wrongpassword"))
+        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Username, "wrongpassword"))
         .BuildReadonlySession();
 
       bool response = await session.AuthenticateAsync();
@@ -110,7 +110,7 @@
     public async void TestGetAuthenticationWithInvalidPassword()
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.UserName, "Password $#%^&^*"))
+        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Username, "Password $#%^&^*"))
         .BuildReadonlySession();
 
       bool response = await session.AuthenticateAsync();
