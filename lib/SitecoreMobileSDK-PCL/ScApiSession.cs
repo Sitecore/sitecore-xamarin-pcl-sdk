@@ -171,7 +171,11 @@ namespace Sitecore.MobileSDK
       IReadMediaItemRequest requestCopy = request.DeepCopyReadMediaRequest();
       IReadMediaItemRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
 
-      MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(this.restGrammar, this.sessionConfig, autocompletedRequest.ItemSource);
+      MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
+        this.restGrammar, 
+        this.sessionConfig, 
+        this.sessionConfig,
+        autocompletedRequest.ItemSource);
 
       var taskFlow = new GetResourceTask(urlBuilder, this.httpClient);
       return await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);

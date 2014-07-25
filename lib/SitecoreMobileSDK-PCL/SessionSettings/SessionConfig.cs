@@ -8,8 +8,11 @@ namespace Sitecore.MobileSDK.SessionSettings
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.Validators;
 
-
-  public class SessionConfig : ISessionConfig, IWebApiCredentials
+  // TODO : remove this class
+  public class SessionConfig : 
+    ISessionConfig, 
+    IWebApiCredentials,
+    IMediaLibrarySettings // TODO : remove this interface
   {
     #region Constructor
     public static SessionConfig NewAnonymousSessionConfig(

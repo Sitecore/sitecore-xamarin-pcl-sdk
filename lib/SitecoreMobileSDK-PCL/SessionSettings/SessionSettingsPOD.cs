@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.SessionSettings
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder;
 
-  public class SessionConfigPOD : ISessionConfig
+  public class SessionConfigPOD : ISessionConfig, IMediaLibrarySettings
   {
     public virtual ISessionConfig SessionConfigShallowCopy()
     {
