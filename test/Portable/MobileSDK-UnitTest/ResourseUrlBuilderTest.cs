@@ -28,7 +28,7 @@
       sessionConfig.InstanceUrl = "http://test.host";
       sessionConfig.ItemWebApiVersion = "v1";
       sessionConfig.Site = "/sitecore/shell";
-      sessionConfig.MediaLybraryRoot = "/sitecore/media library";
+      sessionConfig.MediaLibraryRoot = "/sitecore/media library";
       sessionConfig.DefaultMediaResourceExtension = "ashx";
       sessionConfig.MediaPrefix = "~/media";
 
@@ -128,7 +128,7 @@
       sessionConfig.InstanceUrl = "htTP://CUSTOM.hoST";
       sessionConfig.ItemWebApiVersion = "v1";
       sessionConfig.Site = "/sitecore/shell";
-      sessionConfig.MediaLybraryRoot = "/SiteCore/Other Media Library";
+      sessionConfig.MediaLibraryRoot = "/SiteCore/Other Media Library";
       sessionConfig.DefaultMediaResourceExtension = "ZIP";
       sessionConfig.MediaPrefix = "~/MediaXyZ";
 
