@@ -46,10 +46,7 @@ namespace Sitecore.MobileSDK
       return new CreateItemByPathRequestBuilder(itemPath);
     }
 
-    public static IUpdateItemRequestParametersBuilder<IUpdateItemByIdRequest> UpdateItemRequestWithId(string itemId)
-    {
-      return new UpdateItemByIdRequestBuilder(itemId);
-    }
+
   }
 }
 
