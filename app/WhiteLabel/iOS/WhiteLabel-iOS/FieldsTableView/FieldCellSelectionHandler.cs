@@ -6,8 +6,8 @@ namespace WhiteLabeliOS.FieldsTableView
     using MonoTouch.UIKit;
     using MonoTouch.Foundation;
 
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.Items.Fields;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Fields;
 
 
 // https://github.com/sami1971/SimplyMobile/wiki/Cross-platform-data-source

@@ -1,15 +1,13 @@
 ﻿
-
-
 namespace WhiteLabeliOS.FieldsTableView
 {
-    using System;
+  using System;
 
-    using MonoTouch.UIKit;
-    using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+  using MonoTouch.Foundation;
 
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.Items.Fields;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Fields;
 
     public class FieldsDataSource : UITableViewDataSource
     {

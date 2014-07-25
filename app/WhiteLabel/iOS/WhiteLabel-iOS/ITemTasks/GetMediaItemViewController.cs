@@ -1,17 +1,17 @@
 ﻿
-
 namespace WhiteLabeliOS
 {
   using System;
   using System.Drawing;
+  using System.IO;
 
   using MonoTouch.Foundation;
   using MonoTouch.UIKit;
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-  using System.IO;
-  using Sitecore.MobileSDK.Session;
 
+  using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.MediaItem;
+  using Sitecore.MobileSDK.API;
 
 	public partial class GetMediaItemViewController : BaseTaskViewController
 	{

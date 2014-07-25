@@ -1,13 +1,13 @@
-﻿using System;
-using MonoTouch.Foundation;
-
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.Session;
-using Sitecore.MobileSDK.SessionSettings;
-
+﻿
 namespace WhiteLabeliOS
 {
+  using System;
+  using MonoTouch.Foundation;
+
+  using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.SessionSettings;
+
   public class InstanceSettings
   {
     private string instanceUrl;

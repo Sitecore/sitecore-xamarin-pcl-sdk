@@ -1,5 +1,4 @@
 ﻿
-
 namespace WhiteLabeliOS
 {
   using System;
@@ -8,8 +7,9 @@ namespace WhiteLabeliOS
   using MonoTouch.Foundation;
   using MonoTouch.UIKit;
   using WhiteLabeliOS.FieldsTableView;
-  using Sitecore.MobileSDK.Items.Fields;
-  using Sitecore.MobileSDK.Items;
+
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Fields;
 
   public partial class FieldsViewController : BaseTaskTableViewController
   {

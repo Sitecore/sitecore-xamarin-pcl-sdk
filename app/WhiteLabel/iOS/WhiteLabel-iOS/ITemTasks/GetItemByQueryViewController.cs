@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace WhiteLabeliOS
 {
   using System;
@@ -9,9 +7,9 @@ namespace WhiteLabeliOS
   using MonoTouch.Foundation;
   using MonoTouch.UIKit;
 
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
 
 
   public partial class GetItemByQueryViewController : BaseTaskTableViewController
