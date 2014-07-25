@@ -5,9 +5,10 @@ namespace Sitecore.MobileSdkUnitTest
   using NUnit.Framework;
 
   using MobileSDKUnitTest.Mock;
-
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UserRequest;
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
@@ -152,7 +153,7 @@ namespace Sitecore.MobileSdkUnitTest
 
       TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
 
-      Assert.Throws<ArgumentNullException>(action);
+      Assert.Throws<ArgumentException>(action);
     }
 
     [Test]

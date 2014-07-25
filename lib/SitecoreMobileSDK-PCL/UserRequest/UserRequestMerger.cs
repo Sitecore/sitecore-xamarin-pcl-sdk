@@ -1,8 +1,13 @@
 ﻿
 namespace Sitecore.MobileSDK.UserRequest
 {
-  using Sitecore.MobileSDK.Items;
+    using Sitecore.MobileSDK.API;
+    using Sitecore.MobileSDK.API.Items;
+    using Sitecore.MobileSDK.API.Request;
+    using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
@@ -73,6 +78,42 @@ namespace Sitecore.MobileSDK.UserRequest
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps (userRequest.SessionSettings);
 
       return new UpdateItemByIdParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, userRequest.CreateParameters, userRequest.ItemId);
+    }
+
+    public IDeleteItemsByIdRequest FillDeleteItemByIdGaps(IDeleteItemsByIdRequest userRequest)
+    {
+      string databse = userRequest.Database;
+      if (string.IsNullOrEmpty(databse))
+      {
+        databse = this.ItemSourceMerger.DefaultSource.Database;
+      }
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionConfig);
+
+      return new DeleteItemByIdParameters(mergedSessionConfig, userRequest.ScopeParameters, databse, userRequest.ItemId);
+    }
+
+    public IDeleteItemsByPathRequest FillDeleteItemByPathGaps(IDeleteItemsByPathRequest userRequest)
+    {
+      string databse = userRequest.Database;
+      if (string.IsNullOrEmpty(databse))
+      {
+        databse = this.ItemSourceMerger.DefaultSource.Database;
+      }
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionConfig);
+
+      return new DeleteItemByPathParameters(mergedSessionConfig, userRequest.ScopeParameters, databse, userRequest.ItemPath);
+    }
+
+    public IDeleteItemsByQueryRequest FillDeleteItemByQueryGaps(IDeleteItemsByQueryRequest userRequest)
+    {
+      string databse = userRequest.Database;
+      if (string.IsNullOrEmpty(databse))
+      {
+        databse = this.ItemSourceMerger.DefaultSource.Database;
+      }
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionConfig);
+
+      return new DeleteItemByQueryParameters(mergedSessionConfig, userRequest.ScopeParameters, databse, userRequest.SitecoreQuery);
     }
 
     public ItemSourceFieldMerger ItemSourceMerger { get; private set; }

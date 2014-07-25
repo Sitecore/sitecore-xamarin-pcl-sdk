@@ -5,8 +5,7 @@ namespace Sitecore.MobileSDK
 {
   using System;
   using System.Collections.Generic;
-
-
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
@@ -108,19 +107,19 @@ namespace Sitecore.MobileSDK
     {
       if ( null == request )
       {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request cannot be null" );
+        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request cannot be null" );
       }
       else if ( null == request.SessionSettings )
       {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings cannot be null" );
+        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings cannot be null" );
       }
       else if ( null == request.SessionSettings.InstanceUrl )
       {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null" );
+        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null" );
       }
       else if ( null == request.SessionSettings.ItemWebApiVersion )
       {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetUrlForRequest() : request.SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null" );
+        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null" );
       }
 
       if (null != request.QueryParameters)
@@ -133,7 +132,7 @@ namespace Sitecore.MobileSDK
     {
       if (DuplicateEntryValidator.IsDuplicatedFieldsInTheList(fields))
       {
-        throw new ArgumentException("AbstractGetItemUrlBuilder.GetUrlForRequest() : request.QueryParameters.Fields must contain NO duplicates");
+        throw new ArgumentException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.QueryParameters.Fields must contain NO duplicates");
       }
     }
 

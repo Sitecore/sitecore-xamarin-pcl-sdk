@@ -7,6 +7,9 @@ namespace Sitecore.MobileSdkUnitTest
 
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
@@ -97,20 +100,20 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemIdRequestBuilderWithNullIdCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(null));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(null));
     }
 
     [Test]
     public void TestItemIdRequestBuilderWithEmptyIdCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(""));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(""));
     }
 
     [Test]
     public void TestItemIdRequestBuilderWithWhitespaceIdCrashes()
     {
 
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId("\t \r \n"));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId("\t \r \n"));
     }
 
     [Test]
@@ -176,19 +179,19 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemPathRequestBuilderWithNullPathCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(null));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(null));
     }
 
     [Test]
     public void TestItemPathRequestBuilderWithEmptyPathCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(""));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(""));
     }
 
     [Test]
     public void TestItemPathRequestBuilderWithWhitespacePathCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath("\t \r \n"));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath("\t \r \n"));
     }
 
     [Test]
@@ -250,19 +253,19 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestQueryRequestBuilderWithNullQueryCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(null));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(null));
     }
 
     [Test]
     public void TestItemQueryRequestBuilderWithEmptyQueryCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(""));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(""));
     }
 
     [Test]
     public void TestQueryRequestBuilderWithWhitespaceQueryCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("\t \r \n"));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("\t \r \n"));
     }            
     #endregion SitecoreQuery
 
@@ -606,7 +609,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestAddScopeThrowsExceptionOnDuplicates()
     {
       Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/SitecoreDotShell")
         .AddScope(ScopeType.Self)
         .AddScope(ScopeType.Self));
     }
@@ -636,7 +639,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestAddScopeThrowsExceptionOnDuplicatesInParams()
     {
       Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecoreDOTshell")
         .AddScope(ScopeType.Self, ScopeType.Parent, ScopeType.Self ) );
     }
 
@@ -644,7 +647,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestAddScopeThrowsExceptionOnDuplicatesInIncrementCalls()
     {
       Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore.shell")
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecoreDOTshell")
         .AddScope(ScopeType.Self, ScopeType.Parent )
         .AddScope(ScopeType.Self) );
     }

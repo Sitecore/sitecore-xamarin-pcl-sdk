@@ -2,7 +2,9 @@
 
 namespace Sitecore.MobileSDK.Items
 {
-  public class ItemSource : ItemSourcePOD
+    using Sitecore.MobileSDK.API.Items;
+
+    public class ItemSource : ItemSourcePOD
   {
     public const string DefaultDatabase = "web";
     public const string DefaultLanguage = "en";

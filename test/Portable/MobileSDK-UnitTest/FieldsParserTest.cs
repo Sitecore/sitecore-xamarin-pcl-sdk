@@ -6,6 +6,7 @@ namespace Sitecore.MobileSdkUnitTest
 	using System;
 	using System.Threading;
 	using System.Threading.Tasks;
+	using Sitecore.MobileSDK.API.Fields;
 	using Sitecore.MobileSDK.Items.Fields;
 	using System.Collections.Generic;
 	using Newtonsoft.Json;

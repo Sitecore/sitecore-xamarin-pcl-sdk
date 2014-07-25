@@ -4,12 +4,12 @@
   using System.Threading.Tasks;
   using NUnit.Framework;
 
-  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Session;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class SetDefaultSessionSettingsTest
@@ -23,7 +23,7 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      this.sessionAuthenticatedUser = 
+      this.sessionAuthenticatedUser =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .DefaultDatabase("web")
@@ -58,6 +58,9 @@
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(Db, resultItem.Source.Database);
+      Assert.AreEqual(Version, resultItem.Source.Version);
+      Assert.AreEqual(Language, resultItem.Source.Language);
     }
 
     [Test]
@@ -103,14 +106,12 @@
       const string Db = "master";
       const string Language = "en";
       const string Version = "2";
-      var source = new ItemSource(Db, "da", Version);
 
-      var session = 
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Admin)
-          .DefaultDatabase(Db)
-          .DefaultLanguage("da")
-          .BuildReadonlySession();
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .DefaultDatabase(Db)
+        .DefaultLanguage("da")
+        .BuildReadonlySession();
 
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
@@ -175,7 +176,7 @@
     }
 
     [Test]
-    public async void TestOverrideDatabaseInRequestByPathSeveralTimes()
+    public void TestOverrideDatabaseInRequestByPathSeveralTimes()
     {
       const string Db = "web";
 
@@ -239,22 +240,19 @@
     }
 
     [Test]
-    public async void TestOverrideLanguageAndVersionInRequestByQuery()
+    public async void TestOverrideLanguageInRequestByQuery()
     {
       const string Language = "da";
-      const string Version = "1";
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/*");
       var request = requestBuilder
-        // @adk : does not compile by design
-        //        .Version(Version)
         .Language(Language)
         .Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
       var resultItem = response.Items[3];
-      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, Language, Version);
+      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, Language, "1");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
 
@@ -290,7 +288,21 @@
         .DefaultDatabase(itemSource.Database)
         .BuildReadonlySession();
 
-      var response = await session.ReadItemAsync(this.requestWithItemId);
+      IReadItemsByIdRequest request = null;
+
+      if (string.IsNullOrEmpty(itemSource.Version))
+      {
+        request = this.requestWithItemId;
+      }
+      else
+      {
+        request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+        .Payload(PayloadType.Content)
+        .Version(itemSource.Version)
+        .Build();
+      }
+
+      var response = await session.ReadItemAsync(request);
       return response;
     }
   }

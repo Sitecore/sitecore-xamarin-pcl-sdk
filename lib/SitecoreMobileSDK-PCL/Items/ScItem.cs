@@ -3,7 +3,9 @@
 namespace Sitecore.MobileSDK.Items
 {
 	using System.Collections.Generic;
-    using Sitecore.MobileSDK.Items.Fields;
+	using Sitecore.MobileSDK.API.Fields;
+	using Sitecore.MobileSDK.API.Items;
+	using Sitecore.MobileSDK.Items.Fields;
 
 
     public class ScItem : ISitecoreItem

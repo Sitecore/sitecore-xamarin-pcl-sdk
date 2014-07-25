@@ -5,8 +5,13 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Exceptions;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.SessionSettings;
@@ -57,7 +62,7 @@
     [Test]
     public async void TestGetItemWithNullLanguage()
     {
-      var session = 
+      var session =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .DefaultDatabase("master")
@@ -75,7 +80,7 @@
     [Test]
     public async void TestGetItemWithNullDb()
     {
-      var session = 
+      var session =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .DefaultLanguage("en")
@@ -206,7 +211,7 @@
 
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Database + "']"));
     }
 
@@ -230,28 +235,6 @@
     }
 
     [Test]
-    public void TestGetItemWithInvalidVersion()
-    {
-      const string Db = "web";
-      const string Language = "da";
-      const string Version = "Version";
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-
-
-      TestDelegate testCode = async () =>
-      {
-        var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
-
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Cannot recognize item version."));
-    }
-
-    [Test]
     public void TestGetItemWithInvalidDb()
     {
       const string Db = "@#er$#";
@@ -268,7 +251,7 @@
       Exception exception = Assert.Throws<ParserException>(testCode);
 
       Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Db + "']"));
     }
 
@@ -309,15 +292,11 @@
     }
 
     [Test]
-    public async void TestGetItemWithEmptySite()
+    public void TestGetItemWithEmptySite()
     {
       const string Site = "";
-      var session = this.CreateCreatorexSession(Site);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      Exception exception = Assert.Throws<ArgumentException>(() => this.CreateCreatorexSession(Site));
+      Assert.AreEqual("[SessionBuilder.Site] the value cannot be null or empty", exception.Message);
     }
     [Test]
     public void TestGetItemWithInvalidSite()
@@ -331,7 +310,7 @@
         await task;
       };
       Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
-      Assert.AreEqual("Sitecore.MobileSDK.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
       Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
       Assert.AreEqual("System.Xml.XmlException", exception.InnerException.GetType().ToString());
 
@@ -343,76 +322,53 @@
     }
 
     [Test]
-    public async void TestGetItemWithNullSite()
+    public void TestGetItemWithNullSite()
     {
-      var session = this.CreateCreatorexSession(null);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      Exception exception = Assert.Throws<ArgumentException>(() => this.CreateCreatorexSession(null));
+      Assert.AreEqual("[SessionBuilder.Site] the value cannot be null or empty", exception.Message);
     }
 
     [Test]
-    public async void TestGetItemWithEmptyDbInItemSource()
+    public void TestGetItemWithEmptyDbInItemSource()
     {
       const string Db = "";
       const string Language = "da";
-      const string Version = "1";
 
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .DefaultDatabase(Db)
+        .DefaultLanguage(Language)
+        .BuildReadonlySession());
 
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-
-      var expectedSource = new ItemSource("web", Language, Version);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("[SessionBuilder.DefaultDatabase] the value cannot be null or empty", exception.Message);
     }
 
     [Test]
-    public async void TestGetItemWithEmptyLanguageInItemSource()
+    public void TestCreateSessionWithEmptyLanguage()
     {
       const string Db = "master";
       const string Language = "";
-      const string Version = "1";
 
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-
-      var expectedSource = new ItemSource(Db, "en", Version);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("English version 1 master", resultItem.FieldWithName("Title").RawValue);
+      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .DefaultDatabase(Db)
+        .DefaultLanguage(Language) // ALR: should throw exception
+        .BuildReadonlySession());
+      Assert.AreEqual("[SessionBuilder.DefaultLanguage] the value cannot be null or empty", exception.Message);
     }
 
     [Test]
-    public async void TestGetItemWithEmptyVersionInItemSource()
+    public void TestCreateSessionWithNullDatabase()
     {
-      const string Db = "master";
-      const string Language = "da";
-      const string Version = "";
+      const string Db = null;
+      const string Language = "en";
 
-      var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response.Items[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      Assert.AreEqual(Db, resultItem.Source.Database);
-      Assert.AreEqual(Language, resultItem.Source.Language);
-      var expectedSource = new ItemSource(Db, Language, "2");
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("Danish version 2 master", resultItem.FieldWithName("Title").RawValue);
+      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .DefaultDatabase(Db)   // ALR: should throw exception
+        .DefaultLanguage(Language)
+        .BuildReadonlySession());
+      Assert.AreEqual("[SessionBuilder.DefaultDatabase] the value cannot be null or empty", exception.Message);
     }
 
     [Test]
@@ -475,7 +431,7 @@
     }
 
     [Test]
-    public async void TestGetItemByPathWithOverrideLanguageTwice()
+    public void TestGetItemByPathWithOverrideLanguageTwice()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Language("da")
@@ -487,7 +443,7 @@
     [Test]
     public void TestGetItemByIdWithOverrideVersionTwice()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => 
+      Exception exception = Assert.Throws<InvalidOperationException>(() =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
           .Version("2")
           .Version("1")
@@ -497,7 +453,7 @@
 
     private ISitecoreWebApiReadonlySession CreateAdminSession(ItemSource itemSource = null)
     {
-      var builder = 
+      var builder =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin);
 
@@ -512,7 +468,7 @@
 
     private ISitecoreWebApiReadonlySession CreateCreatorexSession(string site)
     {
-      var session = 
+      var session =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.Creatorex)
           .Site(site)

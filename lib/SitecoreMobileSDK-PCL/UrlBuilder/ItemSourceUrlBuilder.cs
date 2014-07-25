@@ -1,6 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.Items
 {
   using System;
+  using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Utils;

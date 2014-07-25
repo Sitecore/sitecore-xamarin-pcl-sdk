@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder;
 
@@ -13,7 +14,9 @@ namespace Sitecore.MobileSDK.SessionSettings
       result.InstanceUrl = this.InstanceUrl;
       result.ItemWebApiVersion = this.ItemWebApiVersion;
       result.Site = this.Site;
-      result.MediaLybraryRoot = this.MediaLybraryRoot;
+      result.MediaLibraryRoot = this.MediaLibraryRoot;
+      result.DefaultMediaResourceExtension = this.DefaultMediaResourceExtension;
+      result.MediaPrefix = this.MediaPrefix;
 
       return result;
     }
@@ -52,12 +55,25 @@ namespace Sitecore.MobileSDK.SessionSettings
       }
     }
 
-    public string MediaLybraryRoot { get; set; }
+    public string MediaLibraryRoot { get; set; }
+
+    public string DefaultMediaResourceExtension
+    {
+      get;
+      set;
+    }
+
+    public string MediaPrefix
+    {
+      get;
+      set;
+    }
+
     #endregion ISessionConfig
 
 
     #region Comparator
-    public override bool Equals (object obj)
+    public override bool Equals(object obj)
     {
       if (object.ReferenceEquals (this, obj))
       {

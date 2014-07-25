@@ -2,8 +2,9 @@
 namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
 {
   using System.Collections.Generic;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class QueryParameters : IQueryParameters
+    public class QueryParameters : IQueryParameters
   {
     public QueryParameters(PayloadType? payload, IScopeParameters scopeParameters, ICollection<string> fields)
     {

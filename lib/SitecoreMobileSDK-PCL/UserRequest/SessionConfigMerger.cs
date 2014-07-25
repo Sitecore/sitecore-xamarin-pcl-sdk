@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK.UserRequest
 {
   using System;
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.SessionSettings;
 
 

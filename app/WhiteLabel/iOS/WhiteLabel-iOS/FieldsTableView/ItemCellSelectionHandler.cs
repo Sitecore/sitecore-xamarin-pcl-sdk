@@ -1,16 +1,12 @@
-﻿using System.Collections.Generic;
-
-
+﻿
 namespace WhiteLabeliOS.FieldsTableView
 {
   using System;
-
+  using System.Collections.Generic;
   using MonoTouch.UIKit;
   using MonoTouch.Foundation;
 
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Items.Fields;
-
+  using Sitecore.MobileSDK.API.Items;
 
   // https://github.com/sami1971/SimplyMobile/wiki/Cross-platform-data-source
   // http://components.xamarin.com/view/gmgsoftware

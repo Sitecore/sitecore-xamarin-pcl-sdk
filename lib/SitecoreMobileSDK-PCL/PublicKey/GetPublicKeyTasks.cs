@@ -5,6 +5,7 @@
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;

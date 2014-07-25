@@ -1,6 +1,5 @@
 ﻿using Sitecore.MobileSDK.SessionSettings;
 using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.PublicKey;
 
 namespace MobileSDKIntegrationTest
 {
@@ -17,7 +16,7 @@ namespace MobileSDKIntegrationTest
     {
       testData = TestEnvironment.DefaultTestEnvironment();
 
-      SessionConfig config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
+      var config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Anonymous.Username, testData.Users.Anonymous.Password);
       this.anonymousSession = new ScTestApiSession(config, ItemSource.DefaultSource());
 
       config = SessionConfig.NewAuthenticatedSessionConfig(testData.InstanceUrl, testData.Users.Admin.Username, testData.Users.Admin.Password);
@@ -34,7 +33,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestAnonymousSessionDoesNotFetchPublicKey()
     {
-      ICredentialsHeadersCryptor cryptor = await this.anonymousSession.GetCredentialsCryptorAsyncPublic();
+      var cryptor = await this.anonymousSession.GetCredentialsCryptorAsyncPublic();
       Assert.NotNull(cryptor);
 
       Assert.AreEqual(0, this.anonymousSession.GetPublicKeyInvocationsCount);
@@ -44,7 +43,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestAuthenticatedSessionDownloadsPublicKey()
     {
-      ICredentialsHeadersCryptor cryptor = await this.authenticatedSession.GetCredentialsCryptorAsyncPublic();
+      var cryptor = await this.authenticatedSession.GetCredentialsCryptorAsyncPublic();
       Assert.NotNull(cryptor);
 
       Assert.AreEqual(1, this.authenticatedSession.GetPublicKeyInvocationsCount);

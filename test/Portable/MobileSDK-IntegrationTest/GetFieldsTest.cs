@@ -4,16 +4,15 @@
   using System.Collections.ObjectModel;
   using NUnit.Framework;
 
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Session;
-  using Sitecore.MobileSDK.Exceptions;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Session;
 
   [TestFixture]
   public class GetFieldsTest
   {
-    private TestEnvironment                testData                ;
+    private TestEnvironment testData;
     private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
 
     [SetUp]
@@ -287,7 +286,7 @@
     [Test]
     public async void TestGetItemByIdWithAllFieldsWithoutReadAccessToSomeFields()
     {
-      var sessionCreatorexUser = 
+      var sessionCreatorexUser =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Creatorex)
           .BuildReadonlySession();
@@ -326,7 +325,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFields("Title", "Text").AddFields("title").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Fields : duplicates are not allowed", exception.Message);
     }
 
     [Test]
@@ -335,7 +334,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields("Text", "Text").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Fields : duplicates are not allowed", exception.Message);
     }
 
     [Test]
@@ -344,7 +343,7 @@
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFields("Title", "", "Title").Build());
 
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("RequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.Fields : duplicates are not allowed", exception.Message);
     }
 
     [Test]
@@ -375,34 +374,34 @@
     }
 
     [Test]
-    public async void TestGetItemByIdWithOverridenPayload()
+    public void TestGetItemByIdWithOverridenPayload()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
         .Payload(PayloadType.Content)
         .Payload(PayloadType.Full)
         .Build());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
 
     }
 
     [Test]
-    public async void TestGetItemByPathWithOverridenPayload()
+    public void TestGetItemByPathWithOverridenPayload()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Payload(PayloadType.Full)
         .Payload(PayloadType.Min)
         .Build());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
     }
 
     [Test]
-    public async void TestGetItemByQueryWithOverridenPayload()
+    public void TestGetItemByQueryWithOverridenPayload()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
         .Payload(PayloadType.Content)
         .Payload(PayloadType.Content)
         .Build());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.Payload : The payload cannot be assigned twice", exception.Message);
     }
   }
 }

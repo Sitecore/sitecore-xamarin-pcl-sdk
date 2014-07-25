@@ -3,11 +3,14 @@
 namespace Sitecore.MobileSDK.UrlBuilder.ItemById
 {
     using System;
+
+    using Sitecore.MobileSDK.API.Request;
     using Sitecore.MobileSDK.SessionSettings;
     using Sitecore.MobileSDK.Items;
     using Sitecore.MobileSDK.UrlBuilder.Rest;
     using Sitecore.MobileSDK.UrlBuilder.WebApi;
     using Sitecore.MobileSDK.Utils;
+  using Sitecore.MobileSDK.Validators;
 
 
     public class ItemByIdUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByIdRequest>

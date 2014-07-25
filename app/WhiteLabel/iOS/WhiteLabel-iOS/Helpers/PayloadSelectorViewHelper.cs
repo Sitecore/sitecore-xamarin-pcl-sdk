@@ -1,11 +1,12 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-using MonoTouch.Foundation;
+﻿
 
 namespace WhiteLabeliOS
 {
   using System;
   using MonoTouch.UIKit;
+  using MonoTouch.Foundation;
 
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public class PayloadSelectorViewHelper
   {

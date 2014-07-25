@@ -10,11 +10,12 @@ namespace Sitecore.MobileSdkUnitTest
   using NUnit.Framework;
 
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API.Exceptions;
+  using Sitecore.MobileSDK.API.Fields;
+  using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Items.Fields;
-  using Sitecore.MobileSDK.Exceptions;
-
-  // @adk.review : waybe we should we wrap this? 
+      // @adk.review : waybe we should we wrap this? 
   using Newtonsoft.Json;
 
   [TestFixture]

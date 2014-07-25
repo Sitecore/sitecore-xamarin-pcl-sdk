@@ -1,5 +1,4 @@
 ﻿
-
 namespace WhiteLabeliOS
 {
 	using System;
@@ -7,7 +6,8 @@ namespace WhiteLabeliOS
 
 	using MonoTouch.Foundation;
 	using MonoTouch.UIKit;
-	using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
 	public partial class BaseTaskViewController : UIViewController
 	{

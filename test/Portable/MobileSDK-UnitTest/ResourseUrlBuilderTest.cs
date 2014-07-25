@@ -1,28 +1,43 @@
-﻿using NUnit.Framework;
-using System;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+﻿
 
 namespace Sitecore.MobileSdkUnitTest
 {
+  using NUnit.Framework;
+  using System;
+
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+
+
 
   [TestFixture]
   public class ResourseUrlBuilderTest
   {
     MediaItemUrlBuilder builder;
+    RestServiceGrammar restGrammar;
 
     [SetUp]
     public void SetUp()
     {
-      var restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
+      this.restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
 
-      var sessionConfig = SessionConfig.NewAuthenticatedSessionConfig("http://test.host", "a", "b");
+      SessionConfigPOD sessionConfig = new SessionConfigPOD();
+      sessionConfig.InstanceUrl = "http://test.host";
+      sessionConfig.ItemWebApiVersion = "v1";
+      sessionConfig.Site = "/sitecore/shell";
+      sessionConfig.MediaLibraryRoot = "/sitecore/media library";
+      sessionConfig.DefaultMediaResourceExtension = "ashx";
+      sessionConfig.MediaPrefix = "~/media";
+
 
       ItemSource itemSource = ItemSource.DefaultSource();
-      builder = new MediaItemUrlBuilder(restGrammar, sessionConfig, itemSource);
+      this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionConfig, itemSource);
     }
 
     [TearDown]
@@ -34,7 +49,6 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void RequestBuilderTest()
     {
-
       IDownloadMediaOptions options = new MediaOptionsBuilder()
         .SetWidth(100)
         .SetHeight(200)
@@ -42,19 +56,19 @@ namespace Sitecore.MobileSdkUnitTest
         .SetDisplayAsThumbnail(true)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/1.png")
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/1 dot png")
         .DownloadOptions(options)
         .Database("master")
         .Build();
       //      request.ItemSource.Database = "web";
 
-      //ALR: Where is asserts?
+      Assert.AreEqual("master", request.ItemSource.Database);
     }
 
     [Test]
-    public void TestInvalidPathException()
+    public void TestPathWithoutSlashAndMediaHookThrowsException()
     {
-      TestDelegate action = () => builder.BuildUrlStringForPath("sitecore/media library/1.png", null);
+      TestDelegate action = () => this.builder.BuildUrlStringForPath("sitecore/media library/1.png", null);
       var exception = Assert.Throws<ArgumentException>(action);
       Assert.True(exception.Message.Contains("Media path should begin with '/' or '~'"));
     }
@@ -62,16 +76,16 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestNullPathException()
     {
-      TestDelegate action = () => builder.BuildUrlStringForPath(null, null);
-      var exception = Assert.Throws<ArgumentNullException>(action);
+      TestDelegate action = () => this.builder.BuildUrlStringForPath(null, null);
+      var exception = Assert.Throws<ArgumentException>(action);
       Assert.True(exception.Message.Contains("Media path cannot be null or empty"));
     }
 
     [Test]
     public void AbsolutePathWithoutOptionsTest()
     {
-      string result = builder.BuildUrlStringForPath("/sitecore/media library/2/1.png", null);
-      const string Expected = "http://test.host/~/media/2/1.png.ashx?db=web&la=en";
+      string result = this.builder.BuildUrlStringForPath("/sitecore/media library/2/1 dot png", null);
+      const string Expected = "http://test.host/~/media/2/1%20dot%20png.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -79,25 +93,69 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void RelativePathTest()
     {
-      string result = builder.BuildUrlStringForPath("/mediaXYZ/1.png", null);
-      const string Expected = "http://test.host/~/media/mediaXYZ/1.png?db=web&la=en";
+      string result = this.builder.BuildUrlStringForPath("/mediaXYZ/1 dot png", null);
+      const string Expected = "http://test.host/~/media/mediaxyz/1%20dot%20png.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
 
     [Test]
-    public void RelativePathAndExtensionTest()
+    public void TestExtensionOnItemPathThrowsArgumentException()
     {
-      string result = builder.BuildUrlStringForPath("/mediaXYZ/1.png.ashx", null);
-      const string Expected = "http://test.host/~/media/mediaXYZ/1.png.ashx?db=web&la=en";
+      Assert.Throws<ArgumentException>( ()=>
+        this.builder.BuildUrlStringForPath("/mediaXYZ/1.png", null)
+      );
+    }
 
-      Assert.AreEqual(Expected, result);
+    [Test]
+    public void TestDoubleExtensionOnMediaHookIsAllowed()
+    {
+      string result = this.builder.BuildUrlStringForPath("~/media/XYZ/1.png.ashx", null);
+      string expected = "http://test.host/~/media/xyz/1.png.ashx?db=web&la=en";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestIncorrectMediaHookCausesArgumentException()
+    {
+      Assert.Throws<ArgumentException>( ()=>
+        this.builder.BuildUrlStringForPath("~/mediaXYZ/1.png", null)
+      );
+    }
+
+    [Test]
+    public void TestCustomMediaHook()
+    {
+      SessionConfigPOD sessionConfig = new SessionConfigPOD();
+      sessionConfig.InstanceUrl = "htTP://CUSTOM.hoST";
+      sessionConfig.ItemWebApiVersion = "v1";
+      sessionConfig.Site = "/sitecore/shell";
+      sessionConfig.MediaLibraryRoot = "/SiteCore/Other Media Library";
+      sessionConfig.DefaultMediaResourceExtension = "ZIP";
+      sessionConfig.MediaPrefix = "~/MediaXyZ";
+
+
+      ItemSource itemSource = ItemSource.DefaultSource();
+      this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionConfig, itemSource);
+
+      var customBuilder = 
+        new MediaItemUrlBuilder(
+          this.restGrammar, 
+          sessionConfig, 
+          itemSource);
+
+
+      string result = customBuilder.BuildUrlStringForPath("~/mediaXYZ/1.png.ashx", null);
+      string expected = "http://custom.host/~/mediaxyz/1.png.ashx?db=web&la=en";
+
+      Assert.AreEqual(expected, result);
     }
 
     [Test]
     public void PathContaignMediaHookTest()
     {
-      string result = builder.BuildUrlStringForPath("~/media/1", null);
+      string result = this.builder.BuildUrlStringForPath("~/media/1", null);
       const string Expected = "http://test.host/~/media/1.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
@@ -106,7 +164,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void PathContaignMediaHookAndExtensionTest()
     {
-      string result = builder.BuildUrlStringForPath("~/media/1.ashx", null);
+      string result = this.builder.BuildUrlStringForPath("~/media/1.ashx", null);
       const string Expected = "http://test.host/~/media/1.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
@@ -115,18 +173,18 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void PathProperlyEscapedTest()
     {
-      string result = builder.BuildUrlStringForPath("~/media/Images/test image", null);
-      const string Expected = "http://test.host/~/media/Images/test%20image.ashx?db=web&la=en";
+      string result = this.builder.BuildUrlStringForPath("~/media/Images/test image", null);
+      const string Expected = "http://test.host/~/media/images/test%20image.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
 
 
     [Test]
-    public void ResourceNameIsCaseSensitiveTest()
+    public void ResourceNameIsCaseInsensitiveTest()
     {
-      string result = builder.BuildUrlStringForPath("~/media/Images/SoMe ImAGe", null);
-      const string Expected = "http://test.host/~/media/Images/SoMe%20ImAGe.ashx?db=web&la=en";
+      string result = this.builder.BuildUrlStringForPath("~/media/Images/SoMe ImAGe", null);
+      const string Expected = "http://test.host/~/media/images/some%20image.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -136,7 +194,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       var options = new DownloadMediaOptions();
 
-      string result = builder.BuildUrlStringForPath("~/media/1", options);
+      string result = this.builder.BuildUrlStringForPath("~/media/1", options);
       const string Expected = "http://test.host/~/media/1.ashx?db=web&la=en";
 
       Assert.AreEqual(Expected, result);
@@ -150,7 +208,7 @@ namespace Sitecore.MobileSdkUnitTest
       options.SetBackgroundColor("white");
       options.SetDisplayAsThumbnail(true);
 
-      string result = builder.BuildUrlStringForPath("~/media/1/2", options);
+      string result = this.builder.BuildUrlStringForPath("~/media/1/2", options);
       const string Expected = "http://test.host/~/media/1/2.ashx?w=100&bc=white&thn=1&db=web&la=en";
 
       Assert.AreEqual(Expected, result);
@@ -167,10 +225,10 @@ namespace Sitecore.MobileSdkUnitTest
       options.SetDisplayAsThumbnail(true);
       options.SetDisplayAsThumbnail(false);
 
-      string result = builder.BuildUrlStringForPath("~/media/1", options);
-      const string Expected = "http://test.host/~/media/1.ashx?w=100&db=web&la=en";
+      string result = this.builder.BuildUrlStringForPath("~/media/1", options);
+      const string expected = "http://test.host/~/media/1.ashx?w=100&thn=0&db=web&la=en";
 
-      Assert.AreEqual(Expected, result);
+      Assert.AreEqual(expected, result);
     }
     [Test]
     public void CorrectDownloadOptionsWithAllParamsTest()
@@ -186,10 +244,10 @@ namespace Sitecore.MobileSdkUnitTest
       options.SetMaxWidth(10);
       options.SetScale(2.5f);
 
-      string result = builder.BuildUrlStringForPath("~/media/1.png", options);
-      const string Expected = "http://test.host/~/media/1.png?w=10&h=10&mw=10&mh=10&bc=3F0000&dmc=0&as=0&sc=2.5&thn=1&db=web&la=en";
+      string result = this.builder.BuildUrlStringForPath("~/media/1.png", options);
+      const string expected = "http://test.host/~/media/1.png?w=10&h=10&mw=10&mh=10&bc=3f0000&dmc=0&as=0&sc=2.5&thn=1&db=web&la=en";
 
-      Assert.AreEqual(Expected, result);
+      Assert.AreEqual(expected, result);
     }
 
     [Test]
@@ -200,7 +258,7 @@ namespace Sitecore.MobileSdkUnitTest
       options.SetMaxWidth(10);
 
 
-      string result = builder.BuildUrlStringForPath("~/media/1", options);
+      string result = this.builder.BuildUrlStringForPath("~/media/1", options);
       const string Expected = "http://test.host/~/media/1.ashx?mw=10&sc=3.0005&db=web&la=en";
 
       Assert.AreEqual(Expected, result);
@@ -235,7 +293,6 @@ namespace Sitecore.MobileSdkUnitTest
       var exception = Assert.Throws<ArgumentException>(action);
       Assert.True(exception.Message.Contains("scale must be > 0"));
     }
-
   }
 }
 

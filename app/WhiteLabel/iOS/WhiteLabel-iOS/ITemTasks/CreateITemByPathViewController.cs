@@ -7,8 +7,8 @@ namespace WhiteLabeliOS
 
   using MonoTouch.Foundation;
   using MonoTouch.UIKit;
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
 
   public partial class CreateITemByPathViewController : BaseTaskViewController
   {

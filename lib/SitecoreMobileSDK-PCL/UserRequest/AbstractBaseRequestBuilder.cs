@@ -4,7 +4,8 @@ namespace Sitecore.MobileSDK.UserRequest
   using System;
   using System.Linq;
   using System.Collections.Generic;
-
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
@@ -16,11 +17,11 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (string.IsNullOrWhiteSpace(sitecoreDatabase))
       {
-        throw new ArgumentException("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty");
+        throw new ArgumentException(this.GetType().Name + ".Database : The input cannot be null or empty");
       }
       else if (null != this.itemSourceAccumulator.Database)
       {
-        throw new InvalidOperationException("AbstractGetItemRequestBuilder.Database : The database cannot be assigned twice");
+        throw new InvalidOperationException(this.GetType().Name + ".Database : The database cannot be assigned twice");
       }
 
 
@@ -36,11 +37,11 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (string.IsNullOrWhiteSpace(itemLanguage))
       {
-        throw new ArgumentException("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty");
+        throw new ArgumentException(this.GetType().Name + ".Language : The input cannot be null or empty");
       }
       else if (null != this.itemSourceAccumulator.Language)
       {
-        throw new InvalidOperationException("AbstractGetItemRequestBuilder.Language : The language cannot be assigned twice");
+        throw new InvalidOperationException(this.GetType().Name + ".Language : The language cannot be assigned twice");
       }
 
 
@@ -56,7 +57,7 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (null != this.queryParameters.Payload)
       {
-        throw new InvalidOperationException("AbstractGetItemRequestBuilder.Payload : The payload cannot be assigned twice");
+        throw new InvalidOperationException(this.GetType().Name + ".Payload : The payload cannot be assigned twice");
       }
 
       this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields);
@@ -119,7 +120,7 @@ namespace Sitecore.MobileSDK.UserRequest
       bool isFieldListHasDuplicates = DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields);
       if (isFieldListHasDuplicates)
       {
-        throw new ArgumentException("RequestBuilder : duplicate fields are not allowed");
+        throw new ArgumentException(this.GetType().Name + " : duplicate fields are not allowed");
       }
 
       this.queryParameters = new QueryParameters( this.queryParameters.Payload, this.queryParameters.ScopeParameters, newFields );

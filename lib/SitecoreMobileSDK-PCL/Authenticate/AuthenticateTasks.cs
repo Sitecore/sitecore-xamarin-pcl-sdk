@@ -4,7 +4,8 @@
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
-  using Sitecore.MobileSDK.Exceptions;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.TaskFlow;

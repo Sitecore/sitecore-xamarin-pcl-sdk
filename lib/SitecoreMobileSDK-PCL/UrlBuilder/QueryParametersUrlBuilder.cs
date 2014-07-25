@@ -5,7 +5,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
   using System;
   using System.Linq;
   using System.Collections.Generic;
-
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -32,7 +32,9 @@ namespace Sitecore.MobileSDK.UrlBuilder
       result = payloadStatement.ToLowerInvariant();
 
       string scopeString = string.Empty;
-      scopeString = this.ScopeToRestArgumentStatement(queryParameters.ScopeParameters);
+      var scopeBuilder = new ScopeParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
+
+      scopeString = scopeBuilder.ScopeToRestArgumentStatement(queryParameters.ScopeParameters);
 
       if (!string.IsNullOrEmpty(scopeString))
       {
@@ -123,46 +125,6 @@ namespace Sitecore.MobileSDK.UrlBuilder
       return result;
     }
     #endregion Payload
-
-    #region Scope
-    private string ScopeToRestArgumentStatement(IScopeParameters scopeParameters)
-    {
-      if (null == scopeParameters)
-      {
-        return string.Empty;
-      }
-
-      string scopeString = string.Empty;
-
-      foreach (ScopeType singleScopeEntry in scopeParameters.OrderedScopeSequence)
-      {
-        string urlParameterForScope = this.ScopeTypeToString(singleScopeEntry);
-        scopeString += this.restGrammar.ItemFieldSeparator + urlParameterForScope;
-      }
-
-      if (string.IsNullOrEmpty(scopeString))
-      {
-        return string.Empty;
-      }
-
-      scopeString = scopeString.Substring(1);
-
-      string result = this.webApiGrammar.ScopeParameterName + this.restGrammar.KeyValuePairSeparator + scopeString;
-
-      return result;
-    }
-
-    private string ScopeTypeToString(ScopeType scope)
-    {
-      var enumNamesMap = new Dictionary<ScopeType, string>();
-      enumNamesMap.Add( ScopeType.Parent  , "p" );
-      enumNamesMap.Add( ScopeType.Self    , "s" );
-      enumNamesMap.Add( ScopeType.Children, "c" );
-
-      string result = enumNamesMap[scope];
-      return result;
-    }
-    #endregion Scope
 
     private IRestServiceGrammar restGrammar;
     private IWebApiUrlParameters webApiGrammar;

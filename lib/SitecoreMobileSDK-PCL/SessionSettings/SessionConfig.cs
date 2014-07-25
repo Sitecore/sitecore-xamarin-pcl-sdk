@@ -5,26 +5,86 @@ namespace Sitecore.MobileSDK.SessionSettings
   using System;
   using System.Diagnostics;
 
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.Validators;
+
+
   public class SessionConfig : ISessionConfig, IWebApiCredentials
   {
     #region Constructor
-    public static SessionConfig NewAnonymousSessionConfig(string instanceUrl, string site = null, string itemWebApiVersion = "v1")
+    public static SessionConfig NewAnonymousSessionConfig(
+      string instanceUrl, 
+      string site = null, 
+      string itemWebApiVersion = "v1")
     {
-      return new SessionConfig(instanceUrl, null, null, site, itemWebApiVersion);
+      return new SessionConfig(
+        instanceUrl, 
+        null, 
+        null, 
+        site, 
+        itemWebApiVersion, 
+        "/sitecore/media library",
+        "ashx",
+        "~/media");
     }
 
-    public static SessionConfig NewAuthenticatedSessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
+    public static SessionConfig NewAuthenticatedSessionConfig(
+      string instanceUrl, 
+      string login, 
+      string password, 
+      string site = null, 
+      string itemWebApiVersion = "v1")
     {
-      return new SessionConfig(instanceUrl, login, password, site, itemWebApiVersion);
+      return new SessionConfig(
+        instanceUrl, 
+        login, password, 
+        site, 
+        itemWebApiVersion,
+        "/sitecore/media library",
+        "ashx",
+        "~/media");
     }
 
-    protected SessionConfig(string instanceUrl, string login, string password, string site = null, string itemWebApiVersion = "v1")
+    public static SessionConfig NewSessionConfig(
+      string instanceUrl, 
+      string login, 
+      string password, 
+      string site, 
+      string itemWebApiVersion,
+      string mediaLibraryRoot,
+      string defaultMediaResourceExtension,
+      string mediaPrefix)
+    {
+      return new SessionConfig(
+        instanceUrl, 
+        login, 
+        password, 
+        site, 
+        itemWebApiVersion,
+        mediaLibraryRoot,
+        defaultMediaResourceExtension,
+        mediaPrefix);
+    }
+
+    protected SessionConfig(
+      string instanceUrl, 
+      string login, 
+      string password, 
+      string site, 
+      string itemWebApiVersion,
+      string mediaLibraryRoot,
+      string defaultMediaResourceExtension,
+      string mediaPrefix)
     {
       this.InstanceUrl = instanceUrl;
-      this.Login       = login      ;
-      this.Password    = password   ;
-      this.Site        = site       ;
+      this.Username    = login;
+      this.Password    = password;
+      this.Site        = site;
       this.ItemWebApiVersion = itemWebApiVersion;
+
+      this.MediaLibraryRoot = mediaLibraryRoot;
+      this.DefaultMediaResourceExtension = defaultMediaResourceExtension;
+      this.MediaPrefix = mediaPrefix;
 
       this.Validate();
     }
@@ -33,7 +93,17 @@ namespace Sitecore.MobileSDK.SessionSettings
     #region ICloneable
     public virtual SessionConfig ShallowCopy()
     {
-      return new SessionConfig(this.InstanceUrl, this.Login, this.Password, this.Site, this.ItemWebApiVersion);
+      SessionConfig result = new SessionConfig(
+        this.InstanceUrl, 
+        this.Username, 
+        this.Password, 
+        this.Site, 
+        this.ItemWebApiVersion,
+        this.MediaLibraryRoot,
+        this.DefaultMediaResourceExtension,
+        this.MediaPrefix);
+
+      return result;
     }
 
     public virtual ISessionConfig SessionConfigShallowCopy()
@@ -60,7 +130,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       protected set; 
     }
 
-    public string Login
+    public string Username
     {
       get;
       protected set;
@@ -80,25 +150,32 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     public bool IsAnonymous()
     {
-      return string.IsNullOrEmpty(this.Login) && string.IsNullOrEmpty(this.Password);
+      return string.IsNullOrEmpty(this.Username) && string.IsNullOrEmpty(this.Password);
     }
 
     private void Validate()
     {
-      if (string.IsNullOrWhiteSpace(this.InstanceUrl))
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage
+      (
+        this.InstanceUrl,
+        "SessionConfig.InstanceUrl is required"
+      );
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage
+      (
+        this.ItemWebApiVersion,
+        "SessionConfig.ItemWebApiVersion is required"
+      );
+
+      bool hasLogin = !string.IsNullOrWhiteSpace(this.Username);
+      bool hasPassword = !string.IsNullOrWhiteSpace(this.Password);
+      if (!hasLogin && hasPassword)
       {
-        throw new ArgumentNullException("SessionConfig.InstanceUrl is required");
-      }
-      else if (string.IsNullOrWhiteSpace(this.ItemWebApiVersion))
-      {
-        throw new ArgumentNullException("SessionConfig.ItemWebApiVersion is required");
+        throw new ArgumentException("SessionConfig.Credentials : login is required for authenticated session");
       }
 
-      bool hasLogin = !string.IsNullOrWhiteSpace(this.Login);
-      bool hasPassword = !string.IsNullOrWhiteSpace(this.Password);
       if (hasLogin && !hasPassword)
       {
-        throw new ArgumentNullException("SessionConfig.Credentials : password is required for authenticated session");
+        throw new ArgumentException("SessionConfig.Credentials : password is required for authenticated session");
       }
 
       if (!SessionConfigValidator.IsValidSchemeOfInstanceUrl(this.InstanceUrl))
@@ -107,26 +184,33 @@ namespace Sitecore.MobileSDK.SessionSettings
       }
     }
 
-    public string MediaLybraryRoot 
-    {
-      get
-      { 
-        if (null == this.mediaLybraryRoot)
-        {
-          return SessionConfig.DefaultMediaLybraryRoot;
-        }
-        return this.mediaLybraryRoot;
-      }
-      set
-      { 
-        this.mediaLybraryRoot = value;
-      }
-    }
     #endregion Properties
 
+    #region Media Properties
+
+    public string MediaLibraryRoot
+    {
+      get;
+      private set;
+    }
+
+    public string DefaultMediaResourceExtension
+    {
+      get;
+      private set;
+    }
+
+    public string MediaPrefix
+    {
+      get;
+      private set;
+    }
+
+    #endregion Media Properties
+
     #region Instance Variables
-    private const string DefaultMediaLybraryRoot = "/sitecore/media library";
-    private string mediaLybraryRoot;
+    private const string DefaultMediaLibraryRoot = "/sitecore/media library";
+    private string mediaLibraryRoot;
     #endregion Instance Variables
   }
 }

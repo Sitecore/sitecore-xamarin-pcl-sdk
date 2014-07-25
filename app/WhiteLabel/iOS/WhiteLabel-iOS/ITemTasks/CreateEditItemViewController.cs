@@ -1,16 +1,17 @@
 ﻿
-using System;
-using System.Drawing;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.Items;
-using System.Linq;
-using Sitecore.MobileSDK.Session;
-
 namespace WhiteLabeliOS
 {
+  using System;
+  using System.Drawing;
+  using System.Linq;
+
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+
+  using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+
 	public partial class CreateEditItemViewController : BaseTaskViewController
 	{
 		public CreateEditItemViewController (IntPtr handle) : base (handle)

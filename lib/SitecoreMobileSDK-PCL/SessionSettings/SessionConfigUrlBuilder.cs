@@ -1,10 +1,14 @@
 ﻿namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
+
+
+  using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.Validators;
 
   public class SessionConfigUrlBuilder
   {
