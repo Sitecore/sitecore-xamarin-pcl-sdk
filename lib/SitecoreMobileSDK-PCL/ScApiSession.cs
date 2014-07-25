@@ -45,10 +45,18 @@ namespace Sitecore.MobileSDK
         throw new ArgumentNullException("ScApiSession.config cannot be null");
       }
 
-      this.requestMerger = new UserRequestMerger(config, defaultSource);
       this.sessionConfig = config.SessionConfigShallowCopy();
-      this.credentials = credentials.CredentialsShallowCopy();
-      this.mediaSettings = mediaSettings.MediaSettingsShallowCopy();
+      this.requestMerger = new UserRequestMerger(this.sessionConfig, defaultSource);
+
+      if (null != credentials)
+      {
+        this.credentials = credentials.CredentialsShallowCopy();
+      }
+
+      if (null != mediaSettings)
+      {
+        this.mediaSettings = mediaSettings.MediaSettingsShallowCopy();
+      }
 
       this.httpClient = new HttpClient();
     }
