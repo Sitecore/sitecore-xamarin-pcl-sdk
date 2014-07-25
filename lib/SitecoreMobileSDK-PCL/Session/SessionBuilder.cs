@@ -8,7 +8,7 @@ namespace Sitecore.MobileSDK.Session
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
 
-  internal class SessionBuilderImpl : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder
+  internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder
   {
     #region Main Logic
     public ISitecoreWebApiSession BuildSession()
@@ -93,14 +93,21 @@ namespace Sitecore.MobileSDK.Session
     #endregion Main Logic
 
     #region Constructor
-    private SessionBuilderImpl()
+    private SessionBuilder()
     {
     }
 
-    public static SessionBuilderImpl SessionBuilderWithHost(string instanceUrl)
+    public static SessionBuilder SessionBuilderWithHost(string instanceUrl)
     {
-      SessionBuilderImpl result = new SessionBuilderImpl();
-      result.instanceUrl = instanceUrl;
+      if (string.IsNullOrEmpty(instanceUrl))
+      {
+        throw new ArgumentException(typeof(SessionBuilder).Name + ".InstanceUrl : The input cannot be null or empty.");
+      }
+
+      var result = new SessionBuilder
+      {
+        instanceUrl = instanceUrl
+      };
 
       return result;
     }
@@ -110,7 +117,16 @@ namespace Sitecore.MobileSDK.Session
     public IBaseSessionBuilder Credentials(IWebApiCredentials credentials)
     {
       // @adk : won't be invoked more than once.
-      // No calidation needed.
+      // No validation needed.
+      if (string.IsNullOrEmpty(credentials.Username))
+      {
+        throw new ArgumentException(this.GetType().Name + ".Credentials.Username : The input cannot be null or empty.");
+      }
+
+      if (string.IsNullOrEmpty(credentials.Password))
+      {
+        throw new ArgumentException(this.GetType().Name + ".Credentials.Password : The input cannot be null or empty.");
+      }
 
       this.credentials = credentials.CredentialsShallowCopy();
       return this;
@@ -122,11 +138,11 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.site,
-        "[IBaseSessionBuilder.Site] the property cannot be assigned twice"
+        this.GetType().Name + ".Site property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         site,
-        "[SessionBuilder.Site] the value cannot be null or empty"
+        this.GetType().Name + ".Site : The input cannot be null or empty"
       );
 
       this.site = site;
@@ -137,11 +153,11 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.webApiVersion,
-        "[IBaseSessionBuilder.WebApiVersion] the property cannot be assigned twice"
+        this.GetType().Name + ".WebApiVersion property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         webApiVersion,
-        "[SessionBuilder.WebApiVersion] the value cannot be null or empty"
+        this.GetType().Name + ".WebApiVersion : The input cannot be null or empty"
       );
 
 
@@ -153,11 +169,11 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Database,
-        "[IBaseSessionBuilder.DefaultDatabase] the property cannot be assigned twice"
+        this.GetType().Name + ".DefaultDatabase property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultDatabase,
-        "[SessionBuilder.DefaultDatabase] the value cannot be null or empty"
+        this.GetType().Name + ".DefaultDatabase : The input cannot be null or empty"
       );
 
 
@@ -174,11 +190,11 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Language,
-        "[IBaseSessionBuilder.DefaultLanguage] the property cannot be assigned twice"
+        this.GetType().Name + ".DefaultLanguage property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultLanguage,
-        "[SessionBuilder.DefaultLanguage] the value cannot be null or empty"
+        this.GetType().Name + ".DefaultLanguage : The input cannot be null or empty"
       );
 
 
@@ -195,9 +211,9 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaRoot,
-        "[IBaseSessionBuilder.MediaLibraryRoot] the property cannot be assigned twice"
+        this.GetType().Name + ".MediaLibraryRoot property cannot be assigned twice"
       );
-      MediaPathValidator.ValidateMediaRoot(mediaLibraryRootItem);
+      MediaPathValidator.ValidateMediaRoot(mediaLibraryRootItem, this.GetType().Name + ".MediaLibraryRoot");
 
       this.mediaRoot = mediaLibraryRootItem;
       return this;
@@ -207,11 +223,11 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaExtension,
-        "[IBaseSessionBuilder.DefaultMediaResourceExtension] the property cannot be assigned twice"
+         this.GetType().Name + ".DefaultMediaResourceExtension property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultExtension,
-        "[SessionBuilder.DefaultMediaResourceExtension] the value cannot be null or empty"
+        this.GetType().Name + ".DefaultMediaResourceExtension : The input cannot be null or empty"
       );
 
       this.mediaExtension = defaultExtension;
@@ -222,11 +238,11 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaPrefix,
-        "[IBaseSessionBuilder.MediaPrefix] the property cannot be assigned twice"
+        this.GetType().Name + ".MediaPrefix property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         mediaPrefix,
-        "[SessionBuilder.MediaPrefix] the value cannot be null or empty"
+        this.GetType().Name + ".MediaPrefix : The input cannot be null or empty"
       );
 
       this.mediaPrefix = mediaPrefix;

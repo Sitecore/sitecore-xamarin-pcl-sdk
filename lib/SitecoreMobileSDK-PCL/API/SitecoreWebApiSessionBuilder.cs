@@ -1,10 +1,10 @@
 
 namespace Sitecore.MobileSDK.API
 {
-    using Sitecore.MobileSDK.API.Session;
-    using Sitecore.MobileSDK.Session;
+  using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.Session;
 
-    public class SitecoreWebApiSessionBuilder
+  public class SitecoreWebApiSessionBuilder
   {
     private SitecoreWebApiSessionBuilder()
     {
@@ -12,13 +12,13 @@ namespace Sitecore.MobileSDK.API
 
     public static IAnonymousSessionBuilder AnonymousSessionWithHost(string instanceUrl)
     {
-      var result = SessionBuilderImpl.SessionBuilderWithHost(instanceUrl);
+      var result = SessionBuilder.SessionBuilderWithHost(instanceUrl);
       return result;
     }
 
     public static IAuthenticatedSessionBuilder AuthenticatedSessionWithHost(string instanceUrl)
     {
-      var result = SessionBuilderImpl.SessionBuilderWithHost(instanceUrl);
+      var result = SessionBuilder.SessionBuilderWithHost(instanceUrl);
       return result;
     }
   }

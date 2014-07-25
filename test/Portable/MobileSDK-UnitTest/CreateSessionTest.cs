@@ -58,7 +58,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestSessionConfigDoesNotAllowNullPasswordForAuthenticatedSession()
     {
-      Assert.Throws<ArgumentNullException>(() =>
+      Assert.Throws<ArgumentException>(() =>
         SessionConfig.NewAuthenticatedSessionConfig("localhost", "userrrr", null, "/sitecore/shell", "v1")
       );
     }

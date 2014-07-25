@@ -168,7 +168,7 @@
     <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
-    <Compile Include="Session\SessionBuilderImpl.cs" />
+    <Compile Include="Session\SessionBuilder.cs" />
     <Compile Include="Validators\ItemIdValidator.cs" />
     <Compile Include="Validators\ItemPathValidator.cs" />
     <Compile Include="Validators\SitecoreQueryValidator.cs" />
@@ -225,7 +225,5 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-  <ItemGroup>
-    <Folder Include="API\MediaItem\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

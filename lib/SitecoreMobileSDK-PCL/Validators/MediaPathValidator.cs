@@ -13,11 +13,11 @@
       this.sessionConfig = sessionConfig;
     }
 
-    public static void ValidateMediaRoot(string mediaLibraryRootItemPath)
+    public static void ValidateMediaRoot(string mediaLibraryRootItemPath, string exceptionSource)
     {
       if ( string.IsNullOrWhiteSpace(mediaLibraryRootItemPath) )
       {
-        throw new ArgumentException("Media path cannot be null or empty");
+        throw new ArgumentException(exceptionSource + " : Media path cannot be null or empty");
       }
 
       string lowerCasePath = mediaLibraryRootItemPath.ToLowerInvariant();
