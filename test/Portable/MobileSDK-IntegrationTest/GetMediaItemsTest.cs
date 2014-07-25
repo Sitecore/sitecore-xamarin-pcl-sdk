@@ -1,4 +1,6 @@
-﻿namespace MobileSDKIntegrationTest
+﻿
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Globalization;
@@ -12,6 +14,8 @@
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API.MediaItem;
+
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;

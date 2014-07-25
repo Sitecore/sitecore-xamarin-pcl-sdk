@@ -1,10 +1,13 @@
-﻿namespace Sitecore.MobileSdkUnitTest
+﻿
+
+namespace Sitecore.MobileSdkUnitTest
 {
   using NUnit.Framework;
   using System;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
