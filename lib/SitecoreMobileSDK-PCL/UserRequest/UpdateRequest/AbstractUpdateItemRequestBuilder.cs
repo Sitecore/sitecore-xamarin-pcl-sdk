@@ -1,4 +1,5 @@
 ﻿
+
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -6,7 +7,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public abstract class AbstractUpdateItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>, IUpdateItemRequestParametersBuilder<T> 
     where T : class

@@ -3,6 +3,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 {
   using System;
   using System.Collections.Generic;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
   public interface IBaseUpdateItemRequest : IBaseItemRequest

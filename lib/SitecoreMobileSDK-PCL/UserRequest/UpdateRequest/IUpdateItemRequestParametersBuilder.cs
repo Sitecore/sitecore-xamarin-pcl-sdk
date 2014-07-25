@@ -3,8 +3,8 @@ namespace Sitecore.MobileSDK
 {
   using System;
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.UserRequest;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public interface IUpdateItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
     where T : class

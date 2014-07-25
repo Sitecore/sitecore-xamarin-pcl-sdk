@@ -2,7 +2,7 @@ namespace Sitecore.MobileSDK.API.Request
 {
     using Sitecore.MobileSDK.UrlBuilder;
 
-    public interface IReadItemsByPathRequest : IBaseGetItemRequest
+  public interface IReadItemsByPathRequest : IBaseItemRequest
   {
     IReadItemsByPathRequest DeepCopyGetItemByPathRequest();
 

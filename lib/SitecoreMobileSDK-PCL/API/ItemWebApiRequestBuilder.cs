@@ -1,18 +1,21 @@
+
 namespace Sitecore.MobileSDK.API
 {
-    using Sitecore.MobileSDK.API.Request;
-    using Sitecore.MobileSDK.API.Request.Parameters;
-    using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-    using Sitecore.MobileSDK.UrlBuilder.ItemById;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-    using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-    using Sitecore.MobileSDK.UserRequest;
-    using Sitecore.MobileSDK.Validators;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
+
+  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 
-    public class ItemWebApiRequestBuilder
+  public class ItemWebApiRequestBuilder
   {
     private ItemWebApiRequestBuilder()
     {
@@ -75,6 +78,11 @@ namespace Sitecore.MobileSDK.API
     public static IDeleteItemRequestBuilder<IDeleteItemsByQueryRequest> DeleteItemRequestWithSitecoreQuery(string sitecoreQuery)
     {
       return new DeleteItemItemByQueryRequestBuilder(sitecoreQuery);
+    }
+
+    public static IUpdateItemRequestParametersBuilder<IUpdateItemByIdRequest> UpdateItemRequestWithId(string itemId)
+    {
+      return new UpdateItemByIdRequestBuilder(itemId);
     }
   }
 }

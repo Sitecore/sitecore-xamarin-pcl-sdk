@@ -209,7 +209,6 @@ namespace Sitecore.MobileSDK
 
     #endregion CreateItems
 
-<<<<<<< HEAD
     #region Update Items
 
     public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))

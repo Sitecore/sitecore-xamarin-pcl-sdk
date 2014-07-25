@@ -48,7 +48,6 @@
     <Compile Include="API\IWebApiCredentials.cs" />
     <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
     <Compile Include="API\Request\IBaseDeleteItemRequest.cs" />
-    <Compile Include="API\Request\IBaseGetItemRequest.cs" />
     <Compile Include="API\Request\IBaseRequestParametersBuilder.cs" />
     <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
     <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
@@ -167,7 +166,6 @@
     <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\IBaseItemRequest.cs" />
     <Compile Include="UrlBuilder\UpdateItem\IBaseUpdateItemRequest.cs" />
     <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\UpdateItem\UpdateItemById\IUpdateItemByIdRequest.cs" />
@@ -180,14 +178,6 @@
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
     <Compile Include="Session\SessionBuilderImpl.cs" />
-    <Compile Include="Session\ISitecoreWebApiSessionState.cs" />
-    <Compile Include="Session\ISitecoreWebApiSessionActions.cs" />
-    <Compile Include="Session\IReadItemActions.cs" />
-    <Compile Include="Session\IMediaActions.cs" />
-    <Compile Include="Session\ICreateItemActions.cs" />
-    <Compile Include="Session\IConnectionActions.cs" />
-    <Compile Include="Session\ISitecoreWebApiReadonlySession.cs" />
-    <Compile Include="Session\IUpdateItemActions.cs" />
     <Compile Include="Validators\ItemIdValidator.cs" />
     <Compile Include="Validators\ItemPathValidator.cs" />
     <Compile Include="Validators\SitecoreQueryValidator.cs" />
@@ -197,6 +187,8 @@
     <Compile Include="Validators\MediaOptionsValidator.cs" />
     <Compile Include="API\IMediaLibrarySettings.cs" />
     <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
+    <Compile Include="API\Request\IBaseItemRequest.cs" />
+    <Compile Include="API\Session\IUpdateItemActions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

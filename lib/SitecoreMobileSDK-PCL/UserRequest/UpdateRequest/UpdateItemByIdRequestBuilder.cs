@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 {
   using System;
+  using Sitecore.MobileSDK.Validators;
 
   public class UpdateItemByIdRequestBuilder : AbstractUpdateItemRequestBuilder<IUpdateItemByIdRequest>
   {
