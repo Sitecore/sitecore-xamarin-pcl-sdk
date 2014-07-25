@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       result.InstanceUrl = this.InstanceUrl;
       result.ItemWebApiVersion = this.ItemWebApiVersion;
       result.Site = this.Site;
-      result.MediaLybraryRoot = this.MediaLybraryRoot;
+      result.MediaLibraryRoot = this.MediaLibraryRoot;
       result.DefaultMediaResourceExtension = this.DefaultMediaResourceExtension;
       result.MediaPrefix = this.MediaPrefix;
 
@@ -55,7 +55,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       }
     }
 
-    public string MediaLybraryRoot { get; set; }
+    public string MediaLibraryRoot { get; set; }
 
     public string DefaultMediaResourceExtension
     {

@@ -2,7 +2,7 @@
 {
   public interface IMediaLibrarySettings
   {
-    string MediaLybraryRoot
+    string MediaLibraryRoot
     {
       get;
     }

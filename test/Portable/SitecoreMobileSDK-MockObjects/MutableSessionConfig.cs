@@ -13,10 +13,10 @@ namespace SitecoreMobileSDKMockObjects
       string password, 
       string site = null, 
       string itemWebApiVersion = "v1",
-      string mediaLybraryRoot = "/sitecore/media library",
+      string mediaLibraryRoot = "/sitecore/media library",
       string defaultMediaResourceExtension = "ashx",
       string mediaPrefix = "~/media")
-    : base(instanceUrl, login, password, site, itemWebApiVersion, mediaLybraryRoot, defaultMediaResourceExtension, mediaPrefix)
+    : base(instanceUrl, login, password, site, itemWebApiVersion, mediaLibraryRoot, defaultMediaResourceExtension, mediaPrefix)
     {
     }
 
@@ -28,7 +28,7 @@ namespace SitecoreMobileSDKMockObjects
         "mock password", 
         "mock site", 
         "v1", 
-        this.MediaLybraryRoot, 
+        this.MediaLibraryRoot, 
         this.DefaultMediaResourceExtension, 
         this.MediaPrefix);
 

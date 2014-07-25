@@ -77,14 +77,14 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       {
         result = result + this.restGrammar.PathComponentSeparator + lowerCaseMediaHook;
 
-        string mediaLibraryRoot = this.sessionConfig.MediaLybraryRoot.ToLowerInvariant();
+        string mediaLibraryRoot = this.sessionConfig.MediaLibraryRoot.ToLowerInvariant();
 
         int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
         bool isMediaRootAvailable = (rootStartIndex >= 0);
 
         if ( isMediaRootAvailable )
         {
-          relativePath = path.Remove(rootStartIndex, this.sessionConfig.MediaLybraryRoot.Length);
+          relativePath = path.Remove(rootStartIndex, this.sessionConfig.MediaLibraryRoot.Length);
         }
 
 

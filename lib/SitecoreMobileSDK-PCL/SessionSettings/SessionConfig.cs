@@ -51,7 +51,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       string password, 
       string site, 
       string itemWebApiVersion,
-      string mediaLybraryRoot,
+      string mediaLibraryRoot,
       string defaultMediaResourceExtension,
       string mediaPrefix)
     {
@@ -61,7 +61,7 @@ namespace Sitecore.MobileSDK.SessionSettings
         password, 
         site, 
         itemWebApiVersion,
-        mediaLybraryRoot,
+        mediaLibraryRoot,
         defaultMediaResourceExtension,
         mediaPrefix);
     }
@@ -72,7 +72,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       string password, 
       string site, 
       string itemWebApiVersion,
-      string mediaLybraryRoot,
+      string mediaLibraryRoot,
       string defaultMediaResourceExtension,
       string mediaPrefix)
     {
@@ -82,7 +82,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       this.Site        = site;
       this.ItemWebApiVersion = itemWebApiVersion;
 
-      this.MediaLybraryRoot = mediaLybraryRoot;
+      this.MediaLibraryRoot = mediaLibraryRoot;
       this.DefaultMediaResourceExtension = defaultMediaResourceExtension;
       this.MediaPrefix = mediaPrefix;
 
@@ -99,7 +99,7 @@ namespace Sitecore.MobileSDK.SessionSettings
         this.Password, 
         this.Site, 
         this.ItemWebApiVersion,
-        this.MediaLybraryRoot,
+        this.MediaLibraryRoot,
         this.DefaultMediaResourceExtension,
         this.MediaPrefix);
 
@@ -188,7 +188,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     #region Media Properties
 
-    public string MediaLybraryRoot
+    public string MediaLibraryRoot
     {
       get;
       private set;
@@ -209,8 +209,8 @@ namespace Sitecore.MobileSDK.SessionSettings
     #endregion Media Properties
 
     #region Instance Variables
-    private const string DefaultMediaLybraryRoot = "/sitecore/media library";
-    private string mediaLybraryRoot;
+    private const string DefaultMediaLibraryRoot = "/sitecore/media library";
+    private string mediaLibraryRoot;
     #endregion Instance Variables
   }
 }
