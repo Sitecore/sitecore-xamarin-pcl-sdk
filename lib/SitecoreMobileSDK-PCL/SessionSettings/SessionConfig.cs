@@ -118,6 +118,11 @@ namespace Sitecore.MobileSDK.SessionSettings
     {
       return this.ShallowCopy();
     }
+
+    public IMediaLibrarySettings MediaSettingsShallowCopy()
+    {
+      return this.ShallowCopy();
+    }
     #endregion ICloneable
 
     #region Properties
@@ -212,7 +217,6 @@ namespace Sitecore.MobileSDK.SessionSettings
     #endregion Media Properties
 
     #region Instance Variables
-    private const string DefaultMediaLibraryRoot = "/sitecore/media library";
     private string mediaLibraryRoot;
     #endregion Instance Variables
   }
