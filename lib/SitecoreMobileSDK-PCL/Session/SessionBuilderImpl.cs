@@ -16,21 +16,14 @@ namespace Sitecore.MobileSDK.Session
       string optionalWebApiVersion = this.OptionalWebApiVersion();
       string optionalMediaRoot = this.OptionalMediaRoot();
       string optionalMediaExtension = this.OptionalMediaExtension();
-      string optionalMediaPrefix = OptionalMediaPrefix();
+      string optionalMediaPrefix = this.OptionalMediaPrefix();
 
 
       ////////
-      SessionConfig conf = SessionConfig.NewSessionConfig(
+      SessionConfig conf = new SessionConfig(
         this.instanceUrl,
-        //@adk : TODO : do not store credentials in variables
-        this.credentials.Username,
-        this.credentials.Password,
-
         this.site,
-        optionalWebApiVersion,
-        optionalMediaRoot,
-        optionalMediaExtension,
-        optionalMediaPrefix);
+        optionalWebApiVersion);
 
       var mediaSettings = new MediaLibrarySettings(
         optionalMediaRoot,
