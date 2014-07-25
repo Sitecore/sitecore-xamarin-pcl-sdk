@@ -5,9 +5,9 @@
   public class MediaLibrarySettings : IMediaLibrarySettings
   {
     public MediaLibrarySettings(
-      string mediaLibraryRoot,
-      string defaultMediaResourceExtension,
-      string mediaPrefix)
+      string mediaLibraryRoot = "/sitecore/media library",
+      string defaultMediaResourceExtension = "ashx",
+      string mediaPrefix = "~/media")
     {
       this.MediaLibraryRoot = mediaLibraryRoot;
       this.DefaultMediaResourceExtension = defaultMediaResourceExtension;
@@ -39,7 +39,6 @@
       get;
       private set;
     }
-
   }
 }
 
