@@ -35,11 +35,16 @@
 
     public IDeleteItemRequestBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
+      if (null == scope)
+      {
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".scope");
+      }
+
       var scopeParams = new ScopeParameters(this.scopeParameters);
 
       foreach (var singleScope in scope)
       {
-        if (!scopeParameters.AddScope(singleScope))
+        if (!scopeParams.AddScope(singleScope))
         {
           throw new InvalidOperationException(this.GetType().Name + " : Adding scope parameter duplicates is forbidden");
         }

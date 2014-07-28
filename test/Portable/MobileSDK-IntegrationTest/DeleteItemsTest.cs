@@ -241,7 +241,7 @@
         .AddScope(ScopeType.Self)
         .AddScope(ScopeType.Self)
         .Build());
-      Assert.AreEqual("Adding scope parameter duplicates is forbidden", exception.Message);
+      Assert.AreEqual("DeleteItemByIdRequestBuilder : Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
     [Test]
@@ -257,7 +257,7 @@
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
         .AddScope(null)
         .Build());
-      Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Scope : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.scope : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
