@@ -138,7 +138,7 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.site,
-        this.GetType().Name + ".Site property cannot be assigned twice"
+        this.GetType().Name + ".Site : property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         site,
@@ -153,7 +153,7 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.webApiVersion,
-        this.GetType().Name + ".WebApiVersion property cannot be assigned twice"
+        this.GetType().Name + ".WebApiVersion : property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         webApiVersion,
@@ -169,7 +169,7 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Database,
-        this.GetType().Name + ".DefaultDatabase property cannot be assigned twice"
+        this.GetType().Name + ".DefaultDatabase : property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultDatabase,
@@ -190,7 +190,7 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Language,
-        this.GetType().Name + ".DefaultLanguage property cannot be assigned twice"
+        this.GetType().Name + ".DefaultLanguage : property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultLanguage,
@@ -211,7 +211,7 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaRoot,
-        this.GetType().Name + ".MediaLibraryRoot property cannot be assigned twice"
+        this.GetType().Name + ".MediaLibraryRoot : property cannot be assigned twice"
       );
       MediaPathValidator.ValidateMediaRoot(mediaLibraryRootItem, this.GetType().Name + ".MediaLibraryRoot");
 
@@ -223,7 +223,7 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaExtension,
-         this.GetType().Name + ".DefaultMediaResourceExtension property cannot be assigned twice"
+         this.GetType().Name + ".DefaultMediaResourceExtension : property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultExtension,
@@ -238,7 +238,7 @@ namespace Sitecore.MobileSDK.Session
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaPrefix,
-        this.GetType().Name + ".MediaPrefix property cannot be assigned twice"
+        this.GetType().Name + ".MediaPrefix : property cannot be assigned twice"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         mediaPrefix,
