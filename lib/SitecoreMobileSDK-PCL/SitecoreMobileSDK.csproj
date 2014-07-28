@@ -168,7 +168,6 @@
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="UrlBuilder\UpdateItem\IBaseUpdateItemRequest.cs" />
     <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\UpdateItem\UpdateItemById\IUpdateItemByIdRequest.cs" />
     <Compile Include="UrlBuilder\UpdateItem\UpdateItemById\UpdateItemByIdUrlBuilder.cs" />
     <Compile Include="Items\UpdateItemByIdParameters.cs" />
     <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
@@ -189,6 +188,7 @@
     <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
     <Compile Include="API\Request\IBaseItemRequest.cs" />
     <Compile Include="API\Session\IUpdateItemActions.cs" />
+    <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

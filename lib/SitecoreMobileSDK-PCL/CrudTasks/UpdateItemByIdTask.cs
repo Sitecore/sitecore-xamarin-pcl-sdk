@@ -4,6 +4,7 @@ namespace Sitecore.MobileSDK.CrudTasks
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using System.Net.Http;
   using Sitecore.MobileSDK.PublicKey;
+  using Sitecore.MobileSDK.API.Request;
 
   public class UpdateItemByIdTask : AbstractUpdateItemTask<IUpdateItemByIdRequest>
   {
