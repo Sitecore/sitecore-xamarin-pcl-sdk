@@ -1,6 +1,4 @@
-﻿
-
-namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Utils;
@@ -30,7 +28,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 
     protected override void ValidateSpecificRequest(ICreateItemByIdRequest request)
     {
-      ItemIdValidator.ValidateItemId(request.ItemId);
+      ItemIdValidator.ValidateItemId(request.ItemId, this.GetType().Name + ".ItemId");
     }
   }
 }

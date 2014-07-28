@@ -1,5 +1,4 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;
   using Sitecore.MobileSDK.API.Request;
@@ -9,7 +8,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
   {
     public CreateItemByIdRequestBuilder (string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId);
+      ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".itemId");
 
       this.itemId = itemId;
     }

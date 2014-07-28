@@ -9,10 +9,10 @@
   {
     private readonly string sitecoreQuery;
 
-    public DeleteItemItemByQueryRequestBuilder(string query)
+    public DeleteItemItemByQueryRequestBuilder(string sitecoreQuery)
     {
-      SitecoreQueryValidator.ValidateSitecoreQuery(query);
-      this.sitecoreQuery = query;
+      SitecoreQueryValidator.ValidateSitecoreQuery(sitecoreQuery, this.GetType().Name + ".sitecoreQuery");
+      this.sitecoreQuery = sitecoreQuery;
     }
 
     public override IDeleteItemsByQueryRequest Build()

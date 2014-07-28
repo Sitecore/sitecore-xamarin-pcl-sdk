@@ -14,8 +14,6 @@
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
 
   [TestFixture()]

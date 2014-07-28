@@ -1,17 +1,13 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest
 {
-  using System;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.Validators;
 
   public class ReadItemByQueryRequestBuilder : AbstractBaseRequestBuilder<IReadItemsByQueryRequest>
   {
     public ReadItemByQueryRequestBuilder(string sitecoreQuery)
     {
-      SitecoreQueryValidator.ValidateSitecoreQuery(sitecoreQuery);
+      SitecoreQueryValidator.ValidateSitecoreQuery(sitecoreQuery, this.GetType().Name + ".sitecoreQuery");
 
       this.sitecoreQuery = sitecoreQuery;
     }

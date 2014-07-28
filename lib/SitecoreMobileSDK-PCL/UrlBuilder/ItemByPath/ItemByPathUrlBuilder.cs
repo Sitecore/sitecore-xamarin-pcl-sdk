@@ -1,22 +1,15 @@
-﻿
-
-namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
+﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 {
-  using System;
-
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Utils;
-  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Validators;
-
 
   public class ItemByPathUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByPathRequest>
   {
     public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base( restGrammar, webApiGrammar )
+      : base(restGrammar, webApiGrammar)
     {
     }
 
@@ -36,7 +29,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.ItemByPath
 
     protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)
     {
-      ItemPathValidator.ValidateItemPath (request.ItemPath);
+      ItemPathValidator.ValidateItemPath(request.ItemPath, this.GetType().Name + ".ItemPath");
     }
   }
 }

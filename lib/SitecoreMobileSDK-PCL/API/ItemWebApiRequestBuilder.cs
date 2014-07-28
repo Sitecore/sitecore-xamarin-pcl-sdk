@@ -1,18 +1,15 @@
 namespace Sitecore.MobileSDK.API
 {
-    using Sitecore.MobileSDK.API.Request;
-    using Sitecore.MobileSDK.API.Request.Parameters;
-    using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-    using Sitecore.MobileSDK.UrlBuilder.ItemById;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-    using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-    using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-    using Sitecore.MobileSDK.UserRequest;
-    using Sitecore.MobileSDK.Validators;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.UserRequest.CreateRequest;
+  using Sitecore.MobileSDK.Validators;
 
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 
-    public class ItemWebApiRequestBuilder
+  public class ItemWebApiRequestBuilder
   {
     private ItemWebApiRequestBuilder()
     {
@@ -20,45 +17,45 @@ namespace Sitecore.MobileSDK.API
 
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId);
+      ItemIdValidator.ValidateItemId(itemId, typeof(ItemWebApiRequestBuilder).Name + ".itemId");
       return new ReadItemByIdRequestBuilder(itemId);
     }
 
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByPathRequest> ReadItemsRequestWithPath(string itemPath)
     {
-      ItemPathValidator.ValidateItemPath(itemPath);
+      ItemPathValidator.ValidateItemPath(itemPath, typeof(ItemWebApiRequestBuilder).Name + ".itemPath");
       return new ReadItemByPathRequestBuilder(itemPath);
     }
 
     public static IBaseRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
     {
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        sitecoreQuery, 
+        sitecoreQuery,
         "[ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery] value path cannot be null or empty"
       );
 
       return new ReadItemByQueryRequestBuilder(sitecoreQuery);
     }
 
-		public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
-		{
+    public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
+    {
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        mediaPath, 
+        mediaPath,
         "[ItemWebApiRequestBuilder.ReadMediaItemRequest] value path cannot be null or empty"
       );
 
-			return new ReadMediaItemRequestBuilder(mediaPath);
-		}
+      return new ReadMediaItemRequestBuilder(mediaPath);
+    }
 
     public static ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId);
+      ItemIdValidator.ValidateItemId(itemId, typeof(ItemWebApiRequestBuilder).Name + ".itemId");
       return new CreateItemByIdRequestBuilder(itemId);
     }
 
     public static ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
     {
-      ItemPathValidator.ValidateItemPath(itemPath);
+      ItemPathValidator.ValidateItemPath(itemPath, typeof(ItemWebApiRequestBuilder).Name + ".itemPath");
       return new CreateItemByPathRequestBuilder(itemPath);
     }
 

@@ -125,6 +125,7 @@
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
+    <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\AbstractDeleteItemRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByPathRequestBuilder.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="UrlBuilder\CreateItem\CreateItemById\CreateItemByIdUrlBuilder.cs" />
     <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
     <Compile Include="Items\CreateItemByIdParameters.cs" />
+    <Compile Include="Validators\BaseValidator.cs" />
     <Compile Include="Validators\DuplicateEntryValidator.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
@@ -165,7 +167,6 @@
     <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
     <Compile Include="Items\CreateItemByPathParameters.cs" />
     <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
-    <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
     <Compile Include="Session\SessionBuilder.cs" />

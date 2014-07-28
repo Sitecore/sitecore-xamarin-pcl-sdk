@@ -52,7 +52,7 @@
     {
       TestDelegate action = () => this.builder.GetUrlForRequest(null);
 
-      Assert.Throws<ArgumentNullException>(action);
+      Assert.Throws<ArgumentException>(action);
     }
 
     [Test]
@@ -65,7 +65,7 @@
         this.builder.GetUrlForRequest(parameters);
       };
 
-      Assert.Throws<ArgumentNullException>(action);
+      Assert.Throws<ArgumentException>(action);
     }
 
     [Test]

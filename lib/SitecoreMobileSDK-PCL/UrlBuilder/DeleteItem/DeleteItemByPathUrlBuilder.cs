@@ -1,7 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
 {
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Utils;
@@ -34,7 +33,7 @@
 
     public override void ValidateSpecificPart(IDeleteItemsByPathRequest request)
     {
-      ItemPathValidator.ValidateItemPath(request.ItemPath);
+      ItemPathValidator.ValidateItemPath(request.ItemPath, this.GetType().Name + ".ItemPath");
     }
   }
 }

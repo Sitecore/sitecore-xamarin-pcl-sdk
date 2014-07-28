@@ -1,18 +1,12 @@
 ﻿namespace Sitecore.MobileSDK.Validators
 {
-  using System;
-
-  public class SitecoreQueryValidator
+  public static class SitecoreQueryValidator
   {
-    private SitecoreQueryValidator ()
-    {
-    }
-
-    public static void ValidateSitecoreQuery(string sitecoreQuery)
+    public static void ValidateSitecoreQuery(string sitecoreQuery, string source)
     {
       if ( string.IsNullOrWhiteSpace(sitecoreQuery) )
       {
-        throw new ArgumentNullException ("SitecoreQuery cannot be null");
+        BaseValidator.ThrowNullOrEmptyParameterException(source); 
       }
     }
   }

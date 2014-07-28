@@ -26,7 +26,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 
     protected override void ValidateSpecificRequest(ICreateItemByPathRequest request)
     {
-      ItemPathValidator.ValidateItemPath(request.ItemPath);
+      ItemPathValidator.ValidateItemPath(request.ItemPath, this.GetType().Name + ".ItemPath");
     }
   }
 }

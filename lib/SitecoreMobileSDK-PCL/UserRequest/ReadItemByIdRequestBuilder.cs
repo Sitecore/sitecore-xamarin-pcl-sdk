@@ -1,15 +1,13 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest
 {
-    using Sitecore.MobileSDK.API.Request;
-    using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Validators;
 
   public class ReadItemByIdRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByIdRequest>
   {
     public ReadItemByIdRequestBuilder(string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId);
+      ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".itemId");
 
       this.itemId = itemId;
     }

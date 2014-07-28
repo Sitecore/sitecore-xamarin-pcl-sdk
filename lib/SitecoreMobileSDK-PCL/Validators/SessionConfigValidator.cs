@@ -1,7 +1,5 @@
 ﻿namespace Sitecore.MobileSDK.Validators
 {
-  using System;
-
   public class SessionConfigValidator
   {
     private SessionConfigValidator()
@@ -10,7 +8,7 @@
 
     public static string AutocompleteInstanceUrl(string url)
     {
-      if (SessionConfigValidator.IsValidSchemeOfInstanceUrl(url))
+      if (IsValidSchemeOfInstanceUrl(url))
       {
         return url;
       }
