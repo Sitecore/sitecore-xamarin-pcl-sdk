@@ -17,12 +17,12 @@
     {
       if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemName))
       {
-        throw new ArgumentException(this.GetType().Name + ".ItemName : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemName");
       }
 
       if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemTemplate))
       {
-        throw new ArgumentException(this.GetType().Name + ".ItemTemplate : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemTemplate");
       }
 
       CreateItemByIdParameters result = new CreateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemId);

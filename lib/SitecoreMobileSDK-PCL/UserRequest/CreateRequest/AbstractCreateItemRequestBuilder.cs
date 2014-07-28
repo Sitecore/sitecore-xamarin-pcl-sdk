@@ -8,6 +8,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractCreateItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>, ICreateItemRequestParametersBuilder<T> 
     where T : class
@@ -18,12 +19,12 @@ namespace Sitecore.MobileSDK
     {
       if (string.IsNullOrEmpty(itemName) || string.IsNullOrWhiteSpace(itemName))
       {
-        throw new ArgumentException(this.GetType().Name + ".ItemName : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemName");
       }
 
       if (!string.IsNullOrEmpty(this.itemParametersAccumulator.ItemName))
       {
-        throw new ArgumentException(this.GetType().Name + ".ItemName : The input cannot be set twice");
+        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".ItemName");
       }
 
       this.itemParametersAccumulator = 
@@ -36,12 +37,12 @@ namespace Sitecore.MobileSDK
     {
       if (string.IsNullOrEmpty(itemTemplate) || string.IsNullOrWhiteSpace(itemTemplate))
       {
-        throw new ArgumentException(this.GetType().Name + ".ItemTemplate : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemTemplate");
       }
 
       if (!string.IsNullOrEmpty(this.itemParametersAccumulator.ItemTemplate))
       {
-        throw new ArgumentException(this.GetType().Name + ".ItemTemplate : The input cannot be set twice");
+        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".ItemTemplate");
       }
 
       this.itemParametersAccumulator = 
@@ -54,7 +55,7 @@ namespace Sitecore.MobileSDK
     {
       if (fieldsRawValuesByName == null)
       {
-        throw new ArgumentException(this.GetType().Name + ".fieldsRawValuesByName cannot be null");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".fieldsRawValuesByName");
       }
       
       if (fieldsRawValuesByName.Count == 0)

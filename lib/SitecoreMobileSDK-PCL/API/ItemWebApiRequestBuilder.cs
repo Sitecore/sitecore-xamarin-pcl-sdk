@@ -17,13 +17,11 @@ namespace Sitecore.MobileSDK.API
 
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId, typeof(ItemWebApiRequestBuilder).Name + ".itemId");
       return new ReadItemByIdRequestBuilder(itemId);
     }
 
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByPathRequest> ReadItemsRequestWithPath(string itemPath)
     {
-      ItemPathValidator.ValidateItemPath(itemPath, typeof(ItemWebApiRequestBuilder).Name + ".itemPath");
       return new ReadItemByPathRequestBuilder(itemPath);
     }
 
@@ -49,13 +47,11 @@ namespace Sitecore.MobileSDK.API
 
     public static ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId, typeof(ItemWebApiRequestBuilder).Name + ".itemId");
       return new CreateItemByIdRequestBuilder(itemId);
     }
 
     public static ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
     {
-      ItemPathValidator.ValidateItemPath(itemPath, typeof(ItemWebApiRequestBuilder).Name + ".itemPath");
       return new CreateItemByPathRequestBuilder(itemPath);
     }
 
