@@ -1,5 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
 {
+  using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -38,7 +39,10 @@
 
       foreach (var singleScope in scope)
       {
-        scopeParams.AddScope(singleScope);
+        if (!scopeParameters.AddScope(singleScope))
+        {
+          throw new InvalidOperationException(this.GetType().Name + " : Adding scope parameter duplicates is forbidden");
+        }
       }
       this.scopeParameters = scopeParams;
 

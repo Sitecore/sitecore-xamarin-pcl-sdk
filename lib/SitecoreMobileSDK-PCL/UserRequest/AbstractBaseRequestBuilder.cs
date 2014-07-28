@@ -70,7 +70,10 @@ namespace Sitecore.MobileSDK.UserRequest
 
       foreach (ScopeType singleScope in scope)
       {
-        scopeParameters.AddScope(singleScope);
+        if (!scopeParameters.AddScope(singleScope))
+        {
+          throw new InvalidOperationException(this.GetType().Name + " : Adding scope parameter duplicates is forbidden");
+        }
       }
 
       this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields);
@@ -97,8 +100,6 @@ namespace Sitecore.MobileSDK.UserRequest
       Func<string, bool> fieldNameValidator = 
         fieldName => !string.IsNullOrWhiteSpace(fieldName);
       var validFields = fields.Where(fieldNameValidator).ToList();
-
-
 
       ICollection<string> currentFields = this.queryParameters.Fields;
       if (null == currentFields)
