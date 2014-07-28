@@ -84,7 +84,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .DefaultDatabase(null)
         .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.DefaultDatabase : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("SessionBuilder.DefaultDatabase : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -93,7 +93,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .DefaultLanguage(" ")
         .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.DefaultLanguage : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("SessionBuilder.DefaultLanguage : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -102,7 +102,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .DefaultMediaResourceExtension(null)
         .BuildSession());
-      Assert.AreEqual("SessionBuilder.DefaultMediaResourceExtension : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("SessionBuilder.DefaultMediaResourceExtension : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -111,7 +111,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .MediaLibraryRoot("")
         .BuildSession());
-      Assert.AreEqual("SessionBuilder.MediaLibraryRoot : Media path cannot be null or empty", exception.Message);
+      Assert.AreEqual("SessionBuilder.MediaLibraryRoot : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -120,7 +120,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .Site(null)
         .BuildSession());
-      Assert.AreEqual("SessionBuilder.Site : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("SessionBuilder.Site : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -129,7 +129,7 @@
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .MediaPrefix(" ")
         .BuildSession());
-      Assert.AreEqual("SessionBuilder.MediaPrefix : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("SessionBuilder.MediaPrefix : The input cannot be null or empty.", exception.Message);
     }
 
     private IBaseSessionBuilder NewSession()
