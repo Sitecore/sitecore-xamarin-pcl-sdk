@@ -5,22 +5,22 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.API.Request;
 
-  public class UpdateItemByIdRequestBuilder : AbstractUpdateItemRequestBuilder<IUpdateItemByIdRequest>
+  public class UpdateItemByPathRequestBuilder : AbstractUpdateItemRequestBuilder<IUpdateItemByPathRequest>
   {
-    public UpdateItemByIdRequestBuilder (string itemId)
+    public UpdateItemByPathRequestBuilder (string itemPath)
     {
-      ItemIdValidator.ValidateItemId(itemId);
+      ItemPathValidator.ValidateItemPath(itemPath);
 
-      this.itemId = itemId;
+      this.itemPath = itemPath;
     }
 
-    public override IUpdateItemByIdRequest Build()
+    public override IUpdateItemByPathRequest Build()
     {
 
-      UpdateItemByIdParameters result = new UpdateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemId);
+      UpdateItemByPathParameters result = new UpdateItemByPathParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemPath);
       return result;
     }
 
-    private readonly string itemId;
+    private readonly string itemPath;
   }
 }

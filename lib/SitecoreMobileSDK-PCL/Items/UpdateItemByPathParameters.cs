@@ -11,18 +11,18 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder;
 
-  public class UpdateItemByIdParameters : IUpdateItemByIdRequest
+  public class UpdateItemByPathParameters : IUpdateItemByPathRequest
   {
-    public UpdateItemByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemId)
+    public UpdateItemByPathParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemPath)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
-      this.ItemId = itemId;
+      this.ItemPath = itemPath;
       this.QueryParameters = queryParameters;
       this.CreateParameters = createParameters;
     }
 
-    public virtual IUpdateItemByIdRequest DeepCopyUpdateItemByIdRequest()
+    public virtual IUpdateItemByPathRequest DeepCopyUpdateItemByPathRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
@@ -49,21 +49,21 @@ namespace Sitecore.MobileSDK
         createParameters = this.CreateParameters.ShallowCopy();
       }
 
-      return new UpdateItemByIdParameters(connection, itemSrc, payload, createParameters, this.ItemId);
+      return new UpdateItemByPathParameters(connection, itemSrc, payload, createParameters, this.ItemPath);
     }
 
-    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
+    public virtual IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
     {
-      return this.DeepCopyUpdateItemByIdRequest();
+      return this.DeepCopyUpdateItemByPathRequest();
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
-      return this.DeepCopyUpdateItemByIdRequest();
+      return this.DeepCopyUpdateItemByPathRequest();
     }
 
 
-    public string ItemId { get; private set; }
+    public string ItemPath { get; private set; }
 
     public IItemSource ItemSource { get; private set; }
 

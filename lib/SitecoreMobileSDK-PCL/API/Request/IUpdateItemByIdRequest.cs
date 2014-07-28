@@ -1,5 +1,4 @@
 ﻿
-
 namespace Sitecore.MobileSDK.API.Request
 {
   using System;
@@ -11,4 +10,3 @@ namespace Sitecore.MobileSDK.API.Request
     IUpdateItemByIdRequest DeepCopyUpdateItemByIdRequest();
   }
 }
-

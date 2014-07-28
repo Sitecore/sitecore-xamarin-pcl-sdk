@@ -12,6 +12,7 @@ namespace Sitecore.MobileSDK.API.Session
   public interface IUpdateItemActions
   {
     Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken));
   }
 }
 

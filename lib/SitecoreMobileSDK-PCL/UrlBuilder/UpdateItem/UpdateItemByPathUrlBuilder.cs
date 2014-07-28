@@ -8,31 +8,32 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.API.Request;
 
-  public class UpdateItemByIdUrlBuilder : AbstractUpdateItemUrlBuilder<IUpdateItemByIdRequest>
+  public class UpdateItemByPathUrlBuilder : AbstractUpdateItemUrlBuilder<IUpdateItemByPathRequest>
   {
-    public UpdateItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    public UpdateItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base( restGrammar, webApiGrammar )
     {
     }
 
-    //TODO: igk common part for all requests "by id", we should merge it somehow!!!
-    protected override string GetSpecificPartForRequest(IUpdateItemByIdRequest request)
+    protected override string GetSpecificPartForRequest(IUpdateItemByPathRequest request)
     {
-      string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId).ToLowerInvariant();
+      return string.Empty;
+    }
 
-      string result = 
-          this.restGrammar.FieldSeparator 
-        + this.webApiGrammar.ItemIdParameterName
-        + this.restGrammar.KeyValuePairSeparator
-        + escapedId;
+    protected override string GetHostUrlForRequest(IUpdateItemByPathRequest request)
+    {
+      string hostUrl = base.GetHostUrlForRequest(request);
+      string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
 
+      string result = hostUrl + escapedPath;
       return result;
     }
 
-    protected override void ValidateSpecificRequest(IUpdateItemByIdRequest request)
+    protected override void ValidateSpecificRequest(IUpdateItemByPathRequest request)
     {
-      ItemIdValidator.ValidateItemId(request.ItemId);
+      ItemPathValidator.ValidateItemPath(request.ItemPath);
     }
+   
   }
 }
 

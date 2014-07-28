@@ -1,9 +1,13 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK.API.Request
 {
-  public interface IUpdateItemByPathRequest
+  using System;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
+
+  public interface IUpdateItemByPathRequest : IReadItemsByPathRequest, IBaseUpdateItemRequest
   {
+    IUpdateItemByPathRequest DeepCopyUpdateItemByPathRequest();
   }
 }
 
