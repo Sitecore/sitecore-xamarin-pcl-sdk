@@ -1,8 +1,6 @@
 namespace Sitecore.MobileSDK.API.Session
 {
-    using Sitecore.MobileSDK.Session;
-
-    public interface IBaseSessionBuilder
+  public interface IBaseSessionBuilder
   {
     ISitecoreWebApiSession BuildSession();
     ISitecoreWebApiReadonlySession BuildReadonlySession();

@@ -51,7 +51,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
     {
       MediaPathValidator mediaPathValidator = new MediaPathValidator(this.sessionConfig);
-      mediaPathValidator.ValidateMediaPath(path);
+      mediaPathValidator.ValidateMediaPath(path, this.GetType().Name + ".path");
 
       string relativePath = path;
       string result = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
