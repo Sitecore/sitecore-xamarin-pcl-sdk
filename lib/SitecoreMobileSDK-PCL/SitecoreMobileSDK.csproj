@@ -168,7 +168,6 @@
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="UrlBuilder\UpdateItem\IBaseUpdateItemRequest.cs" />
     <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\UpdateItem\UpdateItemById\UpdateItemByIdUrlBuilder.cs" />
     <Compile Include="Items\UpdateItemByIdParameters.cs" />
     <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
     <Compile Include="CrudTasks\AbstractUpdateItemTask.cs" />
@@ -191,6 +190,12 @@
     <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
     <Compile Include="Validators\WebApiCredentialsValidator.cs" />
     <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
+    <Compile Include="API\Request\IUpdateItemByPathRequest.cs" />
+    <Compile Include="Items\UpdateItemByPathParameters.cs" />
+    <Compile Include="CrudTasks\UpdateItemByPathTask.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\UpdateItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\UpdateItemByPathUrlBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\UpdateItemByPathRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -245,7 +250,6 @@
     <Folder Include="Validators\" />
     <Folder Include="UrlBuilder\CreateItem\CreateItemByPath\" />
     <Folder Include="UrlBuilder\UpdateItem\" />
-    <Folder Include="UrlBuilder\UpdateItem\UpdateItemById\" />
     <Folder Include="UserRequest\UpdateRequest\" />
     <Folder Include="Session\" />
     <Folder Include="API\MediaItem\" />
