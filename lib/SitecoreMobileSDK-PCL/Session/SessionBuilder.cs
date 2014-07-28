@@ -1,12 +1,11 @@
-﻿using Sitecore.MobileSDK.Validators;
-
-namespace Sitecore.MobileSDK.Session
+﻿namespace Sitecore.MobileSDK.Session
 {
   using System;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.Validators;
 
   internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder
   {
