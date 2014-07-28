@@ -1,22 +1,20 @@
-﻿namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.UrlBuilder.MediaItem.UserRequest
 {
-	using System;
-
-  using Sitecore.MobileSDK.API;
-	using Sitecore.MobileSDK.API.Request;
-	using Sitecore.MobileSDK.API.Request.Parameters;
-
-	using Sitecore.MobileSDK.Items;
-	using Sitecore.MobileSDK.UrlBuilder;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.Validators;
 
-
   public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest>
 	{
-    public ReadMediaItemRequestBuilder(string itemPath)
+    public ReadMediaItemRequestBuilder(string mediaPath)
     {
-      this.mediaPath = itemPath;
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        mediaPath,
+        this.GetType().Name + ".mediaPath"
+      );
+      this.mediaPath = mediaPath;
     }
       
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database(string sitecoreDatabase)

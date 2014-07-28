@@ -7,6 +7,11 @@
   {
     public ReadItemByQueryRequestBuilder(string sitecoreQuery)
     {
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        sitecoreQuery,
+        this.GetType().Name + ".sitecoreQuery"
+      );
+
       SitecoreQueryValidator.ValidateSitecoreQuery(sitecoreQuery, this.GetType().Name + ".sitecoreQuery");
 
       this.sitecoreQuery = sitecoreQuery;

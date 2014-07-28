@@ -3,9 +3,9 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem.UserRequest;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UserRequest.CreateRequest;
-  using Sitecore.MobileSDK.Validators;
 
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 
@@ -27,21 +27,11 @@ namespace Sitecore.MobileSDK.API
 
     public static IBaseRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
     {
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        sitecoreQuery,
-        "[ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery] value path cannot be null or empty"
-      );
-
       return new ReadItemByQueryRequestBuilder(sitecoreQuery);
     }
 
     public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
     {
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        mediaPath,
-        "[ItemWebApiRequestBuilder.ReadMediaItemRequest] value path cannot be null or empty"
-      );
-
       return new ReadMediaItemRequestBuilder(mediaPath);
     }
 
