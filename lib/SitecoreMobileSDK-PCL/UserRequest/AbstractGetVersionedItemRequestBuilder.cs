@@ -10,8 +10,10 @@ namespace Sitecore.MobileSDK.UserRequest
 
 
 
-  public abstract class AbstractGetVersionedItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>, IGetVersionedItemRequestParametersBuilder<T>
-    where T : class
+  public abstract class AbstractGetVersionedItemRequestBuilder<T> : 
+    AbstractBaseRequestBuilder<T>, 
+    IGetVersionedItemRequestParametersBuilder<T>
+  where T : class
   {
     public IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion)
     {

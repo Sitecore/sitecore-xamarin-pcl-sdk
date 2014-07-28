@@ -6,11 +6,11 @@
 
 	public class MediaPathValidator
 	{
-    private ISessionConfig sessionConfig;
+    private IMediaLibrarySettings mediaSettings;
 
-    public MediaPathValidator(ISessionConfig sessionConfig)
+    public MediaPathValidator(IMediaLibrarySettings mediaSettings)
     {
-      this.sessionConfig = sessionConfig;
+      this.mediaSettings = mediaSettings;
     }
 
     public static void ValidateMediaRoot(string mediaLibraryRootItemPath, string exceptionSource)
@@ -62,7 +62,7 @@
     private bool IsItemPathHasMediaHook(string itemPath)
     {
       string lowerCasePath = itemPath.ToLowerInvariant();
-      string lowerCaseHook = this.sessionConfig.MediaPrefix.ToLowerInvariant();
+      string lowerCaseHook = this.mediaSettings.MediaPrefix.ToLowerInvariant();
       if (!lowerCaseHook.EndsWith("/"))
       {
         lowerCaseHook += "/";

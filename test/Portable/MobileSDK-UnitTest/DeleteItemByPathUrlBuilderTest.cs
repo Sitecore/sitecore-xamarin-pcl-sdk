@@ -26,7 +26,7 @@
     [SetUp]
     public void Setup()
     {
-      this.sessionConfig = new MutableSessionConfig("http://testurl", null, null);
+      this.sessionConfig = new MutableSessionConfig("http://testurl");
       this.scopeParameters = new ScopeParameters();
 
       this.path = "/sitecore/content/Home/Android/Folder for deleting/1";

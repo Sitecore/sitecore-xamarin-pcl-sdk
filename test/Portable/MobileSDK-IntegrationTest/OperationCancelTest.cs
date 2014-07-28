@@ -19,22 +19,30 @@ namespace MobileSDKIntegrationTest
   {
     private ScTestApiSession session;
     private TestEnvironment env;
+    private MediaLibrarySettings mediaSettings;
 
     [SetUp]
     public void SetUp()
     {
       this.env = TestEnvironment.DefaultTestEnvironment();
 
-      var config = SessionConfig.NewAuthenticatedSessionConfig(this.env.InstanceUrl, this.env.Users.Admin.Username, this.env.Users.Admin.Password);
+      this.mediaSettings = new MediaLibrarySettings(
+        "/sitecore/media library",
+        "ashx",
+        "~/media/");
+
+      var config = new SessionConfig(this.env.InstanceUrl);
       var defaultSource = ItemSource.DefaultSource();
 
-      this.session = new ScTestApiSession(config, defaultSource);
+      this.session = new ScTestApiSession(config, this.env.Users.Admin, mediaSettings, defaultSource);
     }
 
     [TearDown]
     public void TearDown()
     {
       this.session = null;
+      this.env = null;
+      this.mediaSettings = null;
     }
 
 

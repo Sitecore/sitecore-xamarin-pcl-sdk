@@ -1,10 +1,14 @@
 ﻿
+
+
 namespace Sitecore.MobileSdkUnitTest
 {
   using NUnit.Framework;
 
   using System;
   using System.Diagnostics;
+
+  using Sitecore.MobileSDK.API;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
@@ -15,12 +19,39 @@ namespace Sitecore.MobileSdkUnitTest
   [TestFixture]
   public class ItemSourceTest
   {
+    IMediaLibrarySettings mediaSettings;
+    IWebApiCredentials credentials;
+    ISessionConfig localhostConnection;
+
+
+    [SetUp]
+    public void SetUp()
+    {
+      this.credentials = new WebApiCredentialsPOD(
+        "alex.fergusson", 
+        "man u is a champion");
+
+      this.mediaSettings = new MediaLibrarySettings(
+        "/sitecore/media library",
+        "ashx",
+        "~/media/");
+
+      this.localhostConnection = new SessionConfig("localhost");
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+      this.mediaSettings = null;
+      this.credentials = null;
+      this.localhostConnection = null;
+    }
+
+
     [Test]
     public void TestApiSessionConstructorDoesNotRequiresDefaultSource()
     {
-      SessionConfig config = SessionConfig.NewAuthenticatedSessionConfig("localhost", "alex.fergusson", "man u is a champion");
-
-      ScApiSession result = new ScApiSession (config, null);
+      ScApiSession result = new ScApiSession(this.localhostConnection, this.credentials, this.mediaSettings, null);
       Assert.IsNotNull(result);
     }
 
@@ -32,7 +63,7 @@ namespace Sitecore.MobileSdkUnitTest
 
       TestDelegate initSessionAction = () =>
       {
-        ScApiSession result = new ScApiSession (null, defaultSource);
+        ScApiSession result = new ScApiSession(null, this.credentials, this.mediaSettings, defaultSource);
         Debug.WriteLine( result );
       };
 
@@ -42,7 +73,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemSourceDatabaseIsOptional()
     {
-      var result = new ItemSource (null, "en", "1");
+      var result = new ItemSource(null, "en", "1");
 
       Assert.IsNotNull(result);
       Assert.IsNull(result.Database);

@@ -4,6 +4,9 @@ namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
+
+  using SitecoreMobileSDKMockObjects;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.SessionSettings;
@@ -18,62 +21,50 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestSessionConfigForAuthenticatedSession()
     {
-      var conf = SessionConfig.NewAuthenticatedSessionConfig("localhost", "root", "pass", "/sitecore/shell", "v1");
-      Assert.IsNotNull(conf);
+      var sessionSettings = new SessionConfig("localhost", "/sitecore/shell", "v1");
+      var credentials = new WebApiCredentialsPOD("root", "pass");
 
-      Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.AreEqual("root", conf.Username);
-      Assert.AreEqual("pass", conf.Password);
-      Assert.AreEqual("/sitecore/shell", conf.Site);
-      Assert.AreEqual("v1", conf.ItemWebApiVersion);
+      Assert.IsNotNull(sessionSettings);
+      Assert.IsNotNull(credentials);
+
+      Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
+      Assert.AreEqual("root", credentials.Username);
+      Assert.AreEqual("pass", credentials.Password);
+      Assert.AreEqual("/sitecore/shell", sessionSettings.Site);
+      Assert.AreEqual("v1", sessionSettings.ItemWebApiVersion);
     }
 
     [Test]
     public void TestSessionConfigAllowsBothNullForAuthenticatedSession()
     {
-      var conf = SessionConfig.NewAuthenticatedSessionConfig("localhost", null, null, "/sitecore/shell", "v1");
-      Assert.IsNotNull(conf);
+      var sessionSettings = new SessionConfig("localhost", "/sitecore/shell", "v1");
+      var credentials = new WebApiCredentialsPOD(null, null);
 
-      Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Username);
-      Assert.IsNull(conf.Password);
-      Assert.AreEqual("/sitecore/shell", conf.Site);
-      Assert.AreEqual("v1", conf.ItemWebApiVersion);
+      Assert.IsNotNull(sessionSettings);
+      Assert.IsNotNull(credentials);
+
+      Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
+      Assert.IsNull(credentials.Username);
+      Assert.IsNull(credentials.Password);
+      Assert.AreEqual("/sitecore/shell", sessionSettings.Site);
+      Assert.AreEqual("v1", sessionSettings.ItemWebApiVersion);
     }
 
 
     [Test]
     public void TestSessionConfigAllowsNullUsernameForAuthenticatedSession()
     {
-      var conf = SessionConfig.NewAuthenticatedSessionConfig("localhost", null, "pass", "/sitecore/shell", "v1");
-      Assert.IsNotNull(conf);
+      var sessionSettings = new SessionConfig("localhost", "/sitecore/shell", "v1");
+      var credentials = new WebApiCredentialsPOD(null, "pass");
 
-      Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Username);
-      Assert.AreEqual("pass", conf.Password);
-      Assert.AreEqual("/sitecore/shell", conf.Site);
-      Assert.AreEqual("v1", conf.ItemWebApiVersion);
-    }
+      Assert.IsNotNull(sessionSettings);
+      Assert.IsNotNull(credentials);
 
-    [Test]
-    public void TestSessionConfigDoesNotAllowNullPasswordForAuthenticatedSession()
-    {
-      Assert.Throws<ArgumentException>(() =>
-        SessionConfig.NewAuthenticatedSessionConfig("localhost", "userrrr", null, "/sitecore/shell", "v1")
-      );
-    }
-
-    [Test]
-    public void TestSessionConfigForAnonymousSession()
-    {
-      var conf = SessionConfig.NewAnonymousSessionConfig("localhost", "/sitecore/shell", "v1");
-      Assert.IsNotNull(conf);
-
-      Assert.AreEqual("localhost", conf.InstanceUrl);
-      Assert.IsNull(conf.Username);
-      Assert.IsNull(conf.Password);
-      Assert.AreEqual("/sitecore/shell", conf.Site);
-      Assert.AreEqual("v1", conf.ItemWebApiVersion);
+      Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
+      Assert.IsNull(credentials.Username);
+      Assert.AreEqual("pass", credentials.Password);
+      Assert.AreEqual("/sitecore/shell", sessionSettings.Site);
+      Assert.AreEqual("v1", sessionSettings.ItemWebApiVersion);
     }
     #endregion Explicit Construction
 
