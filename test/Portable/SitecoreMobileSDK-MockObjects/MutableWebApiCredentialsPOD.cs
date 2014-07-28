@@ -1,11 +1,11 @@
-﻿namespace Sitecore.MobileSDK.SessionSettings
+﻿namespace SitecoreMobileSDKMockObjects
 {
   using System;
   using Sitecore.MobileSDK.API;
 
-  public class WebApiCredentialsPOD : IWebApiCredentials
+  public class MutableWebApiCredentialsPOD : IWebApiCredentials
   {
-    public WebApiCredentialsPOD(string username, string password)
+    public MutableWebApiCredentialsPOD(string username, string password)
     {
       this.Username = username;
       this.Password = password;
@@ -13,20 +13,20 @@
 
     public IWebApiCredentials CredentialsShallowCopy()
     {
-      return new WebApiCredentialsPOD(this.Username, this.Password);
+      return new MutableWebApiCredentialsPOD(this.Username, this.Password);
     }
 
     public string Username
     {
       get;
-      private set;
+      set;
     }
 
     public string Password
     {
       get;
-      private set;
-    }
+      set;
+    }  
   }
 }
 

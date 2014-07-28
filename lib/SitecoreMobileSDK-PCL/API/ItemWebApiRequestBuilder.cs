@@ -8,8 +8,8 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
 
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Validators;

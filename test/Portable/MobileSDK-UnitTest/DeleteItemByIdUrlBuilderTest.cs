@@ -26,7 +26,7 @@
     [SetUp]
     public void Setup()
     {
-      this.sessionConfig = new MutableSessionConfig("http://testurl", null, null);
+      this.sessionConfig = new MutableSessionConfig("http://testurl");
       this.scopeParameters = new ScopeParameters();
 
       this.id = "{B0ED4777-1F5D-478D-AF47-145CCA9E4311}";

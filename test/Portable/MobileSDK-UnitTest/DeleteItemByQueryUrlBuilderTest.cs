@@ -28,7 +28,7 @@
     [SetUp]
     public void Setup()
     {
-      this.sessionConfig = new MutableSessionConfig("http://testurl", null, null);
+      this.sessionConfig = new MutableSessionConfig("http://testurl");
       this.scopeParameters = new ScopeParameters();
 
       this.query = "/Sitecore/Content/*";
@@ -82,7 +82,7 @@
         this.builder.GetUrlForRequest(parameters);
       };
 
-      Assert.Throws<ArgumentNullException>(action);
+      Assert.Throws<ArgumentException>(action);
     }
 
     [Test]

@@ -6,18 +6,18 @@
 
 	public class MediaPathValidator
 	{
-    private ISessionConfig sessionConfig;
+    private IMediaLibrarySettings mediaSettings;
 
-    public MediaPathValidator(ISessionConfig sessionConfig)
+    public MediaPathValidator(IMediaLibrarySettings mediaSettings)
     {
-      this.sessionConfig = sessionConfig;
+      this.mediaSettings = mediaSettings;
     }
 
-    public static void ValidateMediaRoot(string mediaLibraryRootItemPath)
+    public static void ValidateMediaRoot(string mediaLibraryRootItemPath, string exceptionSource)
     {
       if ( string.IsNullOrWhiteSpace(mediaLibraryRootItemPath) )
       {
-        throw new ArgumentException("Media path cannot be null or empty");
+        throw new ArgumentException(exceptionSource + " : Media path cannot be null or empty");
       }
 
       string lowerCasePath = mediaLibraryRootItemPath.ToLowerInvariant();
@@ -62,7 +62,7 @@
     private bool IsItemPathHasMediaHook(string itemPath)
     {
       string lowerCasePath = itemPath.ToLowerInvariant();
-      string lowerCaseHook = this.sessionConfig.MediaPrefix.ToLowerInvariant();
+      string lowerCaseHook = this.mediaSettings.MediaPrefix.ToLowerInvariant();
       if (!lowerCaseHook.EndsWith("/"))
       {
         lowerCaseHook += "/";

@@ -176,7 +176,7 @@
     <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
-    <Compile Include="Session\SessionBuilderImpl.cs" />
+    <Compile Include="Session\SessionBuilder.cs" />
     <Compile Include="Validators\ItemIdValidator.cs" />
     <Compile Include="Validators\ItemPathValidator.cs" />
     <Compile Include="Validators\SitecoreQueryValidator.cs" />
@@ -189,6 +189,8 @@
     <Compile Include="API\Request\IBaseItemRequest.cs" />
     <Compile Include="API\Session\IUpdateItemActions.cs" />
     <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
+    <Compile Include="Validators\WebApiCredentialsValidator.cs" />
+    <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

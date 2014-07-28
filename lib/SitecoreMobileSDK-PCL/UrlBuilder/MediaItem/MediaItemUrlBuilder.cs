@@ -22,10 +22,12 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     public MediaItemUrlBuilder(
       IRestServiceGrammar restGrammar, 
       ISessionConfig sessionConfig, 
+      IMediaLibrarySettings mediaSettings,
       IItemSource itemSource)
     {
       this.itemSource = itemSource;
       this.restGrammar = restGrammar;
+      this.mediaSettings = mediaSettings;
       this.sessionConfig = sessionConfig;
 
       this.Validate();
@@ -50,19 +52,19 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     //    https://test.host/~/media/1.png.ashx?w=640&h=480
     public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
     {
-      MediaPathValidator mediaPathValidator = new MediaPathValidator(this.sessionConfig);
+      MediaPathValidator mediaPathValidator = new MediaPathValidator(this.mediaSettings);
       mediaPathValidator.ValidateMediaPath(path);
 
       string relativePath = path;
       string result = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
 
       string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
-      string lowerCaseMediaHook = this.sessionConfig.MediaPrefix.ToLowerInvariant();
+      string lowerCaseMediaHook = this.mediaSettings.MediaPrefix.ToLowerInvariant();
 
       bool isMediaHookAvailable = lowerCasePathForComparisonNeeds.Contains(lowerCaseMediaHook);
       bool isExtensionAvailable = MediaPathValidator.IsItemPathHasExtension(path);
 
-      string extensionWithDotPrefix = DOT_SEPARATOR + this.sessionConfig.DefaultMediaResourceExtension.ToLowerInvariant();
+      string extensionWithDotPrefix = DOT_SEPARATOR + this.mediaSettings.DefaultMediaResourceExtension.ToLowerInvariant();
 
       if (isMediaHookAvailable)
       {
@@ -77,14 +79,14 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       {
         result = result + this.restGrammar.PathComponentSeparator + lowerCaseMediaHook;
 
-        string mediaLibraryRoot = this.sessionConfig.MediaLibraryRoot.ToLowerInvariant();
+        string mediaLibraryRoot = this.mediaSettings.MediaLibraryRoot.ToLowerInvariant();
 
         int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
         bool isMediaRootAvailable = (rootStartIndex >= 0);
 
         if ( isMediaRootAvailable )
         {
-          relativePath = path.Remove(rootStartIndex, this.sessionConfig.MediaLibraryRoot.Length);
+          relativePath = path.Remove(rootStartIndex, this.mediaSettings.MediaLibraryRoot.Length);
         }
 
 
@@ -164,6 +166,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;
     private ISessionConfig sessionConfig;
+    private IMediaLibrarySettings mediaSettings;
   }
 }
 
