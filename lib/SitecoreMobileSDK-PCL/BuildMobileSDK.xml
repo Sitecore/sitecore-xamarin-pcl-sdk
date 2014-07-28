@@ -159,7 +159,18 @@
 
     <Copy
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PCL.1.0.0.nupkg"
-      DestinationFolder="$(DeploymentDirectory) "
+      DestinationFolder="$(DeploymentDirectory)"
+     />
+
+
+     <Exec
+      Command="rake"
+      WorkingDirectory="$(ScriptsDirectory)\xamarin-store"
+    />
+
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\Sitecore.MobileSDK.PCL-1.0.0.xam"
+      DestinationFolder="$(DeploymentDirectory)"
      />
   </Target>
 
