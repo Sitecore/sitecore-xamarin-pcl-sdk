@@ -45,7 +45,7 @@ task :default => "xamarin-component/xamarin-component.exe" do
         --library="android":"bin/third-party/System.Net.Http.Primitives.dll"                 \
         --library="android":"bin/third-party/System.Net.Http.dll"                            \
         --library="android":"bin/third-party/System.Threading.Tasks.dll"                     \
-        --library="ios":"bin/third-party/crypto.dll"                                         \
+        --library="android":"bin/third-party/crypto.dll"                                     \
         --library="android":"bin/third-party/System.IO.dll"                                  \
                                                                                              \
         --library="winphone-7.1":"bin/Sitecore.MobileSDK.dll"                                \
@@ -56,8 +56,10 @@ task :default => "xamarin-component/xamarin-component.exe" do
         --library="winphone-7.1":"bin/third-party/System.Net.Http.Primitives.dll"            \
         --library="winphone-7.1":"bin/third-party/System.Net.Http.dll"                       \
         --library="winphone-7.1":"bin/third-party/System.Threading.Tasks.dll"                \
-        --library="ios":"bin/third-party/crypto.dll"                                         \
-        --library="winphone-7.1":"bin/third-party/System.IO.dll"                             
+        --library="winphone-7.1":"bin/third-party/crypto.dll"                                \
+        --library="winphone-7.1":"bin/third-party/System.IO.dll"                             \
+                                                                                             \
+        --sample="Sitecore Mobile SDK iOS Sample. Downloads a single item and shows an alert with its fields.":"../../test/LocalNugetTest/iMobileSdkDemo/iMobileSdkDemo.sln"
         END
     puts "* Creating #{COMPONENT}..."
     puts line.strip.gsub "\t\t", "\\\n    "
