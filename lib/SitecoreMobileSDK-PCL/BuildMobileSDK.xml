@@ -15,9 +15,10 @@
   	<!-- newline symbols matter -->
 
     <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\..'))</RepositoryRoot>
-	<ScriptsDirectory>$(RepositoryRoot)\scripts</ScriptsDirectory>
+	  <ScriptsDirectory>$(RepositoryRoot)\scripts</ScriptsDirectory>
     <SolutionsDirectory>$(RepositoryRoot)\solutions</SolutionsDirectory>
     <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
+    <BinariesDeploymentDirectory>$(RepositoryRoot)\deployment\lib</BinariesDeploymentDirectory>
 
     <UnitTestReportXml>$(RepositoryRoot)\deployment\UnitTestDesktopReport.xml</UnitTestReportXml>
     <IntegrationTestReportXml>$(RepositoryRoot)\deployment\IntegrationTestDesktopReport.xml</IntegrationTestReportXml>
@@ -74,10 +75,20 @@
       Condition="!Exists('$(DeploymentDirectory)')"
       Directories="$(DeploymentDirectory)" 
     />
+    <MakeDir 
+      Condition="!Exists('$(BinariesDeploymentDirectory)')"
+      Directories="$(BinariesDeploymentDirectory)" 
+    />
+    
 
     <ItemGroup>
       <MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
     </ItemGroup>
+
+    <Copy
+      SourceFiles="@(MobileSdkArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
 
   	<MSBuild.ExtensionPack.Compression.Zip 
       TaskAction="Create" 
