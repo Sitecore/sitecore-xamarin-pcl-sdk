@@ -70,7 +70,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       TestDelegate action = () => this.builder.BuildUrlStringForPath("sitecore/media library/1.png", null);
       var exception = Assert.Throws<ArgumentException>(action);
-      Assert.True(exception.Message.Contains("Media path should begin with '/' or '~'"));
+      Assert.True(exception.Message.Contains("Should begin with '/' or '~'"));
     }
 
     [Test]
@@ -78,7 +78,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       TestDelegate action = () => this.builder.BuildUrlStringForPath(null, null);
       var exception = Assert.Throws<ArgumentException>(action);
-      Assert.True(exception.Message.Contains("Media path cannot be null or empty"));
+      Assert.True(exception.Message.Contains("The input cannot be null or empty."));
     }
 
     [Test]

@@ -1,11 +1,11 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
 {
-  using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
+  using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractDeleteItemRequestBuilder<T> : IDeleteItemRequestBuilder<T>
     where T : class
@@ -16,21 +16,19 @@
 
     public abstract T Build();
 
-    public IDeleteItemRequestBuilder<T> Database(string sitecoreDatabase)
+    public IDeleteItemRequestBuilder<T> Database(string database)
     {
-      if (string.IsNullOrWhiteSpace(sitecoreDatabase))
+      if (string.IsNullOrWhiteSpace(database))
       {
-        throw new ArgumentException("AbstractDeleteItemRequestBuilder.Database : " +
-                                    "The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".database");
       }
 
       if (!string.IsNullOrEmpty(this.database))
       {
-        throw new InvalidOperationException("AbstractDeleteItemRequestBuilder.Database : " +
-                                            "The database cannot be assigned twice");
+        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".database");
       }
 
-      this.database = sitecoreDatabase;
+      this.database = database;
       return this;
     }
 

@@ -12,7 +12,7 @@
       }
       else if (!itemPath.StartsWith("/"))
       {
-        throw new ArgumentException(source + ": Item path should begin with '/'");
+        throw new ArgumentException(source + " : Item path should begin with '/'");
       }
 
 

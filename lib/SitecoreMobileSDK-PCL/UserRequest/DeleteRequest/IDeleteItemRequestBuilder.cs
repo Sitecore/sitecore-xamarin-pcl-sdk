@@ -6,7 +6,7 @@
   public interface IDeleteItemRequestBuilder<T>
     where T : class
   {
-    IDeleteItemRequestBuilder<T> Database(string sitecoreDatabase);
+    IDeleteItemRequestBuilder<T> Database(string database);
     IDeleteItemRequestBuilder<T> AddScope(ICollection<ScopeType> scope);
     IDeleteItemRequestBuilder<T> AddScope(params ScopeType[] scope);
 
