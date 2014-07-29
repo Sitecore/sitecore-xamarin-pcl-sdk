@@ -11,7 +11,7 @@ namespace Sitecore.MobileSdkUnitTest
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UserRequest;
@@ -22,9 +22,9 @@ namespace Sitecore.MobileSdkUnitTest
 
 
   [TestFixture]
-  public class CreateItemByIdUrlBuilderTests
+  public class UpdateItemByIdUrlBuilderTests
   {
-    private CreateItemByIdUrlBuilder builder;
+    private UpdateItemByIdUrlBuilder builder;
     private UserRequestMerger requestMerger;
 
     [SetUp]
@@ -33,7 +33,7 @@ namespace Sitecore.MobileSdkUnitTest
       IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
       IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
 
-      this.builder = new CreateItemByIdUrlBuilder(restGrammar, webApiGrammar);
+      this.builder = new UpdateItemByIdUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
       mutableSessionConfig.ItemWebApiVersion = "v234";
@@ -54,19 +54,15 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestCorrectParamsWithoutFields()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("item name")
+      IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
+      IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
       string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell"+
         "?sc_database=web"+
         "&language=en"+
-        "&template=sample%2fsample%20item"+
-        "&name=item%20name"+
         "&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
@@ -79,21 +75,17 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestCorrectParamsWithFields()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("item name")
+      IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .AddFieldsRawValuesByName("field1","value1")
         .AddFieldsRawValuesByName("field2","value2")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
+      IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
       string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell"+
         "?sc_database=web"+
         "&language=en"+
-        "&template=sample%2fsample%20item"+
-        "&name=item%20name"+
         "&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
@@ -106,21 +98,17 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestFieldsValuesIsCaseInsensitive()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("item name")
+      IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .AddFieldsRawValuesByName("field1","VaLuE1")
         .AddFieldsRawValuesByName("field2","VaLuE2")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
+      IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps(request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
       string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell"+
         "?sc_database=web"+
         "&language=en"+
-        "&template=sample%2fsample%20item"+
-        "&name=item%20name"+
         "&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
@@ -133,21 +121,17 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemNameIsCaseInsensitive()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("ItEmNaMe")
+      IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .AddFieldsRawValuesByName("field1","VaLuE1")
         .AddFieldsRawValuesByName("field2","VaLuE2")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
+      IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
       string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell"+
         "?sc_database=web"+
         "&language=en"+
-        "&template=sample%2fsample%20item"+
-        "&name=ItEmNaMe"+
         "&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
@@ -160,9 +144,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestFieldWithDoublicatedKeyWillCrash()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("ItEmNaMe")
+      var requestBuilder = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .AddFieldsRawValuesByName("field1", "VaLuE1")
         .AddFieldsRawValuesByName("field2", "VaLuE2");
         
@@ -173,37 +155,11 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestAppendingFields()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("ItEmNaMe")
+      var requestBuilder = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .AddFieldsRawValuesByName("field1", "VaLuE1")
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 
       TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
-      Assert.Throws<ArgumentException>(action);
-    }
-
-    [Test]
-    public void TestNameIsMandatoryField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
-
-      TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentException>(action);
-    }
-
-    [Test]
-    public void TestTemplateIsMandatoryField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemName("ItEmNaMe")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
-
-      TestDelegate action = () => requestBuilder.Build();
       Assert.Throws<ArgumentException>(action);
     }
 
@@ -214,17 +170,15 @@ namespace Sitecore.MobileSdkUnitTest
       fields.Add("field1","VaLuE1");
       fields.Add("field2","VaLuE2");
 
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName(fields)
         .AddFieldsRawValuesByName("field3","VaLuE3")
         .Build();
 
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
+      IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
       string expected = 
@@ -232,8 +186,6 @@ namespace Sitecore.MobileSdkUnitTest
         "?sc_database=db"+
         "&language=lg"+
         "&payload=full"+
-        "&template=sample%2fsample%20item"+
-        "&name=ItEmNaMe"+
         "&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
