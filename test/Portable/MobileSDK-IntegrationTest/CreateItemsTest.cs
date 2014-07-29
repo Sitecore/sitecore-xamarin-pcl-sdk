@@ -285,7 +285,7 @@
          .ItemName("Get duplicate fields")
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.fields : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
