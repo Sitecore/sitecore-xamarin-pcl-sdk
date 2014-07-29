@@ -43,7 +43,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetMediaWithScale()
     {
       var options = new MediaOptionsBuilder()
-       .SetScale(0.5f)
+       .Scale(0.5f)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
@@ -60,7 +60,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetMediaAsThumbnail()
     {
       var options = new MediaOptionsBuilder()
-        .SetDisplayAsThumbnail(true)
+        .DisplayAsThumbnail(true)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/butterfly2_large")
@@ -80,9 +80,9 @@ namespace MobileSDKIntegrationTest
       const int Width = 300;
 
       var options = new MediaOptionsBuilder()
-        .SetHeight(Height)
-        .SetWidth(Width)
-        .SetAllowStrech(true)
+        .Height(Height)
+        .Width(Width)
+        .AllowStrech(true)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/kirkorov")
@@ -167,7 +167,7 @@ namespace MobileSDKIntegrationTest
       TestDelegate testCode = () =>
       {
         var options = new MediaOptionsBuilder()
-         .SetScale(-2.0f)
+         .Scale(-2.0f)
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -180,7 +180,7 @@ namespace MobileSDKIntegrationTest
       TestDelegate testCode = () =>
       {
         var options = new MediaOptionsBuilder()
-         .SetMaxWidth(-55)
+         .MaxWidth(-55)
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -193,7 +193,7 @@ namespace MobileSDKIntegrationTest
       TestDelegate testCode = () =>
       {
         var options = new MediaOptionsBuilder()
-           .SetHeight(-55)
+           .Height(-55)
            .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -206,7 +206,7 @@ namespace MobileSDKIntegrationTest
       TestDelegate testCode = () =>
       {
         var options = new MediaOptionsBuilder()
-         .SetWidth(0)
+         .Width(0)
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -217,7 +217,7 @@ namespace MobileSDKIntegrationTest
     public void TestGetMediaFromUploadedImageWithError()
     {
       var options = new MediaOptionsBuilder()
-        .SetHeight(100)
+        .Height(100)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/nexus")
@@ -248,7 +248,7 @@ namespace MobileSDKIntegrationTest
           .BuildReadonlySession();
 
       var options = new MediaOptionsBuilder()
-        .SetScale(1)
+        .Scale(1)
         .Build();
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
         .DownloadOptions(options)
@@ -293,9 +293,9 @@ namespace MobileSDKIntegrationTest
     public async void TestGetItemWithTildaInPath()
     {
       var options = new MediaOptionsBuilder()
-        .SetDisplayAsThumbnail(false)
-        .SetAllowStrech(true)
-        .SetHeight(150)
+        .DisplayAsThumbnail(false)
+        .AllowStrech(true)
+        .Height(150)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/Images/green_mineraly1")
@@ -337,7 +337,7 @@ namespace MobileSDKIntegrationTest
       const string db = "master";
 
       var options = new MediaOptionsBuilder()
-        .SetHeight(50)
+        .Height(50)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(mediaPath)
@@ -392,7 +392,7 @@ namespace MobileSDKIntegrationTest
     public async void TestGetMediaWithInternationalPath()
     {
       var options = new MediaOptionsBuilder()
-        .SetWidth(50)
+        .Width(50)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/Images/files/では/flowers")

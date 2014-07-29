@@ -13,55 +13,55 @@
       options = new DownloadMediaOptions();
     }
 
-    public MediaOptionsBuilder SetWidth(int width)
+    public MediaOptionsBuilder Width(int width)
     {
       options.SetWidth(width);
       return this;
     }
 
-    public MediaOptionsBuilder SetHeight(int height)
+    public MediaOptionsBuilder Height(int height)
     {
       options.SetHeight(height);
       return this;
     }
 
-    public MediaOptionsBuilder SetMaxWidth(int maxWidth)
+    public MediaOptionsBuilder MaxWidth(int maxWidth)
     {
       options.SetMaxWidth(maxWidth);
       return this;
     }
 
-    public MediaOptionsBuilder SetMaxHeight(int maxHeight)
+    public MediaOptionsBuilder MaxHeight(int maxHeight)
     {
       options.SetMaxHeight(maxHeight);
       return this;
     }
 
-    public MediaOptionsBuilder SetBackgroundColor(string color)
+    public MediaOptionsBuilder BackgroundColor(string color)
     {
       options.SetBackgroundColor(color);
       return this;
     }
 
-    public MediaOptionsBuilder SetDisableMediaCache(bool value)
+    public MediaOptionsBuilder DisableMediaCache(bool value)
     {
       options.SetDisableMediaCache(value);
       return this;
     }
 
-    public MediaOptionsBuilder SetAllowStrech(bool value)
+    public MediaOptionsBuilder AllowStrech(bool value)
     {
       options.SetAllowStrech(value);
       return this;
     }
 
-    public MediaOptionsBuilder SetScale(float scale)
+    public MediaOptionsBuilder Scale(float scale)
     {
       options.SetScale(scale);
       return this;
     }
 
-    public MediaOptionsBuilder SetDisplayAsThumbnail(bool value)
+    public MediaOptionsBuilder DisplayAsThumbnail(bool value)
     {
       options.SetDisplayAsThumbnail(value);
       return this;
