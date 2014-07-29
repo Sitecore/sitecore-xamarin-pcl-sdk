@@ -233,6 +233,7 @@
     }
 
     [Test]
+    [Ignore]
     public async void TestCreateItemByIdAndSetHtmlFieldValue()
     {
       var expectedItem = this.CreateTestItem("Set HTML in field");
