@@ -180,6 +180,8 @@
     <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
     <Compile Include="Validators\WebApiCredentialsValidator.cs" />
     <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
+    <Compile Include="API\MediaItem\IMediaOptionsBuilder.cs" />
+    <Compile Include="Media\MediaOptionsBuilderImpl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -228,4 +230,7 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Media\" />
+  </ItemGroup>
 </Project>
