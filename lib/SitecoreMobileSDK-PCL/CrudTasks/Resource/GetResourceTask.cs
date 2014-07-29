@@ -10,7 +10,6 @@ namespace Sitecore.MobileSDK.CrudTasks
   using System.Threading.Tasks;
 
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
