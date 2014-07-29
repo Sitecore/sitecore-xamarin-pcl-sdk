@@ -1,4 +1,3 @@
-
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -11,7 +10,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Session;
-  using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.CrudTasks.Resource;
   using Sitecore.MobileSDK.SessionSettings;
 
   using Sitecore.MobileSDK.Authenticate;

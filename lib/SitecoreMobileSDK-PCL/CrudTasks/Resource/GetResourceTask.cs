@@ -1,15 +1,12 @@
-﻿
-
-namespace Sitecore.MobileSDK.CrudTasks
+﻿namespace Sitecore.MobileSDK.CrudTasks.Resource
 {
   using System;
+  using System.Diagnostics;
   using System.IO;
   using System.Net.Http;
-  using System.Diagnostics;
   using System.Threading;
   using System.Threading.Tasks;
-
-  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
@@ -32,7 +29,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
     public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IReadMediaItemRequest request, CancellationToken cancelToken)
     {
-      string url = this.UrlToGetItemWithRequest((IReadMediaItemRequest)request);
+      string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
       return result;
@@ -43,8 +40,14 @@ namespace Sitecore.MobileSDK.CrudTasks
 		  //TODO: @igk debug request output, remove later
 	    Debug.WriteLine("REQUEST: " + requestUrl);
 
-      Stream httpResponse = await this.httpClient.GetStreamAsync(requestUrl.RequestUri.AbsoluteUri);
-      return httpResponse;
+      var httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
+
+      if (!httpResponse.IsSuccessStatusCode)
+      {
+        throw new HttpRequestException(httpResponse.ReasonPhrase);
+      }
+
+      return await httpResponse.Content.ReadAsStreamAsync();
     }
 
     #endregion IRestApiCallTasks
