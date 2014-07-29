@@ -34,5 +34,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByPathUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByQueryUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsResponseParserTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByIdUrlBuilderTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByPathUrlBuilderTests.cs" />
   </ItemGroup>
 </Project>
