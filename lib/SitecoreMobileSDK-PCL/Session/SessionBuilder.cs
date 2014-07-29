@@ -15,29 +15,26 @@
       string optionalWebApiVersion = this.OptionalWebApiVersion();
       string optionalMediaRoot = this.OptionalMediaRoot();
       string optionalMediaExtension = this.OptionalMediaExtension();
-      string optionalMediaPrefix = OptionalMediaPrefix();
+      string optionalMediaPrefix = this.OptionalMediaPrefix();
 
 
       ////////
-      SessionConfig conf = SessionConfig.NewSessionConfig(
+      SessionConfig conf = new SessionConfig(
         this.instanceUrl,
-        //@adk : TODO : do not store credentials in variables
-        this.credentials.Username,
-        this.credentials.Password,
-
         this.site,
-        optionalWebApiVersion,
+        optionalWebApiVersion);
+
+      var mediaSettings = new MediaLibrarySettings(
         optionalMediaRoot,
         optionalMediaExtension,
         optionalMediaPrefix);
-
 
       var itemSource = new ItemSource(
         this.itemSourceAccumulator.Database,
         this.itemSourceAccumulator.Language,
         this.itemSourceAccumulator.Version);
 
-      var result = new ScApiSession(conf, itemSource);
+      var result = new ScApiSession(conf, this.credentials, mediaSettings, itemSource);
       return result;
     }
 

@@ -1,13 +1,12 @@
-﻿
-
-namespace Sitecore.MobileSDK.PublicKey
+﻿namespace Sitecore.MobileSDK.PublicKey
 {
 	using System;
-    using System.Threading;
-    using System.Threading.Tasks;
+  using System.Threading;
+  using System.Threading.Tasks;
 	using System.Net.Http;
 
 
+  // TODO : use secure string
 	public class AuthenticedSessionCryptor : ICredentialsHeadersCryptor
 	{
 		public AuthenticedSessionCryptor (string login, string password, PublicKeyX509Certificate certificate)

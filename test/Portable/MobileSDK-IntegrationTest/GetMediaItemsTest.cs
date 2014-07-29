@@ -503,7 +503,7 @@
       Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
     }
 
-    [Test] //ALR: InvalidOperationException should appear
+    [Test]
     public void TestGetMediaWithOverridenVersion()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
@@ -513,7 +513,7 @@
       Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : Property cannot be assigned twice.", exception.Message);
     }
 
-    [Test] //ALR: InvalidOperationException should appear
+    [Test] 
     public void TestGetMediaWithOverridenLanguage()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
@@ -523,7 +523,7 @@
       Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : Property cannot be assigned twice.", exception.Message);
     }
 
-    [Test] //ALR: InvalidOperationException should appear
+    [Test]
     public void TestGetMediaWithOverridenDatabase()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")

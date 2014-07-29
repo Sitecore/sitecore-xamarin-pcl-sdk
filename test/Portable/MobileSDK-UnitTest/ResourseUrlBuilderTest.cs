@@ -35,9 +35,11 @@ namespace Sitecore.MobileSdkUnitTest
       sessionConfig.DefaultMediaResourceExtension = "ashx";
       sessionConfig.MediaPrefix = "~/media";
 
+      ISessionConfig sessionSettings = sessionConfig;
+      IMediaLibrarySettings mediaSettings = sessionConfig;
 
       ItemSource itemSource = ItemSource.DefaultSource();
-      this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionConfig, itemSource);
+      this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionSettings, mediaSettings, itemSource);
     }
 
     [TearDown]
@@ -135,14 +137,18 @@ namespace Sitecore.MobileSdkUnitTest
       sessionConfig.DefaultMediaResourceExtension = "ZIP";
       sessionConfig.MediaPrefix = "~/MediaXyZ";
 
+      ISessionConfig sessionSettings = sessionConfig;
+      IMediaLibrarySettings mediaSettings = sessionConfig;
+
 
       ItemSource itemSource = ItemSource.DefaultSource();
-      this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionConfig, itemSource);
+      this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionSettings, mediaSettings, itemSource);
 
       var customBuilder = 
         new MediaItemUrlBuilder(
           this.restGrammar, 
-          sessionConfig, 
+          sessionSettings, 
+          mediaSettings,
           itemSource);
 
 

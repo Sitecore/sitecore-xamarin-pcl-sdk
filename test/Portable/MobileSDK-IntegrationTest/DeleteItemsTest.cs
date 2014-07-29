@@ -307,7 +307,7 @@
     [Test]
     public void TestDeleteItemByNullQueryReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(null).Build());
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(null));
       Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.sitecoreQuery : The input cannot be null or empty.", exception.Message);
     }
 

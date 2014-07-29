@@ -1,4 +1,6 @@
-﻿namespace MobileSDKIntegrationTest
+﻿using Sitecore.MobileSDK.API;
+
+namespace MobileSDKIntegrationTest
 {
   using System.Threading;
   using System.Threading.Tasks;
@@ -10,8 +12,12 @@
 
   public class ScTestApiSession : ScApiSession
   {
-    public ScTestApiSession(SessionConfig config, ItemSource defaultSource) :
-      base(config, defaultSource)
+    public ScTestApiSession(
+      ISessionConfig config, 
+      IWebApiCredentials credentials,
+      IMediaLibrarySettings mediaSettings,
+      ItemSource defaultSource = null) :
+    base(config, credentials, mediaSettings, defaultSource)
     {
       this.GetPublicKeyInvocationsCount = 0;
     }

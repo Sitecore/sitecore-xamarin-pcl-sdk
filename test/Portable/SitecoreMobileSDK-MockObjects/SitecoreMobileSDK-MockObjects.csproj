@@ -40,6 +40,8 @@
     <Compile Include="MutableItemSource.cs" />
     <Compile Include="MutableSessionConfig.cs" />
     <Compile Include="MockMutableMediaOptions.cs" />
+    <Compile Include="MutableMediaLibrarySettings.cs" />
+    <Compile Include="MutableWebApiCredentialsPOD.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

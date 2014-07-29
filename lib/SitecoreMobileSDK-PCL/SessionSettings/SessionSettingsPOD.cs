@@ -6,9 +6,9 @@ namespace Sitecore.MobileSDK.SessionSettings
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder;
 
-  public class SessionConfigPOD : ISessionConfig
+  public class SessionConfigPOD : ISessionConfig, IMediaLibrarySettings
   {
-    public virtual ISessionConfig SessionConfigShallowCopy()
+    private SessionConfigPOD SessionConfigPODCopy()
     {
       SessionConfigPOD result = new SessionConfigPOD();
       result.InstanceUrl = this.InstanceUrl;
@@ -19,6 +19,16 @@ namespace Sitecore.MobileSDK.SessionSettings
       result.MediaPrefix = this.MediaPrefix;
 
       return result;
+    }
+
+    public virtual ISessionConfig SessionConfigShallowCopy()
+    {
+      return this.SessionConfigPODCopy();
+    }
+
+    public virtual IMediaLibrarySettings MediaSettingsShallowCopy()
+    {
+      return this.SessionConfigPODCopy();
     }
 
     #region ISessionConfig

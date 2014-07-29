@@ -2,6 +2,8 @@
 {
   public interface IMediaLibrarySettings
   {
+    IMediaLibrarySettings MediaSettingsShallowCopy();
+
     string MediaLibraryRoot
     {
       get;

@@ -174,10 +174,10 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestOptionalSourceInSessionAndUserRequest()
     {
-      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
+      var connection = new SessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}").Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
+      var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
@@ -191,12 +191,12 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestOptionalSourceAndExplicitPayload()
     {
-      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
+      var connection = new SessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
         .Payload(PayloadType.Full)
         .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
+      var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
@@ -210,12 +210,12 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestExplicitDatabase()
     {
-      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
+      var connection = new SessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
         .Database("master")
         .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
+      var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
@@ -229,13 +229,13 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestDatabaseAndExplicitLanguageAndPayload()
     {
-      var anonymous = SessionConfig.NewAnonymousSessionConfig("localhost");
+      var connection = new SessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
         .Language("da")
         .Payload(PayloadType.Content)
         .Build();
-      var requestMerger = new UserRequestMerger(anonymous, null);
+      var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
