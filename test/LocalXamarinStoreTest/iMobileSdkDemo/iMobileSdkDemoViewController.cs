@@ -1,15 +1,15 @@
-﻿using System;
-using System.Drawing;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Sitecore.MobileSDK.API.Request.Parameters;
-using Sitecore.MobileSDK.API.Items;
-
-
-namespace iMobileSdkDemo
+﻿namespace iMobileSdkDemo
 {
+  using System;
+  using System.Drawing;
+
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
 
   public partial class iMobileSdkDemoViewController : UIViewController, IWebApiCredentials
   {
