@@ -21,8 +21,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId).ToLowerInvariant();
 
       string result = 
-          this.restGrammar.FieldSeparator 
-        + this.webApiGrammar.ItemIdParameterName
+          this.webApiGrammar.ItemIdParameterName
         + this.restGrammar.KeyValuePairSeparator
         + escapedId;
 
