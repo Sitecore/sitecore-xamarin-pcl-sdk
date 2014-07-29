@@ -124,7 +124,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest("");
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.GetBaseException().ToString().Contains("[ItemWebApiRequestBuilder.ReadMediaItemRequest] value path cannot be null or empty"));
+      Assert.True(exception.GetBaseException().ToString().Contains("The input cannot be null or empty."));
     }
 
     [Test]
@@ -132,7 +132,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest(null);
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("[ItemWebApiRequestBuilder.ReadMediaItemRequest] value path cannot be null or empty"));
+      Assert.AreEqual("ReadMediaItemRequestBuilder.mediaPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -470,42 +470,42 @@ namespace MobileSDKIntegrationTest
     public void TestGetMediaWithEmptyDatabase()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(""));
-      Assert.AreEqual("[ReadMediaItemRequestBuilder.Database] the value cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullDatabase()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(null));
-      Assert.AreEqual("[ReadMediaItemRequestBuilder.Database] the value cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithSpacesInLanguage()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language("  "));
-      Assert.AreEqual("[ReadMediaItemRequestBuilder.Language] the value cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullLanguage()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language(null));
-        Assert.AreEqual("[ReadMediaItemRequestBuilder.Language] the value cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithEmptyVersion()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(""));
-      Assert.AreEqual("[ReadMediaItemRequestBuilder.Version] the value cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullVersion()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(null));
-      Assert.AreEqual("[ReadMediaItemRequestBuilder.Version] the value cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: InvalidOperationException should appear
@@ -515,7 +515,7 @@ namespace MobileSDKIntegrationTest
         .Version("2")
         .Version("1")
         .Build());
-      Assert.AreEqual("[ReadMediaItemRequestBuilder.Version] the property cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test] //ALR: InvalidOperationException should appear
@@ -525,7 +525,7 @@ namespace MobileSDKIntegrationTest
         .Language("en")
         .Language("da")
         .Build());
-      Assert.AreEqual("[ReadMediaItemRequestBuilder.Language] the property cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test] //ALR: InvalidOperationException should appear
@@ -535,7 +535,7 @@ namespace MobileSDKIntegrationTest
         .Database("master")
         .Database("web")
         .Build());
-      Assert.AreEqual("[ReadMediaItemRequestBuilder.Database] the property cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.database : Property cannot be assigned twice.", exception.Message);
     }
 
     //TODO: add tests for MediaOptions (null, empty, override)
