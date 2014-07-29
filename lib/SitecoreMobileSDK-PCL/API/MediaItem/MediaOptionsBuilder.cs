@@ -1,9 +1,9 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK.API.MediaItem
+﻿namespace Sitecore.MobileSDK.API.MediaItem
 {
-    using Sitecore.MobileSDK.API.Request.Parameters;
-    using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using System;
+
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 
   public class MediaOptionsBuilder
