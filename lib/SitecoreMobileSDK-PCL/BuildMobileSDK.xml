@@ -164,7 +164,7 @@
 
 
      <Exec
-      Command="rake"
+      Command="BuildXamarinPackage.bat"
       WorkingDirectory="$(ScriptsDirectory)\xamarin-store"
     />
 
