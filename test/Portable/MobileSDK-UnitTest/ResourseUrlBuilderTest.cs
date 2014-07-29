@@ -51,7 +51,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void RequestBuilderTest()
     {
-      IDownloadMediaOptions options = new MediaOptionsBuilder()
+      IDownloadMediaOptions options = new MediaOptionsBuilder().Set
         .Width(100)
         .Height(200)
         .BackgroundColor("white")

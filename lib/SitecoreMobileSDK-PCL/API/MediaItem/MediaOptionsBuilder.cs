@@ -10,60 +10,74 @@
   {
     public MediaOptionsBuilder()
     {
-      options = new DownloadMediaOptions();
+      this.options = new DownloadMediaOptions();
     }
 
+
+    public MediaOptionsBuilder Set
+    {
+      // @adk : as suggested in the sample
+      // http://stackoverflow.com/questions/1622662/creating-api-that-is-fluent
+
+      get
+      {
+        return this;
+      }
+    }
+
+
+    // before fix - as described in Wikipedia http://ru.wikipedia.org/wiki/Fluent_interface
     public MediaOptionsBuilder Width(int width)
     {
-      options.SetWidth(width);
+      this.options.SetWidth(width);
       return this;
     }
 
     public MediaOptionsBuilder Height(int height)
     {
-      options.SetHeight(height);
+      this.options.SetHeight(height);
       return this;
     }
 
     public MediaOptionsBuilder MaxWidth(int maxWidth)
     {
-      options.SetMaxWidth(maxWidth);
+      this.options.SetMaxWidth(maxWidth);
       return this;
     }
 
     public MediaOptionsBuilder MaxHeight(int maxHeight)
     {
-      options.SetMaxHeight(maxHeight);
+      this.options.SetMaxHeight(maxHeight);
       return this;
     }
 
     public MediaOptionsBuilder BackgroundColor(string color)
     {
-      options.SetBackgroundColor(color);
+      this.options.SetBackgroundColor(color);
       return this;
     }
 
     public MediaOptionsBuilder DisableMediaCache(bool value)
     {
-      options.SetDisableMediaCache(value);
+      this.options.SetDisableMediaCache(value);
       return this;
     }
 
     public MediaOptionsBuilder AllowStrech(bool value)
     {
-      options.SetAllowStrech(value);
+      this.options.SetAllowStrech(value);
       return this;
     }
 
     public MediaOptionsBuilder Scale(float scale)
     {
-      options.SetScale(scale);
+      this.options.SetScale(scale);
       return this;
     }
 
     public MediaOptionsBuilder DisplayAsThumbnail(bool value)
     {
-      options.SetDisplayAsThumbnail(value);
+      this.options.SetDisplayAsThumbnail(value);
       return this;
     }
 

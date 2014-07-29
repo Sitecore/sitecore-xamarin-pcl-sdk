@@ -42,7 +42,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetMediaWithScale()
     {
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
        .Scale(0.5f)
         .Build();
 
@@ -59,7 +59,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetMediaAsThumbnail()
     {
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
         .DisplayAsThumbnail(true)
         .Build();
 
@@ -79,7 +79,7 @@ namespace MobileSDKIntegrationTest
       const int Height = 200;
       const int Width = 300;
 
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
         .Height(Height)
         .Width(Width)
         .AllowStrech(true)
@@ -166,7 +166,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
+        var options = new MediaOptionsBuilder().Set
          .Scale(-2.0f)
          .Build();
       };
@@ -179,7 +179,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
+        var options = new MediaOptionsBuilder().Set
          .MaxWidth(-55)
          .Build();
       };
@@ -192,7 +192,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
+        var options = new MediaOptionsBuilder().Set
            .Height(-55)
            .Build();
       };
@@ -205,7 +205,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
+        var options = new MediaOptionsBuilder().Set
          .Width(0)
          .Build();
       };
@@ -216,7 +216,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestGetMediaFromUploadedImageWithError()
     {
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
         .Height(100)
         .Build();
 
@@ -247,7 +247,7 @@ namespace MobileSDKIntegrationTest
           .Credentials(this.testData.Users.NoReadAccess)
           .BuildReadonlySession();
 
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
         .Scale(1)
         .Build();
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
@@ -292,7 +292,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetItemWithTildaInPath()
     {
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
         .DisplayAsThumbnail(false)
         .AllowStrech(true)
         .Height(150)
@@ -314,7 +314,7 @@ namespace MobileSDKIntegrationTest
       const string ItemPath = "/sitecore/media library/Images/Files/pdf example";
       const string MediaPath = "~/media/Images/Files/pdf example.pdf";
       const string Db = "master";
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
          .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
@@ -336,7 +336,7 @@ namespace MobileSDKIntegrationTest
       const string mediaPath = "~/media/Images/Files/Video_01.mp4";
       const string db = "master";
 
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
         .Height(50)
         .Build();
 
@@ -391,7 +391,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public async void TestGetMediaWithInternationalPath()
     {
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
         .Width(50)
         .Build();
 

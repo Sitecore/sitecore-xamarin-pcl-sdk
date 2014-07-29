@@ -37,7 +37,7 @@
     //    public async void TestGetMediaItem()
     //    {
     //      // @igk !!! TEMPORARY TEST FOR CUSTOM USE, DO NOT DELETE, PLEASE !!!
-    //      IDownloadMediaOptions options = new MediaOptionsBuilder()
+    //      IDownloadMediaOptions options = new MediaOptionsBuilder().Set
     //        .SetDisplayAsThumbnail(true)
     //        .Build();
     //
