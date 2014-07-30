@@ -147,7 +147,7 @@
       return (ICreateItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
+    new public ICreateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
     {
       return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fields);
     }
@@ -157,7 +157,7 @@
       return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    new public ICreateItemRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {
       return (ICreateItemRequestParametersBuilder<T>)base.AddScope(scope);
     }

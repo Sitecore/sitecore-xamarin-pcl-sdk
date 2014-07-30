@@ -64,7 +64,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IBaseRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    public IBaseRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {
       ScopeParameters scopeParameters = new ScopeParameters(this.queryParameters.ScopeParameters);
 
@@ -82,17 +82,17 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
-      ICollection<ScopeType> castedScope = (ICollection<ScopeType>)scope;
+      IEnumerable<ScopeType> castedScope = (IEnumerable<ScopeType>)scope;
       return this.AddScope(castedScope);
     }
 
-    public IBaseRequestParametersBuilder<T> AddFields(ICollection<string> fields)
+    public IBaseRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
     {
       if (null == fields)
       {
         return this;
       }
-      else if (0 == fields.Count)
+      else if (!fields.Any())
       {
         return this;
       }
@@ -101,21 +101,22 @@ namespace Sitecore.MobileSDK.UserRequest
         fieldName => !string.IsNullOrWhiteSpace(fieldName);
       var validFields = fields.Where(fieldNameValidator).ToList();
 
-      ICollection<string> currentFields = this.queryParameters.Fields;
+      IEnumerable<string> currentFields = this.queryParameters.Fields;
       if (null == currentFields)
       {
         currentFields = new string[0]{};
       };
 
 
-      int myFieldsCount = currentFields.Count;
+
+      int myFieldsCount = currentFields.Count();
       int newFieldsCount = validFields.Count;
 
       int appendedFieldsCount = myFieldsCount + newFieldsCount;
       string[] newFields = new string[appendedFieldsCount];
 
 
-      currentFields.CopyTo(newFields, 0);
+      currentFields.ToArray().CopyTo(newFields, 0);
       validFields.CopyTo(newFields, myFieldsCount);
 
       bool isFieldListHasDuplicates = DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields);
@@ -124,7 +125,11 @@ namespace Sitecore.MobileSDK.UserRequest
         throw new ArgumentException(this.GetType().Name + ".fields" + " : duplicate fields are not allowed");
       }
 
-      this.queryParameters = new QueryParameters( this.queryParameters.Payload, this.queryParameters.ScopeParameters, newFields );
+      this.queryParameters = new QueryParameters(
+        this.queryParameters.Payload, 
+        this.queryParameters.ScopeParameters, 
+        newFields);
+
       return this;
     }
 
@@ -142,7 +147,7 @@ namespace Sitecore.MobileSDK.UserRequest
         }
       }
 
-      return this.AddFields( (ICollection<string>)fieldParams );
+      return this.AddFields( (IEnumerable<string>)fieldParams );
     }
 
     public abstract T Build();

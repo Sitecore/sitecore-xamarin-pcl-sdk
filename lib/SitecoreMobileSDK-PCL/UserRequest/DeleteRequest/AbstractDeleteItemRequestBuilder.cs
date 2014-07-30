@@ -33,7 +33,7 @@
       return this;
     }
 
-    public IDeleteItemRequestBuilder<T> AddScope(ICollection<ScopeType> scope)
+    public IDeleteItemRequestBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {
       if (null == scope)
       {
@@ -56,7 +56,7 @@
 
     public IDeleteItemRequestBuilder<T> AddScope(params ScopeType[] scope)
     {
-      ICollection<ScopeType> castedScope = scope;
+      IEnumerable<ScopeType> castedScope = scope;
       return this.AddScope(castedScope);
     }
   }
