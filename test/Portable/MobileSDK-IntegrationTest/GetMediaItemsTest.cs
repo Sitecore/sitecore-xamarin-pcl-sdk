@@ -42,8 +42,8 @@
     [Test]
     public async void TestGetMediaWithScale()
     {
-      var options = new MediaOptionsBuilder()
-       .SetScale(0.5f)
+      var options = new MediaOptionsBuilder().Set
+       .Scale(0.5f)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
@@ -59,8 +59,8 @@
     [Test]
     public async void TestGetMediaAsThumbnail()
     {
-      var options = new MediaOptionsBuilder()
-        .SetDisplayAsThumbnail(true)
+      var options = new MediaOptionsBuilder().Set
+        .DisplayAsThumbnail(true)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/butterfly2_large")
@@ -79,10 +79,10 @@
       const int Height = 200;
       const int Width = 300;
 
-      var options = new MediaOptionsBuilder()
-        .SetHeight(Height)
-        .SetWidth(Width)
-        .SetAllowStrech(true)
+      var options = new MediaOptionsBuilder().Set
+        .Height(Height)
+        .Width(Width)
+        .AllowStrech(true)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/kirkorov")
@@ -167,8 +167,8 @@
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
-         .SetScale(-2.0f)
+        var options = new MediaOptionsBuilder().Set
+         .Scale(-2.0f)
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -180,8 +180,8 @@
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
-         .SetMaxWidth(-55)
+        var options = new MediaOptionsBuilder().Set
+         .MaxWidth(-55)
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -193,8 +193,8 @@
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
-           .SetHeight(-55)
+        var options = new MediaOptionsBuilder().Set
+           .Height(-55)
            .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -206,8 +206,8 @@
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
-         .SetWidth(0)
+        var options = new MediaOptionsBuilder().Set
+         .Width(0)
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -217,8 +217,8 @@
     [Test]
     public void TestGetMediaFromUploadedImageWithError()
     {
-      var options = new MediaOptionsBuilder()
-        .SetHeight(100)
+      var options = new MediaOptionsBuilder().Set
+        .Height(100)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/nexus")
@@ -248,8 +248,8 @@
           .Credentials(this.testData.Users.NoReadAccess)
           .BuildReadonlySession();
 
-      var options = new MediaOptionsBuilder()
-        .SetScale(1)
+      var options = new MediaOptionsBuilder().Set
+        .Scale(1)
         .Build();
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
         .DownloadOptions(options)
@@ -293,10 +293,10 @@
     [Test]
     public async void TestGetItemWithTildaInPath()
     {
-      var options = new MediaOptionsBuilder()
-        .SetDisplayAsThumbnail(false)
-        .SetAllowStrech(true)
-        .SetHeight(150)
+      var options = new MediaOptionsBuilder().Set
+        .DisplayAsThumbnail(false)
+        .AllowStrech(true)
+        .Height(150)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/Images/green_mineraly1")
@@ -315,7 +315,7 @@
       const string ItemPath = "/sitecore/media library/Images/Files/pdf example";
       const string MediaPath = "~/media/Images/Files/pdf example.pdf";
       const string Db = "master";
-      var options = new MediaOptionsBuilder()
+      var options = new MediaOptionsBuilder().Set
          .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
@@ -337,8 +337,8 @@
       const string mediaPath = "~/media/Images/Files/Video_01.mp4";
       const string db = "master";
 
-      var options = new MediaOptionsBuilder()
-        .SetHeight(50)
+      var options = new MediaOptionsBuilder().Set
+        .Height(50)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(mediaPath)
@@ -393,8 +393,8 @@
     [Test]
     public async void TestGetMediaWithInternationalPath()
     {
-      var options = new MediaOptionsBuilder()
-        .SetWidth(50)
+      var options = new MediaOptionsBuilder().Set
+        .Width(50)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/Images/files/では/flowers")

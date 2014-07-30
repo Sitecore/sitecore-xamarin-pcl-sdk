@@ -1,83 +1,26 @@
-﻿using System;
+﻿
 
 namespace Sitecore.MobileSDK.API.MediaItem
 {
-    using Sitecore.MobileSDK.API.Request.Parameters;
-    using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using System;
+
+  using Sitecore.MobileSDK.Media;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
 
   public class MediaOptionsBuilder
   {
-    public MediaOptionsBuilder()
+    public IMediaOptionsBuilder Set
     {
-      options = new DownloadMediaOptions();
-    }
+      // @adk : as suggested in the sample
+      // http://stackoverflow.com/questions/1622662/creating-api-that-is-fluent
 
-    public MediaOptionsBuilder SetWidth(int width)
-    {
-      options.SetWidth(width);
-      return this;
-    }
-
-    public MediaOptionsBuilder SetHeight(int height)
-    {
-      options.SetHeight(height);
-      return this;
-    }
-
-    public MediaOptionsBuilder SetMaxWidth(int maxWidth)
-    {
-      options.SetMaxWidth(maxWidth);
-      return this;
-    }
-
-    public MediaOptionsBuilder SetMaxHeight(int maxHeight)
-    {
-      options.SetMaxHeight(maxHeight);
-      return this;
-    }
-
-    public MediaOptionsBuilder SetBackgroundColor(string color)
-    {
-      options.SetBackgroundColor(color);
-      return this;
-    }
-
-    public MediaOptionsBuilder SetDisableMediaCache(bool value)
-    {
-      options.SetDisableMediaCache(value);
-      return this;
-    }
-
-    public MediaOptionsBuilder SetAllowStrech(bool value)
-    {
-      options.SetAllowStrech(value);
-      return this;
-    }
-
-    public MediaOptionsBuilder SetScale(float scale)
-    {
-      options.SetScale(scale);
-      return this;
-    }
-
-    public MediaOptionsBuilder SetDisplayAsThumbnail(bool value)
-    {
-      options.SetDisplayAsThumbnail(value);
-      return this;
-    }
-
-    public IDownloadMediaOptions Build()
-    {
-      if (null == this.options)
+      get
       {
-        throw new InvalidOperationException("[MediaOptionsBuilder] Nothing to build since no options have been specified by the user");
+        return new MediaOptionsBuilderImpl();
       }
-
-      return this.options;
     }
-
-    private DownloadMediaOptions options;
   }
 }
 

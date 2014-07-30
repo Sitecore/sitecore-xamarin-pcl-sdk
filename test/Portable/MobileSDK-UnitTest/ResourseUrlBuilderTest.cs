@@ -51,11 +51,11 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void RequestBuilderTest()
     {
-      IDownloadMediaOptions options = new MediaOptionsBuilder()
-        .SetWidth(100)
-        .SetHeight(200)
-        .SetBackgroundColor("white")
-        .SetDisplayAsThumbnail(true)
+      IDownloadMediaOptions options = new MediaOptionsBuilder().Set
+        .Width(100)
+        .Height(200)
+        .BackgroundColor("white")
+        .DisplayAsThumbnail(true)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/1 dot png")
