@@ -1,23 +1,16 @@
-﻿using Sitecore.MobileSDK.UrlBuilder;
-
-namespace Sitecore.MobileSDK.Items
+﻿namespace Sitecore.MobileSDK.Items
 {
-    using Sitecore.MobileSDK.API;
-    using Sitecore.MobileSDK.API.Items;
-    using Sitecore.MobileSDK.API.Request;
-    using Sitecore.MobileSDK.API.Request.Parameters;
-    using Sitecore.MobileSDK.PublicKey;
-  using Sitecore.MobileSDK.SessionSettings;
-
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public class ReadItemByPathParameters : IReadItemsByPathRequest
   {
     public ReadItemByPathParameters(
       ISessionConfig sessionSettings,
-      IItemSource itemSource, 
-      IQueryParameters queryParameters, 
+      IItemSource itemSource,
+      IQueryParameters queryParameters,
       string itemPath)
     {
       this.SessionSettings = sessionSettings;
@@ -50,7 +43,7 @@ namespace Sitecore.MobileSDK.Items
       return new ReadItemByPathParameters(connection, itemSrc, payload, this.ItemPath);
     }
 
-    public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyGetItemByPathRequest();
     }

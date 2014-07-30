@@ -1,33 +1,28 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-
-
+﻿
 namespace Sitecore.MobileSDK
 {
   using System;
+
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-  using System.Collections.Generic;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder;
 
-  public class CreateItemByPathParameters : ICreateItemByPathRequest
+  public class UpdateItemByIdParameters : IUpdateItemByIdRequest
   {
-    public CreateItemByPathParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemPath)
+    public UpdateItemByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
-      this.ItemPath = itemPath;
+      this.ItemId = itemId;
       this.QueryParameters = queryParameters;
       this.CreateParameters = createParameters;
     }
 
-    public virtual ICreateItemByPathRequest DeepCopyCreateItemByPathRequest()
+    public virtual IUpdateItemByIdRequest DeepCopyUpdateItemByIdRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
@@ -54,21 +49,21 @@ namespace Sitecore.MobileSDK
         createParameters = this.CreateParameters.ShallowCopy();
       }
 
-      return new CreateItemByPathParameters(connection, itemSrc, payload, createParameters, this.ItemPath);
+      return new UpdateItemByIdParameters(connection, itemSrc, payload, createParameters, this.ItemId);
     }
 
-    public virtual IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
+    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
     {
-      return this.DeepCopyCreateItemByPathRequest();
+      return this.DeepCopyUpdateItemByIdRequest();
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
-      return this.DeepCopyCreateItemByPathRequest();
+      return this.DeepCopyUpdateItemByIdRequest();
     }
 
 
-    public string ItemPath { get; private set; }
+    public string ItemId { get; private set; }
 
     public IItemSource ItemSource { get; private set; }
 

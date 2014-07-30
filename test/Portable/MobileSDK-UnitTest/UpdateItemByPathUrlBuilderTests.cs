@@ -9,18 +9,19 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
 
   [TestFixture()]
-  public class CreateItemByPathUrlBuilderTests
+  public class UpdateItemByPathUrlBuilderTests
   {
-    private CreateItemByPathUrlBuilder builder;
+    private UpdateItemByPathUrlBuilder builder;
     private UserRequestMerger requestMerger;
 
     [SetUp]
@@ -29,7 +30,7 @@
       IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
       IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
 
-      this.builder = new CreateItemByPathUrlBuilder(restGrammar, webApiGrammar);
+      this.builder = new UpdateItemByPathUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
       mutableSessionConfig.ItemWebApiVersion = "v234";
@@ -48,17 +49,15 @@
       fields.Add("field1","VaLuE1");
       fields.Add("field2","VaLuE2");
 
-      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
+      IUpdateItemByPathRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName(fields)
         .AddFieldsRawValuesByName("field3","VaLuE3")
         .Build();
 
-      ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps(request);
+      IUpdateItemByPathRequest autocompletedRequest = this.requestMerger.FillUpdateItemByPathGaps(request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
       string expected = 
@@ -66,9 +65,7 @@
         + "fsitecore%2fcontent%2fhome"
         + "?sc_database=db"
         + "&language=lg"
-        + "&payload=full"
-        + "&template=sample%2fsample%20item"
-        + "&name=ItEmNaMe";
+        + "&payload=full";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2&field3=VaLuE3";
@@ -76,50 +73,22 @@
       Assert.AreEqual(expected, result);
       Assert.AreEqual(expectedFieldsResult, fieldsResult);
     }
-
-    [Test]
-    public void TestNameIsMandatoryField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemTemplate("Sample/Sample Item")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
-
-      TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentException>(action);
-    }
-
-    [Test]
-    public void TestTemplateIsMandatoryField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemName("ItEmNaMe")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
-
-      TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentException>(action);
-    }
-
+      
     [Test]
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
-      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("ItEmNaMe")
+      IUpdateItemByPathRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
         .AddFieldsRawValuesByName("field1","VaLuE1")
         .AddFieldsRawValuesByName("field2","VaLuE2")
         .Build();
 
-      ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps(request);
+      IUpdateItemByPathRequest autocompletedRequest = this.requestMerger.FillUpdateItemByPathGaps(request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
       string expected =  "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell%2f"
         + "sitecore%2fcontent%2fhome"
         + "?sc_database=web"
-        + "&language=en"
-        + "&template=sample%2fsample%20item"
-        + "&name=ItEmNaMe";
+        + "&language=en";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2";
@@ -131,9 +100,7 @@
     [Test]
     public void TestFieldWithDoublicatedKeyWillCrash()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
-        .ItemName("ItEmNaMe")
+      var requestBuilder = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .AddFieldsRawValuesByName("field1", "VaLuE1")
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 

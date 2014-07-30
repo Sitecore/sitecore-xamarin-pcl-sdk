@@ -141,8 +141,6 @@
         .Credentials(testData.Users.Admin)
         .BuildReadonlySession();
 
-
-
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Version(Version)
         .Database(Db)

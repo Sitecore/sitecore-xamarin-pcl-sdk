@@ -50,7 +50,7 @@ namespace Sitecore.MobileSDK
       return new ReadItemByQueryParameters(connection, itemSrc, payload, this.SitecoreQuery);
     }
 
-    public virtual IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyGetItemByQueryRequest();
     }

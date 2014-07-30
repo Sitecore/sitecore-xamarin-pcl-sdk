@@ -2,7 +2,6 @@
 {
   using System;
 
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder;

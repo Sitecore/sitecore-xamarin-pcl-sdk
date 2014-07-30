@@ -29,22 +29,20 @@ namespace WhiteLabeliOS
 
 		[Action ("OnCreateItemButtonTapped:")]
 		partial void OnCreateItemButtonTapped (MonoTouch.UIKit.UIButton sender);
+
+		[Action ("OnUpdateItemButtonTapped:")]
+		partial void OnUpdateItemButtonTapped (MonoTouch.UIKit.UIButton sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (createButton != null) {
+				createButton.Dispose ();
+				createButton = null;
+			}
+
 			if (nameField != null) {
 				nameField.Dispose ();
 				nameField = null;
-			}
-
-			if (titleField != null) {
-				titleField.Dispose ();
-				titleField = null;
-			}
-
-			if (textField != null) {
-				textField.Dispose ();
-				textField = null;
 			}
 
 			if (pathField != null) {
@@ -52,9 +50,14 @@ namespace WhiteLabeliOS
 				pathField = null;
 			}
 
-			if (createButton != null) {
-				createButton.Dispose ();
-				createButton = null;
+			if (textField != null) {
+				textField.Dispose ();
+				textField = null;
+			}
+
+			if (titleField != null) {
+				titleField.Dispose ();
+				titleField = null;
 			}
 		}
 	}

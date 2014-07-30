@@ -49,6 +49,7 @@
     <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
     <Compile Include="API\Request\IBaseDeleteItemRequest.cs" />
     <Compile Include="API\Request\IBaseGetItemRequest.cs" />
+    <Compile Include="API\Request\IBaseItemRequest.cs" />
     <Compile Include="API\Request\IBaseRequestParametersBuilder.cs" />
     <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
     <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="API\Request\IReadItemsByPathRequest.cs" />
     <Compile Include="API\Request\IReadItemsByQueryRequest.cs" />
     <Compile Include="API\Request\IReadMediaItemRequest.cs" />
+    <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
     <Compile Include="API\Request\Parameters\IDownloadMediaOptions.cs" />
     <Compile Include="API\Request\Parameters\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\Parameters\IQueryParameters.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="API\Session\ISitecoreWebApiSession.cs" />
     <Compile Include="API\Session\ISitecoreWebApiSessionActions.cs" />
     <Compile Include="API\Session\ISitecoreWebApiSessionState.cs" />
+    <Compile Include="API\Session\IUpdateItemActions.cs" />
     <Compile Include="API\SitecoreWebApiSessionBuilder.cs" />
     <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
     <Compile Include="Authenticate\AuthenticateTasks.cs" />
@@ -168,6 +171,14 @@
     <Compile Include="Items\CreateItemByPathParameters.cs" />
     <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\IBaseUpdateItemRequest.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
+    <Compile Include="Items\UpdateItemByIdParameters.cs" />
+    <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
+    <Compile Include="CrudTasks\AbstractUpdateItemTask.cs" />
+    <Compile Include="UserRequest\UpdateRequest\IUpdateItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
     <Compile Include="Session\SessionBuilder.cs" />
     <Compile Include="Validators\ItemIdValidator.cs" />
@@ -181,6 +192,12 @@
     <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
     <Compile Include="Validators\WebApiCredentialsValidator.cs" />
     <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
+    <Compile Include="API\Request\IUpdateItemByPathRequest.cs" />
+    <Compile Include="Items\UpdateItemByPathParameters.cs" />
+    <Compile Include="CrudTasks\UpdateItemByPathTask.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\UpdateItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\UpdateItemByPathUrlBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\UpdateItemByPathRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
