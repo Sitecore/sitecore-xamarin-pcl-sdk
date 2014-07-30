@@ -7,7 +7,7 @@
   {
     public ReadItemByQueryRequestBuilder(string sitecoreQuery)
     {
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(sitecoreQuery, this.GetType().Name + ".sitecoreQuery");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(sitecoreQuery, this.GetType().Name + ".SitecoreQuery");
 
       this.sitecoreQuery = sitecoreQuery;
     }
