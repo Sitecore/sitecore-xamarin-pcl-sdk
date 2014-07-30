@@ -37,4 +37,4 @@ string fieldContent = item.FieldWithName("text").RawValue;
 
 * [Component Documentation](https://sitecore1-my.sharepoint.com/personal/adk_sitecore_net/Documents/Shared%20with%20Everyone/MobileSDK-C-sharp-Doc/Sitecore%20Mobile%20SDK%20PCL%20v1.pdf)
 * [Support Forums](http://sdn.sitecore.net/Forum.aspx?)
-* [Source Code Repository](http://tfs4dk1.dk.sitecore.net/tfs/PD01/Product_Mobile/_git/Xamarin_Sdk)
+* [Source Code Repository](http://tfs4dk1.dk.sitecore.net/tfs/PD01/Product_Mobile/_git/Xamarin_Sdk#path=%2F&version=GBmaster&_a=contents)
