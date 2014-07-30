@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
+namespace Sitecore.MobileSDK.API.Request
 {
   using System;
   using System.Collections.Generic;
@@ -12,7 +12,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
     //TODO: igk we need only 
     //public Dictionary<string, string> FieldsRawValuesByName{ get; private set; }
     //fix this!!!
-    CreateItemParameters CreateParameters{ get; }
+    //CreateItemParameters CreateParameters{ get; }
+
+    IDictionary<string, string> FieldsRawValuesByName { get; }
   }
 }
 

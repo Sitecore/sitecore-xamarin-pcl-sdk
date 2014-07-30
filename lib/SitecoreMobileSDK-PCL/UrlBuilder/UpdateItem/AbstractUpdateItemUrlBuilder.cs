@@ -5,6 +5,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.API.Request;
 
   public abstract class AbstractUpdateItemUrlBuilder<TRequest> : AbstractGetItemUrlBuilder<TRequest>
     where TRequest : IBaseUpdateItemRequest
@@ -18,15 +19,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
     {
       string result = string.Empty;
 
-      bool fieldsAvailable = (null != request.CreateParameters.FieldsRawValuesByName);
+      bool fieldsAvailable = (null != request.FieldsRawValuesByName);
       if (fieldsAvailable)
       {
-        fieldsAvailable = (request.CreateParameters.FieldsRawValuesByName.Count > 0);
+        fieldsAvailable = (request.FieldsRawValuesByName.Count > 0);
       }
 
       if (fieldsAvailable)
       {
-        foreach (var fieldElem in request.CreateParameters.FieldsRawValuesByName)
+        foreach (var fieldElem in request.FieldsRawValuesByName)
         {  
           string escapedFieldName = UrlBuilderUtils.EscapeDataString (fieldElem.Key);
           string escapedFieldValue = UrlBuilderUtils.EscapeDataString (fieldElem.Value);

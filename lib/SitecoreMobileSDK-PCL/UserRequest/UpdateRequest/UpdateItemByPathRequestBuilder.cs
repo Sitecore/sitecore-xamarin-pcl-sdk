@@ -15,7 +15,7 @@
     public override IUpdateItemByPathRequest Build()
     {
 
-      UpdateItemByPathParameters result = new UpdateItemByPathParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemPath);
+      UpdateItemByPathParameters result = new UpdateItemByPathParameters(null, this.itemSourceAccumulator, this.queryParameters, this.FieldsRawValuesByName, this.itemPath);
       return result;
     }
 

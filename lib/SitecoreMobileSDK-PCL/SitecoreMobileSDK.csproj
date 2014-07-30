@@ -158,7 +158,6 @@
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemById\CreateItemByIdUrlBuilder.cs" />
     <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
     <Compile Include="Items\CreateItemByIdParameters.cs" />
     <Compile Include="Validators\BaseValidator.cs" />
@@ -167,11 +166,9 @@
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
     <Compile Include="Items\CreateItemByPathParameters.cs" />
     <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
     <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\UpdateItem\IBaseUpdateItemRequest.cs" />
     <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
     <Compile Include="Items\UpdateItemByIdParameters.cs" />
     <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
@@ -198,6 +195,9 @@
     <Compile Include="UrlBuilder\UpdateItem\UpdateItemByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\UpdateItem\UpdateItemByPathUrlBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByPathRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByPathUrlBuilder.cs" />
+    <Compile Include="API\Request\IBaseUpdateItemRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

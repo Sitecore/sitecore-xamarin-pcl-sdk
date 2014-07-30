@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK
   {
 
     //TODO: @igk copypaste from AbstractCreateItemRequestBuilder merge!!!
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (Dictionary<string, string> fieldsRawValuesByName)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (IDictionary<string, string> fieldsRawValuesByName)
     {
       if (fieldsRawValuesByName.Count == 0)
       {
@@ -23,9 +23,9 @@ namespace Sitecore.MobileSDK
 
       Dictionary<string, string> newFields = new Dictionary<string, string>();
 
-      if (null != this.itemParametersAccumulator.FieldsRawValuesByName)
+      if (null != this.FieldsRawValuesByName)
       {
-        foreach (var fieldElem in this.itemParametersAccumulator.FieldsRawValuesByName)
+        foreach (var fieldElem in this.FieldsRawValuesByName)
         {
           newFields.Add (fieldElem.Key, fieldElem.Value);
         }
@@ -36,8 +36,7 @@ namespace Sitecore.MobileSDK
         newFields.Add (fieldElem.Key.ToLowerInvariant(), fieldElem.Value);
       }
 
-      this.itemParametersAccumulator = 
-        new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, newFields);
+      this.FieldsRawValuesByName = newFields;
 
       return this;
     }
@@ -51,17 +50,16 @@ namespace Sitecore.MobileSDK
 
       Dictionary<string, string> newFields = new Dictionary<string, string>();
 
-      if (null != this.itemParametersAccumulator.FieldsRawValuesByName)
+      if (null != this.FieldsRawValuesByName)
       {
-        foreach (var fieldElem in this.itemParametersAccumulator.FieldsRawValuesByName)
+        foreach (var fieldElem in this.FieldsRawValuesByName)
         {
           newFields.Add (fieldElem.Key, fieldElem.Value);
         }
       }
       newFields.Add (fieldKey.ToLowerInvariant(), fieldValue);
 
-      this.itemParametersAccumulator = 
-        new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, newFields);
+      this.FieldsRawValuesByName = newFields;
 
       return this;
     }
@@ -101,7 +99,7 @@ namespace Sitecore.MobileSDK
       return (IUpdateItemRequestParametersBuilder<T>)base.AddScope(scope);
     }
 
-    protected CreateItemParameters itemParametersAccumulator = new CreateItemParameters(null, null, null);
+    protected IDictionary<string, string> FieldsRawValuesByName;
   }
 }
 

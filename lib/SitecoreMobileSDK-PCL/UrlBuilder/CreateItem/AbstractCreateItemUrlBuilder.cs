@@ -17,8 +17,8 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 
     protected override string GetSpecificPartForRequest(TRequest request)
     {
-      string escapedTemplate = UrlBuilderUtils.EscapeDataString(request.CreateParameters.ItemTemplate).ToLowerInvariant();
-      string escapedName = UrlBuilderUtils.EscapeDataString(request.CreateParameters.ItemName);
+      string escapedTemplate = UrlBuilderUtils.EscapeDataString(request.ItemTemplate).ToLowerInvariant();
+      string escapedName = UrlBuilderUtils.EscapeDataString(request.ItemName);
 
       string result =
           this.webApiGrammar.TemplateParameterName 
@@ -36,15 +36,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
     {
       string result = string.Empty;
 
-      bool fieldsAvailable = (null != request.CreateParameters.FieldsRawValuesByName);
+      bool fieldsAvailable = (null != request.FieldsRawValuesByName);
       if (fieldsAvailable)
       {
-        fieldsAvailable = (request.CreateParameters.FieldsRawValuesByName.Count > 0);
+        fieldsAvailable = (request.FieldsRawValuesByName.Count > 0);
       }
 
       if (fieldsAvailable)
       {
-        foreach (var fieldElem in request.CreateParameters.FieldsRawValuesByName)
+        foreach (var fieldElem in request.FieldsRawValuesByName)
         {  
           string escapedFieldName = UrlBuilderUtils.EscapeDataString (fieldElem.Key);
           string escapedFieldValue = UrlBuilderUtils.EscapeDataString (fieldElem.Value);

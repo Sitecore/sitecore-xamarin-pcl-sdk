@@ -9,7 +9,7 @@
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.Validators;
 
-  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>, ICreateItemRequestParametersBuilder<T>
+  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractUpdateItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T>
     where T : class
   {
     protected CreateItemParameters itemParametersAccumulator = new CreateItemParameters(null, null, null);
@@ -50,72 +50,80 @@
       return this;
     }
 
-    public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
     {
-      if (fieldsRawValuesByName == null)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".fieldsRawValuesByName");
-      }
-
-      if (fieldsRawValuesByName.Count == 0)
-      {
-        return this;
-      }
-
-      if (fieldsRawValuesByName.Any(entry => this.CheckForDuplicate(entry.Key.ToLowerInvariant())))
-      {
-        throw new InvalidOperationException(this.GetType().Name + " : duplicate fields are not allowed");
-      }
-
-      IDictionary<string, string> newFields = new Dictionary<string, string>();
-
-      if (null != this.itemParametersAccumulator.FieldsRawValuesByName)
-      {
-        foreach (var fieldElem in this.itemParametersAccumulator.FieldsRawValuesByName)
-        {
-          newFields.Add(fieldElem.Key, fieldElem.Value);
-        }
-      }
-
-      foreach (var fieldElem in fieldsRawValuesByName)
-      {
-        newFields.Add(fieldElem.Key.ToLowerInvariant(), fieldElem.Value);
-      }
-
-      this.itemParametersAccumulator =
-        new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, newFields);
-
-      return this;
+      return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByName(fieldsRawValuesByName);
     }
+//    public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
+//    {
+//      if (fieldsRawValuesByName == null)
+//      {
+//        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".fieldsRawValuesByName");
+//      }
+//
+//      if (fieldsRawValuesByName.Count == 0)
+//      {
+//        return this;
+//      }
+//
+//      if (fieldsRawValuesByName.Any(entry => this.CheckForDuplicate(entry.Key.ToLowerInvariant())))
+//      {
+//        throw new InvalidOperationException(this.GetType().Name + " : duplicate fields are not allowed");
+//      }
+//
+//      IDictionary<string, string> newFields = new Dictionary<string, string>();
+//
+//      if (null != this.itemParametersAccumulator.FieldsRawValuesByName)
+//      {
+//        foreach (var fieldElem in this.itemParametersAccumulator.FieldsRawValuesByName)
+//        {
+//          newFields.Add(fieldElem.Key, fieldElem.Value);
+//        }
+//      }
+//
+//      foreach (var fieldElem in fieldsRawValuesByName)
+//      {
+//        newFields.Add(fieldElem.Key.ToLowerInvariant(), fieldElem.Value);
+//      }
+//
+//      this.itemParametersAccumulator =
+//        new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, newFields);
+//
+//      return this;
+//    }
 
-    public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
     {
-      if (string.IsNullOrEmpty(fieldKey) || string.IsNullOrEmpty(fieldValue))
-      {
-        return this;
-      }
-
-      if (this.CheckForDuplicate(fieldKey.ToLowerInvariant()))
-      {
-        throw new InvalidOperationException(this.GetType().Name + " : duplicate fields are not allowed");
-      }
-
-      IDictionary<string, string> newFields = new Dictionary<string, string>();
-
-      if (null != this.itemParametersAccumulator.FieldsRawValuesByName)
-      {
-        foreach (var fieldElem in this.itemParametersAccumulator.FieldsRawValuesByName)
-        {
-          newFields.Add(fieldElem.Key, fieldElem.Value);
-        }
-      }
-      newFields.Add(fieldKey.ToLowerInvariant(), fieldValue);
-
-      this.itemParametersAccumulator =
-        new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, newFields);
-
-      return this;
+      return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByName(fieldKey, fieldValue);
     }
+//    public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
+//    {
+//      if (string.IsNullOrEmpty(fieldKey) || string.IsNullOrEmpty(fieldValue))
+//      {
+//        return this;
+//      }
+//
+//      if (this.CheckForDuplicate(fieldKey.ToLowerInvariant()))
+//      {
+//        throw new InvalidOperationException(this.GetType().Name + " : duplicate fields are not allowed");
+//      }
+//
+//      IDictionary<string, string> newFields = new Dictionary<string, string>();
+//
+//      if (null != this.itemParametersAccumulator.FieldsRawValuesByName)
+//      {
+//        foreach (var fieldElem in this.itemParametersAccumulator.FieldsRawValuesByName)
+//        {
+//          newFields.Add(fieldElem.Key, fieldElem.Value);
+//        }
+//      }
+//      newFields.Add(fieldKey.ToLowerInvariant(), fieldValue);
+//
+//      this.itemParametersAccumulator =
+//        new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, newFields);
+//
+//      return this;
+//    }
 
     private bool CheckForDuplicate(string key)
     {
