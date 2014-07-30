@@ -10,16 +10,16 @@
   {
     public ReadMediaItemRequestBuilder(string mediaPath)
     {
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaPath, this.GetType().Name + ".mediaPath");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaPath, this.GetType().Name + ".MediaPath");
       
       this.mediaPath = mediaPath;
     }
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database(string database)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".database");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
 
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(database, this.GetType().Name + ".database");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(database, this.GetType().Name + ".Database");
       
       this.itemSourceAccumulator = new ItemSourcePOD(
         database,
@@ -31,9 +31,9 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Language(string itemLanguage)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".itemLanguage");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
 
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemLanguage, this.GetType().Name + ".itemLanguage");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemLanguage, this.GetType().Name + ".Language");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,
@@ -45,9 +45,9 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Version(string itemVersion)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Version, this.GetType().Name + ".itemVersion");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Version, this.GetType().Name + ".Version");
 
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemVersion, this.GetType().Name + ".itemVersion");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemVersion, this.GetType().Name + ".Version");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,
@@ -59,12 +59,9 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> DownloadOptions(IDownloadMediaOptions downloadMediaOptions)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.downloadMediaOptions, this.GetType().Name + ".downloadMediaOptions");
+      BaseValidator.CheckForTwiceSetAndThrow(this.downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
-      if (MediaOptionsValidator.IsValidMediaOptions(downloadMediaOptions))
-      {
-        throw new ArgumentException(this.GetType().Name + ".downloadMediaOptions : is not valid");
-      }
+      MediaOptionsValidator.ValidateOrThrow(downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
       this.downloadMediaOptions = downloadMediaOptions.DeepCopyMediaDownloadOptions();
 
