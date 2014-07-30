@@ -1,13 +1,13 @@
-
-
 namespace Sitecore.MobileSDK.API.Session
 {
+  using System;
   using Sitecore.MobileSDK.Session;
 
   public interface ISitecoreWebApiSession : 
-  ISitecoreWebApiReadonlySession,
-  ISitecoreWebApiSessionState   , 
-  ISitecoreWebApiSessionActions 
+    IDisposable,
+    ISitecoreWebApiSessionState,
+    ISitecoreWebApiReadonlySession, 
+    ISitecoreWebApiSessionActions 
   {
   }
 }

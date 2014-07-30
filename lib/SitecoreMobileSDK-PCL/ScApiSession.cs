@@ -62,6 +62,15 @@ namespace Sitecore.MobileSDK
       this.httpClient = new HttpClient();
     }
 
+    public virtual void Dispose()
+    {
+      if (null != this.credentials)
+      {
+        this.credentials.Dispose();
+        this.credentials = null;
+      }
+    }
+
     public IItemSource DefaultSource
     {
       get
@@ -338,7 +347,7 @@ namespace Sitecore.MobileSDK
     private readonly HttpClient httpClient;
 
     protected readonly ISessionConfig sessionConfig;
-    private readonly IWebApiCredentials credentials;
+    private IWebApiCredentials credentials;
     private readonly IMediaLibrarySettings mediaSettings;
 
 
