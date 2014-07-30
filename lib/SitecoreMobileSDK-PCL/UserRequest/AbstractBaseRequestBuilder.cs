@@ -57,7 +57,7 @@ namespace Sitecore.MobileSDK.UserRequest
       {
         if (!scopeParameters.AddScope(singleScope))
         {
-          throw new InvalidOperationException(this.GetType().Name + " : Adding scope parameter duplicates is forbidden");
+          throw new InvalidOperationException(this.GetType().Name + ".Scope : Adding scope parameter duplicates is forbidden");
         }
       }
 
@@ -67,8 +67,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
-      ICollection<ScopeType> castedScope = (ICollection<ScopeType>)scope;
-      return this.AddScope(castedScope);
+      return this.AddScope((ICollection<ScopeType>)scope);
     }
 
     public IBaseRequestParametersBuilder<T> AddFields(ICollection<string> fields)
