@@ -65,7 +65,7 @@
     }
 
     [Test]
-    public void TestGetItemsWithNotExistentInstanceUrl()
+    public void TestGetItemsWithNotExistentInstanceUrlReturnsError()
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dddk.sitecore.net")
         .Credentials(this.testData.Users.Admin)
@@ -83,7 +83,7 @@
     }
 
     [Test]
-    public void TestGetItemWithNotExistentUser()
+    public void TestGetItemWithNotExistentUserReturnsError()
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(this.testData.Users.NotExistent)
@@ -105,7 +105,7 @@
     }
 
     [Test]
-    public void TestGetItemWithInvalidUsernameAndPassword()
+    public void TestGetItemWithInvalidUsernameAndPasswordReturnsError()
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(new WebApiCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd"))
@@ -124,7 +124,7 @@
     }
 
     [Test]
-    public void TestGetItemAsAnonymousWithoutReadAccess()
+    public void TestGetItemAsAnonymousWithoutReadAccessReturnsError()
     {
       var session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .DefaultDatabase("web")

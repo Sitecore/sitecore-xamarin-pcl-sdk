@@ -37,7 +37,7 @@
     //    public async void TestGetMediaItem()
     //    {
     //      // @igk !!! TEMPORARY TEST FOR CUSTOM USE, DO NOT DELETE, PLEASE !!!
-    //      IDownloadMediaOptions options = new MediaOptionsBuilder()
+    //      IDownloadMediaOptions options = new MediaOptionsBuilder().Set
     //        .SetDisplayAsThumbnail(true)
     //        .Build();
     //
@@ -98,11 +98,11 @@
     }
 
     [Test]
-    public void TestGetItemByIdWithPathInParams()
+    public void TestGetItemByIdWithPathInParamsReturnsError()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Path).Build());
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("ReadItemByIdRequestBuilder.itemId : Item id must have curly braces '{}'", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
 
     [Test]
@@ -204,7 +204,7 @@
     }
 
     [Test]
-    public async void TestGetItemByInvalidQuery()
+    public async void TestGetItemByInvalidQueryReturnsError()
     {
       const string QueryInvalid = "/sitecore/content/HOME/AllowED_PARent//*[@@templatekey123='sample item']";
       var response = await this.GetItemByQuery(QueryInvalid);
@@ -213,7 +213,7 @@
     }
 
     [Test]
-    public void TestGetItemByNullId()
+    public void TestGetItemByNullIdReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -222,11 +222,11 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByIdRequestBuilder.itemId : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByNullPath()
+    public void TestGetItemByNullPathReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -235,11 +235,11 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByPathRequestBuilder.itemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByNullQuery()
+    public void TestGetItemByNullQueryReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -248,11 +248,11 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.sitecoreQuery : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.SitecoreQuery : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByEmptyPath()
+    public void TestGetItemByEmptyPathReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -261,11 +261,11 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByPathRequestBuilder.itemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByEmptyQuery()
+    public void TestGetItemByEmptyQueryReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -274,11 +274,11 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.sitecoreQuery : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.SitecoreQuery : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByIdWithSpacesOnly()
+    public void TestGetItemByIdWithSpacesOnlyReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -287,11 +287,11 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByIdRequestBuilder.itemId : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByPathWithSpacesOnly()
+    public void TestGetItemByPathWithSpacesOnlyReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -300,7 +300,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByPathRequestBuilder.itemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
     }
 
     //TODO: create items for test first and remove them after test

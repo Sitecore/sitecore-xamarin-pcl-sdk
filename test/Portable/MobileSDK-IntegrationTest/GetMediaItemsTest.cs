@@ -1,7 +1,6 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
-  using System.Diagnostics;
   using System.Globalization;
   using System.IO;
   using System.Threading.Tasks;
@@ -42,9 +41,9 @@
     [Test]
     public async void TestGetMediaWithScale()
     {
-      var options = new MediaOptionsBuilder()
-       .SetScale(0.5f)
-        .Build();
+      var options = new MediaOptionsBuilder().Set
+       .Scale(0.5f)
+       .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
         .DownloadOptions(options)
@@ -59,8 +58,8 @@
     [Test]
     public async void TestGetMediaAsThumbnail()
     {
-      var options = new MediaOptionsBuilder()
-        .SetDisplayAsThumbnail(true)
+      var options = new MediaOptionsBuilder().Set
+        .DisplayAsThumbnail(true)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/butterfly2_large")
@@ -79,10 +78,10 @@
       const int Height = 200;
       const int Width = 300;
 
-      var options = new MediaOptionsBuilder()
-        .SetHeight(Height)
-        .SetWidth(Width)
-        .SetAllowStrech(true)
+      var options = new MediaOptionsBuilder().Set
+        .Height(Height)
+        .Width(Width)
+        .AllowStrech(true)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/kirkorov")
@@ -113,23 +112,23 @@
     }
 
     [Test]
-    public void TestGetMediaWithEmptyPath()
+    public void TestGetMediaWithEmptyPathReturnsError()
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest("");
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadMediaItemRequestBuilder.mediaPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.MediaPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaWithNullPath()
+    public void TestGetMediaWithNullPathReturnsError()
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest(null);
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadMediaItemRequestBuilder.mediaPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.MediaPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaWithNotExistentPath()
+    public void TestGetMediaWithNotExistentPathReturnsError()
     {
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/images/not existent")
         .Build();
@@ -150,7 +149,7 @@
 
     [Test]
     [Ignore]
-    public void TestGetMediaWithPathBeginsWithoutSlash()
+    public void TestGetMediaWithPathBeginsWithoutSlashReturnsError()
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest("sitecore/media library/images/kirkorov");
       Exception exception = Assert.Throws<ArgumentException>(testCode);
@@ -159,66 +158,66 @@
       // Solutions
       // 1. Construct a builder using a session.
       // 2. Not validate this particular value at this stage.
-      Assert.True(exception.Message.Contains("ReadMediaItemRequestBuilder.Path : Media path should begin with '/' or '~'"));
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Path : Media path should begin with '/' or '~'", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaWithNegativeScaleValue()
+    public void TestGetMediaWithNegativeScaleValueReturnsError()
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
-         .SetScale(-2.0f)
-         .Build();
+        var options = new MediaOptionsBuilder().Set
+          .Scale(-2.0f)
+          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("scale must be > 0"));
+      Assert.AreEqual("MediaOptionsBuilder.Scale : The input must be > 0", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaWithNegativeMaxWidthValue()
+    public void TestGetMediaWithNegativeMaxWidthValueReturnsError()
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
-         .SetMaxWidth(-55)
-         .Build();
+        var options = new MediaOptionsBuilder().Set
+          .MaxWidth(-55)
+          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("maxWidth must be > 0"));
+      Assert.AreEqual("MediaOptionsBuilder.MaxWidth : The input must be > 0", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaWithNegativeHeightValue()
+    public void TestGetMediaWithNegativeHeightValueReturnsError()
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
-           .SetHeight(-55)
-           .Build();
+        var options = new MediaOptionsBuilder().Set
+          .Height(-55)
+          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("height must be > 0"));
+      Assert.AreEqual("MediaOptionsBuilder.Height : The input must be > 0", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaWithZeroWidthValue()
+    public void TestGetMediaWithZeroWidthValueReturnsError()
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder()
-         .SetWidth(0)
-         .Build();
+        var options = new MediaOptionsBuilder().Set
+          .Width(0)
+          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("width must be > 0"));
+      Assert.AreEqual("MediaOptionsBuilder.Width : The input must be > 0", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaFromUploadedImageWithError()
+    public void TestGetMediaFromInvalidImageReturnsError()
     {
-      var options = new MediaOptionsBuilder()
-        .SetHeight(100)
+      var options = new MediaOptionsBuilder().Set
+        .Height(100)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/nexus")
@@ -248,8 +247,8 @@
           .Credentials(this.testData.Users.NoReadAccess)
           .BuildReadonlySession();
 
-      var options = new MediaOptionsBuilder()
-        .SetScale(1)
+      var options = new MediaOptionsBuilder().Set
+        .Scale(1)
         .Build();
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
         .DownloadOptions(options)
@@ -276,7 +275,7 @@
       Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
-    [Test] //should be passed after .ashx fix
+    [Test]
     public async void TestGetMediaWithRelativePath()
     {
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/Images/green_mineraly1")
@@ -293,10 +292,10 @@
     [Test]
     public async void TestGetItemWithTildaInPath()
     {
-      var options = new MediaOptionsBuilder()
-        .SetDisplayAsThumbnail(false)
-        .SetAllowStrech(true)
-        .SetHeight(150)
+      var options = new MediaOptionsBuilder().Set
+        .DisplayAsThumbnail(false)
+        .AllowStrech(true)
+        .Height(150)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/Images/green_mineraly1")
@@ -309,17 +308,14 @@
       Assert.AreEqual(16284, ms.Length);
     }
 
-    [Test]  //should be passed after .ashx fix
+    [Test]
     public async void TestGetMediaWithPdfExtension()
     {
       const string ItemPath = "/sitecore/media library/Images/Files/pdf example";
       const string MediaPath = "~/media/Images/Files/pdf example.pdf";
       const string Db = "master";
-      var options = new MediaOptionsBuilder()
-         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
-        //        .DownloadOptions(options)
         .Database(Db)
         .Build();
 
@@ -330,26 +326,26 @@
       Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
-    [Test] //should be passed after .ashx fix
+    [Test]
     public async void TestGetMediaItemWithMp4Extension()
     {
-      const string itemPath = "/sitecore/media library/Images/Files/Video_01";
-      const string mediaPath = "~/media/Images/Files/Video_01.mp4";
-      const string db = "master";
+      const string ItemPath = "/sitecore/media library/Images/Files/Video_01";
+      const string MediaPath = "~/media/Images/Files/Video_01.mp4";
+      const string Db = "master";
 
-      var options = new MediaOptionsBuilder()
-        .SetHeight(50)
+      var options = new MediaOptionsBuilder().Set
+        .Height(50)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(mediaPath)
+      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
         .DownloadOptions(options)
-        .Database(db)
+        .Database(Db)
         .Build();
 
       var response = await this.session.DownloadResourceAsync(request);
       var ms = new MemoryStream();
       response.CopyTo(ms);
-      var expectedItem = await this.GetItemByPath(itemPath, db);
+      var expectedItem = await this.GetItemByPath(ItemPath, Db);
       Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
@@ -393,8 +389,8 @@
     [Test]
     public async void TestGetMediaWithInternationalPath()
     {
-      var options = new MediaOptionsBuilder()
-        .SetWidth(50)
+      var options = new MediaOptionsBuilder().Set
+        .Width(50)
         .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/Images/files/では/flowers")
@@ -462,75 +458,75 @@
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithEmptyDatabase()
+    public void TestGetMediaWithEmptyDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(""));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.database : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithNullDatabase()
+    public void TestGetMediaWithNullDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(null));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.database : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithSpacesInLanguage()
+    public void TestGetMediaWithSpacesInLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language("  "));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithNullLanguage()
+    public void TestGetMediaWithNullLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language(null));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithEmptyVersion()
+    public void TestGetMediaWithEmptyVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(""));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithNullVersion()
+    public void TestGetMediaWithNullVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(null));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaWithOverridenVersion()
+    public void TestGetMediaWithOverridenVersionReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Version("2")
         .Version("1")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }
 
-    [Test] 
-    public void TestGetMediaWithOverridenLanguage()
+    [Test]
+    public void TestGetMediaWithOverridenLanguageReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Language("en")
         .Language("da")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
-    public void TestGetMediaWithOverridenDatabase()
+    public void TestGetMediaWithOverridenDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Database("master")
         .Database("web")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.database : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
     }
 
     //TODO: add tests for MediaOptions (null, empty, override)

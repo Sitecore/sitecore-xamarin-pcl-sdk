@@ -174,7 +174,7 @@
     }
 
     [Test]
-    public void TestOverrideDatabaseInRequestByPathSeveralTimes()
+    public void TestOverrideDatabaseInRequestByPathSeveralTimesReturnsError()
     {
       const string Db = "web";
 
@@ -186,7 +186,7 @@
     }
 
     [Test]
-    public void TestGetItemByIdWithNullDatabase()
+    public void TestGetItemByIdWithNullDatabaseReturnsError()
     {
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id);
@@ -196,7 +196,7 @@
     }
 
     [Test]
-    public void TestGetItemByPathWithEmptyDatabase()
+    public void TestGetItemByPathWithEmptyDatabaseReturnsError()
     {
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
@@ -216,7 +216,7 @@
     }
 
     [Test]
-    public void TestOverrideLanguageWithEmptyValueInRequestById()
+    public void TestOverrideLanguageWithEmptyValueInRequestByIdReturnsError()
     {
       const string Language = "";
 
@@ -227,14 +227,14 @@
     }
 
     [Test]
-    public void TestOverrideVersionWithEmptyValueInRequestByPath()
+    public void TestOverrideVersionWithEmptyValueInRequestByPathReturnsError()
     {
       const string Version = "";
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(Version).Build());
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("ReadItemByPathRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Version : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]

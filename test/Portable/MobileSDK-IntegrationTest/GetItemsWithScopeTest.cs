@@ -176,32 +176,32 @@
     }
 
     [Test]
-    public void TestGetItemByPathDuplicateScopeParams()
+    public void TestGetItemByPathDuplicateScopeParamsReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .AddScope(ScopeType.Parent)
         .AddScope(ScopeType.Children)
         .AddScope(ScopeType.Parent)
         .Build());
-      Assert.AreEqual("ReadItemByPathRequestBuilder : Adding scope parameter duplicates is forbidden", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByIdDuplicateScopeParams()
+    public void TestGetItemByIdDuplicateScopeParamsReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
         .AddScope(ScopeType.Self, ScopeType.Self)
         .Build());
-      Assert.AreEqual("ReadItemByIdRequestBuilder : Adding scope parameter duplicates is forbidden", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByQueryDuplicateScopeParams()
+    public void TestGetItemByQueryDuplicateScopeParamsReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
         .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Children)
         .Build());
-      Assert.AreEqual("ReadItemByQueryRequestBuilder : Adding scope parameter duplicates is forbidden", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
     }
   }
 }
