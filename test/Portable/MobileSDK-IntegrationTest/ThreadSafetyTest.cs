@@ -3,6 +3,7 @@
   using System;
   using System.IO;
   using System.Threading.Tasks;
+  using System.Diagnostics;
 
   using NUnit.Framework;
 
@@ -33,6 +34,7 @@
     public void Setup()
     {
       TestEnvironment env = TestEnvironment.DefaultTestEnvironment();
+      this.env = env;
 
       this.mediaSettings = new MediaLibrarySettings(
         "/sitecore/media library",
@@ -43,8 +45,6 @@
       var defaultSource = ItemSource.DefaultSource();
 
       this.session = new ScTestApiSession(connection, env.Users.Admin, this.mediaSettings, defaultSource);
-      this.env = env;
-
       this.itemSource = new MutableItemSource("master", "en", "3872");
     }
 
@@ -80,6 +80,10 @@
       catch (LoadDataFromNetworkException)
       {
         //IDLE
+      }
+      catch (Exception ex)
+      {
+        Debug.WriteLine(ex.Message);
       }
       finally
       {
