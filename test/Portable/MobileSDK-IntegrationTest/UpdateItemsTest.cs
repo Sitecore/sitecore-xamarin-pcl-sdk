@@ -50,13 +50,13 @@
       this.testData = null;
       this.session = null;
     }
-    /*
+
     [Test]
     public async void TestUpdateItemByIdFromWebDbWithChildrenScope()
     {
       const string Db = "web";
-      const string TitleValue = "New title after update";
-      const string TextValue = "New text after update";
+      var titleValue = RandomText();
+      var textValue = RandomText();
       var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
@@ -66,8 +66,8 @@
       ISitecoreItem childItem = await this.CreateItem("Child item to update in web", parentItem, itemSession);
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(parentItem.Id)
-        .AddFieldsRawValuesByName("Title", TitleValue)
-        .AddFieldsRawValuesByName("Text", TextValue)
+        .AddFieldsRawValuesByName("Title", titleValue)
+        .AddFieldsRawValuesByName("Text", textValue)
         .AddScope(ScopeType.Children)
         .Database(Db)
         .Build();
@@ -77,8 +77,8 @@
       Assert.AreEqual(1, result.Items.Count);
       var resultItem = result.Items[0];
       Assert.AreEqual(childItem.Id, resultItem.Id);
-      Assert.AreEqual(TitleValue, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
       Assert.AreEqual(Db, resultItem.Source.Database);
 
       this.RemoveItem(parentItem);
@@ -88,33 +88,130 @@
     public async void TestUpdateDanishItemByPath()
     {
       const string Language = "da";
-      const string TitleValue = "New title after update";
-      const string TextValue = "New text after update";
+      var titleValue = RandomText();
+      var textValue = RandomText();
       var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultLanguage(Language)
+        .DefaultDatabase("master")
         .BuildSession();
       ISitecoreItem item = await this.CreateItem("Danish item to update", null, itemSession);
 
-      var request = ItemWebApiRequestBuilder.UpdateItemsRequestWithPath(item.Path)
-        .AddFieldsRawValuesByName("Title", TitleValue)
-        .AddFieldsRawValuesByName("Text", TextValue)
+      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
+        .AddFieldsRawValuesByName("Title", titleValue)
+        .AddFieldsRawValuesByName("Text", textValue)
         .Language(Language)
         .Build();
 
-      var result = await this.session.UpdateItemsAsync(request);
+      var result = await this.session.UpdateItemAsync(request);
 
       Assert.AreEqual(1, result.Items.Count);
       var resultItem = result.Items[0];
       Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(TitleValue, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
       Assert.AreEqual(Language, resultItem.Source.Language);
 
       this.RemoveItem(item);
     }
+
+    [Test]
+    public async void TestUpdateItemByNotExistentId()
+    {
+      var textValue = RandomText();
+
+      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+        .AddFieldsRawValuesByName("Text", textValue)
+        .Build();
+
+      var result = await this.session.UpdateItemAsync(request);
+
+      Assert.AreEqual(0, result.Items.Count);
+    }
+
+    [Test]
+    public void TestUpdateItemByInvalidIdReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.Home.Path)
+        .Build());
+      Assert.AreEqual("UpdateItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByEmptyIdReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId("")
+        .Build());
+      Assert.AreEqual("UpdateItemByIdRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByNullPathReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath(null)
+        .Build());
+      Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByInvalidPathReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("invalid path)")
+        .Build());
+      Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : Item path should begin with '/'", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByIdWithNullDatabaseReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+        .Database(null)
+        .Build());
+      Assert.AreEqual("UpdateItemByIdRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByPathWithTwoDatabasesReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+        .Database("db1")
+        .Database("db2")
+        .Build());
+      Assert.AreEqual("UpdateItemByIdRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
+    }
+
+    /*
+    [Test]
+    public void TestUpdateItemByQueryWithSpacesOnlyReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithSitecoreQuery("  ")
+        .Build());
+      Assert.AreEqual("UpdateItemByQueryRequestBuilder.SitecoreQuery : The input cannot be null or empty.", exception.Message);
+    }
     
+    [Test]
+    public async void TestUpdateItemVersion1ById()
+    {
+      const string Version = "1";
+      var textValue = RandomText();
+
+      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
+        .AddFieldsRawValuesByName("Text", textValue)
+        .Payload(PayloadType.Full)
+        .Version(Version)
+        .Build();
+
+      var result = await this.session.UpdateItemAsync(request);
+
+      Assert.AreEqual(1, result.Items.Count);
+      var resultItem = result.Items[0];
+      Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
+      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.True(50 < resultItem.Fields.Count);
+      Assert.AreEqual(Version, resultItem.Source.Version);
+    }
+
     [Test]
     public async void TestUpdateItemByQueryWithParentScope()
     {
@@ -167,7 +264,6 @@
 
       this.RemoveItem(parentItem);
     }
-    
 
     [Test]
     public async void TestUpdateInternationalItemByQuery()
@@ -223,6 +319,11 @@
 
       var response = await itemSession.DeleteItemAsync(request);
       Assert.AreEqual(1, response.Count);
+    }
+
+    private static string RandomText()
+    {
+      return "UpdatedText" + new Random(10000);
     }
 
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
