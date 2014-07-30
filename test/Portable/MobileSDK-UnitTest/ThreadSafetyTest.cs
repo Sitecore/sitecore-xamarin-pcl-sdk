@@ -1,16 +1,13 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using SitecoreMobileSDKMockObjects;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
-
-
 
   [TestFixture]
   public class ThreadSafetyTest

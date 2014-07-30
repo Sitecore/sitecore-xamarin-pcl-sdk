@@ -11,7 +11,7 @@
 
     public DeleteItemItemByPathRequestBuilder(string itemPath)
     {
-      ItemPathValidator.ValidateItemPath(itemPath);
+      ItemPathValidator.ValidateItemPath(itemPath, this.GetType().Name + ".itemPath");
       this.itemPath = itemPath;
     }
 

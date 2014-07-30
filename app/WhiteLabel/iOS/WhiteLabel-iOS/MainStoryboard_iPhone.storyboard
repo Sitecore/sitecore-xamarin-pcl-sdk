@@ -660,9 +660,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bea-zj-CTF">
+                                <rect key="frame" x="254" y="244" width="51" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="51" id="PHs-FP-Dq3"/>
+                                    <constraint firstAttribute="height" constant="30" id="rMB-No-jie"/>
+                                </constraints>
+                                <state key="normal" title="Update">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnUpdateItemButtonTapped:" destination="hDq-Kn-IbD" eventType="touchUpInside" id="2a5-tP-jNE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Bea-zj-CTF" secondAttribute="trailing" constant="15" id="4HP-Pj-nHn"/>
                             <constraint firstItem="Bmb-U1-Yxb" firstAttribute="top" secondItem="OQn-Ac-Sc6" secondAttribute="bottom" constant="8" id="5nG-N9-VOa"/>
                             <constraint firstItem="POP-nM-A7x" firstAttribute="leading" secondItem="OQn-Ac-Sc6" secondAttribute="leading" id="B2F-yq-k8n"/>
                             <constraint firstItem="POP-nM-A7x" firstAttribute="trailing" secondItem="OQn-Ac-Sc6" secondAttribute="trailing" id="BZH-Eu-2j7"/>
@@ -676,6 +691,7 @@
                             <constraint firstItem="POP-nM-A7x" firstAttribute="top" secondItem="5GE-kj-Ih3" secondAttribute="bottom" constant="7" id="eEd-bg-4d9"/>
                             <constraint firstItem="bkx-UR-mBG" firstAttribute="leading" secondItem="vdN-QR-R2l" secondAttribute="leading" constant="93" id="fA4-oB-hlu"/>
                             <constraint firstItem="OQn-Ac-Sc6" firstAttribute="top" secondItem="5GE-kj-Ih3" secondAttribute="bottom" constant="54" id="gI8-qY-b1L"/>
+                            <constraint firstItem="Bea-zj-CTF" firstAttribute="top" secondItem="WH6-wC-5s6" secondAttribute="bottom" constant="8" id="gbK-7U-exz"/>
                             <constraint firstItem="bkx-UR-mBG" firstAttribute="top" secondItem="WH6-wC-5s6" secondAttribute="bottom" constant="8" id="iof-9V-p9l"/>
                             <constraint firstAttribute="trailing" secondItem="Bmb-U1-Yxb" secondAttribute="trailing" constant="20" id="yyp-Jd-HyV"/>
                         </constraints>
@@ -1018,15 +1034,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnr-Zr-84p">
+                                <rect key="frame" x="254" y="244" width="51" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="51" id="QDZ-2A-wEa"/>
+                                </constraints>
+                                <state key="normal" title="Update">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnUpdateItemButtonTapped:" destination="Eg0-WD-ucD" eventType="touchUpInside" id="u9y-z8-NkF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JLv-iX-xgf" firstAttribute="top" secondItem="o3L-Qu-Yzw" secondAttribute="bottom" constant="20" id="2QB-DN-6He"/>
                             <constraint firstItem="E4c-H8-m5W" firstAttribute="top" secondItem="KoW-w2-QPa" secondAttribute="bottom" constant="54" id="3ey-76-Ez6"/>
+                            <constraint firstItem="bnr-Zr-84p" firstAttribute="top" secondItem="JLv-iX-xgf" secondAttribute="bottom" constant="8" id="GP3-b3-Rg1"/>
                             <constraint firstItem="P8c-qD-0Cq" firstAttribute="top" secondItem="KoW-w2-QPa" secondAttribute="bottom" constant="7" id="Nbb-A4-yvp"/>
                             <constraint firstItem="JLv-iX-xgf" firstAttribute="leading" secondItem="Ue5-X8-jSW" secondAttribute="leading" constant="20" id="PGk-wO-gWl"/>
                             <constraint firstItem="o3L-Qu-Yzw" firstAttribute="top" secondItem="E4c-H8-m5W" secondAttribute="bottom" constant="8" id="QUE-rd-O0R"/>
                             <constraint firstItem="P8c-qD-0Cq" firstAttribute="leading" secondItem="E4c-H8-m5W" secondAttribute="leading" id="Qwg-4M-jdS"/>
+                            <constraint firstAttribute="trailing" secondItem="bnr-Zr-84p" secondAttribute="trailing" constant="15" id="RcB-9v-5UC"/>
                             <constraint firstItem="yg6-Xi-Rko" firstAttribute="top" secondItem="JLv-iX-xgf" secondAttribute="bottom" constant="8" id="V0L-vs-sBe"/>
                             <constraint firstItem="yg6-Xi-Rko" firstAttribute="leading" secondItem="JLv-iX-xgf" secondAttribute="leading" constant="73" id="WK7-WS-rSS"/>
                             <constraint firstItem="yg6-Xi-Rko" firstAttribute="leading" secondItem="Ue5-X8-jSW" secondAttribute="leading" constant="93" id="Woa-Id-But"/>

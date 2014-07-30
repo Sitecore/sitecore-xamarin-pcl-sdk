@@ -17,11 +17,11 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (string.IsNullOrWhiteSpace(sitecoreDatabase))
       {
-        throw new ArgumentException(this.GetType().Name + ".Database : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".Database");
       }
       else if (null != this.itemSourceAccumulator.Database)
       {
-        throw new InvalidOperationException(this.GetType().Name + ".Database : The database cannot be assigned twice");
+        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Database");
       }
 
 
@@ -37,11 +37,11 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (string.IsNullOrWhiteSpace(itemLanguage))
       {
-        throw new ArgumentException(this.GetType().Name + ".Language : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".Language");
       }
       else if (null != this.itemSourceAccumulator.Language)
       {
-        throw new InvalidOperationException(this.GetType().Name + ".Language : The language cannot be assigned twice");
+        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Language");
       }
 
 
@@ -57,7 +57,7 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (null != this.queryParameters.Payload)
       {
-        throw new InvalidOperationException(this.GetType().Name + ".Payload : The payload cannot be assigned twice");
+        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Payload");
       }
 
       this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields);
@@ -70,7 +70,10 @@ namespace Sitecore.MobileSDK.UserRequest
 
       foreach (ScopeType singleScope in scope)
       {
-        scopeParameters.AddScope(singleScope);
+        if (!scopeParameters.AddScope(singleScope))
+        {
+          throw new InvalidOperationException(this.GetType().Name + " : Adding scope parameter duplicates is forbidden");
+        }
       }
 
       this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields);
@@ -98,8 +101,6 @@ namespace Sitecore.MobileSDK.UserRequest
         fieldName => !string.IsNullOrWhiteSpace(fieldName);
       var validFields = fields.Where(fieldNameValidator).ToList();
 
-
-
       ICollection<string> currentFields = this.queryParameters.Fields;
       if (null == currentFields)
       {
@@ -120,7 +121,7 @@ namespace Sitecore.MobileSDK.UserRequest
       bool isFieldListHasDuplicates = DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields);
       if (isFieldListHasDuplicates)
       {
-        throw new ArgumentException(this.GetType().Name + " : duplicate fields are not allowed");
+        throw new ArgumentException(this.GetType().Name + ".fields" + " : duplicate fields are not allowed");
       }
 
       this.queryParameters = new QueryParameters( this.queryParameters.Payload, this.queryParameters.ScopeParameters, newFields );

@@ -1,13 +1,13 @@
 ﻿
 namespace Sitecore.MobileSDK.TaskFlow
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Sitecore.MobileSDK.API.Exceptions;
+  using System;
+  using System.Threading;
+  using System.Threading.Tasks;
+  using Sitecore.MobileSDK.API.Exceptions;
 
 
-    internal class RestApiCallFlow
+  internal class RestApiCallFlow
   {
     private static async Task<TPhaseResult> IvokeTaskAndWrapExceptions<TPhaseResult, TWrapperException>(
       Task<TPhaseResult> task, Func<Exception, TWrapperException> exceptionWrapperDelegate)
@@ -16,7 +16,7 @@ namespace Sitecore.MobileSDK.TaskFlow
     {
       TPhaseResult result = null;
 
-      try 
+      try
       {
         result = await task;
       }
@@ -33,7 +33,7 @@ namespace Sitecore.MobileSDK.TaskFlow
       }
       catch (Exception ex)
       {
-        throw exceptionWrapperDelegate (ex);
+        throw exceptionWrapperDelegate(ex);
       }
 
       return result;
@@ -41,13 +41,13 @@ namespace Sitecore.MobileSDK.TaskFlow
 
 
     public static async Task<TResult> LoadRequestFromNetworkFlow<TRequest, THttpRequest, THttpResult, TResult>(
-      TRequest request, 
+      TRequest request,
       IRestApiCallTasks<TRequest, THttpRequest, THttpResult, TResult> stages,
       CancellationToken cancelToken)
-      where TRequest: class
-      where THttpRequest: class
-      where THttpResult: class
-      where TResult: class
+      where TRequest : class
+      where THttpRequest : class
+      where THttpResult : class
+      where TResult : class
     {
       THttpResult serverResponse = null;
       TResult parsedData = null;
@@ -55,58 +55,61 @@ namespace Sitecore.MobileSDK.TaskFlow
       serverResponse = await RestApiCallFlow.LoadResourceFromNetworkFlow(request, stages, cancelToken);
 
       Func<Exception, ParserException> parseExceptionWrapper = (Exception ex) => new ParserException("[Sitecore Mobile SDK] Unable to download data from the internet", ex);
-      Task<TResult> asyncParser = stages.ParseResponseDataAsync (serverResponse, cancelToken);
+      Task<TResult> asyncParser = stages.ParseResponseDataAsync(serverResponse, cancelToken);
 
-      parsedData = await RestApiCallFlow.IvokeTaskAndWrapExceptions( asyncParser, parseExceptionWrapper );
+      parsedData = await RestApiCallFlow.IvokeTaskAndWrapExceptions(asyncParser, parseExceptionWrapper);
       ////
 
       if (null == parsedData)
       {
-        throw new ArgumentNullException ("[RestApiCallFlow.LoadRequestFromNetworkFlow] parsed response cannot be null");
+        throw new ArgumentNullException("[RestApiCallFlow.LoadRequestFromNetworkFlow] parsed response cannot be null");
       }
 
       return parsedData;
     }
 
     public static async Task<THttpResult> LoadResourceFromNetworkFlow<TRequest, THttpRequest, THttpResult>(
-      TRequest request, 
+      TRequest request,
       IDownloadApiCallTasks<TRequest, THttpRequest, THttpResult> stages,
       CancellationToken cancelToken)
-      where TRequest: class
-      where THttpRequest: class
-      where THttpResult: class
+      where TRequest : class
+      where THttpRequest : class
+      where THttpResult : class
     {
       THttpRequest requestUrl = null;
       THttpResult serverResponse = null;
 
       if (null == request)
       {
-        throw new ArgumentNullException ("[RestApiCallFlow.LoadRequestFromNetworkFlow] user's request cannot be null");
+        throw new ArgumentNullException("[RestApiCallFlow.LoadRequestFromNetworkFlow] user's request cannot be null");
       }
 
 
-      Func<Exception, ProcessUserRequestException> urlExceptionWrapper = (Exception ex) => new ProcessUserRequestException ("[Sitecore Mobile SDK] Unable to build HTTP request", ex);
-      Task<THttpRequest> requsetLoader = stages.BuildRequestUrlForRequestAsync (request, cancelToken);
+      Func<Exception, ProcessUserRequestException> urlExceptionWrapper = (Exception ex) => new ProcessUserRequestException("[Sitecore Mobile SDK] Unable to build HTTP request", ex);
+      Task<THttpRequest> requsetLoader = stages.BuildRequestUrlForRequestAsync(request, cancelToken);
 
-      requestUrl = await RestApiCallFlow.IvokeTaskAndWrapExceptions( requsetLoader, urlExceptionWrapper );
+      requestUrl = await RestApiCallFlow.IvokeTaskAndWrapExceptions(requsetLoader, urlExceptionWrapper);
       ////
 
 
       if (null == requestUrl)
       {
-        throw new ArgumentNullException ("[RestApiCallFlow.LoadRequestFromNetworkFlow] http request cannot be null");
+        throw new ArgumentNullException("[RestApiCallFlow.LoadRequestFromNetworkFlow] http request cannot be null");
       }
 
-      Func<Exception, LoadDataFromNetworkException> httpExceptionWrapper = (Exception ex) => new LoadDataFromNetworkException ("[Sitecore Mobile SDK] Unable to download data from the internet", ex);
-      Task<THttpResult> httpLoader = stages.SendRequestForUrlAsync (requestUrl, cancelToken);
+      Func<Exception, LoadDataFromNetworkException> httpExceptionWrapper = (Exception ex) =>
+      {
+        return new LoadDataFromNetworkException("[Sitecore Mobile SDK] Unable to download data from the internet", ex);
+      };
+      Task<THttpResult> httpLoader = stages.SendRequestForUrlAsync(requestUrl, cancelToken);
 
-      serverResponse = await RestApiCallFlow.IvokeTaskAndWrapExceptions( httpLoader, httpExceptionWrapper );
+      serverResponse = await RestApiCallFlow.IvokeTaskAndWrapExceptions(httpLoader, httpExceptionWrapper);
       ////
 
 
       if (null == serverResponse)
       {
-        throw new ArgumentNullException ("[RestApiCallFlow.LoadRequestFromNetworkFlow] back end response cannot be null");
+        throw new ArgumentNullException("[RestApiCallFlow.LoadRequestFromNetworkFlow] back end response cannot be null");
       }
 
       return serverResponse;

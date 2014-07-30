@@ -100,8 +100,7 @@ namespace MobileSDK_UnitTest_Desktop
       scope.AddScope(ScopeType.Children);
       scope.AddScope(ScopeType.Self);
 
-      Assert.Throws<InvalidOperationException>(() =>
-        scope.AddScope(ScopeType.Children) );
+      Assert.IsFalse(scope.AddScope(ScopeType.Children));
     }
 
     [Test]
@@ -114,7 +113,7 @@ namespace MobileSDK_UnitTest_Desktop
     [Test]
     public void TestSimpleFieldListOfNamesIsProcessedCorrectly()
     {
-      string[] fields = {"abra", "shwabra", "kadabra"};
+      string[] fields = { "abra", "shwabra", "kadabra" };
 
       string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Full, null, fields));
       Assert.AreEqual("payload=full&fields=abra|shwabra|kadabra", result);
@@ -124,7 +123,7 @@ namespace MobileSDK_UnitTest_Desktop
     [Test]
     public void TestFieldListOfNamesIsUrlEncodedCorrectly()
     {
-      string[] fields = {"Слава Україні!", "Героям слава!"};
+      string[] fields = { "Слава Україні!", "Героям слава!" };
 
       string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, null, fields));
       string expected = "payload=content&fields=%d0%a1%d0%bb%d0%b0%d0%b2%d0%b0%20%d0%a3%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%96%21|%d0%93%d0%b5%d1%80%d0%be%d1%8f%d0%bc%20%d1%81%d0%bb%d0%b0%d0%b2%d0%b0%21";
@@ -134,7 +133,7 @@ namespace MobileSDK_UnitTest_Desktop
     [Test]
     public void TestSimpleFieldListOfIdsIsProcessedCorrectly()
     {
-      string[] fields = {"{0000-1111-2222}", "{1123-5813-21-34}"};
+      string[] fields = { "{0000-1111-2222}", "{1123-5813-21-34}" };
       var scope = new ScopeParameters();
       scope.AddScope(ScopeType.Children);
       string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Min, scope, fields));
@@ -144,7 +143,7 @@ namespace MobileSDK_UnitTest_Desktop
     [Test]
     public void TestMixedFieldList()
     {
-      string[] fields = {"Слава Україні!", "{0000-1111-2222}", "Героям слава!"};
+      string[] fields = { "Слава Україні!", "{0000-1111-2222}", "Героям слава!" };
 
       string result = this.builder.BuildUrlString(new QueryParameters(PayloadType.Content, null, fields));
       string expected = "payload=content&fields=%d0%a1%d0%bb%d0%b0%d0%b2%d0%b0%20%d0%a3%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%96%21|%7b0000-1111-2222%7d|%d0%93%d0%b5%d1%80%d0%be%d1%8f%d0%bc%20%d1%81%d0%bb%d0%b0%d0%b2%d0%b0%21";
@@ -154,7 +153,7 @@ namespace MobileSDK_UnitTest_Desktop
     [Test]
     public void TestFieldsOnly()
     {
-      string[] fields = {"Слава Україні!", "{0000-1111-2222}", "Героям слава!"};
+      string[] fields = { "Слава Україні!", "{0000-1111-2222}", "Героям слава!" };
 
       string result = this.builder.BuildUrlString(new QueryParameters(null, null, fields));
       string expected = "fields=%d0%a1%d0%bb%d0%b0%d0%b2%d0%b0%20%d0%a3%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%96%21|%7b0000-1111-2222%7d|%d0%93%d0%b5%d1%80%d0%be%d1%8f%d0%bc%20%d1%81%d0%bb%d0%b0%d0%b2%d0%b0%21";

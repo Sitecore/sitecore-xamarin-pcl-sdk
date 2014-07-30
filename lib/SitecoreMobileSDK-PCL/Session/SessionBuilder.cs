@@ -134,11 +134,11 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.site,
-        this.GetType().Name + ".Site : property cannot be assigned twice"
+        this.GetType().Name + ".Site"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         site,
-        this.GetType().Name + ".Site : The input cannot be null or empty"
+        this.GetType().Name + ".Site"
       );
 
       this.site = site;
@@ -149,11 +149,11 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.webApiVersion,
-        this.GetType().Name + ".WebApiVersion : property cannot be assigned twice"
+        this.GetType().Name + ".WebApiVersion"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         webApiVersion,
-        this.GetType().Name + ".WebApiVersion : The input cannot be null or empty"
+        this.GetType().Name + ".WebApiVersion"
       );
 
 
@@ -165,11 +165,11 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Database,
-        this.GetType().Name + ".DefaultDatabase : property cannot be assigned twice"
+        this.GetType().Name + ".DefaultDatabase"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultDatabase,
-        this.GetType().Name + ".DefaultDatabase : The input cannot be null or empty"
+        this.GetType().Name + ".DefaultDatabase"
       );
 
 
@@ -186,13 +186,12 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Language,
-        this.GetType().Name + ".DefaultLanguage : property cannot be assigned twice"
+        this.GetType().Name + ".DefaultLanguage"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultLanguage,
-        this.GetType().Name + ".DefaultLanguage : The input cannot be null or empty"
+        this.GetType().Name + ".DefaultLanguage"
       );
-
 
       this.itemSourceAccumulator =
         new ItemSourcePOD(
@@ -207,7 +206,7 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaRoot,
-        this.GetType().Name + ".MediaLibraryRoot : property cannot be assigned twice"
+        this.GetType().Name + ".MediaLibraryRoot"
       );
       MediaPathValidator.ValidateMediaRoot(mediaLibraryRootItem, this.GetType().Name + ".MediaLibraryRoot");
 
@@ -219,11 +218,11 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaExtension,
-         this.GetType().Name + ".DefaultMediaResourceExtension : property cannot be assigned twice"
+         this.GetType().Name + ".DefaultMediaResourceExtension"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         defaultExtension,
-        this.GetType().Name + ".DefaultMediaResourceExtension : The input cannot be null or empty"
+        this.GetType().Name + ".DefaultMediaResourceExtension"
       );
 
       this.mediaExtension = defaultExtension;
@@ -234,11 +233,11 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.mediaPrefix,
-        this.GetType().Name + ".MediaPrefix : property cannot be assigned twice"
+        this.GetType().Name + ".MediaPrefix"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
         mediaPrefix,
-        this.GetType().Name + ".MediaPrefix : The input cannot be null or empty"
+        this.GetType().Name + ".MediaPrefix"
       );
 
       this.mediaPrefix = mediaPrefix;

@@ -1,19 +1,18 @@
-﻿
-namespace Sitecore.MobileSDK.Validators
+﻿namespace Sitecore.MobileSDK.Validators
 {
   using System;
 
   public static class ItemPathValidator
   {
-    public static void ValidateItemPath(string itemPath)
+    public static void ValidateItemPath(string itemPath, string source)
     {
-      if ( string.IsNullOrWhiteSpace(itemPath) )
+      if (string.IsNullOrWhiteSpace(itemPath))
       {
-        throw new ArgumentException("Item path cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(source);
       }
       else if (!itemPath.StartsWith("/"))
       {
-        throw new ArgumentException("Item path should begin with '/'");
+        throw new ArgumentException(source + " : Item path should begin with '/'");
       }
 
 
@@ -23,7 +22,7 @@ namespace Sitecore.MobileSDK.Validators
       if (hasUnexpectedSymbols)
       {
         var unexpectedSymbol = itemPath[unexpectedSymbolIndex];
-        string message = string.Format("Item path cannot contain '{0}'", unexpectedSymbol);
+        string message = string.Format("{0} : Item path cannot contain '{1}'", source, unexpectedSymbol);
 
         throw new ArgumentException(message);
       }

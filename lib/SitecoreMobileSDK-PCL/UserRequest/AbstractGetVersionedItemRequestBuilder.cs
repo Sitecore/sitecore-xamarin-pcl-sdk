@@ -1,14 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest
 {
-  using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-
+  using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractGetVersionedItemRequestBuilder<T> : 
     AbstractBaseRequestBuilder<T>, 
@@ -19,15 +15,15 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (string.IsNullOrWhiteSpace(itemVersion))
       {
-        throw new ArgumentException("AbstractGetItemRequestBuilder.Version : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".itemVersion");
       }
       else if (null != this.itemSourceAccumulator.Version)
       {
-        throw new InvalidOperationException("AbstractGetItemRequestBuilder.Version : The item's version cannot be assigned twice");
+        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Version");
       }
 
-      this.itemSourceAccumulator =  new ItemSourcePOD(
-        this.itemSourceAccumulator.Database, 
+      this.itemSourceAccumulator = new ItemSourcePOD(
+        this.itemSourceAccumulator.Database,
         this.itemSourceAccumulator.Language,
         itemVersion);
 
@@ -50,7 +46,7 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.Payload(payload);
     }
-      
+
     new public IGetVersionedItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFields(fields);

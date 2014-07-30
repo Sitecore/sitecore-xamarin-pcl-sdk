@@ -1,0 +1,68 @@
+require "rake/clean"
+
+CLEAN.include "*.xam"
+CLEAN.include "xamarin-component"
+
+COMPONENT = "Sitecore.MobileSDK.PCL-1.0.0.xam"
+
+file "xamarin-component/xamarin-component.exe" do
+    puts "* Downloading xamarin-component..."
+    mkdir "xamarin-component"
+    sh "curl -L https://components.xamarin.com/submit/xpkg > xamarin-component.zip"
+    sh "unzip -o -q xamarin-component.zip -d xamarin-component"
+    sh "rm xamarin-component.zip"
+end
+
+task :default => "xamarin-component/xamarin-component.exe" do
+    line = <<-END
+    mono xamarin-component/xamarin-component.exe create-manually #{COMPONENT}                \
+        --name="Sitecore Mobile SDK PCL"                                                     \
+        --summary="Use content Sitecore CMS content in your native mobile apps in C#."       \
+        --publisher="Sitecore Corporation"                                                   \
+        --website="http://www.sitecore.net"                                                  \
+        --details="Details.md"                                                               \
+        --license="License.md"                                                               \
+        --getting-started="GettingStarted.md"                                                \
+        --icon="icons/Sitecore.MobileSDK.PCL_128x128.png"                                    \
+        --icon="icons/Sitecore.MobileSDK.PCL_512x512.png"                                    \
+                                                                                             \
+        --library="ios":"bin/Sitecore.MobileSDK.dll"                                         \
+        --library="ios":"bin/third-party/Microsoft.Threading.Tasks.Extensions.dll"           \
+        --library="ios":"bin/third-party/Microsoft.Threading.Tasks.dll"                      \
+        --library="ios":"bin/third-party/Newtonsoft.Json.dll"                                \
+        --library="ios":"bin/third-party/System.Net.Http.Extensions.dll"                     \
+        --library="ios":"bin/third-party/System.Net.Http.Primitives.dll"                     \
+        --library="ios":"bin/third-party/System.Net.Http.dll"                                \
+        --library="ios":"bin/third-party/System.Threading.Tasks.dll"                         \
+        --library="ios":"bin/third-party/crypto.dll"                                         \
+        --library="ios":"bin/third-party/System.IO.dll"                                      \
+                                                                                             \
+        --library="android":"bin/Sitecore.MobileSDK.dll"                                     \
+        --library="android":"bin/third-party/Microsoft.Threading.Tasks.Extensions.dll"       \
+        --library="android":"bin/third-party/Microsoft.Threading.Tasks.dll"                  \
+        --library="android":"bin/third-party/Newtonsoft.Json.dll"                            \
+        --library="android":"bin/third-party/System.Net.Http.Extensions.dll"                 \
+        --library="android":"bin/third-party/System.Net.Http.Primitives.dll"                 \
+        --library="android":"bin/third-party/System.Net.Http.dll"                            \
+        --library="android":"bin/third-party/System.Threading.Tasks.dll"                     \
+        --library="android":"bin/third-party/crypto.dll"                                     \
+        --library="android":"bin/third-party/System.IO.dll"                                  \
+                                                                                             \
+        --library="winphone-7.1":"bin/Sitecore.MobileSDK.dll"                                \
+        --library="winphone-7.1":"bin/third-party/Microsoft.Threading.Tasks.Extensions.dll"  \
+        --library="winphone-7.1":"bin/third-party/Microsoft.Threading.Tasks.dll"             \
+        --library="winphone-7.1":"bin/third-party/Newtonsoft.Json.dll"                       \
+        --library="winphone-7.1":"bin/third-party/System.Net.Http.Extensions.dll"            \
+        --library="winphone-7.1":"bin/third-party/System.Net.Http.Primitives.dll"            \
+        --library="winphone-7.1":"bin/third-party/System.Net.Http.dll"                       \
+        --library="winphone-7.1":"bin/third-party/System.Threading.Tasks.dll"                \
+        --library="winphone-7.1":"bin/third-party/crypto.dll"                                \
+        --library="winphone-7.1":"bin/third-party/System.IO.dll"                             \
+                                                                                             \
+        --sample="Sitecore Mobile SDK iOS Sample. Downloads a single item and shows an alert with its fields.":"../../test/LocalNugetTest/iMobileSdkDemo/iMobileSdkDemo.sln"
+        END
+    puts "* Creating #{COMPONENT}..."
+    puts line.strip.gsub "\t\t", "\\\n    "
+    sh line, :verbose => false
+    puts "* Created #{COMPONENT}"
+end

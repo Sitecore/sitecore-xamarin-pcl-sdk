@@ -44,7 +44,7 @@ namespace MobileSDKUnitTest.Mock
       return result;
     }
 
-    public IBaseGetItemRequest DeepCopyBaseGetItemRequest()
+    public IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyGetItemByPathRequest();
     }

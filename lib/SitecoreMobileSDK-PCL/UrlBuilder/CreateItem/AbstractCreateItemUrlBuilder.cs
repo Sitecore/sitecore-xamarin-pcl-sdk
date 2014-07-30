@@ -45,7 +45,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
       if (fieldsAvailable)
       {
         foreach (var fieldElem in request.CreateParameters.FieldsRawValuesByName)
-        {
+        {  
           string escapedFieldName = UrlBuilderUtils.EscapeDataString (fieldElem.Key);
           string escapedFieldValue = UrlBuilderUtils.EscapeDataString (fieldElem.Value);
           result += escapedFieldName 

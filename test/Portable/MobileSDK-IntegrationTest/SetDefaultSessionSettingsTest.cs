@@ -141,8 +141,6 @@
         .Credentials(testData.Users.Admin)
         .BuildReadonlySession();
 
-
-
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Version(Version)
         .Database(Db)
@@ -184,7 +182,7 @@
        .Database("master")
        .Database(Db)
        .Payload(PayloadType.Content).Build());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The database cannot be assigned twice", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
@@ -194,7 +192,7 @@
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Database(null).Payload(PayloadType.Content).Build());
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -204,7 +202,7 @@
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Database(" ").Payload(PayloadType.Content).Build());
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -225,7 +223,7 @@
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Language(Language).Build());
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -236,7 +234,7 @@
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(Version).Build());
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
-      Assert.AreEqual("AbstractGetItemRequestBuilder.Version : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]

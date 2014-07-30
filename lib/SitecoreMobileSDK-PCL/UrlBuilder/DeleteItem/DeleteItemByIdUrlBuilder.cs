@@ -37,7 +37,7 @@
 
     public override void ValidateSpecificPart(IDeleteItemsByIdRequest request)
     {
-      ItemIdValidator.ValidateItemId(request.ItemId);
+      ItemIdValidator.ValidateItemId(request.ItemId, this.GetType().Name + ".ItemId");
     }
 
   }

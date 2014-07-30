@@ -1,8 +1,7 @@
-﻿
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Diagnostics;
   using System.Globalization;
   using System.IO;
   using System.Threading.Tasks;
@@ -27,9 +26,10 @@ namespace MobileSDKIntegrationTest
     public void Setup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-        .Credentials(this.testData.Users.Admin)
-        .BuildReadonlySession();
+      this.session =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession();
     }
 
     [TearDown]
@@ -117,7 +117,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest("");
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.GetBaseException().ToString().Contains("ReadMediaItemRequestBuilder.Path : The input cannot be null or empty"));
+      Assert.AreEqual("ReadMediaItemRequestBuilder.mediaPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -125,7 +125,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest(null);
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("ReadMediaItemRequestBuilder.Path : The input cannot be null or empty"));
+      Assert.AreEqual("ReadMediaItemRequestBuilder.mediaPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -140,15 +140,16 @@ namespace MobileSDKIntegrationTest
         await task;
       };
       Exception exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.IsTrue(exception.Message.Contains("Unable to download data from the internet"));
       Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
 
       // Windows : "Response status code does not indicate success: 404 (Not Found)"
       // iOS     : "404 (Not Found)"
-      Assert.True(exception.InnerException.Message.Contains("404 (Not Found)"));
+      Assert.IsTrue(exception.InnerException.Message.Contains("Not Found"));
     }
 
     [Test]
+    [Ignore]
     public void TestGetMediaWithPathBeginsWithoutSlash()
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest("sitecore/media library/images/kirkorov");
@@ -171,7 +172,7 @@ namespace MobileSDKIntegrationTest
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("ReadMediaItemRequestBuilder.Scale : The input must be > 0"));
+      Assert.IsTrue(exception.Message.Contains("scale must be > 0"));
     }
 
     [Test]
@@ -184,7 +185,7 @@ namespace MobileSDKIntegrationTest
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("ReadMediaItemRequestBuilder.MaxWidth : The input must be > 0"));
+      Assert.IsTrue(exception.Message.Contains("maxWidth must be > 0"));
     }
 
     [Test]
@@ -197,7 +198,7 @@ namespace MobileSDKIntegrationTest
            .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("ReadMediaItemRequestBuilder.Height : The input must be > 0"));
+      Assert.IsTrue(exception.Message.Contains("height must be > 0"));
     }
 
     [Test]
@@ -210,7 +211,7 @@ namespace MobileSDKIntegrationTest
          .Build();
       };
       Exception exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("ReadMediaItemRequestBuilder.Width : The input must be > 0"));
+      Assert.IsTrue(exception.Message.Contains("width must be > 0"));
     }
 
     [Test]
@@ -230,19 +231,19 @@ namespace MobileSDKIntegrationTest
         await task;
       };
       Exception exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.IsTrue(exception.Message.Contains("Unable to download data from the internet"));
       Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
 
       // Windows : "Response status code does not indicate success: 404 (Not Found)"
       // iOS     : "404 (Not Found)"
-      Assert.True(exception.InnerException.Message.Contains("404 (Not Found)"));
+      Assert.IsTrue(exception.InnerException.Message.Contains("Not Found"));
     }
 
     [Test]
     public async void TestMediaWithoutAccessToFolder()
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
-      var sessionNoReadAccess = 
+      var sessionNoReadAccess =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.NoReadAccess)
           .BuildReadonlySession();
@@ -318,7 +319,7 @@ namespace MobileSDKIntegrationTest
          .Build();
 
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(MediaPath)
-//        .DownloadOptions(options)
+        //        .DownloadOptions(options)
         .Database(Db)
         .Build();
 
@@ -379,13 +380,14 @@ namespace MobileSDKIntegrationTest
         var task = this.session.DownloadResourceAsync(requestFromWebDb);
         await task;
       };
+
       Exception exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+      Assert.IsTrue(exception.Message.Contains("Unable to download data from the internet"));
       Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
 
       // Windows : "Response status code does not indicate success: 404 (Not Found)"
       // iOS     : "404 (Not Found)"
-      Assert.True(exception.InnerException.Message.Contains("404 (Not Found)"));
+      Assert.IsTrue(exception.InnerException.Message.Contains("Not Found"));
     }
 
     [Test]
@@ -463,72 +465,72 @@ namespace MobileSDKIntegrationTest
     public void TestGetMediaWithEmptyDatabase()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(""));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullDatabase()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(null));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithSpacesInLanguage()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language("  "));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Language The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullLanguage()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language(null));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithEmptyVersion()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(""));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullVersion()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(null));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be null or empty", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
     public void TestGetMediaWithOverridenVersion()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Version("2")
         .Version("1")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be set twice", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemVersion : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test] 
     public void TestGetMediaWithOverridenLanguage()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Language("en")
         .Language("da")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : The input cannot be set twice", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.itemLanguage : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
     public void TestGetMediaWithOverridenDatabase()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Database("master")
         .Database("web")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The input cannot be set twice", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.database : Property cannot be assigned twice.", exception.Message);
     }
 
     //TODO: add tests for MediaOptions (null, empty, override)
@@ -557,4 +559,4 @@ namespace MobileSDKIntegrationTest
       return item;
     }
   }
-}    
+}

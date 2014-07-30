@@ -4,11 +4,12 @@
 
   public static class ItemIdValidator
   {
-    public static void ValidateItemId(string itemId)
+    private const string INVALID_ID_MESSAGE = "Item id must have curly braces '{}'";
+    public static void ValidateItemId(string itemId, string source)
     {
       if (string.IsNullOrWhiteSpace(itemId))
       {
-        throw new ArgumentException("Item id cannot be null");
+        BaseValidator.ThrowNullOrEmptyParameterException(source);
       }
 
       bool hasOpeningBrace = itemId.StartsWith("{");
@@ -18,7 +19,7 @@
       bool isValidId = hasOpeningBrace && hasClosingBrace && hasNonBraceSymbols;
       if (!isValidId)
       {
-        throw new ArgumentException("Item id must have curly braces '{}'");
+        throw new ArgumentException(source + " : " + INVALID_ID_MESSAGE);
       }
     }
   }

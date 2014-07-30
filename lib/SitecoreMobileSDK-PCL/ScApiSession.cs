@@ -14,6 +14,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.CrudTasks.Resource;
   using Sitecore.MobileSDK.SessionSettings;
 
   using Sitecore.MobileSDK.Authenticate;
@@ -30,7 +31,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
 
   public class ScApiSession : ISitecoreWebApiSession
   {
@@ -238,6 +239,36 @@ namespace Sitecore.MobileSDK
 
     #endregion CreateItems
 
+    #region Update Items
+
+    public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IUpdateItemByIdRequest requestCopy = request.DeepCopyUpdateItemByIdRequest();
+
+      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+
+      IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (requestCopy);
+
+      var taskFlow = new UpdateItemByIdTask(new UpdateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IUpdateItemByPathRequest requestCopy = request.DeepCopyUpdateItemByPathRequest();
+
+      ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+
+      IUpdateItemByPathRequest autocompletedRequest = this.requestMerger.FillUpdateItemByPathGaps (requestCopy);
+
+      var taskFlow = new UpdateItemByPathTask(new UpdateItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar), this.httpClient, cryptor);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    #endregion Update Items
+
     #region DeleteItems
 
     public async Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
@@ -283,7 +314,6 @@ namespace Sitecore.MobileSDK
     }
 
     #endregion DeleteItems
-
 
     #region Authentication
 

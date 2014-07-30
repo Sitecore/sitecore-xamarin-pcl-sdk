@@ -1,26 +1,24 @@
 ﻿namespace Sitecore.MobileSDK.Validators
 {
-  using System;
-
   internal class WebApiParameterValidator
   {
     private WebApiParameterValidator()
     {
     }
 
-    public static void ValidateWriteOnceDestinationWithErrorMessage(object writeOnceDestination, string errorMessage)
+    public static void ValidateWriteOnceDestinationWithErrorMessage(object writeOnceDestination, string source)
     {
       if (null != writeOnceDestination)
       {
-        throw new InvalidOperationException(errorMessage);
+        BaseValidator.ThrowParameterSetTwiceException(source);
       }
     }
 
-    public static void ValidateParameterAndThrowErrorWithMessage(string parameterValue, string errorMessage)
+    public static void ValidateParameterAndThrowErrorWithMessage(string parameterValue, string source)
     {
-      if (!WebApiParameterValidator.IsParameterValid(parameterValue))
+      if (!IsParameterValid(parameterValue))
       {
-        throw new ArgumentException(errorMessage);
+        BaseValidator.ThrowNullOrEmptyParameterException(source);
       }
     }
 

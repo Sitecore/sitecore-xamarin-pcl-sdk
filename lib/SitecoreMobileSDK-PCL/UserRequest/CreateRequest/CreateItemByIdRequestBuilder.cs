@@ -1,5 +1,4 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;
   using Sitecore.MobileSDK.API.Request;
@@ -9,7 +8,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
   {
     public CreateItemByIdRequestBuilder (string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId);
+      ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".itemId");
 
       this.itemId = itemId;
     }
@@ -18,12 +17,12 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
     {
       if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemName))
       {
-        throw new ArgumentException(this.GetType().Name + ".ItemName : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemName");
       }
 
       if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemTemplate))
       {
-        throw new ArgumentException(this.GetType().Name + ".ItemTemplate : The input cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemTemplate");
       }
 
       CreateItemByIdParameters result = new CreateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemId);

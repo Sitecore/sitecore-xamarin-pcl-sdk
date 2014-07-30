@@ -37,15 +37,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     {
       if (null == this.itemSource)
       {
-        throw new ArgumentNullException("[ResourceUrlBuilder.itemSource] Do not pass null");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".itemSource");
       }
       else if (null == this.restGrammar)
       {
-        throw new ArgumentNullException("[ResourceUrlBuilder.grammar] Do not pass null");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".restGrammar");
       }
       else if (null == this.sessionConfig)
       {
-        throw new ArgumentNullException("[ResourceUrlBuilder.sessionConfig] Do not pass null");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".sessionConfig");
       }
     }
 
@@ -53,7 +53,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     public string BuildUrlStringForPath(string path, IDownloadMediaOptions options)
     {
       MediaPathValidator mediaPathValidator = new MediaPathValidator(this.mediaSettings);
-      mediaPathValidator.ValidateMediaPath(path);
+      mediaPathValidator.ValidateMediaPath(path, this.GetType().Name + ".path");
 
       string relativePath = path;
       string result = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);

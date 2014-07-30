@@ -1,14 +1,10 @@
-﻿
-
-namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
+﻿namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-
-    public class ScopeParameters : IScopeParameters
+  public class ScopeParameters : IScopeParameters
   {
     #region Copy Constructor
     public ScopeParameters(IScopeParameters other = null)
@@ -44,14 +40,16 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
     #endregion Copy Constructor
 
 
-    public void AddScope(ScopeType scope)
+    public bool AddScope(ScopeType scope)
     {
       if (this.accumulatedScope.Contains(scope))
       {
-        throw new InvalidOperationException("Adding scope parameter duplicates is forbidden");
+        return false;
+        //        throw new InvalidOperationException("Adding scope parameter duplicates is forbidden");
       }
 
       this.accumulatedScope.Add(scope);
+      return true;
     }
 
     #region Properties
@@ -66,7 +64,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
     public bool ParentScopeIsSet
     {
       get
-      { 
+      {
         return this.accumulatedScope.Contains(ScopeType.Parent);
       }
     }
@@ -74,7 +72,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
     public bool SelfScopeIsSet
     {
       get
-      { 
+      {
         return this.accumulatedScope.Contains(ScopeType.Self);
       }
     }
@@ -82,7 +80,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
     public bool ChildrenScopeIsSet
     {
       get
-      { 
+      {
         return this.accumulatedScope.Contains(ScopeType.Children);
       }
     }

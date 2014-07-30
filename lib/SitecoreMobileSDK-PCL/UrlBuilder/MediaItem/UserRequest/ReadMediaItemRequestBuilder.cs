@@ -1,38 +1,36 @@
-﻿namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.UrlBuilder.MediaItem.UserRequest
 {
-	using System;
-
-  using Sitecore.MobileSDK.API;
-	using Sitecore.MobileSDK.API.Request;
-	using Sitecore.MobileSDK.API.Request.Parameters;
-
-	using Sitecore.MobileSDK.Items;
-	using Sitecore.MobileSDK.UrlBuilder;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.Validators;
 
-
   public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest>
-	{
-    public ReadMediaItemRequestBuilder(string itemPath)
+  {
+    public ReadMediaItemRequestBuilder(string mediaPath)
     {
-      this.mediaPath = itemPath;
+      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
+        mediaPath,
+        this.GetType().Name + ".mediaPath"
+      );
+      this.mediaPath = mediaPath;
     }
-      
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database(string sitecoreDatabase)
+
+    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database(string database)
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Database,
-        "[ReadMediaItemRequestBuilder.Database] the property cannot be assigned twice"
+        this.GetType().Name + ".database"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        sitecoreDatabase, 
-        "[ReadMediaItemRequestBuilder.Database] the value cannot be null or empty"
+        database,
+        this.GetType().Name + ".database"
       );
 
       this.itemSourceAccumulator = new ItemSourcePOD(
-        sitecoreDatabase, 
-        this.itemSourceAccumulator.Language, 
+        database,
+        this.itemSourceAccumulator.Language,
         this.itemSourceAccumulator.Version);
 
       return this;
@@ -42,16 +40,16 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Language,
-        "[ReadMediaItemRequestBuilder.Language] the property cannot be assigned twice"
+        this.GetType().Name + ".itemLanguage"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        itemLanguage, 
-        "[ReadMediaItemRequestBuilder.Language] the value cannot be null or empty"
+        itemLanguage,
+        this.GetType().Name + ".itemLanguage"
       );
 
       this.itemSourceAccumulator = new ItemSourcePOD(
-        this.itemSourceAccumulator.Database, 
-        itemLanguage, 
+        this.itemSourceAccumulator.Database,
+        itemLanguage,
         this.itemSourceAccumulator.Version);
 
       return this;
@@ -61,16 +59,16 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.itemSourceAccumulator.Version,
-        "[ReadMediaItemRequestBuilder.Version] the property cannot be assigned twice"
+        this.GetType().Name + ".itemVersion"
       );
       WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        itemVersion, 
-        "[ReadMediaItemRequestBuilder.Version] the value cannot be null or empty"
+        itemVersion,
+        this.GetType().Name + ".itemVersion"
       );
 
 
       this.itemSourceAccumulator = new ItemSourcePOD(
-        this.itemSourceAccumulator.Database, 
+        this.itemSourceAccumulator.Database,
         this.itemSourceAccumulator.Language,
         itemVersion);
 
@@ -81,13 +79,13 @@
     {
       WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
         this.downloadMediaOptions,
-        "[ReadMediaItemRequestBuilder.DownloadOptions] the property cannot be assigned twice"
+        this.GetType().Name + ".downloadMediaOptions"
       );
 
       MediaOptionsValidator.ValidateMediaOptions
       (
         downloadMediaOptions,
-        "[ReadMediaItemRequestBuilder.DownloadOptions] the value cannot be null or empty"
+        this.GetType().Name + ".downloadMediaOptions"
       );
 
 
@@ -96,16 +94,16 @@
       return this;
     }
 
-		public IReadMediaItemRequest Build()
-		{
-			var result = new ReadMediaItemParameters(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaPath);
-			return result;
-		}
+    public IReadMediaItemRequest Build()
+    {
+      var result = new ReadMediaItemParameters(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaPath);
+      return result;
+    }
 
-    protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD( null, null, null );
+    protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
     protected IDownloadMediaOptions downloadMediaOptions = null;
 
-		private string mediaPath;
-	}
+    private string mediaPath;
+  }
 }
 

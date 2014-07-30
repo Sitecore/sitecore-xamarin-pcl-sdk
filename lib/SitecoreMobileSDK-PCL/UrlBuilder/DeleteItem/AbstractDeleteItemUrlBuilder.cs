@@ -5,6 +5,7 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractDeleteItemUrlBuilder<TRequest> : IDeleteItemsUrlBuilder<TRequest>
     where TRequest : IBaseDeleteItemRequest
@@ -59,27 +60,22 @@
     {
       if (null == request)
       {
-        throw new ArgumentNullException("request",
-          "AbstractDeleteItemUrlBuilder.GetBaseUrlForRequest() : do not pass null request");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".request");
       }
 
       if (null == request.SessionConfig)
       {
-        throw new ArgumentNullException("SessionConfig",
-          "AbstractDeleteItemUrlBuilder.GetBaseUrlForRequest() : do not pass null SessionConfig");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".SessionConfig");
       }
 
       if (null == request.SessionConfig.InstanceUrl)
       {
-        throw new ArgumentNullException("InstanceUrl",
-          "AbstractDeleteItemUrlBuilder.GetBaseUrlForRequest() : SessionSettings.InstanceUrl cannot be null");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".InstanceUrl");
       }
 
       if (null == request.SessionConfig.ItemWebApiVersion)
       {
-        throw new ArgumentNullException("ItemWebApiVersion",
-          "AbstractDeleteItemUrlBuilder.GetBaseUrlForRequest() : " +
-          "SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null");
+        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemWebApiVersion");
       }
 
       this.ValidateSpecificPart(request);

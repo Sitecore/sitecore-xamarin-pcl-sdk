@@ -13,42 +13,42 @@
       this.mediaSettings = mediaSettings;
     }
 
-    public static void ValidateMediaRoot(string mediaLibraryRootItemPath, string exceptionSource)
+    public static void ValidateMediaRoot(string mediaLibraryRootItemPath, string source)
     {
       if ( string.IsNullOrWhiteSpace(mediaLibraryRootItemPath) )
       {
-        throw new ArgumentException(exceptionSource + " : Media path cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(source);
       }
 
       string lowerCasePath = mediaLibraryRootItemPath.ToLowerInvariant();
       bool isValidPathPrefix = lowerCasePath.StartsWith("/");
       if (!isValidPathPrefix)
       {
-        throw new ArgumentException("Media Library Root path must begin with '/'");
+        throw new ArgumentException(source + " : Path must begin with '/'");
       }
     }
 
-		public void ValidateMediaPath(string itemPath)
+		public void ValidateMediaPath(string itemPath, string source)
 		{
 			if ( string.IsNullOrWhiteSpace(itemPath) )
 			{
-        throw new ArgumentException("Media path cannot be null or empty");
+        BaseValidator.ThrowNullOrEmptyParameterException(source);
 			}
 
-      bool isAbsoluteItemPath = MediaPathValidator.IsItemPathStartsWithSlash(itemPath);
+      bool isAbsoluteItemPath = IsItemPathStartsWithSlash(itemPath);
       bool isMediaHookPresent = this.IsItemPathHasMediaHook(itemPath);
       bool isValidPrefix = isAbsoluteItemPath || isMediaHookPresent;
       if (!isValidPrefix)
 			{
-				throw new ArgumentException("Media path should begin with '/' or '~'");
+				throw new ArgumentException(source + " : Should begin with '/' or '~'");
 			}
 
       if (isAbsoluteItemPath)
       {
-        bool hasExtension = MediaPathValidator.IsItemPathHasExtension(itemPath);
+        bool hasExtension = IsItemPathHasExtension(itemPath);
         if (hasExtension)
         {
-          throw new ArgumentException("Item path starting with '/' cannot have an extension (.ashx and others)");
+          throw new ArgumentException(source + " : Starting with '/' cannot have an extension (.ashx and others)");
         }
       }
 		}
