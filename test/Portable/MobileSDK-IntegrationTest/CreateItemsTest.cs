@@ -286,7 +286,7 @@
          .ItemName("Get duplicate fields")
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.fields : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
@@ -301,7 +301,7 @@
          .ItemTemplate(testData.Items.Home.Template)
          .AddFieldsRawValuesByName(FieldName, FieldValue)
          .Build());
-      Assert.AreEqual("CreateItemByPathRequestBuilder : duplicate fields are not allowed", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
@@ -531,7 +531,7 @@
          .ItemName("Item with empty parent id")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.itemId : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -541,7 +541,7 @@
          .ItemName("Item with null parent path")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("CreateItemByPathRequestBuilder.itemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -551,7 +551,7 @@
          .ItemName("Item with invalid parent id")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.itemId : Item id must have curly braces '{}'", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
 
     [Test]
@@ -561,7 +561,7 @@
          .ItemName("Item with empty parent path")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("CreateItemByPathRequestBuilder.itemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
