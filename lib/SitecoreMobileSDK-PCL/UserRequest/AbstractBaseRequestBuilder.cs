@@ -15,15 +15,9 @@ namespace Sitecore.MobileSDK.UserRequest
   {
     public IBaseRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
-      if (string.IsNullOrWhiteSpace(sitecoreDatabase))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".Database");
-      }
-      else if (null != this.itemSourceAccumulator.Database)
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Database");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(sitecoreDatabase, this.GetType().Name + ".Database");
 
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         sitecoreDatabase, 
@@ -35,15 +29,9 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> Language(string itemLanguage)
     {
-      if (string.IsNullOrWhiteSpace(itemLanguage))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".Language");
-      }
-      else if (null != this.itemSourceAccumulator.Language)
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Language");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemLanguage, this.GetType().Name + ".Language");
 
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
@@ -55,10 +43,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> Payload(PayloadType payload)
     {
-      if (null != this.queryParameters.Payload)
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Payload");
-      }
+      BaseValidator.CheckForTwiceSetAndThrow(this.queryParameters.Payload, this.GetType().Name + ".Payload");
 
       this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields);
       return this;

@@ -13,14 +13,9 @@
   {
     public IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion)
     {
-      if (string.IsNullOrWhiteSpace(itemVersion))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".itemVersion");
-      }
-      else if (null != this.itemSourceAccumulator.Version)
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Version");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemVersion, this.GetType().Name + ".itemVersion");
+      
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Version, this.GetType().Name + ".Version");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,

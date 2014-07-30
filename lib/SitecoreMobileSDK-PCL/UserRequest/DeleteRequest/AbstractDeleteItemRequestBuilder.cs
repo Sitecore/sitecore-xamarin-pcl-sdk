@@ -19,15 +19,9 @@
 
     public IDeleteItemRequestBuilder<T> Database(string database)
     {
-      if (string.IsNullOrWhiteSpace(database))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".database");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(database, this.GetType().Name + ".database");
 
-      if (!string.IsNullOrEmpty(this.database))
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".database");
-      }
+      BaseValidator.CheckForTwiceSetAndThrow(this.database, this.GetType().Name + ".database");
 
       this.database = database;
       return this;
@@ -35,11 +29,8 @@
 
     public IDeleteItemRequestBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
-      if (null == scope)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".scope");
-      }
-
+      BaseValidator.CheckNullAndThrow(scope, this.GetType().Name + ".scope");
+    
       var scopeParams = new ScopeParameters(this.scopeParameters);
 
       foreach (var singleScope in scope)

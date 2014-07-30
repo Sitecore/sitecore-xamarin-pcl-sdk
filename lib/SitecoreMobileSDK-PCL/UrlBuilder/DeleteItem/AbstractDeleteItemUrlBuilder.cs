@@ -58,25 +58,14 @@
 
     protected void Validate(TRequest request)
     {
-      if (null == request)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".request");
-      }
+      BaseValidator.CheckNullAndThrow(request, this.GetType().Name + ".request");
 
-      if (null == request.SessionConfig)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".SessionConfig");
-      }
+      BaseValidator.CheckNullAndThrow(request.SessionConfig, this.GetType().Name + ".SessionConfig");
 
-      if (null == request.SessionConfig.InstanceUrl)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".InstanceUrl");
-      }
+      BaseValidator.CheckNullAndThrow(request.SessionConfig.InstanceUrl, this.GetType().Name + ".InstanceUrl");
 
-      if (null == request.SessionConfig.ItemWebApiVersion)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemWebApiVersion");
-      }
+      BaseValidator.CheckNullAndThrow(request.SessionConfig.ItemWebApiVersion,
+        this.GetType().Name + ".ItemWebApiVersion");
 
       this.ValidateSpecificPart(request);
     }

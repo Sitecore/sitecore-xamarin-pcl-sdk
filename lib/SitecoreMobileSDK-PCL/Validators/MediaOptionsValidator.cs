@@ -11,21 +11,13 @@
       {
         return false;
       }
-      else if (options.IsEmpty)
+      
+      if (options.IsEmpty)
       {
         return false;
       }
 
       return true;
-    }
-
-    public static void ValidateMediaOptions(IDownloadMediaOptions options, string errorMessage)
-    {
-      bool isValidOptions = MediaOptionsValidator.IsValidMediaOptions(options);
-      if (!isValidOptions)
-      {
-        throw new ArgumentException(errorMessage);
-      }
     }
   }
 }
