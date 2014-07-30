@@ -55,7 +55,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestNullPayloadIsNotReplacedWithDefault()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = new QueryParameters(null, null, null);
@@ -72,7 +72,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestNullPayloadStructIsIgnored()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = null;
@@ -89,7 +89,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestBuildWithValidPath()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -106,7 +106,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestBuildWithoutPayloadIsAllowed()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = null;
@@ -122,7 +122,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestBuildWithUnEscapedPath()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/path TO iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -146,7 +146,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestPathMustStartWithSlash()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "path without starting slash";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -161,7 +161,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestBuildWithEmptyPathCausesArgumentException()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -177,7 +177,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestBuildWithWhitespacePathCausesArgumentException()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "\r\n\t";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -194,7 +194,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestBuildRequestWithPathAndFieldList()
     {
       MockGetItemsByPathParameters mutableParameters = new MockGetItemsByPathParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
 
@@ -291,7 +291,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       var mutableParameters = new MockGetItemsByPathParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/aaa/bbb/ccc/ddd";
 
       string[] fields = { "x", "y", "x" };
@@ -309,7 +309,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       var mutableParameters = new MockGetItemsByPathParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/aaa/bbb/ccc/ddd";
 
 

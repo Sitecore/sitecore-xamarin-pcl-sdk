@@ -8,6 +8,8 @@ namespace Sitecore.MobileSdkUnitTest
   using System;
   using System.Diagnostics;
 
+  using MobileSDKUnitTest.Mock;
+
   using Sitecore.MobileSDK.API;
 
   using Sitecore.MobileSDK;
@@ -59,7 +61,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestApiSessionConstructorRequiresConfig()
     {
-      ItemSource defaultSource = ItemSource.DefaultSource();
+      ItemSource defaultSource = LegacyConstants.DefaultSource();
 
       TestDelegate initSessionAction = () =>
       {
@@ -100,7 +102,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestDefaultSource()
     {
-      ItemSource defaultSource = ItemSource.DefaultSource ();
+      ItemSource defaultSource = LegacyConstants.DefaultSource();
 
       Assert.AreEqual (defaultSource.Database, "web");
       Assert.AreEqual (defaultSource.Language, "en");

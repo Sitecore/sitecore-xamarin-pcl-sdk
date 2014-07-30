@@ -4,12 +4,15 @@
   using System.Threading.Tasks;
   using NUnit.Framework;
 
+  using MobileSDKUnitTest.Mock;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
+
 
   [TestFixture]
   public class SetDefaultSessionSettingsTest
@@ -66,7 +69,7 @@
     [Test]
     public async void TestGetItemWithDefaultDbLanguageAndVersion()
     {
-      var response = await this.GetItemByIdWithItemSource(ItemSource.DefaultSource());
+      var response = await this.GetItemByIdWithItemSource(LegacyConstants.DefaultSource());
       const string Db = "web";
       const string Language = "en";
       const string Version = "2";
@@ -168,7 +171,7 @@
       testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
 
-      var expectedSource = new ItemSource(Db, ItemSource.DefaultSource().Language, "2");
+      var expectedSource = new ItemSource(Db, LegacyConstants.DefaultSource().Language, "2");
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
@@ -250,7 +253,7 @@
 
       testData.AssertItemsCount(4, response);
       var resultItem = response.Items[3];
-      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, Language, "1");
+      var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, Language, "1");
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
 
@@ -263,7 +266,7 @@
 
       testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
-      var expectedSource = new ItemSource(ItemSource.DefaultSource().Database, ItemSource.DefaultSource().Language, "2");
+      var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, LegacyConstants.DefaultSource().Language, "2");
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
