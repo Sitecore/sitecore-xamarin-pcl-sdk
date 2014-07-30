@@ -79,8 +79,8 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestNullPathException()
     {
       TestDelegate action = () => this.builder.BuildUrlStringForPath(null, null);
-      var exception = Assert.Throws<ArgumentException>(action);
-      Assert.True(exception.Message.Contains("The input cannot be null or empty."));
+      var exception = Assert.Throws<ArgumentNullException>(action);
+      Assert.True(exception.Message.Contains("Value cannot be null."));
     }
 
     [Test]

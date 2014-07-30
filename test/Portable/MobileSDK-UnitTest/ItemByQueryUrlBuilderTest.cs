@@ -134,7 +134,7 @@ namespace Sitecore.MobileSdkUnitTest
 
       IReadItemsByQueryRequest request = mutableParameters;
 
-      Assert.Throws<ArgumentException> (() => this.builder.GetUrlForRequest (request));
+      Assert.Throws<ArgumentNullException > (() => this.builder.GetUrlForRequest (request));
     }
 
     [Test]

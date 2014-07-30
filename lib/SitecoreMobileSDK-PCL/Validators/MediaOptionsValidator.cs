@@ -1,6 +1,5 @@
 ﻿namespace Sitecore.MobileSDK.Validators
 {
-  using System;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   public static class MediaOptionsValidator

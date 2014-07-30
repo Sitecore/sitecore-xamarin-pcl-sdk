@@ -63,7 +63,7 @@
 
       if (MediaOptionsValidator.IsValidMediaOptions(downloadMediaOptions))
       {
-        throw new ArgumentException(this.GetType().Name + ".downloadMediaOptions");
+        throw new ArgumentException(this.GetType().Name + ".downloadMediaOptions : is not valid");
       }
 
       this.downloadMediaOptions = downloadMediaOptions.DeepCopyMediaDownloadOptions();

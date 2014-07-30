@@ -9,7 +9,7 @@
     {
       if (obj == null)
       {
-        throw new ArgumentNullException(source + " : " + "The input cannot be null.");
+        throw new ArgumentNullException(source);
       }
     }
 
@@ -17,7 +17,7 @@
     {
       if (obj != null)
       {
-        throw new ArgumentNullException(source + " : " + "Property cannot be assigned twice.");
+        throw new InvalidOperationException(source + " : " + "Property cannot be assigned twice.");
       }
     }
 

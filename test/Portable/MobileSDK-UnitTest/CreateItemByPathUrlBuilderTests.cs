@@ -86,7 +86,7 @@
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 
       TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentException>(action);
+      Assert.Throws<ArgumentNullException>(action);
     }
 
     [Test]
@@ -98,7 +98,7 @@
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 
       TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentException>(action);
+      Assert.Throws<ArgumentNullException>(action);
     }
 
     [Test]
