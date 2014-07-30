@@ -475,28 +475,28 @@
     public void TestGetMediaWithSpacesInLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language("  "));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.ItemLanguage : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language(null));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.ItemLanguage : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithEmptyVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(""));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.ItemVersion : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be null or empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(null));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.ItemVersion : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -506,7 +506,7 @@
         .Version("2")
         .Version("1")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.ItemVersion : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
@@ -516,7 +516,7 @@
         .Language("en")
         .Language("da")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.ItemLanguage : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
