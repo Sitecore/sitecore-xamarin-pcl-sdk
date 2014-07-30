@@ -117,7 +117,7 @@
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest("");
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.GetBaseException().ToString().Contains("ReadMediaItemRequestBuilder.Path : The input cannot be null or empty"));
+      Assert.AreEqual("ReadMediaItemRequestBuilder.mediaPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -125,7 +125,7 @@
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest(null);
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.True(exception.Message.Contains("ReadMediaItemRequestBuilder.Path : The input cannot be null or empty"));
+      Assert.AreEqual("ReadMediaItemRequestBuilder.mediaPath : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -506,7 +506,7 @@
     [Test]
     public void TestGetMediaWithOverridenVersion()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Version("2")
         .Version("1")
         .Build());
@@ -516,7 +516,7 @@
     [Test] 
     public void TestGetMediaWithOverridenLanguage()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Language("en")
         .Language("da")
         .Build());
@@ -526,7 +526,7 @@
     [Test]
     public void TestGetMediaWithOverridenDatabase()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
         .Database("master")
         .Database("web")
         .Build());
