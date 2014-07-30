@@ -155,7 +155,7 @@ namespace Sitecore.MobileSDK
 
         // TODO : credentials should not be passed as plain text strings. 
         // TODO : Use ```SecureString``` class
-        return new AuthenticedSessionCryptor(this.credentials.Username, this.credentials.Password, this.publicCertifiacte);
+        return new AuthenticatedSessionCryptor(this.credentials.Username, this.credentials.Password, this.publicCertifiacte);
       }
       else
       {

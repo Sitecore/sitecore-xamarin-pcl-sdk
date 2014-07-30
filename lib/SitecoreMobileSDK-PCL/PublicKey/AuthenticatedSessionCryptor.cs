@@ -8,7 +8,7 @@
 
   // Do not store references to this class
   // Instantiate it only in ```using () {} ``` blocks
-  public class AuthenticedSessionCryptor : ICredentialsHeadersCryptor
+  public class AuthenticatedSessionCryptor : ICredentialsHeadersCryptor
   {
     private string password;
     private string login;
@@ -22,7 +22,7 @@
       this.certificate = null;
     }
 
-    public AuthenticedSessionCryptor (string login, string password, PublicKeyX509Certificate certificate)
+    public AuthenticatedSessionCryptor (string login, string password, PublicKeyX509Certificate certificate)
     {
       //      TODO: validate params
       this.login = login;
