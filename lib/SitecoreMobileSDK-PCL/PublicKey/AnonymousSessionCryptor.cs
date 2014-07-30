@@ -18,6 +18,11 @@ namespace Sitecore.MobileSDK.PublicKey
     {
       return httpRequest;
     }
+
+    public void Dispose()
+    {
+      // IDLE : nothing to clean up
+    }
   }
 }
 

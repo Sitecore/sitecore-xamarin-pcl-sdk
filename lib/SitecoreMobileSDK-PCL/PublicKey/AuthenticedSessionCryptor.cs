@@ -6,9 +6,22 @@
   using System.Net.Http;
 
 
-  // TODO : use secure string
+  // Do not store references to this class
+  // Instantiate it only in ```using () {} ``` blocks
   public class AuthenticedSessionCryptor : ICredentialsHeadersCryptor
   {
+    private string password;
+    private string login;
+    private PublicKeyX509Certificate certificate;
+
+
+    public void Dispose()
+    {
+      this.login = null;
+      this.password = null;
+      this.certificate = null;
+    }
+
     public AuthenticedSessionCryptor (string login, string password, PublicKeyX509Certificate certificate)
     {
       //      TODO: validate params
@@ -41,10 +54,6 @@
       return httpRequest;
 
     }
-
-    private readonly string password;
-    private readonly string login;
-    private PublicKeyX509Certificate certificate;
   }
 }
 
