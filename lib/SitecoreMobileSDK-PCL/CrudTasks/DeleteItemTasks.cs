@@ -18,7 +18,9 @@
     private readonly HttpClient httpClient;
     private readonly ICredentialsHeadersCryptor cryptor;
 
-    public DeleteItemTasks(IDeleteItemsUrlBuilder<T> deleteItemsBuilder, HttpClient httpClient,
+    public DeleteItemTasks(
+      IDeleteItemsUrlBuilder<T> deleteItemsBuilder, 
+      HttpClient httpClient,
       ICredentialsHeadersCryptor cryptor)
     {
       this.deleteItemsBuilder = deleteItemsBuilder;
@@ -30,7 +32,6 @@
 
     public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(T request, CancellationToken cancelToken)
     {
-
       var url = this.deleteItemsBuilder.GetUrlForRequest(request);
       var result = new HttpRequestMessage(HttpMethod.Delete, url);
 

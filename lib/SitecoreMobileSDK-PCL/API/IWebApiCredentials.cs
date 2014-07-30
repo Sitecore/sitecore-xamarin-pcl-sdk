@@ -1,7 +1,9 @@
 
 namespace Sitecore.MobileSDK.API
 {
-    public interface IWebApiCredentials
+  using System;
+
+  public interface IWebApiCredentials : IDisposable
   {
     IWebApiCredentials CredentialsShallowCopy();
 
