@@ -5,6 +5,8 @@ namespace Sitecore.MobileSdkUnitTest
   using NUnit.Framework;
   using System;
 
+  using MobileSDKUnitTest.Mock;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.MediaItem;
@@ -38,7 +40,7 @@ namespace Sitecore.MobileSdkUnitTest
       ISessionConfig sessionSettings = sessionConfig;
       IMediaLibrarySettings mediaSettings = sessionConfig;
 
-      ItemSource itemSource = ItemSource.DefaultSource();
+      ItemSource itemSource = LegacyConstants.DefaultSource();
       this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionSettings, mediaSettings, itemSource);
     }
 
@@ -141,7 +143,7 @@ namespace Sitecore.MobileSdkUnitTest
       IMediaLibrarySettings mediaSettings = sessionConfig;
 
 
-      ItemSource itemSource = ItemSource.DefaultSource();
+      ItemSource itemSource = LegacyConstants.DefaultSource();
       this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionSettings, mediaSettings, itemSource);
 
       var customBuilder = 

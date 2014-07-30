@@ -1,11 +1,14 @@
 ﻿
 namespace MobileSDKIntegrationTest
 {
+  using NUnit.Framework;
+
   using System;
   using System.Threading;
   using System.Threading.Tasks;
 
-  using NUnit.Framework;
+  using MobileSDKUnitTest.Mock;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.SessionSettings;
@@ -32,7 +35,7 @@ namespace MobileSDKIntegrationTest
         "~/media/");
 
       var config = new SessionConfig(this.env.InstanceUrl);
-      var defaultSource = ItemSource.DefaultSource();
+      var defaultSource = LegacyConstants.DefaultSource();
 
       this.session = new ScTestApiSession(config, this.env.Users.Admin, mediaSettings, defaultSource);
     }

@@ -4,6 +4,8 @@
   using System;
   using System.Collections.Generic;
 
+  using MobileSDKUnitTest.Mock;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -36,7 +38,7 @@
       mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
       mutableSessionConfig.Site = "/sitecore/shell";
 
-      ItemSource source = ItemSource.DefaultSource();
+      ItemSource source = LegacyConstants.DefaultSource();
       this.requestMerger = new UserRequestMerger(mutableSessionConfig, source);
 
     }
