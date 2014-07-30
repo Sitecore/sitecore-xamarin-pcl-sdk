@@ -13,7 +13,7 @@
   {
     public IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion)
     {
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemVersion, this.GetType().Name + ".itemVersion");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemVersion, this.GetType().Name + ".Version");
       
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Version, this.GetType().Name + ".Version");
 
