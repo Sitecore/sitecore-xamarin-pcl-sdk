@@ -84,7 +84,7 @@
 
       if (this.CheckForDuplicate(fieldKey.ToLowerInvariant()))
       {
-        throw new InvalidOperationException(this.GetType().Name + " : duplicate fields are not allowed");
+        throw new InvalidOperationException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");
       }
 
       IDictionary<string, string> newFields = new Dictionary<string, string>();
