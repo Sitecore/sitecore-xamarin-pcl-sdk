@@ -1,0 +1,79 @@
+require "rake/clean"
+
+CLEAN.include "*.xam"
+CLEAN.include "xamarin-component"
+
+COMPONENT = "Sitecore.MobileSDK.PCL-1.0.0.xam"
+BINARIES_DIR = "../../deployment/lib"
+SCRIPT_THIS_DIR = File.expand_path(File.dirname(__FILE__))
+XAMARIN_COMPONENT_EXE = SCRIPT_THIS_DIR + "/xamarin-component/xamarin-component.exe"
+
+file "xamarin-component/xamarin-component.exe" do
+    puts "* Downloading xamarin-component..."
+    mkdir "xamarin-component"
+    sh "curl -L https://components.xamarin.com/submit/xpkg > xamarin-component.zip"
+    sh "unzip -o -q xamarin-component.zip -d xamarin-component"
+    sh "rm xamarin-component.zip"
+end
+
+task :default => "xamarin-component/xamarin-component.exe" do
+    line = <<-END
+    create-manually #{COMPONENT}                \
+        --name="Sitecore Mobile SDK PCL"                                                     \
+        --summary="Use content Sitecore CMS content in your native mobile apps in C#."       \
+        --publisher="Sitecore Corporation"                                                   \
+        --website="http://www.sitecore.net"                                                  \
+        --details="Details.md"                                                               \
+        --license="License.md"                                                               \
+        --getting-started="GettingStarted.md"                                                \
+        --icon="icons/Sitecore.MobileSDK.PCL_128x128.png"                                    \
+        --icon="icons/Sitecore.MobileSDK.PCL_512x512.png"                                    \
+                                                                                             \
+        --library="ios":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                                         \
+        --library="ios":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.Extensions.dll"           \
+        --library="ios":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.dll"                      \
+        --library="ios":"#{BINARIES_DIR}/Newtonsoft.Json.dll"                                \
+        --library="ios":"#{BINARIES_DIR}/System.Net.Http.Extensions.dll"                     \
+        --library="ios":"#{BINARIES_DIR}/System.Net.Http.Primitives.dll"                     \
+        --library="ios":"#{BINARIES_DIR}/System.Net.Http.dll"                                \
+        --library="ios":"#{BINARIES_DIR}/System.Threading.Tasks.dll"                         \
+        --library="ios":"#{BINARIES_DIR}/crypto.dll"                                         \
+        --library="ios":"#{BINARIES_DIR}/System.IO.dll"                                      \
+                                                                                             \
+        --library="android":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                                     \
+        --library="android":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.Extensions.dll"       \
+        --library="android":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.dll"                  \
+        --library="android":"#{BINARIES_DIR}/Newtonsoft.Json.dll"                            \
+        --library="android":"#{BINARIES_DIR}/System.Net.Http.Extensions.dll"                 \
+        --library="android":"#{BINARIES_DIR}/System.Net.Http.Primitives.dll"                 \
+        --library="android":"#{BINARIES_DIR}/System.Net.Http.dll"                            \
+        --library="android":"#{BINARIES_DIR}/System.Threading.Tasks.dll"                     \
+        --library="android":"#{BINARIES_DIR}/crypto.dll"                                     \
+        --library="android":"#{BINARIES_DIR}/System.IO.dll"                                  \
+                                                                                             \
+        --library="winphone-7.1":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                                \
+        --library="winphone-7.1":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.Extensions.dll"  \
+        --library="winphone-7.1":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.dll"             \
+        --library="winphone-7.1":"#{BINARIES_DIR}/Newtonsoft.Json.dll"                       \
+        --library="winphone-7.1":"#{BINARIES_DIR}/System.Net.Http.Extensions.dll"            \
+        --library="winphone-7.1":"#{BINARIES_DIR}/System.Net.Http.Primitives.dll"            \
+        --library="winphone-7.1":"#{BINARIES_DIR}/System.Net.Http.dll"                       \
+        --library="winphone-7.1":"#{BINARIES_DIR}/System.Threading.Tasks.dll"                \
+        --library="winphone-7.1":"#{BINARIES_DIR}/crypto.dll"                                \
+        --library="winphone-7.1":"#{BINARIES_DIR}/System.IO.dll"                             \
+                                                                                             \
+        --sample="Sitecore Mobile SDK iOS Sample. Downloads a single item and shows an alert with its fields.":"../../test/LocalNugetTest/iMobileSdkDemo/iMobileSdkDemo.sln"
+        END
+
+    line = XAMARIN_COMPONENT_EXE + " " + line
+    if !Gem.win_platform? then 
+        line = "mono " + line
+    end
+
+    puts "* Creating #{COMPONENT}..."
+    puts line.strip.gsub "\t\t", "\\\n    "
+
+    system line #, :verbose => false
+    puts "* Created #{COMPONENT}"
+end
+
