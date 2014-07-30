@@ -1,6 +1,3 @@
-using Sitecore.MobileSDK.Validators;
-
-
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -32,6 +29,10 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
+
+  using Sitecore.MobileSDK.Validators;
+
+
 
   public class ScApiSession : ISitecoreWebApiSession
   {
