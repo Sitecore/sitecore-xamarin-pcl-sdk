@@ -11,27 +11,25 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Session;
-  using Sitecore.MobileSDK.CrudTasks.Resource;
-  using Sitecore.MobileSDK.SessionSettings;
 
-  using Sitecore.MobileSDK.Authenticate;
-  using Sitecore.MobileSDK.CrudTasks;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.TaskFlow;
-  using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
+  using Sitecore.MobileSDK.CrudTasks;
+  using Sitecore.MobileSDK.CrudTasks.Resource;
+  using Sitecore.MobileSDK.Validators;
+  using Sitecore.MobileSDK.Authenticate;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
-
-  using Sitecore.MobileSDK.Validators;
-
+  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
 
 
   public class ScApiSession : ISitecoreWebApiSession
