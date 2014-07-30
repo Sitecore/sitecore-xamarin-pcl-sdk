@@ -174,14 +174,100 @@
     [Test]
     public void TestUpdateItemByPathWithTwoDatabasesReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
         .Database("db1")
         .Database("db2")
         .Build());
-      Assert.AreEqual("UpdateItemByIdRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("UpdateItemByPathRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByIdWithSpacesOnlyInLanguageReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+        .Language("  ")
+        .Build());
+      Assert.AreEqual("UpdateItemByIdRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByPathWithNullScopeReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
+        .AddScope(null)
+        .Build());
+      Assert.True(exception.Message.Contains("UpdateItemByPathRequestBuilder.Scope"));
+    }
+
+    [Test]
+    public void TestUpdateItemByIdWithNullReadFieldsReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+        .AddFields(null)
+        .Build());
+      Assert.True(exception.Message.Contains("UpdateItemByIdRequestBuilder.Fields"));
+    }
+
+    [Test]
+    public void TestUpdateItemByPathWithNullFieldsToUpdateReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
+        .AddFieldsRawValuesByName(null)
+        .Build());
+      Assert.True(exception.Message.Contains("UpdateItemByPathRequestBuilder.FieldsRawValuesByName"));
+    }
+
+    [Test]
+    public void TestUpdateItemByIdWithDuplicateFieldsToUpdateReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+        .AddFieldsRawValuesByName("Title", "Value1")
+        .AddFieldsRawValuesByName("Title", "Value2")
+        .Build());
+      Assert.AreEqual("UpdateItemByIdRequestBuilder.FieldsRawValuesByName : duplicate fields are not allowed", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByPathWithDuplicateFieldsToReadReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
+        .AddFields("Title")
+        .AddFields("Title")
+        .Build());
+      Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
     /*
+    [Test]
+    public void TestUpdateItemByQueryWithDuplicateScopeReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithSitecoreQuery("/query")
+        .AddScope(ScopeType.Children)
+        .AddScope(ScopeType.Parent)
+        .AddScope(ScopeType.Children)
+        .Build());
+      Assert.AreEqual("UpdateItemByQueryRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByPathWithEmptyVersionReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
+        .Version("")
+        .Build());
+      Assert.AreEqual("UpdateItemByPathRequestBuilder.Version : The input cannot be null or empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemByIdWithTwoVersionsReturnsException()
+    {
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+        .Version("1")
+        .Version("2")
+        .Build());
+      Assert.AreEqual("UpdateItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
+    }
+    
     [Test]
     public void TestUpdateItemByQueryWithSpacesOnlyReturnsException()
     {
