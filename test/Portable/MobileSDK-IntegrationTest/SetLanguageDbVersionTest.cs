@@ -190,7 +190,7 @@
     }
 
     [Test]
-    public void TestGetItemWithNotExistedDb()
+    public void TestGetItemWithNotExistedDbReturnsException()
     {
       const string Database = "new_database";
       var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id).Database(Database);
@@ -230,7 +230,7 @@
     }
 
     [Test]
-    public void TestGetItemWithInvalidDb()
+    public void TestGetItemWithInvalidDbReturnsException()
     {
       const string Db = "@#er$#";
       const string Language = "da";
@@ -287,14 +287,14 @@
     }
 
     [Test]
-    public void TestGetItemWithEmptySite()
+    public void TestGetItemWithEmptySiteReturnsException()
     {
       const string Site = "";
       Exception exception = Assert.Throws<ArgumentException>(() => this.CreateCreatorexSession(Site));
       Assert.AreEqual("SessionBuilder.Site : The input cannot be null or empty.", exception.Message);
     }
     [Test]
-    public void TestGetItemWithInvalidSite()
+    public void TestGetItemWithInvalidSiteReturnsException()
     {
       const string Site = "/@$%/";
       var session = this.CreateCreatorexSession(Site);
@@ -317,99 +317,49 @@
     }
 
     [Test]
-    public void TestGetItemWithNullSite()
-    {
-      Exception exception = Assert.Throws<ArgumentException>(() => this.CreateCreatorexSession(null));
-      Assert.AreEqual("SessionBuilder.Site : The input cannot be null or empty.", exception.Message);
-    }
-
-    [Test]
-    public void TestGetItemWithEmptyDbInItemSource()
-    {
-      const string Db = "";
-      const string Language = "da";
-
-      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(this.testData.Users.Admin)
-        .DefaultDatabase(Db)
-        .DefaultLanguage(Language)
-        .BuildReadonlySession());
-
-      Assert.AreEqual("SessionBuilder.DefaultDatabase : The input cannot be null or empty.", exception.Message);
-    }
-
-    [Test]
-    public void TestCreateSessionWithEmptyLanguage()
-    {
-      const string Db = "master";
-      const string Language = "";
-
-      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(this.testData.Users.Admin)
-        .DefaultDatabase(Db)
-        .DefaultLanguage(Language) // ALR: should throw exception
-        .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.DefaultLanguage : The input cannot be null or empty.", exception.Message);
-    }
-
-    [Test]
-    public void TestCreateSessionWithNullDatabase()
-    {
-      const string Db = null;
-      const string Language = "en";
-
-      Exception exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(this.testData.Users.Admin)
-        .DefaultDatabase(Db)   // ALR: should throw exception
-        .DefaultLanguage(Language)
-        .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.DefaultDatabase : The input cannot be null or empty.", exception.Message);
-    }
-
-    [Test]
-    public void TestGetItemWithNullVersionInRequestByPath()
+    public void TestGetItemWithNullVersionInRequestByPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Version(null).Build());
-      Assert.AreEqual("ReadItemByPathRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Version : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemWithSpacesInVersionInRequestById()
+    public void TestGetItemWithSpacesInVersionInRequestByIdReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(" ").Build());
-      Assert.AreEqual("ReadItemByIdRequestBuilder.itemVersion : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Version : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemWithEmpryLanguageInRequestByQuery()
+    public void TestGetItemWithEmpryLanguageInRequestByQueryReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Id).Language("").Build());
       Assert.AreEqual("ReadItemByQueryRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemWithSpacesInLanguageInRequestByPath()
+    public void TestGetItemWithSpacesInLanguageInRequestByPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Language("   ").Build());
       Assert.AreEqual("ReadItemByPathRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemWithNullLanguageInRequestById()
+    public void TestGetItemWithNullLanguageInRequestByIdReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Language(null).Build());
       Assert.AreEqual("ReadItemByIdRequestBuilder.Language : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemWithEmptyDatabaseInRequestById()
+    public void TestGetItemWithEmptyDatabaseInRequestByIdReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Database("").Build());
       Assert.AreEqual("ReadItemByIdRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
-    public void TestGetItemWithNullDatabaseInRequestByPath()
+    public void TestGetItemWithNullDatabaseInRequestByPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Database(null).Build());
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
@@ -417,7 +367,7 @@
     }
 
     [Test]
-    public void TestGetItemWithSpacesInDatabaseInRequestByQuery()
+    public void TestGetItemWithSpacesInDatabaseInRequestByQueryReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Id)
         .Database(" 	")
@@ -426,7 +376,7 @@
     }
 
     [Test]
-    public void TestGetItemByPathWithOverrideLanguageTwice()
+    public void TestGetItemByPathWithOverrideLanguageTwiceReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Language("da")
@@ -436,7 +386,7 @@
     }
 
     [Test]
-    public void TestGetItemByIdWithOverrideVersionTwice()
+    public void TestGetItemByIdWithOverrideVersionTwiceReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)

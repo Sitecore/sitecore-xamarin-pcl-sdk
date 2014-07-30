@@ -98,7 +98,7 @@
     }
 
     [Test]
-    public void TestGetItemByIdWithPathInParams()
+    public void TestGetItemByIdWithPathInParamsReturnsError()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Path).Build());
       Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
@@ -204,7 +204,7 @@
     }
 
     [Test]
-    public async void TestGetItemByInvalidQuery()
+    public async void TestGetItemByInvalidQueryReturnsError()
     {
       const string QueryInvalid = "/sitecore/content/HOME/AllowED_PARent//*[@@templatekey123='sample item']";
       var response = await this.GetItemByQuery(QueryInvalid);
@@ -213,7 +213,7 @@
     }
 
     [Test]
-    public void TestGetItemByNullId()
+    public void TestGetItemByNullIdReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -226,7 +226,7 @@
     }
 
     [Test]
-    public void TestGetItemByNullPath()
+    public void TestGetItemByNullPathReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -239,7 +239,7 @@
     }
 
     [Test]
-    public void TestGetItemByNullQuery()
+    public void TestGetItemByNullQueryReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -252,7 +252,7 @@
     }
 
     [Test]
-    public void TestGetItemByEmptyPath()
+    public void TestGetItemByEmptyPathReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -265,7 +265,7 @@
     }
 
     [Test]
-    public void TestGetItemByEmptyQuery()
+    public void TestGetItemByEmptyQueryReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -278,7 +278,7 @@
     }
 
     [Test]
-    public void TestGetItemByIdWithSpacesOnly()
+    public void TestGetItemByIdWithSpacesOnlyReturnsError()
     {
       TestDelegate testCode = async () =>
       {
@@ -291,7 +291,7 @@
     }
 
     [Test]
-    public void TestGetItemByPathWithSpacesOnly()
+    public void TestGetItemByPathWithSpacesOnlyReturnsError()
     {
       TestDelegate testCode = async () =>
       {

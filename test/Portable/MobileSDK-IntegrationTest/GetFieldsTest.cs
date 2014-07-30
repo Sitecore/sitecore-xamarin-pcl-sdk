@@ -320,7 +320,7 @@
     }
 
     [Test]
-    public void TestGetItemByIdWithDuplicateFields()
+    public void TestGetItemByIdWithDuplicateFieldsReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFields("Title", "Text").AddFields("title").Build());
 
@@ -329,7 +329,7 @@
     }
 
     [Test]
-    public void TestGetItemByPathWithDuplicateFields()
+    public void TestGetItemByPathWithDuplicateFieldsReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields("Text", "Text").Build());
 
@@ -338,7 +338,7 @@
     }
 
     [Test]
-    public void TestGetItemByQueryWithDuplicateAndEmptyField()
+    public void TestGetItemByQueryWithDuplicateAndEmptyFieldReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFields("Title", "", "Title").Build());
 
@@ -374,7 +374,7 @@
     }
 
     [Test]
-    public void TestGetItemByIdWithOverridenPayload()
+    public void TestGetItemByIdWithOverridenPayloadReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
         .Payload(PayloadType.Content)
@@ -385,7 +385,7 @@
     }
 
     [Test]
-    public void TestGetItemByPathWithOverridenPayload()
+    public void TestGetItemByPathWithOverridenPayloadReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Payload(PayloadType.Full)
@@ -395,7 +395,7 @@
     }
 
     [Test]
-    public void TestGetItemByQueryWithOverridenPayload()
+    public void TestGetItemByQueryWithOverridenPayloadReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
         .Payload(PayloadType.Content)

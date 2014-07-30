@@ -176,7 +176,7 @@
     }
 
     [Test]
-    public void TestGetItemByPathDuplicateScopeParams()
+    public void TestGetItemByPathDuplicateScopeParamsReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .AddScope(ScopeType.Parent)
@@ -187,7 +187,7 @@
     }
 
     [Test]
-    public void TestGetItemByIdDuplicateScopeParams()
+    public void TestGetItemByIdDuplicateScopeParamsReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
         .AddScope(ScopeType.Self, ScopeType.Self)
@@ -196,7 +196,7 @@
     }
 
     [Test]
-    public void TestGetItemByQueryDuplicateScopeParams()
+    public void TestGetItemByQueryDuplicateScopeParamsReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
         .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Children)

@@ -30,7 +30,7 @@
        .Credentials(new WebApiCredentialsPOD("", testData.Users.Admin.Password))
        .BuildReadonlySession());
 
-      Assert.AreEqual("SessionBuilder.Credentials.username : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("SessionBuilder.Credentials.Username : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -39,7 +39,7 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD("username", ""))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.Credentials.password : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("SessionBuilder.Credentials.Password : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -48,7 +48,7 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD(null, "password"))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.Credentials.username : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("SessionBuilder.Credentials.Username : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
@@ -57,7 +57,7 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD("username", null))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.Credentials.password : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("SessionBuilder.Credentials.Password : The input cannot be null or empty.", exception.Message);
     }
 
     [Test]
