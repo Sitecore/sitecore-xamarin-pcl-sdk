@@ -151,7 +151,7 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath(null)
         .Build());
-      Assert.AreEqual("Value cannot be null.\r\nParameter name: UpdateItemByPathRequestBuilder.ItemPath", exception.Message);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByPathRequestBuilder.ItemPath", exception.Message);
     }
 
     [Test]
@@ -168,7 +168,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
         .Database(null)
         .Build());
-      Assert.AreEqual("Value cannot be null.\r\nParameter name: UpdateItemByIdRequestBuilder.Database", exception.Message);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByIdRequestBuilder.Database", exception.Message);
     }
 
     [Test]
@@ -196,7 +196,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
         .AddScope(null)
         .Build());
-      Assert.AreEqual("Value cannot be null.\r\nParameter name: UpdateItemByPathRequestBuilder.Scope", exception.Message);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByPathRequestBuilder.Scope", exception.Message);
     }
 
     [Test]
@@ -205,7 +205,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
         .AddFields(null)
         .Build());
-      Assert.AreEqual("Value cannot be null.\r\nParameter name: UpdateItemByIdRequestBuilder.Fields", exception.Message);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByIdRequestBuilder.Fields", exception.Message);
     }
 
     [Test]
@@ -214,7 +214,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
         .AddFieldsRawValuesByName(null)
         .Build());
-      Assert.AreEqual("Value cannot be null.\r\nParameter name: UpdateItemByPathRequestBuilder.FieldsRawValuesByName", exception.Message);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByPathRequestBuilder.FieldsRawValuesByName", exception.Message);
     }
 
     [Test]

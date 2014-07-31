@@ -308,17 +308,6 @@
       Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
 
-    //TODO: create items for test first and remove them after test
-    /*
-    [Test]
-    public async void TestGetOneHundredItemsByQuery()
-    {
-      var response = await this.GetItemByQuery("/sitecore/content/Home/Android/Static/100Items/*");
-      testData.AssertItemsCount(100, response);
-      Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
-    }
-    */
-
     [Test]
     public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
