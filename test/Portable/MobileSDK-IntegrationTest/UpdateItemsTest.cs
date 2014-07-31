@@ -18,7 +18,7 @@
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
-
+    /*
     [TestFixtureSetUp]
     public async void TestFixtureSetup()
     {
@@ -29,12 +29,10 @@
         .DefaultDatabase("master")
         .BuildSession();
 
-      await this.DeleteAllItems("master");
-      await this.DeleteAllItems("web");
     }
-
+    */
     [SetUp]
-    public void Setup()
+    public async void Setup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
@@ -42,6 +40,8 @@
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
+      await this.DeleteAllItems("master");
+      await this.DeleteAllItems("web");
     }
 
     [TearDown]
