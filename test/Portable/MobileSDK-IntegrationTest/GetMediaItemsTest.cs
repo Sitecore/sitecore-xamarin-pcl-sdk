@@ -124,7 +124,9 @@
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.ReadMediaItemRequest(null);
       var exception = Assert.Throws<ArgumentNullException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("ReadMediaItemRequestBuilder.MediaPath"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadMediaItemRequestBuilder.MediaPath",
+        exception.Message);
     }
 
     [Test]
@@ -468,7 +470,9 @@
     public void TestGetMediaWithNullDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Database(null));
-      Assert.IsTrue(exception.Message.Contains("ReadMediaItemRequestBuilder.Database"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE +
+        "ReadMediaItemRequestBuilder.Database",
+        exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
@@ -482,7 +486,9 @@
     public void TestGetMediaWithNullLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Language(null));
-      Assert.IsTrue(exception.Message.Contains("ReadMediaItemRequestBuilder.Language"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE +
+        "ReadMediaItemRequestBuilder.Language",
+        exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
@@ -496,7 +502,9 @@
     public void TestGetMediaWithNullVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(null));
-      Assert.IsTrue(exception.Message.Contains("ReadMediaItemRequestBuilder.Version"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE +
+        "ReadMediaItemRequestBuilder.Version",
+        exception.Message);
     }
 
     [Test]

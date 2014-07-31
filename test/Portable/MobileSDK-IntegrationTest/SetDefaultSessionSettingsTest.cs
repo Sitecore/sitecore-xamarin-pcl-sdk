@@ -194,8 +194,9 @@
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id);
       Exception exception = Assert.Throws<ArgumentNullException>(() => requestBuilder.Database(null).Payload(PayloadType.Content).Build());
-      Assert.IsTrue(exception is ArgumentNullException);
-      Assert.IsTrue(exception.Message.Contains("ReadItemByIdRequestBuilder.Database"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE +
+        "ReadItemByIdRequestBuilder.Database",
+        exception.Message);
     }
 
     [Test]

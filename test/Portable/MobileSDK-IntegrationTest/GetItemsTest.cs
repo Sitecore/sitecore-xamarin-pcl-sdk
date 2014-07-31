@@ -222,7 +222,9 @@
       };
 
       var exception = Assert.Throws<ArgumentNullException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("ReadItemByIdRequestBuilder.ItemId"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadItemByIdRequestBuilder.ItemId",
+        exception.Message);
     }
 
     [Test]
@@ -235,7 +237,9 @@
       };
 
       var exception = Assert.Throws<ArgumentNullException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("ReadItemByPathRequestBuilder.ItemPath"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadItemByPathRequestBuilder.ItemPath",
+        exception.Message);
     }
 
     [Test]
@@ -248,7 +252,9 @@
       };
 
       var exception = Assert.Throws<ArgumentNullException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("ReadItemByQueryRequestBuilder.SitecoreQuery"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadItemByQueryRequestBuilder.SitecoreQuery",
+        exception.Message);
     }
 
     [Test]

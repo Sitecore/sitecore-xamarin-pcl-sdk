@@ -320,7 +320,9 @@
     public void TestGetItemWithNullVersionInRequestByPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Version(null).Build());
-      Assert.IsTrue(exception.Message.Contains("ReadItemByPathRequestBuilder.Version"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE +
+        "ReadItemByPathRequestBuilder.Version",
+        exception.Message);
     }
 
     [Test]
@@ -348,7 +350,9 @@
     public void TestGetItemWithNullLanguageInRequestByIdReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Language(null).Build());
-      Assert.IsTrue(exception.Message.Contains("ReadItemByIdRequestBuilder.Language"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadItemByIdRequestBuilder.Language",
+        exception.Message);
     }
 
     [Test]
@@ -362,7 +366,9 @@
     public void TestGetItemWithNullDatabaseInRequestByPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Database(null).Build());
-      Assert.IsTrue(exception.Message.Contains("ReadItemByPathRequestBuilder.Database"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadItemByPathRequestBuilder.Database",
+        exception.Message);
     }
 
     [Test]

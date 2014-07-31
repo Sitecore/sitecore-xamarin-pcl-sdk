@@ -84,7 +84,9 @@
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .DefaultDatabase(null)
         .BuildReadonlySession());
-      Assert.IsTrue(exception.Message.Contains("SessionBuilder.DefaultDatabase"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "SessionBuilder.DefaultDatabase",
+        exception.Message);
     }
 
     [Test]
@@ -102,7 +104,9 @@
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .DefaultMediaResourceExtension(null)
         .BuildSession());
-      Assert.IsTrue(exception.Message.Contains("SessionBuilder.DefaultMediaResourceExtension"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "SessionBuilder.DefaultMediaResourceExtension",
+        exception.Message);
     }
 
     [Test]
@@ -120,7 +124,8 @@
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .Site(null)
         .BuildSession());
-      Assert.IsTrue(exception.Message.Contains("SessionBuilder.Site"));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "SessionBuilder.Site",
+        exception.Message);
     }
 
     [Test]
