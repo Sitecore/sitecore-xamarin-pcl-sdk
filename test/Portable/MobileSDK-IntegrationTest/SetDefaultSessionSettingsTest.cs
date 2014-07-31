@@ -205,7 +205,6 @@
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Database(" ").Payload(PayloadType.Content).Build());
-      Assert.IsTrue(exception is ArgumentException);
       Assert.AreEqual("ReadItemByPathRequestBuilder.Database : The input cannot be empty.", exception.Message);
     }
 
@@ -226,7 +225,6 @@
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Language(Language).Build());
-      Assert.IsTrue(exception is ArgumentException);
       Assert.AreEqual("ReadItemByIdRequestBuilder.Language : The input cannot be empty.", exception.Message);
     }
 
@@ -237,7 +235,6 @@
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(Version).Build());
-      Assert.IsTrue(exception is ArgumentException);
       Assert.AreEqual("ReadItemByPathRequestBuilder.Version : The input cannot be empty.", exception.Message);
     }
 

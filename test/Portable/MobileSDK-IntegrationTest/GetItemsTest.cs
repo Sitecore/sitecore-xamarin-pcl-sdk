@@ -101,7 +101,6 @@
     public void TestGetItemByIdWithPathInParamsReturnsError()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Path).Build());
-      Assert.IsTrue(exception is ArgumentException);
       Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
 
