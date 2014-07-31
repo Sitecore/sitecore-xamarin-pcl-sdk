@@ -58,7 +58,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestNullPayloadIsNotReplacedWithDefault()
     {
       MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "/Sitecore/Content/*";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = new QueryParameters(null, null, null);
@@ -76,7 +76,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestNullPayloadStructIsIgnored()
     {
       MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "/Sitecore/Content/*";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = null;
@@ -93,7 +93,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestBuildWithFastQuery()
     {
       MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "fast:/sitecore/content/Home/Products/*[@@name = 'Hammer']";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -110,7 +110,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestBuildWithRegularQuery()
     {
       MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "/Sitecore/Content/*";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -127,21 +127,21 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestQueryCannotBeNull()
     {
       MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = null;
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
 
       IReadItemsByQueryRequest request = mutableParameters;
 
-      Assert.Throws<ArgumentException> (() => this.builder.GetUrlForRequest (request));
+      Assert.Throws<ArgumentNullException > (() => this.builder.GetUrlForRequest (request));
     }
 
     [Test]
     public void TestQueryCannotBeEmpty()
     {
       MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -155,7 +155,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestQueryCannotBeWhitespace()
     {
       MockGetItemsByQueryParameters mutableParameters = new MockGetItemsByQueryParameters ();
-      mutableParameters.ItemSource = ItemSource.DefaultSource ();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "   \t \r \n   ";
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.QueryParameters = this.payload;
@@ -245,7 +245,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       var mutableParameters = new MockGetItemsByQueryParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "/aaa/bbb/ccc/*";
 
       string[] fields = { "x", "y", "x" };
@@ -263,7 +263,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       var mutableParameters = new MockGetItemsByQueryParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "/aaa/bbb/ccc/*";
 
 

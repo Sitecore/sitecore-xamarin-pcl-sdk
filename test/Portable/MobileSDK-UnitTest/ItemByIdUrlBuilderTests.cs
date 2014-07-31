@@ -61,7 +61,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
       mutableParameters.QueryParameters = new QueryParameters(null, null, null);
 
@@ -79,7 +79,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
       mutableParameters.QueryParameters = null;
 
@@ -96,7 +96,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "someInvalidItemId";
       mutableParameters.QueryParameters = this.payload;
 
@@ -111,7 +111,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
       mutableParameters.QueryParameters = this.payload;
 
@@ -128,7 +128,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
       mutableParameters.QueryParameters = this.payload;
 
@@ -145,7 +145,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = null;
       mutableParameters.QueryParameters = this.payload;
 
@@ -153,7 +153,7 @@ namespace Sitecore.MobileSdkUnitTest
 
       TestDelegate action = () => this.builder.GetUrlForRequest(parameters);
 
-      Assert.Throws<ArgumentException>(action);
+      Assert.Throws<ArgumentNullException>(action);
     }
 
     [Test]
@@ -161,7 +161,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{}";
       mutableParameters.QueryParameters = this.payload;
 
@@ -251,7 +251,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
 
       string[] fields = { "x", "y", "x" };
@@ -269,7 +269,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
 
       string[] fields = { "x", "y", "X" };
@@ -286,7 +286,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
 
       string[] fields = { "x", "y", null };
@@ -303,7 +303,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sitecoreShellConfig;
-      mutableParameters.ItemSource = ItemSource.DefaultSource();
+      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
 
       string[] fields = { "x", "y", "" };

@@ -1,8 +1,7 @@
-﻿
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
+  using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
@@ -29,10 +28,10 @@ namespace MobileSDKIntegrationTest
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
       var config = new SessionConfig(testData.InstanceUrl);
-      this.anonymousSession = new ScTestApiSession(config, null, this.mediaSettings,ItemSource.DefaultSource());
+      this.anonymousSession = new ScTestApiSession(config, null, this.mediaSettings,LegacyConstants.DefaultSource());
 
       config = new SessionConfig(testData.InstanceUrl);
-      this.authenticatedSession = new ScTestApiSession(config, testData.Users.Admin, this.mediaSettings,ItemSource.DefaultSource());
+      this.authenticatedSession = new ScTestApiSession(config, testData.Users.Admin, this.mediaSettings,LegacyConstants.DefaultSource());
     }
 
     [TearDown]

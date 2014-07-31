@@ -3,12 +3,12 @@ using System.Globalization;
 
 namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
-	using System.Collections.Generic;
-	using Sitecore.MobileSDK.API.Request.Parameters;
+  using System.Collections.Generic;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
-    public class DownloadMediaOptions : IDownloadMediaOptions
-	{
-    public DownloadMediaOptions ()
+  public class DownloadMediaOptions : IDownloadMediaOptions
+  {
+    public DownloadMediaOptions()
     {
     }
 
@@ -34,278 +34,277 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       return this.DeepCopyMutableMediaDownloadOptions();
     }
 
-
     public bool IsEmpty
-		{
+    {
       get
       {
-          return  	
-              null == this.Width
-          &&  null == this.Height
-          &&	null == this.MaxWidth
-          &&	null == this.MaxHeight
-          &&	null == this.BackgroundColor
-          &&	null == this.DisableMediaCache
-          &&	null == this.AllowStrech
-          &&	null == this.Scale
-          &&	null == this.DisplayAsThumbnail;
+        return
+            null == this.Width
+        && null == this.Height
+        && null == this.MaxWidth
+        && null == this.MaxHeight
+        && null == this.BackgroundColor
+        && null == this.DisableMediaCache
+        && null == this.AllowStrech
+        && null == this.Scale
+        && null == this.DisplayAsThumbnail;
       }
-		}
+    }
 
-		public string Width
-		{
-      private set 
+    public string Width
+    {
+      private set
       {
         this.width = value;
       }
-			get
-			{ 
-				return this.width;
-			}
-		}
+      get
+      {
+        return this.width;
+      }
+    }
 
-		public void SetWidth(int width)
-		{
-			if (width <= 0)
-			{
-				throw new ArgumentException("[DownloadMediaOptions] width must be > 0");
-			}
+    public void SetWidth(int width)
+    {
+      if (width <= 0)
+      {
+        throw new ArgumentException(this.GetType().Name + ".Width : width must be > 0");
+      }
 
-			this.width = width.ToString ();
-		}
+      this.width = width.ToString();
+    }
 
-		public string Height
-		{
+    public string Height
+    {
       private set
       {
         this.height = value;
       }
-			get
-			{ 
-				return this.height;
-			}
-		}
+      get
+      {
+        return this.height;
+      }
+    }
 
-		public void SetHeight(int height)
-		{
-			if (height <= 0)
-			{
-				throw new ArgumentException("[DownloadMediaOptions] height must be > 0");
-			}
+    public void SetHeight(int height)
+    {
+      if (height <= 0)
+      {
+        throw new ArgumentException(this.GetType().Name + ".Height : height must be > 0");
+      }
 
-			this.height = height.ToString ();
-		}
+      this.height = height.ToString();
+    }
 
-		public string MaxWidth
-		{
+    public string MaxWidth
+    {
       private set
       {
         this.maxWidth = value;
       }
-			get
-			{ 
-				return this.maxWidth;
-			}
-		}
+      get
+      {
+        return this.maxWidth;
+      }
+    }
 
-		public void SetMaxWidth(int maxWidth)
-		{
-			if (maxWidth <= 0)
-			{
-				throw new ArgumentException("[DownloadMediaOptions] maxWidth must be > 0");
-			}
+    public void SetMaxWidth(int maxWidth)
+    {
+      if (maxWidth <= 0)
+      {
+        throw new ArgumentException(this.GetType().Name + ".MaxWidth : maxWidth must be > 0");
+      }
 
-			this.maxWidth = maxWidth.ToString ();
-		}
+      this.maxWidth = maxWidth.ToString();
+    }
 
-		public string MaxHeight
-		{
+    public string MaxHeight
+    {
       private set
       {
         this.maxHeight = value;
       }
-			get
-			{ 
-				return this.maxHeight;
-			}
-		}
+      get
+      {
+        return this.maxHeight;
+      }
+    }
 
-		public void SetMaxHeight(int maxHeight)
-		{
-			if (maxHeight <= 0)
-			{
-				throw new ArgumentException("[DownloadMediaOptions] maxHeight must be > 0");
-			}
+    public void SetMaxHeight(int maxHeight)
+    {
+      if (maxHeight <= 0)
+      {
+        throw new ArgumentException(this.GetType().Name + ".MaxHeight : maxHeight must be > 0");
+      }
 
-			this.maxHeight = maxHeight.ToString ();
-		}
+      this.maxHeight = maxHeight.ToString();
+    }
 
-		public string BackgroundColor
-		{
+    public string BackgroundColor
+    {
       private set
       {
         this.backgroundColor = value;
       }
-			get
-			{ 
-				return this.backgroundColor;
-			}
-		}
+      get
+      {
+        return this.backgroundColor;
+      }
+    }
 
-		public void SetBackgroundColor(string color)
-		{
-			this.backgroundColor = color;
-		}
+    public void SetBackgroundColor(string color)
+    {
+      this.backgroundColor = color;
+    }
 
-		public string DisableMediaCache
-		{
+    public string DisableMediaCache
+    {
       private set
       {
         this.disableMediaCache = value;
       }
-			get
-			{ 
+      get
+      {
         return this.disableMediaCache;
-			}
-		}
+      }
+    }
 
-		public void SetDisableMediaCache(bool value)
-		{
-			if (value)
-			{
-				this.disableMediaCache = DownloadMediaOptions.PositiveBoolValue;
-			}
-			else
-			{
+    public void SetDisableMediaCache(bool value)
+    {
+      if (value)
+      {
+        this.disableMediaCache = DownloadMediaOptions.PositiveBoolValue;
+      }
+      else
+      {
         this.disableMediaCache = DownloadMediaOptions.NegativeBoolValue;
-			}
-		}
+      }
+    }
 
-		public string AllowStrech
-		{
+    public string AllowStrech
+    {
       private set
       {
         this.allowStrech = value;
       }
-			get
-			{ 
+      get
+      {
         return this.allowStrech;
-			}
-		}
+      }
+    }
 
-		public void SetAllowStrech(bool value)
-		{
-			if (value)
-			{
-				this.allowStrech = DownloadMediaOptions.PositiveBoolValue;
-			}
-			else
-			{
+    public void SetAllowStrech(bool value)
+    {
+      if (value)
+      {
+        this.allowStrech = DownloadMediaOptions.PositiveBoolValue;
+      }
+      else
+      {
         this.allowStrech = DownloadMediaOptions.NegativeBoolValue;
-			}
-		}
+      }
+    }
 
-		public string DisplayAsThumbnail
-		{
+    public string DisplayAsThumbnail
+    {
       private set
       {
         this.displayAsThumbnail = value;
       }
-			get
-			{ 
+      get
+      {
         return this.displayAsThumbnail;
-			}
-		}
+      }
+    }
 
-		public void SetDisplayAsThumbnail(bool value)
-		{
-			if (value)
-			{
-				this.displayAsThumbnail = DownloadMediaOptions.PositiveBoolValue;
-			}
-			else
-			{
+    public void SetDisplayAsThumbnail(bool value)
+    {
+      if (value)
+      {
+        this.displayAsThumbnail = DownloadMediaOptions.PositiveBoolValue;
+      }
+      else
+      {
         this.displayAsThumbnail = DownloadMediaOptions.NegativeBoolValue;
-			}
-		}
+      }
+    }
 
-		public string Scale
-		{
+    public string Scale
+    {
       private set
       {
         this.scale = value;
       }
-			get
-			{ 
-				return this.scale;
-			}
-		}
+      get
+      {
+        return this.scale;
+      }
+    }
 
-		public void SetScale(float scale)
-		{
-			if (scale <= 0)
-			{
-				throw new ArgumentException("[DownloadMediaOptions] scale must be > 0");
-			}
+    public void SetScale(float scale)
+    {
+      if (scale <= 0)
+      {
+        throw new ArgumentException(this.GetType().Name + ".Scale : scale must be > 0");
+      }
 
       string convertedScale = scale.ToString(CultureInfo.InvariantCulture);
       this.scale = convertedScale;
-		}
+    }
 
-		public Dictionary<string, string> OptionsDictionary
-		{
-			get
-			{
-				Dictionary<string, string> result = new Dictionary<string, string> ();
+    public Dictionary<string, string> OptionsDictionary
+    {
+      get
+      {
+        Dictionary<string, string> result = new Dictionary<string, string>();
 
-				if (this.Width != null)
-				{
-					result.Add (DownloadMediaOptions.widthKey, this.Width);
-				}
+        if (this.Width != null)
+        {
+          result.Add(DownloadMediaOptions.widthKey, this.Width);
+        }
 
-				if (this.Height != null)
-				{
-					result.Add (DownloadMediaOptions.heightKey, this.Height);
-				}
+        if (this.Height != null)
+        {
+          result.Add(DownloadMediaOptions.heightKey, this.Height);
+        }
 
-				if (this.MaxWidth != null)
-				{
-					result.Add (DownloadMediaOptions.maxWidthKey, this.MaxWidth);
-				}
+        if (this.MaxWidth != null)
+        {
+          result.Add(DownloadMediaOptions.maxWidthKey, this.MaxWidth);
+        }
 
-				if (this.MaxHeight != null)
-				{
-					result.Add (DownloadMediaOptions.maxHeightKey, this.MaxHeight);
-				}
+        if (this.MaxHeight != null)
+        {
+          result.Add(DownloadMediaOptions.maxHeightKey, this.MaxHeight);
+        }
 
-				if (this.BackgroundColor != null)
-				{
-					result.Add (DownloadMediaOptions.backgroundColorKey, this.BackgroundColor);
-				}
+        if (this.BackgroundColor != null)
+        {
+          result.Add(DownloadMediaOptions.backgroundColorKey, this.BackgroundColor);
+        }
 
-				if (this.DisableMediaCache != null)
-				{
-					result.Add (DownloadMediaOptions.mediaCacheKey, this.DisableMediaCache);
-				}
+        if (this.DisableMediaCache != null)
+        {
+          result.Add(DownloadMediaOptions.mediaCacheKey, this.DisableMediaCache);
+        }
 
-				if (this.AllowStrech != null)
-				{
-					result.Add (DownloadMediaOptions.strechKey, this.AllowStrech);
-				}
+        if (this.AllowStrech != null)
+        {
+          result.Add(DownloadMediaOptions.strechKey, this.AllowStrech);
+        }
 
-				if (this.Scale != null)
-				{
-					result.Add (DownloadMediaOptions.scaleKey, this.Scale);
-				}
+        if (this.Scale != null)
+        {
+          result.Add(DownloadMediaOptions.scaleKey, this.Scale);
+        }
 
-				if (this.DisplayAsThumbnail != null)
-				{
-					result.Add (DownloadMediaOptions.thumbnailKey, this.DisplayAsThumbnail);
-				}
+        if (this.DisplayAsThumbnail != null)
+        {
+          result.Add(DownloadMediaOptions.thumbnailKey, this.DisplayAsThumbnail);
+        }
 
-				return result;
-			}
-		}
+        return result;
+      }
+    }
 
     protected string width;
     protected string height;
@@ -317,18 +316,18 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
     protected string scale;
     protected string displayAsThumbnail;
 
-		private const string PositiveBoolValue = "1";
+    private const string PositiveBoolValue = "1";
     private const string NegativeBoolValue = "0";
 
-		private const string widthKey 			    = "w";
-		private const string heightKey 			    = "h";
-		private const string maxWidthKey 		    = "mw";
-		private const string maxHeightKey 	    = "mh";
-		private const string strechKey 			    = "as";
-		private const string mediaCacheKey 	    = "dmc";
-		private const string scaleKey 			    = "sc";
-		private const string thumbnailKey 		  = "thn";
-		private const string backgroundColorKey = "bc";
-	}
+    private const string widthKey = "w";
+    private const string heightKey = "h";
+    private const string maxWidthKey = "mw";
+    private const string maxHeightKey = "mh";
+    private const string strechKey = "as";
+    private const string mediaCacheKey = "dmc";
+    private const string scaleKey = "sc";
+    private const string thumbnailKey = "thn";
+    private const string backgroundColorKey = "bc";
+  }
 }
 

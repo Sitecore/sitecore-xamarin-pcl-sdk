@@ -62,16 +62,8 @@ namespace Sitecore.MobileSDK.SessionSettings
     #region Validation
     private void Validate()
     {
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage
-      (
-        this.InstanceUrl,
-        "SessionConfig.InstanceUrl is required"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage
-      (
-        this.ItemWebApiVersion,
-        "SessionConfig.ItemWebApiVersion is required"
-      );
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(this.InstanceUrl, "SessionConfig.InstanceUrl is required");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(this.ItemWebApiVersion, "SessionConfig.ItemWebApiVersion is required");
 
       if (!SessionConfigValidator.IsValidSchemeOfInstanceUrl(this.InstanceUrl))
       {

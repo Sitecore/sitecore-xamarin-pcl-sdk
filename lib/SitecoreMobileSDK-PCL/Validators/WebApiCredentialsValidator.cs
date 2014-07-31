@@ -1,6 +1,5 @@
 ﻿namespace Sitecore.MobileSDK.Validators
 {
-  using System;
   using Sitecore.MobileSDK.API;
 
   public static class WebApiCredentialsValidator
@@ -31,7 +30,7 @@
 
     public static bool IsAnonymousSession(IWebApiCredentials credentials)
     {
-      if (!WebApiCredentialsValidator.IsValidCredentials(credentials))
+      if (!IsValidCredentials(credentials))
       {
         return false;
       }

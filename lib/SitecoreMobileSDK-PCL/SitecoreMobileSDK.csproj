@@ -112,7 +112,6 @@
     <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsUrlBuilder.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
-    <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
     <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
@@ -183,7 +182,6 @@
     <Compile Include="Validators\SitecoreQueryValidator.cs" />
     <Compile Include="Validators\MediaPathValidator.cs" />
     <Compile Include="Validators\SessionConfigValidator.cs" />
-    <Compile Include="Validators\WebApiParameterValidator.cs" />
     <Compile Include="Validators\MediaOptionsValidator.cs" />
     <Compile Include="API\IMediaLibrarySettings.cs" />
     <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
@@ -200,6 +198,7 @@
     <Compile Include="API\Request\IBaseUpdateItemRequest.cs" />
     <Compile Include="API\MediaItem\IMediaOptionsBuilder.cs" />
     <Compile Include="Media\MediaOptionsBuilderImpl.cs" />
+    <Compile Include="PublicKey\AuthenticatedSessionCryptor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -248,7 +247,5 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Media\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

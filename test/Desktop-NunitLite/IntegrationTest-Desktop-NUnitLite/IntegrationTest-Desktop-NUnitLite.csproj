@@ -63,6 +63,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\DeleteItemsTest.cs">
       <Link>DeleteItemsTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ExceptionMessagesTemplates.cs">
+      <Link>ExceptionMessagesTemplates.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetFieldsTest.cs">
       <Link>GetFieldsTest.cs</Link>
     </Compile>
@@ -99,13 +102,12 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UrlAutocompleteTest.cs">
       <Link>UrlAutocompleteTest.cs</Link>
     </Compile>
-	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\BuildSessionTest.cs">
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\BuildSessionTest.cs">
       <Link>BuildSessionTest.cs</Link>
     </Compile>
-	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UpdateItemsTest.cs">
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UpdateItemsTest.cs">
       <Link>UpdateItemsTest.cs</Link>
     </Compile>
-	
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

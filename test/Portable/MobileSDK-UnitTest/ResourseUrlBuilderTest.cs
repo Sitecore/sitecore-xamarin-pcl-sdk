@@ -5,6 +5,8 @@ namespace Sitecore.MobileSdkUnitTest
   using NUnit.Framework;
   using System;
 
+  using MobileSDKUnitTest.Mock;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.MediaItem;
@@ -38,7 +40,7 @@ namespace Sitecore.MobileSdkUnitTest
       ISessionConfig sessionSettings = sessionConfig;
       IMediaLibrarySettings mediaSettings = sessionConfig;
 
-      ItemSource itemSource = ItemSource.DefaultSource();
+      ItemSource itemSource = LegacyConstants.DefaultSource();
       this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionSettings, mediaSettings, itemSource);
     }
 
@@ -79,8 +81,8 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestNullPathException()
     {
       TestDelegate action = () => this.builder.BuildUrlStringForPath(null, null);
-      var exception = Assert.Throws<ArgumentException>(action);
-      Assert.True(exception.Message.Contains("The input cannot be null or empty."));
+      var exception = Assert.Throws<ArgumentNullException>(action);
+      Assert.True(exception.Message.Contains("Value cannot be null."));
     }
 
     [Test]
@@ -141,7 +143,7 @@ namespace Sitecore.MobileSdkUnitTest
       IMediaLibrarySettings mediaSettings = sessionConfig;
 
 
-      ItemSource itemSource = ItemSource.DefaultSource();
+      ItemSource itemSource = LegacyConstants.DefaultSource();
       this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionSettings, mediaSettings, itemSource);
 
       var customBuilder = 

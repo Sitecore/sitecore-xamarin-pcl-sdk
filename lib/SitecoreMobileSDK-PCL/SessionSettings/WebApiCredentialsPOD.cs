@@ -16,6 +16,12 @@
       return new WebApiCredentialsPOD(this.Username, this.Password);
     }
 
+    public void Dispose()
+    {
+      this.Username = null;
+      this.Password = null;
+    }
+
     public string Username
     {
       get;

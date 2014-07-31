@@ -17,15 +17,10 @@ namespace Sitecore.MobileSDK
 
     public ICreateItemRequestParametersBuilder<T> ItemName(string itemName)
     {
-      if (string.IsNullOrEmpty(itemName) || string.IsNullOrWhiteSpace(itemName))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemName");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemName, this.GetType().Name + ".ItemName");
 
-      if (!string.IsNullOrEmpty(this.itemParametersAccumulator.ItemName))
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".ItemName");
-      }
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemParametersAccumulator.ItemName,
+        this.GetType().Name + ".ItemName");
 
       this.itemParametersAccumulator =
         new CreateItemParameters(itemName, this.itemParametersAccumulator.ItemTemplate, this.itemParametersAccumulator.FieldsRawValuesByName);
@@ -35,15 +30,10 @@ namespace Sitecore.MobileSDK
 
     public ICreateItemRequestParametersBuilder<T> ItemTemplate(string itemTemplate)
     {
-      if (string.IsNullOrEmpty(itemTemplate) || string.IsNullOrWhiteSpace(itemTemplate))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemTemplate");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemTemplate, this.GetType().Name + ".ItemTemplate");
 
-      if (!string.IsNullOrEmpty(this.itemParametersAccumulator.ItemTemplate))
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".ItemTemplate");
-      }
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemParametersAccumulator.ItemTemplate,
+        this.GetType().Name + ".ItemTemplate");
 
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, itemTemplate, this.itemParametersAccumulator.FieldsRawValuesByName);
@@ -54,6 +44,7 @@ namespace Sitecore.MobileSDK
     new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
     {
       base.AddFieldsRawValuesByName(fieldsRawValuesByName);
+
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, this.FieldsRawValuesByName);
       return (ICreateItemRequestParametersBuilder<T>)this;
@@ -63,6 +54,7 @@ namespace Sitecore.MobileSDK
     new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
     {
       base.AddFieldsRawValuesByName(fieldKey, fieldValue);
+
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, this.FieldsRawValuesByName);
       return (ICreateItemRequestParametersBuilder<T>)this;

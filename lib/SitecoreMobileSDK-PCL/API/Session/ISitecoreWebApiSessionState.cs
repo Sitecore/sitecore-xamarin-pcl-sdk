@@ -1,14 +1,15 @@
 namespace Sitecore.MobileSDK.API.Session
 {
-    using Sitecore.MobileSDK.API.Items;
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.SessionSettings;
+  using System;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.SessionSettings;
 
-    public interface ISitecoreWebApiSessionState
+  public interface ISitecoreWebApiSessionState : IDisposable
   {
-    IItemSource        DefaultSource {get;}
-    ISessionConfig     Config        {get;}
-    IWebApiCredentials Credentials   {get;}
+    IItemSource DefaultSource { get; }
+    ISessionConfig Config { get; }
+    IWebApiCredentials Credentials { get; }
   }
 }
 

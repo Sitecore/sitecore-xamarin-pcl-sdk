@@ -1,13 +1,16 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
   using NUnit.Framework;
-  using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+  using MobileSDKUnitTest.Mock;
   using SitecoreMobileSDKMockObjects;
 
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
 
   [TestFixture]
   public class ThreadSafetyTest
@@ -36,7 +39,7 @@
       var connection = new MutableSessionConfig("localhost");
       var anonymous = new MutableWebApiCredentialsPOD(null, null);
 
-      var defaultSource = ItemSource.DefaultSource();
+      var defaultSource = LegacyConstants.DefaultSource();
 
       var session = new ScApiSession(connection, anonymous, this.mediaSettings, defaultSource);
 
@@ -60,7 +63,7 @@
       var connection = new MutableSessionConfig("localhost");
       var anonymous = new MutableWebApiCredentialsPOD(null, null);
 
-      var defaultSource = ItemSource.DefaultSource();
+      var defaultSource = LegacyConstants.DefaultSource();
 
       var session = new ScApiSession(connection, anonymous, this.mediaSettings, defaultSource);
 

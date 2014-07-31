@@ -101,7 +101,6 @@
     public void TestGetItemByIdWithPathInParamsReturnsError()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Path).Build());
-      Assert.AreEqual("System.ArgumentException", exception.GetType().ToString());
       Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
 
@@ -221,8 +220,10 @@
         await task;
       };
 
-      var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
+      var exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadItemByIdRequestBuilder.ItemId",
+        exception.Message);
     }
 
     [Test]
@@ -234,8 +235,10 @@
         await task;
       };
 
-      var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
+      var exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadItemByPathRequestBuilder.ItemPath",
+        exception.Message);
     }
 
     [Test]
@@ -247,8 +250,10 @@
         await task;
       };
 
-      var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.SitecoreQuery : The input cannot be null or empty.", exception.Message);
+      var exception = Assert.Throws<ArgumentNullException>(testCode);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "ReadItemByQueryRequestBuilder.SitecoreQuery",
+        exception.Message);
     }
 
     [Test]
@@ -261,7 +266,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -274,7 +279,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.SitecoreQuery : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.SitecoreQuery : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -287,7 +292,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -300,7 +305,7 @@
       };
 
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
 
     //TODO: create items for test first and remove them after test

@@ -19,15 +19,9 @@
 
     public IDeleteItemRequestBuilder<T> Database(string database)
     {
-      if (string.IsNullOrWhiteSpace(database))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".database");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(database, this.GetType().Name + ".Database");
 
-      if (!string.IsNullOrEmpty(this.database))
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".database");
-      }
+      BaseValidator.CheckForTwiceSetAndThrow(this.database, this.GetType().Name + ".Database");
 
       this.database = database;
       return this;
@@ -35,18 +29,15 @@
 
     public IDeleteItemRequestBuilder<T> AddScope(ICollection<ScopeType> scope)
     {
-      if (null == scope)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".scope");
-      }
-
+      BaseValidator.CheckNullAndThrow(scope, this.GetType().Name + ".Scope");
+    
       var scopeParams = new ScopeParameters(this.scopeParameters);
 
       foreach (var singleScope in scope)
       {
         if (!scopeParams.AddScope(singleScope))
         {
-          throw new InvalidOperationException(this.GetType().Name + " : Adding scope parameter duplicates is forbidden");
+          throw new InvalidOperationException(this.GetType().Name + ".Scope : Adding scope parameter duplicates is forbidden");
         }
       }
       this.scopeParameters = scopeParams;

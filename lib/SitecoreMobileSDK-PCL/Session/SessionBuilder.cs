@@ -132,14 +132,8 @@
     #region IAnonymousSessionBuilder
     public IBaseSessionBuilder Site(string site)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.site,
-        this.GetType().Name + ".Site"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        site,
-        this.GetType().Name + ".Site"
-      );
+      BaseValidator.CheckForTwiceSetAndThrow(this.site, this.GetType().Name + ".Site");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(site, this.GetType().Name + ".Site");
 
       this.site = site;
       return this;
@@ -147,15 +141,8 @@
 
     public IBaseSessionBuilder WebApiVersion(string webApiVersion)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.webApiVersion,
-        this.GetType().Name + ".WebApiVersion"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        webApiVersion,
-        this.GetType().Name + ".WebApiVersion"
-      );
-
+      BaseValidator.CheckForTwiceSetAndThrow(this.webApiVersion, this.GetType().Name + ".WebApiVersion");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(webApiVersion, this.GetType().Name + ".WebApiVersion");
 
       this.webApiVersion = webApiVersion;
       return this;
@@ -163,15 +150,10 @@
 
     public IBaseSessionBuilder DefaultDatabase(string defaultDatabase)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.itemSourceAccumulator.Database,
-        this.GetType().Name + ".DefaultDatabase"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        defaultDatabase,
-        this.GetType().Name + ".DefaultDatabase"
-      );
-
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, 
+        this.GetType().Name + ".DefaultDatabase");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(defaultDatabase, 
+        this.GetType().Name + ".DefaultDatabase");
 
       this.itemSourceAccumulator =
         new ItemSourcePOD(
@@ -184,14 +166,10 @@
 
     public IBaseSessionBuilder DefaultLanguage(string defaultLanguage)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.itemSourceAccumulator.Language,
-        this.GetType().Name + ".DefaultLanguage"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        defaultLanguage,
-        this.GetType().Name + ".DefaultLanguage"
-      );
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language,
+        this.GetType().Name + ".DefaultLanguage");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(defaultLanguage,
+        this.GetType().Name + ".DefaultLanguage");
 
       this.itemSourceAccumulator =
         new ItemSourcePOD(
@@ -204,11 +182,10 @@
 
     public IBaseSessionBuilder MediaLibraryRoot(string mediaLibraryRootItem)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.mediaRoot,
-        this.GetType().Name + ".MediaLibraryRoot"
-      );
-      MediaPathValidator.ValidateMediaRoot(mediaLibraryRootItem, this.GetType().Name + ".MediaLibraryRoot");
+      BaseValidator.CheckForTwiceSetAndThrow(this.mediaRoot,
+        this.GetType().Name + ".MediaLibraryRoot");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaLibraryRootItem,
+        this.GetType().Name + ".MediaLibraryRoot");
 
       this.mediaRoot = mediaLibraryRootItem;
       return this;
@@ -216,14 +193,10 @@
 
     public IBaseSessionBuilder DefaultMediaResourceExtension(string defaultExtension)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.mediaExtension,
-         this.GetType().Name + ".DefaultMediaResourceExtension"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        defaultExtension,
-        this.GetType().Name + ".DefaultMediaResourceExtension"
-      );
+      BaseValidator.CheckForTwiceSetAndThrow(this.mediaExtension,
+        this.GetType().Name + ".DefaultMediaResourceExtension");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(defaultExtension,
+        this.GetType().Name + ".DefaultMediaResourceExtension");
 
       this.mediaExtension = defaultExtension;
       return this;
@@ -231,14 +204,10 @@
 
     public IBaseSessionBuilder MediaPrefix(string mediaPrefix)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.mediaPrefix,
-        this.GetType().Name + ".MediaPrefix"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        mediaPrefix,
-        this.GetType().Name + ".MediaPrefix"
-      );
+      BaseValidator.CheckForTwiceSetAndThrow(this.mediaPrefix,
+        this.GetType().Name + ".MediaPrefix");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaPrefix,
+        this.GetType().Name + ".MediaPrefix");
 
       this.mediaPrefix = mediaPrefix;
       return this;

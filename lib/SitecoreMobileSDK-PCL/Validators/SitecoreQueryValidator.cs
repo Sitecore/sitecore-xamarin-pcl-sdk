@@ -4,10 +4,7 @@
   {
     public static void ValidateSitecoreQuery(string sitecoreQuery, string source)
     {
-      if ( string.IsNullOrWhiteSpace(sitecoreQuery) )
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(source); 
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(sitecoreQuery, source);
     }
   }
 }

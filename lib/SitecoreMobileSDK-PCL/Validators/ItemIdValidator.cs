@@ -7,10 +7,7 @@
     private const string INVALID_ID_MESSAGE = "Item id must have curly braces '{}'";
     public static void ValidateItemId(string itemId, string source)
     {
-      if (string.IsNullOrWhiteSpace(itemId))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(source);
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemId, source);
 
       bool hasOpeningBrace = itemId.StartsWith("{");
       bool hasClosingBrace = itemId.EndsWith("}");

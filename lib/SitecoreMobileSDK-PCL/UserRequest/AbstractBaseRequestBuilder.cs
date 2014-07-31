@@ -15,15 +15,9 @@ namespace Sitecore.MobileSDK.UserRequest
   {
     public IBaseRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
-      if (string.IsNullOrWhiteSpace(sitecoreDatabase))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".Database");
-      }
-      else if (null != this.itemSourceAccumulator.Database)
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Database");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(sitecoreDatabase, this.GetType().Name + ".Database");
 
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         sitecoreDatabase, 
@@ -35,15 +29,9 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> Language(string itemLanguage)
     {
-      if (string.IsNullOrWhiteSpace(itemLanguage))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".Language");
-      }
-      else if (null != this.itemSourceAccumulator.Language)
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Language");
-      }
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemLanguage, this.GetType().Name + ".Language");
 
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
@@ -55,10 +43,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> Payload(PayloadType payload)
     {
-      if (null != this.queryParameters.Payload)
-      {
-        BaseValidator.ThrowParameterSetTwiceException(this.GetType().Name + ".Payload");
-      }
+      BaseValidator.CheckForTwiceSetAndThrow(this.queryParameters.Payload, this.GetType().Name + ".Payload");
 
       this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields);
       return this;
@@ -72,7 +57,7 @@ namespace Sitecore.MobileSDK.UserRequest
       {
         if (!scopeParameters.AddScope(singleScope))
         {
-          throw new InvalidOperationException(this.GetType().Name + " : Adding scope parameter duplicates is forbidden");
+          throw new InvalidOperationException(this.GetType().Name + ".Scope : Adding scope parameter duplicates is forbidden");
         }
       }
 
@@ -82,7 +67,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
-      ICollection<ScopeType> castedScope = (ICollection<ScopeType>)scope;
+      ICollection<ScopeType> castedScope = scope;
       return this.AddScope(castedScope);
     }
 
@@ -121,7 +106,7 @@ namespace Sitecore.MobileSDK.UserRequest
       bool isFieldListHasDuplicates = DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields);
       if (isFieldListHasDuplicates)
       {
-        throw new ArgumentException(this.GetType().Name + ".fields" + " : duplicate fields are not allowed");
+        throw new ArgumentException(this.GetType().Name + ".Fields" + " : duplicate fields are not allowed");
       }
 
       this.queryParameters = new QueryParameters( this.queryParameters.Payload, this.queryParameters.ScopeParameters, newFields );

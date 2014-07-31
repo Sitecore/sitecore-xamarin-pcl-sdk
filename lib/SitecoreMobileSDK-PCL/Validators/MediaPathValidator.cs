@@ -15,11 +15,8 @@
 
     public static void ValidateMediaRoot(string mediaLibraryRootItemPath, string source)
     {
-      if ( string.IsNullOrWhiteSpace(mediaLibraryRootItemPath) )
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(source);
-      }
-
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaLibraryRootItemPath, source);
+    
       string lowerCasePath = mediaLibraryRootItemPath.ToLowerInvariant();
       bool isValidPathPrefix = lowerCasePath.StartsWith("/");
       if (!isValidPathPrefix)
@@ -30,10 +27,7 @@
 
 		public void ValidateMediaPath(string itemPath, string source)
 		{
-			if ( string.IsNullOrWhiteSpace(itemPath) )
-			{
-        BaseValidator.ThrowNullOrEmptyParameterException(source);
-			}
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemPath, source);
 
       bool isAbsoluteItemPath = IsItemPathStartsWithSlash(itemPath);
       bool isMediaHookPresent = this.IsItemPathHasMediaHook(itemPath);

@@ -11,7 +11,7 @@
 
     public DeleteItemByIdRequestBuilder(string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".itemId");
+      ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".ItemId");
       this.itemId = itemId;
     }
 

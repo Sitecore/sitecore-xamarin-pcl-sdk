@@ -1,10 +1,9 @@
-﻿
-
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
 
+  using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API.Items;
@@ -48,7 +47,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestMergerReturnsDefaultSourceCopyForNilInput()
     {
-      ItemSource defaultSource = ItemSource.DefaultSource();
+      ItemSource defaultSource = LegacyConstants.DefaultSource();
 
       var merger = new ItemSourceFieldMerger(defaultSource);
       IItemSource result = merger.FillItemSourceGaps(null);
@@ -61,7 +60,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestMergerReturnsInputSourceCopyForNilDefault()
     {
-      ItemSource defaultSource = ItemSource.DefaultSource();
+      ItemSource defaultSource = LegacyConstants.DefaultSource();
 
       var merger = new ItemSourceFieldMerger(null);
       IItemSource result = merger.FillItemSourceGaps(defaultSource);
