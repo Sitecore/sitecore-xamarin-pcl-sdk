@@ -1,4 +1,5 @@
-﻿namespace Sitecore.MobileSDK
+﻿
+namespace Sitecore.MobileSDK
 {
   using System;
   using System.Collections.Generic;

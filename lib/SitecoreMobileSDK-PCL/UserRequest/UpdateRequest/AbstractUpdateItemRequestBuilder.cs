@@ -9,7 +9,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public abstract class AbstractUpdateItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>, IUpdateItemRequestParametersBuilder<T> 
+  public abstract class AbstractUpdateItemRequestBuilder<T> : AbstractGetVersionedItemRequestBuilder<T>, IUpdateItemRequestParametersBuilder<T> 
     where T : class
   {
 
@@ -62,6 +62,11 @@ namespace Sitecore.MobileSDK
       this.FieldsRawValuesByName = newFields;
 
       return this;
+    }
+
+    new public IUpdateItemRequestParametersBuilder<T> Version(string version)
+    {
+      return (IUpdateItemRequestParametersBuilder<T>)base.Version(version);
     }
 
     new public IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase)

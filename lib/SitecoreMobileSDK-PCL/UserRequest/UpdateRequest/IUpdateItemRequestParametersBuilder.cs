@@ -9,6 +9,7 @@ namespace Sitecore.MobileSDK
   public interface IUpdateItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
     where T : class
   {
+    IUpdateItemRequestParametersBuilder<T> Version(string itemVersion);
     IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (IDictionary<string, string> fieldsRawValuesByName);
     IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (string fieldKey, string fieldValue);
 

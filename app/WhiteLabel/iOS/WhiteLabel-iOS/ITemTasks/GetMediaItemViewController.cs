@@ -98,9 +98,10 @@ namespace WhiteLabeliOS
         ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
 				IDownloadMediaOptions options = new MediaOptionsBuilder()
-					.SetWidth(this.width)
-					.SetHeight(this.height)
-					.SetBackgroundColor("white")
+          .Set
+					.Width(this.width)
+					.Height(this.height)
+					.BackgroundColor("white")
 					.Build();
 
 				string path = this.MediaPathTextField.Text;
