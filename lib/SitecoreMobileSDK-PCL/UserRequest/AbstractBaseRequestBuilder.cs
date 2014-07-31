@@ -67,7 +67,8 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
-      return this.AddScope((ICollection<ScopeType>)scope);
+      ICollection<ScopeType> castedScope = scope;
+      return this.AddScope(castedScope);
     }
 
     public IBaseRequestParametersBuilder<T> AddFields(ICollection<string> fields)
