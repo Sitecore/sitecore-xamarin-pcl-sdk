@@ -199,6 +199,8 @@
     <Compile Include="API\MediaItem\IMediaOptionsBuilder.cs" />
     <Compile Include="Media\MediaOptionsBuilderImpl.cs" />
     <Compile Include="PublicKey\AuthenticatedSessionCryptor.cs" />
+    <Compile Include="UrlBuilder\ChangeItem\AbstractChangeItemUrlBuilder.cs" />
+    <Compile Include="API\Request\IBaseChangeItemRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -248,4 +250,7 @@
   </Target>
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UrlBuilder\ChangeItem\" />
+  </ItemGroup>
 </Project>
