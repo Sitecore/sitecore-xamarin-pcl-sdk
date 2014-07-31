@@ -60,7 +60,7 @@
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
-      BaseValidator.ValidateMediaOptionsOrThrow(downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
+      BaseValidator.CheckMediaOptionsOrThrow(downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
       this.downloadMediaOptions = downloadMediaOptions.DeepCopyMediaDownloadOptions();
 

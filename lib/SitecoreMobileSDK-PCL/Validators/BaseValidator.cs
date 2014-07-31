@@ -41,7 +41,7 @@
       }
     }
 
-    public static void ValidateMediaOptionsOrThrow(IDownloadMediaOptions options, string source)
+    public static void CheckMediaOptionsOrThrow(IDownloadMediaOptions options, string source)
     {
       if (!MediaOptionsValidator.IsValidMediaOptions(options))
       {
