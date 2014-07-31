@@ -1,46 +1,82 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-namespace ItemGetterCLI
+﻿namespace ItemGetterCLI
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
-    using Sitecore.MobileSDK;
-    using Sitecore.MobileSDK.Items;
-    using Sitecore.MobileSDK.SessionSettings;
+
+    using Sitecore.MobileSDK.API;
+    using Sitecore.MobileSDK.API.Items;
+    using Sitecore.MobileSDK.API.Request.Parameters;
 
 
     class Program
     {
-        static void Main(string[] args)
+        class InsecureDemoCredentials : IWebApiCredentials
         {
-            var endpoint = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:722", "admin", "b", "/sitecore/shell");
-            var defaultSource = ItemSource.DefaultSource();
-            var session = new ScApiSession(endpoint, defaultSource);
+            public string Username
+            {
+                get
+                {
+                    return "admin";
+                }
+            }
 
-            var request =
-                ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-                    .Payload(PayloadType.Content)
-                    .Build();
-            var readHomeItemTask = session.ReadItemAsync(request);
+            public string Password
+            {
+                get
+                {
+                    return "b";
+                }
+            }
 
-            // @adk : cannot use "await" in main
-            Task.WaitAll(readHomeItemTask);
+            public IWebApiCredentials CredentialsShallowCopy()
+            {
+                return this;
+            }
 
-            ScItemsResponse items = readHomeItemTask.Result;
-            string fieldText = items.Items[0].FieldWithName("Text").RawValue;
+            public void Dispose()
+            {
+                //IDLE
+            }
+        }
 
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.Clear();
+        private static void Main(string[] args)
+        {
+            using (var demoCredentials = new InsecureDemoCredentials())
+            {
+                var session =
+                    SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dk.sitecore.net:7220")
+                                                .Credentials(demoCredentials)
+                                                .Site("/sitecore/shell")
+                                                .DefaultDatabase("web")
+                                                .DefaultLanguage("en")
+                                                .MediaLibraryRoot("/sitecore/media library")
+                                                .MediaPrefix("~/media/")
+                                                .DefaultMediaResourceExtension("ashx")
+                                                .BuildReadonlySession();
 
-            Console.WriteLine("Home Item Text");
-            Console.WriteLine();
-            Console.WriteLine(fieldText);
+                var request =
+                    ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+                                            .AddScope(ScopeType.Self)
+                                            .Payload(PayloadType.Content)
+                                            .Build();
+                var readHomeItemTask = session.ReadItemAsync(request);
 
-            Console.ReadKey();
+                // @adk : cannot use "await" in main
+                Task.WaitAll(readHomeItemTask);
+
+                ScItemsResponse items = readHomeItemTask.Result;
+                string fieldText = items.Items[0].FieldWithName("Text").RawValue;
+
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Clear();
+
+                Console.WriteLine("Home Item Text");
+                Console.WriteLine();
+                Console.WriteLine(fieldText);
+
+                Console.ReadKey();
+            }
         }
     }
 }
