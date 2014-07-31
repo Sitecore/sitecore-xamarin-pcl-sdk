@@ -19,7 +19,7 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
-
+   /*
     [TestFixtureSetUp]
     public async void TestFixtureSetup()
     {
@@ -33,15 +33,18 @@
         await this.DeleteAllItems("master");
         await this.DeleteAllItems("web");
     }
-
+    */
     [SetUp]
-    public void Setup()
+    public async void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
       session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .BuildSession();
+
+      await this.DeleteAllItems("master");
+      await this.DeleteAllItems("web");
     }
 
     [TearDown]
