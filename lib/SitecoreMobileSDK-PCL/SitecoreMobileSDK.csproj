@@ -112,7 +112,6 @@
     <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsUrlBuilder.cs" />
     <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
     <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
-    <Compile Include="PublicKey\AuthenticedSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
     <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
@@ -199,6 +198,7 @@
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByPathRequestBuilder.cs" />
     <Compile Include="API\MediaItem\IMediaOptionsBuilder.cs" />
     <Compile Include="Media\MediaOptionsBuilderImpl.cs" />
+    <Compile Include="PublicKey\AuthenticatedSessionCryptor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

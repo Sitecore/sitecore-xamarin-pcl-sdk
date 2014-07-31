@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.PublicKey
   using System.Threading;
   using System.Threading.Tasks;
 
-  public interface ICredentialsHeadersCryptor
+  public interface ICredentialsHeadersCryptor : IDisposable
   {
     Task<HttpRequestMessage> AddEncryptedCredentialHeadersAsync(HttpRequestMessage httpRequest, CancellationToken cancelToken);
     HttpRequestMessage AddEncryptedCredentialHeaders(HttpRequestMessage httpRequest);
