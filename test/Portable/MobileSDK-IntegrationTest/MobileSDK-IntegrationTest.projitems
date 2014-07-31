@@ -26,5 +26,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)UrlAutocompleteTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExceptionMessagesTemplates.cs" />
   </ItemGroup>
 </Project>
