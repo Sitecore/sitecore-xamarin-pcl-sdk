@@ -27,5 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CreateItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExceptionMessagesTemplates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BuildSessionTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UpdateItemsTest.cs" />
   </ItemGroup>
 </Project>
