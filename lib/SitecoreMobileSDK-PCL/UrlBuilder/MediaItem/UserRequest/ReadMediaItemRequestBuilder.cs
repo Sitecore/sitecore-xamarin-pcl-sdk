@@ -1,6 +1,5 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.MediaItem.UserRequest
 {
-  using System;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
@@ -61,7 +60,7 @@
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
-      MediaOptionsValidator.ValidateOrThrow(downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
+      BaseValidator.ValidateMediaOptionsOrThrow(downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
       this.downloadMediaOptions = downloadMediaOptions.DeepCopyMediaDownloadOptions();
 

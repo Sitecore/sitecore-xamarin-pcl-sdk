@@ -1,10 +1,10 @@
 ﻿namespace Sitecore.MobileSDK.Validators
 {
   using System;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public class BaseValidator
   {
-
     public static void CheckNullAndThrow(Object obj, string source)
     {
       if (obj == null)
@@ -41,14 +41,12 @@
       }
     }
 
-    //    public static void ThrowNullOrEmptyParameterException(string source)
-    //    {
-    //      throw new ArgumentException(source + " : " + "The input cannot be null or empty.");
-    //    }
-    //
-    //    public static void ThrowParameterSetTwiceException(string source)
-    //    {
-    //      throw new InvalidOperationException(source + " : " + "Property cannot be assigned twice.");
-    //    }
+    public static void ValidateMediaOptionsOrThrow(IDownloadMediaOptions options, string source)
+    {
+      if (!MediaOptionsValidator.IsValidMediaOptions(options))
+      {
+        throw new ArgumentException(source + " : is not valid");
+      }
+    }
   }
 }
