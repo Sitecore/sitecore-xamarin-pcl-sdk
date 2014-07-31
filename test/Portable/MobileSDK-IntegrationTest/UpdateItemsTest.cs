@@ -4,7 +4,7 @@
   using System.Diagnostics;
   using System.Threading.Tasks;
   using NUnit.Framework;
-
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.Items;
 
   using Sitecore.MobileSDK.API;
@@ -401,15 +401,16 @@
     }
 
     [Test]
+    [Ignore]
     public async void TestUpdateItemByIdSetHtmlField()
     {
-      const string FieldName = "Texttt";
-      var fieldValue = RandomText();
+      const string FieldName = "Text";
+      const string FieldValue = "<div>Welcome to Sitecore!</div>";
 
       ISitecoreItem item = await this.CreateItem("item to updata not existen field");
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
-        .AddFieldsRawValuesByName(FieldName, fieldValue)
+        .AddFieldsRawValuesByName(FieldName, FieldValue)
         .AddFields(FieldName)
         .Build();
 
@@ -418,9 +419,63 @@
       Assert.AreEqual(1, result.Items.Count);
       var resultItem = result.Items[0];
       Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(0, resultItem.Fields.Count);
+      Assert.AreEqual(1, resultItem.Fields.Count);
+      Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
 
       this.RemoveItem(item);
+    }
+
+    [Test]
+    public void TestUpdateItemAsAnonymousFromShell()
+    {
+      const string FieldName = "Text";
+      var fieldValue = RandomText();
+
+      var itemSession = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
+        .Site(testData.ShellSite)
+        .DefaultDatabase("master")
+        .BuildSession();
+
+      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
+        .AddFieldsRawValuesByName(FieldName, fieldValue)
+        .Build();
+
+      TestDelegate testCode = async () =>
+      {
+        var task = itemSession.UpdateItemAsync(request);
+        await task;
+      };
+      var exception = Assert.Throws<ParserException>(testCode);
+      Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Access to site is not granted.", exception.InnerException.Message);
+    }
+
+    [Test]
+    public void TestUpdateItemAsUserWithoutWriteAccess()
+    {
+      const string FieldName = "Text";
+      var fieldValue = RandomText();
+
+      var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.NoCreateAccess)
+        .Site(testData.ShellSite)
+        .DefaultDatabase("master")
+        .BuildSession();
+
+      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
+        .AddFieldsRawValuesByName(FieldName, fieldValue)
+        .Build();
+
+      TestDelegate testCode = async () =>
+      {
+        var task = itemSession.UpdateItemAsync(request);
+        await task;
+      };
+      var exception = Assert.Throws<ParserException>(testCode);
+      Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.True(exception.InnerException.Message.Contains("The current user does not have write access to this item"));
     }
 
     private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)
@@ -436,7 +491,7 @@
         .Build();
       var createResponse = await itemSession.CreateItemAsync(request);
 
-      //Assert.AreEqual(1, createResponse.Items.Count);
+      Assert.AreEqual(1, createResponse.Items.Count);
       return createResponse.Items[0];
     }
 
