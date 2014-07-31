@@ -323,6 +323,21 @@
       Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
 
+    [Test]
+    public async void TestCreateAndDelete100ItemsByQuery()
+    {
+      for (int i = 0; i < 100; i++)
+      {
+        await this.CreateItem("Test item " + (i + 1));
+      }
+
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(testData.Items.CreateItemsHere.Path + "/descendant::*[@@templatename='Sample Item']")
+        .Build();
+
+      var result = await this.session.DeleteItemAsync(request);
+      Assert.AreEqual(100, result.Count); 
+    }
+
     private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)
     {
       if (itemSession == null)
