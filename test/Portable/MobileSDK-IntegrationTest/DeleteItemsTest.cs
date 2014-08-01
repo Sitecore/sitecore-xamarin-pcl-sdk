@@ -99,7 +99,7 @@
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(3, result.Count); //but 2 items was deleted in fact (Item Web API issue)
+      Assert.AreEqual(2, result.Count);
       Assert.AreEqual(item1.Id, result.ItemsIds[0]);
       Assert.AreEqual(item2.Id, result.ItemsIds[1]);
     }

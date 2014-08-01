@@ -67,7 +67,7 @@
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -97,7 +97,7 @@
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
       Assert.AreEqual(Db, resultItem.Source.Database);
       Assert.AreEqual(Language, resultItem.Source.Language);
-      this.RemoveItem(resultItem, adminSession);
+     // this.RemoveItem(resultItem, adminSession);
     }
 
     [Test]
@@ -125,7 +125,7 @@
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
       Assert.AreEqual(Db, resultItem.Source.Database);
       Assert.AreEqual(Language, resultItem.Source.Language);
-      this.RemoveItem(resultItem, adminSession);
+      //this.RemoveItem(resultItem, adminSession);
     }
 
 
@@ -142,7 +142,7 @@
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
 
@@ -166,7 +166,7 @@
       Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -189,7 +189,7 @@
       Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -211,7 +211,7 @@
       Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -232,7 +232,7 @@
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -255,7 +255,7 @@
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
 
@@ -275,7 +275,7 @@
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -323,7 +323,7 @@
       Assert.AreEqual(0, resultItem.Fields.Count);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -345,7 +345,7 @@
       Assert.AreEqual(0, resultItem.Fields.Count);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      this.RemoveItem(resultItem);
+      //this.RemoveItem(resultItem);
     }
 
     [Test]

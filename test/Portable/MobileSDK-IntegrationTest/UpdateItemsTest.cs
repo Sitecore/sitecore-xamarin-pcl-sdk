@@ -81,7 +81,7 @@
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
       Assert.AreEqual(Db, resultItem.Source.Database);
 
-      this.RemoveItem(parentItem);
+      //this.RemoveItem(parentItem);
     }
 
     [Test]
@@ -113,7 +113,7 @@
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
       Assert.AreEqual(Language, resultItem.Source.Language);
 
-      this.RemoveItem(item);
+      //this.RemoveItem(item);
     }
 
     [Test]
@@ -318,7 +318,7 @@
       Assert.AreEqual(parentItem.Id, resultItem.Id);
       Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
 
-      this.RemoveItem(parentItem);
+      //this.RemoveItem(parentItem);
     }
     
     //Item Web API issue
@@ -349,7 +349,7 @@
         Assert.AreEqual(TextValue, item.FieldWithName("Text").RawValue);
       }
 
-      this.RemoveItem(parentItem);
+      //this.RemoveItem(parentItem);
     }
 
     [Test]
@@ -374,7 +374,7 @@
       Assert.AreEqual(item.DisplayName, resultItem.DisplayName);
       Assert.AreEqual(TextValue, item.FieldWithName("Text").RawValue);
 
-      this.RemoveItem(item);
+      //this.RemoveItem(item);
     }
 
     [Test]
@@ -397,7 +397,7 @@
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(0, resultItem.Fields.Count);
 
-      this.RemoveItem(item);
+      //this.RemoveItem(item);
     }
 
     [Test]
@@ -422,7 +422,7 @@
       Assert.AreEqual(1, resultItem.Fields.Count);
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
 
-      this.RemoveItem(item);
+      //this.RemoveItem(item);
     }
 
     [Test]
