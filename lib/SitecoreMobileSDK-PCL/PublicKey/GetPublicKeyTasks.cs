@@ -1,6 +1,8 @@
-﻿namespace Sitecore.MobileSDK.PublicKey
+﻿
+namespace Sitecore.MobileSDK.PublicKey
 {
   using System;
+  using System.Diagnostics;
   using System.IO;
   using System.Net.Http;
   using System.Threading;
@@ -39,6 +41,8 @@
 
     public async Task<Stream> SendRequestForUrlAsync(string requestUrl, CancellationToken cancelToken)
     {
+      //TODO: @igk debug request output, remove later
+      Debug.WriteLine("REQUEST: " + requestUrl);
       HttpResponseMessage httpResponse = await this.httpClient.GetAsync (requestUrl, cancelToken);
       HttpContent responseContent = httpResponse.Content;
 
