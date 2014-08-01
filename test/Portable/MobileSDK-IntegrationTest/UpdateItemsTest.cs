@@ -18,21 +18,9 @@
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
-    /*
-    [TestFixtureSetUp]
-    public async void TestFixtureSetup()
-    {
-      this.testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
-        .DefaultDatabase("master")
-        .BuildSession();
 
-    }
-    */
     [SetUp]
-    public async void Setup()
+    public void SetupSession()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
@@ -40,6 +28,10 @@
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
+    }
+
+    public async void RemoveAll()
+    {
       await this.DeleteAllItems("master");
       await this.DeleteAllItems("web");
     }
@@ -54,6 +46,7 @@
     [Test]
     public async void TestUpdateItemByIdFromWebDbWithChildrenScope()
     {
+      this.RemoveAll();
       const string Db = "web";
       var titleValue = RandomText();
       var textValue = RandomText();
@@ -80,13 +73,12 @@
       Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
       Assert.AreEqual(Db, resultItem.Source.Database);
-
-      //this.RemoveItem(parentItem);
     }
 
     [Test]
     public async void TestUpdateDanishItemByPath()
     {
+      this.RemoveAll();
       const string Language = "da";
       var titleValue = RandomText();
       var textValue = RandomText();
@@ -112,8 +104,6 @@
       Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
       Assert.AreEqual(Language, resultItem.Source.Language);
-
-      //this.RemoveItem(item);
     }
 
     [Test]
@@ -237,7 +227,7 @@
       Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
-   
+
     [Test]
     public void TestUpdateItemByIdWithDuplicateScopeReturnsException()
     {
@@ -275,32 +265,34 @@
         .Build());
       Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
-   /* 
-    [Test]
-    public async void TestUpdateItemVersion1ById()
-    {
-      const string Version = "1";
-      var textValue = RandomText();
+    /* 
+     [Test]
+     public async void TestUpdateItemVersion1ById()
+     {
+       this.RemoveAll();
+       const string Version = "1";
+       var textValue = RandomText();
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
-        .AddFieldsRawValuesByName("Text", textValue)
-        .Payload(PayloadType.Full)
-        .Version(Version)
-        .Build();
+       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
+         .AddFieldsRawValuesByName("Text", textValue)
+         .Payload(PayloadType.Full)
+         .Version(Version)
+         .Build();
 
-      var result = await this.session.UpdateItemAsync(request);
+       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
-      Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
-      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
-      Assert.True(50 < resultItem.Fields.Count);
-      Assert.AreEqual(Version, resultItem.Source.Version);
-    }
-    */
+       Assert.AreEqual(1, result.Items.Count);
+       var resultItem = result.Items[0];
+       Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
+       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
+       Assert.True(50 < resultItem.Fields.Count);
+       Assert.AreEqual(Version, resultItem.Source.Version);
+     }
+     */
     [Test]
     public async void TestUpdateItemByPathWithParentScope()
     {
+      this.RemoveAll();
       const string TextValue = "Parent text after update";
 
       ISitecoreItem parentItem = await this.CreateItem("Parent item to update by query");
@@ -317,15 +309,14 @@
       var resultItem = result.Items[0];
       Assert.AreEqual(parentItem.Id, resultItem.Id);
       Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
-
-      //this.RemoveItem(parentItem);
     }
-    
+
     //Item Web API issue
     [Test]
     [Ignore]
     public async void TestUpdateItemByPathWithParentAndChildrenScope()
     {
+      this.RemoveAll();
       const string TextValue = "Text after update";
 
       ISitecoreItem parentItem = await this.CreateItem("Parent item to update by query");
@@ -348,18 +339,16 @@
       {
         Assert.AreEqual(TextValue, item.FieldWithName("Text").RawValue);
       }
-
-      //this.RemoveItem(parentItem);
     }
 
     [Test]
     public async void TestUpdateInternationalItemByPath()
     {
+      this.RemoveAll();
       const string TextValue = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
       const string ItemName = "גלורי לאוקראינה";
-
       ISitecoreItem item = await this.CreateItem(ItemName);
-      
+
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/" + ItemName)
         .AddFieldsRawValuesByName("Text", TextValue)
         .AddFields("Text")
@@ -373,13 +362,12 @@
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(item.DisplayName, resultItem.DisplayName);
       Assert.AreEqual(TextValue, item.FieldWithName("Text").RawValue);
-
-      //this.RemoveItem(item);
     }
 
     [Test]
     public async void TestUpdateItemByIdWithNotExistentField()
     {
+      this.RemoveAll();
       const string FieldName = "Texttt";
       var fieldValue = RandomText();
 
@@ -397,13 +385,13 @@
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(0, resultItem.Fields.Count);
 
-      //this.RemoveItem(item);
     }
 
     [Test]
     [Ignore]
     public async void TestUpdateItemByIdSetHtmlField()
     {
+      this.RemoveAll();
       const string FieldName = "Text";
       const string FieldValue = "<div>Welcome to Sitecore!</div>";
 
@@ -422,7 +410,6 @@
       Assert.AreEqual(1, resultItem.Fields.Count);
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
 
-      //this.RemoveItem(item);
     }
 
     [Test]
@@ -495,21 +482,6 @@
       return createResponse.Items[0];
     }
 
-    private async void RemoveItem(ISitecoreItem item, ISitecoreWebApiSession itemSession = null)
-    {
-      if (itemSession == null)
-      {
-        itemSession = this.session;
-      }
-
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(item.Id)
-        .Database(item.Source.Database)
-        .Build();
-
-      var response = await itemSession.DeleteItemAsync(request);
-      Assert.AreEqual(1, response.Count);
-    }
-
     private static string RandomText()
     {
       return "UpdatedText" + new Random(10000);
@@ -523,14 +495,15 @@
           .AddScope(ScopeType.Children)
           .Database(database)
           .Build();
-        return await this.session.DeleteItemAsync(deleteFromMaster);
+        var responce = await this.session.DeleteItemAsync(deleteFromMaster);
+        return responce;
       }
       catch (Exception ex)
       {
-        string message = "Error removing items : " + ex;
+        var message = "Error removing items : " + ex;
         Debug.WriteLine(message);
-
         return null;
+
       }
     }
   }

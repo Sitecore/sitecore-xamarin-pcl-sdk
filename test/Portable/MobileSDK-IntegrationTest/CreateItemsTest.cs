@@ -19,21 +19,7 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
-   /*
-    [TestFixtureSetUp]
-    public async void TestFixtureSetup()
-    {
-        this.testData = TestEnvironment.DefaultTestEnvironment();
-        this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Admin)
-          .Site(testData.ShellSite)
-          .BuildSession();
 
-        // @adk : must not throw
-        await this.DeleteAllItems("master");
-        await this.DeleteAllItems("web");
-    }
-    */
     [SetUp]
     public async void Setup()
     {
@@ -42,7 +28,10 @@
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .BuildSession();
+    }
 
+    public async void RemoveAll()
+    {
       await this.DeleteAllItems("master");
       await this.DeleteAllItems("web");
     }
@@ -57,6 +46,7 @@
     [Test]
     public async void TestCreateItemByIdWithoutFieldsSet()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create by parent id");
 
       var request = this.CreateByIdRequestBuilder()
@@ -67,12 +57,12 @@
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
     [Test]
     public async void TestCreateItemByIdWithOverridenDatabaseAndLanguageInRequest()
     {
+      this.RemoveAll();
       const string Db = "web";
       const string Language = "da";
       var expectedItem = this.CreateTestItem("Create danish version in web from request");
@@ -97,12 +87,12 @@
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
       Assert.AreEqual(Db, resultItem.Source.Database);
       Assert.AreEqual(Language, resultItem.Source.Language);
-     // this.RemoveItem(resultItem, adminSession);
     }
 
     [Test]
     public async void TestCreateItemByPathWithDatabaseAndLanguageInSession()
     {
+      this.RemoveAll();
       const string Db = "web";
       const string Language = "da";
       var expectedItem = this.CreateTestItem("Create danish version in web from session");
@@ -125,13 +115,13 @@
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
       Assert.AreEqual(Db, resultItem.Source.Database);
       Assert.AreEqual(Language, resultItem.Source.Language);
-      //this.RemoveItem(resultItem, adminSession);
     }
 
 
     [Test]
     public async void TestCreateItemByPathAndTemplateIdWithoutFieldsSet()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
       var request = this.CreateByIdRequestBuilder()
@@ -142,13 +132,13 @@
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
 
     [Test]
     public async void TestCreateItemByPathWithSpecifiedFields()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create with fields");
       const string CreatedTitle = "Created title";
       const string CreatedText = "Created text";
@@ -166,12 +156,12 @@
       Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
     [Test]
     public async void TestCreateItemByIdWithInternationalNameAndFields()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("International Слава Україні ウクライナへの栄光 عالمي");
       const string CreatedTitle = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
       const string CreatedText = "युक्रेन गौरव גלורי לאוקראינה";
@@ -189,12 +179,12 @@
       Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
     [Test]
     public async void TestCreateItemByIdWithNotExistentFields()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("Set not existent field");
       const string CreatedTitle = "Existent title";
       const string CreatedTexttt = "Not existent texttt";
@@ -211,12 +201,12 @@
       Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
     [Test]
     public async void TestCreateItemByPathAndSetFieldWithSpacesInName()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("Set standard field value");
       const string FieldName = "__Standard values";
       const string FieldValue = "Created standard value 000!! ))";
@@ -232,13 +222,13 @@
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
     [Test]
     [Ignore]
     public async void TestCreateItemByIdAndSetHtmlFieldValue()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("Set HTML in field");
       const string FieldName = "Text";
       const string FieldValue = "<div>Welcome to Sitecore!</div><div><br /><a href=\"~/link.aspx?_id=A2EE64D5BD7A4567A27E708440CAA9CD&amp;_z=z\">Accelerometer</a></div>";
@@ -255,7 +245,6 @@
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
 
@@ -264,6 +253,7 @@
     [Ignore]
     public async void TestCreateItemByPathFromBranch()
     {
+      this.RemoveAll();
       TestEnvironment.Item expectedItem = this.CreateTestItem("Multiple item brunch");
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
@@ -275,7 +265,6 @@
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -310,6 +299,7 @@
     [Test]
     public async void TestCreateItemByPathAndGetInvalidEmptyAndNullFields()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create and get invalid field");
       const string FieldName = "@*<<invalid!`fieldname=)";
       var request = CreateByPathRequestBuilder()
@@ -323,12 +313,12 @@
       Assert.AreEqual(0, resultItem.Fields.Count);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
     [Test]
     public async void TestCreateItemByIdAndSetInvalidEmptyAndNullFields()
     {
+      this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create and set invalid field");
       const string FieldName = "@*<<%#==_&@";
       var request = CreateByPathRequestBuilder()
@@ -345,7 +335,6 @@
       Assert.AreEqual(0, resultItem.Fields.Count);
 
       this.GetAndCheckItem(expectedItem, resultItem);
-      //this.RemoveItem(resultItem);
     }
 
     [Test]
@@ -695,22 +684,6 @@
       this.testData.AssertItemsAreEqual(expectedItem, resultItem);
       return resultItem;
     }
-
-    private async void RemoveItem(ISitecoreItem item, ISitecoreWebApiSession itemSession = null)
-    {
-      if (itemSession == null)
-      {
-        itemSession = this.session;
-      }
-
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(item.Id)
-        .Database(item.Source.Database)
-        .Build();
-
-      var response = await itemSession.DeleteItemAsync(request);
-      Assert.AreEqual(1, response.Count);
-    }
-
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
       try
