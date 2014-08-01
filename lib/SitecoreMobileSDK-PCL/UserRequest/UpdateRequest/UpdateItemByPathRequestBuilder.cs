@@ -7,7 +7,7 @@
   {
     public UpdateItemByPathRequestBuilder(string itemPath)
     {
-      ItemPathValidator.ValidateItemPath(itemPath, this.GetType().Name + ".itemPath");
+      ItemPathValidator.ValidateItemPath(itemPath, this.GetType().Name + ".ItemPath");
 
       this.itemPath = itemPath;
     }

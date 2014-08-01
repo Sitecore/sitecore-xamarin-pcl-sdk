@@ -113,7 +113,7 @@ namespace WhiteLabeliOS
 				var response = await session.DownloadResourceAsync(request);
 
 				byte[] data;
-
+          
 				using (BinaryReader br = new BinaryReader(response))
 				{
 					data = br.ReadBytes((int)response.Length);
