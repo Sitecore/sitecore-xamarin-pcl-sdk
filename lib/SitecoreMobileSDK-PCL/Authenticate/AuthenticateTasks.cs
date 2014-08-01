@@ -1,6 +1,8 @@
-﻿namespace Sitecore.MobileSDK.Authenticate
+﻿
+namespace Sitecore.MobileSDK.Authenticate
 {
   using System;
+  using System.Diagnostics;
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
@@ -46,6 +48,8 @@
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestMessage, CancellationToken cancelToken)
     {
+      //TODO: @igk debug request output, remove later
+      Debug.WriteLine("REQUEST: " + requestMessage);
       HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestMessage, cancelToken);
       HttpContent responseContent = httpResponse.Content;
 
