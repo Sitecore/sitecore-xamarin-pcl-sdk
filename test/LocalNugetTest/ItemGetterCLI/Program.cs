@@ -6,6 +6,8 @@
     using Sitecore.MobileSDK.API;
     using Sitecore.MobileSDK.API.Items;
     using Sitecore.MobileSDK.API.Request.Parameters;
+    using Sitecore.MobileSDK.API.MediaItem;
+    using System.IO;
 
 
     class Program
@@ -82,6 +84,8 @@
         }
 
         #endregion Authenticated
+
+        #region Anonymous read
         private static void __Main(string[] args)
         {
             string instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7220";
@@ -117,6 +121,42 @@
             Console.WriteLine(fieldText);
 
             Console.ReadKey();
+        }
+        #endregion
+
+        private static async void __Main_Media(string[] args)
+        {
+            string instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7220";
+            var session =
+                SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(instanceUrl)
+                                            .Site("/sitecore/shell")
+                                            .DefaultDatabase("web")
+                                            .DefaultLanguage("en")
+                                            .MediaLibraryRoot("/sitecore/media library")
+                                            .MediaPrefix("~/media/")
+                                            .DefaultMediaResourceExtension("ashx")
+                                            .BuildReadonlySession();
+
+            var options = new MediaOptionsBuilder().Set
+                                                   .MaxWidth(1920)
+                                                   .MaxHeight(1080)
+                                                   .Width(1024)
+                                                   .Height(768)
+                                                   .BackgroundColor("red")
+                                                   .DisableMediaCache(false)
+                                                   .AllowStrech(false)
+                                                   .Scale(1.0f)
+                                                   .DisplayAsThumbnail(false)
+                                                   .Build();
+
+            var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/butterfly2_large")
+                                                     .Database("master")
+                                                     .Language("fr")
+                                                     .Version("1")
+                                                     .DownloadOptions(options)
+                                                     .Build();
+
+             Stream response = await session.DownloadResourceAsync(request);
         }
     }
 }
