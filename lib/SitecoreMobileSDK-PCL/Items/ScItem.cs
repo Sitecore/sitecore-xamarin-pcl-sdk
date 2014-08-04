@@ -6,7 +6,6 @@ namespace Sitecore.MobileSDK.Items
 	using Sitecore.MobileSDK.API.Items;
 	using Sitecore.MobileSDK.Items.Fields;
 
-
   public class ScItem : ISitecoreItem
 	{
 		#region Class variables;
@@ -33,8 +32,8 @@ namespace Sitecore.MobileSDK.Items
 
     public IField FieldWithName(string caseInsensitiveFieldName)
     {
-        string lowercaseName = caseInsensitiveFieldName.ToLowerInvariant();
-        return this.FieldsByName[lowercaseName];
+      string lowercaseName = caseInsensitiveFieldName.ToLowerInvariant();
+      return this.FieldsByName[lowercaseName];
     }
 
   	#endregion Class variables;
