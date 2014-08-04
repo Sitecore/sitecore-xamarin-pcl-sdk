@@ -6,11 +6,21 @@
   {
     public static void ValidateItemPath(string itemPath, string source)
     {
+      ItemPathValidator.CommonValidatePath (itemPath, source, "Item name");
+    }
+
+    public static void ValidateItemTemplate(string itemPath, string source)
+    {
+      ItemPathValidator.CommonValidatePath (itemPath, source, "Template");
+    }
+
+    private static void CommonValidatePath(string itemPath, string source, string parameterName)
+    {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemPath, source);
 
       if (!itemPath.StartsWith("/"))
       {
-        throw new ArgumentException(source + " : Item path should begin with '/'");
+        throw new ArgumentException(source + " : " + parameterName + " should begin with '/'");
       }
 
       char[] unexpectedSymbols = { '.' };
@@ -19,11 +29,10 @@
       if (hasUnexpectedSymbols)
       {
         var unexpectedSymbol = itemPath[unexpectedSymbolIndex];
-        string message = string.Format("{0} : Item path cannot contain '{1}'", source, unexpectedSymbol);
+        string message = string.Format("{0} : " + parameterName + " cannot contain '{1}'", source, unexpectedSymbol);
 
         throw new ArgumentException(message);
       }
-
     }
   }
 }

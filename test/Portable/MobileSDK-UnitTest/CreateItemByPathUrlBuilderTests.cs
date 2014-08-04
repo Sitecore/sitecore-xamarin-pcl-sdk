@@ -54,7 +54,7 @@
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .ItemTemplate("Sample/Sample Item")
+        .ItemTemplate("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName(fields)
         .AddFieldsRawValuesByName("field3","VaLuE3")
@@ -83,7 +83,7 @@
     public void TestNameIsMandatoryField()
     {
       var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemTemplate("Sample/Sample Item")
+        .ItemTemplate("/Sample/Sample Item")
         .AddFieldsRawValuesByName("field1", "VaLuE1")
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 
@@ -107,7 +107,7 @@
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
       ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemTemplate("Sample/Sample Item")
+        .ItemTemplate("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName("field1","VaLuE1")
         .AddFieldsRawValuesByName("field2","VaLuE2")
@@ -134,7 +134,7 @@
     public void TestFieldWithDoublicatedKeyWillCrash()
     {
       var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("Sample/Sample Item")
+        .ItemTemplate("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName("field1", "VaLuE1")
         .AddFieldsRawValuesByName("field2", "VaLuE2");

@@ -32,8 +32,13 @@ namespace Sitecore.MobileSDK
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemTemplate, this.GetType().Name + ".ItemTemplate");
 
+      ItemPathValidator.ValidateItemTemplate(itemTemplate, this.GetType().Name + ".itemTemplate");
+
       BaseValidator.CheckForTwiceSetAndThrow(this.itemParametersAccumulator.ItemTemplate,
         this.GetType().Name + ".ItemTemplate");
+
+      //igk spike to use one restrictions for all paths 
+      itemTemplate = itemTemplate.TrimStart ('/');
 
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, itemTemplate, this.itemParametersAccumulator.FieldsRawValuesByName);
