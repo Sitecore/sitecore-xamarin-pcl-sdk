@@ -222,13 +222,13 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestWebApiVersionThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .WebApiVersion(null)
       );
 
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .WebApiVersion(null)
       );
@@ -237,13 +237,13 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestDatabaseThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>( ()=>
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultDatabase(null)
       );
 
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>( ()=>
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .DefaultDatabase(null)
       );
@@ -252,13 +252,13 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestLanguageThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultLanguage(null)
       );
 
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .DefaultLanguage(null)
       );
@@ -267,13 +267,13 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestSiteThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .Site(null)
       );
 
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .Site(null)
       );
@@ -283,13 +283,13 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestMediaThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .MediaLibraryRoot(null)
       );
 
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .MediaLibraryRoot(null)
       );
@@ -299,13 +299,13 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestMediaExtThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>( ()=>
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultMediaResourceExtension(null)
       );
 
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentNullException>(() =>
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .DefaultMediaResourceExtension(null)
       );

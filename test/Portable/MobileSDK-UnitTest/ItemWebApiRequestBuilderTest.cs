@@ -1,21 +1,12 @@
-﻿
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using System.Collections.Generic;
   using NUnit.Framework;
 
-
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-
 
   [TestFixture]
   public class ItemWebApiRequestBuilderTest
@@ -36,8 +27,6 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.IsNotNull(result.ItemId);
       Assert.IsNotNull( result.QueryParameters );
       Assert.IsNull(result.SessionSettings);
-
-
 
       Assert.AreEqual("{dead-beef}", result.ItemId);
       Assert.AreEqual("en", result.ItemSource.Language);
@@ -100,7 +89,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemIdRequestBuilderWithNullIdCrashes()
     {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(null));
+      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(null));
     }
 
     [Test]
@@ -179,7 +168,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemPathRequestBuilderWithNullPathCrashes()
     {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(null));
+      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(null));
     }
 
     [Test]
@@ -253,7 +242,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestQueryRequestBuilderWithNullQueryCrashes()
     {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(null));
+      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(null));
     }
 
     [Test]
@@ -478,7 +467,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestNullDatabaseCannotBeAssignedExplicitly()
     {
-      Assert.Throws<ArgumentException>( () =>
+      Assert.Throws<ArgumentNullException>( () =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Database(null)
       );
@@ -518,7 +507,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestNullLanguageCannotBeAssignedExplicitly()
     {
-      Assert.Throws<ArgumentException>( () =>
+      Assert.Throws<ArgumentNullException>( () =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
         .Language(null)
       );
@@ -557,7 +546,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestNullVersionCannotBeAssignedExplicitly()
     {
-      Assert.Throws<ArgumentException>( () =>
+      Assert.Throws<ArgumentNullException>( () =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
         .Version(null)
       );

@@ -8,23 +8,19 @@ namespace Sitecore.MobileSDK.UserRequest.CreateRequest
   {
     public CreateItemByPathRequestBuilder(string itemPath)
     {
-      ItemPathValidator.ValidateItemPath(itemPath, this.GetType().Name + ".itemPath");
+      ItemPathValidator.ValidateItemPath(itemPath, this.GetType().Name + ".ItemPath");
       this.ItemPath = itemPath;
     }
 
     public override ICreateItemByPathRequest Build()
     {
-      if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemName))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemName");
-      }
+      BaseValidator.CheckForNullAndEmptyOrThrow(this.itemParametersAccumulator.ItemName,
+        this.GetType().Name + ".ItemName");
 
-      if (string.IsNullOrEmpty(this.itemParametersAccumulator.ItemTemplate))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".ItemTemplate");
-      }
+      BaseValidator.CheckForNullAndEmptyOrThrow(this.itemParametersAccumulator.ItemTemplate,
+        this.GetType().Name + ".ItemTemplate");
 
-      CreateItemByPathParameters result = 
+      CreateItemByPathParameters result =
         new CreateItemByPathParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.ItemPath);
       return result;
     }

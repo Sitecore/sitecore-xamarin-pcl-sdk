@@ -3,31 +3,23 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.Validators;
 
   public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest>
   {
     public ReadMediaItemRequestBuilder(string mediaPath)
     {
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        mediaPath,
-        this.GetType().Name + ".mediaPath"
-      );
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaPath, this.GetType().Name + ".MediaPath");
+      
       this.mediaPath = mediaPath;
     }
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database(string database)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.itemSourceAccumulator.Database,
-        this.GetType().Name + ".database"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        database,
-        this.GetType().Name + ".database"
-      );
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
 
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(database, this.GetType().Name + ".Database");
+      
       this.itemSourceAccumulator = new ItemSourcePOD(
         database,
         this.itemSourceAccumulator.Language,
@@ -38,14 +30,9 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Language(string itemLanguage)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.itemSourceAccumulator.Language,
-        this.GetType().Name + ".itemLanguage"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        itemLanguage,
-        this.GetType().Name + ".itemLanguage"
-      );
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
+
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemLanguage, this.GetType().Name + ".Language");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,
@@ -57,15 +44,9 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Version(string itemVersion)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.itemSourceAccumulator.Version,
-        this.GetType().Name + ".itemVersion"
-      );
-      WebApiParameterValidator.ValidateParameterAndThrowErrorWithMessage(
-        itemVersion,
-        this.GetType().Name + ".itemVersion"
-      );
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Version, this.GetType().Name + ".Version");
 
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemVersion, this.GetType().Name + ".Version");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,
@@ -77,19 +58,11 @@
 
     public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> DownloadOptions(IDownloadMediaOptions downloadMediaOptions)
     {
-      WebApiParameterValidator.ValidateWriteOnceDestinationWithErrorMessage(
-        this.downloadMediaOptions,
-        this.GetType().Name + ".downloadMediaOptions"
-      );
+      BaseValidator.CheckForTwiceSetAndThrow(this.downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
-      MediaOptionsValidator.ValidateMediaOptions
-      (
-        downloadMediaOptions,
-        this.GetType().Name + ".downloadMediaOptions"
-      );
+      BaseValidator.CheckMediaOptionsOrThrow(downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
-
-      this.downloadMediaOptions = (DownloadMediaOptions)downloadMediaOptions.DeepCopyMediaDownloadOptions();
+      this.downloadMediaOptions = downloadMediaOptions.DeepCopyMediaDownloadOptions();
 
       return this;
     }

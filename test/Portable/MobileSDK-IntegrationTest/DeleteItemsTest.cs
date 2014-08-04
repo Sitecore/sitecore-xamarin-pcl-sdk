@@ -6,7 +6,6 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK.Items;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
@@ -19,7 +18,7 @@
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
-
+    /*
     [TestFixtureSetUp]
     public async void TestFixtureSetup()
     {
@@ -34,9 +33,9 @@
       await this.DeleteAllItems("master");
       await this.DeleteAllItems("web");
     }
-
+     */
     [SetUp]
-    public void Setup()
+    public async void Setup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
@@ -44,6 +43,8 @@
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
+      await this.DeleteAllItems("master");
+      await this.DeleteAllItems("web");
     }
 
     [TearDown]
@@ -254,10 +255,12 @@
     [Test]
     public void TestDeleteItemByQueryWithNullScopeReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
         .AddScope(null)
         .Build());
-      Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Scope : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "DeleteItemItemByQueryRequestBuilder.Scope",
+        exception.Message);
     }
 
     [Test]
@@ -273,10 +276,12 @@
     [Test]
     public void TestDeleteItemByPathWithNullDatabaseReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sample path")
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sample path")
         .Database(null)
         .Build());
-      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "DeleteItemItemByPathRequestBuilder.Database",
+        exception.Message);
     }
 
     [Test]
@@ -285,7 +290,7 @@
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
         .Database("")
         .Build());
-      Assert.AreEqual("DeleteItemByIdRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("DeleteItemByIdRequestBuilder.Database : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -294,28 +299,45 @@
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("/sample query")
         .Database("  ")
         .Build());
-      Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Database : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Database : The input cannot be empty.", exception.Message);
     }
 
     [Test]
     public void TestDeleteItemByEmptyIdReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId("").Build());
-      Assert.AreEqual("DeleteItemByIdRequestBuilder.ItemId : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("DeleteItemByIdRequestBuilder.ItemId : The input cannot be empty.", exception.Message);
     }
 
     [Test]
     public void TestDeleteItemByNullQueryReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(null));
-      Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.SitecoreQuery : The input cannot be null or empty.", exception.Message);
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(null));
+      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
+        "DeleteItemItemByQueryRequestBuilder.SitecoreQuery", 
+        exception.Message);
     }
 
     [Test]
     public void TestDeleteItemByPathWithSpacesOnlyReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath(" ").Build());
-      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
+    }
+
+    [Test]
+    public async void TestCreateAndDelete100ItemsByQuery()
+    {
+      for (int i = 0; i < 100; i++)
+      {
+        await this.CreateItem("Test item " + (i + 1));
+      }
+
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(testData.Items.CreateItemsHere.Path + "/descendant::*[@@templatename='Sample Item']")
+        .Build();
+
+      var result = await this.session.DeleteItemAsync(request);
+      Assert.AreEqual(100, result.Count); 
     }
 
     private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)

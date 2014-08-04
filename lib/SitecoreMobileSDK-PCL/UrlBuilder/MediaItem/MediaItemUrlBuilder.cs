@@ -35,18 +35,11 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
     private void Validate()
     {
-      if (null == this.itemSource)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".itemSource");
-      }
-      else if (null == this.restGrammar)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".restGrammar");
-      }
-      else if (null == this.sessionConfig)
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(this.GetType().Name + ".sessionConfig");
-      }
+      BaseValidator.CheckNullAndThrow(this.itemSource, this.GetType().Name + ".itemSource");
+
+      BaseValidator.CheckNullAndThrow(this.restGrammar, this.GetType().Name + ".restGrammar");
+
+      BaseValidator.CheckNullAndThrow(this.sessionConfig, this.GetType().Name + ".sessionConfig");
     }
 
     //    https://test.host/~/media/1.png.ashx?w=640&h=480

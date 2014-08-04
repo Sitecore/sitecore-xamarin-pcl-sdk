@@ -194,7 +194,7 @@ namespace Sitecore.MobileSdkUnitTest
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 
       TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentException>(action);
+      Assert.Throws<ArgumentNullException>(action);
     }
 
     [Test]
@@ -206,7 +206,7 @@ namespace Sitecore.MobileSdkUnitTest
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 
       TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentException>(action);
+      Assert.Throws<ArgumentNullException>(action);
     }
 
     [Test]

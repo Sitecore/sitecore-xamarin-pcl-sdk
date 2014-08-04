@@ -6,15 +6,12 @@
   {
     public static void ValidateItemPath(string itemPath, string source)
     {
-      if (string.IsNullOrWhiteSpace(itemPath))
-      {
-        BaseValidator.ThrowNullOrEmptyParameterException(source);
-      }
-      else if (!itemPath.StartsWith("/"))
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemPath, source);
+
+      if (!itemPath.StartsWith("/"))
       {
         throw new ArgumentException(source + " : Item path should begin with '/'");
       }
-
 
       char[] unexpectedSymbols = { '.' };
       int unexpectedSymbolIndex = itemPath.IndexOfAny(unexpectedSymbols);

@@ -11,7 +11,7 @@
 
     public DeleteItemItemByQueryRequestBuilder(string sitecoreQuery)
     {
-      SitecoreQueryValidator.ValidateSitecoreQuery(sitecoreQuery, this.GetType().Name + ".sitecoreQuery");
+      SitecoreQueryValidator.ValidateSitecoreQuery(sitecoreQuery, this.GetType().Name + ".SitecoreQuery");
       this.sitecoreQuery = sitecoreQuery;
     }
 

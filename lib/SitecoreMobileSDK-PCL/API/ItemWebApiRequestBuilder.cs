@@ -1,4 +1,3 @@
-
 namespace Sitecore.MobileSDK.API
 {
   using Sitecore.MobileSDK.API.Request;
@@ -7,13 +6,8 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.UrlBuilder.MediaItem.UserRequest;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UserRequest.CreateRequest;
-
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-
-  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UserRequest.UpdateRequest;
-  using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 
   public class ItemWebApiRequestBuilder
