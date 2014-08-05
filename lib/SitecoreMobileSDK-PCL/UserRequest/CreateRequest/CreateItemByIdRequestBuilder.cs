@@ -17,9 +17,9 @@
 
     public override ICreateItemByIdRequest Build()
     {
-      BaseValidator.CheckNullAndThrow(this.itemParametersAccumulator.ItemName, this.GetType().Name + ".ItemName");
+      BaseValidator.CheckForNullAndEmptyOrThrow(this.itemParametersAccumulator.ItemName, this.GetType().Name + ".ItemName");
 
-      BaseValidator.CheckNullAndThrow(this.itemParametersAccumulator.ItemTemplate, this.GetType().Name + ".ItemTemplate");
+      BaseValidator.CheckForNullAndEmptyOrThrow(this.itemParametersAccumulator.ItemTemplate, this.GetType().Name + ".ItemTemplate");
 
       CreateItemByIdParameters result = new CreateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemId);
       return result;
