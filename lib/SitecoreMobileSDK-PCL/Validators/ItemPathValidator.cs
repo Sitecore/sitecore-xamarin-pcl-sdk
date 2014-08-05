@@ -6,7 +6,14 @@
   {
     public static void ValidateItemPath(string itemPath, string source)
     {
-      ItemPathValidator.CommonValidatePath (itemPath, source, "Item name");
+      string parameterName = "Item name";
+
+      if (!itemPath.StartsWith("/"))
+      {
+        throw new ArgumentException(source + " : " + parameterName + " should begin with '/'");
+      }
+
+      ItemPathValidator.CommonValidatePath (itemPath, source, parameterName);
     }
 
     public static void ValidateItemTemplate(string itemPath, string source)
@@ -17,11 +24,6 @@
     private static void CommonValidatePath(string itemPath, string source, string parameterName)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemPath, source);
-
-      if (!itemPath.StartsWith("/"))
-      {
-        throw new ArgumentException(source + " : " + parameterName + " should begin with '/'");
-      }
 
       char[] unexpectedSymbols = { '.' };
       int unexpectedSymbolIndex = itemPath.IndexOfAny(unexpectedSymbols);
