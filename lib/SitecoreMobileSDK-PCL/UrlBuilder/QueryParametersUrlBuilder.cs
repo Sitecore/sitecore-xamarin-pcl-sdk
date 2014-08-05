@@ -72,7 +72,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
       return result.ToLowerInvariant();
     }
 
-    private string GetFieldsStatementFromCollection( ICollection<string> fields )
+    private string GetFieldsStatementFromCollection( IEnumerable<string> fields )
     {
       string result = this.webApiGrammar.FieldsListParameterName + this.restGrammar.KeyValuePairSeparator;
 

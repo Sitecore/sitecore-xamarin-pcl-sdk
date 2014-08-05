@@ -95,10 +95,7 @@
 
     public static SessionBuilder SessionBuilderWithHost(string instanceUrl)
     {
-      if (string.IsNullOrEmpty(instanceUrl))
-      {
-        throw new ArgumentException(typeof(SessionBuilder).Name + ".InstanceUrl : The input cannot be null or empty.");
-      }
+      BaseValidator.CheckForNullAndEmptyOrThrow(instanceUrl, typeof(SessionBuilder).Name + ".InstanceUrl");
 
       var result = new SessionBuilder
       {
@@ -114,16 +111,9 @@
     {
       // @adk : won't be invoked more than once.
       // No validation needed.
-      if (string.IsNullOrEmpty(credentials.Username))
-      {
-        throw new ArgumentException(this.GetType().Name + ".Credentials.Username : The input cannot be null or empty.");
-      }
-
-      if (string.IsNullOrEmpty(credentials.Password))
-      {
-        throw new ArgumentException(this.GetType().Name + ".Credentials.Password : The input cannot be null or empty.");
-      }
-
+      BaseValidator.CheckForNullAndEmptyOrThrow(credentials.Username, this.GetType().Name + ".Credentials.Username");
+      BaseValidator.CheckForNullAndEmptyOrThrow(credentials.Password, this.GetType().Name + ".Credentials.Password");
+    
       this.credentials = credentials.CredentialsShallowCopy();
       return this;
     }

@@ -40,6 +40,8 @@
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage request, CancellationToken cancelToken)
     {
+      //TODO: @igk debug request output, remove later
+      Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
       return await result.Content.ReadAsStringAsync();
     }

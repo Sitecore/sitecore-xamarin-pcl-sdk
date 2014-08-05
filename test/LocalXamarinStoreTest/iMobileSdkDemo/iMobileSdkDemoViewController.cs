@@ -49,7 +49,8 @@
       base.ViewDidAppear(animated);
 
       // first we have to setup connection info and create a session
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dk.sitecore.net:722")
+      var instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722";
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
         .Credentials(this)
         .WebApiVersion("v1")
         .DefaultDatabase("web")

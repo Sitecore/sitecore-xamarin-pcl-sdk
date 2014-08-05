@@ -63,9 +63,6 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\DeleteItemsTest.cs">
       <Link>DeleteItemsTest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ExceptionMessagesTemplates.cs">
-      <Link>ExceptionMessagesTemplates.cs</Link>
-    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetFieldsTest.cs">
       <Link>GetFieldsTest.cs</Link>
     </Compile>

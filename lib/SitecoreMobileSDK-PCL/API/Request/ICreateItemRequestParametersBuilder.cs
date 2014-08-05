@@ -16,10 +16,10 @@ namespace Sitecore.MobileSDK.API.Request
     new ICreateItemRequestParametersBuilder<T> Language(string itemLanguage);
     new ICreateItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
-    new ICreateItemRequestParametersBuilder<T> AddFields(ICollection<string> fields);
+    new ICreateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields);
     new ICreateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
 
-    new ICreateItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope);
+    new ICreateItemRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope);
     new ICreateItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
   }
 }

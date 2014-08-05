@@ -10,10 +10,10 @@ namespace Sitecore.MobileSDK.API.Request
     IBaseRequestParametersBuilder<T> Language(string itemLanguage);
     IBaseRequestParametersBuilder<T> Payload(PayloadType payload);
 
-    IBaseRequestParametersBuilder<T> AddFields(ICollection<string> fields);
+    IBaseRequestParametersBuilder<T> AddFields(IEnumerable<string> fields);
     IBaseRequestParametersBuilder<T> AddFields(params string[] fieldParams);
 
-    IBaseRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope);
+    IBaseRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope);
     IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
 
     T Build();

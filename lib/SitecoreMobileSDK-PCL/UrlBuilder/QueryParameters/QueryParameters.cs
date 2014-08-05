@@ -1,12 +1,15 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
+﻿namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
 {
+  using System.Linq;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-    public class QueryParameters : IQueryParameters
+  public class QueryParameters : IQueryParameters
   {
-    public QueryParameters(PayloadType? payload, IScopeParameters scopeParameters, ICollection<string> fields)
+    public QueryParameters(
+      PayloadType? payload, 
+      IScopeParameters scopeParameters, 
+      IEnumerable<string> fields)
     {
       this.Payload         = payload;
       this.ScopeParameters = scopeParameters;
@@ -18,8 +21,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
       string[] fields = null;
       if (null != this.Fields)
       {
-        fields = new string[this.Fields.Count];
-        this.Fields.CopyTo(fields, 0);
+        fields = this.Fields.ToArray();
       }
 
       IScopeParameters scopeParameters = null;
@@ -33,6 +35,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.QueryParameters
 
     public IScopeParameters ScopeParameters { get; private set; }
     public PayloadType? Payload { get; private set; }
-    public ICollection<string> Fields { get; private set; }
+    public IEnumerable<string> Fields { get; private set; }
   }
 }
