@@ -30,7 +30,7 @@
        .Credentials(new WebApiCredentialsPOD("", testData.Users.Admin.Password))
        .BuildReadonlySession());
 
-      Assert.AreEqual("SessionBuilder.Credentials.Username : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("SessionBuilder.Credentials.Username : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -39,34 +39,34 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD("username", ""))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.Credentials.Password : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("SessionBuilder.Credentials.Password : The input cannot be empty.", exception.Message);
     }
 
     [Test]
     public void TestBuildSessionWithNullUsernameReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD(null, "password"))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.Credentials.Username : The input cannot be null or empty.", exception.Message);
+      Assert.IsTrue(exception.Message.Contains("SessionBuilder.Credentials.Username"));
     }
 
     [Test]
     public void TestBuildSessionWithNullPasswordReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD("username", null))
          .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.Credentials.Password : The input cannot be null or empty.", exception.Message);
+      Assert.IsTrue(exception.Message.Contains("SessionBuilder.Credentials.Password"));
     }
 
     [Test]
     public void TestBuildSessionWithNullUrlReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(null)
+      var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(null)
         .Credentials(new WebApiCredentialsPOD("Username", "Password"))
         .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.InstanceUrl : The input cannot be null or empty.", exception.Message);
+      Assert.IsTrue(exception.Message.Contains("SessionBuilder.InstanceUrl"));
     }
 
     [Test]
@@ -75,7 +75,7 @@
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("")
         .Credentials(new WebApiCredentialsPOD("Username", "Password"))
         .BuildReadonlySession());
-      Assert.AreEqual("SessionBuilder.InstanceUrl : The input cannot be null or empty.", exception.Message);
+      Assert.AreEqual("SessionBuilder.InstanceUrl : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -84,9 +84,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .DefaultDatabase(null)
         .BuildReadonlySession());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "SessionBuilder.DefaultDatabase",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("SessionBuilder.DefaultDatabase"));
     }
 
     [Test]
@@ -104,9 +102,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .DefaultMediaResourceExtension(null)
         .BuildSession());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "SessionBuilder.DefaultMediaResourceExtension",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("SessionBuilder.DefaultMediaResourceExtension"));
     }
 
     [Test]
@@ -124,8 +120,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .Site(null)
         .BuildSession());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "SessionBuilder.Site",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("SessionBuilder.Site"));
     }
 
     [Test]
