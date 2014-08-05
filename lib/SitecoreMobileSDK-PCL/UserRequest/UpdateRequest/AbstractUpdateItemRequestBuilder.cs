@@ -81,7 +81,7 @@ namespace Sitecore.MobileSDK
       return (IUpdateItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public IUpdateItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
+    new public IUpdateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.AddFields(fields);
     }
@@ -91,7 +91,7 @@ namespace Sitecore.MobileSDK
       return (IUpdateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
     }
 
-    new public IUpdateItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    new public IUpdateItemRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.AddScope(scope);
     }

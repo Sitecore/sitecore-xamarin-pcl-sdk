@@ -42,7 +42,7 @@
       return (IGetVersionedItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public IGetVersionedItemRequestParametersBuilder<T> AddFields(ICollection<string> fields)
+    new public IGetVersionedItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFields(fields);
     }
@@ -57,7 +57,7 @@
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
     }
 
-    new public IGetVersionedItemRequestParametersBuilder<T> AddScope(ICollection<ScopeType> scope)
+    new public IGetVersionedItemRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
     }
