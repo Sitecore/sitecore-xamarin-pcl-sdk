@@ -1,4 +1,5 @@
-﻿namespace Sitecore.MobileSDK.Items
+﻿
+namespace Sitecore.MobileSDK.Items
 {
   using System;
   using Sitecore.MobileSDK.API.Items;
