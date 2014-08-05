@@ -142,9 +142,6 @@
     <Compile Include="Items\ItemSourcePOD.cs" />
     <Compile Include="UserRequest\SessionConfigMerger.cs" />
     <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
-    <Compile Include="UserRequest\ReadItemByIdRequestBuilder.cs" />
-    <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
-    <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
     <Compile Include="Items\Fields\ScField.cs" />
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
@@ -167,7 +164,6 @@
     <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
     <Compile Include="Items\CreateItemByPathParameters.cs" />
     <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
-    <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
     <Compile Include="Items\UpdateItemByIdParameters.cs" />
     <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
@@ -201,6 +197,10 @@
     <Compile Include="PublicKey\AuthenticatedSessionCryptor.cs" />
     <Compile Include="UrlBuilder\ChangeItem\AbstractChangeItemUrlBuilder.cs" />
     <Compile Include="API\Request\IBaseChangeItemRequest.cs" />
+    <Compile Include="UserRequest\ReadRequest\AbstractBaseRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadRequest\ReadItemByIdRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadRequest\ReadItemByPathRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadRequest\ReadItemByQueryRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -252,5 +252,6 @@
   <ItemGroup />
   <ItemGroup>
     <Folder Include="UrlBuilder\ChangeItem\" />
+    <Folder Include="UserRequest\ReadRequest\" />
   </ItemGroup>
 </Project>
