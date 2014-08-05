@@ -82,7 +82,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       TestDelegate action = () => this.builder.BuildUrlStringForPath(null, null);
       var exception = Assert.Throws<ArgumentNullException>(action);
-      Assert.True(exception.Message.Contains("Value cannot be null."));
+      Assert.True(exception.Message.Contains("MediaItemUrlBuilder.Path"));
     }
 
     [Test]

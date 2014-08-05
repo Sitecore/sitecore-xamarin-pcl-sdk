@@ -258,9 +258,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
         .AddScope(null)
         .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "DeleteItemItemByQueryRequestBuilder.Scope",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("DeleteItemItemByQueryRequestBuilder.Scope"));
     }
 
     [Test]
@@ -279,9 +277,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sample path")
         .Database(null)
         .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "DeleteItemItemByPathRequestBuilder.Database",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("DeleteItemItemByPathRequestBuilder.Database"));
     }
 
     [Test]
@@ -313,9 +309,7 @@
     public void TestDeleteItemByNullQueryReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(null));
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "DeleteItemItemByQueryRequestBuilder.SitecoreQuery", 
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("DeleteItemItemByQueryRequestBuilder.SitecoreQuery"));
     }
 
     [Test]

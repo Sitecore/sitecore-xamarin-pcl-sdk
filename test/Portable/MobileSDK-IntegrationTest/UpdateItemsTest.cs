@@ -13,6 +13,7 @@
   using Sitecore.MobileSDK.API.Session;
 
   [TestFixture]
+  [Ignore]
   public class UpdateItemsTest
   {
     private TestEnvironment testData;
@@ -141,7 +142,7 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath(null)
         .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByPathRequestBuilder.ItemPath", exception.Message);
+      Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.ItemPath"));
     }
 
     [Test]
@@ -158,7 +159,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
         .Database(null)
         .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByIdRequestBuilder.Database", exception.Message);
+      Assert.IsTrue(exception.Message.Contains("UpdateItemByIdRequestBuilder.Database"));
     }
 
     [Test]
@@ -186,7 +187,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
         .AddScope(null)
         .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByPathRequestBuilder.Scope", exception.Message);
+      Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.Scope"));
     }
 
     [Test]
@@ -195,7 +196,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
         .AddFields(null)
         .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByIdRequestBuilder.Fields", exception.Message);
+      Assert.IsTrue(exception.Message.Contains("UpdateItemByIdRequestBuilder.Fields"));
     }
 
     [Test]
@@ -204,7 +205,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
         .AddFieldsRawValuesByName(null)
         .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + "UpdateItemByPathRequestBuilder.FieldsRawValuesByName", exception.Message);
+      Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.FieldsRawValuesByName"));
     }
 
     [Test]

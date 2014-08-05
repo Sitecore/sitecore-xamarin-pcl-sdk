@@ -27,7 +27,7 @@
       return this;
     }
 
-    public IDeleteItemRequestBuilder<T> AddScope(ICollection<ScopeType> scope)
+    public IDeleteItemRequestBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {
       BaseValidator.CheckNullAndThrow(scope, this.GetType().Name + ".Scope");
     
@@ -47,7 +47,7 @@
 
     public IDeleteItemRequestBuilder<T> AddScope(params ScopeType[] scope)
     {
-      ICollection<ScopeType> castedScope = scope;
+      IEnumerable<ScopeType> castedScope = scope;
       return this.AddScope(castedScope);
     }
   }

@@ -364,9 +364,7 @@
          .ItemName(null)
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "CreateItemByPathRequestBuilder.ItemName",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemName"));
     }
 
     [Test]
@@ -375,9 +373,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
          .ItemTemplate(testData.Items.Home.Template)
          .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "CreateItemByPathRequestBuilder.ItemName",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemName"));
     }
 
     [Test]
@@ -465,9 +461,7 @@
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
         .ItemName("Item without template")
         .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "CreateItemByIdRequestBuilder.ItemTemplate",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.ItemTemplate"));
     }
 
     [Test]
@@ -519,9 +513,7 @@
          .ItemName("Item with empty template")
          .ItemTemplate(null)
          .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "CreateItemByIdRequestBuilder.ItemTemplate",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.ItemTemplate"));
     }
 
     [Test]
@@ -541,9 +533,7 @@
          .ItemName("Item with null parent path")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE +
-        "CreateItemByPathRequestBuilder.ItemPath",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemPath"));
     }
 
     [Test]
@@ -587,9 +577,7 @@
          .ItemTemplate("Some template")
          .Database(null)
          .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "CreateItemByIdRequestBuilder.Database",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.Database"));
     }
 
     [Test]
@@ -611,9 +599,7 @@
          .ItemTemplate("Some template")
          .Language(null)
          .Build());
-      Assert.AreEqual(ExceptionMessagesTemplates.ARGMUNET_NULL_EXCEPTION_TEMPALTE + 
-        "CreateItemByPathRequestBuilder.Language",
-        exception.Message);
+      Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.Language"));
     }
 
     [Test]

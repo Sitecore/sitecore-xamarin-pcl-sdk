@@ -10,6 +10,6 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 
     IScopeParameters ScopeParameters{ get; }
     PayloadType? Payload { get; }
-    ICollection<string> Fields {get;}
+    IEnumerable<string> Fields {get;}
   }
 }
