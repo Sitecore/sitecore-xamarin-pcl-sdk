@@ -1,5 +1,4 @@
 ﻿
-
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -9,11 +8,10 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public abstract class AbstractUpdateItemRequestBuilder<T> : AbstractGetVersionedItemRequestBuilder<T>, IUpdateItemRequestParametersBuilder<T> 
+  public abstract class AbstractChangeItemRequestBuilder<T> : AbstractGetVersionedItemRequestBuilder<T>, IUpdateItemRequestParametersBuilder<T> 
     where T : class
   {
 
-    //TODO: @igk copypaste from AbstractCreateItemRequestBuilder merge!!!
     public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (IDictionary<string, string> fieldsRawValuesByName)
     {
       if (fieldsRawValuesByName.Count == 0)

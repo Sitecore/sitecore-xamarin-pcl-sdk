@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.Validators;
 
-  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractUpdateItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T>
+  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractChangeItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T>
     where T : class
   {
     protected CreateItemParameters itemParametersAccumulator = new CreateItemParameters(null, null, null);

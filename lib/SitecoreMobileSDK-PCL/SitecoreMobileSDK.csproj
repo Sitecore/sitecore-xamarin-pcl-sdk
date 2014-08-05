@@ -169,7 +169,6 @@
     <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
     <Compile Include="CrudTasks\AbstractUpdateItemTask.cs" />
     <Compile Include="UserRequest\UpdateRequest\IUpdateItemRequestParametersBuilder.cs" />
-    <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
     <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
     <Compile Include="Session\SessionBuilder.cs" />
@@ -202,6 +201,8 @@
     <Compile Include="UserRequest\ReadRequest\ReadItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadRequest\ReadItemByQueryRequestBuilder.cs" />
     <Compile Include="API\Request\IBaseReadItemsRequest.cs" />
+    <Compile Include="UserRequest\ChangeRequest\AbstractChangeItemRequestBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -254,5 +255,6 @@
   <ItemGroup>
     <Folder Include="UrlBuilder\ChangeItem\" />
     <Folder Include="UserRequest\ReadRequest\" />
+    <Folder Include="UserRequest\ChangeRequest\" />
   </ItemGroup>
 </Project>
