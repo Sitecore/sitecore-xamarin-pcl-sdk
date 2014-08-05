@@ -1,9 +1,8 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.API.Request
 {
-  public interface IBaseReadItemsRequest
+  using Sitecore.MobileSDK.UrlBuilder;
+
+  public interface IBaseReadItemsRequest : IBaseItemRequest
   {
   }
 }
-

@@ -201,6 +201,7 @@
     <Compile Include="UserRequest\ReadRequest\ReadItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadRequest\ReadItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadRequest\ReadItemByQueryRequestBuilder.cs" />
+    <Compile Include="API\Request\IBaseReadItemsRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
