@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.API.Request
 {
   using System;
   using System.Collections.Generic;
