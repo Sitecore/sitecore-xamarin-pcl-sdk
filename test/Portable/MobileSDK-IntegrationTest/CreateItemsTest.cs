@@ -324,8 +324,6 @@
       var request = CreateByPathRequestBuilder()
          .AddFields(FieldName)
          .AddFieldsRawValuesByName(FieldName, FieldName)
-         .AddFieldsRawValuesByName(null, "")
-         .AddFieldsRawValuesByName("", null)
          .ItemName(expectedItem.DisplayName)
          .Build();
 
@@ -338,12 +336,32 @@
     }
 
     [Test]
+    public void TestCreateItemEmtyOrNullFieldsNotAvailable()
+    {
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .AddFieldsRawValuesByName(null, "somevalue"));
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+     
+      var exception1 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .AddFieldsRawValuesByName("", "somevalue"));
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+
+      var exception2 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .AddFieldsRawValuesByName("somekey", null));
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+
+      var exception3 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .AddFieldsRawValuesByName("somekey", ""));
+      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+    }
+
+    [Test]
     public void TestCreateItemByIdWithEmptyNameReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-         .ItemName("")
-         .ItemTemplate(testData.Items.Home.Template)
-         .Build());
+        .ItemName("")
+        .ItemTemplate(testData.Items.Home.Template)
+        .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
     }
 
