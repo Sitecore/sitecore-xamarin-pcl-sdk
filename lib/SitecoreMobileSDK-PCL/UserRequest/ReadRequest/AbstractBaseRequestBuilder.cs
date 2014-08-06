@@ -73,11 +73,9 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
     {
-      if (null == fields)
-      {
-        return this;
-      }
-      else if (!fields.Any())
+      BaseValidator.CheckNullAndThrow(fields, this.GetType().Name + ".fields");
+
+      if (!fields.Any())
       {
         return this;
       }
