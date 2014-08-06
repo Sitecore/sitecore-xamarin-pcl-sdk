@@ -6,14 +6,12 @@
   {
     public static void ValidateItemPath(string itemPath, string source)
     {
-      string parameterName = "Item name";
+      ItemPathValidator.CommonValidatePath (itemPath, source);
 
       if (!itemPath.StartsWith("/"))
       {
         throw new ArgumentException(source + " : should begin with '/'");
       }
-
-      ItemPathValidator.CommonValidatePath (itemPath, source);
     }
 
     public static void ValidateItemTemplate(string itemPath, string source)
