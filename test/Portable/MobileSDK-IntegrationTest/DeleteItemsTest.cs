@@ -5,6 +5,8 @@
   using System.Threading.Tasks;
   using NUnit.Framework;
 
+  using SitecoreMobileSDKMockObjects;
+
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
@@ -17,6 +19,7 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
+    private ISitecoreWebApiSession noThrowCleanupSession;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
     /*
     [TestFixtureSetUp]
@@ -34,15 +37,28 @@
       await this.DeleteAllItems("web");
     }
      */
-    [SetUp]
-    public async void Setup()
+   
+
+    private ISitecoreWebApiSession CreateSession()
     {
-      this.testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      return SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
+    }
+   
+
+    [SetUp]
+    public async void Setup()
+    {
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+      this.session = this.CreateSession();
+
+      // Same as this.session
+      var cleanupSession = this.CreateSession();
+      this.noThrowCleanupSession = new NoThrowWebApiSession(cleanupSession);
+
       await this.DeleteAllItems("master");
       await this.DeleteAllItems("web");
     }
@@ -338,9 +354,9 @@
     {
       if (itemSession == null)
       {
-        itemSession = session;
+        itemSession = this.session;
       }
-      string parentPath = parentItem == null ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
+      string parentPath = (parentItem == null) ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(parentPath)
         .ItemName(itemName)
         .ItemTemplate(testData.Items.Home.Template)
@@ -353,21 +369,11 @@
 
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-      try
-      {
         var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
           .AddScope(ScopeType.Children)
           .Database(database)
           .Build();
-        return await this.session.DeleteItemAsync(deleteFromMaster);
-      }
-      catch (Exception ex)
-      {
-        string message = "Error removing items : " + ex;
-        Debug.WriteLine(message);
-
-        return null;
-      }
+        return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
     }
   }
 }

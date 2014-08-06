@@ -1,4 +1,6 @@
-﻿namespace MobileSDKIntegrationTest
+﻿using SitecoreMobileSDKMockObjects;
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Diagnostics;
@@ -17,23 +19,34 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
+    private ISitecoreWebApiSession noThrowCleanupSession;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
 
     [SetUp]
     public void SetupSession()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      this.session = this.CreateSession();
+
+      // Same as this.session
+      var cleanupSession = this.CreateSession();
+      this.noThrowCleanupSession = new NoThrowWebApiSession(cleanupSession);
+    }
+
+    private ISitecoreWebApiSession CreateSession()
+    {
+      return SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
     }
 
-    public async void RemoveAll()
+
+    public async Task<ScDeleteItemsResponse> RemoveAll()
     {
       await this.DeleteAllItems("master");
-      await this.DeleteAllItems("web");
+      return await this.DeleteAllItems("web");
     }
 
     [TearDown]
@@ -46,7 +59,7 @@
     [Test]
     public async void TestUpdateItemByIdFromWebDbWithChildrenScope()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string Db = "web";
       var titleValue = RandomText();
       var textValue = RandomText();
@@ -78,7 +91,7 @@
     [Test]
     public async void TestUpdateDanishItemByPath()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string Language = "da";
       var titleValue = RandomText();
       var textValue = RandomText();
@@ -292,7 +305,7 @@
     [Test]
     public async void TestUpdateItemByPathWithParentScope()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string TextValue = "Parent text after update";
 
       ISitecoreItem parentItem = await this.CreateItem("Parent item to update by query");
@@ -316,7 +329,7 @@
     [Ignore]
     public async void TestUpdateItemByPathWithParentAndChildrenScope()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string TextValue = "Text after update";
 
       ISitecoreItem parentItem = await this.CreateItem("Parent item to update by query");
@@ -344,7 +357,7 @@
     [Test]
     public async void TestUpdateInternationalItemByPath()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string TextValue = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
       const string ItemName = "גלורי לאוקראינה";
       ISitecoreItem item = await this.CreateItem(ItemName);
@@ -367,7 +380,7 @@
     [Test]
     public async void TestUpdateItemByIdWithNotExistentField()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string FieldName = "Texttt";
       var fieldValue = RandomText();
 
@@ -384,14 +397,13 @@
       var resultItem = result.Items[0];
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(0, resultItem.Fields.Count);
-
     }
 
     [Test]
     [Ignore]
     public async void TestUpdateItemByIdSetHtmlField()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string FieldName = "Text";
       const string FieldValue = "<div>Welcome to Sitecore!</div>";
 
@@ -409,7 +421,6 @@
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(1, resultItem.Fields.Count);
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
-
     }
 
     [Test]
@@ -489,22 +500,12 @@
 
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-      try
-      {
-        var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
-          .AddScope(ScopeType.Children)
-          .Database(database)
-          .Build();
-        var responce = await this.session.DeleteItemAsync(deleteFromMaster);
-        return responce;
-      }
-      catch (Exception ex)
-      {
-        var message = "Error removing items : " + ex;
-        Debug.WriteLine(message);
-        return null;
-
-      }
+      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+        .AddScope(ScopeType.Children)
+        .Database(database)
+        .Build();
+      var response = await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+      return response;
     }
   }
 }
