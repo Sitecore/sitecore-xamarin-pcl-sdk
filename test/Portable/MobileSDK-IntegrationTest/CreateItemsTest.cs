@@ -21,7 +21,6 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
-
     private ISitecoreWebApiSession noThrowCleanupSession;
 
 
