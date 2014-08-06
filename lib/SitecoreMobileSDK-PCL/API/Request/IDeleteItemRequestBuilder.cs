@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UserRequest.DeleteRequest
+﻿namespace Sitecore.MobileSDK.API.Request
 {
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request.Parameters;
