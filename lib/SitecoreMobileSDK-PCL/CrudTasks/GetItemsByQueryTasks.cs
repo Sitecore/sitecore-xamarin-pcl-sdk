@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
+  using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using System.Net.Http;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
@@ -27,18 +28,12 @@ namespace Sitecore.MobileSDK.CrudTasks
 
     private void ValidateRequest(IReadItemsByQueryRequest request)
     {
-        if (null == request)
-        {
-            throw new ArgumentNullException ("[GetItemsByQueryTasks] request cannot be null");
-        }
+      BaseValidator.CheckNullAndThrow (request, this.GetType ().Name + ".request");
     }
 
     private void Validate()
     {
-        if (null == this.urlBuilder)
-        {
-            throw new ArgumentNullException ("GetItemsByQueryTasks.urlBuilder cannot be null");
-        }
+      BaseValidator.CheckNullAndThrow (this.urlBuilder, this.GetType ().Name + ".urlBuilder");
     }
 
     private readonly ItemByQueryUrlBuilder urlBuilder;
