@@ -166,7 +166,7 @@
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder().Set
+        new MediaOptionsBuilder().Set
           .Scale(-2.0f)
           .Build();
       };
@@ -179,7 +179,7 @@
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder().Set
+        new MediaOptionsBuilder().Set
           .MaxWidth(-55)
           .Build();
       };
@@ -192,7 +192,7 @@
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder().Set
+        new MediaOptionsBuilder().Set
           .Height(-55)
           .Build();
       };
@@ -205,7 +205,7 @@
     {
       TestDelegate testCode = () =>
       {
-        var options = new MediaOptionsBuilder().Set
+        new MediaOptionsBuilder().Set
           .Width(0)
           .Build();
       };

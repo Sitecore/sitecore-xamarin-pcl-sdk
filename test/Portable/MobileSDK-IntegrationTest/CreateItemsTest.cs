@@ -21,10 +21,10 @@
     private ISitecoreWebApiSession session;
 
     [SetUp]
-    public async void Setup()
+    public void Setup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .BuildSession();
