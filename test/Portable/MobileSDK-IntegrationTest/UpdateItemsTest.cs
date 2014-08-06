@@ -13,7 +13,6 @@
   using Sitecore.MobileSDK.API.Session;
 
   [TestFixture]
-  [Ignore]
   public class UpdateItemsTest
   {
     private TestEnvironment testData;
