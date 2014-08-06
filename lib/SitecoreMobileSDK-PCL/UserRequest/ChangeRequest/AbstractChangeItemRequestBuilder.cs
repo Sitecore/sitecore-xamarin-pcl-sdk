@@ -16,7 +16,7 @@ namespace Sitecore.MobileSDK
 
     public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (IDictionary<string, string> fieldsRawValuesByName)
     {
-      BaseValidator.CheckNullAndThrow(fieldsRawValuesByName, this.GetType().Name + ".fieldsRawValuesByName");
+      BaseValidator.CheckNullAndThrow(fieldsRawValuesByName, this.GetType().Name + ".FieldsRawValuesByName");
 
       if (fieldsRawValuesByName.Count == 0)
       {

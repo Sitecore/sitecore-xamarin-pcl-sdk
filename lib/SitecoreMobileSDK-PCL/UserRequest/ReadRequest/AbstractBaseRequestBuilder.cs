@@ -67,13 +67,15 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
     {
+      BaseValidator.CheckNullAndThrow(scope, this.GetType().Name + ".Scope");
+
       IEnumerable<ScopeType> castedScope = scope;
       return this.AddScope(castedScope);
     }
 
     public IBaseRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
     {
-      BaseValidator.CheckNullAndThrow(fields, this.GetType().Name + ".fields");
+      BaseValidator.CheckNullAndThrow(fields, this.GetType().Name + ".Fields");
 
       if (!fields.Any())
       {
@@ -118,11 +120,10 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IBaseRequestParametersBuilder<T> AddFields(params string[] fieldParams)
     {
-      if (null == fieldParams)
-      {
-        return this;
-      }
-      else if (1 == fieldParams.Length)
+      BaseValidator.CheckNullAndThrow(fieldParams, this.GetType().Name + ".Fields");
+      BaseValidator.CheckNullAndThrow(fieldParams[0], this.GetType().Name + ".Fields");
+
+      if (1 == fieldParams.Length)
       {
         if (null == fieldParams[0])
         {
