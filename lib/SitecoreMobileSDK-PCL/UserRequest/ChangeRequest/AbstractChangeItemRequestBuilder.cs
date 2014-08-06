@@ -1,9 +1,11 @@
-﻿
+﻿using Sitecore.MobileSDK.Validators;
+
 namespace Sitecore.MobileSDK
 {
   using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -19,45 +21,34 @@ namespace Sitecore.MobileSDK
         return this;
       }
 
-      Dictionary<string, string> newFields = new Dictionary<string, string>();
-
-      if (null != this.FieldsRawValuesByName)
-      {
-        foreach (var fieldElem in this.FieldsRawValuesByName)
-        {
-          newFields.Add (fieldElem.Key, fieldElem.Value);
-        }
-      }
-
       foreach (var fieldElem in fieldsRawValuesByName)
       {
-        newFields.Add (fieldElem.Key.ToLowerInvariant(), fieldElem.Value);
+        this.AddFieldsRawValuesByName (fieldElem.Key, fieldElem.Value);
       }
-
-      this.FieldsRawValuesByName = newFields;
-
+        
       return this;
     }
 
     public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (string fieldKey, string fieldValue)
     {
-      if (string.IsNullOrEmpty(fieldKey) || string.IsNullOrEmpty(fieldValue))
+      BaseValidator.CheckForNullAndEmptyOrThrow(fieldKey, this.GetType().Name + ".fieldKey");
+      BaseValidator.CheckForNullAndEmptyOrThrow(fieldValue, this.GetType().Name + ".fieldValue");
+
+      if (null == this.FieldsRawValuesByName)
       {
-        return this;
+        Dictionary<string, string> newFields = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        this.FieldsRawValuesByName = newFields;
       }
 
-      Dictionary<string, string> newFields = new Dictionary<string, string>();
+      string lowerCaseField = fieldKey.ToLowerInvariant ();
 
-      if (null != this.FieldsRawValuesByName)
+      bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary (this.FieldsRawValuesByName, lowerCaseField);
+      if (keyIsDuplicated)
       {
-        foreach (var fieldElem in this.FieldsRawValuesByName)
-        {
-          newFields.Add (fieldElem.Key, fieldElem.Value);
-        }
+        throw new ArgumentException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");  
       }
-      newFields.Add (fieldKey.ToLowerInvariant(), fieldValue);
 
-      this.FieldsRawValuesByName = newFields;
+      this.FieldsRawValuesByName.Add(lowerCaseField, fieldValue);
 
       return this;
     }
