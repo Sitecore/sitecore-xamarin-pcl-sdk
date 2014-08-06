@@ -21,7 +21,7 @@
     private ISitecoreWebApiSession session;
 
     [SetUp]
-    public async void Setup()
+    public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
       session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
@@ -30,10 +30,11 @@
         .BuildSession();
     }
 
-    public async void RemoveAll()
+    public async Task<ScDeleteItemsResponse> RemoveAll()
     {
-      await this.DeleteAllItems("master");
-      await this.DeleteAllItems("web");
+      var response = await this.DeleteAllItems("master");
+      response = await this.DeleteAllItems("web");
+      return response;
     }
 
     [TearDown]
@@ -46,7 +47,7 @@
     [Test]
     public async void TestCreateItemByIdWithoutFieldsSet()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create by parent id");
 
       var request = this.CreateByIdRequestBuilder()
@@ -62,7 +63,7 @@
     [Test]
     public async void TestCreateItemByIdWithOverridenDatabaseAndLanguageInRequest()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string Db = "web";
       const string Language = "da";
       var expectedItem = this.CreateTestItem("Create danish version in web from request");
@@ -92,7 +93,7 @@
     [Test]
     public async void TestCreateItemByPathWithDatabaseAndLanguageInSession()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string Db = "web";
       const string Language = "da";
       var expectedItem = this.CreateTestItem("Create danish version in web from session");
@@ -121,7 +122,7 @@
     [Test]
     public async void TestCreateItemByPathAndTemplateIdWithoutFieldsSet()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
       var request = this.CreateByIdRequestBuilder()
@@ -138,7 +139,7 @@
     [Test]
     public async void TestCreateItemByPathWithSpecifiedFields()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create with fields");
       const string CreatedTitle = "Created title";
       const string CreatedText = "Created text";
@@ -161,7 +162,7 @@
     [Test]
     public async void TestCreateItemByIdWithInternationalNameAndFields()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("International Слава Україні ウクライナへの栄光 عالمي");
       const string CreatedTitle = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
       const string CreatedText = "युक्रेन गौरव גלורי לאוקראינה";
@@ -184,7 +185,7 @@
     [Test]
     public async void TestCreateItemByIdWithNotExistentFields()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Set not existent field");
       const string CreatedTitle = "Existent title";
       const string CreatedTexttt = "Not existent texttt";
@@ -206,7 +207,7 @@
     [Test]
     public async void TestCreateItemByPathAndSetFieldWithSpacesInName()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Set standard field value");
       const string FieldName = "__Standard values";
       const string FieldValue = "Created standard value 000!! ))";
@@ -228,7 +229,7 @@
     [Ignore]
     public async void TestCreateItemByIdAndSetHtmlFieldValue()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Set HTML in field");
       const string FieldName = "Text";
       const string FieldValue = "<div>Welcome to Sitecore!</div><div><br /><a href=\"~/link.aspx?_id=A2EE64D5BD7A4567A27E708440CAA9CD&amp;_z=z\">Accelerometer</a></div>";
@@ -253,7 +254,7 @@
     [Ignore]
     public async void TestCreateItemByPathFromBranch()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       TestEnvironment.Item expectedItem = this.CreateTestItem("Multiple item brunch");
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
@@ -299,7 +300,7 @@
     [Test]
     public async void TestCreateItemByPathAndGetInvalidEmptyAndNullFields()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create and get invalid field");
       const string FieldName = "@*<<invalid!`fieldname=)";
       var request = CreateByPathRequestBuilder()
@@ -318,7 +319,7 @@
     [Test]
     public async void TestCreateItemByIdAndSetInvalidEmptyAndNullFields()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create and set invalid field");
       const string FieldName = "@*<<%#==_&@";
       var request = CreateByPathRequestBuilder()

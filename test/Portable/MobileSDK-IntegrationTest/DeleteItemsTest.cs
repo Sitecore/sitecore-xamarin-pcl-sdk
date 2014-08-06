@@ -18,24 +18,9 @@
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
-    /*
-    [TestFixtureSetUp]
-    public async void TestFixtureSetup()
-    {
-      this.testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
-        .DefaultDatabase("master")
-        .BuildSession();
 
-      // @adk : must not throw
-      await this.DeleteAllItems("master");
-      await this.DeleteAllItems("web");
-    }
-     */
     [SetUp]
-    public async void Setup()
+    public void Setup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
@@ -43,8 +28,13 @@
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
-      await this.DeleteAllItems("master");
-      await this.DeleteAllItems("web");
+    }
+
+    public async Task<ScDeleteItemsResponse> RemoveAll()
+    {
+      var response = await this.DeleteAllItems("master");
+      response = await this.DeleteAllItems("web");
+      return response;
     }
 
     [TearDown]
@@ -57,6 +47,7 @@
     [Test]
     public async void TestDeleteItemByPathWithDb()
     {
+      await this.RemoveAll();
       const string Db = "web";
       var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
@@ -77,6 +68,7 @@
     [Test]
     public async void TestDeleteItemByIdWithParentScope()
     {
+      await this.RemoveAll();
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem childItem = await this.CreateItem("Child item", parentItem);
 
@@ -92,6 +84,7 @@
     [Test]
     public async void TestDeleteInternationalItemWithSpacesInNameByQuery()
     {
+      await this.RemoveAll();
       ISitecoreItem item1 = await this.CreateItem("International בינלאומי");
       ISitecoreItem item2 = await this.CreateItem("インターナショナル عالمي");
 
@@ -107,6 +100,7 @@
     [Test]
     public async void TestDeleteItemByIdbWithParentAndChildrenScope()
     {
+      await this.RemoveAll();
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem selfItem = await this.CreateItem("Self item", parentItem);
       ISitecoreItem childItem = await this.CreateItem("Child item", selfItem);
@@ -125,6 +119,7 @@
     [Test]
     public async void TestDeleteInternationalItemByPathbWithChildrenScope()
     {
+      await this.RemoveAll();
       ISitecoreItem selfItem = await this.CreateItem("インターナショナル عالمي JJ ж");
       ISitecoreItem childItem = await this.CreateItem("インターナショナル", selfItem);
 
@@ -140,7 +135,7 @@
     [Test]
     public async void TestDeleteItemByQueryWithChildrenAndSelfScope()
     {
-
+      await this.RemoveAll();
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem selfItem = await this.CreateItem("Self item", parentItem);
       await this.CreateItem("Child item", selfItem);
@@ -322,6 +317,7 @@
     [Test]
     public async void TestCreateAndDelete100ItemsByQuery()
     {
+      await this.RemoveAll();
       for (int i = 0; i < 100; i++)
       {
         await this.CreateItem("Test item " + (i + 1));
