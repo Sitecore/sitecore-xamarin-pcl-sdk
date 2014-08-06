@@ -30,10 +30,11 @@
         .BuildSession();
     }
 
-    public async void RemoveAll()
+    public async Task<ScDeleteItemsResponse> RemoveAll()
     {
-      await this.DeleteAllItems("master");
-      await this.DeleteAllItems("web");
+      var response = await this.DeleteAllItems("master");
+      response = await this.DeleteAllItems("web");
+      return response;
     }
 
     [TearDown]
@@ -46,7 +47,7 @@
     [Test]
     public async void TestUpdateItemByIdFromWebDbWithChildrenScope()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string Db = "web";
       var titleValue = RandomText();
       var textValue = RandomText();
@@ -78,7 +79,7 @@
     [Test]
     public async void TestUpdateDanishItemByPath()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string Language = "da";
       var titleValue = RandomText();
       var textValue = RandomText();
@@ -292,7 +293,7 @@
     [Test]
     public async void TestUpdateItemByPathWithParentScope()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string TextValue = "Parent text after update";
 
       ISitecoreItem parentItem = await this.CreateItem("Parent item to update by query");
@@ -316,7 +317,7 @@
     [Ignore]
     public async void TestUpdateItemByPathWithParentAndChildrenScope()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string TextValue = "Text after update";
 
       ISitecoreItem parentItem = await this.CreateItem("Parent item to update by query");
@@ -344,7 +345,7 @@
     [Test]
     public async void TestUpdateInternationalItemByPath()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string TextValue = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
       const string ItemName = "גלורי לאוקראינה";
       ISitecoreItem item = await this.CreateItem(ItemName);
@@ -367,7 +368,7 @@
     [Test]
     public async void TestUpdateItemByIdWithNotExistentField()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string FieldName = "Texttt";
       var fieldValue = RandomText();
 
@@ -391,7 +392,7 @@
     [Ignore]
     public async void TestUpdateItemByIdSetHtmlField()
     {
-      this.RemoveAll();
+      await this.RemoveAll();
       const string FieldName = "Text";
       const string FieldValue = "<div>Welcome to Sitecore!</div>";
 

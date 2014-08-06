@@ -43,6 +43,7 @@
     <Compile Include="API\ISessionConfig.cs" />
     <Compile Include="API\Items\IItemSource.cs" />
     <Compile Include="API\Items\ISitecoreItem.cs" />
+    <Compile Include="API\Items\ScDeleteItemsResponse.cs" />
     <Compile Include="API\Items\ScItemsResponse.cs" />
     <Compile Include="API\ItemWebApiRequestBuilder.cs" />
     <Compile Include="API\IWebApiCredentials.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
     <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
     <Compile Include="API\Request\ICreateItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IDeleteItemRequestBuilder.cs" />
     <Compile Include="API\Request\IDeleteItemsByIdRequest.cs" />
     <Compile Include="API\Request\IDeleteItemsByPathRequest.cs" />
     <Compile Include="API\Request\IDeleteItemsByQueryRequest.cs" />
@@ -91,7 +93,6 @@
     <Compile Include="Items\Delete\DeleteItemByPathParameters.cs" />
     <Compile Include="Items\Delete\DeleteItemByQueryParameters.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
-    <Compile Include="Items\ScDeleteItemsResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
@@ -132,7 +133,6 @@
     <Compile Include="UserRequest\DeleteRequest\DeleteItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByQueryRequestBuilder.cs" />
-    <Compile Include="UserRequest\DeleteRequest\IDeleteItemRequestBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
