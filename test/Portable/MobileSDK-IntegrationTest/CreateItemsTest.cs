@@ -572,7 +572,7 @@
          .ItemName("Item with empty parent path")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
 
     [Test]
