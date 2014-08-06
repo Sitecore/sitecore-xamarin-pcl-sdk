@@ -1,17 +1,18 @@
-﻿using System;
-using System.Drawing;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-using System.Threading.Tasks;
-
-namespace iMobileSdkDemo
+﻿namespace iMobileSdkDemo
 {
-  public partial class iMobileSdkDemoViewController : UIViewController
+  using System;
+  using System.Drawing;
+  using System.Threading.Tasks;
+
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
+
+  public partial class iMobileSdkDemoViewController : UIViewController, IWebApiCredentials
   {
     static bool UserInterfaceIdiomIsPhone
     {
@@ -46,20 +47,34 @@ namespace iMobileSdkDemo
     {
       base.ViewDidAppear(animated);
 
-      var endpoint = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:722", "admin", "b", "/sitecore/shell");
-      var defaultSource = ItemSource.DefaultSource();
-      var session = new ScApiSession(endpoint, defaultSource);
+      // first we have to setup connection info and create a session
+      var instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722";
+      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
+        .Credentials(this)
+        .WebApiVersion("v1")
+        .DefaultDatabase("web")
+        .DefaultLanguage("en")
+        .MediaLibraryRoot("/sitecore/media library")
+        .MediaPrefix("~/media/")
+        .DefaultMediaResourceExtension("ashx")
+        .BuildSession();
 
-      var request =
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-          .Payload(PayloadType.Content)
-          .Build();
-      var readHomeItemTask = session.ReadItemAsync(request);
+      // In order to fetch some data we have to build a request
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        .AddFields("text")
+        .AddScope(ScopeType.Self)
+        .Build();
 
-      ScItemsResponse items = await readHomeItemTask;
-      string fieldText = items.Items[0].FieldWithName("Text").RawValue;
+      // And execute it on a session asynchronously
+      var response = await session.ReadItemAsync(request);
 
-      UIAlertView alert = new UIAlertView("Home Item Text", fieldText, null, "OK", null);
+      // Now that it has succeeded we are able to access downloaded items
+      ISitecoreItem item = response.Items[0];
+
+      // And content stored it its fields
+      string fieldContent = item.FieldWithName("text").RawValue;
+
+      UIAlertView alert = new UIAlertView("Sitecore SDK Demo", fieldContent, null, "Ok", null);
       alert.Show();
     }
 
@@ -74,6 +89,30 @@ namespace iMobileSdkDemo
     }
 
     #endregion
+
+    #region IWebApiCredentials
+    public IWebApiCredentials CredentialsShallowCopy()
+    {
+      return this;
+    }
+
+    public string Username
+    {
+      get
+      {
+        return "admin";
+      }
+    }
+
+    public string Password
+    {
+      get
+      {
+        return "b";
+      }
+    }
+    #endregion IWebApiCredentials
+
   }
 }
 
