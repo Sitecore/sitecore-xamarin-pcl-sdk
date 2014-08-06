@@ -288,7 +288,7 @@
       const string FieldName = "Text";
       const string FieldValue = "Duplicate value";
 
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
          .ItemName("Set duplicate fields")
          .AddFieldsRawValuesByName(FieldName, FieldValue)
          .ItemTemplate(testData.Items.Home.Template)
@@ -341,19 +341,19 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
         .AddFieldsRawValuesByName(null, "somevalue"));
-      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
-     
+      Assert.IsTrue(exception.Message.Contains("fieldKey"));
+
       var exception1 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
         .AddFieldsRawValuesByName("", "somevalue"));
-      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldKey : The input cannot be empty.", exception1.Message);
 
-      var exception2 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+      var exception2 = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
         .AddFieldsRawValuesByName("somekey", null));
-      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+      Assert.IsTrue (exception2.Message.Contains ("fieldValue"));
 
       var exception3 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
         .AddFieldsRawValuesByName("somekey", ""));
-      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
     }
 
     [Test]
@@ -572,7 +572,7 @@
          .ItemName("Item with empty parent path")
          .ItemTemplate("Some template")
          .Build());
-      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
     }
 
     [Test]
