@@ -5,7 +5,6 @@
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
-  using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;

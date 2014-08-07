@@ -67,29 +67,6 @@ namespace Sitecore.MobileSDK
       return this.DeepCopyCreateItemByPathRequest();
     }
 
-    public string ItemName
-    {
-      get
-      {
-        return this.CreateParameters.ItemName;
-      }
-    }
-
-    public string ItemTemplate
-    {
-      get
-      {
-        return this.CreateParameters.ItemTemplate;
-      }
-    }
-
-    public IDictionary<string, string> FieldsRawValuesByName
-    {
-      get
-      {
-        return this.CreateParameters.FieldsRawValuesByName;
-      }
-    }
 
     public string ItemPath { get; private set; }
 

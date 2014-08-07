@@ -5,6 +5,8 @@
   using System.Threading.Tasks;
   using NUnit.Framework;
 
+  using SitecoreMobileSDKMockObjects;
+
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
@@ -17,10 +19,11 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
+    private ISitecoreWebApiSession noThrowCleanupSession;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
-
-    [SetUp]
-    public void Setup()
+    /*
+    [TestFixtureSetUp]
+    public async void TestFixtureSetup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
@@ -28,13 +31,36 @@
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
-    }
 
-    public async Task<ScDeleteItemsResponse> RemoveAll()
+      // @adk : must not throw
+      await this.DeleteAllItems("master");
+      await this.DeleteAllItems("web");
+    }
+     */
+   
+
+    private ISitecoreWebApiSession CreateSession()
     {
-      var response = await this.DeleteAllItems("master");
-      response = await this.DeleteAllItems("web");
-      return response;
+      return SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(testData.Users.Admin)
+        .Site(testData.ShellSite)
+        .DefaultDatabase("master")
+        .BuildSession();
+    }
+   
+
+    [SetUp]
+    public async void Setup()
+    {
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+      this.session = this.CreateSession();
+
+      // Same as this.session
+      var cleanupSession = this.CreateSession();
+      this.noThrowCleanupSession = new NoThrowWebApiSession(cleanupSession);
+
+      await this.DeleteAllItems("master");
+      await this.DeleteAllItems("web");
     }
 
     [TearDown]
@@ -47,7 +73,6 @@
     [Test]
     public async void TestDeleteItemByPathWithDb()
     {
-      await this.RemoveAll();
       const string Db = "web";
       var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
@@ -68,7 +93,6 @@
     [Test]
     public async void TestDeleteItemByIdWithParentScope()
     {
-      await this.RemoveAll();
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem childItem = await this.CreateItem("Child item", parentItem);
 
@@ -84,7 +108,6 @@
     [Test]
     public async void TestDeleteInternationalItemWithSpacesInNameByQuery()
     {
-      await this.RemoveAll();
       ISitecoreItem item1 = await this.CreateItem("International בינלאומי");
       ISitecoreItem item2 = await this.CreateItem("インターナショナル عالمي");
 
@@ -100,7 +123,6 @@
     [Test]
     public async void TestDeleteItemByIdbWithParentAndChildrenScope()
     {
-      await this.RemoveAll();
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem selfItem = await this.CreateItem("Self item", parentItem);
       ISitecoreItem childItem = await this.CreateItem("Child item", selfItem);
@@ -119,7 +141,6 @@
     [Test]
     public async void TestDeleteInternationalItemByPathbWithChildrenScope()
     {
-      await this.RemoveAll();
       ISitecoreItem selfItem = await this.CreateItem("インターナショナル عالمي JJ ж");
       ISitecoreItem childItem = await this.CreateItem("インターナショナル", selfItem);
 
@@ -135,7 +156,7 @@
     [Test]
     public async void TestDeleteItemByQueryWithChildrenAndSelfScope()
     {
-      await this.RemoveAll();
+
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem selfItem = await this.CreateItem("Self item", parentItem);
       await this.CreateItem("Child item", selfItem);
@@ -244,7 +265,7 @@
     public void TestDeleteItemWithInvalidPathReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("invalid path )").Build());
-      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
+      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : Item path should begin with '/'", exception.Message);
     }
 
     [Test]
@@ -317,7 +338,6 @@
     [Test]
     public async void TestCreateAndDelete100ItemsByQuery()
     {
-      await this.RemoveAll();
       for (int i = 0; i < 100; i++)
       {
         await this.CreateItem("Test item " + (i + 1));
@@ -334,9 +354,9 @@
     {
       if (itemSession == null)
       {
-        itemSession = session;
+        itemSession = this.session;
       }
-      string parentPath = parentItem == null ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
+      string parentPath = (parentItem == null) ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(parentPath)
         .ItemName(itemName)
         .ItemTemplate(testData.Items.Home.Template)
@@ -349,21 +369,11 @@
 
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-      try
-      {
         var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
           .AddScope(ScopeType.Children)
           .Database(database)
           .Build();
-        return await this.session.DeleteItemAsync(deleteFromMaster);
-      }
-      catch (Exception ex)
-      {
-        string message = "Error removing items : " + ex;
-        Debug.WriteLine(message);
-
-        return null;
-      }
+        return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
     }
   }
 }

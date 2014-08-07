@@ -2,7 +2,6 @@
 namespace Sitecore.MobileSDK
 {
   using System;
-  using System.Collections.Generic;
 
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API;
@@ -14,13 +13,13 @@ namespace Sitecore.MobileSDK
 
   public class UpdateItemByPathParameters : IUpdateItemByPathRequest
   {
-    public UpdateItemByPathParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, IDictionary<string, string> fieldsRawValuesByName, string itemPath)
+    public UpdateItemByPathParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemPath)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
       this.ItemPath = itemPath;
       this.QueryParameters = queryParameters;
-      this.FieldsRawValuesByName = fieldsRawValuesByName;
+      this.CreateParameters = createParameters;
     }
 
     public virtual IUpdateItemByPathRequest DeepCopyUpdateItemByPathRequest()
@@ -44,8 +43,13 @@ namespace Sitecore.MobileSDK
       {
         payload = this.QueryParameters.DeepCopy();
       }
-        
-      return new UpdateItemByPathParameters(connection, itemSrc, payload, this.FieldsRawValuesByName, this.ItemPath);
+
+      if (null != this.CreateParameters)
+      {
+        createParameters = this.CreateParameters.ShallowCopy();
+      }
+
+      return new UpdateItemByPathParameters(connection, itemSrc, payload, createParameters, this.ItemPath);
     }
 
     public virtual IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
@@ -67,7 +71,8 @@ namespace Sitecore.MobileSDK
 
     public IQueryParameters QueryParameters { get; private set; }
 
-    public IDictionary<string, string> FieldsRawValuesByName { get; private set; }
+
+    public CreateItemParameters CreateParameters { get; private set; }
 
   }
 }

@@ -5,7 +5,7 @@ namespace Sitecore.MobileSdkUnitTest
   using System;
   using NUnit.Framework;
 
-  using MobileSDKUnitTest.Mock;
+  using SitecoreMobileSDKMockObjects;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;

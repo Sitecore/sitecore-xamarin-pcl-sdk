@@ -98,10 +98,9 @@ namespace WhiteLabeliOS
         ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
 				IDownloadMediaOptions options = new MediaOptionsBuilder()
-          .Set
-					.Width(this.width)
-					.Height(this.height)
-					.BackgroundColor("white")
+					.SetWidth(this.width)
+					.SetHeight(this.height)
+					.SetBackgroundColor("white")
 					.Build();
 
 				string path = this.MediaPathTextField.Text;
@@ -113,7 +112,7 @@ namespace WhiteLabeliOS
 				var response = await session.DownloadResourceAsync(request);
 
 				byte[] data;
-          
+
 				using (BinaryReader br = new BinaryReader(response))
 				{
 					data = br.ReadBytes((int)response.Length);

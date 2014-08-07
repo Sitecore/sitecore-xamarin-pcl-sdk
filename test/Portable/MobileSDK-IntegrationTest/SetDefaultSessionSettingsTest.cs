@@ -142,6 +142,8 @@
 
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
+        .DefaultDatabase(source.Database)
+        .DefaultLanguage(source.Language)
         .BuildReadonlySession();
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)

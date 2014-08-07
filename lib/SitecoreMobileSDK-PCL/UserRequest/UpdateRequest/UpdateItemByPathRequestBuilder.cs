@@ -7,7 +7,7 @@
   {
     public UpdateItemByPathRequestBuilder(string itemPath)
     {
-      ItemPathValidator.ValidateItemPath(itemPath, this.GetType().Name + ".ItemPath");
+      ItemPathValidator.ValidateItemPath(itemPath, this.GetType().Name + ".itemPath");
 
       this.itemPath = itemPath;
     }
@@ -15,7 +15,7 @@
     public override IUpdateItemByPathRequest Build()
     {
 
-      UpdateItemByPathParameters result = new UpdateItemByPathParameters(null, this.itemSourceAccumulator, this.queryParameters, this.FieldsRawValuesByName, this.itemPath);
+      UpdateItemByPathParameters result = new UpdateItemByPathParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemPath);
       return result;
     }
 

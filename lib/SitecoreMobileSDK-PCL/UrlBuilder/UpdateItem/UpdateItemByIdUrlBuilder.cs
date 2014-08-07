@@ -30,7 +30,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 
     protected override void ValidateSpecificRequest(IUpdateItemByIdRequest request)
     {
-      ItemIdValidator.ValidateItemId(request.ItemId, this.GetType().Name + ".ItemId");
+      ItemIdValidator.ValidateItemId(request.ItemId, this.GetType().Name + ".itemId");
     }
   }
 }

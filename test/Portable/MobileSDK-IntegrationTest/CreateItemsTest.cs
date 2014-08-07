@@ -5,6 +5,8 @@
   using System.Threading.Tasks;
   using NUnit.Framework;
 
+  using SitecoreMobileSDKMockObjects;
+
   using Sitecore.MobileSDK.Items;
 
   using Sitecore.MobileSDK.API;
@@ -19,22 +21,35 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
+    private ISitecoreWebApiSession noThrowCleanupSession;
+
 
     [SetUp]
     public void Setup()
     {
-      testData = TestEnvironment.DefaultTestEnvironment();
-      session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      this.testData = TestEnvironment.DefaultTestEnvironment();
+      this.session = this.CreateSession();
+
+
+      // Same as this.session
+      var cleanupSession = this.CreateSession();
+      this.noThrowCleanupSession = new NoThrowWebApiSession(cleanupSession);
+    }
+
+    private ISitecoreWebApiSession CreateSession()
+    {
+      var result = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .BuildSession();
+
+      return result;
     }
 
     public async Task<ScDeleteItemsResponse> RemoveAll()
     {
-      var response = await this.DeleteAllItems("master");
-      response = await this.DeleteAllItems("web");
-      return response;
+      await this.DeleteAllItems("master");
+      return await this.DeleteAllItems("web");
     }
 
     [TearDown]
@@ -288,7 +303,7 @@
       const string FieldName = "Text";
       const string FieldValue = "Duplicate value";
 
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
          .ItemName("Set duplicate fields")
          .AddFieldsRawValuesByName(FieldName, FieldValue)
          .ItemTemplate(testData.Items.Home.Template)
@@ -325,6 +340,8 @@
       var request = CreateByPathRequestBuilder()
          .AddFields(FieldName)
          .AddFieldsRawValuesByName(FieldName, FieldName)
+         .AddFieldsRawValuesByName(null, "")
+         .AddFieldsRawValuesByName("", null)
          .ItemName(expectedItem.DisplayName)
          .Build();
 
@@ -337,32 +354,12 @@
     }
 
     [Test]
-    public void TestCreateItemEmtyOrNullFieldsNotAvailable()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .AddFieldsRawValuesByName(null, "somevalue"));
-      Assert.IsTrue(exception.Message.Contains("fieldKey"));
-
-      var exception1 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .AddFieldsRawValuesByName("", "somevalue"));
-      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldKey : The input cannot be empty.", exception1.Message);
-
-      var exception2 = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .AddFieldsRawValuesByName("somekey", null));
-      Assert.IsTrue (exception2.Message.Contains ("fieldValue"));
-
-      var exception3 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .AddFieldsRawValuesByName("somekey", ""));
-      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
-    }
-
-    [Test]
     public void TestCreateItemByIdWithEmptyNameReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .ItemName("")
-        .ItemTemplate(testData.Items.Home.Template)
-        .Build());
+         .ItemName("")
+         .ItemTemplate(testData.Items.Home.Template)
+         .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
     }
 
@@ -687,24 +684,17 @@
       this.testData.AssertItemsCount(1, createResponse);
       ISitecoreItem resultItem = createResponse.Items[0];
       this.testData.AssertItemsAreEqual(expectedItem, resultItem);
+
       return resultItem;
     }
+
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-      try
-      {
-        var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
           .AddScope(ScopeType.Children)
           .Database(database)
           .Build();
-        return await this.session.DeleteItemAsync(deleteFromMaster);
-      }
-      catch(Exception ex)
-      {
-        string message = "Error removing items : " + ex; 
-        Debug.WriteLine(message);
-        return null;
-      }
+      return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
     }
   }
 }
