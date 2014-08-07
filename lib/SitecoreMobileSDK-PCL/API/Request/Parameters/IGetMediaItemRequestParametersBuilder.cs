@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 	{
 		IGetMediaItemRequestParametersBuilder<T> Database (string database);
 		IGetMediaItemRequestParametersBuilder<T> Language (string itemLanguage);
-		IGetMediaItemRequestParametersBuilder<T> Version (string itemVersion);
+    IGetMediaItemRequestParametersBuilder<T> Version (int? itemVersion);
 
     IGetMediaItemRequestParametersBuilder<T> DownloadOptions (IDownloadMediaOptions downloadMediaOptions);
 		T Build();
