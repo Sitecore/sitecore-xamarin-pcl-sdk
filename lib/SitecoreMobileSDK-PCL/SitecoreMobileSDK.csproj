@@ -169,7 +169,6 @@
     <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
     <Compile Include="CrudTasks\AbstractUpdateItemTask.cs" />
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
-    <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
     <Compile Include="Session\SessionBuilder.cs" />
     <Compile Include="Validators\ItemIdValidator.cs" />
     <Compile Include="Validators\ItemPathValidator.cs" />

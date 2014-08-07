@@ -212,7 +212,7 @@
     private string mediaExtension;
     private string mediaPrefix;
 
-    private IWebApiCredentials credentials = new WebApiCredentialsPOD(null, null);
+    private IWebApiCredentials credentials = null;
     private ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
     #endregion State
   }
