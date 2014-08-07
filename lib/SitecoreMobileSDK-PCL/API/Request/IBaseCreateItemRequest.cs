@@ -3,9 +3,10 @@ namespace Sitecore.MobileSDK.API.Request
 {
     using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
-    public interface IBaseCreateItemRequest : IBaseItemRequest
+  public interface IBaseCreateItemRequest : IBaseChangeItemRequest
   {
-    CreateItemParameters CreateParameters{ get; }
+    string ItemName{ get; }
+    string ItemTemplate{ get; }
   }
 }
 

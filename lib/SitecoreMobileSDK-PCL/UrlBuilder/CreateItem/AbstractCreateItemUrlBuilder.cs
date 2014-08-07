@@ -6,8 +6,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
 
-  public abstract class AbstractCreateItemUrlBuilder<TRequest> : AbstractGetItemUrlBuilder<TRequest>
+  public abstract class AbstractCreateItemUrlBuilder<TRequest> : AbstractChangeItemUrlBuilder<TRequest>
     where TRequest : IBaseCreateItemRequest
   {
     public AbstractCreateItemUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
@@ -17,8 +18,8 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 
     protected override string GetSpecificPartForRequest(TRequest request)
     {
-      string escapedTemplate = UrlBuilderUtils.EscapeDataString(request.CreateParameters.ItemTemplate).ToLowerInvariant();
-      string escapedName = UrlBuilderUtils.EscapeDataString(request.CreateParameters.ItemName);
+      string escapedTemplate = UrlBuilderUtils.EscapeDataString(request.ItemTemplate).ToLowerInvariant();
+      string escapedName = UrlBuilderUtils.EscapeDataString(request.ItemName);
 
       string result =
           this.webApiGrammar.TemplateParameterName 
@@ -31,35 +32,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 
       return result;
     }
-
-    public string GetFieldValuesList(TRequest request)
-    {
-      string result = string.Empty;
-
-      bool fieldsAvailable = (null != request.CreateParameters.FieldsRawValuesByName);
-      if (fieldsAvailable)
-      {
-        fieldsAvailable = (request.CreateParameters.FieldsRawValuesByName.Count > 0);
-      }
-
-      if (fieldsAvailable)
-      {
-        foreach (var fieldElem in request.CreateParameters.FieldsRawValuesByName)
-        {  
-          string escapedFieldName = UrlBuilderUtils.EscapeDataString (fieldElem.Key);
-          string escapedFieldValue = UrlBuilderUtils.EscapeDataString (fieldElem.Value);
-          result += escapedFieldName 
-            + this.restGrammar.KeyValuePairSeparator 
-            + escapedFieldValue 
-            + this.restGrammar.FieldSeparator;
-        }
-        result = result.Remove (result.Length - 1);
-      }
-
-      return result;
-    }
-
-    //protected abstract string GetSpecificPartForRequest(TRequest request);
   }
 }
 

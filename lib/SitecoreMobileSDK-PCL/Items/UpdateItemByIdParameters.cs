@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK
 {
   using System;
+  using System.Collections.Generic;
 
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API;
@@ -13,13 +14,13 @@ namespace Sitecore.MobileSDK
 
   public class UpdateItemByIdParameters : IUpdateItemByIdRequest
   {
-    public UpdateItemByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, CreateItemParameters createParameters, string itemId)
+    public UpdateItemByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, IDictionary<string, string> fieldsRawValuesByName, string itemId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
       this.ItemId = itemId;
       this.QueryParameters = queryParameters;
-      this.CreateParameters = createParameters;
+      this.FieldsRawValuesByName = fieldsRawValuesByName;
     }
 
     public virtual IUpdateItemByIdRequest DeepCopyUpdateItemByIdRequest()
@@ -27,7 +28,6 @@ namespace Sitecore.MobileSDK
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
       IQueryParameters payload = null;
-      CreateItemParameters createParameters = null;
 
       if (null != this.SessionSettings)
       {
@@ -44,12 +44,7 @@ namespace Sitecore.MobileSDK
         payload = this.QueryParameters.DeepCopy();
       }
 
-      if (null != this.CreateParameters)
-      {
-        createParameters = this.CreateParameters.ShallowCopy();
-      }
-
-      return new UpdateItemByIdParameters(connection, itemSrc, payload, createParameters, this.ItemId);
+      return new UpdateItemByIdParameters(connection, itemSrc, payload, this.FieldsRawValuesByName, this.ItemId);
     }
 
     public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
@@ -71,8 +66,7 @@ namespace Sitecore.MobileSDK
 
     public IQueryParameters QueryParameters { get; private set; }
 
-
-    public CreateItemParameters CreateParameters { get; private set; }
+    public IDictionary<string, string> FieldsRawValuesByName { get; private set; }
 
   }
 }
