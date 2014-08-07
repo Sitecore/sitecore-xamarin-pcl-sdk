@@ -6,7 +6,6 @@ namespace WhiteLabeliOS
 
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.SessionSettings;
 
   public class InstanceSettings
   {
@@ -36,7 +35,7 @@ namespace WhiteLabeliOS
     public ISitecoreWebApiSession GetSession()
     {
       var credentials = 
-        new WebApiCredentialsPOD(
+        new WebApiCredentialsPODInsequredDemo(
           this.instanceLogin, 
           this.instancePassword);
 
