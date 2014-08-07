@@ -251,7 +251,7 @@ namespace MobileSDKIntegrationTest
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
     }
-    /*
+    
     [Test]
     public void TestUpdateItemByPathWithEmptyVersionReturnsException()
     {
@@ -270,7 +270,7 @@ namespace MobileSDKIntegrationTest
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }
-     */
+     
     [Test]
     public void TestUpdateItemByPathWithSpacesOnlyReturnsException()
     {
@@ -278,11 +278,11 @@ namespace MobileSDKIntegrationTest
         .Build());
       Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
-    /* 
+     
      [Test]
      public async void TestUpdateItemVersion1ById()
      {
-       this.RemoveAll();
+       await this.RemoveAll();
        const string Version = "1";
        var textValue = RandomText();
 
@@ -301,7 +301,7 @@ namespace MobileSDKIntegrationTest
        Assert.True(50 < resultItem.Fields.Count);
        Assert.AreEqual(Version, resultItem.Source.Version);
      }
-     */
+     
     [Test]
     public async void TestUpdateItemByPathWithParentScope()
     {
