@@ -38,6 +38,21 @@
 
       return false;
     }
+
+    public static bool IsDuplicatedFieldsInTheDictionary(IDictionary<string, string> dictionary, string key)
+    {
+      if (null == key || null == dictionary)
+      {
+        return false;
+      }
+
+      if (dictionary.ContainsKey(key))
+      {
+        return true;
+      }
+
+      return false;
+    }
   }
 }
 

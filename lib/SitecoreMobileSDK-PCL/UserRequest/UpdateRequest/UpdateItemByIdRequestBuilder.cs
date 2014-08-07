@@ -7,15 +7,14 @@
   {
     public UpdateItemByIdRequestBuilder (string itemId)
     {
-      ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".itemId");
+      ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".ItemId");
 
       this.itemId = itemId;
     }
 
     public override IUpdateItemByIdRequest Build()
     {
-
-      UpdateItemByIdParameters result = new UpdateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemParametersAccumulator, this.itemId);
+      UpdateItemByIdParameters result = new UpdateItemByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.FieldsRawValuesByName, this.itemId);
       return result;
     }
 
