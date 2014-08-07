@@ -3,9 +3,9 @@
   using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.UserRequest.DeleteRequest;
   using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractDeleteItemRequestBuilder<T> : IDeleteItemRequestBuilder<T>

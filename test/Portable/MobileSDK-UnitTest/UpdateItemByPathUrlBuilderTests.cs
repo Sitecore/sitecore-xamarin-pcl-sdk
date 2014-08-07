@@ -54,7 +54,6 @@
       IUpdateItemByPathRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
         .Database("db")
         .Language("lg")
-        .Version("2")
         .Payload(PayloadType.Full)
         .AddFieldsRawValuesByName(fields)
         .AddFieldsRawValuesByName("field3","VaLuE3")
@@ -68,7 +67,6 @@
         + "fsitecore%2fcontent%2fhome"
         + "?sc_database=db"
         + "&language=lg"
-        + "&sc_itemversion=2"
         + "&payload=full";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);

@@ -43,7 +43,6 @@
     <Compile Include="API\ISessionConfig.cs" />
     <Compile Include="API\Items\IItemSource.cs" />
     <Compile Include="API\Items\ISitecoreItem.cs" />
-    <Compile Include="API\Items\ScDeleteItemsResponse.cs" />
     <Compile Include="API\Items\ScItemsResponse.cs" />
     <Compile Include="API\ItemWebApiRequestBuilder.cs" />
     <Compile Include="API\IWebApiCredentials.cs" />
@@ -55,7 +54,6 @@
     <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
     <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
     <Compile Include="API\Request\ICreateItemRequestParametersBuilder.cs" />
-    <Compile Include="API\Request\IDeleteItemRequestBuilder.cs" />
     <Compile Include="API\Request\IDeleteItemsByIdRequest.cs" />
     <Compile Include="API\Request\IDeleteItemsByPathRequest.cs" />
     <Compile Include="API\Request\IDeleteItemsByQueryRequest.cs" />
@@ -93,6 +91,7 @@
     <Compile Include="Items\Delete\DeleteItemByPathParameters.cs" />
     <Compile Include="Items\Delete\DeleteItemByQueryParameters.cs" />
     <Compile Include="Items\ReadItemByPathParameters.cs" />
+    <Compile Include="Items\ScDeleteItemsResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
@@ -133,6 +132,7 @@
     <Compile Include="UserRequest\DeleteRequest\DeleteItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByQueryRequestBuilder.cs" />
+    <Compile Include="UserRequest\DeleteRequest\IDeleteItemRequestBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
@@ -142,6 +142,9 @@
     <Compile Include="Items\ItemSourcePOD.cs" />
     <Compile Include="UserRequest\SessionConfigMerger.cs" />
     <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
+    <Compile Include="UserRequest\ReadItemByIdRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadItemByPathRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadItemByQueryRequestBuilder.cs" />
     <Compile Include="Items\Fields\ScField.cs" />
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
@@ -154,6 +157,7 @@
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemById\CreateItemByIdUrlBuilder.cs" />
     <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
     <Compile Include="Items\CreateItemByIdParameters.cs" />
     <Compile Include="Validators\BaseValidator.cs" />
@@ -162,13 +166,19 @@
     <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByPath\CreateItemByPathUrlBuilder.cs" />
     <Compile Include="Items\CreateItemByPathParameters.cs" />
     <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
+    <Compile Include="UserRequest\AbstractBaseRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\IBaseUpdateItemRequest.cs" />
     <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
     <Compile Include="Items\UpdateItemByIdParameters.cs" />
     <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
     <Compile Include="CrudTasks\AbstractUpdateItemTask.cs" />
+    <Compile Include="UserRequest\UpdateRequest\IUpdateItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
+    <Compile Include="SessionSettings\WebApiCredentialsPOD.cs" />
     <Compile Include="Session\SessionBuilder.cs" />
     <Compile Include="Validators\ItemIdValidator.cs" />
     <Compile Include="Validators\ItemPathValidator.cs" />
@@ -186,22 +196,9 @@
     <Compile Include="UrlBuilder\UpdateItem\UpdateItemByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\UpdateItem\UpdateItemByPathUrlBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByPathRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByPathUrlBuilder.cs" />
-    <Compile Include="API\Request\IBaseUpdateItemRequest.cs" />
     <Compile Include="API\MediaItem\IMediaOptionsBuilder.cs" />
     <Compile Include="Media\MediaOptionsBuilderImpl.cs" />
     <Compile Include="PublicKey\AuthenticatedSessionCryptor.cs" />
-    <Compile Include="UrlBuilder\ChangeItem\AbstractChangeItemUrlBuilder.cs" />
-    <Compile Include="API\Request\IBaseChangeItemRequest.cs" />
-    <Compile Include="UserRequest\ReadRequest\AbstractBaseRequestBuilder.cs" />
-    <Compile Include="UserRequest\ReadRequest\ReadItemByIdRequestBuilder.cs" />
-    <Compile Include="UserRequest\ReadRequest\ReadItemByPathRequestBuilder.cs" />
-    <Compile Include="UserRequest\ReadRequest\ReadItemByQueryRequestBuilder.cs" />
-    <Compile Include="API\Request\IBaseReadItemsRequest.cs" />
-    <Compile Include="UserRequest\ChangeRequest\AbstractChangeItemRequestBuilder.cs" />
-    <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
-    <Compile Include="API\Request\IUpdateItemRequestParametersBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -251,9 +248,4 @@
   </Target>
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="UrlBuilder\ChangeItem\" />
-    <Folder Include="UserRequest\ReadRequest\" />
-    <Folder Include="UserRequest\ChangeRequest\" />
-  </ItemGroup>
 </Project>

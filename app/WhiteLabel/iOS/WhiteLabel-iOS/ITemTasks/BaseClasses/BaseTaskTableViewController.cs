@@ -67,6 +67,7 @@ namespace WhiteLabeliOS
         ItemCellSelectionHandler.TableViewDidSelectItemAtIndexPath onItemSelected = 
           delegate (UITableView tableView, ISitecoreItem item, NSIndexPath indexPath)
         {
+         //TODO: @igk show fields list here!!!
           this.selectedItem = item;
           this.PerformSegue("showFieldsViewController", this);
           //AlertHelper.ShowLocalizedAlertWithOkOption("Message", item.DisplayName);

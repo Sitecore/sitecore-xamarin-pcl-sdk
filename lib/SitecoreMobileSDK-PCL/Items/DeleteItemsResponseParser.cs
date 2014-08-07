@@ -6,7 +6,6 @@
   using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
   using Sitecore.MobileSDK.API.Exceptions;
-  using Sitecore.MobileSDK.API.Items;
 
   public class DeleteItemsResponseParser
   {

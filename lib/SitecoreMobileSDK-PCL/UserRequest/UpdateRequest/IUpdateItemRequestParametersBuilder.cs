@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK.API.Request
+namespace Sitecore.MobileSDK
 {
   using System;
   using System.Collections.Generic;
@@ -9,8 +9,7 @@ namespace Sitecore.MobileSDK.API.Request
   public interface IUpdateItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
     where T : class
   {
-    IUpdateItemRequestParametersBuilder<T> Version(string itemVersion);
-    IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (IDictionary<string, string> fieldsRawValuesByName);
+    IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (Dictionary<string, string> fieldsRawValuesByName);
     IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (string fieldKey, string fieldValue);
 
     new IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase);

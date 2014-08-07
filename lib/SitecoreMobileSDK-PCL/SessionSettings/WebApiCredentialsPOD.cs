@@ -1,4 +1,4 @@
-﻿namespace MobileSDKUnitTest.Mock
+﻿namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
   using Sitecore.MobileSDK.API;

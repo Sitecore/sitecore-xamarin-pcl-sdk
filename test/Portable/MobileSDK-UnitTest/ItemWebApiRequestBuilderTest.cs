@@ -389,17 +389,37 @@
     }
 
     [Test]
-    public void TestNullFieldsAreNotIgnored()
+    public void TestNullFieldsAreIgnored()
     {
       {
-        TestDelegate action = () => ItemWebApiRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFields ((string)null);
-        Assert.Throws<ArgumentNullException>(action);
+        var request = 
+          ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields((string)null)
+        .Build();
+
+        Assert.IsNotNull(request);
+        Assert.IsNotNull(request.QueryParameters);
+        if (null != request.QueryParameters.Fields)
+        {
+          Assert.AreEqual(0, request.QueryParameters.Fields.Count());
+        }
       }
 
+
       {
-        TestDelegate action = () => ItemWebApiRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFields ((IEnumerable<string>)null);
-        Assert.Throws<ArgumentNullException>(action);
+        var request = 
+        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        .AddFields((IEnumerable<string>)null)
+        .Build();
+
+        Assert.IsNotNull(request);
+        Assert.IsNotNull(request.QueryParameters);
+        if (null != request.QueryParameters.Fields)
+        {
+          Assert.AreEqual(0, request.QueryParameters.Fields.Count());
+        }
       }
+
     }
 
     [Test]

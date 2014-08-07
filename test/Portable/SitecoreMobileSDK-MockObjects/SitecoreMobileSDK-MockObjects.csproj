@@ -44,7 +44,6 @@
     <Compile Include="MutableWebApiCredentialsPOD.cs" />
     <Compile Include="LegacyConstants.cs" />
     <Compile Include="NoThrowWebApiSession.cs" />
-    <Compile Include="WebApiCredentialsPOD.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

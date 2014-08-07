@@ -1,42 +1,47 @@
-﻿
+﻿using System;
+using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+using System.Net.Http;
+using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+using Sitecore.MobileSDK.PublicKey;
+
 namespace Sitecore.MobileSDK.CrudTasks
 {
-  using System;
-  using Sitecore.MobileSDK.Validators;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using System.Net.Http;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-  using Sitecore.MobileSDK.PublicKey;
-  using Sitecore.MobileSDK.API.Request;
+    using Sitecore.MobileSDK.API.Request;
 
-  public class GetItemsByQueryTasks : AbstractGetItemTask<IReadItemsByQueryRequest>
-  {
-    public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
-        : base(httpClient, credentialsHeadersCryptor)
+    public class GetItemsByQueryTasks : AbstractGetItemTask<IReadItemsByQueryRequest>
     {
-        this.urlBuilder = urlBuilder;
-        this.Validate ();
+        public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
+            : base(httpClient, credentialsHeadersCryptor)
+        {
+            this.urlBuilder = urlBuilder;
+            this.Validate ();
+        }
+
+        protected override string UrlToGetItemWithRequest (IReadItemsByQueryRequest request)
+        {
+            this.ValidateRequest (request);
+
+            string result = this.urlBuilder.GetUrlForRequest (request);
+            return result;
+        }
+
+        private void ValidateRequest(IReadItemsByQueryRequest request)
+        {
+            if (null == request)
+            {
+                throw new ArgumentNullException ("[GetItemsByQueryTasks] request cannot be null");
+            }
+        }
+
+        private void Validate()
+        {
+            if (null == this.urlBuilder)
+            {
+                throw new ArgumentNullException ("GetItemsByQueryTasks.urlBuilder cannot be null");
+            }
+        }
+
+        private readonly ItemByQueryUrlBuilder urlBuilder;
     }
-
-    protected override string UrlToGetItemWithRequest (IReadItemsByQueryRequest request)
-    {
-        this.ValidateRequest (request);
-
-        string result = this.urlBuilder.GetUrlForRequest (request);
-        return result;
-    }
-
-    private void ValidateRequest(IReadItemsByQueryRequest request)
-    {
-      BaseValidator.CheckNullAndThrow (request, this.GetType ().Name + ".request");
-    }
-
-    private void Validate()
-    {
-      BaseValidator.CheckNullAndThrow (this.urlBuilder, this.GetType ().Name + ".urlBuilder");
-    }
-
-    private readonly ItemByQueryUrlBuilder urlBuilder;
-  }
 }
 
