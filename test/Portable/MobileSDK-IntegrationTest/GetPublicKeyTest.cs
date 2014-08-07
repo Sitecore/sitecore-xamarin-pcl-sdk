@@ -112,6 +112,7 @@
     {
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(new WebApiCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd"))
+        .Site(testData.ShellSite)
         .BuildSession();
 
       TestDelegate testCode = async () =>

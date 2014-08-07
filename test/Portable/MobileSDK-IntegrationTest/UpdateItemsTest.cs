@@ -362,7 +362,7 @@
       var resultItem = result.Items[0];
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(item.DisplayName, resultItem.DisplayName);
-      Assert.AreEqual(TextValue, item.FieldWithName("Text").RawValue);
+      Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
     }
 
     [Test]
