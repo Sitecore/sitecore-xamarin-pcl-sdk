@@ -10,8 +10,7 @@ namespace Sitecore.MobileSDK.API.Items
     string Language { get; }
 
     #region Version
-    string Version  { get; }
-    int VersionNumber { get; }
+    int? VersionNumber { get; }
     #endregion Version
   }
 }
