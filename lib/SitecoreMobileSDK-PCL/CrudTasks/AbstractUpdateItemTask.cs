@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK
+namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
   using System.Threading.Tasks;
@@ -7,7 +7,6 @@ namespace Sitecore.MobileSDK
   using System.Threading;
   using System.Text;
   using Sitecore.MobileSDK.PublicKey;
-  using Sitecore.MobileSDK.CrudTasks;
 
   public abstract class AbstractUpdateItemTask<TRequest> : AbstractGetItemTask<TRequest>
     where TRequest: class

@@ -10,7 +10,7 @@
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using SitecoreMobileSDKMockObjects;
+  using MobileSDKUnitTest.Mock;
 
   [TestFixture]
   public class DeleteItemByIdUrlBuilderTest

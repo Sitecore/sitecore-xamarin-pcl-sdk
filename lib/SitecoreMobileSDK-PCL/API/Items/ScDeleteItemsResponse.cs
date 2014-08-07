@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.Items
+﻿namespace Sitecore.MobileSDK.API.Items
 {
   using System.Collections.Generic;
 

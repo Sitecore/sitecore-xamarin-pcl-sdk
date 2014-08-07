@@ -78,6 +78,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestCorrectParamsWithFields()
     {
       IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+        .Version("1")
         .AddFieldsRawValuesByName("field1","value1")
         .AddFieldsRawValuesByName("field2","value2")
         .Build();
@@ -88,6 +89,7 @@ namespace Sitecore.MobileSdkUnitTest
       string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell"+
         "?sc_database=web"+
         "&language=en"+
+        "&sc_itemversion=1"+
         "&sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);

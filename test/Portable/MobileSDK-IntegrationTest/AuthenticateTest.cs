@@ -2,6 +2,9 @@
 {
   using System;
   using NUnit.Framework;
+
+  using MobileSDKUnitTest.Mock;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.SessionSettings;
