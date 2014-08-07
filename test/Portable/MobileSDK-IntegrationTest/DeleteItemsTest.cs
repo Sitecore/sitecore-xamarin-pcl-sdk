@@ -7,7 +7,6 @@
 
   using SitecoreMobileSDKMockObjects;
 
-  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
@@ -37,7 +36,7 @@
       await this.DeleteAllItems("web");
     }
      */
-   
+
 
     private ISitecoreWebApiSession CreateSession()
     {
@@ -47,7 +46,7 @@
         .DefaultDatabase("master")
         .BuildSession();
     }
-   
+
 
     [SetUp]
     public async void Setup()
@@ -347,7 +346,7 @@
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(100, result.Count); 
+      Assert.AreEqual(100, result.Count);
     }
 
     private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)
@@ -369,11 +368,11 @@
 
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-        var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
-          .AddScope(ScopeType.Children)
-          .Database(database)
-          .Build();
-        return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+        .AddScope(ScopeType.Children)
+        .Database(database)
+        .Build();
+      return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
     }
   }
 }

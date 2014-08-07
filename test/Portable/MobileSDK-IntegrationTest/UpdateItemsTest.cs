@@ -3,11 +3,9 @@
 namespace MobileSDKIntegrationTest
 {
   using System;
-  using System.Diagnostics;
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
-  using Sitecore.MobileSDK.Items;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
@@ -251,7 +249,7 @@ namespace MobileSDKIntegrationTest
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
     }
-    
+
     [Test]
     public void TestUpdateItemByPathWithEmptyVersionReturnsException()
     {
@@ -270,7 +268,7 @@ namespace MobileSDKIntegrationTest
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }
-     
+
     [Test]
     public void TestUpdateItemByPathWithSpacesOnlyReturnsException()
     {
@@ -278,30 +276,30 @@ namespace MobileSDKIntegrationTest
         .Build());
       Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
-     
-     [Test]
-     public async void TestUpdateItemVersion1ById()
-     {
-       await this.RemoveAll();
-       const string Version = "1";
-       var textValue = RandomText();
 
-       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
-         .AddFieldsRawValuesByName("Text", textValue)
-         .Payload(PayloadType.Full)
-         .Version(Version)
-         .Build();
+    [Test]
+    public async void TestUpdateItemVersion1ById()
+    {
+      await this.RemoveAll();
+      const string Version = "1";
+      var textValue = RandomText();
 
-       var result = await this.session.UpdateItemAsync(request);
+      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
+        .AddFieldsRawValuesByName("Text", textValue)
+        .Payload(PayloadType.Full)
+        .Version(Version)
+        .Build();
 
-       Assert.AreEqual(1, result.Items.Count);
-       var resultItem = result.Items[0];
-       Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
-       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
-       Assert.True(50 < resultItem.Fields.Count);
-       Assert.AreEqual(Version, resultItem.Source.Version);
-     }
-     
+      var result = await this.session.UpdateItemAsync(request);
+
+      Assert.AreEqual(1, result.Items.Count);
+      var resultItem = result.Items[0];
+      Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
+      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.True(50 < resultItem.Fields.Count);
+      Assert.AreEqual(Version, resultItem.Source.Version);
+    }
+
     [Test]
     public async void TestUpdateItemByPathWithParentScope()
     {

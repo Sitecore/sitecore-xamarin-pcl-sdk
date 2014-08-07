@@ -126,7 +126,7 @@
       Assert.AreEqual("Allowed_Parent", response.Items[3].DisplayName);
     }
 
-    [Test] 
+    [Test]
     public async void TestGetItemWithChildrenScopeByQueryWithSpecifiedFields()        //children in name
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/descendant::*[@title='Allowed_Item']")
@@ -148,7 +148,7 @@
       var sessionWithNoReadAccessUser = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
         .Credentials(this.testData.Users.NoReadAccess)
         .BuildReadonlySession();
-          
+
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id)
         .AddScope(ScopeType.Children)
         .Build();

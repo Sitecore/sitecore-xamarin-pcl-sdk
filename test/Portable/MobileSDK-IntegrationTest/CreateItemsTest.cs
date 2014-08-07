@@ -1,13 +1,10 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
-  using System.Diagnostics;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
   using SitecoreMobileSDKMockObjects;
-
-  using Sitecore.MobileSDK.Items;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
