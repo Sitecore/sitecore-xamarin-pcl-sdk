@@ -21,6 +21,18 @@
       }
     }
 
+    public static void AssertPositiveNumber(int? optionalNumber, string  source)
+    {
+      BaseValidator.CheckNullAndThrow(optionalNumber, source);
+      int number = optionalNumber.Value;
+
+      if (number <= 0)
+      {
+        throw new ArgumentException(source + " : " + "Positive number expected");
+      }
+
+    }
+
     public static void CheckForNullAndEmptyOrThrow(string str, string source)
     {
       CheckNullAndThrow(str, source);
