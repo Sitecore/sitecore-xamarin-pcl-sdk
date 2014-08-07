@@ -161,11 +161,17 @@
     <Compile Include="ITemTasks\CreateITemByPathViewController.designer.cs">
       <DependentUpon>CreateITemByPathViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITemTasks\AuthViewController.cs" />
+    <Compile Include="ITemTasks\AuthViewController.designer.cs">
+      <DependentUpon>AuthViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\WebApiCredentialsPODInsequredDemo.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\en.lproj\" />
     <Folder Include="ITemTasks\" />

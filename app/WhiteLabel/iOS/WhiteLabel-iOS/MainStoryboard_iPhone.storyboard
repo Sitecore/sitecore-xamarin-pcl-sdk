@@ -267,6 +267,7 @@
                         <segue destination="YSW-Sn-ezD" kind="push" identifier="getItemByQuery" id="ElA-dM-oAo"/>
                         <segue destination="2Pb-gb-fR4" kind="push" identifier="getMediaItem" id="Zq9-Tr-eq8"/>
                         <segue destination="Eg0-WD-ucD" kind="push" identifier="createItemByPath" id="Idd-jG-cb8"/>
+                        <segue destination="VyN-Zi-4QM" kind="push" identifier="authTestVC" id="ClX-Aa-9Fy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
@@ -969,6 +970,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qmL-ka-eOW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="930" y="1134"/>
+        </scene>
+        <!--Auth View Controller-->
+        <scene sceneID="BuV-ZY-PzY">
+            <objects>
+                <viewController id="VyN-Zi-4QM" customClass="AuthViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UuJ-go-kUs"/>
+                        <viewControllerLayoutGuide type="bottom" id="20B-MQ-P3M"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0ME-YM-T3a">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="login" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JeT-Ji-QpI">
+                                <rect key="frame" x="20" y="109" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3mK-3g-rSj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SEw-eR-n42">
+                                <rect key="frame" x="20" y="147" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6WO-dD-8wc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPA-wc-082">
+                                <rect key="frame" x="91" y="185" width="139" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9XU-xe-gPD"/>
+                                </constraints>
+                                <state key="normal" title="Authenticate">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnAuthButtonTapped:" destination="VyN-Zi-4QM" eventType="touchUpInside" id="YVB-ZT-ev2"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="instance url" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jEU-R8-gW0">
+                                <rect key="frame" x="20" y="71" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5me-TE-tk9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SEw-eR-n42" firstAttribute="leading" secondItem="0ME-YM-T3a" secondAttribute="leading" constant="20" id="01A-Yy-hFA"/>
+                            <constraint firstAttribute="trailing" secondItem="jEU-R8-gW0" secondAttribute="trailing" constant="20" id="1db-2d-D7m"/>
+                            <constraint firstAttribute="trailing" secondItem="JeT-Ji-QpI" secondAttribute="trailing" constant="20" id="38Q-Hf-rzR"/>
+                            <constraint firstItem="bPA-wc-082" firstAttribute="top" secondItem="SEw-eR-n42" secondAttribute="bottom" constant="8" id="PSE-iA-r1w"/>
+                            <constraint firstAttribute="trailing" secondItem="bPA-wc-082" secondAttribute="trailing" constant="90" id="Qfs-Ia-I5e"/>
+                            <constraint firstItem="JeT-Ji-QpI" firstAttribute="top" secondItem="UuJ-go-kUs" secondAttribute="bottom" constant="45" id="X3J-K8-pXg"/>
+                            <constraint firstAttribute="trailing" secondItem="SEw-eR-n42" secondAttribute="trailing" constant="20" id="Z8R-bK-Iox"/>
+                            <constraint firstItem="jEU-R8-gW0" firstAttribute="leading" secondItem="0ME-YM-T3a" secondAttribute="leading" constant="20" id="gdK-aQ-ksL"/>
+                            <constraint firstItem="bPA-wc-082" firstAttribute="leading" secondItem="0ME-YM-T3a" secondAttribute="leading" constant="91" id="kyV-pc-OQf"/>
+                            <constraint firstItem="jEU-R8-gW0" firstAttribute="top" secondItem="UuJ-go-kUs" secondAttribute="bottom" constant="7" id="lJ8-2s-Kdw"/>
+                            <constraint firstItem="SEw-eR-n42" firstAttribute="top" secondItem="JeT-Ji-QpI" secondAttribute="bottom" constant="8" id="yO8-MT-Wlc"/>
+                            <constraint firstItem="JeT-Ji-QpI" firstAttribute="leading" secondItem="0ME-YM-T3a" secondAttribute="leading" constant="20" id="z2Y-q9-ypd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="eV3-Tp-pSN"/>
+                    <connections>
+                        <outlet property="authButton" destination="bPA-wc-082" id="bIF-sg-sme"/>
+                        <outlet property="loginField" destination="JeT-Ji-QpI" id="g2q-1L-LNp"/>
+                        <outlet property="passwordField" destination="SEw-eR-n42" id="Bxb-oF-W69"/>
+                        <outlet property="urlField" destination="jEU-R8-gW0" id="jHq-V4-2tq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dT2-Mz-B06" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1344" y="1143"/>
         </scene>
         <!--CreateI Tem By Path View Controller-->
         <scene sceneID="Sjs-to-f7A">

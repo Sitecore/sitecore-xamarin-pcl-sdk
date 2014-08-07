@@ -8,6 +8,7 @@
 "uploadImageVC" = "******************";
 "getItemByQuery" = "************";
 "getMediaItem" = "**********";
+"authTestVC" = "*********";
 "Master" = "*********";
 
 "MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
@@ -29,7 +30,6 @@
 "SCOPE_BUTTON_SELF"   = "Self";
 "SCOPE_BUTTON_PARENT" = "Parent";
 "SCOPE_BUTTON_CHILD"  = "Child";
-
 
 //messages
 "Loading Data" = "************...";
@@ -54,6 +54,8 @@
 "children count is" = "********* *****";
 "The item created successfully" = "*** ****** ** **";
 "Item path: " = "**** ** ";
+"This user exist" = "*********";
+"This user not exist" = "********";
 
 //settings screen placeholders
 "Instance Url" = "***********";
@@ -70,3 +72,6 @@
 "Download" = "*********";
 "Height:" = "*****";
 "Width:" = "****";
+"user_login_placeholder" = "******";
+"password_placeholder" = "*******";
+"authenticate_button_title" = "**********";
