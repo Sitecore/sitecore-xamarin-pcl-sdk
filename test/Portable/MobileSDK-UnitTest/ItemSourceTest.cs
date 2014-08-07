@@ -75,7 +75,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemSourceDatabaseIsOptional()
     {
-      var result = new ItemSource(null, "en", "1");
+      var result = new ItemSource(null, "en", 1);
 
       Assert.IsNotNull(result);
       Assert.IsNull(result.Database);
@@ -84,7 +84,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemSourceLanguageIsOptional()
     {
-      var result = new ItemSource("master", null, "1");
+      var result = new ItemSource("master", null, 1);
 
       Assert.IsNotNull(result);
       Assert.IsNull(result.Language);
@@ -96,7 +96,7 @@ namespace Sitecore.MobileSdkUnitTest
       var result = new ItemSource ("core", "da", null);
 
       Assert.IsNotNull(result);
-      Assert.IsNull(result.Version);
+      Assert.IsNull(result.VersionNumber);
     }
 
     [Test]

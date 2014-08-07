@@ -78,7 +78,7 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestCorrectParamsWithFields()
     {
       IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .Version("1")
+        .Version(1)
         .AddFieldsRawValuesByName("field1","value1")
         .AddFieldsRawValuesByName("field2","value2")
         .Build();

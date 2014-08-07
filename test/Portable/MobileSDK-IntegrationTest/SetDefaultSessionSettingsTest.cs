@@ -50,7 +50,7 @@
     {
       const string Db = "web";
       const string Language = "da";
-      const string Version = "1";
+      const int Version = 1;
       var itemSource = new ItemSource(Db, Language, Version);
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
@@ -62,7 +62,7 @@
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
       Assert.AreEqual(Db, resultItem.Source.Database);
-      Assert.AreEqual(Version, resultItem.Source.Version);
+      Assert.AreEqual(Version, resultItem.Source.VersionNumber.Value);
       Assert.AreEqual(Language, resultItem.Source.Language);
     }
 
@@ -72,7 +72,7 @@
       var response = await this.GetItemByIdWithItemSource(LegacyConstants.DefaultSource());
       const string Db = "web";
       const string Language = "en";
-      const string Version = "2";
+      const int Version = 2;
       testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
@@ -86,7 +86,7 @@
     {
       const string Db = "master";
       const string Language = "da";
-      const string Version = "1";
+      const int Version = 1;
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Database(Db)
@@ -108,7 +108,7 @@
     {
       const string Db = "master";
       const string Language = "en";
-      const string Version = "2";
+      const int Version = 2;
 
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
@@ -137,8 +137,8 @@
     {
       const string Db = "master";
       const string Language = "en";
-      const string Version = "2";
-      var source = new ItemSource("web", Language, "1");
+      const int Version = 2;
+      var source = new ItemSource("web", Language, 1);
 
       var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
@@ -173,7 +173,7 @@
       testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
 
-      var expectedSource = new ItemSource(Db, LegacyConstants.DefaultSource().Language, "2");
+      var expectedSource = new ItemSource(Db, LegacyConstants.DefaultSource().Language, 2);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
@@ -229,12 +229,18 @@
     }
 
     [Test]
-    public void TestOverrideVersionWithEmptyValueInRequestByPathReturnsError()
+    public void TestOverrideVersionWithZeroValueInRequestByPathReturnsError()
     {
-      const string Version = "";
-
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
-      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(Version).Build());
+      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(0).Build());
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Version : The input cannot be empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestOverrideVersionWithNegativeValueInRequestByPathReturnsError()
+    {
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
+      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(-1).Build());
       Assert.AreEqual("ReadItemByPathRequestBuilder.Version : The input cannot be empty.", exception.Message);
     }
 
@@ -251,7 +257,7 @@
 
       testData.AssertItemsCount(4, response);
       var resultItem = response.Items[3];
-      var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, Language, "1");
+      var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, Language, 1);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
 
@@ -264,7 +270,7 @@
 
       testData.AssertItemsCount(1, response);
       var resultItem = response.Items[0];
-      var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, LegacyConstants.DefaultSource().Language, "2");
+      var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, LegacyConstants.DefaultSource().Language, 2);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
@@ -289,7 +295,7 @@
 
       IReadItemsByIdRequest request = null;
 
-      if (string.IsNullOrEmpty(itemSource.Version))
+      if (null == itemSource.VersionNumber)
       {
         request = this.requestWithItemId;
       }
@@ -297,7 +303,7 @@
       {
         request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Payload(PayloadType.Content)
-        .Version(itemSource.Version)
+        .Version(itemSource.VersionNumber.Value)
         .Build();
       }
 

@@ -265,8 +265,8 @@ namespace MobileSDKIntegrationTest
     public void TestUpdateItemByIdWithTwoVersionsReturnsException()
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
-        .Version("1")
-        .Version("2")
+        .Version(1)
+        .Version(2)
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }

@@ -43,7 +43,7 @@
     [Test]
     public void TestSerializationSupportsVersion()
     {
-      ItemSource data = new ItemSource("master", "da", "100500");
+      ItemSource data = new ItemSource("master", "da", 100500);
       ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters(), data);
 
       string expected = "sc_database=master&language=da&sc_itemversion=100500";
@@ -53,13 +53,10 @@
     [Test]
     public void TestUrlBuilderExcapesArgs()
     {
-      // TODO : 
-      // Braces are encoded on iOS but not encoded on Desktop
-
-      ItemSource data = new ItemSource("{master}", "da???", ";()//");
+      ItemSource data = new ItemSource("{master}", "da???", 123);
       ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters(), data);
 
-      string expected = "sc_database=%7bmaster%7d&language=da%3f%3f%3f&sc_itemversion=%3b%28%29%2f%2f";
+      string expected = "sc_database=%7bmaster%7d&language=da%3f%3f%3f&sc_itemversion=123";
       Assert.AreEqual(expected, builder.BuildUrlQueryString());
     }
   }
