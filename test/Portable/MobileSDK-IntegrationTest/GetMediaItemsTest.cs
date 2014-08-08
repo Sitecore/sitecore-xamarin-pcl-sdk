@@ -164,12 +164,9 @@
     [Test]
     public void TestGetMediaWithNegativeScaleValueReturnsError()
     {
-      TestDelegate testCode = () =>
-      {
-        new MediaOptionsBuilder().Set
-          .Scale(-2.0f)
-          .Build();
-      };
+      TestDelegate testCode = () => new MediaOptionsBuilder().Set
+        .Scale(-2.0f)
+        .Build();
       Exception exception = Assert.Throws<ArgumentException>(testCode);
       Assert.AreEqual("DownloadMediaOptions.Scale : scale must be > 0", exception.Message);
     }
@@ -177,12 +174,9 @@
     [Test]
     public void TestGetMediaWithNegativeMaxWidthValueReturnsError()
     {
-      TestDelegate testCode = () =>
-      {
-        new MediaOptionsBuilder().Set
-          .MaxWidth(-55)
-          .Build();
-      };
+      TestDelegate testCode = () => new MediaOptionsBuilder().Set
+        .MaxWidth(-55)
+        .Build();
       Exception exception = Assert.Throws<ArgumentException>(testCode);
       Assert.AreEqual("DownloadMediaOptions.MaxWidth : maxWidth must be > 0", exception.Message);
     }
@@ -190,12 +184,9 @@
     [Test]
     public void TestGetMediaWithNegativeHeightValueReturnsError()
     {
-      TestDelegate testCode = () =>
-      {
-        new MediaOptionsBuilder().Set
-          .Height(-55)
-          .Build();
-      };
+      TestDelegate testCode = () => new MediaOptionsBuilder().Set
+        .Height(-55)
+        .Build();
       Exception exception = Assert.Throws<ArgumentException>(testCode);
       Assert.AreEqual("DownloadMediaOptions.Height : height must be > 0", exception.Message);
     }
@@ -203,12 +194,9 @@
     [Test]
     public void TestGetMediaWithZeroWidthValueReturnsError()
     {
-      TestDelegate testCode = () =>
-      {
-        new MediaOptionsBuilder().Set
-          .Width(0)
-          .Build();
-      };
+      TestDelegate testCode = () => new MediaOptionsBuilder().Set
+        .Width(0)
+        .Build();
       Exception exception = Assert.Throws<ArgumentException>(testCode);
       Assert.AreEqual("DownloadMediaOptions.Width : width must be > 0", exception.Message);
     }
