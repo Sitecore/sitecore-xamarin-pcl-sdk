@@ -203,6 +203,7 @@
     <Compile Include="UserRequest\ChangeRequest\AbstractChangeItemRequestBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
     <Compile Include="API\Request\IUpdateItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\Template\ISetTemplateBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -253,4 +254,7 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="API\Request\Template\" />
+  </ItemGroup>
 </Project>
