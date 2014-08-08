@@ -149,8 +149,15 @@
       // TODO : create platform specific files for this test case
       // Windows : System.Net.Http.HttpRequestException
       // iOS : System.Net.WebException
-      Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("An error occurred while sending the request"));
+
+      //Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
+      bool testCorrect = exception.InnerException.GetType().ToString().Equals ("System.Net.Http.HttpRequestException");
+      testCorrect = testCorrect || exception.InnerException.GetType().ToString().Equals ("System.Net.WebException");
+      Assert.IsTrue (testCorrect, "exception.InnerException is wrong");
+
+      bool messageCorrect = exception.InnerException.Message.Contains("An error occurred while sending the request");
+      messageCorrect = messageCorrect || exception.InnerException.Message.Contains("NameResolutionFailure");
+      Assert.IsTrue(messageCorrect, "exception message is not correct");
     }
 
     [Test]
