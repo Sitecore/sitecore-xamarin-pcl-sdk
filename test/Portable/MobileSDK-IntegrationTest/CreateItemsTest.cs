@@ -268,6 +268,7 @@
 
 
     [Test]
+    [Ignore]
     public async void TestCreateItemByPathFromBranch()
     {
       await this.RemoveAll();
@@ -275,6 +276,7 @@
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplateId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
+//        .ItemName("Name should Not be in the branch")
         .Database("master")
         .Build();
 
@@ -504,16 +506,6 @@
       Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
       Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("AddFromTemplate - Add access required"));
-    }
-
-    [Test]
-    public void TestCreateItemByIdWithoutItemTemplateReturnsException()
-    {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .ItemTemplatePath("/Sample/Sample Item")
-        .ItemName("Item without template")
-        .Build());
-      Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.ItemTemplate"));
     }
 
     [Test]
