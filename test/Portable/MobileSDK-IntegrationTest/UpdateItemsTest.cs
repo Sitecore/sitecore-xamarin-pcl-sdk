@@ -43,7 +43,7 @@
     }
 
 
-    public async Task<ScDeleteItemsResponse> RemoveAll()
+    private async Task<ScDeleteItemsResponse> RemoveAll()
     {
       await this.DeleteAllItems("master");
       return await this.DeleteAllItems("web");
@@ -53,7 +53,12 @@
     public void TearDown()
     {
       this.testData = null;
+
+      this.session.Dispose();
       this.session = null;
+
+      this.noThrowCleanupSession.Dispose();
+      this.noThrowCleanupSession = null;
     }
 
     [Test]
