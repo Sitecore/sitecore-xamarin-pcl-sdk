@@ -16,6 +16,11 @@ namespace WhiteLabeliOS
     private string instanceDataBase;
     private string instanceLanguage;
 
+    public void Dispose()
+    {
+      // IDLE
+    }
+
     public InstanceSettings()
     {
       this.ReadValuesFromStorage();
@@ -61,12 +66,12 @@ namespace WhiteLabeliOS
       get
       { 
         #if DEBUG
-        if (instanceUrl == null) 
+        if (this.instanceUrl == null) 
         {
-          instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722/";
+          this.instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722/";
         }
         #endif
-        return instanceUrl;
+        return this.instanceUrl;
       }
       set
       { 
@@ -80,12 +85,12 @@ namespace WhiteLabeliOS
       get
       { 
         #if DEBUG
-        if (instanceLogin == null) 
+        if (this.instanceLogin == null) 
         {
-          instanceLogin = "admin";
+          this.instanceLogin = "admin";
         }
         #endif
-        return instanceLogin;
+        return this.instanceLogin;
       }
       set
       { 
@@ -99,12 +104,12 @@ namespace WhiteLabeliOS
       get
       { 
         #if DEBUG
-        if (instancePassword == null) 
+        if (this.instancePassword == null) 
         {
-          instancePassword = "b";
+          this.instancePassword = "b";
         }
         #endif
-        return instancePassword;
+        return this.instancePassword;
       } 
       set
       { 
@@ -119,17 +124,17 @@ namespace WhiteLabeliOS
       get
       { 
         #if DEBUG
-        if (instanceSite == null) 
+        if (this.instanceSite == null) 
         {
-          instanceSite = "/sitecore/shell";
+          this.instanceSite = "/sitecore/shell";
         }
         #endif
-        return instanceSite;
+        return this.instanceSite;
       }
       set
       { 
         this.instanceSite = value;
-        this.SaveValueToStorage (value, "instanceSite");
+        this.SaveValueToStorage(value, "instanceSite");
       } 
     }
 
@@ -138,12 +143,12 @@ namespace WhiteLabeliOS
       get
       { 
         #if DEBUG
-        if (instanceDataBase == null) 
+        if (this.instanceDataBase == null) 
         {
-          instanceDataBase = "web";
+          this.instanceDataBase = "web";
         }
         #endif
-        return instanceDataBase;
+        return this.instanceDataBase;
       }
       set
       { 
@@ -157,12 +162,12 @@ namespace WhiteLabeliOS
       get
       { 
         #if DEBUG
-        if (instanceLanguage == null) 
+        if (this.instanceLanguage == null) 
         {
-          instanceLanguage = "en";
+          this.instanceLanguage = "en";
         }
         #endif
-        return instanceLanguage;
+        return this.instanceLanguage;
       }
       set
       { 

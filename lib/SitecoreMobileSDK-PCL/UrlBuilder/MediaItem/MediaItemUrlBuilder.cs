@@ -1,7 +1,7 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
   using System;
+  using System.Globalization;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
@@ -130,9 +130,10 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
         paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.LANGUAGE_KEY, this.itemSource.Language);
       }
 
-      if (this.itemSource.Version != null)
+      if (null != this.itemSource.VersionNumber)
       {
-        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.VERSION_KEY, this.itemSource.Version);
+        string strVersionNumber = this.itemSource.VersionNumber.Value.ToString(CultureInfo.InvariantCulture);
+        paramsString = this.AddOptionValueToPath(paramsString, MediaItemUrlBuilder.VERSION_KEY, strVersionNumber);
       }
 
       if (!String.IsNullOrEmpty(paramsString))

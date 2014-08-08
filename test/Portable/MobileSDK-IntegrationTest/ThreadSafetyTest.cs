@@ -45,7 +45,7 @@
       var defaultSource = LegacyConstants.DefaultSource();
 
       this.session = new ScTestApiSession(connection, env.Users.Admin, this.mediaSettings, defaultSource);
-      this.itemSource = new MutableItemSource("master", "en", "3872");
+      this.itemSource = new MutableItemSource("master", "en", 3872);
     }
 
     [TearDown]

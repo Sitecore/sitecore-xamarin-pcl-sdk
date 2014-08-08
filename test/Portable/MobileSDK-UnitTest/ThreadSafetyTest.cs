@@ -92,7 +92,7 @@
 
       defaultSource.SetDatabase("web");
       defaultSource.SetLanguage("da");
-      defaultSource.SetVersion("100500");
+      defaultSource.SetVersion(100500);
       Assert.AreNotEqual(defaultSource, session.DefaultSource);
       Assert.AreNotSame(defaultSource, session.DefaultSource);
     }
@@ -100,7 +100,7 @@
     [Test]
     public void TestReadItemByIdCopiesSessionSettings()
     {
-      var defaultSource = new MutableItemSource("master", "en", "33");
+      var defaultSource = new MutableItemSource("master", "en", 33);
       var sessionSettings = new MutableSessionConfig("localhost", "/sitecore/shell", "v100500");
 
       ScopeParameters scope = new ScopeParameters();
@@ -131,7 +131,7 @@
     [Test]
     public void TestReadItemByIdCopiesItemSource()
     {
-      var defaultSource = new MutableItemSource("master", "en", "33");
+      var defaultSource = new MutableItemSource("master", "en", 33);
       var sessionSettings = new MutableSessionConfig("localhost", "/sitecore/shell", "v100500");
 
       ScopeParameters scope = new ScopeParameters();
@@ -148,11 +148,11 @@
       {
         defaultSource.SetDatabase("web");
         defaultSource.SetLanguage("xyz");
-        defaultSource.SetVersion("1aa11");
+        defaultSource.SetVersion(9999);
 
         Assert.AreEqual("master", otherRequest.ItemSource.Database);
         Assert.AreEqual("en", otherRequest.ItemSource.Language);
-        Assert.AreEqual("33", otherRequest.ItemSource.Version);
+        Assert.AreEqual(33, otherRequest.ItemSource.VersionNumber.Value);
 
         Assert.AreNotSame(request.SessionSettings, otherRequest.SessionSettings);
         Assert.AreNotSame(request.ItemSource, otherRequest.ItemSource);

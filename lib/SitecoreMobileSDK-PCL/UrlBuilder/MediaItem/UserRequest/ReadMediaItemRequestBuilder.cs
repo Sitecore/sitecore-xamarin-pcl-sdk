@@ -23,7 +23,7 @@
       this.itemSourceAccumulator = new ItemSourcePOD(
         database,
         this.itemSourceAccumulator.Language,
-        this.itemSourceAccumulator.Version);
+        this.itemSourceAccumulator.VersionNumber);
 
       return this;
     }
@@ -37,16 +37,15 @@
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,
         itemLanguage,
-        this.itemSourceAccumulator.Version);
+        this.itemSourceAccumulator.VersionNumber);
 
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Version(string itemVersion)
+    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Version(int? itemVersion)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Version, this.GetType().Name + ".Version");
-
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemVersion, this.GetType().Name + ".Version");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
+      BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".Version");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,

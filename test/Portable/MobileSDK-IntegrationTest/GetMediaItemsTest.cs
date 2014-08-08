@@ -410,7 +410,7 @@
       var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/images/test image")
         .Database("web")
         .Language("en")
-        .Version("1")
+        .Version(1)
         .Build();
       var response = await this.session.DownloadResourceAsync(request);
 
@@ -486,11 +486,19 @@
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithEmptyVersionReturnsException()
+    public void TestGetMediaWithZeroVersionReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(""));
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(0));
       Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be empty.", exception.Message);
     }
+
+    [Test] //ALR: Argument exception should appear
+    public void TestGetMediaWithNegativeVersionReturnsException()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(-1));
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be empty.", exception.Message);
+    }
+
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullVersionReturnsException()
@@ -503,8 +511,8 @@
     public void TestGetMediaWithOverridenVersionReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test")
-        .Version("2")
-        .Version("1")
+        .Version(2)
+        .Version(1)
         .Build());
       Assert.AreEqual("ReadMediaItemRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }

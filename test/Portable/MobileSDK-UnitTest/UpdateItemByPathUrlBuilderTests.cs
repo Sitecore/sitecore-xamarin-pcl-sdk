@@ -54,7 +54,7 @@
       IUpdateItemByPathRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
         .Database("db")
         .Language("lg")
-        .Version("2")
+        .Version(2)
         .Payload(PayloadType.Full)
         .AddFieldsRawValuesByName(fields)
         .AddFieldsRawValuesByName("field3","VaLuE3")

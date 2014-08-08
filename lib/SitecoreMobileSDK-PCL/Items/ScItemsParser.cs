@@ -79,7 +79,7 @@ namespace Sitecore.MobileSDK
     {
       var language = (string)json.GetValue("Language");
       var database = (string)json.GetValue("Database");
-      var version = (string)json.GetValue("Version");
+      var version = (int)json.GetValue("Version");
 
       return new ItemSource(database, language, version);
     }

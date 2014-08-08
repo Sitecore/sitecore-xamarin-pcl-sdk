@@ -17,7 +17,7 @@
     [Test]
     public void TestItemSourceMergerCopiesInputStruct()
     {
-      IItemSource source = new ItemSourcePOD("master", "da", "100500" );
+      IItemSource source = new ItemSourcePOD("master", "da", 100500 );
       var merger = new ItemSourceFieldMerger(source);
 
       Assert.AreNotSame(source, merger.DefaultSource);
@@ -34,8 +34,8 @@
     [Test]
     public void TestDatabaseAndLanguageAreOptionalForDefaultSource()
     {
-      IItemSource noDatabase = new ItemSourcePOD(null    , "en", "1" );
-      IItemSource noLanguage = new ItemSourcePOD("master", null, "1" );
+      IItemSource noDatabase = new ItemSourcePOD(null    , "en", 1 );
+      IItemSource noLanguage = new ItemSourcePOD("master", null, 1 );
       IItemSource noVersion  = new ItemSourcePOD("master", "en", null);
 
 
@@ -81,8 +81,8 @@
     [Test]
     public void TestUserFieldsHaveHigherPriority()
     {
-      var defaultSource = new ItemSourcePOD ("master", "en", "1");
-      var userSource = new ItemSourcePOD ("web", "ua", "42");
+      var defaultSource = new ItemSourcePOD ("master", "en", 1);
+      var userSource = new ItemSourcePOD ("web", "ua", 42);
 
       var merger = new ItemSourceFieldMerger (defaultSource);
       IItemSource result = merger.FillItemSourceGaps (userSource);
@@ -94,7 +94,7 @@
     [Test]
     public void TestNullUserFieldsAreAutocompleted()
     {
-      var defaultSource = new ItemSourcePOD ("master", "en", "1");
+      var defaultSource = new ItemSourcePOD ("master", "en", 1);
       var userSource = new ItemSourcePOD (null, null, null);
 
       var merger = new ItemSourceFieldMerger (defaultSource);

@@ -6,16 +6,16 @@ namespace Sitecore.MobileSDK.Items
 
   public class ItemSourcePOD : IItemSource
   {
-    public ItemSourcePOD(string database, string language, string version = null)
+    public ItemSourcePOD(string database, string language, int? version = null)
     {
       this.Database = database;
       this.Language = language;
-      this.Version  = version ;
+      this.VersionNumber  = version ;
     }
 
     public virtual IItemSource ShallowCopy()
     {
-      return new ItemSourcePOD(this.Database, this.Language, this.Version);
+      return new ItemSourcePOD(this.Database, this.Language, this.VersionNumber);
     }
 
     public override bool Equals (object obj)
@@ -31,33 +31,21 @@ namespace Sitecore.MobileSDK.Items
         return false;
       }
 
-      bool isDbEqual =  object.Equals ( this.Database, other.Database );
-      bool isLangEqual = object.Equals (this.Language, other.Language);
-      bool isVersionEqual = object.Equals (this.Version, other.Version);
+      bool isDbEqual =  object.Equals( this.Database, other.Database );
+      bool isLangEqual = object.Equals(this.Language, other.Language);
+      bool isVersionEqual = object.Equals(this.VersionNumber, other.VersionNumber);
 
       return isDbEqual && isLangEqual && isVersionEqual;
     } 
 
     public override int GetHashCode ()
     {
-      return base.GetHashCode() + this.Database.GetHashCode () + this.Language.GetHashCode () + this.Version.GetHashCode ();
+      return base.GetHashCode() + this.Database.GetHashCode () + this.Language.GetHashCode () + this.VersionNumber.GetHashCode ();
     }
 
-    public string Database  { get; protected set; }
-    public string Language  { get; protected set; }
-    public string Version   { get; protected set; }
-    public int VersionNumber 
-    { 
-      get 
-      { 
-        if (null == this.Version)
-        {
-          throw new ArgumentNullException ("[ItemSource.VersionNumber] : Cannot convert nil version to int");
-        }
-
-        return Convert.ToInt32 (this.Version); 
-      } 
-    }
+    public string Database { get; protected set; }
+    public string Language { get; protected set; }
+    public int? VersionNumber { get; protected set; }
   }
 }
 

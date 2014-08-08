@@ -1,6 +1,4 @@
-﻿using SitecoreMobileSDKMockObjects;
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Diagnostics;
@@ -8,6 +6,8 @@ namespace MobileSDKIntegrationTest
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.Items;
+
+  using SitecoreMobileSDKMockObjects;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
@@ -43,7 +43,7 @@ namespace MobileSDKIntegrationTest
     }
 
 
-    public async Task<ScDeleteItemsResponse> RemoveAll()
+    private async Task<ScDeleteItemsResponse> RemoveAll()
     {
       await this.DeleteAllItems("master");
       return await this.DeleteAllItems("web");
@@ -53,7 +53,12 @@ namespace MobileSDKIntegrationTest
     public void TearDown()
     {
       this.testData = null;
+
+      this.session.Dispose();
       this.session = null;
+
+      this.noThrowCleanupSession.Dispose();
+      this.noThrowCleanupSession = null;
     }
 
     [Test]
@@ -265,8 +270,8 @@ namespace MobileSDKIntegrationTest
     public void TestUpdateItemByIdWithTwoVersionsReturnsException()
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
-        .Version("1")
-        .Version("2")
+        .Version(1)
+        .Version(2)
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }

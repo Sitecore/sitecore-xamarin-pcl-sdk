@@ -7,7 +7,7 @@ namespace MobileSDKUnitTest.Mock
 
   public class MutableItemSource : ItemSource
   {
-    public MutableItemSource(string database, string language, string version = null) 
+    public MutableItemSource(string database, string language, int? version = null) 
       : base(database, language, version)
     {
     }
@@ -22,9 +22,9 @@ namespace MobileSDKUnitTest.Mock
       this.Language = value;
     }
 
-    public void SetVersion(string value)
+    public void SetVersion(int? value)
     {
-      this.Version = value;
+      this.VersionNumber = value;
     }
 
     public override IItemSource ShallowCopy()
