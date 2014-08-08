@@ -68,6 +68,12 @@ namespace Sitecore.MobileSDK
         this.credentials.Dispose();
         this.credentials = null;
       }
+
+      if (null != this.httpClient)
+      {
+        this.httpClient.Dispose();
+        this.httpClient = null;
+      }
     }
 
     public IItemSource DefaultSource
@@ -365,7 +371,7 @@ namespace Sitecore.MobileSDK
     #region Private Variables
 
     private readonly UserRequestMerger requestMerger;
-    private readonly HttpClient httpClient;
+    private HttpClient httpClient;
 
     protected readonly ISessionConfig sessionConfig;
     private IWebApiCredentials credentials;
