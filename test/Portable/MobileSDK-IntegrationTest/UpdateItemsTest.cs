@@ -167,7 +167,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("invalid path)")
         .Build());
-      Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : Item path should begin with '/'", exception.Message);
+      Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
     }
 
     [Test]

@@ -146,14 +146,14 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestFieldWithDoublicatedKeyWillCrash()
+    public void TestFieldWithDuplicatedKeyWillCrash()
     {
       var requestBuilder = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .AddFieldsRawValuesByName("field1", "VaLuE1")
         .AddFieldsRawValuesByName("field2", "VaLuE2");
         
       TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
-      Assert.Throws<ArgumentException>(action);
+      Assert.Throws<InvalidOperationException>(action);
     }
 
     [Test]
@@ -164,7 +164,7 @@ namespace Sitecore.MobileSdkUnitTest
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 
       TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
-      Assert.Throws<ArgumentException>(action);
+      Assert.Throws<InvalidOperationException>(action);
     }
 
     [Test]
