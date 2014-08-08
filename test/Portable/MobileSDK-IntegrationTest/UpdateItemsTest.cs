@@ -240,8 +240,7 @@
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
         .AddFields("Title")
-        .AddFields("Title")
-        .Build());
+        .AddFields("Title"));
       Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
