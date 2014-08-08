@@ -380,8 +380,8 @@
       }
       string parentPath = (parentItem == null) ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(parentPath)
+        .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(itemName)
-        .ItemTemplate(testData.Items.Home.Template)
         .Build();
       var createResponse = await itemSession.CreateItemAsync(request);
 

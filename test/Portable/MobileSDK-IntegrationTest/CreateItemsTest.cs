@@ -94,7 +94,7 @@
           .BuildSession();
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.CreateItemsHere.Id)
-         .ItemTemplate(expectedItem.Template)
+        .ItemTemplatePath(expectedItem.Template)
          .ItemName(expectedItem.DisplayName)
          .Database(Db)
          .Language(Language)
@@ -124,7 +124,7 @@
           .BuildSession();
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(testData.Items.CreateItemsHere.Path)
-         .ItemTemplate(expectedItem.Template)
+        .ItemTemplatePath(expectedItem.Template)
          .ItemName(expectedItem.DisplayName)
          .Build();
 
@@ -268,15 +268,14 @@
 
 
     [Test]
-    [Ignore]
     public async void TestCreateItemByPathFromBranch()
     {
       await this.RemoveAll();
       TestEnvironment.Item expectedItem = this.CreateTestItem("Multiple item brunch");
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplateId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
         .Database("master")
-        .ItemTemplate("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -292,9 +291,9 @@
 
       var exception = Assert.Throws<InvalidOperationException>(() =>
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+         .ItemTemplatePath(testData.Items.Home.Template)
          .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
-         .ItemTemplate(testData.Items.Home.Template)
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
@@ -306,10 +305,10 @@
       const string FieldValue = "Duplicate value";
 
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemName("Set duplicate fields")
-         .AddFieldsRawValuesByName(FieldName, FieldValue)
-         .ItemTemplate(testData.Items.Home.Template)
-         .AddFieldsRawValuesByName(FieldName, FieldValue));
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName("Set duplicate fields")
+        .AddFieldsRawValuesByName(FieldName, FieldValue)
+        .AddFieldsRawValuesByName(FieldName, FieldValue));
       Assert.AreEqual("CreateItemByPathRequestBuilder.FieldsRawValuesByName : duplicate fields are not allowed", exception.Message);
     }
 
@@ -335,20 +334,36 @@
     [Test]
     public void TestCreateItemEmtyOrNullFieldsNotAvailable()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .AddFieldsRawValuesByName(null, "somevalue"));
+      var exception = Assert.Throws<ArgumentNullException>(() => 
+      {
+        ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+          .ItemTemplatePath("/Sample/Sample Item")
+          .AddFieldsRawValuesByName(null, "somevalue");
+      });
       Assert.IsTrue(exception.Message.Contains("fieldKey"));
 
-      var exception1 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .AddFieldsRawValuesByName("", "somevalue"));
+      var exception1 = Assert.Throws<ArgumentException>(() => 
+      {
+        ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+          .ItemTemplatePath("/Sample/Sample Item")
+          .AddFieldsRawValuesByName("", "somevalue");
+      });
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldKey : The input cannot be empty.", exception1.Message);
 
-      var exception2 = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .AddFieldsRawValuesByName("somekey", null));
+      var exception2 = Assert.Throws<ArgumentNullException>(() => 
+      {
+        ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+          .ItemTemplatePath("/Sample/Sample Item")
+          .AddFieldsRawValuesByName("somekey", null);
+      });
       Assert.IsTrue (exception2.Message.Contains ("fieldValue"));
 
-      var exception3 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .AddFieldsRawValuesByName("somekey", ""));
+      var exception3 = Assert.Throws<ArgumentException>(() => 
+      {
+        ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+          .ItemTemplatePath("/Sample/Sample Item")
+          .AddFieldsRawValuesByName("somekey", "");
+      });
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
     }
 
@@ -377,9 +392,9 @@
     public void TestCreateItemByIdWithEmptyNameReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-         .ItemName("")
-         .ItemTemplate(testData.Items.Home.Template)
-         .Build());
+        .ItemTemplatePath(testData.Items.Home.Template) 
+        .ItemName("")
+        .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
     }
 
@@ -387,8 +402,8 @@
     public void TestCreateItemByPathWithSpacesOnlyInItemName()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+         .ItemTemplatePath(testData.Items.Home.Template)
          .ItemName("  ")
-         .ItemTemplate(testData.Items.Home.Template)
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
     }
@@ -397,8 +412,8 @@
     public void TestCreateItemByPathWithNullItemNameReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+         .ItemTemplatePath(testData.Items.Home.Template)
          .ItemName(null)
-         .ItemTemplate(testData.Items.Home.Template)
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemName"));
     }
@@ -407,7 +422,7 @@
     public void TestCreateItemByPathWithoutItemNameReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemTemplate(testData.Items.Home.Template)
+        .ItemTemplatePath(testData.Items.Home.Template)
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemName"));
     }
@@ -435,9 +450,9 @@
     {
       const string Template = "@*<<%#==_&@";
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplatePath(Template)
         .Database("master")
         .ItemName("item with invalid template")
-        .ItemTemplate(Template)
         .Build();
       TestDelegate testCode = async () =>
       {
@@ -495,6 +510,7 @@
     public void TestCreateItemByIdWithoutItemTemplateReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("Item without template")
         .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.ItemTemplate"));
@@ -504,9 +520,19 @@
     public void TestCreateItemByPathWithEmptyTemplateReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+         .ItemTemplatePath("")
          .ItemName("Item with empty template")
-         .ItemTemplate("")
          .Build());
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be empty.", exception.Message);
+    }
+
+    [Test]
+    public void TestCreateItemByPathWithEmptyTemplateIdReturnsException()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplateId("")
+        .ItemName("Item with empty template")
+        .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be empty.", exception.Message);
     }
 
@@ -514,30 +540,29 @@
     public void TestCreateItemByPathWithSpacesOnlyInTemplateReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemName("Item with empty template")
-         .ItemTemplate("  	")
+        .ItemTemplatePath("   ")
+        .ItemName("Item with empty template")
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be empty.", exception.Message);
     }
 
     [Test]
-    public void TestCreateItemByPathWithTwoTemplatesReturnsException()
+    public void TestCreateItemByPathWithSpacesOnlyInTemplateIdReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemName("Item with empty template")
-         .ItemTemplate("template1")
-         .ItemTemplate("template2")
-         .Build());
-      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : Property cannot be assigned twice.", exception.Message);
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplateId("   ")
+        .ItemName("Item with empty template")
+        .Build());
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be empty.", exception.Message);
     }
 
     [Test]
     public void TestCreateItemByIdWithTwoNamesReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+         .ItemTemplatePath("template")
          .ItemName("Item name 1")
          .ItemName("Item name 2")
-         .ItemTemplate("template")
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : Property cannot be assigned twice.", exception.Message);
     }
@@ -546,8 +571,8 @@
     public void TestCreateItemByIdhWithNullTemplateReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+         .ItemTemplatePath(null)
          .ItemName("Item with empty template")
-         .ItemTemplate(null)
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.ItemTemplate"));
     }
@@ -556,8 +581,8 @@
     public void TestCreateItemByEmptyIdReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId("")
+         .ItemTemplatePath("Some template")
          .ItemName("Item with empty parent id")
-         .ItemTemplate("Some template")
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.ItemId : The input cannot be empty.", exception.Message);
     }
@@ -566,8 +591,8 @@
     public void TestCreateItemByNullPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(null)
+         .ItemTemplatePath("Some template")
          .ItemName("Item with null parent path")
-         .ItemTemplate("Some template")
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemPath"));
     }
@@ -576,8 +601,8 @@
     public void TestCreateItemByInvalidIdReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.Home.Path)
+         .ItemTemplatePath("Some template")
          .ItemName("Item with invalid parent id")
-         .ItemTemplate("Some template")
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
@@ -586,9 +611,9 @@
     public void TestCreateItemWithSpacesOnlyInPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath("  ")
-         .ItemName("Item with empty parent path")
-         .ItemTemplate("Some template")
-         .Build());
+        .ItemTemplatePath("Some template")
+        .ItemName("Item with empty parent path")
+        .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
 
@@ -597,9 +622,9 @@
     {
       const string Id = "{000D009F-D000-000A-0C0C-0A0DF0E00EF0}";
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(Id)
+        .ItemTemplatePath(testData.Items.Home.Template)
         .Database("master")
         .ItemName("item with not existent id")
-        .ItemTemplate(testData.Items.Home.Template)
         .Build();
       var createResponse = await session.CreateItemAsync(request);
       Assert.AreEqual(0, createResponse.Items.Count);
@@ -609,8 +634,8 @@
     public void TestCreateItemByIdWithNullDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.Home.Id)
+         .ItemTemplatePath("Some template")
          .ItemName("Item with null db")
-         .ItemTemplate("Some template")
          .Database(null)
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.Database"));
@@ -620,8 +645,8 @@
     public void TestCreateItemByIdWithEmptyDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.Home.Id)
+         .ItemTemplatePath("Some template")
          .ItemName("Item with empty db")
-         .ItemTemplate("Some template")
          .Database("")
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.Database : The input cannot be empty.", exception.Message);
@@ -631,8 +656,8 @@
     public void TestCreateItemByPathWithNullLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(testData.Items.Home.Path)
+         .ItemTemplatePath("Some template")
          .ItemName("Item with null language")
-         .ItemTemplate("Some template")
          .Language(null)
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.Language"));
@@ -642,8 +667,8 @@
     public void TestCreateItemByIdWithSpacesOnlyInLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(testData.Items.Home.Id)
+         .ItemTemplatePath("Some template") 
          .ItemName("Item with empty language")
-         .ItemTemplate("Some template")
          .Language("  ")
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.Language : The input cannot be empty.", exception.Message);
@@ -653,8 +678,8 @@
     public void TestCreateItemByPathWithSpacesOnlyInDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(testData.Items.Home.Path)
+         .ItemTemplatePath("Some template")
          .ItemName("Item with empty db")
-         .ItemTemplate("Some template")
          .Database("   ")
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.Database : The input cannot be empty.", exception.Message);
@@ -678,15 +703,15 @@
     private ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateByIdRequestBuilder()
     {
       return ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .ItemTemplate(testData.Items.Home.Template)
+       .ItemTemplatePath(testData.Items.Home.Template)
         .Database("master");
     }
 
     private ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateByPathRequestBuilder()
     {
       return ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-        .Database("master")
-        .ItemTemplate(testData.Items.Home.Template);
+          .ItemTemplatePath(testData.Items.Home.Template)
+          .Database("master");
     }
 
     private TestEnvironment.Item CreateTestItem(string name)
