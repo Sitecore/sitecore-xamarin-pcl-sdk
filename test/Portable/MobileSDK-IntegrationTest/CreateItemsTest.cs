@@ -293,7 +293,7 @@
     {
       const string FieldName = "Text";
 
-      var exception = Assert.Throws<ArgumentException>(() =>
+      var exception = Assert.Throws<InvalidOperationException>(() =>
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
