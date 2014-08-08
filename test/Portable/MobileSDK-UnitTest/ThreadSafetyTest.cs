@@ -3,7 +3,7 @@
   using NUnit.Framework;
 
   using MobileSDKUnitTest.Mock;
-  using SitecoreMobileSDKMockObjects;
+  using Sitecore.MobileSDK.Items;
 
   using Sitecore.MobileSDK.API.Request.Parameters;
 
@@ -112,9 +112,9 @@
 
 
       ReadItemsByIdParameters request = new ReadItemsByIdParameters(
-        sessionSettings, 
-        defaultSource, 
-        queryParameters, 
+        sessionSettings,
+        defaultSource,
+        queryParameters,
         "{aaaa-aa-bb}");
       var otherRequest = request.DeepCopyGetItemByIdRequest();
 
