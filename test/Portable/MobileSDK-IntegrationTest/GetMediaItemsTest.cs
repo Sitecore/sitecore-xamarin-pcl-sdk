@@ -28,6 +28,7 @@
       this.session =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
+          .Site(this.testData.ShellSite)
           .BuildReadonlySession();
     }
 
