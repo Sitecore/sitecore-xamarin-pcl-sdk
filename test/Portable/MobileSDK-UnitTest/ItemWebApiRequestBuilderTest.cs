@@ -321,7 +321,7 @@
     [Test]
     public void TestDuplicatedFieldsCauseException()
     {
-      Assert.Throws<ArgumentException>(() => 
+      Assert.Throws<InvalidOperationException>(() => 
       ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFields("XXXXX")
         .AddFields("YYY")
@@ -332,7 +332,7 @@
     [Test]
     public void TestCaseInsensitiveDuplicatedFieldsCauseException()
     {
-      Assert.Throws<ArgumentException>(() => 
+      Assert.Throws<InvalidOperationException>(() => 
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFields("XXXXX")
         .AddFields("YYY")

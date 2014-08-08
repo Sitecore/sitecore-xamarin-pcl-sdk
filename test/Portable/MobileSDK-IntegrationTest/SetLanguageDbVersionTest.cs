@@ -327,14 +327,14 @@
     public void TestGetItemWithZeroInVersionInRequestByIdReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(0).Build());
-      Assert.AreEqual("ReadItemByIdRequestBuilder.Version : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
     [Test]
     public void TestGetItemWithNegativeVersionInRequestByIdReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(-1).Build());
-      Assert.AreEqual("ReadItemByIdRequestBuilder.Version : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
 

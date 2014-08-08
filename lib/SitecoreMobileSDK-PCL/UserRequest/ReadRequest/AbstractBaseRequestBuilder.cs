@@ -106,7 +106,7 @@
       bool isFieldListHasDuplicates = DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields);
       if (isFieldListHasDuplicates)
       {
-        throw new ArgumentException(this.GetType().Name + ".Fields" + " : duplicate fields are not allowed");
+        throw new InvalidOperationException(this.GetType().Name + ".Fields" + " : duplicate fields are not allowed");
       }
 
       this.queryParameters = new QueryParameters(

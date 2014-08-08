@@ -167,7 +167,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("invalid path)")
         .Build());
-      Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : Item path should begin with '/'", exception.Message);
+      Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
     }
 
     [Test]
@@ -228,7 +228,7 @@
     [Test]
     public void TestUpdateItemByIdWithDuplicateFieldsToUpdateReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
         .AddFieldsRawValuesByName("Title", "Value1")
         .AddFieldsRawValuesByName("Title", "Value2")
         .Build());
@@ -238,10 +238,9 @@
     [Test]
     public void TestUpdateItemByPathWithDuplicateFieldsToReadReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
         .AddFields("Title")
-        .AddFields("Title")
-        .Build());
+        .AddFields("Title"));
       Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 

@@ -44,7 +44,7 @@
       bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary(this.FieldsRawValuesByName, lowerCaseField);
       if (keyIsDuplicated)
       {
-        throw new ArgumentException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");
+        throw new InvalidOperationException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");  
       }
 
       this.FieldsRawValuesByName.Add(lowerCaseField, fieldValue);

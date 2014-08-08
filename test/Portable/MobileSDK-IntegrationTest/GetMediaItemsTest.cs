@@ -14,7 +14,7 @@
   using Sitecore.MobileSDK.API.MediaItem;
 
   [TestFixture]
-  public class GetMediaTest
+  public class GetMediaItemsTest
   {
     private TestEnvironment testData;
     private ISitecoreWebApiReadonlySession session;
@@ -489,14 +489,14 @@
     public void TestGetMediaWithZeroVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(0));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNegativeVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadMediaItemRequest("~/media/test").Version(-1));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
 
