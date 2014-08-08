@@ -140,7 +140,7 @@
         .AddFieldsRawValuesByName("field2", "VaLuE2");
 
       TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
-      Assert.Throws<ArgumentException>(action);
+      Assert.Throws<InvalidOperationException>(action);
     }
   }
 }
