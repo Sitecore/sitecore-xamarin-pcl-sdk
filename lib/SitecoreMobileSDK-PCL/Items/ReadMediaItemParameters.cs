@@ -1,23 +1,18 @@
-﻿
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.Items
 {
-    using Sitecore.MobileSDK.API;
-    using Sitecore.MobileSDK.API.Items;
-    using Sitecore.MobileSDK.API.Request;
-    using Sitecore.MobileSDK.API.Request.Parameters;
-    using Sitecore.MobileSDK.UrlBuilder;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public class ReadMediaItemParameters : IReadMediaItemRequest
   {
     public ReadMediaItemParameters
     (
-      ISessionConfig          sessionSettings,
-      IItemSource             itemSource, 
-      IDownloadMediaOptions   downloadOptions,
-      string                  mediaPath
+      ISessionConfig sessionSettings,
+      IItemSource itemSource,
+      IDownloadMediaOptions downloadOptions,
+      string mediaPath
     )
     {
       this.SessionSettings = sessionSettings;

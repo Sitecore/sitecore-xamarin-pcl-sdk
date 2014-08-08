@@ -1,6 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.UserRequest.UpdateRequest
 {
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
   public class UpdateItemByIdRequestBuilder : AbstractUpdateItemRequestBuilder<IUpdateItemByIdRequest>

@@ -1,6 +1,4 @@
-﻿
-
-namespace Sitecore.MobileSDK.PublicKey
+﻿namespace Sitecore.MobileSDK.PublicKey
 {
   using System;
   using System.Net.Http;

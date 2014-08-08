@@ -1,8 +1,6 @@
-
-
 namespace Sitecore.MobileSDK.API.Items
 {
-    public interface IItemSource
+  public interface IItemSource
   {
     IItemSource ShallowCopy();
 

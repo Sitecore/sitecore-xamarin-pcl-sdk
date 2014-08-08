@@ -4,17 +4,18 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.Validators;
 
-  public abstract class AbstractGetVersionedItemRequestBuilder<T> : 
-    AbstractBaseRequestBuilder<T>, 
+  public abstract class AbstractGetVersionedItemRequestBuilder<T> :
+    AbstractBaseRequestBuilder<T>,
     IGetVersionedItemRequestParametersBuilder<T>
   where T : class
   {
     public IGetVersionedItemRequestParametersBuilder<T> Version(int? itemVersion)
     {
       BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".Version");
-      
+
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
 
       this.itemSourceAccumulator = new ItemSourcePOD(

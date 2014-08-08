@@ -6,7 +6,7 @@
   {
     public static void ValidateItemPath(string itemPath, string source)
     {
-      ItemPathValidator.CommonValidatePath (itemPath, source);
+      ItemPathValidator.CommonValidatePath(itemPath, source);
 
       if (!itemPath.StartsWith("/"))
       {
@@ -16,7 +16,7 @@
 
     public static void ValidateItemTemplate(string itemPath, string source)
     {
-      ItemPathValidator.CommonValidatePath (itemPath, source);
+      ItemPathValidator.CommonValidatePath(itemPath, source);
     }
 
     private static void CommonValidatePath(string itemPath, string source)

@@ -1,16 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.Items
 {
-  using System;
   using System.Collections.Generic;
-
-  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.UrlBuilder;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public class UpdateItemByIdParameters : IUpdateItemByIdRequest
   {

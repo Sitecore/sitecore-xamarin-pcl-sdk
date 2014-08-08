@@ -1,9 +1,8 @@
-﻿using System;
-using System.Globalization;
-
-namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
+  using System;
   using System.Collections.Generic;
+  using System.Globalization;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   public class DownloadMediaOptions : IDownloadMediaOptions

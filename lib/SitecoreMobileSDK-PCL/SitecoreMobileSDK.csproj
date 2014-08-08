@@ -97,6 +97,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
+    <Compile Include="UrlBuilder\MediaItem\DownloadMediaOptions.cs" />
+    <Compile Include="UserRequest\ReadMediaItemRequestBuilder.cs" />
     <Compile Include="ScApiSession.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />
     <Compile Include="PublicKeyX509Certificate.cs" />
@@ -147,8 +149,6 @@
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\UserRequest\ReadMediaItemRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\MediaOptionsBuilder\DownloadMediaOptions.cs" />
     <Compile Include="Items\ReadMediaItemParameters.cs" />
     <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
     <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
@@ -252,9 +252,5 @@
   </Target>
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="UrlBuilder\ChangeItem\" />
-    <Folder Include="UserRequest\ReadRequest\" />
-    <Folder Include="UserRequest\ChangeRequest\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

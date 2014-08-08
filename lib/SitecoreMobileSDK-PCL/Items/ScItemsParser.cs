@@ -1,17 +1,13 @@
-﻿
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.Items
 {
   using System;
-  using System.Threading;
   using System.Collections.Generic;
-
+  using System.Threading;
   using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Fields;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Items.Fields;
 
   public class ScItemsParser

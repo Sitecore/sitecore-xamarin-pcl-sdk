@@ -1,9 +1,6 @@
-﻿
-namespace Sitecore.MobileSDK.API.Request
+﻿namespace Sitecore.MobileSDK.API.Request
 {
-  using System;
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   public interface IUpdateItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>

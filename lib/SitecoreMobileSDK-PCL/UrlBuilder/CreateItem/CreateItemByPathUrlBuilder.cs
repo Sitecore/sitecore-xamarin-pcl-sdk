@@ -1,7 +1,5 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
-  using System;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -11,7 +9,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
   public class CreateItemByPathUrlBuilder : AbstractCreateItemUrlBuilder<ICreateItemByPathRequest>
   {
     public CreateItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base( restGrammar, webApiGrammar )
+      : base(restGrammar, webApiGrammar)
     {
     }
 

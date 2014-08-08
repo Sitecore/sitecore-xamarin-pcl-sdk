@@ -1,11 +1,9 @@
-﻿
-namespace Sitecore.MobileSDK.TaskFlow
+﻿namespace Sitecore.MobileSDK.TaskFlow
 {
   using System;
   using System.Threading;
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.API.Exceptions;
-
 
   internal class RestApiCallFlow
   {

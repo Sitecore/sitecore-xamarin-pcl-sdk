@@ -1,22 +1,16 @@
-﻿
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.Items
 {
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UrlBuilder;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   public class ReadItemByQueryParameters : IReadItemsByQueryRequest
   {
     public ReadItemByQueryParameters(
       ISessionConfig sessionSettings,
-      IItemSource itemSource, 
-      IQueryParameters queryParameters, 
+      IItemSource itemSource,
+      IQueryParameters queryParameters,
       string sitecoreQuery)
     {
       this.SessionSettings = sessionSettings;

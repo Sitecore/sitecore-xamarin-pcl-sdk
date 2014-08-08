@@ -1,14 +1,9 @@
-﻿
-namespace Sitecore.MobileSDK.PublicKey
+﻿namespace Sitecore.MobileSDK.PublicKey
 {
   using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
   using System.Xml;
   using System.IO;
   using System.Threading;
-
 
   public class PublicKeyXmlParser
   {
@@ -28,7 +23,7 @@ namespace Sitecore.MobileSDK.PublicKey
 
         while (true)
         {
-          cancelToken.ThrowIfCancellationRequested ();
+          cancelToken.ThrowIfCancellationRequested();
 
           if (reader.Name.Equals("Modulus"))
           {

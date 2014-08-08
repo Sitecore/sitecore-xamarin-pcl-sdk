@@ -1,12 +1,13 @@
 namespace Sitecore.MobileSDK.API.Exceptions
 {
-    using System;
+  using System;
 
-    public class SitecoreMobileSdkException : Exception
+  public class SitecoreMobileSdkException : Exception
+  {
+    public SitecoreMobileSdkException(string message, Exception inner = null)
+      : base(message, inner)
     {
-        public SitecoreMobileSdkException (string message, Exception inner = null) : base (message, inner)
-        {
-        }
     }
+  }
 }
 
