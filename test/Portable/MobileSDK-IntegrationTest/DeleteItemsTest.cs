@@ -49,8 +49,14 @@
     }
    
 
+    private async Task<ScDeleteItemsResponse> RemoveAll()
+    {
+      await this.DeleteAllItems("master");
+      return await this.DeleteAllItems("web");
+    }
+
     [SetUp]
-    public async void Setup()
+    public void Setup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session = this.CreateSession();
@@ -58,21 +64,25 @@
       // Same as this.session
       var cleanupSession = this.CreateSession();
       this.noThrowCleanupSession = new NoThrowWebApiSession(cleanupSession);
-
-      await this.DeleteAllItems("master");
-      await this.DeleteAllItems("web");
     }
 
     [TearDown]
     public void TearDown()
     {
       this.testData = null;
+
+      this.session.Dispose();
       this.session = null;
+
+      this.noThrowCleanupSession.Dispose();
+      this.noThrowCleanupSession = null;
     }
 
     [Test]
     public async void TestDeleteItemByPathWithDb()
     {
+      await this.RemoveAll();
+
       const string Db = "web";
       var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
@@ -93,6 +103,8 @@
     [Test]
     public async void TestDeleteItemByIdWithParentScope()
     {
+      await this.RemoveAll();
+
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem childItem = await this.CreateItem("Child item", parentItem);
 
@@ -108,6 +120,8 @@
     [Test]
     public async void TestDeleteInternationalItemWithSpacesInNameByQuery()
     {
+      await this.RemoveAll();
+
       ISitecoreItem item1 = await this.CreateItem("International בינלאומי");
       ISitecoreItem item2 = await this.CreateItem("インターナショナル عالمي");
 
@@ -123,6 +137,8 @@
     [Test]
     public async void TestDeleteItemByIdbWithParentAndChildrenScope()
     {
+      await this.RemoveAll();
+
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem selfItem = await this.CreateItem("Self item", parentItem);
       ISitecoreItem childItem = await this.CreateItem("Child item", selfItem);
@@ -141,6 +157,8 @@
     [Test]
     public async void TestDeleteInternationalItemByPathbWithChildrenScope()
     {
+      await this.RemoveAll();
+
       ISitecoreItem selfItem = await this.CreateItem("インターナショナル عالمي JJ ж");
       ISitecoreItem childItem = await this.CreateItem("インターナショナル", selfItem);
 
@@ -156,6 +174,7 @@
     [Test]
     public async void TestDeleteItemByQueryWithChildrenAndSelfScope()
     {
+      await this.RemoveAll();
 
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem selfItem = await this.CreateItem("Self item", parentItem);
@@ -173,6 +192,8 @@
     [Test]
     public async void TestDeleteItemByIdAsAnonymousFromShellSiteReturnsException()
     {
+      await this.RemoveAll();
+
       var anonymousSession = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .DefaultDatabase("master")
         .Site(testData.ShellSite)
@@ -199,6 +220,8 @@
     [Test]
     public async void TestDeleteItemByPathWithoutDeleteAccessReturnsException()
     {
+      await this.RemoveAll();
+
       var noAccessSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.NoCreateAccess)
         .DefaultDatabase("master")
@@ -226,6 +249,8 @@
     [Test]
     public async void TestDeleteItemByNotExistentPath()
     {
+      await this.RemoveAll();
+
       var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/not existent item")
         .Build();
 
@@ -236,8 +261,10 @@
     [Test]
     public async void TestDeleteItemByNotExistentId()
     {
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
-        .Build();
+      await this.RemoveAll();
+
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId).Build();
+
 
       var response = await session.DeleteItemAsync(request);
       Assert.AreEqual(0, response.Count);
@@ -256,15 +283,14 @@
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
         .AddScope(ScopeType.Self)
-        .AddScope(ScopeType.Self)
-        .Build());
+        .AddScope(ScopeType.Self));
       Assert.AreEqual("DeleteItemByIdRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
     [Test]
     public void TestDeleteItemWithInvalidPathReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("invalid path )").Build());
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("invalid path )"));
       Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : Item path should begin with '/'", exception.Message);
     }
 
@@ -272,8 +298,7 @@
     public void TestDeleteItemByQueryWithNullScopeReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
-        .AddScope(null)
-        .Build());
+        .AddScope(null));
       Assert.IsTrue(exception.Message.Contains("DeleteItemItemByQueryRequestBuilder.Scope"));
     }
 
@@ -282,8 +307,7 @@
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
         .Database("1")
-        .Database("2")
-        .Build());
+        .Database("2"));
       Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
     }
 
@@ -291,8 +315,7 @@
     public void TestDeleteItemByPathWithNullDatabaseReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sample path")
-        .Database(null)
-        .Build());
+        .Database(null));
       Assert.IsTrue(exception.Message.Contains("DeleteItemItemByPathRequestBuilder.Database"));
     }
 
@@ -300,8 +323,7 @@
     public void TestDeleteItemByIdWithEmptyDatabaseReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
-        .Database("")
-        .Build());
+        .Database(""));
       Assert.AreEqual("DeleteItemByIdRequestBuilder.Database : The input cannot be empty.", exception.Message);
     }
 
@@ -309,15 +331,14 @@
     public void TestDeleteItemByQueryWithSpacesOnlyInDatabaseReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("/sample query")
-        .Database("  ")
-        .Build());
+        .Database("  "));
       Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Database : The input cannot be empty.", exception.Message);
     }
 
     [Test]
     public void TestDeleteItemByEmptyIdReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId("").Build());
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(""));
       Assert.AreEqual("DeleteItemByIdRequestBuilder.ItemId : The input cannot be empty.", exception.Message);
     }
 
@@ -331,20 +352,22 @@
     [Test]
     public void TestDeleteItemByPathWithSpacesOnlyReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath(" ").Build());
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath(" "));
       Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
 
     [Test]
     public async void TestCreateAndDelete100ItemsByQuery()
     {
+      await this.RemoveAll();
+
       for (int i = 0; i < 100; i++)
       {
         await this.CreateItem("Test item " + (i + 1));
       }
 
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(testData.Items.CreateItemsHere.Path + "/descendant::*[@@templatename='Sample Item']")
-        .Build();
+      var query = testData.Items.CreateItemsHere.Path + "/descendant::*[@@templatename='Sample Item']";
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(query).Build();
 
       var result = await this.session.DeleteItemAsync(request);
       Assert.AreEqual(100, result.Count); 
