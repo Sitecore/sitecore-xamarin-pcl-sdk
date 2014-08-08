@@ -8,6 +8,7 @@
 "uploadImageVC" = "Upload Image";
 "getItemByQuery" = "Item by Query";
 "getMediaItem" = "Download Image";
+"authTestVC" = "Authentication";
 "Master" = "Master";
 
 "MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
@@ -29,8 +30,6 @@
 "SCOPE_BUTTON_SELF"   = "Self";
 "SCOPE_BUTTON_PARENT" = "Parent";
 "SCOPE_BUTTON_CHILD"  = "Child";
-
-
 
 //messages
 "Loading Data" = "Loading Data...";
@@ -56,6 +55,8 @@
 "children count is" = "children count is";
 "The item created successfully" = "The item created successfully";
 "Item path: " = "Item path: ";
+"This user exist" = "This user exist";
+"This user not exist" = "This user not exist";
 
 //settings screen placeholders
 "Instance Url" = "Instance Url";
@@ -72,3 +73,6 @@
 "Download" = "Download";
 "Height:" = "Height:";
 "Width:" = "Width:";
+"user_login_placeholder" = "user login(example: sitecore\admin)";
+"password_placeholder" = "password";
+"authenticate_button_title" = "Authenticate";

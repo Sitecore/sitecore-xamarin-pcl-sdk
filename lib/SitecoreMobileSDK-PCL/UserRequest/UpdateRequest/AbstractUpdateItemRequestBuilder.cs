@@ -1,12 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.UserRequest.UpdateRequest
 {
-  using System;
+  using Sitecore.MobileSDK.UserRequest.ChangeRequest;
 
   public abstract class AbstractUpdateItemRequestBuilder<T> : AbstractChangeItemRequestBuilder<T>
     where T : class
   {
-
   }
 }
 

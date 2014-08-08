@@ -1,23 +1,18 @@
-﻿
-
-namespace Sitecore.MobileSDK.CrudTasks
+﻿namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
-  using System.IO;
   using System.Net.Http;
   using System.Diagnostics;
   using System.Threading;
   using System.Threading.Tasks;
 
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.PublicKey;
 
-
   public abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
-      where TRequest: class
+      where TRequest : class
   {
     private AbstractGetItemTask()
     {
@@ -28,7 +23,7 @@ namespace Sitecore.MobileSDK.CrudTasks
       this.httpClient = httpClient;
       this.credentialsHeadersCryptor = credentialsHeadersCryptor;
 
-      this.Validate ();
+      this.Validate();
     }
 
     #region  IRestApiCallTasks
@@ -44,8 +39,8 @@ namespace Sitecore.MobileSDK.CrudTasks
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
     {
-	    //TODO: @igk debug request output, remove later
-		  Debug.WriteLine("REQUEST: " + requestUrl);
+      //TODO: @igk debug request output, remove later
+      Debug.WriteLine("REQUEST: " + requestUrl);
       HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
       return await httpResponse.Content.ReadAsStringAsync();
     }
@@ -54,8 +49,8 @@ namespace Sitecore.MobileSDK.CrudTasks
     {
       Func<ScItemsResponse> syncParseResponse = () =>
       {
-		    //TODO: @igk debug response output, remove later
-		    Debug.WriteLine("RESPONSE: " + data);
+        //TODO: @igk debug response output, remove later
+        Debug.WriteLine("RESPONSE: " + data);
         return ScItemsParser.Parse(data, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);
@@ -67,20 +62,20 @@ namespace Sitecore.MobileSDK.CrudTasks
     {
       if (null == this.httpClient)
       {
-        throw new ArgumentNullException ("AbstractGetItemTask.httpClient cannot be null");
+        throw new ArgumentNullException("AbstractGetItemTask.httpClient cannot be null");
       }
       else if (null == this.credentialsHeadersCryptor)
       {
-        throw new ArgumentNullException ("AbstractGetItemTask.credentialsHeadersCryptor cannot be null");
+        throw new ArgumentNullException("AbstractGetItemTask.credentialsHeadersCryptor cannot be null");
       }
     }
 
-    protected abstract string UrlToGetItemWithRequest (TRequest request);
+    protected abstract string UrlToGetItemWithRequest(TRequest request);
 
 
     private HttpClient httpClient;
     protected ICredentialsHeadersCryptor credentialsHeadersCryptor;
-    }
+  }
 }
 
 

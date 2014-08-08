@@ -2,26 +2,18 @@
 {
   using System;
   using System.Globalization;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
-
-
-  using Sitecore.MobileSDK.Utils;
-  using Sitecore.MobileSDK.SessionSettings;
   using System.Collections.Generic;
-
-  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.Validators;
-
 
   public class MediaItemUrlBuilder
   {
     public MediaItemUrlBuilder(
-      IRestServiceGrammar restGrammar, 
-      ISessionConfig sessionConfig, 
+      IRestServiceGrammar restGrammar,
+      ISessionConfig sessionConfig,
       IMediaLibrarySettings mediaSettings,
       IItemSource itemSource)
     {
@@ -63,7 +55,7 @@
       {
         result = result + this.restGrammar.PathComponentSeparator + Uri.EscapeUriString(relativePath);
 
-        if ( !isExtensionAvailable )
+        if (!isExtensionAvailable)
         {
           result = result + extensionWithDotPrefix;
         }
@@ -77,7 +69,7 @@
         int rootStartIndex = lowerCasePathForComparisonNeeds.IndexOf(mediaLibraryRoot);
         bool isMediaRootAvailable = (rootStartIndex >= 0);
 
-        if ( isMediaRootAvailable )
+        if (isMediaRootAvailable)
         {
           relativePath = path.Remove(rootStartIndex, this.mediaSettings.MediaLibraryRoot.Length);
         }

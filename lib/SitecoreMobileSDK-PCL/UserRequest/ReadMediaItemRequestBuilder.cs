@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.MediaItem.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -10,7 +10,7 @@
     public ReadMediaItemRequestBuilder(string mediaPath)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaPath, this.GetType().Name + ".MediaPath");
-      
+
       this.mediaPath = mediaPath;
     }
 
@@ -19,7 +19,7 @@
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
 
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(database, this.GetType().Name + ".Database");
-      
+
       this.itemSourceAccumulator = new ItemSourcePOD(
         database,
         this.itemSourceAccumulator.Language,

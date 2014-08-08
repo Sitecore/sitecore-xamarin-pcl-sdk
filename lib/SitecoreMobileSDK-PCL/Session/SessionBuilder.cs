@@ -1,6 +1,5 @@
 ﻿namespace Sitecore.MobileSDK.Session
 {
-  using System;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
@@ -113,7 +112,7 @@
       // No validation needed.
       BaseValidator.CheckForNullAndEmptyOrThrow(credentials.Username, this.GetType().Name + ".Credentials.Username");
       BaseValidator.CheckForNullAndEmptyOrThrow(credentials.Password, this.GetType().Name + ".Credentials.Password");
-    
+
       this.credentials = credentials.CredentialsShallowCopy();
       return this;
     }
@@ -140,9 +139,9 @@
 
     public IBaseSessionBuilder DefaultDatabase(string defaultDatabase)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, 
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database,
         this.GetType().Name + ".DefaultDatabase");
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(defaultDatabase, 
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(defaultDatabase,
         this.GetType().Name + ".DefaultDatabase");
 
       this.itemSourceAccumulator =

@@ -1,5 +1,4 @@
-﻿
-namespace Sitecore.MobileSDK.Authenticate
+﻿namespace Sitecore.MobileSDK.Authenticate
 {
   using System;
   using System.Diagnostics;

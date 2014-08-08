@@ -1,5 +1,4 @@
-﻿
-namespace Sitecore.MobileSDK.Utils
+﻿namespace Sitecore.MobileSDK.Utils
 {
   using System;
 

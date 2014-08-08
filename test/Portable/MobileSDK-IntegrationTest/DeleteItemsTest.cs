@@ -290,7 +290,7 @@
     public void TestDeleteItemWithInvalidPathReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("invalid path )"));
-      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : Item path should begin with '/'", exception.Message);
+      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
     }
 
     [Test]

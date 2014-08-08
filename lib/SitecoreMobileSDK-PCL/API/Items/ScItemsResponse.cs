@@ -1,8 +1,8 @@
 namespace Sitecore.MobileSDK.API.Items
 {
-    using System.Collections.Generic;
+  using System.Collections.Generic;
 
-    public class ScItemsResponse
+  public class ScItemsResponse
   {
     public int TotalCount { get; private set; }
 
@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK.API.Items
 
     public List<ISitecoreItem> Items { get; private set; }
 
-    public ScItemsResponse (int totalCount, int resultCount, List<ISitecoreItem> items)
+    public ScItemsResponse(int totalCount, int resultCount, List<ISitecoreItem> items)
     {
       this.TotalCount = totalCount;
       this.ResultCount = resultCount;

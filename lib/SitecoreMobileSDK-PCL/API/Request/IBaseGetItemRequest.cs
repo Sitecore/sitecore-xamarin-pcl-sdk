@@ -1,9 +1,9 @@
 namespace Sitecore.MobileSDK.API.Request
 {
-    using Sitecore.MobileSDK.API.Items;
-    using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
-    public interface IBaseGetItemRequest
+  public interface IBaseGetItemRequest
   {
     IBaseGetItemRequest DeepCopyBaseGetItemRequest();
 

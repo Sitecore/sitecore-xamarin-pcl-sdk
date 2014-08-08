@@ -290,7 +290,7 @@
     {
       const string FieldName = "Text";
 
-      var exception = Assert.Throws<ArgumentException>(() =>
+      var exception = Assert.Throws<InvalidOperationException>(() =>
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
@@ -309,8 +309,7 @@
          .ItemName("Set duplicate fields")
          .AddFieldsRawValuesByName(FieldName, FieldValue)
          .ItemTemplate(testData.Items.Home.Template)
-         .AddFieldsRawValuesByName(FieldName, FieldValue)
-         .Build());
+         .AddFieldsRawValuesByName(FieldName, FieldValue));
       Assert.AreEqual("CreateItemByPathRequestBuilder.FieldsRawValuesByName : duplicate fields are not allowed", exception.Message);
     }
 
@@ -334,6 +333,27 @@
     }
 
     [Test]
+    public void TestCreateItemEmtyOrNullFieldsNotAvailable()
+    {
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .AddFieldsRawValuesByName(null, "somevalue"));
+      Assert.IsTrue(exception.Message.Contains("fieldKey"));
+
+      var exception1 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .AddFieldsRawValuesByName("", "somevalue"));
+      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldKey : The input cannot be empty.", exception1.Message);
+
+      var exception2 = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .AddFieldsRawValuesByName("somekey", null));
+      Assert.IsTrue (exception2.Message.Contains ("fieldValue"));
+
+      var exception3 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .AddFieldsRawValuesByName("somekey", ""));
+      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
+    }
+
+
+    [Test]
     public async void TestCreateItemByIdAndSetInvalidEmptyAndNullFields()
     {
       await this.RemoveAll();
@@ -342,8 +362,6 @@
       var request = CreateByPathRequestBuilder()
          .AddFields(FieldName)
          .AddFieldsRawValuesByName(FieldName, FieldName)
-         .AddFieldsRawValuesByName(null, "")
-         .AddFieldsRawValuesByName("", null)
          .ItemName(expectedItem.DisplayName)
          .Build();
 

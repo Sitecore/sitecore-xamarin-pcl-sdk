@@ -6,9 +6,8 @@ namespace WhiteLabeliOS
 
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.SessionSettings;
 
-  public class InstanceSettings : IWebApiCredentials
+  public class InstanceSettings
   {
     private string instanceUrl;
     private string instanceLogin;
@@ -40,9 +39,13 @@ namespace WhiteLabeliOS
 
     public ISitecoreWebApiSession GetSession()
     {
-      var credentials = this;
-      var result = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.instanceUrl)
-        .Credentials(credentials)
+      var credentials = 
+        new WebApiCredentialsPODInsequredDemo(
+          this.instanceLogin, 
+          this.instancePassword);
+
+      var result = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost (this.instanceUrl)
+        .Credentials (credentials)
         .Site (this.instanceSite)
         .DefaultDatabase (this.instanceDataBase)
         .DefaultLanguage (this.instanceLanguage)
@@ -172,29 +175,5 @@ namespace WhiteLabeliOS
         this.SaveValueToStorage (value, "instanceLanguage");
       } 
     }
-
-    #region IWebApiCredentials
-    public IWebApiCredentials CredentialsShallowCopy()
-    {
-      return this;
-    }
-
-    public string Username
-    {
-      get
-      {
-        return this.InstanceLogin;
-      }
-    }
-
-    public string Password
-    {
-      get
-      {
-        return this.InstancePassword;
-      }
-    }
-
-    #endregion IWebApiCredentials
   }
 }

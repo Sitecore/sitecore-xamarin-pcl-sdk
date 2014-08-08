@@ -21,7 +21,7 @@
       }
     }
 
-    public static void AssertPositiveNumber(int? optionalNumber, string  source)
+    public static void AssertPositiveNumber(int? optionalNumber, string source)
     {
       BaseValidator.CheckNullAndThrow(optionalNumber, source);
       int number = optionalNumber.Value;

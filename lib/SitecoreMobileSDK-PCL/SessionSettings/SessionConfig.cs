@@ -1,8 +1,5 @@
-﻿
-
-namespace Sitecore.MobileSDK.SessionSettings
+﻿namespace Sitecore.MobileSDK.SessionSettings
 {
-  using System;
   using System.Diagnostics;
 
   using Sitecore.MobileSDK.API;
@@ -12,12 +9,12 @@ namespace Sitecore.MobileSDK.SessionSettings
   public class SessionConfig : ISessionConfig
   {
     public SessionConfig(
-      string instanceUrl, 
-      string site = null, 
+      string instanceUrl,
+      string site = null,
       string itemWebApiVersion = "v1")
     {
       this.InstanceUrl = instanceUrl;
-      this.Site        = site;
+      this.Site = site;
       this.ItemWebApiVersion = itemWebApiVersion;
 
       this.Validate();
@@ -27,8 +24,8 @@ namespace Sitecore.MobileSDK.SessionSettings
     public virtual SessionConfig ShallowCopy()
     {
       SessionConfig result = new SessionConfig(
-        this.InstanceUrl, 
-        this.Site, 
+        this.InstanceUrl,
+        this.Site,
         this.ItemWebApiVersion);
 
       return result;
@@ -47,14 +44,14 @@ namespace Sitecore.MobileSDK.SessionSettings
       protected set;
     }
 
-    public string Site      
-    { 
-      get; 
-      protected set; 
+    public string Site
+    {
+      get;
+      protected set;
     }
     public string ItemWebApiVersion
     {
-      get; 
+      get;
       protected set;
     }
     #endregion Properties

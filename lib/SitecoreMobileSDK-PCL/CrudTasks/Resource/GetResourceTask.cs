@@ -6,7 +6,6 @@
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
-  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
@@ -22,7 +21,7 @@
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
 
-      this.Validate ();
+      this.Validate();
     }
 
     #region  IRestApiCallTasks
@@ -37,8 +36,8 @@
 
     public async Task<Stream> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
     {
-		  //TODO: @igk debug request output, remove later
-	    Debug.WriteLine("REQUEST: " + requestUrl);
+      //TODO: @igk debug request output, remove later
+      Debug.WriteLine("REQUEST: " + requestUrl);
 
       var httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
 
@@ -56,7 +55,7 @@
     {
       if (null == this.httpClient)
       {
-        throw new ArgumentNullException ("AbstractGetItemTask.httpClient cannot be null");
+        throw new ArgumentNullException("AbstractGetItemTask.httpClient cannot be null");
       }
     }
 

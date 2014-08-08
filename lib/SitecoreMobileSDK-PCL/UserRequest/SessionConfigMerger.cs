@@ -1,5 +1,4 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest
 {
   using System;
   using Sitecore.MobileSDK.API;
@@ -8,21 +7,21 @@ namespace Sitecore.MobileSDK.UserRequest
 
   public class SessionConfigMerger
   {
-    public SessionConfigMerger (ISessionConfig defaultSessionConfig)
+    public SessionConfigMerger(ISessionConfig defaultSessionConfig)
     {
       this.defaultSessionConfig = defaultSessionConfig;
 
-      this.Validate ();
+      this.Validate();
     }
 
     public ISessionConfig FillSessionConfigGaps(ISessionConfig userConfig)
     {
-      if ( null == userConfig )
+      if (null == userConfig)
       {
         return this.defaultSessionConfig;
       }
 
-      var result = new SessionConfigPOD ();
+      var result = new SessionConfigPOD();
       result.InstanceUrl = (null != userConfig.InstanceUrl) ? userConfig.InstanceUrl : this.defaultSessionConfig.InstanceUrl;
       result.Site = (null != userConfig.Site) ? userConfig.Site : this.defaultSessionConfig.Site;
       result.ItemWebApiVersion = (null != userConfig.ItemWebApiVersion) ? userConfig.ItemWebApiVersion : this.defaultSessionConfig.ItemWebApiVersion;
@@ -34,15 +33,15 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (null == this.defaultSessionConfig)
       {
-        throw new ArgumentNullException ("SessionConfigMerger.defaultSessionConfig cannot be null");
+        throw new ArgumentNullException("SessionConfigMerger.defaultSessionConfig cannot be null");
       }
       else if (null == this.defaultSessionConfig.InstanceUrl)
       {
-        throw new ArgumentNullException ("SessionConfigMerger.defaultSessionConfig.InstanceUrl cannot be null");
+        throw new ArgumentNullException("SessionConfigMerger.defaultSessionConfig.InstanceUrl cannot be null");
       }
       else if (null == this.defaultSessionConfig.ItemWebApiVersion)
       {
-        throw new ArgumentNullException ("SessionConfigMerger.defaultSessionConfig.ItemWebApiVersion cannot be null");
+        throw new ArgumentNullException("SessionConfigMerger.defaultSessionConfig.ItemWebApiVersion cannot be null");
       }
     }
 

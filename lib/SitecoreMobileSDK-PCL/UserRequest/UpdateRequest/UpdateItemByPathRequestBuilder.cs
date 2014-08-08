@@ -1,7 +1,8 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
+﻿namespace Sitecore.MobileSDK.UserRequest.UpdateRequest
 {
-  using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.Validators;
 
   public class UpdateItemByPathRequestBuilder : AbstractUpdateItemRequestBuilder<IUpdateItemByPathRequest>
   {

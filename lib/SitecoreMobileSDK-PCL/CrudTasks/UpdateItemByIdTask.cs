@@ -1,5 +1,4 @@
-﻿
-namespace Sitecore.MobileSDK.CrudTasks
+﻿namespace Sitecore.MobileSDK.CrudTasks
 {
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using System.Net.Http;
@@ -8,7 +7,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
   public class UpdateItemByIdTask : AbstractUpdateItemTask<IUpdateItemByIdRequest>
   {
-    public UpdateItemByIdTask(UpdateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
+    public UpdateItemByIdTask(UpdateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;

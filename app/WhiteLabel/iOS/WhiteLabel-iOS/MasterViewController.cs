@@ -68,6 +68,7 @@ namespace WhiteLabeliOS
             this.features.Insert(0, "uploadImageVC");
             this.features.Insert(0, "getItemByQuery");
 			      this.features.Insert(0, "getMediaItem");
+            this.features.Insert(0, "authTestVC");
         }
         #endregion Navigation
 

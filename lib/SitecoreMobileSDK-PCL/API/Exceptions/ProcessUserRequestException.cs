@@ -1,13 +1,13 @@
 namespace Sitecore.MobileSDK.API.Exceptions
 {
-    using System;
+  using System;
 
-    public class ProcessUserRequestException : SitecoreMobileSdkException
+  public class ProcessUserRequestException : SitecoreMobileSdkException
+  {
+    public ProcessUserRequestException(string message, Exception inner = null)
+      : base(message, inner)
     {
-        public ProcessUserRequestException(string message, Exception inner = null) 
-            : base (message, inner)
-        {
-        }
     }
+  }
 }
 

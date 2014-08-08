@@ -1,7 +1,5 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 {
-  using System;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
@@ -11,7 +9,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
   public class UpdateItemByPathUrlBuilder : AbstractUpdateItemUrlBuilder<IUpdateItemByPathRequest>
   {
     public UpdateItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base( restGrammar, webApiGrammar )
+      : base(restGrammar, webApiGrammar)
     {
     }
 
@@ -33,7 +31,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
     {
       ItemPathValidator.ValidateItemPath(request.ItemPath, this.GetType().Name + ".itemPath");
     }
-   
+
   }
 }
 

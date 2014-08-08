@@ -1,7 +1,5 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 {
-  using System;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
@@ -11,7 +9,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
   public class UpdateItemByIdUrlBuilder : AbstractUpdateItemUrlBuilder<IUpdateItemByIdRequest>
   {
     public UpdateItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base( restGrammar, webApiGrammar )
+      : base(restGrammar, webApiGrammar)
     {
     }
 
@@ -20,7 +18,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
     {
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId).ToLowerInvariant();
 
-      string result = 
+      string result =
           this.webApiGrammar.ItemIdParameterName
         + this.restGrammar.KeyValuePairSeparator
         + escapedId;

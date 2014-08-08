@@ -4,7 +4,6 @@
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.Utils;
-  using Sitecore.MobileSDK.UrlBuilder;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Validators;
@@ -33,7 +32,7 @@
         this.webApiGrammar.ItemWebApiEndpoint +
         escapedVersion;
 
-      if (!string.IsNullOrEmpty (request.Site))
+      if (!string.IsNullOrEmpty(request.Site))
       {
         string escapedSite = UrlBuilderUtils.EscapeDataString(request.Site);
         result +=
@@ -56,11 +55,11 @@
     {
       if (null == this.restGrammar)
       {
-        throw new ArgumentNullException ("[SessionConfigUrlBuilder] restGrammar cannot be null");
+        throw new ArgumentNullException("[SessionConfigUrlBuilder] restGrammar cannot be null");
       }
       else if (null == this.webApiGrammar)
       {
-        throw new ArgumentNullException ("[SessionConfigUrlBuilder] webApiGrammar cannot be null");
+        throw new ArgumentNullException("[SessionConfigUrlBuilder] webApiGrammar cannot be null");
       }
     }
 

@@ -1,8 +1,7 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
 {
-  using System;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.UrlBuilder.ChangeItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 

@@ -7,13 +7,13 @@
   public class QueryParameters : IQueryParameters
   {
     public QueryParameters(
-      PayloadType? payload, 
-      IScopeParameters scopeParameters, 
+      PayloadType? payload,
+      IScopeParameters scopeParameters,
       IEnumerable<string> fields)
     {
-      this.Payload         = payload;
+      this.Payload = payload;
       this.ScopeParameters = scopeParameters;
-		  this.Fields          = fields;
+      this.Fields = fields;
     }
 
     public virtual IQueryParameters DeepCopy()

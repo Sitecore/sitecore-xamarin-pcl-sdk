@@ -1,7 +1,5 @@
-﻿
-namespace Sitecore.MobileSDK.CrudTasks
+﻿namespace Sitecore.MobileSDK.CrudTasks
 {
-  using System;
   using System.Threading.Tasks;
   using System.Net.Http;
   using System.Threading;
@@ -9,7 +7,7 @@ namespace Sitecore.MobileSDK.CrudTasks
   using Sitecore.MobileSDK.PublicKey;
 
   public abstract class AbstractUpdateItemTask<TRequest> : AbstractGetItemTask<TRequest>
-    where TRequest: class
+    where TRequest : class
   {
     public AbstractUpdateItemTask(HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)
@@ -22,7 +20,7 @@ namespace Sitecore.MobileSDK.CrudTasks
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Put, url);
       string fieldsList = this.GetFieldsListString(request);
-      result.Content = new StringContent(fieldsList,  Encoding.UTF8, "application/x-www-form-urlencoded");
+      result.Content = new StringContent(fieldsList, Encoding.UTF8, "application/x-www-form-urlencoded");
       result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }

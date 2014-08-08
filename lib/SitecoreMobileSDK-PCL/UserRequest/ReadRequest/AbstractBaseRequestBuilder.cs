@@ -1,14 +1,13 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest.ReadRequest
 {
   using System;
-  using System.Linq;
   using System.Collections.Generic;
+  using System.Linq;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractBaseRequestBuilder<T> : IBaseRequestParametersBuilder<T>
     where T : class
@@ -20,8 +19,8 @@ namespace Sitecore.MobileSDK.UserRequest
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
-        sitecoreDatabase, 
-        this.itemSourceAccumulator.Language, 
+        sitecoreDatabase,
+        this.itemSourceAccumulator.Language,
         this.itemSourceAccumulator.VersionNumber);
 
       return this;
@@ -34,8 +33,8 @@ namespace Sitecore.MobileSDK.UserRequest
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
-        this.itemSourceAccumulator.Database, 
-        itemLanguage, 
+        this.itemSourceAccumulator.Database,
+        itemLanguage,
         this.itemSourceAccumulator.VersionNumber);
 
       return this;
@@ -82,14 +81,14 @@ namespace Sitecore.MobileSDK.UserRequest
         return this;
       }
 
-      Func<string, bool> fieldNameValidator = 
+      Func<string, bool> fieldNameValidator =
         fieldName => !string.IsNullOrWhiteSpace(fieldName);
       var validFields = fields.Where(fieldNameValidator).ToList();
 
       IEnumerable<string> currentFields = this.queryParameters.Fields;
       if (null == currentFields)
       {
-        currentFields = new string[0]{};
+        currentFields = new string[0] { };
       };
 
 
@@ -107,12 +106,12 @@ namespace Sitecore.MobileSDK.UserRequest
       bool isFieldListHasDuplicates = DuplicateEntryValidator.IsDuplicatedFieldsInTheList(newFields);
       if (isFieldListHasDuplicates)
       {
-        throw new ArgumentException(this.GetType().Name + ".Fields" + " : duplicate fields are not allowed");
+        throw new InvalidOperationException(this.GetType().Name + ".Fields" + " : duplicate fields are not allowed");
       }
 
       this.queryParameters = new QueryParameters(
-        this.queryParameters.Payload, 
-        this.queryParameters.ScopeParameters, 
+        this.queryParameters.Payload,
+        this.queryParameters.ScopeParameters,
         newFields);
 
       return this;
@@ -131,7 +130,7 @@ namespace Sitecore.MobileSDK.UserRequest
         }
       }
 
-      return this.AddFields( (IEnumerable<string>)fieldParams );
+      return this.AddFields((IEnumerable<string>)fieldParams);
     }
 
     public abstract T Build();

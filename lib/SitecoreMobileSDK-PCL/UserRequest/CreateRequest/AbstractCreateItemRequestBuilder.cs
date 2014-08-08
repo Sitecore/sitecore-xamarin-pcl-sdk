@@ -1,13 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.UserRequest.CreateRequest
 {
-  using System;
   using System.Collections.Generic;
-  using System.Linq;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UserRequest.ChangeRequest;
   using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractCreateItemRequestBuilder<T> : AbstractChangeItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T>
@@ -38,7 +35,7 @@ namespace Sitecore.MobileSDK
         this.GetType().Name + ".ItemTemplate");
 
       //igk spike to use one restrictions for all paths 
-      itemTemplate = itemTemplate.TrimStart ('/');
+      itemTemplate = itemTemplate.TrimStart('/');
 
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, itemTemplate, this.itemParametersAccumulator.FieldsRawValuesByName);

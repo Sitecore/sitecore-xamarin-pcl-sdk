@@ -1,17 +1,15 @@
-﻿
-namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
+﻿namespace Sitecore.MobileSDK.UrlBuilder.ChangeItem
 {
-  using System;
-  using Sitecore.MobileSDK.Utils;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.Utils;
 
   public abstract class AbstractChangeItemUrlBuilder<TRequest> : AbstractGetItemUrlBuilder<TRequest>
     where TRequest : IBaseChangeItemRequest
   {
     public AbstractChangeItemUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base( restGrammar, webApiGrammar )
+      : base(restGrammar, webApiGrammar)
     {
     }
 
@@ -28,15 +26,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.UpdateItem
       if (fieldsAvailable)
       {
         foreach (var fieldElem in request.FieldsRawValuesByName)
-        {  
-          string escapedFieldName = UrlBuilderUtils.EscapeDataString (fieldElem.Key);
-          string escapedFieldValue = UrlBuilderUtils.EscapeDataString (fieldElem.Value);
-          result += escapedFieldName 
-            + this.restGrammar.KeyValuePairSeparator 
-            + escapedFieldValue 
+        {
+          string escapedFieldName = UrlBuilderUtils.EscapeDataString(fieldElem.Key);
+          string escapedFieldValue = UrlBuilderUtils.EscapeDataString(fieldElem.Value);
+          result += escapedFieldName
+            + this.restGrammar.KeyValuePairSeparator
+            + escapedFieldValue
             + this.restGrammar.FieldSeparator;
         }
-        result = result.Remove (result.Length - 1);
+        result = result.Remove(result.Length - 1);
       }
 
       return result;

@@ -233,7 +233,7 @@
     {
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(0).Build());
-      Assert.AreEqual("ReadItemByPathRequestBuilder.Version : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
     [Test]
@@ -241,7 +241,7 @@
     {
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(-1).Build());
-      Assert.AreEqual("ReadItemByPathRequestBuilder.Version : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("ReadItemByPathRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
     [Test]

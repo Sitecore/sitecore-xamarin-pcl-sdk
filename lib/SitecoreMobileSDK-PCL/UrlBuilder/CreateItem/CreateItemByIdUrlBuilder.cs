@@ -9,7 +9,7 @@
   public class CreateItemByIdUrlBuilder : AbstractCreateItemUrlBuilder<ICreateItemByIdRequest>
   {
     public CreateItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base( restGrammar, webApiGrammar )
+      : base(restGrammar, webApiGrammar)
     {
     }
 
@@ -18,7 +18,7 @@
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId).ToLowerInvariant();
 
       string result = base.GetSpecificPartForRequest(request);
-      result += this.restGrammar.FieldSeparator 
+      result += this.restGrammar.FieldSeparator
         + this.webApiGrammar.ItemIdParameterName
         + this.restGrammar.KeyValuePairSeparator
         + escapedId;
