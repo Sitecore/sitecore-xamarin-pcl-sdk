@@ -1,13 +1,10 @@
-﻿
-
-namespace Sitecore.MobileSDK.UrlBuilder
+﻿namespace Sitecore.MobileSDK.UrlBuilder
 {
   using System;
   using System.Linq;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Utils;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
@@ -28,7 +25,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
       string result = string.Empty;
 
-      string payloadStatement = this.PayloadTypeToRestArgumentStatement( queryParameters.Payload );
+      string payloadStatement = this.PayloadTypeToRestArgumentStatement(queryParameters.Payload);
       result = payloadStatement.ToLowerInvariant();
 
       string scopeString = string.Empty;
@@ -45,22 +42,22 @@ namespace Sitecore.MobileSDK.UrlBuilder
         result += scopeString.ToLowerInvariant();
       }
 
-      bool isCollectionValid = ( null != queryParameters.Fields );
-      if ( !isCollectionValid )
+      bool isCollectionValid = (null != queryParameters.Fields);
+      if (!isCollectionValid)
       {
         // @adk : avoiding null pointer exception from IEnumerable.Any()
         return result;
       }
 
-      bool isCollectionEmpty = ( !queryParameters.Fields.Any() );
+      bool isCollectionEmpty = (!queryParameters.Fields.Any());
       bool isFieldsAvailable = isCollectionValid && !isCollectionEmpty;
-      if ( !isFieldsAvailable )
+      if (!isFieldsAvailable)
       {
         return result;
       }
 
-      string fieldsStatement = this.GetFieldsStatementFromCollection( queryParameters.Fields );
-      if ( null != fieldsStatement )
+      string fieldsStatement = this.GetFieldsStatementFromCollection(queryParameters.Fields);
+      if (null != fieldsStatement)
       {
         if (!string.IsNullOrEmpty(result))
         {
@@ -72,7 +69,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
       return result.ToLowerInvariant();
     }
 
-    private string GetFieldsStatementFromCollection( IEnumerable<string> fields )
+    private string GetFieldsStatementFromCollection(IEnumerable<string> fields)
     {
       string result = this.webApiGrammar.FieldsListParameterName + this.restGrammar.KeyValuePairSeparator;
 
@@ -80,13 +77,13 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
       Func<string, string> fieldTransformerFunc = (currentField) =>
       {
-        string escapedField = UrlBuilderUtils.EscapeDataString( currentField );
+        string escapedField = UrlBuilderUtils.EscapeDataString(currentField);
         return restGrammar.ItemFieldSeparator + escapedField;
       };
-      var fieldsWithSeparators = fields.Select( fieldTransformerFunc );
+      var fieldsWithSeparators = fields.Select(fieldTransformerFunc);
 
-      string strFieldsList = string.Concat( fieldsWithSeparators );
-      string strFieldsListWithoutLeadingSeparator = strFieldsList.Remove( 0, 1 );
+      string strFieldsList = string.Concat(fieldsWithSeparators);
+      string strFieldsListWithoutLeadingSeparator = strFieldsList.Remove(0, 1);
 
       result += strFieldsListWithoutLeadingSeparator;
 
@@ -96,7 +93,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
     #region Payload
     private string PayloadTypeToRestArgumentStatement(PayloadType? payload)
     {
-      string strPayload = this.PayloadTypeToString( payload );
+      string strPayload = this.PayloadTypeToString(payload);
       string result = string.Empty;
 
       if (null == strPayload)
@@ -117,9 +114,9 @@ namespace Sitecore.MobileSDK.UrlBuilder
       }
 
       var enumNamesMap = new Dictionary<PayloadType?, string>();
-      enumNamesMap.Add( PayloadType.Content, "content" );
-      enumNamesMap.Add( PayloadType.Full   , "full"    );
-      enumNamesMap.Add( PayloadType.Min    , "min"     );
+      enumNamesMap.Add(PayloadType.Content, "content");
+      enumNamesMap.Add(PayloadType.Full, "full");
+      enumNamesMap.Add(PayloadType.Min, "min");
 
       string result = enumNamesMap[payload];
       return result;

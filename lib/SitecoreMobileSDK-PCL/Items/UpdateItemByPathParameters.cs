@@ -1,16 +1,11 @@
-﻿
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.Items
 {
-  using System;
   using System.Collections.Generic;
-
-  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-  using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.UrlBuilder;
 
   public class UpdateItemByPathParameters : IUpdateItemByPathRequest
   {
@@ -44,7 +39,7 @@ namespace Sitecore.MobileSDK
       {
         payload = this.QueryParameters.DeepCopy();
       }
-        
+
       return new UpdateItemByPathParameters(connection, itemSrc, payload, this.FieldsRawValuesByName, this.ItemPath);
     }
 

@@ -1,12 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK.Items
+﻿namespace Sitecore.MobileSDK.Items
 {
-  using System;
   using Sitecore.MobileSDK.API.Items;
 
   public class ItemSource : ItemSourcePOD
   {
-    public ItemSource(string database, string language, int? version = null) 
+    public ItemSource(string database, string language, int? version = null)
       : base(database, language, version)
     {
     }
@@ -15,6 +13,6 @@ namespace Sitecore.MobileSDK.Items
     {
       return new ItemSource(this.Database, this.Language, this.VersionNumber);
     }
-  } 
+  }
 }
 

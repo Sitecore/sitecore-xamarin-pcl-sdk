@@ -1,5 +1,4 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest.ReadRequest
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items;

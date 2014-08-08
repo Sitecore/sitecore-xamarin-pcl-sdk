@@ -1,10 +1,7 @@
-
 namespace Sitecore.MobileSDK.SessionSettings
 {
   using System;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder;
 
   public class SessionConfigPOD : ISessionConfig, IMediaLibrarySettings
   {
@@ -36,14 +33,14 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     public string ItemWebApiVersion { get; set; }
 
-    public string Site 
-    { 
-      get 
-      { 
+    public string Site
+    {
+      get
+      {
         return this.site;
       }
       set
-      { 
+      {
         if (string.IsNullOrEmpty(value))
         {
           this.site = null;
@@ -52,10 +49,10 @@ namespace Sitecore.MobileSDK.SessionSettings
         {
           string separator = "/";
           string siteValue = value;
-          bool firstSymbolIsNotSlash = !siteValue.StartsWith (separator);
+          bool firstSymbolIsNotSlash = !siteValue.StartsWith(separator);
           if (firstSymbolIsNotSlash)
           {
-            throw new ArgumentException ("SessionConfigPOD.Site : site must starts with '/'"); 
+            throw new ArgumentException("SessionConfigPOD.Site : site must starts with '/'");
           }
           else
           {
@@ -85,7 +82,7 @@ namespace Sitecore.MobileSDK.SessionSettings
     #region Comparator
     public override bool Equals(object obj)
     {
-      if (object.ReferenceEquals (this, obj))
+      if (object.ReferenceEquals(this, obj))
       {
         return true;
       }
@@ -97,16 +94,16 @@ namespace Sitecore.MobileSDK.SessionSettings
       }
 
 
-      bool isUrlEqual = object.Equals (this.InstanceUrl, other.InstanceUrl);
-      bool isVersionEqual = object.Equals (this.ItemWebApiVersion, other.ItemWebApiVersion);
-      bool isSiteEqual = object.Equals (this.Site, other.Site);
+      bool isUrlEqual = object.Equals(this.InstanceUrl, other.InstanceUrl);
+      bool isVersionEqual = object.Equals(this.ItemWebApiVersion, other.ItemWebApiVersion);
+      bool isSiteEqual = object.Equals(this.Site, other.Site);
 
       return isUrlEqual && isVersionEqual && isSiteEqual;
     }
 
-    public override int GetHashCode ()
+    public override int GetHashCode()
     {
-      return base.GetHashCode() + this.InstanceUrl.GetHashCode () + this.ItemWebApiVersion.GetHashCode () + this.Site.GetHashCode ();
+      return base.GetHashCode() + this.InstanceUrl.GetHashCode() + this.ItemWebApiVersion.GetHashCode() + this.Site.GetHashCode();
     }
     #endregion Comparator
 

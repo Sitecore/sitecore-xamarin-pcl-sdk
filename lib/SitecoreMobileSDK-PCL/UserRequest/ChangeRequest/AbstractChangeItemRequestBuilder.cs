@@ -1,20 +1,17 @@
-﻿using Sitecore.MobileSDK.Validators;
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.UserRequest.ChangeRequest
 {
   using System;
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.Validators;
 
-  public abstract class AbstractChangeItemRequestBuilder<T> : AbstractGetVersionedItemRequestBuilder<T>, IUpdateItemRequestParametersBuilder<T> 
+  public abstract class AbstractChangeItemRequestBuilder<T> : AbstractGetVersionedItemRequestBuilder<T>, IUpdateItemRequestParametersBuilder<T>
     where T : class
   {
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (IDictionary<string, string> fieldsRawValuesByName)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
     {
       BaseValidator.CheckNullAndThrow(fieldsRawValuesByName, this.GetType().Name + ".FieldsRawValuesByName");
 
@@ -25,13 +22,13 @@ namespace Sitecore.MobileSDK
 
       foreach (var fieldElem in fieldsRawValuesByName)
       {
-        this.AddFieldsRawValuesByName (fieldElem.Key, fieldElem.Value);
+        this.AddFieldsRawValuesByName(fieldElem.Key, fieldElem.Value);
       }
-        
+
       return this;
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (string fieldKey, string fieldValue)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
     {
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldKey, this.GetType().Name + ".fieldKey");
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldValue, this.GetType().Name + ".fieldValue");
@@ -42,12 +39,12 @@ namespace Sitecore.MobileSDK
         this.FieldsRawValuesByName = newFields;
       }
 
-      string lowerCaseField = fieldKey.ToLowerInvariant ();
+      string lowerCaseField = fieldKey.ToLowerInvariant();
 
-      bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary (this.FieldsRawValuesByName, lowerCaseField);
+      bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary(this.FieldsRawValuesByName, lowerCaseField);
       if (keyIsDuplicated)
       {
-        throw new ArgumentException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");  
+        throw new ArgumentException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");
       }
 
       this.FieldsRawValuesByName.Add(lowerCaseField, fieldValue);

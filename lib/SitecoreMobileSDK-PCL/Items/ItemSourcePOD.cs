@@ -1,7 +1,5 @@
-﻿
-namespace Sitecore.MobileSDK.Items
+﻿namespace Sitecore.MobileSDK.Items
 {
-  using System;
   using Sitecore.MobileSDK.API.Items;
 
   public class ItemSourcePOD : IItemSource
@@ -10,7 +8,7 @@ namespace Sitecore.MobileSDK.Items
     {
       this.Database = database;
       this.Language = language;
-      this.VersionNumber  = version ;
+      this.VersionNumber = version;
     }
 
     public virtual IItemSource ShallowCopy()
@@ -18,7 +16,7 @@ namespace Sitecore.MobileSDK.Items
       return new ItemSourcePOD(this.Database, this.Language, this.VersionNumber);
     }
 
-    public override bool Equals (object obj)
+    public override bool Equals(object obj)
     {
       if (object.ReferenceEquals(this, obj))
       {
@@ -31,16 +29,16 @@ namespace Sitecore.MobileSDK.Items
         return false;
       }
 
-      bool isDbEqual =  object.Equals( this.Database, other.Database );
+      bool isDbEqual = object.Equals(this.Database, other.Database);
       bool isLangEqual = object.Equals(this.Language, other.Language);
       bool isVersionEqual = object.Equals(this.VersionNumber, other.VersionNumber);
 
       return isDbEqual && isLangEqual && isVersionEqual;
-    } 
+    }
 
-    public override int GetHashCode ()
+    public override int GetHashCode()
     {
-      return base.GetHashCode() + this.Database.GetHashCode () + this.Language.GetHashCode () + this.VersionNumber.GetHashCode ();
+      return base.GetHashCode() + this.Database.GetHashCode() + this.Language.GetHashCode() + this.VersionNumber.GetHashCode();
     }
 
     public string Database { get; protected set; }

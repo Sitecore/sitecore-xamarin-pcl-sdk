@@ -1,13 +1,10 @@
-﻿
-namespace Sitecore.MobileSDK.API.Session
+﻿namespace Sitecore.MobileSDK.API.Session
 {
   using System.Threading;
   using System.Threading.Tasks;
 
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API.Request;
-
 
   public interface IUpdateItemActions
   {

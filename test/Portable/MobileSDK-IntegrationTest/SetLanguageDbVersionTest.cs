@@ -11,7 +11,7 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.UserRequest.ReadRequest;
 
   [TestFixture]
   public class SetLanguageDbVersionTest

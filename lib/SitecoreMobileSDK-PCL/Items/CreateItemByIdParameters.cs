@@ -1,18 +1,11 @@
-﻿
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.Items
 {
-  using System;
+  using System.Collections.Generic;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-  using System.Collections.Generic;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder;
 
   public class CreateItemByIdParameters : ICreateItemByIdRequest
   {

@@ -1,4 +1,3 @@
-
 namespace Sitecore.MobileSDK.API
 {
   using System;

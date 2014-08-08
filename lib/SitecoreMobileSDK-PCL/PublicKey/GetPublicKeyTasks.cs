@@ -43,10 +43,10 @@ namespace Sitecore.MobileSDK.PublicKey
     {
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + requestUrl);
-      HttpResponseMessage httpResponse = await this.httpClient.GetAsync (requestUrl, cancelToken);
+      HttpResponseMessage httpResponse = await this.httpClient.GetAsync(requestUrl, cancelToken);
       HttpContent responseContent = httpResponse.Content;
 
-      Stream result = await responseContent.ReadAsStreamAsync ();
+      Stream result = await responseContent.ReadAsStreamAsync();
       return result;
     }
 

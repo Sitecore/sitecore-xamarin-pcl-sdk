@@ -1,9 +1,6 @@
-﻿
-namespace Sitecore.MobileSDK.CrudTasks
+﻿namespace Sitecore.MobileSDK.CrudTasks
 {
-  using System;
   using Sitecore.MobileSDK.Validators;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using System.Net.Http;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.PublicKey;
@@ -11,29 +8,29 @@ namespace Sitecore.MobileSDK.CrudTasks
 
   public class GetItemsByQueryTasks : AbstractGetItemTask<IReadItemsByQueryRequest>
   {
-    public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
-        : base(httpClient, credentialsHeadersCryptor)
+    public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+      : base(httpClient, credentialsHeadersCryptor)
     {
-        this.urlBuilder = urlBuilder;
-        this.Validate ();
+      this.urlBuilder = urlBuilder;
+      this.Validate();
     }
 
-    protected override string UrlToGetItemWithRequest (IReadItemsByQueryRequest request)
+    protected override string UrlToGetItemWithRequest(IReadItemsByQueryRequest request)
     {
-        this.ValidateRequest (request);
+      this.ValidateRequest(request);
 
-        string result = this.urlBuilder.GetUrlForRequest (request);
-        return result;
+      string result = this.urlBuilder.GetUrlForRequest(request);
+      return result;
     }
 
     private void ValidateRequest(IReadItemsByQueryRequest request)
     {
-      BaseValidator.CheckNullAndThrow (request, this.GetType ().Name + ".request");
+      BaseValidator.CheckNullAndThrow(request, this.GetType().Name + ".request");
     }
 
     private void Validate()
     {
-      BaseValidator.CheckNullAndThrow (this.urlBuilder, this.GetType ().Name + ".urlBuilder");
+      BaseValidator.CheckNullAndThrow(this.urlBuilder, this.GetType().Name + ".urlBuilder");
     }
 
     private readonly ItemByQueryUrlBuilder urlBuilder;

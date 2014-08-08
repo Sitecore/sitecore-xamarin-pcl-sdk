@@ -1,13 +1,11 @@
-﻿namespace Sitecore.MobileSDK.Items
+﻿namespace Sitecore.MobileSDK.UrlBuilder
 {
   using System;
   using System.Globalization;
-
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Utils;
-
 
   public class ItemSourceUrlBuilder
   {
@@ -25,7 +23,7 @@
     }
 
     public string BuildUrlQueryString()
-    { 
+    {
       string escapedDatabase = null;
       string escapedLanguage = null;
 
@@ -39,16 +37,16 @@
 
       if (!string.IsNullOrEmpty(escapedDatabase))
       {
-        result = 
+        result =
           result +
           this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + escapedDatabase;
       }
 
       if (!string.IsNullOrEmpty(escapedLanguage))
       {
-        result = 
+        result =
           result +
-          this.restGrammar.FieldSeparator + 
+          this.restGrammar.FieldSeparator +
           this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
       }
 

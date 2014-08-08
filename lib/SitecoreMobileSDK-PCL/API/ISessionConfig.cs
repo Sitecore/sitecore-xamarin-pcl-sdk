@@ -6,18 +6,18 @@ namespace Sitecore.MobileSDK.API
 
     string InstanceUrl
     {
-        get;
+      get;
     }
 
-    string Site      
-    { 
-        get; 
+    string Site
+    {
+      get;
     }
 
     string ItemWebApiVersion
     {
-        get;
+      get;
     }
-      
+
   }
 }

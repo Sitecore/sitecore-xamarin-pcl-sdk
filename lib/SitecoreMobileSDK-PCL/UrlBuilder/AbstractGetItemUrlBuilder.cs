@@ -1,18 +1,13 @@
-﻿
-
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.UrlBuilder
 {
   using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.UrlBuilder;
-  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Validators;
-
 
   public abstract class AbstractGetItemUrlBuilder<TRequest>
     where TRequest : IBaseItemRequest
@@ -28,26 +23,26 @@ namespace Sitecore.MobileSDK
     #region Entry Point
     public virtual string GetUrlForRequest(TRequest request)
     {
-      this.ValidateRequest( request );
+      this.ValidateRequest(request);
 
       string hostUrl = this.GetHostUrlForRequest(request);
-      string baseUrl = this.GetCommonPartForRequest( request ).ToLowerInvariant();
-      string specificParameters = this.GetSpecificPartForRequest( request );
+      string baseUrl = this.GetCommonPartForRequest(request).ToLowerInvariant();
+      string specificParameters = this.GetSpecificPartForRequest(request);
 
       string allParameters = baseUrl;
 
       if (!string.IsNullOrEmpty(specificParameters))
       {
-        allParameters = 
+        allParameters =
           allParameters +
           this.restGrammar.FieldSeparator + specificParameters;
       }
-        
-      bool shouldTruncateBaseUrl = ( !string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator) );
+
+      bool shouldTruncateBaseUrl = (!string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator));
       while (shouldTruncateBaseUrl)
       {
-          allParameters = allParameters.Substring(1);
-          shouldTruncateBaseUrl = ( !string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator) );
+        allParameters = allParameters.Substring(1);
+        shouldTruncateBaseUrl = (!string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator));
       }
 
 
@@ -55,7 +50,7 @@ namespace Sitecore.MobileSDK
 
       if (!string.IsNullOrEmpty(allParameters))
       {
-        result = 
+        result =
           result +
           this.restGrammar.HostAndArgsSeparator + allParameters;
       }
@@ -65,8 +60,8 @@ namespace Sitecore.MobileSDK
 
     protected virtual void ValidateRequest(TRequest request)
     {
-      this.ValidateCommonRequest( request );
-      this.ValidateSpecificRequest( request );
+      this.ValidateCommonRequest(request);
+      this.ValidateSpecificRequest(request);
     }
     #endregion Entry Point
 
@@ -84,8 +79,8 @@ namespace Sitecore.MobileSDK
       QueryParametersUrlBuilder queryParametersUrlBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
       string queryParamsUrl = queryParametersUrlBuilder.BuildUrlString(request.QueryParameters);
 
-      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder (this.restGrammar, this.webApiGrammar, request.ItemSource);
-      string itemSourceArgs = sourceBuilder.BuildUrlQueryString ();
+      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.webApiGrammar, request.ItemSource);
+      string itemSourceArgs = sourceBuilder.BuildUrlQueryString();
 
       string result = string.Empty;
 
@@ -94,7 +89,7 @@ namespace Sitecore.MobileSDK
       {
         if (!string.IsNullOrEmpty(currentSubQuery))
         {
-          result = 
+          result =
             result +
             this.restGrammar.FieldSeparator + currentSubQuery;
         }
@@ -105,21 +100,21 @@ namespace Sitecore.MobileSDK
 
     private void ValidateCommonRequest(TRequest request)
     {
-      if ( null == request )
+      if (null == request)
       {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request cannot be null" );
+        throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request cannot be null");
       }
-      else if ( null == request.SessionSettings )
+      else if (null == request.SessionSettings)
       {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings cannot be null" );
+        throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings cannot be null");
       }
-      else if ( null == request.SessionSettings.InstanceUrl )
+      else if (null == request.SessionSettings.InstanceUrl)
       {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null" );
+        throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null");
       }
-      else if ( null == request.SessionSettings.ItemWebApiVersion )
+      else if (null == request.SessionSettings.ItemWebApiVersion)
       {
-        throw new ArgumentNullException( "AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null" );
+        throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null");
       }
 
       if (null != request.QueryParameters)
@@ -140,11 +135,11 @@ namespace Sitecore.MobileSDK
     {
       if (null == this.restGrammar)
       {
-        throw new ArgumentNullException ("[GetItemUrlBuilder] restGrammar cannot be null"); 
+        throw new ArgumentNullException("[GetItemUrlBuilder] restGrammar cannot be null");
       }
       else if (null == this.webApiGrammar)
       {
-        throw new ArgumentNullException ("[GetItemUrlBuilder] webApiGrammar cannot be null");
+        throw new ArgumentNullException("[GetItemUrlBuilder] webApiGrammar cannot be null");
       }
     }
     #endregion Common Logic

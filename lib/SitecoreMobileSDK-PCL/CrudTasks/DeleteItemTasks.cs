@@ -20,7 +20,7 @@
     private readonly ICredentialsHeadersCryptor cryptor;
 
     public DeleteItemTasks(
-      IDeleteItemsUrlBuilder<T> deleteItemsBuilder, 
+      IDeleteItemsUrlBuilder<T> deleteItemsBuilder,
       HttpClient httpClient,
       ICredentialsHeadersCryptor cryptor)
     {

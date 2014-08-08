@@ -35,7 +35,7 @@ namespace Sitecore.MobileSDK
   public class ScApiSession : ISitecoreWebApiSession
   {
     public ScApiSession(
-      ISessionConfig config, 
+      ISessionConfig config,
       IWebApiCredentials credentials,
       IMediaLibrarySettings mediaSettings,
       ItemSource defaultSource = null)
@@ -205,7 +205,7 @@ namespace Sitecore.MobileSDK
 
         var urlBuilder = new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar);
         var taskFlow = new GetItemsByQueryTasks(urlBuilder, this.httpClient, cryptor);
-       
+
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
       }
     }
@@ -216,8 +216,8 @@ namespace Sitecore.MobileSDK
       IReadMediaItemRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
 
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
-        this.restGrammar, 
-        this.sessionConfig, 
+        this.restGrammar,
+        this.sessionConfig,
         this.mediaSettings,
         autocompletedRequest.ItemSource);
 
@@ -236,7 +236,7 @@ namespace Sitecore.MobileSDK
       using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
       {
         ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps(requestCopy);
-       
+
         var urlBuilder = new CreateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar);
         var taskFlow = new CreateItemByIdTask(urlBuilder, this.httpClient, cryptor);
 

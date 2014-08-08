@@ -1,14 +1,13 @@
-﻿
-namespace Sitecore.MobileSDK.CrudTasks
+﻿namespace Sitecore.MobileSDK.CrudTasks
 {
-    using Sitecore.MobileSDK.API.Request;
-    using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using System.Net.Http;
   using Sitecore.MobileSDK.PublicKey;
 
   public class CreateItemByPathTask : AbstractCreateItemTask<ICreateItemByPathRequest>
   {
-    public CreateItemByPathTask(CreateItemByPathUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor) 
+    public CreateItemByPathTask(CreateItemByPathUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;
@@ -18,7 +17,7 @@ namespace Sitecore.MobileSDK.CrudTasks
     {
       return this.urlBuilder.GetUrlForRequest(request);
     }
-      
+
     public override string GetFieldsListString(ICreateItemByPathRequest request)
     {
       return this.urlBuilder.GetFieldValuesList(request);

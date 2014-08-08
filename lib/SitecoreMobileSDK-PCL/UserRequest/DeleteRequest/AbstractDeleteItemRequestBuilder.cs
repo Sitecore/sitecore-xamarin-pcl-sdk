@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.DeleteItem
+﻿namespace Sitecore.MobileSDK.UserRequest.DeleteRequest
 {
   using System;
   using System.Collections.Generic;
@@ -30,7 +30,7 @@
     public IDeleteItemRequestBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {
       BaseValidator.CheckNullAndThrow(scope, this.GetType().Name + ".Scope");
-    
+
       var scopeParams = new ScopeParameters(this.scopeParameters);
 
       foreach (var singleScope in scope)

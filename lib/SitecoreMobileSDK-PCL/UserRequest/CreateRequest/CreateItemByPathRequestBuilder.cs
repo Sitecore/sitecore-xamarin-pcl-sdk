@@ -2,6 +2,7 @@
 namespace Sitecore.MobileSDK.UserRequest.CreateRequest
 {
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
   public class CreateItemByPathRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByPathRequest>

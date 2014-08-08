@@ -1,24 +1,16 @@
-﻿
-namespace Sitecore.MobileSDK.UserRequest
+﻿namespace Sitecore.MobileSDK.UserRequest
 {
-    using Sitecore.MobileSDK.API;
-    using Sitecore.MobileSDK.API.Items;
-    using Sitecore.MobileSDK.API.Request;
-    using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Items.Delete;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
 
 
   public class UserRequestMerger
   {
-    public UserRequestMerger (ISessionConfig defaultSessionConfig, IItemSource defaultSource)
+    public UserRequestMerger(ISessionConfig defaultSessionConfig, IItemSource defaultSource)
     {
       this.ItemSourceMerger = new ItemSourceFieldMerger(defaultSource);
       this.SessionConfigMerger = new SessionConfigMerger(defaultSessionConfig);
@@ -43,7 +35,7 @@ namespace Sitecore.MobileSDK.UserRequest
     public IReadItemsByQueryRequest FillReadItemByQueryGaps(IReadItemsByQueryRequest userRequest)
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
-      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps (userRequest.SessionSettings);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
       return new ReadItemByQueryParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, userRequest.SitecoreQuery);
     }
@@ -60,32 +52,32 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
-      CreateItemParameters createParams = new CreateItemParameters (userRequest.ItemName, userRequest.ItemTemplate, userRequest.FieldsRawValuesByName);
+      CreateItemParameters createParams = new CreateItemParameters(userRequest.ItemName, userRequest.ItemTemplate, userRequest.FieldsRawValuesByName);
 
       return new CreateItemByIdParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, createParams, userRequest.ItemId);
     }
 
     public ICreateItemByPathRequest FillCreateItemByPathGaps(ICreateItemByPathRequest userRequest)
     {
-      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps (userRequest.ItemSource);
-      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps (userRequest.SessionSettings);
-      CreateItemParameters createParams = new CreateItemParameters (userRequest.ItemName, userRequest.ItemTemplate, userRequest.FieldsRawValuesByName);
+      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+      CreateItemParameters createParams = new CreateItemParameters(userRequest.ItemName, userRequest.ItemTemplate, userRequest.FieldsRawValuesByName);
 
       return new CreateItemByPathParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, createParams, userRequest.ItemPath);
     }
 
     public IUpdateItemByIdRequest FillUpdateItemByIdGaps(IUpdateItemByIdRequest userRequest)
     {
-      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps (userRequest.ItemSource);
-      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps (userRequest.SessionSettings);
+      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
       return new UpdateItemByIdParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, userRequest.FieldsRawValuesByName, userRequest.ItemId);
     }
 
     public IUpdateItemByPathRequest FillUpdateItemByPathGaps(IUpdateItemByPathRequest userRequest)
     {
-      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps (userRequest.ItemSource);
-      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps (userRequest.SessionSettings);
+      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
       return new UpdateItemByPathParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, userRequest.FieldsRawValuesByName, userRequest.ItemPath);
     }
@@ -127,7 +119,7 @@ namespace Sitecore.MobileSDK.UserRequest
     }
 
     public ItemSourceFieldMerger ItemSourceMerger { get; private set; }
-    public SessionConfigMerger   SessionConfigMerger { get; private set; }
+    public SessionConfigMerger SessionConfigMerger { get; private set; }
   }
 }
 

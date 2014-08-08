@@ -1,4 +1,3 @@
-
 namespace Sitecore.MobileSDK.API.Exceptions
 {
   public class WebApiJsonStatusMessage

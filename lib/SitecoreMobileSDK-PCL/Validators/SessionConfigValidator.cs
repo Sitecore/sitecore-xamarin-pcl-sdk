@@ -22,8 +22,8 @@
       string lowercaseUrl = url.ToLowerInvariant();
 
       bool isHttps = lowercaseUrl.StartsWith("https://");
-      bool isHttp  = lowercaseUrl.StartsWith("http://");
-      bool result  = (isHttps || isHttp);
+      bool isHttp = lowercaseUrl.StartsWith("http://");
+      bool result = (isHttps || isHttp);
 
       return result;
     }
