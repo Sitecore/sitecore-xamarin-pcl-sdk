@@ -14,7 +14,7 @@
   using Sitecore.MobileSDK.API.MediaItem;
 
   [TestFixture]
-  public class GetMediaTest
+  public class GetMediaItemsTest
   {
     private TestEnvironment testData;
     private ISitecoreWebApiReadonlySession session;
@@ -28,7 +28,6 @@
       this.session =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
-          .Site(this.testData.ShellSite)
           .BuildReadonlySession();
     }
 
