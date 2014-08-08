@@ -19,7 +19,7 @@
       IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Database("web")
         .Language("en")
-        .Version("1")
+        .Version(1)
         .Payload(PayloadType.Full)
         .Build();
 
@@ -32,41 +32,10 @@
       Assert.AreEqual("{dead-beef}", result.ItemId);
       Assert.AreEqual("en", result.ItemSource.Language);
       Assert.AreEqual("web", result.ItemSource.Database);
-      Assert.AreEqual("1", result.ItemSource.Version);
+      Assert.AreEqual(1, result.ItemSource.VersionNumber);
       Assert.AreEqual( PayloadType.Full, result.QueryParameters.Payload );
     }
 
-
-//    [Test]
-//    public void TestLatestCallsOverrideFirstOnes()
-//    {
-//      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
-//        .Database("web")
-//        .Language("en")
-//        .Version("1")
-//        .Payload(PayloadType.Full)
-//
-//        .Database("core")
-//        .Language("fr")
-//        .Version("3872")
-//        .Payload(PayloadType.Content)
-//
-//        .Build();
-//
-//      Assert.IsNotNull(result);
-//      Assert.IsNotNull(result.ItemSource);
-//      Assert.IsNotNull(result.ItemId);
-//      Assert.IsNotNull( result.QueryParameters );
-//      Assert.IsNull(result.SessionSettings);
-//
-//
-//
-//      Assert.AreEqual("{dead-beef}", result.ItemId);
-//      Assert.AreEqual("fr", result.ItemSource.Language);
-//      Assert.AreEqual("core", result.ItemSource.Database);
-//      Assert.AreEqual("3872", result.ItemSource.Version);
-//      Assert.AreEqual( PayloadType.Content, result.QueryParameters.Payload );
-//    }
 
     [Test]
     public void TestItemIdRequestBuilderWithIdOnly()
@@ -83,7 +52,7 @@
       Assert.AreEqual("{abra-kadabra}", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
-      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.ItemSource.VersionNumber);
       Assert.IsNull(result.QueryParameters.Payload);
     }
 
@@ -129,7 +98,7 @@
       IReadItemsByPathRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content")
         .Database("master")
         .Language("da")
-        .Version("100500")
+        .Version(100500)
         .Payload( PayloadType.Content )
         .Build();
 
@@ -143,8 +112,8 @@
       Assert.AreEqual("/sitecore/content", result.ItemPath);
       Assert.AreEqual("da", result.ItemSource.Language);
       Assert.AreEqual("master", result.ItemSource.Database);
-      Assert.AreEqual("100500", result.ItemSource.Version);
-      Assert.AreEqual( PayloadType.Content, result.QueryParameters.Payload );
+      Assert.AreEqual(100500, result.ItemSource.VersionNumber);
+      Assert.AreEqual(PayloadType.Content, result.QueryParameters.Payload );
     }
 
     [Test]
@@ -162,8 +131,8 @@
       Assert.AreEqual("/sitecore/content", result.ItemPath);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
-      Assert.IsNull(result.ItemSource.Version);
-      Assert.IsNull(result.QueryParameters.Payload );
+      Assert.IsNull(result.ItemSource.VersionNumber);
+      Assert.IsNull(result.QueryParameters.Payload);
     }
 
     [Test]
@@ -215,8 +184,8 @@
       Assert.AreEqual("de", result.ItemSource.Language);
       Assert.AreEqual("core", result.ItemSource.Database);
 
-//      Assert.AreEqual("341", result.ItemSource.Version);
-      Assert.IsNull(result.ItemSource.Version);
+//      Assert.AreEqual("341", result.ItemSource.VersionNumber);
+      Assert.IsNull(result.ItemSource.VersionNumber);
 
       Assert.IsNull(result.QueryParameters.Payload);
     }
@@ -237,7 +206,7 @@
 
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
-      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.ItemSource.VersionNumber);
     }
 
     [Test]
@@ -284,7 +253,7 @@
       Assert.AreEqual("{dead-c0de}", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
-      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.ItemSource.VersionNumber);
       Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
@@ -314,7 +283,7 @@
       Assert.AreEqual("{dead-c0de}", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
-      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.ItemSource.VersionNumber);
       Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
@@ -343,7 +312,7 @@
       Assert.AreEqual("{dead-c0de}", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
-      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.ItemSource.VersionNumber);
       Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
@@ -438,7 +407,7 @@
       Assert.AreEqual("{dead-c0de}", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
-      Assert.IsNull(result.ItemSource.Version);
+      Assert.IsNull(result.ItemSource.VersionNumber);
       Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
@@ -534,11 +503,20 @@
     }
 
     [Test]
-    public void TestEmptyVersionCannotBeAssignedExplicitly()
+    public void TestZeroVersionCannotBeAssignedExplicitly()
     {
       Assert.Throws<ArgumentException>( () =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/pppp/sss")
-        .Version(string.Empty)
+        .Version(0)
+      );
+    }
+
+    [Test]
+    public void TestNegativeVersionCannotBeAssignedExplicitly()
+    {
+      Assert.Throws<ArgumentException>( () =>
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/pppp/sss")
+        .Version(-34)
       );
     }
 
@@ -547,17 +525,8 @@
     {
       Assert.Throws<InvalidOperationException>( () =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
-        .Version("2")
-        .Version("99")
-      );
-    }
-
-    [Test]
-    public void TestWhitespaceItemVersionCannotBeAssignedExplicitly()
-    {
-      Assert.Throws<ArgumentException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
-        .Version("\t   \r  \n")
+        .Version(2)
+        .Version(99)
       );
     }
     #endregion Version Validation

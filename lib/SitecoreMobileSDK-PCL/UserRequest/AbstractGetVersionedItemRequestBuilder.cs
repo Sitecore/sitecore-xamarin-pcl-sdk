@@ -11,11 +11,11 @@
     IGetVersionedItemRequestParametersBuilder<T>
   where T : class
   {
-    public IGetVersionedItemRequestParametersBuilder<T> Version(string itemVersion)
+    public IGetVersionedItemRequestParametersBuilder<T> Version(int? itemVersion)
     {
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemVersion, this.GetType().Name + ".Version");
+      BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".Version");
       
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Version, this.GetType().Name + ".Version");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,

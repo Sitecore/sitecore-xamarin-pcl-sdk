@@ -32,7 +32,7 @@
       var itemSource = new ItemSource(
         this.itemSourceAccumulator.Database,
         this.itemSourceAccumulator.Language,
-        this.itemSourceAccumulator.Version);
+        this.itemSourceAccumulator.VersionNumber);
 
       var result = new ScApiSession(conf, this.credentials, mediaSettings, itemSource);
       return result;
@@ -149,7 +149,7 @@
         new ItemSourcePOD(
           defaultDatabase,
           this.itemSourceAccumulator.Language,
-          itemSourceAccumulator.Version);
+          itemSourceAccumulator.VersionNumber);
 
       return this;
     }
@@ -165,7 +165,7 @@
         new ItemSourcePOD(
           this.itemSourceAccumulator.Database,
           defaultLanguage,
-          itemSourceAccumulator.Version);
+          itemSourceAccumulator.VersionNumber);
 
       return this;
     }

@@ -55,7 +55,7 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    new public IUpdateItemRequestParametersBuilder<T> Version(string version)
+    new public IUpdateItemRequestParametersBuilder<T> Version(int? version)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.Version(version);
     }

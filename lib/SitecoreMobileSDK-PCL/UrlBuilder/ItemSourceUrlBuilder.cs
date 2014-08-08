@@ -1,6 +1,8 @@
 ﻿namespace Sitecore.MobileSDK.Items
 {
   using System;
+  using System.Globalization;
+
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
@@ -50,9 +52,14 @@
           this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
       }
 
-      if (null != this.itemSource.Version)
+
+      if (null != this.itemSource.VersionNumber)
       {
-        string escapedVersion = UrlBuilderUtils.EscapeDataString(this.itemSource.Version);
+        int iVersion = this.itemSource.VersionNumber.Value;
+        string strVersion = iVersion.ToString(CultureInfo.InvariantCulture);
+
+
+        string escapedVersion = UrlBuilderUtils.EscapeDataString(strVersion);
 
         result +=
           this.restGrammar.FieldSeparator +

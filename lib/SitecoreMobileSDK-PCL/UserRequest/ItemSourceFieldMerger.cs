@@ -38,10 +38,10 @@ namespace Sitecore.MobileSDK.UserRequest
 
       string database = (null != userSource.Database) ? userSource.Database : this.defaultSource.Database;
       string language = (null != userSource.Language) ? userSource.Language : this.defaultSource.Language;
-      string version  = (null != userSource.Version ) ? userSource.Version  : this.defaultSource.Version ;
+      int? version  = (null != userSource.VersionNumber ) ? userSource.VersionNumber  : this.defaultSource.VersionNumber;
 
 
-      return new ItemSource (database, language, version);
+      return new ItemSource(database, language, version);
     }
 
     public IItemSource DefaultSource

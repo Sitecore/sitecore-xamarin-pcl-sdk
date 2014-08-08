@@ -43,7 +43,7 @@
     {
       const string Db = "web";
       const string Language = "da";
-      var itemSource = new ItemSource(Db, Language, "1");
+      var itemSource = new ItemSource(Db, Language, 1);
       var session = this.CreateAdminSession(itemSource);
       var response = await this.GetHomeItem(session);
 
@@ -64,7 +64,7 @@
           .BuildReadonlySession();
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-        .Version("1")
+        .Version(1)
         .Build();
 
       var itemRequest = await session.ReadItemAsync(request);
@@ -83,7 +83,7 @@
 
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-        .Version("1")
+        .Version(1)
         .Build();
 
       var itemRequest = await session.ReadItemAsync(request);
@@ -154,7 +154,7 @@
     {
       const string Db = "web";
       const string Language = "da";
-      const string Version = "12";
+      const int Version = 12;
 
       var itemSource = new ItemSource(Db, Language, Version);
       var session = this.CreateAdminSession(itemSource);
@@ -164,7 +164,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, Language, "2");
+      var expectedSource = new ItemSource(Db, Language, 2);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -174,7 +174,7 @@
     {
       const string Db = "web";
       const string Language = "UKRAINIAN";
-      const string Version = "12";
+      const int Version = 12;
 
       var itemSource = new ItemSource(Db, Language, Version);
       var session = this.CreateAdminSession(itemSource);
@@ -184,7 +184,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", "2");
+      var expectedSource = new ItemSource(Db, "en", 2);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -224,7 +224,7 @@
       ISitecoreItem resultItem = response.Items[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", "2");
+      var expectedSource = new ItemSource(Db, "en", 2);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
       Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
     }
@@ -324,11 +324,19 @@
     }
 
     [Test]
-    public void TestGetItemWithSpacesInVersionInRequestByIdReturnsException()
+    public void TestGetItemWithZeroInVersionInRequestByIdReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(" ").Build());
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(0).Build());
       Assert.AreEqual("ReadItemByIdRequestBuilder.Version : The input cannot be empty.", exception.Message);
     }
+
+    [Test]
+    public void TestGetItemWithNegativeVersionInRequestByIdReturnsException()
+    {
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(-1).Build());
+      Assert.AreEqual("ReadItemByIdRequestBuilder.Version : The input cannot be empty.", exception.Message);
+    }
+
 
     [Test]
     public void TestGetItemWithEmpryLanguageInRequestByQueryReturnsException()
@@ -389,8 +397,8 @@
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() =>
         ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
-          .Version("2")
-          .Version("1")
+          .Version(2)
+          .Version(1)
           .Build());
       Assert.AreEqual("ReadItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }

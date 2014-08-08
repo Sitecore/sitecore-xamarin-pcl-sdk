@@ -22,7 +22,7 @@ namespace Sitecore.MobileSDK.UserRequest
       this.itemSourceAccumulator = new ItemSourcePOD(
         sitecoreDatabase, 
         this.itemSourceAccumulator.Language, 
-        this.itemSourceAccumulator.Version);
+        this.itemSourceAccumulator.VersionNumber);
 
       return this;
     }
@@ -36,7 +36,7 @@ namespace Sitecore.MobileSDK.UserRequest
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database, 
         itemLanguage, 
-        this.itemSourceAccumulator.Version);
+        this.itemSourceAccumulator.VersionNumber);
 
       return this;
     }
