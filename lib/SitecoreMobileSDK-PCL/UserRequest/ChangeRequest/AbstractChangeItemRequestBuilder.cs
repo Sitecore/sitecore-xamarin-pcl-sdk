@@ -31,7 +31,7 @@ namespace Sitecore.MobileSDK
       return this;
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName (string fieldKey, string fieldValue)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
     {
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldKey, this.GetType().Name + ".fieldKey");
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldValue, this.GetType().Name + ".fieldValue");
@@ -47,7 +47,7 @@ namespace Sitecore.MobileSDK
       bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary (this.FieldsRawValuesByName, lowerCaseField);
       if (keyIsDuplicated)
       {
-        throw new ArgumentException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");  
+        throw new InvalidOperationException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");  
       }
 
       this.FieldsRawValuesByName.Add(lowerCaseField, fieldValue);
