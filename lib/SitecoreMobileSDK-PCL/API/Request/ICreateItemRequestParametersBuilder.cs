@@ -6,7 +6,6 @@ namespace Sitecore.MobileSDK.API.Request
   public interface ICreateItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T>
   where T : class
   {
-    ICreateItemRequestParametersBuilder<T> ItemTemplate(string template);
     ICreateItemRequestParametersBuilder<T> ItemName(string template);
     ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName);
     ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue);

@@ -1,6 +1,7 @@
 namespace Sitecore.MobileSDK.API
 {
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Template;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UserRequest;
@@ -9,6 +10,7 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.UserRequest.UpdateRequest;
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
+
 
   public class ItemWebApiRequestBuilder
   {
@@ -36,12 +38,12 @@ namespace Sitecore.MobileSDK.API
       return new ReadMediaItemRequestBuilder(mediaPath);
     }
 
-    public static ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
+    public static ISetTemplateBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
     {
       return new CreateItemByIdRequestBuilder(itemId);
     }
 
-    public static ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
+    public static ISetTemplateBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
     {
       return new CreateItemByPathRequestBuilder(itemPath);
     }

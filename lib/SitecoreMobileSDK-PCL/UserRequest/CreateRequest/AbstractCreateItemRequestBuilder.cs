@@ -3,12 +3,17 @@
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Request.Template;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UserRequest.ChangeRequest;
   using Sitecore.MobileSDK.Validators;
 
-  public abstract class AbstractCreateItemRequestBuilder<T> : AbstractChangeItemRequestBuilder<T>, ICreateItemRequestParametersBuilder<T>
-    where T : class
+
+  public abstract class AbstractCreateItemRequestBuilder<T> : 
+    AbstractChangeItemRequestBuilder<T>, 
+    ICreateItemRequestParametersBuilder<T>,
+    ISetTemplateBuilder<T>
+  where T : class
   {
     protected CreateItemParameters itemParametersAccumulator = new CreateItemParameters(null, null, null);
 
@@ -25,11 +30,27 @@
       return this;
     }
 
-    public ICreateItemRequestParametersBuilder<T> ItemTemplate(string itemTemplate)
+    public ICreateItemRequestParametersBuilder<T> ItemTemplatePath(string itemTemplate)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemTemplate, this.GetType().Name + ".ItemTemplate");
-
       ItemPathValidator.ValidateItemTemplate(itemTemplate, this.GetType().Name + ".itemTemplate");
+
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemParametersAccumulator.ItemTemplate,
+        this.GetType().Name + ".ItemTemplate");
+
+      //igk spike to use one restrictions for all paths 
+      itemTemplate = itemTemplate.TrimStart('/');
+
+      this.itemParametersAccumulator =
+        new CreateItemParameters(this.itemParametersAccumulator.ItemName, itemTemplate, this.itemParametersAccumulator.FieldsRawValuesByName);
+
+      return this;
+    }
+
+    public ICreateItemRequestParametersBuilder<T> ItemTemplateId(string itemTemplate)
+    {
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemTemplate, this.GetType().Name + ".ItemTemplate");
+      ItemIdValidator.ValidateItemId(itemTemplate, this.GetType().Name + ".itemTemplate");
 
       BaseValidator.CheckForTwiceSetAndThrow(this.itemParametersAccumulator.ItemTemplate,
         this.GetType().Name + ".ItemTemplate");
