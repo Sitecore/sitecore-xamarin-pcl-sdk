@@ -131,7 +131,7 @@
     }
 
     [Test]
-    public void TestFieldWithDoublicatedKeyWillCrash()
+    public void TestFieldWithDuplicatedKeyWillCrash()
     {
       var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplate("/Sample/Sample Item")
