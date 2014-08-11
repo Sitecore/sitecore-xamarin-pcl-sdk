@@ -6,7 +6,6 @@
 
   public class CreateItemByIdRequestBuilder : AbstractCreateItemRequestBuilder<ICreateItemByIdRequest>
   {
-
     private readonly string itemId;
 
     public CreateItemByIdRequestBuilder(string itemId)

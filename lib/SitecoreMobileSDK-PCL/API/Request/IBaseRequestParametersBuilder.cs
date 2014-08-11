@@ -13,9 +13,6 @@ namespace Sitecore.MobileSDK.API.Request
     IBaseRequestParametersBuilder<T> AddFields(IEnumerable<string> fields);
     IBaseRequestParametersBuilder<T> AddFields(params string[] fieldParams);
 
-    IBaseRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope);
-    IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
-
     T Build();
   }
 }

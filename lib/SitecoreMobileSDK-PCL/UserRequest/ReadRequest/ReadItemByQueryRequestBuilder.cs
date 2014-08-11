@@ -4,7 +4,7 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class ReadItemByQueryRequestBuilder : AbstractBaseRequestBuilder<IReadItemsByQueryRequest>
+  public class ReadItemByQueryRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByQueryRequest>
   {
     public ReadItemByQueryRequestBuilder(string sitecoreQuery)
     {

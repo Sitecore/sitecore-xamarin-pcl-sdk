@@ -60,38 +60,6 @@
     }
 
     [Test]
-    public async void TestUpdateItemByIdFromWebDbWithChildrenScope()
-    {
-      await this.RemoveAll();
-      const string Db = "web";
-      var titleValue = RandomText();
-      var textValue = RandomText();
-      var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
-        .DefaultDatabase(Db)
-        .BuildSession();
-      ISitecoreItem parentItem = await this.CreateItem("Parent item to update in web", null, itemSession);
-      ISitecoreItem childItem = await this.CreateItem("Child item to update in web", parentItem, itemSession);
-
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(parentItem.Id)
-        .AddFieldsRawValuesByName("Title", titleValue)
-        .AddFieldsRawValuesByName("Text", textValue)
-        .AddScope(ScopeType.Children)
-        .Database(Db)
-        .Build();
-
-      var result = await itemSession.UpdateItemAsync(request);
-
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
-      Assert.AreEqual(childItem.Id, resultItem.Id);
-      Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
-      Assert.AreEqual(Db, resultItem.Source.Database);
-    }
-
-    [Test]
     public async void TestUpdateDanishItemByPath()
     {
       await this.RemoveAll();
@@ -197,15 +165,6 @@
     }
 
     [Test]
-    public void TestUpdateItemByPathWithNullScopeReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
-        .AddScope(null)
-        .Build());
-      Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.Scope"));
-    }
-
-    [Test]
     public void TestUpdateItemByIdWithNullReadFieldsReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
@@ -240,18 +199,6 @@
         .AddFields("Title")
         .AddFields("Title"));
       Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
-    }
-
-
-    [Test]
-    public void TestUpdateItemByIdWithDuplicateScopeReturnsException()
-    {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
-        .AddScope(ScopeType.Children)
-        .AddScope(ScopeType.Parent)
-        .AddScope(ScopeType.Children)
-        .Build());
-      Assert.AreEqual("UpdateItemByIdRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
     }
 
     [Test]
@@ -293,58 +240,6 @@
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
       Assert.True(50 < resultItem.Fields.Count);
       Assert.AreEqual(Version, resultItem.Source.VersionNumber);
-    }
-
-    [Test]
-    public async void TestUpdateItemByPathWithParentScope()
-    {
-      await this.RemoveAll();
-      const string TextValue = "Parent text after update";
-
-      ISitecoreItem parentItem = await this.CreateItem("Parent item to update by query");
-      ISitecoreItem childItem = await this.CreateItem("Child item to update by query", parentItem);
-
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(childItem.Path)
-        .AddFieldsRawValuesByName("Text", TextValue)
-        .AddScope(ScopeType.Parent)
-        .Build();
-
-      var result = await this.session.UpdateItemAsync(request);
-
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
-      Assert.AreEqual(parentItem.Id, resultItem.Id);
-      Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
-    }
-
-    //Item Web API issue
-    [Test]
-    [Ignore]
-    public async void TestUpdateItemByPathWithParentAndChildrenScope()
-    {
-      await this.RemoveAll();
-      const string TextValue = "Text after update";
-
-      ISitecoreItem parentItem = await this.CreateItem("Parent item to update by query");
-      ISitecoreItem selfItem = await this.CreateItem("Self item to update by query", parentItem);
-      ISitecoreItem childItem = await this.CreateItem("Child item to update by query", selfItem);
-
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(childItem.Path)
-        .AddFieldsRawValuesByName("Text", TextValue)
-        .AddScope(ScopeType.Parent)
-        .AddScope(ScopeType.Children)
-        .AddScope(ScopeType.Self)
-        .Build();
-
-      var result = await this.session.UpdateItemAsync(request);
-
-      Assert.AreEqual(3, result.Items.Count);
-      var resultItem = result.Items[0];
-      Assert.AreEqual(parentItem.Id, resultItem.Id);
-      foreach (var item in result.Items)
-      {
-        Assert.AreEqual(TextValue, item.FieldWithName("Text").RawValue);
-      }
     }
 
     [Test]

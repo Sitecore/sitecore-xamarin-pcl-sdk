@@ -431,7 +431,7 @@
       return session;
     }
 
-    private static async Task<ScItemsResponse> GetItemByIdWithRequestBuilder(IBaseRequestParametersBuilder<IReadItemsByIdRequest> requestBuilder, IReadItemActions session)
+    private static async Task<ScItemsResponse> GetItemByIdWithRequestBuilder(IScopedRequestParametersBuilder<IReadItemsByIdRequest> requestBuilder, IReadItemActions session)
     {
       var request = requestBuilder.Build();
       var response = await session.ReadItemAsync(request);
