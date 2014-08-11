@@ -58,7 +58,9 @@
       return this;
     }
 
-    public ICreateItemRequestParametersBuilder<T> BranchId(string branchId)
+
+    public ISetNewItemNameBuilder<T> BranchId(string branchId)
+//    public ICreateItemRequestParametersBuilder<T> BranchId(string branchId)
     {
       this.SetItemTemplateId(branchId);
       this.IsCreateFromBranch = true;
