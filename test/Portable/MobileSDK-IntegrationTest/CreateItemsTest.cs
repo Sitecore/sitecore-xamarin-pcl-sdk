@@ -286,15 +286,13 @@
 
 
     [Test]
-    [Ignore]
     public async void TestCreateItemByPathFromBranch()
     {
       await this.RemoveAll();
       TestEnvironment.Item expectedItem = this.CreateTestItem("Multiple item brunch");
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplateId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
-        .ItemName("Name should Not be in the branch")
+        .BranchId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
         .Database("master")
         .Build();
 

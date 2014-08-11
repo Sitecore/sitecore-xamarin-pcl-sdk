@@ -16,6 +16,8 @@
     ISetTemplateBuilder<T>
   where T : class
   {
+    protected bool IsCreateFromBranch { get; private set; }
+
     protected CreateItemParameters itemParametersAccumulator = new CreateItemParameters(null, null, null);
 
     public ICreateItemRequestParametersBuilder<T> ItemName(string itemName)
@@ -50,19 +52,33 @@
 
     public ISetNewItemNameBuilder<T> ItemTemplateId(string itemTemplate)
     {
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemTemplate, this.GetType().Name + ".ItemTemplate");
-      ItemIdValidator.ValidateItemId(itemTemplate, this.GetType().Name + ".itemTemplate");
+      this.SetItemTemplateId(itemTemplate);
+      this.IsCreateFromBranch = false;
+
+      return this;
+    }
+
+    public ICreateItemRequestParametersBuilder<T> BranchId(string branchId)
+    {
+      this.SetItemTemplateId(branchId);
+      this.IsCreateFromBranch = true;
+
+      return this;
+    }
+
+    private void SetItemTemplateId(string itemTemplateOrBranch)
+    {
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemTemplateOrBranch, this.GetType().Name + ".ItemTemplate");
+      ItemIdValidator.ValidateItemId(itemTemplateOrBranch, this.GetType().Name + ".itemTemplate");
 
       BaseValidator.CheckForTwiceSetAndThrow(this.itemParametersAccumulator.ItemTemplate,
         this.GetType().Name + ".ItemTemplate");
 
       //igk spike to use one restrictions for all paths 
-      itemTemplate = itemTemplate.TrimStart('/');
+      string trimmedTemplate = itemTemplateOrBranch.TrimStart('/');
 
       this.itemParametersAccumulator =
-        new CreateItemParameters(this.itemParametersAccumulator.ItemName, itemTemplate, this.itemParametersAccumulator.FieldsRawValuesByName);
-
-      return this;
+        new CreateItemParameters(this.itemParametersAccumulator.ItemName, trimmedTemplate, this.itemParametersAccumulator.FieldsRawValuesByName);
     }
 
     new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
