@@ -1,4 +1,6 @@
-﻿namespace MobileSDKIntegrationTest
+﻿
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using System.Threading.Tasks;
@@ -10,6 +12,7 @@
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
 
@@ -20,6 +23,7 @@
     private ISitecoreWebApiSession session;
     private ISitecoreWebApiSession noThrowCleanupSession;
 
+    const string nonExistingGuid = "{DEADBEEF-CDED-45AF-99BF-2DE9883B7AC3}";
 
     #region Setup
     [SetUp]
@@ -154,6 +158,69 @@
       this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse.Items[0]);
     }
     #endregion RequestsToServer
+
+    #region IncorrectInput
+    [Test]
+    public async void TestCreateItemByPathFromUnknownBranchCausesException()
+    {
+      await this.RemoveTestItemsFromMasterAndWebAsync();
+
+      const string itemFromBranchName = "ITEM PATH   A default name of the branch should be used";
+      //      const string itemFromBranchName = "Multiple item brunch";
+
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .BranchId(nonExistingGuid)
+        .ItemName(itemFromBranchName)
+        .Database("master")
+        .Language("en")
+        .AddScope(ScopeType.Self)
+        .Payload(PayloadType.Content)
+        .Build();
+
+      var ex = Assert.Throws<ParserException>( async () => 
+      {
+        await session.CreateItemAsync(request);
+      });
+
+
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", ex.InnerException.GetType().FullName);
+      WebApiJsonErrorException castedException = ex.InnerException as WebApiJsonErrorException;
+
+      Assert.AreEqual(500, castedException.Response.StatusCode);
+      Assert.AreEqual("Template item not found.", castedException.Response.Message);
+    }
+
+    [Test]
+    public async void TestCreateItemByIdFromUnknownBranchCausesException()
+    {
+      await this.RemoveTestItemsFromMasterAndWebAsync();
+
+      const string itemFromBranchName = "ITEM ID   A default name of the branch should be used";
+      //      const string itemFromBranchName = "Multiple item brunch";
+
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .BranchId(nonExistingGuid)
+        .ItemName(itemFromBranchName)
+        .Database("master")
+        .Language("en")
+        .AddScope(ScopeType.Self)
+        .Payload(PayloadType.Content)
+        .Build();
+
+
+      var ex = Assert.Throws<ParserException>( async () => 
+      {
+        await session.CreateItemAsync(request);
+      });
+
+
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", ex.InnerException.GetType().FullName);
+      WebApiJsonErrorException castedException = ex.InnerException as WebApiJsonErrorException;
+
+      Assert.AreEqual(500, castedException.Response.StatusCode);
+      Assert.AreEqual("Template item not found.", castedException.Response.Message);
+    }
+    #endregion IncorrectInput
 
     #region Validations
     [Test]
