@@ -283,25 +283,6 @@
       this.GetAndCheckItem(expectedItem, resultItem);
     }
 
-
-
-    [Test]
-    public async void TestCreateItemByPathFromBranch()
-    {
-      await this.RemoveAll();
-      TestEnvironment.Item expectedItem = this.CreateTestItem("Multiple item brunch");
-
-      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-        .BranchId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
-        .Database("master")
-        .Build();
-
-      var createResponse = await session.CreateItemAsync(request);
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-
-      this.GetAndCheckItem(expectedItem, resultItem);
-    }
-
     [Test]
     public void TestCreateItemByIdAndGetDuplicateFieldsReturnsException()
     {
