@@ -2,8 +2,9 @@
 {
   public interface ISetTemplateBuilder<T> where T : class
   {
-    ICreateItemRequestParametersBuilder<T> ItemTemplatePath(string template);
-    ICreateItemRequestParametersBuilder<T> ItemTemplateId(string template);
+    ISetNewItemNameBuilder<T> ItemTemplatePath(string templatePath);
+    ISetNewItemNameBuilder<T> ItemTemplateId(string templateId);
+//    ICreateItemRequestParametersBuilder<T> BranchId(string branchId);
   }
 }
 

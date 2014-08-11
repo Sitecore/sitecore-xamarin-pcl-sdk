@@ -12,6 +12,7 @@
   public abstract class AbstractCreateItemRequestBuilder<T> : 
     AbstractChangeItemRequestBuilder<T>, 
     ICreateItemRequestParametersBuilder<T>,
+    ISetNewItemNameBuilder<T>,
     ISetTemplateBuilder<T>
   where T : class
   {
@@ -30,7 +31,7 @@
       return this;
     }
 
-    public ICreateItemRequestParametersBuilder<T> ItemTemplatePath(string itemTemplate)
+    public ISetNewItemNameBuilder<T> ItemTemplatePath(string itemTemplate)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemTemplate, this.GetType().Name + ".ItemTemplate");
       ItemPathValidator.ValidateItemTemplate(itemTemplate, this.GetType().Name + ".itemTemplate");
@@ -47,7 +48,7 @@
       return this;
     }
 
-    public ICreateItemRequestParametersBuilder<T> ItemTemplateId(string itemTemplate)
+    public ISetNewItemNameBuilder<T> ItemTemplateId(string itemTemplate)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemTemplate, this.GetType().Name + ".ItemTemplate");
       ItemIdValidator.ValidateItemId(itemTemplate, this.GetType().Name + ".itemTemplate");
