@@ -1,5 +1,5 @@
 ﻿
-namespace SitecoreMobileSDKMockObjects
+namespace MobileSDKUnitTest.Mock
 {
   using System;
   using Sitecore.MobileSDK.API.Request.Parameters;

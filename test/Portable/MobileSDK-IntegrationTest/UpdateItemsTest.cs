@@ -5,7 +5,7 @@
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
 
-  using SitecoreMobileSDKMockObjects;
+  using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
