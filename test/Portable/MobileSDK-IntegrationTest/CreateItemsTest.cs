@@ -65,11 +65,16 @@
     public async void TestCreateItemByIdWithoutFieldsSet()
     {
       await this.RemoveAll();
-      var expectedItem = this.CreateTestItem("Create by parent id");
 
-      var request = this.CreateByIdRequestBuilder()
-         .ItemName(expectedItem.DisplayName)
-         .Build();
+      const string itemName = "Create by parent id";
+      var expectedItem = this.CreateTestItem(itemName);
+
+      var request = 
+        ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(itemName)
+        .Database("master")
+        .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -142,9 +147,11 @@
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
-      var request = this.CreateByIdRequestBuilder()
-         .ItemName(expectedItem.DisplayName)
-         .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(expectedItem.DisplayName)
+        .Database("master")
+        .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -158,10 +165,13 @@
     {
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create with fields");
+
       const string CreatedTitle = "Created title";
       const string CreatedText = "Created text";
-      var request = this.CreateByPathRequestBuilder()
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+         .ItemTemplatePath(testData.Items.Home.Template)
          .ItemName(expectedItem.DisplayName)
+         .Database("master")
          .AddFieldsRawValuesByName("Title", CreatedTitle)
          .AddFieldsRawValuesByName("Text", CreatedText)
          .AddFields("Text", "Title")
@@ -183,12 +193,14 @@
       var expectedItem = this.CreateTestItem("International Слава Україні ウクライナへの栄光 عالمي");
       const string CreatedTitle = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
       const string CreatedText = "युक्रेन गौरव גלורי לאוקראינה";
-      var request = this.CreateByIdRequestBuilder()
-         .ItemName(expectedItem.DisplayName)
-         .AddFieldsRawValuesByName("Title", CreatedTitle)
-         .AddFieldsRawValuesByName("Text", CreatedText)
-         .Payload(PayloadType.Content)
-         .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(expectedItem.DisplayName)
+        .Database("master")
+        .AddFieldsRawValuesByName("Title", CreatedTitle)
+        .AddFieldsRawValuesByName("Text", CreatedText)
+        .Payload(PayloadType.Content)
+        .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -206,12 +218,14 @@
       var expectedItem = this.CreateTestItem("Set not existent field");
       const string CreatedTitle = "Existent title";
       const string CreatedTexttt = "Not existent texttt";
-      var request = this.CreateByIdRequestBuilder()
-         .Payload(PayloadType.Content)
-         .ItemName(expectedItem.DisplayName)
-         .AddFieldsRawValuesByName("Title", CreatedTitle)
-         .AddFieldsRawValuesByName("Texttt", CreatedTexttt)
-         .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(expectedItem.DisplayName)
+        .Database("master")
+        .Payload(PayloadType.Content)
+        .AddFieldsRawValuesByName("Title", CreatedTitle)
+        .AddFieldsRawValuesByName("Texttt", CreatedTexttt)
+        .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -228,11 +242,13 @@
       var expectedItem = this.CreateTestItem("Set standard field value");
       const string FieldName = "__Standard values";
       const string FieldValue = "Created standard value 000!! ))";
-      var request = CreateByPathRequestBuilder()
-         .AddFields(FieldName)
-         .ItemName(expectedItem.DisplayName)
-         .AddFieldsRawValuesByName(FieldName, FieldValue)
-         .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(expectedItem.DisplayName)
+        .Database("master")
+        .AddFields(FieldName)
+        .AddFieldsRawValuesByName(FieldName, FieldValue)
+        .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -251,11 +267,13 @@
       const string FieldName = "Text";
       const string FieldValue = "<div>Welcome to Sitecore!</div><div><br /><a href=\"~/link.aspx?_id=A2EE64D5BD7A4567A27E708440CAA9CD&amp;_z=z\">Accelerometer</a></div>";
 
-      var request = CreateByPathRequestBuilder()
-         .AddFields(FieldName)
-         .ItemName(expectedItem.DisplayName)
-         .AddFieldsRawValuesByName(FieldName, FieldValue)
-         .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(expectedItem.DisplayName)
+        .Database("master")
+        .AddFields(FieldName)
+        .AddFieldsRawValuesByName(FieldName, FieldValue)
+        .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -276,7 +294,7 @@
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplateId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
-//        .ItemName("Name should Not be in the branch")
+        .ItemName("Name should Not be in the branch")
         .Database("master")
         .Build();
 
@@ -294,8 +312,8 @@
       var exception = Assert.Throws<InvalidOperationException>(() =>
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
          .ItemTemplatePath(testData.Items.Home.Template)
-         .AddFields(FieldName, "Title", FieldName)
          .ItemName("Get duplicate fields")
+         .AddFields(FieldName, "Title", FieldName)
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
@@ -320,10 +338,12 @@
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create and get invalid field");
       const string FieldName = "@*<<invalid!`fieldname=)";
-      var request = CreateByPathRequestBuilder()
-         .AddFields(FieldName, null, "")
-         .ItemName(expectedItem.DisplayName)
-         .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(expectedItem.DisplayName)
+        .Database("master")
+        .AddFields(FieldName, null, "")
+        .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -340,6 +360,7 @@
       {
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
           .ItemTemplatePath("/Sample/Sample Item")
+          .ItemName("SomeValidName")
           .AddFieldsRawValuesByName(null, "somevalue");
       });
       Assert.IsTrue(exception.Message.Contains("fieldKey"));
@@ -348,6 +369,7 @@
       {
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
           .ItemTemplatePath("/Sample/Sample Item")
+          .ItemName("SomeValidName")
           .AddFieldsRawValuesByName("", "somevalue");
       });
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldKey : The input cannot be empty.", exception1.Message);
@@ -356,6 +378,7 @@
       {
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
           .ItemTemplatePath("/Sample/Sample Item")
+          .ItemName("SomeValidName")
           .AddFieldsRawValuesByName("somekey", null);
       });
       Assert.IsTrue (exception2.Message.Contains ("fieldValue"));
@@ -364,6 +387,7 @@
       {
         ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
           .ItemTemplatePath("/Sample/Sample Item")
+          .ItemName("SomeValidName")
           .AddFieldsRawValuesByName("somekey", "");
       });
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
@@ -376,11 +400,13 @@
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create and set invalid field");
       const string FieldName = "@*<<%#==_&@";
-      var request = CreateByPathRequestBuilder()
-         .AddFields(FieldName)
-         .AddFieldsRawValuesByName(FieldName, FieldName)
-         .ItemName(expectedItem.DisplayName)
-         .Build();
+        var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+          .ItemTemplatePath(testData.Items.Home.Template)
+          .ItemName(expectedItem.DisplayName)
+          .Database("master")
+          .AddFields(FieldName)
+          .AddFieldsRawValuesByName(FieldName, FieldName)         
+          .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -421,21 +447,15 @@
     }
 
     [Test]
-    public void TestCreateItemByPathWithoutItemNameReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
-         .Build());
-      Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemName"));
-    }
-
-    [Test]
     public void TestCreateItemByIdWithInvalidItemNameReturnsException()
     {
       const string ItemName = "@*<<%#==_&@";
-      var request = CreateByPathRequestBuilder()
-         .ItemName(ItemName)
-         .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(ItemName)
+        .Database("master")
+        .Build();
+
       TestDelegate testCode = async () =>
       {
         var task = session.CreateItemAsync(request);
@@ -453,9 +473,10 @@
       const string Template = "@*<<%#==_&@";
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(Template)
-        .Database("master")
         .ItemName("item with invalid template")
+        .Database("master")
         .Build();
+
       TestDelegate testCode = async () =>
       {
         var task = session.CreateItemAsync(request);
@@ -473,9 +494,12 @@
       var anonymousSession = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .Site(testData.ShellSite)
         .BuildSession();
-      var request = this.CreateByPathRequestBuilder()
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName("item created with anonymous user")
+        .Database("master")
         .Build();
+
       TestDelegate testCode = async () =>
       {
         var task = anonymousSession.CreateItemAsync(request);
@@ -494,9 +518,12 @@
         .Credentials(testData.Users.NoCreateAccess)
         .Site(testData.ShellSite)
         .BuildSession();
-      var request = this.CreateByPathRequestBuilder()
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName("item created with nocreate user")
+        .Database("master")
         .Build();
+
       TestDelegate testCode = async () =>
       {
         var task = anonymousSession.CreateItemAsync(request);
@@ -546,17 +573,6 @@
         .ItemName("Item with empty template")
         .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be empty.", exception.Message);
-    }
-
-    [Test]
-    public void TestCreateItemByIdWithTwoNamesReturnsException()
-    {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-         .ItemTemplatePath("template")
-         .ItemName("Item name 1")
-         .ItemName("Item name 2")
-         .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
@@ -615,9 +631,10 @@
       const string Id = "{000D009F-D000-000A-0C0C-0A0DF0E00EF0}";
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(Id)
         .ItemTemplatePath(testData.Items.Home.Template)
-        .Database("master")
         .ItemName("item with not existent id")
+        .Database("master")
         .Build();
+
       var createResponse = await session.CreateItemAsync(request);
       Assert.AreEqual(0, createResponse.Items.Count);
     }
@@ -690,20 +707,6 @@
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Database("master").Build();
       var response = await this.session.ReadItemAsync(request);
       return response;
-    }
-
-    private ICreateItemRequestParametersBuilder<ICreateItemByIdRequest> CreateByIdRequestBuilder()
-    {
-      return ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-       .ItemTemplatePath(testData.Items.Home.Template)
-        .Database("master");
-    }
-
-    private ICreateItemRequestParametersBuilder<ICreateItemByPathRequest> CreateByPathRequestBuilder()
-    {
-      return ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
-          .ItemTemplatePath(testData.Items.Home.Template)
-          .Database("master");
     }
 
     private TestEnvironment.Item CreateTestItem(string name)

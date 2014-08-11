@@ -186,16 +186,6 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestNameIsMandatoryField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplatePath("/Sample/Sample Item");
-
-      TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentNullException>(action);
-    }
-
-    [Test]
     public void TestNameCanNotBeEmpty()
     {
       var builder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
@@ -222,10 +212,10 @@ namespace Sitecore.MobileSdkUnitTest
 
       ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
+        .ItemName("ItEmNaMe")
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName(fields)
         .AddFieldsRawValuesByName("field3","VaLuE3")
         .Build();

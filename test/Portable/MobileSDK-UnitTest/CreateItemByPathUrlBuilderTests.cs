@@ -52,10 +52,10 @@
 
       ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
         .ItemTemplatePath("/Sample/Sample Item")
+        .ItemName("ItEmNaMe")
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName(fields)
         .AddFieldsRawValuesByName("field3","VaLuE3")
         .Build();
@@ -80,22 +80,10 @@
     }
 
     [Test]
-    public void TestNameIsMandatoryField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemTemplatePath("/Sample/Sample Item")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
-
-      TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentNullException>(action);
-    }
-
-    [Test]
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
       ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-       .ItemTemplatePath("/Sample/Sample Item")
+        .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName("field1","VaLuE1")
         .AddFieldsRawValuesByName("field2","VaLuE2")
