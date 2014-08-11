@@ -28,5 +28,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ThreadSafetyTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UrlAutocompleteTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CreateFromBranchTest.cs" />
   </ItemGroup>
 </Project>
