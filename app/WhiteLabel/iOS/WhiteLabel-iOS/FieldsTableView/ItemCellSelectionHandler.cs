@@ -2,6 +2,7 @@
 namespace WhiteLabeliOS.FieldsTableView
 {
   using System;
+  using System.Linq;
   using System.Collections.Generic;
   using MonoTouch.UIKit;
   using MonoTouch.Foundation;
@@ -53,7 +54,7 @@ namespace WhiteLabeliOS.FieldsTableView
     {
       this.ValidateFields();
 
-      ISitecoreItem selectedItem = this.sitecoreItems[indexPath.Row];
+      ISitecoreItem selectedItem = this.sitecoreItems.ElementAt(indexPath.Row);
       this.OnItemCellSelectedDelegate(tableView, selectedItem, indexPath);
     }
 
@@ -76,7 +77,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
     }
 
-    public List<ISitecoreItem> SitecoreItems
+    public IEnumerable<ISitecoreItem> SitecoreItems
     { 
       get
       {
@@ -113,7 +114,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
 
     #region Instance Variables
-    private List<ISitecoreItem> sitecoreItems;
+    private IEnumerable<ISitecoreItem> sitecoreItems;
     private UITableView myTable;
     private TableViewDidSelectItemAtIndexPath handler;
     #endregion Instance Variables

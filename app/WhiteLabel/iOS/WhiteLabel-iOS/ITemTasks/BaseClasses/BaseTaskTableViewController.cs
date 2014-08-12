@@ -45,7 +45,7 @@ namespace WhiteLabeliOS
 			}
 		}
 
-    protected void ShowItemsList( List<ISitecoreItem> items )
+    protected void ShowItemsList( IEnumerable<ISitecoreItem> items )
     {
       BeginInvokeOnMainThread(delegate
       {

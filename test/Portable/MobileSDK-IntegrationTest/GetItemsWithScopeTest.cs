@@ -38,10 +38,10 @@
         .Build();
       var response = await this.session.ReadItemAsync(request);
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
 
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      Assert.AreEqual("The Home item is the default starting point for a website.", resultItem.FieldWithName("__Long description").RawValue);
+      Assert.AreEqual("The Home item is the default starting point for a website.", resultItem["__Long description"].RawValue);
     }
 
     [Test]
@@ -53,11 +53,11 @@
       var response = await this.session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
 
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      Assert.AreEqual(2, resultItem.Fields.Count);
-      Assert.AreEqual("Sitecore", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(2, resultItem.FieldsCount);
+      Assert.AreEqual("Sitecore", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -69,8 +69,8 @@
       var response = await this.session.ReadItemAsync(request);
 
       testData.AssertItemsCount(2, response);
-      Assert.AreEqual("Allowed_Child", response.Items[0].DisplayName);
-      Assert.AreEqual("Not_Allowed_Child", response.Items[1].DisplayName);
+      Assert.AreEqual("Allowed_Child", response[0].DisplayName);
+      Assert.AreEqual("Not_Allowed_Child", response[1].DisplayName);
     }
 
     [Test]
@@ -85,8 +85,8 @@
       var response = await this.session.ReadItemAsync(request);
 
       testData.AssertItemsCount(3, response);
-      Assert.AreEqual("Allowed_Child", response.Items[0].DisplayName);
-      testData.AssertItemsAreEqual(this.testData.Items.AllowedParent, response.Items[2]);
+      Assert.AreEqual("Allowed_Child", response[0].DisplayName);
+      testData.AssertItemsAreEqual(this.testData.Items.AllowedParent, response[2]);
     }
 
     [Test]
@@ -120,10 +120,10 @@
         .Build();
       var response = await this.session.ReadItemAsync(request);
       testData.AssertItemsCount(28, response);
-      Assert.AreEqual("Allowed_Child", response.Items[0].DisplayName);
-      Assert.AreEqual("Not_Allowed_Child", response.Items[1].DisplayName);
-      Assert.AreEqual("Allowed_Item", response.Items[2].DisplayName);
-      Assert.AreEqual("Allowed_Parent", response.Items[3].DisplayName);
+      Assert.AreEqual("Allowed_Child", response[0].DisplayName);
+      Assert.AreEqual("Not_Allowed_Child", response[1].DisplayName);
+      Assert.AreEqual("Allowed_Item", response[2].DisplayName);
+      Assert.AreEqual("Allowed_Parent", response[3].DisplayName);
     }
 
     [Test]
@@ -137,9 +137,9 @@
       var response = await this.session.ReadItemAsync(request);
 
       testData.AssertItemsCount(6, response);
-      Assert.AreEqual("Allowed_Child", response.Items[0].DisplayName);
-      Assert.AreEqual("Not_Allowed_Child", response.Items[1].DisplayName);
-      Assert.AreEqual("Allowed_Item", response.Items[2].DisplayName);
+      Assert.AreEqual("Allowed_Child", response[0].DisplayName);
+      Assert.AreEqual("Not_Allowed_Child", response[1].DisplayName);
+      Assert.AreEqual("Allowed_Item", response[2].DisplayName);
     }
 
     [Test]
@@ -172,7 +172,7 @@
       var response = await sessionWithNoReadAccessUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      Assert.AreEqual("Allowed_Item", response.Items[0].DisplayName);
+      Assert.AreEqual("Allowed_Item", response[0].DisplayName);
     }
 
     [Test]

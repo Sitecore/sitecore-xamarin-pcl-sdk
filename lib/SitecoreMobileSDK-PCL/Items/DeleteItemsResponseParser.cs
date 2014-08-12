@@ -43,7 +43,12 @@
         itemsIds.Add(itemIdString);
       }
 
-      return new ScDeleteItemsResponse(count, itemsIds);
+      if (itemsIds.Count != count)
+      {
+        throw new ParserException("[DELETE RESPONSE] Inconsistent items count in JSON response ");
+      }
+
+      return new ScDeleteItemsResponse(itemsIds);
     }
 
     private static T ParseOrFail<T>(JObject json, string path)

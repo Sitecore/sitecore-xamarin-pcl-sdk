@@ -2,16 +2,41 @@
 {
   using System.Collections.Generic;
 
-  public class ScDeleteItemsResponse
+  public class ScDeleteItemsResponse : IEnumerable<string>
   {
-    public int Count { get; private set; }
+    private List<string> ItemsIds { get; set; }
 
-    public List<string> ItemsIds { get; private set; }
-
-    public ScDeleteItemsResponse(int count, List<string> itemsIds)
+    public ScDeleteItemsResponse(List<string> itemsIds)
     {
-      this.Count = count;
       this.ItemsIds = itemsIds;
     }
+
+    public int Count 
+    { 
+      get
+      {
+        return this.ItemsIds.Count;
+      }
+    }
+
+    #region IEnumerable
+    public string this[int index]
+    {
+      get
+      {
+        return this.ItemsIds[index];
+      }
+    }
+
+    public IEnumerator<string> GetEnumerator()
+    {
+      return this.ItemsIds.GetEnumerator();
+    }
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+      return this.ItemsIds.GetEnumerator();
+    }
+    #endregion IEnumerable
   }
 }

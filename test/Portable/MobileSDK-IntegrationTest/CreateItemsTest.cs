@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Linq;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
@@ -180,8 +181,8 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
+      Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -205,8 +206,8 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
+      Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -230,7 +231,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -253,7 +254,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
+      Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -278,7 +279,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
+      Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -327,7 +328,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(0, resultItem.Fields.Count);
+      Assert.AreEqual(0, resultItem.FieldsCount);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -390,7 +391,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(0, resultItem.Fields.Count);
+      Assert.AreEqual(0, resultItem.FieldsCount);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -615,7 +616,7 @@
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
-      Assert.AreEqual(0, createResponse.Items.Count);
+      Assert.AreEqual(0, createResponse.ResultCount);
     }
 
     [Test]
@@ -678,7 +679,7 @@
       var readResponse = await this.GetItemById(resultItem.Id);
 
       this.testData.AssertItemsCount(1, readResponse);
-      this.testData.AssertItemsAreEqual(expectedItem, readResponse.Items[0]);
+      this.testData.AssertItemsAreEqual(expectedItem, readResponse[0]);
     }
 
     private async Task<ScItemsResponse> GetItemById(string id)
@@ -701,7 +702,7 @@
     private ISitecoreItem CheckCreatedItem(ScItemsResponse createResponse, TestEnvironment.Item expectedItem)
     {
       this.testData.AssertItemsCount(1, createResponse);
-      ISitecoreItem resultItem = createResponse.Items[0];
+      ISitecoreItem resultItem = createResponse[0];
       this.testData.AssertItemsAreEqual(expectedItem, resultItem);
 
       return resultItem;
