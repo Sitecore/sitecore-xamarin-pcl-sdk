@@ -56,7 +56,7 @@
       var resultItem = response[0];
 
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      Assert.AreEqual(2, resultItem.Fields.Count);
+      Assert.AreEqual(2, resultItem.FieldsCount);
       Assert.AreEqual("Sitecore", resultItem.FieldWithName("Title").RawValue);
     }
 

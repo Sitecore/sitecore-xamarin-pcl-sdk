@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Linq;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
@@ -327,7 +328,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(0, resultItem.Fields.Count);
+      Assert.AreEqual(0, resultItem.FieldsCount);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -390,7 +391,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(0, resultItem.Fields.Count);
+      Assert.AreEqual(0, resultItem.FieldsCount);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }

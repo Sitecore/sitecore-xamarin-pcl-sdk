@@ -291,7 +291,7 @@
       var resultItem = result[0];
       Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
-      Assert.True(50 < resultItem.Fields.Count);
+      Assert.True(50 < resultItem.FieldsCount);
       Assert.AreEqual(Version, resultItem.Source.VersionNumber);
     }
 
@@ -389,7 +389,7 @@
       Assert.AreEqual(1, result.ResultCount);
       var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(0, resultItem.Fields.Count);
+      Assert.AreEqual(0, resultItem.FieldsCount);
     }
 
     [Test]
@@ -412,7 +412,7 @@
       Assert.AreEqual(1, result.ResultCount);
       var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(1, resultItem.Fields.Count);
+      Assert.AreEqual(1, resultItem.FieldsCount);
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
     }
 

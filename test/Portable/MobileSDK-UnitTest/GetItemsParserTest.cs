@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
-using System.Diagnostics;
-
-
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
+  using System.Linq;
   using System.Threading;
+  using System.Threading.Tasks;
+  using System.Diagnostics;
 
   using NUnit.Framework;
 
@@ -45,10 +44,10 @@ namespace Sitecore.MobileSdkUnitTest
       Assert.AreEqual("Sample/Sample Item", item1.Template);
       Assert.AreEqual(1, item1.Source.VersionNumber);
 
-      Assert.AreEqual(2, item1.Fields.Count);
-      IField field1 = item1.Fields [0];
+      Assert.AreEqual(2, item1.FieldsCount);
+      IField field1 = item1.Fields.ElementAt(0);
       Assert.AreEqual("{75577384-3C97-45DA-A847-81B00500E250}", field1.FieldId);
-      IField field2 = item1.Fields [1];
+      IField field2 = item1.Fields.ElementAt(1);
       Assert.AreEqual("{A60ACD61-A6DB-4182-8329-C957982CEC74}", field2.FieldId);
     }
 
