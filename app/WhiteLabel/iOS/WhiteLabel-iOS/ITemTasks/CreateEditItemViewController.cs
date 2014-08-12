@@ -61,9 +61,9 @@ namespace WhiteLabeliOS
         this.ShowLoader();
 
         ScItemsResponse response = await session.UpdateItemAsync(request);
-        if (response.Items.Any())
+        if (response.Any())
         {
-          ISitecoreItem item = response.Items[0];
+          ISitecoreItem item = response[0];
           AlertHelper.ShowLocalizedAlertWithOkOption("The item created successfully", "Item path: " + item.Path);
         }
         else
@@ -101,9 +101,9 @@ namespace WhiteLabeliOS
         this.ShowLoader();
 
         ScItemsResponse response = await session.CreateItemAsync(request);
-        if (response.Items.Any())
+        if (response.Any())
         {
-          ISitecoreItem item = response.Items[0];
+          ISitecoreItem item = response[0];
           this.CreatedItemId = item.Id;
           AlertHelper.ShowLocalizedAlertWithOkOption("The item created successfully", "Item path: " + item.Path);
         }
