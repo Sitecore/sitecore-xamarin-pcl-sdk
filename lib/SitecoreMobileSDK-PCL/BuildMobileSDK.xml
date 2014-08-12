@@ -15,6 +15,7 @@
   	<!-- newline symbols matter -->
 
     <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\..'))</RepositoryRoot>
+    <MobileSdkLibraryRoot>$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL</MobileSdkLibraryRoot>
 	  <ScriptsDirectory>$(RepositoryRoot)\scripts</ScriptsDirectory>
     <SolutionsDirectory>$(RepositoryRoot)\solutions</SolutionsDirectory>
     <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
@@ -27,6 +28,11 @@
 
     <UnitTestDesktopBuildDirectory>$(RepositoryRoot)\test\Desktop-NunitLite\UnitTest-Desktop-NUnitLite\bin\Release</UnitTestDesktopBuildDirectory>
     <IntegrationTestDesktopBuildDirectory>$(RepositoryRoot)\test\Desktop-NunitLite\IntegrationTest-Desktop-NUnitLite\bin\Release</IntegrationTestDesktopBuildDirectory>
+
+    <DocumentationXml>$(MobileSdkLibraryRoot)\bin\Release\Sitecore.MobileSDK.XML</DocumentationXml>
+    <DoxygenConfig>$(MobileSdkLibraryRoot)\SitecoreMobileSDK.doxygen</DoxygenConfig>
+    <DoxygenExe>doxygen</DoxygenExe>
+    <JavadocDeploymentDir>$(RepositoryRoot)\deployment\doc</JavadocDeploymentDir>
   </PropertyGroup>
 
 
@@ -55,6 +61,7 @@
     <CallTarget Targets="UnitTest"/>
     <CallTarget Targets="SitecoreMobileSDK"/>
     <CallTarget Targets="package"/>
+    <CallTarget Targets="doc"/>
   </Target>
 
   <Target Name="FullBuild">
@@ -174,6 +181,32 @@
      />
   </Target>
 
+  <Target Name="doc">
+     <MakeDir 
+      Condition="!Exists('$(JavadocDeploymentDir)')"
+      Directories="$(JavadocDeploymentDir)" 
+    /> 
+
+    <Copy
+      SourceFiles="$(DocumentationXml)"
+      DestinationFolder="$(DeploymentDirectory)"
+     />
+
+    <Exec 
+      Command="&quot;$(DoxygenExe)&quot; &quot;$(DoxygenConfig)&quot;"
+      WorkingDirectory="$(MobileSdkLibraryRoot)" />
+
+    <ItemGroup>
+      <DoxygenFiles Include="$(JavadocDeploymentDir)\MobileSDK-doxygen-html\**" />
+    </ItemGroup>
+
+    <MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(DoxygenFiles)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Doxygen.zip" 
+      RemoveRoot="$(JavadocDeploymentDir)" 
+    />
+  </Target>
 
 <!-- ====================================================  -->
   <Target Name="log">
