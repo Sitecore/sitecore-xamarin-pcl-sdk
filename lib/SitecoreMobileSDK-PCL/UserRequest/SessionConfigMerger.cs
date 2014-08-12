@@ -22,9 +22,9 @@
       }
 
       var result = new SessionConfigPOD();
-      result.InstanceUrl = (null != userConfig.InstanceUrl) ? userConfig.InstanceUrl : this.defaultSessionConfig.InstanceUrl;
-      result.Site = (null != userConfig.Site) ? userConfig.Site : this.defaultSessionConfig.Site;
-      result.ItemWebApiVersion = (null != userConfig.ItemWebApiVersion) ? userConfig.ItemWebApiVersion : this.defaultSessionConfig.ItemWebApiVersion;
+      result.InstanceUrl = userConfig.InstanceUrl ?? this.defaultSessionConfig.InstanceUrl;
+      result.Site = userConfig.Site ?? this.defaultSessionConfig.Site;
+      result.ItemWebApiVersion = userConfig.ItemWebApiVersion ?? this.defaultSessionConfig.ItemWebApiVersion;
 
       return result;
     }

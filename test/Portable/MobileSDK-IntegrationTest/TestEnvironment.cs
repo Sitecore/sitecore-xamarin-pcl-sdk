@@ -113,7 +113,7 @@
     {
       Assert.AreEqual(itemCount, response.TotalCount);
       Assert.AreEqual(itemCount, response.ResultCount);
-      Assert.AreEqual(itemCount, response.Items.Count);
+      Assert.AreEqual(itemCount, response.ResultCount);
     }
   }
 }

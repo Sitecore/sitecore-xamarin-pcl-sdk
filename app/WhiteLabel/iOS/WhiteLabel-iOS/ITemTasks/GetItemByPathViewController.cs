@@ -109,9 +109,9 @@ namespace WhiteLabeliOS
 
 				ScItemsResponse response = await session.ReadItemAsync(request);
 				
-        if (response.Items.Any())
+        if (response.Any())
         {
-          this.ShowItemsList(response.Items);
+          this.ShowItemsList(response);
         }
         else
         {

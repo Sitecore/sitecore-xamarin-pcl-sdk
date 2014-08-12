@@ -104,14 +104,13 @@ namespace MobileSDKIntegrationTest
         .ItemName(itemFromBranchName)
         .Database("master")
         .Language("en")
-        .AddScope(ScopeType.Self)
         .Payload(PayloadType.Content)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
       this.testData.AssertItemsCount(1, createResponse);
 
-      ISitecoreItem resultItem = createResponse.Items[0];
+      ISitecoreItem resultItem = createResponse[0];
       this.testData.AssertItemsAreEqual(expectedItem, resultItem);
 
 
@@ -121,7 +120,7 @@ namespace MobileSDKIntegrationTest
       var readJustCreatedItemResponse = await this.session.ReadItemAsync(readJustCreatedItemRequest);
 
       this.testData.AssertItemsCount(1, readJustCreatedItemResponse);
-      this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse.Items[0]);
+      this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse[0]);
     }
 
     [Test]
@@ -138,14 +137,13 @@ namespace MobileSDKIntegrationTest
         .ItemName(itemFromBranchName)
         .Database("master")
         .Language("en")
-        .AddScope(ScopeType.Self)
         .Payload(PayloadType.Content)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
       this.testData.AssertItemsCount(1, createResponse);
 
-      ISitecoreItem resultItem = createResponse.Items[0];
+      ISitecoreItem resultItem = createResponse[0];
       this.testData.AssertItemsAreEqual(expectedItem, resultItem);
 
 
@@ -155,7 +153,7 @@ namespace MobileSDKIntegrationTest
       var readJustCreatedItemResponse = await this.session.ReadItemAsync(readJustCreatedItemRequest);
 
       this.testData.AssertItemsCount(1, readJustCreatedItemResponse);
-      this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse.Items[0]);
+      this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse[0]);
     }
     #endregion RequestsToServer
 
@@ -173,7 +171,6 @@ namespace MobileSDKIntegrationTest
         .ItemName(itemFromBranchName)
         .Database("master")
         .Language("en")
-        .AddScope(ScopeType.Self)
         .Payload(PayloadType.Content)
         .Build();
 
@@ -203,7 +200,6 @@ namespace MobileSDKIntegrationTest
         .ItemName(itemFromBranchName)
         .Database("master")
         .Language("en")
-        .AddScope(ScopeType.Self)
         .Payload(PayloadType.Content)
         .Build();
 

@@ -1,10 +1,11 @@
 ﻿namespace Sitecore.MobileSDK.UserRequest.ReadRequest
 {
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class ReadItemByQueryRequestBuilder : AbstractBaseRequestBuilder<IReadItemsByQueryRequest>
+  public class ReadItemByQueryRequestBuilder : AbstractScopedRequestParametersBuilder<IReadItemsByQueryRequest>
   {
     public ReadItemByQueryRequestBuilder(string sitecoreQuery)
     {

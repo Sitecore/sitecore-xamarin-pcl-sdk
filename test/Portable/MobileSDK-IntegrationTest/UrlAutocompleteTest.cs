@@ -35,7 +35,7 @@
       var urlWithoutHttp = this.RemoveHttpSymbols(this.testData.InstanceUrl);
       var response = await this.GetAuthencationRequestWithHomeItemPath(urlWithoutHttp);
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
     }
 
     [Test]
@@ -45,7 +45,7 @@
       var url = this.RemoveHttpSymbols(urlWithTwoSlash);
       var response = await this.GetAuthencationRequestWithHomeItemPath(url);
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
     }
 
     [Test]
@@ -54,7 +54,7 @@
       var urlWithoutHttp = this.RemoveHttpSymbols(this.testData.InstanceUrl);
       var response = await this.GetAuthencationRequestWithHomeItemQuery(urlWithoutHttp);
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
     }
 
     [Test]
@@ -63,7 +63,7 @@
       var urlWithOneSlash = testData.InstanceUrl + "/";
       var response = await this.GetAuthencationRequestWithHomeItemQuery(urlWithOneSlash);
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
     }
 
     [Test]
@@ -71,7 +71,7 @@
     {
       var response = await this.GetAuthencationRequestWithHomeItemId("https://scmobileteam.sitecoretest.net");
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
     }
 
     private async Task<ScItemsResponse> GetAuthencationRequestWithHomeItemPath(string url)

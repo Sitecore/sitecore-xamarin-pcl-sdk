@@ -62,7 +62,7 @@ namespace WhiteLabeliOS
         this.HideLoader();
         if (response.ResultCount > 0)
         {
-          this.ShowItemsList(response.Items);
+          this.ShowItemsList(response);
         }
         else
         {
