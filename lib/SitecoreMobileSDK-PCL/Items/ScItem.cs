@@ -24,7 +24,23 @@
 
     public string Template { get; private set; }
 
-    public IList<IField> Fields { get; private set; }
+    public IEnumerable<IField> Fields { get; private set; }
+
+    public IField this[string caseInsensitiveFieldName] 
+    { 
+      get
+      {
+        return this.FieldWithName(caseInsensitiveFieldName);
+      }
+    }
+
+    public int FieldsCount 
+    { 
+      get
+      {
+        return this.FieldsByName.Count;
+      }
+    }
 
     private Dictionary<string, IField> FieldsByName { get; set; }
 

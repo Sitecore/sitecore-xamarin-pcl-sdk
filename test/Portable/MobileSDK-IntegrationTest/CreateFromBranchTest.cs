@@ -110,7 +110,7 @@ namespace MobileSDKIntegrationTest
       var createResponse = await session.CreateItemAsync(request);
       this.testData.AssertItemsCount(1, createResponse);
 
-      ISitecoreItem resultItem = createResponse.Items[0];
+      ISitecoreItem resultItem = createResponse[0];
       this.testData.AssertItemsAreEqual(expectedItem, resultItem);
 
 
@@ -120,7 +120,7 @@ namespace MobileSDKIntegrationTest
       var readJustCreatedItemResponse = await this.session.ReadItemAsync(readJustCreatedItemRequest);
 
       this.testData.AssertItemsCount(1, readJustCreatedItemResponse);
-      this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse.Items[0]);
+      this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse[0]);
     }
 
     [Test]
@@ -143,7 +143,7 @@ namespace MobileSDKIntegrationTest
       var createResponse = await session.CreateItemAsync(request);
       this.testData.AssertItemsCount(1, createResponse);
 
-      ISitecoreItem resultItem = createResponse.Items[0];
+      ISitecoreItem resultItem = createResponse[0];
       this.testData.AssertItemsAreEqual(expectedItem, resultItem);
 
 
@@ -153,7 +153,7 @@ namespace MobileSDKIntegrationTest
       var readJustCreatedItemResponse = await this.session.ReadItemAsync(readJustCreatedItemRequest);
 
       this.testData.AssertItemsCount(1, readJustCreatedItemResponse);
-      this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse.Items[0]);
+      this.testData.AssertItemsAreEqual(expectedItem, readJustCreatedItemResponse[0]);
     }
     #endregion RequestsToServer
 
