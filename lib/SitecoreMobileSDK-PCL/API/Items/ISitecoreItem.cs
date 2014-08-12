@@ -19,7 +19,10 @@ namespace Sitecore.MobileSDK.API.Items
 
     string Template { get; }
 
-    IList<IField> Fields { get; }
+    int FieldsCount { get; }
+    IField this[string index] { get; }
+
+    IEnumerable<IField> Fields{ get; }
 
     IField FieldWithName(string caseInsensitiveFieldName);
   }
