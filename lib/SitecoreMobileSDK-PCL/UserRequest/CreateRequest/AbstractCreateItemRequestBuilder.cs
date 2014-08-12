@@ -9,8 +9,8 @@
   using Sitecore.MobileSDK.Validators;
 
 
-  public abstract class AbstractCreateItemRequestBuilder<T> : 
-    AbstractChangeItemRequestBuilder<T>, 
+  public abstract class AbstractCreateItemRequestBuilder<T> :
+    AbstractChangeItemRequestBuilder<T>,
     ICreateItemRequestParametersBuilder<T>,
     ISetNewItemNameBuilder<T>,
     ISetTemplateBuilder<T>
@@ -58,9 +58,8 @@
       return this;
     }
 
-
     public ISetNewItemNameBuilder<T> BranchId(string branchId)
-//    public ICreateItemRequestParametersBuilder<T> BranchId(string branchId)
+    //    public ICreateItemRequestParametersBuilder<T> BranchId(string branchId)
     {
       this.SetItemTemplateId(branchId);
       this.IsCreateFromBranch = true;
