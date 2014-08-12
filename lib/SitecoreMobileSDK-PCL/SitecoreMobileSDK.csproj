@@ -22,7 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DocumentationFile>bin\Debug\Sitecore.MobileSDK.XML</DocumentationFile>
+    <DocumentationFile>Sitecore.MobileSDK.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -31,6 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DocumentationFile>Sitecore.MobileSDK.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="API\Exceptions\LoadDataFromNetworkException.cs" />
@@ -258,7 +259,5 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="API\Request\Template\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
