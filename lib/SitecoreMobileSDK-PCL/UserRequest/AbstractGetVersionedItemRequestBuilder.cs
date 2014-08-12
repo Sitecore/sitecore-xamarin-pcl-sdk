@@ -4,11 +4,10 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractGetVersionedItemRequestBuilder<T> :
-    AbstractBaseRequestBuilder<T>,
+    AbstractScopedRequestParametersBuilder<T>,
     IGetVersionedItemRequestParametersBuilder<T>
   where T : class
   {

@@ -4,14 +4,14 @@
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.Validators;
 
-  public abstract class AbstractChangeItemRequestBuilder<T> : AbstractGetVersionedItemRequestBuilder<T>, IUpdateItemRequestParametersBuilder<T>
+  public abstract class AbstractChangeItemRequestBuilder<T> : AbstractBaseRequestBuilder<T>,
+    IChangeItemRequestParametersBuilder<T>
     where T : class
   {
-
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
+    public IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
     {
       BaseValidator.CheckNullAndThrow(fieldsRawValuesByName, this.GetType().Name + ".FieldsRawValuesByName");
 
@@ -28,7 +28,7 @@
       return this;
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
+    public IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
     {
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldKey, this.GetType().Name + ".fieldKey");
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldValue, this.GetType().Name + ".fieldValue");
@@ -44,7 +44,7 @@
       bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary(this.FieldsRawValuesByName, lowerCaseField);
       if (keyIsDuplicated)
       {
-        throw new InvalidOperationException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");  
+        throw new InvalidOperationException(this.GetType().Name + ".FieldsRawValuesByName : duplicate fields are not allowed");
       }
 
       this.FieldsRawValuesByName.Add(lowerCaseField, fieldValue);
@@ -52,44 +52,29 @@
       return this;
     }
 
-    new public IUpdateItemRequestParametersBuilder<T> Version(int? version)
+    new public IChangeItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.Version(version);
+      return (IChangeItemRequestParametersBuilder<T>)base.Database(sitecoreDatabase);
     }
 
-    new public IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
+    new public IChangeItemRequestParametersBuilder<T> Language(string itemLanguage)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.Database(sitecoreDatabase);
+      return (IChangeItemRequestParametersBuilder<T>)base.Language(itemLanguage);
     }
 
-    new public IUpdateItemRequestParametersBuilder<T> Language(string itemLanguage)
+    new public IChangeItemRequestParametersBuilder<T> Payload(PayloadType payload)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.Language(itemLanguage);
+      return (IChangeItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public IUpdateItemRequestParametersBuilder<T> Payload(PayloadType payload)
+    new public IChangeItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.Payload(payload);
+      return (IChangeItemRequestParametersBuilder<T>)base.AddFields(fields);
     }
 
-    new public IUpdateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    new public IChangeItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFields(fields);
-    }
-
-    new public IUpdateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
-    {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
-    }
-
-    new public IUpdateItemRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
-    {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddScope(scope);
-    }
-
-    new public IUpdateItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
-    {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddScope(scope);
+      return (IChangeItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
     }
 
     protected IDictionary<string, string> FieldsRawValuesByName;

@@ -48,30 +48,6 @@
       return this;
     }
 
-    public IBaseRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
-    {
-      ScopeParameters scopeParameters = new ScopeParameters(this.queryParameters.ScopeParameters);
-
-      foreach (ScopeType singleScope in scope)
-      {
-        if (!scopeParameters.AddScope(singleScope))
-        {
-          throw new InvalidOperationException(this.GetType().Name + ".Scope : Adding scope parameter duplicates is forbidden");
-        }
-      }
-
-      this.queryParameters = new QueryParameters(this.queryParameters.Payload, scopeParameters, this.queryParameters.Fields);
-      return this;
-    }
-
-    public IBaseRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
-    {
-      BaseValidator.CheckNullAndThrow(scope, this.GetType().Name + ".Scope");
-
-      IEnumerable<ScopeType> castedScope = scope;
-      return this.AddScope(castedScope);
-    }
-
     public IBaseRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
     {
       BaseValidator.CheckNullAndThrow(fields, this.GetType().Name + ".Fields");

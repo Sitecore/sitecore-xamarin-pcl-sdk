@@ -88,8 +88,7 @@
 
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, this.FieldsRawValuesByName);
-      return (ICreateItemRequestParametersBuilder<T>)this;
-
+      return this;
     }
 
     new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
@@ -98,7 +97,7 @@
 
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, this.FieldsRawValuesByName);
-      return (ICreateItemRequestParametersBuilder<T>)this;
+      return this;
     }
 
     private bool CheckForDuplicate(string key)
@@ -139,16 +138,6 @@
     new public ICreateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
     {
       return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
-    }
-
-    new public ICreateItemRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
-    {
-      return (ICreateItemRequestParametersBuilder<T>)base.AddScope(scope);
-    }
-
-    new public ICreateItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)
-    {
-      return (ICreateItemRequestParametersBuilder<T>)base.AddScope(scope);
     }
   }
 }
