@@ -385,8 +385,8 @@
         .Build();
       var createResponse = await itemSession.CreateItemAsync(request);
 
-      Assert.AreEqual(1, createResponse.Items.Count);
-      return createResponse.Items[0];
+      Assert.AreEqual(1, createResponse.ResultCount);
+      return createResponse[0];
     }
 
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)

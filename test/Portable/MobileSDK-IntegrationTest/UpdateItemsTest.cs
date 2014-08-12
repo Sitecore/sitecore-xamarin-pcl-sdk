@@ -83,8 +83,8 @@
 
       var result = await itemSession.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
+      Assert.AreEqual(1, result.ResultCount);
+      var resultItem = result[0];
       Assert.AreEqual(childItem.Id, resultItem.Id);
       Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
@@ -114,8 +114,8 @@
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
+      Assert.AreEqual(1, result.ResultCount);
+      var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
@@ -133,7 +133,7 @@
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(0, result.Items.Count);
+      Assert.AreEqual(0, result.ResultCount);
     }
 
     [Test]
@@ -287,8 +287,8 @@
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
+      Assert.AreEqual(1, result.ResultCount);
+      var resultItem = result[0];
       Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
       Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
       Assert.True(50 < resultItem.Fields.Count);
@@ -311,8 +311,8 @@
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
+      Assert.AreEqual(1, result.ResultCount);
+      var resultItem = result[0];
       Assert.AreEqual(parentItem.Id, resultItem.Id);
       Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
     }
@@ -338,10 +338,10 @@
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(3, result.Items.Count);
-      var resultItem = result.Items[0];
+      Assert.AreEqual(3, result.ResultCount);
+      var resultItem = result[0];
       Assert.AreEqual(parentItem.Id, resultItem.Id);
-      foreach (var item in result.Items)
+      foreach (var item in result)
       {
         Assert.AreEqual(TextValue, item.FieldWithName("Text").RawValue);
       }
@@ -363,8 +363,8 @@
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
+      Assert.AreEqual(1, result.ResultCount);
+      var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(item.DisplayName, resultItem.DisplayName);
       Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
@@ -386,8 +386,8 @@
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
+      Assert.AreEqual(1, result.ResultCount);
+      var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(0, resultItem.Fields.Count);
     }
@@ -409,8 +409,8 @@
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.Items.Count);
-      var resultItem = result.Items[0];
+      Assert.AreEqual(1, result.ResultCount);
+      var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(1, resultItem.Fields.Count);
       Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
@@ -482,8 +482,8 @@
         .Build();
       var createResponse = await itemSession.CreateItemAsync(request);
 
-      Assert.AreEqual(1, createResponse.Items.Count);
-      return createResponse.Items[0];
+      Assert.AreEqual(1, createResponse.ResultCount);
+      return createResponse[0];
     }
 
     private static string RandomText()

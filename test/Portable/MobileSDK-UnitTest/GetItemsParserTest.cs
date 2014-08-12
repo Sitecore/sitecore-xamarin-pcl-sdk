@@ -29,9 +29,9 @@ namespace Sitecore.MobileSdkUnitTest
     {
       string rawResponse = VALID_RESPONSE;
       ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
-      Assert.AreEqual(1, response.Items.Count);
+      Assert.AreEqual(1, response.ResultCount);
 
-      ISitecoreItem item1 = response.Items[0];
+      ISitecoreItem item1 = response[0];
 
       Assert.AreEqual("Home", item1.DisplayName);
       Assert.AreEqual("web", item1.Source.Database);
@@ -63,7 +63,7 @@ namespace Sitecore.MobileSdkUnitTest
         string rawResponse = responseBegin + i.ToString() + responseEnd;
 
         ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
-        Assert.AreEqual(0, response.Items.Count);
+        Assert.AreEqual(0, response.ResultCount);
       }
     }
 
@@ -89,7 +89,7 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.AreEqual(0, response.TotalCount);
       Assert.AreEqual(0, response.ResultCount);
-      Assert.AreEqual(0, response.Items.Count);
+      Assert.AreEqual(0, response.ResultCount);
     }
 
     [Test]

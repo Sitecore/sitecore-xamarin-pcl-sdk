@@ -40,8 +40,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
@@ -54,10 +54,10 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
 
-      Assert.IsTrue(response.Items[0].Fields.Count > 70);
-      Assert.AreEqual("Home", response.Items[0].FieldWithName("__Display name").RawValue);
+      Assert.IsTrue(response[0].Fields.Count > 70);
+      Assert.AreEqual("Home", response[0].FieldWithName("__Display name").RawValue);
     }
 
     [Test]
@@ -67,8 +67,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      Assert.AreEqual(0, response.Items[0].Fields.Count);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
+      Assert.AreEqual(0, response[0].Fields.Count);
     }
 
     [Test]
@@ -78,8 +78,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(3, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
@@ -92,9 +92,9 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      Assert.AreEqual("宇都宮", response.Items[0].DisplayName);
-      Assert.AreEqual("/sitecore/content/Home/Android/Static/Japanese/宇都宮", response.Items[0].Path);
-      ISitecoreItem item = response.Items[0];
+      Assert.AreEqual("宇都宮", response[0].DisplayName);
+      Assert.AreEqual("/sitecore/content/Home/Android/Static/Japanese/宇都宮", response[0].Path);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("宇都宮", item.FieldWithName("Title").RawValue);
@@ -107,8 +107,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
+      ISitecoreItem item = response[0];
 
 
       Assert.AreEqual(1, item.Fields.Count);
@@ -128,8 +128,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.TestFieldsItem, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.TestFieldsItem, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual(item.FieldWithName("CheckBoxField").RawValue, "1");
@@ -152,8 +152,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.TestFieldsItem, response.Items[0]);
-      Assert.AreEqual(0, response.Items[0].Fields.Count);
+      testData.AssertItemsAreEqual(testData.Items.TestFieldsItem, response[0]);
+      Assert.AreEqual(0, response[0].Fields.Count);
     }
 
     [Test]
@@ -167,8 +167,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(1, item.Fields.Count);
       Assert.AreEqual("English version 2 web", item.FieldWithName("title").RawValue);
@@ -185,8 +185,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(1, item.Fields.Count);
       Assert.AreEqual("English version 2 web", item.FieldWithName("title").RawValue);
@@ -204,8 +204,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(1, item.Fields.Count);
       Assert.AreEqual("English version 2 web", item.FieldWithName("title").RawValue);
@@ -222,8 +222,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(1, item.Fields.Count);
       Assert.AreEqual("Danish version 2 web", item.FieldWithName("title").RawValue);
@@ -240,8 +240,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(0, item.Fields.Count);
     }
@@ -261,7 +261,7 @@
         DisplayName = "Allowed_Parent",
         Template = "Sample/Sample Item"
       };
-      ISitecoreItem actualAllowedParentItem = response.Items[0];
+      ISitecoreItem actualAllowedParentItem = response[0];
       testData.AssertItemsAreEqual(expectedAllowedParentItem, actualAllowedParentItem);
 
       Assert.AreEqual(2, actualAllowedParentItem.Fields.Count);
@@ -274,7 +274,7 @@
         Template = "Test Templates/Sample fields"
       };
 
-      ISitecoreItem actualTestFieldsItem = response.Items[3];
+      ISitecoreItem actualTestFieldsItem = response[3];
       testData.AssertItemsAreEqual(expectedTestFieldsItem, actualTestFieldsItem);
 
       Assert.AreEqual(19, actualTestFieldsItem.Fields.Count);
@@ -296,7 +296,7 @@
       var responseCreatorex = await sessionCreatorexUser.ReadItemAsync(request);
       var responseAdmin = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
-      Assert.IsTrue(responseCreatorex.Items[0].Fields.Count < responseAdmin.Items[0].Fields.Count);
+      Assert.IsTrue(responseCreatorex[0].Fields.Count < responseAdmin[0].Fields.Count);
     }
 
     [Test]
@@ -311,8 +311,8 @@
         DisplayName = "Test Fields",
         Template = "Test Templates/Sample fields"
       };
-      testData.AssertItemsAreEqual(expectedItemTestTemplate, response.Items[0]);
-      ISitecoreItem item = response.Items[0];
+      testData.AssertItemsAreEqual(expectedItemTestTemplate, response[0]);
+      ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("Normal Text", item.FieldWithName("Normal Text").Name);
@@ -350,8 +350,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      var item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
+      var item = response[0];
 
       Assert.AreEqual(0, item.Fields.Count);
     }
@@ -363,8 +363,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
-      var item = response.Items[0];
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
+      var item = response[0];
 
       Assert.AreEqual(2, item.Fields.Count);
       Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);

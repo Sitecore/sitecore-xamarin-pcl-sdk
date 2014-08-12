@@ -547,7 +547,7 @@
       }
       var request = requestBuilder.Build();
       var response = await this.session.ReadItemAsync(request);
-      var item = response.Items[0];
+      var item = response[0];
       return item;
     }
   }
