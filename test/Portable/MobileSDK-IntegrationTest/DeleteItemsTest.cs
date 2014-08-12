@@ -96,7 +96,7 @@
 
       var result = await this.session.DeleteItemAsync(request);
       Assert.AreEqual(1, result.Count);
-      Assert.AreEqual(item.Id, result.ItemsIds[0]);
+      Assert.AreEqual(item.Id, result[0]);
     }
 
     [Test]
@@ -113,7 +113,7 @@
 
       var result = await this.session.DeleteItemAsync(request);
       Assert.AreEqual(1, result.Count);
-      Assert.AreEqual(parentItem.Id, result.ItemsIds[0]);
+      Assert.AreEqual(parentItem.Id, result[0]);
     }
 
     [Test]
@@ -129,8 +129,8 @@
 
       var result = await this.session.DeleteItemAsync(request);
       Assert.AreEqual(2, result.Count);
-      Assert.AreEqual(item1.Id, result.ItemsIds[0]);
-      Assert.AreEqual(item2.Id, result.ItemsIds[1]);
+      Assert.AreEqual(item1.Id, result[0]);
+      Assert.AreEqual(item2.Id, result[1]);
     }
 
     [Test]
@@ -149,8 +149,8 @@
 
       var result = await this.session.DeleteItemAsync(request);
       Assert.AreEqual(2, result.Count);
-      Assert.AreEqual(parentItem.Id, result.ItemsIds[0]);
-      Assert.AreEqual(childItem.Id, result.ItemsIds[1]);
+      Assert.AreEqual(parentItem.Id, result[0]);
+      Assert.AreEqual(childItem.Id, result[1]);
     }
 
     [Test]
@@ -167,7 +167,7 @@
 
       var result = await this.session.DeleteItemAsync(request);
       Assert.AreEqual(1, result.Count);
-      Assert.AreEqual(childItem.Id, result.ItemsIds[0]);
+      Assert.AreEqual(childItem.Id, result[0]);
     }
 
     [Test]
