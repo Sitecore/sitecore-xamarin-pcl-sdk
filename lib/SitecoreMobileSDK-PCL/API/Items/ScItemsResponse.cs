@@ -18,14 +18,6 @@ namespace Sitecore.MobileSDK.API.Items
     public int ResultCount { get; private set; }
     #endregion Paging
 
-    // TODO : remove
-    private List<ISitecoreItem> Items 
-    { 
-      get; 
-      /*private*/ set; 
-    }
-
-
     #region IEnumerable
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
@@ -43,6 +35,12 @@ namespace Sitecore.MobileSDK.API.Items
       {
         return this.Items[index];
       }
+    }
+
+    private List<ISitecoreItem> Items 
+    { 
+      get; 
+      /*private*/ set; 
     }
     #endregion IEnumerable
   }
