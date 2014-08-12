@@ -61,6 +61,7 @@ namespace Sitecore.MobileSDK
       this.httpClient = new HttpClient();
     }
 
+    //REVIEW: memory management
     void ReleaseResources()
     {
       if (null != this.credentials)
