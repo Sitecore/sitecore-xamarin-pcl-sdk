@@ -54,6 +54,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CancelOperationsTest.cs">
       <Link>CancelOperationsTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateFromBranchTest.cs">
+      <Link>CreateFromBranchTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateItemsTest.cs">
       <Link>CreateItemsTest.cs</Link>
     </Compile>

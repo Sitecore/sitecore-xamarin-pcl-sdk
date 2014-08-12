@@ -15,8 +15,11 @@ namespace Sitecore.MobileSDK.UserRequest.CreateRequest
 
     public override ICreateItemByPathRequest Build()
     {
-      BaseValidator.CheckForNullAndEmptyOrThrow(this.itemParametersAccumulator.ItemName,
-        this.GetType().Name + ".ItemName");
+      if (!this.IsCreateFromBranch)
+      {
+        BaseValidator.CheckForNullAndEmptyOrThrow(this.itemParametersAccumulator.ItemName,
+          this.GetType().Name + ".ItemName");
+      }
 
       BaseValidator.CheckForNullAndEmptyOrThrow(this.itemParametersAccumulator.ItemTemplate,
         this.GetType().Name + ".ItemTemplate");

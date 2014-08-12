@@ -20,13 +20,19 @@
       string escapedName = UrlBuilderUtils.EscapeDataString(request.ItemName);
 
       string result =
-          this.webApiGrammar.TemplateParameterName
+        this.webApiGrammar.TemplateParameterName
         + this.restGrammar.KeyValuePairSeparator
-        + escapedTemplate
-        + this.restGrammar.FieldSeparator
-        + this.webApiGrammar.ItemNameParameterName
-        + this.restGrammar.KeyValuePairSeparator
-        + escapedName;
+        + escapedTemplate;
+
+
+      if (!string.IsNullOrEmpty(escapedName))
+      {
+        result = result
+          + this.restGrammar.FieldSeparator
+          + this.webApiGrammar.ItemNameParameterName
+          + this.restGrammar.KeyValuePairSeparator
+          + escapedName;
+      }
 
       return result;
     }

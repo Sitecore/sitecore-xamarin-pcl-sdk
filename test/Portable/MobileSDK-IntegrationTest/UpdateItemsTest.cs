@@ -5,7 +5,7 @@
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
 
-  using SitecoreMobileSDKMockObjects;
+  using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
@@ -477,8 +477,8 @@
       }
       string parentPath = parentItem == null ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(parentPath)
+        .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(itemName)
-        .ItemTemplate(testData.Items.Home.Template)
         .Build();
       var createResponse = await itemSession.CreateItemAsync(request);
 

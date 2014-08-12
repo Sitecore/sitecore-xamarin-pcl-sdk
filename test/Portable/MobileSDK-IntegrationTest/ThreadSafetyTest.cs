@@ -6,8 +6,6 @@
   using System.Diagnostics;
 
   using NUnit.Framework;
-
-  using SitecoreMobileSDKMockObjects;
   using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK.API.Exceptions;

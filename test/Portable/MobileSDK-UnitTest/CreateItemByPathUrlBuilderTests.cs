@@ -51,11 +51,11 @@
       fields.Add("field2","VaLuE2");
 
       ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
+        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemName("ItEmNaMe")
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .ItemTemplate("/Sample/Sample Item")
-        .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName(fields)
         .AddFieldsRawValuesByName("field3","VaLuE3")
         .Build();
@@ -80,34 +80,10 @@
     }
 
     [Test]
-    public void TestNameIsMandatoryField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemTemplate("/Sample/Sample Item")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
-
-      TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentNullException>(action);
-    }
-
-    [Test]
-    public void TestTemplateIsMandatoryField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemName("ItEmNaMe")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
-
-      TestDelegate action = () => requestBuilder.Build();
-      Assert.Throws<ArgumentNullException>(action);
-    }
-
-    [Test]
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
       ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
-        .ItemTemplate("/Sample/Sample Item")
+        .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName("field1","VaLuE1")
         .AddFieldsRawValuesByName("field2","VaLuE2")
@@ -134,7 +110,7 @@
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
       var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .ItemTemplate("/Sample/Sample Item")
+       .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName("field1", "VaLuE1")
         .AddFieldsRawValuesByName("field2", "VaLuE2");
