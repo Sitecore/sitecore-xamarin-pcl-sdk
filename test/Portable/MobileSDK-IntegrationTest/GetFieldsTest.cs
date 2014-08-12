@@ -45,7 +45,7 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.FieldsCount);
-      Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Sitecore", item["Title"].RawValue);
     }
 
     [Test]
@@ -58,7 +58,7 @@
       testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
 
       Assert.IsTrue(response[0].FieldsCount > 70);
-      Assert.AreEqual("Home", response[0].FieldWithName("__Display name").RawValue);
+      Assert.AreEqual("Home", response[0]["__Display name"].RawValue);
     }
 
     [Test]
@@ -83,7 +83,7 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.FieldsCount);
-      Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Sitecore", item["Title"].RawValue);
     }
 
     [Test]
@@ -98,7 +98,7 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.FieldsCount);
-      Assert.AreEqual("宇都宮", item.FieldWithName("Title").RawValue);
+      Assert.AreEqual("宇都宮", item["Title"].RawValue);
     }
 
     [Test]
@@ -114,7 +114,7 @@
 
       Assert.AreEqual(1, item.FieldsCount);
       Assert.AreEqual("Text", item.Fields.ElementAt(0).Name);
-      Assert.True(item.FieldWithName("Text").RawValue.Contains("<div>Welcome to Sitecore!</div>"));
+      Assert.True(item["Text"].RawValue.Contains("<div>Welcome to Sitecore!</div>"));
     }
 
     [Test]
@@ -133,8 +133,8 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.FieldsCount);
-      Assert.AreEqual(item.FieldWithName("CheckBoxField").RawValue, "1");
-      Assert.AreEqual(item.FieldWithName("MultiListField").RawValue, "{2075CBFF-C330-434D-9E1B-937782E0DE49}");
+      Assert.AreEqual(item["CheckBoxField"].RawValue, "1");
+      Assert.AreEqual(item["MultiListField"].RawValue, "{2075CBFF-C330-434D-9E1B-937782E0DE49}");
     }
 
     [Test]
@@ -172,7 +172,7 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(1, item.FieldsCount);
-      Assert.AreEqual("English version 2 web", item.FieldWithName("title").RawValue);
+      Assert.AreEqual("English version 2 web", item["title"].RawValue);
     }
 
     [Test]
@@ -190,7 +190,7 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(1, item.FieldsCount);
-      Assert.AreEqual("English version 2 web", item.FieldWithName("title").RawValue);
+      Assert.AreEqual("English version 2 web", item["title"].RawValue);
     }
 
     [Test]
@@ -209,7 +209,7 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(1, item.FieldsCount);
-      Assert.AreEqual("English version 2 web", item.FieldWithName("title").RawValue);
+      Assert.AreEqual("English version 2 web", item["title"].RawValue);
     }
 
     [Test]
@@ -227,7 +227,7 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(1, item.FieldsCount);
-      Assert.AreEqual("Danish version 2 web", item.FieldWithName("title").RawValue);
+      Assert.AreEqual("Danish version 2 web", item["title"].RawValue);
     }
 
     [Test]
@@ -266,7 +266,7 @@
       testData.AssertItemsAreEqual(expectedAllowedParentItem, actualAllowedParentItem);
 
       Assert.AreEqual(2, actualAllowedParentItem.FieldsCount);
-      Assert.AreEqual("Allowed_Parent", actualAllowedParentItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Allowed_Parent", actualAllowedParentItem["Title"].RawValue);
 
 
       var expectedTestFieldsItem = new TestEnvironment.Item
@@ -279,9 +279,9 @@
       testData.AssertItemsAreEqual(expectedTestFieldsItem, actualTestFieldsItem);
 
       Assert.AreEqual(19, actualTestFieldsItem.FieldsCount);
-      Assert.AreEqual("Text", actualTestFieldsItem.FieldWithName("Text").RawValue);
-      Assert.AreEqual("1", actualTestFieldsItem.FieldWithName("CheckBoxField").RawValue);
-      Assert.AreEqual("Normal Text", actualTestFieldsItem.FieldWithName("Normal Text").RawValue);
+      Assert.AreEqual("Text", actualTestFieldsItem["Text"].RawValue);
+      Assert.AreEqual("1", actualTestFieldsItem["CheckBoxField"].RawValue);
+      Assert.AreEqual("Normal Text", actualTestFieldsItem["Normal Text"].RawValue);
     }
 
     [Test]
@@ -316,8 +316,8 @@
       ISitecoreItem item = response[0];
 
       Assert.AreEqual(2, item.FieldsCount);
-      Assert.AreEqual("Normal Text", item.FieldWithName("Normal Text").Name);
-      Assert.AreEqual("sitecore\\admin", item.FieldWithName("__Owner").RawValue);
+      Assert.AreEqual("Normal Text", item["Normal Text"].Name);
+      Assert.AreEqual("sitecore\\admin", item["__Owner"].RawValue);
     }
 
     [Test]
@@ -368,7 +368,7 @@
       var item = response[0];
 
       Assert.AreEqual(2, item.FieldsCount);
-      Assert.AreEqual("Sitecore", item.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Sitecore", item["Title"].RawValue);
     }
 
     [Test]

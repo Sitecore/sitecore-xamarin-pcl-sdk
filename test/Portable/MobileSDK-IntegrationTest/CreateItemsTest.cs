@@ -181,8 +181,8 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
+      Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -206,8 +206,8 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(CreatedText, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
+      Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -231,7 +231,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(CreatedTitle, resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -254,7 +254,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
+      Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }
@@ -279,7 +279,7 @@
       var createResponse = await session.CreateItemAsync(request);
 
       var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
+      Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
 
       this.GetAndCheckItem(expectedItem, resultItem);
     }

@@ -60,7 +60,7 @@
 
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
-      Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Danish version 2 web", resultItem["Title"].RawValue);
       Assert.AreEqual(Db, resultItem.Source.Database);
       Assert.AreEqual(Version, resultItem.Source.VersionNumber.Value);
       Assert.AreEqual(Language, resultItem.Source.Language);
@@ -79,7 +79,7 @@
 
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
-      Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
     }
     [Test]
     public async void TestGetItemWithDbLanguageAndVersionFromRequest()
@@ -101,7 +101,7 @@
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
-      Assert.AreEqual("Danish version 1 master", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Danish version 1 master", resultItem["Title"].RawValue);
     }
     [Test]
     public async void TestOverrideLanguageInRequestById()
@@ -129,7 +129,7 @@
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var sourceExpected = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(sourceExpected, resultItem.Source);
-      Assert.AreEqual("English version 2 master", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("English version 2 master", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -158,7 +158,7 @@
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var sourceExpected = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(sourceExpected, resultItem.Source);
-      Assert.AreEqual("English version 2 master", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("English version 2 master", resultItem["Title"].RawValue);
     }
 
     [Test]

@@ -41,7 +41,7 @@
       var resultItem = response[0];
 
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      Assert.AreEqual("The Home item is the default starting point for a website.", resultItem.FieldWithName("__Long description").RawValue);
+      Assert.AreEqual("The Home item is the default starting point for a website.", resultItem["__Long description"].RawValue);
     }
 
     [Test]
@@ -57,7 +57,7 @@
 
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
       Assert.AreEqual(2, resultItem.FieldsCount);
-      Assert.AreEqual("Sitecore", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Sitecore", resultItem["Title"].RawValue);
     }
 
     [Test]

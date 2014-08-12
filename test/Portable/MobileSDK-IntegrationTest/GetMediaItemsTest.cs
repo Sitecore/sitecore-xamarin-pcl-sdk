@@ -108,7 +108,7 @@
       response.CopyTo(ms);
 
       var expectedItem = await this.GetItemByPath(MediaPath, Db);
-      Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
     [Test]
@@ -246,7 +246,7 @@
       var ms = new MemoryStream();
       response.CopyTo(ms);
       var expectedItem = await this.GetItemByPath(MediaPath);
-      Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
     [Test]
@@ -260,7 +260,7 @@
       var ms = new MemoryStream();
       response.CopyTo(ms);
       var expectedItem = await this.GetItemByPath(MediaPath);
-      Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
     [Test]
@@ -274,7 +274,7 @@
       response.CopyTo(ms);
 
       var expectedItem = await this.GetItemByPath("/sitecore/media library/Images/green_mineraly1");
-      Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
     [Test]
@@ -311,7 +311,7 @@
       var ms = new MemoryStream();
       response.CopyTo(ms);
       var expectedItem = await this.GetItemByPath(ItemPath, Db);
-      Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
     [Test]
@@ -334,7 +334,7 @@
       var ms = new MemoryStream();
       response.CopyTo(ms);
       var expectedItem = await this.GetItemByPath(ItemPath, Db);
-      Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
     [Test]
@@ -406,7 +406,7 @@
       response.CopyTo(ms);
 
       var expectedItem = await this.GetItemByPath("/sitecore/media library/images/test image");
-      Assert.AreEqual(expectedItem.FieldWithName("size").RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
     }
 
     [Test]
@@ -530,7 +530,7 @@
     private async Task<string[]> GetMediaFieldAsStringArray(string path)
     {
       var expectedItem = await this.GetItemByPath(path);
-      var str = expectedItem.FieldWithName("image").RawValue;
+      var str = expectedItem["image"].RawValue;
       var z = str.Split(new char[]
       {
         '\"'

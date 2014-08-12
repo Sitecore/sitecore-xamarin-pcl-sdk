@@ -51,7 +51,7 @@
       ISitecoreItem resultItem = response[0];
       Assert.AreEqual(testData.Items.Home.Id, resultItem.Id);
       testData.AssertItemSourcesAreEqual(itemSource, resultItem.Source);
-      Assert.AreEqual("", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -102,7 +102,7 @@
 
       ISitecoreItem resultItem = response[0];
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      Assert.AreEqual("Sitecore master", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Sitecore master", resultItem["Title"].RawValue);
     }
 
     private async Task<ScItemsResponse> GetHomeItem(IReadItemActions session, string db = null)
@@ -126,7 +126,7 @@
       ISitecoreItem resultItem = response[0];
 
       testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      Assert.AreEqual("Sitecore", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Sitecore", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -146,7 +146,7 @@
         Template = "Sitecore Client/Home"
       };
       testData.AssertItemsAreEqual(expectedItem, resultItem);
-      Assert.AreEqual("Welcome to Sitecore", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Welcome to Sitecore", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -166,7 +166,7 @@
 
       var expectedSource = new ItemSource(Db, Language, 2);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Danish version 2 web", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -186,7 +186,7 @@
 
       var expectedSource = new ItemSource(Db, "en", 2);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -226,7 +226,7 @@
 
       var expectedSource = new ItemSource(Db, "en", 2);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
     }
 
     [Test]

@@ -86,8 +86,8 @@
       Assert.AreEqual(1, result.ResultCount);
       var resultItem = result[0];
       Assert.AreEqual(childItem.Id, resultItem.Id);
-      Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(titleValue, resultItem["Title"].RawValue);
+      Assert.AreEqual(textValue, resultItem["Text"].RawValue);
       Assert.AreEqual(Db, resultItem.Source.Database);
     }
 
@@ -117,8 +117,8 @@
       Assert.AreEqual(1, result.ResultCount);
       var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(titleValue, resultItem.FieldWithName("Title").RawValue);
-      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(titleValue, resultItem["Title"].RawValue);
+      Assert.AreEqual(textValue, resultItem["Text"].RawValue);
       Assert.AreEqual(Language, resultItem.Source.Language);
     }
 
@@ -290,7 +290,7 @@
       Assert.AreEqual(1, result.ResultCount);
       var resultItem = result[0];
       Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
-      Assert.AreEqual(textValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(textValue, resultItem["Text"].RawValue);
       Assert.True(50 < resultItem.FieldsCount);
       Assert.AreEqual(Version, resultItem.Source.VersionNumber);
     }
@@ -314,7 +314,7 @@
       Assert.AreEqual(1, result.ResultCount);
       var resultItem = result[0];
       Assert.AreEqual(parentItem.Id, resultItem.Id);
-      Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(TextValue, resultItem["Text"].RawValue);
     }
 
     //Item Web API issue
@@ -343,7 +343,7 @@
       Assert.AreEqual(parentItem.Id, resultItem.Id);
       foreach (var item in result)
       {
-        Assert.AreEqual(TextValue, item.FieldWithName("Text").RawValue);
+        Assert.AreEqual(TextValue, item["Text"].RawValue);
       }
     }
 
@@ -367,7 +367,7 @@
       var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(item.DisplayName, resultItem.DisplayName);
-      Assert.AreEqual(TextValue, resultItem.FieldWithName("Text").RawValue);
+      Assert.AreEqual(TextValue, resultItem["Text"].RawValue);
     }
 
     [Test]
@@ -413,7 +413,7 @@
       var resultItem = result[0];
       Assert.AreEqual(item.Id, resultItem.Id);
       Assert.AreEqual(1, resultItem.FieldsCount);
-      Assert.AreEqual(FieldValue, resultItem.FieldWithName(FieldName).RawValue);
+      Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
     }
 
     [Test]
