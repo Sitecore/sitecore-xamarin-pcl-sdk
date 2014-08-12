@@ -2,7 +2,6 @@
 {
   using System;
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.Validators;
@@ -59,8 +58,5 @@
     {
       return (IScopedRequestParametersBuilder<T>)base.AddFields(fieldParams);
     }
-
-    protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
-    protected QueryParameters queryParameters = new QueryParameters(null, null, null);
   }
 }
