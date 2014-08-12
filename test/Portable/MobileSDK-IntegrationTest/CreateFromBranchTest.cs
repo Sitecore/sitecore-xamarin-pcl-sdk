@@ -104,7 +104,6 @@ namespace MobileSDKIntegrationTest
         .ItemName(itemFromBranchName)
         .Database("master")
         .Language("en")
-        .AddScope(ScopeType.Self)
         .Payload(PayloadType.Content)
         .Build();
 
@@ -138,7 +137,6 @@ namespace MobileSDKIntegrationTest
         .ItemName(itemFromBranchName)
         .Database("master")
         .Language("en")
-        .AddScope(ScopeType.Self)
         .Payload(PayloadType.Content)
         .Build();
 
@@ -173,7 +171,6 @@ namespace MobileSDKIntegrationTest
         .ItemName(itemFromBranchName)
         .Database("master")
         .Language("en")
-        .AddScope(ScopeType.Self)
         .Payload(PayloadType.Content)
         .Build();
 
@@ -203,7 +200,6 @@ namespace MobileSDKIntegrationTest
         .ItemName(itemFromBranchName)
         .Database("master")
         .Language("en")
-        .AddScope(ScopeType.Self)
         .Payload(PayloadType.Content)
         .Build();
 
