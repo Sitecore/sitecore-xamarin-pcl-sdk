@@ -87,7 +87,7 @@
       {
         var session = this.instanceSettings.GetSession();
 
-        var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.pathField.Text)
+        var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
           .ItemTemplatePath("Sample/Sample Item")
           .ItemName(this.nameField.Text)
           .Database("web")

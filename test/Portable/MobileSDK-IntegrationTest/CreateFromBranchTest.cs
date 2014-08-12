@@ -99,7 +99,7 @@ namespace MobileSDKIntegrationTest
 //      const string itemFromBranchName = "Multiple item brunch";
       TestEnvironment.Item expectedItem = this.CreateTestItem(itemFromBranchName);
 
-      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .BranchId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
         .ItemName(itemFromBranchName)
         .Database("master")
@@ -132,7 +132,7 @@ namespace MobileSDKIntegrationTest
       //      const string itemFromBranchName = "Multiple item brunch";
       TestEnvironment.Item expectedItem = this.CreateTestItem(itemFromBranchName);
 
-      var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
         .BranchId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
         .ItemName(itemFromBranchName)
         .Database("master")
@@ -166,7 +166,7 @@ namespace MobileSDKIntegrationTest
       const string itemFromBranchName = "ITEM PATH   A default name of the branch should be used";
       //      const string itemFromBranchName = "Multiple item brunch";
 
-      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.testData.Items.CreateItemsHere.Path)
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .BranchId(nonExistingGuid)
         .ItemName(itemFromBranchName)
         .Database("master")
@@ -195,7 +195,7 @@ namespace MobileSDKIntegrationTest
       const string itemFromBranchName = "ITEM ID   A default name of the branch should be used";
       //      const string itemFromBranchName = "Multiple item brunch";
 
-      var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
         .BranchId(nonExistingGuid)
         .ItemName(itemFromBranchName)
         .Database("master")
@@ -224,7 +224,7 @@ namespace MobileSDKIntegrationTest
     {
       Assert.Throws<ArgumentNullException>(() =>
       {
-        ItemWebApiRequestBuilder.CreateItemRequestWithPath("/some/valid/path")
+        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
                                 .BranchId(null);
       });
     }
@@ -234,7 +234,7 @@ namespace MobileSDKIntegrationTest
     {
       Assert.Throws<ArgumentException>(() =>
       {
-        ItemWebApiRequestBuilder.CreateItemRequestWithPath("/some/valid/path")
+        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
                                 .BranchId("");
       });
     }
@@ -244,7 +244,7 @@ namespace MobileSDKIntegrationTest
     {
       Assert.Throws<ArgumentException>(() =>
       {
-        ItemWebApiRequestBuilder.CreateItemRequestWithPath("/some/valid/path")
+        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
           .BranchId("  \n   \r  \t \t\n\r");
       });
     }
@@ -254,7 +254,7 @@ namespace MobileSDKIntegrationTest
     {
       Assert.Throws<ArgumentException>(() =>
       {
-        ItemWebApiRequestBuilder.CreateItemRequestWithPath("/some/valid/path")
+        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
           .BranchId("{");
       });
     }
@@ -264,7 +264,7 @@ namespace MobileSDKIntegrationTest
     {
       Assert.Throws<ArgumentException>(() =>
       {
-        ItemWebApiRequestBuilder.CreateItemRequestWithPath("/some/valid/path")
+        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
           .BranchId("}");
       });
     }
@@ -274,7 +274,7 @@ namespace MobileSDKIntegrationTest
     {
       Assert.Throws<ArgumentException>(() =>
       {
-        ItemWebApiRequestBuilder.CreateItemRequestWithPath("/some/valid/path")
+        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
           .BranchId("{}");
       });
     }

@@ -50,7 +50,7 @@
       fields.Add("field1","VaLuE1");
       fields.Add("field2","VaLuE2");
 
-      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
+      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/sitecore/content/home")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .Database("db")
@@ -82,7 +82,7 @@
     [Test]
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
-      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
+      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/sitecore/content/home")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName("field1","VaLuE1")
@@ -109,7 +109,7 @@
     [Test]
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
        .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByName("field1", "VaLuE1")
