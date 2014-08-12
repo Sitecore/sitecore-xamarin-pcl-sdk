@@ -91,13 +91,13 @@ namespace WhiteLabeliOS
         ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
         var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.pathField.Text)
-          .Database("web")
-          .ItemTemplate("Sample/Sample Item")
+          .ItemTemplatePath("Sample/Sample Item")
           .ItemName(this.nameField.Text)
+          .Database("web")
           .AddFieldsRawValuesByName("Title", titleField.Text)
           .AddFieldsRawValuesByName("Text", textField.Text)
           .Build();
-
+         
         this.ShowLoader();
 
         ScItemsResponse response = await session.CreateItemAsync(request);

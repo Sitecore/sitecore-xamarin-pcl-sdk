@@ -89,9 +89,9 @@ namespace WhiteLabeliOS
         var session = this.instanceSettings.GetSession();
 
         var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.pathField.Text)
-          .Database("web")
-          .ItemTemplate("Sample/Sample Item")
+          .ItemTemplatePath("Sample/Sample Item")
           .ItemName(this.nameField.Text)
+          .Database("web")
           .AddFieldsRawValuesByName("Title", titleField.Text)
           .AddFieldsRawValuesByName("Text", textField.Text)
           .Build();
