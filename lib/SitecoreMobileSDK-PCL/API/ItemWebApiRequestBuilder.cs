@@ -30,17 +30,17 @@ namespace Sitecore.MobileSDK.API
       return new ReadItemByQueryRequestBuilder(sitecoreQuery);
     }
 
-    public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
+    public static IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> DownloadResourceRequestWithMediaPath(string mediaPath)
     {
       return new ReadMediaItemRequestBuilder(mediaPath);
     }
 
-    public static ISetTemplateBuilder<ICreateItemByIdRequest> CreateItemRequestWithId(string itemId)
+    public static ISetTemplateBuilder<ICreateItemByIdRequest> CreateItemRequestWithParentId(string itemId)
     {
       return new CreateItemByIdRequestBuilder(itemId);
     }
 
-    public static ISetTemplateBuilder<ICreateItemByPathRequest> CreateItemRequestWithPath(string itemPath)
+    public static ISetTemplateBuilder<ICreateItemByPathRequest> CreateItemRequestWithParentPath(string itemPath)
     {
       return new CreateItemByPathRequestBuilder(itemPath);
     }

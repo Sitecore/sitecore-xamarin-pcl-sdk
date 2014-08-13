@@ -54,8 +54,8 @@ namespace WhiteLabeliOS
 
         var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.CreatedItemId)
           .Database("web")
-          .AddFieldsRawValuesByName("Title", titleField.Text)
-          .AddFieldsRawValuesByName("Text", textField.Text)
+          .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
+          .AddFieldsRawValuesByNameToSet("Text", textField.Text)
           .Build();
 
         this.ShowLoader();
@@ -90,12 +90,12 @@ namespace WhiteLabeliOS
       {
         ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
-        var request = ItemWebApiRequestBuilder.CreateItemRequestWithId(this.pathField.Text)
+        var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.pathField.Text)
           .ItemTemplatePath("Sample/Sample Item")
           .ItemName(this.nameField.Text)
           .Database("web")
-          .AddFieldsRawValuesByName("Title", titleField.Text)
-          .AddFieldsRawValuesByName("Text", textField.Text)
+          .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
+          .AddFieldsRawValuesByNameToSet("Text", textField.Text)
           .Build();
          
         this.ShowLoader();

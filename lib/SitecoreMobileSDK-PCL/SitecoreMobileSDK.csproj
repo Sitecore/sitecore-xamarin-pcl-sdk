@@ -66,7 +66,6 @@
     <Compile Include="API\Request\IReadItemsByIdRequest.cs" />
     <Compile Include="API\Request\IReadItemsByPathRequest.cs" />
     <Compile Include="API\Request\IReadItemsByQueryRequest.cs" />
-    <Compile Include="API\Request\IReadMediaItemRequest.cs" />
     <Compile Include="API\Request\IScopedRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
     <Compile Include="API\Request\Parameters\AbstractScopedRequestParametersBuilder.cs" />
@@ -209,6 +208,7 @@
     <Compile Include="API\Request\IUpdateItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\Template\ISetTemplateBuilder.cs" />
     <Compile Include="API\Request\Template\ISetNewItemNameBuilder.cs" />
+    <Compile Include="API\Request\IMediaResourceDownloadRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

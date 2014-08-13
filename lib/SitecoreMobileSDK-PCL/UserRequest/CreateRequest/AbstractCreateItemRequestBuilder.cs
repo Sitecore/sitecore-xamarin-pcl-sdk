@@ -82,18 +82,18 @@
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, trimmedTemplate, this.itemParametersAccumulator.FieldsRawValuesByName);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName)
     {
-      base.AddFieldsRawValuesByName(fieldsRawValuesByName);
+      base.AddFieldsRawValuesByNameToSet(fieldsRawValuesByName);
 
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, this.FieldsRawValuesByName);
       return this;
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue)
     {
-      base.AddFieldsRawValuesByName(fieldKey, fieldValue);
+      base.AddFieldsRawValuesByNameToSet(fieldKey, fieldValue);
 
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, this.FieldsRawValuesByName);
@@ -130,14 +130,14 @@
       return (ICreateItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
-      return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fields);
+      return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
-      return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
+      return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
   }
 }

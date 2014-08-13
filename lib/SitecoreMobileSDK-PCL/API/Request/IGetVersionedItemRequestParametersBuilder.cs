@@ -12,8 +12,8 @@ namespace Sitecore.MobileSDK.API.Request
     new IGetVersionedItemRequestParametersBuilder<T> Language(string itemLanguage);
     new IGetVersionedItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
-    new IGetVersionedItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields);
-    new IGetVersionedItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
+    new IGetVersionedItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
+    new IGetVersionedItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
 
     new IGetVersionedItemRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope);
     new IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);

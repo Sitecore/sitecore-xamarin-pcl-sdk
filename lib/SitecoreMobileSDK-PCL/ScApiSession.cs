@@ -61,7 +61,8 @@ namespace Sitecore.MobileSDK
       this.httpClient = new HttpClient();
     }
 
-    public virtual void Dispose()
+    //REVIEW: memory management
+    void ReleaseResources()
     {
       if (null != this.credentials)
       {
@@ -74,6 +75,17 @@ namespace Sitecore.MobileSDK
         this.httpClient.Dispose();
         this.httpClient = null;
       }
+    }
+
+    public virtual void Dispose()
+    {
+      this.ReleaseResources();
+      GC.SuppressFinalize(this);
+    }
+
+    ~ScApiSession() 
+    {
+      this.ReleaseResources();
     }
 
     public IItemSource DefaultSource
@@ -216,10 +228,10 @@ namespace Sitecore.MobileSDK
       }
     }
 
-    public async Task<Stream> DownloadResourceAsync(IReadMediaItemRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<Stream> DownloadResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      IReadMediaItemRequest requestCopy = request.DeepCopyReadMediaRequest();
-      IReadMediaItemRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
+      IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
+      IMediaResourceDownloadRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
 
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar,

@@ -50,14 +50,14 @@
       fields.Add("field1","VaLuE1");
       fields.Add("field2","VaLuE2");
 
-      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
+      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/sitecore/content/home")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .AddFieldsRawValuesByName(fields)
-        .AddFieldsRawValuesByName("field3","VaLuE3")
+        .AddFieldsRawValuesByNameToSet(fields)
+        .AddFieldsRawValuesByNameToSet("field3","VaLuE3")
         .Build();
 
       ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps(request);
@@ -82,11 +82,11 @@
     [Test]
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
-      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithPath("/sitecore/content/home")
+      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/sitecore/content/home")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
-        .AddFieldsRawValuesByName("field1","VaLuE1")
-        .AddFieldsRawValuesByName("field2","VaLuE2")
+        .AddFieldsRawValuesByNameToSet("field1","VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2","VaLuE2")
         .Build();
 
       ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps(request);
@@ -109,13 +109,13 @@
     [Test]
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
        .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
+        .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2", "VaLuE2");
 
-      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
+      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByNameToSet("field1","VaLuE3");
       Assert.Throws<InvalidOperationException>(action);
     }
   }

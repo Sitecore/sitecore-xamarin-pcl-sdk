@@ -42,14 +42,14 @@
       return (IGetVersionedItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public IGetVersionedItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    new public IGetVersionedItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
-      return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFields(fields);
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    new public IGetVersionedItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    new public IGetVersionedItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
-      return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
 
     new public IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope)

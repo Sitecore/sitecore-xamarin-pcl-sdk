@@ -48,7 +48,7 @@
       return this;
     }
 
-    public IBaseRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    public IBaseRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
       BaseValidator.CheckNullAndThrow(fields, this.GetType().Name + ".Fields");
 
@@ -93,7 +93,7 @@
       return this;
     }
 
-    public IBaseRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    public IBaseRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
       BaseValidator.CheckNullAndThrow(fieldParams, this.GetType().Name + ".Fields");
       BaseValidator.CheckNullAndThrow(fieldParams[0], this.GetType().Name + ".Fields");
@@ -106,7 +106,7 @@
         }
       }
 
-      return this.AddFields((IEnumerable<string>)fieldParams);
+      return this.AddFieldsToRead((IEnumerable<string>)fieldParams);
     }
 
     public abstract T Build();

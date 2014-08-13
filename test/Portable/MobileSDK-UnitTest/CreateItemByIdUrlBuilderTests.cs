@@ -56,7 +56,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestCorrectParamsWithoutFields()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("item name")
         .Build();
@@ -81,11 +81,11 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestCorrectParamsWithFields()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("item name")
-        .AddFieldsRawValuesByName("field1","value1")
-        .AddFieldsRawValuesByName("field2","value2")
+        .AddFieldsRawValuesByNameToSet("field1","value1")
+        .AddFieldsRawValuesByNameToSet("field2","value2")
         .Build();
 
       ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
@@ -108,11 +108,11 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestFieldsValuesIsCaseInsensitive()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("item name")
-        .AddFieldsRawValuesByName("field1","VaLuE1")
-        .AddFieldsRawValuesByName("field2","VaLuE2")
+        .AddFieldsRawValuesByNameToSet("field1","VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2","VaLuE2")
         .Build();
 
       ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
@@ -135,11 +135,11 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestItemNameIsCaseInsensitive()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
-        .AddFieldsRawValuesByName("field1","VaLuE1")
-        .AddFieldsRawValuesByName("field2","VaLuE2")
+        .AddFieldsRawValuesByNameToSet("field1","VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2","VaLuE2")
         .Build();
 
       ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);
@@ -162,33 +162,33 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
+        .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2", "VaLuE2");
         
-      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
+      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByNameToSet("field1","VaLuE3");
       Assert.Throws<InvalidOperationException>(action);
     }
 
     [Test]
     public void TestAppendingDuplicatedFieldsCausesInvalidOperationException()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
+        .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2", "VaLuE2");
 
-      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
+      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByNameToSet("field1","VaLuE3");
       Assert.Throws<InvalidOperationException>(action);
     }
 
     [Test]
     public void TestNameCanNotBeEmpty()
     {
-      var builder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
+      var builder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
 
       TestDelegate action = () => builder.ItemTemplatePath("Sample/Sample Item").ItemName(" ");
       Assert.Throws<ArgumentException>(action);
@@ -197,7 +197,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestTemplateCanNotBeEmpty()
     {
-      var builder = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
+      var builder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
         
       TestDelegate action = () => builder.ItemTemplatePath(" ");
       Assert.Throws<ArgumentException>(action);
@@ -210,14 +210,14 @@ namespace Sitecore.MobileSdkUnitTest
       fields.Add("field1","VaLuE1");
       fields.Add("field2","VaLuE2");
 
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .AddFieldsRawValuesByName(fields)
-        .AddFieldsRawValuesByName("field3","VaLuE3")
+        .AddFieldsRawValuesByNameToSet(fields)
+        .AddFieldsRawValuesByNameToSet("field3","VaLuE3")
         .Build();
 
       ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps (request);

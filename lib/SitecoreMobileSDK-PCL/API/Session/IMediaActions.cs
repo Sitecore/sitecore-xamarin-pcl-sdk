@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.API.Session
 
   public interface IMediaActions
   {
-    Task<Stream> DownloadResourceAsync(IReadMediaItemRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<Stream> DownloadResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken));
   }
 }
 

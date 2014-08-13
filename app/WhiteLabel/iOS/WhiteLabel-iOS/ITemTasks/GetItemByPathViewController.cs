@@ -88,7 +88,7 @@ namespace WhiteLabeliOS
 
         var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
           .Payload(this.currentPayloadType)
-          .AddFields(this.fieldNameTextField.Text);
+          .AddFieldsToRead(this.fieldNameTextField.Text);
 
         if (this.parentScopeButton.Selected)
         {

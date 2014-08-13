@@ -26,14 +26,14 @@
       return this;
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByName(fieldsRawValuesByName);
+      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByNameToSet(fieldsRawValuesByName);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByName(fieldKey, fieldValue);
+      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByNameToSet(fieldKey, fieldValue);
     }
 
     public IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
@@ -51,14 +51,14 @@
       return (IUpdateItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFields(fields);
+      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
+      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
   }
 }
