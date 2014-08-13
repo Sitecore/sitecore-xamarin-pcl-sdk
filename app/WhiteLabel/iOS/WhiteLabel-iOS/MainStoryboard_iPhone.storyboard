@@ -750,10 +750,12 @@
                     <navigationItem key="navigationItem" id="hhR-am-ao9"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="createButton" destination="bkx-UR-mBG" id="jMT-iH-zsE"/>
                         <outlet property="nameField" destination="POP-nM-A7x" id="b9v-XJ-EWM"/>
                         <outlet property="pathField" destination="WH6-wC-5s6" id="GpO-Zq-t96"/>
                         <outlet property="textField" destination="Bmb-U1-Yxb" id="Ef8-Ny-JQg"/>
                         <outlet property="titleField" destination="OQn-Ac-Sc6" id="GQq-Ri-Rwd"/>
+                        <outlet property="updateButton" destination="Bea-zj-CTF" id="9gi-Zg-NeT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Xb-x1-fNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1033,7 +1035,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="login" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JeT-Ji-QpI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="login" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="JeT-Ji-QpI">
                                 <rect key="frame" x="20" y="109" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1042,7 +1044,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SEw-eR-n42">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="SEw-eR-n42">
                                 <rect key="frame" x="20" y="147" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1052,7 +1054,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPA-wc-082">
-                                <rect key="frame" x="91" y="185" width="139" height="30"/>
+                                <rect key="frame" x="91" y="223" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9XU-xe-gPD"/>
@@ -1064,7 +1066,7 @@
                                     <action selector="OnAuthButtonTapped:" destination="VyN-Zi-4QM" eventType="touchUpInside" id="YVB-ZT-ev2"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="instance url" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jEU-R8-gW0">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="instance url" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="jEU-R8-gW0">
                                 <rect key="frame" x="20" y="71" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1073,16 +1075,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="site" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="IRc-xn-F21">
+                                <rect key="frame" x="20" y="185" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="WNx-oc-HDi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SEw-eR-n42" firstAttribute="leading" secondItem="0ME-YM-T3a" secondAttribute="leading" constant="20" id="01A-Yy-hFA"/>
                             <constraint firstAttribute="trailing" secondItem="jEU-R8-gW0" secondAttribute="trailing" constant="20" id="1db-2d-D7m"/>
                             <constraint firstAttribute="trailing" secondItem="JeT-Ji-QpI" secondAttribute="trailing" constant="20" id="38Q-Hf-rzR"/>
-                            <constraint firstItem="bPA-wc-082" firstAttribute="top" secondItem="SEw-eR-n42" secondAttribute="bottom" constant="8" id="PSE-iA-r1w"/>
+                            <constraint firstItem="IRc-xn-F21" firstAttribute="top" secondItem="SEw-eR-n42" secondAttribute="bottom" constant="8" id="CFh-ZX-Bp3"/>
+                            <constraint firstItem="bPA-wc-082" firstAttribute="top" secondItem="IRc-xn-F21" secondAttribute="bottom" constant="8" id="Dam-Ls-m7b"/>
                             <constraint firstAttribute="trailing" secondItem="bPA-wc-082" secondAttribute="trailing" constant="90" id="Qfs-Ia-I5e"/>
+                            <constraint firstAttribute="trailing" secondItem="IRc-xn-F21" secondAttribute="trailing" constant="20" id="UUd-Ii-uNi"/>
                             <constraint firstItem="JeT-Ji-QpI" firstAttribute="top" secondItem="UuJ-go-kUs" secondAttribute="bottom" constant="45" id="X3J-K8-pXg"/>
                             <constraint firstAttribute="trailing" secondItem="SEw-eR-n42" secondAttribute="trailing" constant="20" id="Z8R-bK-Iox"/>
+                            <constraint firstItem="IRc-xn-F21" firstAttribute="leading" secondItem="0ME-YM-T3a" secondAttribute="leading" constant="20" id="aU9-1E-mnm"/>
                             <constraint firstItem="jEU-R8-gW0" firstAttribute="leading" secondItem="0ME-YM-T3a" secondAttribute="leading" constant="20" id="gdK-aQ-ksL"/>
                             <constraint firstItem="bPA-wc-082" firstAttribute="leading" secondItem="0ME-YM-T3a" secondAttribute="leading" constant="91" id="kyV-pc-OQf"/>
                             <constraint firstItem="jEU-R8-gW0" firstAttribute="top" secondItem="UuJ-go-kUs" secondAttribute="bottom" constant="7" id="lJ8-2s-Kdw"/>
@@ -1095,6 +1109,7 @@
                         <outlet property="authButton" destination="bPA-wc-082" id="bIF-sg-sme"/>
                         <outlet property="loginField" destination="JeT-Ji-QpI" id="g2q-1L-LNp"/>
                         <outlet property="passwordField" destination="SEw-eR-n42" id="Bxb-oF-W69"/>
+                        <outlet property="siteField" destination="IRc-xn-F21" id="IcF-Tp-FzN"/>
                         <outlet property="urlField" destination="jEU-R8-gW0" id="jHq-V4-2tq"/>
                     </connections>
                 </viewController>
@@ -1202,11 +1217,12 @@
                     <navigationItem key="navigationItem" id="JEp-0u-bph"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="createButton" destination="yg6-Xi-Rko" id="0AT-3C-i4v"/>
+                        <outlet property="createButton" destination="yg6-Xi-Rko" id="9pm-u8-04f"/>
                         <outlet property="nameField" destination="P8c-qD-0Cq" id="xaC-D8-6HA"/>
                         <outlet property="pathField" destination="JLv-iX-xgf" id="PYg-VD-paY"/>
                         <outlet property="textField" destination="o3L-Qu-Yzw" id="b7P-zO-06v"/>
                         <outlet property="titleField" destination="E4c-H8-m5W" id="PR0-QE-ErB"/>
+                        <outlet property="updateButton" destination="bnr-Zr-84p" id="0tL-SS-p64"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNK-n2-e0s" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1220,6 +1236,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="JRH-aK-6K5"/>
+        <segue reference="UKA-pi-PzR"/>
     </inferredMetricsTieBreakers>
 </document>
