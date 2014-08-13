@@ -13,140 +13,140 @@ namespace WhiteLabeliOS
   using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API;
 
-	public partial class GetMediaItemViewController : BaseTaskViewController
-	{
-		public GetMediaItemViewController (IntPtr handle) : base (handle)
-		{
-			Title = NSBundle.MainBundle.LocalizedString ("getMediaItem", null);
-		}
+  public partial class GetMediaItemViewController : BaseTaskViewController
+  {
+    public GetMediaItemViewController (IntPtr handle) : base (handle)
+    {
+      Title = NSBundle.MainBundle.LocalizedString ("getMediaItem", null);
+    }
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
+    public override void ViewDidLoad ()
+    {
+      base.ViewDidLoad ();
 
-			this.MediaPathTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type Media Path", null);
+      this.MediaPathTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type Media Path", null);
 
-			string ButtonTitle = NSBundle.MainBundle.LocalizedString ("Download", null);
-			this.DownloadButton.SetTitle (ButtonTitle, UIControlState.Normal);
+      string ButtonTitle = NSBundle.MainBundle.LocalizedString ("Download", null);
+      this.DownloadButton.SetTitle (ButtonTitle, UIControlState.Normal);
 
-			this.HeightLabel.Text = NSBundle.MainBundle.LocalizedString ("Height:", null);
-			this.WidthLabel.Text = NSBundle.MainBundle.LocalizedString ("Width:", null);
+      this.HeightLabel.Text = NSBundle.MainBundle.LocalizedString ("Height:", null);
+      this.WidthLabel.Text = NSBundle.MainBundle.LocalizedString ("Width:", null);
 
-			this.MediaPathTextField.Text = "/sitecore/media library/fffffffff";
-		}
+      this.MediaPathTextField.Text = "/sitecore/media library/fffffffff";
+    }
 
-		public override void ViewDidAppear (bool animated)
-		{
-			base.ViewDidAppear (animated);
+    public override void ViewDidAppear (bool animated)
+    {
+      base.ViewDidAppear (animated);
 
-			this.maxWidth = (int)Math.Round (this.ImageView.Bounds.Width);
-			this.maxHeight = (int)Math.Round (this.ImageView.Bounds.Height);
+      this.maxWidth = (int)Math.Round (this.ImageView.Bounds.Width);
+      this.maxHeight = (int)Math.Round (this.ImageView.Bounds.Height);
 
-			this.WidthTextField.Text = maxWidth.ToString ();
-			this.HeightTextField.Text = maxHeight.ToString ();
-		}
+      this.WidthTextField.Text = maxWidth.ToString ();
+      this.HeightTextField.Text = maxHeight.ToString ();
+    }
 
-		partial void OnDownloadButtonTouched (MonoTouch.Foundation.NSObject sender)
-		{
-			try
-			{
-				if (String.IsNullOrEmpty(this.WidthTextField.Text)
-					||String.IsNullOrEmpty(this.HeightTextField.Text))
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Incorect width or height value");
-					return;
-				}
+    partial void OnDownloadButtonTouched (MonoTouch.Foundation.NSObject sender)
+    {
+      try
+      {
+        if (String.IsNullOrEmpty(this.WidthTextField.Text)
+          ||String.IsNullOrEmpty(this.HeightTextField.Text))
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Incorect width or height value");
+          return;
+        }
 
-				this.width = Convert.ToInt32(this.WidthTextField.Text);
-				this.height = Convert.ToInt32(this.HeightTextField.Text);
+        this.width = Convert.ToInt32(this.WidthTextField.Text);
+        this.height = Convert.ToInt32(this.HeightTextField.Text);
 
-				if (String.IsNullOrEmpty(this.MediaPathTextField.Text))
-				{
-					AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type media path");
-				}
-				else
-				{
-					bool wrongSizeData = this.width<=0
-						||this.width>this.maxWidth
-						||this.height<=0
-						||this.height>this.maxHeight;
+        if (String.IsNullOrEmpty(this.MediaPathTextField.Text))
+        {
+          AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type media path");
+        }
+        else
+        {
+          bool wrongSizeData = this.width<=0
+            ||this.width>this.maxWidth
+            ||this.height<=0
+            ||this.height>this.maxHeight;
 
-					if (wrongSizeData)
-					{
-						AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Incorect width or height value");
-					}
-					else
-						{
-							this.HideKeyboard(this.MediaPathTextField);
-							this.HideKeyboard(this.WidthTextField);
-							this.HideKeyboard(this.HeightTextField);
+          if (wrongSizeData)
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Incorect width or height value");
+          }
+          else
+          {
+            this.HideKeyboard(this.MediaPathTextField);
+            this.HideKeyboard(this.WidthTextField);
+            this.HideKeyboard(this.HeightTextField);
 
-							this.SendRequest();
-						}
-				}
-			}
-			catch(Exception e) 
-			{
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-			}
-		}
+            this.SendRequest();
+          }
+        }
+      }
+      catch(Exception e) 
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+    }
 
-		private async void SendRequest ()
-		{
-			try
-			{
+    private async void SendRequest ()
+    {
+      try
+      {
         ISitecoreWebApiSession session = this.instanceSettings.GetSession();
 
-				IDownloadMediaOptions options = new MediaOptionsBuilder()
+        IDownloadMediaOptions options = new MediaOptionsBuilder()
           .Set
-					.Width(this.width)
-					.Height(this.height)
-					.BackgroundColor("white")
-					.Build();
+          .Width(this.width)
+          .Height(this.height)
+          .BackgroundColor("white")
+          .Build();
 
-				string path = this.MediaPathTextField.Text;
+        string path = this.MediaPathTextField.Text;
 
-				var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(path)
-					.DownloadOptions(options)
-					.Build();
+        var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(path)
+          .DownloadOptions(options)
+          .Build();
 
-				var response = await session.DownloadResourceAsync(request);
+        var response = await session.DownloadResourceAsync(request);
 
-				byte[] data;
-          
-				using (BinaryReader br = new BinaryReader(response))
-				{
-					data = br.ReadBytes((int)response.Length);
-				}
+        byte[] data;
 
-				UIImage image = null;
-				image = new UIImage(NSData.FromArray(data));
+        using (BinaryReader br = new BinaryReader(response))
+        {
+          data = br.ReadBytes((int)response.Length);
+        }
 
-				BeginInvokeOnMainThread(delegate
-				{
-					this.ImageView.Image = image;
-					this.HideLoader();
-				});
+        UIImage image = null;
+        image = new UIImage(NSData.FromArray(data));
 
-			}
-			catch(Exception e) 
-			{
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-			}
-			finally
-			{
-				BeginInvokeOnMainThread(delegate
-				{
-					this.HideLoader();
-				});
-			}
-		}
+        BeginInvokeOnMainThread(delegate
+        {
+          this.ImageView.Image = image;
+          this.HideLoader();
+        });
 
-		public int width;
-		public int height;
+      }
+      catch(Exception e) 
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.HideLoader();
+        });
+      }
+    }
 
-		public int maxWidth;
-		public int maxHeight;
-	}
+    public int width;
+    public int height;
+
+    public int maxWidth;
+    public int maxHeight;
+  }
 }
 

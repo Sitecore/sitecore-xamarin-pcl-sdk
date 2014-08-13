@@ -54,8 +54,8 @@ namespace WhiteLabeliOS
 
         var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.CreatedItemId)
           .Database("web")
-          .AddFieldsRawValuesByName("Title", titleField.Text)
-          .AddFieldsRawValuesByName("Text", textField.Text)
+          .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
+          .AddFieldsRawValuesByNameToSet("Text", textField.Text)
           .Build();
 
         this.ShowLoader();
@@ -94,8 +94,8 @@ namespace WhiteLabeliOS
           .ItemTemplatePath("Sample/Sample Item")
           .ItemName(this.nameField.Text)
           .Database("web")
-          .AddFieldsRawValuesByName("Title", titleField.Text)
-          .AddFieldsRawValuesByName("Text", textField.Text)
+          .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
+          .AddFieldsRawValuesByNameToSet("Text", textField.Text)
           .Build();
          
         this.ShowLoader();

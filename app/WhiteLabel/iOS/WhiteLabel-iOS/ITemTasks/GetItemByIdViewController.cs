@@ -1,11 +1,11 @@
 ﻿
 namespace WhiteLabeliOS
 {
-	using System;
+  using System;
   using System.Linq;
 
   using MonoTouch.UIKit;
-	using MonoTouch.Foundation;
+  using MonoTouch.Foundation;
 
   using WhiteLabeliOS.FieldsTableView;
 
@@ -15,42 +15,42 @@ namespace WhiteLabeliOS
   using Sitecore.MobileSDK.API.Items;
 
 
-	public partial class GetItemByIdViewController : BaseTaskTableViewController
-	{
-		public GetItemByIdViewController (IntPtr handle) : base (handle)
-		{
-			Title = NSBundle.MainBundle.LocalizedString ("getItemById", null);
-		}
+  public partial class GetItemByIdViewController : BaseTaskTableViewController
+  {
+    public GetItemByIdViewController(IntPtr handle) : base(handle)
+    {
+      Title = NSBundle.MainBundle.LocalizedString("getItemById", null);
+    }
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
+    public override void ViewDidLoad()
+    {
+      base.ViewDidLoad();
 
-			this.TableView = this.FieldsTableView;
+      this.TableView = this.FieldsTableView;
 
-			this.itemIdTextField.ShouldReturn = this.HideKeyboard;
+      this.itemIdTextField.ShouldReturn = this.HideKeyboard;
 
-			this.itemIdTextField.Text = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
+      this.itemIdTextField.Text = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
 
-			fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);
-			itemIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item ID", null);
+      fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Type field name", null);
+      itemIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Type item ID", null);
 
-			string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
-			getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
-		}
+      string getItemButtonTitle = NSBundle.MainBundle.LocalizedString("Get Item", null);
+      getItemButton.SetTitle(getItemButtonTitle, UIControlState.Normal);
+    }
 
-		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
-		{
-			if (String.IsNullOrEmpty(itemIdTextField.Text))
-			{
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item Id");
-			}
-			else
-			{
+    partial void OnGetItemButtonTouched(MonoTouch.Foundation.NSObject sender)
+    {
+      if (String.IsNullOrEmpty(itemIdTextField.Text))
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item Id");
+      }
+      else
+      {
         this.HideKeyboardForAllFields();
-				this.SendRequest();
-			}
-		}
+        this.SendRequest();
+      }
+    }
 
     private void HideKeyboardForAllFields()
     {
@@ -58,28 +58,28 @@ namespace WhiteLabeliOS
       this.HideKeyboard(this.fieldNameTextField);
     }
 
-		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
-		{
-			switch (sender.SelectedSegment)
-			{
-			case 0:
-				this.currentPayloadType = PayloadType.Full;
-				break;
-			case 1:
-				this.currentPayloadType = PayloadType.Content;
-				break;
-			case 2:
-				this.currentPayloadType = PayloadType.Min;
-				break;
-			}
-		}
+    partial void OnPayloadValueChanged(MonoTouch.UIKit.UISegmentedControl sender)
+    {
+      switch (sender.SelectedSegment)
+      {
+        case 0:
+        this.currentPayloadType = PayloadType.Full;
+        break;
+        case 1:
+        this.currentPayloadType = PayloadType.Content;
+        break;
+        case 2:
+        this.currentPayloadType = PayloadType.Min;
+        break;
+      }
+    }
 
-    partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender)
+    partial void OnButtonChangeState(MonoTouch.UIKit.UIButton sender)
     {
       sender.Selected = !sender.Selected;
     }
 
-		private async void SendRequest()
+    private async void SendRequest()
     {
       try
       {
@@ -87,7 +87,7 @@ namespace WhiteLabeliOS
 
         var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
           .Payload(this.currentPayloadType)
-          .AddFields(this.fieldNameTextField.Text);
+          .AddFieldsToRead(this.fieldNameTextField.Text);
 
         if (this.parentScopeButton.Selected)
         {
@@ -130,6 +130,6 @@ namespace WhiteLabeliOS
         });
       }
     }
-	}
+  }
 }
 
