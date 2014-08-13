@@ -371,7 +371,7 @@
         itemSession = session;
       }
       string parentPath = parentItem == null ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
-      var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(parentPath)
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(parentPath)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(itemName)
         .Build();
