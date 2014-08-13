@@ -68,7 +68,6 @@
     <Compile Include="API\Request\IReadItemsByQueryRequest.cs" />
     <Compile Include="API\Request\IScopedRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
-    <Compile Include="API\Request\Parameters\AbstractScopedRequestParametersBuilder.cs" />
     <Compile Include="API\Request\Parameters\IDownloadMediaOptions.cs" />
     <Compile Include="API\Request\Parameters\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\Parameters\IQueryParameters.cs" />
@@ -101,6 +100,7 @@
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
     <Compile Include="UrlBuilder\MediaItem\DownloadMediaOptions.cs" />
+    <Compile Include="UserRequest\AbstractScopedRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\ReadMediaItemRequestBuilder.cs" />
     <Compile Include="ScApiSession.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />

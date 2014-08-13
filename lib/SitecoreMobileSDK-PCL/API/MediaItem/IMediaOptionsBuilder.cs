@@ -5,7 +5,7 @@
 
   /// <summary>
   /// Interface represents builder for options for download resource request. 
-  /// <seealso cref="IReadMediaItemRequest"/>
+  /// <seealso cref="IMediaResourceDownloadRequest"/>
   /// </summary>
   public interface IMediaOptionsBuilder
   {

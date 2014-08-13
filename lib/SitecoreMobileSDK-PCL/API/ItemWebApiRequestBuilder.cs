@@ -1,5 +1,6 @@
 namespace Sitecore.MobileSDK.API
 {
+  using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Template;
   using Sitecore.MobileSDK.API.Request.Parameters;

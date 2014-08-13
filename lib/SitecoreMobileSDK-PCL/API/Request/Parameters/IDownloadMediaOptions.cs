@@ -4,7 +4,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 
   /// <summary>
   /// Interface represents media options for download resource request.
-  /// <seealso cref="IReadMediaItemRequest"/>
+  /// <seealso cref="IMediaResourceDownloadRequest"/>
   /// </summary>
   public interface IDownloadMediaOptions
   {
