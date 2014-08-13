@@ -31,6 +31,10 @@
 "SCOPE_BUTTON_PARENT" = "Parent";
 "SCOPE_BUTTON_CHILD"  = "Child";
 
+"Delete item by Id" = "*********";
+"Delete item by Path" = "**********";
+"Delete item by Query" = "**********";
+
 //messages
 "Loading Data" = "************...";
 

@@ -50,7 +50,6 @@
         var session = this.instanceSettings.GetSession();
 
         var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(this.CreatedItemPath)
-          .Database("web")
           .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
           .AddFieldsRawValuesByNameToSet("Text", textField.Text)
           .Build();
@@ -90,7 +89,6 @@
         var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
           .ItemTemplatePath("Sample/Sample Item")
           .ItemName(this.nameField.Text)
-          .Database("web")
           .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
           .AddFieldsRawValuesByNameToSet("Text", textField.Text)
           .Build();
