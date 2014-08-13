@@ -22,6 +22,9 @@ namespace WhiteLabeliOS
 		MonoTouch.UIKit.UITextField passwordField { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UITextField siteField { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UITextField urlField { get; set; }
 
 		[Action ("OnAuthButtonTapped:")]
@@ -47,6 +50,11 @@ namespace WhiteLabeliOS
 			if (urlField != null) {
 				urlField.Dispose ();
 				urlField = null;
+			}
+
+			if (siteField != null) {
+				siteField.Dispose ();
+				siteField = null;
 			}
 		}
 	}

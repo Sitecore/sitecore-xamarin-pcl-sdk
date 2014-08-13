@@ -76,7 +76,7 @@
 "Download" = "Download";
 "Height:" = "Height:";
 "Width:" = "Width:";
-"user_login_placeholder" = "user login(example: sitecore\\admin)";
+"user_login_placeholder" = "user login";
 "password_placeholder" = "password";
 "authenticate_button_title" = "Authenticate";
 "type item name" = "type item name";
