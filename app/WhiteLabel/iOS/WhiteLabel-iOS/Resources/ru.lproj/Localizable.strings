@@ -31,6 +31,10 @@
 "SCOPE_BUTTON_PARENT" = "Parent";
 "SCOPE_BUTTON_CHILD"  = "Child";
 
+"Delete item by Id" = "*********";
+"Delete item by Path" = "**********";
+"Delete item by Query" = "**********";
+
 //messages
 "Loading Data" = "************...";
 
@@ -75,3 +79,10 @@
 "user_login_placeholder" = "******";
 "password_placeholder" = "*******";
 "authenticate_button_title" = "**********";
+"type item name" = "*****************";
+"type parent item id" = "****************";
+"type text field value" = "*****************";
+"type title field value" = "***************";
+"type parent item path" = "*****************";
+"create" = "********";
+"Update created item" = "*****************";
