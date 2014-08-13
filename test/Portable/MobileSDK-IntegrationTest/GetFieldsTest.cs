@@ -104,7 +104,7 @@
     [Test]
     public async void TestGetHtmlField()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields(new Collection<string> { "Text" }).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFieldsToRead(new Collection<string> { "Text" }).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -125,7 +125,7 @@
         "CheckBoxField",
         "MultiListField"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.TestFieldsItem.Id).AddFields(fields).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.TestFieldsItem.Id).AddFieldsToRead(fields).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -146,7 +146,7 @@
       };
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.TestFieldsItem.Path)
-        .AddFields(fields)
+        .AddFieldsToRead(fields)
         .Payload(PayloadType.Default)
         .Build();
 
@@ -164,7 +164,7 @@
       {
         "Title"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Language("en").Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("en").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -182,7 +182,7 @@
       {
         "{75577384-3C97-45DA-A847-81B00500E250}"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -201,7 +201,7 @@
         "{75577384-3C97-45DA-A847-81B00500E250}",
         "Title"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -219,7 +219,7 @@
       {
         "Title"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Language("da").Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("da").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -237,7 +237,7 @@
       {
         ".!@#$%^&*()_+*/"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFields(fields).Language("da").Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("da").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -303,7 +303,7 @@
     [Test]
     public async void TestGetFieldsWithSymbolsAndSpacesInNameFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").AddFields("Normal Text", "__Owner").Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").AddFieldsToRead("Normal Text", "__Owner").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -323,7 +323,7 @@
     [Test]
     public void TestGetItemByIdWithDuplicateFieldsReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFields("Title", "Text").AddFields("title").Build());
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFieldsToRead("Title", "Text").AddFieldsToRead("title").Build());
 
       Assert.AreEqual("ReadItemByIdRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
@@ -331,7 +331,7 @@
     [Test]
     public void TestGetItemByPathWithDuplicateFieldsReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFields("Text", "Text").Build());
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFieldsToRead("Text", "Text").Build());
 
       Assert.AreEqual("ReadItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
@@ -339,7 +339,7 @@
     [Test]
     public void TestGetItemByQueryWithDuplicateAndEmptyFieldReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFields("Title", "", "Title").Build());
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFieldsToRead("Title", "", "Title").Build());
 
       Assert.AreEqual("ReadItemByQueryRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }

@@ -51,14 +51,14 @@
       return (IUpdateItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFields(fields);
+      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
+      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
   }
 }

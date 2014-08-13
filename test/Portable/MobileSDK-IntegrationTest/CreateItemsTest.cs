@@ -175,7 +175,7 @@
          .Database("master")
          .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
          .AddFieldsRawValuesByNameToSet("Text", CreatedText)
-         .AddFields("Text", "Title")
+         .AddFieldsToRead("Text", "Title")
          .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -247,7 +247,7 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFields(FieldName)
+        .AddFieldsToRead(FieldName)
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
         .Build();
 
@@ -272,7 +272,7 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFields(FieldName)
+        .AddFieldsToRead(FieldName)
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
         .Build();
 
@@ -293,7 +293,7 @@
         ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
          .ItemTemplatePath(testData.Items.Home.Template)
          .ItemName("Get duplicate fields")
-         .AddFields(FieldName, "Title", FieldName)
+         .AddFieldsToRead(FieldName, "Title", FieldName)
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
@@ -322,7 +322,7 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFields(FieldName, null, "")
+        .AddFieldsToRead(FieldName, null, "")
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -384,7 +384,7 @@
           .ItemTemplatePath(testData.Items.Home.Template)
           .ItemName(expectedItem.DisplayName)
           .Database("master")
-          .AddFields(FieldName)
+          .AddFieldsToRead(FieldName)
           .AddFieldsRawValuesByNameToSet(FieldName, FieldName)         
           .Build();
 

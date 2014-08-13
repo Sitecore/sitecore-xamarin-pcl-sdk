@@ -168,7 +168,7 @@
     public void TestUpdateItemByIdWithNullReadFieldsReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
-        .AddFields(null)
+        .AddFieldsToRead(null)
         .Build());
       Assert.IsTrue(exception.Message.Contains("UpdateItemByIdRequestBuilder.Fields"));
     }
@@ -196,8 +196,8 @@
     public void TestUpdateItemByPathWithDuplicateFieldsToReadReturnsException()
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
-        .AddFields("Title")
-        .AddFields("Title"));
+        .AddFieldsToRead("Title")
+        .AddFieldsToRead("Title"));
       Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
@@ -252,7 +252,7 @@
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/" + ItemName)
         .AddFieldsRawValuesByNameToSet("Text", TextValue)
-        .AddFields("Text")
+        .AddFieldsToRead("Text")
         .Payload(PayloadType.Content)
         .Build();
 
@@ -276,7 +276,7 @@
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
         .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
-        .AddFields(FieldName)
+        .AddFieldsToRead(FieldName)
         .Build();
 
       var result = await this.session.UpdateItemAsync(request);
@@ -299,7 +299,7 @@
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
-        .AddFields(FieldName)
+        .AddFieldsToRead(FieldName)
         .Build();
 
       var result = await this.session.UpdateItemAsync(request);

@@ -130,14 +130,14 @@
       return (ICreateItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
-      return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fields);
+      return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
-      return (ICreateItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
+      return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
   }
 }

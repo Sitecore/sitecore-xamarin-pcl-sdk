@@ -14,8 +14,8 @@
     new IUpdateItemRequestParametersBuilder<T> Language(string itemLanguage);
     new IUpdateItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
-    new IUpdateItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields);
-    new IUpdateItemRequestParametersBuilder<T> AddFields(params string[] fieldParams);
+    new IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
+    new IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
   }
 }
 

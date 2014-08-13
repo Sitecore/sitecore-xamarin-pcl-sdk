@@ -67,14 +67,14 @@
       return (IChangeItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public IChangeItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    new public IChangeItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
-      return (IChangeItemRequestParametersBuilder<T>)base.AddFields(fields);
+      return (IChangeItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    new public IChangeItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    new public IChangeItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
-      return (IChangeItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
+      return (IChangeItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
 
     protected IDictionary<string, string> FieldsRawValuesByName;

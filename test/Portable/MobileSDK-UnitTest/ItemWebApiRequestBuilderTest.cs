@@ -238,8 +238,8 @@
       string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
 
       IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
-        .AddFields(fields)
-        .AddFields(moarFields)
+        .AddFieldsToRead(fields)
+        .AddFieldsToRead(moarFields)
         .Build();
 
       Assert.IsNotNull(result);
@@ -268,8 +268,8 @@
       string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
 
       IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
-        .AddFields(fields)
-        .AddFields(moarFieldsList)
+        .AddFieldsToRead(fields)
+        .AddFieldsToRead(moarFieldsList)
         .Build();
 
       Assert.IsNotNull(result);
@@ -296,9 +296,9 @@
       string[] expectedFields = { "Мыла", "Раму", "Мама" };
 
       IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
-        .AddFields("Мыла")
-        .AddFields("Раму")
-        .AddFields("Мама")
+        .AddFieldsToRead("Мыла")
+        .AddFieldsToRead("Раму")
+        .AddFieldsToRead("Мама")
         .Build();
 
       Assert.IsNotNull(result);
@@ -323,9 +323,9 @@
     {
       Assert.Throws<InvalidOperationException>(() => 
       ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
-        .AddFields("XXXXX")
-        .AddFields("YYY")
-        .AddFields("XXXXX")
+        .AddFieldsToRead("XXXXX")
+        .AddFieldsToRead("YYY")
+        .AddFieldsToRead("XXXXX")
         .Build());
     }
 
@@ -334,9 +334,9 @@
     {
       Assert.Throws<InvalidOperationException>(() => 
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
-        .AddFields("XXXXX")
-        .AddFields("YYY")
-        .AddFields("xxXXx")
+        .AddFieldsToRead("XXXXX")
+        .AddFieldsToRead("YYY")
+        .AddFieldsToRead("xxXXx")
         .Build());
     }
 
@@ -346,7 +346,7 @@
     {
       var request = 
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
-        .AddFields("")
+        .AddFieldsToRead("")
         .Build();
 
       Assert.IsNotNull(request);
@@ -361,12 +361,12 @@
     public void TestNullFieldsAreNotIgnored()
     {
       {
-        TestDelegate action = () => ItemWebApiRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFields ((string)null);
+        TestDelegate action = () => ItemWebApiRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFieldsToRead ((string)null);
         Assert.Throws<ArgumentNullException>(action);
       }
 
       {
-        TestDelegate action = () => ItemWebApiRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFields ((IEnumerable<string>)null);
+        TestDelegate action = () => ItemWebApiRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFieldsToRead ((IEnumerable<string>)null);
         Assert.Throws<ArgumentNullException>(action);
       }
     }
@@ -376,7 +376,7 @@
     {
       var request = 
         ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
-        .AddFields("\n   \t   \r")
+        .AddFieldsToRead("\n   \t   \r")
         .Build();
 
       Assert.IsNotNull(request);
@@ -393,7 +393,7 @@
       string[] expectedFields = { "alpha", "beta", "gamma" };
 
       IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
-        .AddFields("alpha", "beta", "gamma")
+        .AddFieldsToRead("alpha", "beta", "gamma")
         .Build();
 
       Assert.IsNotNull(result);
