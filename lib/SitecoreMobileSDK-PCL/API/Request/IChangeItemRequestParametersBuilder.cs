@@ -5,7 +5,7 @@
   public interface IChangeItemRequestParametersBuilder<T> : IBaseRequestParametersBuilder<T> 
     where T : class
   {
-    IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName);
-    IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue);
+    IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName);
+    IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue);
   }
 }

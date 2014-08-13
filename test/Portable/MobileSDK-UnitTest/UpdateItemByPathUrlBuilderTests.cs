@@ -56,8 +56,8 @@
         .Language("lg")
         .Version(2)
         .Payload(PayloadType.Full)
-        .AddFieldsRawValuesByName(fields)
-        .AddFieldsRawValuesByName("field3","VaLuE3")
+        .AddFieldsRawValuesByNameToSet(fields)
+        .AddFieldsRawValuesByNameToSet("field3","VaLuE3")
         .Build();
 
       IUpdateItemByPathRequest autocompletedRequest = this.requestMerger.FillUpdateItemByPathGaps(request);
@@ -82,8 +82,8 @@
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
       IUpdateItemByPathRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
-        .AddFieldsRawValuesByName("field1","VaLuE1")
-        .AddFieldsRawValuesByName("field2","VaLuE2")
+        .AddFieldsRawValuesByNameToSet("field1","VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2","VaLuE2")
         .Build();
 
       IUpdateItemByPathRequest autocompletedRequest = this.requestMerger.FillUpdateItemByPathGaps(request);
@@ -105,10 +105,10 @@
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
       var requestBuilder = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
+        .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2", "VaLuE2");
 
-      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
+      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByNameToSet("field1","VaLuE3");
       Assert.Throws<InvalidOperationException>(action);
     }
   }

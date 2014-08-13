@@ -79,8 +79,8 @@ namespace Sitecore.MobileSdkUnitTest
     {
       IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .Version(1)
-        .AddFieldsRawValuesByName("field1","value1")
-        .AddFieldsRawValuesByName("field2","value2")
+        .AddFieldsRawValuesByNameToSet("field1","value1")
+        .AddFieldsRawValuesByNameToSet("field2","value2")
         .Build();
 
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (request);
@@ -103,8 +103,8 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestFieldsValuesIsCaseInsensitive()
     {
       IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .AddFieldsRawValuesByName("field1","VaLuE1")
-        .AddFieldsRawValuesByName("field2","VaLuE2")
+        .AddFieldsRawValuesByNameToSet("field1","VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2","VaLuE2")
         .Build();
 
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps(request);
@@ -126,8 +126,8 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestItemNameIsCaseInsensitive()
     {
       IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .AddFieldsRawValuesByName("field1","VaLuE1")
-        .AddFieldsRawValuesByName("field2","VaLuE2")
+        .AddFieldsRawValuesByNameToSet("field1","VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2","VaLuE2")
         .Build();
 
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (request);
@@ -149,10 +149,10 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
       var requestBuilder = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
+        .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2", "VaLuE2");
         
-      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
+      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByNameToSet("field1","VaLuE3");
       Assert.Throws<InvalidOperationException>(action);
     }
 
@@ -160,10 +160,10 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestAppendingFields()
     {
       var requestBuilder = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-        .AddFieldsRawValuesByName("field1", "VaLuE1")
-        .AddFieldsRawValuesByName("field2", "VaLuE2");
+        .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
+        .AddFieldsRawValuesByNameToSet("field2", "VaLuE2");
 
-      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByName("field1","VaLuE3");
+      TestDelegate action = () => requestBuilder.AddFieldsRawValuesByNameToSet("field1","VaLuE3");
       Assert.Throws<InvalidOperationException>(action);
     }
 
@@ -178,8 +178,8 @@ namespace Sitecore.MobileSdkUnitTest
         .Database("db")
         .Language("lg")
         .Payload(PayloadType.Full)
-        .AddFieldsRawValuesByName(fields)
-        .AddFieldsRawValuesByName("field3","VaLuE3")
+        .AddFieldsRawValuesByNameToSet(fields)
+        .AddFieldsRawValuesByNameToSet("field3","VaLuE3")
         .Build();
 
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps (request);
