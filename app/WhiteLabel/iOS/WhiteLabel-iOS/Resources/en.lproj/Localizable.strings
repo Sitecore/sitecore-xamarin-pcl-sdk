@@ -79,3 +79,10 @@
 "user_login_placeholder" = "user login(example: sitecore\\admin)";
 "password_placeholder" = "password";
 "authenticate_button_title" = "Authenticate";
+"type item name" = "type item name";
+"type parent item id" = "type parent item id";
+"type text field value" = "type text field value";
+"type title field value" = "type title field value";
+"type parent item path" = "type parent item path";
+"create" = "create";
+"Update created item" = "Update created item";

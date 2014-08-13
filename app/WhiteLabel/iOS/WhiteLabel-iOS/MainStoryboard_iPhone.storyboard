@@ -750,10 +750,12 @@
                     <navigationItem key="navigationItem" id="hhR-am-ao9"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="createButton" destination="bkx-UR-mBG" id="jMT-iH-zsE"/>
                         <outlet property="nameField" destination="POP-nM-A7x" id="b9v-XJ-EWM"/>
                         <outlet property="pathField" destination="WH6-wC-5s6" id="GpO-Zq-t96"/>
                         <outlet property="textField" destination="Bmb-U1-Yxb" id="Ef8-Ny-JQg"/>
                         <outlet property="titleField" destination="OQn-Ac-Sc6" id="GQq-Ri-Rwd"/>
+                        <outlet property="updateButton" destination="Bea-zj-CTF" id="9gi-Zg-NeT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Xb-x1-fNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1202,11 +1204,12 @@
                     <navigationItem key="navigationItem" id="JEp-0u-bph"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="createButton" destination="yg6-Xi-Rko" id="0AT-3C-i4v"/>
+                        <outlet property="createButton" destination="yg6-Xi-Rko" id="9pm-u8-04f"/>
                         <outlet property="nameField" destination="P8c-qD-0Cq" id="xaC-D8-6HA"/>
                         <outlet property="pathField" destination="JLv-iX-xgf" id="PYg-VD-paY"/>
                         <outlet property="textField" destination="o3L-Qu-Yzw" id="b7P-zO-06v"/>
                         <outlet property="titleField" destination="E4c-H8-m5W" id="PR0-QE-ErB"/>
+                        <outlet property="updateButton" destination="bnr-Zr-84p" id="0tL-SS-p64"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNK-n2-e0s" userLabel="First Responder" sceneMemberID="firstResponder"/>
