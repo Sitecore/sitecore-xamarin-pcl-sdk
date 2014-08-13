@@ -106,7 +106,7 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestCancelGetMedia()
     {
-      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/test image").Build();
+      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/test image").Build();
       var cancelToken = CreateCancelTokenWithDelay(5);
       Stream response = null;
 

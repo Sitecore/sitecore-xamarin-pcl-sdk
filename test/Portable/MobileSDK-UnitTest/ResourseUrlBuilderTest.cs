@@ -60,7 +60,7 @@ namespace Sitecore.MobileSdkUnitTest
         .DisplayAsThumbnail(true)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/1 dot png")
+      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/1 dot png")
         .DownloadOptions(options)
         .Database("master")
         .Build();
