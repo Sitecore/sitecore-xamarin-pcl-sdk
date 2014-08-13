@@ -7,7 +7,7 @@
     <owners>Sitecore Corporation</owners>
     <licenseUrl>https://raw.githubusercontent.com/Sitecore/sitecore-ios-sdk/master/license.txt</licenseUrl>
     <projectUrl>http://sdn.sitecore.net/Products/Sitecore%20Mobile%20SDK.aspx</projectUrl>
-    <iconUrl>https://www.dropbox.com/s/dtgvufz1w54awjl/128x128.png</iconUrl>
+    <iconUrl>https://www.dropbox.com/s/vewnsn2ughucrx7/128x128.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore.</description>
     <releaseNotes>Initial release with items manipulation support</releaseNotes>
