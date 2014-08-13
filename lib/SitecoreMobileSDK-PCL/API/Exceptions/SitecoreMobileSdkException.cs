@@ -3,7 +3,7 @@ namespace Sitecore.MobileSDK.API.Exceptions
   using System;
 
   /// <summary>
-  /// Base exception that represents errors that occur during Sitecore Mobile SDK execution.
+  /// Base exception that represents errors that occur during working with Sitecore Mobile SDK.
   /// </summary>
   public class SitecoreMobileSdkException : Exception
   {
