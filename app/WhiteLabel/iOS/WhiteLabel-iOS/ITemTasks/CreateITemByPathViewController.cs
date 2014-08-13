@@ -1,4 +1,5 @@
-﻿namespace WhiteLabeliOS
+﻿
+namespace WhiteLabeliOS
 {
   using System;
   using System.Drawing;

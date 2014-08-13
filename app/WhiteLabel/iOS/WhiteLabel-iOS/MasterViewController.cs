@@ -1,11 +1,12 @@
-﻿using System;
-using System.Drawing;
-using System.Collections.Generic;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-
+﻿
 namespace WhiteLabeliOS
 {
+  using System;
+  using System.Drawing;
+  using System.Collections.Generic;
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+
 	public partial class MasterViewController : UITableViewController
 	{
         #region UIViewController
