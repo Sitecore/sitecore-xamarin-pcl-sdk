@@ -39,4 +39,4 @@ UpgradeLog.htm
 packages
 *.exe
 *.dgml
-Sitecore.MobileSDK.XML
+lib/SitecoreMobileSDK-PCL/Sitecore.MobileSDK.XML

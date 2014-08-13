@@ -75,8 +75,8 @@
       ISitecoreItem item = await this.CreateItem("Danish item to update", null, itemSession);
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
-        .AddFieldsRawValuesByName("Title", titleValue)
-        .AddFieldsRawValuesByName("Text", textValue)
+        .AddFieldsRawValuesByNameToSet("Title", titleValue)
+        .AddFieldsRawValuesByNameToSet("Text", textValue)
         .Language(Language)
         .Build();
 
@@ -96,7 +96,7 @@
       var textValue = RandomText();
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
-        .AddFieldsRawValuesByName("Text", textValue)
+        .AddFieldsRawValuesByNameToSet("Text", textValue)
         .Build();
 
       var result = await this.session.UpdateItemAsync(request);
@@ -168,7 +168,7 @@
     public void TestUpdateItemByIdWithNullReadFieldsReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
-        .AddFields(null)
+        .AddFieldsToRead(null)
         .Build());
       Assert.IsTrue(exception.Message.Contains("UpdateItemByIdRequestBuilder.Fields"));
     }
@@ -177,7 +177,7 @@
     public void TestUpdateItemByPathWithNullFieldsToUpdateReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
-        .AddFieldsRawValuesByName(null)
+        .AddFieldsRawValuesByNameToSet(null)
         .Build());
       Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.FieldsRawValuesByName"));
     }
@@ -186,8 +186,8 @@
     public void TestUpdateItemByIdWithDuplicateFieldsToUpdateReturnsException()
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
-        .AddFieldsRawValuesByName("Title", "Value1")
-        .AddFieldsRawValuesByName("Title", "Value2")
+        .AddFieldsRawValuesByNameToSet("Title", "Value1")
+        .AddFieldsRawValuesByNameToSet("Title", "Value2")
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.FieldsRawValuesByName : duplicate fields are not allowed", exception.Message);
     }
@@ -196,8 +196,8 @@
     public void TestUpdateItemByPathWithDuplicateFieldsToReadReturnsException()
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
-        .AddFields("Title")
-        .AddFields("Title"));
+        .AddFieldsToRead("Title")
+        .AddFieldsToRead("Title"));
       Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
@@ -227,7 +227,7 @@
       var textValue = RandomText();
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
-        .AddFieldsRawValuesByName("Text", textValue)
+        .AddFieldsRawValuesByNameToSet("Text", textValue)
         .Payload(PayloadType.Full)
         .Version(Version)
         .Build();
@@ -251,8 +251,8 @@
       ISitecoreItem item = await this.CreateItem(ItemName);
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/" + ItemName)
-        .AddFieldsRawValuesByName("Text", TextValue)
-        .AddFields("Text")
+        .AddFieldsRawValuesByNameToSet("Text", TextValue)
+        .AddFieldsToRead("Text")
         .Payload(PayloadType.Content)
         .Build();
 
@@ -275,8 +275,8 @@
       ISitecoreItem item = await this.CreateItem("item to updata not existen field");
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
-        .AddFieldsRawValuesByName(FieldName, fieldValue)
-        .AddFields(FieldName)
+        .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
+        .AddFieldsToRead(FieldName)
         .Build();
 
       var result = await this.session.UpdateItemAsync(request);
@@ -298,8 +298,8 @@
       ISitecoreItem item = await this.CreateItem("item to updata not existen field");
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
-        .AddFieldsRawValuesByName(FieldName, FieldValue)
-        .AddFields(FieldName)
+        .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
+        .AddFieldsToRead(FieldName)
         .Build();
 
       var result = await this.session.UpdateItemAsync(request);
@@ -323,7 +323,7 @@
         .BuildSession();
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
-        .AddFieldsRawValuesByName(FieldName, fieldValue)
+        .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
         .Build();
 
       TestDelegate testCode = async () =>
@@ -350,7 +350,7 @@
         .BuildSession();
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
-        .AddFieldsRawValuesByName(FieldName, fieldValue)
+        .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
         .Build();
 
       TestDelegate testCode = async () =>

@@ -173,9 +173,9 @@
          .ItemTemplatePath(testData.Items.Home.Template)
          .ItemName(expectedItem.DisplayName)
          .Database("master")
-         .AddFieldsRawValuesByName("Title", CreatedTitle)
-         .AddFieldsRawValuesByName("Text", CreatedText)
-         .AddFields("Text", "Title")
+         .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
+         .AddFieldsRawValuesByNameToSet("Text", CreatedText)
+         .AddFieldsToRead("Text", "Title")
          .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -198,8 +198,8 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFieldsRawValuesByName("Title", CreatedTitle)
-        .AddFieldsRawValuesByName("Text", CreatedText)
+        .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
+        .AddFieldsRawValuesByNameToSet("Text", CreatedText)
         .Payload(PayloadType.Content)
         .Build();
 
@@ -224,8 +224,8 @@
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .Payload(PayloadType.Content)
-        .AddFieldsRawValuesByName("Title", CreatedTitle)
-        .AddFieldsRawValuesByName("Texttt", CreatedTexttt)
+        .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
+        .AddFieldsRawValuesByNameToSet("Texttt", CreatedTexttt)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -247,8 +247,8 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFields(FieldName)
-        .AddFieldsRawValuesByName(FieldName, FieldValue)
+        .AddFieldsToRead(FieldName)
+        .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -272,8 +272,8 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFields(FieldName)
-        .AddFieldsRawValuesByName(FieldName, FieldValue)
+        .AddFieldsToRead(FieldName)
+        .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -293,7 +293,7 @@
         ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
          .ItemTemplatePath(testData.Items.Home.Template)
          .ItemName("Get duplicate fields")
-         .AddFields(FieldName, "Title", FieldName)
+         .AddFieldsToRead(FieldName, "Title", FieldName)
          .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
@@ -307,8 +307,8 @@
       var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName("Set duplicate fields")
-        .AddFieldsRawValuesByName(FieldName, FieldValue)
-        .AddFieldsRawValuesByName(FieldName, FieldValue));
+        .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
+        .AddFieldsRawValuesByNameToSet(FieldName, FieldValue));
       Assert.AreEqual("CreateItemByPathRequestBuilder.FieldsRawValuesByName : duplicate fields are not allowed", exception.Message);
     }
 
@@ -322,7 +322,7 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFields(FieldName, null, "")
+        .AddFieldsToRead(FieldName, null, "")
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -341,7 +341,7 @@
         ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
           .ItemTemplatePath("/Sample/Sample Item")
           .ItemName("SomeValidName")
-          .AddFieldsRawValuesByName(null, "somevalue");
+          .AddFieldsRawValuesByNameToSet(null, "somevalue");
       });
       Assert.IsTrue(exception.Message.Contains("fieldKey"));
 
@@ -350,7 +350,7 @@
         ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
           .ItemTemplatePath("/Sample/Sample Item")
           .ItemName("SomeValidName")
-          .AddFieldsRawValuesByName("", "somevalue");
+          .AddFieldsRawValuesByNameToSet("", "somevalue");
       });
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldKey : The input cannot be empty.", exception1.Message);
 
@@ -359,7 +359,7 @@
         ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
           .ItemTemplatePath("/Sample/Sample Item")
           .ItemName("SomeValidName")
-          .AddFieldsRawValuesByName("somekey", null);
+          .AddFieldsRawValuesByNameToSet("somekey", null);
       });
       Assert.IsTrue (exception2.Message.Contains ("fieldValue"));
 
@@ -368,7 +368,7 @@
         ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
           .ItemTemplatePath("/Sample/Sample Item")
           .ItemName("SomeValidName")
-          .AddFieldsRawValuesByName("somekey", "");
+          .AddFieldsRawValuesByNameToSet("somekey", "");
       });
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
     }
@@ -384,8 +384,8 @@
           .ItemTemplatePath(testData.Items.Home.Template)
           .ItemName(expectedItem.DisplayName)
           .Database("master")
-          .AddFields(FieldName)
-          .AddFieldsRawValuesByName(FieldName, FieldName)         
+          .AddFieldsToRead(FieldName)
+          .AddFieldsRawValuesByNameToSet(FieldName, FieldName)         
           .Build();
 
       var createResponse = await session.CreateItemAsync(request);

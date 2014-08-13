@@ -5,7 +5,7 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest>
+  public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest>
   {
     public ReadMediaItemRequestBuilder(string mediaPath)
     {
@@ -14,7 +14,7 @@
       this.mediaPath = mediaPath;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Database(string database)
+    public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> Database(string database)
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
 
@@ -28,7 +28,7 @@
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Language(string itemLanguage)
+    public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> Language(string itemLanguage)
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
 
@@ -42,7 +42,7 @@
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> Version(int? itemVersion)
+    public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> Version(int? itemVersion)
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
       BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".Version");
@@ -55,7 +55,7 @@
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> DownloadOptions(IDownloadMediaOptions downloadMediaOptions)
+    public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> DownloadOptions(IDownloadMediaOptions downloadMediaOptions)
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
 
@@ -66,7 +66,7 @@
       return this;
     }
 
-    public IReadMediaItemRequest Build()
+    public IMediaResourceDownloadRequest Build()
     {
       var result = new ReadMediaItemParameters(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaPath);
       return result;

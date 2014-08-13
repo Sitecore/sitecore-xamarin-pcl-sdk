@@ -5,7 +5,7 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class ReadMediaItemParameters : IReadMediaItemRequest
+  public class ReadMediaItemParameters : IMediaResourceDownloadRequest
   {
     public ReadMediaItemParameters
     (
@@ -21,7 +21,7 @@
       this.DownloadOptions = downloadOptions;
     }
 
-    public virtual IReadMediaItemRequest DeepCopyReadMediaRequest()
+    public virtual IMediaResourceDownloadRequest DeepCopyReadMediaRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSource = null;

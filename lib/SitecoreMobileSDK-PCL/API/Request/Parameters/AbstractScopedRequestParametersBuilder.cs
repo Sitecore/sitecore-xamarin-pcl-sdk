@@ -49,14 +49,14 @@
       return (IScopedRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    public IScopedRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    public IScopedRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
-      return (IScopedRequestParametersBuilder<T>)base.AddFields(fields);
+      return (IScopedRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    public IScopedRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    public IScopedRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
-      return (IScopedRequestParametersBuilder<T>)base.AddFields(fieldParams);
+      return (IScopedRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
   }
 }

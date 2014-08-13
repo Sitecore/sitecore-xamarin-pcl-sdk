@@ -11,7 +11,7 @@
     IChangeItemRequestParametersBuilder<T>
     where T : class
   {
-    public IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByName(IDictionary<string, string> fieldsRawValuesByName)
+    public IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName)
     {
       BaseValidator.CheckNullAndThrow(fieldsRawValuesByName, this.GetType().Name + ".FieldsRawValuesByName");
 
@@ -22,13 +22,13 @@
 
       foreach (var fieldElem in fieldsRawValuesByName)
       {
-        this.AddFieldsRawValuesByName(fieldElem.Key, fieldElem.Value);
+        this.AddFieldsRawValuesByNameToSet(fieldElem.Key, fieldElem.Value);
       }
 
       return this;
     }
 
-    public IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByName(string fieldKey, string fieldValue)
+    public IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue)
     {
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldKey, this.GetType().Name + ".fieldKey");
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldValue, this.GetType().Name + ".fieldValue");
@@ -67,14 +67,14 @@
       return (IChangeItemRequestParametersBuilder<T>)base.Payload(payload);
     }
 
-    new public IChangeItemRequestParametersBuilder<T> AddFields(IEnumerable<string> fields)
+    new public IChangeItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
-      return (IChangeItemRequestParametersBuilder<T>)base.AddFields(fields);
+      return (IChangeItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    new public IChangeItemRequestParametersBuilder<T> AddFields(params string[] fieldParams)
+    new public IChangeItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
-      return (IChangeItemRequestParametersBuilder<T>)base.AddFields(fieldParams);
+      return (IChangeItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
 
     protected IDictionary<string, string> FieldsRawValuesByName;

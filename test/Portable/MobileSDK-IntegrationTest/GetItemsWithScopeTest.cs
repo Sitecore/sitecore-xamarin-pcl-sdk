@@ -79,7 +79,7 @@
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.AllowedItem.Id)
         .AddScope(ScopeType.Children, ScopeType.Parent)
         .Database("master")
-        .AddFields("title")
+        .AddFieldsToRead("title")
         .Payload(PayloadType.Full)
         .Build();
       var response = await this.session.ReadItemAsync(request);

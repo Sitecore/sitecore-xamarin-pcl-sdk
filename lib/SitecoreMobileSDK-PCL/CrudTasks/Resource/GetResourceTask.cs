@@ -10,7 +10,7 @@
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
-  public class GetResourceTask : IDownloadApiCallTasks<IReadMediaItemRequest, HttpRequestMessage, Stream>
+  public class GetResourceTask : IDownloadApiCallTasks<IMediaResourceDownloadRequest, HttpRequestMessage, Stream>
   {
     private GetResourceTask()
     {
@@ -26,7 +26,7 @@
 
     #region  IRestApiCallTasks
 
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IReadMediaItemRequest request, CancellationToken cancelToken)
+    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
@@ -59,7 +59,7 @@
       }
     }
 
-    protected string UrlToGetItemWithRequest(IReadMediaItemRequest request)
+    protected string UrlToGetItemWithRequest(IMediaResourceDownloadRequest request)
     {
       return this.urlBuilder.BuildUrlStringForPath(request.MediaPath, request.DownloadOptions);
     }
