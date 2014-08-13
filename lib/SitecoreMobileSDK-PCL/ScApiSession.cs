@@ -61,7 +61,8 @@ namespace Sitecore.MobileSDK
       this.httpClient = new HttpClient();
     }
 
-    public virtual void Dispose()
+    //REVIEW: memory management
+    void ReleaseResources()
     {
       if (null != this.credentials)
       {
@@ -74,6 +75,17 @@ namespace Sitecore.MobileSDK
         this.httpClient.Dispose();
         this.httpClient = null;
       }
+    }
+
+    public virtual void Dispose()
+    {
+      this.ReleaseResources();
+      GC.SuppressFinalize(this);
+    }
+
+    ~ScApiSession() 
+    {
+      this.ReleaseResources();
     }
 
     public IItemSource DefaultSource
