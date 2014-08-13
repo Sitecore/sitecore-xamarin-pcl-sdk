@@ -3,6 +3,7 @@
 namespace WhiteLabeliOS.FieldsTableView
 {
   using System;
+  using System.Linq;
   using System.Collections.Generic;
   using MonoTouch.UIKit;
   using MonoTouch.Foundation;
@@ -59,7 +60,7 @@ namespace WhiteLabeliOS.FieldsTableView
 
     }
 
-    public List<ISitecoreItem> SitecoreItems
+    public IEnumerable<ISitecoreItem> SitecoreItems
     { 
       get
       {
@@ -93,7 +94,7 @@ namespace WhiteLabeliOS.FieldsTableView
       }
 
       this.ValidateFields();
-      return this.sitecoreItems.Count;
+      return this.sitecoreItems.Count();
     }
 
     public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -108,7 +109,7 @@ namespace WhiteLabeliOS.FieldsTableView
         result = new UITableViewCell(UITableViewCellStyle.Default, FIELD_CELL_ID);
       }
 
-      ISitecoreItem currentItem = this.sitecoreItems[indexPath.Row];
+      ISitecoreItem currentItem = this.sitecoreItems.ElementAt(indexPath.Row);
       result.TextLabel.Text = currentItem.DisplayName;
 
       return result;
@@ -121,7 +122,7 @@ namespace WhiteLabeliOS.FieldsTableView
     #endregion UITableViewDataSource
 
     #region Instance Variables
-    private List<ISitecoreItem> sitecoreItems;
+    private IEnumerable<ISitecoreItem> sitecoreItems;
     private UITableView myTable;
     #endregion Instance Variables
   }

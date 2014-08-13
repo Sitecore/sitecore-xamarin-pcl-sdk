@@ -39,7 +39,7 @@
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
-      Assert.AreEqual(testData.Items.Home.DisplayName, response.Items[0].DisplayName);
+      Assert.AreEqual(testData.Items.Home.DisplayName, response[0].DisplayName);
     }
 
     [Test]
@@ -64,7 +64,7 @@
 
       var response = await session.ReadItemAsync(requestWithItemId);
       testData.AssertItemsCount(1, response);
-      Assert.AreEqual(testData.Items.Home.DisplayName, response.Items[0].DisplayName);
+      Assert.AreEqual(testData.Items.Home.DisplayName, response[0].DisplayName);
     }
 
     [Test]

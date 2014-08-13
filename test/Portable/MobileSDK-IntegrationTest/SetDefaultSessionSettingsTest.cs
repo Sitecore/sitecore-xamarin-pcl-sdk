@@ -55,12 +55,12 @@
       var response = await this.GetItemByIdWithItemSource(itemSource);
 
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
-      Assert.AreEqual("Danish version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Danish version 2 web", resultItem["Title"].RawValue);
       Assert.AreEqual(Db, resultItem.Source.Database);
       Assert.AreEqual(Version, resultItem.Source.VersionNumber.Value);
       Assert.AreEqual(Language, resultItem.Source.Language);
@@ -74,12 +74,12 @@
       const string Language = "en";
       const int Version = 2;
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
-      Assert.AreEqual("English version 2 web", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
     }
     [Test]
     public async void TestGetItemWithDbLanguageAndVersionFromRequest()
@@ -97,11 +97,11 @@
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var source = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(source, resultItem.Source);
-      Assert.AreEqual("Danish version 1 master", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("Danish version 1 master", resultItem["Title"].RawValue);
     }
     [Test]
     public async void TestOverrideLanguageInRequestById()
@@ -125,11 +125,11 @@
       var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var sourceExpected = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(sourceExpected, resultItem.Source);
-      Assert.AreEqual("English version 2 master", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("English version 2 master", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -154,11 +154,11 @@
       var response = await session.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       var sourceExpected = new ItemSource(Db, Language, Version);
       testData.AssertItemSourcesAreEqual(sourceExpected, resultItem.Source);
-      Assert.AreEqual("English version 2 master", resultItem.FieldWithName("Title").RawValue);
+      Assert.AreEqual("English version 2 master", resultItem["Title"].RawValue);
     }
 
     [Test]
@@ -171,7 +171,7 @@
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
 
       var expectedSource = new ItemSource(Db, LegacyConstants.DefaultSource().Language, 2);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
@@ -256,7 +256,7 @@
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(4, response);
-      var resultItem = response.Items[3];
+      var resultItem = response[3];
       var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, Language, 1);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
     }
@@ -269,7 +269,7 @@
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
-      var resultItem = response.Items[0];
+      var resultItem = response[0];
       var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, LegacyConstants.DefaultSource().Language, 2);
       testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
       testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);

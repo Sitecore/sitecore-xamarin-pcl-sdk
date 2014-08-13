@@ -78,7 +78,7 @@
       var response = await GetItemById(this.testData.Items.Home.Id);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
     }
 
     [Test]
@@ -110,7 +110,7 @@
       var response = await GetItemByPath(testData.Items.Home.Path);
 
       testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response.Items[0]);
+      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
     }
 
     [Test]
@@ -125,7 +125,7 @@
         Path = ItemWithSpacesPath,
         Template = testData.Items.Home.Template
       };
-      testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
+      testData.AssertItemsAreEqual(expectedItem, response[0]);
     }
 
     [Test]
@@ -140,7 +140,7 @@
         Path = ItemWithSpacesPath,
         Template = testData.Items.Home.Template
       };
-      testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
+      testData.AssertItemsAreEqual(expectedItem, response[0]);
 
     }
 
@@ -164,7 +164,7 @@
         Path = ItemInterationalPath,
         Template = testData.Items.Home.Template
       };
-      testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
+      testData.AssertItemsAreEqual(expectedItem, response[0]);
     }
 
     [Test]
@@ -178,7 +178,7 @@
         Path = ItemInterationalPath,
         Template = testData.Items.Home.Template
       };
-      testData.AssertItemsAreEqual(expectedItem, response.Items[0]);
+      testData.AssertItemsAreEqual(expectedItem, response[0]);
     }
 
     [Test]
@@ -189,7 +189,7 @@
       var response = await this.GetItemByQuery(Query);
 
       testData.AssertItemsCount(2, response);
-      Assert.AreEqual(testData.Items.Home.Template, response.Items[0].Template);
+      Assert.AreEqual(testData.Items.Home.Template, response[0].Template);
     }
 
     [Test]
@@ -199,7 +199,7 @@
       var response = await this.GetItemByQuery(QueryInternational);
 
       testData.AssertItemsCount(1, response);
-      Assert.AreEqual("宇都宮", response.Items[0].DisplayName);
+      Assert.AreEqual("宇都宮", response[0].DisplayName);
     }
 
     [Test]

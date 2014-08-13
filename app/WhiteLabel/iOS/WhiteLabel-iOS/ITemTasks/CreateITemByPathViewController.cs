@@ -1,5 +1,4 @@
-﻿
-namespace WhiteLabeliOS
+﻿namespace WhiteLabeliOS
 {
   using System;
   using System.Drawing;
@@ -59,9 +58,9 @@ namespace WhiteLabeliOS
         this.ShowLoader();
 
         ScItemsResponse response = await session.UpdateItemAsync(request);
-        if (response.Items.Any())
+        if (response.Any())
         {
-          ISitecoreItem item = response.Items[0];
+          ISitecoreItem item = response[0];
           AlertHelper.ShowLocalizedAlertWithOkOption("The item created successfully", "Item path: " + item.Path);
         }
         else
@@ -89,9 +88,9 @@ namespace WhiteLabeliOS
         var session = this.instanceSettings.GetSession();
 
         var request = ItemWebApiRequestBuilder.CreateItemRequestWithPath(this.pathField.Text)
-          .Database("web")
-          .ItemTemplate("Sample/Sample Item")
+          .ItemTemplatePath("Sample/Sample Item")
           .ItemName(this.nameField.Text)
+          .Database("web")
           .AddFieldsRawValuesByName("Title", titleField.Text)
           .AddFieldsRawValuesByName("Text", textField.Text)
           .Build();
@@ -99,9 +98,9 @@ namespace WhiteLabeliOS
         this.ShowLoader();
 
         ScItemsResponse response = await session.CreateItemAsync(request);
-        if (response.Items.Any())
+        if (response.Any())
         {
-          ISitecoreItem item = response.Items[0];
+          ISitecoreItem item = response[0];
           this.CreatedItemPath = item.Path;
           AlertHelper.ShowLocalizedAlertWithOkOption("The item created successfully", "Item path: " + item.Path);
         }
@@ -124,7 +123,6 @@ namespace WhiteLabeliOS
     }
 
     private string CreatedItemPath;
-
   }
 }
 

@@ -72,7 +72,7 @@
         Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
   //      await Task.Factory.StartNew(() => mockMutableRequest.ItemId = this.env.Items.MediaLibrary.Id);
         ScItemsResponse response = await loadItemsTask;
-        var item = response.Items[0];
+        var item = response[0];
         Assert.AreEqual(homeId, item.Id);
       }
       catch (LoadDataFromNetworkException)
@@ -107,7 +107,7 @@
         Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
         //      await Task.Factory.StartNew(() => mockMutableRequest.ItemPath = this.env.Items.MediaLibrary.Path);
         ScItemsResponse response = await loadItemsTask;
-        var item = response.Items[0];
+        var item = response[0];
         Assert.AreEqual(homePath.ToLowerInvariant(), item.Path.ToLowerInvariant());
       }
       catch (LoadDataFromNetworkException)
@@ -138,7 +138,7 @@
         Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
         //      await Task.Factory.StartNew(() => mockMutableRequest.SitecoreQuery = "/sitecore/content/media library");
         ScItemsResponse response = await loadItemsTask;
-        var item = response.Items[0];
+        var item = response[0];
         Assert.AreEqual(homePath.ToLowerInvariant(), item.Path.ToLowerInvariant());
       }
       catch (LoadDataFromNetworkException)
