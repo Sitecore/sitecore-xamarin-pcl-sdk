@@ -61,7 +61,7 @@
 
       // In order to fetch some data we have to build a request
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-        .AddFields("text")
+        .AddFieldsToRead("text")
         .AddScope(ScopeType.Self)
         .Build();
 
@@ -69,10 +69,10 @@
       var response = await session.ReadItemAsync(request);
 
       // Now that it has succeeded we are able to access downloaded items
-      ISitecoreItem item = response.Items[0];
+      ISitecoreItem item = response[0];
 
       // And content stored it its fields
-      string fieldContent = item.FieldWithName("text").RawValue;
+      string fieldContent = item["text"].RawValue;
 
       UIAlertView alert = new UIAlertView("Sitecore SDK Demo", fieldContent, null, "Ok", null);
       alert.Show();
