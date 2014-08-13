@@ -2,7 +2,7 @@
 "Settings" = "Settings";
 "getItemByPath" = "Item by Path";
 "getItemById" = "Item by ID & Scope";
-"deleteItemById" = "Delete Item by ID";
+"deleteItemById" = "Delete Item";
 "createEditItem" = "Create Item by ID";
 "createItemByPath" = "Create item by Path";
 "uploadImageVC" = "Upload Image";
@@ -30,6 +30,10 @@
 "SCOPE_BUTTON_SELF"   = "Self";
 "SCOPE_BUTTON_PARENT" = "Parent";
 "SCOPE_BUTTON_CHILD"  = "Child";
+
+"Delete item by Id" = "Delete item by Id";
+"Delete item by Path" = "Delete item by Path";
+"Delete item by Query" = "Delete item by Query";
 
 //messages
 "Loading Data" = "Loading Data...";
