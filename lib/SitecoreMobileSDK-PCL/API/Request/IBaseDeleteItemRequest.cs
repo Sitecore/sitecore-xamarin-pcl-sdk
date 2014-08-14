@@ -18,7 +18,7 @@
 
     /// <summary>
     /// Gets the scope parameters.
-    /// <seealse cref="IScopeParameters"/>
+    /// <seealso cref="IScopeParameters"/>
     /// </summary>
     /// <returns>>
     /// The scope parameters.
