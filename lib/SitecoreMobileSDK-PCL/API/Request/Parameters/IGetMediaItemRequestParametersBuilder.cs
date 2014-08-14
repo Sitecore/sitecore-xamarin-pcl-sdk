@@ -24,7 +24,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// <summary>
     /// Specifies version of media item.
     /// </summary>
-    /// <param name="itemVersion">Version number. If null - latest version will be used.</param>
+    /// <param name="itemVersion">Version number.</param>
     /// <returns>this</returns>
     IGetMediaItemRequestParametersBuilder<T> Version(int? itemVersion);
 
