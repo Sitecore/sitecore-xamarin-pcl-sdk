@@ -51,7 +51,6 @@
     <Compile Include="API\IWebApiCredentials.cs" />
     <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
     <Compile Include="API\Request\IBaseDeleteItemRequest.cs" />
-    <Compile Include="API\Request\IBaseGetItemRequest.cs" />
     <Compile Include="API\Request\IBaseItemRequest.cs" />
     <Compile Include="API\Request\IBaseRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IChangeItemRequestParametersBuilder.cs" />

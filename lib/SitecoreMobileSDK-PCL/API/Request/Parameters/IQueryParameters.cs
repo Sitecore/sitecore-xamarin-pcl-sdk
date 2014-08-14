@@ -3,7 +3,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   using System.Collections.Generic;
 
   /// <summary>
-  /// Interface represents 3 parameters needed for requsts:
+  /// Interface represents 3 parameters needed for read item requests:
   /// <para><c>Scope</c></para><para><c>Payload</c></para><para><c>Fields</c></para>
   /// </summary>
   public interface IQueryParameters
