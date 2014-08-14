@@ -43,6 +43,7 @@ namespace MobileSDKIntegrationTest
       using (FunctionTracer logger = new FunctionTracer("CancelOperationsTest->tearDown()", CancelOperationsTest.DebugWriteLineBlock))
       {
         this.testData = null;
+        this.session.Dispose();
         this.session = null;
       }
     }

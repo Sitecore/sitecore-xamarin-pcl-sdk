@@ -26,6 +26,7 @@
     public void TearDown()
     {
       this.testData = null;
+      this.session.Dispose();
       this.session = null;
     }
 

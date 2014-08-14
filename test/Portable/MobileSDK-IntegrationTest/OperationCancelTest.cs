@@ -43,6 +43,7 @@ namespace MobileSDKIntegrationTest
     [TearDown]
     public void TearDown()
     {
+      this.session.Dispose();
       this.session = null;
       this.env = null;
       this.mediaSettings = null;
