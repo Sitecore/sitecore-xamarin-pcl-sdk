@@ -3,6 +3,10 @@ namespace Sitecore.MobileSDK.API.Request
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
+  /// <summary>
+  /// Interface 
+  /// </summary>
+  /// <typeparam name="T"></typeparam>
   public interface ICreateItemRequestParametersBuilder<T> : IChangeItemRequestParametersBuilder<T>
   where T : class
   {
