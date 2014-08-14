@@ -4,7 +4,7 @@ namespace Sitecore.MobileSDK.API.Session
   using System.Threading.Tasks;
 
   /// <summary>
-  /// Interface represnets connection actions like authenticate.
+  /// Interface represents connection actions like authenticate.
   /// </summary>
   public interface IConnectionActions
   {
