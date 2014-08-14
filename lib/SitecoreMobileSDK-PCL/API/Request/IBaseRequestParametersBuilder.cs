@@ -4,9 +4,9 @@ namespace Sitecore.MobileSDK.API.Request
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   /// <summary>
-  /// Interface represents basic flow for creation of item requets.
+  /// Interface represents basic flow for creation of requets.
   /// </summary>
-  /// <typeparam name="T">Type of item request</typeparam>
+  /// <typeparam name="T">Type of request</typeparam>
   public interface IBaseRequestParametersBuilder<T>
   where T : class
   {

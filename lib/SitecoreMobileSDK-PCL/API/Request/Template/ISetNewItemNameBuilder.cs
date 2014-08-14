@@ -1,7 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.API.Request.Template
 {
   /// <summary>
-  /// Interface that specifies flow for creation of item.
+  /// Interface that specifies flow for creation of request to create item.
   /// </summary>
   /// <typeparam name="T">Type of request</typeparam>
   public interface ISetNewItemNameBuilder<T> where T : class

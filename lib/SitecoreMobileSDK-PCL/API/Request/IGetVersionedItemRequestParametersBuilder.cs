@@ -3,6 +3,10 @@ namespace Sitecore.MobileSDK.API.Request
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
+  /// <summary>
+  /// Interface represents basic flow for creation of requets that reads versioned items.
+  /// </summary>
+  /// <typeparam name="T">Type of request</typeparam>
   public interface IGetVersionedItemRequestParametersBuilder<T> : IScopedRequestParametersBuilder<T>
     where T : class
   {
