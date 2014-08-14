@@ -18,7 +18,7 @@ end
 
 task :default => "xamarin-component/xamarin-component.exe" do
     line = <<-END
-    create-manually #{COMPONENT}                \
+    create-manually #{COMPONENT}                                                             \
         --name="Sitecore Mobile SDK PCL"                                                     \
         --summary="Use content Sitecore CMS content in your native mobile apps in C#."       \
         --publisher="Sitecore Corporation"                                                   \
@@ -29,7 +29,7 @@ task :default => "xamarin-component/xamarin-component.exe" do
         --icon="icons/Sitecore.MobileSDK.PCL_128x128.png"                                    \
         --icon="icons/Sitecore.MobileSDK.PCL_512x512.png"                                    \
                                                                                              \
-        --library="ios":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                                         \
+        --library="ios":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                             \
         --library="ios":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.Extensions.dll"           \
         --library="ios":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.dll"                      \
         --library="ios":"#{BINARIES_DIR}/Newtonsoft.Json.dll"                                \
@@ -40,7 +40,7 @@ task :default => "xamarin-component/xamarin-component.exe" do
         --library="ios":"#{BINARIES_DIR}/crypto.dll"                                         \
         --library="ios":"#{BINARIES_DIR}/System.IO.dll"                                      \
                                                                                              \
-        --library="android":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                                     \
+        --library="android":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                         \
         --library="android":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.Extensions.dll"       \
         --library="android":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.dll"                  \
         --library="android":"#{BINARIES_DIR}/Newtonsoft.Json.dll"                            \
@@ -51,7 +51,7 @@ task :default => "xamarin-component/xamarin-component.exe" do
         --library="android":"#{BINARIES_DIR}/crypto.dll"                                     \
         --library="android":"#{BINARIES_DIR}/System.IO.dll"                                  \
                                                                                              \
-        --library="winphone-7.1":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                                \
+        --library="winphone-7.1":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                    \
         --library="winphone-7.1":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.Extensions.dll"  \
         --library="winphone-7.1":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.dll"             \
         --library="winphone-7.1":"#{BINARIES_DIR}/Newtonsoft.Json.dll"                       \
@@ -62,7 +62,8 @@ task :default => "xamarin-component/xamarin-component.exe" do
         --library="winphone-7.1":"#{BINARIES_DIR}/crypto.dll"                                \
         --library="winphone-7.1":"#{BINARIES_DIR}/System.IO.dll"                             \
                                                                                              \
-        --sample="Sitecore Mobile SDK iOS Sample. Downloads a single item and shows an alert with its fields.":"../../test/LocalNugetTest/iMobileSdkDemo/iMobileSdkDemo.sln"
+        --sample="iOS Sample for Sitecore Mobile SDK iOS. Downloads a single item and shows an alert with its fields.":"../../test/LocalXamarinStoreTest/iMobileSdkDemo/iMobileSdkDemo.sln" \
+        --sample="Android Sample for Sitecore Mobile SDK iOS. Downloads a single item and shows an alert with its fields.":"../../test/LocalXamarinStoreTest/AndroidMobileSdkDemo/YourSolutionName.sln"
         END
 
     line = XAMARIN_COMPONENT_EXE + " " + line

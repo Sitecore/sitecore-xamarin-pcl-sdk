@@ -29,7 +29,7 @@ echo "==========LOGS============"
 cd "%XAMARIN_PACKAGE_ROOT%"
 echo %cd%
 
-CALL %PACKAGE_UTILITY_EXE% create-manually Sitecore.MobileSDK.PCL-1.0.0.xam ^
+CALL %PACKAGE_UTILITY_EXE% create-manually Sitecore.MobileSDK.PCL-1.0.0.xam                         ^
 		--name="Sitecore Mobile SDK PCL"                                                    ^
 		--summary="Use content Sitecore CMS content in your native mobile apps in C#."      ^
 		--publisher="Sitecore Corporation"                                                  ^
@@ -73,6 +73,6 @@ CALL %PACKAGE_UTILITY_EXE% create-manually Sitecore.MobileSDK.PCL-1.0.0.xam ^
 		--library="winphone-7.1":"%BINARIES_DIR%\crypto.dll"                                ^
 		--library="winphone-7.1":"%BINARIES_DIR%\System.IO.dll"                             ^
                                                                                                     ^
-		--sample="iOS Sample for Sitecore Mobile SDK iOS. Downloads a single item and shows an alert with its fields.":"../../test/LocalNugetTest/iMobileSdkDemo/iMobileSdkDemo.sln" ^
-		--sample="Android Sample for Sitecore Mobile SDK iOS. Downloads a single item and shows an alert with its fields.":"../../test/LocalNugetTest/AndroidMobileSdkDemo/YourSolutionName.sln"
+		--sample="iOS Sample for Sitecore Mobile SDK iOS. Downloads a single item and shows an alert with its fields.":"../../test/LocalXamarinStoreTest/iMobileSdkDemo/iMobileSdkDemo.sln" ^
+		--sample="Android Sample for Sitecore Mobile SDK iOS. Downloads a single item and shows an alert with its fields.":"../../test/LocalXamarinStoreTest/AndroidMobileSdkDemo/YourSolutionName.sln"
 
