@@ -1,4 +1,5 @@
-﻿namespace WhiteLabeliOS
+﻿
+namespace WhiteLabeliOS
 {
   using System;
   using System.Drawing;
@@ -24,6 +25,17 @@
       this.pathField.ShouldReturn = this.HideKeyboard;
       this.textField.ShouldReturn = this.HideKeyboard;
       this.titleField.ShouldReturn = this.HideKeyboard;
+
+      this.nameField.Placeholder = NSBundle.MainBundle.LocalizedString ("type item name", null);
+      this.pathField.Placeholder = NSBundle.MainBundle.LocalizedString ("type parent item path", null);
+      this.textField.Placeholder = NSBundle.MainBundle.LocalizedString ("type text field value", null);
+      this.titleField.Placeholder = NSBundle.MainBundle.LocalizedString ("type title field value", null);
+
+      string createButtonTitle = NSBundle.MainBundle.LocalizedString ("create", null);
+      this.createButton.SetTitle (createButtonTitle, UIControlState.Normal);
+
+      string updateButtonTitle = NSBundle.MainBundle.LocalizedString ("Update created item", null);
+      this.updateButton.SetTitle (updateButtonTitle, UIControlState.Normal);
     }
 
     partial void OnCreateItemButtonTapped (MonoTouch.UIKit.UIButton sender)
@@ -50,7 +62,6 @@
         var session = this.instanceSettings.GetSession();
 
         var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(this.CreatedItemPath)
-          .Database("web")
           .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
           .AddFieldsRawValuesByNameToSet("Text", textField.Text)
           .Build();
@@ -90,7 +101,6 @@
         var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
           .ItemTemplatePath("Sample/Sample Item")
           .ItemName(this.nameField.Text)
-          .Database("web")
           .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
           .AddFieldsRawValuesByNameToSet("Text", textField.Text)
           .Build();

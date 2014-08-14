@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace WhiteLabeliOS
 {
   using System;
@@ -16,8 +14,6 @@ namespace WhiteLabeliOS
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
-
-
 
 	public partial class GetItemByPathViewController : BaseTaskTableViewController
 	{

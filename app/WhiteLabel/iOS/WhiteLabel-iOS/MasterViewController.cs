@@ -1,11 +1,12 @@
-﻿using System;
-using System.Drawing;
-using System.Collections.Generic;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-
+﻿
 namespace WhiteLabeliOS
 {
+  using System;
+  using System.Drawing;
+  using System.Collections.Generic;
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+
 	public partial class MasterViewController : UITableViewController
 	{
         #region UIViewController
@@ -38,45 +39,46 @@ namespace WhiteLabeliOS
             this.TableView.Source = this.dataSource;
 			this.TableView.ReloadData();
 		}
-        #endregion UIViewController
+    #endregion UIViewController
 
-        #region Navigation
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
-        {
-            base.PrepareForSegue(segue, sender);
+    #region Navigation
+    public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+    {
+      base.PrepareForSegue(segue, sender);
 
-            if ("configurationViewController" == segue.Identifier)
-            {
-                var settingsViewController = segue.DestinationViewController as SettingsViewController;
-                settingsViewController.instanceSettings = this.settings;
-            }
-            else
-            {
-                var targetController = segue.DestinationViewController as BaseTaskViewController;
-                targetController.instanceSettings = this.settings;
+      if ("configurationViewController" == segue.Identifier)
+      {
+          var settingsViewController = segue.DestinationViewController as SettingsViewController;
+          settingsViewController.instanceSettings = this.settings;
+      }
+      else
+      {
+          var targetController = segue.DestinationViewController as BaseTaskViewController;
+          targetController.instanceSettings = this.settings;
 
-            }
-        }
+      }
+    }
 
-        private void InitFeaturesList()
-        {
-            this.features.Insert(0, "getItemByPath");
-            this.features.Insert(0, "getItemById");
-            this.features.Insert(0, "deleteItemById");
-            this.features.Insert(0, "createEditItem");
-            this.features.Insert(0, "createItemByPath");
-            this.features.Insert(0, "uploadImageVC");
-            this.features.Insert(0, "getItemByQuery");
-			      this.features.Insert(0, "getMediaItem");
-            this.features.Insert(0, "authTestVC");
-        }
-        #endregion Navigation
+    private void InitFeaturesList()
+    {
+      this.features.Insert(0, "uploadImageVC");
+      this.features.Insert(0, "getMediaItem");
+      this.features.Insert(0, "authTestVC");
+      this.features.Insert(0, "deleteItemById");
+      this.features.Insert(0, "createItemByPath");
+      this.features.Insert(0, "createEditItem");
+      this.features.Insert(0, "getItemByQuery");
+      this.features.Insert(0, "getItemByPath");
+      this.features.Insert(0, "getItemById");
+    }
 
-        #region Instance Variables
-        private DataSource dataSource;
-        private InstanceSettings settings;
-        private List<object> features = new List<object> ();
-        #endregion Instance Variables
+    #endregion Navigation
+
+    #region Instance Variables
+    private DataSource dataSource;
+    private InstanceSettings settings;
+    private List<object> features = new List<object> ();
+    #endregion Instance Variables
 
 		class DataSource : UITableViewSource
 		{

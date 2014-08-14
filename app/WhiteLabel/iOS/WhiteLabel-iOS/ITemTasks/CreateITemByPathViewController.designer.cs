@@ -27,6 +27,9 @@ namespace WhiteLabeliOS
 		[Outlet]
 		MonoTouch.UIKit.UITextField titleField { get; set; }
 
+		[Outlet]
+		MonoTouch.UIKit.UIButton updateButton { get; set; }
+
 		[Action ("OnCreateItemButtonTapped:")]
 		partial void OnCreateItemButtonTapped (MonoTouch.UIKit.UIButton sender);
 
@@ -58,6 +61,11 @@ namespace WhiteLabeliOS
 			if (titleField != null) {
 				titleField.Dispose ();
 				titleField = null;
+			}
+
+			if (updateButton != null) {
+				updateButton.Dispose ();
+				updateButton = null;
 			}
 		}
 	}

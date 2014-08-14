@@ -1,12 +1,12 @@
 ﻿
-using System;
-using System.Drawing;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-
 namespace WhiteLabeliOS
 {
+  using System;
+  using System.Drawing;
+
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+
 	public partial class UploadImageViewController : BaseTaskViewController
 	{
 		private UIImagePickerController imagePicker;

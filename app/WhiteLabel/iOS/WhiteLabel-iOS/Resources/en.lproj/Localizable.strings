@@ -1,18 +1,17 @@
 ﻿//features
 "Settings" = "Settings";
-"getItemByPath" = "Item by Path";
-"getItemById" = "Item by ID & Scope";
-"deleteItemById" = "Delete Item by ID";
+"getItemByPath" = "Get Item by Path";
+"getItemById" = "Get Item by ID";
+"getItemByQuery" = "Get Item by Query";
+"deleteItemById" = "Delete Item";
 "createEditItem" = "Create Item by ID";
 "createItemByPath" = "Create item by Path";
 "uploadImageVC" = "Upload Image";
-"getItemByQuery" = "Item by Query";
 "getMediaItem" = "Download Image";
 "authTestVC" = "Authentication";
 "Master" = "Master";
 
 "MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
-
 
 //titles
 "Alert" = "Alert";
@@ -30,6 +29,10 @@
 "SCOPE_BUTTON_SELF"   = "Self";
 "SCOPE_BUTTON_PARENT" = "Parent";
 "SCOPE_BUTTON_CHILD"  = "Child";
+
+"Delete item by Id" = "Delete item by Id";
+"Delete item by Path" = "Delete item by Path";
+"Delete item by Query" = "Delete item by Query";
 
 //messages
 "Loading Data" = "Loading Data...";
@@ -73,6 +76,13 @@
 "Download" = "Download";
 "Height:" = "Height:";
 "Width:" = "Width:";
-"user_login_placeholder" = "user login(example: sitecore\admin)";
+"user_login_placeholder" = "user login";
 "password_placeholder" = "password";
 "authenticate_button_title" = "Authenticate";
+"type item name" = "type item name";
+"type parent item id" = "type parent item id";
+"type text field value" = "type text field value";
+"type title field value" = "type title field value";
+"type parent item path" = "type parent item path";
+"create" = "create";
+"Update created item" = "Update created item";
