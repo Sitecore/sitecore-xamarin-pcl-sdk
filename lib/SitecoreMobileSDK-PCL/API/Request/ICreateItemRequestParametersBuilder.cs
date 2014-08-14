@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.API.Request
   where T : class
   {
     new ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName);
-    new ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue);
+    new ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue);
 
     new ICreateItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
     new ICreateItemRequestParametersBuilder<T> Language(string itemLanguage);

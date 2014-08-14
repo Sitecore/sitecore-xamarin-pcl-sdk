@@ -8,7 +8,7 @@
   {
     IUpdateItemRequestParametersBuilder<T> Version(int? itemVersion);
     new IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName);
-    new IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue);
+    new IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue);
 
     new IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
     new IUpdateItemRequestParametersBuilder<T> Language(string itemLanguage);

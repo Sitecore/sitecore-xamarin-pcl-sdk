@@ -31,9 +31,9 @@
       return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByNameToSet(fieldsRawValuesByName);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue)
+    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue)
     {
-      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByNameToSet(fieldKey, fieldValue);
+      return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByNameToSet(fieldName, fieldValue);
     }
 
     public IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
