@@ -6,7 +6,7 @@
   public interface IDeleteItemsByIdRequest : IBaseDeleteItemRequest
   {
     /// <summary>
-    /// Performs deep copy request.
+    /// Performs deep copy of request.
     /// </summary>
     /// <returns><see cref="IDeleteItemsByIdRequest"/></returns>
     IDeleteItemsByIdRequest DeepCopyDeleteItemRequest();

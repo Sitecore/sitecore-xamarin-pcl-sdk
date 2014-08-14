@@ -10,16 +10,78 @@ namespace Sitecore.MobileSDK.API.Request
   public interface IGetVersionedItemRequestParametersBuilder<T> : IScopedRequestParametersBuilder<T>
     where T : class
   {
+    /// <summary>
+    /// Specifies item version.
+    /// </summary>
+    /// <param name="itemVersion">The item version.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IGetVersionedItemRequestParametersBuilder<T> Version(int? itemVersion);
 
+    /// <summary>
+    /// Specifies sitecore database.
+    /// </summary>
+    /// <param name="sitecoreDatabase">The sitecore database.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     new IGetVersionedItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
+
+    /// <summary>
+    /// Specifies item language.
+    /// </summary>
+    /// <param name="itemLanguage">The item language.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     new IGetVersionedItemRequestParametersBuilder<T> Language(string itemLanguage);
+
+    /// <summary>
+    /// Specifies payload.
+    /// </summary>
+    /// <param name="payload">The payload.</param>
+    /// <returns>
+    /// this
+    /// </returns>
+    /// <seealso cref="PayloadType" />
     new IGetVersionedItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
+    /// <summary>
+    /// Adds the fields that will be read from the server.
+    /// </summary>
+    /// <param name="fields">The fields.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     new IGetVersionedItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
+
+    /// <summary>
+    /// Adds the fields that will be read from the server.
+    /// </summary>
+    /// <param name="fieldParams">The field parameters.</param>
+    /// <returns>
+    /// this
+    /// </returns>
+    /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
     new IGetVersionedItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
 
+    /// <summary>
+    /// Adds the scopes.
+    /// </summary>
+    /// <param name="scope">The scopes.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     new IGetVersionedItemRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope);
+
+    /// <summary>
+    /// Adds the scopes.
+    /// </summary>
+    /// <param name="scope">The scopes.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     new IGetVersionedItemRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
   }
 }
