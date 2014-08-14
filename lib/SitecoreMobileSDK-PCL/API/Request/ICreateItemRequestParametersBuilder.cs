@@ -14,7 +14,9 @@ namespace Sitecore.MobileSDK.API.Request
     /// Adds fields that will be updated in item.
     /// </summary>
     /// <param name="fieldsRawValuesByName">Name of field and raw value pairs</param>
-    /// <returns>this</returns>
+    /// <returns>
+    /// this
+    /// </returns>
     new ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName);
 
     /// <summary>
@@ -22,7 +24,9 @@ namespace Sitecore.MobileSDK.API.Request
     /// </summary>
     /// <param name="fieldName">Field name.</param>
     /// <param name="fieldValue">Field raw value.</param>
-    /// <returns>this</returns>
+    /// <returns>
+    /// this
+    /// </returns>
     new ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue);
 
     /// <summary>
