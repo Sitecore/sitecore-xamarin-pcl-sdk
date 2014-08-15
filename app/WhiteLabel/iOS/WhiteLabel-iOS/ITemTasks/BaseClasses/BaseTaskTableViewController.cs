@@ -19,7 +19,7 @@ namespace WhiteLabeliOS
 		
 		}
 
-		protected void CleanupTableViewBindings()
+		protected virtual void CleanupTableViewBindings()
 		{
 			BeginInvokeOnMainThread(delegate
 			{
@@ -27,7 +27,7 @@ namespace WhiteLabeliOS
 			});
 		}
 
-		protected void CleanupTableViewBindingsSync()
+    protected virtual void CleanupTableViewBindingsSync()
 		{
 			this.TableView.DataSource = null;
 			this.TableView.Delegate = null;
