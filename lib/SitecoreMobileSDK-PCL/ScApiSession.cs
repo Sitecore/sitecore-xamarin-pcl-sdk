@@ -63,8 +63,8 @@ namespace Sitecore.MobileSDK
 
     void ReleaseResources()
     {
-      Exception ex1 = null;
-      Exception ex2 = null;
+      Exception credentialsException = null;
+      Exception httpClientException = null;
 
       if (null != this.credentials)
       {
@@ -74,7 +74,7 @@ namespace Sitecore.MobileSDK
         }
         catch (Exception ex)
         {
-          ex1 = ex;
+          credentialsException = ex;
         }
         this.credentials = null;
       }
@@ -87,18 +87,18 @@ namespace Sitecore.MobileSDK
         }
         catch (Exception ex)
         {
-          ex2 = ex;
+          httpClientException = ex;
         }
         this.httpClient = null;
       }
 
-      if (null != ex1)
+      if (null != credentialsException)
       {
-        throw ex1;
+        throw credentialsException;
       }
-      else if (null != ex2)
+      else if (null != httpClientException)
       {
-        throw ex2;
+        throw httpClientException;
       }
     }
 
