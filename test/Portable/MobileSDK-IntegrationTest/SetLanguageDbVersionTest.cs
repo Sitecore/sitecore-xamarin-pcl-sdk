@@ -44,65 +44,82 @@
       const string Db = "web";
       const string Language = "da";
       var itemSource = new ItemSource(Db, Language, 1);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await this.GetHomeItem(session);
+      using 
+      (
+        var session = this.CreateAdminSession (itemSource)
+      )
+      {
+        var response = await this.GetHomeItem (session);
 
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response[0];
-      Assert.AreEqual(testData.Items.Home.Id, resultItem.Id);
-      testData.AssertItemSourcesAreEqual(itemSource, resultItem.Source);
-      Assert.AreEqual("", resultItem["Title"].RawValue);
+        testData.AssertItemsCount (1, response);
+        ISitecoreItem resultItem = response [0];
+        Assert.AreEqual (testData.Items.Home.Id, resultItem.Id);
+        testData.AssertItemSourcesAreEqual (itemSource, resultItem.Source);
+        Assert.AreEqual ("", resultItem ["Title"].RawValue);
+      }
     }
 
     [Test]
     public async void TestGetItemWithNullLanguage()
     {
-      var session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Admin)
-          .DefaultDatabase("master")
-          .BuildReadonlySession();
+      using 
+      (
+        var session =
+          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+            .Credentials(testData.Users.Admin)
+            .DefaultDatabase("master")
+            .BuildReadonlySession()
+      )
+      {
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+          .Version(1)
+          .Build();
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-        .Version(1)
-        .Build();
-
-      var itemRequest = await session.ReadItemAsync(request);
-      Assert.IsNotNull(itemRequest);
-      Assert.AreEqual(1, itemRequest.ResultCount);
+        var itemRequest = await session.ReadItemAsync(request);
+        Assert.IsNotNull(itemRequest);
+        Assert.AreEqual(1, itemRequest.ResultCount);
+      }
     }
 
     [Test]
     public async void TestGetItemWithNullDb()
     {
-      var session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Admin)
-          .DefaultLanguage("en")
-          .BuildReadonlySession();
+      using 
+      (
+        var session =
+          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+            .Credentials(testData.Users.Admin)
+            .DefaultLanguage("en")
+            .BuildReadonlySession()
+      )
+      {
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+          .Version(1)
+          .Build();
 
-
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-        .Version(1)
-        .Build();
-
-      var itemRequest = await session.ReadItemAsync(request);
-      Assert.IsNotNull(itemRequest);
-      Assert.AreEqual(1, itemRequest.ResultCount);
+        var itemRequest = await session.ReadItemAsync(request);
+        Assert.IsNotNull(itemRequest);
+        Assert.AreEqual(1, itemRequest.ResultCount);
+      }
     }
 
     [Test]
     public async void TestGetItemWithMasterDb()
     {
       const string Db = "master";
-      var session = this.CreateAdminSession();
-      var response = await this.GetHomeItem(session, Db);
+      using 
+      (
+        var session = this.CreateAdminSession()
+      )
+      {
+        var response = await this.GetHomeItem(session, Db);
 
-      testData.AssertItemsCount(1, response);
+        testData.AssertItemsCount(1, response);
 
-      ISitecoreItem resultItem = response[0];
-      testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      Assert.AreEqual("Sitecore master", resultItem["Title"].RawValue);
+        ISitecoreItem resultItem = response[0];
+        testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
+        Assert.AreEqual("Sitecore master", resultItem["Title"].RawValue);
+      }
     }
 
     private async Task<ScItemsResponse> GetHomeItem(IReadItemActions session, string db = null)
@@ -119,34 +136,44 @@
     public async void TestGetItemWithWebCaseInsensetive()
     {
       const string Db = "wEB";
-      var session = this.CreateAdminSession();
-      var response = await this.GetHomeItem(session, Db);
+      using 
+      (
+        var session = this.CreateAdminSession()
+      )
+      {
+        var response = await this.GetHomeItem(session, Db);
 
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response[0];
+        testData.AssertItemsCount(1, response);
+        ISitecoreItem resultItem = response[0];
 
-      testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
-      Assert.AreEqual("Sitecore", resultItem["Title"].RawValue);
+        testData.AssertItemsAreEqual(testData.Items.Home, resultItem);
+        Assert.AreEqual("Sitecore", resultItem["Title"].RawValue);
+      }
     }
 
     [Test]
     public async void TestGetItemWithCoreDbLanguageAndVersion()
     {
       const string Db = "CoRE";
-      var session = this.CreateAdminSession();
-      var response = await this.GetHomeItem(session, Db);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response[0];
-      var expectedItem = new TestEnvironment.Item
+      using 
+      (
+        var session = this.CreateAdminSession()
+      )
       {
-        DisplayName = this.testData.Items.Home.DisplayName,
-        Id = this.testData.Items.Home.Id,
-        Path = this.testData.Items.Home.Path,
-        Template = "Sitecore Client/Home"
-      };
-      testData.AssertItemsAreEqual(expectedItem, resultItem);
-      Assert.AreEqual("Welcome to Sitecore", resultItem["Title"].RawValue);
+        var response = await this.GetHomeItem(session, Db);
+
+        testData.AssertItemsCount(1, response);
+        ISitecoreItem resultItem = response[0];
+        var expectedItem = new TestEnvironment.Item
+        {
+          DisplayName = this.testData.Items.Home.DisplayName,
+          Id = this.testData.Items.Home.Id,
+          Path = this.testData.Items.Home.Path,
+          Template = "Sitecore Client/Home"
+        };
+        testData.AssertItemsAreEqual(expectedItem, resultItem);
+        Assert.AreEqual("Welcome to Sitecore", resultItem["Title"].RawValue);
+      }
     }
 
     [Test]
@@ -157,16 +184,21 @@
       const int Version = 12;
 
       var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      using 
+      (
+        var session = this.CreateAdminSession(itemSource)
+      )
+      {
+        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+        testData.AssertItemsCount(1, response);
+        ISitecoreItem resultItem = response[0];
+        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, Language, 2);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("Danish version 2 web", resultItem["Title"].RawValue);
+        var expectedSource = new ItemSource(Db, Language, 2);
+        testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+        Assert.AreEqual("Danish version 2 web", resultItem["Title"].RawValue);
+      }
     }
 
     [Test]
@@ -177,16 +209,21 @@
       const int Version = 12;
 
       var itemSource = new ItemSource(Db, Language, Version);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      using 
+      (
+        var session = this.CreateAdminSession(itemSource)
+      )
+      {
+        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+        testData.AssertItemsCount(1, response);
+        ISitecoreItem resultItem = response[0];
+        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", 2);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
+        var expectedSource = new ItemSource(Db, "en", 2);
+        testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+        Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
+      }
     }
 
     [Test]
@@ -194,21 +231,24 @@
     {
       const string Database = "new_database";
       var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id).Database(Database);
-      var session = this.CreateAdminSession();
-
-
-      TestDelegate testCode = async () =>
+      using 
+      (
+        var session = this.CreateAdminSession()
+      )
       {
-        var task = GetItemByIdWithRequestBuilder(requestBuilder, session);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
+        TestDelegate testCode = async () =>
+        {
+          var task = GetItemByIdWithRequestBuilder(requestBuilder, session);
+          await task;
+        };
+        Exception exception = Assert.Throws<ParserException>(testCode);
 
 
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Database + "']"));
-    }
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Database + "']"));
+      }
+      }
 
     [Test]
     public async void TestGetItemWithInvalidLanguage()
@@ -217,16 +257,21 @@
       const string Language = "#%^^&";
 
       var itemSource = new ItemSource(Db, Language);
-      var session = this.CreateAdminSession(itemSource);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      using 
+      (
+        var session = this.CreateAdminSession(itemSource)
+      )
+      {
+        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+        testData.AssertItemsCount(1, response);
+        ISitecoreItem resultItem = response[0];
+        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
 
-      var expectedSource = new ItemSource(Db, "en", 2);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-      Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
+        var expectedSource = new ItemSource(Db, "en", 2);
+        testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
+        Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
+      }
     }
 
     [Test]
@@ -235,55 +280,71 @@
       const string Db = "@#er$#";
       const string Language = "da";
       var itemSource = new ItemSource(Db, Language);
-      var session = this.CreateAdminSession(itemSource);
-
-
-      TestDelegate testCode = async () =>
+      using 
+      (
+        var session = this.CreateAdminSession(itemSource)
+      )
       {
-        var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
+        TestDelegate testCode = async () =>
+        {
+          var task = session.ReadItemAsync(this.requestWithVersionsItemId);
+          await task;
+        };
+        Exception exception = Assert.Throws<ParserException>(testCode);
 
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Db + "']"));
-    }
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Db + "']"));
+      }
+      }
 
     [Test]
     public async void TestGetItemWithShellSite()
     {
       var site = testData.ShellSite;
-      var session = this.CreateCreatorexSession(site);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
+      using 
+      (
+        var session = this.CreateCreatorexSession(site)
+      )
+      {
+        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-      testData.AssertItemsCount(0, response);
+        testData.AssertItemsCount(0, response);
+      }
     }
 
     [Test]
     public async void TestGetItemWithWebSite()
     {
       const string Site = "/";
+      using 
+      (
+        var session = this.CreateCreatorexSession(Site)
+      )
+      {
+        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-      var session = this.CreateCreatorexSession(Site);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+        testData.AssertItemsCount(1, response);
+        ISitecoreItem resultItem = response[0];
+        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      }
     }
 
     [Test]
     public async void TestGetItemWithShellSiteWithoutDomain()
     {
       const string Site = "/";
+      using 
+      (
+        var session = this.CreateCreatorexSession(Site)
+      )
+      {
+        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-      var session = this.CreateCreatorexSession(Site);
-      var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-      testData.AssertItemsCount(1, response);
-      ISitecoreItem resultItem = response[0];
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+        testData.AssertItemsCount(1, response);
+        ISitecoreItem resultItem = response[0];
+        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
+      }
     }
 
     [Test]
@@ -297,23 +358,27 @@
     public void TestGetItemWithInvalidSiteReturnsException()
     {
       const string Site = "/@$%/";
-      var session = this.CreateCreatorexSession(Site);
-
-      TestDelegate testCode = async () =>
+      using 
+      (
+        var session = this.CreateCreatorexSession(Site)
+      )
       {
-        var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
-      Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
-      Assert.AreEqual("System.Xml.XmlException", exception.InnerException.GetType().ToString());
+        TestDelegate testCode = async () =>
+        {
+          var task = session.ReadItemAsync(this.requestWithVersionsItemId);
+          await task;
+        };
+        Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+        Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
+        Assert.AreEqual("System.Xml.XmlException", exception.InnerException.GetType().ToString());
 
 
-      // Windows : "For security reasons DTD is prohibited in this XML document."
-      // iOS : {System.Xml.XmlException: Document Type Declaration (DTD) is prohibited in this XML.  Line 1, position 10.
-      Assert.True(exception.InnerException.Message.Contains("is prohibited in this XML"));
-      Assert.True(exception.InnerException.Message.Contains("DTD"));
+        // Windows : "For security reasons DTD is prohibited in this XML document."
+        // iOS : {System.Xml.XmlException: Document Type Declaration (DTD) is prohibited in this XML.  Line 1, position 10.
+        Assert.True(exception.InnerException.Message.Contains("is prohibited in this XML"));
+        Assert.True(exception.InnerException.Message.Contains("DTD"));
+      }
     }
 
     [Test]

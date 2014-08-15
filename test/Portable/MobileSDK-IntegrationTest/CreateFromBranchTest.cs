@@ -32,7 +32,6 @@ namespace MobileSDKIntegrationTest
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session = this.CreateSession();
 
-
       // Same as this.session
       var cleanupSession = this.CreateSession();
       this.noThrowCleanupSession = new NoThrowWebApiSession(cleanupSession);

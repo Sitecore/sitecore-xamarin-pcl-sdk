@@ -5,10 +5,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Sitecore.MobileSDK;
+
+using Sitecore.MobileSDK.API.Session;
 using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+using Sitecore.MobileSDK.API;
+using Sitecore.MobileSDK.API.Request.Parameters;
+using Sitecore.MobileSDK.API.Items;
 
 namespace MobileSDKSample
 {
@@ -19,43 +21,41 @@ namespace MobileSDKSample
     {
       base.OnCreate(bundle);
 
-      var endpoint = new SessionConfig("http://website-address", "username", "password", "/sitecore/shell"); 
-      var defaultSource = ItemSource.DefaultSource();
-      var session = new ScApiSession(endpoint, defaultSource);
+      string instanceUrl = "http://my.site.com";
+      var session = 
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(instanceUrl)
+          .Site("/sitecore/shell")
+          .DefaultDatabase("web")
+          .DefaultLanguage("en")
+          .MediaLibraryRoot("/sitecore/media library")
+          .MediaPrefix("~/media/")
+          .DefaultMediaResourceExtension("ashx")
+          .BuildReadonlySession();
 
-      try
-      {
-
-        var request =
-          ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+      var request =
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+          .AddScope(ScopeType.Self)
           .Payload(PayloadType.Content)
           .Build();
-        var readHomeItemTask = session.ReadItemAsync(request);
+      var response = await session.ReadItemAsync(request);
 
-        var items = await readHomeItemTask;
+      // Now that it has succeeded we are able to access downloaded items
+      ISitecoreItem item = response[0];
 
-        string fieldText = items.Items[0].FieldWithName("Text").RawValue;
-        string itemName = "Home Item Text";
+      // And content stored it its fields
+      string fieldContent = item["text"].RawValue;
 
-        var dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.SetTitle(itemName);
-        dialogBuilder.SetMessage(fieldText);
-        dialogBuilder.SetPositiveButton("OK", (object sender, DialogClickEventArgs e) =>
-          {
-          });
+      string itemName = "Home Item Text";
 
-        dialogBuilder.Create().Show();
-      }
-      catch (Exception exception)
-      {
-        var dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.SetTitle("error");
-        dialogBuilder.SetMessage(exception.Message);
-        dialogBuilder.SetPositiveButton("OK", (object sender, DialogClickEventArgs e) =>
-          {
-          });
-        dialogBuilder.Create().Show();
-      }
+      var dialogBuilder = new AlertDialog.Builder(this);
+      dialogBuilder.SetTitle(itemName);
+      dialogBuilder.SetMessage(fieldContent);
+      dialogBuilder.SetPositiveButton("OK", (object sender, DialogClickEventArgs e) =>
+        {
+        });
+
+      dialogBuilder.Create().Show();
+
     }
   }
 }

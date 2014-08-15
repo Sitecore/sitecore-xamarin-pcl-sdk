@@ -1,3 +1,5 @@
+test/LocalNugetTest/LocalRepository/
+
 deployment
 *.nupkg
 *.log

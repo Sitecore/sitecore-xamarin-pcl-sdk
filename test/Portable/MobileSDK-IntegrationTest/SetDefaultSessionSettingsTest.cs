@@ -42,6 +42,7 @@
     public void TearDown()
     {
       this.testData = null;
+      this.sessionAuthenticatedUser.Dispose();
       this.sessionAuthenticatedUser = null;
     }
 
