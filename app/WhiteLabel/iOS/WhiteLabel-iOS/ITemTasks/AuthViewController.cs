@@ -48,10 +48,15 @@ namespace WhiteLabeliOS
       try
       {
         var credentials = new WebApiCredentialsPODInsequredDemo(this.loginField.Text, this.passwordField.Text);
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
-          .Credentials(credentials)
-          .Site(this.siteField.Text)
-          .BuildReadonlySession();
+        var sessionBuilder = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
+          .Credentials(credentials);
+
+        if (!string.IsNullOrEmpty(this.siteField.Text))
+        {
+          sessionBuilder.Site(this.siteField.Text);
+        }
+
+        var session = sessionBuilder.BuildReadonlySession();
 
         this.ShowLoader();
 
