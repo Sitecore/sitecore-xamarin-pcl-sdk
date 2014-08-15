@@ -53,25 +53,30 @@
         {
           string instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7220";
 
-          var session =
-              SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
-                                          .Credentials(demoCredentials)
-                                          .Site("/sitecore/shell")
-                                          .DefaultDatabase("web")
-                                          .DefaultLanguage("en")
-                                          .MediaLibraryRoot("/sitecore/media library")
-                                          .MediaPrefix("~/media/")
-                                          .DefaultMediaResourceExtension("ashx")
-                                          .BuildReadonlySession();
-          var request =
-              ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-                                      .Payload(PayloadType.Content)
-                                      .Build();
+          using 
+          (
+            var session =
+                SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
+                                            .Credentials(demoCredentials)
+                                            .Site("/sitecore/shell")
+                                            .DefaultDatabase("web")
+                                            .DefaultLanguage("en")
+                                            .MediaLibraryRoot("/sitecore/media library")
+                                            .MediaPrefix("~/media/")
+                                            .DefaultMediaResourceExtension("ashx")
+                                            .BuildReadonlySession()
+          )
+          {
+            var request =
+                ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+                                        .Payload(PayloadType.Content)
+                                        .Build();
 
-          ScItemsResponse items = await session.ReadItemAsync(request);
-          string fieldText = items[0]["Text"].RawValue;
+            ScItemsResponse items = await session.ReadItemAsync(request);
+            string fieldText = items[0]["Text"].RawValue;
 
-          this.FieldValueTextBox.Text = fieldText;
+            this.FieldValueTextBox.Text = fieldText;
+          }
         }
         catch (Exception ex)
         {
