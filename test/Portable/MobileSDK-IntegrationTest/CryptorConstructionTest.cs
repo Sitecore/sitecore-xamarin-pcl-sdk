@@ -37,7 +37,9 @@
     [TearDown]
     public void TearDown()
     {
+      this.anonymousSession.Dispose();
       this.anonymousSession = null;
+      this.authenticatedSession.Dispose();
       this.authenticatedSession = null;
       this.mediaSettings = null;
       this.testData = null;

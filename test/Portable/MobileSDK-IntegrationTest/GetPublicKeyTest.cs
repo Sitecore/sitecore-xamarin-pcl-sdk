@@ -33,119 +33,147 @@
     [Test]
     public async void TestGetItemAsAuthenticatedUser()
     {
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-        .Credentials(this.testData.Users.Admin)
-        .BuildReadonlySession();
-
-      var response = await session.ReadItemAsync(requestWithItemId);
-      testData.AssertItemsCount(1, response);
-      Assert.AreEqual(testData.Items.Home.DisplayName, response[0].DisplayName);
+      using
+      (
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession()
+      )
+      {
+        var response = await session.ReadItemAsync(requestWithItemId);
+        testData.AssertItemsCount(1, response);
+        Assert.AreEqual(testData.Items.Home.DisplayName, response[0].DisplayName);
+      }
     }
 
     [Test]
     public async void TestMissingHttpIsAutocompletedDuringAuthentication()
     {
       var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
-        .Credentials(this.testData.Users.Admin)
-        .BuildReadonlySession();
-
-      var certrificate = await session.ReadItemAsync(this.requestWithItemId);
-      Assert.IsNotNull(certrificate);
+      using
+      (
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession()
+      )
+      {
+        var certrificate = await session.ReadItemAsync(this.requestWithItemId);
+        Assert.IsNotNull(certrificate);
+      }
     }
 
     [Test]
     public async void TestAuthenticateWithSlashInTheEnd()
     {
       string urlWithSlahInTheEnd = testData.InstanceUrl + '/';
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithSlahInTheEnd)
-        .Credentials(this.testData.Users.Admin)
-        .BuildReadonlySession();
-
-      var response = await session.ReadItemAsync(requestWithItemId);
-      testData.AssertItemsCount(1, response);
-      Assert.AreEqual(testData.Items.Home.DisplayName, response[0].DisplayName);
+      using
+      (
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithSlahInTheEnd)
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession()
+      )
+      {
+        var response = await session.ReadItemAsync(requestWithItemId);
+        testData.AssertItemsCount(1, response);
+        Assert.AreEqual(testData.Items.Home.DisplayName, response[0].DisplayName);
+      }
     }
 
     [Test]
     public void TestGetItemsWithNotExistentInstanceUrlReturnsError()
     {
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dddk.sitecore.net")
-        .Credentials(this.testData.Users.Admin)
-        .BuildReadonlySession();
-
-      TestDelegate testCode = async () =>
+      using
+      (
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dddk.sitecore.net")
+          .Credentials(this.testData.Users.Admin)
+          .BuildReadonlySession()
+      )
       {
-        var task = session.ReadItemAsync(this.requestWithItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
+        TestDelegate testCode = async () =>
+        {
+          var task = session.ReadItemAsync(this.requestWithItemId);
+          await task;
+        };
+        Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
-      Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+        Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
+      }
     }
 
     [Test]
     public void TestGetItemWithNotExistentUserReturnsError()
     {
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(this.testData.Users.NotExistent)
-        .DefaultDatabase("web")
-        .DefaultLanguage("en")
-        .Site(testData.ShellSite)
-        .BuildSession();
-
-      TestDelegate testCode = async () =>
+      using
+      (
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(this.testData.Users.NotExistent)
+          .DefaultDatabase("web")
+          .DefaultLanguage("en")
+          .Site(testData.ShellSite)
+          .BuildSession()
+      )
       {
-        var task = session.ReadItemAsync(this.requestWithItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
+        TestDelegate testCode = async () =>
+        {
+          var task = session.ReadItemAsync(this.requestWithItemId);
+          await task;
+        };
+        Exception exception = Assert.Throws<ParserException>(testCode);
 
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
+      }
     }
 
     [Test]
     public void TestGetItemWithInvalidUsernameAndPasswordReturnsError()
     {
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd"))
-        .Site(testData.ShellSite)
-        .BuildSession();
-
-      TestDelegate testCode = async () =>
+      using
+      (
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(new WebApiCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd"))
+          .Site(testData.ShellSite)
+          .BuildSession()
+      )
       {
-        var task = session.ReadItemAsync(this.requestWithItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
+        TestDelegate testCode = async () =>
+        {
+          var task = session.ReadItemAsync(this.requestWithItemId);
+          await task;
+        };
+        Exception exception = Assert.Throws<ParserException>(testCode);
 
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
+        Assert.True(exception.Message.Contains("Unable to download data from the internet"));
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
+      }
     }
 
     [Test]
     public void TestGetItemAsAnonymousWithoutReadAccessReturnsError()
     {
-      var session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
-        .DefaultDatabase("web")
-        .DefaultLanguage("en")
-        .Site(testData.ShellSite)
-        .BuildReadonlySession();
-
-      TestDelegate testCode = async () =>
+      using 
+      (
+        var session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost (testData.InstanceUrl)
+        .DefaultDatabase ("web")
+        .DefaultLanguage ("en")
+        .Site (testData.ShellSite)
+        .BuildReadonlySession ()
+      )
       {
-        var task = session.ReadItemAsync(this.requestWithItemId);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
+        TestDelegate testCode = async () =>
+        {
+          var task = session.ReadItemAsync (this.requestWithItemId);
+          await task;
+        };
+        Exception exception = Assert.Throws<ParserException> (testCode);
 
-      Assert.True(exception.Message.Contains("Unable to download data from the internet"));
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
+        Assert.True (exception.Message.Contains ("Unable to download data from the internet"));
+        Assert.AreEqual ("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType ().ToString ());
+        Assert.True (exception.InnerException.Message.Contains ("Access to site is not granted."));
+      }
     }
   }
 }

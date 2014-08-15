@@ -61,31 +61,56 @@ namespace Sitecore.MobileSDK
       this.httpClient = new HttpClient();
     }
 
-    //REVIEW: memory management
     void ReleaseResources()
     {
+      Exception credentialsException = null;
+      Exception httpClientException = null;
+
       if (null != this.credentials)
       {
-        this.credentials.Dispose();
+        try
+        {
+          this.credentials.Dispose();
+        }
+        catch (Exception ex)
+        {
+          credentialsException = ex;
+        }
         this.credentials = null;
       }
 
       if (null != this.httpClient)
       {
-        this.httpClient.Dispose();
+        try
+        {
+          this.httpClient.Dispose();
+        }
+        catch (Exception ex)
+        {
+          httpClientException = ex;
+        }
         this.httpClient = null;
       }
+
+      if (null != credentialsException)
+      {
+        throw credentialsException;
+      }
+      else if (null != httpClientException)
+      {
+        throw httpClientException;
+      }
     }
+
 
     public virtual void Dispose()
     {
       this.ReleaseResources();
-      GC.SuppressFinalize(this);
     }
 
     ~ScApiSession() 
     {
-      this.ReleaseResources();
+
     }
 
     public IItemSource DefaultSource

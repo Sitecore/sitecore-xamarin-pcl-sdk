@@ -1,4 +1,6 @@
-﻿namespace MobileSDKIntegrationTest
+﻿using Sitecore.MobileSDK;
+
+namespace MobileSDKIntegrationTest
 {
   using System;
   using NUnit.Framework;
@@ -31,8 +33,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
        .Credentials(new WebApiCredentialsPOD("", testData.Users.Admin.Password))
-       .BuildReadonlySession());
-
+      );
       Assert.AreEqual("SessionBuilder.Credentials.Username : The input cannot be empty.", exception.Message);
     }
 
@@ -41,7 +42,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD("username", ""))
-         .BuildReadonlySession());
+         );
       Assert.AreEqual("SessionBuilder.Credentials.Password : The input cannot be empty.", exception.Message);
     }
 
@@ -50,7 +51,7 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD(null, "password"))
-         .BuildReadonlySession());
+         );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.Credentials.Username"));
     }
 
@@ -59,7 +60,7 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
          .Credentials(new WebApiCredentialsPOD("username", null))
-         .BuildReadonlySession());
+         );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.Credentials.Password"));
     }
 
@@ -68,7 +69,7 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(null)
         .Credentials(new WebApiCredentialsPOD("Username", "Password"))
-        .BuildReadonlySession());
+        );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.InstanceUrl"));
     }
 
@@ -77,7 +78,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("")
         .Credentials(new WebApiCredentialsPOD("Username", "Password"))
-        .BuildReadonlySession());
+        );
       Assert.AreEqual("SessionBuilder.InstanceUrl : The input cannot be empty.", exception.Message);
     }
 
@@ -86,7 +87,7 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .DefaultDatabase(null)
-        .BuildReadonlySession());
+        );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.DefaultDatabase"));
     }
 
@@ -95,7 +96,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .DefaultLanguage(" ")
-        .BuildReadonlySession());
+        );
       Assert.AreEqual("SessionBuilder.DefaultLanguage : The input cannot be empty.", exception.Message);
     }
 
@@ -104,7 +105,7 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .DefaultMediaResourceExtension(null)
-        .BuildSession());
+        );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.DefaultMediaResourceExtension"));
     }
 
@@ -113,7 +114,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .MediaLibraryRoot("")
-        .BuildSession());
+        );
       Assert.AreEqual("SessionBuilder.MediaLibraryRoot : The input cannot be empty.", exception.Message);
     }
 
@@ -122,7 +123,7 @@
     {
       var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
         .Site(null)
-        .BuildSession());
+        );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.Site"));
     }
 
@@ -131,7 +132,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
         .MediaPrefix(" ")
-        .BuildSession());
+        );
       Assert.AreEqual("SessionBuilder.MediaPrefix : The input cannot be empty.", exception.Message);
     }
 

@@ -50,6 +50,7 @@
     public void TearDown()
     {
       this.itemSource = null;
+      this.session.Dispose();
       this.session = null;
       this.env = null;
       this.mediaSettings = null;
