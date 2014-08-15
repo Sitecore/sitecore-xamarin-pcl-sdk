@@ -63,25 +63,45 @@ namespace Sitecore.MobileSDK
 
     void ReleaseResources()
     {
-      try
+      Exception ex1 = null;
+      Exception ex2 = null;
+
+      if (null != this.credentials)
       {
-        if (null != this.credentials)
+        try
         {
           this.credentials.Dispose();
-          this.credentials = null;
         }
+        catch (Exception ex)
+        {
+          ex1 = ex;
+        }
+        this.credentials = null;
+      }
 
-        if (null != this.httpClient)
+      if (null != this.httpClient)
+      {
+        try
         {
           this.httpClient.Dispose();
-          this.httpClient = null;
         }
+        catch (Exception ex)
+        {
+          ex2 = ex;
+        }
+        this.httpClient = null;
       }
-      catch (Exception ex)
+
+      if (null != ex1)
       {
-        throw new SitecoreMobileSdkException("[Sitecore Mobile SDK] Memory release issues", ex);
+        throw ex1;
+      }
+      else if (null != ex2)
+      {
+        throw ex2;
       }
     }
+
 
     public virtual void Dispose()
     {
