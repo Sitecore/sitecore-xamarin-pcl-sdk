@@ -19,6 +19,11 @@
 
     public IDeleteItemRequestBuilder<T> Database(string database)
     {
+      if (string.IsNullOrEmpty(database))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(database, this.GetType().Name + ".Database");
 
       BaseValidator.CheckForTwiceSetAndThrow(this.database, this.GetType().Name + ".Database");

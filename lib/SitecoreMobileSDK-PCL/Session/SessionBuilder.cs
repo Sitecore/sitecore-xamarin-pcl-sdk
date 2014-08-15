@@ -121,6 +121,11 @@
     #region IAnonymousSessionBuilder
     public IBaseSessionBuilder Site(string site)
     {
+      if (string.IsNullOrEmpty(site))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForTwiceSetAndThrow(this.site, this.GetType().Name + ".Site");
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(site, this.GetType().Name + ".Site");
 
@@ -139,6 +144,11 @@
 
     public IBaseSessionBuilder DefaultDatabase(string defaultDatabase)
     {
+      if (string.IsNullOrEmpty(defaultDatabase))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database,
         this.GetType().Name + ".DefaultDatabase");
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(defaultDatabase,
@@ -155,6 +165,11 @@
 
     public IBaseSessionBuilder DefaultLanguage(string defaultLanguage)
     {
+      if (string.IsNullOrEmpty(defaultLanguage))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language,
         this.GetType().Name + ".DefaultLanguage");
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(defaultLanguage,
@@ -171,6 +186,11 @@
 
     public IBaseSessionBuilder MediaLibraryRoot(string mediaLibraryRootItem)
     {
+      if (string.IsNullOrEmpty(mediaLibraryRootItem))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForTwiceSetAndThrow(this.mediaRoot,
         this.GetType().Name + ".MediaLibraryRoot");
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaLibraryRootItem,
@@ -182,6 +202,11 @@
 
     public IBaseSessionBuilder DefaultMediaResourceExtension(string defaultExtension)
     {
+      if (string.IsNullOrEmpty(defaultExtension))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForTwiceSetAndThrow(this.mediaExtension,
         this.GetType().Name + ".DefaultMediaResourceExtension");
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(defaultExtension,
@@ -193,6 +218,11 @@
 
     public IBaseSessionBuilder MediaPrefix(string mediaPrefix)
     {
+      if (string.IsNullOrEmpty(mediaPrefix))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForTwiceSetAndThrow(this.mediaPrefix,
         this.GetType().Name + ".MediaPrefix");
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaPrefix,

@@ -14,6 +14,11 @@
   {
     public IBaseRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
+      if (string.IsNullOrEmpty(sitecoreDatabase))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(sitecoreDatabase, this.GetType().Name + ".Database");
 
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
@@ -28,6 +33,11 @@
 
     public IBaseRequestParametersBuilder<T> Language(string itemLanguage)
     {
+      if (string.IsNullOrEmpty(itemLanguage))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemLanguage, this.GetType().Name + ".Language");
 
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
