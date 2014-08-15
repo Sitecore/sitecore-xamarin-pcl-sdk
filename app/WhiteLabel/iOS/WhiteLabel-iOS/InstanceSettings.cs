@@ -39,19 +39,23 @@ namespace WhiteLabeliOS
 
     public ISitecoreWebApiSession GetSession()
     {
-      var credentials = 
-        new WebApiCredentialsPODInsequredDemo(
-          this.instanceLogin, 
-          this.instancePassword);
+      using 
+      (
+        var credentials = 
+          new WebApiCredentialsPODInsequredDemo(
+            this.instanceLogin, 
+            this.instancePassword)
+      )
+      {
+        var result = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.instanceUrl)
+          .Credentials(credentials)
+          .Site(this.instanceSite)
+          .DefaultDatabase(this.instanceDataBase)
+          .DefaultLanguage(this.instanceLanguage)
+          .BuildSession();
 
-      var result = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost (this.instanceUrl)
-        .Credentials (credentials)
-        .Site (this.instanceSite)
-        .DefaultDatabase (this.instanceDataBase)
-        .DefaultLanguage (this.instanceLanguage)
-        .BuildSession ();
-
-      return result;
+        return result;
+      }
     }
 
     private void SaveValueToStorage(string value, string key)
