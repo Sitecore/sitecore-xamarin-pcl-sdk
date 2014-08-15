@@ -415,21 +415,23 @@
 
     #region Database Validation
     [Test]
-    public void TestNullDatabaseCannotBeAssignedExplicitly()
+    public void TestNullDatabaseCanBeAssignedExplicitly()
     {
-      Assert.Throws<ArgumentNullException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Database(null)
-      );
+        .Build();
+
+      Assert.IsNotNull(request);
     }
 
     [Test]
-    public void TestEmptyDatabaseCannotBeAssignedExplicitly()
+    public void TestEmptyDatabaseCanBeAssignedExplicitly()
     {
-      Assert.Throws<ArgumentException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
         .Database(string.Empty)
-      );
+        .Build();
+
+      Assert.IsNotNull(request);
     }
 
     [Test]
@@ -453,23 +455,25 @@
     #endregion Database Validation
 
 
-    #region Language Validation
+    #region Language Validationvar request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+     
     [Test]
-    public void TestNullLanguageCannotBeAssignedExplicitly()
+    public void TestNullLanguageCanBeAssignedExplicitly()
     {
-      Assert.Throws<ArgumentNullException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
         .Language(null)
-      );
+        .Build();
+
+      Assert.IsNotNull(request);
     }
 
     [Test]
-    public void TestEmptyLanguageCannotBeAssignedExplicitly()
+    public void TestEmptyLanguageCanBeAssignedExplicitly()
     {
-      Assert.Throws<ArgumentException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Language(string.Empty)
-      );
+        .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]

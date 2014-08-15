@@ -235,80 +235,80 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestDatabaseThrowsExceptionForNullInput()
+    public void TestDatabaseDoNotThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentNullException>( ()=>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+      using 
+        (
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultDatabase(null)
-      );
-
-      Assert.Throws<ArgumentNullException>( ()=>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .DefaultDatabase(null)
-      );
+        .BuildSession()
+        )
+      {
+        Assert.IsNotNull(session);
+      }
     }
 
     [Test]
-    public void TestLanguageThrowsExceptionForNullInput()
+    public void TestLanguageDoNotThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
-        .Credentials(this.adminCredentials)
-        .DefaultLanguage(null)
-      );
-
-      Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .DefaultLanguage(null)
-      );
+      using 
+        (
+          var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+          .Credentials(this.adminCredentials)
+          .DefaultLanguage(null)
+          .BuildSession()
+        )
+      {
+        Assert.IsNotNull(session);
+      }
     }
 
     [Test]
-    public void TestSiteThrowsExceptionForNullInput()
+    public void TestSiteDoNotThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
-        .Credentials(this.adminCredentials)
-        .Site(null)
-      );
-
-      Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .Site(null)
-      );
-    }
-
-
-    [Test]
-    public void TestMediaThrowsExceptionForNullInput()
-    {
-      Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
-        .Credentials(this.adminCredentials)
-        .MediaLibraryRoot(null)
-      );
-
-      Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .MediaLibraryRoot(null)
-      );
+      using 
+        (
+          var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+          .Credentials(this.adminCredentials)
+          .Site(null)
+          .BuildSession()
+        )
+      {
+        Assert.IsNotNull(session);
+      }
     }
 
 
     [Test]
-    public void TestMediaExtThrowsExceptionForNullInput()
+    public void TestMediaDoNotThrowsExceptionForNullInput()
     {
-      Assert.Throws<ArgumentNullException>( ()=>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
-        .Credentials(this.adminCredentials)
-        .DefaultMediaResourceExtension(null)
-      );
+      using 
+        (
+          var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+          .Credentials(this.adminCredentials)
+          .MediaLibraryRoot(null)
+          .BuildSession()
+        )
+      {
+        Assert.IsNotNull(session);
+      }
+    }
 
-      Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .DefaultMediaResourceExtension(null)
-      );
+
+    [Test]
+    public void TestMediaExtDonotThrowsExceptionForNullInput()
+    {
+      using 
+        (
+          var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+          .Credentials(this.adminCredentials)
+          .DefaultMediaResourceExtension(null)
+          .BuildSession()
+        )
+      {
+        Assert.IsNotNull(session);
+      }
     }
     #endregion Validate Null
   }

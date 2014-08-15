@@ -446,17 +446,21 @@
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithEmptyDatabaseReturnsException()
+    public void TestGetMediaWithEmptyDatabaseDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Database(""));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : The input cannot be empty.", exception.Message);
+      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+        .Database("")
+        .Build();
+      Assert.IsNotNull (request);
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithNullDatabaseReturnsException()
+    public void TestGetMediaWithNullDatabaseDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Database(null));
-      Assert.IsTrue(exception.Message.Contains("ReadMediaItemRequestBuilder.Database"));
+      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+        .Database(null)
+        .Build();
+      Assert.IsNotNull (request);
     }
 
     [Test] //ALR: Argument exception should appear
@@ -467,10 +471,12 @@
     }
 
     [Test] //ALR: Argument exception should appear
-    public void TestGetMediaWithNullLanguageReturnsException()
+    public void TestGetMediaWithNullLanguageDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Language(null));
-      Assert.IsTrue(exception.Message.Contains("ReadMediaItemRequestBuilder.Language"));
+      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+        .Language(null)
+        .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test] //ALR: Argument exception should appear

@@ -287,11 +287,11 @@
     }
 
     [Test]
-    public void TestGetItemWithEmptySiteReturnsException()
+    public void TestGetItemWithEmptySiteDoNotReturnsException()
     {
       const string Site = "";
-      Exception exception = Assert.Throws<ArgumentException>(() => this.CreateCreatorexSession(Site));
-      Assert.AreEqual("SessionBuilder.Site : The input cannot be empty.", exception.Message);
+      var session = this.CreateCreatorexSession(Site);
+      Assert.IsNotNull(session);
     }
     [Test]
     public void TestGetItemWithInvalidSiteReturnsException()
@@ -339,10 +339,12 @@
 
 
     [Test]
-    public void TestGetItemWithEmpryLanguageInRequestByQueryReturnsException()
+    public void TestGetItemWithEmpryLanguageInRequestByQueryDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Id).Language("").Build());
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.Language : The input cannot be empty.", exception.Message);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Id)
+        .Language("")
+        .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]
@@ -353,24 +355,30 @@
     }
 
     [Test]
-    public void TestGetItemWithNullLanguageInRequestByIdReturnsException()
+    public void TestGetItemWithNullLanguageInRequestByIdDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Language(null).Build());
-      Assert.IsTrue(exception.Message.Contains("ReadItemByIdRequestBuilder.Language"));
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+        .Language(null)
+        .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]
-    public void TestGetItemWithEmptyDatabaseInRequestByIdReturnsException()
+    public void TestGetItemWithEmptyDatabaseInRequestByIdDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Database("").Build());
-      Assert.AreEqual("ReadItemByIdRequestBuilder.Database : The input cannot be empty.", exception.Message);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+        .Database("")
+        .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]
-    public void TestGetItemWithNullDatabaseInRequestByPathReturnsException()
+    public void TestGetItemWithNullDatabaseInRequestByPathDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Database(null).Build());
-      Assert.IsTrue(exception.Message.Contains("ReadItemByPathRequestBuilder.Database"));
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
+        .Database(null)
+        .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]

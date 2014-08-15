@@ -311,19 +311,21 @@
     }
 
     [Test]
-    public void TestDeleteItemByPathWithNullDatabaseReturnsException()
+    public void TestDeleteItemByPathWithNullDatabaseDoNotReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sample path")
-        .Database(null));
-      Assert.IsTrue(exception.Message.Contains("DeleteItemItemByPathRequestBuilder.Database"));
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sample path")
+        .Database(null)
+        .Build();
+      Assert.IsNotNull (request);
     }
 
     [Test]
-    public void TestDeleteItemByIdWithEmptyDatabaseReturnsException()
+    public void TestDeleteItemByIdWithEmptyDatabaseDoNotReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
-        .Database(""));
-      Assert.AreEqual("DeleteItemByIdRequestBuilder.Database : The input cannot be empty.", exception.Message);
+      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
+        .Database("")
+        .Build();
+      Assert.IsNotNull (request);
     }
 
     [Test]

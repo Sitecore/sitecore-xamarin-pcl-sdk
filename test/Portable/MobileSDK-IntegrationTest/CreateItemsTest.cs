@@ -620,36 +620,36 @@
     }
 
     [Test]
-    public void TestCreateItemByIdWithNullDatabaseReturnsException()
+    public void TestCreateItemByIdWithNullDatabaseDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Id)
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Id)
          .ItemTemplatePath("Some template")
          .ItemName("Item with null db")
          .Database(null)
-         .Build());
-      Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.Database"));
+         .Build();
+      Assert.IsNotNull (request);
     }
 
     [Test]
-    public void TestCreateItemByIdWithEmptyDatabaseReturnsException()
+    public void TestCreateItemByIdWithEmptyDatabaseDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Id)
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Id)
          .ItemTemplatePath("Some template")
          .ItemName("Item with empty db")
          .Database("")
-         .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.Database : The input cannot be empty.", exception.Message);
+         .Build();
+      Assert.IsNotNull (request);
     }
 
     [Test]
-    public void TestCreateItemByPathWithNullLanguageReturnsException()
+    public void TestCreateItemByPathWithNullLanguageDoNotReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
          .ItemTemplatePath("Some template")
          .ItemName("Item with null language")
          .Language(null)
-         .Build());
-      Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.Language"));
+         .Build();
+      Assert.IsNotNull (request);
     }
 
     [Test]
