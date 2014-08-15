@@ -12,12 +12,12 @@ namespace WhiteLabeliOS
   {
     public AuthViewController (IntPtr handle) : base (handle)
     {
-      Title = NSBundle.MainBundle.LocalizedString ("authTestVC", null);
+      Title = NSBundle.MainBundle.LocalizedString("authTestVC", null);
     }
 
     public override void ViewDidLoad()
     {
-      base.ViewDidLoad ();
+      base.ViewDidLoad();
 
       this.loginField.ShouldReturn = this.HideKeyboard;
       this.passwordField.ShouldReturn = this.HideKeyboard;
@@ -28,17 +28,16 @@ namespace WhiteLabeliOS
       this.passwordField.Text = "b";
       this.siteField.Text = "/sitecore/shell";
 
-      this.loginField.Placeholder = NSBundle.MainBundle.LocalizedString ("user_login_placeholder", null);
-      this.passwordField.Placeholder = NSBundle.MainBundle.LocalizedString ("password_placeholder", null);
-      this.urlField.Placeholder = NSBundle.MainBundle.LocalizedString ("Instance Url", null);
-      this.siteField.Placeholder = NSBundle.MainBundle.LocalizedString ("Site", null);
+      this.loginField.Placeholder = NSBundle.MainBundle.LocalizedString("user_login_placeholder", null);
+      this.passwordField.Placeholder = NSBundle.MainBundle.LocalizedString("password_placeholder", null);
+      this.urlField.Placeholder = NSBundle.MainBundle.LocalizedString("Instance Url", null);
+      this.siteField.Placeholder = NSBundle.MainBundle.LocalizedString("Site", null);
 
-      string authButtonTitle = NSBundle.MainBundle.LocalizedString ("authenticate_button_title", null);
-      authButton.SetTitle (authButtonTitle, UIControlState.Normal);
-
+      string authButtonTitle = NSBundle.MainBundle.LocalizedString("authenticate_button_title", null);
+      authButton.SetTitle(authButtonTitle, UIControlState.Normal);
     }
 
-    partial void OnAuthButtonTapped (MonoTouch.UIKit.UIButton sender)
+    partial void OnAuthButtonTapped(MonoTouch.UIKit.UIButton sender)
     {
       this.SendAuthRequest();
     }
@@ -47,23 +46,27 @@ namespace WhiteLabeliOS
     {
       try
       {
-        var credentials = new WebApiCredentialsPODInsequredDemo(this.loginField.Text, this.passwordField.Text);
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
-          .Credentials(credentials)
-          .Site(this.siteField.Text)
-          .BuildReadonlySession();
-
-        this.ShowLoader();
-
-        bool response = await session.AuthenticateAsync();
-
-        if (response)
+        using (var credentials = new WebApiCredentialsPODInsequredDemo(this.loginField.Text, this.passwordField.Text))
+        using 
+        ( 
+            var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
+            .Credentials(credentials)
+            .Site(this.siteField.Text)
+            .BuildReadonlySession()
+        )
         {
-          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "This user exist");
-        }
-        else
-        {
-          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "This user not exist");
+          this.ShowLoader();
+
+          bool response = await session.AuthenticateAsync();
+
+          if (response)
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "This user exist");
+          }
+          else
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "This user not exist");
+          }
         }
       }
       catch(Exception e) 

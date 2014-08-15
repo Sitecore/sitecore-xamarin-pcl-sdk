@@ -63,14 +63,20 @@ namespace WhiteLabeliOS
       switch (sender.SelectedSegment)
       {
         case 0:
-        this.currentPayloadType = PayloadType.Full;
-        break;
+        {
+          this.currentPayloadType = PayloadType.Full;
+          break;
+        }
         case 1:
-        this.currentPayloadType = PayloadType.Content;
-        break;
+        {
+          this.currentPayloadType = PayloadType.Content;
+          break;
+        }
         case 2:
-        this.currentPayloadType = PayloadType.Min;
-        break;
+        {
+          this.currentPayloadType = PayloadType.Min;
+          break;
+        }
       }
     }
 
@@ -83,37 +89,38 @@ namespace WhiteLabeliOS
     {
       try
       {
-        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
-
-        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
-          .Payload(this.currentPayloadType)
-          .AddFieldsToRead(this.fieldNameTextField.Text);
-
-        if (this.parentScopeButton.Selected)
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
-          builder = builder.AddScope(ScopeType.Parent);
-        }
-        if (this.selfScopeButton.Selected)
-        {
-          builder = builder.AddScope(ScopeType.Self);
-        }
-        if (this.childrenScopeButton.Selected)
-        {
-          builder = builder.AddScope(ScopeType.Children);
-        }
+          var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+            .Payload(this.currentPayloadType)
+            .AddFieldsToRead(this.fieldNameTextField.Text);
 
-        var request = builder.Build();
+          if (this.parentScopeButton.Selected)
+          {
+            builder = builder.AddScope(ScopeType.Parent);
+          }
+          if (this.selfScopeButton.Selected)
+          {
+            builder = builder.AddScope(ScopeType.Self);
+          }
+          if (this.childrenScopeButton.Selected)
+          {
+            builder = builder.AddScope(ScopeType.Children);
+          }
 
-        this.ShowLoader();
+          var request = builder.Build();
 
-        ScItemsResponse response = await session.ReadItemAsync(request);
-        if (response.Any())
-        {
-          this.ShowItemsList(response);
-        }
-        else
-        {
-          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+          this.ShowLoader();
+
+          ScItemsResponse response = await session.ReadItemAsync(request);
+          if (response.Any())
+          {
+            this.ShowItemsList(response);
+          }
+          else
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+          }
         }
       }
       catch(Exception e) 
