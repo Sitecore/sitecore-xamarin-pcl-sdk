@@ -15,38 +15,38 @@ namespace WhiteLabeliOS
 
   public partial class GetMediaItemViewController : BaseTaskViewController
   {
-    public GetMediaItemViewController (IntPtr handle) : base (handle)
+    public GetMediaItemViewController(IntPtr handle) : base (handle)
     {
-      Title = NSBundle.MainBundle.LocalizedString ("getMediaItem", null);
+      Title = NSBundle.MainBundle.LocalizedString("getMediaItem", null);
     }
 
-    public override void ViewDidLoad ()
+    public override void ViewDidLoad()
     {
-      base.ViewDidLoad ();
+      base.ViewDidLoad();
 
-      this.MediaPathTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type Media Path", null);
+      this.MediaPathTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Type Media Path", null);
 
-      string ButtonTitle = NSBundle.MainBundle.LocalizedString ("Download", null);
+      string ButtonTitle = NSBundle.MainBundle.LocalizedString("Download", null);
       this.DownloadButton.SetTitle (ButtonTitle, UIControlState.Normal);
 
-      this.HeightLabel.Text = NSBundle.MainBundle.LocalizedString ("Height:", null);
-      this.WidthLabel.Text = NSBundle.MainBundle.LocalizedString ("Width:", null);
+      this.HeightLabel.Text = NSBundle.MainBundle.LocalizedString("Height:", null);
+      this.WidthLabel.Text = NSBundle.MainBundle.LocalizedString("Width:", null);
 
       this.MediaPathTextField.Text = "/sitecore/media library/fffffffff";
     }
 
-    public override void ViewDidAppear (bool animated)
+    public override void ViewDidAppear(bool animated)
     {
-      base.ViewDidAppear (animated);
+      base.ViewDidAppear(animated);
 
-      this.maxWidth = (int)Math.Round (this.ImageView.Bounds.Width);
-      this.maxHeight = (int)Math.Round (this.ImageView.Bounds.Height);
+      this.maxWidth = (int)Math.Round(this.ImageView.Bounds.Width);
+      this.maxHeight = (int)Math.Round(this.ImageView.Bounds.Height);
 
-      this.WidthTextField.Text = maxWidth.ToString ();
-      this.HeightTextField.Text = maxHeight.ToString ();
+      this.WidthTextField.Text = maxWidth.ToString();
+      this.HeightTextField.Text = maxHeight.ToString();
     }
 
-    partial void OnDownloadButtonTouched (MonoTouch.Foundation.NSObject sender)
+    partial void OnDownloadButtonTouched(MonoTouch.Foundation.NSObject sender)
     {
       try
       {
@@ -95,39 +95,44 @@ namespace WhiteLabeliOS
     {
       try
       {
-        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
-
-        IDownloadMediaOptions options = new MediaOptionsBuilder()
-          .Set
-          .Width(this.width)
-          .Height(this.height)
-          .BackgroundColor("white")
-          .Build();
-
-        string path = this.MediaPathTextField.Text;
-
-        var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(path)
-          .DownloadOptions(options)
-          .Build();
-
-        var response = await session.DownloadResourceAsync(request);
-
-        byte[] data;
-
-        using (BinaryReader br = new BinaryReader(response))
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
-          data = br.ReadBytes((int)response.Length);
+          IDownloadMediaOptions options = new MediaOptionsBuilder()
+            .Set
+            .Width(this.width)
+            .Height(this.height)
+            .BackgroundColor("white")
+            .Build();
+
+          string path = this.MediaPathTextField.Text;
+
+          var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(path)
+            .DownloadOptions(options)
+            .Build();
+
+
+          byte[] data = null;
+          using (Stream response = await session.DownloadResourceAsync(request))
+          using (MemoryStream responseInMemory = new MemoryStream())
+          {
+            await response.CopyToAsync(responseInMemory);
+            data = responseInMemory.ToArray();
+          }
+
+          BeginInvokeOnMainThread(delegate
+          {
+            using ( UIImage image = new UIImage(NSData.FromArray(data)) )
+            {
+              // no need disposing 
+              // since this.ImageView.Image creates a 
+              // new C# object on each call
+              this.ImageView.Image = image;
+
+              // Update Overlay
+              this.HideLoader();
+            }
+          });
         }
-
-        UIImage image = null;
-        image = new UIImage(NSData.FromArray(data));
-
-        BeginInvokeOnMainThread(delegate
-        {
-          this.ImageView.Image = image;
-          this.HideLoader();
-        });
-
       }
       catch(Exception e) 
       {
