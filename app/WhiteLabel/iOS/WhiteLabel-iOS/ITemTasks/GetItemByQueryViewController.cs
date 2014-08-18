@@ -1,5 +1,4 @@
-﻿
-namespace WhiteLabeliOS
+﻿namespace WhiteLabeliOS
 {
   using System;
   using System.Drawing;
@@ -14,26 +13,26 @@ namespace WhiteLabeliOS
 
   public partial class GetItemByQueryViewController : BaseTaskTableViewController
   {
-    public GetItemByQueryViewController (IntPtr handle) : base (handle)
+    public GetItemByQueryViewController(IntPtr handle) : base (handle)
     {
-      Title = NSBundle.MainBundle.LocalizedString ("getItemByQuery", null);
+      Title = NSBundle.MainBundle.LocalizedString("getItemByQuery", null);
     }
 
-    public override void ViewDidLoad ()
+    public override void ViewDidLoad()
     {
-      base.ViewDidLoad ();
+      base.ViewDidLoad();
       this.TableView = this.ItemsTableView;
 
       queryTextField.Text = "/Sitecore/Content/Home/*";
 
 
-      string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
-      getItemButton.SetTitle (getChildrenButtonTitle, UIControlState.Normal);
+      string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString("Get Item", null);
+      getItemButton.SetTitle(getChildrenButtonTitle, UIControlState.Normal);
 
-      nameLabel.Text = NSBundle.MainBundle.LocalizedString ("Type query", null);
+      nameLabel.Text = NSBundle.MainBundle.LocalizedString("Type query", null);
     }
 
-    partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
+    partial void OnGetItemButtonTouched(MonoTouch.Foundation.NSObject sender)
     {
       if (String.IsNullOrEmpty(queryTextField.Text))
       {
@@ -50,23 +49,24 @@ namespace WhiteLabeliOS
     {
       try
       {
-        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
-
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(queryTextField.Text)
-          .Build();
-
-        this.ShowLoader();
-
-        ScItemsResponse response = await session.ReadItemAsync(request);
-
-        this.HideLoader();
-        if (response.ResultCount > 0)
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
-          this.ShowItemsList(response);
-        }
-        else
-        {
-          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+          var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(queryTextField.Text)
+            .Build();
+
+          this.ShowLoader();
+
+          ScItemsResponse response = await session.ReadItemAsync(request);
+
+          this.HideLoader();
+          if (response.ResultCount > 0)
+          {
+            this.ShowItemsList(response);
+          }
+          else
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+          }
         }
       }
       catch(Exception e) 

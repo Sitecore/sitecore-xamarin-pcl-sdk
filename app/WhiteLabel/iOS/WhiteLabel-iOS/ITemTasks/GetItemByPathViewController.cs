@@ -1,5 +1,4 @@
-﻿
-namespace WhiteLabeliOS
+﻿namespace WhiteLabeliOS
 {
   using System;
   using System.Linq;
@@ -15,103 +14,109 @@ namespace WhiteLabeliOS
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
 
-	public partial class GetItemByPathViewController : BaseTaskTableViewController
-	{
+  public partial class GetItemByPathViewController : BaseTaskTableViewController
+  {
 
-		public GetItemByPathViewController (IntPtr handle) : base (handle)
-		{
-			Title = NSBundle.MainBundle.LocalizedString("getItemByPath", null);
-		}
+    public GetItemByPathViewController(IntPtr handle) : base (handle)
+    {
+      Title = NSBundle.MainBundle.LocalizedString("getItemByPath", null);
+    }
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
-			this.TableView = this.FieldsTableView;
+    public override void ViewDidLoad()
+    {
+      base.ViewDidLoad();
+      this.TableView = this.FieldsTableView;
 
-			this.ItemPathField.Text = "/sitecore/content/Home";
+      this.ItemPathField.Text = "/sitecore/content/Home";
 
-            this.ItemPathField.ShouldReturn = this.HideKeyboard;
+      this.ItemPathField.ShouldReturn = this.HideKeyboard;
 
-			this.ItemPathField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item Path", null);
-			this.fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);;
+      this.ItemPathField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item Path", null);
+      this.fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);;
 
-			string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
-			getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
+      string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
+      getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
+    }
 
-		}
+    partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
+    {
+      if (String.IsNullOrEmpty(this.ItemPathField.Text))
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item path");
+      }
+      else
+      {
+        this.HideKeyboard(this.ItemPathField);
+        this.HideKeyboard(this.fieldNameTextField);
 
-		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
-		{
-            if (String.IsNullOrEmpty(this.ItemPathField.Text))
-			{
-				AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item path");
-			}
-			else
-			{
-                this.HideKeyboard(this.ItemPathField);
-                this.HideKeyboard(this.fieldNameTextField);
+        this.SendRequest();
+      }
+    }
 
-				this.SendRequest();
-			}
-		}
-
-		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
-		{
-			switch (sender.SelectedSegment)
-			{
-			case 0:
-				this.currentPayloadType = PayloadType.Full;
-				break;
-			case 1:
-				this.currentPayloadType = PayloadType.Content;
-				break;
-			case 2:
-				this.currentPayloadType = PayloadType.Min;
-				break;
-			}
-		}
+    partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
+    {
+      switch (sender.SelectedSegment)
+      {
+        case 0:
+        {
+          this.currentPayloadType = PayloadType.Full;
+          break;
+        }
+        case 1:
+        {
+          this.currentPayloadType = PayloadType.Content;
+          break;
+        }
+        case 2:
+        {
+          this.currentPayloadType = PayloadType.Min;
+          break;
+        }
+      }
+    }
 
     partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender)
     {
       sender.Selected = !sender.Selected;
     }
 
-		private async void SendRequest ()
-		{
-			try
-			{
-        ISitecoreWebApiSession session = this.instanceSettings.GetSession();
-
-        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-          .Payload(this.currentPayloadType)
-          .AddFieldsToRead(this.fieldNameTextField.Text);
-
-        if (this.parentScopeButton.Selected)
+    private async void SendRequest ()
+    {
+      try
+      {
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
-          builder = builder.AddScope(ScopeType.Parent);
-        }
-        if (this.selfScopeButton.Selected)
-        {
-          builder = builder.AddScope(ScopeType.Self);
-        }
-        if (this.childrenScopeButton.Selected)
-        {
-          builder = builder.AddScope(ScopeType.Children);
-        }
+          var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+            .Payload(this.currentPayloadType)
+            .AddFieldsToRead(this.fieldNameTextField.Text);
 
-        var request = builder.Build();
+          if (this.parentScopeButton.Selected)
+          {
+            builder = builder.AddScope(ScopeType.Parent);
+          }
+          if (this.selfScopeButton.Selected)
+          {
+            builder = builder.AddScope(ScopeType.Self);
+          }
+          if (this.childrenScopeButton.Selected)
+          {
+            builder = builder.AddScope(ScopeType.Children);
+          }
 
-				this.ShowLoader();
+          var request = builder.Build();
 
-				ScItemsResponse response = await session.ReadItemAsync(request);
-				
-        if (response.Any())
-        {
-          this.ShowItemsList(response);
-        }
-        else
-        {
-          AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+          this.ShowLoader();
+
+          ScItemsResponse response = await session.ReadItemAsync(request);
+
+          if (response.Any())
+          {
+            this.ShowItemsList(response);
+          }
+          else
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+          }
         }
       }
       catch(Exception e) 

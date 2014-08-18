@@ -13,44 +13,44 @@ namespace WhiteLabeliOS
 
 	public partial class DeleteITemByIdViewController : BaseTaskViewController
 	{
-		public DeleteITemByIdViewController (IntPtr handle) : base (handle)
+		public DeleteITemByIdViewController(IntPtr handle) : base (handle)
 		{
-			Title = NSBundle.MainBundle.LocalizedString ("deleteItemById", null);
+			Title = NSBundle.MainBundle.LocalizedString("deleteItemById", null);
 		}
 
-		public override void ViewDidLoad ()
+		public override void ViewDidLoad()
 		{
-			base.ViewDidLoad ();
+			base.ViewDidLoad();
 
       this.itemIdField.ShouldReturn = this.HideKeyboard;
       this.itemPathField.ShouldReturn = this.HideKeyboard;
       this.itemQueryField.ShouldReturn = this.HideKeyboard;
 
-      this.itemIdField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item ID", null);
-      this.itemPathField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item Path", null);
-      this.itemQueryField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type query", null);
+      this.itemIdField.Placeholder = NSBundle.MainBundle.LocalizedString("Type item ID", null);
+      this.itemPathField.Placeholder = NSBundle.MainBundle.LocalizedString("Type item Path", null);
+      this.itemQueryField.Placeholder = NSBundle.MainBundle.LocalizedString("Type query", null);
 
-      string deleteByIdButtonTitle = NSBundle.MainBundle.LocalizedString ("Delete item by Id", null);
-      this.deleteByIdButton.SetTitle (deleteByIdButtonTitle, UIControlState.Normal);
+      string deleteByIdButtonTitle = NSBundle.MainBundle.LocalizedString("Delete item by Id", null);
+      this.deleteByIdButton.SetTitle(deleteByIdButtonTitle, UIControlState.Normal);
 
-      string deleteByPathButtonTitle = NSBundle.MainBundle.LocalizedString ("Delete item by Path", null);
-      this.deleteByPathButton.SetTitle (deleteByPathButtonTitle, UIControlState.Normal);
+      string deleteByPathButtonTitle = NSBundle.MainBundle.LocalizedString("Delete item by Path", null);
+      this.deleteByPathButton.SetTitle(deleteByPathButtonTitle, UIControlState.Normal);
 
-      string deleteByQueryButtonTitle = NSBundle.MainBundle.LocalizedString ("Delete item by Query", null);
-      this.deleteByQueryButton.SetTitle (deleteByQueryButtonTitle, UIControlState.Normal);
+      string deleteByQueryButtonTitle = NSBundle.MainBundle.LocalizedString("Delete item by Query", null);
+      this.deleteByQueryButton.SetTitle(deleteByQueryButtonTitle, UIControlState.Normal);
 		}
       
-    partial void OnDeleteItemByIdButtonTouched (MonoTouch.UIKit.UIButton sender)
+    partial void OnDeleteItemByIdButtonTouched(MonoTouch.UIKit.UIButton sender)
     {
       this.SendDeleteByIdRequest();
     }
 
-    partial void OnDeleteItemByPathButtonTouched (MonoTouch.UIKit.UIButton sender)
+    partial void OnDeleteItemByPathButtonTouched(MonoTouch.UIKit.UIButton sender)
     {
       this.SendDeleteByPathRequest();
     }
 
-    partial void OnDeleteItemByqueryButtonTouched (MonoTouch.UIKit.UIButton sender)
+    partial void OnDeleteItemByqueryButtonTouched(MonoTouch.UIKit.UIButton sender)
     {
       this.SendDeleteByQueryRequest();
     }
@@ -59,17 +59,18 @@ namespace WhiteLabeliOS
     {
       try
       {
-        var session = this.instanceSettings.GetSession();
+          using (var session = this.instanceSettings.GetSession())
+          {
 
-        var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(this.itemIdField.Text)
-          .Build();
+          var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(this.itemIdField.Text)
+            .Build();
 
-        this.ShowLoader();
+          this.ShowLoader();
 
-        ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
+          ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
 
-        this.ProceedResponce(response);
-
+          this.ProceedResponce(response);
+        }
       }
       catch(Exception e) 
       {
@@ -88,17 +89,17 @@ namespace WhiteLabeliOS
     {
       try
       {
-        var session = this.instanceSettings.GetSession();
+        using (var session = this.instanceSettings.GetSession())
+        {
+          var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(this.itemPathField.Text)
+            .Build();
 
-        var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(this.itemPathField.Text)
-          .Build();
+          this.ShowLoader();
 
-        this.ShowLoader();
+          ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
 
-        ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
-
-        this.ProceedResponce(response);
-
+          this.ProceedResponce(response);
+        }
       }
       catch(Exception e) 
       {
@@ -117,17 +118,17 @@ namespace WhiteLabeliOS
     {
       try
       {
-        var session = this.instanceSettings.GetSession();
+        using (var session = this.instanceSettings.GetSession())
+        {
+          var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.itemQueryField.Text)
+            .Build();
 
-        var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.itemQueryField.Text)
-          .Build();
+          this.ShowLoader();
 
-        this.ShowLoader();
+          ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
 
-        ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
-
-        this.ProceedResponce(response);
-
+          this.ProceedResponce(response);
+        }
       }
       catch(Exception e) 
       {

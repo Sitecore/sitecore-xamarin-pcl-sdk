@@ -1,5 +1,4 @@
-﻿
-namespace WhiteLabeliOS
+﻿namespace WhiteLabeliOS
 {
   using System;
   using System.Drawing;
@@ -11,18 +10,18 @@ namespace WhiteLabeliOS
 	{
 		private UIImagePickerController imagePicker;
 
-		public UploadImageViewController (IntPtr handle) : base (handle)
+		public UploadImageViewController(IntPtr handle) : base(handle)
 		{
 			Title = NSBundle.MainBundle.LocalizedString ("uploadImageVC", null);
 		}
 
-		partial void OnCancelUploadButtonTouched (MonoTouch.Foundation.NSObject sender)
+		partial void OnCancelUploadButtonTouched(MonoTouch.Foundation.NSObject sender)
 		{
 			AlertHelper.ShowLocalizedNotImlementedAlert();
 			this.cancelButton.Enabled = false;
 		}
 
-		partial void OnUploadImageButtonTouched (MonoTouch.Foundation.NSObject sender)
+		partial void OnUploadImageButtonTouched(MonoTouch.Foundation.NSObject sender)
 		{
 			this.cancelButton.Enabled = true;
 			this.ChooseImageFromLibrary();
@@ -30,30 +29,34 @@ namespace WhiteLabeliOS
 
 		private void ChooseImageFromLibrary()
 		{
-		    imagePicker = new UIImagePickerController ();
-			imagePicker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-			imagePicker.MediaTypes = UIImagePickerController.AvailableMediaTypes (UIImagePickerControllerSourceType.PhotoLibrary);
-			imagePicker.FinishedPickingMedia += Handle_FinishedPickingMedia;
-			imagePicker.Canceled += Handle_Canceled;
-			this.NavigationController.PresentViewController (imagePicker, true, null);
+      this.imagePicker = new UIImagePickerController();
+      this.imagePicker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+      this.imagePicker.MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary);
+      this.imagePicker.FinishedPickingMedia += Handle_FinishedPickingMedia;
+      this.imagePicker.Canceled += Handle_Canceled;
+			this.NavigationController.PresentViewController(imagePicker, true, null);
 		}
 
-		protected void Handle_FinishedPickingMedia (object sender, UIImagePickerMediaPickedEventArgs e)
+		protected void Handle_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
 		{
 			bool isImage = false;
-			switch(e.Info[UIImagePickerController.MediaType].ToString()) {
-			case "public.image":
-				Console.WriteLine("Image selected");
-				isImage = true;
-				break;
-			case "public.video":
-				Console.WriteLine("Video selected");
-				break;
+			switch(e.Info[UIImagePickerController.MediaType].ToString()) 
+      {
+        case "public.image":
+        {
+          Console.WriteLine("Image selected");
+          isImage = true;
+          break;
+        }
+        case "public.video":
+        {
+          Console.WriteLine("Video selected");
+          break;
+        }
 			}
 
-			if(isImage) 
+			if (isImage) 
 			{
-
 				UIImage originalImage = e.Info[UIImagePickerController.OriginalImage] as UIImage;
 				if(originalImage != null) 
 				{
@@ -65,12 +68,12 @@ namespace WhiteLabeliOS
 				AlertHelper.ShowLocalizedAlertWithOkOption("Alert", "Video uploading is not supported");
 			}          
 
-			imagePicker.DismissViewController (true, null);
+			imagePicker.DismissViewController(true, null);
 		}
 
-		void Handle_Canceled (object sender, EventArgs e) 
+		void Handle_Canceled(object sender, EventArgs e) 
 		{
-			imagePicker.DismissViewController (true, null);
+			imagePicker.DismissViewController(true, null);
 		}
 	}
 }

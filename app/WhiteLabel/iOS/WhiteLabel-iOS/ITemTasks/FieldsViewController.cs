@@ -1,5 +1,4 @@
-﻿
-namespace WhiteLabeliOS
+﻿namespace WhiteLabeliOS
 {
   using System;
   using System.Drawing;
@@ -13,22 +12,25 @@ namespace WhiteLabeliOS
 
   public partial class FieldsViewController : BaseTaskTableViewController
   {
-    public FieldsViewController (IntPtr handle) : base (handle)
+    protected FieldsDataSource fieldsDataSource;
+    protected FieldCellSelectionHandler fieldsTableDelegate;
+
+
+    public FieldsViewController(IntPtr handle) : base (handle)
     {
     }
 
-    public override void ViewDidLoad ()
+    public override void ViewDidLoad()
     {
-      base.ViewDidLoad ();
+      base.ViewDidLoad();
       this.TableView = this.FieldsTableView;
 
     }
 
-    public void ShowFieldsForItem( ISitecoreItem item )
+    public void ShowFieldsForItem(ISitecoreItem item)
     {
       BeginInvokeOnMainThread(delegate
       {
-
         this.Title = item.DisplayName;
 
         this.CleanupTableViewBindingsSync();
@@ -59,7 +61,7 @@ namespace WhiteLabeliOS
       });
     }
 
-    protected void CleanupTableViewBindingsSync()
+    protected override void CleanupTableViewBindingsSync()
     {
       this.TableView.DataSource = null;
       this.TableView.Delegate = null;
@@ -76,10 +78,6 @@ namespace WhiteLabeliOS
         this.fieldsTableDelegate = null;
       }
     }
-
-    protected FieldsDataSource fieldsDataSource;
-    protected FieldCellSelectionHandler fieldsTableDelegate;
-
   }
 }
 
