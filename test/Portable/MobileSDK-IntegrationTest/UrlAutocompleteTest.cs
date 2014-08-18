@@ -69,9 +69,33 @@
     [Test]
     public async void TestWithHttpsInUrlById()
     {
-      var response = await this.GetAuthencationRequestWithHomeItemId("https://scmobileteam.sitecoretest.net");
-      testData.AssertItemsCount(1, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
+      var url = "https://scmobileteam.sitecoretest.net";
+
+      // @adk : inlined due to 
+      //
+      // Failed UrlAutocompleteTest.TestWithHttpsInUrlById
+      //
+      // MESSAGE:
+      // System.Threading.Tasks.TaskCanceledException : A task was canceled.
+      // +++++++++++++++++++
+      // STACK TRACE:
+      //    at Microsoft.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+      //    at Microsoft.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccess(Task task)
+      //    at Sitecore.MobileSDK.ScApiSession.<ReadItemAsync>d__a.MoveNext() in c:\dev\Jenkins\jobs\XamarinSDK-FullBuild\workspace\lib\SitecoreMobileSDK-PCL\ScApiSession.cs:line 215
+      using
+      (
+        var session = 
+          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
+            .Credentials(this.testData.Users.Admin)
+            .BuildReadonlySession()
+      )
+      {
+        var requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Payload(PayloadType.Content).Build();
+        var response = await session.ReadItemAsync(requestWithItemId);
+
+        testData.AssertItemsCount(1, response);
+        testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
+      }
     }
 
     private async Task<ScItemsResponse> GetAuthencationRequestWithHomeItemPath(string url)
