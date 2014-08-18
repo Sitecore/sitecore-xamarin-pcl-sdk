@@ -4,22 +4,30 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   /// <summary>
-  /// Interface represents builder for options for download resource request. 
-  /// <seealso cref="IMediaResourceDownloadRequest"/>
+  /// A builder for dynamic media options.
+  /// They are used for size and colour configuration of the image being downloaded. 
+  /// 
+  /// These options are a part of the <seealso cref="IMediaResourceDownloadRequest"/>
   /// </summary>
   public interface IMediaOptionsBuilder
   {
     /// <summary>
     /// Specifies width for media item.
     /// </summary>
-    /// <param name="width">Target width. Must be > 0.</param>
+    /// <param name="width"> Target width. 
+    /// It must a positive number.
+    /// Multiple invocations are forbidden and cause an IvalidOperationException.
+    /// </param>
     /// <returns>this</returns>
     IMediaOptionsBuilder Width(int width);
 
     /// <summary>
     /// Specifies height for media item.
     /// </summary>
-    /// <param name="height">Target height. Must be > 0.</param>
+    /// <param name="height">Target height. 
+    /// It must a positive number.
+    /// Multiple invocations are forbidden and cause an IvalidOperationException.
+    /// </param>
     /// <returns>this</returns>
     IMediaOptionsBuilder Height(int height);
 

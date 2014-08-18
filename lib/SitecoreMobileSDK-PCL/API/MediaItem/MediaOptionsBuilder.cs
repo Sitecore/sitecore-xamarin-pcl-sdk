@@ -4,15 +4,17 @@
   using Sitecore.MobileSDK.Media;
 
   /// <summary>
-  /// Builder class for constructing <see cref="IDownloadMediaOptions" />
+  /// A placeholder class to make the fluent interface more human friendly.
+  /// Returns an instance of <see cref="IDownloadMediaOptions" /> that accumulates the user's input.
+  /// 
   /// </summary>
   public class MediaOptionsBuilder
   {
     /// <summary>
-    /// Gets builder for <see cref="IDownloadMediaOptions" />.
+    /// A stub method returning an actual implementation of <see cref="IDownloadMediaOptions" />.
     /// </summary>
     /// <value>
-    /// The builder.
+    /// The actual builder.
     /// </value>
     public IMediaOptionsBuilder Set
     {
