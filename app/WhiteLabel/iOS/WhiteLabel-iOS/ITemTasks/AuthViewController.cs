@@ -46,11 +46,6 @@ namespace WhiteLabeliOS
     {
       try
       {
-//        if (!string.IsNullOrEmpty(this.siteField.Text))
-//        {
-//          sessionBuilder.Site(this.siteField.Text);
-//        }
-
         using (var credentials = new WebApiCredentialsPODInsequredDemo(this.loginField.Text, this.passwordField.Text))
         using 
         ( 
