@@ -1,7 +1,25 @@
 namespace Sitecore.MobileSDK.API.Items
 {
   /// <summary>
-  /// Class represents source config of <see cref="ISitecoreItem"/>.  
+  /// This class represents source config of <see cref="ISitecoreItem"/>.
+  /// 
+  /// It contains information about a database that contains the item. 
+  /// For example,
+  /// * master
+  /// * web
+  /// * core
+  /// 
+  /// Since the CMS serves localized content, this class also provides the language of the given item. An abbreviation of two letters is used. For example,
+  /// * en
+  /// * da
+  /// * fr
+  /// * ja
+  /// * cn
+  /// 
+  /// 
+  /// As content editing is usually performed in a particular workflow, the IItemSource class stores the item's version. It is either a positive integer number or a latest version (null).
+  /// 
+  /// 
   /// </summary>
   public interface IItemSource
   {
@@ -20,11 +38,10 @@ namespace Sitecore.MobileSDK.API.Items
     /// </summary>
     string Language { get; }
 
-    #region Version
     /// <summary>
-    /// Returns item version.
+    /// Returns item version. It is a positive integer number.
+    /// A null value stands for the "latest" version.
     /// </summary>
     int? VersionNumber { get; }
-    #endregion Version
   }
 }
