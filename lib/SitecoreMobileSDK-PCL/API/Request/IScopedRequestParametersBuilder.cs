@@ -3,18 +3,81 @@
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
+  /// <summary>
+  /// Interface represents basic flow for creation of requets that hsa ability to specify scope for request.
+  /// </summary>
+  /// <typeparam name="T">Type of request</typeparam>
   public interface IScopedRequestParametersBuilder<T> where T : class
   {
+    /// <summary>
+    /// Specifies sitecore database.
+    /// </summary>
+    /// <param name="sitecoreDatabase">The sitecore database.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IScopedRequestParametersBuilder<T> Database(string sitecoreDatabase);
+
+    /// <summary>
+    /// Specifies item language.
+    /// </summary>
+    /// <param name="itemLanguage">The item language.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IScopedRequestParametersBuilder<T> Language(string itemLanguage);
+
+    /// <summary>
+    /// Specifies payload.
+    /// </summary>
+    /// <param name="payload">The payload.</param>
+    /// <returns>
+    /// this
+    /// </returns>
+    /// <seealso cref="PayloadType" />
     IScopedRequestParametersBuilder<T> Payload(PayloadType payload);
 
+    /// <summary>
+    /// Adds the fields that will be read from the server.
+    /// </summary>
+    /// <param name="fields">The fields.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IScopedRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
+
+    /// <summary>
+    /// Adds the fields that will be read from the server.
+    /// </summary>
+    /// <param name="fieldParams">The field parameters.</param>
+    /// <returns>
+    /// this
+    /// </returns>
+    /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
     IScopedRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
 
+    /// <summary>
+    /// Adds the scopes.
+    /// </summary>
+    /// <param name="scope">The scopes.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IScopedRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope);
+
+    /// <summary>
+    /// Adds the scopes.
+    /// </summary>
+    /// <param name="scope">The scopes.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IScopedRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
 
+    /// <summary>
+    /// Builds request with specified parameters.
+    /// </summary>
+    /// <returns>request</returns>
     T Build();
   }
 }

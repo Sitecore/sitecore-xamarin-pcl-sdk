@@ -28,9 +28,9 @@
       return this;
     }
 
-    public IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue)
+    public IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue)
     {
-      BaseValidator.CheckForNullAndEmptyOrThrow(fieldKey, this.GetType().Name + ".fieldKey");
+      BaseValidator.CheckForNullAndEmptyOrThrow(fieldName, this.GetType().Name + ".fieldName");
       BaseValidator.CheckForNullAndEmptyOrThrow(fieldValue, this.GetType().Name + ".fieldValue");
 
       if (null == this.FieldsRawValuesByName)
@@ -39,7 +39,7 @@
         this.FieldsRawValuesByName = newFields;
       }
 
-      string lowerCaseField = fieldKey.ToLowerInvariant();
+      string lowerCaseField = fieldName.ToLowerInvariant();
 
       bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary(this.FieldsRawValuesByName, lowerCaseField);
       if (keyIsDuplicated)

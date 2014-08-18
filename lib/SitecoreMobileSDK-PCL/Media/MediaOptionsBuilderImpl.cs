@@ -43,15 +43,15 @@
       return this;
     }
 
-    public IMediaOptionsBuilder DisableMediaCache(bool value)
+    public IMediaOptionsBuilder DisableMediaCache(bool disable)
     {
-      this.options.SetDisableMediaCache(value);
+      this.options.SetDisableMediaCache(disable);
       return this;
     }
 
-    public IMediaOptionsBuilder AllowStrech(bool value)
+    public IMediaOptionsBuilder AllowStrech(bool allow)
     {
-      this.options.SetAllowStrech(value);
+      this.options.SetAllowStrech(allow);
       return this;
     }
 
@@ -61,9 +61,9 @@
       return this;
     }
 
-    public IMediaOptionsBuilder DisplayAsThumbnail(bool value)
+    public IMediaOptionsBuilder DisplayAsThumbnail(bool displayAsThumbnail)
     {
-      this.options.SetDisplayAsThumbnail(value);
+      this.options.SetDisplayAsThumbnail(displayAsThumbnail);
       return this;
     }
 

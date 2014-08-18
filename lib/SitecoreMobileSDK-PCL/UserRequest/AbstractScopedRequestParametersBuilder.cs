@@ -1,7 +1,9 @@
-﻿namespace Sitecore.MobileSDK.API.Request.Parameters
+﻿namespace Sitecore.MobileSDK.UserRequest
 {
   using System;
   using System.Collections.Generic;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.Validators;

@@ -343,7 +343,7 @@
           .ItemName("SomeValidName")
           .AddFieldsRawValuesByNameToSet(null, "somevalue");
       });
-      Assert.IsTrue(exception.Message.Contains("fieldKey"));
+      Assert.IsTrue(exception.Message.Contains("fieldName"));
 
       var exception1 = Assert.Throws<ArgumentException>(() => 
       {
@@ -352,7 +352,7 @@
           .ItemName("SomeValidName")
           .AddFieldsRawValuesByNameToSet("", "somevalue");
       });
-      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldKey : The input cannot be empty.", exception1.Message);
+      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldName : The input cannot be empty.", exception1.Message);
 
       var exception2 = Assert.Throws<ArgumentNullException>(() => 
       {

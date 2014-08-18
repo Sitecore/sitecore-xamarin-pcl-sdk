@@ -91,9 +91,9 @@
       return this;
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldKey, string fieldValue)
+    new public ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue)
     {
-      base.AddFieldsRawValuesByNameToSet(fieldKey, fieldValue);
+      base.AddFieldsRawValuesByNameToSet(fieldName, fieldValue);
 
       this.itemParametersAccumulator =
         new CreateItemParameters(this.itemParametersAccumulator.ItemName, this.itemParametersAccumulator.ItemTemplate, this.FieldsRawValuesByName);
