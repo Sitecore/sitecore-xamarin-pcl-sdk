@@ -20,12 +20,12 @@ namespace Sitecore.MobileSDK.API.Items
   /// As content editing is usually performed in a particular workflow, the IItemSource class stores the item's version. It is either a positive integer number or a latest version (null).
   /// 
   /// 
-  /// Item source indicates the origin of a given item. It is also used in requests to define the place of a given CRUD operation.
+  /// Item source indicates the origin of a given item. It is also used in requests to define the place of a given CRUD operation. The implementation of this interface is recommended to be readonly and immutable.
   /// </summary>
   public interface IItemSource
   {
     /// <summary>
-    /// Returns copy of <see cref="IItemSource"/>.
+    /// Returns copy of <see cref="IItemSource"/>. It will be invoked by the session once the request is passed to it. It is done for the thread safety reasons.
     /// </summary>
     IItemSource ShallowCopy();
 
