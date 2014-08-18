@@ -83,12 +83,17 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public void TestBuildSessionWithNullDatabaseReturnsException()
+    public void TestBuildSessionWithNullDatabaseDoNotReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
-        .DefaultDatabase(null)
-        );
-      Assert.IsTrue(exception.Message.Contains("SessionBuilder.DefaultDatabase"));
+      using
+        (
+          var session = this.NewSession()
+          .DefaultDatabase(null)
+          .BuildReadonlySession()
+        )
+      {
+        Assert.IsNotNull(session);
+      }
     }
 
     [Test]
@@ -101,30 +106,46 @@ namespace MobileSDKIntegrationTest
     }
 
     [Test]
-    public void TestBuildSessionWithNullMediaSourceExtensionReturnsException()
+    public void TestBuildSessionWithNullMediaSourceExtensionDoNotReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
-        .DefaultMediaResourceExtension(null)
-        );
-      Assert.IsTrue(exception.Message.Contains("SessionBuilder.DefaultMediaResourceExtension"));
+      using
+        (
+          var session = this.NewSession()
+          .DefaultMediaResourceExtension(null)
+          .BuildSession()
+        )
+      {
+        Assert.IsNotNull(session);
+      }
     }
 
     [Test]
-    public void TestBuildSessionWithEmptyMediaLibraryRootReturnsException()
+    public void TestBuildSessionWithEmptyMediaLibraryRootDoNotReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
+      using
+      (
+        var session = this.NewSession()
         .MediaLibraryRoot("")
-        );
-      Assert.AreEqual("SessionBuilder.MediaLibraryRoot : The input cannot be empty.", exception.Message);
+        .BuildSession()
+      )
+      {
+        Assert.IsNotNull(session);
+      }
+
     }
 
     [Test]
-    public void TestBuildSessionWithNullSiteReturnsException()
+    public void TestBuildSessionWithNullSiteDoNotReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => this.NewSession()
-        .Site(null)
-        );
-      Assert.IsTrue(exception.Message.Contains("SessionBuilder.Site"));
+      using
+        (
+          var session = this.NewSession()
+          .Site(null)
+          .BuildSession()
+        )
+      {
+        Assert.IsNotNull(session);
+      }
     }
 
     [Test]

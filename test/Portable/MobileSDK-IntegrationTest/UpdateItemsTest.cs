@@ -137,12 +137,12 @@
     }
 
     [Test]
-    public void TestUpdateItemByIdWithNullDatabaseReturnsException()
+    public void TestUpdateItemByIdWithNullDatabaseDoNotReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
         .Database(null)
-        .Build());
-      Assert.IsTrue(exception.Message.Contains("UpdateItemByIdRequestBuilder.Database"));
+        .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]

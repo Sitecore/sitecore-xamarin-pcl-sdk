@@ -16,8 +16,12 @@
 
     public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> Database(string database)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
+      if (string.IsNullOrEmpty(database))
+      {
+        return this;
+      }
 
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database, this.GetType().Name + ".Database");
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(database, this.GetType().Name + ".Database");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
@@ -30,6 +34,11 @@
 
     public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> Language(string itemLanguage)
     {
+      if (string.IsNullOrEmpty(itemLanguage))
+      {
+        return this;
+      }
+
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
 
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemLanguage, this.GetType().Name + ".Language");

@@ -192,12 +192,13 @@
     }
 
     [Test]
-    public void TestGetItemByIdWithNullDatabaseReturnsError()
+    public void TestGetItemByIdWithNullDatabaseDoNotReturnsError()
     {
-
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id);
-      Exception exception = Assert.Throws<ArgumentNullException>(() => requestBuilder.Database(null).Payload(PayloadType.Content).Build());
-      Assert.IsTrue(exception.Message.Contains("ReadItemByIdRequestBuilder.Database"));
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+                            .Database(null)
+                            .Payload(PayloadType.Content)
+                            .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]
@@ -220,13 +221,14 @@
     }
 
     [Test]
-    public void TestOverrideLanguageWithEmptyValueInRequestByIdReturnsError()
+    public void TestOverrideLanguageWithEmptyValueInRequestByIdDoNotReturnsError()
     {
       const string Language = "";
 
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id);
-      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Language(Language).Build());
-      Assert.AreEqual("ReadItemByIdRequestBuilder.Language : The input cannot be empty.", exception.Message);
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+                                            .Language(Language)
+                                            .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]
