@@ -30,12 +30,12 @@ namespace Sitecore.MobileSDK.API.Items
     IItemSource ShallowCopy();
 
     /// <summary>
-    /// Returns item database.
+    /// Returns item database. The value is case insensitive.
     /// </summary>
     string Database { get; }
 
     /// <summary>
-    /// Returns item language.
+    /// Returns item language. The value is case insensitive.
     /// </summary>
     string Language { get; }
 
