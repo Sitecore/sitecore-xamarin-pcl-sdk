@@ -80,9 +80,12 @@ namespace WhiteLabelAndroid.SubActivities
           var response = await session.DownloadResourceAsync(requestBuilder.Build());
 
           this.SetProgressBarIndeterminateVisibility(false);
-          var imageBitmep = BitmapFactory.DecodeStream(response);
 
-          this.targetImageView.SetImageBitmap(imageBitmep);  
+          // !!! executes on main thread
+          using(var imageBitmap = BitmapFactory.DecodeStream(response))
+          {
+            this.targetImageView.SetImageBitmap(imageBitmap);
+          }
         }
       }
       catch (Exception exception)
