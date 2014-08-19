@@ -81,8 +81,7 @@ namespace WhiteLabelAndroid.SubActivities
 
           this.SetProgressBarIndeterminateVisibility(false);
 
-          // !!! executes on main thread
-          using(var imageBitmap = BitmapFactory.DecodeStream(response))
+          using(var imageBitmap = await BitmapFactory.DecodeStreamAsync(response))
           {
             this.targetImageView.SetImageBitmap(imageBitmap);
           }
