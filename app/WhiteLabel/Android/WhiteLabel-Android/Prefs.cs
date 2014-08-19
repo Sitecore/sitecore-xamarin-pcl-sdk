@@ -1,10 +1,10 @@
 namespace WhiteLabelAndroid
 {
-  using System.Diagnostics.CodeAnalysis;
   using Android.Content;
   using Android.Preferences;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.SessionSettings;
 
   public class Prefs
   {
@@ -113,11 +113,30 @@ namespace WhiteLabelAndroid
 
     #endregion Database
 
-    public SessionConfig SessionConfig
+    public ISitecoreWebApiSession Session
     {
       get
       {
-        return new SessionConfig(this.InstanceUrl, this.Login, this.Password, this.Site);
+        bool isAuthentiated = !string.IsNullOrEmpty(this.Login) && !string.IsNullOrEmpty(this.Password);
+
+        ISitecoreWebApiSession session;
+        if(isAuthentiated)
+        {
+          var credentials = new Credentials(this.Login, this.Password);
+
+          session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.InstanceUrl)
+            .Credentials(credentials)
+            .Site(this.Site)
+            .BuildSession();
+        }
+        else
+        {
+          session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.InstanceUrl)
+            .Site(this.Site)
+            .BuildSession();
+        }
+          
+        return session;
       }
     }
 
@@ -145,6 +164,45 @@ namespace WhiteLabelAndroid
       ISharedPreferencesEditor editor = this.prefs.Edit();
       editor.PutString(key, value);
       editor.Apply();
+    }
+
+    class Credentials : IWebApiCredentials
+    {
+      private string login;
+      private string password;
+
+      public Credentials(string login, string password)
+      {
+        this.login = login;
+        this.password = password;
+      }
+
+      public IWebApiCredentials CredentialsShallowCopy()
+      {
+        return new Credentials(this.login, this.password);
+      }
+
+      public void Dispose()
+      {
+        this.login = null;
+        this.password = null;
+      }
+
+      public string Username
+      {
+        get
+        {
+          return this.login;
+        }
+      }
+
+      public string Password
+      {
+        get
+        {
+          return this.password;
+        }
+      }
     }
   }
 }

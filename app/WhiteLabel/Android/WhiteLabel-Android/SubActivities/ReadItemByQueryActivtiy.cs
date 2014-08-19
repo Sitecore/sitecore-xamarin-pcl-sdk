@@ -9,6 +9,8 @@ namespace WhiteLabelAndroid.SubActivities
   using Android.Views.InputMethods;
   using Android.Widget;
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
@@ -59,19 +61,20 @@ namespace WhiteLabelAndroid.SubActivities
     {
       try
       {
-        ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
-
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
         this.SetProgressBarIndeterminateVisibility(true);
 
-        ScItemsResponse response = await session.ReadItemAsync(request);
+        using (var session = this.prefs.Session)
+        {
+          ScItemsResponse response = await session.ReadItemAsync(request);
 
-        this.SetProgressBarIndeterminateVisibility(false);
-        var message = response.ResultCount > 0 ?
-          this.GetString(Resource.String.text_num_of_items_received, response.Items.Count)
-          : GetString(Resource.String.text_no_item);
+          this.SetProgressBarIndeterminateVisibility(false);
+          var message = response.ResultCount > 0 ?
+            this.GetString(Resource.String.text_num_of_items_received, response.ResultCount)
+            : GetString(Resource.String.text_no_item);
 
-        DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_item_received), message);
+          DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_item_received), message);  
+        }
       }
       catch (Exception exception)
       {

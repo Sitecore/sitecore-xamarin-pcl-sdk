@@ -1,21 +1,19 @@
 namespace WhiteLabelAndroid.SubActivities
 {
   using System.Collections.Generic;
+  using System.Linq;
   using Android.App;
-  using Android.Content;
-  using Android.OS;
   using Android.Views;
   using Android.Views.InputMethods;
   using Android.Widget;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Items.Fields;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using Sitecore.MobileSDK.API.Fields;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public abstract class BaseActivity : Activity
   {
     protected void HideKeyboard(View view)
     {
-      var inputMethodManager = this.GetSystemService(Context.InputMethodService) as InputMethodManager;
+      var inputMethodManager = this.GetSystemService(InputMethodService) as InputMethodManager;
       inputMethodManager.HideSoftInputFromWindow(view.WindowToken, HideSoftInputFlags.None);
     }
 
@@ -33,14 +31,16 @@ namespace WhiteLabelAndroid.SubActivities
       }
     }
 
-    protected void PopulateFieldsList(ListView listView, IList<IField> fields)
+    protected void PopulateFieldsList(ListView listView, IEnumerable<IField> fields)
     {
-      var items = new string[fields.Count];
-      foreach (IField field in fields)
-      {
-        items[fields.IndexOf(field)] = field.Name;
-      }
+      var count = fields.Count();
+      var items = new string[count];
 
+      for (int i = 0; i < count; i++)
+      {
+        IField field = fields.ElementAt(i);
+        items[i] = field.Name;
+      }
       listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, items);
     }
   }

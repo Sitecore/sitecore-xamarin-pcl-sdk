@@ -1,14 +1,15 @@
+using Sitecore.MobileSDK.API;
+using Sitecore.MobileSDK.API.Items;
+
 namespace WhiteLabelAndroid.SubActivities
 {
   using System;
+  using System.Linq;
   using Android.App;
   using Android.Content.PM;
   using Android.OS;
   using Android.Views;
   using Android.Widget;
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Items.Fields;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class ReadItemByPathActivtiy : BaseActivity, AdapterView.IOnItemClickListener
@@ -22,7 +23,8 @@ namespace WhiteLabelAndroid.SubActivities
 
     void AdapterView.IOnItemClickListener.OnItemClick(AdapterView parent, View view, int position, long id)
     {
-      DialogHelper.ShowSimpleDialog(this, this.item.Fields[position].Name, this.item.Fields[position].RawValue);
+      DialogHelper.ShowSimpleDialog(this, this.item.Fields.ElementAt(position).Name, 
+        this.item.Fields.ElementAt(position).RawValue);
     }
 
     protected override void OnCreate(Bundle bundle)
@@ -73,25 +75,26 @@ namespace WhiteLabelAndroid.SubActivities
     {
       try
       {
-        ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
-
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Payload(this.GetSelectedPayload(this.payloadRadioGroup)).Build();
         this.SetProgressBarIndeterminateVisibility(true);
 
-        ScItemsResponse response = await session.ReadItemAsync(request);
-
-        this.SetProgressBarIndeterminateVisibility(false);
-        if (response.ResultCount > 0)
+        using (var session = this.prefs.Session)
         {
-          this.item = response.Items[0];
-          this.itemNameTextView.Text = this.item.DisplayName;
+          ScItemsResponse response = await session.ReadItemAsync(request);
 
-          this.PopulateFieldsList(this.fieldsListView, item.Fields);
-        }
-        else
-        {
-          DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received,
-            Resource.String.text_no_item);
+          this.SetProgressBarIndeterminateVisibility(false);
+          if (response.ResultCount > 0)
+          {
+            this.item = response[0];
+            this.itemNameTextView.Text = this.item.DisplayName;
+
+            this.PopulateFieldsList(this.fieldsListView, item.Fields);
+          }
+          else
+          {
+            DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received,
+              Resource.String.text_no_item);
+          }  
         }
       }
       catch (Exception exception)

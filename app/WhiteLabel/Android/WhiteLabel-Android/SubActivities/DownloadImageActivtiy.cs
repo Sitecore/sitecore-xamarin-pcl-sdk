@@ -1,15 +1,15 @@
-using Android.App;
-
 namespace WhiteLabelAndroid.SubActivities
 {
+  using System;
+  using Android.App;
   using Android.Content.PM;
   using Android.Graphics;
   using Android.OS;
   using Android.Views;
   using Android.Widget;
-  using Java.Lang;
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.MediaItem;
+  using Sitecore.MobileSDK.API.Request.Parameters;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class DownloadImageActivtiy : BaseActivity
@@ -51,34 +51,41 @@ namespace WhiteLabelAndroid.SubActivities
     {
       try
       {
-        ScApiSession session = new ScApiSession(this.prefs.SessionConfig, this.prefs.ItemSource);
-
-        MediaOptionsBuilder builder = new MediaOptionsBuilder();
+        IMediaOptionsBuilder builder = new MediaOptionsBuilder().Set;
 
         if (!string.IsNullOrEmpty(widthStr))
         {
-          var width = Integer.ParseInt(widthStr);
-          builder.SetWidth(width);
+          var width = Int32.Parse(widthStr);
+          builder.Width(width);
         }
-
 
         if (!string.IsNullOrEmpty(heightStr))
         {
-          var height = Integer.ParseInt(heightStr);
-          builder.SetHeight(height);
+          var height = Int32.Parse(heightStr);
+          builder.Height(height);
         }
 
-        var request = ItemWebApiRequestBuilder.ReadMediaItemRequest(itemPath).DownloadOptions(builder.Build()).Build();
+        var requestBuilder = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(itemPath);
 
+        IDownloadMediaOptions options = builder.Build();
+        if (!options.IsEmpty)
+        {
+          requestBuilder.DownloadOptions(options);
+        }
+        
         this.SetProgressBarIndeterminateVisibility(true);
-        var response = await session.DownloadResourceAsync(request);
 
-        this.SetProgressBarIndeterminateVisibility(false);
-        var imageBitmep = BitmapFactory.DecodeStream(response);
+        using (var session = this.prefs.Session)
+        {
+          var response = await session.DownloadResourceAsync(requestBuilder.Build());
 
-        this.targetImageView.SetImageBitmap(imageBitmep);
+          this.SetProgressBarIndeterminateVisibility(false);
+          var imageBitmep = BitmapFactory.DecodeStream(response);
+
+          this.targetImageView.SetImageBitmap(imageBitmep);  
+        }
       }
-      catch (System.Exception exception)
+      catch (Exception exception)
       {
         this.SetProgressBarIndeterminateVisibility(false);
         var title = GetString(Resource.String.text_item_received);
