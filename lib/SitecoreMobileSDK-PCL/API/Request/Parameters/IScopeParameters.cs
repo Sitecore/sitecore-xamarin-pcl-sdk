@@ -3,7 +3,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   using System.Collections.Generic;
 
   /// <summary>
-  /// Interface that represemts collection of "Scope" parameters for requests.
+  /// Interface that represents collection of "Scope" parameters for requests.
   ///  </summary>
   public interface IScopeParameters
   {
@@ -15,6 +15,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 
     /// <summary>
     /// Gets the ordered scopes parameters.
+    /// <see cref="ScopeType"/>
     /// </summary>
     IEnumerable<ScopeType> OrderedScopeSequence { get; }
 

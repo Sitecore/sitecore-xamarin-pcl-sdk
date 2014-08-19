@@ -11,7 +11,10 @@ namespace Sitecore.MobileSDK.API.Request
     where T : class
   {
     /// <summary>
-    /// Specifies item version.
+    /// Specifies item version. It is a positive integer number.
+    /// A null value stands for the "latest" version.
+    /// 
+    /// For example: 1
     /// </summary>
     /// <param name="itemVersion">The item version.</param>
     /// <returns>
@@ -29,7 +32,10 @@ namespace Sitecore.MobileSDK.API.Request
     new IGetVersionedItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
 
     /// <summary>
-    /// Specifies item language.
+    /// Specifies item database.
+    /// For example: "web"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="itemLanguage">The item language.</param>
     /// <returns>
@@ -40,11 +46,10 @@ namespace Sitecore.MobileSDK.API.Request
     /// <summary>
     /// Specifies payload.
     /// </summary>
-    /// <param name="payload">The payload.</param>
+    /// <param name="payload"><see cref="PayloadType" />The payload.</param>
     /// <returns>
     /// this
     /// </returns>
-    /// <seealso cref="PayloadType" />
     new IGetVersionedItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
     /// <summary>

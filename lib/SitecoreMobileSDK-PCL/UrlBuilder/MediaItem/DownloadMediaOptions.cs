@@ -318,14 +318,14 @@
     private const string PositiveBoolValue = "1";
     private const string NegativeBoolValue = "0";
 
-    private const string widthKey = "w";
-    private const string heightKey = "h";
-    private const string maxWidthKey = "mw";
-    private const string maxHeightKey = "mh";
-    private const string strechKey = "as";
-    private const string mediaCacheKey = "dmc";
-    private const string scaleKey = "sc";
-    private const string thumbnailKey = "thn";
+    private const string widthKey           = "w";
+    private const string heightKey          = "h";
+    private const string maxWidthKey        = "mw";
+    private const string maxHeightKey       = "mh";
+    private const string strechKey          = "as";
+    private const string mediaCacheKey      = "dmc";
+    private const string scaleKey           = "sc";
+    private const string thumbnailKey       = "thn";
     private const string backgroundColorKey = "bc";
   }
 }

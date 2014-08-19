@@ -12,10 +12,11 @@
     IDeleteItemsByQueryRequest DeepCopyDeleteItemRequest();
 
     /// <summary>
-    /// Gets the sitecore query.
+    /// Gets the sitecore query, request string for retrieving and filtering items from the Sitecore database.
+    /// See Sitecore documentation for details.
     /// </summary>
     /// <value>
-    /// The sitecore query.
+    /// The sitecore query value.
     /// </value>
     string SitecoreQuery { get; }
   }

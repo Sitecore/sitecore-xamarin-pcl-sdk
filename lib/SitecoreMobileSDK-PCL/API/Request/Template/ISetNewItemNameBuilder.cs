@@ -9,7 +9,9 @@
     /// <summary>
     /// Specifies item's name.
     /// </summary>
-    /// <param name="itemName">Item's name.</param>
+    /// <param name="itemName">Item's name.
+    /// The value is case sensitive.
+    /// </param>
     /// <returns><see cref="ICreateItemRequestParametersBuilder{T}"/></returns>
     ICreateItemRequestParametersBuilder<T> ItemName(string itemName);
   }

@@ -10,7 +10,10 @@
   public interface IScopedRequestParametersBuilder<T> where T : class
   {
     /// <summary>
-    /// Specifies sitecore database.
+    /// Specifies item database.
+    /// For example: "web"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="sitecoreDatabase">The sitecore database.</param>
     /// <returns>
@@ -20,6 +23,9 @@
 
     /// <summary>
     /// Specifies item language.
+    /// For example: "en"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="itemLanguage">The item language.</param>
     /// <returns>
@@ -30,17 +36,18 @@
     /// <summary>
     /// Specifies payload.
     /// </summary>
-    /// <param name="payload">The payload.</param>
+    /// <param name="payload"><see cref="PayloadType" />The payload.</param>
     /// <returns>
     /// this
     /// </returns>
-    /// <seealso cref="PayloadType" />
     IScopedRequestParametersBuilder<T> Payload(PayloadType payload);
 
     /// <summary>
     /// Adds the fields that will be read from the server.
+    /// 
+    /// The values is case insensitive.
     /// </summary>
-    /// <param name="fields">The fields.</param>
+    /// <param name="fields">The fields names.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -48,8 +55,10 @@
 
     /// <summary>
     /// Adds the fields that will be read from the server.
+    /// 
+    /// The values is case insensitive.
     /// </summary>
-    /// <param name="fieldParams">The field parameters.</param>
+    /// <param name="fieldParams">The field names.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -59,7 +68,7 @@
     /// <summary>
     /// Adds the scopes.
     /// </summary>
-    /// <param name="scope">The scopes.</param>
+    /// <param name="scope"><see cref="ScopeType" />The scopes.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -68,7 +77,7 @@
     /// <summary>
     /// Adds the scopes.
     /// </summary>
-    /// <param name="scope">The scopes.</param>
+    /// <param name="scope"><see cref="ScopeType" />The scopes.</param>
     /// <returns>
     /// this
     /// </returns>

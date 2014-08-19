@@ -14,7 +14,7 @@
     IMediaLibrarySettings MediaSettingsShallowCopy();
 
     /// <summary>
-    /// Specifies path to media lybrary root, for example '/sitecore/media library'.
+    /// Specifies path to media library root, for example '/sitecore/media library'.
     /// </summary>
     string MediaLibraryRoot
     {

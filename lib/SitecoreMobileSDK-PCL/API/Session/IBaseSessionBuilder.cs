@@ -23,60 +23,71 @@ namespace Sitecore.MobileSDK.API.Session
 
     /// <summary>
     /// Specifies site parameter.
+    /// For example:"/sitecore/shell"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="site">Site parameter, for example '/sitecore/shell'</param>
+    /// <param name="site">Site parameter</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder Site(string site);
 
     /// <summary>
-    /// Specifies WebAPI version.
+    /// Specifies WebAPI version, "v1" by default.
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="webApiVersion">WebAPI version, 'v1' by default</param>
+    /// <param name="webApiVersion">WebAPI version</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder WebApiVersion(string webApiVersion);
 
     /// <summary>
-    /// Specifies default database.
+    /// Specifies item language.
+    /// For example: "en"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="defaultDatabase">Database, for example 'web'</param>
+    /// <param name="defaultDatabase">Database name value</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder DefaultDatabase(string defaultDatabase);
 
     /// <summary>
-    /// Specifies default language.
+    /// Specifies item language.
+    /// For example: "en"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="defaultLanguage">Language, for example 'en'</param>
+    /// <param name="defaultLanguage">Language value</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder DefaultLanguage(string defaultLanguage);
 
     /// <summary>
-    /// Specifies path to media lybrary root.
+    /// Specifies path to media lybrary root, '/sitecore/media library' by default.
     /// </summary>
-    /// <param name="mediaLibraryRootItem">Media lybrary root, '/sitecore/media library' by default</param>
+    /// <param name="mediaLibraryRootItem">Media lybrary root.</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder MediaLibraryRoot(string mediaLibraryRootItem);
 
     /// <summary>
-    /// Defaults the media resource extension.
+    /// Defaults the media resource extension, "ashx" by default.
     /// </summary>
-    /// <param name="defaultExtension">The default extension.</param>
+    /// <param name="defaultExtension">The default extension for media requests.</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder DefaultMediaResourceExtension(string defaultExtension);
 
     /// <summary>
-    /// Medias the prefix.
+    /// Prefix to build media requests, "~/media" by default.
     /// </summary>
     /// <param name="mediaPrefix">The media prefix.</param>
     /// <returns>

@@ -9,6 +9,9 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   {
     /// <summary>
     /// Specifies source database for media item.
+    /// For example: "web".
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="database">Databse name.</param>
     /// <returns>this</returns>
@@ -16,6 +19,9 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 
     /// <summary>
     /// Specifies language for media item.
+    /// For example: "en".
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="itemLanguage">Language name.</param>
     /// <returns>this</returns>
@@ -23,6 +29,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 
     /// <summary>
     /// Specifies version of media item.
+    /// For example: 1.
     /// </summary>
     /// <param name="itemVersion">Version number.</param>
     /// <returns>this</returns>

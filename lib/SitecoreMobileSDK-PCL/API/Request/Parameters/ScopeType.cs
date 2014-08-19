@@ -6,16 +6,17 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   public enum ScopeType
   {
     /// <summary>
-    /// self - for self.    /// </summary>
+    /// self - only requested item will be returned from the server.
+    /// </summary>
     Self,
 
     /// <summary>
-    /// children - for children.
+    /// children - children of the requested item will be returned from the server.
     /// </summary>
     Children,
     
     /// <summary>
-    /// parent - for parent.
+    /// parent - parent of the requested item will be returned from the server.
     /// </summary>
     Parent,
 

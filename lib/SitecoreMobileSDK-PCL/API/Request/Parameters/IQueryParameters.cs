@@ -24,7 +24,8 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     IScopeParameters ScopeParameters { get; }
 
     /// <summary>
-    /// Gets the payload.
+    /// Gets the payload. Determines scope of the fields which will be returned for every item.
+    /// <see cref="PayloadType"/>
     /// </summary>
     /// <value>
     /// The payload.
@@ -33,12 +34,12 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     PayloadType? Payload { get; }
 
     /// <summary>
-    /// Gets the fields.
+    /// Gets the fields. Determines custom fields scope to retrieve from server for every item.
     /// </summary>
     /// <value>
     /// The fields.
     /// </value>
-    /// <returns><see cref="IEnumerable{T}"/> with fields</returns>
+    /// <returns><see cref="IEnumerable{T}"/></returns>
     IEnumerable<string> Fields { get; }
   }
 }

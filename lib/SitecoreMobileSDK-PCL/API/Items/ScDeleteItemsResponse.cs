@@ -7,7 +7,7 @@
   /// Class represents server response for delete items request.
   /// It contains a list of ids for the successfully removed items.
   /// 
-  /// Note : the mentioned ids can be used to update the persistent cache data.
+  /// Note: the mentioned ids can be used to update the persistent cache data.
   /// The cache implementation is not provided by the Sitecore Mobile SDK yet.
   /// </summary>
   public class ScDeleteItemsResponse : IEnumerable<string>
@@ -17,7 +17,7 @@
     /// <summary>
     /// Initializes a new instance of the <see cref="ScDeleteItemsResponse"/> class.
     /// 
-    /// Note : All requests should be returned by the session object. The user is not supposed to construct response classes directly.
+    /// Note: All requests should be returned by the session object. The user is not supposed to construct response classes directly.
     /// </summary>
     /// <param name="itemsIds">List of item ids that were deleted.</param>
     public ScDeleteItemsResponse(List<string> itemsIds)
@@ -59,9 +59,9 @@
 
     /// <summary>
     ///     Returns an enumerator that iterates through the item ids list.
-    /// </summary>
+    /// </summary> 
     /// <returns>
-    ///      <see cref="IEnumerator{T}"/> that can be used to iterate through the item ids.
+    ///     <see cref="IEnumerator{T}"/> that can be used to iterate through the item ids.
     /// </returns>
     public IEnumerator<string> GetEnumerator()
     {

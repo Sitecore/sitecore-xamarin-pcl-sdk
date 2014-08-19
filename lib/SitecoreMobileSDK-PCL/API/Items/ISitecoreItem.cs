@@ -28,7 +28,7 @@ namespace Sitecore.MobileSDK.API.Items
 
     /// <summary>
     /// Returns item's GUID. Item Web API service returns GUID values enclosed in curly braces.
-    /// For example : "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
     /// 
     /// The value is case insensitive.
     /// </summary>
@@ -36,22 +36,25 @@ namespace Sitecore.MobileSDK.API.Items
 
     /// <summary>
     /// Returns item's long id. LongId is similar to the Path property. However, it contains of GUIDs separated by the slash symbol.
-    /// 
-    /// For example, "/{11111111-1111-1111-1111-111111111111}/{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// For example: "/{11111111-1111-1111-1111-111111111111}/{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
     /// 
     /// The value is case insensitive.
     /// </summary>
     string LongId { get; }
 
     /// <summary>
-    /// Returns item's path in the content tree. For example, "/sitecore/content/Home"
+    /// Returns item's path in the content tree. 
+    /// For example: "/sitecore/content/Home"
+    /// 
     /// The value is case insensitive.
     /// </summary>
     string Path { get; }
 
     /// <summary>
-    /// Returns a relative path to the item's template. For example, "Common/Folder".
+    /// Returns a relative path to the item's template. 
     /// The path is relative to the "/sitecore/templates" item.
+    /// For example: "Common/Folder".
+    /// 
     /// The value is case insensitive.
     /// </summary>
     string Template { get; }

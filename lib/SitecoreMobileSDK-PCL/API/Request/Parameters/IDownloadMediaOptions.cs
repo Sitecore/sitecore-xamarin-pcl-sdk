@@ -17,67 +17,102 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// <summary>
     ///  Determines whether any of property of <see cref="IDownloadMediaOptions" /> was set.
     /// </summary>
-    /// <returns>true if any proprty is set, false otherwise</returns>
+    /// <returns>true if any property is set, false otherwise</returns>
     bool IsEmpty { get; }
 
     /// <summary>
-    ///  Returns width.
+    /// Specifies width for media item.
     /// </summary>
-    /// <returns>width</returns>
+    /// <param name="width"> Target width. 
+    /// It must be a positive number.
+    /// </param>
+    /// <returns>this</returns>
     string Width { get; }
 
     /// <summary>
-    ///  Returns height.
+    /// Specifies height for media item.
     /// </summary>
-    /// <returns>height</returns>
+    /// <param name="height">Target height. 
+    /// It must be a positive number.
+    /// </param>
+    /// <returns>this</returns>
     string Height { get; }
 
     /// <summary>
-    ///  Returns max width.
+    /// Specifies max width for media item.
     /// </summary>
-    /// <returns>max width</returns>
+    /// <param name="maxWidth">Target max width.
+    /// It must be a positive number.
+    /// </param>
+    /// <returns>this</returns>
     string MaxWidth { get; }
 
     /// <summary>
-    ///  Returns max height.
+    /// Specifies max height for media item.
     /// </summary>
-    /// <returns>max height</returns>
+    /// <param name="maxHeight">Target max height.
+    /// It must be a positive number.
+    /// </param>
+    /// <returns>this</returns>
     string MaxHeight { get; }
 
     /// <summary>
-    ///  Returns backgorund color.
+    /// Specifies background color for media item. 
     /// </summary>
-    /// <returns>backgorund color</returns>
+    /// <param name="color">Target color. Should be an HTML colorName or hex color code
+    /// For example: "Red" or "ff0000"
+    /// 
+    /// The value is case insensitive.
+    /// </param>
+    /// 
+    /// <returns>this</returns>
     string BackgroundColor { get; }
 
     /// <summary>
-    ///  Determines whether option "media cache" is set.
+    /// Specifies whether to use media cache. 
     /// </summary>
-    /// <returns>1 if true or 0 if false</returns>
+    /// <param name="disable">To use cache.</param>
+    /// <returns>this</returns>
     string DisableMediaCache { get; }
 
     /// <summary>
-    ///  Determines whether option "allow strech" is set.
+    /// Specifies whether to allow strech. 
     /// </summary>
-    /// <returns>1 if true or 0 if false</returns>
+    /// <param name="allow">To allow strech.</param>
+    /// <returns>this</returns>
     string AllowStrech { get; }
 
     /// <summary>
-    ///  Returns scale.
+    /// Specifies scale for media item. 
     /// </summary>
-    /// <returns>scale</returns>
+    /// <param name="scale">Target scale.
+    /// It must be a positive floating point number.
+    /// </param>
+    /// <returns>this</returns>
     string Scale { get; }
 
     /// <summary>
-    ///  Determines whether option "display as thumbnail" is set.
+    /// Specifies whether to display as thumbnail. 
     /// </summary>
-    /// <returns>max width</returns>
+    /// <param name="displayAsThumbnail">To display as sumbnail.</param>
+    /// <returns>this</returns>
     string DisplayAsThumbnail { get; }
 
     /// <summary>
     ///  Returns <see cref="Dictionary{TKey,TValue}"/> that contains key value pairs where : 
     ///  key - option name,
     ///  value - options value;
+    /// 
+    /// key value must equals to appropriate request's parameter key:
+    /// "w" - width
+    /// "h" - height
+    /// "mw" - max width
+    /// "mh" - max height
+    /// "as" - allow strech
+    /// "dmc" - disable media cache
+    /// "sc" - scale
+    /// "thn" - display as thumbnail
+    /// "bc" - background color
     /// </summary>
     /// <returns><see cref="Dictionary{TKey,TValue}"/></returns>
     Dictionary<string, string> OptionsDictionary { get; }

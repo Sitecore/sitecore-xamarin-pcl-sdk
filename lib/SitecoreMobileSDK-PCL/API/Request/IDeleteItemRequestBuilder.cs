@@ -11,7 +11,10 @@
     where T : class
   {
     /// <summary>
-    /// Specifies sitecore database.
+    /// Specifies item database.
+    /// For example: "web"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="database">The sitecore database.</param>
     /// <returns>
@@ -22,7 +25,7 @@
     /// <summary>
     /// Adds the scopes.
     /// </summary>
-    /// <param name="scope">The scopes.</param>
+    /// <param name="scope"><see cref="ScopeType"/>The scopes.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -31,7 +34,7 @@
     /// <summary>
     /// Adds the scope.
     /// </summary>
-    /// <param name="scope">The scopes.</param>
+    /// <param name="scope"><see cref="ScopeType"/>The scopes.</param>
     /// <returns>
     /// this
     /// </returns>
