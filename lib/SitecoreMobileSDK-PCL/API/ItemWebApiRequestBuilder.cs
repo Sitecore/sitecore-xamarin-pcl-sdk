@@ -26,7 +26,7 @@ namespace Sitecore.MobileSDK.API
     /// </param>
     /// <returns>
     /// Read item by Id request builder.
-    /// <seealso cref="IGetVersionedItemRequestParametersBuilder" />
+    /// <see cref="IGetVersionedItemRequestParametersBuilder" />
     /// </returns>
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
     {
