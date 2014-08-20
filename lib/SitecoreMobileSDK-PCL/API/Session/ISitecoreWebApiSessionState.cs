@@ -9,7 +9,7 @@ namespace Sitecore.MobileSDK.API.Session
   public interface ISitecoreWebApiSessionState : IDisposable
   {
     /// <summary>
-    /// Gets the default source.
+    /// Gets the default settings: database name, language and item version number.
     /// </summary>
     /// <value>
     /// The default source.
@@ -18,7 +18,7 @@ namespace Sitecore.MobileSDK.API.Session
     IItemSource DefaultSource { get; }
 
     /// <summary>
-    /// Gets the sessiobn configuration.
+    /// Gets the session settings: instance url, site, web API version.
     /// </summary>
     /// <value>
     /// The configuration.
@@ -27,7 +27,7 @@ namespace Sitecore.MobileSDK.API.Session
     ISessionConfig Config { get; }
 
     /// <summary>
-    /// Gets the credentials.
+    /// Gets the credentials: user login and password.
     /// </summary>
     /// <value>
     /// The credentials.

@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
 
   /// <summary>
-  /// Main builder class, which provide functionality for manipulating with items.
+  /// Main factory to construct buider for concrete request. 
   /// </summary>
   public class ItemWebApiRequestBuilder
   {
@@ -21,9 +21,11 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing read item request by item GUID.
     /// </summary>
-    /// <param name="itemId">Item GUID</param>
+    /// <param name="itemId">Item GUID values enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// </param>
     /// <returns>
-    ///   <see cref="IGetVersionedItemRequestParametersBuilder{T}" />
+    ///   <see cref="IGetVersionedItemRequestParametersBuilder{T}" />Read item by Id request builder.
     /// </returns>
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
     {
@@ -33,9 +35,9 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing read item request by item path.
     /// </summary>
-    /// <param name="itemPath">Item path</param>
+    /// <param name="itemPath">Absolute Item path, bust starts with "/" symbol</param>
     /// <returns>
-    ///   <see cref="IGetVersionedItemRequestParametersBuilder{T}" />
+    ///   <see cref="IGetVersionedItemRequestParametersBuilder{T}" />Read item by Path request builder.
     /// </returns>
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByPathRequest> ReadItemsRequestWithPath(string itemPath)
     {
@@ -47,7 +49,7 @@ namespace Sitecore.MobileSDK.API
     /// </summary>
     /// <param name="sitecoreQuery">Sitecore query</param>
     /// <returns>
-    ///   <see cref="IScopedRequestParametersBuilder{T}" />
+    ///   <see cref="IScopedRequestParametersBuilder{T}" />Read item by Sitecore Query request builder.
     /// </returns>
     public static IScopedRequestParametersBuilder<IReadItemsByQueryRequest> ReadItemsRequestWithSitecoreQuery(string sitecoreQuery)
     {
@@ -57,9 +59,9 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing download resource request with media item path.
     /// </summary>
-    /// <param name="mediaPath">A path to the media item, relative to the media library root<see cref="ISessionConfig" /></param>
+    /// <param name="mediaPath">A path to the media item, relative to the media library root</param>
     /// <returns>
-    ///   <see cref="IGetMediaItemRequestParametersBuilder{T}" />
+    ///   <see cref="IGetMediaItemRequestParametersBuilder{T}" />Read media item by Media Item Path request builder.
     /// </returns>
     public static IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> DownloadResourceRequestWithMediaPath(string mediaPath)
     {
@@ -69,9 +71,11 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing create item request with parent item GUID.
     /// </summary>
-    /// <param name="itemId">Parent item GUID</param>
+    /// <param name="itemId">Parent item GUID values enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// </param>
     /// <returns>
-    ///   <see cref="ISetTemplateBuilder{T}" />
+    ///   <see cref="ISetTemplateBuilder{T}" />Create item with parent Item Id request.
     /// </returns>
     public static ISetTemplateBuilder<ICreateItemByIdRequest> CreateItemRequestWithParentId(string itemId)
     {
@@ -81,9 +85,9 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing create item request with parent item path.
     /// </summary>
-    /// <param name="itemPath">Parent item path</param>
+    /// <param name="itemPath">Parent item absolute path, must starts with "/" symbol.</param>
     /// <returns>
-    ///   <see cref="ISetTemplateBuilder{T}" />
+    ///   <see cref="ISetTemplateBuilder{T}" />Create item with parent Item Path request.
     /// </returns>
     public static ISetTemplateBuilder<ICreateItemByPathRequest> CreateItemRequestWithParentPath(string itemPath)
     {
@@ -93,9 +97,11 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing delete item request with item GUID.
     /// </summary>
-    /// <param name="itemId">Item GUID</param>
+    /// <param name="itemId">Item GUID values enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// </param>
     /// <returns>
-    ///   <see cref="IDeleteItemRequestBuilder{T}" />
+    ///   <see cref="IDeleteItemRequestBuilder{T}" />Delete item with Item Id request.
     /// </returns>
     public static IDeleteItemRequestBuilder<IDeleteItemsByIdRequest> DeleteItemRequestWithId(string itemId)
     {
@@ -105,9 +111,9 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing delete item request with item path.
     /// </summary>
-    /// <param name="itemPath">Item path</param>
+    /// <param name="itemPath">Absolute Item Path, must starts with "/" symbol.</param>
     /// <returns>
-    ///   <see cref="IDeleteItemRequestBuilder{T}" />
+    ///   <see cref="IDeleteItemRequestBuilder{T}" />Delete item with Item Path request.
     /// </returns>
     public static IDeleteItemRequestBuilder<IDeleteItemsByPathRequest> DeleteItemRequestWithPath(string itemPath)
     {
@@ -117,9 +123,9 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing delete item request with Sitecore query.
     /// </summary>
-    /// <param name="sitecoreQuery">Sitecore query</param>
+    /// <param name="sitecoreQuery">Sitecore query.</param>
     /// <returns>
-    ///   <see cref="IDeleteItemRequestBuilder{T}" />
+    ///   <see cref="IDeleteItemRequestBuilder{T}" />Delete item with Sitecore Query request.
     /// </returns>
     public static IDeleteItemRequestBuilder<IDeleteItemsByQueryRequest> DeleteItemRequestWithSitecoreQuery(string sitecoreQuery)
     {
@@ -129,9 +135,11 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing update item request with item id.
     /// </summary>
-    /// <param name="itemId">Item GUID</param>
+    /// <param name="itemId">Item GUID values enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// </param>
     /// <returns>
-    ///   <see cref="IUpdateItemRequestParametersBuilder{T}" />
+    ///   <see cref="IUpdateItemRequestParametersBuilder{T}" />Update item with Item Id request.
     /// </returns>
     public static IUpdateItemRequestParametersBuilder<IUpdateItemByIdRequest> UpdateItemRequestWithId(string itemId)
     {
@@ -141,9 +149,9 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Provides builder for constructing update item request with item path.
     /// </summary>
-    /// <param name="itemPath">Item path</param>
+    /// <param name="itemPath">Absolute Item path, must starts with "/" symbol</param>
     /// <returns>
-    ///   <see cref="IUpdateItemRequestParametersBuilder{T}" />
+    ///   <see cref="IUpdateItemRequestParametersBuilder{T}" />Update item with Item Path request.
     /// </returns>
     public static IUpdateItemRequestParametersBuilder<IUpdateItemByPathRequest> UpdateItemRequestWithPath(string itemPath)
     {

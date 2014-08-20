@@ -14,7 +14,8 @@
     IMediaLibrarySettings MediaSettingsShallowCopy();
 
     /// <summary>
-    /// Specifies path to media library root, for example '/sitecore/media library'.
+    /// Specifies path to media library root to build download media resources request.
+    /// By default: '/sitecore/media library'.
     /// </summary>
     string MediaLibraryRoot
     {
@@ -22,7 +23,8 @@
     }
 
     /// <summary>
-    /// Default extension for media resources, for example 'ashx'.
+    /// Specifies default extension to build download media resources request.
+    /// By default: 'ashx'.
     /// </summary>
     string DefaultMediaResourceExtension
     {
@@ -30,7 +32,8 @@
     }
 
     /// <summary>
-    /// Hook to build request for resource download, for example '~/media'.
+    /// Specifies hook string to build download media resources request.
+    /// By default: '~/media'.
     /// </summary>
     string MediaPrefix
     {
