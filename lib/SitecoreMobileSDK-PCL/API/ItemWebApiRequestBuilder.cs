@@ -25,7 +25,8 @@ namespace Sitecore.MobileSDK.API
     /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
     /// </param>
     /// <returns>
-    ///   <seealso cref="IGetVersionedItemRequestParametersBuilder{T}" />Read item by Id request builder.
+    /// Read item by Id request builder.
+    /// <seealso cref="IGetVersionedItemRequestParametersBuilder" />
     /// </returns>
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> ReadItemsRequestWithId(string itemId)
     {
