@@ -93,7 +93,7 @@
     /// <summary>
     /// Builds media options. 
     /// </summary>
-    /// <returns><see cref="IDownloadMediaOptions"/></returns>
+    /// <returns><seealso cref="IDownloadMediaOptions"/></returns>
     IDownloadMediaOptions Build();
   }
 }

@@ -9,7 +9,7 @@ namespace Sitecore.MobileSDK.API.Session
     /// Builds session.
     /// </summary>
     /// <returns>
-    ///   <see cref="ISitecoreWebApiSession" />
+    ///   <seealso cref="ISitecoreWebApiSession" />
     /// </returns>
     ISitecoreWebApiSession BuildSession();
 
@@ -17,7 +17,7 @@ namespace Sitecore.MobileSDK.API.Session
     /// Builds session which contain read only operations.
     /// </summary>
     /// <returns>
-    ///   <see cref="ISitecoreWebApiReadonlySession" />
+    ///   <seealso cref="ISitecoreWebApiReadonlySession" />
     /// </returns>
     ISitecoreWebApiReadonlySession BuildReadonlySession();
 

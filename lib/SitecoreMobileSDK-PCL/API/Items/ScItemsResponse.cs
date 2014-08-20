@@ -14,11 +14,11 @@ namespace Sitecore.MobileSDK.API.Items
   public class ScItemsResponse : IEnumerable<ISitecoreItem>
   {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ScItemsResponse"/> class.
+    /// Initializes a new instance of the <seealso cref="ScItemsResponse"/> class.
     /// </summary>
     /// <param name="totalCount">Total items count in response</param>
     /// <param name="resultCount">Received items count in response</param>
-    /// <param name="items">List of <see cref="ISitecoreItem"/></param>
+    /// <param name="items">List of <seealso cref="ISitecoreItem"/></param>
     public ScItemsResponse(int totalCount, int resultCount, List<ISitecoreItem> items)
     {
       this.TotalCount = totalCount;
@@ -48,7 +48,7 @@ namespace Sitecore.MobileSDK.API.Items
     ///     Note : Required by the compiler to conform the non-generic IEnumerable interface.
     /// </summary>
     /// <returns>
-    ///      <see cref="IEnumerator{T}"/> that can be used to iterate through the items.
+    ///      <seealso cref="IEnumerator{T}"/> that can be used to iterate through the items.
     /// </returns>
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
@@ -61,7 +61,7 @@ namespace Sitecore.MobileSDK.API.Items
     /// 
     /// </summary>
     /// <returns>
-    ///      <see cref="IEnumerator{T}"/> that can be used to iterate through the items.
+    ///      <seealso cref="IEnumerator{T}"/> that can be used to iterate through the items.
     /// </returns>
     public IEnumerator<ISitecoreItem> GetEnumerator()
     {
@@ -74,9 +74,9 @@ namespace Sitecore.MobileSDK.API.Items
     /// <param name="index">The index of item.</param>
     ///
     /// <returns>
-    ///     <see cref="ISitecoreItem"/>.
+    ///     <seealso cref="ISitecoreItem"/>.
     /// </returns>
-    /// <exception cref="ArgumentOutOfRangeException"> index is less than 0 or index is equal to or greater than <see cref="List{T}.Count"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException"> index is less than 0 or index is equal to or greater than <seealso cref="List{T}.Count"/>.</exception>
     public ISitecoreItem this[int index]
     {
       get

@@ -9,13 +9,13 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   public interface IDownloadMediaOptions
   {
     /// <summary>
-    /// Performs deep copy of <see cref="IDownloadMediaOptions"/>
+    /// Performs deep copy of <seealso cref="IDownloadMediaOptions"/>
     /// </summary>
-    /// <returns><see cref="IDownloadMediaOptions"/></returns>
+    /// <returns><seealso cref="IDownloadMediaOptions"/></returns>
     IDownloadMediaOptions DeepCopyMediaDownloadOptions();
 
     /// <summary>
-    ///  Determines whether any of property of <see cref="IDownloadMediaOptions" /> was set.
+    ///  Determines whether any of property of <seealso cref="IDownloadMediaOptions" /> was set.
     /// </summary>
     /// <returns>true if any property is set, false otherwise</returns>
     bool IsEmpty { get; }
@@ -99,7 +99,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     string DisplayAsThumbnail { get; }
 
     /// <summary>
-    ///  Returns <see cref="Dictionary{TKey,TValue}"/> that contains key value pairs where : 
+    ///  Returns <seealso cref="Dictionary{TKey,TValue}"/> that contains key value pairs where : 
     ///  key - option name,
     ///  value - options value;
     /// 
@@ -114,7 +114,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// "thn" - display as thumbnail
     /// "bc" - background color
     /// </summary>
-    /// <returns><see cref="Dictionary{TKey,TValue}"/></returns>
+    /// <returns><seealso cref="Dictionary{TKey,TValue}"/></returns>
     Dictionary<string, string> OptionsDictionary { get; }
   }
 }

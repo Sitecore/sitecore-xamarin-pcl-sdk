@@ -12,7 +12,7 @@ namespace Sitecore.MobileSDK.API.Items
   public interface ISitecoreItem
   {
     /// <summary>
-    /// Returns item's <see cref="IItemSource"/>
+    /// Returns item's <seealso cref="IItemSource"/>
     /// </summary>
     IItemSource Source { get; }
 
@@ -70,7 +70,7 @@ namespace Sitecore.MobileSDK.API.Items
     /// <param name="caseInsensitiveFieldName"> The name of the field to get.</param>
     ///
     /// <returns>
-    ///     The  <see cref="IField"/> with specified name.
+    ///     The  <seealso cref="IField"/> with specified name.
     /// </returns>
     /// 
     /// <exception cref="ArgumentNullException">Name is null</exception>

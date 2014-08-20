@@ -21,7 +21,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     Parent,
 
     /// <summary>
-    /// The default is <see cref="Self"/>
+    /// The default is <seealso cref="Self"/>
     /// </summary>
     Default = Self
   }

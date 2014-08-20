@@ -21,7 +21,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     Full,
 
     /// <summary>
-    /// The default is <see cref="Min"/>
+    /// The default is <seealso cref="Min"/>
     /// </summary>
     Default = Min
   }

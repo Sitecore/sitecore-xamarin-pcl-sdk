@@ -10,9 +10,9 @@ namespace Sitecore.MobileSDK.API.Session
     /// <summary>
     /// Specifies user's credantials.
     /// </summary>
-    /// <param name="credentials">A data provider for user's credentials <see cref="IWebApiCredentials" /></param>
+    /// <param name="credentials">A data provider for user's credentials <seealso cref="IWebApiCredentials" /></param>
     /// <returns>
-    ///   <see cref="IItemSource" />
+    ///   <seealso cref="IItemSource" />
     /// </returns>
     IBaseSessionBuilder Credentials(IWebApiCredentials credentials);
   }

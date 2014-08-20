@@ -10,9 +10,9 @@
   public interface IBaseItemRequest
   {
     /// <summary>
-    /// Performs deep copy of <see cref="IBaseItemRequest"/>.
+    /// Performs deep copy of <seealso cref="IBaseItemRequest"/>.
     /// </summary>
-    /// <returns><see cref="IBaseItemRequest"/></returns>
+    /// <returns><seealso cref="IBaseItemRequest"/></returns>
     IBaseItemRequest DeepCopyBaseGetItemRequest();
 
     /// <summary>

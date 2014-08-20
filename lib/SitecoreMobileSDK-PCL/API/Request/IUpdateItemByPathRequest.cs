@@ -9,7 +9,7 @@
     /// Performs deep copy of request.
     /// </summary>
     /// <returns>
-    ///   <see cref="IUpdateItemByPathRequest" />
+    ///   <seealso cref="IUpdateItemByPathRequest" />
     /// </returns>
     IUpdateItemByPathRequest DeepCopyUpdateItemByPathRequest();
   }

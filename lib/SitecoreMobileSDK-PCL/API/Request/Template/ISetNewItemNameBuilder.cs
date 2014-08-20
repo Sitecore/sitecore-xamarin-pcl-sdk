@@ -12,7 +12,7 @@
     /// <param name="itemName">Item's name.
     /// The value is case sensitive.
     /// </param>
-    /// <returns><see cref="ICreateItemRequestParametersBuilder{T}"/></returns>
+    /// <returns><seealso cref="ICreateItemRequestParametersBuilder{T}"/></returns>
     ICreateItemRequestParametersBuilder<T> ItemName(string itemName);
   }
 }

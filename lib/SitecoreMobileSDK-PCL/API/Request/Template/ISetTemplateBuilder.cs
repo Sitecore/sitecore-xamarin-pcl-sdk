@@ -11,7 +11,7 @@
     /// Must stars with the '/' symbol.
     /// </summary>
     /// <param name="templatePath">The template path.</param>
-    /// <returns><see cref="ISetNewItemNameBuilder{T}"/></returns>
+    /// <returns><seealso cref="ISetNewItemNameBuilder{T}"/></returns>
     ISetNewItemNameBuilder<T> ItemTemplatePath(string templatePath);
 
     /// <summary>
@@ -19,7 +19,7 @@
     /// For example: "{B174990B-37B1-4A60-9C7D-891B521E1B76}"
     /// </summary>
     /// <param name="templateId">The template GUID.</param>
-    /// <returns><see cref="ISetNewItemNameBuilder{T}"/></returns>
+    /// <returns><seealso cref="ISetNewItemNameBuilder{T}"/></returns>
     ISetNewItemNameBuilder<T> ItemTemplateId(string templateId);
 
     //    ICreateItemRequestParametersBuilder<T> BranchId(string branchId);
@@ -29,7 +29,7 @@
     /// For example: "{B174990B-37B1-4A60-9C7D-891B521E1B76}"
     /// </summary>
     /// <param name="branchId">The branch GUID.</param>
-    /// <returns><see cref="ISetNewItemNameBuilder{T}"/></returns>
+    /// <returns><seealso cref="ISetNewItemNameBuilder{T}"/></returns>
     ISetNewItemNameBuilder<T> BranchId(string branchId);
   }
 }
