@@ -6,17 +6,17 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   public enum PayloadType
   {
     /// <summary>
-    /// min - no fields are returned in the service response.
+    /// no fields are returned in the service response.
     /// </summary>
     Min,
 
     /// <summary>
-    /// content - only content fields are returned in the service response.
+    /// only content fields are returned in the service response.
     /// </summary>
     Content,
 
     /// <summary>
-    /// full - all the item fields, including content and standard fields, are returned in the service response.
+    /// all the item fields, including content and standard fields, are returned in the service response.
     /// </summary>
     Full,
 

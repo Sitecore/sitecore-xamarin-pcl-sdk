@@ -5,7 +5,7 @@ namespace Sitecore.MobileSDK.API.Items
   using Sitecore.MobileSDK.API.Fields;
 
   /// <summary>
-  /// This interace represents a Sitecore item. An item is an element of the content tree stored in a particular database. Depending on its localization language and version its fields may contain different content.
+  /// This interface represents a Sitecore item. An item is an element of the content tree stored in a particular database. Depending on its localization language and version its fields may contain different content.
   /// 
   /// Items are readonly and immutable. If you need to modify the content you should send a new request using the session.
   /// </summary>
