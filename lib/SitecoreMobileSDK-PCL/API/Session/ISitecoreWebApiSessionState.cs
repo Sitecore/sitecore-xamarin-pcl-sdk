@@ -27,7 +27,7 @@ namespace Sitecore.MobileSDK.API.Session
     ISessionConfig Config { get; }
 
     /// <summary>
-    /// Gets the credentials: user login and password.
+    /// Gets the credentials: user name and password.
     /// </summary>
     /// <value>
     /// The credentials.

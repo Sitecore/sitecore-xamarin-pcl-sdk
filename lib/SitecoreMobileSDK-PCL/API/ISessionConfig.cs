@@ -15,7 +15,7 @@ namespace Sitecore.MobileSDK.API
     ISessionConfig SessionConfigShallowCopy();
 
     /// <summary>
-    /// Specifies URL to the Sitecore instance. must starts with "http://" prefix.
+    /// Specifies URL to the Sitecore instance, must starts with "http://" prefix.
     /// 
     /// The value is case insensitive.
     /// </summary>

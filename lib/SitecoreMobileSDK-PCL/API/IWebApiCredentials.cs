@@ -26,7 +26,7 @@ namespace Sitecore.MobileSDK.API
     /// For example: "sitecore/admin"
     /// <seealso cref="ISessionConfig" />
     /// Or user name only, if you have "site" information.
-    /// For Example: "admin" and ISessionConfig.Site == "/sitecore/shell" 
+    /// For Example: "admin" and 'ISessionConfig'.Site == "/sitecore/shell" 
     /// <seealso cref="ISessionConfig" />
     /// </value>
     string Username
