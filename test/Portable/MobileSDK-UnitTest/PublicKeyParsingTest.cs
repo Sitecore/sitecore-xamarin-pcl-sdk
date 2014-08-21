@@ -57,12 +57,13 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestXmlParserFetchesValidDataCorrectly()
     {
       string validXml = VALID_PUBLIC_KEY_XML;
-      Stream xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(validXml));
+      using (Stream xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(validXml)))
+      {
+        PublicKeyX509Certificate result = this.parser.Parse(xmlStream, CancellationToken.None);
 
-      PublicKeyX509Certificate result = this.parser.Parse(xmlStream, CancellationToken.None);
-
-      Assert.AreEqual(result.ModulusInBase64, "0jvvnZgV2r8hlQ6rPIFcoQxJntKBnu3dsmPVzv+diFpkEHrQxX1XRz3KK2f4EBqXASEXFQrluJda7c0d82p76HFjcORGqF5/iTvnlEXotzgy+dAa4BGYa//LNp4DFOipfdvGQlN7lZJyRZqaXGVryueyBHK6MiT6KPcoDmZNZN8=");
-      Assert.AreEqual(result.ExponentInBase64, "AQAB");
+        Assert.AreEqual(result.ModulusInBase64, "0jvvnZgV2r8hlQ6rPIFcoQxJntKBnu3dsmPVzv+diFpkEHrQxX1XRz3KK2f4EBqXASEXFQrluJda7c0d82p76HFjcORGqF5/iTvnlEXotzgy+dAa4BGYa//LNp4DFOipfdvGQlN7lZJyRZqaXGVryueyBHK6MiT6KPcoDmZNZN8=");
+        Assert.AreEqual(result.ExponentInBase64, "AQAB");
+      }
     }
 
 
@@ -70,12 +71,13 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestXmlParserDoesNotDependOnNodeOrder()
     {
       string validXml = "<RSAKeyValue><Exponent>AQAB</Exponent><Modulus>0jvvnZgV2r8hlQ6rPIFcoQxJntKBnu3dsmPVzv+diFpkEHrQxX1XRz3KK2f4EBqXASEXFQrluJda7c0d82p76HFjcORGqF5/iTvnlEXotzgy+dAa4BGYa//LNp4DFOipfdvGQlN7lZJyRZqaXGVryueyBHK6MiT6KPcoDmZNZN8=</Modulus></RSAKeyValue>";
-      Stream xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(validXml));
+      using (Stream xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(validXml)))
+      {
+        PublicKeyX509Certificate result = this.parser.Parse(xmlStream, CancellationToken.None);
 
-      PublicKeyX509Certificate result = this.parser.Parse(xmlStream, CancellationToken.None);
-
-      Assert.AreEqual(result.ModulusInBase64, "0jvvnZgV2r8hlQ6rPIFcoQxJntKBnu3dsmPVzv+diFpkEHrQxX1XRz3KK2f4EBqXASEXFQrluJda7c0d82p76HFjcORGqF5/iTvnlEXotzgy+dAa4BGYa//LNp4DFOipfdvGQlN7lZJyRZqaXGVryueyBHK6MiT6KPcoDmZNZN8=");
-      Assert.AreEqual(result.ExponentInBase64, "AQAB");
+        Assert.AreEqual(result.ModulusInBase64, "0jvvnZgV2r8hlQ6rPIFcoQxJntKBnu3dsmPVzv+diFpkEHrQxX1XRz3KK2f4EBqXASEXFQrluJda7c0d82p76HFjcORGqF5/iTvnlEXotzgy+dAa4BGYa//LNp4DFOipfdvGQlN7lZJyRZqaXGVryueyBHK6MiT6KPcoDmZNZN8=");
+        Assert.AreEqual(result.ExponentInBase64, "AQAB");
+      }
     }
 
     [Test]
@@ -84,18 +86,19 @@ namespace Sitecore.MobileSdkUnitTest
       TestDelegate testAction = async () =>
       {
         var cancel = new CancellationTokenSource ();
-        Stream xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(VALID_PUBLIC_KEY_XML));
-
-        Task<PublicKeyX509Certificate> action = Task.Factory.StartNew( ()=> 
+        using (Stream xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(VALID_PUBLIC_KEY_XML)))
         {
-          int millisecondTimeout = 10;
-          Thread.Sleep(millisecondTimeout);    
+          Task<PublicKeyX509Certificate> action = Task.Factory.StartNew( ()=> 
+          {
+            int millisecondTimeout = 10;
+            Thread.Sleep(millisecondTimeout);    
 
-          return this.parser.Parse(xmlStream, cancel.Token);
-        });
-        cancel.Cancel();
+            return this.parser.Parse(xmlStream, cancel.Token);
+          });
+          cancel.Cancel();
 
-        await action;
+          await action;
+        }
       };
 
       Assert.Catch<OperationCanceledException>(testAction);
