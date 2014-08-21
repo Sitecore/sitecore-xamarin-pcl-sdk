@@ -9,7 +9,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   public interface IQueryParameters
   {
     /// <summary>
-    /// Performs deep the copy of <seealso cref="IQueryParameters"/>.
+    /// Performs deep the copy of <see cref="IQueryParameters"/>.
     /// </summary>
     /// <returns><seealso cref="IQueryParameters"/></returns>
     IQueryParameters DeepCopy();

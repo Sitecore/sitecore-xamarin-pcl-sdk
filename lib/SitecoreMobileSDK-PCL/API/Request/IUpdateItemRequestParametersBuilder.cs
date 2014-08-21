@@ -67,7 +67,7 @@
     /// <summary>
     /// Specifies payload.
     /// </summary>
-    /// <param name="payload"><seealso cref="PayloadType" />The payload.</param>
+    /// <param name="payload"><see cref="PayloadType" /> The payload.</param>
     /// <returns>
     /// this
     /// </returns>

@@ -15,7 +15,7 @@
     private List<string> ItemsIds { get; set; }
 
     /// <summary>
-    /// Initializes a new instance of the <seealso cref="ScDeleteItemsResponse"/> class.
+    /// Initializes a new instance of the <see cref="ScDeleteItemsResponse"/> class.
     /// 
     /// Note: All requests should be returned by the session object. The user is not supposed to construct response classes directly.
     /// </summary>
@@ -48,7 +48,7 @@
     /// 
     /// Field's id is case insensitive.
     /// </returns>
-    /// <exception cref="ArgumentOutOfRangeException"> index is less than 0 or index is equal to or greater than <seealso cref="List{T}.Count"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException"> index is less than 0 or index is equal to or greater than <see cref="List{T}.Count"/>.</exception>
     public string this[int index]
     {
       get
@@ -61,7 +61,7 @@
     ///     Returns an enumerator that iterates through the item ids list.
     /// </summary> 
     /// <returns>
-    ///     <seealso cref="IEnumerator{T}"/> that can be used to iterate through the item ids.
+    ///     <see cref="IEnumerator{T}"/> that can be used to iterate through the item ids.
     /// </returns>
     public IEnumerator<string> GetEnumerator()
     {
@@ -72,7 +72,7 @@
     ///     Returns an enumerator that iterates through the item ids list. Not generic version.
     /// </summary>
     /// <returns>
-    ///      <seealso cref="IEnumerator{T}"/> that can be used to iterate through the item ids.
+    ///      <see cref="IEnumerator{T}"/> that can be used to iterate through the item ids.
     /// </returns>
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {

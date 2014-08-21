@@ -15,7 +15,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     IDownloadMediaOptions DeepCopyMediaDownloadOptions();
 
     /// <summary>
-    ///  Determines whether any of property of <seealso cref="IDownloadMediaOptions" /> was set.
+    ///  Determines whether any of property of <see cref="IDownloadMediaOptions" /> was set.
     /// </summary>
     /// <returns>true if any property is set, false otherwise</returns>
     bool IsEmpty { get; }
@@ -99,7 +99,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     string DisplayAsThumbnail { get; }
 
     /// <summary>
-    ///  Returns <seealso cref="Dictionary{TKey,TValue}"/> that contains key value pairs where : 
+    ///  Returns <see cref="Dictionary{TKey,TValue}"/> that contains key value pairs where : 
     ///  key - option name,
     ///  value - options value;
     /// 

@@ -5,13 +5,13 @@
 
   /// <summary>
   /// A placeholder class to make the fluent interface more human friendly.
-  /// Returns an instance of <seealso cref="IDownloadMediaOptions" /> that accumulates the user's input.
+  /// Returns an instance of <see cref="IDownloadMediaOptions" /> that accumulates the user's input.
   /// 
   /// </summary>
   public class MediaOptionsBuilder
   {
     /// <summary>
-    /// A stub method returning an actual implementation of <seealso cref="IDownloadMediaOptions" />.
+    /// A stub method returning an actual implementation of <see cref="IDownloadMediaOptions" />.
     /// </summary>
     /// <value>
     /// The actual builder.

@@ -13,30 +13,30 @@
     /// <summary>
     /// Deletes item for GUID asynchronously.
     /// </summary>
-    /// <param name="request"><seealso cref="IDeleteItemsByIdRequest" />Delete item by Id request.</param>
+    /// <param name="request"><see cref="IDeleteItemsByIdRequest" /> Delete item by Id request.</param>
     /// <param name="cancelToken">The cancel token, should be called in case when you want to terminate request execution.</param>
     /// <returns>
-    ///   <seealso cref="Task{ScDeleteItemsResponse}" />Deleted items GUIDs list.
+    ///   <see cref="Task{ScDeleteItemsResponse}" /> Deleted items GUIDs list.
     /// </returns>
     Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
 
     /// <summary>
     /// Deletes item for item path asynchronously.
     /// </summary>
-    /// <param name="request"><seealso cref="IDeleteItemsByPathRequest" />Delete item by Path request.</param>
+    /// <param name="request"><see cref="IDeleteItemsByPathRequest" /> Delete item by Path request.</param>
     /// <param name="cancelToken">The cancel token, should be called in case when you want to terminate request execution.</param>
     /// <returns>
-    ///   <seealso cref="Task{ScDeleteItemsResponse}" />Deleted items GUIDs list.
+    ///   <see cref="Task{ScDeleteItemsResponse}" /> Deleted items GUIDs list.
     /// </returns>
     Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken));
 
     /// <summary>
     /// Deletes item for sitecore query asynchronously.
     /// </summary>
-    /// <param name="request"><seealso cref="Task{IDeleteItemsByQueryRequest}" />Delete item by Query request.</param>
+    /// <param name="request"><see cref="Task{IDeleteItemsByQueryRequest}" /> Delete item by Query request.</param>
     /// <param name="cancelToken">The cancel token, should be called in case when you want to terminate request execution.</param>
     /// <returns>
-    ///   <seealso cref="Task{ScDeleteItemsResponse}" />Deleted items GUIDs list.
+    ///   <see cref="Task{ScDeleteItemsResponse}" /> Deleted items GUIDs list.
     /// </returns>
     Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken));
   }

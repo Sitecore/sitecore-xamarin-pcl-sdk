@@ -1,7 +1,7 @@
 namespace Sitecore.MobileSDK.API.Items
 {
   /// <summary>
-  /// This class represents source config of <seealso cref="ISitecoreItem"/>.
+  /// This class represents source config of <see cref="ISitecoreItem"/>.
   /// 
   /// It contains information about a database that contains the item. 
   /// For example,
@@ -25,7 +25,7 @@ namespace Sitecore.MobileSDK.API.Items
   public interface IItemSource
   {
     /// <summary>
-    /// Returns copy of <seealso cref="IItemSource"/>. It will be invoked by the session once the request is passed to it. It is done for the thread safety reasons.
+    /// Returns copy of <see cref="IItemSource"/>. It will be invoked by the session once the request is passed to it. It is done for the thread safety reasons.
     /// </summary>
     IItemSource ShallowCopy();
 

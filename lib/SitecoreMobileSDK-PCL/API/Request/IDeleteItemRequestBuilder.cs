@@ -25,7 +25,7 @@
     /// <summary>
     /// Adds the scopes.
     /// </summary>
-    /// <param name="scope"><seealso cref="ScopeType"/>The scopes.</param>
+    /// <param name="scope"><see cref="ScopeType"/> The scopes.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -34,7 +34,7 @@
     /// <summary>
     /// Adds the scope.
     /// </summary>
-    /// <param name="scope"><seealso cref="ScopeType"/>The scopes.</param>
+    /// <param name="scope"><see cref="ScopeType"/> The scopes.</param>
     /// <returns>
     /// this
     /// </returns>

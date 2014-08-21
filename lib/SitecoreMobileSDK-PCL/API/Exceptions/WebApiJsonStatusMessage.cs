@@ -21,7 +21,7 @@ namespace Sitecore.MobileSDK.API.Exceptions
     public string Message { get; private set; }
 
     /// <summary>
-    ///  Initializes a new instance of the <seealso cref="WebApiJsonStatusMessage"/> class.
+    ///  Initializes a new instance of the <see cref="WebApiJsonStatusMessage"/> class.
     /// </summary>
     /// <param name="statusCode">status code of the response</param>
     /// <param name="message">error message of the response</param>
