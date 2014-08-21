@@ -49,11 +49,13 @@
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/testname222")
         .DownloadOptions(options)
         .Build();
-      var response = await this.session.DownloadResourceAsync(request);
 
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      Assert.IsTrue(8000 > ms.Length);
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        Assert.IsTrue(8000 > ms.Length);
+      }
     }
 
     [Test]
@@ -67,10 +69,12 @@
         .DownloadOptions(options)
         .Build();
 
-      var response = await this.session.DownloadResourceAsync(request);
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      Assert.IsTrue(43000 > ms.Length);
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        Assert.IsTrue(43000 > ms.Length);
+      }
     }
 
     [Test]
@@ -89,10 +93,12 @@
         .DownloadOptions(options)
         .Build();
 
-      var response = await this.session.DownloadResourceAsync(request);
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      Assert.IsTrue(14300 > ms.Length);
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        Assert.IsTrue(14300 > ms.Length);
+      }
     }
 
     [Test]
@@ -104,12 +110,14 @@
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .Database(Db)
         .Build();
-      var response = await this.session.DownloadResourceAsync(request);
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
 
-      var expectedItem = await this.GetItemByPath(MediaPath, Db);
-      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        var expectedItem = await this.GetItemByPath(MediaPath, Db);
+        Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      }
     }
 
     [Test]
@@ -243,11 +251,13 @@
         .DownloadOptions(options)
         .Build();
 
-      var response = await sessionNoReadAccess.DownloadResourceAsync(request);
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      var expectedItem = await this.GetItemByPath(MediaPath);
-      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      using (var response = await sessionNoReadAccess.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        var expectedItem = await this.GetItemByPath(MediaPath);
+        Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      }
     }
 
     [Test]
@@ -256,12 +266,14 @@
       const string MediaPath = "/sitecore/media library/Images/testname222";
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .Build();
-      var response = await this.session.DownloadResourceAsync(request);
 
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      var expectedItem = await this.GetItemByPath(MediaPath);
-      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        var expectedItem = await this.GetItemByPath(MediaPath);
+        Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      }
     }
 
     [Test]
@@ -269,13 +281,14 @@
     {
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/Images/green_mineraly1")
         .Build();
-      var response = await this.session.DownloadResourceAsync(request);
 
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-
-      var expectedItem = await this.GetItemByPath("/sitecore/media library/Images/green_mineraly1");
-      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        var expectedItem = await this.GetItemByPath("/sitecore/media library/Images/green_mineraly1");
+        Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      }
     }
 
     [Test]
@@ -290,11 +303,13 @@
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/Images/green_mineraly1")
         .DownloadOptions(options)
         .Build();
-      var response = await this.session.DownloadResourceAsync(request);
 
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      Assert.AreEqual(16284, ms.Length);
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        Assert.AreEqual(16284, ms.Length);
+      }
     }
 
     [Test]
@@ -308,11 +323,13 @@
         .Database(Db)
         .Build();
 
-      var response = await this.session.DownloadResourceAsync(request);
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      var expectedItem = await this.GetItemByPath(ItemPath, Db);
-      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        var expectedItem = await this.GetItemByPath(ItemPath, Db);
+        Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      }
     }
 
     [Test]
@@ -331,11 +348,13 @@
         .Database(Db)
         .Build();
 
-      var response = await this.session.DownloadResourceAsync(request);
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      var expectedItem = await this.GetItemByPath(ItemPath, Db);
-      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        var expectedItem = await this.GetItemByPath(ItemPath, Db);
+        Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      }
     }
 
     [Test]
@@ -347,14 +366,16 @@
         .Database("master")
         .Build();
 
-      var responseFromMasterDb = await this.session.DownloadResourceAsync(requestFromMasterDb);
-      var ms = new MemoryStream();
-      responseFromMasterDb.CopyTo(ms);
+      using (var responseFromMasterDb = await this.session.DownloadResourceAsync(requestFromMasterDb))
+      using (var ms = new MemoryStream())
+      {
+        responseFromMasterDb.CopyTo(ms);
 
-      // @adk : changed since different size has been received 
-      // * Mac OS
-      // * IOS Simulator
-      Assert.IsTrue(141750 == ms.Length);
+        // @adk : changed since different size has been received 
+        // * Mac OS
+        // * IOS Simulator
+        Assert.IsTrue(141750 == ms.Length);
+      }
 
       var requestFromWebDb = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(Path)
        .Database("web")
@@ -386,11 +407,13 @@
         .DownloadOptions(options)
         .Database("master")
         .Build();
-      var response = await this.session.DownloadResourceAsync(request);
 
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
-      Assert.AreEqual(7654, ms.Length);
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+        Assert.AreEqual(7654, ms.Length);
+      }
     }
 
     [Test]
@@ -401,13 +424,16 @@
         .Language("en")
         .Version(1)
         .Build();
-      var response = await this.session.DownloadResourceAsync(request);
 
-      var ms = new MemoryStream();
-      response.CopyTo(ms);
 
-      var expectedItem = await this.GetItemByPath("/sitecore/media library/images/test image");
-      Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        response.CopyTo(ms);
+
+        var expectedItem = await this.GetItemByPath("/sitecore/media library/images/test image");
+        Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
+      }
     }
 
     [Test]
@@ -418,18 +444,23 @@
       // z[5]: src="~/media/4F20B519D5654472B01891CB6103C667.ashx"
       var requestWithSrcParameter = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[5])
           .Build();
-      var responseWithSrcParameter = await this.session.DownloadResourceAsync(requestWithSrcParameter);
-      var msWithSrcParameter = new MemoryStream();
-      responseWithSrcParameter.CopyTo(msWithSrcParameter);
 
-      // z[3]: mediapath="/Images/test image"
-      var requestWithMediapathParameter = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])
+
+      using (var responseWithSrcParameter = await this.session.DownloadResourceAsync(requestWithSrcParameter))
+      using (var msWithSrcParameter = new MemoryStream())
+      {
+        responseWithSrcParameter.CopyTo(msWithSrcParameter);
+
+        // z[3]: mediapath="/Images/test image"
+        var requestWithMediapathParameter = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])
          .Build();
-      var responseWithMediapathParameter = await this.session.DownloadResourceAsync(requestWithMediapathParameter);
-      var msWithMediapathParameter = new MemoryStream();
-      responseWithMediapathParameter.CopyTo(msWithMediapathParameter);
-
-      Assert.AreEqual(msWithSrcParameter, msWithMediapathParameter);
+        using (var responseWithMediapathParameter = await this.session.DownloadResourceAsync(requestWithMediapathParameter))
+        using (var msWithMediapathParameter = new MemoryStream())
+        {
+          responseWithMediapathParameter.CopyTo(msWithMediapathParameter);
+          Assert.AreEqual(msWithSrcParameter, msWithMediapathParameter);
+        }
+      }
     }
 
     [Test]
@@ -439,11 +470,12 @@
 
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])   // z[3]: mediapath="/Images/test image"
          .Build();
-      var responseWithMediapathParameter = await this.session.DownloadResourceAsync(request);
-      var ms = new MemoryStream();
-      responseWithMediapathParameter.CopyTo(ms);
-
-      Assert.AreEqual(5257, ms.Length);
+      using (var responseWithMediapathParameter = await this.session.DownloadResourceAsync(request))
+      using (var ms = new MemoryStream())
+      {
+        responseWithMediapathParameter.CopyTo(ms);
+        Assert.AreEqual(5257, ms.Length);
+      }
     }
 
     [Test] //ALR: Argument exception should appear

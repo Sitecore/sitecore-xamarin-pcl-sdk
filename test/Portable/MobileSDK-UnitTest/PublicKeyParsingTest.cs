@@ -45,9 +45,10 @@ namespace Sitecore.MobileSdkUnitTest
       TestDelegate action = () =>
       {
         string invalidXml = "<RSAKeyValue><Modus>0jvvnZgV2r8hlQ6rPIFcoQxJntKBnu3dsmPVzv+diFpkEHrQxX1XRz3KK2f4EBqXASEXFQrluJda7c0d82p76HFjcORGqF5/iTvnlEXotzgy+dAa4BGYa//LNp4DFOipfdvGQlN7lZJyRZqaXGVryueyBHK6MiT6KPcoDmZNZN8=</Modulus><Exponent>AQAB<xponensdadt></RSAKeyValue>";
-        Stream xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(invalidXml));
-
-        this.parser.Parse(xmlStream, CancellationToken.None);
+        using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(invalidXml)) )
+        {
+          this.parser.Parse(xmlStream, CancellationToken.None);
+        }
       };
       Assert.Throws<XmlException>(action, "cannot parse invalid xml");
     }
