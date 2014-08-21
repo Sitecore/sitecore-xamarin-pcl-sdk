@@ -4,10 +4,10 @@
 
   /// <summary>
   /// Interface that represents necessary data for requests that change item.
-  /// <param><see cref="IUpdateItemByIdRequest"/></param>
-  /// <param><see cref="IUpdateItemByPathRequest"/></param>
-  /// <param><see cref="ICreateItemByIdRequest"/></param>
-  /// <param><see cref="ICreateItemByPathRequest"/></param>
+  /// <param><seealso cref="IUpdateItemByIdRequest"/></param>
+  /// <param><seealso cref="IUpdateItemByPathRequest"/></param>
+  /// <param><seealso cref="ICreateItemByIdRequest"/></param>
+  /// <param><seealso cref="ICreateItemByPathRequest"/></param>
   /// </summary>
   public interface IBaseChangeItemRequest : IBaseItemRequest
   {

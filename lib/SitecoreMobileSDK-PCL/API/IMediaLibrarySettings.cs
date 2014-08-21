@@ -9,7 +9,7 @@
     /// Performs shallow copy of media setting.
     /// </summary>
     /// <returns>
-    ///   <see cref="IMediaLibrarySettings" />
+    ///   <seealso cref="IMediaLibrarySettings" />
     /// </returns>
     IMediaLibrarySettings MediaSettingsShallowCopy();
 

@@ -8,7 +8,7 @@ namespace Sitecore.MobileSDK.API.Request
     /// <summary>
     /// Performs deep copy of request.
     /// </summary>
-    /// <returns><see cref="IReadItemsByIdRequest"/></returns>
+    /// <returns><seealso cref="IReadItemsByIdRequest"/></returns>
     IReadItemsByIdRequest DeepCopyGetItemByIdRequest();
 
     /// <summary>

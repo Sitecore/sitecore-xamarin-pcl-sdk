@@ -1,7 +1,7 @@
 namespace Sitecore.MobileSDK.API.Request.Parameters
 {
   /// <summary>
-  /// Interface represents fluent flow for building <see cref="IMediaResourceDownloadRequest"/>
+  /// Interface represents fluent flow for building <seealso cref="IMediaResourceDownloadRequest"/>
   /// </summary>
   /// <typeparam name="T">Type of request that is build by this builder.</typeparam>
   public interface IGetMediaItemRequestParametersBuilder<out T>
@@ -37,7 +37,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 
     /// <summary>
     /// Specifies media options for media item.
-    /// <see cref="IDownloadMediaOptions"/>
+    /// <seealso cref="IDownloadMediaOptions"/>
     /// </summary>
     /// <param name="downloadMediaOptions">Media options.</param>
     /// <returns>this</returns>

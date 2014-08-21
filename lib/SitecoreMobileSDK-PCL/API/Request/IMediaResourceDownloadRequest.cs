@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK.API.Request
     /// <summary>
     /// Performs deep copy of request.
     /// </summary>
-    /// <returns><see cref="IMediaResourceDownloadRequest"/></returns>
+    /// <returns><seealso cref="IMediaResourceDownloadRequest"/></returns>
     IMediaResourceDownloadRequest DeepCopyReadMediaRequest();
 
     /// <summary>

@@ -13,30 +13,30 @@ namespace Sitecore.MobileSDK.API.Session
     /// <summary>
     /// Reads the item for item GUID asynchronously.
     /// </summary>
-    /// <param name="request"><see cref="IReadItemsByIdRequest" />Read item by Id request.</param>
+    /// <param name="request"><seealso cref="IReadItemsByIdRequest" />Read item by Id request.</param>
     /// <param name="cancelToken">The cancel token, should be called in case when you want to terminate request execution.</param>
     /// <returns>
-    ///  <see cref="ScItemsResponse" />Read Items list.
+    ///  <seealso cref="ScItemsResponse" />Read Items list.
     /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
 
     /// <summary>
     /// Reads the item for item Path asynchronously
     /// </summary>
-    /// <param name="request"><see cref="IReadItemsByPathRequest" />Read item by Path request.</param>
+    /// <param name="request"><seealso cref="IReadItemsByPathRequest" />Read item by Path request.</param>
     /// <param name="cancelToken">The cancel token, should be called in case when you want to terminate request execution.</param>
     /// <returns>
-    ///  <see cref="ScItemsResponse" />Read Items list.
+    ///  <seealso cref="ScItemsResponse" />Read Items list.
     /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken));
 
     /// <summary>
     /// Reads the item with Sitecore Query asynchronously
     /// </summary>
-    /// <param name="request"><see cref="IReadItemsByQueryRequest" />Read item by Query request.</param>
+    /// <param name="request"><seealso cref="IReadItemsByQueryRequest" />Read item by Query request.</param>
     /// <param name="cancelToken">The cancel token, should be called in case when you want to terminate request execution.</param>
     /// <returns>
-    ///  <see cref="ScItemsResponse" />Read Items list.
+    ///  <seealso cref="ScItemsResponse" />Read Items list.
     /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken));
   }

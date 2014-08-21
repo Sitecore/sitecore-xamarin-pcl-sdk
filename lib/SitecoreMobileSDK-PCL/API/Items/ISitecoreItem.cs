@@ -5,14 +5,14 @@ namespace Sitecore.MobileSDK.API.Items
   using Sitecore.MobileSDK.API.Fields;
 
   /// <summary>
-  /// This interace represents a Sitecore item. An item is an element of the content tree stored in a particular database. Depending on its localization language and version its fields may contain different content.
+  /// This interface represents a Sitecore item. An item is an element of the content tree stored in a particular database. Depending on its localization language and version its fields may contain different content.
   /// 
   /// Items are readonly and immutable. If you need to modify the content you should send a new request using the session.
   /// </summary>
   public interface ISitecoreItem
   {
     /// <summary>
-    /// Returns item's <see cref="IItemSource"/>
+    /// Returns item's <seealso cref="IItemSource"/>
     /// </summary>
     IItemSource Source { get; }
 
@@ -70,7 +70,7 @@ namespace Sitecore.MobileSDK.API.Items
     /// <param name="caseInsensitiveFieldName"> The name of the field to get.</param>
     ///
     /// <returns>
-    ///     The  <see cref="IField"/> with specified name.
+    ///     The  <seealso cref="IField"/> with specified name.
     /// </returns>
     /// 
     /// <exception cref="ArgumentNullException">Name is null</exception>

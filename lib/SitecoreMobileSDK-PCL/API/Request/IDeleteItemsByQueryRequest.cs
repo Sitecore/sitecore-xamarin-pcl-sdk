@@ -8,7 +8,7 @@
     /// <summary>
     /// Performs deep copy request.
     /// </summary>
-    /// <returns><see cref="IDeleteItemsByQueryRequest"/></returns>
+    /// <returns><seealso cref="IDeleteItemsByQueryRequest"/></returns>
     IDeleteItemsByQueryRequest DeepCopyDeleteItemRequest();
 
     /// <summary>

@@ -36,7 +36,7 @@
     /// <summary>
     /// Specifies payload.
     /// </summary>
-    /// <param name="payload"><see cref="PayloadType" />The payload.</param>
+    /// <param name="payload"><seealso cref="PayloadType" />The payload.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -68,7 +68,7 @@
     /// <summary>
     /// Adds the scopes.
     /// </summary>
-    /// <param name="scope"><see cref="ScopeType" />The scopes.</param>
+    /// <param name="scope"><seealso cref="ScopeType" />The scopes.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -77,7 +77,7 @@
     /// <summary>
     /// Adds the scopes.
     /// </summary>
-    /// <param name="scope"><see cref="ScopeType" />The scopes.</param>
+    /// <param name="scope"><seealso cref="ScopeType" />The scopes.</param>
     /// <returns>
     /// this
     /// </returns>

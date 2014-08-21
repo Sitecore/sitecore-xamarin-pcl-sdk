@@ -10,12 +10,12 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// <summary>
     /// Performs shallow copy of scope parameters.
     /// </summary>
-    /// <returns><see cref="IScopeParameters"/></returns>
+    /// <returns><seealso cref="IScopeParameters"/></returns>
     IScopeParameters ShallowCopyScopeParametersInterface();
 
     /// <summary>
     /// Gets the ordered scopes parameters.
-    /// <see cref="ScopeType"/>
+    /// <seealso cref="ScopeType"/>
     /// </summary>
     IEnumerable<ScopeType> OrderedScopeSequence { get; }
 

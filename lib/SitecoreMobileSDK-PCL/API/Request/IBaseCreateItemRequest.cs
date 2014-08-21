@@ -2,8 +2,8 @@ namespace Sitecore.MobileSDK.API.Request
 {
   /// <summary>
   /// Interface represents basic create item request parameters.
-  /// <see cref="ICreateItemByIdRequest"/>
-  /// <see cref="ICreateItemByPathRequest"/>
+  /// <seealso cref="ICreateItemByIdRequest"/>
+  /// <seealso cref="ICreateItemByPathRequest"/>
   /// </summary>
   public interface IBaseCreateItemRequest : IBaseChangeItemRequest
   {

@@ -6,22 +6,22 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   public enum ScopeType
   {
     /// <summary>
-    /// self - only requested item will be returned from the server.
+    /// only requested item will be returned from the server.
     /// </summary>
     Self,
 
     /// <summary>
-    /// children - children of the requested item will be returned from the server.
+    /// children of the requested item will be returned from the server.
     /// </summary>
     Children,
     
     /// <summary>
-    /// parent - parent of the requested item will be returned from the server.
+    /// parent of the requested item will be returned from the server.
     /// </summary>
     Parent,
 
     /// <summary>
-    /// The default is <see cref="Self"/>
+    /// The default is <seealso cref="Self"/>
     /// </summary>
     Default = Self
   }

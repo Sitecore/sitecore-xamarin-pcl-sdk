@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK.API
     /// Performs shallow copy of session setting.
     /// </summary>
     /// <returns>
-    ///   <see cref="ISessionConfig" />
+    ///   <seealso cref="ISessionConfig" />
     /// </returns>
     ISessionConfig SessionConfigShallowCopy();
 
