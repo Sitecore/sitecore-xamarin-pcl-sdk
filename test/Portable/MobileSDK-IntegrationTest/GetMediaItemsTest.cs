@@ -53,7 +53,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         Assert.IsTrue(8000 > ms.Length);
       }
     }
@@ -72,7 +72,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         Assert.IsTrue(43000 > ms.Length);
       }
     }
@@ -96,7 +96,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         Assert.IsTrue(14300 > ms.Length);
       }
     }
@@ -114,7 +114,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         var expectedItem = await this.GetItemByPath(MediaPath, Db);
         Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
       }
@@ -254,7 +254,7 @@
       using (var response = await sessionNoReadAccess.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         var expectedItem = await this.GetItemByPath(MediaPath);
         Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
       }
@@ -270,7 +270,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         var expectedItem = await this.GetItemByPath(MediaPath);
         Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
       }
@@ -285,7 +285,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         var expectedItem = await this.GetItemByPath("/sitecore/media library/Images/green_mineraly1");
         Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
       }
@@ -307,7 +307,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         Assert.AreEqual(16284, ms.Length);
       }
     }
@@ -326,7 +326,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         var expectedItem = await this.GetItemByPath(ItemPath, Db);
         Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
       }
@@ -351,7 +351,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         var expectedItem = await this.GetItemByPath(ItemPath, Db);
         Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
       }
@@ -369,7 +369,7 @@
       using (var responseFromMasterDb = await this.session.DownloadResourceAsync(requestFromMasterDb))
       using (var ms = new MemoryStream())
       {
-        responseFromMasterDb.CopyTo(ms);
+        await responseFromMasterDb.CopyToAsync(ms);
 
         // @adk : changed since different size has been received 
         // * Mac OS
@@ -411,7 +411,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
         Assert.AreEqual(7654, ms.Length);
       }
     }
@@ -429,7 +429,7 @@
       using (var response = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        response.CopyTo(ms);
+        await response.CopyToAsync(ms);
 
         var expectedItem = await this.GetItemByPath("/sitecore/media library/images/test image");
         Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
@@ -449,7 +449,7 @@
       using (var responseWithSrcParameter = await this.session.DownloadResourceAsync(requestWithSrcParameter))
       using (var msWithSrcParameter = new MemoryStream())
       {
-        responseWithSrcParameter.CopyTo(msWithSrcParameter);
+        await responseWithSrcParameter.CopyToAsync(msWithSrcParameter);
 
         // z[3]: mediapath="/Images/test image"
         var requestWithMediapathParameter = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])
@@ -457,7 +457,7 @@
         using (var responseWithMediapathParameter = await this.session.DownloadResourceAsync(requestWithMediapathParameter))
         using (var msWithMediapathParameter = new MemoryStream())
         {
-          responseWithMediapathParameter.CopyTo(msWithMediapathParameter);
+          await responseWithMediapathParameter.CopyToAsync(msWithMediapathParameter);
           Assert.AreEqual(msWithSrcParameter, msWithMediapathParameter);
         }
       }
@@ -473,7 +473,7 @@
       using (var responseWithMediapathParameter = await this.session.DownloadResourceAsync(request))
       using (var ms = new MemoryStream())
       {
-        responseWithMediapathParameter.CopyTo(ms);
+        await responseWithMediapathParameter.CopyToAsync(ms);
         Assert.AreEqual(5257, ms.Length);
       }
     }
