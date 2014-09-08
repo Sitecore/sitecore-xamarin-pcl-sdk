@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK.API.Request
     /// <summary>
     /// Performs deep copy of request.
     /// </summary>
-    /// <returns><see cref="IMediaResourceDownloadRequest"/></returns>
+    /// <returns><seealso cref="IMediaResourceDownloadRequest"/></returns>
     IMediaResourceDownloadRequest DeepCopyReadMediaRequest();
 
     /// <summary>
@@ -38,10 +38,14 @@ namespace Sitecore.MobileSDK.API.Request
     /// <value>
     /// The download options.
     /// </value>
+    /// <seealso cref="IDownloadMediaOptions" />
     IDownloadMediaOptions DownloadOptions { get; }
 
     /// <summary>
-    /// Gets the media item path.
+    /// Gets the media item path, relative to media library rootю
+    /// Must starts with '/' symbol.
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <value>
     /// The media item path.

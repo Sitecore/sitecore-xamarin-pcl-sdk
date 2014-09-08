@@ -8,14 +8,15 @@
     /// <summary>
     /// Performs deep copy request.
     /// </summary>
-    /// <returns><see cref="IDeleteItemsByQueryRequest"/></returns>
+    /// <returns><seealso cref="IDeleteItemsByQueryRequest"/></returns>
     IDeleteItemsByQueryRequest DeepCopyDeleteItemRequest();
 
     /// <summary>
-    /// Gets the sitecore query.
+    /// Gets the sitecore query, request string for retrieving and filtering items from the Sitecore database.
+    /// See Sitecore documentation for details.
     /// </summary>
     /// <value>
-    /// The sitecore query.
+    /// The sitecore query value.
     /// </value>
     string SitecoreQuery { get; }
   }

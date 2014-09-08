@@ -8,11 +8,14 @@
     /// <summary>
     /// Performs deep copy request.
     /// </summary>
-    /// <returns><see cref="IDeleteItemsByPathRequest"/></returns>
+    /// <returns><seealso cref="IDeleteItemsByPathRequest"/></returns>
     IDeleteItemsByPathRequest DeepCopyDeleteItemRequest();
 
     /// <summary>
-    /// Gets the item path.
+    /// Gets the item path in the content tree. 
+    /// For example: "/sitecore/content/Home"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <value>
     /// The item path.

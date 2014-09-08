@@ -12,6 +12,8 @@ namespace Sitecore.MobileSDK.API.Request
   {
     /// <summary>
     /// Adds fields that will be updated in item.
+    /// key   - must contain field name.
+    /// value - must contain new field raw value.
     /// </summary>
     /// <param name="fieldsRawValuesByName">Name of field and raw value pairs</param>
     /// <returns>
@@ -30,9 +32,12 @@ namespace Sitecore.MobileSDK.API.Request
     new ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue);
 
     /// <summary>
-    /// Specifies sitecore database.
+    /// Specifies item database.
+    /// For example: "web"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="sitecoreDatabase">The sitecore database.</param>
+    /// <param name="sitecoreDatabase">The sitecore database name.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -40,8 +45,11 @@ namespace Sitecore.MobileSDK.API.Request
 
     /// <summary>
     /// Specifies item language.
+    /// For example: "en"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="itemLanguage">The item language.</param>
+    /// <param name="itemLanguage">The item language name.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -58,7 +66,9 @@ namespace Sitecore.MobileSDK.API.Request
     new ICreateItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
     /// <summary>
-    /// Adds the fields that will be read from the server.
+    /// Adds the fields names that will be read from the server.
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="fields">The fields.</param>
     /// <returns>
@@ -67,7 +77,9 @@ namespace Sitecore.MobileSDK.API.Request
     new ICreateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
 
     /// <summary>
-    /// Adds the fields that will be read from the server.
+    /// Adds the fields names that will be read from the server.
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="fieldParams">The field parameters.</param>
     /// <returns>

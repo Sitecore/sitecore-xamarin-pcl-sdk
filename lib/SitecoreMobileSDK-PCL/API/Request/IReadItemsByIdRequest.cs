@@ -8,11 +8,14 @@ namespace Sitecore.MobileSDK.API.Request
     /// <summary>
     /// Performs deep copy of request.
     /// </summary>
-    /// <returns><see cref="IReadItemsByIdRequest"/></returns>
+    /// <returns><seealso cref="IReadItemsByIdRequest"/></returns>
     IReadItemsByIdRequest DeepCopyGetItemByIdRequest();
 
     /// <summary>
-    /// Gets the item GUID.
+    /// Gets item GUID values enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <value>
     /// The item GUID.

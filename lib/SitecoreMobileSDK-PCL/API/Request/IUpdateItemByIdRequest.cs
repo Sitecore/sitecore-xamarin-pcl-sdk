@@ -9,7 +9,7 @@
     /// Performs deep copy of request.
     /// </summary>
     /// <returns>
-    ///   <see cref="IUpdateItemByIdRequest" />
+    ///   <seealso cref="IUpdateItemByIdRequest" />
     /// </returns>
     IUpdateItemByIdRequest DeepCopyUpdateItemByIdRequest();
   }

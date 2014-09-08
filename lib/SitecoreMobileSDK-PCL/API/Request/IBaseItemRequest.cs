@@ -12,7 +12,7 @@
     /// <summary>
     /// Performs deep copy of <see cref="IBaseItemRequest"/>.
     /// </summary>
-    /// <returns><see cref="IBaseItemRequest"/></returns>
+    /// <returns><seealso cref="IBaseItemRequest"/></returns>
     IBaseItemRequest DeepCopyBaseGetItemRequest();
 
     /// <summary>

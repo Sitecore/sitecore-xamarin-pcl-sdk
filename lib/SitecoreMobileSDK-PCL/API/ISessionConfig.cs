@@ -10,12 +10,14 @@ namespace Sitecore.MobileSDK.API
     /// Performs shallow copy of session setting.
     /// </summary>
     /// <returns>
-    ///   <see cref="ISessionConfig" />
+    /// this instance copy.<see cref="ISessionConfig" />
     /// </returns>
     ISessionConfig SessionConfigShallowCopy();
 
     /// <summary>
-    /// Specifies URL to the Sitecore instance.
+    /// Specifies URL to the Sitecore instance, must starts with "http://" prefix.
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     string InstanceUrl
     {
@@ -23,7 +25,10 @@ namespace Sitecore.MobileSDK.API
     }
 
     /// <summary>
-    /// Specifies site parameter, foe example '/sitecore/shell'.
+    /// Specifies site parameter, must starts with "/" symbol.
+    /// For example: "/sitecore/shell".
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     string Site
     {
@@ -31,7 +36,10 @@ namespace Sitecore.MobileSDK.API
     }
 
     /// <summary>
-    /// Specifies WebAPI vertion, for example 'v1'.
+    /// Specifies WebAPI vertion.
+    /// For example "v1".
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     string ItemWebApiVersion
     {

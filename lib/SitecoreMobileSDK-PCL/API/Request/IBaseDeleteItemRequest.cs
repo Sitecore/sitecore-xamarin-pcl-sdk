@@ -26,7 +26,10 @@
     IScopeParameters ScopeParameters { get; }
 
     /// <summary>
-    /// Gets the database name.
+    /// Returns database name.
+    /// For example: "web"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <returns>
     /// The database name.

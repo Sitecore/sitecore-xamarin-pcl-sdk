@@ -11,7 +11,10 @@
     where T : class
   {
     /// <summary>
-    /// Specifies item version.
+    /// Specifies item version. It is a positive integer number.
+    /// A null value stands for the "latest" version.
+    /// 
+    /// For example: 1
     /// </summary>
     /// <param name="itemVersion">The item version.</param>
     /// <returns>
@@ -21,6 +24,8 @@
 
     /// <summary>
     /// Adds fields that will be updated in item.
+    /// key   - must contain field name.
+    /// value - must contain new field raw value.
     /// </summary>
     /// <param name="fieldsRawValuesByName">Name of field and raw value pairs</param>
     /// <returns>this</returns>
@@ -36,8 +41,10 @@
     /// </returns>
     new IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue);
 
-    /// <summary>
-    /// Specifies sitecore database.
+    /// Specifies item database.
+    /// For example: "web"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="sitecoreDatabase">The sitecore database.</param>
     /// <returns>
@@ -47,6 +54,9 @@
 
     /// <summary>
     /// Specifies item language.
+    /// For example: "en"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <param name="itemLanguage">The item language.</param>
     /// <returns>
@@ -57,17 +67,16 @@
     /// <summary>
     /// Specifies payload.
     /// </summary>
-    /// <param name="payload">The payload.</param>
+    /// <param name="payload"><see cref="PayloadType" /> The payload.</param>
     /// <returns>
     /// this
     /// </returns>
-    /// <seealso cref="PayloadType" />
     new IUpdateItemRequestParametersBuilder<T> Payload(PayloadType payload);
 
     /// <summary>
     /// Adds the fields that will be read from the server.
     /// </summary>
-    /// <param name="fields">The fields.</param>
+    /// <param name="fields">The fields names.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -76,7 +85,7 @@
     /// <summary>
     /// Adds the fields that will be read from the server.
     /// </summary>
-    /// <param name="fieldParams">The field parameters.</param>
+    /// <param name="fieldParams">The field names.</param>
     /// <returns>
     /// this
     /// </returns>

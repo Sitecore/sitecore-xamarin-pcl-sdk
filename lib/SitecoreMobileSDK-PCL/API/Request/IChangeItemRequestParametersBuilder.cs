@@ -11,13 +11,15 @@
   {
     /// <summary>
     /// Adds fields that will be updated in item.
+    /// key   - must contain field name.
+    /// value - must contain new field raw value.
     /// </summary>
     /// <param name="fieldsRawValuesByName">Name of field and raw value pairs</param>
     /// <returns>this</returns>
     IChangeItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName);
 
     /// <summary>
-    /// Adds fields that will be updated in item.
+    /// Adds field that will be updated in item.
     /// </summary>
     /// <param name="fieldName">Field name.</param>
     /// <param name="fieldValue">Field raw value.</param>

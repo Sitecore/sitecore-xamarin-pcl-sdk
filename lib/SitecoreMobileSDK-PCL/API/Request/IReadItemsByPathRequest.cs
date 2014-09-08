@@ -8,11 +8,14 @@ namespace Sitecore.MobileSDK.API.Request
     /// <summary>
     /// Performs deep copy of request.
     /// </summary>
-    /// <returns><see cref="IReadItemsByPathRequest"/></returns>
+    /// <returns><seealso cref="IReadItemsByPathRequest"/></returns>
     IReadItemsByPathRequest DeepCopyGetItemByPathRequest();
 
     /// <summary>
-    /// Gets the item path.
+    /// Gets the item's path in the content tree. 
+    /// For example: "/sitecore/content/Home"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
     /// <value>
     /// The item path.

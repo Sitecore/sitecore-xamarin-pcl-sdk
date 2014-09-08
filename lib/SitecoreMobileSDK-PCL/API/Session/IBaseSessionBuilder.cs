@@ -9,31 +9,38 @@ namespace Sitecore.MobileSDK.API.Session
     /// Builds session.
     /// </summary>
     /// <returns>
-    ///   <see cref="ISitecoreWebApiSession" />
+    ///   <seealso cref="ISitecoreWebApiSession" />
     /// </returns>
     ISitecoreWebApiSession BuildSession();
 
     /// <summary>
-    /// Builds readonly session.
+    /// Builds session which contain read only operations.
     /// </summary>
     /// <returns>
-    ///   <see cref="ISitecoreWebApiReadonlySession" />
+    ///   <seealso cref="ISitecoreWebApiReadonlySession" />
     /// </returns>
     ISitecoreWebApiReadonlySession BuildReadonlySession();
 
     /// <summary>
     /// Specifies site parameter.
+    /// This parameter value will be used if appropriate parameter will be missed in request object.
+    /// For example: "/sitecore/shell"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="site">Site parameter, for example '/sitecore/shell'</param>
+    /// <param name="site">Site parameter.</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder Site(string site);
 
     /// <summary>
-    /// Specifies WebAPI version.
+    /// Specifies WebAPI version, 'v1' by default.
+    /// This parameter value will be used if appropriate parameter will be missed in request object.
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="webApiVersion">WebAPI version, 'v1' by default</param>
+    /// <param name="webApiVersion">WebAPI version</param>
     /// <returns>
     /// this
     /// </returns>
@@ -41,8 +48,12 @@ namespace Sitecore.MobileSDK.API.Session
 
     /// <summary>
     /// Specifies default database.
+    /// This parameter value will be used if appropriate parameter will be missed in request object.
+    /// For example: "web".
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="defaultDatabase">Database, for example 'web'</param>
+    /// <param name="defaultDatabase">Database</param>
     /// <returns>
     /// this
     /// </returns>
@@ -50,24 +61,28 @@ namespace Sitecore.MobileSDK.API.Session
 
     /// <summary>
     /// Specifies default language.
+    /// This parameter value will be used if appropriate parameter will be missed in request object.
+    /// For example: "en".
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="defaultLanguage">Language, for example 'en'</param>
+    /// <param name="defaultLanguage">Language</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder DefaultLanguage(string defaultLanguage);
 
     /// <summary>
-    /// Specifies path to media lybrary root.
+    /// Specifies path to media lybrary root, "/sitecore/media library" by default.
     /// </summary>
-    /// <param name="mediaLibraryRootItem">Media lybrary root, '/sitecore/media library' by default</param>
+    /// <param name="mediaLibraryRootItem">Media lybrary root</param>
     /// <returns>
     /// this
     /// </returns>
     IBaseSessionBuilder MediaLibraryRoot(string mediaLibraryRootItem);
 
     /// <summary>
-    /// Defaults the media resource extension.
+    /// Defaults the media resource extension, "ashx" by default.
     /// </summary>
     /// <param name="defaultExtension">The default extension.</param>
     /// <returns>
@@ -76,7 +91,7 @@ namespace Sitecore.MobileSDK.API.Session
     IBaseSessionBuilder DefaultMediaResourceExtension(string defaultExtension);
 
     /// <summary>
-    /// Medias the prefix.
+    /// Prefix to build request for resource download, "~/media" by default.
     /// </summary>
     /// <param name="mediaPrefix">The media prefix.</param>
     /// <returns>

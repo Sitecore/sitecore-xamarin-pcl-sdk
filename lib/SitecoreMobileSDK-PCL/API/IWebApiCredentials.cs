@@ -21,8 +21,13 @@ namespace Sitecore.MobileSDK.API
     /// Gets the username from the keychain.
     /// </summary>
     /// <value>
-    /// The username to authenticate against the sitecore instance. It may contain the domain information.
-    /// For example, "sitecore/admin"
+    /// The username to authenticate against the sitecore instance. 
+    /// It should contain the domain information if you will not have "site" information.
+    /// For example: "sitecore/admin"
+    /// <seealso cref="ISessionConfig" />
+    /// Or user name only, if you have "site" information.
+    /// For Example: "admin" and 'ISessionConfig'.Site == "/sitecore/shell" 
+    /// <seealso cref="ISessionConfig" />
     /// </value>
     string Username
     {

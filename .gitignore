@@ -35,6 +35,7 @@ TestResult.xml
 UpgradeLog.html
 UpgradeLog.htm
 *.VisualState.xml
+*.psess
 *.sln.*
 
 # NuGet

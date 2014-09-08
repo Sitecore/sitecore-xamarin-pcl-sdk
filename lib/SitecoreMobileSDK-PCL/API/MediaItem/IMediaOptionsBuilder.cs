@@ -4,43 +4,58 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   /// <summary>
-  /// Interface represents builder for options for download resource request. 
-  /// <seealso cref="IMediaResourceDownloadRequest"/>
+  /// A builder for dynamic media options.
+  /// They are used for size and colour configuration of the image being downloaded. 
+  /// 
+  /// These options are a part of the <seealso cref="IMediaResourceDownloadRequest"/>
   /// </summary>
   public interface IMediaOptionsBuilder
   {
     /// <summary>
     /// Specifies width for media item.
     /// </summary>
-    /// <param name="width">Target width. Must be > 0.</param>
+    /// <param name="width"> Target width. 
+    /// It must be a positive number.
+    /// </param>
     /// <returns>this</returns>
     IMediaOptionsBuilder Width(int width);
 
     /// <summary>
     /// Specifies height for media item.
     /// </summary>
-    /// <param name="height">Target height. Must be > 0.</param>
+    /// <param name="height">Target height. 
+    /// It must be a positive number.
+    /// </param>
     /// <returns>this</returns>
     IMediaOptionsBuilder Height(int height);
 
     /// <summary>
     /// Specifies max width for media item.
     /// </summary>
-    /// <param name="maxWidth">Target max width. Must be > 0.</param>
+    /// <param name="maxWidth">Target max width.
+    /// It must be a positive number.
+    /// </param>
     /// <returns>this</returns>
     IMediaOptionsBuilder MaxWidth(int maxWidth);
 
     /// <summary>
     /// Specifies max height for media item.
     /// </summary>
-    /// <param name="maxHeight">Target max height. Must be > 0.</param>
+    /// <param name="maxHeight">Target max height.
+    /// It must be a positive number.
+    /// </param>
     /// <returns>this</returns>
     IMediaOptionsBuilder MaxHeight(int maxHeight);
 
     /// <summary>
     /// Specifies background color for media item. 
     /// </summary>
-    /// <param name="color">Target color.</param>
+    /// <param name="color">Target color. Should be an HTML colorName or hex color code
+    /// For example: "Red" or "ff0000"
+    /// 
+    /// The value is case insensitive.
+    /// </param>
+    /// 
     /// <returns>this</returns>
     IMediaOptionsBuilder BackgroundColor(string color);
 
@@ -61,7 +76,9 @@
     /// <summary>
     /// Specifies scale for media item. 
     /// </summary>
-    /// <param name="scale">Target scale. Must be > 0</param>
+    /// <param name="scale">Target scale.
+    /// It must be a positive floating point number.
+    /// </param>
     /// <returns>this</returns>
     IMediaOptionsBuilder Scale(float scale);
 
@@ -76,7 +93,7 @@
     /// <summary>
     /// Builds media options. 
     /// </summary>
-    /// <returns><see cref="IDownloadMediaOptions"/></returns>
+    /// <returns><seealso cref="IDownloadMediaOptions"/></returns>
     IDownloadMediaOptions Build();
   }
 }

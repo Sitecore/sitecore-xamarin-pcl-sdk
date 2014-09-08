@@ -11,9 +11,11 @@ namespace Sitecore.MobileSDK.API.Request
   where T : class
   {
     /// <summary>
-    /// Specifies sitecore database.
+    /// Specifies item database.
+    /// For example: "web"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="sitecoreDatabase">The sitecore database.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -21,8 +23,10 @@ namespace Sitecore.MobileSDK.API.Request
 
     /// <summary>
     /// Specifies item language.
+    /// For example: "en"
+    /// 
+    /// The value is case insensitive.
     /// </summary>
-    /// <param name="itemLanguage">The item language.</param>
     /// <returns>
     /// this
     /// </returns>
