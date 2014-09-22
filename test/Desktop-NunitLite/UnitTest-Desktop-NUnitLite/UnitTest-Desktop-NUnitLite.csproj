@@ -110,6 +110,9 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\LoginAndPasswordEncryptionTest.cs">
       <Link>LoginAndPasswordEncryptionTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\PortablePasswordStorageTest.cs">
+      <Link>PortablePasswordStorageTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\PublicKeyParsingTest.cs">
       <Link>PublicKeyParsingTest.cs</Link>
     </Compile>
@@ -130,12 +133,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="win_PasswordStorageTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
+      <Project>{079d5d12-ff8e-46d4-8afc-06cbf5a736c7}</Project>
+      <Name>SitecoreMobileSdkPasswordProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\SecureStringPasswordProvider-windows.csproj">
+      <Project>{6a895746-b2ea-4865-ae55-89aec075efac}</Project>
+      <Name>SecureStringPasswordProvider-windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
       <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
       <Name>SitecoreMobileSDK</Name>
