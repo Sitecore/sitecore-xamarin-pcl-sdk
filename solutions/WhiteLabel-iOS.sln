@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PasswordProvider", "Passwor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSdkPasswordProvider", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SecureStringPasswordProvider", "..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.shproj", "{25A7AAE3-E76A-4C4F-AA0E-24983166C37D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SecureStringPasswordProvider-iOS", "..\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\SecureStringPasswordProvider-iOS.shproj", "{A8F155B6-3E49-4730-B0EF-C24161775A68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -58,6 +62,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
+		{25A7AAE3-E76A-4C4F-AA0E-24983166C37D} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
+		{A8F155B6-3E49-4730-B0EF-C24161775A68} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ..\app\WhiteLabel\iOS\WhiteLabel-iOS\WhiteLabel-iOS.csproj
