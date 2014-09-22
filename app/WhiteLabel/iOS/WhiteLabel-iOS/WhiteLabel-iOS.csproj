@@ -165,7 +165,6 @@
     <Compile Include="ITemTasks\AuthViewController.designer.cs">
       <DependentUpon>AuthViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\WebApiCredentialsPODInsequredDemo.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
