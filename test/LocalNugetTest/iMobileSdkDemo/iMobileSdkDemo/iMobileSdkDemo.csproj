@@ -110,6 +110,12 @@
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>..\packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
     </Reference>
+    <Reference Include="SecureStringPasswordProvider-iOS">
+      <HintPath>..\..\..\..\..\..\LocalPackages\NuGet\SecureStringPasswordProvider-iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="SitecoreMobileSdkPasswordProvider">
+      <HintPath>..\..\..\..\..\..\LocalPackages\NuGet\SitecoreMobileSdkPasswordProvider.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
