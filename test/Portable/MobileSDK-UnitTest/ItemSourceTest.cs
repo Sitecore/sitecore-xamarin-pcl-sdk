@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using NUnit.Framework;
 
@@ -15,6 +12,7 @@ namespace Sitecore.MobileSdkUnitTest
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
+  using SitecoreMobileSdkPasswordProvider.API;
 
 
 

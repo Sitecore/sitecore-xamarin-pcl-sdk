@@ -124,5 +124,9 @@
       <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
       <Name>SitecoreMobileSDK-MockObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
+      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
+      <Name>SitecoreMobileSdkPasswordProvider</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
