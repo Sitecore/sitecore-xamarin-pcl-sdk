@@ -105,6 +105,7 @@
       <DependentUpon>packages.config</DependentUpon>
     </Compile>
     <Compile Include="UnitTestAppDelegate.cs" />
+    <Compile Include="iOS_PasswordStorageTest.cs" />
   </ItemGroup>
   <Import Project="..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems')" />
   <Import Project="..\..\..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems" Label="Shared" Condition="Exists('..\..\..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems')" />

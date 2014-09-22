@@ -1,12 +1,13 @@
-﻿namespace Sitecore.MobileSdkUnitTest
+﻿namespace MobileSDKUnitTestiOS
 {
   using System;
   using NUnit.Framework;
-  using SecureStringPasswordProvider.API;
+  using SecureStringPasswordProvider.iOS;
+
 
 
   [TestFixture]
-  public class PortablePasswordStorageTest
+  public class iOS_PasswordStorageTest
   {
     [Test]
     public void TestPasswordStorageReturnsSameValues()
@@ -106,7 +107,7 @@
       }
     }
 
-  
+
 
     [Test]
     public void TestPasswordStorageAllowsWhitespacePassword()
@@ -120,6 +121,7 @@
         Assert.AreEqual(password, passwordStorage.Password);
       }
     }
+  
   }
 }
 
