@@ -17,8 +17,16 @@
 
     public SecureStringPasswordProvider(string insecureLogin, string insecurePassword)
     {
+      if (string.IsNullOrEmpty(insecureLogin))
+      {
+        throw new ArgumentException("[SecureStringPasswordProvider] : username cannot be null or empty");
+      }
       this.encryptedLogin = SecureStringPasswordProvider.EncryptString(insecureLogin);
-      this.encryptedPassword = SecureStringPasswordProvider.EncryptString(insecurePassword);
+
+      if (null != insecurePassword)
+      {
+        this.encryptedPassword = SecureStringPasswordProvider.EncryptString(insecurePassword);
+      }
     }
 
     #region Encryption
@@ -122,6 +130,11 @@
     {
       get
       {
+        if (null == this.encryptedPassword)
+        {
+          return null;
+        }
+
         return SecureStringPasswordProvider.DecryptSecureString(this.encryptedPassword);
       }
     }
