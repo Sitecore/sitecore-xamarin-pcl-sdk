@@ -107,6 +107,7 @@
     <Compile Include="UnitTestAppDelegate.cs" />
   </ItemGroup>
   <Import Project="..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems')" />
+  <Import Project="..\..\..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems" Label="Shared" Condition="Exists('..\..\..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
@@ -120,6 +121,10 @@
     <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
       <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
       <Name>SitecoreMobileSdkPasswordProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\SecureStringPasswordProvider-iOS.csproj">
+      <Project>{E4FA0E8C-90C5-472D-8264-2D026CCB3D4E}</Project>
+      <Name>SecureStringPasswordProvider-iOS</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
