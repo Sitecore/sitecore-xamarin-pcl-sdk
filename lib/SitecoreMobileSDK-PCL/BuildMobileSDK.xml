@@ -43,6 +43,11 @@
   	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
 
   	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
+    <PasswordStorageWinProject Include="$(RepositoryRoot)\lib\PasswordProvider\windows\*.csproj" />
+    <PasswordStorageIOSProject Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\*.csproj" />
+    <PasswordStorageAndroidProject Include="$(RepositoryRoot)\lib\PasswordProvider\Android\*.csproj" />
+
+
     <UnitTestDesktopProject Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\*.csproj" />
 
   	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
@@ -60,6 +65,7 @@
     <CallTarget Targets="clean"/>
     <CallTarget Targets="UnitTest"/>
     <CallTarget Targets="SitecoreMobileSDK"/>
+	<CallTarget Targets="PasswordProvider"/>
     <CallTarget Targets="package"/>
     <CallTarget Targets="doc"/>
   </Target>
@@ -67,6 +73,73 @@
   <Target Name="FullBuild">
     <CallTarget Targets="QuickBuild"/>
     <CallTarget Targets="IntegrationTest"/>
+  </Target>
+
+<!-- ====================================================  -->
+
+  <Target Name="PasswordProvider">
+    <Message Text="Building PasswordProvider Libraries..." />
+    <CallTarget Targets="PasswordProviderWin"/>
+    <CallTarget Targets="PasswordProviderIOS"/>
+    <CallTarget Targets="PasswordProviderAndroid"/>	
+  </Target>
+
+
+  <Target Name="PasswordProviderWin">
+    <Message Text="Building PasswordProvider For Windows..." />
+
+    <MSBuild 
+      Projects="@(PasswordStorageWinProject)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+	
+	 <ItemGroup>
+      <PasswordWinArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\bin\Release\*.dll" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(PasswordWinArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
+  </Target>
+
+  <Target Name="PasswordProviderIOS">
+    <Message Text="Building PasswordProvider For iOS..." />
+	
+<!-- 	<MSBuild 
+      Projects="@(PasswordStorageIOSProject)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+	
+	 <ItemGroup>
+      <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\bin\Release\*.dll" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(PasswordIOSArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     /> -->
+  </Target>
+
+  <Target Name="PasswordProviderAndroid">
+    <Message Text="Building PasswordProvider For Android..." />
+
+    <!-- PasswordStorageAndroidProject -->
+  </Target>
+
+  <Target Name="PrepareDeploymentDir">
+    <MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+    <MakeDir 
+      Condition="!Exists('$(BinariesDeploymentDirectory)')"
+      Directories="$(BinariesDeploymentDirectory)" 
+    />
   </Target>
 
 <!-- ====================================================  -->
@@ -78,14 +151,8 @@
       Properties="Configuration=Release;" 
     />
 
-   	<MakeDir 
-      Condition="!Exists('$(DeploymentDirectory)')"
-      Directories="$(DeploymentDirectory)" 
-    />
-    <MakeDir 
-      Condition="!Exists('$(BinariesDeploymentDirectory)')"
-      Directories="$(BinariesDeploymentDirectory)" 
-    />
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
     
 
     <ItemGroup>
@@ -96,20 +163,6 @@
       SourceFiles="@(MobileSdkArtefacts)"
       DestinationFolder="$(BinariesDeploymentDirectory) "
      />
-
-  	<MSBuild.ExtensionPack.Compression.Zip 
-      TaskAction="Create" 
-      CompressFiles="@(MobileSdkArtefacts)" 
-      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Full.zip" 
-      RemoveRoot="@(MobileSdkArtefactsDir)" 
-    />
-
-    <MSBuild.ExtensionPack.Compression.Zip 
-      TaskAction="Create" 
-      CompressFiles="@(MobileSdkDll)" 
-      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Minimal.zip" 
-      RemoveRoot="@(MobileSdkArtefactsDir)" 
-    />
   </Target>
 
 <!-- ====================================================  -->
@@ -160,6 +213,21 @@
 
 <!-- ====================================================  -->
   <Target Name="package">
+  	<MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(MobileSdkArtefacts)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Full.zip" 
+      RemoveRoot="@(MobileSdkArtefactsDir)" 
+    />
+
+    <MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(MobileSdkDll)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Minimal.zip" 
+      RemoveRoot="@(MobileSdkArtefactsDir)" 
+    />  
+  
+  
     <Exec 
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
