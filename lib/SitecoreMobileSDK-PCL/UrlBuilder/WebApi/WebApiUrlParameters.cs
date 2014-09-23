@@ -15,6 +15,8 @@
       result.TemplateParameterName = "template";
       result.ItemNameParameterName = "name";
 
+      result.RenderingIdParameterName = "renderingId";
+
       result.ItemIdParameterName = "sc_itemid";
       result.SitecoreQueryParameterName = "query";
 
@@ -40,6 +42,8 @@
     public string ScopeParameterName { get; private set; }
     public string FieldsListParameterName { get; private set; }
     public string ItemNameParameterName { get; private set; }
+
+    public string RenderingIdParameterName { get; private set; }
 
     public string ItemIdParameterName { get; private set; }
     public string SitecoreQueryParameterName { get; private set; }

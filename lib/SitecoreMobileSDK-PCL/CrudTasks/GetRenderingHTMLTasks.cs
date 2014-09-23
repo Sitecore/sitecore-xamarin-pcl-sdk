@@ -6,20 +6,20 @@
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
 
 
-  public class GetItemsByIdTasks : AbstractGetItemTask<IReadItemsByIdRequest>
+  public class GetRenderingHTMLTasks : AbstractGetItemTask<IGetRenderingHtmlRequest>
   {
-    public GetItemsByIdTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+    public GetRenderingHTMLTasks(RenderingHTMLUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;
     }
 
-    protected override string UrlToGetItemWithRequest(IReadItemsByIdRequest request)
+    protected override string UrlToGetItemWithRequest(IGetRenderingHtmlRequest request)
     {
       return this.urlBuilder.GetUrlForRequest(request);
     }
 
-    private readonly ItemByIdUrlBuilder urlBuilder;
+    private readonly RenderingHTMLUrlBuilder urlBuilder;
   }
 }
 

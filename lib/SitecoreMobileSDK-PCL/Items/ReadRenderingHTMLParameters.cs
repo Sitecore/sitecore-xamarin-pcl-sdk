@@ -5,17 +5,18 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class ReadItemsByIdParameters : IReadItemsByIdRequest
+  public class ReadRenderingHTMLParameters : IGetRenderingHtmlRequest
   {
-    public ReadItemsByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, string itemId)
+    public ReadRenderingHTMLParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, string sourceId, string renderingId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
-      this.ItemId = itemId;
+      this.SourceId = sourceId;
+      this.RenderingId = renderingId;
       this.QueryParameters = queryParameters;
     }
 
-    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
+    public virtual IGetRenderingHtmlRequest DeepCopyGetRenderingHTMLRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
@@ -36,17 +37,18 @@
         payload = this.QueryParameters.DeepCopy();
       }
 
-      return new ReadItemsByIdParameters(connection, itemSrc, payload, this.ItemId);
+      return new ReadRenderingHTMLParameters(connection, itemSrc, payload, this.SourceId, this.RenderingId);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
-      return this.DeepCopyGetItemByIdRequest();
+      return this.DeepCopyGetRenderingHTMLRequest();
     }
 
 
+    public string SourceId { get; private set; }
 
-    public string ItemId { get; private set; }
+    public string RenderingId { get; private set; }
 
     public IItemSource ItemSource { get; private set; }
 

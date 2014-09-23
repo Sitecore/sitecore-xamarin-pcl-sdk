@@ -13,6 +13,10 @@
     string ItemIdParameterName { get; }
     #endregion Item Identifiers
 
+    #region Rendering Identifiers
+    string RenderingIdParameterName { get; }
+    #endregion Rendering Identifiers
+
     #region query parameters
     string PayloadParameterName { get; }
     string TemplateParameterName { get; }

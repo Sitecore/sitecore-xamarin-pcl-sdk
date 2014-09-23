@@ -1,9 +1,15 @@
-﻿using System;
-
-namespace Sitecore.MobileSDK
+﻿namespace Sitecore.MobileSDK.API.Request
 {
-  public interface IGetRenderingHtmlRequest
+  public interface IGetRenderingHtmlRequest : IBaseItemRequest
   {
+
+    string RenderingId { get; }
+    string SourceId { get; } // @igk, same as itemId!!!
+
+    IGetRenderingHtmlRequest DeepCopyGetRenderingHTMLRequest();
+
+    //TODO: @igk we do not need "IQueryParameters QueryParameters { get; }" here, from IBaseItemRequest, 
+    //TODO: @igk probably we need new main request?
   }
 }
 
