@@ -94,8 +94,7 @@ namespace MobileSDKIntegrationTest
     {
       await this.RemoveTestItemsFromMasterAndWebAsync();
 
-      const string itemFromBranchName = "ITEM PATH   A default name of the branch should be used";
-//      const string itemFromBranchName = "Multiple item brunch";
+      const string itemFromBranchName = "Multiple item branch";
       TestEnvironment.Item expectedItem = this.CreateTestItem(itemFromBranchName);
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
