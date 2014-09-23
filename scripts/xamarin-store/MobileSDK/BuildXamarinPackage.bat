@@ -4,7 +4,7 @@ SET LAUNCH_DIR=%cd%
 SET XAMARIN_PACKAGE_ROOT=%cd%
 SET PACKAGE_UTILITY_EXE=%XAMARIN_PACKAGE_ROOT%\xamarin-component\xamarin-component.exe
 
-cd ..
+cd ..\..
 SET SCRIPTS_ROOT=%cd%
 
 cd ..
