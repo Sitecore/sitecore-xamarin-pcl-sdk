@@ -4,7 +4,6 @@
   using NUnit.Framework;
   using SecureStringPasswordProvider.API;
 
-
   [TestFixture]
   public class PortablePasswordStorageTest
   {

@@ -10,8 +10,6 @@
   using Sitecore.MobileSDK.API;
   using SitecoreMobileSdkPasswordProvider.API;
 
-
-
   public class ScTestApiSession : ScApiSession
   {
     public ScTestApiSession(
