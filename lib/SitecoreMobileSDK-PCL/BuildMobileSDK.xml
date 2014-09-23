@@ -169,13 +169,13 @@
      />
 
 
-    <Exec 
+<!--     <Exec 
       Command="&quot;$(NugetExe)&quot; pack SitecoreMobileSdkPasswordProvider.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
       SourceFiles="$(ScriptsDirectory)\nuget\SitecoreMobileSdkPasswordProvider.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
-     />
+     /> -->
 
 
      <Exec
@@ -189,14 +189,14 @@
 
 
 
-    <Exec
+<!--     <Exec
       Command="BuildXamarinPackage.bat"
       WorkingDirectory="$(ScriptsDirectory)\xamarin-store\PasswordStorage"
     />
     <Copy
       SourceFiles="$(ScriptsDirectory)\xamarin-store\PasswordStorage\SitecoreMobileSdkPasswordProvider.xam"
       DestinationFolder="$(DeploymentDirectory)"
-     />
+     /> -->
   </Target>
 
   <Target Name="doc">
