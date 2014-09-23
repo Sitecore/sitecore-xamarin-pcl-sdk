@@ -5,10 +5,10 @@ using Android.App;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("MobileSDK-Android-Tests")]
+[assembly: AssemblyTitle("MobileSDK-Android-Unit-Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Sitecore")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("Sitecore")]
 [assembly: AssemblyTrademark("")]
