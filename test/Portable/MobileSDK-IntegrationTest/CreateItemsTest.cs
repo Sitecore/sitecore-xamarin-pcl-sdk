@@ -143,13 +143,31 @@
 
 
     [Test]
+    public async void TestCreateItemByPathAndTemplatePathWithoutFieldsSet()
+    {
+      await this.RemoveAll();
+      var expectedItem = this.CreateTestItem("Create by parent path and template Path");
+
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(expectedItem.DisplayName)
+        .Database("master")
+        .Build();
+
+      var createResponse = await session.CreateItemAsync(request);
+
+      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      this.GetAndCheckItem(expectedItem, resultItem);
+    }
+
+    [Test]
     public async void TestCreateItemByPathAndTemplateIdWithoutFieldsSet()
     {
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplatePath(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .Build();
