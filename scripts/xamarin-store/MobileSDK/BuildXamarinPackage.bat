@@ -23,7 +23,7 @@ echo %SCRIPTS_ROOT%
 echo %REPOSITORY_ROOT%
 echo %BINARIES_DIR%
 echo "==========LOGS============"
-pause
+:: pause
 
 :: And action
 cd "%XAMARIN_PACKAGE_ROOT%"
