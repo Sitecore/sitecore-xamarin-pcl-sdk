@@ -25,7 +25,7 @@
       result.ItemWebApiActionsEndpoint = "-/actions";
       result.ItemWebApiAuthenticateAction = "/authenticate";
       result.ItemWebApiGetPublicKeyAction = "/getpublickey";
-
+      result.ItemWebApiGetRenderingAction = "/getRenderinghtml";
       return result;
     }
 
@@ -53,6 +53,8 @@
 
     public string ItemWebApiAuthenticateAction { get; private set; }
     public string ItemWebApiGetPublicKeyAction { get; private set; }
+    public string ItemWebApiGetRenderingAction { get; private set; }
+
   }
 }
 

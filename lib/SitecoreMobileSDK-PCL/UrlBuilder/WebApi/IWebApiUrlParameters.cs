@@ -33,6 +33,7 @@
     #region Item Web API Actions
     string ItemWebApiAuthenticateAction { get; }
     string ItemWebApiGetPublicKeyAction { get; }
+    string ItemWebApiGetRenderingAction { get; }
     #endregion Item Web API Actions
   }
 }
