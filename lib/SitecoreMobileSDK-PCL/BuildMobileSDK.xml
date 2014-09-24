@@ -114,14 +114,6 @@
 	  Command="&quot;$(MSBuildExe)&quot; SecureStringPasswordProvider-iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
 	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\" 
     IgnoreExitCode="true"/>
-<!--	Z:\Mobile.SDK.dotNET\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\ -->
-
-	
-<!-- 	<MSBuild 
-      Projects="@(PasswordStorageIOSProject)" 
-      Targets="Build;_RemoteBuild" 
-      Properties="Configuration=Release;"
-    /> -->
 	
 	 <ItemGroup>
       <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\bin\Release\*.dll" />
