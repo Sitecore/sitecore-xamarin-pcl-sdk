@@ -18,7 +18,8 @@
     <tags>Sitecore iOS Android PCL Xamarin</tags>
 
     <dependencies>
-      <dependency id="Sitecore.MobileSDK.PasswordProvider.PCL" version="1.0.0" />
+      <dependency id="Sitecore.MobileSDK.PasswordProvider.Interface" version="1.0.0" />
+	  <dependency id="Sitecore.MobileSDK.PasswordProvider" version="1.0.0" />
 
 	  <dependency id="Microsoft.Bcl" version="1.1.9" />
 	  <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
