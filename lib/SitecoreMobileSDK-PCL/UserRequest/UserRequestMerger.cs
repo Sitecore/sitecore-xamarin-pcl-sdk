@@ -16,19 +16,19 @@
       this.SessionConfigMerger = new SessionConfigMerger(defaultSessionConfig);
     }
 
-//    public IGetRenderingHtmlRequest FillGetRenderingHTMLGaps(IGetRenderingHtmlRequest userRequest)
-//    {
-//      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
-//      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
-//
-//      return new ReadRenderingHTMLParameters(
-//        mergedSessionConfig, 
-//        mergedSource, 
-//        userRequest.QueryParameters, 
-//        userRequest.SourceId, 
-//        userRequest.RenderingId
-//      );
-//    }
+    public IGetRenderingHtmlRequest FillGetRenderingHTMLGaps(IGetRenderingHtmlRequest userRequest)
+    {
+      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+
+      return new ReadRenderingHTMLParameters(
+        mergedSessionConfig, 
+        mergedSource, 
+        userRequest.QueryParameters, 
+        userRequest.SourceId, 
+        userRequest.RenderingId
+      );
+    }
 
     public IReadItemsByIdRequest FillReadItemByIdGaps(IReadItemsByIdRequest userRequest)
     {

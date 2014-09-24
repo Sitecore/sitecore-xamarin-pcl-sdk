@@ -272,20 +272,20 @@ namespace Sitecore.MobileSDK
 
     #region GetHTMLRendering
 
-//    public async Task<ScItemsResponse> ReadRenderingHTMLAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
-//    {
-//      IGetRenderingHtmlRequest requestCopy = request.DeepCopyGetRenderingHTMLRequest();
-//
-//      using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
-//      {
-//        IGetRenderingHtmlRequest autocompletedRequest = this.requestMerger.FillGetRenderingHTMLGaps(requestCopy);
-//
-//        var urlBuilder = new RenderingHTMLUrlBuilder(this.restGrammar, this.webApiGrammar);
-//        var taskFlow = new GetRenderingHTMLTasks(urlBuilder, this.httpClient, cryptor);
-//
-//        return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-//      }
-//    }
+    public async Task<ScItemsResponse> ReadRenderingHTMLAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IGetRenderingHtmlRequest requestCopy = request.DeepCopyGetRenderingHTMLRequest();
+
+      using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
+      {
+        IGetRenderingHtmlRequest autocompletedRequest = this.requestMerger.FillGetRenderingHTMLGaps(requestCopy);
+
+        var urlBuilder = new RenderingHTMLUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var taskFlow = new GetRenderingHTMLTasks(urlBuilder, this.httpClient, cryptor);
+
+        return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      }
+    }
 
     #endregion
 
