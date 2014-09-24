@@ -4,13 +4,13 @@
     where T : class
   {
   
-    IGetMediaItemRequestParametersBuilder<T> Database(string database);
+    IRenderingHTMLRequestParametersBuilder<T> SourceAndRenderingDatabase(string database);
 
-    IGetMediaItemRequestParametersBuilder<T> Language(string itemLanguage);
+    IRenderingHTMLRequestParametersBuilder<T> SourceAndRenderingLanguage(string itemLanguage);
 
-    IGetMediaItemRequestParametersBuilder<T> Version(int? itemVersion);
+    IRenderingHTMLRequestParametersBuilder<T> SourceVersion(int? itemVersion);
 
-    new ICreateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue);
+    IRenderingHTMLRequestParametersBuilder<T> AddAdditionalParameterNameValue(string parameterName, string parameterValue);
 
     T Build();
   }

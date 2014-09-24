@@ -1,4 +1,7 @@
-﻿namespace Sitecore.MobileSDK.CrudTasks.Resource
+﻿using Sitecore.MobileSDK.PublicKey;
+
+
+namespace Sitecore.MobileSDK.CrudTasks.Resource
 {
   using System;
   using System.Diagnostics;
@@ -8,45 +11,41 @@
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.TaskFlow;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.UrlBuilder.RenderingHTML;
 
-  public class GetResourceTask : IDownloadApiCallTasks<IMediaResourceDownloadRequest, HttpRequestMessage, Stream>
+  public class GetRenderingHTMLTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, string>
   {
-    private GetResourceTask()
+    private GetRenderingHTMLTasks()
     {
     }
 
-    public GetResourceTask(MediaItemUrlBuilder urlBuilder, HttpClient httpClient)
+    public GetRenderingHTMLTasks(RenderingHTMLUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
+      this.credentialsHeadersCryptor = credentialsHeadersCryptor;
 
       this.Validate();
     }
 
     #region  IRestApiCallTasks
 
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken)
+    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken)
     {
-      string url = this.UrlToGetItemWithRequest(request);
+      string url = this.urlBuilder.GetUrlForRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
+      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
 
-    public async Task<Stream> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
+    public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
     {
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + requestUrl);
 
-      var httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
-
-      if (!httpResponse.IsSuccessStatusCode)
-      {
-        throw new HttpRequestException(httpResponse.ReasonPhrase);
-      }
-
-      return await httpResponse.Content.ReadAsStreamAsync();
+      HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
+      return await httpResponse.Content.ReadAsStringAsync();
     }
 
     #endregion IRestApiCallTasks
@@ -59,13 +58,9 @@
       }
     }
 
-    protected string UrlToGetItemWithRequest(IMediaResourceDownloadRequest request)
-    {
-      return this.urlBuilder.BuildUrlStringForPath(request.MediaPath, request.DownloadOptions);
-    }
-
-    private readonly MediaItemUrlBuilder urlBuilder;
+    private readonly RenderingHTMLUrlBuilder urlBuilder;
     private HttpClient httpClient;
+    private ICredentialsHeadersCryptor credentialsHeadersCryptor;
   }
 }
 

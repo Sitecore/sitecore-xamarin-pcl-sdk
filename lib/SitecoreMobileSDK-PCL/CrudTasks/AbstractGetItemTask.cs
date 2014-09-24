@@ -45,7 +45,7 @@
       return await httpResponse.Content.ReadAsStringAsync();
     }
 
-    public async Task<ScItemsResponse> ParseResponseDataAsync(string data, CancellationToken cancelToken)
+    public virtual async Task<ScItemsResponse> ParseResponseDataAsync(string data, CancellationToken cancelToken)
     {
       Func<ScItemsResponse> syncParseResponse = () =>
       {

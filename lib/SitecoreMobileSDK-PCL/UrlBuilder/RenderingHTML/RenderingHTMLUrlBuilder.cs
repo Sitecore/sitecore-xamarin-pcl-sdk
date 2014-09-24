@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemById
+﻿namespace Sitecore.MobileSDK.UrlBuilder.RenderingHTML
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -11,6 +11,46 @@
     public RenderingHTMLUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base(restGrammar, webApiGrammar)
     {
+    }
+
+    public override string GetUrlForRequest(IGetRenderingHtmlRequest request)
+    {
+      this.ValidateRequest(request);
+
+      string hostUrl = this.GetHostUrlForRequest(request)
+            + this.restGrammar.PathComponentSeparator
+            + this.webApiGrammar.ItemWebApiActionsEndpoint
+            + this.webApiGrammar.ItemWebApiGetRenderingAction;
+
+      string specificParameters = this.GetSpecificPartForRequest(request);
+
+      string allParameters = null;
+
+      if (!string.IsNullOrEmpty(specificParameters))
+      {
+        allParameters =
+          allParameters +
+          this.restGrammar.FieldSeparator + specificParameters;
+      }
+
+      bool shouldTruncateBaseUrl = (!string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator));
+      while (shouldTruncateBaseUrl)
+      {
+        allParameters = allParameters.Substring(1);
+        shouldTruncateBaseUrl = (!string.IsNullOrEmpty(allParameters) && allParameters.StartsWith(this.restGrammar.FieldSeparator));
+      }
+
+
+      string result = hostUrl;
+
+      if (!string.IsNullOrEmpty(allParameters))
+      {
+        result =
+          result +
+          this.restGrammar.HostAndArgsSeparator + allParameters;
+      }
+
+      return result;
     }
 
     protected override string GetSpecificPartForRequest(IGetRenderingHtmlRequest request)

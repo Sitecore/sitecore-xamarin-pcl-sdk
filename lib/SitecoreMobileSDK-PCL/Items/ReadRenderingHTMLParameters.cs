@@ -7,20 +7,18 @@
 
   public class ReadRenderingHTMLParameters : IGetRenderingHtmlRequest
   {
-    public ReadRenderingHTMLParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, string sourceId, string renderingId)
+    public ReadRenderingHTMLParameters(ISessionConfig sessionSettings, IItemSource itemSource, string sourceId, string renderingId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
       this.SourceId = sourceId;
       this.RenderingId = renderingId;
-      this.QueryParameters = queryParameters;
     }
 
     public virtual IGetRenderingHtmlRequest DeepCopyGetRenderingHTMLRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
-      IQueryParameters payload = null;
 
       if (null != this.SessionSettings)
       {
@@ -32,12 +30,7 @@
         itemSrc = this.ItemSource.ShallowCopy();
       }
 
-      if (null != this.QueryParameters)
-      {
-        payload = this.QueryParameters.DeepCopy();
-      }
-
-      return new ReadRenderingHTMLParameters(connection, itemSrc, payload, this.SourceId, this.RenderingId);
+      return new ReadRenderingHTMLParameters(connection, itemSrc, this.SourceId, this.RenderingId);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -45,6 +38,8 @@
       return this.DeepCopyGetRenderingHTMLRequest();
     }
 
+    //TODO: igk remove QueryParameters
+    public IQueryParameters QueryParameters { get; set; }
 
     public string SourceId { get; private set; }
 
@@ -54,7 +49,6 @@
 
     public ISessionConfig SessionSettings { get; private set; }
 
-    public IQueryParameters QueryParameters { get; private set; }
   }
 }
 
