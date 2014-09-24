@@ -97,8 +97,14 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SecureStringPasswordProvider-iOS">
+      <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\SecureStringPasswordProvider-iOS.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Sitecore.MobileSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="SitecoreMobileSdkPasswordProvider">
+      <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\SitecoreMobileSdkPasswordProvider.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
       <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\System.IO.dll</HintPath>
@@ -117,12 +123,6 @@
     </Reference>
     <Reference Include="crypto">
       <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="SecureStringPasswordProvider-iOS">
-      <HintPath>..\..\..\..\..\LocalPackages\Xamarin-iOS\SecureStringPasswordProvider-iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="SitecoreMobileSdkPasswordProvider">
-      <HintPath>..\..\..\..\..\LocalPackages\Xamarin-iOS\SitecoreMobileSdkPasswordProvider.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
