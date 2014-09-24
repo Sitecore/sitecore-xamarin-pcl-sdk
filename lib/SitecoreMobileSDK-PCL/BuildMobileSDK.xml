@@ -214,6 +214,12 @@
 
 <!-- ====================================================  -->
   <Target Name="package">
+
+    <ItemGroup>
+      <MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
+    </ItemGroup>
+
+
   	<MSBuild.ExtensionPack.Compression.Zip 
       TaskAction="Create" 
       CompressFiles="@(MobileSdkArtefacts)" 
