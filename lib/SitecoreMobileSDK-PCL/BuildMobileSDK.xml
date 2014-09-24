@@ -246,13 +246,13 @@
      />
 
 
-<!--     <Exec 
+    <Exec 
       Command="&quot;$(NugetExe)&quot; pack SitecoreMobileSdkPasswordProvider.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\SitecoreMobileSdkPasswordProvider.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.0.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
-     /> -->
+     />
 
 
      <Exec
