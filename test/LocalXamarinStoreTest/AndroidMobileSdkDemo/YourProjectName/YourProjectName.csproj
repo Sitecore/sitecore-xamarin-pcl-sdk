@@ -39,11 +39,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="System.Net.Http">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\System.Net.Http.dll</HintPath>
+    <Reference Include="SecureStringPasswordProvider-Android">
+      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\SecureStringPasswordProvider-Android.dll</HintPath>
+    </Reference>
+    <Reference Include="SitecoreMobileSdkPasswordProvider">
+      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\SitecoreMobileSdkPasswordProvider.dll</HintPath>
     </Reference>
     <Reference Include="crypto">
       <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\crypto.dll</HintPath>
@@ -62,6 +64,9 @@
     </Reference>
     <Reference Include="System.IO">
       <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\System.Net.Http.Extensions.dll</HintPath>

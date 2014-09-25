@@ -12,6 +12,8 @@ using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 using Sitecore.MobileSDK.API.Request.Parameters;
 using Sitecore.MobileSDK.API.Items;
 
+using SecureStringPasswordProvider.Android;
+
 namespace MobileSDKSample
 {
   [Activity(Label = "YourProjectName", MainLauncher = true, Icon = "@drawable/icon")]
@@ -21,41 +23,41 @@ namespace MobileSDKSample
     {
       base.OnCreate(bundle);
 
-      string instanceUrl = "http://my.site.com";
-      var session = 
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(instanceUrl)
-          .Site("/sitecore/shell")
-          .DefaultDatabase("web")
-          .DefaultLanguage("en")
-          .MediaLibraryRoot("/sitecore/media library")
-          .MediaPrefix("~/media/")
-          .DefaultMediaResourceExtension("ashx")
-          .BuildReadonlySession();
+      string instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722/";
 
-      var request =
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-          .AddScope(ScopeType.Self)
-          .Payload(PayloadType.Content)
-          .Build();
-      var response = await session.ReadItemAsync(request);
+      using (var credentials = new SecureStringPasswordProvider.Android.SecureStringPasswordProvider("login", "password"))
+      using (
+        var session =
+          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
+        .Credentials(credentials)
+        .DefaultDatabase("web")
+        .DefaultLanguage("en")
+        .MediaLibraryRoot("/sitecore/media library")
+        .MediaPrefix("~/media/")
+        .DefaultMediaResourceExtension("ashx")
+        .BuildReadonlySession())
+      {
+        var request =
+          ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+            .AddScope(ScopeType.Self)
+            .Payload(PayloadType.Content)
+            .Build();
 
-      // Now that it has succeeded we are able to access downloaded items
-      ISitecoreItem item = response[0];
+        ScItemsResponse items = await session.ReadItemAsync(request);
+        string fieldContent = items[0]["Text"].RawValue;
 
-      // And content stored it its fields
-      string fieldContent = item["text"].RawValue;
+        string itemName = "Home Item Text";
 
-      string itemName = "Home Item Text";
+        var dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.SetTitle(itemName);
+        dialogBuilder.SetMessage(fieldContent);
+        dialogBuilder.SetPositiveButton("OK", (object sender, DialogClickEventArgs e) =>
+          {
+          });
 
-      var dialogBuilder = new AlertDialog.Builder(this);
-      dialogBuilder.SetTitle(itemName);
-      dialogBuilder.SetMessage(fieldContent);
-      dialogBuilder.SetPositiveButton("OK", (object sender, DialogClickEventArgs e) =>
-        {
-        });
-
-      dialogBuilder.Create().Show();
-    }
+        dialogBuilder.Create().Show();
+      }
+  }
   }
 }
 
