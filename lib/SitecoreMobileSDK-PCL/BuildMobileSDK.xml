@@ -129,11 +129,10 @@
   <Target Name="PasswordProviderAndroid">
     <Message Text="Building PasswordProvider For Android..." />
 
-	<MSBuild 
-      Projects="@(PasswordStorageAndroidProject)" 
-      Targets="Build" 
-      Properties="Configuration=Release;" 
-    />
+
+  <Exec
+    Command="&quot;$(MSBuildExe)&quot; SecureStringPasswordProvider-Android.csproj /t:Build /p:Configuration=Release"
+    WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\" />
 	
 	 <ItemGroup>
       <PasswordAndroidArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\bin\Release\*.dll" />
