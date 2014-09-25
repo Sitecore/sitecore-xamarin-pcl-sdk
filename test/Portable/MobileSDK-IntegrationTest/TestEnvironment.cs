@@ -12,7 +12,7 @@
     {
       var result = new TestEnvironment
       {
-        InstanceUrl = "http://cms71u2.test24dk1.dk.sitecore.net",
+        InstanceUrl = "http://cms72u2.test24dk1.dk.sitecore.net",
         ShellSite = "/sitecore/shell"
       };
 
