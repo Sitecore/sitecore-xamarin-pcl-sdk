@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
+﻿using Sitecore.MobileSDK.SessionSettings;
+
+namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -6,25 +8,30 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class RenderingHtmlUrlBuilder : AbstractGetItemUrlBuilder<IGetRenderingHtmlRequest>
+  public class RenderingHtmlUrlBuilder
   {
+    private IRestServiceGrammar restGrammar;
+    private IWebApiUrlParameters webApiGrammar;
+
     public RenderingHtmlUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
     {
+      this.restGrammar = restGrammar;
+      this.webApiGrammar = webApiGrammar;
     }
 
-    public override string GetUrlForRequest(IGetRenderingHtmlRequest request)
+    public string GetUrlForRequest(IGetRenderingHtmlRequest request)
     {
-      this.ValidateRequest(request);
+      this.ValidateSpecificRequest(request);
 
       string hostUrl = this.GetHostUrlForRequest(request)
             + this.restGrammar.PathComponentSeparator
             + this.webApiGrammar.ItemWebApiActionsEndpoint
             + this.webApiGrammar.ItemWebApiGetRenderingAction;
 
+      string baseParameters = this.GetCommonPartForRequest(request).ToLowerInvariant();
       string specificParameters = this.GetSpecificPartForRequest(request);
 
-      string allParameters = null;
+      string allParameters = baseParameters;
 
       if (!string.IsNullOrEmpty(specificParameters))
       {
@@ -53,7 +60,7 @@
       return result;
     }
 
-    protected override string GetSpecificPartForRequest(IGetRenderingHtmlRequest request)
+    protected string GetSpecificPartForRequest(IGetRenderingHtmlRequest request)
     {
       string escapedSourceId = UrlBuilderUtils.EscapeDataString(request.SourceId);
       string escapedRenderingId = UrlBuilderUtils.EscapeDataString(request.RenderingId);
@@ -64,10 +71,39 @@
       return result.ToLowerInvariant();
     }
 
-    protected override void ValidateSpecificRequest(IGetRenderingHtmlRequest request)
+    private string GetCommonPartForRequest(IGetRenderingHtmlRequest request)
+    {
+      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.webApiGrammar, request.ItemSource);
+      string itemSourceArgs = sourceBuilder.BuildUrlQueryString();
+
+      string result = string.Empty;
+
+      string[] restSubQueries = { itemSourceArgs };
+      foreach (string currentSubQuery in restSubQueries)
+      {
+        if (!string.IsNullOrEmpty(currentSubQuery))
+        {
+          result =
+            result +
+            this.restGrammar.FieldSeparator + currentSubQuery;
+        }
+      }
+
+      return result.ToLowerInvariant();
+    }
+
+    protected void ValidateSpecificRequest(IGetRenderingHtmlRequest request)
     {
       ItemIdValidator.ValidateItemId(request.SourceId, this.GetType().Name + ".SourceId");
       ItemIdValidator.ValidateItemId(request.RenderingId, this.GetType().Name + ".RenderingId");
+    }
+
+    protected virtual string GetHostUrlForRequest(IGetRenderingHtmlRequest request)
+    {
+      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+      string hostUrl = sessionBuilder.BuildUrlString(request.SessionSettings);
+
+      return hostUrl;
     }
   }
 }

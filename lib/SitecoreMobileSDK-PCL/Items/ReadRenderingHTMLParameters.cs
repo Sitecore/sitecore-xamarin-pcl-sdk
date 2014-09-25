@@ -33,14 +33,6 @@
       return new ReadRenderingHtmlParameters(connection, itemSrc, this.SourceId, this.RenderingId);
     }
 
-    public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
-    {
-      return this.DeepCopyGetRenderingHtmlRequest();
-    }
-
-    //TODO: igk remove QueryParameters
-    public IQueryParameters QueryParameters { get; set; }
-
     public string SourceId { get; private set; }
 
     public string RenderingId { get; private set; }
