@@ -114,6 +114,7 @@ namespace Sitecore.MobileSDK.UserRequest
       ReadRenderingHtmlParameters result = new ReadRenderingHtmlParameters(
         null, 
         this.itemSourceAccumulator,
+        this.parametersValuesByName,
         this.sourceId,
         this.renderingId
       );

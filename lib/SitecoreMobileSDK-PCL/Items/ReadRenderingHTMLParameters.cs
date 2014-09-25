@@ -1,5 +1,8 @@
-﻿namespace Sitecore.MobileSDK.Items
+﻿
+namespace Sitecore.MobileSDK.Items
 {
+  using System.Collections.Generic;
+
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
@@ -7,12 +10,13 @@
 
   public class ReadRenderingHtmlParameters : IGetRenderingHtmlRequest
   {
-    public ReadRenderingHtmlParameters(ISessionConfig sessionSettings, IItemSource itemSource, string sourceId, string renderingId)
+    public ReadRenderingHtmlParameters(ISessionConfig sessionSettings, IItemSource itemSource, IDictionary<string, string> parametersValuesByName, string sourceId, string renderingId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
       this.SourceId = sourceId;
       this.RenderingId = renderingId;
+      this.ParametersValuesByName = parametersValuesByName;
     }
 
     public virtual IGetRenderingHtmlRequest DeepCopyGetRenderingHtmlRequest()
@@ -41,6 +45,7 @@
 
     public ISessionConfig SessionSettings { get; private set; }
 
+    public IDictionary<string, string> ParametersValuesByName { get; private set; }
   }
 }
 

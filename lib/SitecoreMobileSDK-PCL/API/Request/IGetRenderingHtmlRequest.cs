@@ -1,5 +1,7 @@
-﻿namespace Sitecore.MobileSDK.API.Request
+﻿
+namespace Sitecore.MobileSDK.API.Request
 {
+  using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Items;
 
   public interface IGetRenderingHtmlRequest
@@ -25,6 +27,8 @@
     /// </value>
     /// <seealso cref="ISessionConfig" />
     ISessionConfig SessionSettings { get; }
+
+    IDictionary<string, string> ParametersValuesByName { get; }
 
     IGetRenderingHtmlRequest DeepCopyGetRenderingHtmlRequest();
 
