@@ -1,20 +1,20 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
-using Sitecore.MobileSDK.API.Session;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.API;
-using Sitecore.MobileSDK.API.Request.Parameters;
-using Sitecore.MobileSDK.API.Items;
-using System.Threading.Tasks;
-
-namespace MobileSDKSample
+﻿namespace MobileSDKSample
 {
+  using System;
+  using Android.App;
+  using Android.Content;
+  using Android.OS;
+  using Android.Runtime;
+  using Android.Views;
+  using Android.Widget;
+
+  using System.Threading.Tasks;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Items;
+
+  using SecureStringPasswordProvider.Android;
+
   [Activity(Label = "YourProjectName", MainLauncher = true, Icon = "@drawable/icon")]
   public class MainActivity : Activity
   {
@@ -23,9 +23,12 @@ namespace MobileSDKSample
       base.OnCreate(bundle);
 
       string instanceUrl = "http://my.site.com";
+
+      using (var credentials = new SecureStringPasswordProvider("login", "password"))
       using (
         var session =
-          SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(instanceUrl)
+          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
+          .Credentials(credentials)
           .DefaultDatabase("web")
           .DefaultLanguage("en")
           .MediaLibraryRoot("/sitecore/media library")
