@@ -23,7 +23,7 @@ namespace MobileSDKSample
     {
       base.OnCreate(bundle);
 
-      string instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722/";
+      string instanceUrl = "http://my.site.com";
 
       using (var credentials = new SecureStringPasswordProvider.Android.SecureStringPasswordProvider("login", "password"))
       using (
