@@ -39,7 +39,7 @@ using
 }
 ```
 
-** Note : ** Both the session and the credentials objects must be wrapped into the "using" directive since they rely on unmanaged resources of a mobile platform such as sockets and cryptography. The same should be done for all heavy objects of a native platform such as 
+Note : Both the session and the credentials objects must be wrapped into the "using" directive since they rely on unmanaged resources of a mobile platform such as sockets and cryptography. The same should be done for all heavy objects of a native platform such as 
 
 * Stream (.NET)
 * NSData (iOS)
