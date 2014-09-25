@@ -100,9 +100,9 @@
       return await this.InvokeNoThrow(this.workerSession.DownloadResourceAsync(request, cancelToken));
     }
 
-    public async Task<string> ReadRenderingHTMLAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<string> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      return await this.InvokeNoThrow(this.workerSession.ReadRenderingHTMLAsync(request, cancelToken));
+      return await this.InvokeNoThrow(this.workerSession.ReadRenderingHtmlAsync(request, cancelToken));
     }
 
     #endregion GetItems

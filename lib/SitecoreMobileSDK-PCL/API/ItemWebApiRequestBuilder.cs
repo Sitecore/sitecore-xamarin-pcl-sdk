@@ -158,9 +158,9 @@ namespace Sitecore.MobileSDK.API
       return new UpdateItemByPathRequestBuilder(itemPath);
     }
 
-    public static IRenderingHTMLRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHTMLRequestWithSourceAndRenderingId(string sourceId, string renderingId)
+    public static IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHtmlRequestWithSourceAndRenderingId(string sourceId, string renderingId)
     {
-      return new RenderingHTMLRequestBuilder(sourceId, renderingId);
+      return new RenderingHtmlRequestBuilder(sourceId, renderingId);
     }
   }
 }

@@ -16,12 +16,12 @@
       this.SessionConfigMerger = new SessionConfigMerger(defaultSessionConfig);
     }
 
-    public IGetRenderingHtmlRequest FillGetRenderingHTMLGaps(IGetRenderingHtmlRequest userRequest)
+    public IGetRenderingHtmlRequest FillGetRenderingHtmlGaps(IGetRenderingHtmlRequest userRequest)
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
-      return new ReadRenderingHTMLParameters(
+      return new ReadRenderingHtmlParameters(
         mergedSessionConfig, 
         mergedSource, 
         userRequest.SourceId, 

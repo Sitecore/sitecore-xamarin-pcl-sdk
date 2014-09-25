@@ -31,7 +31,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
-  using Sitecore.MobileSDK.UrlBuilder.RenderingHTML;
+  using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
   public class ScApiSession : ISitecoreWebApiSession
   {
@@ -273,16 +273,16 @@ namespace Sitecore.MobileSDK
 
     #region GetHTMLRendering
 
-    public async Task<string> ReadRenderingHTMLAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<string> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      IGetRenderingHtmlRequest requestCopy = request.DeepCopyGetRenderingHTMLRequest();
+      IGetRenderingHtmlRequest requestCopy = request.DeepCopyGetRenderingHtmlRequest();
 
       using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
       {
-        IGetRenderingHtmlRequest autocompletedRequest = this.requestMerger.FillGetRenderingHTMLGaps(requestCopy);
+        IGetRenderingHtmlRequest autocompletedRequest = this.requestMerger.FillGetRenderingHtmlGaps(requestCopy);
 
-        var urlBuilder = new RenderingHTMLUrlBuilder(this.restGrammar, this.webApiGrammar);
-        var taskFlow = new GetRenderingHTMLTasks(urlBuilder, this.httpClient, cryptor);
+        var urlBuilder = new RenderingHtmlUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var taskFlow = new GetRenderingHtmlTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
       }

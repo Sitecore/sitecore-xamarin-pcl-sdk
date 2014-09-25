@@ -5,9 +5,9 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class RenderingHTMLRequestBuilder : IRenderingHTMLRequestParametersBuilder<IGetRenderingHtmlRequest>
+  public class RenderingHtmlRequestBuilder : IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest>
   {
-    public RenderingHTMLRequestBuilder(string sourceId, string renderingId)
+    public RenderingHtmlRequestBuilder(string sourceId, string renderingId)
     {
       ItemIdValidator.ValidateItemId(sourceId, this.GetType().Name + ".SourceId");
       ItemIdValidator.ValidateItemId(renderingId, this.GetType().Name + ".RenderingId");
@@ -16,7 +16,7 @@
       this.renderingId = renderingId;
     }
 
-    public IRenderingHTMLRequestParametersBuilder<IGetRenderingHtmlRequest> SourceAndRenderingDatabase(string database)
+    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> SourceAndRenderingDatabase(string database)
     {
       if (string.IsNullOrEmpty(database))
       {
@@ -34,7 +34,7 @@
       return this;
     }
 
-    public IRenderingHTMLRequestParametersBuilder<IGetRenderingHtmlRequest> SourceAndRenderingLanguage(string itemLanguage)
+    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> SourceAndRenderingLanguage(string itemLanguage)
     {
       if (string.IsNullOrEmpty(itemLanguage))
       {
@@ -53,7 +53,7 @@
       return this;
     }
 
-    public IRenderingHTMLRequestParametersBuilder<IGetRenderingHtmlRequest> SourceVersion(int? itemVersion)
+    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> SourceVersion(int? itemVersion)
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
       BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".Version");
@@ -66,7 +66,7 @@
       return this;
     }
 
-    public IRenderingHTMLRequestParametersBuilder<IGetRenderingHtmlRequest> AddAdditionalParameterNameValue(string parameterName, string parameterValue)
+    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> AddAdditionalParameterNameValue(string parameterName, string parameterValue)
     {
       //TODO: igk!!!
       return this;
@@ -74,7 +74,7 @@
 
     public IGetRenderingHtmlRequest Build()
     {
-      ReadRenderingHTMLParameters result = new ReadRenderingHTMLParameters(
+      ReadRenderingHtmlParameters result = new ReadRenderingHtmlParameters(
         null, 
         this.itemSourceAccumulator,
         this.sourceId,

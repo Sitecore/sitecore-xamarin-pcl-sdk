@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.RenderingHTML
+﻿namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -6,9 +6,9 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class RenderingHTMLUrlBuilder : AbstractGetItemUrlBuilder<IGetRenderingHtmlRequest>
+  public class RenderingHtmlUrlBuilder : AbstractGetItemUrlBuilder<IGetRenderingHtmlRequest>
   {
-    public RenderingHTMLUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    public RenderingHtmlUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base(restGrammar, webApiGrammar)
     {
     }

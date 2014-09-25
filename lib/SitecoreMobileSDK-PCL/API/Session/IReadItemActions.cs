@@ -40,7 +40,7 @@ namespace Sitecore.MobileSDK.API.Session
     /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken));
 
-    Task<string> ReadRenderingHTMLAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<string> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken));
 
   }
 }

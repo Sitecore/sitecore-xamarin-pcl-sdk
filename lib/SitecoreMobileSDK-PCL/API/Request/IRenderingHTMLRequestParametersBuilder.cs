@@ -1,16 +1,16 @@
 ﻿namespace Sitecore.MobileSDK.API.Request.Parameters
 {
-  public interface IRenderingHTMLRequestParametersBuilder<out T>
+  public interface IRenderingHtmlRequestParametersBuilder<out T>
     where T : class
   {
   
-    IRenderingHTMLRequestParametersBuilder<T> SourceAndRenderingDatabase(string database);
+    IRenderingHtmlRequestParametersBuilder<T> SourceAndRenderingDatabase(string database);
 
-    IRenderingHTMLRequestParametersBuilder<T> SourceAndRenderingLanguage(string itemLanguage);
+    IRenderingHtmlRequestParametersBuilder<T> SourceAndRenderingLanguage(string itemLanguage);
 
-    IRenderingHTMLRequestParametersBuilder<T> SourceVersion(int? itemVersion);
+    IRenderingHtmlRequestParametersBuilder<T> SourceVersion(int? itemVersion);
 
-    IRenderingHTMLRequestParametersBuilder<T> AddAdditionalParameterNameValue(string parameterName, string parameterValue);
+    IRenderingHtmlRequestParametersBuilder<T> AddAdditionalParameterNameValue(string parameterName, string parameterValue);
 
     T Build();
   }

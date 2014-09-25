@@ -1,4 +1,4 @@
-﻿mnjgjkusing Sitecore.MobileSDK.PublicKey;
+﻿using Sitecore.MobileSDK.PublicKey;
 
 
 namespace Sitecore.MobileSDK.CrudTasks.Resource
@@ -11,15 +11,15 @@ namespace Sitecore.MobileSDK.CrudTasks.Resource
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.TaskFlow;
-  using Sitecore.MobileSDK.UrlBuilder.RenderingHTML;
+  using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
-  public class GetRenderingHTMLTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, string>
+  public class GetRenderingHtmlTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, string>
   {
-    private GetRenderingHTMLTasks()
+    private GetRenderingHtmlTasks()
     {
     }
 
-    public GetRenderingHTMLTasks(RenderingHTMLUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+    public GetRenderingHtmlTasks(RenderingHtmlUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
@@ -58,7 +58,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Resource
       }
     }
 
-    private readonly RenderingHTMLUrlBuilder urlBuilder;
+    private readonly RenderingHtmlUrlBuilder urlBuilder;
     private HttpClient httpClient;
     private ICredentialsHeadersCryptor credentialsHeadersCryptor;
   }

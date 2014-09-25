@@ -5,9 +5,9 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class ReadRenderingHTMLParameters : IGetRenderingHtmlRequest
+  public class ReadRenderingHtmlParameters : IGetRenderingHtmlRequest
   {
-    public ReadRenderingHTMLParameters(ISessionConfig sessionSettings, IItemSource itemSource, string sourceId, string renderingId)
+    public ReadRenderingHtmlParameters(ISessionConfig sessionSettings, IItemSource itemSource, string sourceId, string renderingId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
@@ -15,7 +15,7 @@
       this.RenderingId = renderingId;
     }
 
-    public virtual IGetRenderingHtmlRequest DeepCopyGetRenderingHTMLRequest()
+    public virtual IGetRenderingHtmlRequest DeepCopyGetRenderingHtmlRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
@@ -30,12 +30,12 @@
         itemSrc = this.ItemSource.ShallowCopy();
       }
 
-      return new ReadRenderingHTMLParameters(connection, itemSrc, this.SourceId, this.RenderingId);
+      return new ReadRenderingHtmlParameters(connection, itemSrc, this.SourceId, this.RenderingId);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
-      return this.DeepCopyGetRenderingHTMLRequest();
+      return this.DeepCopyGetRenderingHtmlRequest();
     }
 
     //TODO: igk remove QueryParameters

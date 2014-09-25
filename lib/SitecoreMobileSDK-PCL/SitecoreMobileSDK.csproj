@@ -209,11 +209,11 @@
     <Compile Include="API\Request\Template\ISetNewItemNameBuilder.cs" />
     <Compile Include="API\Request\IMediaResourceDownloadRequest.cs" />
     <Compile Include="API\Request\IGetRenderingHtmlRequest.cs" />
-    <Compile Include="UrlBuilder\RenderingHTML\RenderingHTMLUrlBuilder.cs" />
     <Compile Include="Items\ReadRenderingHTMLParameters.cs" />
-    <Compile Include="CrudTasks\Resource\GetRenderingHTMLTasks.cs" />
     <Compile Include="API\Request\IRenderingHTMLRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\RenderingHTMLRequest\RenderingHTMLRequestBuilder.cs" />
+    <Compile Include="CrudTasks\Resource\GetRenderingHtmlTasks.cs" />
+    <Compile Include="UrlBuilder\RenderingHTML\RenderingHtmlUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
