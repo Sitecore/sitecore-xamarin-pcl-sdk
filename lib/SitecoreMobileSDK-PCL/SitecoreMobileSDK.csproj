@@ -210,10 +210,10 @@
     <Compile Include="API\Request\IMediaResourceDownloadRequest.cs" />
     <Compile Include="API\Request\IGetRenderingHtmlRequest.cs" />
     <Compile Include="Items\ReadRenderingHTMLParameters.cs" />
-    <Compile Include="API\Request\IRenderingHTMLRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\RenderingHTMLRequest\RenderingHTMLRequestBuilder.cs" />
     <Compile Include="CrudTasks\Resource\GetRenderingHtmlTasks.cs" />
     <Compile Include="UrlBuilder\RenderingHTML\RenderingHtmlUrlBuilder.cs" />
+    <Compile Include="API\Request\IRenderingHtmlRequestParametersBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
