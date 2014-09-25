@@ -129,7 +129,21 @@
   <Target Name="PasswordProviderAndroid">
     <Message Text="Building PasswordProvider For Android..." />
 
-    <!-- PasswordStorageAndroidProject -->
+	<MSBuild 
+      Projects="@(PasswordStorageAndroidProject)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+	
+	 <ItemGroup>
+      <PasswordAndroidArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\bin\Release\*.dll" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(PasswordAndroidArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
   </Target>
 
   <Target Name="PrepareDeploymentDir">
