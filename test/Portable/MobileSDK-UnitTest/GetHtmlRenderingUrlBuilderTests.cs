@@ -69,6 +69,24 @@
       Assert.AreEqual(expected, result);
     }
 
+    [Test]
+    public void TestHTMLRenderingWithWrongSourceId()
+    {
+      IGetRenderingHtmlRequest request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("dfdfd", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}")
+        .Build();
+
+      IGetRenderingHtmlRequest autocompletedRequest = this.requestMerger.FillGetRenderingHtmlGaps(request);
+
+      string result = this.builder.GetUrlForRequest(autocompletedRequest);
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/" +
+        "-/item/v234" +
+        "%2fsitecore%2fshell/" +
+        "-/actions/getRenderinghtml?" +
+        "sc_itemid=%7b110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7d" +
+        "&renderingid=%7b220d559f-dea5-42ea-9c1c-8a5df7e70e22%7d";
+
+      Assert.AreEqual(expected, result);
+    }
 
   }
 }
