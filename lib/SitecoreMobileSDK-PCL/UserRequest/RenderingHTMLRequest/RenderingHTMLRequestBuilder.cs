@@ -1,5 +1,9 @@
-﻿namespace Sitecore.MobileSDK.UserRequest
+﻿
+namespace Sitecore.MobileSDK.UserRequest
 {
+  using System.Collections.Generic;
+  using System;
+
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
@@ -68,10 +72,43 @@
 
     public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> AddAdditionalParameterNameValue(string parameterName, string parameterValue)
     {
-      //TODO: igk!!!
+      BaseValidator.CheckForNullAndEmptyOrThrow(parameterName, this.GetType().Name + ".fieldName");
+      BaseValidator.CheckForNullAndEmptyOrThrow(parameterValue, this.GetType().Name + ".fieldValue");
+
+      if (null == this.parametersValuesByName)
+      {
+        Dictionary<string, string> newFields = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        this.parametersValuesByName = newFields;
+      }
+        
+      bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary(this.parametersValuesByName, parameterName);
+      if (keyIsDuplicated)
+      {
+        throw new InvalidOperationException(this.GetType().Name + ".parametersValuesByName : duplicate fields are not allowed");
+      }
+
+      this.parametersValuesByName.Add(parameterName, parameterValue);
+
       return this;
     }
 
+    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> AddAdditionalParameterNameValue(IDictionary<string, string> parametersValuesByName)
+    {
+      BaseValidator.CheckNullAndThrow(parametersValuesByName, this.GetType().Name + ".FieldsRawValuesByName");
+
+      if (parametersValuesByName.Count == 0)
+      {
+        return this;
+      }
+
+      foreach (var parameter in parametersValuesByName)
+      {
+        this.AddAdditionalParameterNameValue(parameter.Key, parameter.Value);
+      }
+
+      return this;
+    }
+      
     public IGetRenderingHtmlRequest Build()
     {
       ReadRenderingHtmlParameters result = new ReadRenderingHtmlParameters(
@@ -85,6 +122,7 @@
     }
 
     protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
+    protected IDictionary<string, string> parametersValuesByName;
 
     private string sourceId;
     private string renderingId;
