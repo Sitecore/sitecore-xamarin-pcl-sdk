@@ -18,6 +18,7 @@ It uses the modern C# features and approaches such as :
 ## The SDK includes the following features:
 
 * Authentication
+* Credentials protection based on SecureString class
 * CRUD operations on items
 * Access item fields and properties
 * Download content of media items
@@ -35,28 +36,36 @@ SITECORE SHARED SOURCE LICENSE
 Since the SDK has been designed as a portable class library (PCL), you can use the very same code on all platforms to fetch the home item contents. 
 
 ```csharp
-// first we have to setup connection info and create a session
-var session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("https://my.sitecore.instance.com")
-  .WebApiVersion("v1")
-  .DefaultDatabase("web")
-  .DefaultLanguage("en")
-  .MediaLibraryRoot("/sitecore/media library")
-  .MediaPrefix("~/media/")
-  .DefaultMediaResourceExtension("ashx")
-  .BuildSession();
-
-// In order to fetch some data we have to build a request
-var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
-  .AddFields("text")
+using (var credentials = new SecureStringPasswordProvider("admin", "b")) // providing secure credentials
+using 
+(
+  var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
+    .Credentials(credentials)
+    .WebApiVersion("v1")
+    .DefaultDatabase("web")
+    .DefaultLanguage("en")
+    .MediaLibraryRoot("/sitecore/media library")
+    .MediaPrefix("~/media/")
+    .DefaultMediaResourceExtension("ashx")
+    .BuildSession()
+) // Creating a session from credentials, instance URL and settings
+{
+  // In order to fetch some data we have to build a request
+  var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+  .AddFieldsToRead("text")
   .AddScope(ScopeType.Self)
   .Build();
 
-// And execute it on a session asynchronously
-var response = await session.ReadItemAsync(request);
+  // And execute it on a session asynchronously
+  var response = await session.ReadItemAsync(request);
 
-// Now that it has succeeded we are able to access downloaded items
-ISitecoreItem item = response.Items[0];
+  // Now that it has succeeded we are able to access downloaded items
+  ISitecoreItem item = response[0];
 
-// And content stored it its fields
-string fieldContent = item.FieldWithName("text").RawValue;
+  // And content stored it its fields
+  string fieldContent = item["text"].RawValue;
+}
 ```
+
+
+
