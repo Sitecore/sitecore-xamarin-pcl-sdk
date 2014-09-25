@@ -52,6 +52,10 @@
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>SitecoreMobileSDK</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
+      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
+      <Name>SitecoreMobileSdkPasswordProvider</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

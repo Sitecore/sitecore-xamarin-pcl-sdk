@@ -7,6 +7,7 @@
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
+  using SitecoreMobileSdkPasswordProvider.API;
 
 
   public partial class MainPage : UserControl

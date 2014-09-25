@@ -31,6 +31,8 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
 
+  using SitecoreMobileSdkPasswordProvider.API;
+
 
   public class ScApiSession : ISitecoreWebApiSession
   {

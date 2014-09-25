@@ -2,6 +2,8 @@
 {
   using System;
   using Sitecore.MobileSDK.API;
+  using SitecoreMobileSdkPasswordProvider.API;
+
 
   public class WebApiCredentialsPOD : IWebApiCredentials
   {

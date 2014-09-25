@@ -1,0 +1,1 @@
+Z:\Mobile.SDK.dotNET\solutions\.nuget\NuGet.exe pack SitecoreMobileSdkPasswordProvider.nuspec 

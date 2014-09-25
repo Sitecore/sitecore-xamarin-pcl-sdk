@@ -48,7 +48,6 @@
     <Compile Include="API\Items\ScDeleteItemsResponse.cs" />
     <Compile Include="API\Items\ScItemsResponse.cs" />
     <Compile Include="API\ItemWebApiRequestBuilder.cs" />
-    <Compile Include="API\IWebApiCredentials.cs" />
     <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
     <Compile Include="API\Request\IBaseDeleteItemRequest.cs" />
     <Compile Include="API\Request\IBaseItemRequest.cs" />
@@ -259,4 +258,10 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
+      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
+      <Name>SitecoreMobileSdkPasswordProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

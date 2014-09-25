@@ -7,6 +7,7 @@ namespace WhiteLabeliOS
   using MonoTouch.Foundation;
   using MonoTouch.UIKit;
   using Sitecore.MobileSDK.API;
+  using SecureStringPasswordProvider.iOS;
 
   public partial class AuthViewController : BaseTaskViewController
   {
@@ -23,7 +24,7 @@ namespace WhiteLabeliOS
       this.passwordField.ShouldReturn = this.HideKeyboard;
 
       //TODO: remove later, default values
-      this.urlField.Text = "http://mobiledev1ua1.dk.sitecore.net:722/";
+      this.urlField.Text = "http://mobiledev1ua1.dk.sitecore.net:7200/";
       this.loginField.Text = "admin";
       this.passwordField.Text = "b";
       this.siteField.Text = "/sitecore/shell";
@@ -46,7 +47,7 @@ namespace WhiteLabeliOS
     {
       try
       {
-        using (var credentials = new WebApiCredentialsPODInsequredDemo(this.loginField.Text, this.passwordField.Text))
+        using (var credentials = new SecureStringPasswordProvider(this.loginField.Text, this.passwordField.Text))
         using 
         ( 
             var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)

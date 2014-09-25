@@ -11,8 +11,11 @@
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
+  using SitecoreMobileSdkPasswordProvider.API;
+  using SecureStringPasswordProvider.iOS;
 
-  public partial class iMobileSdkDemoViewController : UIViewController, IWebApiCredentials
+
+  public partial class iMobileSdkDemoViewController : UIViewController
   {
     static bool UserInterfaceIdiomIsPhone
     {
@@ -49,10 +52,12 @@
 
       // first we have to setup connection info and create a session
       var instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722";
+
+      using (var credentials = new SecureStringPasswordProvider("admin", "b"))
       using 
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
-          .Credentials(this)
+          .Credentials(credentials)
           .WebApiVersion("v1")
           .DefaultDatabase("web")
           .DefaultLanguage("en")
@@ -93,30 +98,6 @@
     }
 
     #endregion
-
-    #region IWebApiCredentials
-    public IWebApiCredentials CredentialsShallowCopy()
-    {
-      return this;
-    }
-
-    public string Username
-    {
-      get
-      {
-        return "admin";
-      }
-    }
-
-    public string Password
-    {
-      get
-      {
-        return "b";
-      }
-    }
-    #endregion IWebApiCredentials
-
   }
 }
 

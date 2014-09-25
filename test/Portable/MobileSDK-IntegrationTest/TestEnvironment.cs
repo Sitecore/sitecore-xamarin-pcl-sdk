@@ -20,6 +20,7 @@
       result.Items.Home.Path = "/sitecore/content/Home";
       result.Items.Home.DisplayName = "Home";
       result.Items.Home.Template = "Sample/Sample Item";
+      result.Items.Home.TemplateId = "{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}";
 
       result.Items.ItemWithVersions.Id = "{B86C2CBB-7808-4798-A461-1FB3EB0A43E5}";
       result.Items.ItemWithVersions.Path = "/sitecore/content/FieldsTest/TestFieldsVersionsAndDB";
@@ -29,6 +30,7 @@
       result.Items.TestFieldsItem.Path = "/sitecore/content/Home/Test Fields";
       result.Items.TestFieldsItem.DisplayName = "Test Fields";
       result.Items.TestFieldsItem.Template = "Test Templates/Sample fields";
+      result.Items.TestFieldsItem.TemplateId = "{5FC0D542-E27B-4E55-A1F0-702E959DCD6C}";
 
       result.Items.AllowedItem.Id = "{387B69B2-B2EA-4618-8C3E-2785DC0469A7}";
       result.Items.AllowedItem.Path = "/sitecore/content/Home/Allowed_Parent/Allowed_Item";
@@ -80,6 +82,7 @@
       public string Path { get; set; }
       public string DisplayName { get; set; }
       public string Template { get; set; }
+      public string TemplateId { get; set; }
     }
 
     public void AssertItemsAreEqual(Item expected, ISitecoreItem actual)

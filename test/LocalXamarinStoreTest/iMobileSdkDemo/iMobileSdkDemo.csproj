@@ -97,8 +97,14 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SecureStringPasswordProvider-iOS">
+      <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\SecureStringPasswordProvider-iOS.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Sitecore.MobileSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="SitecoreMobileSdkPasswordProvider">
+      <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\SitecoreMobileSdkPasswordProvider.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
       <HintPath>Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\System.IO.dll</HintPath>
@@ -139,6 +145,7 @@
     <InterfaceDefinition Include="MainStoryboard_iPad.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <XamarinComponentReference Include="Sitecore.MobileSDK.PCL">
       <Version>1.0.0</Version>
