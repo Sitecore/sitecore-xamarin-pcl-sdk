@@ -229,7 +229,7 @@
   <Target Name="package">
 
     <ItemGroup>
-      <MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
+      <MobileSdkArtefacts Include="$(RepositoryRoot)\deployment\lib\*.dll" />
     </ItemGroup>
 
 
