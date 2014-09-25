@@ -25,7 +25,7 @@
       result.ItemWebApiActionsEndpoint = "-/actions";
       result.ItemWebApiAuthenticateAction = "/authenticate";
       result.ItemWebApiGetPublicKeyAction = "/getpublickey";
-      result.ItemWebApiGetRenderingAction = "/getRenderinghtml";
+      result.ItemWebApiGetRenderingAction = "/getrenderinghtml";
       return result;
     }
 
