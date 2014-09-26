@@ -84,7 +84,7 @@ namespace Sitecore.MobileSDK.UserRequest
       bool keyIsDuplicated = DuplicateEntryValidator.IsDuplicatedFieldsInTheDictionary(this.parametersValuesByName, parameterName);
       if (keyIsDuplicated)
       {
-        throw new InvalidOperationException(this.GetType().Name + ".parametersValuesByName : duplicate fields are not allowed");
+        throw new InvalidOperationException(this.GetType().Name + ".ParametersValuesByName : duplicate fields are not allowed");
       }
 
       this.parametersValuesByName.Add(parameterName, parameterValue);
@@ -94,7 +94,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> AddAdditionalParameterNameValue(IDictionary<string, string> parametersValuesByName)
     {
-      BaseValidator.CheckNullAndThrow(parametersValuesByName, this.GetType().Name + ".FieldsRawValuesByName");
+      BaseValidator.CheckNullAndThrow(parametersValuesByName, this.GetType().Name + ".ParametersValuesByName");
 
       if (parametersValuesByName.Count == 0)
       {

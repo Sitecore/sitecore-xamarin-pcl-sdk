@@ -34,7 +34,13 @@ namespace Sitecore.MobileSDK.Items
         itemSrc = this.ItemSource.ShallowCopy();
       }
 
-      return new ReadRenderingHtmlParameters(connection, itemSrc, this.SourceId, this.RenderingId);
+      return new ReadRenderingHtmlParameters(
+        connection, 
+        itemSrc, 
+        this.ParametersValuesByName, 
+        this.SourceId, 
+        this.RenderingId
+      );
     }
 
     public string SourceId { get; private set; }

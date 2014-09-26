@@ -24,6 +24,7 @@
       return new ReadRenderingHtmlParameters(
         mergedSessionConfig, 
         mergedSource, 
+        userRequest.ParametersValuesByName,
         userRequest.SourceId, 
         userRequest.RenderingId
       );

@@ -60,7 +60,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
       return result;
     }
 
-    protected string GetSpecificPartForRequest(IGetRenderingHtmlRequest request)
+    private string GetSpecificPartForRequest(IGetRenderingHtmlRequest request)
     {
       string escapedSourceId = UrlBuilderUtils.EscapeDataString(request.SourceId);
       string escapedRenderingId = UrlBuilderUtils.EscapeDataString(request.RenderingId);
@@ -68,7 +68,31 @@ namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
         + restGrammar.FieldSeparator 
         + this.webApiGrammar.RenderingIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedRenderingId;
 
-      return result.ToLowerInvariant();
+      result = result.ToLowerInvariant();
+
+      //must be case sensitive
+      result += this.GetCustomParametersString (request);
+
+      return result;
+    }
+
+    private string GetCustomParametersString(IGetRenderingHtmlRequest request)
+    {
+      string result = "";
+      if (null != request.ParametersValuesByName)
+      {
+        foreach (var param in request.ParametersValuesByName)
+        {
+          string escapedParamName = UrlBuilderUtils.EscapeDataString (param.Key);
+          string escapedParamValue = UrlBuilderUtils.EscapeDataString (param.Value);
+          result += 
+          this.restGrammar.FieldSeparator +
+          escapedParamName +
+          this.restGrammar.KeyValuePairSeparator +
+          escapedParamValue;
+        }
+      }
+      return result;
     }
 
     private string GetCommonPartForRequest(IGetRenderingHtmlRequest request)
