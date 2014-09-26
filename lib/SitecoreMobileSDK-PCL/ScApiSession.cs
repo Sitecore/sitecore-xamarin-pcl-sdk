@@ -275,7 +275,7 @@ namespace Sitecore.MobileSDK
 
     #region GetHTMLRendering
 
-    public async Task<string> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<Stream> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       IGetRenderingHtmlRequest requestCopy = request.DeepCopyGetRenderingHtmlRequest();
 

@@ -13,7 +13,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Resource
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
-  public class GetRenderingHtmlTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, string>
+  public class GetRenderingHtmlTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, Stream>
   {
     private GetRenderingHtmlTasks()
     {
@@ -39,13 +39,19 @@ namespace Sitecore.MobileSDK.CrudTasks.Resource
       return result;
     }
 
-    public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
+    public async Task<Stream> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
     {
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + requestUrl);
 
-      HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
-      return await httpResponse.Content.ReadAsStringAsync();
+      var httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
+
+      if (!httpResponse.IsSuccessStatusCode)
+      {
+        throw new HttpRequestException(httpResponse.ReasonPhrase);
+      }
+
+      return await httpResponse.Content.ReadAsStreamAsync();
     }
 
     #endregion IRestApiCallTasks

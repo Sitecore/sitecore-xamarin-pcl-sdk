@@ -1,5 +1,7 @@
+
 namespace Sitecore.MobileSDK.API.Session
 {
+  using System.IO;
   using System.Threading;
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.API.Items;
@@ -40,7 +42,7 @@ namespace Sitecore.MobileSDK.API.Session
     /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken));
 
-    Task<string> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<Stream> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken));
 
   }
 }

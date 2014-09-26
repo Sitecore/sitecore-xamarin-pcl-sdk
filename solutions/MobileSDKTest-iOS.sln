@@ -147,7 +147,7 @@ Global
 		{3099A100-12CA-45D0-A45F-087632139637} = {E0E03E8E-2782-4217-9146-5A706CB30487}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\test\iOS\MobileSDKUnitTest-iOS\MobileSDKUnitTest-iOS.csproj
+		StartupItem = ..\test\iOS\MobileSDK-IntegrationTest-iOS\MobileSDK-IntegrationTest-iOS.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
