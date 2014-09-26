@@ -32,8 +32,6 @@ namespace Sitecore.MobileSDK.API.Request
 
     IGetRenderingHtmlRequest DeepCopyGetRenderingHtmlRequest();
 
-    //TODO: @igk we do not need "IQueryParameters QueryParameters { get; }" here, from IBaseItemRequest, 
-    //TODO: @igk probably we need new main request?
   }
 }
 
