@@ -38,7 +38,6 @@
       return new ReadItemsByIdParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, userRequest.ItemId);
     }
 
-
     public IReadItemsByPathRequest FillReadItemByPathGaps(IReadItemsByPathRequest userRequest)
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
