@@ -60,7 +60,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Resource
     {
       if (null == this.httpClient)
       {
-        throw new ArgumentNullException("AbstractGetItemTask.httpClient cannot be null");
+        throw new ArgumentNullException("GetRenderingHtmlTasks.httpClient cannot be null");
       }
     }
 
