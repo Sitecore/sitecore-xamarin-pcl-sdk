@@ -5,9 +5,9 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class ReadMediaItemParameters : IMediaResourceDownloadRequest
+  public class MediaResourceDownloadRequest : IMediaResourceDownloadRequest
   {
-    public ReadMediaItemParameters
+    public MediaResourceDownloadRequest
     (
       ISessionConfig sessionSettings,
       IItemSource itemSource,
@@ -42,7 +42,7 @@
         resizingOptions = this.DownloadOptions.DeepCopyMediaDownloadOptions();
       }
 
-      return new ReadMediaItemParameters(connection, itemSource, resizingOptions, this.MediaPath);
+      return new MediaResourceDownloadRequest(connection, itemSource, resizingOptions, this.MediaPath);
     }
 
     public string MediaPath { get; private set; }

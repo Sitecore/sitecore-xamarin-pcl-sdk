@@ -95,9 +95,9 @@
       return await this.InvokeNoThrow(this.workerSession.ReadItemAsync(request, cancelToken));
     }
 
-    public async Task<Stream> DownloadResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      return await this.InvokeNoThrow(this.workerSession.DownloadResourceAsync(request, cancelToken));
+      return await this.InvokeNoThrow(this.workerSession.DownloadMediaResourceAsync(request, cancelToken));
     }
 
     #endregion GetItems

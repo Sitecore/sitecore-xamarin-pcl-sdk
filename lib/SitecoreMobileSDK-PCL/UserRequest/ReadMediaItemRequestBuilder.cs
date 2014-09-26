@@ -77,7 +77,7 @@
 
     public IMediaResourceDownloadRequest Build()
     {
-      var result = new ReadMediaItemParameters(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaPath);
+      var result = new MediaResourceDownloadRequest(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaPath);
       return result;
     }
 

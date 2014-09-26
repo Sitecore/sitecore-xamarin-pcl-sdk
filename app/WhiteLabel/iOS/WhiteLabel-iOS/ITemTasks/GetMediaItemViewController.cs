@@ -112,7 +112,7 @@ namespace WhiteLabeliOS
 
 
           byte[] data = null;
-          using (Stream response = await session.DownloadResourceAsync(request))
+          using (Stream response = await session.DownloadMediaResourceAsync(request))
           using (MemoryStream responseInMemory = new MemoryStream())
           {
             await response.CopyToAsync(responseInMemory);

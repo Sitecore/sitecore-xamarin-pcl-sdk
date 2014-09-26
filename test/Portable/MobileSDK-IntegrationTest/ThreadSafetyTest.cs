@@ -164,9 +164,9 @@
 
       try
       {
-        IMediaResourceDownloadRequest request = new ReadMediaItemParameters(null, this.itemSource, resizing, mediaPath);
+        IMediaResourceDownloadRequest request = new MediaResourceDownloadRequest(null, this.itemSource, resizing, mediaPath);
 
-        using (Stream imageStream = await this.session.DownloadResourceAsync(request))
+        using (Stream imageStream = await this.session.DownloadMediaResourceAsync(request))
         {
           Assert.IsNotNull(imageStream);
         }

@@ -255,7 +255,7 @@ namespace Sitecore.MobileSDK
       }
     }
 
-    public async Task<Stream> DownloadResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
       IMediaResourceDownloadRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);

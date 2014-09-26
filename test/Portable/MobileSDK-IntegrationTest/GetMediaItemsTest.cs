@@ -50,7 +50,7 @@
         .DownloadOptions(options)
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -69,7 +69,7 @@
         .DownloadOptions(options)
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -93,7 +93,7 @@
         .DownloadOptions(options)
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -111,7 +111,7 @@
         .Database(Db)
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -144,7 +144,7 @@
 
       TestDelegate testCode = async () =>
       {
-        var task = this.session.DownloadResourceAsync(request);
+        var task = this.session.DownloadMediaResourceAsync(request);
         await task;
       };
       Exception exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
@@ -223,7 +223,7 @@
 
       TestDelegate testCode = async () =>
       {
-        var task = this.session.DownloadResourceAsync(request);
+        var task = this.session.DownloadMediaResourceAsync(request);
         await task;
       };
       Exception exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
@@ -251,7 +251,7 @@
         .DownloadOptions(options)
         .Build();
 
-      using (var response = await sessionNoReadAccess.DownloadResourceAsync(request))
+      using (var response = await sessionNoReadAccess.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -267,7 +267,7 @@
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -282,7 +282,7 @@
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/Images/green_mineraly1")
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -304,7 +304,7 @@
         .DownloadOptions(options)
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -323,7 +323,7 @@
         .Database(Db)
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -348,7 +348,7 @@
         .Database(Db)
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -366,7 +366,7 @@
         .Database("master")
         .Build();
 
-      using (var responseFromMasterDb = await this.session.DownloadResourceAsync(requestFromMasterDb))
+      using (var responseFromMasterDb = await this.session.DownloadMediaResourceAsync(requestFromMasterDb))
       using (var ms = new MemoryStream())
       {
         await responseFromMasterDb.CopyToAsync(ms);
@@ -383,7 +383,7 @@
 
       TestDelegate testCode = async () =>
       {
-        var task = this.session.DownloadResourceAsync(requestFromWebDb);
+        var task = this.session.DownloadMediaResourceAsync(requestFromWebDb);
         await task;
       };
 
@@ -408,7 +408,7 @@
         .Database("master")
         .Build();
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -426,7 +426,7 @@
         .Build();
 
 
-      using (var response = await this.session.DownloadResourceAsync(request))
+      using (var response = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await response.CopyToAsync(ms);
@@ -446,7 +446,7 @@
           .Build();
 
 
-      using (var responseWithSrcParameter = await this.session.DownloadResourceAsync(requestWithSrcParameter))
+      using (var responseWithSrcParameter = await this.session.DownloadMediaResourceAsync(requestWithSrcParameter))
       using (var msWithSrcParameter = new MemoryStream())
       {
         await responseWithSrcParameter.CopyToAsync(msWithSrcParameter);
@@ -454,7 +454,7 @@
         // z[3]: mediapath="/Images/test image"
         var requestWithMediapathParameter = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])
          .Build();
-        using (var responseWithMediapathParameter = await this.session.DownloadResourceAsync(requestWithMediapathParameter))
+        using (var responseWithMediapathParameter = await this.session.DownloadMediaResourceAsync(requestWithMediapathParameter))
         using (var msWithMediapathParameter = new MemoryStream())
         {
           await responseWithMediapathParameter.CopyToAsync(msWithMediapathParameter);
@@ -470,7 +470,7 @@
 
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])   // z[3]: mediapath="/Images/test image"
          .Build();
-      using (var responseWithMediapathParameter = await this.session.DownloadResourceAsync(request))
+      using (var responseWithMediapathParameter = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
       {
         await responseWithMediapathParameter.CopyToAsync(ms);
