@@ -58,7 +58,9 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
 
-      Assert.IsTrue(response[0].FieldsCount > 70);
+      bool correctFieldsCount = (response [0].FieldsCount > 70);
+      correctFieldsCount = correctFieldsCount || (response [0].FieldsCount == 59); //cms v6.x
+      Assert.IsTrue(correctFieldsCount);
       Assert.AreEqual("Home", response[0]["__Display name"].RawValue);
     }
 
