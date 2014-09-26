@@ -21,6 +21,8 @@
 	  <ScriptsDirectory>$(RepositoryRoot)\scripts</ScriptsDirectory>
     <SolutionsDirectory>$(RepositoryRoot)\solutions</SolutionsDirectory>
     <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
+    <LocalNugetRepoDirectory>C:\dev\LocalNugetRepository\</LocalNugetRepoDirectory>
+    <LocalXamarinComponentsRepoDirectory>C:\dev\LocalXamarinStoreComponents\</LocalXamarinComponentsRepoDirectory>
     <BinariesDeploymentDirectory>$(RepositoryRoot)\deployment\lib</BinariesDeploymentDirectory>
 
     <UnitTestReportXml>$(RepositoryRoot)\deployment\UnitTestDesktopReport.xml</UnitTestReportXml>
@@ -227,7 +229,6 @@
 
 <!-- ====================================================  -->
   <Target Name="package">
-
     <ItemGroup>
       <MobileSdkArtefacts Include="$(RepositoryRoot)\deployment\lib\*.dll" />
     </ItemGroup>
@@ -255,6 +256,11 @@
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PCL.1.0.0.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
      />
+	<Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PCL.1.0.0.nupkg"
+      DestinationFolder="$(LocalNugetRepoDirectory)"
+	  OverwriteReadOnlyFiles="true"
+     />
 
 	 
 	 <Exec 
@@ -263,6 +269,11 @@
     <Copy
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
+     />
+	 <Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0.nupkg"
+      DestinationFolder="$(LocalNugetRepoDirectory)"
+	  OverwriteReadOnlyFiles="true"
      />
 	 
 
@@ -273,7 +284,12 @@
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.0.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
      />
-
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.0.nupkg"
+      DestinationFolder="$(LocalNugetRepoDirectory)"
+	  OverwriteReadOnlyFiles="true"
+     />
+	 
 
      <Exec
       Command="BuildXamarinPackage.bat"
@@ -283,17 +299,16 @@
       SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.MobileSDK.PCL-1.0.0.xam"
       DestinationFolder="$(DeploymentDirectory)"
      />
-
-
-
-<!--     <Exec
-      Command="BuildXamarinPackage.bat"
-      WorkingDirectory="$(ScriptsDirectory)\xamarin-store\PasswordStorage"
-    />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\PasswordStorage\SitecoreMobileSdkPasswordProvider.xam"
-      DestinationFolder="$(DeploymentDirectory)"
-     /> -->
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.MobileSDK.PCL-1.0.0.xam"
+      DestinationFolder="$(LocalXamarinComponentsRepoDirectory)"
+     />
+
+	 <Exec
+	    Command="xamarin-component install Sitecore.MobileSDK.PCL-1.0.0.xam"
+		WorkingDirectory="$(LocalXamarinComponentsRepoDirectory)"
+    />
+	    
   </Target>
 
   <Target Name="doc">
