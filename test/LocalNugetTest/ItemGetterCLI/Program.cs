@@ -1,51 +1,24 @@
 ﻿namespace ItemGetterCLI
 {
   using System;
+  using System.IO;
   using System.Threading.Tasks;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.MediaItem;
-  using System.IO;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
+  using SecureStringPasswordProvider.Windows;
+  using SitecoreMobileSdkPasswordProvider.API;
 
 
   class Program
   {
     #region Authenticated
-
-    class InsecureDemoCredentials : IWebApiCredentials
-    {
-      public string Username
-      {
-        get
-        {
-          return "admin";
-        }
-      }
-
-      public string Password
-      {
-        get
-        {
-          return "b";
-        }
-      }
-
-      public IWebApiCredentials CredentialsShallowCopy()
-      {
-        return this;
-      }
-
-      public void Dispose()
-      {
-        //IDLE
-      }
-    }
-
     private static void Main(string[] args)
     {
-      using (var demoCredentials = new InsecureDemoCredentials())
+      using (var demoCredentials = new SecureStringPasswordProvider("admin", "b"))
       {
         string instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:7220";
 

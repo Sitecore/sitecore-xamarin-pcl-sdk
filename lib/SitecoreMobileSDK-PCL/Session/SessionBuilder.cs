@@ -5,6 +5,7 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Validators;
+  using SitecoreMobileSdkPasswordProvider.API;
 
   internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder
   {

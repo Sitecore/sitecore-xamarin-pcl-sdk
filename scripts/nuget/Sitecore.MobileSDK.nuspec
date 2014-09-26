@@ -18,19 +18,21 @@
     <tags>Sitecore iOS Android PCL Xamarin</tags>
 
     <dependencies>
+      <dependency id="Sitecore.MobileSDK.PasswordProvider.Interface" version="1.0.0" />
+
 	  <dependency id="Microsoft.Bcl" version="1.1.9" />
 	  <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
 	  <dependency id="Microsoft.Bcl.Build" version="1.0.14" />
 	  <dependency id="Microsoft.Net.Http" version="2.2.22" />
-	  <dependency id="Newtonsoft.Json" version="6.0.3" />
+	  
+      <dependency id="Newtonsoft.Json" version="6.0.3" />
 	  <dependency id="Portable.BouncyCastle" version="1.7.0" />
     </dependencies>
   </metadata>
 
     <files>
-            <file
+       <file
 		src="..\..\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" 
 		target="lib\portable-win+net4+sl5+wp8\"  />
     </files>
-
 </package>

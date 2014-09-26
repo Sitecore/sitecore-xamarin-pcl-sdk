@@ -6,6 +6,7 @@ namespace WhiteLabeliOS
 
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
+  using SecureStringPasswordProvider.iOS;
 
   public class InstanceSettings
   {
@@ -42,7 +43,7 @@ namespace WhiteLabeliOS
       using 
       (
         var credentials = 
-          new WebApiCredentialsPODInsequredDemo(
+          new SecureStringPasswordProvider(
             this.instanceLogin, 
             this.instancePassword)
       )

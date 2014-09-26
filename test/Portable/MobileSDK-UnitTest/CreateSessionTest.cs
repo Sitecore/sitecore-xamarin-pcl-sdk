@@ -10,6 +10,8 @@ namespace Sitecore.MobileSdkUnitTest
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.SessionSettings;
+  using SitecoreMobileSdkPasswordProvider.API;
+
 
 
   [TestFixture]

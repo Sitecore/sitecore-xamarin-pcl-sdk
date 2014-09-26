@@ -12,7 +12,7 @@
   using Sitecore.MobileSDK.API.Request;
 
   using Sitecore.MobileSDK.Items;
-
+  using SitecoreMobileSdkPasswordProvider.API;
 
 
   public class NoThrowWebApiSession : ISitecoreWebApiSession
