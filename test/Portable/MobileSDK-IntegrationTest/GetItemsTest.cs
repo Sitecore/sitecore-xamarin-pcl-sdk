@@ -47,7 +47,7 @@
     //        .Database("master")
     //        .Build();
     //        
-    //      var response = await this.sessionAuthenticatedUser.DownloadResourceAsync(request);
+    //      var response = await this.sessionAuthenticatedUser.DownloadMediaResourceAsync(request);
     //     
     //      byte[] data;
     //

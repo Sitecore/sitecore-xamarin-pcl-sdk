@@ -146,7 +146,7 @@
                                                .DownloadOptions(options)
                                                .Build();
 
-        Stream response = await session.DownloadResourceAsync(request);
+        Stream response = await session.DownloadMediaResourceAsync(request);
       }
     }
     #endregion Download Media

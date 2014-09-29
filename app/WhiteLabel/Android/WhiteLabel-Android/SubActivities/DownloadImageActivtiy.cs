@@ -77,7 +77,7 @@ namespace WhiteLabelAndroid.SubActivities
 
         using (var session = this.prefs.Session)
         {
-          var response = await session.DownloadResourceAsync(requestBuilder.Build());
+          var response = await session.DownloadMediaResourceAsync(requestBuilder.Build());
 
           this.SetProgressBarIndeterminateVisibility(false);
 

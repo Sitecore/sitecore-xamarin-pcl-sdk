@@ -31,7 +31,7 @@ namespace Sitecore.MobileSDK
       return new ReadItemByQueryRequestBuilder(sitecoreQuery);
     }
 
-		public static IGetMediaItemRequestParametersBuilder<IReadMediaItemRequest> ReadMediaItemRequest(string mediaPath)
+		public static IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> ReadMediaItemRequest(string mediaPath)
 		{
 			return new ReadMediaItemRequestBuilder(mediaPath);
 		}

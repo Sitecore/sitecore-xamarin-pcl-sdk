@@ -113,7 +113,7 @@ namespace MobileSDKIntegrationTest
 
       TestDelegate testCode = async () =>
       {
-        var task = session.DownloadResourceAsync(request, cancelToken);
+        var task = session.DownloadMediaResourceAsync(request, cancelToken);
         response = await task;
       };
       var exception = Assert.Catch<OperationCanceledException>(testCode);
