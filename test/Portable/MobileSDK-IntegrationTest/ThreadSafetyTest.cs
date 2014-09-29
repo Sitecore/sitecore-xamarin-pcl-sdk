@@ -164,7 +164,7 @@
 
       try
       {
-        IMediaResourceDownloadRequest request = new MediaResourceDownloadRequest(null, this.itemSource, resizing, mediaPath);
+        IMediaResourceDownloadRequest request = new MediaResourceDownloadParameters(null, this.itemSource, resizing, mediaPath);
 
         using (Stream imageStream = await this.session.DownloadMediaResourceAsync(request))
         {

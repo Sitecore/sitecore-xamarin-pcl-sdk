@@ -150,7 +150,6 @@
     <Compile Include="Items\Fields\ScFieldsParser.cs" />
     <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
-    <Compile Include="Items\ReadMediaItemParameters.cs" />
     <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
     <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
     <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
@@ -207,6 +206,7 @@
     <Compile Include="API\Request\Template\ISetTemplateBuilder.cs" />
     <Compile Include="API\Request\Template\ISetNewItemNameBuilder.cs" />
     <Compile Include="API\Request\IMediaResourceDownloadRequest.cs" />
+    <Compile Include="Items\MediaResourceDownloadParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
