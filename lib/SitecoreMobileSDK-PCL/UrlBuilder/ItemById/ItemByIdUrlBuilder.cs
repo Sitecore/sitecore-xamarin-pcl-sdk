@@ -13,20 +13,13 @@
     {
     }
 
-    protected override string GetSpecificPartForRequest(IReadItemsByIdRequest request)
+    protected override string GetItemIdenticationForRequest(IReadItemsByIdRequest request)
     {
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
       string strItemId = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
       string lowerCaseItemId = strItemId.ToLowerInvariant();
-      string result = lowerCaseItemId;
 
-      string strPageInfo = base.GetSpecificPartForRequest(request);
-      if (!string.IsNullOrEmpty(strPageInfo))
-      {
-        result = result + this.restGrammar.FieldSeparator + strPageInfo;
-      }
-
-      return result;
+      return lowerCaseItemId;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByIdRequest request)

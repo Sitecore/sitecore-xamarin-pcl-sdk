@@ -13,20 +13,12 @@
     {
     }
 
-    protected override string GetSpecificPartForRequest(IReadItemsByQueryRequest request)
+    protected override string GetItemIdenticationForRequest(IReadItemsByQueryRequest request)
     {
-      this.ValidateRequest(request);
       string escapedQuery = UrlBuilderUtils.EscapeDataString(request.SitecoreQuery);
       string formattedQuery = this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
 
-      string strPageInfo = base.GetSpecificPartForRequest(request);
-      string result = formattedQuery;
-      if (!string.IsNullOrEmpty(strPageInfo))
-      {
-        result = result + this.restGrammar.FieldSeparator + strPageInfo;
-      }
-
-      return result;
+      return formattedQuery;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByQueryRequest request)

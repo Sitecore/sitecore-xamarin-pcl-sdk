@@ -22,9 +22,9 @@
       return result;
     }
 
-    protected override string GetSpecificPartForRequest(IReadItemsByPathRequest request)
+    protected override string GetItemIdenticationForRequest(IReadItemsByPathRequest request)
     {
-      return base.GetSpecificPartForRequest(request);
+      return null;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)
