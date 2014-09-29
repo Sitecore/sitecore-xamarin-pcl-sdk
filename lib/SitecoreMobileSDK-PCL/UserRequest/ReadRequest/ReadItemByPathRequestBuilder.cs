@@ -3,6 +3,9 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
 
   public class ReadItemByPathRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByPathRequest>
   {
@@ -15,7 +18,16 @@
 
     public override IReadItemsByPathRequest Build()
     {
-      var result = new ReadItemByPathParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemPath);
+      IPagingParameters pagingSettings = null;
+      ISessionConfig sessionSettings = null;
+
+      var result = new ReadItemByPathParameters(
+        sessionSettings, 
+        this.itemSourceAccumulator, 
+        this.queryParameters, 
+        pagingSettings,
+        this.itemPath);
+
       return result;
     }
 

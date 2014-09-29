@@ -11,12 +11,14 @@
       ISessionConfig sessionSettings,
       IItemSource itemSource,
       IQueryParameters queryParameters,
+      IPagingParameters pagingSettings,
       string sitecoreQuery)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
       this.SitecoreQuery = sitecoreQuery;
       this.QueryParameters = queryParameters;
+      this.PagingSettings = pagingSettings;
     }
 
 
@@ -41,7 +43,8 @@
         payload = this.QueryParameters.DeepCopy();
       }
 
-      return new ReadItemByQueryParameters(connection, itemSrc, payload, this.SitecoreQuery);
+      IPagingParameters pagingSettings = null;
+      return new ReadItemByQueryParameters(connection, itemSrc, payload, pagingSettings, this.SitecoreQuery);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -56,6 +59,8 @@
     public ISessionConfig SessionSettings { get; private set; }
 
     public IQueryParameters QueryParameters { get; private set; }
+  
+    public IPagingParameters PagingSettings { get; private set; }
   }
 }
 

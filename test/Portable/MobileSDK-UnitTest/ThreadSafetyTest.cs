@@ -110,11 +110,12 @@
       string[] fields = { "Ukraine", "is", "Europe" };
       var queryParameters = new QueryParameters(PayloadType.Content, scope, fields);
 
-
+      IPagingParameters pagingSettings = null;
       ReadItemsByIdParameters request = new ReadItemsByIdParameters(
         sessionSettings,
         defaultSource,
         queryParameters,
+        pagingSettings,
         "{aaaa-aa-bb}");
       var otherRequest = request.DeepCopyGetItemByIdRequest();
 
@@ -141,8 +142,13 @@
       string[] fields = { "Ukraine", "is", "Europe" };
       var queryParameters = new QueryParameters(PayloadType.Content, scope, fields);
 
-
-      ReadItemsByIdParameters request = new ReadItemsByIdParameters(sessionSettings, defaultSource, queryParameters, "{aaaa-aa-bb}");
+      IPagingParameters pagingSettings = null;
+      ReadItemsByIdParameters request = new ReadItemsByIdParameters(
+        sessionSettings, 
+        defaultSource, 
+        queryParameters, 
+        pagingSettings,
+        "{aaaa-aa-bb}");
       var otherRequest = request.DeepCopyGetItemByIdRequest();
 
       {

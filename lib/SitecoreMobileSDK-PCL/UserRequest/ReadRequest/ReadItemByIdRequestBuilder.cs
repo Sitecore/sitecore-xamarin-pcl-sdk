@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSDK.UserRequest.ReadRequest
+﻿using Sitecore.MobileSDK.API.Request.Parameters;
+
+namespace Sitecore.MobileSDK.UserRequest.ReadRequest
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Items;
@@ -15,7 +17,15 @@
 
     public override IReadItemsByIdRequest Build()
     {
-      ReadItemsByIdParameters result = new ReadItemsByIdParameters(null, this.itemSourceAccumulator, this.queryParameters, this.itemId);
+      IPagingParameters pagingSettings = null;
+
+      ReadItemsByIdParameters result = new ReadItemsByIdParameters(
+        null, 
+        this.itemSourceAccumulator, 
+        this.queryParameters, 
+        pagingSettings,
+        this.itemId);
+
       return result;
     }
 
