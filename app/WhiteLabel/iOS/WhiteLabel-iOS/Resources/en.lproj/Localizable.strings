@@ -9,6 +9,7 @@
 "uploadImageVC" = "Upload Image";
 "getMediaItem" = "Download Image";
 "authTestVC" = "Authentication";
+"getRenderingHtml" = "Get Rendering HTML";
 "Master" = "Master";
 
 "MASTER_VIEW_CONTROLLER_TITLE" = "White Label";

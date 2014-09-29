@@ -12,9 +12,42 @@ namespace WhiteLabeliOS
 	[Register ("RenderingHtmlViewController")]
 	partial class RenderingHtmlViewController
 	{
+		[Outlet]
+		MonoTouch.UIKit.UIButton getRenderingButton { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UITextField renderingIdTextField { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UIWebView resultWebView { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UITextField sourceIdTextField { get; set; }
+
+		[Action ("OnGetRenderingTouch:")]
+		partial void OnGetRenderingTouch (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (sourceIdTextField != null) {
+				sourceIdTextField.Dispose ();
+				sourceIdTextField = null;
+			}
+
+			if (renderingIdTextField != null) {
+				renderingIdTextField.Dispose ();
+				renderingIdTextField = null;
+			}
+
+			if (getRenderingButton != null) {
+				getRenderingButton.Dispose ();
+				getRenderingButton = null;
+			}
+
+			if (resultWebView != null) {
+				resultWebView.Dispose ();
+				resultWebView = null;
+			}
 		}
 	}
 }
