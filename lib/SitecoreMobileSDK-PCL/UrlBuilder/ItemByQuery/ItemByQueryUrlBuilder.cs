@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class ItemByQueryUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByQueryRequest>
+  public class ItemByQueryUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByQueryRequest>
   {
     public ItemByQueryUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base(restGrammar, webApiGrammar)
@@ -19,8 +19,7 @@
       string escapedQuery = UrlBuilderUtils.EscapeDataString(request.SitecoreQuery);
       string formattedQuery = this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
 
-      var pageBuilder = new PagingUrlBuilder(this.restGrammar, this.webApiGrammar);
-      string strPageInfo = pageBuilder.BuildUrlQueryString(request.PagingSettings);
+      string strPageInfo = base.GetSpecificPartForRequest(request);
       string result = formattedQuery;
       if (!string.IsNullOrEmpty(strPageInfo))
       {
@@ -32,6 +31,8 @@
 
     protected override void ValidateSpecificRequest(IReadItemsByQueryRequest request)
     {
+      base.ValidateSpecificRequest(request);
+
       SitecoreQueryValidator.ValidateSitecoreQuery(request.SitecoreQuery, this.GetType().Name + ".SitecoreQuery");
     }
   }

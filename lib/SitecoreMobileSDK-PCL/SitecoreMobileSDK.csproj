@@ -215,6 +215,7 @@
     <Compile Include="Items\MediaResourceDownloadParameters.cs" />
     <Compile Include="API\Request\Parameters\IPagingParameters.cs" />
     <Compile Include="UrlBuilder\PagingUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\GetPagedItemsUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
