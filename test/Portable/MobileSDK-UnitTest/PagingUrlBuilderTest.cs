@@ -145,6 +145,44 @@
       Assert.AreEqual(expected, result);
     }
     #endregion By Path
+
+    #region By Query
+    [Test]
+    public void TestValidRequestWithQuery()
+    {
+      IPagingParameters paging = new MutablePagingParameters(3, 5);
+      var request = new ReadItemByQueryParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content");
+
+      string result = this.builderForQuery.GetUrlForRequest(request);
+      string expected = "http://tumba.yumba/-/item/v1?query=%2fsitecore%2fcontent&page=3&pageSize=5";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestValidRequestWithQueryForShellSite()
+    {
+      IPagingParameters paging = new MutablePagingParameters(1, 10);
+      var request = new ReadItemByQueryParameters(this.sitecoreShellConfig, this.defaultSource, null, paging, "/x/y/z");
+
+      string result = this.builderForQuery.GetUrlForRequest(request);
+      string expected = "http://trololo.net/-/item/v234%2fsitecore%2fshell?query=%2fx%2fy%2fz&page=1&pageSize=10";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestPagingCanBeOmittedForQuery()
+    {
+      IPagingParameters paging = null;
+      var request = new ReadItemByQueryParameters(this.sessionConfig, this.defaultSource, null, paging, "/root");
+
+      string result = this.builderForQuery.GetUrlForRequest(request);
+      string expected = "http://tumba.yumba/-/item/v1?query=%2froot";
+
+      Assert.AreEqual(expected, result);
+    }
+    #endregion By Query
   }
 }
 

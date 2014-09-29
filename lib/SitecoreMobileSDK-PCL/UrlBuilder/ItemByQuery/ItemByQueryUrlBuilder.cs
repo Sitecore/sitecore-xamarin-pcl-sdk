@@ -17,7 +17,15 @@
     {
       this.ValidateRequest(request);
       string escapedQuery = UrlBuilderUtils.EscapeDataString(request.SitecoreQuery);
-      string result = this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
+      string formattedQuery = this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
+
+      var pageBuilder = new PagingUrlBuilder(this.restGrammar, this.webApiGrammar);
+      string strPageInfo = pageBuilder.BuildUrlQueryString(request.PagingSettings);
+      string result = formattedQuery;
+      if (!string.IsNullOrEmpty(strPageInfo))
+      {
+        result = result + this.restGrammar.FieldSeparator + strPageInfo;
+      }
 
       return result;
     }
