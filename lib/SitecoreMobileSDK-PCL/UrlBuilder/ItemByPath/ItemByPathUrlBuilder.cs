@@ -24,7 +24,10 @@
 
     protected override string GetSpecificPartForRequest(IReadItemsByPathRequest request)
     {
-      return null;
+      var pageBuilder = new PagingUrlBuilder(this.restGrammar, this.webApiGrammar);
+      string strPageInfo = pageBuilder.BuildUrlQueryString(request.PagingSettings);
+
+      return strPageInfo;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)

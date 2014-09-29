@@ -1,26 +1,32 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.Items;
-using Sitecore.MobileSDK.API.Request.Parameters;
-using SitecoreMobileSDKMockObjects;
-using Sitecore.MobileSDK.API.Items;
-
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
+  using SitecoreMobileSDKMockObjects;
 
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+
+
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
 
 
   [TestFixture]
   public class PagingUrlBuilderTest
   {
     private ItemByIdUrlBuilder builderForId;
+    private ItemByPathUrlBuilder builderForPath;
+    private ItemByQueryUrlBuilder builderForQuery;
+
     private ISessionConfig sessionConfig;
     private ISessionConfig sitecoreShellConfig;
     private IItemSource defaultSource;
@@ -33,6 +39,9 @@ namespace Sitecore.MobileSdkUnitTest
       IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
 
       this.builderForId = new ItemByIdUrlBuilder(restGrammar, webApiGrammar);
+      this.builderForPath = new ItemByPathUrlBuilder(restGrammar, webApiGrammar);
+      this.builderForQuery = new ItemByQueryUrlBuilder(restGrammar, webApiGrammar);
+
       this.defaultSource = new ItemSourcePOD(null, null, null);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
@@ -49,7 +58,19 @@ namespace Sitecore.MobileSdkUnitTest
       this.sitecoreShellConfig = mutableSessionConfig;
     }
 
+    [TearDown]
+    public void TearDown()
+    {
+      this.builderForId = null;
+      this.builderForPath = null;
+      this.builderForQuery = null;
 
+      this.sessionConfig = null; 
+      this.sitecoreShellConfig = null;
+      this.defaultSource = null;
+    }
+
+    #region By Id
     [Test]
     public void TestValidRequestWithId()
     {
@@ -85,7 +106,45 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.AreEqual(expected, result);
     }
+    #endregion By Id
 
+    #region By Path
+    [Test]
+    public void TestValidRequestWithPath()
+    {
+      IPagingParameters paging = new MutablePagingParameters(3, 5);
+      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content");
+
+      string result = this.builderForPath.GetUrlForRequest(request);
+      string expected = "http://tumba.yumba/-/item/v1%2fsitecore%2fcontent?page=3&pageSize=5";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestValidRequestWithPathForShellSite()
+    {
+      IPagingParameters paging = new MutablePagingParameters(1, 10);
+      var request = new ReadItemByPathParameters(this.sitecoreShellConfig, this.defaultSource, null, paging, "/x/y/z");
+
+      string result = this.builderForPath.GetUrlForRequest(request);
+      string expected = "http://trololo.net/-/item/v234%2fsitecore%2fshell%2fx%2fy%2fz?page=1&pageSize=10";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestPagingCanBeOmittedForPath()
+    {
+      IPagingParameters paging = null;
+      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, "/root");
+
+      string result = this.builderForPath.GetUrlForRequest(request);
+      string expected = "http://tumba.yumba/-/item/v1%2froot";
+
+      Assert.AreEqual(expected, result);
+    }
+    #endregion By Path
   }
 }
 
