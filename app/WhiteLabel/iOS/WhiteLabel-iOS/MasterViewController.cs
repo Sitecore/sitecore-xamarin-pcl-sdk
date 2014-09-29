@@ -61,6 +61,7 @@ namespace WhiteLabeliOS
 
     private void InitFeaturesList()
     {
+      this.features.Insert(0, "getRenderingHtml");
       this.features.Insert(0, "uploadImageVC");
       this.features.Insert(0, "getMediaItem");
       this.features.Insert(0, "authTestVC");

@@ -9,6 +9,7 @@
 "getItemByQuery" = "************";
 "getMediaItem" = "**********";
 "authTestVC" = "*********";
+"getRenderingHtml" = "***** ** ***";
 "Master" = "*********";
 
 "MASTER_VIEW_CONTROLLER_TITLE" = "Вайт Лейбыл";
