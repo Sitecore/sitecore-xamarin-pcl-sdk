@@ -48,11 +48,6 @@
       return new CreateItemByPathParameters(connection, itemSrc, payload, createParameters, this.ItemPath);
     }
 
-    public virtual IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
-    {
-      return this.DeepCopyCreateItemByPathRequest();
-    }
-
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyCreateItemByPathRequest();
