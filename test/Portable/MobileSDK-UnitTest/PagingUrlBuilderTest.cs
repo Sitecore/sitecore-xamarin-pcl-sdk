@@ -61,6 +61,31 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.AreEqual(expected, result);
     }
+
+    [Test]
+    public void TestValidRequestWithIdForShellSite()
+    {
+      IPagingParameters paging = new MutablePagingParameters(1, 10);
+      var request = new ReadItemsByIdParameters(this.sitecoreShellConfig, this.defaultSource, null, paging, "{item-id}");
+
+      string result = this.builderForId.GetUrlForRequest(request);
+      string expected = "http://trololo.net/-/item/v234%2fsitecore%2fshell?sc_itemid=%7bitem-id%7d&page=1&pageSize=10";
+
+      Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void TestPagingCanBeOmittedForId()
+    {
+      IPagingParameters paging = null;
+      var request = new ReadItemsByIdParameters(this.sessionConfig, this.defaultSource, null, paging, "{item-id}");
+
+      string result = this.builderForId.GetUrlForRequest(request);
+      string expected = "http://tumba.yumba/-/item/v1?sc_itemid=%7bitem-id%7d";
+
+      Assert.AreEqual(expected, result);
+    }
+
   }
 }
 
