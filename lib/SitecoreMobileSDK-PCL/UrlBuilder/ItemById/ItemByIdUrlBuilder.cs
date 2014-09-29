@@ -16,9 +16,19 @@
     protected override string GetSpecificPartForRequest(IReadItemsByIdRequest request)
     {
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
-      string result = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
+      string strItemId = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
+      string lowerCaseItemId = strItemId.ToLowerInvariant();
 
-      return result.ToLowerInvariant();
+      var pageBuilder = new PagingUrlBuilder(this.restGrammar, this.webApiGrammar);
+      string strPageInfo = pageBuilder.BuildUrlQueryString(request.PagingSettings);
+
+      string result = lowerCaseItemId;
+      if (!string.IsNullOrEmpty(strPageInfo))
+      {
+        result = result + this.restGrammar.FieldSeparator + strPageInfo;
+      }
+
+      return result;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByIdRequest request)
