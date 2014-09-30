@@ -6,9 +6,6 @@
 
   internal class PagingParameters : IPagingParameters
   {
-    public int? OptionalItemsPerPage { get; private set; }
-    public int? OptionalPageNumber { get; private set; }
-
     public PagingParameters(int? optionalItemsPerPage, int? optionalPageNumber)
     {
       this.OptionalItemsPerPage = optionalItemsPerPage;
@@ -33,7 +30,10 @@
     }
     #endregion
 
-
+    #region Optional
+    public int? OptionalItemsPerPage { get; private set; }
+    public int? OptionalPageNumber { get; private set; }
+    #endregion
   }
 }
 
