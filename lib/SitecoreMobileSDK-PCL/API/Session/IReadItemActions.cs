@@ -42,6 +42,14 @@ namespace Sitecore.MobileSDK.API.Session
     /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken));
 
+    /// <summary>
+    /// Reads the rendering html for source item GUID and rendering item GUID asynchronously.
+    /// </summary>
+    /// <param name="request"><see cref="IGetRenderingHtmlRequest" /> Read rendering html by source and rendering Id's request.</param>
+    /// <param name="cancelToken"> The cancel token, should be called in case when you want to terminate request execution.</param>
+    /// <returns>
+    ///  <see cref="Stream" /> Stream to read html string.
+    /// </returns>
     Task<Stream> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken));
 
   }

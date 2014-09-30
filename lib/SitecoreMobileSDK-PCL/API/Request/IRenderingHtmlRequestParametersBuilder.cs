@@ -3,20 +3,71 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 {
   using System.Collections.Generic;
 
+  /// <summary>
+  /// Interface represents basic flow for creation of requets that reads rendering html.
+  /// </summary>
+  /// <typeparam name="T">Type of request</typeparam>
   public interface IRenderingHtmlRequestParametersBuilder<out T>
     where T : class
   {
-  
+    /// <summary>
+    /// Specifies database for both source and rendering items.
+    /// For example: "web"
+    /// 
+    /// The value is case insensitive.
+    /// </summary>
+    /// <param name="sitecoreDatabase">The sitecore database.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IRenderingHtmlRequestParametersBuilder<T> SourceAndRenderingDatabase(string database);
 
+    /// <summary>
+    /// Specifies language for both source and rendering items.
+    /// For example: "en"
+    /// 
+    /// The value is case insensitive.
+    /// </summary>
+    /// <param name="itemLanguage">The item language.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IRenderingHtmlRequestParametersBuilder<T> SourceAndRenderingLanguage(string itemLanguage);
 
+    /// <summary>
+    /// Specifies version for source item only. It is a positive integer number.
+    /// A null value stands for the "latest" version.
+    /// 
+    /// For example: 1
+    /// </summary>
+    /// <param name="itemVersion">The item version.</param>
+    /// <returns>
+    /// this
+    /// </returns>
     IRenderingHtmlRequestParametersBuilder<T> SourceVersion(int? itemVersion);
 
+    /// <summary>
+    /// Adds custom parameter for rendering.
+    /// key   - must contain parmeter name.
+    /// value - must contain new parameter value.
+    /// </summary>
+    /// <param name="fieldsRawValuesByName"> Parameter and parameter value pairs</param>
+    /// <returns>this</returns>
     IRenderingHtmlRequestParametersBuilder<T> AddAdditionalParameterNameValue(string parameterName, string parameterValue);
 
+    /// <summary>
+    /// Adds custom parameters list for rendering.
+    /// key   - must contain parmeter name.
+    /// value - must contain new parameter value.
+    /// </summary>
+    /// <param name="fieldsRawValuesByName"> Parameter and parameter value pairs</param>
+    /// <returns>this</returns>
     IRenderingHtmlRequestParametersBuilder<T> AddAdditionalParameterNameValue(IDictionary<string, string> parametersValuesByName);
 
+    /// <summary>
+    /// Builds request with specified parameters.
+    /// </summary>
+    /// <returns>request</returns>
     T Build();
   }
 }
