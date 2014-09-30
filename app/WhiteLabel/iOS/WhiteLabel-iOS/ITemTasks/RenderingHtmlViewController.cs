@@ -16,6 +16,17 @@ namespace WhiteLabeliOS
       Title = NSBundle.MainBundle.LocalizedString("getRenderingHtml", null);
 		}
 
+    public override void ViewDidLoad()
+    {
+      base.ViewDidLoad ();
+
+      string getRenderingButtonTitle = NSBundle.MainBundle.LocalizedString("GET_RENDERING_BUTTON_TITLE", null);
+      getRenderingButton.SetTitle(getRenderingButtonTitle, UIControlState.Normal);
+
+      sourceIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("SOURCE_ID_PLACEHOLDER", null);
+      renderingIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("RENDERING_ID_PLACEHOLDER", null);
+    }
+
     partial void OnGetRenderingTouch (MonoTouch.Foundation.NSObject sender)
     {
       if (String.IsNullOrEmpty(sourceIdTextField.Text))

@@ -36,6 +36,8 @@
 "Delete item by Path" = "**********";
 "Delete item by Query" = "**********";
 
+"GET_RENDERING_BUTTON_TITLE" = "***** *******";
+
 //messages
 "Loading Data" = "************...";
 
