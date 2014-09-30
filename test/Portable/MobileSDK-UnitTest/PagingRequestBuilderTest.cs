@@ -30,7 +30,7 @@
     [Test]
     public void TestPagingSettingsUsedForSelfScopeAndSingleItemResponse()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{karpaty}")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/A/B/C/D/E")
         .AddScope(ScopeType.Self)
         .PageNumber(5)
         .ItemsPerPage(10)
@@ -47,7 +47,7 @@
     [Test]
     public void TestPagingSettingsUsedForOmittedScopeAndSingleItemResponse()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{karpaty}")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/x/y/z/*")
         .PageNumber(44)
         .ItemsPerPage(5)
         .Build();
