@@ -39,5 +39,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GetHtmlRenderingUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PortablePasswordStorageTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagingUrlBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PagingRequestBuilderTest.cs" />
   </ItemGroup>
 </Project>
