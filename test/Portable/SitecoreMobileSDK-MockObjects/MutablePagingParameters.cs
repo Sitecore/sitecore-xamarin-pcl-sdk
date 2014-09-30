@@ -1,4 +1,4 @@
-﻿namespace SitecoreMobileSDKMockObjects
+﻿namespace MobileSDKUnitTest.Mock
 {
   using System;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -11,6 +11,11 @@
     {
       this.PageNumber = pageNumber;
       this.ItemsPerPageCount = perPageCount;
+    }
+
+    public IPagingParameters PagingParametersCopy()
+    {
+      return new MutablePagingParameters(this.PageNumber, this.ItemsPerPageCount);
     }
       
     public int ItemsPerPageCount { get; set; }

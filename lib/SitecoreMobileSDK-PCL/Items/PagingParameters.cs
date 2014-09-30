@@ -12,6 +12,11 @@
       this.OptionalPageNumber = optionalPageNumber;
     }
 
+    public IPagingParameters PagingParametersCopy()
+    {
+      return new PagingParameters(this.OptionalItemsPerPage, this.OptionalPageNumber);
+    }
+
     #region IPagingParameters
     public int ItemsPerPageCount 
     { 

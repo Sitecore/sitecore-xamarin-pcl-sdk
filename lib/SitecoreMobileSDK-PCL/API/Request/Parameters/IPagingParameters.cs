@@ -8,6 +8,8 @@
   ///  </summary>
   public interface IPagingParameters
   {
+    IPagingParameters PagingParametersCopy();
+
     /// <summary>
     /// An upper limit of items amount for the response.
     /// </summary>

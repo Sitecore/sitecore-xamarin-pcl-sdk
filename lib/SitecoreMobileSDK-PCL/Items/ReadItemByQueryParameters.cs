@@ -27,6 +27,7 @@
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
       IQueryParameters payload = null;
+      IPagingParameters pagingSettings = null;
 
       if (null != this.SessionSettings)
       {
@@ -43,7 +44,12 @@
         payload = this.QueryParameters.DeepCopy();
       }
 
-      IPagingParameters pagingSettings = null;
+      if (null != this.PagingSettings)
+      {
+        pagingSettings = this.PagingSettings.PagingParametersCopy();
+      }
+
+
       return new ReadItemByQueryParameters(connection, itemSrc, payload, pagingSettings, this.SitecoreQuery);
     }
 
