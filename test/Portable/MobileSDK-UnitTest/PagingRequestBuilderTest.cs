@@ -18,6 +18,13 @@
         .PageNumber(2)
         .ItemsPerPage(5)
         .Build();
+
+      Assert.IsTrue(request.QueryParameters.ScopeParameters.ChildrenScopeIsSet);
+      Assert.IsFalse(request.QueryParameters.ScopeParameters.ParentScopeIsSet);
+      Assert.IsFalse(request.QueryParameters.ScopeParameters.SelfScopeIsSet);
+
+      Assert.AreEqual(2, request.PagingSettings.PageNumber);
+      Assert.AreEqual(5, request.PagingSettings.ItemsPerPageCount);
     }
 
     [Test]
@@ -28,6 +35,13 @@
         .PageNumber(5)
         .ItemsPerPage(10)
         .Build();
+
+      Assert.IsFalse(request.QueryParameters.ScopeParameters.ChildrenScopeIsSet);
+      Assert.IsFalse(request.QueryParameters.ScopeParameters.ParentScopeIsSet);
+      Assert.IsTrue(request.QueryParameters.ScopeParameters.SelfScopeIsSet);
+
+      Assert.AreEqual(5, request.PagingSettings.PageNumber);
+      Assert.AreEqual(10, request.PagingSettings.ItemsPerPageCount);
     }
 
     [Test]
@@ -37,6 +51,9 @@
         .PageNumber(44)
         .ItemsPerPage(5)
         .Build();
+
+      Assert.AreEqual(44, request.PagingSettings.PageNumber);
+      Assert.AreEqual(5, request.PagingSettings.ItemsPerPageCount);
     }
   }
 }

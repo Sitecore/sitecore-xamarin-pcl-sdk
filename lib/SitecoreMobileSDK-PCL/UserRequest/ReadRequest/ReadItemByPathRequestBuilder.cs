@@ -18,7 +18,7 @@
 
     public override IReadItemsByPathRequest Build()
     {
-      IPagingParameters pagingSettings = null;
+      IPagingParameters pagingSettings = this.AccumulatedPagingParameters;
       ISessionConfig sessionSettings = null;
 
       var result = new ReadItemByPathParameters(

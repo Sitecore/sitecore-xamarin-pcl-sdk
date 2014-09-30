@@ -15,6 +15,13 @@
     where T : class
   {
     private PagingParameters pagingOptions = new PagingParameters(null, null);
+    protected IPagingParameters AccumulatedPagingParameters
+    {
+      get
+      {
+        return this.pagingOptions;
+      }
+    }
 
     public IScopedRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {

@@ -18,7 +18,7 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest
 
     public override IReadItemsByQueryRequest Build()
     {
-      IPagingParameters pagingSettings = null;
+      IPagingParameters pagingSettings = this.AccumulatedPagingParameters;
       ISessionConfig sessionSettings = null;
 
       var result = new ReadItemByQueryParameters(
