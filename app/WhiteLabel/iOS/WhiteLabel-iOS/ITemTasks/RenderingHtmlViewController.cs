@@ -62,8 +62,13 @@ namespace WhiteLabeliOS
           this.ShowLoader();
 
           Stream response = await session.ReadRenderingHtmlAsync(request);
-          StreamReader reader = new StreamReader(response);
-          string htmlText = reader.ReadToEnd();
+
+          response.Position = 0;
+          string htmlText = "";
+          using (StreamReader reader = new StreamReader(response))
+          {
+            htmlText = reader.ReadToEnd();
+          }
 
           this.resultWebView.LoadHtmlString(htmlText, null);
         }
