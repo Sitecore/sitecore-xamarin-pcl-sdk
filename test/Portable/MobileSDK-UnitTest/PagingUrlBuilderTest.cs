@@ -2,7 +2,7 @@
 {
   using System;
   using NUnit.Framework;
-  using SitecoreMobileSDKMockObjects;
+  using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
