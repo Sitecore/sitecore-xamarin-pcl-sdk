@@ -19,11 +19,11 @@ namespace MobileSDKIntegrationTest
   [TestFixture]
   public class CreateFromBranchTest
   {
-    private MobileSDKIntegrationTest.TestEnvironment testData;
+    private TestEnvironment testData;
     private ISitecoreWebApiSession session;
     private ISitecoreWebApiSession noThrowCleanupSession;
 
-    const string nonExistingGuid = "{DEADBEEF-CDED-45AF-99BF-2DE9883B7AC3}";
+    const string NonExistingGuid = "{DEADBEEF-CDED-45AF-99BF-2DE9883B7AC3}";
 
     #region Setup
     [SetUp]
@@ -94,12 +94,12 @@ namespace MobileSDKIntegrationTest
     {
       await this.RemoveTestItemsFromMasterAndWebAsync();
 
-      const string itemFromBranchName = "Multiple item branch";
-      TestEnvironment.Item expectedItem = this.CreateTestItem(itemFromBranchName);
+      const string ItemFromBranchName = "Multiple item branch";
+      TestEnvironment.Item expectedItem = this.CreateTestItem(ItemFromBranchName);
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .BranchId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
-        .ItemName(itemFromBranchName)
+        .ItemName(ItemFromBranchName)
         .Database("master")
         .Language("en")
         .Payload(PayloadType.Content)
@@ -126,13 +126,13 @@ namespace MobileSDKIntegrationTest
     {
       await this.RemoveTestItemsFromMasterAndWebAsync();
 
-      const string itemFromBranchName = "ITEM ID   A default name of the branch should be used";
+      const string ItemFromBranchName = "ITEM ID   A default name of the branch should be used";
       //      const string itemFromBranchName = "Multiple item brunch";
-      TestEnvironment.Item expectedItem = this.CreateTestItem(itemFromBranchName);
+      TestEnvironment.Item expectedItem = this.CreateTestItem(ItemFromBranchName);
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
         .BranchId("{14416817-CDED-45AF-99BF-2DE9883B7AC3}")
-        .ItemName(itemFromBranchName)
+        .ItemName(ItemFromBranchName)
         .Database("master")
         .Language("en")
         .Payload(PayloadType.Content)
@@ -161,12 +161,12 @@ namespace MobileSDKIntegrationTest
     {
       await this.RemoveTestItemsFromMasterAndWebAsync();
 
-      const string itemFromBranchName = "ITEM PATH   A default name of the branch should be used";
+      const string ItemFromBranchName = "ITEM PATH   A default name of the branch should be used";
       //      const string itemFromBranchName = "Multiple item brunch";
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .BranchId(nonExistingGuid)
-        .ItemName(itemFromBranchName)
+        .BranchId(NonExistingGuid)
+        .ItemName(ItemFromBranchName)
         .Database("master")
         .Language("en")
         .Payload(PayloadType.Content)
@@ -179,7 +179,7 @@ namespace MobileSDKIntegrationTest
 
 
       Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", ex.InnerException.GetType().FullName);
-      WebApiJsonErrorException castedException = ex.InnerException as WebApiJsonErrorException;
+      var castedException = ex.InnerException as WebApiJsonErrorException;
 
       Assert.AreEqual(500, castedException.Response.StatusCode);
       Assert.AreEqual("Template item not found.", castedException.Response.Message);
@@ -190,12 +190,12 @@ namespace MobileSDKIntegrationTest
     {
       await this.RemoveTestItemsFromMasterAndWebAsync();
 
-      const string itemFromBranchName = "ITEM ID   A default name of the branch should be used";
+      const string ItemFromBranchName = "ITEM ID   A default name of the branch should be used";
       //      const string itemFromBranchName = "Multiple item brunch";
 
       var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-        .BranchId(nonExistingGuid)
-        .ItemName(itemFromBranchName)
+        .BranchId(NonExistingGuid)
+        .ItemName(ItemFromBranchName)
         .Database("master")
         .Language("en")
         .Payload(PayloadType.Content)
@@ -209,7 +209,7 @@ namespace MobileSDKIntegrationTest
 
 
       Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", ex.InnerException.GetType().FullName);
-      WebApiJsonErrorException castedException = ex.InnerException as WebApiJsonErrorException;
+      var castedException = ex.InnerException as WebApiJsonErrorException;
 
       Assert.AreEqual(500, castedException.Response.StatusCode);
       Assert.AreEqual("Template item not found.", castedException.Response.Message);
@@ -220,61 +220,43 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestNullBranchIdCausesNullPointerException()
     {
-      Assert.Throws<ArgumentNullException>(() =>
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
-                                .BranchId(null);
-      });
+      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
+        .BranchId(null));
     }
 
     [Test]
     public void TestEmptyBranchIdCausesArgumentException()
     {
-      Assert.Throws<ArgumentException>(() =>
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
-                                .BranchId("");
-      });
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
+        .BranchId(""));
     }
 
     [Test]
     public void TestWhitespaceBranchIdCausesArgumentException()
     {
-      Assert.Throws<ArgumentException>(() =>
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
-          .BranchId("  \n   \r  \t \t\n\r");
-      });
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
+        .BranchId("  \n   \r  \t \t\n\r"));
     }
 
     [Test]
     public void TestOpeningBraceOnlyBranchIdCausesArgumentException()
     {
-      Assert.Throws<ArgumentException>(() =>
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
-          .BranchId("{");
-      });
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
+        .BranchId("{"));
     }
 
     [Test]
     public void TestClosingBraceOnlyBranchIdCausesArgumentException()
     {
-      Assert.Throws<ArgumentException>(() =>
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
-          .BranchId("}");
-      });
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
+        .BranchId("}"));
     }
 
     [Test]
     public void TestBracesOnlyBranchIdCausesArgumentException()
     {
-      Assert.Throws<ArgumentException>(() =>
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
-          .BranchId("{}");
-      });
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/some/valid/path")
+        .BranchId("{}"));
     }
     #endregion Validations
   }

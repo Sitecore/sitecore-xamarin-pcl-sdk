@@ -1,7 +1,6 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
-  using System.Linq;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
@@ -10,7 +9,6 @@
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
 
@@ -67,13 +65,13 @@
     {
       await this.RemoveAll();
 
-      const string itemName = "Create by parent id";
-      var expectedItem = this.CreateTestItem(itemName);
+      const string ItemName = "Create by parent id";
+      var expectedItem = this.CreateTestItem(ItemName);
 
       var request = 
         ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
         .ItemTemplatePath(testData.Items.Home.Template)
-        .ItemName(itemName)
+        .ItemName(ItemName)
         .Database("master")
         .Build();
 
@@ -352,42 +350,30 @@
     }
 
     [Test]
-    public void TestCreateItemEmtyOrNullFieldsNotAvailable()
+    public void TestCreateItemWithEmptyOrNullFieldsReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => 
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-          .ItemTemplatePath("/Sample/Sample Item")
-          .ItemName("SomeValidName")
-          .AddFieldsRawValuesByNameToSet(null, "somevalue");
-      });
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemName("SomeValidName")
+        .AddFieldsRawValuesByNameToSet(null, "somevalue"));
       Assert.IsTrue(exception.Message.Contains("fieldName"));
 
-      var exception1 = Assert.Throws<ArgumentException>(() => 
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-          .ItemTemplatePath("/Sample/Sample Item")
-          .ItemName("SomeValidName")
-          .AddFieldsRawValuesByNameToSet("", "somevalue");
-      });
+      var exception1 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemName("SomeValidName")
+        .AddFieldsRawValuesByNameToSet("", "somevalue"));
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldName : The input cannot be empty.", exception1.Message);
 
-      var exception2 = Assert.Throws<ArgumentNullException>(() => 
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-          .ItemTemplatePath("/Sample/Sample Item")
-          .ItemName("SomeValidName")
-          .AddFieldsRawValuesByNameToSet("somekey", null);
-      });
+      var exception2 = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemName("SomeValidName")
+        .AddFieldsRawValuesByNameToSet("somekey", null));
       Assert.IsTrue (exception2.Message.Contains ("fieldValue"));
 
-      var exception3 = Assert.Throws<ArgumentException>(() => 
-      {
-        ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-          .ItemTemplatePath("/Sample/Sample Item")
-          .ItemName("SomeValidName")
-          .AddFieldsRawValuesByNameToSet("somekey", "");
-      });
+      var exception3 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemName("SomeValidName")
+        .AddFieldsRawValuesByNameToSet("somekey", ""));
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
     }
 

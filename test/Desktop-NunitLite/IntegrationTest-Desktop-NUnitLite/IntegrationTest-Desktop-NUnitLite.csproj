@@ -108,6 +108,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UpdateItemsTest.cs">
       <Link>UpdateItemsTest.cs</Link>
     </Compile>
+	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetRenderingHTMLTest.cs">
+      <Link>GetRenderingHTMLTest.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
