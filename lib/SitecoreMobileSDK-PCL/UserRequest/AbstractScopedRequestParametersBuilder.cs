@@ -6,12 +6,16 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UserRequest.ReadRequest;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
+
 
   public abstract class AbstractScopedRequestParametersBuilder<T> : AbstractBaseRequestBuilder<T>,
     IScopedRequestParametersBuilder<T>
     where T : class
   {
+    private PagingParameters pagingOptions = new PagingParameters(null, null);
+
     public IScopedRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope)
     {
       ScopeParameters scopeParameters = new ScopeParameters(this.queryParameters.ScopeParameters);
@@ -59,6 +63,18 @@
     public IScopedRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
       return (IScopedRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
+    }
+  
+    public IScopedRequestParametersBuilder<T> PageNumber(int pageNumber)
+    {
+      this.pagingOptions = new PagingParameters(this.pagingOptions.OptionalItemsPerPage, pageNumber);
+      return this;
+    }
+
+    public IScopedRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage)
+    {
+      this.pagingOptions = new PagingParameters(itemsCountPerPage, this.pagingOptions.OptionalPageNumber);
+      return this;
     }
   }
 }

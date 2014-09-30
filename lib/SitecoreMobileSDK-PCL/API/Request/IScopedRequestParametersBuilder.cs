@@ -9,6 +9,10 @@
   /// <typeparam name="T">Type of request</typeparam>
   public interface IScopedRequestParametersBuilder<T> where T : class
   {
+    IScopedRequestParametersBuilder<T> PageNumber(int pageNumber);
+    IScopedRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage);
+
+
     /// <summary>
     /// Specifies item database.
     /// For example: "web"
