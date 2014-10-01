@@ -1,7 +1,9 @@
 ﻿namespace Sitecore.MobileSDK.API.Request
 {
   using System.Collections.Generic;
+  using Sitecore.MobileSDK.API.Request.Paging;
   using Sitecore.MobileSDK.API.Request.Parameters;
+
 
   /// <summary>
   /// Interface represents basic flow for creation of requets that hsa ability to specify scope for request.
@@ -9,9 +11,7 @@
   /// <typeparam name="T">Type of request</typeparam>
   public interface IScopedRequestParametersBuilder<T> where T : class
   {
-    IScopedRequestParametersBuilder<T> PageNumber(int pageNumber);
-    IScopedRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage);
-
+    IPageNumberAccumulator<T> PageNumber(int pageNumber);
 
     /// <summary>
     /// Specifies item database.

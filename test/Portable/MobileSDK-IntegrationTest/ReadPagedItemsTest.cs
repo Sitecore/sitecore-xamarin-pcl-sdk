@@ -42,8 +42,8 @@
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/media library/images/*")
         .AddScope(ScopeType.Self)
-        .ItemsPerPage(2)
         .PageNumber(0)
+        .ItemsPerPage(2)
         .Build();
 
       ScItemsResponse response = await this.session.ReadItemAsync(request);
@@ -59,8 +59,8 @@
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.env.Items.MediaImagesItem.Id)
         .AddScope(ScopeType.Children)
-        .ItemsPerPage(2)
         .PageNumber(3)
+        .ItemsPerPage(2)
         .Build();
 
       ScItemsResponse response = await this.session.ReadItemAsync(request);
@@ -75,8 +75,8 @@
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path)
         .AddScope(ScopeType.Children)
-        .ItemsPerPage(5)
         .PageNumber(10)
+        .ItemsPerPage(5)
         .Build();
 
       ScItemsResponse response = await this.session.ReadItemAsync(request);
@@ -100,7 +100,7 @@
     {
       Assert.Throws<ArgumentException>( ()=>
       {
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path).ItemsPerPage(0);
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path).PageNumber(10).ItemsPerPage(0);
       });
     }
 
@@ -109,7 +109,7 @@
     {
       Assert.Throws<ArgumentException>( ()=>
       {
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path).ItemsPerPage(-1);
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path).PageNumber(10).ItemsPerPage(-1);
       });
     }
   }

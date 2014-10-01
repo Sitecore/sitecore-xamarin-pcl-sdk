@@ -22,10 +22,6 @@ namespace Sitecore.MobileSDK.API.Request
     /// </returns>
     IGetVersionedItemRequestParametersBuilder<T> Version(int? itemVersion);
 
-    new IGetVersionedItemRequestParametersBuilder<T> PageNumber(int pageNumber);
-    new IGetVersionedItemRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage);
-
-
     /// <summary>
     /// Specifies sitecore database.
     /// </summary>

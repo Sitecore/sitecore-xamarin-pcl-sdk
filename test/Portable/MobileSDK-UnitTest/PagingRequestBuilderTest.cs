@@ -10,42 +10,6 @@
   [TestFixture]
   public class PagingRequestBuilderTest
   {
-
-
-    [Test]
-    public void TestPagingSettingsCanBeReordered()
-    {
-      var first = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dynamo}")
-        .AddScope(ScopeType.Children)
-        .PageNumber(2)
-        .ItemsPerPage(5)
-        .Build();
-
-      var second = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dynamo}")
-        .ItemsPerPage(5)
-        .PageNumber(2)
-        .AddScope(ScopeType.Children)
-        .Build();
-
-      {
-        Assert.IsTrue(first.QueryParameters.ScopeParameters.ChildrenScopeIsSet);
-        Assert.IsFalse(first.QueryParameters.ScopeParameters.ParentScopeIsSet);
-        Assert.IsFalse(first.QueryParameters.ScopeParameters.SelfScopeIsSet);
-
-        Assert.AreEqual(2, first.PagingSettings.PageNumber);
-        Assert.AreEqual(5, first.PagingSettings.ItemsPerPageCount);
-      }
-
-      {
-        Assert.AreEqual(first.QueryParameters.ScopeParameters.ChildrenScopeIsSet, second.QueryParameters.ScopeParameters.ChildrenScopeIsSet);
-        Assert.AreEqual(first.QueryParameters.ScopeParameters.ParentScopeIsSet, second.QueryParameters.ScopeParameters.ParentScopeIsSet);
-        Assert.AreEqual(first.QueryParameters.ScopeParameters.SelfScopeIsSet, second.QueryParameters.ScopeParameters.SelfScopeIsSet);
-
-        Assert.AreEqual(first.PagingSettings.PageNumber, second.PagingSettings.PageNumber);
-        Assert.AreEqual(first.PagingSettings.ItemsPerPageCount, second.PagingSettings.ItemsPerPageCount);
-      }
-    }
-
     [Test]
     public void TestPagingSettingsUsedForSelfScopeAndSingleItemResponse()
     {

@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSDK.UserRequest
+﻿using Sitecore.MobileSDK.API.Request.Paging;
+
+namespace Sitecore.MobileSDK.UserRequest
 {
   using System;
   using System.Collections.Generic;
@@ -11,8 +13,9 @@
 
 
   public abstract class AbstractScopedRequestParametersBuilder<T> : AbstractBaseRequestBuilder<T>,
-    IScopedRequestParametersBuilder<T>
-    where T : class
+    IScopedRequestParametersBuilder<T>,
+    IPageNumberAccumulator<T>
+  where T : class
   {
     private PagingParameters pagingOptions = new PagingParameters(null, null);
     protected IPagingParameters AccumulatedPagingParameters
@@ -83,7 +86,7 @@
       return (IScopedRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
   
-    public IScopedRequestParametersBuilder<T> PageNumber(int pageNumber)
+    public IPageNumberAccumulator<T> PageNumber(int pageNumber)
     {
       if (pageNumber < 0)
       {
