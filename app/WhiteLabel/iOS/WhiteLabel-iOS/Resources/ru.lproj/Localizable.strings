@@ -36,6 +36,10 @@
 "Delete item by Path" = "**********";
 "Delete item by Query" = "**********";
 
+"Get rendering html" = "**** ******";
+"Source id" = "*********";
+"Rendering id" = "**********";
+
 //messages
 "Loading Data" = "************...";
 

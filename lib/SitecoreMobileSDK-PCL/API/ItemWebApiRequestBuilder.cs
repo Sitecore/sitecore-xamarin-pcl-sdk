@@ -158,10 +158,22 @@ namespace Sitecore.MobileSDK.API
       return new UpdateItemByPathRequestBuilder(itemPath);
     }
 
-    public static IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHtmlRequestWithSourceAndRenderingId(string sourceId, string renderingId)
+    /// <summary>
+    /// Provides builder for constructing read rendering request with source item id and rendering item id.
+    /// </summary>
+    /// <param name="sourceId">Source item GUID values enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// <returns>
+    /// <param name="renderingId">Rendering item GUID values enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// <returns>
+    ///   <see cref="IGetRenderingHtmlRequest{T}" />Get rendering html request.
+    /// </returns>
+    public static IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHtmlRequestWithSourceRenderingId(string sourceId, string renderingId)
     {
       return new RenderingHtmlRequestBuilder(sourceId, renderingId);
     }
+
   }
 }
 

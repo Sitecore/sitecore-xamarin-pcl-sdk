@@ -35,6 +35,10 @@
 "Delete item by Path" = "Delete item by Path";
 "Delete item by Query" = "Delete item by Query";
 
+"Get rendering html" = "Get rendering html";
+"Source id" = "Source Id";
+"Rendering id" = "Rendering Id";
+
 //messages
 "Loading Data" = "Loading Data...";
 "Field Raw Value" = "Field Raw Value";
