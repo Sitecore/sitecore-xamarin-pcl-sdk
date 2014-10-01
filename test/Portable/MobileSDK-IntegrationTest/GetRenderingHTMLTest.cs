@@ -86,7 +86,43 @@
         .SourceVersion(1)
         .Build();
       var response = await this.GetStringResponse(this.sessionAuthenticatedUser, request);
-      const string Expected = "<div><h1>Danish version 1 master</h1><div><p>میرا انجام HTML ورژن&nbsp;<br />\r\n我的渲染HTML版本</p></div><div><p> a: </p><p> b: </p></div></div>";
+      const string Expected = "<div><h1>玛莎是 כביש وأكلت تجفيف version 1</h1><div><p>信じられないほどの冒険少女マーシャ</p><p> a: </p><p> b: </p></div></div>";
+
+      Assert.AreEqual(Expected, response);
+    }
+
+    [Test]
+    public async void TestGetRenderingWithSessionParams()
+    {
+      var adminSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .Site(this.testData.ShellSite)
+        .DefaultDatabase("master")
+        .DefaultLanguage("da")
+        .BuildSession();
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        .Build();
+      var response = await this.GetStringResponse(adminSession, request);
+      const string Expected = "<div><h1>Danish version 2 master</h1><div><p>میرا انجام HTML ورژن&nbsp;<br />\r\n我的渲染HTML版本</p></div><div><p> a: </p><p> b: </p></div></div>";
+
+      Assert.AreEqual(Expected, response);
+    }
+
+    [Test]
+    public async void TestGetRenderingWithOverridenSessionParams()
+    {
+      var adminSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
+        .Site(this.testData.ShellSite)
+        .DefaultDatabase("web")
+        .DefaultLanguage("en")
+        .BuildSession();
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        .SourceAndRenderingDatabase("master")
+        .SourceAndRenderingLanguage("da")
+        .Build();
+      var response = await this.GetStringResponse(adminSession, request);
+      const string Expected = "<div><h1>Danish version 2 master</h1><div><p>میرا انجام HTML ورژن&nbsp;<br />\r\n我的渲染HTML版本</p></div><div><p> a: </p><p> b: </p></div></div>";
 
       Assert.AreEqual(Expected, response);
     }
@@ -108,23 +144,43 @@
     }
 
     [Test]
-    public void TestGetRenderingWithNullDatabaseReturnsException()
+    public void TestGetRenderingWithoutReadAccessToRenderingItem()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() =>
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
-          .SourceAndRenderingDatabase(null)
-          .Build());
-      Assert.IsTrue(exception.Message.Contains("sourceAndRenderingDatabase"));
+      var noReadSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        .Credentials(this.testData.Users.NoReadUserSitecore)
+        .Site(this.testData.ShellSite)
+        .BuildSession();
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        .SourceAndRenderingDatabase("web")
+        .Build();
+      TestDelegate testCode = async () =>
+      {
+        await this.GetStringResponse(noReadSession, request);
+      };
+
+      var exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
+      Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
+      Assert.AreEqual("Forbidden", exception.InnerException.Message);
     }
 
     [Test]
-    public void TestGetRenderingWithNullItemVersionReturnsException()
+    public void TestGetRenderingWithNullDatabaseDoesNotReturnException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() =>
+      var request = 
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+          .SourceAndRenderingDatabase(null)
+          .Build();
+      Assert.IsNotNull(request);
+    }
+
+    [Test]
+    public void TestGetRenderingWithNullItemVersionDoesNotReturnException()
+    {
+      var request = 
         ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
           .SourceVersion(null)
-          .Build());
-      Assert.IsTrue(exception.Message.Contains("sourceVersion"));
+          .Build();
+      Assert.IsNotNull(request);
     }
 
     [Test]
@@ -133,7 +189,7 @@
       var exception = Assert.Throws<ArgumentNullException>(() =>
         ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, null)
           .Build());
-      Assert.IsTrue(exception.Message.Contains("renderingId"));
+      Assert.IsTrue(exception.Message.Contains("RenderingId"));
     }
 
     [Test]
@@ -142,7 +198,7 @@
       var exception = Assert.Throws<ArgumentException>(() =>
         ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, " ")
           .Build());
-      Assert.AreEqual("RenderingHtmlRequestBuilder.renderingId : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("RenderingHtmlRequestBuilder.RenderingId : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -151,7 +207,7 @@
       var exception = Assert.Throws<ArgumentException>(() =>
         ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("", RenderingId)
           .Build());
-      Assert.AreEqual("RenderingHtmlRequestBuilder.sourceId : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("RenderingHtmlRequestBuilder.SourceId : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -160,26 +216,50 @@
       var exception = Assert.Throws<ArgumentException>(() =>
         ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("}invalid ID", RenderingId)
           .Build());
-      Assert.AreEqual("RenderingHtmlRequestBuilder.sourceId : Item id must have curly braces '{}'", exception.Message);
+      Assert.AreEqual("RenderingHtmlRequestBuilder.SourceId : Item id must have curly braces '{}'", exception.Message);
     }
 
     [Test]
     public void TestGetRenderingWithNotExistentSourceItemIdReturnsException()
     {
-      var exception = Assert.Throws<LoadDataFromNetworkException>(() => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{447AA0FC-95C0-4EFD-B64E-0BF880C42E2D}", RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{447AA0FC-95C0-4EFD-B64E-0BF880C42E2D}", RenderingId)
         .SourceAndRenderingDatabase("master")
-        .Build());
+        .Build();
+      TestDelegate testCode = async () =>
+      {
+        await this.GetStringResponse(this.sessionAuthenticatedUser, request);
+      };
+
+      var exception = Assert.Throws<LoadDataFromNetworkException>(testCode);
       Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
     }
 
     [Test]
-    public void TestGetRenderingWithNullLanguageReturnsException()
+    public void TestGetRenderingWithNullLanguageDoesNotReturnException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() =>
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingLanguage(null)
+          .Build();
+      Assert.IsNotNull(request);
+    }
+
+    [Test]
+    public void TestGetRenderingWithEmpryLanguageDoesNotReturnException()
+    {
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        .SourceAndRenderingLanguage("")
+          .Build();
+      Assert.IsNotNull(request);
+    }
+
+    [Test]
+    public void TestGetRenderingWithSpacesInDatabaseReturnsException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => 
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+          .SourceAndRenderingDatabase("  ")
           .Build());
-      Assert.IsTrue(exception.Message.Contains("sourceAndRenderingLanguage"));
+      Assert.AreEqual("RenderingHtmlRequestBuilder.SourceAndRenderingDatabase : The input cannot be empty.", exception.Message);
     }
 
 
