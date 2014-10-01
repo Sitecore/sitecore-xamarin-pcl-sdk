@@ -273,6 +273,26 @@ namespace Sitecore.MobileSDK
 
     #endregion GetItems
 
+    #region UploadImage
+
+    public async Task<string> CreateItemAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IMediaResourceUploadRequest requestCopy = request.DeepCopyUploadMediaRequest();
+
+      //TODO: @igk check if we need cryptor here?
+      using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
+      {
+        IMediaResourceUploadRequest autocompletedRequest = this.requestMerger.FillUploadMediaGaps(requestCopy);
+
+        var urlBuilder = new UploadMediaUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var taskFlow = new UploadMediaTask(urlBuilder, this.httpClient, cryptor);
+
+        return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      }
+    }
+
+    #endregion UploadImage
+
     #region GetHTMLRendering
 
     public async Task<Stream> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))

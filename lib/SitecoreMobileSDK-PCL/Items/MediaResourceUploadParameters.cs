@@ -5,27 +5,26 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class MediaResourceDownloadParameters : IMediaResourceDownloadRequest
+  public class MediaResourceUploadParameters : IMediaResourceUploadRequest
   {
-    public MediaResourceDownloadParameters
+    public MediaResourceUploadParameters
     (
       ISessionConfig sessionSettings,
       IItemSource itemSource,
-      IDownloadMediaOptions downloadOptions,
-      string mediaPath
+      byte[] imageData,
+      string imageName
     )
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
-      this.MediaPath = mediaPath;
-      this.DownloadOptions = downloadOptions;
+      this.ImageData = imageData;
+      this.ImageName = imageName;
     }
 
-    public virtual IMediaResourceDownloadRequest DeepCopyReadMediaRequest()
+    public virtual IMediaResourceDownloadRequest DeepCopyUploadMediaRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSource = null;
-      IDownloadMediaOptions resizingOptions = null;
 
       if (null != this.SessionSettings)
       {
@@ -37,20 +36,15 @@
         itemSource = this.ItemSource.ShallowCopy();
       }
 
-      if (null != this.DownloadOptions)
-      {
-        resizingOptions = this.DownloadOptions.DeepCopyMediaDownloadOptions();
-      }
-
-      return new MediaResourceDownloadParameters(connection, itemSource, resizingOptions, this.MediaPath);
+      return new MediaResourceUploadParameters(connection, itemSource, this.ImageData, this.ImageName);
     }
-
-    public string MediaPath { get; private set; }
-
+      
     public IItemSource ItemSource { get; private set; }
 
     public ISessionConfig SessionSettings { get; private set; }
 
-    public IDownloadMediaOptions DownloadOptions { get; private set; }
+    public byte[] ImageData { get; private set; }
+
+    public string ImageName { get; private set; }
   }
 }
