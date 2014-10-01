@@ -216,6 +216,8 @@
     <Compile Include="API\Request\IMediaResourceUploadRequest.cs" />
     <Compile Include="Items\MediaResourceUploadParameters.cs" />
     <Compile Include="UrlBuilder\MediaItem\UploadMediaUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\MediaItem\CreateMediaParameters.cs" />
+    <Compile Include="CrudTasks\UploadMediaTask.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
