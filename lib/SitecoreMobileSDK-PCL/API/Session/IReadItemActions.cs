@@ -48,7 +48,7 @@ namespace Sitecore.MobileSDK.API.Session
     /// <param name="request"><see cref="IGetRenderingHtmlRequest" /> Read rendering html by source and rendering Id's request.</param>
     /// <param name="cancelToken"> The cancel token, should be called in case when you want to terminate request execution.</param>
     /// <returns>
-    ///  <see cref="Stream" /> Stream to read html string.
+    ///  <see cref="Stream" /> Stream to read html content.
     /// </returns>
     Task<Stream> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken));
 

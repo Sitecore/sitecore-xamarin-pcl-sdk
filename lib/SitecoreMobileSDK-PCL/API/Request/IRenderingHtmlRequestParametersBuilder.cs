@@ -48,19 +48,20 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
 
     /// <summary>
     /// Adds custom parameter for rendering.
-    /// key   - must contain parmeter name.
-    /// value - must contain new parameter value.
+    /// key   - must contain parmeter name, case sensitive.
+    /// value - must contain new parameter value, case sensitive.
     /// </summary>
-    /// <param name="fieldsRawValuesByName"> Parameter and parameter value pairs</param>
+    /// <param name="parameterName"> Parameter name</param>
+    /// <param name="parameterValue"> Parameter value</param>
     /// <returns>this</returns>
     IRenderingHtmlRequestParametersBuilder<T> AddAdditionalParameterNameValue(string parameterName, string parameterValue);
 
     /// <summary>
     /// Adds custom parameters list for rendering.
-    /// key   - must contain parmeter name.
-    /// value - must contain new parameter value.
+    /// key   - must contain parmeter name, case sensitive.
+    /// value - must contain new parameter value, case sensitive.
     /// </summary>
-    /// <param name="fieldsRawValuesByName"> Parameter and parameter value pairs</param>
+    /// <param name="parametersValuesByName"> Parameter and parameter value pairs</param>
     /// <returns>this</returns>
     IRenderingHtmlRequestParametersBuilder<T> AddAdditionalParameterNameValue(IDictionary<string, string> parametersValuesByName);
 
