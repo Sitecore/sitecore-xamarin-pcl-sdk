@@ -60,10 +60,11 @@
       public WebApiCredentialsPOD Anonymous = new WebApiCredentialsPOD(null, null);
       public WebApiCredentialsPOD Creatorex = new WebApiCredentialsPOD("extranet\\creatorex", "creatorex");
       public WebApiCredentialsPOD SitecoreCreator = new WebApiCredentialsPOD("sitecore\\creator", "creator");
-      public WebApiCredentialsPOD NoReadAccess = new WebApiCredentialsPOD("extranet\\noreadaccess", "noreadaccess");
+      public WebApiCredentialsPOD NoReadUserExtranet = new WebApiCredentialsPOD("extranet\\noreadaccess", "noreadaccess");
       public WebApiCredentialsPOD FakeAnonymous = new WebApiCredentialsPOD("extranet\\FakeAnonymous", "b");
       public WebApiCredentialsPOD NotExistent = new WebApiCredentialsPOD("sitecore\\notexistent", "notexistent");
       public WebApiCredentialsPOD NoCreateAccess = new WebApiCredentialsPOD("sitecore\\nocreate", "nocreate");
+      public WebApiCredentialsPOD NoReadUserSitecore = new WebApiCredentialsPOD("sitecore\\noreaduser", "noreaduser");
     }
 
     public class ItemsList

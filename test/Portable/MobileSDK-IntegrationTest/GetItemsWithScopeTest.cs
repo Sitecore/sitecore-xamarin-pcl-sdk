@@ -147,7 +147,7 @@
     public async void TestGetNotAllowedItemWithChildrenScopeById()
     {
       var sessionWithNoReadAccessUser = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-        .Credentials(this.testData.Users.NoReadAccess)
+        .Credentials(this.testData.Users.NoReadUserExtranet)
         .BuildReadonlySession();
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id)
