@@ -11,6 +11,19 @@
   public class PagingRequestBuilderTest
   {
     [Test]
+    public void TestPagingSettingsCanBeCalledOnlyOnce()
+    {
+      Assert.Throws<InvalidOperationException>( ()=>
+      {
+        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/A/B/C/D/E")
+          .AddScope(ScopeType.Self)
+          .PageNumber(5)
+          .ItemsPerPage(10)
+          .PageNumber(1);
+      });
+    }
+
+    [Test]
     public void TestPagingSettingsUsedForSelfScopeAndSingleItemResponse()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/A/B/C/D/E")

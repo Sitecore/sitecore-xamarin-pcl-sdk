@@ -92,6 +92,10 @@ namespace Sitecore.MobileSDK.UserRequest
       {
         throw new ArgumentException("PageNumber cannot be negative");
       }
+      else if (null != this.pagingOptions.OptionalPageNumber)
+      {
+        throw new InvalidOperationException(this.GetType().Name + ".PageNumber : Property cannot be assigned twice.");
+      }
 
       this.pagingOptions = new PagingParameters(this.pagingOptions.OptionalItemsPerPage, pageNumber);
       return this;
@@ -102,6 +106,10 @@ namespace Sitecore.MobileSDK.UserRequest
       if (itemsCountPerPage <= 0)
       {
         throw new ArgumentException("PageNumber cannot be negative");
+      }
+      else if (null != this.pagingOptions.OptionalItemsPerPage)
+      {
+        throw new InvalidOperationException(this.GetType().Name + ".ItemsPerPage : Property cannot be assigned twice.");
       }
 
       this.pagingOptions = new PagingParameters(itemsCountPerPage, this.pagingOptions.OptionalPageNumber);
