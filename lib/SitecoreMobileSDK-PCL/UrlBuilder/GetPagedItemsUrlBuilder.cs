@@ -1,9 +1,11 @@
-﻿using Sitecore.MobileSDK.API.Request;
-using Sitecore.MobileSDK.UrlBuilder.Rest;
-using Sitecore.MobileSDK.UrlBuilder.WebApi;
-
-namespace Sitecore.MobileSDK.UrlBuilder
+﻿namespace Sitecore.MobileSDK.UrlBuilder
 {
+  using System;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.UrlBuilder.Rest;
+  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+
+
   public abstract class GetPagedItemsUrlBuilder<TRequest> : AbstractGetItemUrlBuilder<TRequest>
     where TRequest : IBaseReadItemsRequest
   {
@@ -48,7 +50,25 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
     protected override void ValidateSpecificRequest(TRequest request)
     {
-      //IDLE
+      var pagingSettings = request.PagingSettings;
+      if (null == pagingSettings)
+      {
+        return;
+      }
+
+      bool isPageNumberValid = ( pagingSettings.PageNumber >= 0 );
+      bool isItemsPerPageCountValid = ( pagingSettings.ItemsPerPageCount > 0 );
+
+      bool isSettingsValid = isPageNumberValid && isItemsPerPageCountValid;
+      if (!isSettingsValid)
+      {
+        string message = string.Format(
+          "Incorrect paging settings. [ Page #{0} | Page Size {1} ]", 
+          pagingSettings.PageNumber, 
+          pagingSettings.ItemsPerPageCount);
+
+        throw new ArgumentException(message);
+      }
     }
   }
 }
