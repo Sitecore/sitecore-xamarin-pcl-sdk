@@ -37,7 +37,7 @@ namespace Sitecore.MobileSDK.UserRequest
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
-      IPagingParameters pagingSettings = null;
+      IPagingParameters pagingSettings = userRequest.PagingSettings.PagingParametersCopy();
       return new ReadItemsByIdParameters(
         mergedSessionConfig, 
         mergedSource, 
@@ -51,7 +51,7 @@ namespace Sitecore.MobileSDK.UserRequest
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
-      IPagingParameters pagingSettings = null;
+      IPagingParameters pagingSettings = userRequest.PagingSettings.PagingParametersCopy();
       return new ReadItemByPathParameters(
         mergedSessionConfig, 
         mergedSource, 
@@ -65,7 +65,7 @@ namespace Sitecore.MobileSDK.UserRequest
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
-      IPagingParameters pagingSettings = null;
+      IPagingParameters pagingSettings = userRequest.PagingSettings.PagingParametersCopy();
       return new ReadItemByQueryParameters(
         mergedSessionConfig, 
         mergedSource, 
