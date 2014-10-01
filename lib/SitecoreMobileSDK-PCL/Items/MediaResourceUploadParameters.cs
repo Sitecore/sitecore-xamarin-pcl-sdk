@@ -1,9 +1,11 @@
-﻿namespace Sitecore.MobileSDK.Items
+﻿
+namespace Sitecore.MobileSDK.Items
 {
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
   public class MediaResourceUploadParameters : IMediaResourceUploadRequest
   {
@@ -11,14 +13,12 @@
     (
       ISessionConfig sessionSettings,
       IItemSource itemSource,
-      byte[] imageData,
-      string imageName
+      CreateMediaParameters createMediaParameters
     )
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
-      this.ImageData = imageData;
-      this.ImageName = imageName;
+      this.CreateMediaParameters = createMediaParameters;
     }
 
     public virtual IMediaResourceDownloadRequest DeepCopyUploadMediaRequest()
@@ -43,8 +43,6 @@
 
     public ISessionConfig SessionSettings { get; private set; }
 
-    public byte[] ImageData { get; private set; }
-
-    public string ImageName { get; private set; }
+    public CreateMediaParameters CreateMediaParameters { get; private set; }
   }
 }

@@ -2,8 +2,9 @@
 {
   using System;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
-  public interface IMediaResourceUploadRequest: IBaseCreateItemRequest
+  public interface IMediaResourceUploadRequest
   {
     IMediaResourceUploadRequest DeepCopyUploadMediaRequest();
 
@@ -25,10 +26,7 @@
     /// <seealso cref="ISessionConfig" />
     ISessionConfig SessionSettings { get; }
 
-    byte[] ImageData { get; }
-
-    string MediaLibraryPath { get; }
-    string FolderPathInsideMediaLibrary { get; }
+    CreateMediaParameters createMediaParameters { get; }
   }
 }
 

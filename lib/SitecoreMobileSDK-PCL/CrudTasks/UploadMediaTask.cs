@@ -1,29 +1,38 @@
 ﻿namespace Sitecore.MobileSDK.CrudTasks
 {
+  using System.Threading;
+  using System.Threading.Tasks;
+  using System.Net.Http;
+  using System.Text;
+
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-  using System.Net.Http;
   using Sitecore.MobileSDK.PublicKey;
 
-  public class CreateItemByIdTask : AbstractCreateItemTask<ICreateItemByIdRequest>
+  public class UploadMediaTask : AbstractGetItemTask<IMediaResourceUploadRequest>
   {
-    public CreateItemByIdTask(CreateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+    public UploadMediaTask(UploadMediaUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;
     }
+      
+    public override async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken)
+    {
+      string url = this.UrlToGetItemWithRequest(request);
+      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
+      string imageData = System.Text.Encoding.UTF8.GetString (request.createMediaParameters.ImageData);
+      result.Content = new StringContent(imageData, Encoding.UTF8, "multipart/form-data");
+      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
+      return result;
+    }
 
-    protected override string UrlToGetItemWithRequest(ICreateItemByIdRequest request)
+
+    protected override string UrlToGetItemWithRequest(IMediaResourceUploadRequest request)
     {
       return this.urlBuilder.GetUrlForRequest(request);
     }
 
-    public override string GetFieldsListString(ICreateItemByIdRequest request)
-    {
-      return this.urlBuilder.GetFieldValuesList(request);
-    }
-
-    private readonly CreateItemByIdUrlBuilder urlBuilder;
+    private readonly UploadMediaUrlBuilder urlBuilder;
   }
 }
-
