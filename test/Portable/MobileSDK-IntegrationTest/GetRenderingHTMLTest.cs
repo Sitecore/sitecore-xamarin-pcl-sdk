@@ -39,7 +39,7 @@
     [Test]
     public async void TestGetRendering()
     {
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{138C6674-A29C-4674-9666-F9126E34B99D}", "{133C5863-D020-4CDF-9AA3-4ED0015F2F30}")
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId("{138C6674-A29C-4674-9666-F9126E34B99D}", "{133C5863-D020-4CDF-9AA3-4ED0015F2F30}")
         .Build();
       Stream stream = await this.sessionAuthenticatedUser.ReadRenderingHtmlAsync(request);
       string response = this.StreamToString(stream);
@@ -55,7 +55,7 @@
         .Credentials(this.testData.Users.Admin)
         .Site(this.testData.ShellSite)
         .BuildSession();
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingDatabase("master")
         .Build();
       var response = await this.GetStringResponse(adminSession, request);
@@ -68,7 +68,7 @@
     public async void TestGetRenderingFromWebDbAsAnonymous()
     {
       var anonymousSession = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.testData.InstanceUrl).BuildSession();
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingDatabase("web")
         .Build();
       var response = await this.GetStringResponse(anonymousSession, request);
@@ -80,7 +80,7 @@
     [Test]
     public async void TestGetRenderingForDanishLanguageAnd1Version()
     {
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingDatabase("master")
         .SourceAndRenderingLanguage("da")
         .SourceVersion(1)
@@ -100,7 +100,7 @@
         .DefaultDatabase("master")
         .DefaultLanguage("da")
         .BuildSession();
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .Build();
       var response = await this.GetStringResponse(adminSession, request);
       const string Expected = "<div><h1>Danish version 2 master</h1><div><p>میرا انجام HTML ورژن&nbsp;<br />\r\n我的渲染HTML版本</p></div><div><p> a: </p><p> b: </p></div></div>";
@@ -117,7 +117,7 @@
         .DefaultDatabase("web")
         .DefaultLanguage("en")
         .BuildSession();
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingDatabase("master")
         .SourceAndRenderingLanguage("da")
         .Build();
@@ -132,7 +132,7 @@
     [Test]
     public async void TestGetRenderingWithCustomRenderingParams()
     {
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingDatabase("master")
         .AddAdditionalParameterNameValue("a", "aaaa")
         .AddAdditionalParameterNameValue("b", "bbbb")
@@ -150,7 +150,7 @@
         .Credentials(this.testData.Users.NoReadUserSitecore)
         .Site(this.testData.ShellSite)
         .BuildSession();
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingDatabase("web")
         .Build();
       TestDelegate testCode = async () =>
@@ -167,7 +167,7 @@
     public void TestGetRenderingWithNullDatabaseDoesNotReturnException()
     {
       var request = 
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
           .SourceAndRenderingDatabase(null)
           .Build();
       Assert.IsNotNull(request);
@@ -177,7 +177,7 @@
     public void TestGetRenderingWithNullItemVersionDoesNotReturnException()
     {
       var request = 
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
           .SourceVersion(null)
           .Build();
       Assert.IsNotNull(request);
@@ -187,7 +187,7 @@
     public void TestGetRenderingWithNullRenderingIdReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() =>
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, null)
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, null)
           .Build());
       Assert.IsTrue(exception.Message.Contains("RenderingId"));
     }
@@ -196,7 +196,7 @@
     public void TestGetRenderingWithEmptyRenderingIdReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() =>
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, " ")
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, " ")
           .Build());
       Assert.AreEqual("RenderingHtmlRequestBuilder.RenderingId : The input cannot be empty.", exception.Message);
     }
@@ -205,7 +205,7 @@
     public void TestGetRenderingWithEmptySourceItemIdReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() =>
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("", RenderingId)
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId("", RenderingId)
           .Build());
       Assert.AreEqual("RenderingHtmlRequestBuilder.SourceId : The input cannot be empty.", exception.Message);
     }
@@ -214,7 +214,7 @@
     public void TestGetRenderingWithInvalidSourceItemIdReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() =>
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("}invalid ID", RenderingId)
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId("}invalid ID", RenderingId)
           .Build());
       Assert.AreEqual("RenderingHtmlRequestBuilder.SourceId : Item id must have curly braces '{}'", exception.Message);
     }
@@ -222,7 +222,7 @@
     [Test]
     public void TestGetRenderingWithNotExistentSourceItemIdReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{447AA0FC-95C0-4EFD-B64E-0BF880C42E2D}", RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId("{447AA0FC-95C0-4EFD-B64E-0BF880C42E2D}", RenderingId)
         .SourceAndRenderingDatabase("master")
         .Build();
       TestDelegate testCode = async () =>
@@ -237,7 +237,7 @@
     [Test]
     public void TestGetRenderingWithNullLanguageDoesNotReturnException()
     {
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingLanguage(null)
           .Build();
       Assert.IsNotNull(request);
@@ -246,7 +246,7 @@
     [Test]
     public void TestGetRenderingWithEmpryLanguageDoesNotReturnException()
     {
-      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingLanguage("")
           .Build();
       Assert.IsNotNull(request);
@@ -256,7 +256,7 @@
     public void TestGetRenderingWithSpacesInDatabaseReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => 
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
           .SourceAndRenderingDatabase("  ")
           .Build());
       Assert.AreEqual("RenderingHtmlRequestBuilder.SourceAndRenderingDatabase : The input cannot be empty.", exception.Message);
