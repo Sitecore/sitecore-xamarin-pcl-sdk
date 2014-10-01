@@ -35,9 +35,9 @@
 "Delete item by Path" = "Delete item by Path";
 "Delete item by Query" = "Delete item by Query";
 
-"GET_RENDERING_BUTTON_TITLE" = "Get rendering html";
-"SOURCE_ID_PLACEHOLDER" = "Source Id";
-"RENDERING_ID_PLACEHOLDER" = "Rendering Id";
+"Get rendering html" = "Get rendering html";
+"Source id" = "Source Id";
+"Rendering id" = "Rendering Id";
 
 //messages
 "Loading Data" = "Loading Data...";

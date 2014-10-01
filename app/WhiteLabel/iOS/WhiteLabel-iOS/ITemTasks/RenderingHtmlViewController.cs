@@ -20,11 +20,11 @@ namespace WhiteLabeliOS
     {
       base.ViewDidLoad ();
 
-      string getRenderingButtonTitle = NSBundle.MainBundle.LocalizedString("GET_RENDERING_BUTTON_TITLE", null);
+      string getRenderingButtonTitle = NSBundle.MainBundle.LocalizedString("Get rendering html", null);
       getRenderingButton.SetTitle(getRenderingButtonTitle, UIControlState.Normal);
 
-      sourceIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("SOURCE_ID_PLACEHOLDER", null);
-      renderingIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("RENDERING_ID_PLACEHOLDER", null);
+      sourceIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Source id", null);
+      renderingIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Rendering id", null);
     }
 
     partial void OnGetRenderingTouch (MonoTouch.Foundation.NSObject sender)
@@ -67,7 +67,7 @@ namespace WhiteLabeliOS
           string htmlText = "";
           using (StreamReader reader = new StreamReader(response))
           {
-            htmlText = reader.ReadToEnd();
+            htmlText = await reader.ReadToEndAsync();
           }
 
           this.resultWebView.LoadHtmlString(htmlText, null);
