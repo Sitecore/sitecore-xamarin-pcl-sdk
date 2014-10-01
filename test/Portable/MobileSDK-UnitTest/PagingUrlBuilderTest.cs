@@ -183,6 +183,35 @@
       Assert.AreEqual(expected, result);
     }
     #endregion By Query
+
+    #region Validation
+    [Test]
+    public void TestNegativePageNumberIsNotAllowed()
+    {
+      IPagingParameters paging = new MutablePagingParameters(-1, 5);
+      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content");
+
+      Assert.Throws<ArgumentException>(() => this.builderForPath.GetUrlForRequest(request));
+    }
+
+    [Test]
+    public void TestZeroItemsCountIsNotAllowed()
+    {
+      IPagingParameters paging = new MutablePagingParameters(3, 0);
+      var request = new ReadItemByQueryParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content/*");
+
+      Assert.Throws<ArgumentException>(() => this.builderForQuery.GetUrlForRequest(request));
+    }
+
+    [Test]
+    public void TestNegativeItemsCountIsNotAllowed()
+    {
+      IPagingParameters paging = new MutablePagingParameters(4, -1);
+      var request = new ReadItemByQueryParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content/*");
+
+      Assert.Throws<ArgumentException>(() => this.builderForQuery.GetUrlForRequest(request));
+    }
+    #endregion Validation
   }
 }
 
