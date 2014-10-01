@@ -19,7 +19,18 @@
     {
       get
       {
-        return this.pagingOptions;
+        if (null == this.pagingOptions.OptionalPageNumber)
+        {
+          return null;
+        }
+        else if (null == this.pagingOptions.OptionalItemsPerPage)
+        {
+          return null;
+        }
+        else
+        {
+          return this.pagingOptions;
+        }
       }
     }
 
