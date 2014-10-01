@@ -74,12 +74,22 @@
   
     public IScopedRequestParametersBuilder<T> PageNumber(int pageNumber)
     {
+      if (pageNumber < 0)
+      {
+        throw new ArgumentException("PageNumber cannot be negative");
+      }
+
       this.pagingOptions = new PagingParameters(this.pagingOptions.OptionalItemsPerPage, pageNumber);
       return this;
     }
 
     public IScopedRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage)
     {
+      if (itemsCountPerPage <= 0)
+      {
+        throw new ArgumentException("PageNumber cannot be negative");
+      }
+
       this.pagingOptions = new PagingParameters(itemsCountPerPage, this.pagingOptions.OptionalPageNumber);
       return this;
     }
