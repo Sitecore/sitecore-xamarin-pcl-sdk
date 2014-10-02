@@ -177,7 +177,6 @@
     <Compile Include="Validators\MediaPathValidator.cs" />
     <Compile Include="Validators\SessionConfigValidator.cs" />
     <Compile Include="Validators\MediaOptionsValidator.cs" />
-    <Compile Include="API\IMediaLibrarySettings.cs" />
     <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
     <Compile Include="Validators\WebApiCredentialsValidator.cs" />
     <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
@@ -213,6 +212,8 @@
     <Compile Include="UrlBuilder\RenderingHTML\RenderingHtmlUrlBuilder.cs" />
     <Compile Include="API\Request\IRenderingHtmlRequestParametersBuilder.cs" />
     <Compile Include="Items\MediaResourceDownloadParameters.cs" />
+    <Compile Include="API\MediaItem\ResizingStrategy.cs" />
+    <Compile Include="API\MediaItem\IMediaLibrarySettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
