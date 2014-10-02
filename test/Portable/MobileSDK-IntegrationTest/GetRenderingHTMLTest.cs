@@ -86,7 +86,7 @@
         .SourceVersion(1)
         .Build();
       var response = await this.GetStringResponse(this.sessionAuthenticatedUser, request);
-      const string Expected = "<div><h1>玛莎是 כביש وأكلت تجفيف version 1</h1><div><p>信じられないほどの冒険少女マーシャ</p><p> a: </p><p> b: </p></div></div>";
+      const string Expected = "<div><h1>玛莎是 כביש وأكلت تجفيف version 1</h1><div>信じられないほどの冒険少女マーシャ</div><div><p> a: </p><p> b: </p></div></div>";
 
       Assert.AreEqual(Expected, response);
     }
