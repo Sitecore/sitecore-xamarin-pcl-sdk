@@ -9,11 +9,13 @@
     public MediaLibrarySettings(
       string mediaLibraryRoot = "/sitecore/media library",
       string defaultMediaResourceExtension = "ashx",
-      string mediaPrefix = "~/media")
+      string mediaPrefix = "~/media",
+      DownloadStrategy downloadStrategy = DownloadStrategy.Plain)
     {
       this.MediaLibraryRoot = mediaLibraryRoot;
       this.DefaultMediaResourceExtension = defaultMediaResourceExtension;
       this.MediaPrefix = mediaPrefix;
+      this.MediaDownloadStrategy = downloadStrategy;
     }
 
     public IMediaLibrarySettings MediaSettingsShallowCopy()
@@ -21,7 +23,8 @@
       return new MediaLibrarySettings(
         this.MediaLibraryRoot,
         this.DefaultMediaResourceExtension,
-        this.MediaPrefix);
+        this.MediaPrefix,
+        this.MediaDownloadStrategy);
     }
 
     public string MediaLibraryRoot

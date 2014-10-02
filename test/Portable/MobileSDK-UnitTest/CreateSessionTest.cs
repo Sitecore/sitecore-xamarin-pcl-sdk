@@ -323,15 +323,19 @@ namespace Sitecore.MobileSdkUnitTest
         .BuildSession() )
       {
         Assert.IsNotNull(session);
+        Assert.IsNotNull(session.MediaLibrarySettings);
+        Assert.AreEqual(DownloadStrategy.Plain, session.MediaLibrarySettings.MediaDownloadStrategy);
       }
 
 
-      using ( var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+      using ( var otherSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .MediaResizingStrategy(DownloadStrategy.Hashed)
         .BuildSession() )
       {
-        Assert.IsNotNull(session);
+        Assert.IsNotNull(otherSession);
+        Assert.IsNotNull(otherSession.MediaLibrarySettings);
+        Assert.AreEqual(DownloadStrategy.Hashed, otherSession.MediaLibrarySettings.MediaDownloadStrategy);
       }
     }
   }
