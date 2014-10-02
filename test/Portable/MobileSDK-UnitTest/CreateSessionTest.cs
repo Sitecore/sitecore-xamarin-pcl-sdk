@@ -1,4 +1,4 @@
-﻿
+﻿using Sitecore.MobileSDK.API.MediaItem;
 
 namespace Sitecore.MobileSdkUnitTest
 {
@@ -313,6 +313,27 @@ namespace Sitecore.MobileSdkUnitTest
       }
     }
     #endregion Validate Null
+
+    [Test]
+    public void TestHashingFlagCanBeSet()
+    {
+      using ( var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .MediaResizingStrategy(ResizingStrategy.Plain)
+        .BuildSession() )
+      {
+        Assert.IsNotNull(session);
+      }
+
+
+      using ( var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        .Credentials(this.adminCredentials)
+        .MediaResizingStrategy(ResizingStrategy.Hashed)
+        .BuildSession() )
+      {
+        Assert.IsNotNull(session);
+      }
+    }
   }
 }
 
