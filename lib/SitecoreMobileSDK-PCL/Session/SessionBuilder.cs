@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSDK.Session
+﻿using Sitecore.MobileSDK.API.MediaItem;
+
+namespace Sitecore.MobileSDK.Session
 {
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
@@ -230,6 +232,12 @@
         this.GetType().Name + ".MediaPrefix");
 
       this.mediaPrefix = mediaPrefix;
+      return this;
+    }
+
+    public IBaseSessionBuilder MediaResizingStrategy(ResizingStrategy resizingFlag)
+    {
+      // TODO : update settings
       return this;
     }
     #endregion IAnonymousSessionBuilder

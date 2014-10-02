@@ -1,5 +1,8 @@
 namespace Sitecore.MobileSDK.API.Session
 {
+  using Sitecore.MobileSDK.API.MediaItem;
+
+
   /// <summary>
   /// Interface represents base session builder. 
   /// </summary>
@@ -98,6 +101,8 @@ namespace Sitecore.MobileSDK.API.Session
     /// this
     /// </returns>
     IBaseSessionBuilder MediaPrefix(string mediaPrefix);
+
+    IBaseSessionBuilder MediaResizingStrategy(ResizingStrategy resizingFlag);
   }
 }
 
