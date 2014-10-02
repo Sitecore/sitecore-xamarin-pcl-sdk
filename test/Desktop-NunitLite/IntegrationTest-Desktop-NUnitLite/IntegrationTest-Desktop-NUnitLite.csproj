@@ -84,6 +84,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\OperationCancelTest.cs">
       <Link>OperationCancelTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ReadPagedItemsTest.cs">
+      <Link>ReadPagedItemsTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ScTestApiSession.cs">
       <Link>ScTestApiSession.cs</Link>
     </Compile>
