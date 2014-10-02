@@ -11,12 +11,14 @@
       ISessionConfig sessionSettings,
       IItemSource itemSource,
       IQueryParameters queryParameters,
+      IPagingParameters pagingSettings,
       string itemPath)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
       this.ItemPath = itemPath;
       this.QueryParameters = queryParameters;
+      this.PagingSettings = pagingSettings;
     }
 
     public virtual IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
@@ -24,6 +26,7 @@
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
       IQueryParameters payload = null;
+      IPagingParameters pagingSettings = null;
 
       if (null != this.SessionSettings)
       {
@@ -40,7 +43,13 @@
         payload = this.QueryParameters.DeepCopy();
       }
 
-      return new ReadItemByPathParameters(connection, itemSrc, payload, this.ItemPath);
+      if (null != this.PagingSettings)
+      {
+        pagingSettings = this.PagingSettings.PagingParametersCopy();
+      }
+
+
+      return new ReadItemByPathParameters(connection, itemSrc, payload, pagingSettings, this.ItemPath);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -55,5 +64,7 @@
     public ISessionConfig SessionSettings { get; private set; }
 
     public IQueryParameters QueryParameters { get; private set; }
+
+    public IPagingParameters PagingSettings { get; private set; }
   }
 }

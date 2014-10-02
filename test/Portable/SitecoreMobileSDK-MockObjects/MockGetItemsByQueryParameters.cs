@@ -58,6 +58,8 @@ namespace MobileSDKUnitTest.Mock
 
     public string SitecoreQuery { get; set; }
 
+    public IPagingParameters PagingSettings { get; set; }
+
     public int CopyInvocationCount { get; private set; }
   }
 }

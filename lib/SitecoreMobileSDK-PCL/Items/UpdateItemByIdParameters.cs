@@ -41,11 +41,6 @@
       return new UpdateItemByIdParameters(connection, itemSrc, payload, this.FieldsRawValuesByName, this.ItemId);
     }
 
-    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
-    {
-      return this.DeepCopyUpdateItemByIdRequest();
-    }
-
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyUpdateItemByIdRequest();

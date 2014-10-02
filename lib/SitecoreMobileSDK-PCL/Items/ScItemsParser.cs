@@ -25,7 +25,7 @@
 
       JObject response = JObject.Parse(responseString);
 
-      int statusCode = ParseOrFail<int>(response, "$.statusCode");
+      int statusCode = ScItemsParser.ParseOrFail<int>(response, "$.statusCode");
       bool isSuccessfulCode = (200 <= statusCode) && (statusCode <= 299);
 
       if (!isSuccessfulCode)
