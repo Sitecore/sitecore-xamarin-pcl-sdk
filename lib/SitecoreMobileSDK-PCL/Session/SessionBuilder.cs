@@ -1,8 +1,7 @@
-﻿using Sitecore.MobileSDK.API.MediaItem;
-
-namespace Sitecore.MobileSDK.Session
+﻿namespace Sitecore.MobileSDK.Session
 {
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
