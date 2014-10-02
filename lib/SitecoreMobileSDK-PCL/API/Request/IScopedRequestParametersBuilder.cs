@@ -1,7 +1,9 @@
 ﻿namespace Sitecore.MobileSDK.API.Request
 {
   using System.Collections.Generic;
+  using Sitecore.MobileSDK.API.Request.Paging;
   using Sitecore.MobileSDK.API.Request.Parameters;
+
 
   /// <summary>
   /// Interface represents basic flow for creation of requets that hsa ability to specify scope for request.
@@ -9,6 +11,24 @@
   /// <typeparam name="T">Type of request</typeparam>
   public interface IScopedRequestParametersBuilder<T> where T : class
   {
+    /// <summary>
+    /// Specifies a number of the page to download.
+    /// It should be a positive number or zero.
+    /// It should be in a range of "TotalItemsInResponse" / "ItemsPerPage"
+    /// 
+    /// The parameter is optional. However, it requires "ItemsPerPage" parameters once specified.
+    /// On a repeated invocation an InvalidOperationException is thrown.
+    /// 
+    /// </summary>
+    /// <param name="pageNumber">Index of a page to download.
+    /// An ArgumentException is thrown if negative number is submitted.
+    /// </param>
+    /// <returns>
+    /// An object capable of setting ItemsPerPage parameter. Usually it is same as "this" object. 
+    /// It is done to ensure that either both parameters are used ore none of them is specified.
+    /// </returns>
+    IPageNumberAccumulator<T> PageNumber(int pageNumber);
+
     /// <summary>
     /// Specifies item database.
     /// For example: "web"

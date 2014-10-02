@@ -44,6 +44,11 @@
       result.Items.CreateItemsHere.Path = "/sitecore/content/Home/Android/Folder for create items";
       result.Items.CreateItemsHere.DisplayName = "Folder for create items";
 
+      result.Items.MediaImagesItem.Id = "{15451229-7534-44EF-815D-D93D6170BFCB}";
+      result.Items.MediaImagesItem.Path = "/sitecore/media library/Images";
+      result.Items.MediaImagesItem.Template = "/sitecore/templates/System/Media/Media folder";
+      result.Items.MediaImagesItem.TemplateId = "{FE5DD826-48C6-436D-B87A-7C4210C7413B}";
+
       return result;
     }
 
@@ -75,6 +80,8 @@
       public Item AllowedItem = new Item();
       public Item AllowedParent = new Item();
       public Item CreateItemsHere = new Item();
+
+      public Item MediaImagesItem = new Item();
     }
 
     public class Item

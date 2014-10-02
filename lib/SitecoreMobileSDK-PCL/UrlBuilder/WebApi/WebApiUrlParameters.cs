@@ -26,6 +26,10 @@
       result.ItemWebApiAuthenticateAction = "/authenticate";
       result.ItemWebApiGetPublicKeyAction = "/getpublickey";
       result.ItemWebApiGetRenderingAction = "/getrenderinghtml";
+
+      result.PageNumberParameterName = "page";
+      result.ItemsPerPageParameterName = "pageSize";
+
       return result;
     }
 
@@ -55,6 +59,8 @@
     public string ItemWebApiGetPublicKeyAction { get; private set; }
     public string ItemWebApiGetRenderingAction { get; private set; }
 
+    public string PageNumberParameterName { get; private set; }
+    public string ItemsPerPageParameterName { get; private set; }
   }
 }
 

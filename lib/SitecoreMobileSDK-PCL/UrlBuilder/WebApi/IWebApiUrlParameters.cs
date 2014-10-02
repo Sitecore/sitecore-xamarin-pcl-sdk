@@ -35,6 +35,11 @@
     string ItemWebApiGetPublicKeyAction { get; }
     string ItemWebApiGetRenderingAction { get; }
     #endregion Item Web API Actions
+
+    #region Paging
+    string PageNumberParameterName { get; }
+    string ItemsPerPageParameterName { get; }
+    #endregion Paging
   }
 }
 
