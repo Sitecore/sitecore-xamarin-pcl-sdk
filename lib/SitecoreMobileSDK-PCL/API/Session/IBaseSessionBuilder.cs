@@ -102,7 +102,7 @@ namespace Sitecore.MobileSDK.API.Session
     /// </returns>
     IBaseSessionBuilder MediaPrefix(string mediaPrefix);
 
-    IBaseSessionBuilder MediaResizingStrategy(ResizingStrategy resizingFlag);
+    IBaseSessionBuilder MediaResizingStrategy(DownloadStrategy resizingFlag);
   }
 }
 

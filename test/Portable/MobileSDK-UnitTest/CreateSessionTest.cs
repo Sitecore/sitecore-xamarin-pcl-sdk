@@ -319,7 +319,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       using ( var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
-        .MediaResizingStrategy(ResizingStrategy.Plain)
+        .MediaResizingStrategy(DownloadStrategy.Plain)
         .BuildSession() )
       {
         Assert.IsNotNull(session);
@@ -328,7 +328,7 @@ namespace Sitecore.MobileSdkUnitTest
 
       using ( var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
-        .MediaResizingStrategy(ResizingStrategy.Hashed)
+        .MediaResizingStrategy(DownloadStrategy.Hashed)
         .BuildSession() )
       {
         Assert.IsNotNull(session);

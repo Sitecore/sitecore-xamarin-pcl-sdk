@@ -235,7 +235,7 @@ namespace Sitecore.MobileSDK.Session
       return this;
     }
 
-    public IBaseSessionBuilder MediaResizingStrategy(ResizingStrategy resizingFlag)
+    public IBaseSessionBuilder MediaResizingStrategy(DownloadStrategy resizingFlag)
     {
       // TODO : update settings
       return this;

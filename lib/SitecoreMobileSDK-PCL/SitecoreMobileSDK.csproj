@@ -212,8 +212,8 @@
     <Compile Include="UrlBuilder\RenderingHTML\RenderingHtmlUrlBuilder.cs" />
     <Compile Include="API\Request\IRenderingHtmlRequestParametersBuilder.cs" />
     <Compile Include="Items\MediaResourceDownloadParameters.cs" />
-    <Compile Include="API\MediaItem\ResizingStrategy.cs" />
     <Compile Include="API\MediaItem\IMediaLibrarySettings.cs" />
+    <Compile Include="API\MediaItem\DownloadStrategy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
