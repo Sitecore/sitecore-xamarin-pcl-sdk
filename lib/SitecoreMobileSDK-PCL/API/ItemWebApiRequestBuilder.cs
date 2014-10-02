@@ -163,13 +163,12 @@ namespace Sitecore.MobileSDK.API
     /// </summary>
     /// <param name="sourceId">Source item GUID values enclosed in curly braces.
     /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
-    /// <returns>
     /// <param name="renderingId">Rendering item GUID values enclosed in curly braces.
     /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
     /// <returns>
-    ///   <see cref="IGetRenderingHtmlRequest{T}" />Get rendering html request.
+    ///   <see cref="IRenderingHtmlRequestParametersBuilder{T}" />Get rendering html request builder.
     /// </returns>
-    public static IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHtmlRequestWithSourceRenderingId(string sourceId, string renderingId)
+    public static IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHtmlRequestWithSourceAndRenderingId(string sourceId, string renderingId)
     {
       return new RenderingHtmlRequestBuilder(sourceId, renderingId);
     }
