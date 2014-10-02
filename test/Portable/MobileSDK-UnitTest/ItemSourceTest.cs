@@ -8,6 +8,7 @@
   using MobileSDKUnitTest.Mock;
 
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.MediaItem;
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;

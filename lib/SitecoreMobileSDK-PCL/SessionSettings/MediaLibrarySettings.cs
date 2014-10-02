@@ -1,6 +1,8 @@
 ﻿namespace Sitecore.MobileSDK.SessionSettings
 {
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.MediaItem;
+
 
   public class MediaLibrarySettings : IMediaLibrarySettings
   {

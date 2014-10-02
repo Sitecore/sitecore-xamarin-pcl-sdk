@@ -2,6 +2,7 @@
 {
   using System;
   using System.Globalization;
+  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;

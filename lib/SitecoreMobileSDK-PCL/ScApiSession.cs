@@ -12,6 +12,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API.MediaItem;
 
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;
@@ -34,6 +35,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
   using SitecoreMobileSdkPasswordProvider.API;
+
 
   public class ScApiSession : ISitecoreWebApiSession
   {
