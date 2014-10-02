@@ -66,6 +66,7 @@ namespace Sitecore.MobileSDK
       this.httpClient = new HttpClient();
     }
 
+    #region IDisposable
     void ReleaseResources()
     {
       Exception credentialsException = null;
@@ -106,8 +107,7 @@ namespace Sitecore.MobileSDK
         throw httpClientException;
       }
     }
-
-
+      
     public virtual void Dispose()
     {
       this.ReleaseResources();
@@ -117,6 +117,8 @@ namespace Sitecore.MobileSDK
     {
 
     }
+    #endregion IDisposable
+
 
     public IItemSource DefaultSource
     {
