@@ -9,17 +9,22 @@
   using System.Collections.Generic;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.Validators;
+  using Sitecore.MobileSDK.Utils;
+  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+
 
   public class MediaItemUrlBuilder
   {
     public MediaItemUrlBuilder(
       IRestServiceGrammar restGrammar,
+      IWebApiUrlParameters webApiGrammar,
       ISessionConfig sessionConfig,
       IMediaLibrarySettings mediaSettings,
       IItemSource itemSource)
     {
       this.itemSource = itemSource;
       this.restGrammar = restGrammar;
+      this.webApiGrammar = webApiGrammar;
       this.mediaSettings = mediaSettings;
       this.sessionConfig = sessionConfig;
 
@@ -91,6 +96,21 @@
       return result.ToLowerInvariant();
     }
 
+    public string BuildUrlToRequestHashForPath(string path, IDownloadMediaOptions options)
+    {
+      string originalUrl = this.BuildUrlStringForPath(path, options);
+      string encodedOriginalUrl = UrlBuilderUtils.EscapeDataString(originalUrl);
+
+      string host = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
+      string result = host + this.restGrammar.PathComponentSeparator +
+                      this.webApiGrammar.ItemWebApiEndpoint +
+                      this.sessionConfig.ItemWebApiVersion +
+                      this.restGrammar.PathComponentSeparator +
+                      this.webApiGrammar.ItemWebApiActionsEndpoint;
+
+      return result;
+    }
+
     private string SerializeOptions(IDownloadMediaOptions options)
     {
       bool isValidMediaOptions = MediaOptionsValidator.IsValidMediaOptions(options);
@@ -152,6 +172,7 @@
 
     private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;
+    private IWebApiUrlParameters webApiGrammar;
     private ISessionConfig sessionConfig;
     private IMediaLibrarySettings mediaSettings;
   }

@@ -1,4 +1,4 @@
-﻿
+﻿using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
 namespace Sitecore.MobileSdkUnitTest
 {
@@ -23,10 +23,12 @@ namespace Sitecore.MobileSdkUnitTest
   {
     MediaItemUrlBuilder builder;
     RestServiceGrammar restGrammar;
+    WebApiUrlParameters webApiGrammar;
 
     [SetUp]
     public void SetUp()
     {
+      this.webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
       this.restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
 
       SessionConfigPOD sessionConfig = new SessionConfigPOD();
@@ -41,7 +43,7 @@ namespace Sitecore.MobileSdkUnitTest
       IMediaLibrarySettings mediaSettings = sessionConfig;
 
       ItemSource itemSource = LegacyConstants.DefaultSource();
-      this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionSettings, mediaSettings, itemSource);
+      this.builder = new MediaItemUrlBuilder(this.restGrammar, this.webApiGrammar, sessionSettings, mediaSettings, itemSource);
     }
 
     [TearDown]
@@ -144,11 +146,12 @@ namespace Sitecore.MobileSdkUnitTest
 
 
       ItemSource itemSource = LegacyConstants.DefaultSource();
-      this.builder = new MediaItemUrlBuilder(this.restGrammar, sessionSettings, mediaSettings, itemSource);
+      this.builder = new MediaItemUrlBuilder(this.restGrammar, this.webApiGrammar, sessionSettings, mediaSettings, itemSource);
 
       var customBuilder = 
         new MediaItemUrlBuilder(
           this.restGrammar, 
+          this.webApiGrammar,
           sessionSettings, 
           mediaSettings,
           itemSource);

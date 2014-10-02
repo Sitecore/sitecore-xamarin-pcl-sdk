@@ -277,6 +277,7 @@ namespace Sitecore.MobileSDK
 
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar,
+        this.webApiGrammar,
         this.sessionConfig,
         this.mediaSettings,
         autocompletedRequest.ItemSource);
