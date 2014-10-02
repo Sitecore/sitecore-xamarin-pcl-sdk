@@ -120,6 +120,7 @@ namespace Sitecore.MobileSDK
     #endregion IDisposable
 
 
+    #region ISitecoreWebApiSessionState
     public IItemSource DefaultSource
     {
       get
@@ -143,6 +144,15 @@ namespace Sitecore.MobileSDK
         return this.credentials;
       }
     }
+
+    public IMediaLibrarySettings MediaLibrarySettings 
+    { 
+      get
+      {
+        return this.mediaSettings;
+      }
+    }
+    #endregion
 
     #region Forbidden Methods
 
