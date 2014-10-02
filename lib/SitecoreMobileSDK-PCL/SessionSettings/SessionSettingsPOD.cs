@@ -15,6 +15,7 @@ namespace Sitecore.MobileSDK.SessionSettings
       result.MediaLibraryRoot = this.MediaLibraryRoot;
       result.DefaultMediaResourceExtension = this.DefaultMediaResourceExtension;
       result.MediaPrefix = this.MediaPrefix;
+      result.MediaDownloadStrategy = this.MediaDownloadStrategy;
 
       return result;
     }
@@ -72,6 +73,12 @@ namespace Sitecore.MobileSDK.SessionSettings
     }
 
     public string MediaPrefix
+    {
+      get;
+      set;
+    }
+
+    public DownloadStrategy MediaDownloadStrategy
     {
       get;
       set;

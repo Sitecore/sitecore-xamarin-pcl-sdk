@@ -39,6 +39,11 @@
     {
       get;
     }
+
+    DownloadStrategy MediaDownloadStrategy
+    {
+      get;
+    }
   }
 }
 

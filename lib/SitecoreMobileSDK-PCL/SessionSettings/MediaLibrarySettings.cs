@@ -41,6 +41,12 @@
       get;
       private set;
     }
+
+    public DownloadStrategy MediaDownloadStrategy
+    {
+      get;
+      private set;
+    }
   }
 }
 
