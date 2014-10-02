@@ -21,7 +21,7 @@ namespace Sitecore.MobileSDK.Items
       this.CreateMediaParameters = createMediaParameters;
     }
 
-    public virtual IMediaResourceDownloadRequest DeepCopyUploadMediaRequest()
+    public virtual IMediaResourceUploadRequest DeepCopyUploadMediaRequest()
     {
       ISessionConfig connection = null;
       IItemSource itemSource = null;
@@ -36,7 +36,9 @@ namespace Sitecore.MobileSDK.Items
         itemSource = this.ItemSource.ShallowCopy();
       }
 
-      return new MediaResourceUploadParameters(connection, itemSource, this.ImageData, this.ImageName);
+      CreateMediaParameters createMediaParameters = this.CreateMediaParameters.ShallowCopy();
+
+      return new MediaResourceUploadParameters(connection, itemSource, createMediaParameters);
     }
       
     public IItemSource ItemSource { get; private set; }

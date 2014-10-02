@@ -21,7 +21,7 @@
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
-      string imageData = System.Text.Encoding.UTF8.GetString (request.createMediaParameters.ImageData);
+      string imageData = System.Text.Encoding.UTF8.GetString(request.CreateMediaParameters.ImageData, 0, request.CreateMediaParameters.ImageData.Length);
       result.Content = new StringContent(imageData, Encoding.UTF8, "multipart/form-data");
       result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;

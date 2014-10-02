@@ -26,7 +26,7 @@
     /// <seealso cref="ISessionConfig" />
     ISessionConfig SessionSettings { get; }
 
-    CreateMediaParameters createMediaParameters { get; }
+    CreateMediaParameters CreateMediaParameters { get; }
   }
 }
 

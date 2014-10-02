@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
   public class UserRequestMerger
   {
@@ -66,8 +66,10 @@
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+     
+      CreateMediaParameters createMediaParameters = userRequest.CreateMediaParameters.ShallowCopy();
 
-      return new MediaResourceUploadParameters(mergedSessionConfig, mergedSource, userRequest.ImageData, userRequest.ImageName);
+      return new MediaResourceUploadParameters(mergedSessionConfig, mergedSource, createMediaParameters);
     }
 
     public ICreateItemByIdRequest FillCreateItemByIdGaps(ICreateItemByIdRequest userRequest)
