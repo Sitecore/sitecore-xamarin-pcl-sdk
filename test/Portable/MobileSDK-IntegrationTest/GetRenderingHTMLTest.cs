@@ -103,7 +103,7 @@
       var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
         .Build();
       var response = await this.GetStringResponse(adminSession, request);
-      const string Expected = "<div><h1>Danish version 2 master</h1><div><p>میرا انجام HTML ورژن&nbsp;<br />\r\n我的渲染HTML版本</p></div><div><p> a: </p><p> b: </p></div></div>";
+      const string Expected = "<div><h1>International версiя 2 master</h1><div>놀라운 모험 여자</div><div><p> a: </p><p> b: </p></div></div>";
 
       Assert.AreEqual(Expected, response);
     }
@@ -122,7 +122,7 @@
         .SourceAndRenderingLanguage("da")
         .Build();
       var response = await this.GetStringResponse(adminSession, request);
-      const string Expected = "<div><h1>Danish version 2 master</h1><div><p>میرا انجام HTML ورژن&nbsp;<br />\r\n我的渲染HTML版本</p></div><div><p> a: </p><p> b: </p></div></div>";
+      const string Expected = "<div><h1>International версiя 2 master</h1><div>놀라운 모험 여자</div><div><p> a: </p><p> b: </p></div></div>";
 
       Assert.AreEqual(Expected, response);
     }
