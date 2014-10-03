@@ -271,15 +271,17 @@ namespace Sitecore.MobileSDK
 
     public async Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
+      IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
+      IMediaResourceDownloadRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
       DownloadStrategy downloadStrategyFromUser = this.mediaSettings.MediaDownloadStrategy;
 
       if (DownloadStrategy.Plain == downloadStrategyFromUser)
       {
-        return await this.DownloadPlainMediaResourceAsync(request, cancelToken);
+        return await this.DownloadPlainMediaResourceAsync(autocompletedRequest, cancelToken);
       }
       else if (DownloadStrategy.Hashed == downloadStrategyFromUser)
       {
-        return await this.DownloadHashedMediaResourceAsync(request, cancelToken);
+        return await this.DownloadHashedMediaResourceAsync(autocompletedRequest, cancelToken);
       }
       else
       {
@@ -289,18 +291,15 @@ namespace Sitecore.MobileSDK
 
     private async Task<Stream> DownloadPlainMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
-      IMediaResourceDownloadRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
-
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar,
         this.webApiGrammar,
         this.sessionConfig,
         this.mediaSettings,
-        autocompletedRequest.ItemSource);
+        request.ItemSource);
 
       var taskFlow = new GetResourceTask(urlBuilder, this.httpClient);
-      return await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      return await RestApiCallFlow.LoadResourceFromNetworkFlow(request, taskFlow, cancelToken);
     }
 
     private async Task<Stream> DownloadHashedMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
