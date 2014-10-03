@@ -304,7 +304,20 @@ namespace Sitecore.MobileSDK
 
     private async Task<Stream> DownloadHashedMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      return null;
+      var cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
+
+      MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
+        this.restGrammar,
+        this.webApiGrammar,
+        this.sessionConfig,
+        this.mediaSettings,
+        request.ItemSource);
+
+      var hashUrlGetterFlow = new GetMediaContentHashTask(urlBuilder, this.httpClient, cryptor);
+      string hashedMediaUrl = await RestApiCallFlow.LoadRequestFromNetworkFlow(request, hashUrlGetterFlow, cancelToken);
+
+      Stream result = await this.httpClient.GetStreamAsync(hashedMediaUrl);
+      return result;
     }
     #endregion GetItems
 
