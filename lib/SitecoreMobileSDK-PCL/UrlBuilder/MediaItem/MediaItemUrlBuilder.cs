@@ -102,11 +102,14 @@
       string encodedOriginalUrl = UrlBuilderUtils.EscapeDataString(originalUrl);
 
       string host = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
-      string result = host + this.restGrammar.PathComponentSeparator +
-                      this.webApiGrammar.ItemWebApiEndpoint +
-                      this.sessionConfig.ItemWebApiVersion +
-                      this.restGrammar.PathComponentSeparator +
-                      this.webApiGrammar.ItemWebApiActionsEndpoint;
+      string result = host +
+        this.webApiGrammar.ItemWebApiEndpoint +
+        this.sessionConfig.ItemWebApiVersion +
+        this.restGrammar.PathComponentSeparator +
+        this.webApiGrammar.ItemWebApiActionsEndpoint +
+        this.webApiGrammar.ItemWebApiGetHashFormediaContentAction +
+        this.restGrammar.HostAndArgsSeparator + 
+        this.webApiGrammar.UrlForHashingParameterName + this.restGrammar.KeyValuePairSeparator + encodedOriginalUrl;
 
       return result;
     }
