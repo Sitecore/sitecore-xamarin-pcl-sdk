@@ -1,4 +1,3 @@
-
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -272,6 +271,24 @@ namespace Sitecore.MobileSDK
 
     public async Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
+      DownloadStrategy downloadStrategyFromUser = this.mediaSettings.MediaDownloadStrategy;
+
+      if (DownloadStrategy.Plain == downloadStrategyFromUser)
+      {
+        return await this.DownloadPlainMediaResourceAsync(request, cancelToken);
+      }
+      else if (DownloadStrategy.Hashed == downloadStrategyFromUser)
+      {
+        return await this.DownloadHashedMediaResourceAsync(request, cancelToken);
+      }
+      else
+      {
+        throw new ArgumentException("Unexpected media download strategy specified");
+      }
+    }
+
+    private async Task<Stream> DownloadPlainMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
       IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
       IMediaResourceDownloadRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
 
@@ -286,6 +303,10 @@ namespace Sitecore.MobileSDK
       return await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
+    private async Task<Stream> DownloadHashedMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return null;
+    }
     #endregion GetItems
 
     #region GetHTMLRendering
