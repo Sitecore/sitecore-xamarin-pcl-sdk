@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
 
 
-  public class GetItemsByPathTasks : AbstractGetItemTask<IReadItemsByPathRequest>
+  internal class GetItemsByPathTasks : AbstractGetItemTask<IReadItemsByPathRequest>
   {
     public GetItemsByPathTasks(ItemByPathUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)

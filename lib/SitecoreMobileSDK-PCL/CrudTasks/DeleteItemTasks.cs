@@ -12,7 +12,7 @@
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
 
-  class DeleteItemTasks<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScDeleteItemsResponse>
+  internal class DeleteItemTasks<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScDeleteItemsResponse>
     where T : class, IBaseDeleteItemRequest
   {
     private readonly IDeleteItemsUrlBuilder<T> deleteItemsBuilder;

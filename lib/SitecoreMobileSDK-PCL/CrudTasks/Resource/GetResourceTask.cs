@@ -10,7 +10,7 @@
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
-  public class GetResourceTask : IDownloadApiCallTasks<IMediaResourceDownloadRequest, HttpRequestMessage, Stream>
+  internal class GetResourceTask : IDownloadApiCallTasks<IMediaResourceDownloadRequest, HttpRequestMessage, Stream>
   {
     private GetResourceTask()
     {

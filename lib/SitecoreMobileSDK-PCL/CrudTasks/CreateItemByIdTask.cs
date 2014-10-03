@@ -5,7 +5,7 @@
   using System.Net.Http;
   using Sitecore.MobileSDK.PublicKey;
 
-  public class CreateItemByIdTask : AbstractCreateItemTask<ICreateItemByIdRequest>
+  internal class CreateItemByIdTask : AbstractCreateItemTask<ICreateItemByIdRequest>
   {
     public CreateItemByIdTask(CreateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)

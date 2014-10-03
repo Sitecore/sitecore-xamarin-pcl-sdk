@@ -6,7 +6,7 @@
   using System.Text;
   using Sitecore.MobileSDK.PublicKey;
 
-  public abstract class AbstractCreateItemTask<TRequest> : AbstractGetItemTask<TRequest>
+  internal abstract class AbstractCreateItemTask<TRequest> : AbstractGetItemTask<TRequest>
     where TRequest : class
   {
     public AbstractCreateItemTask(HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
