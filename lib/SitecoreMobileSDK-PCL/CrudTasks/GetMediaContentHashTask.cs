@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using System.Threading;
-
-namespace Sitecore.MobileSDK.CrudTasks
+﻿namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
   using System.Net.Http;
+  using System.Threading;
+  using System.Threading.Tasks;
 
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.PublicKey;
@@ -13,7 +12,7 @@ namespace Sitecore.MobileSDK.CrudTasks
   using Sitecore.MobileSDK.API.Request;
 
 
-  public class GetMediaContentHashTask : IRestApiCallTasks
+  internal class GetMediaContentHashTask : IRestApiCallTasks
   <
     IMediaResourceDownloadRequest, 
     HttpRequestMessage, 
@@ -36,17 +35,21 @@ namespace Sitecore.MobileSDK.CrudTasks
     }
 
 
-    public Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken)
+    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken)
+    {
+      string url = this.urlBuilder.BuildUrlToRequestHashForPath(request.MediaPath, request.DownloadOptions);
+      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
+
+      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
+      return result;
+    }
+
+    public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
     {
       return null;
     }
 
-    public Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
-    {
-      return null;
-    }
-
-    public Task<string> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
+    public async Task<string> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
     {
       return null;
     }
