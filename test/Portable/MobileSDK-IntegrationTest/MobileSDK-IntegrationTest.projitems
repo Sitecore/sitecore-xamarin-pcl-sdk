@@ -30,5 +30,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)UrlAutocompleteTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateFromBranchTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetRenderingHTMLTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetMediaItemsWithHashesTest.cs" />
   </ItemGroup>
 </Project>
