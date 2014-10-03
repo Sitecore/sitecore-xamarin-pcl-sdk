@@ -26,8 +26,9 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithoutMediaHashing)
           .Credentials(this.testData.Users.Admin)
+          .MediaResizingStrategy(DownloadStrategy.Plain)
           .BuildReadonlySession();
     }
 
@@ -240,7 +241,7 @@
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
       var sessionNoReadAccess =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithoutMediaHashing)
           .Credentials(this.testData.Users.NoReadAccess)
           .BuildReadonlySession();
 

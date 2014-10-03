@@ -14,6 +14,7 @@
       {
         InstanceWithMediaHashing = "http://cms75.test24dk1.dk.sitecore.net",
         InstanceWithoutMediaHashing = "http://cms72u2.test24dk1.dk.sitecore.net",
+
         InstanceUrl = "http://cms72u2.test24dk1.dk.sitecore.net",
         ShellSite = "/sitecore/shell"
       };
