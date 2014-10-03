@@ -9,6 +9,7 @@
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
+  using Sitecore.MobileSDK.CrudTasks.Resource;
 
   using Sitecore.MobileSDK.API.Request;
 
@@ -57,14 +58,9 @@
     {
       return await Task.Factory.StartNew(() =>
       {
-        return this.ParseResponseDataSync(httpData);
+        return HashedMediaUrlParser.Parse(httpData, cancelToken);
       }, 
       cancelToken);
-    }
-
-    private string ParseResponseDataSync(string httpData)
-    {
-      return null;
     }
   }
 }

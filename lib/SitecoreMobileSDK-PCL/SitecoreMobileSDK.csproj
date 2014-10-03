@@ -215,6 +215,7 @@
     <Compile Include="API\MediaItem\IMediaLibrarySettings.cs" />
     <Compile Include="API\MediaItem\DownloadStrategy.cs" />
     <Compile Include="CrudTasks\GetMediaContentHashTask.cs" />
+    <Compile Include="CrudTasks\Resource\HashedMediaUrlParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
