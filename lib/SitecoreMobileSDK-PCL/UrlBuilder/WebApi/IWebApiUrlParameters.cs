@@ -34,6 +34,9 @@
     string ItemWebApiAuthenticateAction { get; }
     string ItemWebApiGetPublicKeyAction { get; }
     string ItemWebApiGetRenderingAction { get; }
+
+    string ItemWebApiGetHashFormediaContentAction { get; }
+    string UrlForHashingParameterName { get; }
     #endregion Item Web API Actions
   }
 }

@@ -26,6 +26,9 @@
       result.ItemWebApiAuthenticateAction = "/authenticate";
       result.ItemWebApiGetPublicKeyAction = "/getpublickey";
       result.ItemWebApiGetRenderingAction = "/getrenderinghtml";
+      result.ItemWebApiGetHashFormediaContentAction = "/getsignedmediaurl";
+      result.UrlForHashingParameterName = "url";
+
       return result;
     }
 
@@ -54,6 +57,8 @@
     public string ItemWebApiAuthenticateAction { get; private set; }
     public string ItemWebApiGetPublicKeyAction { get; private set; }
     public string ItemWebApiGetRenderingAction { get; private set; }
+    public string ItemWebApiGetHashFormediaContentAction { get; private set; }
+    public string UrlForHashingParameterName { get; private set; }
 
   }
 }
