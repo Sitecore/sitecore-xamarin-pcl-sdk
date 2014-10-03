@@ -16,6 +16,7 @@
   public class HashedUrlRequestBuilderTest
   {
     private MediaItemUrlBuilder builder;
+    private MediaItemUrlBuilder builderWithShellSite;
 
 
     [SetUp]
@@ -24,7 +25,7 @@
       SessionConfigPOD mockConfig = new SessionConfigPOD();
       mockConfig.InstanceUrl = "localhost";
       mockConfig.ItemWebApiVersion = "v1";
-      mockConfig.Site = "/sitecore/shell";
+      mockConfig.Site = null;
 
       var itemSource = new ItemSourcePOD("master", "fr");
 
@@ -36,12 +37,25 @@
         mockConfig,
         mediaSettings,
         itemSource);
+
+
+      SessionConfigPOD mockConfigWithShell = new SessionConfigPOD();
+      mockConfigWithShell.InstanceUrl = "localhost";
+      mockConfigWithShell.ItemWebApiVersion = "v1";
+      mockConfigWithShell.Site = "/sitecore/shell";
+      this.builderWithShellSite = new MediaItemUrlBuilder(
+        RestServiceGrammar.ItemWebApiV2Grammar(),
+        WebApiUrlParameters.ItemWebApiV2UrlParameters(),
+        mockConfigWithShell,
+        mediaSettings,
+        itemSource);
     }
 
     [TearDown]
     public void TearDown()
     {
       this.builder = null;
+      this.builderWithShellSite = null;
     }
 
     [Test]
@@ -67,11 +81,11 @@
       options.SetDisplayAsThumbnail(true);
 
       const string imagePath = "/images/green_mineraly1";
-      string original = this.builder.BuildUrlStringForPath(imagePath, options);
+      string original = this.builderWithShellSite.BuildUrlStringForPath(imagePath, options);
       Assert.AreEqual("http://localhost/~/media/images/green_mineraly1.ashx?thn=1&db=master&la=fr", original);
 
-      string result = this.builder.BuildUrlToRequestHashForPath(imagePath, options);
-      string expected = " http://localhost/-/item/v1/sitecore/shell/-/actions/getsignedmediaurl?url=http%3A%2F%2Fcms75.test24dk1.dk.sitecore.net%2F~%2Fmedia%2Fimages%2Fgreen_mineraly1.ashx%3Fthn%3D1";
+      string result = this.builderWithShellSite.BuildUrlToRequestHashForPath(imagePath, options);
+      string expected = "http://localhost/-/item/v1/sitecore/shell/-/actions/getsignedmediaurl?url=http%3a%2f%2flocalhost%2f~%2fmedia%2fimages%2fgreen_mineraly1.ashx%3fthn%3d1%26db%3dmaster%26la%3dfr";
       Assert.AreEqual(expected, result);
     }
   }

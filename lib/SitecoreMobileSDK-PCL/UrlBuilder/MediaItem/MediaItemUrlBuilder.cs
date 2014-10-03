@@ -103,8 +103,15 @@
 
       string host = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
       string result = host +
-        this.webApiGrammar.ItemWebApiEndpoint +
-        this.sessionConfig.ItemWebApiVersion +
+                      this.webApiGrammar.ItemWebApiEndpoint +
+                      this.sessionConfig.ItemWebApiVersion;
+
+      if (!string.IsNullOrWhiteSpace(this.sessionConfig.Site))
+      {
+        result = result + this.sessionConfig.Site.ToLowerInvariant();
+      }
+
+      result = result +
         this.restGrammar.PathComponentSeparator +
         this.webApiGrammar.ItemWebApiActionsEndpoint +
         this.webApiGrammar.ItemWebApiGetHashFormediaContentAction +
