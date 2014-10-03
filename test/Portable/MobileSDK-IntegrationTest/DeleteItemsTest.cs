@@ -2,6 +2,7 @@
 {
   using System;
   using System.Diagnostics;
+  using System.Linq;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
@@ -358,20 +359,24 @@
     }
 
     [Test]
-    public async void TestCreateAndDelete100ItemsByQuery()
+    public async void TestCreateGetAndDelete101ItemsByQuery()
     {
       await this.RemoveAll();
 
-      for (int i = 0; i < 100; i++)
+      for (int i = 0; i < 101; i++)
       {
         await this.CreateItem("Test item " + (i + 1));
       }
 
       var query = testData.Items.CreateItemsHere.Path + "/descendant::*[@@templatename='Sample Item']";
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(query).Build();
 
-      var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(100, result.Count);
+      var readRequest = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).PageNumber(0).ItemsPerPage(101).Build();
+      var readResult = await this.session.ReadItemAsync(readRequest);
+      testData.AssertItemsCount(100, readResult);
+
+      var deleteRequest = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(query).Build();
+      var deleteResult = await this.session.DeleteItemAsync(deleteRequest);
+      Assert.AreEqual(101, deleteResult.Count);
     }
 
     private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)

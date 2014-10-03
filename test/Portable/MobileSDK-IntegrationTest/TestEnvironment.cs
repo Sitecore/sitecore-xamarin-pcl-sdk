@@ -4,7 +4,6 @@
 
   using MobileSDKUnitTest.Mock;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.SessionSettings;
 
   public class TestEnvironment
   {
@@ -123,7 +122,6 @@
     public void AssertItemsCount(int itemCount, ScItemsResponse response)
     {
       Assert.AreEqual(itemCount, response.TotalCount);
-      Assert.AreEqual(itemCount, response.ResultCount);
       Assert.AreEqual(itemCount, response.ResultCount);
     }
   }

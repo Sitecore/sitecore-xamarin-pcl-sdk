@@ -8,21 +8,19 @@
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API.Items;
 
-
-
-  [TestFixture] 
+  [TestFixture]
   public class ReadPagedItemsTest
   {
-    private TestEnvironment env;
+    private TestEnvironment testData;
     private ISitecoreWebApiReadonlySession session;
 
     [SetUp]
     public void SetUp()
     {
-      this.env = TestEnvironment.DefaultTestEnvironment();
+      this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.env.InstanceUrl)
-        .Credentials(this.env.Users.Admin)
+      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        .Credentials(this.testData.Users.Admin)
         .DefaultDatabase("master")
         .DefaultLanguage("en")
         .BuildReadonlySession();
@@ -31,36 +29,36 @@
     [TearDown]
     public void TearDown()
     {
-      this.env = null;
+      this.testData = null;
 
       this.session.Dispose();
       this.session = null;
     }
 
     [Test]
-    public async void TestPagingStartsWithZero()
+    public async void TestGetPage0WithSize3ByQuery()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/media library/images/*")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/*")
         .AddScope(ScopeType.Self)
         .PageNumber(0)
-        .ItemsPerPage(2)
+        .ItemsPerPage(3)
         .Build();
 
       ScItemsResponse response = await this.session.ReadItemAsync(request);
 
       Assert.IsNotNull(response);
-      Assert.AreEqual(2, response.ResultCount);
-      Assert.AreEqual(8, response.TotalCount);
+      Assert.AreEqual(3, response.ResultCount);
+      Assert.AreEqual(4, response.TotalCount);
     }
 
 
     [Test]
-    public async void TestValidPagingOptionsWithId()
+    public async void TestGetPage2WithSize3ByItemIdWithChildrenScope()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.env.Items.MediaImagesItem.Id)
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.MediaImagesItem.Id)
         .AddScope(ScopeType.Children)
-        .PageNumber(3)
-        .ItemsPerPage(2)
+        .PageNumber(2)
+        .ItemsPerPage(3)
         .Build();
 
       ScItemsResponse response = await this.session.ReadItemAsync(request);
@@ -73,7 +71,7 @@
     [Test]
     public async void TestOutOfRangeRequestReturnsEmptyDataset()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path)
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path)
         .AddScope(ScopeType.Children)
         .PageNumber(10)
         .ItemsPerPage(5)
@@ -87,30 +85,32 @@
     }
 
     [Test]
-    public void TestBuilderThrowsArgumentExceptionForNegativePageNumberInput()
+    public void TestGetItemByPathWithNegativePageNumberThrowsArgumentException()
     {
-      Assert.Throws<ArgumentException>( ()=>
-      {
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path).PageNumber(-1);
-      });
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).PageNumber(-1));
+      Assert.AreEqual("ReadItemByPathRequestBuilder.PageNumber : The input cannot be negative.", exception.Message);
     }
 
     [Test]
-    public void TestBuilderThrowsArgumentExceptionForZeroItemsPerPageCountInput()
+    public void TestGetItemByQueryWithPageNumberAssignedTwiceThrowsInvalidOperationException()
     {
-      Assert.Throws<ArgumentException>( ()=>
-      {
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path).PageNumber(10).ItemsPerPage(0);
-      });
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).PageNumber(1).ItemsPerPage(2).PageNumber(2));
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.PageNumber : Property cannot be assigned twice.", exception.Message);
+    }
+
+
+    [Test]
+    public void TestGetItemByIdWithZeroItemsPerPageCountThrowsArgumentException()
+    {
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).PageNumber(10).ItemsPerPage(0));
+      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemsPerPage : The input should be > 0.", exception.Message);
     }
 
     [Test]
-    public void TestBuilderThrowsArgumentExceptionForNegativeItemsPerPageCountInput()
+    public void TestGetItemByQueryWithNegativeCountOfItemsPerPageThrowsArgumentException()
     {
-      Assert.Throws<ArgumentException>( ()=>
-      {
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.env.Items.Home.Path).PageNumber(10).ItemsPerPage(-1);
-      });
+      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).PageNumber(10).ItemsPerPage(-1));
+      Assert.AreEqual("ReadItemByQueryRequestBuilder.ItemsPerPage : The input should be > 0.", exception.Message);
     }
   }
 }
