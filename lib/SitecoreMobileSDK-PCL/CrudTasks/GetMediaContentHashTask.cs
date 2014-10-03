@@ -2,6 +2,7 @@
 {
   using System;
   using System.Net.Http;
+  using System.Diagnostics;
   using System.Threading;
   using System.Threading.Tasks;
 
@@ -46,14 +47,25 @@
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
     {
-      return null;
+      //TODO: @igk debug request output, remove later
+      Debug.WriteLine("REQUEST: " + requestUrl);
+      HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
+      return await httpResponse.Content.ReadAsStringAsync();
     }
 
     public async Task<string> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
     {
-      return null;
+      return await Task.Factory.StartNew(() =>
+      {
+        return this.ParseResponseDataSync(httpData);
+      }, 
+      cancelToken);
     }
 
+    private string ParseResponseDataSync(string httpData)
+    {
+      return null;
+    }
   }
 }
 
