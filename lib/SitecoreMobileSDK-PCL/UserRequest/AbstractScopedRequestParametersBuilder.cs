@@ -90,7 +90,7 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (pageNumber < 0)
       {
-        throw new ArgumentException("PageNumber cannot be negative");
+        throw new ArgumentException(this.GetType().Name + ".PageNumber : The input cannot be negative.");
       }
       else if (null != this.pagingOptions.OptionalPageNumber)
       {
@@ -105,7 +105,7 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       if (itemsCountPerPage <= 0)
       {
-        throw new ArgumentException("PageNumber cannot be negative");
+        throw new ArgumentException(this.GetType().Name + ".ItemsPerPage : The input should be > 0.");
       }
       else if (null != this.pagingOptions.OptionalItemsPerPage)
       {
