@@ -1,12 +1,11 @@
-﻿using Sitecore.MobileSDK.SessionSettings;
-
-namespace Sitecore.MobileSDK.UrlBuilder
+﻿namespace Sitecore.MobileSDK.UrlBuilder
 {
   using System;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.SessionSettings;
 
 
   internal class WebApiActionBuilder
@@ -23,7 +22,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
     }
       
 
-    public string GetWebApiEndpointUrlForSession(ISessionConfig sessionConfig)
+    private string GetWebApiEndpointUrlForSession(ISessionConfig sessionConfig)
     {
       SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
       return builder.BuildUrlString(sessionConfig);
