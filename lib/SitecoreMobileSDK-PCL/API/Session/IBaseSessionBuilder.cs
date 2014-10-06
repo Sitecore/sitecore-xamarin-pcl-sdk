@@ -102,6 +102,21 @@ namespace Sitecore.MobileSDK.API.Session
     /// </returns>
     IBaseSessionBuilder MediaPrefix(string mediaPrefix);
 
+    /// <summary>
+    /// Due to security issue bugfix image resizing procedure has changed for Sitecore CMS 7.5 and newer versions.
+    /// They require hashed URLs for resized media images. 
+    /// 
+    /// For this reason the SDK provides two primary image loading strategies 
+    /// * Plain - for legacy versions of the CMS
+    /// * Hashed - for CMS 7.5 and newer
+    /// 
+    /// </summary>
+    /// <param name="resizingFlag">The media resizing strategy. <see cref="DownloadStrategy"/> 
+    /// If omitted, the "Plain" strategy will be used.
+    /// </param>
+    /// <returns>
+    /// this
+    /// </returns>
     IBaseSessionBuilder MediaResizingStrategy(DownloadStrategy resizingFlag);
   }
 }
