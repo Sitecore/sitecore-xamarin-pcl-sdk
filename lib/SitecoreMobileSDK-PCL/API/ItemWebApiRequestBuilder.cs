@@ -169,11 +169,10 @@ namespace Sitecore.MobileSDK.API
     /// <returns>
     ///   <see cref="IGetRenderingHtmlRequest{T}" />Get rendering html request.
     /// </returns>
-    public static IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHtmlRequestWithSourceRenderingId(string sourceId, string renderingId)
+    public static IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHtmlRequestWithSourceAndRenderingId(string sourceId, string renderingId)
     {
       return new RenderingHtmlRequestBuilder(sourceId, renderingId);
     }
-
   }
 }
 
