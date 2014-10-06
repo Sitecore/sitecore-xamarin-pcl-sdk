@@ -23,10 +23,13 @@ namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
     {
       this.ValidateSpecificRequest(request);
 
-      string hostUrl = this.GetHostUrlForRequest(request)
-            + this.restGrammar.PathComponentSeparator
-            + this.webApiGrammar.ItemWebApiActionsEndpoint
-            + this.webApiGrammar.ItemWebApiGetRenderingAction;
+      var actionBuilder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar);
+
+
+      string hostUrl = actionBuilder.GetWebApiActionEndpointUrlForSession(
+                         this.webApiGrammar.ItemWebApiGetRenderingAction,
+                         request.SessionSettings);
+
 
       string baseParameters = this.GetCommonPartForRequest(request).ToLowerInvariant();
       string specificParameters = this.GetSpecificPartForRequest(request);
