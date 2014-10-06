@@ -359,7 +359,7 @@
         await task;
       };
       var exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Unable to download data from the internet", exception.Message);
+      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
       Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("The current user does not have write access to this item"));
     }
