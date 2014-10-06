@@ -3,6 +3,7 @@
   using System;
   using System.Threading;
   using System.Threading.Tasks;
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.API.Exceptions;
 
   internal class RestApiCallFlow
@@ -52,7 +53,7 @@
 
       serverResponse = await RestApiCallFlow.LoadResourceFromNetworkFlow(request, stages, cancelToken);
 
-      Func<Exception, ParserException> parseExceptionWrapper = (Exception ex) => new ParserException("[Sitecore Mobile SDK] Unable to download data from the internet", ex);
+      Func<Exception, ParserException> parseExceptionWrapper = (Exception ex) => new ParserException(TaskFlowErrorMessages.PARSER_EXCEPTION_MESSAGE, ex);
       Task<TResult> asyncParser = stages.ParseResponseDataAsync(serverResponse, cancelToken);
 
       parsedData = await RestApiCallFlow.IvokeTaskAndWrapExceptions(asyncParser, parseExceptionWrapper);
@@ -83,7 +84,7 @@
       }
 
 
-      Func<Exception, ProcessUserRequestException> urlExceptionWrapper = (Exception ex) => new ProcessUserRequestException("[Sitecore Mobile SDK] Unable to build HTTP request", ex);
+      Func<Exception, ProcessUserRequestException> urlExceptionWrapper = (Exception ex) => new ProcessUserRequestException(TaskFlowErrorMessages.BAD_USER_REQUEST_MESSAGE, ex);
       Task<THttpRequest> requsetLoader = stages.BuildRequestUrlForRequestAsync(request, cancelToken);
 
       requestUrl = await RestApiCallFlow.IvokeTaskAndWrapExceptions(requsetLoader, urlExceptionWrapper);
@@ -97,7 +98,7 @@
 
       Func<Exception, LoadDataFromNetworkException> httpExceptionWrapper = (Exception ex) =>
       {
-        return new LoadDataFromNetworkException("[Sitecore Mobile SDK] Unable to download data from the internet", ex);
+        return new LoadDataFromNetworkException(TaskFlowErrorMessages.NETWORK_EXCEPTION_MESSAGE, ex);
       };
       Task<THttpResult> httpLoader = stages.SendRequestForUrlAsync(requestUrl, cancelToken);
 
