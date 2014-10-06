@@ -1,3 +1,5 @@
+using Sitecore.MobileSDK.Session;
+
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -316,8 +318,15 @@ namespace Sitecore.MobileSDK
       var hashUrlGetterFlow = new GetMediaContentHashTask(urlBuilder, this.httpClient, cryptor);
       string hashedMediaUrl = await RestApiCallFlow.LoadRequestFromNetworkFlow(request, hashUrlGetterFlow, cancelToken);
 
-      Stream result = await this.httpClient.GetStreamAsync(hashedMediaUrl);
-      return result;
+      try
+      {
+        Stream result = await this.httpClient.GetStreamAsync(hashedMediaUrl);
+        return result;
+      }
+      catch (Exception ex)
+      {
+        throw new LoadDataFromNetworkException(TaskFlowErrorMessages.NETWORK_EXCEPTION_MESSAGE, ex);
+      }
     }
     #endregion GetItems
 
