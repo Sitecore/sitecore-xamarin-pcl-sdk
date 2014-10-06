@@ -102,17 +102,11 @@
       string encodedOriginalUrl = UrlBuilderUtils.EscapeDataString(originalUrl);
 
       var actionBuilder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar);
-      string result = actionBuilder.GetWebApiEndpointUrlForSession(this.sessionConfig);
-
-      if (!string.IsNullOrWhiteSpace(this.sessionConfig.Site))
-      {
-        result = result + this.sessionConfig.Site.ToLowerInvariant();
-      }
+      string result = actionBuilder.GetWebApiActionEndpointUrlForSession(
+        this.webApiGrammar.ItemWebApiGetHashFormediaContentAction, 
+        this.sessionConfig);
 
       result = result +
-        this.restGrammar.PathComponentSeparator +
-        this.webApiGrammar.ItemWebApiActionsEndpoint +
-        this.webApiGrammar.ItemWebApiGetHashFormediaContentAction +
         this.restGrammar.HostAndArgsSeparator + 
         this.webApiGrammar.UrlForHashingParameterName + this.restGrammar.KeyValuePairSeparator + encodedOriginalUrl;
 
