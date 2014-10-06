@@ -1,5 +1,3 @@
-using Sitecore.MobileSDK.Session;
-
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -15,6 +13,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API.MediaItem;
 
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.TaskFlow;
