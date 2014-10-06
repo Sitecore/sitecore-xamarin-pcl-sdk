@@ -85,7 +85,7 @@
       Assert.AreEqual("http://localhost/~/media/images/green_mineraly1.ashx?thn=1&db=master&la=fr", original);
 
       string result = this.builderWithShellSite.BuildUrlToRequestHashForPath(imagePath, options);
-      string expected = "http://localhost/-/item/v1/sitecore/shell/-/actions/getsignedmediaurl?url=http%3a%2f%2flocalhost%2f~%2fmedia%2fimages%2fgreen_mineraly1.ashx%3fthn%3d1%26db%3dmaster%26la%3dfr";
+      string expected = "http://localhost/-/item/v1%2fsitecore%2fshell/-/actions/getsignedmediaurl?url=http%3a%2f%2flocalhost%2f~%2fmedia%2fimages%2fgreen_mineraly1.ashx%3fthn%3d1%26db%3dmaster%26la%3dfr";
       Assert.AreEqual(expected, result);
     }
   }
