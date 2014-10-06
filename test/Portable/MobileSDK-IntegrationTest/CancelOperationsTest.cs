@@ -15,18 +15,15 @@ namespace MobileSDKIntegrationTest
   [TestFixture]
   public class CancelOperationsTest
   {
-    private static Action<string> DebugWriteLineBlock  = (string message) =>
-    {
-      Debug.WriteLine(message);
-    };
+    private static readonly Action<string> DebugWriteLineBlock = message => Debug.WriteLine(message);
 
-    private TestEnvironment                testData;
-    private ISitecoreWebApiReadonlySession session ;
+    private TestEnvironment testData;
+    private ISitecoreWebApiReadonlySession session;
 
     [SetUp]
     public void Setup()
     {
-      using ( FunctionTracer logger = new FunctionTracer("CancelOperationsTest->setup()", CancelOperationsTest.DebugWriteLineBlock) )
+      using (new FunctionTracer("CancelOperationsTest->setup()", DebugWriteLineBlock))
       {
         this.testData = TestEnvironment.DefaultTestEnvironment();
 
@@ -40,7 +37,7 @@ namespace MobileSDKIntegrationTest
     [TearDown]
     public void TearDown()
     {
-      using (FunctionTracer logger = new FunctionTracer("CancelOperationsTest->tearDown()", CancelOperationsTest.DebugWriteLineBlock))
+      using (new FunctionTracer("CancelOperationsTest->tearDown()", DebugWriteLineBlock))
       {
         this.testData = null;
         this.session.Dispose();
@@ -51,24 +48,24 @@ namespace MobileSDKIntegrationTest
     [Test]
     public void TestCancelGetItemById()
     {
-      using (FunctionTracer logger = new FunctionTracer("CancelOperationsTest->TestCancelGetItemById()", CancelOperationsTest.DebugWriteLineBlock))
+      using (new FunctionTracer("CancelOperationsTest->TestCancelGetItemById()", DebugWriteLineBlock))
       {
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
         var cancelToken = CreateCancelTokenWithDelay(20);
         ScItemsResponse response = null;
 
         // @adk : do not use Task.WaitAll() since it may cause deadlocks
         TestDelegate testCode = async () =>
         {
-          using (FunctionTracer sessionLogger = new FunctionTracer("session.ReadItemAsync()", CancelOperationsTest.DebugWriteLineBlock))
+          using (new FunctionTracer("session.ReadItemAsync()", DebugWriteLineBlock))
           {
-            var task = session.ReadItemAsync(request, cancelToken);
+            var task = this.session.ReadItemAsync(request, cancelToken);
             response = await task;
           }
         };
         var exception = Assert.Catch<OperationCanceledException>(testCode);
-        Debug.WriteLine("Expected token : " + cancelToken.ToString());
-        Debug.WriteLine("Received token : " + exception.CancellationToken.ToString());
+        Debug.WriteLine("Expected token : " + cancelToken);
+        Debug.WriteLine("Received token : " + exception.CancellationToken);
 
 
         Assert.IsNull(response);
@@ -88,7 +85,7 @@ namespace MobileSDKIntegrationTest
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
 
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(request, cancelToken);
         response = await task;
@@ -143,23 +140,50 @@ namespace MobileSDKIntegrationTest
       var cancelToken = CreateCancelTokenWithDelay(10);
       ScItemsResponse response = null;
 
-      TestDelegate testCode = async() =>
+      TestDelegate testCode = async () =>
       {
         var task = session.ReadItemAsync(request, cancelToken);
-        await task;
+        response = await task;
       };
-      OperationCanceledException exception = Assert.Catch<OperationCanceledException>(testCode);
+      var exception = Assert.Catch<OperationCanceledException>(testCode);
 
       Assert.IsNull(response);
-
 
       //      Desktop (Windows) : "A task was canceled."
       //      iOS               : "The Task was canceled"
       Assert.IsTrue(exception.Message.ToLowerInvariant().Contains("task was canceled"));
 
+      // @adk : CancellationToken class comparison or scheduling works differently on iOS
+      // Assert.AreEqual(cancelToken, exception.CancellationToken);
+    }
+
+    [Test]
+    public void TestCancelGetRenderedHtml()
+    {
+      const string RenderingId = "{447AA0FC-95C8-4EFD-B64E-FBF880C42E2D}";
+      const string DatasourceId = "{44E7C4E6-764E-49ED-9850-9D1435E864CD}";
+      var request =
+       ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
+         .SourceAndRenderingDatabase(null)
+         .Build();
+      var cancelToken = CreateCancelTokenWithDelay(5);
+      Stream response = null;
+
+      TestDelegate testCode = async () =>
+      {
+        response = await session.ReadRenderingHtmlAsync(request, cancelToken);
+      };
+      var exception = Assert.Catch<OperationCanceledException>(testCode);
+
+      Assert.IsNull(response);
+
+      //      Desktop (Windows) : "A task was canceled."
+      //      iOS               : "The Task was canceled"
+      Assert.IsTrue(exception.Message.ToLowerInvariant().Contains("task was canceled"));
 
       // @adk : CancellationToken class comparison or scheduling works differently on iOS
       // Assert.AreEqual(cancelToken, exception.CancellationToken);
     }
+
   }
 }
