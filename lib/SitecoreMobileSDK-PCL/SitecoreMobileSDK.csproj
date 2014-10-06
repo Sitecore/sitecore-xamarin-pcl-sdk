@@ -217,6 +217,7 @@
     <Compile Include="CrudTasks\GetMediaContentHashTask.cs" />
     <Compile Include="CrudTasks\Resource\HashedMediaUrlParser.cs" />
     <Compile Include="Session\TaskFlowErrorMessages.cs" />
+    <Compile Include="UrlBuilder\WebApiActionBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

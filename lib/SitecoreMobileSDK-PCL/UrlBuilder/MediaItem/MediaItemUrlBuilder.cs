@@ -101,10 +101,8 @@
       string originalUrl = this.BuildUrlStringForPath(path, options);
       string encodedOriginalUrl = UrlBuilderUtils.EscapeDataString(originalUrl);
 
-      string host = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
-      string result = host +
-                      this.webApiGrammar.ItemWebApiEndpoint +
-                      this.sessionConfig.ItemWebApiVersion;
+      var actionBuilder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar);
+      string result = actionBuilder.GetWebApiEndpointUrlForSession(this.sessionConfig);
 
       if (!string.IsNullOrWhiteSpace(this.sessionConfig.Site))
       {
