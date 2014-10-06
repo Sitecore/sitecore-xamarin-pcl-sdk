@@ -20,15 +20,38 @@
       this.restGrammar = restGrammar;
       this.webApiGrammar = webApiGrammar;
     }
-      
+     
+    #region Actions
+    public string GetRenderingHtmlAction(ISessionConfig sessionConfig)
+    {
+      return this.GetWebApiActionEndpointUrlForSession(
+        this.webApiGrammar.ItemWebApiGetRenderingAction, 
+        sessionConfig);
+    }
 
+    public string GetHashedMediaUrlAction(ISessionConfig sessionConfig)
+    {
+      return this.GetWebApiActionEndpointUrlForSession(
+        this.webApiGrammar.ItemWebApiGetHashFormediaContentAction, 
+        sessionConfig);
+    }
+
+    public string GetAuthenticateActionUrlForSession(ISessionConfig sessionConfig)
+    {
+      return this.GetWebApiActionEndpointUrlForSession(
+        this.webApiGrammar.ItemWebApiAuthenticateAction,
+        sessionConfig);
+    }
+    #endregion Actions
+
+    #region Utils
     private string GetWebApiEndpointUrlForSession(ISessionConfig sessionConfig)
     {
       SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
       return builder.BuildUrlString(sessionConfig);
     }
 
-    public string GetWebApiActionEndpointUrlForSession(string actionName, ISessionConfig sessionConfig)
+    private string GetWebApiActionEndpointUrlForSession(string actionName, ISessionConfig sessionConfig)
     {
       string hostWithSite = this.GetWebApiEndpointUrlForSession(sessionConfig);
 
@@ -39,6 +62,7 @@
 
       return result;
     }
+    #endregion Utils
   }
 }
 

@@ -24,11 +24,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
       this.ValidateSpecificRequest(request);
 
       var actionBuilder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar);
-
-
-      string hostUrl = actionBuilder.GetWebApiActionEndpointUrlForSession(
-                         this.webApiGrammar.ItemWebApiGetRenderingAction,
-                         request.SessionSettings);
+      string hostUrl = actionBuilder.GetRenderingHtmlAction(request.SessionSettings);
 
 
       string baseParameters = this.GetCommonPartForRequest(request).ToLowerInvariant();

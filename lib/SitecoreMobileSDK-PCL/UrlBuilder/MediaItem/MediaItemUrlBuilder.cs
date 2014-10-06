@@ -102,9 +102,7 @@
       string encodedOriginalUrl = UrlBuilderUtils.EscapeDataString(originalUrl);
 
       var actionBuilder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar);
-      string result = actionBuilder.GetWebApiActionEndpointUrlForSession(
-        this.webApiGrammar.ItemWebApiGetHashFormediaContentAction, 
-        this.sessionConfig);
+      string result = actionBuilder.GetHashedMediaUrlAction(this.sessionConfig);
 
       result = result +
         this.restGrammar.HostAndArgsSeparator + 
