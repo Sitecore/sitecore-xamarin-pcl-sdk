@@ -9,9 +9,10 @@
   internal class RestApiCallFlow
   {
     private static async Task<TPhaseResult> IvokeTaskAndWrapExceptions<TPhaseResult, TWrapperException>(
-      Task<TPhaseResult> task, Func<Exception, TWrapperException> exceptionWrapperDelegate)
-      where TPhaseResult : class
-      where TWrapperException : SitecoreMobileSdkException
+      Task<TPhaseResult> task, 
+      Func<Exception, TWrapperException> exceptionWrapperDelegate)
+    where TPhaseResult : class
+    where TWrapperException : SitecoreMobileSdkException
     {
       TPhaseResult result = null;
 
@@ -43,10 +44,10 @@
       TRequest request,
       IRestApiCallTasks<TRequest, THttpRequest, THttpResult, TResult> stages,
       CancellationToken cancelToken)
-      where TRequest : class
-      where THttpRequest : class
-      where THttpResult : class
-      where TResult : class
+    where TRequest : class
+    where THttpRequest : class
+    where THttpResult : class
+    where TResult : class
     {
       THttpResult serverResponse = null;
       TResult parsedData = null;
@@ -61,7 +62,7 @@
 
       if (null == parsedData)
       {
-        throw new ArgumentNullException("[RestApiCallFlow.LoadRequestFromNetworkFlow] parsed response cannot be null");
+        throw new ArgumentNullException(TaskFlowErrorMessages.PARSER_RESULT_NULL_MESSAGE);
       }
 
       return parsedData;
@@ -71,16 +72,16 @@
       TRequest request,
       IDownloadApiCallTasks<TRequest, THttpRequest, THttpResult> stages,
       CancellationToken cancelToken)
-      where TRequest : class
-      where THttpRequest : class
-      where THttpResult : class
+    where TRequest : class
+    where THttpRequest : class
+    where THttpResult : class
     {
       THttpRequest requestUrl = null;
       THttpResult serverResponse = null;
 
       if (null == request)
       {
-        throw new ArgumentNullException("[RestApiCallFlow.LoadRequestFromNetworkFlow] user's request cannot be null");
+        throw new ArgumentNullException(TaskFlowErrorMessages.USER_REQUEST_NULL_MESSAGE);
       }
 
 
@@ -93,7 +94,7 @@
 
       if (null == requestUrl)
       {
-        throw new ArgumentNullException("[RestApiCallFlow.LoadRequestFromNetworkFlow] http request cannot be null");
+        throw new ArgumentNullException(TaskFlowErrorMessages.HTTP_REQUEST_NULL_MESSAGE);
       }
 
       Func<Exception, LoadDataFromNetworkException> httpExceptionWrapper = (Exception ex) =>
@@ -108,7 +109,7 @@
 
       if (null == serverResponse)
       {
-        throw new ArgumentNullException("[RestApiCallFlow.LoadRequestFromNetworkFlow] back end response cannot be null");
+        throw new ArgumentNullException(TaskFlowErrorMessages.SERVER_RESPONSE_NULL_MESSAGE);
       }
 
       return serverResponse;
