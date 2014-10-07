@@ -173,7 +173,6 @@ namespace Sitecore.MobileSDK.API
     {
       return new RenderingHtmlRequestBuilder(sourceId, renderingId);
     }
-
   }
 }
 
