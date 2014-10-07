@@ -275,7 +275,7 @@ namespace Sitecore.MobileSDK
 
     #region UploadImage
 
-    public async Task<ScItemsResponse> CreateItemAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<string> UploadMediaResourceAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       IMediaResourceUploadRequest requestCopy = request.DeepCopyUploadMediaRequest();
 
@@ -287,7 +287,7 @@ namespace Sitecore.MobileSDK
         var urlBuilder = new UploadMediaUrlBuilder(this.restGrammar, this.webApiGrammar, this.sessionConfig, this.mediaSettings);
         var taskFlow = new UploadMediaTask(urlBuilder, this.httpClient, cryptor);
 
-        return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+        return await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
       }
     }
 

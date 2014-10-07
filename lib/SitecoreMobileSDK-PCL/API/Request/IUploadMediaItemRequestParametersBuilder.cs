@@ -4,7 +4,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   /// Interface represents fluent flow for building <see cref="IMediaResourceDownloadRequest"/>
   /// </summary>
   /// <typeparam name="T">Type of request that is build by this builder.</typeparam>
-  public interface IGetMediaItemRequestParametersBuilder<out T>
+  public interface IUploadMediaItemRequestParametersBuilder<out T>
   where T : class
   {
     /// <summary>
@@ -15,7 +15,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// </summary>
     /// <param name="database">Databse name.</param>
     /// <returns>this</returns>
-    IGetMediaItemRequestParametersBuilder<T> Database(string database);
+    IUploadMediaItemRequestParametersBuilder<T> Database(string database);
 
     /// <summary>
     /// Specifies language for media item.
@@ -25,7 +25,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// </summary>
     /// <param name="itemLanguage">Language name.</param>
     /// <returns>this</returns>
-    IGetMediaItemRequestParametersBuilder<T> Language(string itemLanguage);
+    IUploadMediaItemRequestParametersBuilder<T> Language(string itemLanguage);
 
     /// <summary>
     /// Specifies version of media item.
@@ -33,15 +33,13 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// </summary>
     /// <param name="itemVersion">Version number.</param>
     /// <returns>this</returns>
-    IGetMediaItemRequestParametersBuilder<T> Version(int? itemVersion);
+    IUploadMediaItemRequestParametersBuilder<T> Version(int? itemVersion);
 
-    /// <summary>
-    /// Specifies media options for media item.
-    /// <seealso cref="IDownloadMediaOptions"/>
-    /// </summary>
-    /// <param name="downloadMediaOptions">Media options.</param>
-    /// <returns>this</returns>
-    IGetMediaItemRequestParametersBuilder<T> DownloadOptions(IDownloadMediaOptions downloadMediaOptions);
+    IUploadMediaItemRequestParametersBuilder<T> ItemName(string itemName);
+
+    IUploadMediaItemRequestParametersBuilder<T> ItemTemplate(string itemName);
+
+    IUploadMediaItemRequestParametersBuilder<T> MediaPath(string path);
 
     /// <summary>
     /// Builds request for dowloading media item.

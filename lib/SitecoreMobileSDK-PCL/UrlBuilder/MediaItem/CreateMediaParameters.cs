@@ -1,32 +1,33 @@
 ﻿namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
   using System.Collections.Generic;
+  using System.IO;
 
   public class CreateMediaParameters
   {
     public CreateMediaParameters(
-      byte[] imageData, 
-      string imageName, 
+      Stream imageDataStream, 
+      string itemName, 
       string itemTemlate,
-      string folderPathInsideMediaLibrary
+      string mediaPath
     )
     {
-      this.ImageData = imageData;
-      this.ImageName = imageName; 
+      this.ImageDataStream = imageDataStream;
+      this.ImageName = itemName; 
       this.ItemTemlate = itemTemlate;
-      this.FolderPathInsideMediaLibrary = folderPathInsideMediaLibrary;
+      this.MediaPath = mediaPath;
     }
 
     public CreateMediaParameters ShallowCopy()
     {
-      return new CreateMediaParameters(this.ImageData, this.ImageName, this.ItemTemlate, this.FolderPathInsideMediaLibrary);
+      return new CreateMediaParameters(this.ImageDataStream, this.ImageName, this.ItemTemlate, this.MediaPath);
     }
 
     //TODO: @igk imageData probably should be moved to request?
-    public byte[] ImageData { get; private set; }
+    public Stream ImageDataStream { get; private set; }
     public string ImageName { get; private set; }
     public string ItemTemlate { get; private set; }
-    public string FolderPathInsideMediaLibrary { get; private set; }
+    public string MediaPath { get; private set; }
   }
 }
 

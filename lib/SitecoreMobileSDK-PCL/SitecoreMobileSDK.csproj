@@ -67,7 +67,6 @@
     <Compile Include="API\Request\IScopedRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
     <Compile Include="API\Request\Parameters\IDownloadMediaOptions.cs" />
-    <Compile Include="API\Request\Parameters\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\Parameters\IQueryParameters.cs" />
     <Compile Include="API\Request\Parameters\IScopeParameters.cs" />
     <Compile Include="API\Request\Parameters\PayloadType.cs" />
@@ -218,6 +217,9 @@
     <Compile Include="UrlBuilder\MediaItem\UploadMediaUrlBuilder.cs" />
     <Compile Include="UrlBuilder\MediaItem\CreateMediaParameters.cs" />
     <Compile Include="CrudTasks\UploadMediaTask.cs" />
+    <Compile Include="API\Request\IGetMediaItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IUploadMediaItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\UploadMediaItemRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

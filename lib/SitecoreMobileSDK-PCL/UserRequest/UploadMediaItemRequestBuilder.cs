@@ -1,20 +1,21 @@
 ﻿namespace Sitecore.MobileSDK.UserRequest
 {
+  using System.IO;
+
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest>
+  public class UploadMediaItemRequestBuilder : IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest>
   {
-    public ReadMediaItemRequestBuilder(string mediaPath)
+    public UploadMediaItemRequestBuilder(Stream itemDataStream)
     {
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaPath, this.GetType().Name + ".MediaPath");
-
-      this.mediaPath = mediaPath;
+      this.itemDataStream = itemDataStream;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> Database(string database)
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> Database(string database)
     {
       if (string.IsNullOrEmpty(database))
       {
@@ -32,7 +33,7 @@
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> Language(string itemLanguage)
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> Language(string itemLanguage)
     {
       if (string.IsNullOrEmpty(itemLanguage))
       {
@@ -51,7 +52,7 @@
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> Version(int? itemVersion)
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> Version(int? itemVersion)
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
       BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".Version");
@@ -64,26 +65,44 @@
       return this;
     }
 
-    public IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> DownloadOptions(IDownloadMediaOptions downloadMediaOptions)
+    //TODO: @igk add parameters value checking
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemName(string itemName)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
-
-      BaseValidator.CheckMediaOptionsOrThrow(downloadMediaOptions, this.GetType().Name + ".DownloadMediaOptions");
-
-      this.downloadMediaOptions = downloadMediaOptions.DeepCopyMediaDownloadOptions();
-
+      this.itemName = itemName;
       return this;
     }
 
-    public IMediaResourceDownloadRequest Build()
+    //TODO: @igk add parameters value checking
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemTemplate(string itemTemplate)
     {
-      var result = new MediaResourceDownloadParameters(null, this.itemSourceAccumulator, this.downloadMediaOptions, this.mediaPath);
+      this.itemTemplate = itemTemplate;
+      return this;
+    }
+
+    //TODO: @igk add parameters value checking
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> MediaPath(string path)
+    {
+      this.mediaPath = path;
+      return this;
+    }
+
+    public IMediaResourceUploadRequest Build()
+    {
+      CreateMediaParameters createMediaParameters = new CreateMediaParameters (
+        this.itemDataStream, 
+        this.itemName, 
+        this.itemTemplate, 
+        this.mediaPath
+      ); 
+      var result = new MediaResourceUploadParameters(null, this.itemSourceAccumulator, createMediaParameters);
       return result;
     }
 
     protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
-    protected IDownloadMediaOptions downloadMediaOptions = null;
 
+    private Stream itemDataStream;
+    private string itemName;
+    private string itemTemplate;
     private string mediaPath;
   }
 }

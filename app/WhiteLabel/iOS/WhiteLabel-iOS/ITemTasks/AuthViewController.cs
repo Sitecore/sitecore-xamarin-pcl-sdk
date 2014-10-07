@@ -1,8 +1,8 @@
-﻿
-namespace WhiteLabeliOS
+﻿namespace WhiteLabeliOS
 {
   using System;
   using System.Drawing;
+  using System.Net.Http;
 
   using MonoTouch.Foundation;
   using MonoTouch.UIKit;
@@ -19,6 +19,8 @@ namespace WhiteLabeliOS
     public override void ViewDidLoad()
     {
       base.ViewDidLoad();
+
+
 
       this.loginField.ShouldReturn = this.HideKeyboard;
       this.passwordField.ShouldReturn = this.HideKeyboard;

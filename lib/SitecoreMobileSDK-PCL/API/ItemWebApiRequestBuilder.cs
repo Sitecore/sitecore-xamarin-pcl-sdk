@@ -1,5 +1,7 @@
 namespace Sitecore.MobileSDK.API
 {
+  using System.IO;
+
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Template;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -173,6 +175,10 @@ namespace Sitecore.MobileSDK.API
       return new RenderingHtmlRequestBuilder(sourceId, renderingId);
     }
 
+    public static IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> UploadResourceRequest(Stream itemDataStream)
+    {
+      return new UploadMediaItemRequestBuilder(itemDataStream);
+    }
   }
 }
 
