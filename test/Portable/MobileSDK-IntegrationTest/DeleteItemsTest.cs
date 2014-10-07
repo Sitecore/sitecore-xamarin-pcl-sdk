@@ -372,7 +372,7 @@
 
       var readRequest = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).PageNumber(0).ItemsPerPage(101).Build();
       var readResult = await this.session.ReadItemAsync(readRequest);
-      testData.AssertItemsCount(100, readResult);
+      testData.AssertItemsCount(101, readResult);
 
       var deleteRequest = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(query).Build();
       var deleteResult = await this.session.DeleteItemAsync(deleteRequest);
