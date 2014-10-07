@@ -43,11 +43,6 @@
       return new UpdateItemByPathParameters(connection, itemSrc, payload, this.FieldsRawValuesByName, this.ItemPath);
     }
 
-    public virtual IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
-    {
-      return this.DeepCopyUpdateItemByPathRequest();
-    }
-
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
       return this.DeepCopyUpdateItemByPathRequest();

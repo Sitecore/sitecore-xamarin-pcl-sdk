@@ -179,6 +179,7 @@ namespace Sitecore.MobileSDK.API
     {
       return new UploadMediaItemRequestBuilder(itemDataStream);
     }
+
   }
 }
 

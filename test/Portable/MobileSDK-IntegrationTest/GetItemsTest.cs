@@ -308,7 +308,7 @@
     {
       var sessionWithoutAccess =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-          .Credentials(this.testData.Users.NoReadAccess)
+          .Credentials(this.testData.Users.NoReadUserExtranet)
           .BuildReadonlySession();
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();

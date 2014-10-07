@@ -44,13 +44,8 @@
       {
         createParameters = this.CreateParameters.ShallowCopy();
       }
-
+        
       return new CreateItemByIdParameters(connection, itemSrc, payload, createParameters, this.ItemId);
-    }
-
-    public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
-    {
-      return this.DeepCopyCreateItemByIdRequest();
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -90,9 +85,7 @@
 
     public IQueryParameters QueryParameters { get; private set; }
 
-
     public CreateItemParameters CreateParameters { get; private set; }
-
   }
 }
 

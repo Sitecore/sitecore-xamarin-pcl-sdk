@@ -61,6 +61,16 @@
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddScope(scope);
     }
+
+    new public IGetVersionedItemRequestParametersBuilder<T> PageNumber(int pageNumber)
+    {
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.PageNumber(pageNumber);
+    }
+
+    new public IGetVersionedItemRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage)
+    {
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.ItemsPerPage(itemsCountPerPage);
+    }
     #endregion Compatibility Casts
   }
 }

@@ -4,7 +4,6 @@
 
   using MobileSDKUnitTest.Mock;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.SessionSettings;
 
   public class TestEnvironment
   {
@@ -12,7 +11,7 @@
     {
       var result = new TestEnvironment
       {
-        InstanceUrl = "http://cms72u2.test24dk1.dk.sitecore.net",
+        InstanceUrl = "http://cms71u3.test24dk1.dk.sitecore.net",
         ShellSite = "/sitecore/shell"
       };
 
@@ -44,6 +43,11 @@
       result.Items.CreateItemsHere.Path = "/sitecore/content/Home/Android/Folder for create items";
       result.Items.CreateItemsHere.DisplayName = "Folder for create items";
 
+      result.Items.MediaImagesItem.Id = "{15451229-7534-44EF-815D-D93D6170BFCB}";
+      result.Items.MediaImagesItem.Path = "/sitecore/media library/Images";
+      result.Items.MediaImagesItem.Template = "/sitecore/templates/System/Media/Media folder";
+      result.Items.MediaImagesItem.TemplateId = "{FE5DD826-48C6-436D-B87A-7C4210C7413B}";
+
       return result;
     }
 
@@ -60,10 +64,11 @@
       public WebApiCredentialsPOD Anonymous = new WebApiCredentialsPOD(null, null);
       public WebApiCredentialsPOD Creatorex = new WebApiCredentialsPOD("extranet\\creatorex", "creatorex");
       public WebApiCredentialsPOD SitecoreCreator = new WebApiCredentialsPOD("sitecore\\creator", "creator");
-      public WebApiCredentialsPOD NoReadAccess = new WebApiCredentialsPOD("extranet\\noreadaccess", "noreadaccess");
+      public WebApiCredentialsPOD NoReadUserExtranet = new WebApiCredentialsPOD("extranet\\noreadaccess", "noreadaccess");
       public WebApiCredentialsPOD FakeAnonymous = new WebApiCredentialsPOD("extranet\\FakeAnonymous", "b");
       public WebApiCredentialsPOD NotExistent = new WebApiCredentialsPOD("sitecore\\notexistent", "notexistent");
       public WebApiCredentialsPOD NoCreateAccess = new WebApiCredentialsPOD("sitecore\\nocreate", "nocreate");
+      public WebApiCredentialsPOD NoReadUserSitecore = new WebApiCredentialsPOD("sitecore\\noreaduser", "noreaduser");
     }
 
     public class ItemsList
@@ -74,6 +79,8 @@
       public Item AllowedItem = new Item();
       public Item AllowedParent = new Item();
       public Item CreateItemsHere = new Item();
+
+      public Item MediaImagesItem = new Item();
     }
 
     public class Item
@@ -115,7 +122,6 @@
     public void AssertItemsCount(int itemCount, ScItemsResponse response)
     {
       Assert.AreEqual(itemCount, response.TotalCount);
-      Assert.AreEqual(itemCount, response.ResultCount);
       Assert.AreEqual(itemCount, response.ResultCount);
     }
   }

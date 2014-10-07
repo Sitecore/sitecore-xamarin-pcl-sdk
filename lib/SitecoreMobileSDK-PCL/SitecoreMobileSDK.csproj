@@ -220,6 +220,11 @@
     <Compile Include="API\Request\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IUploadMediaItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\UploadMediaItemRequestBuilder.cs" />
+    <Compile Include="API\Request\Parameters\IPagingParameters.cs" />
+    <Compile Include="UrlBuilder\PagingUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\GetPagedItemsUrlBuilder.cs" />
+    <Compile Include="Items\PagingParameters.cs" />
+    <Compile Include="API\Request\Paging\IPageNumberAccumulator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -278,5 +283,6 @@
       <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
       <Name>SitecoreMobileSdkPasswordProvider</Name>
     </ProjectReference>
+    <Folder Include="API\Request\Paging\" />
   </ItemGroup>
 </Project>

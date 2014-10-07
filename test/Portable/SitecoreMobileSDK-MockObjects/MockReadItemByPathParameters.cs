@@ -55,6 +55,8 @@ namespace MobileSDKUnitTest.Mock
 
     public IQueryParameters QueryParameters { get; set; }
 
+    public IPagingParameters PagingSettings { get; set; }
+
     public string ItemPath { get; set; }
 
     public int CopyInvocationCount { get; private set; }

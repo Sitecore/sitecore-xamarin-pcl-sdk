@@ -6,23 +6,25 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class ItemByIdUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByIdRequest>
+  public class ItemByIdUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByIdRequest>
   {
     public ItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base(restGrammar, webApiGrammar)
     {
     }
 
-    protected override string GetSpecificPartForRequest(IReadItemsByIdRequest request)
+    protected override string GetItemIdenticationForRequest(IReadItemsByIdRequest request)
     {
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
-      string result = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
+      string strItemId = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedId;
+      string lowerCaseItemId = strItemId.ToLowerInvariant();
 
-      return result.ToLowerInvariant();
+      return lowerCaseItemId;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByIdRequest request)
     {
+      base.ValidateSpecificRequest(request);
       ItemIdValidator.ValidateItemId(request.ItemId, this.GetType().Name + ".ItemId");
     }
   }

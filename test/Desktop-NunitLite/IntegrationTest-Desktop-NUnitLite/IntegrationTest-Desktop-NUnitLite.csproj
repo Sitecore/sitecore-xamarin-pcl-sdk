@@ -84,6 +84,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\OperationCancelTest.cs">
       <Link>OperationCancelTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ReadPagedItemsTest.cs">
+      <Link>ReadPagedItemsTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ScTestApiSession.cs">
       <Link>ScTestApiSession.cs</Link>
     </Compile>
@@ -107,6 +110,9 @@
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UpdateItemsTest.cs">
       <Link>UpdateItemsTest.cs</Link>
+    </Compile>
+	<Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetRenderingHTMLTest.cs">
+      <Link>GetRenderingHTMLTest.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

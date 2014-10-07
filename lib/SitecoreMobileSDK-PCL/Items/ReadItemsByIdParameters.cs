@@ -7,12 +7,18 @@
 
   public class ReadItemsByIdParameters : IReadItemsByIdRequest
   {
-    public ReadItemsByIdParameters(ISessionConfig sessionSettings, IItemSource itemSource, IQueryParameters queryParameters, string itemId)
+    public ReadItemsByIdParameters(
+      ISessionConfig sessionSettings, 
+      IItemSource itemSource, 
+      IQueryParameters queryParameters, 
+      IPagingParameters pagingSettings,
+      string itemId)
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
       this.ItemId = itemId;
       this.QueryParameters = queryParameters;
+      this.PagingSettings = pagingSettings;
     }
 
     public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
@@ -20,6 +26,7 @@
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
       IQueryParameters payload = null;
+      IPagingParameters pagingSettings = null;
 
       if (null != this.SessionSettings)
       {
@@ -36,7 +43,12 @@
         payload = this.QueryParameters.DeepCopy();
       }
 
-      return new ReadItemsByIdParameters(connection, itemSrc, payload, this.ItemId);
+      if (null != this.PagingSettings)
+      {
+        pagingSettings = this.PagingSettings.PagingParametersCopy();
+      }
+
+      return new ReadItemsByIdParameters(connection, itemSrc, payload, pagingSettings, this.ItemId);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -53,6 +65,8 @@
     public ISessionConfig SessionSettings { get; private set; }
 
     public IQueryParameters QueryParameters { get; private set; }
+  
+    public IPagingParameters PagingSettings { get; private set; }
   }
 }
 

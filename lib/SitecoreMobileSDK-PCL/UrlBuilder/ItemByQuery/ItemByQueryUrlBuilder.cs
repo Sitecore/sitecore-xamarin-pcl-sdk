@@ -6,24 +6,25 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class ItemByQueryUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByQueryRequest>
+  public class ItemByQueryUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByQueryRequest>
   {
     public ItemByQueryUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base(restGrammar, webApiGrammar)
     {
     }
 
-    protected override string GetSpecificPartForRequest(IReadItemsByQueryRequest request)
+    protected override string GetItemIdenticationForRequest(IReadItemsByQueryRequest request)
     {
-      this.ValidateRequest(request);
       string escapedQuery = UrlBuilderUtils.EscapeDataString(request.SitecoreQuery);
-      string result = this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
+      string formattedQuery = this.webApiGrammar.SitecoreQueryParameterName + this.restGrammar.KeyValuePairSeparator + escapedQuery;
 
-      return result;
+      return formattedQuery;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByQueryRequest request)
     {
+      base.ValidateSpecificRequest(request);
+
       SitecoreQueryValidator.ValidateSitecoreQuery(request.SitecoreQuery, this.GetType().Name + ".SitecoreQuery");
     }
   }

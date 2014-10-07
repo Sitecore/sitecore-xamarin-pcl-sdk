@@ -110,6 +110,12 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\LoginAndPasswordEncryptionTest.cs">
       <Link>LoginAndPasswordEncryptionTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\PagingRequestBuilderTest.cs">
+      <Link>PagingRequestBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\PagingUrlBuilderTest.cs">
+      <Link>PagingUrlBuilderTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\PortablePasswordStorageTest.cs">
       <Link>PortablePasswordStorageTest.cs</Link>
     </Compile>

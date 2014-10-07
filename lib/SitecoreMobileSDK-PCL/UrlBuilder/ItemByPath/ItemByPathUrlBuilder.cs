@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class ItemByPathUrlBuilder : AbstractGetItemUrlBuilder<IReadItemsByPathRequest>
+  public class ItemByPathUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByPathRequest>
   {
     public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base(restGrammar, webApiGrammar)
@@ -22,13 +22,14 @@
       return result;
     }
 
-    protected override string GetSpecificPartForRequest(IReadItemsByPathRequest request)
+    protected override string GetItemIdenticationForRequest(IReadItemsByPathRequest request)
     {
       return null;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)
     {
+      base.ValidateSpecificRequest(request);
       ItemPathValidator.ValidateItemPath(request.ItemPath, this.GetType().Name + ".ItemPath");
     }
   }
