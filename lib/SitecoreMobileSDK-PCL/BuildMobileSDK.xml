@@ -82,18 +82,49 @@
 
  <!-- ====================================================  -->
   <Target Name="DeviceTests">
-    <CallTarget Targets="UnitTest-iOS-Build"/>
-    <CallTarget Targets="IntegrationTest-iOS-Build"/>
+	<!-- Xamarin bug https://bugzilla.xamarin.com/show_bug.cgi?id=18357 -->
+	<!-- <CallTarget Targets="UnitTest-iOS-Build"/>        -->
+    <!-- <CallTarget Targets="IntegrationTest-iOS-Build"/> -->
 	<CallTarget Targets="UnitTest-Android-Build"/>
 	<CallTarget Targets="IntegrationTest-Android-Build"/>
   </Target>
   
   <Target Name="UnitTest-iOS-Build">
   <Message Text="Building iOS Unit Test App..." />
+    
+  	<Exec
+	  Command="&quot;$(MSBuildExe)&quot; MobileSDKUnitTest-iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release;Platform=iPhone"
+	  WorkingDirectory="$(RepositoryRoot)\test\iOS\MobileSDKUnitTest-iOS\" 
+      IgnoreExitCode="true"/>
+	
+	 <ItemGroup>
+      <UnitTestIOSArtefacts Include="$(RepositoryRoot)\test\iOS\MobileSDKUnitTest-iOS\bin\iPhone\Release\*.ipa" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(UnitTestIOSArtefacts)"
+      DestinationFolder="$(DeploymentDirectory) "
+     />
   </Target>
   
   <Target Name="IntegrationTest-iOS-Build">
-  <Message Text="Building iOS IntegrationTest Test App..." />
+    <Message Text="Building iOS IntegrationTest Test App..." />
+  
+    <Exec
+	  Command="&quot;$(MSBuildExe)&quot; MobileSDK-IntegrationTest-iOS.csproj  /t:Build;_RemoteBuild /p:Configuration=Release;Platform=iPhone"
+	  WorkingDirectory="$(RepositoryRoot)\test\iOS\MobileSDK-IntegrationTest-iOS\" 
+      IgnoreExitCode="true"/>
+	
+	 <ItemGroup>
+      <IntegrationTestIOSArtefacts Include="$(RepositoryRoot)\test\iOS\MobileSDK-IntegrationTest-iOS\bin\iPhone\Release\*.ipa" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(IntegrationTestIOSArtefacts)"
+      DestinationFolder="$(DeploymentDirectory) "
+     />
   </Target>
   
   <Target Name="UnitTest-Android-Build">
