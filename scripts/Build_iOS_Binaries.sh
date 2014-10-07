@@ -44,15 +44,15 @@ cd "$LAUNCH_DIR"
 ## create *.ipa
 xcrun -sdk iphoneos \
    PackageApplication "$REPOSITORY_ROOT/test/iOS/MobileSDKUnitTest-iOS/bin/iPhone/Release/MobileSDKUnitTestiOS.app" \
-   -o "$PWD/deployment/MobileSDKUnitTestiOS.ipa"
+   -o "$DEPLOYMENT_DIR/MobileSDKUnitTestiOS.ipa"
 
 xcrun -sdk iphoneos \
    PackageApplication "$REPOSITORY_ROOT/test/iOS/MobileSDK-IntegrationTest-iOS/bin/iPhone/Release/MobileSDKIntegrationTestiOS.app" \
-   -o "$PWD/deployment/MobileSDKIntegrationTestiOS.ipa"
+   -o "$DEPLOYMENT_DIR/MobileSDKIntegrationTestiOS.ipa"
 
 xcrun -sdk iphoneos \
    PackageApplication "$REPOSITORY_ROOT/app/WhiteLabel/iOS/WhiteLabel-iOS/bin/iPhone/Release/WhiteLabeliOS.app" \
-   -o "$PWD/deployment/WhiteLabeliOS.ipa"
+   -o "$DEPLOYMENT_DIR/WhiteLabeliOS.ipa"
 
 
 
