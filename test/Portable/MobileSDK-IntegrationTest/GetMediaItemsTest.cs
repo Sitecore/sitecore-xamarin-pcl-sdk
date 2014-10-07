@@ -394,6 +394,9 @@
       // Windows : "Response status code does not indicate success: 404 (Not Found)"
       // iOS     : "404 (Not Found)"
       Assert.IsTrue(exception.InnerException.Message.Contains("Not Found"));
+
+      //@adk : fails because CMS 7.1 returns HTTP 500 instead of HTTP 404
+      //      500 Internal Server Error
     }
 
     [Test]
