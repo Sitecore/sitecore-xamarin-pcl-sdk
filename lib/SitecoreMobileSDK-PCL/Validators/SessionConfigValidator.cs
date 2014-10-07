@@ -13,7 +13,11 @@
         return url;
       }
 
+      char[] slashes = { '/' };
+
       string result = "http://" + url;
+      result = result.TrimEnd(slashes);
+
       return result;
     }
 

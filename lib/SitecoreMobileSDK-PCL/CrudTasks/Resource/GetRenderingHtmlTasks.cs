@@ -1,7 +1,4 @@
-﻿using Sitecore.MobileSDK.PublicKey;
-
-
-namespace Sitecore.MobileSDK.CrudTasks.Resource
+﻿namespace Sitecore.MobileSDK.CrudTasks.Resource
 {
   using System;
   using System.Diagnostics;
@@ -9,11 +6,12 @@ namespace Sitecore.MobileSDK.CrudTasks.Resource
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
+  using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
-  public class GetRenderingHtmlTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, Stream>
+  internal class GetRenderingHtmlTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, Stream>
   {
     private GetRenderingHtmlTasks()
     {

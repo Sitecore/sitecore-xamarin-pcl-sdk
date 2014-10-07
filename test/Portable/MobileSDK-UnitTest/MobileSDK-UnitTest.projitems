@@ -40,5 +40,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PortablePasswordStorageTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagingUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagingRequestBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HashedUrlRequestBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HashedUrlResponseTest.cs" />
   </ItemGroup>
 </Project>

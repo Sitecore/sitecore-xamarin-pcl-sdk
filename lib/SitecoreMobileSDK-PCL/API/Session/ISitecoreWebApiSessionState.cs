@@ -1,3 +1,5 @@
+using Sitecore.MobileSDK.API.MediaItem;
+
 namespace Sitecore.MobileSDK.API.Session
 {
   using System;
@@ -35,6 +37,21 @@ namespace Sitecore.MobileSDK.API.Session
     /// </value>
     /// <seealso cref="IWebApiCredentials" />
     IWebApiCredentials Credentials { get; }
+
+    /// <summary>
+    /// Gets the settings : 
+    /// 
+    /// * Path of the media library root ("/Sitecore/Media Library")
+    /// * Default extension for media files ("ashx")
+    /// * media hook prefix ("~/media")
+    /// * Image resizing service to use
+    /// 
+    /// </summary>
+    /// <value>
+    /// The configuration.
+    /// </value>
+    /// <seealso cref="IMediaLibrarySettings"/>
+    IMediaLibrarySettings MediaLibrarySettings { get; }
   }
 }
 

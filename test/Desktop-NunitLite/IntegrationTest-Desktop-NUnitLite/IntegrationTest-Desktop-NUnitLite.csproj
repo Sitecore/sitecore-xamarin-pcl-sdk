@@ -78,6 +78,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsTest.cs">
       <Link>GetMediaItemsTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsWithHashesTest.cs">
+      <Link>GetMediaItemsWithHashesTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetPublicKeyTest.cs">
       <Link>GetPublicKeyTest.cs</Link>
     </Compile>

@@ -11,7 +11,7 @@
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.PublicKey;
 
-  public abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
+  internal abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
       where TRequest : class
   {
     private AbstractGetItemTask()

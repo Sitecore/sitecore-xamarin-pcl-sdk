@@ -1,4 +1,3 @@
-
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -12,7 +11,9 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API.MediaItem;
 
+  using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.TaskFlow;
@@ -34,6 +35,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
   using SitecoreMobileSdkPasswordProvider.API;
+
 
   public class ScApiSession : ISitecoreWebApiSession
   {
@@ -64,6 +66,7 @@ namespace Sitecore.MobileSDK
       this.httpClient = new HttpClient();
     }
 
+    #region IDisposable
     void ReleaseResources()
     {
       Exception credentialsException = null;
@@ -104,8 +107,7 @@ namespace Sitecore.MobileSDK
         throw httpClientException;
       }
     }
-
-
+      
     public virtual void Dispose()
     {
       this.ReleaseResources();
@@ -115,7 +117,10 @@ namespace Sitecore.MobileSDK
     {
 
     }
+    #endregion IDisposable
 
+
+    #region ISitecoreWebApiSessionState
     public IItemSource DefaultSource
     {
       get
@@ -139,6 +144,15 @@ namespace Sitecore.MobileSDK
         return this.credentials;
       }
     }
+
+    public IMediaLibrarySettings MediaLibrarySettings 
+    { 
+      get
+      {
+        return this.mediaSettings;
+      }
+    }
+    #endregion
 
     #region Forbidden Methods
 
@@ -260,17 +274,59 @@ namespace Sitecore.MobileSDK
     {
       IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
       IMediaResourceDownloadRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
+      DownloadStrategy downloadStrategyFromUser = this.mediaSettings.MediaDownloadStrategy;
+
+      if (DownloadStrategy.Plain == downloadStrategyFromUser)
+      {
+        return await this.DownloadPlainMediaResourceAsync(autocompletedRequest, cancelToken);
+      }
+      else if (DownloadStrategy.Hashed == downloadStrategyFromUser)
+      {
+        return await this.DownloadHashedMediaResourceAsync(autocompletedRequest, cancelToken);
+      }
+      else
+      {
+        throw new ArgumentException("Unexpected media download strategy specified");
+      }
+    }
+
+    private async Task<Stream> DownloadPlainMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
+        this.restGrammar,
+        this.webApiGrammar,
+        this.sessionConfig,
+        this.mediaSettings,
+        request.ItemSource);
+
+      var taskFlow = new GetResourceTask(urlBuilder, this.httpClient);
+      return await RestApiCallFlow.LoadResourceFromNetworkFlow(request, taskFlow, cancelToken);
+    }
+
+    private async Task<Stream> DownloadHashedMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      var cryptor = await this.GetCredentialsCryptorAsync(cancelToken);
 
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar,
+        this.webApiGrammar,
         this.sessionConfig,
         this.mediaSettings,
-        autocompletedRequest.ItemSource);
+        request.ItemSource);
 
-      var taskFlow = new GetResourceTask(urlBuilder, this.httpClient);
-      return await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      var hashUrlGetterFlow = new GetMediaContentHashTask(urlBuilder, this.httpClient, cryptor);
+      string hashedMediaUrl = await RestApiCallFlow.LoadRequestFromNetworkFlow(request, hashUrlGetterFlow, cancelToken);
+
+      try
+      {
+        Stream result = await this.httpClient.GetStreamAsync(hashedMediaUrl);
+        return result;
+      }
+      catch (Exception ex)
+      {
+        throw new LoadDataFromNetworkException(TaskFlowErrorMessages.NETWORK_EXCEPTION_MESSAGE, ex);
+      }
     }
-
     #endregion GetItems
 
     #region GetHTMLRendering

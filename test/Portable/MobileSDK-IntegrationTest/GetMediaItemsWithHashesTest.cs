@@ -13,8 +13,9 @@
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API.MediaItem;
 
+
   [TestFixture]
-  public class GetMediaItemsTest
+  public class GetMediaItemsWithHashesTest
   {
     private TestEnvironment testData;
     private ISitecoreWebApiReadonlySession session;
@@ -26,9 +27,9 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
       this.session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithoutMediaHashing)
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithMediaHashing)
           .Credentials(this.testData.Users.Admin)
-          .MediaResizingStrategy(DownloadStrategy.Plain)
+          .MediaResizingStrategy(DownloadStrategy.Hashed)
           .BuildReadonlySession();
     }
 
@@ -155,9 +156,6 @@
       // Windows : "Response status code does not indicate success: 404 (Not Found)"
       // iOS     : "404 (Not Found)"
       Assert.IsTrue(exception.InnerException.Message.Contains("Not Found"));
-
-      //@adk : fails because CMS 7.1u3 returns HTTP 500 instead of HTTP 404
-      //      500 Internal Server Error
     }
 
     [Test]
@@ -237,9 +235,6 @@
       // Windows : "Response status code does not indicate success: 404 (Not Found)"
       // iOS     : "404 (Not Found)"
       Assert.IsTrue(exception.InnerException.Message.Contains("Not Found"));
-
-      //@adk : fails because CMS 7.1u3 returns HTTP 500 instead of HTTP 404
-      //      500 Internal Server Error
     }
 
     [Test]
@@ -247,8 +242,8 @@
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
       var sessionNoReadAccess =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithoutMediaHashing)
-          .Credentials(this.testData.Users.NoReadUserExtranet)
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithMediaHashing)
+          .Credentials(this.testData.Users.NoReadAccess)
           .BuildReadonlySession();
 
       var options = new MediaOptionsBuilder().Set
@@ -401,9 +396,6 @@
       // Windows : "Response status code does not indicate success: 404 (Not Found)"
       // iOS     : "404 (Not Found)"
       Assert.IsTrue(exception.InnerException.Message.Contains("Not Found"));
-
-      //@adk : fails because CMS 7.1u3 returns HTTP 500 instead of HTTP 404
-      //      500 Internal Server Error
     }
 
     [Test]
