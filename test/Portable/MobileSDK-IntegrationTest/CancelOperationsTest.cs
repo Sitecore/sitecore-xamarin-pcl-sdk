@@ -163,7 +163,7 @@ namespace MobileSDKIntegrationTest
       const string RenderingId = "{447AA0FC-95C8-4EFD-B64E-FBF880C42E2D}";
       const string DatasourceId = "{44E7C4E6-764E-49ED-9850-9D1435E864CD}";
       var request =
-       ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(DatasourceId, RenderingId)
+       ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
          .SourceAndRenderingDatabase(null)
          .Build();
       var cancelToken = CreateCancelTokenWithDelay(5);
