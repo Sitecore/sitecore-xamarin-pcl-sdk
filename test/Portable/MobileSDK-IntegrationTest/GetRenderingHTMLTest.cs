@@ -80,6 +80,10 @@
     [Test]
     public async void TestGetRenderingForDanishLanguageAnd1Version()
     {
+      // @adk : bug in CMS 7.1
+      // sc_itemversion is ignored and is always set to "Latest"
+      // http://cms71u3.test24dk1.dk.sitecore.net/-/item/v1/-/actions/getrenderinghtml?sc_database=master&language=da&sc_itemversion=1&sc_itemid={44e7c4e6-764e-49ed-9850-9d1435e864cd}&renderingid={447aa0fc-95c8-4efd-b64e-fbf880c42e2d}
+
       var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingDatabase("master")
         .SourceAndRenderingLanguage("da")
