@@ -71,6 +71,7 @@
     <CallTarget Targets="SitecoreMobileSDK"/>
 	<CallTarget Targets="PasswordProvider"/>
     <CallTarget Targets="package"/>
+	<CallTarget Targets="DeviceTests"/>
     <CallTarget Targets="doc"/>
   </Target>
 
@@ -79,6 +80,30 @@
     <CallTarget Targets="IntegrationTest"/>
   </Target>
 
+ <!-- ====================================================  -->
+  <Target Name="DeviceTests">
+    <CallTarget Targets="UnitTest-iOS-Build"/>
+    <CallTarget Targets="IntegrationTest-iOS-Build"/>
+	<CallTarget Targets="UnitTest-Android-Build"/>
+	<CallTarget Targets="IntegrationTest-Android-Build"/>
+  </Target>
+  
+  <Target Name="UnitTest-iOS-Build">
+  <Message Text="Building iOS Unit Test App..." />
+  </Target>
+  
+  <Target Name="IntegrationTest-iOS-Build">
+  <Message Text="Building iOS IntegrationTest Test App..." />
+  </Target>
+  
+  <Target Name="UnitTest-Android-Build">
+  <Message Text="Building Android Unit Test App..." />
+  </Target>
+  
+  <Target Name="IntegrationTest-Android-Build">
+  <Message Text="Building Android IntegrationTest Test App..." />
+  </Target>
+  
 <!-- ====================================================  -->
   <Target Name="PasswordProvider">
     <Message Text="Building PasswordProvider Libraries..." />
