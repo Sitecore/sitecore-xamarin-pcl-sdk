@@ -5,9 +5,9 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class ReadMediaItemRequestBuilder : IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest>
+  public class DownloadMediaResourceRequestBuilder : IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest>
   {
-    public ReadMediaItemRequestBuilder(string mediaPath)
+    public DownloadMediaResourceRequestBuilder(string mediaPath)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(mediaPath, this.GetType().Name + ".MediaPath");
 

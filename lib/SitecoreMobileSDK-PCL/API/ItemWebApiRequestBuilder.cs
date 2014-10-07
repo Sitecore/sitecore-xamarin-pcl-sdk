@@ -65,7 +65,7 @@ namespace Sitecore.MobileSDK.API
     /// </returns>
     public static IGetMediaItemRequestParametersBuilder<IMediaResourceDownloadRequest> DownloadResourceRequestWithMediaPath(string mediaPath)
     {
-      return new ReadMediaItemRequestBuilder(mediaPath);
+      return new DownloadMediaResourceRequestBuilder(mediaPath);
     }
 
     /// <summary>
