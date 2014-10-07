@@ -2,6 +2,9 @@
 {
   using System;
   using System.Drawing;
+  using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API;
+  using System.IO;
 
   using MonoTouch.Foundation;
   using MonoTouch.UIKit;
@@ -60,7 +63,7 @@
 				UIImage originalImage = e.Info[UIImagePickerController.OriginalImage] as UIImage;
 				if(originalImage != null) 
 				{
-					AlertHelper.ShowLocalizedNotImlementedAlert();
+          this.SendImage(originalImage);
 				}
 			} 
 			else 
@@ -70,6 +73,46 @@
 
 			imagePicker.DismissViewController(true, null);
 		}
+
+    private async void SendImage(UIImage image)
+    {
+      try
+      {
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        {
+          Stream stream = image.AsJPEG().AsStream();
+          var request = ItemWebApiRequestBuilder.UploadResourceRequest(stream)
+            .ItemName("name1")
+            .ItemTemplate("System/Media/Unversioned/Image")
+            .MediaPath("")
+            .Build();
+
+          this.ShowLoader();
+
+          var response = await session.UploadMediaResourceAsync(request);
+
+          if (response != null)
+          {
+            AlertHelper.ShowAlertWithOkOption("upload image result","OK");
+          }
+          else
+          {
+            AlertHelper.ShowAlertWithOkOption("upload image result","something wrong");
+          }
+        }
+      }
+      catch(Exception e) 
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.HideLoader();
+        });
+      }
+    }
 
 		void Handle_Canceled(object sender, EventArgs e) 
 		{
