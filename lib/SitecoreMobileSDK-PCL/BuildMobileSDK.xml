@@ -80,14 +80,12 @@
   </Target>
 
 <!-- ====================================================  -->
-
   <Target Name="PasswordProvider">
     <Message Text="Building PasswordProvider Libraries..." />
     <CallTarget Targets="PasswordProviderWin"/>
     <CallTarget Targets="PasswordProviderIOS"/>
     <CallTarget Targets="PasswordProviderAndroid"/>	
   </Target>
-
 
   <Target Name="PasswordProviderWin">
     <Message Text="Building PasswordProvider For Windows..." />
@@ -346,11 +344,11 @@
     <Message Text="MobileSdkDll : @(MobileSdkDll)" />
 	
 
-	  <Message Text="===========" />
+	<Message Text="===========" />
     <Message Text="MobileSdkArtefacts : @(MobileSdkArtefacts, '&#x0d;&#x0a;')" />
     <Message Text="===========" />
 
-	  <Message Text="===========" />
+	<Message Text="===========" />
     <Message Text="ObjDirectories : @(ObjDirectories, '&#x0d;&#x0a;')" />
     <Message Text="===========" />
 
