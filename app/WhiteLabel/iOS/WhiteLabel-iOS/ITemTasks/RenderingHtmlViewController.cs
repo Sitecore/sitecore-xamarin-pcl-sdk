@@ -56,7 +56,7 @@ namespace WhiteLabeliOS
       {
         using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceRenderingId(sourceIdTextField.Text, renderingIdTextField.Text)
+          var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(sourceIdTextField.Text, renderingIdTextField.Text)
             .Build();
 
           this.ShowLoader();
