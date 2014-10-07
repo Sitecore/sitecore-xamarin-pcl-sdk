@@ -243,7 +243,7 @@
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
       var sessionNoReadAccess =
         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithMediaHashing)
-          .Credentials(this.testData.Users.NoReadAccess)
+          .Credentials(this.testData.Users.NoReadUserExtranet)
           .BuildReadonlySession();
 
       var options = new MediaOptionsBuilder().Set
