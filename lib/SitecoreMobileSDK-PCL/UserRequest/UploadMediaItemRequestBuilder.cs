@@ -80,7 +80,7 @@
     }
 
     //TODO: @igk add parameters value checking
-    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemTemplate(string itemTemplate)
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemTemplatePath(string templatePath)
     {
       this.itemTemplate = itemTemplate;
       return this;
@@ -102,7 +102,7 @@
 
     public IMediaResourceUploadRequest Build()
     {
-      CreateMediaParameters createMediaParameters = new CreateMediaParameters (
+      UploadMediaOptions createMediaParameters = new UploadMediaOptions (
         this.itemDataStream, 
         this.fileName,
         this.itemName,

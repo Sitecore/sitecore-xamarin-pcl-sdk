@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
+namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 {
   using System;
 
@@ -28,16 +28,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
       this.mediaSettings = mediaSettings;
       this.webApiGrammar = webApiGrammar;
     }
-      
-//    http://cms72u2.test24dk1.dk.sitecore.net/
-//    -/item/v1/
-//    sitecore/shell
-//    %2Fsitecore%2Fmedia%20library%2Fwhitelabel%2Fbigimagetestdata?
-//    name=TestMediaItem&
-//      template=System%2FMedia%2FUnversioned%2FImage&
-//      sc_database=web&
-//      sc_lang=en&
-//      payload=min
 
     public virtual string GetUrlForRequest(IMediaResourceUploadRequest request)
     {
@@ -90,27 +80,27 @@ namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 
     private string GetCommonPartForRequest(IMediaResourceUploadRequest request)
     {
-      return UrlBuilderUtils.EscapeDataString(this.mediaSettings.MediaLibraryRoot + request.CreateMediaParameters.MediaPath);
+      return UrlBuilderUtils.EscapeDataString(this.mediaSettings.MediaLibraryRoot + request.UploadOptions.MediaPath);
     }
 
     private string SpecificParametersForRequest(IMediaResourceUploadRequest request)
     {
       string result = "";
 
-      if (null != request.CreateMediaParameters.FileName)
+      if (null != request.UploadOptions.FileName)
       {
         result += this.restGrammar.FieldSeparator
           + this.webApiGrammar.ItemNameParameterName
           + this.restGrammar.KeyValuePairSeparator
-          + UrlBuilderUtils.EscapeDataString(request.CreateMediaParameters.ItemName);
+          + UrlBuilderUtils.EscapeDataString(request.UploadOptions.ItemName);
       }
 
-      if (null != request.CreateMediaParameters.ItemTemlate)
+      if (null != request.UploadOptions.ItemTemplatePath)
       {
         result += this.restGrammar.FieldSeparator
           + this.webApiGrammar.TemplateParameterName
           + this.restGrammar.KeyValuePairSeparator
-          + UrlBuilderUtils.EscapeDataString(request.CreateMediaParameters.ItemTemlate);
+          + UrlBuilderUtils.EscapeDataString(request.UploadOptions.ItemTemplatePath);
       }
 
       return result;
