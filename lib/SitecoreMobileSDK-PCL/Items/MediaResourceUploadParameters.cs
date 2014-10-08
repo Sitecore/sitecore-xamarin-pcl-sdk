@@ -13,12 +13,12 @@ namespace Sitecore.MobileSDK.Items
     (
       ISessionConfig sessionSettings,
       IItemSource itemSource,
-      CreateMediaParameters createMediaParameters
+      UploadMediaOptions uploadOptions
     )
     {
       this.SessionSettings = sessionSettings;
       this.ItemSource = itemSource;
-      this.CreateMediaParameters = createMediaParameters;
+      this.UploadOptions = uploadOptions;
     }
 
     public virtual IMediaResourceUploadRequest DeepCopyUploadMediaRequest()
@@ -36,7 +36,7 @@ namespace Sitecore.MobileSDK.Items
         itemSource = this.ItemSource.ShallowCopy();
       }
 
-      CreateMediaParameters createMediaParameters = this.CreateMediaParameters.ShallowCopy();
+      UploadMediaOptions createMediaParameters = this.UploadOptions.ShallowCopy();
 
       return new MediaResourceUploadParameters(connection, itemSource, createMediaParameters);
     }
@@ -50,7 +50,7 @@ namespace Sitecore.MobileSDK.Items
 
     public ISessionConfig SessionSettings { get; private set; }
 
-    public CreateMediaParameters CreateMediaParameters { get; private set; }
+    public UploadMediaOptions UploadOptions { get; private set; }
 
     public IQueryParameters QueryParameters { get; private set; }
   }
