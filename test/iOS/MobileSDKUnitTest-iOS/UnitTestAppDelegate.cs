@@ -59,15 +59,13 @@
 
 
 
-      var reportStream = new NUnitLite.Runner.NUnit2XmlOutputWriter();
-      var targetStreamOnBuildServer = new TcpTextWriter("darthvader.local", 16384);
+      var reportStream = new NUnitLite.Runner.NUnit2XmlOutputWriter(DateTime.Now);
+
+//      string host = "localhost";
+      string host = "10.38.10.236"; // @adk mac-mini
+      var targetStreamOnBuildServer = new TcpTextWriter(host, 16388);
 
       runner.Writer = new NUnitOutputTextWriter(runner, targetStreamOnBuildServer, reportStream);
-
-//      string reportPath = null;
-//      bool isStreamForAppending = false;
-//      var writer = new StreamWriter(reportPath, isStreamForAppending, Encoding.UTF8);
-//      runner.Writer = writer;
     }
   }
 }
