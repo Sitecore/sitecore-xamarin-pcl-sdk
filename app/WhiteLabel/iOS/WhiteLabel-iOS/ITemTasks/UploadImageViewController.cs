@@ -82,7 +82,9 @@
         {
           Stream stream = image.AsJPEG().AsStream();
           var request = ItemWebApiRequestBuilder.UploadResourceRequest(stream)
-            .ItemName("name1")
+            .FileName("namebla.jpg")
+            .ItemName("bugaga")
+            .ContentType("image/jpg")
             .ItemTemplate("System/Media/Unversioned/Image")
             .MediaPath("")
             .Build();
