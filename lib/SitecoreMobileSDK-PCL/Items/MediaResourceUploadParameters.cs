@@ -40,11 +40,18 @@ namespace Sitecore.MobileSDK.Items
 
       return new MediaResourceUploadParameters(connection, itemSource, createMediaParameters);
     }
+
+    public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
+    {
+      return this.DeepCopyUploadMediaRequest();
+    }
       
     public IItemSource ItemSource { get; private set; }
 
     public ISessionConfig SessionSettings { get; private set; }
 
     public CreateMediaParameters CreateMediaParameters { get; private set; }
+
+    public IQueryParameters QueryParameters { get; private set; }
   }
 }

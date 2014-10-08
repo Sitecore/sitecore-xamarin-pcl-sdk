@@ -35,11 +35,21 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// <returns>this</returns>
     IUploadMediaItemRequestParametersBuilder<T> Version(int? itemVersion);
 
+    /// <summary>
+    /// Specifies file's name, must include file resolution.
+    /// For example: image.jpg.
+    /// </summary>
+    /// <param name="fileName">File name.</param>
+    /// <returns>this</returns>
+    IUploadMediaItemRequestParametersBuilder<T> FileName(string fileName);
+
     IUploadMediaItemRequestParametersBuilder<T> ItemName(string itemName);
 
     IUploadMediaItemRequestParametersBuilder<T> ItemTemplate(string itemName);
 
     IUploadMediaItemRequestParametersBuilder<T> MediaPath(string path);
+
+    IUploadMediaItemRequestParametersBuilder<T> ContentType(string contentType);
 
     /// <summary>
     /// Builds request for dowloading media item.

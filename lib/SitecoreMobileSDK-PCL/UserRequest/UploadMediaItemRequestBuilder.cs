@@ -66,6 +66,13 @@
     }
 
     //TODO: @igk add parameters value checking
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> FileName(string fileName)
+    {
+      this.fileName = fileName;
+      return this;
+    }
+
+    //TODO: @igk add parameters value checking
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemName(string itemName)
     {
       this.itemName = itemName;
@@ -86,13 +93,22 @@
       return this;
     }
 
+    //TODO: @igk add parameters value checking
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ContentType(string contentType)
+    {
+      this.contentType = contentType;
+      return this;
+    }
+
     public IMediaResourceUploadRequest Build()
     {
       CreateMediaParameters createMediaParameters = new CreateMediaParameters (
         this.itemDataStream, 
-        this.itemName, 
+        this.fileName,
+        this.itemName,
         this.itemTemplate, 
-        this.mediaPath
+        this.mediaPath,
+        this.contentType
       ); 
       var result = new MediaResourceUploadParameters(null, this.itemSourceAccumulator, createMediaParameters);
       return result;
@@ -101,9 +117,11 @@
     protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
 
     private Stream itemDataStream;
+    private string fileName;
     private string itemName;
     private string itemTemplate;
     private string mediaPath;
+    private string contentType;
   }
 }
 

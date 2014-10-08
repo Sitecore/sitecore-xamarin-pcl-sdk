@@ -21,7 +21,7 @@ namespace Sitecore.MobileSDK.API.Session
     ///  <see cref="Stream" /> Download resource Stream.
     /// </returns>
     Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken));
-    Task<string> UploadMediaResourceAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScItemsResponse> UploadMediaResourceAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken));
 
   }
 }

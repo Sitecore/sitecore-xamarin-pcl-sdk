@@ -95,12 +95,12 @@
     {
       string result = "";
 
-      if (null != request.CreateMediaParameters.ImageName)
+      if (null != request.CreateMediaParameters.FileName)
       {
         result += this.restGrammar.FieldSeparator
           + this.webApiGrammar.ItemNameParameterName
           + this.restGrammar.KeyValuePairSeparator
-          + UrlBuilderUtils.EscapeDataString(request.CreateMediaParameters.ImageName);
+          + UrlBuilderUtils.EscapeDataString(request.CreateMediaParameters.ItemName);
       }
 
       if (null != request.CreateMediaParameters.ItemTemlate)

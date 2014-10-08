@@ -13,20 +13,20 @@
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.PublicKey;
 
-  public class UploadMediaTask : IDownloadApiCallTasks<IMediaResourceUploadRequest, HttpRequestMessage, string>
+  public class UploadMediaTask : AbstractGetItemTask<IMediaResourceUploadRequest>
   {
 
     public UploadMediaTask(UploadMediaUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+      : base(httpClient, credentialsHeadersCryptor)
     {
       this.urlBuilder = urlBuilder;
       this.credentialsHeadersCryptor = credentialsHeadersCryptor;
       this.httpClient = httpClient;
     }
       
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken)
+    public override async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
-     // string url = "http://mobiledev1ua1.dk.sitecore.net:722/-/item/v1/sitecore/shell%2Fsitecore%2Fmedia%20library%2Fwhitelabel%2Fbigimagetestdata?name=TestMediaItem&template=System%2FMedia%2FUnversioned%2FImage&sc_database=web&sc_lang=en&payload=min";
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
 
       byte[] data = this.ReadFully(request.CreateMediaParameters.ImageDataStream);
@@ -34,13 +34,16 @@
       MultipartFormDataContent multiPartContent = new MultipartFormDataContent();
 
       ByteArrayContent byteArrayContent = new ByteArrayContent (data);
-      byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
 
-      string name = "\"datafile\"";
-      string filename = "\"image.jpg\"";
+      byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(request.CreateMediaParameters.ContentType);
 
       multiPartContent.Add(byteArrayContent);
 
+      //@igk server side issue, the following parameters must contaign quotes
+      string name = "\"datafile\"";
+      string filename = "\"" + request.CreateMediaParameters.FileName + "\"";
+      //@igk hack to have name/filename parameters with quotes under the "Content-Disposition" header, do not move this
+      //to the multiPartContent.Add(..) method
       byteArrayContent.Headers.Add ("Content-Disposition", "form-data; name=" + name + "; filename=" + filename);
        
       result.Content = multiPartContent;
@@ -51,16 +54,7 @@
 
     }
 
-    public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
-    {
-      //TODO: @igk debug request output, remove later
-      Debug.WriteLine("REQUEST: " + requestUrl);
-
-      HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
-      return await httpResponse.Content.ReadAsStringAsync();
-    }
-
-    protected string UrlToGetItemWithRequest(IMediaResourceUploadRequest request)
+    protected override string UrlToGetItemWithRequest(IMediaResourceUploadRequest request)
     {
       return this.urlBuilder.GetUrlForRequest(request);
     }
