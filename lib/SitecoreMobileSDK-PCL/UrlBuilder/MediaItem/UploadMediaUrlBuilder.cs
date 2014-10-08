@@ -1,4 +1,5 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
+﻿
+namespace Sitecore.MobileSDK.UrlBuilder.CreateItem
 {
   using System;
 
@@ -11,6 +12,7 @@
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
   using Sitecore.MobileSDK.Utils;
+  using Sitecore.MobileSDK.API.MediaItem;
 
   public class UploadMediaUrlBuilder
   {
