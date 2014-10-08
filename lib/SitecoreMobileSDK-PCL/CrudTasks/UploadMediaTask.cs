@@ -1,17 +1,18 @@
-﻿namespace Sitecore.MobileSDK.CrudTasks
+﻿
+namespace Sitecore.MobileSDK.CrudTasks
 {
+  using System.IO;
+  using System.Text;
   using System.Threading;
   using System.Threading.Tasks;
   using System.Net.Http;
-  using System.Text;
-  using Sitecore.MobileSDK.TaskFlow;
-  using System.IO;
-  using System.Diagnostics;
   using System.Net.Http.Headers;
+  using System.Diagnostics;
 
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.PublicKey;
+  using Sitecore.MobileSDK.TaskFlow;
+  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 
   internal class UploadMediaTask : AbstractGetItemTask<IMediaResourceUploadRequest>
   {
@@ -29,19 +30,19 @@
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
 
-      byte[] data = this.ReadFully(request.CreateMediaParameters.ImageDataStream);
+      byte[] data = this.ReadFully(request.UploadOptions.ImageDataStream);
 
       MultipartFormDataContent multiPartContent = new MultipartFormDataContent();
 
       ByteArrayContent byteArrayContent = new ByteArrayContent (data);
 
-      byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(request.CreateMediaParameters.ContentType);
+      byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(request.UploadOptions.ContentType);
 
       multiPartContent.Add(byteArrayContent);
 
       //@igk server side issue, the following parameters must contaign quotes
       string name = "\"datafile\"";
-      string filename = "\"" + request.CreateMediaParameters.FileName + "\"";
+      string filename = "\"" + request.UploadOptions.FileName + "\"";
       //@igk hack to have name/filename parameters with quotes under the "Content-Disposition" header, do not move this
       //to the multiPartContent.Add(..) method
       byteArrayContent.Headers.Add ("Content-Disposition", "form-data; name=" + name + "; filename=" + filename);
