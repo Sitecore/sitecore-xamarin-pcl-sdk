@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.NUnit.UI;
-using System.IO;
-using System.Text;
-using MonoTouch.NUnit;
-
-namespace MobileSDKUnitTestiOS
+﻿namespace MobileSDKUnitTestiOS
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+  using MonoTouch.NUnit.UI;
+  using System.IO;
+  using System.Text;
+  using MonoTouch.NUnit;
+
+
   // The UIApplicationDelegate for the application. This class is responsible for launching the
   // User Interface of the application, as well as listening (and optionally responding) to
   // application events from iOS.
