@@ -13,7 +13,7 @@
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.PublicKey;
 
-  public class UploadMediaTask : AbstractGetItemTask<IMediaResourceUploadRequest>
+  internal class UploadMediaTask : AbstractGetItemTask<IMediaResourceUploadRequest>
   {
 
     public UploadMediaTask(UploadMediaUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
