@@ -11,7 +11,7 @@
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
-  public class GetRenderingHtmlTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, Stream>
+  internal class GetRenderingHtmlTasks : IDownloadApiCallTasks<IGetRenderingHtmlRequest, HttpRequestMessage, Stream>
   {
     private GetRenderingHtmlTasks()
     {

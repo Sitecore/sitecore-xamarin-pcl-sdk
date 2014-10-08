@@ -11,6 +11,9 @@
     {
       var result = new TestEnvironment
       {
+        InstanceWithMediaHashing = "http://cms75.test24dk1.dk.sitecore.net",
+        InstanceWithoutMediaHashing = "http://cms71u3.test24dk1.dk.sitecore.net",
+
         InstanceUrl = "http://cms71u3.test24dk1.dk.sitecore.net",
         ShellSite = "/sitecore/shell"
       };
@@ -52,6 +55,9 @@
     }
 
     private TestEnvironment() { }
+    public string InstanceWithMediaHashing { get; private set; }
+    public string InstanceWithoutMediaHashing { get; private set; }
+
     public string InstanceUrl { get; private set; }
     public string ShellSite { get; private set; }
 

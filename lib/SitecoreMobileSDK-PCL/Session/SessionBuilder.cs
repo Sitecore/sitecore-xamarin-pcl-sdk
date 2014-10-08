@@ -1,6 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.Session
 {
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
@@ -27,7 +28,8 @@
       var mediaSettings = new MediaLibrarySettings(
         optionalMediaRoot,
         optionalMediaExtension,
-        optionalMediaPrefix);
+        optionalMediaPrefix,
+        this.resizingFlag);
 
       var itemSource = new ItemSource(
         this.itemSourceAccumulator.Database,
@@ -232,6 +234,12 @@
       this.mediaPrefix = mediaPrefix;
       return this;
     }
+
+    public IBaseSessionBuilder MediaResizingStrategy(DownloadStrategy resizingFlag)
+    {
+      this.resizingFlag = resizingFlag;
+      return this;
+    }
     #endregion IAnonymousSessionBuilder
 
     #region State
@@ -241,6 +249,7 @@
     private string mediaRoot;
     private string mediaExtension;
     private string mediaPrefix;
+    DownloadStrategy resizingFlag = DownloadStrategy.Plain;
 
     private IWebApiCredentials credentials = null;
     private ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);

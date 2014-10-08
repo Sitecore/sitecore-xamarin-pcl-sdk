@@ -38,6 +38,9 @@
       result = result.Replace("'", "%27");
       result = result.Replace("!", "%21");
 
+      // result = result.Replace("?", "%3f");
+      result = result.Replace("%3F", "%3f");
+
       return result;
     }
   }

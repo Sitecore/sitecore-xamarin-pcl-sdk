@@ -5,7 +5,7 @@
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.API.Request;
 
-  public class UpdateItemByIdTask : AbstractUpdateItemTask<IUpdateItemByIdRequest>
+  internal class UpdateItemByIdTask : AbstractUpdateItemTask<IUpdateItemByIdRequest>
   {
     public UpdateItemByIdTask(UpdateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)

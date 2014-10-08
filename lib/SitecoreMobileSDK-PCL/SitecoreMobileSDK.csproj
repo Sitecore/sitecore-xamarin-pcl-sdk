@@ -98,7 +98,6 @@
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
     <Compile Include="UrlBuilder\MediaItem\DownloadMediaOptions.cs" />
     <Compile Include="UserRequest\AbstractScopedRequestParametersBuilder.cs" />
-    <Compile Include="UserRequest\ReadMediaItemRequestBuilder.cs" />
     <Compile Include="ScApiSession.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />
     <Compile Include="PublicKeyX509Certificate.cs" />
@@ -176,7 +175,6 @@
     <Compile Include="Validators\MediaPathValidator.cs" />
     <Compile Include="Validators\SessionConfigValidator.cs" />
     <Compile Include="Validators\MediaOptionsValidator.cs" />
-    <Compile Include="API\IMediaLibrarySettings.cs" />
     <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
     <Compile Include="Validators\WebApiCredentialsValidator.cs" />
     <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
@@ -225,6 +223,13 @@
     <Compile Include="UrlBuilder\GetPagedItemsUrlBuilder.cs" />
     <Compile Include="Items\PagingParameters.cs" />
     <Compile Include="API\Request\Paging\IPageNumberAccumulator.cs" />
+    <Compile Include="UserRequest\DownloadMediaResourceRequestBuilder.cs" />
+    <Compile Include="API\MediaItem\IMediaLibrarySettings.cs" />
+    <Compile Include="API\MediaItem\DownloadStrategy.cs" />
+    <Compile Include="CrudTasks\GetMediaContentHashTask.cs" />
+    <Compile Include="CrudTasks\Resource\HashedMediaUrlParser.cs" />
+    <Compile Include="Session\TaskFlowErrorMessages.cs" />
+    <Compile Include="UrlBuilder\WebApiActionBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

@@ -86,6 +86,12 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\GetItemsParserTest.cs">
       <Link>GetItemsParserTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\HashedUrlRequestBuilderTest.cs">
+      <Link>HashedUrlRequestBuilderTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-UnitTest\HashedUrlResponseTest.cs">
+      <Link>HashedUrlResponseTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\ItemByIdUrlBuilderTests.cs">
       <Link>ItemByIdUrlBuilderTests.cs</Link>
     </Compile>

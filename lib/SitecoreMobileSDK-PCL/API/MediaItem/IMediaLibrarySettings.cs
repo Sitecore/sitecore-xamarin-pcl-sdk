@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.API
+﻿namespace Sitecore.MobileSDK.API.MediaItem
 {
   /// <summary>
   /// Interface represents settings that specifies the rules to build media requests. 
@@ -36,6 +36,11 @@
     /// By default: '~/media'.
     /// </summary>
     string MediaPrefix
+    {
+      get;
+    }
+
+    DownloadStrategy MediaDownloadStrategy
     {
       get;
     }

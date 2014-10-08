@@ -12,6 +12,7 @@
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder;
 
   class AuthenticateTasks : IRestApiCallTasks<ISessionConfig, HttpRequestMessage, string, WebApiJsonStatusMessage>
   {
@@ -67,10 +68,8 @@
 
     private string PrepareRequestUrl(ISessionConfig request)
     {
-      return this.urlBuilder.BuildUrlString(request)
-        + this.restGrammar.PathComponentSeparator
-        + this.webApiGrammar.ItemWebApiActionsEndpoint
-        + this.webApiGrammar.ItemWebApiAuthenticateAction;
+      WebApiActionBuilder builder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar); 
+      return builder.GetAuthenticateActionUrlForSession(request);
     }
 
     #endregion IRestApiCallTasks

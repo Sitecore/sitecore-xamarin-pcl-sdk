@@ -2,23 +2,29 @@
 {
   using System;
   using System.Globalization;
+  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.Validators;
+  using Sitecore.MobileSDK.Utils;
+  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+
 
   public class MediaItemUrlBuilder
   {
     public MediaItemUrlBuilder(
       IRestServiceGrammar restGrammar,
+      IWebApiUrlParameters webApiGrammar,
       ISessionConfig sessionConfig,
       IMediaLibrarySettings mediaSettings,
       IItemSource itemSource)
     {
       this.itemSource = itemSource;
       this.restGrammar = restGrammar;
+      this.webApiGrammar = webApiGrammar;
       this.mediaSettings = mediaSettings;
       this.sessionConfig = sessionConfig;
 
@@ -90,6 +96,21 @@
       return result.ToLowerInvariant();
     }
 
+    public string BuildUrlToRequestHashForPath(string path, IDownloadMediaOptions options)
+    {
+      string originalUrl = this.BuildUrlStringForPath(path, options);
+      string encodedOriginalUrl = UrlBuilderUtils.EscapeDataString(originalUrl);
+
+      var actionBuilder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar);
+      string result = actionBuilder.GetHashedMediaUrlAction(this.sessionConfig);
+
+      result = result +
+        this.restGrammar.HostAndArgsSeparator + 
+        this.webApiGrammar.UrlForHashingParameterName + this.restGrammar.KeyValuePairSeparator + encodedOriginalUrl;
+
+      return result;
+    }
+
     private string SerializeOptions(IDownloadMediaOptions options)
     {
       bool isValidMediaOptions = MediaOptionsValidator.IsValidMediaOptions(options);
@@ -151,6 +172,7 @@
 
     private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;
+    private IWebApiUrlParameters webApiGrammar;
     private ISessionConfig sessionConfig;
     private IMediaLibrarySettings mediaSettings;
   }

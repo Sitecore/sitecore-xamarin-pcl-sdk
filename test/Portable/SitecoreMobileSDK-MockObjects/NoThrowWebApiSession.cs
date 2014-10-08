@@ -10,6 +10,7 @@
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.MediaItem;
 
   using Sitecore.MobileSDK.Items;
   using SitecoreMobileSdkPasswordProvider.API;
@@ -45,11 +46,6 @@
         Debug.WriteLine("Suppressed exception : " + Environment.NewLine + ex.ToString());
         return null;
       }
-      catch
-      {
-        Debug.WriteLine("Suppressed unknown exception");
-        return null;
-      }
     }
 
     #region Getter Properties
@@ -74,6 +70,14 @@
       get
       {
         return this.workerSession.Credentials;
+      }
+    }
+
+    public IMediaLibrarySettings MediaLibrarySettings 
+    {
+      get
+      {
+        return this.workerSession.MediaLibrarySettings;
       }
     }
     #endregion 

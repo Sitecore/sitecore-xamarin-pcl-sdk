@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.API.Request;
 
-  public class GetItemsByQueryTasks : AbstractGetItemTask<IReadItemsByQueryRequest>
+  internal class GetItemsByQueryTasks : AbstractGetItemTask<IReadItemsByQueryRequest>
   {
     public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
       : base(httpClient, credentialsHeadersCryptor)
