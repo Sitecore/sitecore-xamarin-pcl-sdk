@@ -3,7 +3,9 @@
   using System.Collections.Generic;
   using System.IO;
 
-  public class CreateMediaParameters
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
+  public class CreateMediaParameters : ICreateMediaParameters
   {
     public CreateMediaParameters(
       Stream imageDataStream, 
@@ -27,7 +29,6 @@
       return new CreateMediaParameters(this.ImageDataStream, this.FileName, this.ItemName, this.ItemTemlate, this.MediaPath, this.ContentType);
     }
 
-    //TODO: @igk imageData probably should be moved to request?
     public Stream ImageDataStream { get; private set; }
     public string FileName { get; private set; }
     public string ItemName { get; private set; }
