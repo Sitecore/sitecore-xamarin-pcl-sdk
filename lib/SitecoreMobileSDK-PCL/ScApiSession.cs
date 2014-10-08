@@ -335,7 +335,6 @@ namespace Sitecore.MobileSDK
     {
       IMediaResourceUploadRequest requestCopy = request.DeepCopyUploadMediaRequest();
 
-      //TODO: @igk check if we need cryptor here?
       using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
       {
         IMediaResourceUploadRequest autocompletedRequest = this.requestMerger.FillUploadMediaGaps(requestCopy);
