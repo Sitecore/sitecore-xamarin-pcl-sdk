@@ -213,7 +213,6 @@
     <Compile Include="API\Request\IMediaResourceUploadRequest.cs" />
     <Compile Include="Items\MediaResourceUploadParameters.cs" />
     <Compile Include="UrlBuilder\MediaItem\UploadMediaUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\MediaItem\CreateMediaParameters.cs" />
     <Compile Include="CrudTasks\UploadMediaTask.cs" />
     <Compile Include="API\Request\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IUploadMediaItemRequestParametersBuilder.cs" />
@@ -230,6 +229,8 @@
     <Compile Include="CrudTasks\Resource\HashedMediaUrlParser.cs" />
     <Compile Include="Session\TaskFlowErrorMessages.cs" />
     <Compile Include="UrlBuilder\WebApiActionBuilder.cs" />
+    <Compile Include="API\Request\Parameters\IUploadMediaOptions.cs" />
+    <Compile Include="UrlBuilder\MediaItem\UploadMediaOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
