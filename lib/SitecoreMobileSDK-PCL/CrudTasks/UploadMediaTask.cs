@@ -35,18 +35,15 @@ namespace Sitecore.MobileSDK.CrudTasks
       MultipartFormDataContent multiPartContent = new MultipartFormDataContent();
 
       ByteArrayContent byteArrayContent = new ByteArrayContent (data);
-
       byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(request.UploadOptions.ContentType);
 
-      multiPartContent.Add(byteArrayContent);
+      ContentDispositionHeaderValue cdHeaderValue = new ContentDispositionHeaderValue ("data");
+      cdHeaderValue.FileName = "\"" + request.UploadOptions.FileName + "\"";
+      cdHeaderValue.Name = "\"datafile\"";
+      byteArrayContent.Headers.ContentDisposition = cdHeaderValue;
 
-      //@igk server side issue, the following parameters must contaign quotes
-      string name = "\"datafile\"";
-      string filename = "\"" + request.UploadOptions.FileName + "\"";
-      //@igk hack to have name/filename parameters with quotes under the "Content-Disposition" header, do not move this
-      //to the multiPartContent.Add(..) method
-      byteArrayContent.Headers.Add ("Content-Disposition", "form-data; name=" + name + "; filename=" + filename);
-       
+      multiPartContent.Add(byteArrayContent);
+     
       result.Content = multiPartContent;
 
       result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
