@@ -84,7 +84,7 @@
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemTemplatePath(string templatePath)
     {
       ItemPathValidator.ValidateItemTemplate(templatePath, this.GetType().Name + ".templatePath");
-      BaseValidator.CheckForTwiceSetAndThrow(this.ItemTemplatePath, this.GetType().Name + ".ItemTemplatePath");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemTemplate, this.GetType().Name + ".templatePath");
       this.itemTemplate = itemTemplate;
       return this;
     }
