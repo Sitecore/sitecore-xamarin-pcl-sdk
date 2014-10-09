@@ -8,17 +8,17 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class UploadMediaItemRequestBuilder : IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest>
+  public class UploadMediaItemByParentPathRequestBuilder : IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest>
   {
-    public UploadMediaItemRequestBuilder(string parentPath)
+    public UploadMediaItemByParentPathRequestBuilder(string parentPath)
     {
       this.mediaPath = parentPath;
     }
 
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemDataStream(Stream itemDataStream)
     {
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow (fileName, "UploadMediaItemRequestParametersBuilder.ItemDataStream is required");
-      BaseValidator.CheckForTwiceSetAndThrow(this.fileName, this.GetType().Name + ".itemDataStream");
+      BaseValidator.CheckNullAndThrow (itemDataStream, "UploadMediaItemRequestParametersBuilder.ItemDataStream is required");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemDataStream, this.GetType().Name + ".itemDataStream");
       this.itemDataStream = itemDataStream;
       return this;
     }
@@ -98,14 +98,6 @@
       return this;
     }
 
-    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> MediaPath(string mediaPath)
-    {
-      ItemPathValidator.ValidateItemPath(mediaPath, this.GetType().Name + ".mediaPath");
-      BaseValidator.CheckForTwiceSetAndThrow(this.mediaPath, this.GetType().Name + ".mediaPath");
-      this.mediaPath = mediaPath;
-      return this;
-    }
-
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ContentType(string contentType)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(contentType, "UploadMediaItemRequestParametersBuilder.contentType is required");
@@ -141,6 +133,7 @@
     private string itemTemplate;
     private string mediaPath;
     private string contentType;
+    protected string parentId;
   }
 }
 

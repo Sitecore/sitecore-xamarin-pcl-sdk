@@ -31,7 +31,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
     public virtual string GetUrlForRequest(IMediaResourceUploadRequest request)
     {
-      this.ValidateRequest(request);
 
       string hostUrl = this.GetHostUrlForRequest(request);
       string baseUrl = this.GetCommonPartForRequest(request).ToLowerInvariant();
@@ -63,12 +62,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
       return result;
     }
-
-    protected virtual void ValidateRequest(IMediaResourceUploadRequest request)
-    {
-      this.ValidateCommonRequest(request);
-    }
-  
 
     protected virtual string GetHostUrlForRequest(IMediaResourceUploadRequest request)
     {
@@ -105,13 +98,6 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
       return result;
     }
-
-    private void ValidateCommonRequest(IMediaResourceUploadRequest request)
-    {
-
-    }
-
-  
 
     private void Validate()
     {

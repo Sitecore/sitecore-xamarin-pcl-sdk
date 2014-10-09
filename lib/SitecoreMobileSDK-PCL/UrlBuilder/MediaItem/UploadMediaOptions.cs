@@ -20,7 +20,7 @@
       this.FileName = fileName; 
       this.ItemName = itemName; 
       this.ItemTemplatePath = itemTemlatePath;
-      this.MediaPath = mediaPath;
+      this.mediaPath = mediaPath;
       this.ContentType = contentType;
     }
 
@@ -33,8 +33,23 @@
     public string FileName { get; private set; }
     public string ItemName { get; private set; }
     public string ItemTemplatePath { get; private set; }
-    public string MediaPath { get; private set; }
     public string ContentType { get; private set; }
+    public string MediaPath 
+    { 
+      get 
+      { 
+        if (null == this.mediaPath)
+        {
+          return @"";
+        }
+        else
+        {
+          return this.mediaPath;
+        }
+      }
+    }
+
+    private string mediaPath;
   }
 }
 

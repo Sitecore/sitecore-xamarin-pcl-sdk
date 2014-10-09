@@ -1,5 +1,8 @@
+
 namespace Sitecore.MobileSDK.API.Request.Parameters
 {
+  using System.IO;
+
   /// <summary>
   /// Interface represents fluent flow for building <see cref="IMediaResourceDownloadRequest"/>
   /// </summary>
@@ -8,12 +11,19 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   where T : class
   {
     /// <summary>
+    /// Specifies resource data strem.
+    /// </summary>
+    /// <param name="itemDataStream">Data stream.</param>
+    /// <returns>this</returns>
+    IUploadMediaItemRequestParametersBuilder<T> ItemDataStream(Stream itemDataStream);
+
+    /// <summary>
     /// Specifies source database for media item.
     /// For example: "web".
     /// 
     /// The value is case insensitive.
     /// </summary>
-    /// <param name="database">Databse name.</param>
+    /// <param name="database">Database name.</param>
     /// <returns>this</returns>
     IUploadMediaItemRequestParametersBuilder<T> Database(string database);
 
@@ -58,14 +68,6 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// <param name="templatePath">The template path.</param>
     /// <returns>this</returns>
     IUploadMediaItemRequestParametersBuilder<T> ItemTemplatePath(string templatePath);
-
-    /// <summary>
-    /// Sepcifies folder path, relative to the media library folder.
-    /// Must stars with the '/' symbol.
-    /// </summary>
-    /// <param name="path">Path to the folder.</param>
-    /// <returns>this</returns>
-    IUploadMediaItemRequestParametersBuilder<T> MediaPath(string path);
 
     /// <summary>
     /// Sepcifies the media item's file content type.

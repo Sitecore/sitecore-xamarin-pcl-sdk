@@ -123,6 +123,11 @@
       return await this.InvokeNoThrow(this.workerSession.CreateItemAsync(request, cancelToken));
     }
 
+    public async Task<ScItemsResponse> UploadMediaResourceAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.UploadMediaResourceAsync(request, cancelToken));
+    }
+
     #endregion CreateItems
 
     #region Update Items

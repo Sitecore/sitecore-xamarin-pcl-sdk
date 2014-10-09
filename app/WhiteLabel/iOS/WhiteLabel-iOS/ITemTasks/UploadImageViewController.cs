@@ -81,12 +81,11 @@
         using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
           Stream stream = image.AsJPEG().AsStream();
-          var request = ItemWebApiRequestBuilder.UploadResourceRequest(stream)
+          var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("")
+            .ItemDataStream(stream)
             .ContentType("image/jpg")
             .ItemName("name1")
             .FileName("bugaga.jpg")
-            .ItemTemplatePath("System/Media/Unversioned/Image")
-            .MediaPath("")
             .Build();
 
           this.ShowLoader();
