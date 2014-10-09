@@ -93,7 +93,7 @@
     {
       ItemPathValidator.ValidateItemTemplate(templatePath, this.GetType().Name + ".templatePath");
       BaseValidator.CheckForTwiceSetAndThrow(this.itemTemplate, this.GetType().Name + ".templatePath");
-      this.itemTemplate = itemTemplate;
+      this.itemTemplate = templatePath;
       return this;
     }
 
