@@ -154,6 +154,28 @@ namespace Sitecore.MobileSdkUnitTest
 
       Assert.Throws<ArgumentNullException>(() => builder.Build());
     }
+      
+    [Test]
+    public void TestEmptyFileName()
+    {
+      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path");
+      Assert.Throws<ArgumentException>(() => builder.FileName(""));
+    }
+
+    [Test]
+    public void TestEmptyItemName()
+    {
+      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path");
+      Assert.Throws<ArgumentException>(() => builder.ItemName(""));
+    }
+
+    [Test]
+    public void TestEmptyContentType()
+    {
+      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path");
+      Assert.Throws<ArgumentException>(() => builder.ContentType(""));
+    }
+
 
     [Test]
     public void TestCorrectParamsForParentPath()
