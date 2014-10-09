@@ -216,7 +216,6 @@
     <Compile Include="CrudTasks\UploadMediaTask.cs" />
     <Compile Include="API\Request\IGetMediaItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\IUploadMediaItemRequestParametersBuilder.cs" />
-    <Compile Include="UserRequest\UploadMediaItemRequestBuilder.cs" />
     <Compile Include="API\Request\Parameters\IPagingParameters.cs" />
     <Compile Include="UrlBuilder\PagingUrlBuilder.cs" />
     <Compile Include="UrlBuilder\GetPagedItemsUrlBuilder.cs" />
@@ -231,6 +230,8 @@
     <Compile Include="UrlBuilder\WebApiActionBuilder.cs" />
     <Compile Include="API\Request\Parameters\IUploadMediaOptions.cs" />
     <Compile Include="UrlBuilder\MediaItem\UploadMediaOptions.cs" />
+    <Compile Include="UserRequest\UploadMediaItemByParentPathRequestBuilder.cs" />
+    <Compile Include="UserRequest\UploadMediaItemByParentIdRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
