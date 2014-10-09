@@ -11,12 +11,6 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   public interface IUploadMediaOptions
   {
     /// <summary>
-    /// Performs deep copy of <seealso cref="IUploadMediaOptions"/>
-    /// </summary>
-    /// <returns><seealso cref="IUploadMediaOptions"/></returns>
-    IUploadMediaOptions DeepCopyMediaUploadOptions();
-
-    /// <summary>
     /// Specifies media resource data.
     /// </summary>
     /// <returns>Data Stream</returns>
