@@ -65,43 +65,51 @@
       return this;
     }
 
-    //TODO: @igk add parameters value checking
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> FileName(string fileName)
     {
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow (fileName, "UploadMediaItemRequestParametersBuilder.FileName is required");
       this.fileName = fileName;
       return this;
     }
 
-    //TODO: @igk add parameters value checking
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemName(string itemName)
     {
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemName, "UploadMediaItemRequestParametersBuilder.ItemName is required");
+
       this.itemName = itemName;
       return this;
     }
 
-    //TODO: @igk add parameters value checking
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemTemplatePath(string templatePath)
     {
+      ItemPathValidator.ValidateItemTemplate(templatePath, this.GetType().Name + ".templatePath");
       this.itemTemplate = itemTemplate;
       return this;
     }
 
-    //TODO: @igk add parameters value checking
-    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> MediaPath(string path)
+    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> MediaPath(string mediaPath)
     {
-      this.mediaPath = path;
+      ItemPathValidator.ValidateItemPath(mediaPath, this.GetType().Name + ".mediaPath");
+      this.mediaPath = mediaPath;
       return this;
     }
 
-    //TODO: @igk add parameters value checking
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ContentType(string contentType)
     {
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(contentType, "UploadMediaItemRequestParametersBuilder.contentType is required");
       this.contentType = contentType;
       return this;
     }
 
     public IMediaResourceUploadRequest Build()
     {
+      BaseValidator.CheckNullAndThrow(this.itemDataStream, this.GetType().Name + ".itemDataStream");
+      BaseValidator.CheckNullAndThrow(this.fileName, this.GetType().Name + ".fileName");
+      BaseValidator.CheckNullAndThrow(this.itemName, this.GetType().Name + ".itemName");
+      BaseValidator.CheckNullAndThrow(this.itemTemplate, this.GetType().Name + ".itemTemplate");
+      BaseValidator.CheckNullAndThrow(this.mediaPath, this.GetType().Name + ".mediaPath");
+      BaseValidator.CheckNullAndThrow(this.contentType, this.GetType().Name + ".contentType");
+
       UploadMediaOptions createMediaParameters = new UploadMediaOptions (
         this.itemDataStream, 
         this.fileName,
