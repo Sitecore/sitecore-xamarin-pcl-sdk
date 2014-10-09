@@ -24,16 +24,6 @@
       this.ContentType = contentType;
     }
 
-    public IUploadMediaOptions DeepCopyMutableMediaUploadOptions()
-    {
-      return null;
-    }
-
-    public IUploadMediaOptions DeepCopyMediaUploadOptions()
-    {
-      return this.DeepCopyMutableMediaUploadOptions();
-    }
-
     public UploadMediaOptions ShallowCopy()
     {
       return new UploadMediaOptions(this.ImageDataStream, this.FileName, this.ItemName, this.ItemTemplatePath, this.MediaPath, this.ContentType);
