@@ -13,6 +13,7 @@
       string itemName,
       string itemTemlatePath,
       string mediaPath,
+      string parentId,
       string contentType
     )
     {
@@ -22,11 +23,12 @@
       this.ItemTemplatePath = itemTemlatePath;
       this.mediaPath = mediaPath;
       this.ContentType = contentType;
+      this.ParentId = parentId;
     }
 
     public UploadMediaOptions ShallowCopy()
     {
-      return new UploadMediaOptions(this.ImageDataStream, this.FileName, this.ItemName, this.ItemTemplatePath, this.MediaPath, this.ContentType);
+      return new UploadMediaOptions(this.ImageDataStream, this.FileName, this.ItemName, this.ItemTemplatePath, this.MediaPath, this.ParentId, this.ContentType);
     }
 
     public Stream ImageDataStream { get; private set; }
@@ -34,6 +36,8 @@
     public string ItemName { get; private set; }
     public string ItemTemplatePath { get; private set; }
     public string ContentType { get; private set; }
+    public string ParentId { get; private set; }
+
     public string MediaPath 
     { 
       get 

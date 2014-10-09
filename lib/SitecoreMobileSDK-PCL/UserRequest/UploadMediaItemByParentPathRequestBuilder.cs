@@ -23,7 +23,6 @@
       return this;
     }
 
-
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> Database(string database)
     {
       if (string.IsNullOrEmpty(database))
@@ -119,6 +118,7 @@
         this.itemName,
         this.itemTemplate, 
         this.mediaPath,
+        this.parentId,
         this.contentType
       ); 
       var result = new MediaResourceUploadParameters(null, this.itemSourceAccumulator, createMediaParameters);

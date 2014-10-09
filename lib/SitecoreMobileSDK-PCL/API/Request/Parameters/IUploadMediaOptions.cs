@@ -50,6 +50,8 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// </summary>
     /// <returns>Content type.</returns>
     string ContentType { get; }
+
+    string ParentId { get; }
   }
 }
 

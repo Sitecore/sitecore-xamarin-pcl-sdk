@@ -21,6 +21,7 @@
     /// <seealso cref="IUploadMediaOptions" />
     /// <returns><seealso cref="IUploadMediaOptions"/></returns>
     UploadMediaOptions UploadOptions { get; }
+
   }
 }
 

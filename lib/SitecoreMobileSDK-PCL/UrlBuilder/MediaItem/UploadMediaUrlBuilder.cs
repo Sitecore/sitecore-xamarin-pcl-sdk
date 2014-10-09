@@ -96,6 +96,14 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
           + UrlBuilderUtils.EscapeDataString(request.UploadOptions.ItemTemplatePath);
       }
 
+      if (null != request.UploadOptions.ParentId)
+      {
+        result += this.restGrammar.FieldSeparator
+          + this.webApiGrammar.ItemIdParameterName
+          + this.restGrammar.KeyValuePairSeparator
+          + UrlBuilderUtils.EscapeDataString(request.UploadOptions.ParentId);
+      }
+
       return result;
     }
 

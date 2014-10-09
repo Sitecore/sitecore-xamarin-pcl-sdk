@@ -81,7 +81,14 @@
         using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
           Stream stream = image.AsJPEG().AsStream();
-          var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("")
+//          var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("")
+//            .ItemDataStream(stream)
+//            .ContentType("image/jpg")
+//            .ItemName("name1")
+//            .FileName("bugaga.jpg")
+//            .Build();
+
+          var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId("{BC1BAE61-ADC6-4B37-B36E-01059B26CF84}")
             .ItemDataStream(stream)
             .ContentType("image/jpg")
             .ItemName("name1")
