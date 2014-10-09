@@ -68,6 +68,7 @@
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> FileName(string fileName)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow (fileName, "UploadMediaItemRequestParametersBuilder.FileName is required");
+      BaseValidator.CheckForTwiceSetAndThrow(this.fileName, this.GetType().Name + ".fileName");
       this.fileName = fileName;
       return this;
     }
@@ -75,7 +76,7 @@
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemName(string itemName)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemName, "UploadMediaItemRequestParametersBuilder.ItemName is required");
-
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemName, this.GetType().Name + ".itemName");
       this.itemName = itemName;
       return this;
     }
@@ -83,6 +84,7 @@
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemTemplatePath(string templatePath)
     {
       ItemPathValidator.ValidateItemTemplate(templatePath, this.GetType().Name + ".templatePath");
+      BaseValidator.CheckForTwiceSetAndThrow(this.ItemTemplatePath, this.GetType().Name + ".ItemTemplatePath");
       this.itemTemplate = itemTemplate;
       return this;
     }
@@ -90,6 +92,7 @@
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> MediaPath(string mediaPath)
     {
       ItemPathValidator.ValidateItemPath(mediaPath, this.GetType().Name + ".mediaPath");
+      BaseValidator.CheckForTwiceSetAndThrow(this.mediaPath, this.GetType().Name + ".mediaPath");
       this.mediaPath = mediaPath;
       return this;
     }
@@ -97,6 +100,7 @@
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ContentType(string contentType)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(contentType, "UploadMediaItemRequestParametersBuilder.contentType is required");
+      BaseValidator.CheckForTwiceSetAndThrow(this.contentType, this.GetType().Name + ".contentType");
       this.contentType = contentType;
       return this;
     }
