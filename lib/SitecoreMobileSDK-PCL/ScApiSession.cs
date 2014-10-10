@@ -36,7 +36,6 @@ namespace Sitecore.MobileSDK
 
   using SitecoreMobileSdkPasswordProvider.API;
 
-
   public class ScApiSession : ISitecoreWebApiSession
   {
     public ScApiSession(
@@ -118,7 +117,6 @@ namespace Sitecore.MobileSDK
 
     }
     #endregion IDisposable
-
 
     #region ISitecoreWebApiSessionState
     public IItemSource DefaultSource

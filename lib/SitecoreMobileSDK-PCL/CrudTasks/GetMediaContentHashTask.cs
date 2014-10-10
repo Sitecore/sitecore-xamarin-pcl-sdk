@@ -13,7 +13,6 @@
 
   using Sitecore.MobileSDK.API.Request;
 
-
   internal class GetMediaContentHashTask : IRestApiCallTasks
   <
     IMediaResourceDownloadRequest, 
