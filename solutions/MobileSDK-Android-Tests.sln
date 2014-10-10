@@ -15,17 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{46462244
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{F4684840-46F5-4BED-9E05-A2C45C381BE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Integration-Tests", "..\test\Android\MobileSDK-Android-Integration-Tests\MobileSDK-Android-Integration-Tests.csproj", "{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Integration-Tests", "..\test\Android\MobileSDK-Android-Integration-Tests\MobileSDK-Android-Integration-Tests.csproj", "{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{40853BAA-B317-4F6B-9F40-C55A529BD583}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.shproj", "{8A52A2A6-20A1-42BD-B586-242F77089B1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Unit-Tests", "..\test\Android\MobileSDK-Android-Unit-Tests\MobileSDK-Android-Unit-Tests.csproj", "{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureStringPasswordProvider-Android", "..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\SecureStringPasswordProvider-Android.csproj", "{8578D879-0661-4986-A37C-D37538458981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Unit-Tests", "..\test\Android\MobileSDK-Android-Unit-Tests\MobileSDK-Android-Unit-Tests.csproj", "{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +41,10 @@ Global
 		{8578D879-0661-4986-A37C-D37538458981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8578D879-0661-4986-A37C-D37538458981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8578D879-0661-4986-A37C-D37538458981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -50,12 +54,12 @@ Global
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
@@ -65,11 +69,11 @@ Global
 		{25A7AAE3-E76A-4C4F-AA0E-24983166C37D} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
 		{F4684840-46F5-4BED-9E05-A2C45C381BE2} = {46462244-D5D8-44B6-A46E-5EA74117B523}
 		{40853BAA-B317-4F6B-9F40-C55A529BD583} = {46462244-D5D8-44B6-A46E-5EA74117B523}
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
 		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
 		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
 		{8578D879-0661-4986-A37C-D37538458981} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ..\test\Android\MobileSDK-Android-Unit-Tests\MobileSDK-Android-Unit-Tests.csproj

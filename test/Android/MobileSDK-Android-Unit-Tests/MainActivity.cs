@@ -4,21 +4,21 @@ using Android.App;
 using Android.OS;
 using Xamarin.Android.NUnitLite;
 
-namespace MobileSDKAndroidTests
+namespace MobileSDKAndroidUnitTests
 {
-    [Activity(Label = "MobileSDK-Android-Tests", MainLauncher = true)]
-    public class MainActivity : TestSuiteActivity
+  [Activity(Label = "MobileSDK-Android-Unit-Tests", MainLauncher = true)]
+  public class MainActivity : TestSuiteActivity
+  {
+    protected override void OnCreate(Bundle bundle)
     {
-        protected override void OnCreate(Bundle bundle)
-        {
-            // tests can be inside the main assembly
-            AddTest(Assembly.GetExecutingAssembly());
-            // or in any reference assemblies
-            // AddTest (typeof (Your.Library.TestClass).Assembly);
+      // tests can be inside the main assembly
+      AddTest(Assembly.GetExecutingAssembly());
+      // or in any reference assemblies
+      // AddTest (typeof (Your.Library.TestClass).Assembly);
 
-            // Once you called base.OnCreate(), you cannot add more assemblies.
-            base.OnCreate(bundle);
-        }
+      // Once you called base.OnCreate(), you cannot add more assemblies.
+      base.OnCreate(bundle);
     }
+  }
 }
 

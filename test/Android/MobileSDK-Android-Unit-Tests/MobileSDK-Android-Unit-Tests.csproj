@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}</ProjectGuid>
+    <ProjectGuid>{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>MobileSDKAndroidUnitTests</RootNamespace>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
@@ -14,10 +14,8 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AssemblyName>MobileSDK-Android-Unit-Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\solutions\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,17 +43,23 @@
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
     <Reference Include="Xamarin.Android.NUnitLite" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\solutions\packages\Newtonsoft.Json.6.0.3\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="crypto">
-      <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
+      <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.7.0.1\lib\portable-net4+sl5+wp8+win8+wpa81\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\solutions\packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\monoandroid\System.Net.Http.Extensions.dll</HintPath>
+      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.28\lib\monoandroid\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\monoandroid\System.Net.Http.Primitives.dll</HintPath>
+      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.28\lib\monoandroid\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
   </ItemGroup>
@@ -66,18 +70,22 @@
     <Compile Include="Android_PasswordStorageTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
     <None Include="packages.config" />
+    <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <Import Project="..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <Import Project="..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <ItemGroup>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\SecureStringPasswordProvider-Android.csproj">
+      <Project>{8578D879-0661-4986-A37C-D37538458981}</Project>
+      <Name>SecureStringPasswordProvider-Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>SitecoreMobileSDK</Name>
@@ -90,16 +98,5 @@
       <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
       <Name>SitecoreMobileSdkPasswordProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\SecureStringPasswordProvider-Android.csproj">
-      <Project>{8578D879-0661-4986-A37C-D37538458981}</Project>
-      <Name>SecureStringPasswordProvider-Android</Name>
-    </ProjectReference>
   </ItemGroup>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
 </Project>

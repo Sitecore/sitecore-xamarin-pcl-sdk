@@ -1,4 +1,4 @@
-﻿namespace MobileSDKUnitTestiOS
+﻿namespace MobileSDKUnitTestiAndroid
 {
   using System;
   using NUnit.Framework;
