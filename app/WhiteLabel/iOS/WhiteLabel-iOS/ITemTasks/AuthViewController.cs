@@ -20,8 +20,6 @@
     {
       base.ViewDidLoad();
 
-
-
       this.loginField.ShouldReturn = this.HideKeyboard;
       this.passwordField.ShouldReturn = this.HideKeyboard;
 
