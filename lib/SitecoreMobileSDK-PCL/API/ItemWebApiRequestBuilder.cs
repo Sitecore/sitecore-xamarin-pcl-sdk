@@ -1,5 +1,7 @@
 namespace Sitecore.MobileSDK.API
 {
+  using System.IO;
+
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Template;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -162,16 +164,40 @@ namespace Sitecore.MobileSDK.API
     /// Provides builder for constructing read rendering request with source item id and rendering item id.
     /// </summary>
     /// <param name="sourceId">Source item GUID values enclosed in curly braces.
-    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
-    /// <returns>
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"</param>
     /// <param name="renderingId">Rendering item GUID values enclosed in curly braces.
-    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"</param>
     /// <returns>
-    ///   <see cref="IGetRenderingHtmlRequest{T}" />Get rendering html request.
+    ///   <see cref="IRenderingHtmlRequestParametersBuilder{T}" />Get rendering html request builder.
     /// </returns>
     public static IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> RenderingHtmlRequestWithSourceAndRenderingId(string sourceId, string renderingId)
     {
       return new RenderingHtmlRequestBuilder(sourceId, renderingId);
+    }
+
+    /// <summary>
+    /// Provides builder for constructing create upload media request with parent item path.
+    /// </summary>
+    /// <param name="itemPath">Relative to the media library folder. Must stars with the '/' symbol.</param>
+    /// <returns>
+    ///   <see cref="IUploadMediaItemRequestParametersBuilder{T}" />Upload media request builder.
+    /// </returns>
+    public static IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> UploadResourceRequestWithParentPath(string mediaPath)
+    {
+      return new UploadMediaItemByParentPathRequestBuilder(mediaPath);
+    }
+
+    /// <summary>
+    /// Provides builder for constructing create upload media request with parent item Id.
+    /// </summary>
+    /// <param name="parentId">Source item GUID values enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"</param>
+    /// <returns>
+    ///   <see cref="IUploadMediaItemRequestParametersBuilder{T}" />Upload media request builder.
+    /// </returns>
+    public static IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> UploadResourceRequestWithParentId(string parentId)
+    {
+      return new UploadMediaItemByParentIdRequestBuilder(parentId);
     }
   }
 }

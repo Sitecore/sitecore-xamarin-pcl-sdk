@@ -42,5 +42,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)PagingRequestBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HashedUrlRequestBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HashedUrlResponseTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UploadMediaUrlBuilderTests.cs" />
   </ItemGroup>
 </Project>
