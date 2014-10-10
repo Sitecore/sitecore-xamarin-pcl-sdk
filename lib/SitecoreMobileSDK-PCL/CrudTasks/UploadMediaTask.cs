@@ -30,20 +30,19 @@ namespace Sitecore.MobileSDK.CrudTasks
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
 
-      byte[] data = this.ReadFully(request.UploadOptions.ImageDataStream);
-
       MultipartFormDataContent multiPartContent = new MultipartFormDataContent();
 
-      ByteArrayContent byteArrayContent = new ByteArrayContent (data);
-      byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(request.UploadOptions.ContentType);
+      StreamContent strContent = new StreamContent (request.UploadOptions.ImageDataStream);
 
       ContentDispositionHeaderValue cdHeaderValue = new ContentDispositionHeaderValue ("data");
       cdHeaderValue.FileName = "\"" + request.UploadOptions.FileName + "\"";
       cdHeaderValue.Name = "\"datafile\"";
-      byteArrayContent.Headers.ContentDisposition = cdHeaderValue;
 
-      multiPartContent.Add(byteArrayContent);
-     
+      strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(request.UploadOptions.ContentType);
+      strContent.Headers.ContentDisposition = cdHeaderValue;
+
+      multiPartContent.Add(strContent);
+
       result.Content = multiPartContent;
 
       result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
@@ -55,15 +54,6 @@ namespace Sitecore.MobileSDK.CrudTasks
     protected override string UrlToGetItemWithRequest(IMediaResourceUploadRequest request)
     {
       return this.urlBuilder.GetUrlForRequest(request);
-    }
-
-    private byte[] ReadFully(Stream input)
-    {
-      using (MemoryStream ms = new MemoryStream())
-      {
-        input.CopyTo(ms);
-        return ms.ToArray();
-      }
     }
 
     private HttpClient httpClient;
