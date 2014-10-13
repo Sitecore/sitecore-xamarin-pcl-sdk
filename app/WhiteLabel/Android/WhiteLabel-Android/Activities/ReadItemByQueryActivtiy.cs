@@ -23,15 +23,15 @@ namespace WhiteLabelAndroid.SubActivities
 
     private void InitViews()
     {
-      this.itemFieldLabel.Text = GetString(Resource.String.text_query_label);
+      this.ItemFieldLabel.Text = GetString(Resource.String.text_query_label);
 
       this.ItemFieldEditText.Hint = GetString(Resource.String.hint_query);
 
-      this.scopeContainer.Visibility = ViewStates.Gone;
-      this.payloadContainer.Visibility = ViewStates.Gone;
-      this.fieldNameContainer.Visibility = ViewStates.Gone;
+      this.ScopeContainer.Visibility = ViewStates.Gone;
+      this.PayloadContainer.Visibility = ViewStates.Gone;
+      this.FieldNameContainer.Visibility = ViewStates.Gone;
 
-      this.getItemsButton.Click += (sender, args) =>
+      this.GetItemsButton.Click += (sender, args) =>
       {
         if (string.IsNullOrEmpty(this.ItemFieldEditText.Text))
         {

@@ -17,23 +17,23 @@ namespace WhiteLabelAndroid.Activities
     protected Prefs prefs;
     
     #region Views
-    protected RadioGroup payloadRadioGroup;
+    private RadioGroup payloadRadioGroup;
     private ListView itemsListView;
 
     private CheckBox scopeParentCheckBox;
     private CheckBox scopeSelfCheckBox;
     private CheckBox scopeChildrenCheckBox;
     
-    protected EditText fieldNamEditText;
+    protected EditText FieldNamEditText;
 
-    protected TextView itemFieldLabel;
+    protected TextView ItemFieldLabel;
     protected EditText ItemFieldEditText;
 
-    protected Button getItemsButton;
+    protected Button GetItemsButton;
 
-    protected LinearLayout fieldNameContainer;
-    protected LinearLayout payloadContainer;
-    protected LinearLayout scopeContainer;
+    protected LinearLayout FieldNameContainer;
+    protected LinearLayout PayloadContainer;
+    protected LinearLayout ScopeContainer;
     #endregion
 
     private IEnumerable<ISitecoreItem> items;
@@ -62,18 +62,18 @@ namespace WhiteLabelAndroid.Activities
       this.scopeSelfCheckBox = this.FindViewById<CheckBox>(Resource.Id.checkbox_scope_self);
       this.scopeChildrenCheckBox = this.FindViewById<CheckBox>(Resource.Id.checkbox_scope_children);
 
-      this.scopeContainer = this.FindViewById<LinearLayout>(Resource.Id.container_scope);
+      this.ScopeContainer = this.FindViewById<LinearLayout>(Resource.Id.container_scope);
 
-      this.fieldNamEditText = this.FindViewById<EditText>(Resource.Id.field_item_field);
+      this.FieldNamEditText = this.FindViewById<EditText>(Resource.Id.field_item_field);
 
       this.ItemFieldEditText = this.FindViewById<EditText>(Resource.Id.field_item);
-      this.itemFieldLabel = this.FindViewById<TextView>(Resource.Id.label);
+      this.ItemFieldLabel = this.FindViewById<TextView>(Resource.Id.label);
 
-      this.getItemsButton = this.FindViewById<Button>(Resource.Id.button_get_item);
+      this.GetItemsButton = this.FindViewById<Button>(Resource.Id.button_get_item);
 
-      this.fieldNameContainer = this.FindViewById<LinearLayout>(Resource.Id.container_item_field);
+      this.FieldNameContainer = this.FindViewById<LinearLayout>(Resource.Id.container_item_field);
 
-      this.payloadContainer = this.FindViewById<LinearLayout>(Resource.Id.container_payload);
+      this.PayloadContainer = this.FindViewById<LinearLayout>(Resource.Id.container_payload);
     }
 
     protected IEnumerable<ScopeType> GetSelectedScopes()
@@ -113,16 +113,16 @@ namespace WhiteLabelAndroid.Activities
       }
     }
 
-    protected void PopulateItemsList(IEnumerable<ISitecoreItem> items)
+    protected void PopulateItemsList(IEnumerable<ISitecoreItem> receivedItems)
     {
-      this.items = items;
+      this.items = receivedItems;
 
-      var count = items.Count();
+      var count = this.items.Count();
       var listItems = new string[count];
 
       for (int i = 0; i < count; i++)
       {
-        ISitecoreItem item = items.ElementAt(i);
+        ISitecoreItem item = this.items.ElementAt(i);
         listItems[i] = item.DisplayName;
       }
       this.itemsListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, listItems);

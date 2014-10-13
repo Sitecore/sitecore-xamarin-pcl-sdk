@@ -22,10 +22,10 @@ namespace WhiteLabelAndroid.Activities
 
     private void InitViews()
     {
-      this.itemFieldLabel.Text = this.GetString(Resource.String.text_path_label);
+      this.ItemFieldLabel.Text = this.GetString(Resource.String.text_path_label);
       this.ItemFieldEditText.Hint = this.GetString(Resource.String.hint_item_path);
 
-      this.getItemsButton.Click += (sender, args) =>
+      this.GetItemsButton.Click += (sender, args) =>
       {
         if (string.IsNullOrEmpty(this.ItemFieldEditText.Text))
         {
@@ -51,9 +51,9 @@ namespace WhiteLabelAndroid.Activities
           builder.AddScope(scopes);
         }
 
-        if (!string.IsNullOrWhiteSpace(this.fieldNamEditText.Text))
+        if (!string.IsNullOrWhiteSpace(this.FieldNamEditText.Text))
         {
-          builder.AddFieldsToRead(this.fieldNamEditText.Text);
+          builder.AddFieldsToRead(this.FieldNamEditText.Text);
         }
 
         this.SetProgressBarIndeterminateVisibility(true);
