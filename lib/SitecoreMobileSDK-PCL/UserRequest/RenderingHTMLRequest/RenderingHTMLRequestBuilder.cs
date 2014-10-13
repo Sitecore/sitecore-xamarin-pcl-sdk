@@ -70,7 +70,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> AddAdditionalParameterNameValue(string parameterName, string parameterValue)
+    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> AddRenderingParameterNameValue(string parameterName, string parameterValue)
     {
       BaseValidator.CheckForNullAndEmptyOrThrow(parameterName, this.GetType().Name + ".fieldName");
       BaseValidator.CheckForNullAndEmptyOrThrow(parameterValue, this.GetType().Name + ".fieldValue");
@@ -92,7 +92,7 @@ namespace Sitecore.MobileSDK.UserRequest
       return this;
     }
 
-    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> AddAdditionalParameterNameValue(IDictionary<string, string> parametersValuesByName)
+    public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> AddRenderingParameterNameValue(IDictionary<string, string> parametersValuesByName)
     {
       BaseValidator.CheckNullAndThrow(parametersValuesByName, this.GetType().Name + ".ParametersValuesByName");
 
@@ -103,7 +103,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
       foreach (var parameter in parametersValuesByName)
       {
-        this.AddAdditionalParameterNameValue(parameter.Key, parameter.Value);
+        this.AddRenderingParameterNameValue(parameter.Key, parameter.Value);
       }
 
       return this;

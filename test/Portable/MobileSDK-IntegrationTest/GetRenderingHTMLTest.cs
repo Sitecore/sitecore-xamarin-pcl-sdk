@@ -139,8 +139,8 @@
     {
       var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
         .SourceAndRenderingDatabase("master")
-        .AddAdditionalParameterNameValue("a", "aaaa")
-        .AddAdditionalParameterNameValue("b", "bbbb")
+        .AddRenderingParameterNameValue("a", "aaaa")
+        .AddRenderingParameterNameValue("b", "bbbb")
         .Build();
       var response = await this.GetStringResponse(this.sessionAuthenticatedUser, request);
       const string Expected = "<div><h1>Sitecore</h1><div><p>Welcome to Sitecore!</p></div><div><p> a: aaaa</p><p> b: bbbb</p></div></div>";
@@ -181,11 +181,9 @@
     [Test]
     public void TestGetRenderingWithNullItemVersionDoesNotReturnException()
     {
-      var request = 
-        ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
-          .SourceVersion(null)
-          .Build();
-      Assert.IsNotNull(request);
+        var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        .SourceVersion(null));
+      Assert.IsTrue(exception.Message.Contains("Argument cannot be null."));
     }
 
     [Test]
@@ -264,7 +262,7 @@
         ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
           .SourceAndRenderingDatabase("  ")
           .Build());
-      Assert.AreEqual("RenderingHtmlRequestBuilder.SourceAndRenderingDatabase : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("RenderingHtmlRequestBuilder.Database : The input cannot be empty.", exception.Message);
     }
 
 

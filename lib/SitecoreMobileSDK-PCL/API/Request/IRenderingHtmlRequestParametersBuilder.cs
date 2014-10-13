@@ -54,7 +54,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// <param name="parameterName"> Parameter name</param>
     /// <param name="parameterValue"> Parameter value</param>
     /// <returns>this</returns>
-    IRenderingHtmlRequestParametersBuilder<T> AddAdditionalParameterNameValue(string parameterName, string parameterValue);
+    IRenderingHtmlRequestParametersBuilder<T> AddRenderingParameterNameValue(string parameterName, string parameterValue);
 
     /// <summary>
     /// Adds custom parameters list for rendering.
@@ -63,7 +63,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// </summary>
     /// <param name="parametersValuesByName"> Parameter and parameter value pairs</param>
     /// <returns>this</returns>
-    IRenderingHtmlRequestParametersBuilder<T> AddAdditionalParameterNameValue(IDictionary<string, string> parametersValuesByName);
+    IRenderingHtmlRequestParametersBuilder<T> AddRenderingParameterNameValue(IDictionary<string, string> parametersValuesByName);
 
     /// <summary>
     /// Builds request with specified parameters.
