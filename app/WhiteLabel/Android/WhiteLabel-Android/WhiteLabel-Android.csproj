@@ -89,6 +89,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\SecureStringPasswordProvider-Android.csproj">
+      <Project>{8578d879-0661-4986-a37c-d37538458981}</Project>
+      <Name>SecureStringPasswordProvider-Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
+      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
+      <Name>SitecoreMobileSdkPasswordProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>SitecoreMobileSDK</Name>

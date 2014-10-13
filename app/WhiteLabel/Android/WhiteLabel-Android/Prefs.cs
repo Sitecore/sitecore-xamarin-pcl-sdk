@@ -2,6 +2,7 @@ namespace WhiteLabelAndroid
 {
   using Android.Content;
   using Android.Preferences;
+  using SecureStringPasswordProvider.Android;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
@@ -122,7 +123,7 @@ namespace WhiteLabelAndroid
         ISitecoreWebApiSession session;
         if(isAuthentiated)
         {
-          var credentials = new Credentials(this.Login, this.Password);
+          var credentials = new SecureStringPasswordProvider(this.Login, this.Password);
 
           session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.InstanceUrl)
             .Credentials(credentials)
@@ -166,43 +167,5 @@ namespace WhiteLabelAndroid
       editor.Apply();
     }
 
-    class Credentials : IWebApiCredentials
-    {
-      private string login;
-      private string password;
-
-      public Credentials(string login, string password)
-      {
-        this.login = login;
-        this.password = password;
-      }
-
-      public IWebApiCredentials CredentialsShallowCopy()
-      {
-        return new Credentials(this.login, this.password);
-      }
-
-      public void Dispose()
-      {
-        this.login = null;
-        this.password = null;
-      }
-
-      public string Username
-      {
-        get
-        {
-          return this.login;
-        }
-      }
-
-      public string Password
-      {
-        get
-        {
-          return this.password;
-        }
-      }
-    }
   }
 }
