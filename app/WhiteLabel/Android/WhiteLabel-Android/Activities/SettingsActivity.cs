@@ -19,7 +19,7 @@
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
-      this.SetContentView(Resource.Layout.Settings);
+      this.SetContentView(Resource.Layout.activity_settings);
       this.SetTitle(Resource.String.text_settings_screen);
       this.prefs = Prefs.From(this);
 

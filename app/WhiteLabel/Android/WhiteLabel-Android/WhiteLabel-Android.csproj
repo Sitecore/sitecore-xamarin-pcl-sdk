@@ -56,7 +56,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsActivity.cs" />
-    <Compile Include="SubActivities\BaseActivity.cs" />
+    <Compile Include="SubActivities\BaseReadItemActivity.cs" />
     <Compile Include="SubActivities\DownloadImageActivtiy.cs" />
     <Compile Include="SubActivities\ReadItemByPathActivtiy.cs" />
     <Compile Include="SubActivities\ReadItemByIdActivity.cs" />
@@ -67,18 +67,18 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\layout\Settings.axml">
+    <AndroidResource Include="Resources\layout\activity_settings.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\SimpleItemLayout.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\DownloadImage.axml">
+    <AndroidResource Include="Resources\layout\activity_download_image.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\activity_main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml">
       <SubType>Designer</SubType>
     </AndroidResource>

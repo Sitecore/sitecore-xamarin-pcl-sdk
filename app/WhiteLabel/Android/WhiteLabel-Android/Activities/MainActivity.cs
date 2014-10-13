@@ -32,8 +32,9 @@
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
-      this.SetContentView(Resource.Layout.Main);
+      this.SetContentView(Resource.Layout.activity_main);
       this.SetTitle(Resource.String.app_name);
+
       Button itemIdButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_id);
       itemIdButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByIdActivity)));
 

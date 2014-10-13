@@ -12,7 +12,7 @@ namespace WhiteLabelAndroid.SubActivities
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
-  public class DownloadImageActivtiy : BaseActivity
+  public class DownloadImageActivtiy : BaseReadItemActivity
   {
     private Prefs prefs;
     private ImageView targetImageView;
@@ -21,7 +21,8 @@ namespace WhiteLabelAndroid.SubActivities
     {
       base.OnCreate(bundle);
       this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
-      this.SetContentView(Resource.Layout.DownloadImage);
+      this.SetContentView(Resource.Layout.activity_download_image);
+
       this.SetTitle(Resource.String.text_download_image);
 
       this.prefs = Prefs.From(this);

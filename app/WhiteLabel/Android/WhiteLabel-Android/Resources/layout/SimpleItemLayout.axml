@@ -3,15 +3,37 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <LinearLayout
+        android:id="@+id/container_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/label" />
-    <EditText
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/label" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/field_item" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/container_item_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:id="@+id/field_item" />
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Type field name" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="Field name"
+            android:id="@+id/field_item_field" />
+    </LinearLayout>
     <TextView
         android:paddingLeft="8dp"
         android:layout_width="match_parent"
@@ -40,35 +62,39 @@
             android:text="@string/text_payload_full" />
     </RadioGroup>
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:weightSum="2"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/text_button_get_item"
-            android:layout_height="match_parent"
-            android:id="@+id/button_get_item" />
-        <Button
-            android:text="@string/text_button_get_item_children"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:visibility="gone"
-            android:enabled="false"
-            android:layout_height="match_parent"
-            android:id="@+id/button_get_children" />
-    </LinearLayout>
-    <TextView
-        android:paddingLeft="8dp"
+        android:id="@+id/container_scope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/item_name" />
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <CheckBox
+            android:id="@+id/checkbox_scope_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Parent" />
+        <CheckBox
+            android:id="@+id/checkbox_scope_self"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Self" />
+        <CheckBox
+            android:id="@+id/checkbox_scope_children"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Children" />
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:text="@string/text_button_get_item"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_get_item" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fields_list" />
+        android:id="@+id/items_list" />
 </LinearLayout>

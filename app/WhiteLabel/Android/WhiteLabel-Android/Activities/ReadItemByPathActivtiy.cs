@@ -12,26 +12,23 @@ namespace WhiteLabelAndroid.SubActivities
   using Android.Widget;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
-  public class ReadItemByPathActivtiy : BaseActivity, AdapterView.IOnItemClickListener
+  public class ReadItemByPathActivtiy : BaseReadItemActivity, AdapterView.IOnItemClickListener
   {
     private ListView fieldsListView;
     private TextView itemNameTextView;
     private RadioGroup payloadRadioGroup;
 
     private ISitecoreItem item;
-    private Prefs prefs;
 
     void AdapterView.IOnItemClickListener.OnItemClick(AdapterView parent, View view, int position, long id)
     {
-      DialogHelper.ShowSimpleDialog(this, this.item.Fields.ElementAt(position).Name, 
+      DialogHelper.ShowSimpleDialog(this, this.item.Fields.ElementAt(position).Name,
         this.item.Fields.ElementAt(position).RawValue);
     }
 
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
-      this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
-      this.SetContentView(Resource.Layout.SimpleItemLayout);
 
       this.prefs = Prefs.From(this);
       this.Title = this.GetString(Resource.String.text_get_item_by_path);
@@ -42,11 +39,6 @@ namespace WhiteLabelAndroid.SubActivities
     private void InitViews()
     {
       this.payloadRadioGroup = this.FindViewById<RadioGroup>(Resource.Id.group_payload_type);
-
-      this.itemNameTextView = this.FindViewById<TextView>(Resource.Id.item_name);
-
-      this.fieldsListView = this.FindViewById<ListView>(Resource.Id.fields_list);
-      this.fieldsListView.OnItemClickListener = this;
 
       var label = this.FindViewById<TextView>(Resource.Id.label);
       label.Text = GetString(Resource.String.text_path_label);
@@ -66,16 +58,15 @@ namespace WhiteLabelAndroid.SubActivities
         this.HideKeyboard(itemPathField);
         this.PerformGetItemRequest(itemPathField.Text);
       };
-
-      var getItemChildrenButton = this.FindViewById<Button>(Resource.Id.button_get_children);
-      getItemChildrenButton.Visibility = ViewStates.Gone;
     }
 
     private async void PerformGetItemRequest(string path)
     {
       try
       {
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Payload(this.GetSelectedPayload(this.payloadRadioGroup)).Build();
+        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path)
+          .Payload(this.GetSelectedPayload())
+          .Build();
         this.SetProgressBarIndeterminateVisibility(true);
 
         using (var session = this.prefs.Session)
@@ -88,13 +79,13 @@ namespace WhiteLabelAndroid.SubActivities
             this.item = response[0];
             this.itemNameTextView.Text = this.item.DisplayName;
 
-            this.PopulateFieldsList(this.fieldsListView, item.Fields);
+            this.PopulateItemsList(response);
           }
           else
           {
             DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received,
               Resource.String.text_no_item);
-          }  
+          }
         }
       }
       catch (Exception exception)
