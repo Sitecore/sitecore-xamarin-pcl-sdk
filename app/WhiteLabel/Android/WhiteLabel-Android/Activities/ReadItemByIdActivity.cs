@@ -1,4 +1,4 @@
-namespace WhiteLabelAndroid.SubActivities
+namespace WhiteLabelAndroid.Activities
 {
   using System;
   using System.Linq;
@@ -22,10 +22,10 @@ namespace WhiteLabelAndroid.SubActivities
     private void InitViews()
     {
       var label = this.FindViewById<TextView>(Resource.Id.label);
-      label.Text = GetString(Resource.String.text_id_label);
+      label.Text = this.GetString(Resource.String.text_id_label);
 
       var itemIdField = this.FindViewById<EditText>(Resource.Id.field_item);
-      itemIdField.Hint = GetString(Resource.String.hint_item_id);
+      itemIdField.Hint = this.GetString(Resource.String.hint_item_id);
 
       var getItemsButton = this.FindViewById<Button>(Resource.Id.button_get_item);
       getItemsButton.Click += (sender, args) =>
@@ -75,7 +75,7 @@ namespace WhiteLabelAndroid.SubActivities
       catch (Exception exception)
       {
         this.SetProgressBarIndeterminateVisibility(false);
-        var title = GetString(Resource.String.text_item_received);
+        var title = this.GetString(Resource.String.text_item_received);
         DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }

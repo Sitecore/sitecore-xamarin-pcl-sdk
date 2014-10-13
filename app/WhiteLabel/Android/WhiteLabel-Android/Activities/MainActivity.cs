@@ -1,4 +1,4 @@
-﻿namespace WhiteLabelAndroid
+﻿namespace WhiteLabelAndroid.Activities
 {
   using Android.App;
   using Android.Content;
@@ -13,7 +13,7 @@
   {
     public override bool OnCreateOptionsMenu(IMenu menu)
     {
-      MenuInflater.Inflate(Resource.Menu.main, menu);
+      this.MenuInflater.Inflate(Resource.Menu.main, menu);
       return base.OnCreateOptionsMenu(menu);
     }
 

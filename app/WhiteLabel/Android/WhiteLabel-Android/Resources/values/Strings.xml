@@ -55,4 +55,6 @@
   <string name="text_button_get_item">Get Item</string>
   <string name="text_button_get_item_children">Get Item Children</string>
   <string name="text_button_ok">OK</string>
+
+  <string name="text_empty_fields_list">No fields</string>
 </resources>

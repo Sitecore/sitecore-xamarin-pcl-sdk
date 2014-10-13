@@ -69,11 +69,8 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f060008
 			public const int button_download_image = 2131099656;
 			
-			// aapt resource value: 0x7f060016
-			public const int button_get_children = 2131099670;
-			
-			// aapt resource value: 0x7f060015
-			public const int button_get_item = 2131099669;
+			// aapt resource value: 0x7f06001c
+			public const int button_get_item = 2131099676;
 			
 			// aapt resource value: 0x7f060005
 			public const int button_get_item_by_id = 2131099653;
@@ -87,6 +84,24 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f06000e
 			public const int button_use = 2131099662;
 			
+			// aapt resource value: 0x7f06001b
+			public const int checkbox_scope_children = 2131099675;
+			
+			// aapt resource value: 0x7f060019
+			public const int checkbox_scope_parent = 2131099673;
+			
+			// aapt resource value: 0x7f06001a
+			public const int checkbox_scope_self = 2131099674;
+			
+			// aapt resource value: 0x7f06000f
+			public const int container_item = 2131099663;
+			
+			// aapt resource value: 0x7f060012
+			public const int container_item_field = 2131099666;
+			
+			// aapt resource value: 0x7f060018
+			public const int container_scope = 2131099672;
+			
 			// aapt resource value: 0x7f060004
 			public const int downloaded_image = 2131099652;
 			
@@ -96,17 +111,17 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f060001
 			public const int field_image_width = 2131099649;
 			
-			// aapt resource value: 0x7f060010
-			public const int field_item = 2131099664;
+			// aapt resource value: 0x7f060011
+			public const int field_item = 2131099665;
+			
+			// aapt resource value: 0x7f060013
+			public const int field_item_field = 2131099667;
 			
 			// aapt resource value: 0x7f060000
 			public const int field_item_path = 2131099648;
 			
-			// aapt resource value: 0x7f060018
-			public const int fields_list = 2131099672;
-			
-			// aapt resource value: 0x7f060011
-			public const int group_payload_type = 2131099665;
+			// aapt resource value: 0x7f060014
+			public const int group_payload_type = 2131099668;
 			
 			// aapt resource value: 0x7f06000d
 			public const int instance_database = 2131099661;
@@ -123,23 +138,23 @@ namespace WhiteLabelAndroid
 			// aapt resource value: 0x7f060009
 			public const int instance_url = 2131099657;
 			
+			// aapt resource value: 0x7f06001d
+			public const int items_list = 2131099677;
+			
+			// aapt resource value: 0x7f060010
+			public const int label = 2131099664;
+			
+			// aapt resource value: 0x7f060016
+			public const int payload_content = 2131099670;
+			
 			// aapt resource value: 0x7f060017
-			public const int item_name = 2131099671;
+			public const int payload_full = 2131099671;
 			
-			// aapt resource value: 0x7f06000f
-			public const int label = 2131099663;
+			// aapt resource value: 0x7f060015
+			public const int payload_min = 2131099669;
 			
-			// aapt resource value: 0x7f060013
-			public const int payload_content = 2131099667;
-			
-			// aapt resource value: 0x7f060014
-			public const int payload_full = 2131099668;
-			
-			// aapt resource value: 0x7f060012
-			public const int payload_min = 2131099666;
-			
-			// aapt resource value: 0x7f060019
-			public const int settings = 2131099673;
+			// aapt resource value: 0x7f06001e
+			public const int settings = 2131099678;
 			
 			static Id()
 			{
@@ -155,13 +170,13 @@ namespace WhiteLabelAndroid
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int DownloadImage = 2130903040;
+			public const int activity_download_image = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int Main = 2130903041;
+			public const int activity_main = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Settings = 2130903042;
+			public const int activity_settings = 2130903042;
 			
 			// aapt resource value: 0x7f030003
 			public const int SimpleItemLayout = 2130903043;
@@ -272,6 +287,9 @@ namespace WhiteLabelAndroid
 			
 			// aapt resource value: 0x7f04000f
 			public const int text_download_image = 2130968591;
+			
+			// aapt resource value: 0x7f04002f
+			public const int text_empty_fields_list = 2130968623;
 			
 			// aapt resource value: 0x7f040026
 			public const int text_empty_id = 2130968614;

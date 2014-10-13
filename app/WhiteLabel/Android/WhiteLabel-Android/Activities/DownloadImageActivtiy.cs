@@ -1,4 +1,4 @@
-namespace WhiteLabelAndroid.SubActivities
+namespace WhiteLabelAndroid.Activities
 {
   using System;
   using Android.App;
@@ -32,7 +32,7 @@ namespace WhiteLabelAndroid.SubActivities
       var imageWidth = this.FindViewById<EditText>(Resource.Id.field_image_width);
       var imageHeight = this.FindViewById<EditText>(Resource.Id.field_image_height);
 
-      this.targetImageView = FindViewById<ImageView>(Resource.Id.downloaded_image);
+      this.targetImageView = this.FindViewById<ImageView>(Resource.Id.downloaded_image);
 
       var downloadButton = this.FindViewById<Button>(Resource.Id.button_download);
       downloadButton.Click += (sender, args) =>
@@ -91,7 +91,7 @@ namespace WhiteLabelAndroid.SubActivities
       catch (Exception exception)
       {
         this.SetProgressBarIndeterminateVisibility(false);
-        var title = GetString(Resource.String.text_item_received);
+        var title = this.GetString(Resource.String.text_item_received);
         DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }

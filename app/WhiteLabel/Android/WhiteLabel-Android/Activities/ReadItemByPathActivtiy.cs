@@ -1,7 +1,4 @@
-using Sitecore.MobileSDK.API;
-using Sitecore.MobileSDK.API.Items;
-
-namespace WhiteLabelAndroid.SubActivities
+namespace WhiteLabelAndroid.Activities
 {
   using System;
   using System.Linq;
@@ -10,6 +7,8 @@ namespace WhiteLabelAndroid.SubActivities
   using Android.OS;
   using Android.Views;
   using Android.Widget;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Items;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class ReadItemByPathActivtiy : BaseReadItemActivity, AdapterView.IOnItemClickListener
@@ -41,17 +40,17 @@ namespace WhiteLabelAndroid.SubActivities
       this.payloadRadioGroup = this.FindViewById<RadioGroup>(Resource.Id.group_payload_type);
 
       var label = this.FindViewById<TextView>(Resource.Id.label);
-      label.Text = GetString(Resource.String.text_path_label);
+      label.Text = this.GetString(Resource.String.text_path_label);
 
       var itemPathField = this.FindViewById<EditText>(Resource.Id.field_item);
-      itemPathField.Hint = GetString(Resource.String.hint_item_path);
+      itemPathField.Hint = this.GetString(Resource.String.hint_item_path);
 
       var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
       getItemButton.Click += (sender, args) =>
       {
         if (string.IsNullOrEmpty(itemPathField.Text))
         {
-          DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_error), GetString(Resource.String.text_empty_path));
+          DialogHelper.ShowSimpleDialog(this, this.GetString(Resource.String.text_error), this.GetString(Resource.String.text_empty_path));
           return;
         }
 
@@ -91,7 +90,7 @@ namespace WhiteLabelAndroid.SubActivities
       catch (Exception exception)
       {
         this.SetProgressBarIndeterminateVisibility(false);
-        var title = GetString(Resource.String.text_item_received);
+        var title = this.GetString(Resource.String.text_item_received);
         DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }

@@ -1,4 +1,4 @@
-namespace WhiteLabelAndroid.SubActivities
+namespace WhiteLabelAndroid.Activities
 {
   using System.Collections.Generic;
   using System.Linq;
@@ -12,6 +12,10 @@ namespace WhiteLabelAndroid.SubActivities
 
   public abstract class BaseReadItemActivity : Activity, AdapterView.IOnItemClickListener
   {
+    public static ISitecoreItem SelectedItem { get; set; }
+
+    protected Prefs prefs;
+    
     #region Views
     private RadioGroup payloadRadioGroup;
     private ListView itemsListView;
@@ -23,7 +27,7 @@ namespace WhiteLabelAndroid.SubActivities
     private LinearLayout scopeContainer;
     #endregion
 
-    protected Prefs prefs;
+    private IEnumerable<ISitecoreItem> items; 
 
     protected void HideKeyboard(View view)
     {
@@ -35,7 +39,7 @@ namespace WhiteLabelAndroid.SubActivities
     {
       base.OnCreate(savedInstanceState);
       this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
-      SetContentView(Resource.Layout.SimpleItemLayout);
+      this.SetContentView(Resource.Layout.SimpleItemLayout);
 
       this.prefs = Prefs.From(this);
 
@@ -75,7 +79,7 @@ namespace WhiteLabelAndroid.SubActivities
 
     protected PayloadType GetSelectedPayload()
     {
-      switch (payloadRadioGroup.CheckedRadioButtonId)
+      switch (this.payloadRadioGroup.CheckedRadioButtonId)
       {
         case Resource.Id.payload_min:
           return PayloadType.Min;
@@ -90,6 +94,8 @@ namespace WhiteLabelAndroid.SubActivities
 
     protected void PopulateItemsList(IEnumerable<ISitecoreItem> items)
     {
+      this.items = items;
+
       var count = items.Count();
       var listItems = new string[count];
 
@@ -103,7 +109,9 @@ namespace WhiteLabelAndroid.SubActivities
 
     public void OnItemClick(AdapterView parent, View view, int position, long id)
     {
-      Toast.MakeText(this, "Clicked", ToastLength.Short).Show();
+      SelectedItem = this.items.ToArray()[position];
+
+      StartActivity(typeof(ItemFieldsActivity));
     }
   }
 }
