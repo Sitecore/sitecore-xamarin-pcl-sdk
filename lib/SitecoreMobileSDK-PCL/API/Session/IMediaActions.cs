@@ -1,9 +1,11 @@
+ 
 namespace Sitecore.MobileSDK.API.Session
 {
   using System.IO;
   using System.Threading;
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Items;
 
   /// <summary>
   /// Interface represents media actions that actions on media items.
@@ -19,6 +21,8 @@ namespace Sitecore.MobileSDK.API.Session
     ///  <see cref="Stream" /> Download resource Stream.
     /// </returns>
     Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScItemsResponse> UploadMediaResourceAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken));
+
   }
 }
 

@@ -1,5 +1,7 @@
-namespace Sitecore.MobileSDK.API.Request.Parameters
+namespace Sitecore.MobileSDK.API.Request
 {
+  using Sitecore.MobileSDK.API.Request.Parameters;
+
   /// <summary>
   /// Interface represents fluent flow for building <see cref="IMediaResourceDownloadRequest"/>
   /// </summary>
