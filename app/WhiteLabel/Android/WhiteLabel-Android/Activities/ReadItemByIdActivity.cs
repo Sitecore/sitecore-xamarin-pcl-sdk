@@ -31,7 +31,7 @@ namespace WhiteLabelAndroid.Activities
           return;
         }
 
-        this.HideKeyboard(this.ItemFieldEditText);
+        this.HideKeyboard();
         this.PerformGetItemRequest(this.ItemFieldEditText.Text);
       };
     }

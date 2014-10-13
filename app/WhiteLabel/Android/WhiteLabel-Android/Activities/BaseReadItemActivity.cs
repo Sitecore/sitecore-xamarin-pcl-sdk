@@ -17,29 +17,32 @@ namespace WhiteLabelAndroid.Activities
     protected Prefs prefs;
     
     #region Views
-    private RadioGroup payloadRadioGroup;
+    protected RadioGroup payloadRadioGroup;
     private ListView itemsListView;
 
     private CheckBox scopeParentCheckBox;
     private CheckBox scopeSelfCheckBox;
     private CheckBox scopeChildrenCheckBox;
-    private LinearLayout scopeContainer;
-
+    
     protected EditText fieldNamEditText;
 
     protected TextView itemFieldLabel;
     protected EditText ItemFieldEditText;
 
     protected Button getItemsButton;
+
+    protected LinearLayout fieldNameContainer;
+    protected LinearLayout payloadContainer;
+    protected LinearLayout scopeContainer;
     #endregion
 
     private IEnumerable<ISitecoreItem> items;
     
 
-    protected void HideKeyboard(View view)
+    protected void HideKeyboard()
     {
       var inputMethodManager = this.GetSystemService(InputMethodService) as InputMethodManager;
-      inputMethodManager.HideSoftInputFromWindow(view.WindowToken, HideSoftInputFlags.None);
+      inputMethodManager.HideSoftInputFromWindow(this.ItemFieldEditText.WindowToken, HideSoftInputFlags.None);
     }
 
     protected override void OnCreate(Bundle savedInstanceState)
@@ -67,6 +70,10 @@ namespace WhiteLabelAndroid.Activities
       this.itemFieldLabel = this.FindViewById<TextView>(Resource.Id.label);
 
       this.getItemsButton = this.FindViewById<Button>(Resource.Id.button_get_item);
+
+      this.fieldNameContainer = this.FindViewById<LinearLayout>(Resource.Id.container_item_field);
+
+      this.payloadContainer = this.FindViewById<LinearLayout>(Resource.Id.container_payload);
     }
 
     protected IEnumerable<ScopeType> GetSelectedScopes()

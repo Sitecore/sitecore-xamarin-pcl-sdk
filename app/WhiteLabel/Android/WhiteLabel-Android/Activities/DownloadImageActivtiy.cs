@@ -43,7 +43,7 @@ namespace WhiteLabelAndroid.Activities
           return;
         }
 
-        this.HideKeyboard(itemPathField);
+        this.HideKeyboard();
         this.DownloadImage(itemPathField.Text, imageWidth.Text, imageHeight.Text);
       };
     }

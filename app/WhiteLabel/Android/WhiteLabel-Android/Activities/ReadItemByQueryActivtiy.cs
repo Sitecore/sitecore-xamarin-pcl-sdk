@@ -2,59 +2,47 @@ namespace WhiteLabelAndroid.SubActivities
 {
   using System;
   using Android.App;
-  using Android.Content;
   using Android.Content.PM;
   using Android.OS;
   using Android.Views;
-  using Android.Views.InputMethods;
-  using Android.Widget;
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.Items;
+  using WhiteLabelAndroid.Activities;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
-  public class ReadItemByQueryActivtiy : Activity
+  public class ReadItemByQueryActivtiy : BaseReadItemActivity
   {
-    private Prefs prefs;
-
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
-      this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
-      this.SetContentView(Resource.Layout.SimpleItemLayout);
 
-      this.prefs = Prefs.From(this);
       this.Title = this.GetString(Resource.String.text_get_item_by_query);
 
-      var label = this.FindViewById<TextView>(Resource.Id.label);
-      label.Text = GetString(Resource.String.text_query_label);
+      this.InitViews();
+    }
 
-      var queryField = this.FindViewById<EditText>(Resource.Id.field_item);
-      queryField.Hint = GetString(Resource.String.hint_query);
+    private void InitViews()
+    {
+      this.itemFieldLabel.Text = GetString(Resource.String.text_query_label);
 
-      var payloadGroup = this.FindViewById<RadioGroup>(Resource.Id.group_payload_type);
-      payloadGroup.Visibility = ViewStates.Gone;
+      this.ItemFieldEditText.Hint = GetString(Resource.String.hint_query);
 
-      var getItemButton = this.FindViewById<Button>(Resource.Id.button_get_item);
-      getItemButton.Click += (sender, args) =>
+      this.scopeContainer.Visibility = ViewStates.Gone;
+      this.payloadContainer.Visibility = ViewStates.Gone;
+      this.fieldNameContainer.Visibility = ViewStates.Gone;
+
+      this.getItemsButton.Click += (sender, args) =>
       {
-        if (string.IsNullOrEmpty(queryField.Text))
+        if (string.IsNullOrEmpty(this.ItemFieldEditText.Text))
         {
           DialogHelper.ShowSimpleDialog(this, Resource.String.text_error,
             Resource.String.text_empty_query);
           return;
         }
 
-        this.HideKeyboard(queryField);
-        this.PerformGetItemRequest(queryField.Text);
+        this.HideKeyboard();
+        this.PerformGetItemRequest(this.ItemFieldEditText.Text);
       };
-    }
-
-    private void HideKeyboard(View view)
-    {
-      var inputMethodManager = this.GetSystemService(Context.InputMethodService) as InputMethodManager;
-      inputMethodManager.HideSoftInputFromWindow(view.WindowToken, HideSoftInputFlags.None);
     }
 
     private async void PerformGetItemRequest(string query)
@@ -66,14 +54,17 @@ namespace WhiteLabelAndroid.SubActivities
 
         using (var session = this.prefs.Session)
         {
-          ScItemsResponse response = await session.ReadItemAsync(request);
+          var response = await session.ReadItemAsync(request);
 
           this.SetProgressBarIndeterminateVisibility(false);
-          var message = response.ResultCount > 0 ?
-            this.GetString(Resource.String.text_num_of_items_received, response.ResultCount)
-            : GetString(Resource.String.text_no_item);
-
-          DialogHelper.ShowSimpleDialog(this, GetString(Resource.String.text_item_received), message);  
+          if (response.ResultCount == 0)
+          {
+            DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, Resource.String.text_no_item);
+          }
+          else
+          {
+            this.PopulateItemsList(response);
+          }
         }
       }
       catch (Exception exception)

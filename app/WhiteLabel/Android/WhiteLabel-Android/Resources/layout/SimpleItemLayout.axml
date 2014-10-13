@@ -34,33 +34,39 @@
             android:hint="Field name"
             android:id="@+id/field_item_field" />
     </LinearLayout>
-    <TextView
-        android:paddingLeft="8dp"
+     <LinearLayout
+        android:id="@+id/container_payload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_payload_title" />
-    <RadioGroup
-        android:id="@+id/group_payload_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/payload_min"
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:paddingLeft="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/text_payload_min" />
-        <RadioButton
-            android:id="@+id/payload_content"
-            android:layout_width="wrap_content"
-            android:checked="true"
+            android:text="@string/text_payload_title" />
+        <RadioGroup
+            android:id="@+id/group_payload_type"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/text_payload_content" />
-        <RadioButton
-            android:id="@+id/payload_full"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_payload_full" />
-    </RadioGroup>
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/payload_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_payload_min" />
+            <RadioButton
+                android:id="@+id/payload_content"
+                android:layout_width="wrap_content"
+                android:checked="true"
+                android:layout_height="wrap_content"
+                android:text="@string/text_payload_content" />
+            <RadioButton
+                android:id="@+id/payload_full"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_payload_full" />
+        </RadioGroup>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/container_scope"
         android:layout_width="match_parent"
