@@ -35,7 +35,7 @@ namespace WhiteLabelAndroid.Activities
 
         listFields[i] = field.Name;
       }
-      this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, new string[0]);
+      this.ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, listFields);
     }
 
     public override bool OnOptionsItemSelected(IMenuItem item)

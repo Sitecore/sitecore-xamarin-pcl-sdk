@@ -23,11 +23,18 @@ namespace WhiteLabelAndroid.Activities
     private CheckBox scopeParentCheckBox;
     private CheckBox scopeSelfCheckBox;
     private CheckBox scopeChildrenCheckBox;
-
     private LinearLayout scopeContainer;
+
+    protected EditText fieldNamEditText;
+
+    protected TextView itemFieldLabel;
+    protected EditText ItemFieldEditText;
+
+    protected Button getItemsButton;
     #endregion
 
-    private IEnumerable<ISitecoreItem> items; 
+    private IEnumerable<ISitecoreItem> items;
+    
 
     protected void HideKeyboard(View view)
     {
@@ -53,6 +60,13 @@ namespace WhiteLabelAndroid.Activities
       this.scopeChildrenCheckBox = this.FindViewById<CheckBox>(Resource.Id.checkbox_scope_children);
 
       this.scopeContainer = this.FindViewById<LinearLayout>(Resource.Id.container_scope);
+
+      this.fieldNamEditText = this.FindViewById<EditText>(Resource.Id.field_item_field);
+
+      this.ItemFieldEditText = this.FindViewById<EditText>(Resource.Id.field_item);
+      this.itemFieldLabel = this.FindViewById<TextView>(Resource.Id.label);
+
+      this.getItemsButton = this.FindViewById<Button>(Resource.Id.button_get_item);
     }
 
     protected IEnumerable<ScopeType> GetSelectedScopes()
