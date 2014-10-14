@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\BaseCreateItemActivity.cs" />
     <Compile Include="Util\DialogHelper.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Prefs.cs" />
@@ -77,6 +78,7 @@
     <AndroidResource Include="Resources\layout\activity_download_image.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_create_item.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_main.axml" />
