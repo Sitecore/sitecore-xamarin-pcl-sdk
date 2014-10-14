@@ -81,6 +81,12 @@
       };
       deleteItemButton.Click += (sender, e) => this.StartActivity(typeof(DeleteItemActivity));
 
+      var uploadImageButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_upload_image)
+      };
+      uploadImageButton.Click += (sender, e) => this.StartActivity(typeof(UploadImageActivity));
+
       var authenticateButton = new Button(this)
       {
         Text = this.GetString(Resource.String.text_authenticate)
@@ -90,11 +96,16 @@
       container.AddView(itemIdButton);
       container.AddView(itemPathButton);
       container.AddView(itemQueryButton);
-      container.AddView(downloadImageButton);
+      
       container.AddView(createItemByIdButton);
       container.AddView(createItemByPathButton);
+      
       container.AddView(deleteItemButton);
+
       container.AddView(authenticateButton);
+      
+      container.AddView(downloadImageButton);
+      container.AddView(uploadImageButton);
     }
   }
 }

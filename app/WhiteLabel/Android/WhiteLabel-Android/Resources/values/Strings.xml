@@ -24,6 +24,7 @@
   <string name="text_create_item_by_path">Create item by Path</string>
   <string name="text_delete_item">Delete Item</string>
   <string name="text_authenticate">Authenticate</string>
+  <string name="text_upload_image">Upload Image</string>
   <string name="text_settings_screen">Settings Activity</string>
 
   <string name="text_width">Width</string>
