@@ -35,17 +35,28 @@
       this.SetContentView(Resource.Layout.activity_main);
       this.SetTitle(Resource.String.app_name);
 
-      Button itemIdButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_id);
-      itemIdButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByIdActivity)));
+      var container = this.FindViewById<LinearLayout>(Resource.Id.container_buttons);
 
-      Button itemPathButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_path);
-      itemPathButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByPathActivtiy)));
+      var itemIdButton = new Button(this);
+      itemIdButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByIdActivity));
 
-      Button itemQueryButton = this.FindViewById<Button>(Resource.Id.button_get_item_by_query);
-      itemQueryButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(ReadItemByQueryActivtiy)));
+      var itemPathButton = new Button(this);
+      itemPathButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByPathActivtiy));
 
-      Button downloadImageButton = this.FindViewById<Button>(Resource.Id.button_download_image);
-      downloadImageButton.Click += async (sender, e) => this.StartActivity(new Intent(this, typeof(DownloadImageActivtiy)));
+      var itemQueryButton = new Button(this);
+      itemQueryButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByQueryActivtiy));
+
+      var downloadImageButton = new Button(this);
+      downloadImageButton.Click += (sender, e) => this.StartActivity(typeof(DownloadImageActivtiy));
+
+      var createItemByIdButton = new Button(this);
+      createItemByIdButton.Click += (sender, e) => this.StartActivity(typeof(DownloadImageActivtiy));
+
+      container.AddView(itemIdButton);
+      container.AddView(itemPathButton);
+      container.AddView(itemQueryButton);
+      container.AddView(downloadImageButton);
+      container.AddView(createItemByIdButton);
     }
   }
 }
