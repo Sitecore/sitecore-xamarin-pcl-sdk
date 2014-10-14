@@ -60,7 +60,6 @@ namespace WhiteLabelAndroid.Activities.Read
         {
           var response = await session.ReadItemAsync(builder.Build());
 
-          this.SetProgressBarIndeterminateVisibility(false);
           if (response.ResultCount == 0)
           {
             DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, Resource.String.text_no_item);
@@ -70,11 +69,13 @@ namespace WhiteLabelAndroid.Activities.Read
             this.PopulateItemsList(response);
           }
         }
+        this.SetProgressBarIndeterminateVisibility(false);
       }
       catch (Exception exception)
       {
         this.SetProgressBarIndeterminateVisibility(false);
-        var title = this.GetString(Resource.String.text_item_received);
+
+        var title = this.GetString(Resource.String.text_error);
         DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }
