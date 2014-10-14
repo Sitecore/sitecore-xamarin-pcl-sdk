@@ -43,6 +43,6 @@
             android:id="@+id/button_update_created_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update create item" />
+            android:text="Update created item" />
     </LinearLayout>
 </LinearLayout>

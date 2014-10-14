@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Activities\Create\BaseCreateItemActivity.cs" />
     <Compile Include="Activities\Create\CreateItemByIdActivity.cs" />
+    <Compile Include="Activities\Create\CreateItemByPathActivity.cs" />
     <Compile Include="Util\DialogHelper.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Prefs.cs" />

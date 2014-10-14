@@ -21,6 +21,7 @@
   <string name="text_get_item_by_query">Item by Query</string>
   <string name="text_download_image">Download Image</string>
   <string name="text_create_item_by_id">Create item by ID</string>
+  <string name="text_create_item_by_path">Create item by Path</string>
   <string name="text_settings_screen">Settings Activity</string>
 
   <string name="text_width">Width</string>

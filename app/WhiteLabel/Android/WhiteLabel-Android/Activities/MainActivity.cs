@@ -69,11 +69,18 @@
       };
       createItemByIdButton.Click += (sender, e) => this.StartActivity(typeof(CreateItemByIdActivity));
 
+      var createItemByPathButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_create_item_by_path)
+      };
+      createItemByPathButton.Click += (sender, e) => this.StartActivity(typeof(CreateItemByPathActivity));
+
       container.AddView(itemIdButton);
       container.AddView(itemPathButton);
       container.AddView(itemQueryButton);
       container.AddView(downloadImageButton);
       container.AddView(createItemByIdButton);
+      container.AddView(createItemByPathButton);
     }
   }
 }
