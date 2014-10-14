@@ -9,7 +9,7 @@
         android:hint="@string/hint_instance_url"
         android:singleLine="true"
         android:imeOptions="actionNext"
-        android:id="@+id/instance_url" />
+        android:id="@+id/field_instance_url" />
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp" />
@@ -19,7 +19,7 @@
         android:hint="@string/hint_login"
         android:singleLine="true"
         android:imeOptions="actionNext"
-        android:id="@+id/instance_login" />
+        android:id="@+id/field_instance_login" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,21 +27,21 @@
         android:singleLine="true"
         android:imeOptions="actionNext"
         android:inputType="textPassword"
-        android:id="@+id/instance_password" />
+        android:id="@+id/field_instance_password" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_site"
         android:singleLine="true"
         android:imeOptions="actionNext"
-        android:id="@+id/instance_site" />
+        android:id="@+id/field_instance_site" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_database"
         android:singleLine="true"
         android:imeOptions="actionDone"
-        android:id="@+id/instance_database" />
+        android:id="@+id/field_instance_database" />
     <Button
         android:text="@string/text_button_use"
         android:layout_width="match_parent"

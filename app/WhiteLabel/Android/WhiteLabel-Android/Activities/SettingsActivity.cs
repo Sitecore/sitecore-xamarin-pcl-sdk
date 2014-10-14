@@ -46,11 +46,11 @@
 
     private void InitFields()
     {
-      this.instanceUrl = this.FindViewById<EditText>(Resource.Id.instance_url);
-      this.login = this.FindViewById<EditText>(Resource.Id.instance_login);
-      this.password = this.FindViewById<EditText>(Resource.Id.instance_password);
-      this.site = this.FindViewById<EditText>(Resource.Id.instance_site);
-      this.database = this.FindViewById<EditText>(Resource.Id.instance_database);
+      this.instanceUrl = this.FindViewById<EditText>(Resource.Id.field_instance_url);
+      this.login = this.FindViewById<EditText>(Resource.Id.field_instance_login);
+      this.password = this.FindViewById<EditText>(Resource.Id.field_instance_password);
+      this.site = this.FindViewById<EditText>(Resource.Id.field_instance_site);
+      this.database = this.FindViewById<EditText>(Resource.Id.field_instance_database);
 
       this.instanceUrl.Text = this.prefs.InstanceUrl;
       this.login.Text = this.prefs.Login;

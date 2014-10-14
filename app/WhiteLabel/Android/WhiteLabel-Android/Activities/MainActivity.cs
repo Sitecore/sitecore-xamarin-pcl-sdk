@@ -81,6 +81,12 @@
       };
       deleteItemButton.Click += (sender, e) => this.StartActivity(typeof(DeleteItemActivity));
 
+      var authenticateButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_authenticate)
+      };
+      authenticateButton.Click += (sender, e) => this.StartActivity(typeof(AuthenticateActivity));
+
       container.AddView(itemIdButton);
       container.AddView(itemPathButton);
       container.AddView(itemQueryButton);
@@ -88,6 +94,7 @@
       container.AddView(createItemByIdButton);
       container.AddView(createItemByPathButton);
       container.AddView(deleteItemButton);
+      container.AddView(authenticateButton);
     }
   }
 }
