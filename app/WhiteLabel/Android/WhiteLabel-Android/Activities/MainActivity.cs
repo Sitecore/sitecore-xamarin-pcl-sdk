@@ -75,12 +75,19 @@
       };
       createItemByPathButton.Click += (sender, e) => this.StartActivity(typeof(CreateItemByPathActivity));
 
+      var deleteItemButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_delete_item)
+      };
+      deleteItemButton.Click += (sender, e) => this.StartActivity(typeof(DeleteItemActivity));
+
       container.AddView(itemIdButton);
       container.AddView(itemPathButton);
       container.AddView(itemQueryButton);
       container.AddView(downloadImageButton);
       container.AddView(createItemByIdButton);
       container.AddView(createItemByPathButton);
+      container.AddView(deleteItemButton);
     }
   }
 }

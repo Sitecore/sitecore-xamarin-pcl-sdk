@@ -53,6 +53,7 @@
     <Compile Include="Activities\Create\BaseCreateItemActivity.cs" />
     <Compile Include="Activities\Create\CreateItemByIdActivity.cs" />
     <Compile Include="Activities\Create\CreateItemByPathActivity.cs" />
+    <Compile Include="Activities\DeleteItemActivity.cs" />
     <Compile Include="Util\DialogHelper.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Prefs.cs" />
@@ -81,6 +82,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_create_item.axml" />
+    <AndroidResource Include="Resources\layout\activity_delete_item.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_main.axml" />
