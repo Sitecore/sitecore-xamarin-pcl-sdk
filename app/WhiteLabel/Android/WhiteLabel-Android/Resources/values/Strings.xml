@@ -41,6 +41,11 @@
   <string name="hint_password">Password</string>
   <string name="hint_site">Site</string>
   <string name="hint_database">Database</string>
+  <string name="hint_item_parent_id">Parent Item Id</string>
+  <string name="hint_item_parent_path">Parent Item Path</string>
+  <string name="hint_item_name">Item name</string>
+  <string name="hint_item_title_field_value">Title field value</string>
+  <string name="hint_item_text_field_value">Text field value</string>
 
   <string name="text_item_received">Item received</string>
   <string name="text_error">Error</string>

@@ -6,6 +6,7 @@
   using Android.OS;
   using Android.Views;
   using Android.Widget;
+  using WhiteLabelAndroid.Activities.Create;
   using WhiteLabelAndroid.Activities.Media;
   using WhiteLabelAndroid.Activities.Read;
 
@@ -38,20 +39,35 @@
 
       var container = this.FindViewById<LinearLayout>(Resource.Id.container_buttons);
 
-      var itemIdButton = new Button(this);
+      var itemIdButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_get_item_by_id)
+      };
       itemIdButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByIdActivity));
 
-      var itemPathButton = new Button(this);
+      var itemPathButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_get_item_by_path)
+      };
       itemPathButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByPathActivtiy));
 
-      var itemQueryButton = new Button(this);
+      var itemQueryButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_get_item_by_query)
+      };
       itemQueryButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByQueryActivtiy));
 
-      var downloadImageButton = new Button(this);
+      var downloadImageButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_download_image)
+      };
       downloadImageButton.Click += (sender, e) => this.StartActivity(typeof(DownloadImageActivtiy));
 
-      var createItemByIdButton = new Button(this);
-      createItemByIdButton.Click += (sender, e) => this.StartActivity(typeof(DownloadImageActivtiy));
+      var createItemByIdButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_create_item_by_id)
+      };
+      createItemByIdButton.Click += (sender, e) => this.StartActivity(typeof(CreateItemByIdActivity));
 
       container.AddView(itemIdButton);
       container.AddView(itemPathButton);

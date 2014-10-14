@@ -127,6 +127,7 @@ namespace WhiteLabelAndroid
 
           session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.InstanceUrl)
             .Credentials(credentials)
+            .DefaultDatabase(this.Database)
             .Site(this.Site)
             .BuildSession();
         }
@@ -134,6 +135,7 @@ namespace WhiteLabelAndroid
         {
           session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.InstanceUrl)
             .Site(this.Site)
+            .DefaultDatabase(this.Database)
             .BuildSession();
         }
           

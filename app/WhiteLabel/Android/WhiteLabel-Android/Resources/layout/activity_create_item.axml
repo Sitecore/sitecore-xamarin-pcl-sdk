@@ -13,17 +13,20 @@
         android:layout_height="20dp" />
     <EditText
         android:id="@+id/field_item_name"
+        android:hint="@string/hint_item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp" />
     <EditText
-        android:id="@+id/field_item_field_name"
+        android:id="@+id/field_item_title_field_name"
+        android:hint="@string/hint_item_title_field_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/field_item_field_value"
+        android:id="@+id/field_item_text_field_value"
+        android:hint="@string/hint_item_text_field_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <LinearLayout

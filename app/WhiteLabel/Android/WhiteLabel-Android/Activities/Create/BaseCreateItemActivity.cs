@@ -2,6 +2,7 @@ namespace WhiteLabelAndroid.Activities.Create
 {
   using Android.App;
   using Android.OS;
+  using Android.Views;
   using Android.Widget;
 
   [Activity]
@@ -10,20 +11,26 @@ namespace WhiteLabelAndroid.Activities.Create
     #region Views
     protected EditText ItemField;
     protected EditText ItemNameField;
-    protected EditText FieldNameField;
-    protected EditText FieldValueField;
+    protected EditText ItemTitleFieldValue;
+    protected EditText ItemTextFieldValue;
     #endregion
+
+    protected Prefs Prefs;
 
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
+      this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
       this.SetContentView(Resource.Layout.activity_create_item);
+
+      this.Prefs = Prefs.From(this);
 
       this.ItemField = this.FindViewById<EditText>(Resource.Id.field_item);
 
       this.ItemNameField = this.FindViewById<EditText>(Resource.Id.field_item_name);
-      this.FieldNameField = this.FindViewById<EditText>(Resource.Id.field_item_field_name);
-      this.FieldValueField = this.FindViewById<EditText>(Resource.Id.field_item_field_value);
+
+      this.ItemTitleFieldValue = this.FindViewById<EditText>(Resource.Id.field_item_title_field_name);
+      this.ItemTextFieldValue = this.FindViewById<EditText>(Resource.Id.field_item_text_field_value);
 
       var createItemButton = this.FindViewById<Button>(Resource.Id.button_create_item);
       var updateCreatedItemButton = this.FindViewById<Button>(Resource.Id.button_update_created_item);
