@@ -1,4 +1,4 @@
-namespace WhiteLabelAndroid.Activities
+namespace WhiteLabelAndroid.Activities.Read
 {
   using System;
   using System.Linq;
@@ -8,28 +8,26 @@ namespace WhiteLabelAndroid.Activities
   using Sitecore.MobileSDK.API;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
-  public class ReadItemByPathActivtiy : BaseReadItemActivity
+  public class ReadItemByIdActivity : BaseReadItemActivity
   {
-
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
 
-      this.Title = this.GetString(Resource.String.text_get_item_by_path);
-
+      this.Title = this.GetString(Resource.String.text_get_item_by_id);
       this.InitViews();
     }
 
     private void InitViews()
     {
-      this.ItemFieldLabel.Text = this.GetString(Resource.String.text_path_label);
-      this.ItemFieldEditText.Hint = this.GetString(Resource.String.hint_item_path);
+      this.ItemFieldLabel.Text = this.GetString(Resource.String.text_id_label);
+      this.ItemFieldEditText.Hint = this.GetString(Resource.String.hint_item_id);
 
       this.GetItemsButton.Click += (sender, args) =>
       {
         if (string.IsNullOrEmpty(this.ItemFieldEditText.Text))
         {
-          DialogHelper.ShowSimpleDialog(this, this.GetString(Resource.String.text_error), this.GetString(Resource.String.text_empty_path));
+          DialogHelper.ShowSimpleDialog(this, Resource.String.text_error, Resource.String.text_empty_id);
           return;
         }
 
@@ -38,11 +36,11 @@ namespace WhiteLabelAndroid.Activities
       };
     }
 
-    private async void PerformGetItemRequest(string path)
+    private async void PerformGetItemRequest(string id)
     {
       try
       {
-        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path)
+        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id)
           .Payload(this.GetSelectedPayload());
 
         var scopes = this.GetSelectedScopes();
@@ -58,7 +56,7 @@ namespace WhiteLabelAndroid.Activities
 
         this.SetProgressBarIndeterminateVisibility(true);
 
-        using (var session = this.prefs.Session)
+        using (var session = this.Prefs.Session)
         {
           var response = await session.ReadItemAsync(builder.Build());
 

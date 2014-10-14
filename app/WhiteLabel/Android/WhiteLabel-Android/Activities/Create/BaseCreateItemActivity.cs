@@ -1,4 +1,4 @@
-namespace WhiteLabelAndroid.Activities
+namespace WhiteLabelAndroid.Activities.Create
 {
   using Android.App;
   using Android.OS;
@@ -17,7 +17,7 @@ namespace WhiteLabelAndroid.Activities
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
-      SetContentView(Resource.Layout.activity_create_item);
+      this.SetContentView(Resource.Layout.activity_create_item);
 
       this.ItemField = this.FindViewById<EditText>(Resource.Id.field_item);
 

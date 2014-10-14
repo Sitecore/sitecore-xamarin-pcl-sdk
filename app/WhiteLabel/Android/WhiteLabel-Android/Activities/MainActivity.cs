@@ -6,7 +6,8 @@
   using Android.OS;
   using Android.Views;
   using Android.Widget;
-  using WhiteLabelAndroid.SubActivities;
+  using WhiteLabelAndroid.Activities.Media;
+  using WhiteLabelAndroid.Activities.Read;
 
   [Activity(MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
   public class MainActivity : Activity

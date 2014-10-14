@@ -8,6 +8,7 @@ namespace WhiteLabelAndroid.Activities
   using Android.Widget;
   using Sitecore.MobileSDK.API.Fields;
   using Sitecore.MobileSDK.API.Items;
+  using WhiteLabelAndroid.Activities.Read;
 
   [Activity]
   public class ItemFieldsActivity : ListActivity

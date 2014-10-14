@@ -1,4 +1,4 @@
-namespace WhiteLabelAndroid.Activities
+namespace WhiteLabelAndroid.Activities.Read
 {
   using System.Collections.Generic;
   using System.Linq;
@@ -14,7 +14,7 @@ namespace WhiteLabelAndroid.Activities
   {
     public static ISitecoreItem SelectedItem { get; set; }
 
-    protected Prefs prefs;
+    protected Prefs Prefs;
     
     #region Views
     private RadioGroup payloadRadioGroup;
@@ -51,7 +51,7 @@ namespace WhiteLabelAndroid.Activities
       this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
       this.SetContentView(Resource.Layout.SimpleItemLayout);
 
-      this.prefs = Prefs.From(this);
+      this.Prefs = Prefs.From(this);
 
       this.payloadRadioGroup = this.FindViewById<RadioGroup>(Resource.Id.group_payload_type);
       
@@ -132,7 +132,7 @@ namespace WhiteLabelAndroid.Activities
     {
       SelectedItem = this.items.ToArray()[position];
 
-      StartActivity(typeof(ItemFieldsActivity));
+      this.StartActivity(typeof(ItemFieldsActivity));
     }
   }
 }

@@ -1,4 +1,4 @@
-namespace WhiteLabelAndroid.SubActivities
+namespace WhiteLabelAndroid.Activities.Read
 {
   using System;
   using Android.App;
@@ -6,8 +6,6 @@ namespace WhiteLabelAndroid.SubActivities
   using Android.OS;
   using Android.Views;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.API.Items;
-  using WhiteLabelAndroid.Activities;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class ReadItemByQueryActivtiy : BaseReadItemActivity
@@ -23,9 +21,9 @@ namespace WhiteLabelAndroid.SubActivities
 
     private void InitViews()
     {
-      this.ItemFieldLabel.Text = GetString(Resource.String.text_query_label);
+      this.ItemFieldLabel.Text = this.GetString(Resource.String.text_query_label);
 
-      this.ItemFieldEditText.Hint = GetString(Resource.String.hint_query);
+      this.ItemFieldEditText.Hint = this.GetString(Resource.String.hint_query);
 
       this.ScopeContainer.Visibility = ViewStates.Gone;
       this.PayloadContainer.Visibility = ViewStates.Gone;
@@ -52,7 +50,7 @@ namespace WhiteLabelAndroid.SubActivities
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
         this.SetProgressBarIndeterminateVisibility(true);
 
-        using (var session = this.prefs.Session)
+        using (var session = this.Prefs.Session)
         {
           var response = await session.ReadItemAsync(request);
 
@@ -70,7 +68,7 @@ namespace WhiteLabelAndroid.SubActivities
       catch (Exception exception)
       {
         this.SetProgressBarIndeterminateVisibility(false);
-        var title = GetString(Resource.String.text_item_received);
+        var title = this.GetString(Resource.String.text_item_received);
         DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }

@@ -1,4 +1,4 @@
-namespace WhiteLabelAndroid.Activities
+namespace WhiteLabelAndroid.Activities.Media
 {
   using System;
   using Android.App;
@@ -10,11 +10,11 @@ namespace WhiteLabelAndroid.Activities
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Request.Parameters;
+  using WhiteLabelAndroid.Activities.Read;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
   public class DownloadImageActivtiy : BaseReadItemActivity
   {
-    private Prefs prefs;
     private ImageView targetImageView;
 
     protected override void OnCreate(Bundle bundle)
@@ -25,7 +25,7 @@ namespace WhiteLabelAndroid.Activities
 
       this.SetTitle(Resource.String.text_download_image);
 
-      this.prefs = Prefs.From(this);
+      this.Prefs = Prefs.From(this);
 
       var itemPathField = this.FindViewById<EditText>(Resource.Id.field_item_path);
 
@@ -76,7 +76,7 @@ namespace WhiteLabelAndroid.Activities
         
         this.SetProgressBarIndeterminateVisibility(true);
 
-        using (var session = this.prefs.Session)
+        using (var session = this.Prefs.Session)
         {
           var response = await session.DownloadMediaResourceAsync(requestBuilder.Build());
 
