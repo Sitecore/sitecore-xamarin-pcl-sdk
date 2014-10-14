@@ -94,20 +94,14 @@ namespace WhiteLabelAndroid.Activities.Media
 
         using (ISitecoreWebApiSession session = this.prefs.Session)
         {
-          using (Stream stream = System.IO.File.Open(imagePath, FileMode.Open))
+          using (Stream stream = File.Open(imagePath, FileMode.Open))
           {
-            var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId("{BC1BAE61-ADC6-4B37-B36E-01059B26CF84}")
+            var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId("{106A23FE-9DE9-4B2D-A586-6C3846AFB33A}")
               .ItemDataStream(stream)
               .ContentType("image/jpg")
               .ItemName("ImageFromAndroid")
+              .FileName("bugaga.jpg")
               .Build();
-
-            //          var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId("{BC1BAE61-ADC6-4B37-B36E-01059B26CF84}")
-            //            .ItemDataStream(stream)
-            //            .ContentType("image/jpg")
-            //            .ItemName("name1")
-            //            .FileName("bugaga.jpg")
-            //            .Build();
 
             var response = await session.UploadMediaResourceAsync(request);
 
