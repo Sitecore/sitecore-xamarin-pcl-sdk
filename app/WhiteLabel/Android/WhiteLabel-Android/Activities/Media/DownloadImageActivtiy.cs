@@ -6,14 +6,14 @@ namespace WhiteLabelAndroid.Activities.Media
   using Android.Graphics;
   using Android.OS;
   using Android.Views;
+  using Android.Views.InputMethods;
   using Android.Widget;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Request.Parameters;
-  using WhiteLabelAndroid.Activities.Read;
 
   [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
-  public class DownloadImageActivtiy : BaseReadItemActivity
+  public class DownloadImageActivtiy : Activity
   {
     private ImageView targetImageView;
 
@@ -25,8 +25,6 @@ namespace WhiteLabelAndroid.Activities.Media
 
       this.SetTitle(Resource.String.text_download_image);
 
-      this.Prefs = Prefs.From(this);
-
       var itemPathField = this.FindViewById<EditText>(Resource.Id.field_item_path);
 
       var imageWidth = this.FindViewById<EditText>(Resource.Id.field_image_width);
@@ -37,19 +35,25 @@ namespace WhiteLabelAndroid.Activities.Media
       var downloadButton = this.FindViewById<Button>(Resource.Id.button_download);
       downloadButton.Click += (sender, args) =>
       {
-        if (string.IsNullOrEmpty(itemPathField.Text))
-        {
-          DialogHelper.ShowSimpleDialog(this, Resource.String.text_error, Resource.String.text_empty_path);
-          return;
-        }
-
         this.HideKeyboard();
         this.DownloadImage(itemPathField.Text, imageWidth.Text, imageHeight.Text);
       };
     }
 
+    protected void HideKeyboard()
+    {
+      var inputMethodManager = this.GetSystemService(InputMethodService) as InputMethodManager;
+      inputMethodManager.HideSoftInputFromWindow(this.targetImageView.WindowToken, HideSoftInputFlags.None);
+    }
+
     private async void DownloadImage(string itemPath, string widthStr, string heightStr)
     {
+      if (string.IsNullOrEmpty(itemPath))
+      {
+        DialogHelper.ShowSimpleDialog(this, Resource.String.text_error, Resource.String.text_empty_path);
+        return;
+      }
+
       try
       {
         IMediaOptionsBuilder builder = new MediaOptionsBuilder().Set;
@@ -76,7 +80,7 @@ namespace WhiteLabelAndroid.Activities.Media
         
         this.SetProgressBarIndeterminateVisibility(true);
 
-        using (var session = this.Prefs.Session)
+        using (var session = Prefs.From(this).Session)
         {
           var response = await session.DownloadMediaResourceAsync(requestBuilder.Build());
 
