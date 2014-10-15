@@ -77,7 +77,6 @@
           .Database(Database)
           .ItemName("testPNG")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build();
         var response = await this.session.UploadMediaResourceAsync(request);
         Assert.AreEqual(1, response.ResultCount);
@@ -105,7 +104,6 @@
           .Database(Database)
           .ItemName("testPNG")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build();
         var response = await sessionToOverride.UploadMediaResourceAsync(request);
         Assert.AreEqual(1, response.ResultCount);
@@ -128,7 +126,6 @@
           .ItemDataStream(image)
           .ItemName("testPNG")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build();
         TestDelegate testCode = async () =>
         {
@@ -160,7 +157,6 @@
           .ItemDataStream(video)
           .ItemName("testVideo")
           .FileName("test.mov")
-          .ContentType("video/mov")
           .Build();
         var response = await sessionToOverride.UploadMediaResourceAsync(request);
         Assert.AreEqual(1, response.ResultCount);
@@ -178,7 +174,6 @@
         .Database(null)
         .ItemName("testPNG")
         .FileName("test.png")
-        .ContentType("image/png")
         .Build();
 
       Assert.NotNull(request);
@@ -197,7 +192,6 @@
           .Database(Database)
           .ItemName(ItemName)
           .FileName("test.png")
-          .ContentType("image/png")
           .Build();
         var response = await this.session.UploadMediaResourceAsync(request);
         Assert.AreEqual(0, response.ResultCount);
@@ -214,7 +208,6 @@
           .ItemDataStream(image)
           .ItemName("test")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build();
 
         TestDelegate testCode = async () =>
@@ -241,7 +234,6 @@
           .ItemDataStream(image)
           .ItemName("test")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build());
         Assert.IsTrue(exception.Message.Contains("ParentId"));
       }
@@ -257,7 +249,6 @@
           .ItemDataStream(image)
           .ItemName("test")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build());
         Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ParentId : Item id must have curly braces '{}'", exception.Message);
       }
@@ -273,7 +264,6 @@
           .ItemDataStream(image)
           .ItemName("test")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build());
         Assert.AreEqual("UploadMediaItemByParentPathRequestBuilder.ParentPath : The input cannot be empty.", exception.Message);
       }
@@ -289,7 +279,6 @@
           .ItemDataStream(image)
           .ItemName("test")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build());
         Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ParentId : The input cannot be empty.", exception.Message);
       }
@@ -318,7 +307,6 @@
           .ItemDataStream(image)
           .Database(Database)
           .ItemName(ItemName)
-          .ContentType("image/gif")
           .FileName("ク.gif")
           .Build();
         var response = await this.session.UploadMediaResourceAsync(request);
@@ -339,7 +327,6 @@
           .ItemDataStream(image)
           .ItemName("")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build());
         Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
       }
@@ -355,7 +342,6 @@
           .ItemDataStream(null)
           .ItemName("test")
           .FileName("test.png")
-          .ContentType("image/png")
           .Build());
         Assert.IsTrue(exception.Message.Contains("ItemDataStream"));
       }
