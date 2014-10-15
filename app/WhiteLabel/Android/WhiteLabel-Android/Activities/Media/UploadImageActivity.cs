@@ -17,15 +17,12 @@ namespace WhiteLabelAndroid.Activities.Media
     private ImageView selectedImage;
     private Uri imageUri;
 
-    private Prefs prefs;
-
     protected override void OnCreate(Bundle bundle)
     {
       base.OnCreate(bundle);
       this.RequestWindowFeature(WindowFeatures.IndeterminateProgress);
       SetContentView(Resource.Layout.activity_upload_image);
 
-      this.prefs = Prefs.From(this);
       this.Title = GetString(Resource.String.text_upload_image);
 
       var selectImageButton = this.FindViewById<Button>(Resource.Id.button_select_image);
@@ -92,7 +89,7 @@ namespace WhiteLabelAndroid.Activities.Media
       {
         this.SetProgressBarIndeterminateVisibility(true);
 
-        using (ISitecoreWebApiSession session = this.prefs.Session)
+        using (ISitecoreWebApiSession session = Prefs.From(this).Session)
         {
           using (Stream stream = File.Open(imagePath, FileMode.Open))
           {

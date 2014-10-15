@@ -39,6 +39,16 @@
 
       var container = this.FindViewById<LinearLayout>(Resource.Id.container_buttons);
 
+      this.AddReadItemsButtons(container);
+      this.AddCreateItemsButtons(container);
+      this.AddDeleteItemsButtons(container);
+      this.AddMediaItemsButtons(container);
+      this.AddAuthenticateButtons(container);
+      this.AddrenderingHtmlButtons(container);
+    }
+
+    private void AddReadItemsButtons(LinearLayout container)
+    {
       var itemIdButton = new Button(this)
       {
         Text = this.GetString(Resource.String.text_get_item_by_id)
@@ -57,12 +67,13 @@
       };
       itemQueryButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByQueryActivtiy));
 
-      var downloadImageButton = new Button(this)
-      {
-        Text = this.GetString(Resource.String.text_download_image)
-      };
-      downloadImageButton.Click += (sender, e) => this.StartActivity(typeof(DownloadImageActivtiy));
+      container.AddView(itemIdButton);
+      container.AddView(itemPathButton);
+      container.AddView(itemQueryButton);
+    }
 
+    private void AddCreateItemsButtons(LinearLayout container)
+    {
       var createItemByIdButton = new Button(this)
       {
         Text = this.GetString(Resource.String.text_create_item_by_id)
@@ -75,11 +86,28 @@
       };
       createItemByPathButton.Click += (sender, e) => this.StartActivity(typeof(CreateItemByPathActivity));
 
+      container.AddView(createItemByIdButton);
+      container.AddView(createItemByPathButton);
+    }
+
+    private void AddDeleteItemsButtons(LinearLayout container)
+    {
       var deleteItemButton = new Button(this)
       {
         Text = this.GetString(Resource.String.text_delete_item)
       };
       deleteItemButton.Click += (sender, e) => this.StartActivity(typeof(DeleteItemActivity));
+
+      container.AddView(deleteItemButton);
+    }
+
+    private void AddMediaItemsButtons(LinearLayout container)
+    {
+      var downloadImageButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_download_image)
+      };
+      downloadImageButton.Click += (sender, e) => this.StartActivity(typeof(DownloadImageActivtiy));
 
       var uploadImageButton = new Button(this)
       {
@@ -87,31 +115,28 @@
       };
       uploadImageButton.Click += (sender, e) => this.StartActivity(typeof(UploadImageActivity));
 
+      container.AddView(downloadImageButton);
+      container.AddView(uploadImageButton);
+    }
+
+    private void AddAuthenticateButtons(LinearLayout container)
+    {
       var authenticateButton = new Button(this)
       {
         Text = this.GetString(Resource.String.text_authenticate)
       };
       authenticateButton.Click += (sender, e) => this.StartActivity(typeof(AuthenticateActivity));
 
+      container.AddView(authenticateButton);
+    }
+
+    private void AddrenderingHtmlButtons(LinearLayout container)
+    {
       var renderingHtmlButton = new Button(this)
       {
         Text = this.GetString(Resource.String.text_get_rendering_html)
       };
       renderingHtmlButton.Click += (sender, e) => this.StartActivity(typeof(GetRenderingHtmlActivity));
-
-      container.AddView(itemIdButton);
-      container.AddView(itemPathButton);
-      container.AddView(itemQueryButton);
-      
-      container.AddView(createItemByIdButton);
-      container.AddView(createItemByPathButton);
-      
-      container.AddView(deleteItemButton);
-
-      container.AddView(authenticateButton);
-      
-      container.AddView(downloadImageButton);
-      container.AddView(uploadImageButton);
 
       container.AddView(renderingHtmlButton);
     }
