@@ -109,7 +109,6 @@
     {
       BaseValidator.CheckNullAndThrow(this.itemDataStream, this.GetType().Name + ".itemDataStream");
       BaseValidator.CheckNullAndThrow(this.itemName, this.GetType().Name + ".itemName");
-      BaseValidator.CheckNullAndThrow(this.contentType, this.GetType().Name + ".contentType");
       BaseValidator.CheckNullAndThrow(this.fileName, this.GetType().Name + ".fileName");
 
       UploadMediaOptions createMediaParameters = new UploadMediaOptions(
