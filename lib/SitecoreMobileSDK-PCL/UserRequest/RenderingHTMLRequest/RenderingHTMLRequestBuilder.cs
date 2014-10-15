@@ -60,7 +60,7 @@ namespace Sitecore.MobileSDK.UserRequest
     public IRenderingHtmlRequestParametersBuilder<IGetRenderingHtmlRequest> SourceVersion(int? itemVersion)
     {
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
-      BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".Version");
+      BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".SourceVersion");
 
       this.itemSourceAccumulator = new ItemSourcePOD(
         this.itemSourceAccumulator.Database,
