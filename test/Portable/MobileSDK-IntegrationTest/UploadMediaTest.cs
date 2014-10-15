@@ -1,10 +1,12 @@
 ﻿namespace MobileSDKIntegrationTest
 {
+  using System;
   using System.IO;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
@@ -112,6 +114,36 @@
     }
 
     [Test]
+    public async void TryToUploadImageAsAnonymousUser()
+    {
+      await this.RemoveAll();
+
+      var sessionToOverride =
+        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.testData.InstanceUrl)
+          .BuildSession();
+
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(image)
+          .ItemName("testPNG")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build();
+        TestDelegate testCode = async () =>
+        {
+          var task = sessionToOverride.UploadMediaResourceAsync(request);
+          await task;
+        };
+
+        Exception exception = Assert.Throws<ParserException>(testCode);
+        Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.IsTrue(exception.InnerException.Message.Contains("Access denied"));
+      }
+    }
+
+    [Test]
     public async void UploadBigSizeVideoToDbSpecifiedInSession()
     {
       await this.RemoveAll();
@@ -123,8 +155,7 @@
           .BuildSession();
       const string VideoPath = "\\\\TEST24DK1\\Resources\\media\\IMG_0994.MOV";
       using (var video = GetStreamFromUrl(VideoPath))
-      {
-        
+      { 
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
           .ItemDataStream(video)
           .ItemName("testVideo")
@@ -136,6 +167,7 @@
         Assert.AreEqual(Database, response[0].Source.Database);
       }
     }
+
 
     [Test]
     public void UploadMediaToNullDbDoesNotReturnException()
@@ -173,6 +205,97 @@
     }
 
     [Test]
+    public async void UploadImageToNotExistentFolder()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/not existent/folder")
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build();
+
+        TestDelegate testCode = async () =>
+        {
+          var task = this.session.UploadMediaResourceAsync(request);
+          await task;
+        };
+
+        Exception exception = Assert.Throws<ParserException>(testCode);
+        Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.AreEqual("The specified location not found.", exception.InnerException.Message);
+      }
+    }
+   
+
+    [Test]
+    public async void UploadImageToNullParentItemIdReturnsNullReferenceException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(null)
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build());
+        Assert.IsTrue(exception.Message.Contains("ParentId"));
+      }
+    }
+
+    [Test]
+    public async void UploadImageToInvalidParentItemIdReturnsArgumentException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId("invalid-id")
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ParentId : Item id must have curly braces '{}'", exception.Message);
+      }
+    }
+
+    [Test]
+    public async void UploadImageToEmptyParentPathReturnsArgumentException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("")
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentPathRequestBuilder.ParentPath : The input cannot be empty.", exception.Message);
+      }
+    }
+
+    [Test]
+    public async void UploadImageToEmptyParentIdReturnsArgumentException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(" ")
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ParentId : The input cannot be empty.", exception.Message);
+      }
+    }
+
+    [Test]
     public async void UploadJpgFileWithInternationalItemNameAndParentPath()
     {
       await this.RemoveAll();
@@ -206,6 +329,37 @@
       }
     }
 
+    [Test]
+    public async void UploadImageWithEmptyItemNameReturnsArgumentException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(this.testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(image)
+          .ItemName("")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+      }
+    }
+
+    [Test]
+    public async void UploadImageWithNullItemDataStreamReturnsArgumentException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(this.testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(null)
+          .ItemName("test")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build());
+        Assert.IsTrue(exception.Message.Contains("ItemDataStream"));
+      }
+    }
 
     private static Stream GetStreamFromUrl(string url)
     {
