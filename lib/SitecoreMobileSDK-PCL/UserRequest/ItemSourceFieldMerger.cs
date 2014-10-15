@@ -42,6 +42,30 @@
       return new ItemSource(database, language, version);
     }
 
+    public IItemSource FillItemSourceGapsForMediaUpload(IItemSource userSource)
+    {
+      bool isNullSource = (null == this.defaultSource);
+      bool isNullInput = (null == userSource);
+
+      if (isNullSource && isNullInput)
+      {
+        return null;
+      }
+      else if (isNullInput)
+      {
+        return this.defaultSource.ShallowCopy();
+      }
+      else if (isNullSource)
+      {
+        return userSource.ShallowCopy();
+      }
+
+
+      string database = (null != userSource.Database) ? userSource.Database : this.defaultSource.Database;
+
+      return new ItemSource(database, null, null);
+    }
+
     public IItemSource DefaultSource
     {
       get

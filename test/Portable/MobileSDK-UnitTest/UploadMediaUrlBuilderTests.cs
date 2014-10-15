@@ -73,7 +73,6 @@ namespace Sitecore.MobileSdkUnitTest
         "sitecore%2fshell" +
         "?" +
         "sc_database=web&" +
-        "language=en&" +
         "name=name1&" +
         "template=System%2fMedia%2fUnversioned%2fImage&" +
         "sc_itemid=%7BBC1BAE61-ADC6-4B37-B36E-01059B26CF84%7D";
@@ -144,15 +143,16 @@ namespace Sitecore.MobileSdkUnitTest
     }
 
     [Test]
-    public void TestContentTypeRequired()
+    public void TestContentTypeIsNotRequired()
     {
       Stream stream = this.GenerateFakeStream();
-      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path")
+      var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path")
         .ItemName("name1")
         .FileName("bugaga.jpg")
-        .ItemDataStream (stream);
-
-      Assert.Throws<ArgumentNullException>(() => builder.Build());
+        .ItemDataStream (stream)
+        .Build();
+     
+      Assert.NotNull (request, "null Content type should be available");
     }
       
     [Test]
@@ -198,7 +198,6 @@ namespace Sitecore.MobileSdkUnitTest
                         "%2fsome%20folder%2fpath" +
                         "?" +
                         "sc_database=web&" +
-                        "language=en&" +
                         "name=name1&" +
                         "template=System%2fMedia%2fUnversioned%2fImage";
 
@@ -225,7 +224,6 @@ namespace Sitecore.MobileSdkUnitTest
         "%2fsome%20folder%2fpath" +
         "?" +
         "sc_database=web&" +
-        "language=en&" +
         "name=name1";
 
       Assert.AreEqual(expected, result);
