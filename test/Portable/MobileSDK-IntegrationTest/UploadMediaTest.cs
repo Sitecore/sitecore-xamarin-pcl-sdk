@@ -1,7 +1,6 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System.IO;
-  using System.Net;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
@@ -16,7 +15,7 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
-    const string GifImagePath = "https://doc-04-3c-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/9lcs447lokedn59lc0im752rfsffk210/1413288000000/00185538803090360990/*/0BwFsp7qW3Sy7V1NSTHF5MDM0NzA";
+    const string GifImagePath = "\\\\TEST24DK1\\Resources\\media\\Pictures-2.gif";
 
 
     [SetUp]
@@ -41,24 +40,25 @@
     public async void UploadGifFileToMasterDatabaseAsSitecoreAdminForParentPath()
     {
       await this.RemoveAll();
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        const string ItemName = "testGif";
+        const string Database = "master";
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(testData.Items.UploadMediaHere.Path)
+          .ItemDataStream(image)
+          .Database(Database)
+          .ItemName(ItemName)
+          .FileName("test.gif")
+          .ContentType("image/jpg")
+          .ItemTemplatePath("System/Media/Unversioned/Jpeg")
+          .Build();
+        var response = await this.session.UploadMediaResourceAsync(request);
 
-      var image = GetStreamFromUrl(GifImagePath);
-      const string ItemName = "testGif";
-      const string Database = "master";
-      var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(testData.Items.UploadMediaHere.Path)
-        .ItemDataStream(image)
-        .Database(Database)
-        .ItemName(ItemName)
-        .FileName("test.gif")
-        .ContentType("image/jpg")
-        .ItemTemplatePath("System/Media/Unversioned/Jpeg")
-        .Build();
-      var response = await this.session.UploadMediaResourceAsync(request);
-
-      Assert.AreEqual(1, response.ResultCount);
-      Assert.AreEqual(ItemName, response[0].DisplayName);
-      Assert.AreEqual(Database, response[0].Source.Database);
-      this.AssertImageUploaded(response[0].Path, Database);
+        Assert.AreEqual(1, response.ResultCount);
+        Assert.AreEqual(ItemName, response[0].DisplayName);
+        Assert.AreEqual(Database, response[0].Source.Database);
+        this.AssertImageUploaded(response[0].Path, Database);
+      }
     }
 
     [Test]
@@ -66,20 +66,22 @@
     {
       await this.RemoveAll();
 
-      const string PngImagePath = "https://doc-04-3c-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/9lcs447lokedn59lc0im752rfsffk210/1413288000000/00185538803090360990/*/0BwFsp7qW3Sy7V1NSTHF5MDM0NzA";
-      var image = GetStreamFromUrl(PngImagePath);
-      const string Database = "web";
-      var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
-        .ItemDataStream(image)
-        .Database(Database)
-        .ItemName("testPNG")
-        .FileName("test.png")
-        .ContentType("image/png")
-        .Build();
-      var response = await this.session.UploadMediaResourceAsync(request);
-      Assert.AreEqual(1, response.ResultCount);
-      Assert.AreEqual(Database, response[0].Source.Database);
-      this.AssertImageUploaded(response[0].Path, Database);
+      const string PngImagePath = "\\\\TEST24DK1\\Resources\\media\\wpapers_ru_Бамбук.png";
+      using (var image = GetStreamFromUrl(PngImagePath))
+      {
+        const string Database = "web";
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(image)
+          .Database(Database)
+          .ItemName("testPNG")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build();
+        var response = await this.session.UploadMediaResourceAsync(request);
+        Assert.AreEqual(1, response.ResultCount);
+        Assert.AreEqual(Database, response[0].Source.Database);
+        this.AssertImageUploaded(response[0].Path, Database);
+      }
     }
 
     [Test]
@@ -93,22 +95,50 @@
           .DefaultDatabase("master")
           .BuildSession();
 
-      var image = GetStreamFromUrl(GifImagePath);
-      const string Database = "web";
-      var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
-        .ItemDataStream(image)
-        .Database(Database)
-        .ItemName("testPNG")
-        .FileName("test.png")
-        .ContentType("image/png")
-        .Build();
-      var response = await sessionToOverride.UploadMediaResourceAsync(request);
-      Assert.AreEqual(1, response.ResultCount);
-      Assert.AreEqual(Database, response[0].Source.Database);
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        const string Database = "web";
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(image)
+          .Database(Database)
+          .ItemName("testPNG")
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build();
+        var response = await sessionToOverride.UploadMediaResourceAsync(request);
+        Assert.AreEqual(1, response.ResultCount);
+        Assert.AreEqual(Database, response[0].Source.Database);
+      }
     }
 
     [Test]
-    public  void UploadMediaToNullDbDoesNotReturnException()
+    public async void UploadBigSizeVideoToDbSpecifiedInSession()
+    {
+      await this.RemoveAll();
+      const string Database = "master";
+      var sessionToOverride =
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+          .Credentials(this.testData.Users.Admin)
+          .DefaultDatabase(Database)
+          .BuildSession();
+      const string VideoPath = "\\\\TEST24DK1\\Resources\\media\\IMG_0994.MOV";
+      using (var video = GetStreamFromUrl(VideoPath))
+      {
+        
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(video)
+          .ItemName("testVideo")
+          .FileName("test.mov")
+          .ContentType("video/mov")
+          .Build();
+        var response = await sessionToOverride.UploadMediaResourceAsync(request);
+        Assert.AreEqual(1, response.ResultCount);
+        Assert.AreEqual(Database, response[0].Source.Database);
+      }
+    }
+
+    [Test]
+    public void UploadMediaToNullDbDoesNotReturnException()
     {
       var image = GetStreamFromUrl(GifImagePath);
       var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
@@ -118,7 +148,7 @@
         .FileName("test.png")
         .ContentType("image/png")
         .Build();
-     
+
       Assert.NotNull(request);
     }
 
@@ -126,19 +156,20 @@
     public async void UploadImageWithVeryLongItemName()
     {
       await this.RemoveAll();
-
-      var image = GetStreamFromUrl(GifImagePath);
-      const string Database = "master";
-      const string ItemName = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam voluptatem quia voluptas si aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est";
-      var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
-        .ItemDataStream(image)
-        .Database(Database)
-        .ItemName(ItemName)
-        .FileName("test.png")
-        .ContentType("image/png")
-        .Build();
-      var response = await this.session.UploadMediaResourceAsync(request);
-      Assert.AreEqual(0, response.ResultCount);
+      using (var image = GetStreamFromUrl(GifImagePath))
+      {
+        const string Database = "master";
+        const string ItemName = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam voluptatem quia voluptas si aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est";
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(image)
+          .Database(Database)
+          .ItemName(ItemName)
+          .FileName("test.png")
+          .ContentType("image/png")
+          .Build();
+        var response = await this.session.UploadMediaResourceAsync(request);
+        Assert.AreEqual(0, response.ResultCount);
+      }
     }
 
     [Test]
@@ -153,33 +184,32 @@
         .Database("master")
         .Build();
       var createResponse = await session.CreateItemAsync(createRequest);
-      Assert.AreEqual(1, createResponse.ResultCount);
+      //Assert.AreEqual(1, createResponse.ResultCount);
+      const string JpgImagePath = "\\\\TEST24DK1\\Resources\\media\\30X30.jpg";
+      using (var image = GetStreamFromUrl(JpgImagePath))
+      {
+        const string ItemName = "International Слава Україні ウクライナへの栄光";
+        const string Database = "master";
+        string parentPath = createResponse[0].Path.Remove(0, 23);
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(parentPath)
+          .ItemDataStream(image)
+          .Database(Database)
+          .ItemName(ItemName)
+          .ContentType("image/gif")
+          .FileName("ク.gif")
+          .Build();
+        var response = await this.session.UploadMediaResourceAsync(request);
 
-      const string JpgImagePath = "https://doc-0k-3c-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/rq5lsqv506hbd9790ilms1e2ck4u2m7n/1413288000000/00185538803090360990/*/0BwFsp7qW3Sy7a2o2VnBZZXNNVlk";
-      var image = GetStreamFromUrl(JpgImagePath);
-      const string ItemName = "International Слава Україні ウクライナへの栄光";
-      const string Database = "master";
-      string parentPath = createResponse[0].Path.Remove(0, 23);
-      var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(parentPath)
-        .ItemDataStream(image)
-        .Database(Database)
-        .ItemName(ItemName)
-        .ContentType("image/gif")
-        .FileName("ク.gif")
-        .Build();
-      var response = await this.session.UploadMediaResourceAsync(request);
-
-      Assert.AreEqual(1, response.ResultCount);
-      Assert.AreEqual(ItemName, response[0].DisplayName);
-      this.AssertImageUploaded(response[0].Path, Database);
+        Assert.AreEqual(1, response.ResultCount);
+        Assert.AreEqual(ItemName, response[0].DisplayName);
+        this.AssertImageUploaded(response[0].Path, Database);
+      }
     }
 
 
     private static Stream GetStreamFromUrl(string url)
     {
-      var req = WebRequest.Create(url);
-      var response = req.GetResponse();
-      return response.GetResponseStream();
+      return File.OpenRead(url);
     }
 
     private async void AssertImageUploaded(string itemPath, string database)
