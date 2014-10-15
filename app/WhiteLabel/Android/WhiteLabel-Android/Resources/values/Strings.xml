@@ -25,6 +25,7 @@
   <string name="text_delete_item">Delete Item</string>
   <string name="text_authenticate">Authenticate</string>
   <string name="text_upload_image">Upload Image</string>
+  <string name="text_get_rendering_html">Get Rendering HTML</string>
   <string name="text_settings_screen">Settings Activity</string>
 
   <string name="text_width">Width</string>

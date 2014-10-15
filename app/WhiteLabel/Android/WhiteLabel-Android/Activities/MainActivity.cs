@@ -93,6 +93,12 @@
       };
       authenticateButton.Click += (sender, e) => this.StartActivity(typeof(AuthenticateActivity));
 
+      var renderingHtmlButton = new Button(this)
+      {
+        Text = this.GetString(Resource.String.text_get_rendering_html)
+      };
+      renderingHtmlButton.Click += (sender, e) => this.StartActivity(typeof(GetRenderingHtmlActivity));
+
       container.AddView(itemIdButton);
       container.AddView(itemPathButton);
       container.AddView(itemQueryButton);
@@ -106,6 +112,8 @@
       
       container.AddView(downloadImageButton);
       container.AddView(uploadImageButton);
+
+      container.AddView(renderingHtmlButton);
     }
   }
 }

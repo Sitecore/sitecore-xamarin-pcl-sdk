@@ -55,6 +55,7 @@
     <Compile Include="Activities\Create\CreateItemByIdActivity.cs" />
     <Compile Include="Activities\Create\CreateItemByPathActivity.cs" />
     <Compile Include="Activities\DeleteItemActivity.cs" />
+    <Compile Include="Activities\GetRenderingHtmlActivity.cs" />
     <Compile Include="Activities\Media\UploadImageActivity.cs" />
     <Compile Include="Util\DialogHelper.cs" />
     <Compile Include="Activities\MainActivity.cs" />
@@ -88,6 +89,7 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_upload_image.axml" />
+    <AndroidResource Include="Resources\layout\activity_rendering_html.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_main.axml" />
