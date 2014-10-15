@@ -181,7 +181,7 @@
     [Test]
     public void TestGetRenderingWithNullItemVersionDoesNotReturnException()
     {
-        var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+        var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
         .SourceVersion(null));
         Assert.True(exception.Message.Contains("SourceVersion"));
     }
