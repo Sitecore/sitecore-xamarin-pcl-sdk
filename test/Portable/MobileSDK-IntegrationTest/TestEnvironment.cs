@@ -93,6 +93,36 @@
       public Item UploadMediaHere = new Item();
     }
 
+    public static class Videos
+    {
+      public static string IMG_0994_MOV = "http://mediaitems.test24dk1.dk.sitecore.net/videos/IMG_0994.MOV";
+    }
+
+    public static class Images
+    {
+      public static class Tif
+      {
+        public static string _3000x3000 = "http://mediaitems.test24dk1.dk.sitecore.net/pictures/3000x3000.tif";
+        public static string _60x60 = "http://mediaitems.test24dk1.dk.sitecore.net/pictures/60x60.tif";
+      }
+
+      public static class Gif
+      {
+        public static string _3000x3000 = "http://mediaitems.test24dk1.dk.sitecore.net/pictures/-3000x3000.gif";
+        public static string Pictures_2 = "http://mediaitems.test24dk1.dk.sitecore.net/pictures/Pictures-2.gif";
+      }
+
+      public static class Png
+      {
+        public static string Bambuk = "http://mediaitems.test24dk1.dk.sitecore.net/pictures/wpapers_ru_%D0%91%D0%B0%D0%BC%D0%B1%D1%83%D0%BA.png";
+      }
+
+      public static class Jpeg
+      {
+        public static string _30x30 = "http://mediaitems.test24dk1.dk.sitecore.net/pictures/30X30.jpg";
+      }
+    }
+
     public class Item
     {
       public string Id { get; set; }
