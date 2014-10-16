@@ -16,7 +16,10 @@ namespace WhiteLabeliOS
 		MonoTouch.UIKit.UIButton cancelButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIProgressView uploadProgress { get; set; }
+		MonoTouch.UIKit.UITextField itemNameTextField { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UITextField itemPathTextField { get; set; }
 
 		[Action ("OnCancelUploadButtonTouched:")]
 		partial void OnCancelUploadButtonTouched (MonoTouch.Foundation.NSObject sender);
@@ -26,14 +29,19 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (itemPathTextField != null) {
+				itemPathTextField.Dispose ();
+				itemPathTextField = null;
+			}
+
+			if (itemNameTextField != null) {
+				itemNameTextField.Dispose ();
+				itemNameTextField = null;
+			}
+
 			if (cancelButton != null) {
 				cancelButton.Dispose ();
 				cancelButton = null;
-			}
-
-			if (uploadProgress != null) {
-				uploadProgress.Dispose ();
-				uploadProgress = null;
 			}
 		}
 	}
