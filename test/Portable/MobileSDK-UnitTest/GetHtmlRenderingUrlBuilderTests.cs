@@ -147,9 +147,9 @@
       paramDict.Add ("param4", "value4");
 
       IGetRenderingHtmlRequest request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId ("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}")
-        .AddAdditionalParameterNameValue("param1", "value1")
-        .AddAdditionalParameterNameValue("param2", "value2")
-        .AddAdditionalParameterNameValue(paramDict)
+        .AddRenderingParameterNameValue("param1", "value1")
+        .AddRenderingParameterNameValue("param2", "value2")
+        .AddRenderingParameterNameValue(paramDict)
         .Build();
 
       IGetRenderingHtmlRequest autocompletedRequest = this.requestMerger.FillGetRenderingHtmlGaps(request);
@@ -176,7 +176,7 @@
     {
 
       IGetRenderingHtmlRequest request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId ("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}")
-        .AddAdditionalParameterNameValue("PaRam", "VALue")
+        .AddRenderingParameterNameValue("PaRam", "VALue")
         .Build();
 
       IGetRenderingHtmlRequest autocompletedRequest = this.requestMerger.FillGetRenderingHtmlGaps(request);

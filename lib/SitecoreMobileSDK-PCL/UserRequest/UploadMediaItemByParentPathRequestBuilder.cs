@@ -41,38 +41,6 @@
       return this;
     }
 
-    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> Language(string itemLanguage)
-    {
-      if (string.IsNullOrEmpty(itemLanguage))
-      {
-        return this;
-      }
-
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Language, this.GetType().Name + ".Language");
-
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemLanguage, this.GetType().Name + ".Language");
-
-      this.itemSourceAccumulator = new ItemSourcePOD(
-        this.itemSourceAccumulator.Database,
-        itemLanguage,
-        this.itemSourceAccumulator.VersionNumber);
-
-      return this;
-    }
-
-    public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> Version(int? itemVersion)
-    {
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
-      BaseValidator.AssertPositiveNumber(itemVersion, this.GetType().Name + ".Version");
-
-      this.itemSourceAccumulator = new ItemSourcePOD(
-        this.itemSourceAccumulator.Database,
-        this.itemSourceAccumulator.Language,
-        itemVersion);
-
-      return this;
-    }
-
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> FileName(string fileName)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow (fileName, "UploadMediaItemRequestParametersBuilder.FileName is required");
@@ -109,7 +77,6 @@
     {
       BaseValidator.CheckNullAndThrow(this.itemDataStream, this.GetType().Name + ".itemDataStream");
       BaseValidator.CheckNullAndThrow(this.itemName, this.GetType().Name + ".itemName");
-      BaseValidator.CheckNullAndThrow(this.contentType, this.GetType().Name + ".contentType");
       BaseValidator.CheckNullAndThrow(this.fileName, this.GetType().Name + ".fileName");
 
       UploadMediaOptions createMediaParameters = new UploadMediaOptions(

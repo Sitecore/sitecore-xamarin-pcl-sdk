@@ -28,24 +28,6 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     IUploadMediaItemRequestParametersBuilder<T> Database(string database);
 
     /// <summary>
-    /// Specifies language for media item.
-    /// For example: "en".
-    /// 
-    /// The value is case insensitive.
-    /// </summary>
-    /// <param name="itemLanguage">Language name.</param>
-    /// <returns>this</returns>
-    IUploadMediaItemRequestParametersBuilder<T> Language(string itemLanguage);
-
-    /// <summary>
-    /// Specifies version of media item.
-    /// For example: 1.
-    /// </summary>
-    /// <param name="itemVersion">Version number.</param>
-    /// <returns>this</returns>
-    IUploadMediaItemRequestParametersBuilder<T> Version(int? itemVersion);
-
-    /// <summary>
     /// Specifies file's name, must include file extension.
     /// For example: image.jpg.
     /// </summary>

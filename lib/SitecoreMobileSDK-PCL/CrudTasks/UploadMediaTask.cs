@@ -37,9 +37,12 @@ namespace Sitecore.MobileSDK.CrudTasks
       ContentDispositionHeaderValue cdHeaderValue = new ContentDispositionHeaderValue ("data");
       cdHeaderValue.FileName = "\"" + request.UploadOptions.FileName + "\"";
       cdHeaderValue.Name = "\"datafile\"";
-
-      strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(request.UploadOptions.ContentType);
       strContent.Headers.ContentDisposition = cdHeaderValue;
+
+      if (null != request.UploadOptions.ContentType)
+      {
+        strContent.Headers.ContentType = MediaTypeHeaderValue.Parse (request.UploadOptions.ContentType);
+      }
 
       multiPartContent.Add(strContent);
 

@@ -126,7 +126,7 @@
     {
       TestDelegate testCode = () => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("");
       var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadMediaItemRequestBuilder.MediaPath : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("DownloadMediaResourceRequestBuilder.MediaPath : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -510,7 +510,7 @@
     public void TestGetMediaWithSpacesInLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Language("  "));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("DownloadMediaResourceRequestBuilder.Language : The input cannot be empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
@@ -526,14 +526,14 @@
     public void TestGetMediaWithZeroVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Version(0));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : Positive number expected", exception.Message);
+      Assert.AreEqual("DownloadMediaResourceRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNegativeVersionReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Version(-1));
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : Positive number expected", exception.Message);
+      Assert.AreEqual("DownloadMediaResourceRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
 
@@ -551,7 +551,7 @@
         .Version(2)
         .Version(1)
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("DownloadMediaResourceRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
@@ -561,7 +561,7 @@
         .Language("en")
         .Language("da")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Language : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("DownloadMediaResourceRequestBuilder.Language : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
@@ -571,7 +571,7 @@
         .Database("master")
         .Database("web")
         .Build());
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
+      Assert.AreEqual("DownloadMediaResourceRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
     }
 
     //TODO: add tests for MediaOptions (null, empty, override)

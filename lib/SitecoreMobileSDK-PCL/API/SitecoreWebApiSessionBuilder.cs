@@ -3,8 +3,6 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Session;
 
-
-
   /// <summary>
   /// Constructs all kinds of session objects
   /// * Anonymous session
@@ -24,7 +22,6 @@ namespace Sitecore.MobileSDK.API
       var result = SessionBuilder.SessionBuilderWithHost(instanceUrl);
       return result;
     }
-
 
     /// <summary>
     /// Creates an authenticated session.

@@ -51,6 +51,9 @@
       result.Items.MediaImagesItem.Template = "/sitecore/templates/System/Media/Media folder";
       result.Items.MediaImagesItem.TemplateId = "{FE5DD826-48C6-436D-B87A-7C4210C7413B}";
 
+      result.Items.UploadMediaHere.Id = "{EFBA81CC-69A3-4E32-BADB-379B6C347437}";
+      result.Items.UploadMediaHere.Path = "/Test Data/Create Edit Delete Media";
+
       return result;
     }
 
@@ -87,6 +90,7 @@
       public Item CreateItemsHere = new Item();
 
       public Item MediaImagesItem = new Item();
+      public Item UploadMediaHere = new Item();
     }
 
     public class Item

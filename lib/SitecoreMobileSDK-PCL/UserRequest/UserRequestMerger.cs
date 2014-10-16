@@ -84,7 +84,8 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IMediaResourceUploadRequest FillUploadMediaGaps(IMediaResourceUploadRequest userRequest)
     {
-      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
+      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGapsForMediaUpload(userRequest.ItemSource);
+
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
      
       UploadMediaOptions createMediaParameters = userRequest.UploadOptions.ShallowCopy();
