@@ -11,9 +11,9 @@
   <string name="key_database">database</string>
 
   <string name="text_default_instance_url">http://mobiledev1ua1.dk.sitecore.net:722</string>
-  <string name="text_default_login">extranet\\creatorex</string>
-  <string name="text_default_password">creatorex</string>
-  <string name="text_default_site"></string>
+  <string name="text_default_login">admin</string>
+  <string name="text_default_password">b</string>
+  <string name="text_default_site">/sitecore/shell</string>
   <string name="text_default_database">master</string>
 
   <string name="text_get_item_by_id">Get Item By ID</string>

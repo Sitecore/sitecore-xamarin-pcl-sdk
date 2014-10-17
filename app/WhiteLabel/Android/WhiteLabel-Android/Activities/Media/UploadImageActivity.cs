@@ -1,13 +1,16 @@
 namespace WhiteLabelAndroid.Activities.Media
 {
+  using System;
   using System.IO;
   using Android.App;
   using Android.Content;
   using Android.Database;
-  using Android.Net;
+  using Android.Graphics;
   using Android.OS;
+  using Android.Provider;
   using Android.Views;
   using Android.Widget;
+  using Java.IO;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
 
@@ -15,7 +18,9 @@ namespace WhiteLabelAndroid.Activities.Media
   public class UploadImageActivity : Activity
   {
     private ImageView selectedImage;
-    private Uri imageUri;
+    private Android.Net.Uri imageUri;
+
+    private Bitmap imageBitmap;
 
     protected override void OnCreate(Bundle bundle)
     {
@@ -47,12 +52,22 @@ namespace WhiteLabelAndroid.Activities.Media
 
       if (resultCode == Result.Ok)
       {
-        this.selectedImage.SetImageURI(data.Data);
+        try
+        {
+          if (this.imageBitmap != null) this.imageBitmap.Recycle();
+          
+          this.imageBitmap = MediaStore.Images.Media.GetBitmap(ContentResolver, data.Data);
+          this.selectedImage.SetImageBitmap(this.imageBitmap);
+        }
+        catch (Exception)
+        {
+          Toast.MakeText(this, "Image is to large for preview", ToastLength.Long).Show();
+        }
         this.imageUri = data.Data;
       }
     }
 
-    private string GetPathToImage(Uri uri)
+    private string GetPathToImage(Android.Net.Uri uri)
     {
       string path = null;
 
@@ -69,17 +84,29 @@ namespace WhiteLabelAndroid.Activities.Media
       return path;
     }
 
-    private async void UploadImage(Uri data)
+    private async void UploadImage(Android.Net.Uri data)
     {
+      var imageNameField = this.FindViewById<EditText>(Resource.Id.field_media_item_name);
+      var imagePathField = this.FindViewById<EditText>(Resource.Id.field_media_item_path);
+
+      var imageName = imageNameField.Text;
+      var imagePath = imagePathField.Text;
+
+      if (string.IsNullOrWhiteSpace(imageName))
+      {
+        Toast.MakeText(this, "Please select image name before upload", ToastLength.Long).Show();
+        return;
+      }
+
       if (data == null)
       {
         Toast.MakeText(this, "Please select image before upload", ToastLength.Long).Show();
         return;
       }
 
-      var imagePath = this.GetPathToImage(data);
+      var imageFilePath = this.GetPathToImage(data);
 
-      if (imagePath == null)
+      if (imageFilePath == null)
       {
         Toast.MakeText(this, "Failed to upload image", ToastLength.Long).Show();
         return;
@@ -91,16 +118,15 @@ namespace WhiteLabelAndroid.Activities.Media
 
         using (ISitecoreWebApiSession session = Prefs.From(this).Session)
         {
-          using (Stream stream = File.Open(imagePath, FileMode.Open))
+          using (Stream stream = System.IO.File.Open(imageFilePath, FileMode.Open))
           {
-            var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId("{106A23FE-9DE9-4B2D-A586-6C3846AFB33A}")
+            var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(imagePath)
               .ItemDataStream(stream)
               .ContentType("image/jpg")
-              .ItemName("ImageFromAndroid")
-              .FileName("bugaga.jpg")
-              .Build();
+              .ItemName(imageName)
+              .FileName("bugaga.jpg");
 
-            var response = await session.UploadMediaResourceAsync(request);
+            var response = await session.UploadMediaResourceAsync(builder.Build());
 
             if (response != null && response.ResultCount > 0)
             {
