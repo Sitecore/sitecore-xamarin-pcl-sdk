@@ -2,6 +2,7 @@
 {
   using System;
   using System.IO;
+  using System.Net;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
@@ -17,8 +18,6 @@
   {
     private TestEnvironment testData;
     private ISitecoreWebApiSession session;
-    const string GifImagePath = "\\\\TEST24DK1\\Resources\\media\\Pictures-2.gif";
-
 
     [SetUp]
     public void Setup()
@@ -42,10 +41,11 @@
     public async void UploadGifFileToMasterDatabaseAsSitecoreAdminForParentPath()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         const string ItemName = "testGif";
         const string Database = "master";
+
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(testData.Items.UploadMediaHere.Path)
           .ItemDataStream(image)
           .Database(Database)
@@ -54,6 +54,7 @@
           .ContentType("image/jpg")
           .ItemTemplatePath("System/Media/Unversioned/Jpeg")
           .Build();
+
         var response = await this.session.UploadMediaResourceAsync(request);
 
         Assert.AreEqual(1, response.ResultCount);
@@ -68,8 +69,7 @@
     {
       await this.RemoveAll();
 
-      const string PngImagePath = "\\\\TEST24DK1\\Resources\\media\\wpapers_ru_Бамбук.png";
-      using (var image = GetStreamFromUrl(PngImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Png.Bambuk))
       {
         const string Database = "web";
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
@@ -96,7 +96,7 @@
           .DefaultDatabase("master")
           .BuildSession();
 
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         const string Database = "web";
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
@@ -120,7 +120,7 @@
         SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.testData.InstanceUrl)
           .BuildSession();
 
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
           .ItemDataStream(image)
@@ -150,9 +150,9 @@
           .Credentials(this.testData.Users.Admin)
           .DefaultDatabase(Database)
           .BuildSession();
-      const string VideoPath = "\\\\TEST24DK1\\Resources\\media\\IMG_0994.MOV";
-      using (var video = GetStreamFromUrl(VideoPath))
-      { 
+
+      using (var video = GetStreamFromUrl(TestEnvironment.Videos.IMG_0994_MOV))
+      {
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
           .ItemDataStream(video)
           .ItemName("testVideo")
@@ -168,7 +168,7 @@
     [Test]
     public void UploadMediaToNullDbDoesNotReturnException()
     {
-      var image = GetStreamFromUrl(GifImagePath);
+      var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2);
       var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(testData.Items.UploadMediaHere.Id)
         .ItemDataStream(image)
         .Database(null)
@@ -183,7 +183,7 @@
     public async void UploadImageWithVeryLongItemName()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         const string Database = "master";
         const string ItemName = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo Nemo enim ipsam voluptatem quia voluptas si aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est";
@@ -202,7 +202,7 @@
     public async void UploadImageToNotExistentFolder()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/not existent/folder")
           .ItemDataStream(image)
@@ -222,13 +222,13 @@
         Assert.AreEqual("The specified location not found.", exception.InnerException.Message);
       }
     }
-   
+
 
     [Test]
     public async void UploadImageToNullParentItemIdReturnsNullReferenceException()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(null)
           .ItemDataStream(image)
@@ -243,7 +243,7 @@
     public async void UploadImageToInvalidParentItemIdReturnsArgumentException()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId("invalid-id")
           .ItemDataStream(image)
@@ -255,17 +255,17 @@
     }
 
     [Test]
-    public async void UploadImageToEmptyParentPathReturnsArgumentException()
+    public async void UploadImageToEmptyParentPathDoesNotReturnException()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
-        var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("")
+        var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("")
           .ItemDataStream(image)
           .ItemName("test")
           .FileName("test.png")
-          .Build());
-        Assert.AreEqual("UploadMediaItemByParentPathRequestBuilder.ParentPath : The input cannot be empty.", exception.Message);
+          .Build();
+        Assert.NotNull(request);
       }
     }
 
@@ -273,13 +273,14 @@
     public async void UploadImageToEmptyParentIdReturnsArgumentException()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(" ")
           .ItemDataStream(image)
           .ItemName("test")
           .FileName("test.png")
           .Build());
+
         Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ParentId : The input cannot be empty.", exception.Message);
       }
     }
@@ -297,8 +298,7 @@
         .Build();
       var createResponse = await session.CreateItemAsync(createRequest);
       //Assert.AreEqual(1, createResponse.ResultCount);
-      const string JpgImagePath = "\\\\TEST24DK1\\Resources\\media\\30X30.jpg";
-      using (var image = GetStreamFromUrl(JpgImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Jpeg._30x30))
       {
         const string ItemName = "International Слава Україні ウクライナへの栄光";
         const string Database = "master";
@@ -321,7 +321,7 @@
     public async void UploadImageWithEmptyItemNameReturnsArgumentException()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
       {
         var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(this.testData.Items.UploadMediaHere.Id)
           .ItemDataStream(image)
@@ -336,20 +336,19 @@
     public async void UploadImageWithNullItemDataStreamReturnsArgumentException()
     {
       await this.RemoveAll();
-      using (var image = GetStreamFromUrl(GifImagePath))
-      {
-        var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(this.testData.Items.UploadMediaHere.Id)
-          .ItemDataStream(null)
-          .ItemName("test")
-          .FileName("test.png")
-          .Build());
-        Assert.IsTrue(exception.Message.Contains("ItemDataStream"));
-      }
+
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(this.testData.Items.UploadMediaHere.Id)
+        .ItemDataStream(null)
+        .ItemName("test")
+        .FileName("test.png")
+        .Build());
+      Assert.IsTrue(exception.Message.Contains("ItemDataStream"));
     }
 
-    private static Stream GetStreamFromUrl(string url)
+    private Stream GetStreamFromUrl(string url)
     {
-      return File.OpenRead(url);
+      var data = new WebClient().DownloadData(new Uri(url));
+      return new MemoryStream(data);
     }
 
     private async void AssertImageUploaded(string itemPath, string database)
