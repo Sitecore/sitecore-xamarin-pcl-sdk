@@ -52,10 +52,12 @@ namespace WhiteLabelAndroid.Activities.Media
 
       if (resultCode == Result.Ok)
       {
+        this.imageUri = data.Data;
         try
         {
-          if (this.imageBitmap != null) this.imageBitmap.Recycle();
-          
+          if (this.imageBitmap != null)
+            this.imageBitmap.Recycle();
+
           this.imageBitmap = MediaStore.Images.Media.GetBitmap(ContentResolver, data.Data);
           this.selectedImage.SetImageBitmap(this.imageBitmap);
         }
@@ -63,7 +65,6 @@ namespace WhiteLabelAndroid.Activities.Media
         {
           Toast.MakeText(this, "Image is to large for preview", ToastLength.Long).Show();
         }
-        this.imageUri = data.Data;
       }
     }
 
@@ -72,13 +73,17 @@ namespace WhiteLabelAndroid.Activities.Media
       string path = null;
 
       var projection = new[] { Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data };
-      using (ICursor cursor = ManagedQuery(uri, projection, null, null, null))
+      using (ICursor cursor = this.ContentResolver.Query(uri, projection, null, null, null))
       {
         if (cursor != null)
         {
           int columnIndex = cursor.GetColumnIndexOrThrow(Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data);
           cursor.MoveToFirst();
           path = cursor.GetString(columnIndex);
+        }
+        else
+        {
+          return uri.Path;
         }
       }
       return path;
