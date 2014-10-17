@@ -1,7 +1,5 @@
 namespace Sitecore.MobileSDK.API
 {
-  using System.IO;
-
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Template;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -10,6 +8,7 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.UserRequest.UpdateRequest;
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
+  using Sitecore.MobileSDK.UserRequest.UploadMediaRequest;
 
   /// <summary>
   /// Main factory to construct buider for concrete request. 

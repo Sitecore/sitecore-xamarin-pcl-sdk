@@ -34,6 +34,14 @@
         throw new ArgumentException(message);
       }
     }
+
+    public static void ValidateMediaItemPath(string mediaPath, string source)
+    {
+      if (!string.IsNullOrEmpty(mediaPath))
+      {
+        CommonValidatePath(mediaPath, source);
+      }
+    }
   }
 }
 
