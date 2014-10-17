@@ -56,25 +56,35 @@ namespace WhiteLabelAndroid.Activities
         return;
       }
 
-      using (var credentials = new SecureStringPasswordProvider(login, password))
-      using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
+      try
+      {
+        using (var credentials = new SecureStringPasswordProvider(login, password))
+          using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
             .Credentials(credentials)
             .Site(site)
             .BuildReadonlySession())
+          {
+            this.SetProgressBarIndeterminateVisibility(true);
+
+            bool response = await session.AuthenticateAsync();
+
+            this.SetProgressBarIndeterminateVisibility(false);
+            if (response)
+            {
+              DialogHelper.ShowSimpleDialog(this, "Success", "This user exists");
+            }
+            else
+            {
+              DialogHelper.ShowSimpleDialog(this, "Failed", "This user doesn't exist");
+            }
+          }
+      }
+      catch (System.Exception exception)
       {
-        this.SetProgressBarIndeterminateVisibility(true);
-
-        bool response = await session.AuthenticateAsync();
-
         this.SetProgressBarIndeterminateVisibility(false);
-        if (response)
-        {
-          DialogHelper.ShowSimpleDialog(this, "Success", "This user exist");
-        }
-        else
-        {
-          DialogHelper.ShowSimpleDialog(this, "Failed", "This user doesn't exist");
-        }
+
+        var title = this.GetString(Resource.String.text_error);
+        DialogHelper.ShowSimpleDialog(this, title, exception.Message);
       }
     }
   }
