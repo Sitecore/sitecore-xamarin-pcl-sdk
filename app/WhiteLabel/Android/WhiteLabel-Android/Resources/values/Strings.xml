@@ -16,12 +16,12 @@
   <string name="text_default_site"></string>
   <string name="text_default_database">master</string>
 
-  <string name="text_get_item_by_id"><![CDATA[Item by ID & item children]]></string>
-  <string name="text_get_item_by_path">Item by Path</string>
-  <string name="text_get_item_by_query">Item by Query</string>
+  <string name="text_get_item_by_id">Get Item By ID</string>
+  <string name="text_get_item_by_path">Get Item By Path</string>
+  <string name="text_get_item_by_query">Get Item By Query</string>
   <string name="text_download_image">Download Image</string>
-  <string name="text_create_item_by_id">Create item by ID</string>
-  <string name="text_create_item_by_path">Create item by Path</string>
+  <string name="text_create_item_by_id">Create Item By ID</string>
+  <string name="text_create_item_by_path">Create Item By Path</string>
   <string name="text_delete_item">Delete Item</string>
   <string name="text_authenticate">Authenticate</string>
   <string name="text_upload_image">Upload Image</string>
