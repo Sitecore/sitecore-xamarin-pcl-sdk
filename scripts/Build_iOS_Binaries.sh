@@ -29,16 +29,24 @@ cd "$REPOSITORY_ROOT"
 find . \( -name "bin" -o  -name "obj" \)  -exec rm -rf {} \;
 
 
-echo "===========Build==========="
+
 cd "$SOLUTIONS_DIR"
+
+    echo "===========NuGet==========="
 	## Unit test and integration test
 	rm -rf "$PWD/packages"
 	nuget restore MobileSDKTest-iOS.sln
+
+    echo "===========Build_Tests==========="
 	"$MDTOOL_EXE" --verbose build "--configuration:Release|iPhone" MobileSDKTest-iOS.sln
 
+
+    echo "===========NuGet==========="
 	## White label iOS app
 	rm -rf "$PWD/packages"
 	nuget restore WhiteLabel-iOS.sln
+
+    echo "===========Build_DemoApp==========="
 	"$MDTOOL_EXE" --verbose build "--configuration:Release|iPhone" WhiteLabel-iOS.sln
 cd "$LAUNCH_DIR"
 
