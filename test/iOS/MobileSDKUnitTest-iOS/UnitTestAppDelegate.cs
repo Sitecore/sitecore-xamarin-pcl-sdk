@@ -35,7 +35,9 @@
       this.window = new UIWindow(UIScreen.MainScreen.Bounds);
       this.runner = new TouchRunner(this.window);
 
+#if !DEBUG
       this.ConfigureRunnerForCI();
+#endif
 
 
       // register every tests included in the main application/assembly
@@ -57,13 +59,11 @@
       this.runner.AutoStart = true;
       this.runner.TerminateAfterExecution = true;
 
-
-
       var reportStream = new NUnitLite.Runner.NUnit2XmlOutputWriter(DateTime.Now);
 
 //      string host = "localhost";
       string host = "10.38.10.236"; // @adk mac-mini
-      var targetStreamOnBuildServer = new TcpTextWriter(host, 16388);
+      var targetStreamOnBuildServer = new TcpTextWriter(host, 16390);
 
       runner.Writer = new NUnitOutputTextWriter(runner, targetStreamOnBuildServer, reportStream);
     }
