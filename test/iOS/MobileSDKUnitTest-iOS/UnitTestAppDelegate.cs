@@ -61,8 +61,9 @@
 
       var reportStream = new NUnitLite.Runner.NUnit2XmlOutputWriter(DateTime.Now);
 
-//      string host = "localhost";
-      string host = "10.38.10.236"; // @adk mac-mini
+      //      string host = "localhost";
+      //      string host = "10.38.11.5"; // @adk mac-mini
+      string host = "10.38.10.205"; // @darthvader.local
       var targetStreamOnBuildServer = new TcpTextWriter(host, 16390);
 
       runner.Writer = new NUnitOutputTextWriter(runner, targetStreamOnBuildServer, reportStream);
