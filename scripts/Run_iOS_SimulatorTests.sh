@@ -65,7 +65,6 @@ cd "$LAUNCH_DIR"
 
 echo "===========Run_Unit_Tests==========="
 "$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE" \
-  --verbose                             \
   --autoexit                            \
   --port=16390                          \
   --launchsim="$UNIT_TEST_APP"          \
@@ -75,7 +74,6 @@ echo "===========Run_Unit_Tests==========="
 
 echo "===========Run_Integraation_Tests==========="
 "$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE" \
-  --verbose                             \
   --autoexit                            \
   --port=16391                          \
   --launchsim="$INTEGRATION_TEST_APP"   \
