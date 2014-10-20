@@ -61,7 +61,7 @@
 
       //      string host = "localhost";
       string host = "10.38.10.236"; // @adk mac-mini
-      var targetStreamOnBuildServer = new TcpTextWriter(host, 16390);
+      var targetStreamOnBuildServer = new TcpTextWriter(host, 16391);
 
       runner.Writer = new NUnitOutputTextWriter(runner, targetStreamOnBuildServer, reportStream);
     }
