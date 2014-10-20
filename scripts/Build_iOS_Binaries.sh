@@ -11,7 +11,7 @@ SOLUTIONS_DIR="$REPOSITORY_ROOT/solutions"
 MDTOOL_EXE="/Applications/Xamarin Studio.app/Contents/MacOS/mdtool"
 
 
-
+echo "===========Environment==========="
 echo "LAUNCH_DIR - $LAUNCH_DIR"
 echo "REPOSITORY_ROOT - $REPOSITORY_ROOT"
 echo "SCRIPTS_DIR - $SCRIPTS_DIR"
@@ -19,6 +19,7 @@ echo "SOLUTIONS_DIR - $SOLUTIONS_DIR"
 echo "MDTOOL_EXE - $MDTOOL_EXE"
 
 
+echo "===========Clean==========="
 rm -rf "$DEPLOYMENT_DIR"
 mkdir -p "$DEPLOYMENT_DIR"
 
@@ -28,6 +29,7 @@ cd "$REPOSITORY_ROOT"
 find . \( -name "bin" -o  -name "obj" \)  -exec rm -rf {} \;
 
 
+echo "===========Build==========="
 cd "$SOLUTIONS_DIR"
 	## Unit test and integration test
 	rm -rf "$PWD/packages"
@@ -41,6 +43,7 @@ cd "$SOLUTIONS_DIR"
 cd "$LAUNCH_DIR"
 
 
+echo "===========IPA==========="
 ## create *.ipa
 xcrun -sdk iphoneos \
    PackageApplication "$REPOSITORY_ROOT/test/iOS/MobileSDKUnitTest-iOS/bin/iPhone/Release/MobileSDKUnitTestiOS.app" \
@@ -56,6 +59,7 @@ xcrun -sdk iphoneos \
 
 
 
+echo "===========DSYM==========="
 ## copy *.dsym
 cd "$REPOSITORY_ROOT/test/iOS/MobileSDKUnitTest-iOS/bin/iPhone/Release/"
 zip -r MobileSDKUnitTestiOS.app.dSYM.zip MobileSDKUnitTestiOS.app.dSYM
@@ -73,6 +77,7 @@ cp WhiteLabeliOS.app.dSYM.zip "$DEPLOYMENT_DIR"
 
 
 
+echo "===========Testflight==========="
 ## Upload to Testflight
 cd "$DEPLOYMENT_DIR"
     curl http://testflightapp.com/api/builds.json \
