@@ -7,6 +7,8 @@ mono Touch.Server.exe \
 ##############
 
 
+"/Applications/Xamarin Studio.app/Contents/MacOS/mdtool" --verbose build "--configuration:Release|iPhoneSimulator" MobileSDKTest-iOS.sln
+
 ##devname does not work properly for Touch.Server.exe
 
 
