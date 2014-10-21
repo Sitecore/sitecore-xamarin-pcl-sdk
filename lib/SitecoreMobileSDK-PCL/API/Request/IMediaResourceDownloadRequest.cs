@@ -42,7 +42,7 @@ namespace Sitecore.MobileSDK.API.Request
     IDownloadMediaOptions DownloadOptions { get; }
 
     /// <summary>
-    /// Gets the media item path, relative to media library rootю
+    /// Gets the media item path, relative to media library root.
     /// Must starts with '/' symbol.
     /// 
     /// The value is case insensitive.

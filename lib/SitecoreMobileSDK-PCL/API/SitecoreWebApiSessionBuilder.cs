@@ -15,7 +15,7 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Creates a session for the anonymous user. It does not require any credentials.
     /// </summary>
-    /// <param name="instanceUrl">URL of the Sitecore instance, must starts with "http://" prefix.</param>
+    /// <param name="instanceUrl">URL of the Sitecore instance, must starts with "http://" or "https://" prefix.</param>
     /// <returns>A builder to initialize an anonymous session.</returns>
     public static IAnonymousSessionBuilder AnonymousSessionWithHost(string instanceUrl)
     {
@@ -26,7 +26,7 @@ namespace Sitecore.MobileSDK.API
     /// <summary>
     /// Creates an authenticated session.
     /// </summary>
-    /// <param name="instanceUrl">URL of the Sitecore instance, must starts with "http://" prefix.</param>
+    /// <param name="instanceUrl">URL of the Sitecore instance, must starts with "http://" or "https://" prefix.</param>
     /// <returns>A builder to set user's credentials.</returns>
     public static IAuthenticatedSessionBuilder AuthenticatedSessionWithHost(string instanceUrl)
     {

@@ -8,7 +8,7 @@ namespace Sitecore.MobileSDK.API.Session
   using Sitecore.MobileSDK.API.Items;
 
   /// <summary>
-  /// Interface represents media actions that actions on media items.
+  /// Interface represents media actions that process media items.
   /// </summary>
   public interface IMediaActions
   {

@@ -1,7 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.API.MediaItem
 {
   /// <summary>
-  /// Interface represents settings that specifies the rules to build media requests. 
+  /// Interface represents settings that specify the rules to build media requests. 
   /// </summary>
   public interface IMediaLibrarySettings
   {

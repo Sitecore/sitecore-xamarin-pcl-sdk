@@ -16,7 +16,6 @@ namespace Sitecore.MobileSDK.API.Items
   /// * ja
   /// * cn
   /// 
-  /// 
   /// As content editing is usually performed in a particular workflow, the IItemSource class stores the item's version. It is either a positive integer number or a latest version (null).
   /// 
   /// 

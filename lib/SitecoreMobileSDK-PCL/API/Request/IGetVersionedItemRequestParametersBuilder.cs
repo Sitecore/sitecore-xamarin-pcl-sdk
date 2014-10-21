@@ -4,7 +4,7 @@ namespace Sitecore.MobileSDK.API.Request
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   /// <summary>
-  /// Interface represents basic flow for creation of requets that reads versioned items.
+  /// Interface represents basic flow for creation of requets that read versioned items.
   /// </summary>
   /// <typeparam name="T">Type of request</typeparam>
   public interface IGetVersionedItemRequestParametersBuilder<T> : IScopedRequestParametersBuilder<T>
@@ -23,17 +23,20 @@ namespace Sitecore.MobileSDK.API.Request
     IGetVersionedItemRequestParametersBuilder<T> Version(int? itemVersion);
 
     /// <summary>
-    /// Specifies sitecore database.
+    /// Specifies Sitecore database.
+    /// For example: "web" 
+    /// 
+    /// The value is case insensitive.     
     /// </summary>
-    /// <param name="sitecoreDatabase">The sitecore database.</param>
+    /// <param name="sitecoreDatabase">The Sitecore database.</param>
     /// <returns>
     /// this
     /// </returns>
     new IGetVersionedItemRequestParametersBuilder<T> Database(string sitecoreDatabase);
 
     /// <summary>
-    /// Specifies item database.
-    /// For example: "web"
+    /// Specifies item language.
+    /// For example: "en"
     /// 
     /// The value is case insensitive.
     /// </summary>

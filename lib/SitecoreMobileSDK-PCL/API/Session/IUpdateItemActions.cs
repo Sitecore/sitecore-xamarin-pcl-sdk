@@ -7,7 +7,7 @@
   using Sitecore.MobileSDK.API.Request;
 
   /// <summary>
-  /// Interface represents update actions that performs items update.
+  /// Interface represents update actions that perform items update.
   /// </summary>
   public interface IUpdateItemActions
   {

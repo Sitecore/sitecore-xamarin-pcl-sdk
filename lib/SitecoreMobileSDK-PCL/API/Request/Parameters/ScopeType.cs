@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   public enum ScopeType
   {
     /// <summary>
-    /// only requested item will be returned from the server.
+    /// the requested item will be returned from the server.
     /// </summary>
     Self,
 

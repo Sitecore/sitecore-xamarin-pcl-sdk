@@ -36,7 +36,7 @@ namespace Sitecore.MobileSDK.API
     }
 
     /// <summary>
-    /// Specifies WebAPI vertion.
+    /// Specifies Item Web API version.
     /// For example "v1".
     /// 
     /// The value is case insensitive.

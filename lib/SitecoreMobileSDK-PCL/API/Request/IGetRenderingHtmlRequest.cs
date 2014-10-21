@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK.API.Request
   {
 
     /// <summary>
-    /// Rendering item GUID values enclosed in curly braces.
+    /// Rendering item GUID value enclosed in curly braces.
     /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
     /// 
     /// The value is case insensitive.
@@ -22,7 +22,7 @@ namespace Sitecore.MobileSDK.API.Request
     string RenderingId { get; }
 
     /// <summary>
-    /// Source item GUID values enclosed in curly braces.
+    /// Source item GUID value enclosed in curly braces.
     /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
     /// 
     /// The value is case insensitive.

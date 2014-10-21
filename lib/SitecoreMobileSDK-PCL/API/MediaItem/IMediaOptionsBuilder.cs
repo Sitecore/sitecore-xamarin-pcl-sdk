@@ -85,7 +85,7 @@
     /// <summary>
     /// Specifies whether to display as thumbnail. 
     /// </summary>
-    /// <param name="displayAsThumbnail">To display as sumbnail.</param>
+    /// <param name="displayAsThumbnail">To display as thumbnail.</param>
     /// <returns>this</returns>
     IMediaOptionsBuilder DisplayAsThumbnail(bool displayAsThumbnail);
 

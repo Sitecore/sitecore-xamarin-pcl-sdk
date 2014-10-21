@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.API.Request;
 
   /// <summary>
-  /// Interface represents deletion actions that performs items deleteion.
+  /// Interface represents deletion actions that perform items deleteion.
   /// </summary>
   public interface IDeleteItemActions
   {
