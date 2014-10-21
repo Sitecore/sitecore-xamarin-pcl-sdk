@@ -61,16 +61,20 @@ namespace LargeUploadTestiOS
 
       {
         // TODO : dispose properly
-        NSData movieContents = NSData.FromFile(resourceUrl);
-        Stream videoOnFileSystem = movieContents.AsStream();
+//        NSData movieContents = NSData.FromFile(resourceUrl);
+//        Stream videoOnFileSystem = movieContents.AsStream();
+
+
+        byte[] tmp = System.Text.Encoding.UTF8.GetBytes("Hello World");
+        Stream videoOnFileSystem = new MemoryStream(tmp);
 
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/")
           .ItemDataStream(videoOnFileSystem)
           .Database("master")
           .ItemName("NewLargeMedia for adk")
           .FileName("IMG_0997.MOV")
-          .ContentType("video/quicktime")
-          .ItemTemplatePath("System/Media/Unversioned/Movie")
+//          .ContentType("video/quicktime")
+//          .ItemTemplatePath("System/Media/Unversioned/Movie")
           .Build();
 
         var response = await session.UploadMediaResourceAsync(request);
