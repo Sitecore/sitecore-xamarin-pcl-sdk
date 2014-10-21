@@ -41,17 +41,23 @@
 
     public HttpRequestMessage AddEncryptedCredentialHeaders(HttpRequestMessage httpRequest)
     {
+      #if !ENCRYPTION_DISABLED
       EncryptionUtil cryptor = new EncryptionUtil(this.certificate);
-
       var encryptedLogin = cryptor.Encrypt(this.login);
       var encryptedPassword = cryptor.Encrypt(this.password);
+      #else
+      var encryptedLogin = this.login;
+      var encryptedPassword = this.password;
+      #endif
 
       httpRequest.Headers.Add("X-Scitemwebapi-Username", encryptedLogin);
       httpRequest.Headers.Add("X-Scitemwebapi-Password", encryptedPassword);
+
+      #if !ENCRYPTION_DISABLED
       httpRequest.Headers.Add("X-Scitemwebapi-Encrypted", "1");
+      #endif
 
       return httpRequest;
-
     }
   }
 }
