@@ -45,7 +45,14 @@ namespace LargeUploadTestiOS
       var resourceUrl = NSBundle.MainBundle.PathForResource("IMG_0994", "MOV");
       string host = "http://cms71u3.test24dk1.dk.sitecore.net";
 
-      using (Stream videoOnFileSystem = new FileStream(resourceUrl, FileMode.Open))
+
+
+      // iOS hardware : FileStream constructor throws
+      // Access to the path "/var/mobile/Applications/2CD1D07E-26DD-43CC-AF52-F24368FB4676/LargeUploadTestiOS.app/IMG_0994.MOV" is denied.
+
+
+//      using (NSData movieContents = NSData.FromFile(resourceUrl))
+//      using (Stream videoOnFileSystem = movieContents.AsStream())
       using (IWebApiCredentials auth = new SecureStringPasswordProvider.API.SecureStringPasswordProvider("sitecore\\admin", "b"))
       using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(host)
                                                        .Credentials(auth)
@@ -53,6 +60,10 @@ namespace LargeUploadTestiOS
                                                        .BuildSession())
 
       {
+        // TODO : dispose properly
+        NSData movieContents = NSData.FromFile(resourceUrl);
+        Stream videoOnFileSystem = movieContents.AsStream();
+
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/")
           .ItemDataStream(videoOnFileSystem)
           .Database("master")
