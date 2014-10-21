@@ -5,11 +5,11 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("SitecoreMobileSdkPasswordProvider")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Password Storage Interfaces for Sitecore Mobile SDK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Sitecore Corporation")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("dodikk")]
+[assembly: AssemblyCopyright("Sitecore Corporation")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
