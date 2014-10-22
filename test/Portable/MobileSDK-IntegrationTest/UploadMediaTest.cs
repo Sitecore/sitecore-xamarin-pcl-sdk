@@ -161,6 +161,7 @@
         var response = await sessionToOverride.UploadMediaResourceAsync(request);
         Assert.AreEqual(1, response.ResultCount);
         Assert.AreEqual(Database, response[0].Source.Database);
+        this.AssertImageUploaded(response[0].Path, Database);
       }
     }
 
@@ -343,6 +344,88 @@
         .FileName("test.png")
         .Build());
       Assert.IsTrue(exception.Message.Contains("ItemDataStream"));
+    }
+
+    [Test]
+    public async void UploadImageToWith2ItemDataStreamsReturnsInvalidOperationException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
+      {
+        var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(this.testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(image)
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test.png")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ItemDataStream : Property cannot be assigned twice.", exception.Message);
+      }
+    }
+
+    [Test]
+    public async void UploadImageToWith2ItemNamesReturnsInvalidOperationException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
+      {
+        var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(this.testData.Items.UploadMediaHere.Path)
+          .ItemDataStream(image)
+          .ItemName("test")
+          .ItemName("test2")
+          .FileName("test.png")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentPathRequestBuilder.ItemName : Property cannot be assigned twice.", exception.Message);
+      }
+    }
+
+    [Test]
+    public async void UploadImageToWith2ItemTemplatesReturnsInvalidOperationException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
+      {
+        var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(this.testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test.png")
+          .ItemTemplatePath("path1")
+          .ItemTemplatePath("path2")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.ItemTemplatePath : Property cannot be assigned twice.", exception.Message);
+      }
+    }
+
+    [Test]
+    public async void UploadImageToWith2FileNamesReturnsInvalidOperationException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
+      {
+        var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(this.testData.Items.UploadMediaHere.Id)
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test1.png")
+          .FileName("test2.png")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentIdRequestBuilder.FileName : Property cannot be assigned twice.", exception.Message);
+      }
+    }
+
+    [Test]
+    public async void UploadImageToWith2DatabasesReturnsInvalidOperationException()
+    {
+      await this.RemoveAll();
+      using (var image = GetStreamFromUrl(TestEnvironment.Images.Gif.Pictures_2))
+      {
+        var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(this.testData.Items.UploadMediaHere.Path)
+          .ItemDataStream(image)
+          .ItemName("test")
+          .FileName("test.png")
+          .Database("db1")
+          .Database("db2")
+          .Build());
+        Assert.AreEqual("UploadMediaItemByParentPathRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
+      }
     }
 
     private Stream GetStreamFromUrl(string url)
