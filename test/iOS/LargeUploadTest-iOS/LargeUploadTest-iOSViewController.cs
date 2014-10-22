@@ -1,17 +1,18 @@
-﻿using System;
-using System.Drawing;
-
-using Foundation;
-using UIKit;
-using System.IO;
-using Sitecore.MobileSDK.API;
-using SecureStringPasswordProvider.API;
-using System.Threading.Tasks;
-using SitecoreMobileSdkPasswordProvider.API;
-using Sitecore.MobileSDK.API.Items;
-
-namespace LargeUploadTestiOS
+﻿namespace LargeUploadTestiOS
 {
+  using System;
+  using System.IO;
+  using System.Drawing;
+  using System.Threading.Tasks;
+
+  using MonoTouch.Foundation;
+  using MonoTouch.UIKit;
+
+  using Sitecore.MobileSDK.API;
+  using SitecoreMobileSdkPasswordProvider.API;
+  using Sitecore.MobileSDK.API.Items;
+
+
   public partial class LargeUploadTest_iOSViewController : UIViewController
   {
     static bool UserInterfaceIdiomIsPhone
@@ -30,7 +31,7 @@ namespace LargeUploadTestiOS
       Console.WriteLine("!!!! MEMORY WARNING !!!!");            
       // Release any cached data, images, etc that aren't in use.
     }
-      
+
     public override async void ViewDidLoad()
     {
       base.ViewDidLoad();
@@ -51,18 +52,18 @@ namespace LargeUploadTestiOS
       // Access to the path "/var/mobile/Applications/2CD1D07E-26DD-43CC-AF52-F24368FB4676/LargeUploadTestiOS.app/IMG_0994.MOV" is denied.
 
 
-//      using (NSData movieContents = NSData.FromFile(resourceUrl))
-//      using (Stream videoOnFileSystem = movieContents.AsStream())
-      using (IWebApiCredentials auth = new SecureStringPasswordProvider.API.SecureStringPasswordProvider("sitecore\\admin", "b"))
+      //      using (NSData movieContents = NSData.FromFile(resourceUrl))
+      //      using (Stream videoOnFileSystem = movieContents.AsStream())
+      using (IWebApiCredentials auth = new SecureStringPasswordProvider.iOS.SecureStringPasswordProvider("sitecore\\admin", "b"))
       using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(host)
-                                                       .Credentials(auth)
-                                                       .Site("/sitecore/shell")
-                                                       .BuildSession())
+        .Credentials(auth)
+        .Site("/sitecore/shell")
+        .BuildSession())
 
       {
         // TODO : dispose properly
-//        NSData movieContents = NSData.FromFile(resourceUrl);
-//        Stream videoOnFileSystem = movieContents.AsStream();
+        //        NSData movieContents = NSData.FromFile(resourceUrl);
+        //        Stream videoOnFileSystem = movieContents.AsStream();
 
 
         byte[] tmp = System.Text.Encoding.UTF8.GetBytes("Hello World");
@@ -73,8 +74,8 @@ namespace LargeUploadTestiOS
           .Database("master")
           .ItemName("NewLargeMedia for adk")
           .FileName("IMG_0997.MOV")
-//          .ContentType("video/quicktime")
-//          .ItemTemplatePath("System/Media/Unversioned/Movie")
+          //          .ContentType("video/quicktime")
+          //          .ItemTemplatePath("System/Media/Unversioned/Movie")
           .Build();
 
         var response = await session.UploadMediaResourceAsync(request);
@@ -83,4 +84,6 @@ namespace LargeUploadTestiOS
     }
   }
 }
+
+
 
