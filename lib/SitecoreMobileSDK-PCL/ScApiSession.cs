@@ -206,8 +206,12 @@ namespace Sitecore.MobileSDK
       }
       else if (WebApiCredentialsValidator.IsValidCredentials(this.Credentials))
       {
+        #if !ENCRYPTION_DISABLED
         // TODO : flow should be responsible for caching. Do not hard code here
         this.publicCertifiacte = await this.GetPublicKeyAsync(cancelToken);
+        #else
+        this.publicCertifiacte = null;
+        #endif
 
         // TODO : credentials should not be passed as plain text strings. 
         // TODO : Use ```SecureString``` class
