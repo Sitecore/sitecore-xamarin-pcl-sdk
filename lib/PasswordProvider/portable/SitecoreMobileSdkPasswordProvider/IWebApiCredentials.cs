@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.PasswordProvider
+﻿namespace Sitecore.MobileSDK.PasswordProvider.Interface
 {
   using System;
 

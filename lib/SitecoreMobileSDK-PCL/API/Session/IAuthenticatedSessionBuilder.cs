@@ -2,6 +2,7 @@ namespace Sitecore.MobileSDK.API.Session
 {
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.PasswordProvider;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
 
   /// <summary>
   /// Interface represents builder for authenticated session. 

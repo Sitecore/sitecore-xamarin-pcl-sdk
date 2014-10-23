@@ -285,9 +285,9 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
+    <ProjectReference Include="..\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
       <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
-      <Name>SitecoreMobileSdkPasswordProvider</Name>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

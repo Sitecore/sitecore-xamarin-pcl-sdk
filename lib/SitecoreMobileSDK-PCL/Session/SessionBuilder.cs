@@ -5,6 +5,7 @@
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PasswordProvider;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Validators;
 

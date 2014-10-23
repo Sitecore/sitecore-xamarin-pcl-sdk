@@ -5,6 +5,7 @@ namespace Sitecore.MobileSDK.API.Session
   using System;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.PasswordProvider;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
 
   /// <summary>
   /// Interface represents session state.
