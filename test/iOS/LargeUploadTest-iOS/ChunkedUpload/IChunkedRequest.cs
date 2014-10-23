@@ -1,15 +1,10 @@
 ﻿using System;
-using System.IO;
 
 namespace LargeUploadTestiOS
 {
   public interface IChunkedRequest
   {
-    /// <summary>
-    /// Specifies media resource data.
-    /// </summary>
-    /// <returns>Data Stream</returns>
-    Stream DataStream { get; }
+    IChunkedRequest ShallowCopy();
 
     /// <summary>
     /// Specifies file's name, must include file extension.
@@ -31,6 +26,8 @@ namespace LargeUploadTestiOS
     /// </summary>
     /// <returns>Content type.</returns>
     string ContentType { get; }
+
+    int ChunkSize { get; }
 
     string RequestUrl { get; }
   }
