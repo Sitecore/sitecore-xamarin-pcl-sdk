@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{8007ADBC-4501-447F-BE99-E628A481BB3F}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SitecoreMobileSDK-MockObjects-Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)FunctionTracer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LegacyConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MockGetItemsByQueryParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MockMutableMediaOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MockReadItemByIdParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MockReadItemByPathParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MutableItemSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MutableMediaLibrarySettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MutablePagingParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MutableSessionConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MutableWebApiCredentialsPOD.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NoThrowWebApiSession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WebApiCredentialsPOD.cs" />
+  </ItemGroup>
+</Project>
