@@ -48,7 +48,7 @@
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> FileName(string fileName)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(fileName, this.GetType().Name + ".FileName");
-      BaseValidator.CheckForTwiceSetAndThrow(this.fileName, this.GetType().Name + ".fileName");
+      BaseValidator.CheckForTwiceSetAndThrow(this.fileName, this.GetType().Name + ".FileName");
       this.fileName = fileName;
       return this;
     }
@@ -56,15 +56,15 @@
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemName(string itemName)
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemName, this.GetType().Name + ".ItemName");
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemName, this.GetType().Name + ".itemName");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemName, this.GetType().Name + ".ItemName");
       this.itemName = itemName;
       return this;
     }
 
     public IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> ItemTemplatePath(string templatePath)
     {
-      ItemPathValidator.ValidateItemTemplate(templatePath, this.GetType().Name + ".TemplatePath");
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemTemplate, this.GetType().Name + ".TemplatePath");
+      ItemPathValidator.ValidateItemTemplate(templatePath, this.GetType().Name + ".ItemTemplatePath");
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemTemplate, this.GetType().Name + ".ItemTemplatePath");
       this.itemTemplate = templatePath;
       return this;
     }
