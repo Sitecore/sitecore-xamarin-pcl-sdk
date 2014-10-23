@@ -1,15 +1,13 @@
-﻿
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
-  using System.IO;
   using System.Diagnostics;
+  using System.IO;
   using System.Threading;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Session;
-
   using Sitecore.MobileSDK.MockObjects;
 
   [TestFixture]

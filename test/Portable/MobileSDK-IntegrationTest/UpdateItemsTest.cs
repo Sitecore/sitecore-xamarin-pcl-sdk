@@ -3,8 +3,8 @@
   using System;
   using System.Threading.Tasks;
   using NUnit.Framework;
-  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;

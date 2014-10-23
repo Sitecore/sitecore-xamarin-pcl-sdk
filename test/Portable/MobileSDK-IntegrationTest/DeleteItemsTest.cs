@@ -1,8 +1,6 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
-  using System.Diagnostics;
-  using System.Linq;
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
@@ -315,7 +313,7 @@
       var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sample path")
         .Database(null)
         .Build();
-      Assert.IsNotNull (request);
+      Assert.IsNotNull(request);
     }
 
     [Test]
@@ -324,7 +322,7 @@
       var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
         .Database("")
         .Build();
-      Assert.IsNotNull (request);
+      Assert.IsNotNull(request);
     }
 
     [Test]

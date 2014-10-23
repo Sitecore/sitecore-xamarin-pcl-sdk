@@ -1,13 +1,10 @@
-﻿using Sitecore.MobileSDK;
-
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
   using System;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.MockObjects;
-  using Sitecore.MobileSDK.SessionSettings;
 
   [TestFixture]
   public class BuildSessionTest

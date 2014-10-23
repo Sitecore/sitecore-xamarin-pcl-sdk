@@ -11,7 +11,6 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.MockObjects;
 
-
   [TestFixture]
   public class SetDefaultSessionSettingsTest
   {

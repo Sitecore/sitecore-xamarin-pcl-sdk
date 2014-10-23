@@ -1,23 +1,18 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Diagnostics;
   using System.IO;
   using System.Threading.Tasks;
-  using System.Diagnostics;
-
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
- 
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.MockObjects;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-  using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
-
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
 
   [TestFixture]
   public class ThreadSafetyTest
@@ -70,7 +65,7 @@
       try
       {
         Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
-  //      await Task.Factory.StartNew(() => mockMutableRequest.ItemId = this.env.Items.MediaLibrary.Id);
+        //      await Task.Factory.StartNew(() => mockMutableRequest.ItemId = this.env.Items.MediaLibrary.Id);
         ScItemsResponse response = await loadItemsTask;
         var item = response[0];
         Assert.AreEqual(homeId, item.Id);
@@ -158,7 +153,7 @@
       var resizing = new MockMutableMediaOptions();
       resizing.SetWidth(100);
       resizing.SetHeight(500);
-        
+
       string mediaPath = "/sitecore/media library/xyz";
 
       try

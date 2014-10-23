@@ -1,10 +1,9 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
-  using System.Linq;
   using System.Collections.ObjectModel;
+  using System.Linq;
   using NUnit.Framework;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
@@ -58,8 +57,8 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
 
-      bool correctFieldsCount = (response [0].FieldsCount > 70);
-      correctFieldsCount = correctFieldsCount || (response [0].FieldsCount == 59); //cms v6.x
+      bool correctFieldsCount = (response[0].FieldsCount > 70);
+      correctFieldsCount = correctFieldsCount || (response[0].FieldsCount == 59); //cms v6.x
       Assert.IsTrue(correctFieldsCount);
       Assert.AreEqual("Home", response[0]["__Display name"].RawValue);
     }

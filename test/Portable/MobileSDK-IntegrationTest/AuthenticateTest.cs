@@ -5,7 +5,6 @@
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.MockObjects;
-  using Sitecore.MobileSDK.SessionSettings;
 
   [TestFixture]
   public class AuthenticateTest
@@ -27,7 +26,7 @@
     [Test]
     public async void TestCheckValidCredentials()
     {
-      using 
+      using
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
@@ -58,9 +57,9 @@
     [Test]
     public async void TestGetAuthenticationAsUserInExtranetDomainToShellSite()
     {
-      using 
+      using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl) 
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Creatorex)
           .Site(testData.ShellSite)
           .BuildReadonlySession()
@@ -74,7 +73,7 @@
     [Test]
     public async void TestGetAuthenticationAstUserInExtraneDomainToWebsite()
     {
-      using 
+      using
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Creatorex)
@@ -90,7 +89,7 @@
     [Test]
     public async void TestGetAuthenticationAsUserInSitecoreDomainToWebsite()
     {
-      using 
+      using
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.SitecoreCreator)
@@ -106,7 +105,7 @@
     [Test]
     public async void TestGetAuthenticationAsUserInSitecoreDomainToShellSite()
     {
-      using 
+      using
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.SitecoreCreator)
@@ -122,7 +121,7 @@
     [Test]
     public async void TestGetAuthenticationWithNotExistentPassword()
     {
-      using 
+      using
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Username, "wrongpassword"))
@@ -137,22 +136,22 @@
     [Test]
     public async void TestGetAuthenticationWithInvalidPassword()
     {
-      using 
+      using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost (testData.InstanceUrl)
-        .Credentials (new WebApiCredentialsPOD (testData.Users.Admin.Username, "Password $#%^&^*"))
-        .BuildReadonlySession ()
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Username, "Password $#%^&^*"))
+        .BuildReadonlySession()
       )
       {
-        bool response = await session.AuthenticateAsync ();
-        Assert.False (response);
+        bool response = await session.AuthenticateAsync();
+        Assert.False(response);
       }
     }
 
     [Test]
     public async void TestGetAuthenticationWithInvalidUsername()
     {
-      using 
+      using
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(new WebApiCredentialsPOD("Username $#%^&^*", testData.Users.Admin.Password))
@@ -167,7 +166,7 @@
     [Test]
     public void TestGetPublicKeyWithNotExistentUrl()
     {
-      using 
+      using
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobilesdk-notexistent.com")
           .Credentials(testData.Users.Admin)
@@ -187,9 +186,9 @@
         // iOS : System.Net.WebException
 
         //Assert.AreEqual("System.Net.Http.HttpRequestException", exception.InnerException.GetType().ToString());
-        bool testCorrect = exception.InnerException.GetType().ToString().Equals ("System.Net.Http.HttpRequestException");
-        testCorrect = testCorrect || exception.InnerException.GetType().ToString().Equals ("System.Net.WebException");
-        Assert.IsTrue (testCorrect, "exception.InnerException is wrong");
+        bool testCorrect = exception.InnerException.GetType().ToString().Equals("System.Net.Http.HttpRequestException");
+        testCorrect = testCorrect || exception.InnerException.GetType().ToString().Equals("System.Net.WebException");
+        Assert.IsTrue(testCorrect, "exception.InnerException is wrong");
 
         bool messageCorrect = exception.InnerException.Message.Contains("An error occurred while sending the request");
         messageCorrect = messageCorrect || exception.InnerException.Message.Contains("NameResolutionFailure");
@@ -200,22 +199,22 @@
     [Test]
     public void TestGetAuthenticationWithInvalidUrl()
     {
-      using 
+      using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost ("\\m.dk%&^&*(.net")
-        .Credentials (testData.Users.Admin)
-        .BuildReadonlySession ()
+        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("\\m.dk%&^&*(.net")
+        .Credentials(testData.Users.Admin)
+        .BuildReadonlySession()
       )
       {
         TestDelegate testCode = async () =>
         {
-          await session.AuthenticateAsync ();
+          await session.AuthenticateAsync();
         };
-        Exception exception = Assert.Throws<RsaHandshakeException> (testCode);
-        Assert.True (exception.Message.Contains ("Public key not received properly"));
+        Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
+        Assert.True(exception.Message.Contains("Public key not received properly"));
 
-        Assert.AreEqual ("System.UriFormatException", exception.InnerException.GetType ().ToString ());
-        Assert.True (exception.InnerException.Message.Contains ("Invalid URI: The hostname could not be parsed"));
+        Assert.AreEqual("System.UriFormatException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Invalid URI: The hostname could not be parsed"));
       }
     }
 
@@ -223,7 +222,7 @@
     public async void TestGetAuthenticationForUrlWithoutHttp()
     {
       var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
-      using 
+      using
       (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
           .Credentials(testData.Users.Admin)
