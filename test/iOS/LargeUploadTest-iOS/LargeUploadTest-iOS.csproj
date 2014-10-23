@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="ChunkedUpload\ChunkedUpload.cs" />
     <Compile Include="ChunkedUpload\IChunkedRequest.cs" />
+    <Compile Include="ChunkedUpload\ChunkedRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />

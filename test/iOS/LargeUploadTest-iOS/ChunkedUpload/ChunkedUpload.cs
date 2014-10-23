@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Web;
 using System.Text;
+using System.Diagnostics;
 
 namespace LargeUploadTestiOS
 {
@@ -17,7 +18,7 @@ namespace LargeUploadTestiOS
       this.chunkedRequest = chunkedRequest.ShallowCopy();
     }
 
-    private void ConvertToChunks()  
+    public void Upload()  
     {
       string formDataBoundary = String.Format("----------{0:N}", Guid.NewGuid());
 
@@ -35,25 +36,32 @@ namespace LargeUploadTestiOS
 
         byte[] bytes = new byte[length];  
         this.resourceStream.Read(bytes, 0, bytes.Length);  
-        ChunkRequest(bytes, formDataBoundary);  
+        string chunkResult = ChunkRequest(bytes, formDataBoundary);  
+        Debug.WriteLine("---===" + i.ToString() + " chunkResult: " + chunkResult);
       }  
     }  
 
-    private void ChunkRequest(byte[] buffer, string boundary)  
+    private string ChunkRequest(byte[] buffer, string boundary)  
     {  
       HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.chunkedRequest.RequestUrl);  
       request.Method = "POST";  
 
+      //TODO: @igk AUTH
+      request.Headers.Add("X-Scitemwebapi-Username", "sitecore\\admin");
+      request.Headers.Add("X-Scitemwebapi-Password", "b");
+
+   
       string contentType = "multipart/form-data; boundary=" + boundary;
 
       request.ContentType = contentType;  
 
-      // Chunk(buffer) is converted to Base64 string that will be convert to Bytes on  the handler.   
-      string requestParameters = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"datafile\"\r\n\r\n{1}",
-        boundary,
-        HttpUtility.UrlEncode( Convert.ToBase64String(buffer));
+//      string requestParameters = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"datafile\"; filename=\"file.mov\"\r\n\r\n{1}",
+//        boundary,
+//        HttpUtility.UrlEncode( Convert.ToBase64String(buffer))
+//      );
+      string requestParameters = @"fileName=" + this.chunkedRequest.FileName +  
+        "&data=" + HttpUtility.UrlEncode( Convert.ToBase64String(buffer) ); 
 
-      // finally whole request will be converted to bytes that will be transferred to HttpHandler  
       byte[] byteData = Encoding.UTF8.GetBytes(requestParameters);  
 
       request.ContentLength = byteData.Length;  
@@ -67,6 +75,7 @@ namespace LargeUploadTestiOS
       StreamReader stIn = new StreamReader(request.GetResponse().GetResponseStream());  
       string strResponse = stIn.ReadToEnd();  
       stIn.Close();  
+      return strResponse;
     } 
   }
 }
