@@ -74,22 +74,26 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
-  <Import Project="..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems')" />
-  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
-      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
-      <Name>SitecoreMobileSDK</Name>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\Sitecore.MobileSDK.PasswordProvider.Android.csproj">
+      <Project>{8578d879-0661-4986-a37c-d37538458981}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj">
-      <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
-      <Name>SitecoreMobileSDK-MockObjects</Name>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
+      <Project>{079d5d12-ff8e-46d4-8afc-06cbf5a736c7}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
-      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
-      <Name>SitecoreMobileSdkPasswordProvider</Name>
+    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
+      <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
+      <Name>Sitecore.MobileSDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
+      <Project>{b99eee93-6176-438f-b601-e0382545166a}</Project>
+      <Name>Sitecore.MobileSDK.MockObjects</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems')" />
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
