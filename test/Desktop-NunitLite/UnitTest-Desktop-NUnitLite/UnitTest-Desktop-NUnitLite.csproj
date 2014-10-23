@@ -176,9 +176,9 @@
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>Sitecore.MobileSDK</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj">
+    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
       <Project>{b99eee93-6176-438f-b601-e0382545166a}</Project>
-      <Name>SitecoreMobileSDK-MockObjects</Name>
+      <Name>Sitecore.MobileSDK.MockObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

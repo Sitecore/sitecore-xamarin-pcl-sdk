@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTest-Desktop-NUn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK", "..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK-MockObjects", "..\test\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj", "{B99EEE93-6176-438F-B601-E0382545166A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Interface", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.MockObjects", "..\test\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj", "{B99EEE93-6176-438F-B601-E0382545166A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
