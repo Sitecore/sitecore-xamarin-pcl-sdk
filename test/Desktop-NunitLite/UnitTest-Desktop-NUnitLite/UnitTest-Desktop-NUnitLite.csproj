@@ -172,9 +172,9 @@
       <Project>{6a895746-b2ea-4865-ae55-89aec075efac}</Project>
       <Name>Sitecore.MobileSDK.PasswordProvider.Windows</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
-      <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
-      <Name>SitecoreMobileSDK</Name>
+    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
+      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
+      <Name>Sitecore.MobileSDK</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj">
       <Project>{b99eee93-6176-438f-b601-e0382545166a}</Project>
