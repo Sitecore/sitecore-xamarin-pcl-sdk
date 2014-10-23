@@ -4,6 +4,7 @@ using System.Net;
 using System.Web;
 using System.Text;
 using System.Diagnostics;
+using System.Net.Http.Headers;
 
 namespace LargeUploadTestiOS
 {
@@ -49,18 +50,14 @@ namespace LargeUploadTestiOS
       //TODO: @igk AUTH
       request.Headers.Add("X-Scitemwebapi-Username", "sitecore\\admin");
       request.Headers.Add("X-Scitemwebapi-Password", "b");
+      request.Headers.Add("Content-Disposition", "form-data; name=\"datafile\"; filename=\"file.mov\"");
+      request.ContentType = MediaTypeHeaderValue.Parse(this.chunkedRequest.ContentType);;  
 
-   
-      string contentType = "multipart/form-data; boundary=" + boundary;
-
-      request.ContentType = contentType;  
-
-//      string requestParameters = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"datafile\"; filename=\"file.mov\"\r\n\r\n{1}",
-//        boundary,
-//        HttpUtility.UrlEncode( Convert.ToBase64String(buffer))
-//      );
-      string requestParameters = @"fileName=" + this.chunkedRequest.FileName +  
-        "&data=" + HttpUtility.UrlEncode( Convert.ToBase64String(buffer) ); 
+      string requestParameters = string.Format("--{0}\r\nContent-Disposition: \r\n\r\n{1}",
+        boundary,
+        HttpUtility.UrlEncode( Convert.ToBase64String(buffer))
+      );
+ 
 
       byte[] byteData = Encoding.UTF8.GetBytes(requestParameters);  
 
