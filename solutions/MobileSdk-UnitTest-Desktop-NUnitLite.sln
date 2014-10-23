@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK-MockObjects", "..\test\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj", "{B99EEE93-6176-438F-B601-E0382545166A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest-Desktop-NUnitLite", "..\test\Desktop-NunitLite\UnitTest-Desktop-NUnitLite\UnitTest-Desktop-NUnitLite.csproj", "{458B812E-CBDC-45D5-89FE-DC7791D8EDBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureStringPasswordProvider-windows", "..\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\SecureStringPasswordProvider-windows.csproj", "{6A895746-B2EA-4865-AE55-89AEC075EFAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Windows", "..\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\Sitecore.MobileSDK.PasswordProvider.Windows.csproj", "{6A895746-B2EA-4865-AE55-89AEC075EFAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSdkPasswordProvider", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Interface", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

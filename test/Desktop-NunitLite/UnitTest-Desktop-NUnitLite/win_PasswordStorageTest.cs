@@ -2,7 +2,7 @@
 {
   using System;
   using NUnit.Framework;
-  using SecureStringPasswordProvider.Windows;
+  using Sitecore.MobileSDK.PasswordProvider.Windows;
 
   [TestFixture]
   class WindowsPasswordStorageTest

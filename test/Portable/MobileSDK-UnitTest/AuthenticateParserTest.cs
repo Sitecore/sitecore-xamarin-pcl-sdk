@@ -7,7 +7,7 @@
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.Authenticate;
 
-    [TestFixture()]
+  [TestFixture()]
   public class AuthenticateResponseParserTest
   {
     [Test]

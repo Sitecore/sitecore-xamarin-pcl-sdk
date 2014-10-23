@@ -4,7 +4,7 @@
   using System;
   using System.Collections.Generic;
 
-  using MobileSDKUnitTest.Mock;
+  using Sitecore.MobileSDK.MockObjects;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;

@@ -2,7 +2,7 @@
 {
   using System;
   using NUnit.Framework;
-  using SecureStringPasswordProvider.API;
+  using Sitecore.MobileSDK.PasswordProvider.Windows;
 
   [TestFixture]
   public class PortablePasswordStorageTest
@@ -48,8 +48,8 @@
       const string login = null;
       const string password = "bimba";
 
-      Assert.Throws<ArgumentException>( 
-        () => new SecureStringPasswordProvider(login, password), 
+      Assert.Throws<ArgumentException>(
+        () => new SecureStringPasswordProvider(login, password),
         "Exception for empty login expected");
     }
 
@@ -59,8 +59,8 @@
       const string login = "";
       const string password = "bimba";
 
-      Assert.Throws<ArgumentException>( 
-        () => new SecureStringPasswordProvider(login, password), 
+      Assert.Throws<ArgumentException>(
+        () => new SecureStringPasswordProvider(login, password),
         "Exception for empty login expected");
     }
 
@@ -105,7 +105,7 @@
       }
     }
 
-  
+
 
     [Test]
     public void TestPasswordStorageAllowsWhitespacePassword()

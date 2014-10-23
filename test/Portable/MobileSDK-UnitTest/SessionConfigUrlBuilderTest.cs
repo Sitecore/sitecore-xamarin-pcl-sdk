@@ -2,13 +2,10 @@
 namespace Sitecore.MobileSdkUnitTest
 {
   using System;
-  using MobileSDKUnitTest.Mock;
   using NUnit.Framework;
   using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-
 
   [TestFixture]
   public class SessionConfigUrlBuilderTest
@@ -25,7 +22,7 @@ namespace Sitecore.MobileSdkUnitTest
       string result = builder.BuildUrlString(mockConfig);
       string expected = "http://localhost/-/item/v1%2fsitecore%2fshell";
 
-      Assert.AreEqual (expected, result);
+      Assert.AreEqual(expected, result);
     }
 
     public void TestBuildBaseUrlWithoutSite()
@@ -39,7 +36,7 @@ namespace Sitecore.MobileSdkUnitTest
       string result = builder.BuildUrlString(mockConfig);
       string expected = "http://localhost/-/item/v1";
 
-      Assert.AreEqual (expected, result);
+      Assert.AreEqual(expected, result);
     }
 
     [Test]
