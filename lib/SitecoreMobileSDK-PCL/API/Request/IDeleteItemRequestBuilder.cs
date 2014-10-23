@@ -16,7 +16,7 @@
     /// 
     /// The value is case insensitive.
     /// </summary>
-    /// <param name="database">The sitecore database.</param>
+    /// <param name="database">The Sitecore database.</param>
     /// <returns>
     /// this
     /// </returns>
@@ -32,7 +32,7 @@
     IDeleteItemRequestBuilder<T> AddScope(IEnumerable<ScopeType> scope);
 
     /// <summary>
-    /// Adds the scope.
+    /// Adds the scopes.
     /// </summary>
     /// <param name="scope"><see cref="ScopeType"/> The scopes.</param>
     /// <returns>

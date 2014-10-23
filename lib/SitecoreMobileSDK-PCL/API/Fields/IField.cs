@@ -17,7 +17,7 @@ namespace Sitecore.MobileSDK.API.Fields
     string FieldId { get; }
 
     /// <summary>
-    /// Returns field's name. It is the same name that you set for the item's template in the content editor.
+    /// Returns field's name.
     ///
     /// Field's name is case insensitive.
     /// </summary>
@@ -42,9 +42,7 @@ namespace Sitecore.MobileSDK.API.Fields
     string Type { get; }
     
     /// <summary>
-    /// Returns field's raw value. It is an xml string that can be viewed in the content editor after enabling the "Raw Values" checkbox on the "View" tab of the ribbon
-    ///
-    /// Ribbon ==> "View" ==> "Raw Values"
+    /// Returns field's raw value.
     /// </summary>
     string RawValue { get; }
   }

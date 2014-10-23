@@ -38,12 +38,12 @@ namespace Sitecore.MobileSDK.API.Session
     IBaseSessionBuilder Site(string site);
 
     /// <summary>
-    /// Specifies WebAPI version, 'v1' by default.
+    /// Specifies Item Web API version, 'v1' by default.
     /// This parameter value will be used if appropriate parameter will be missed in request object.
     /// 
     /// The value is case insensitive.
     /// </summary>
-    /// <param name="webApiVersion">WebAPI version</param>
+    /// <param name="webApiVersion">Item Web API version</param>
     /// <returns>
     /// this
     /// </returns>
@@ -85,7 +85,7 @@ namespace Sitecore.MobileSDK.API.Session
     IBaseSessionBuilder MediaLibraryRoot(string mediaLibraryRootItem);
 
     /// <summary>
-    /// Defaults the media resource extension, "ashx" by default.
+    /// Specifies the media resource extension, "ashx" by default.
     /// </summary>
     /// <param name="defaultExtension">The default extension.</param>
     /// <returns>

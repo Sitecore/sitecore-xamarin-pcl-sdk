@@ -46,7 +46,7 @@
     /// 
     /// The value is case insensitive.
     /// </summary>
-    /// <param name="sitecoreDatabase">The sitecore database.</param>
+    /// <param name="sitecoreDatabase">The Sitecore database.</param>
     /// <returns>
     /// this
     /// </returns>

@@ -4,7 +4,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
   using System.Collections.Generic;
 
   /// <summary>
-  /// Interface represents basic flow for creation of requets that reads rendering html.
+  /// Interface represents basic flow for creation of requests that read rendering html.
   /// </summary>
   /// <typeparam name="T">Type of request</typeparam>
   public interface IRenderingHtmlRequestParametersBuilder<out T>
@@ -16,7 +16,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// 
     /// The value is case insensitive.
     /// </summary>
-    /// <param name="sitecoreDatabase">The sitecore database.</param>
+    /// <param name="sitecoreDatabase">The Sitecore database.</param>
     /// <returns>
     /// this
     /// </returns>

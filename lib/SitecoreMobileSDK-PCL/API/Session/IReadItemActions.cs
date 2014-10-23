@@ -8,7 +8,7 @@ namespace Sitecore.MobileSDK.API.Session
   using Sitecore.MobileSDK.API.Request;
 
   /// <summary>
-  /// Interface represents read actions that retrieves items.
+  /// Interface represents read actions that retrieve items.
   /// </summary>
   public interface IReadItemActions
   {

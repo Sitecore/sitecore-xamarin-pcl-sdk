@@ -6,7 +6,7 @@
 
 
   /// <summary>
-  /// Interface represents basic flow for creation of requets that hsa ability to specify scope for request.
+  /// Interface represents basic flow for creation of requets that have ability to specify scope for request.
   /// </summary>
   /// <typeparam name="T">Type of request</typeparam>
   public interface IScopedRequestParametersBuilder<T> where T : class
@@ -35,7 +35,7 @@
     /// 
     /// The value is case insensitive.
     /// </summary>
-    /// <param name="sitecoreDatabase">The sitecore database.</param>
+    /// <param name="sitecoreDatabase">The Sitecore database.</param>
     /// <returns>
     /// this
     /// </returns>

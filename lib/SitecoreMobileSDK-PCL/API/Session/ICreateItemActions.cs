@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.API.Session
   using Sitecore.MobileSDK.API.Request;
 
   /// <summary>
-  /// Interface represents creation actions that performs items cretion.
+  /// Interface represents creation actions that perform items cretion.
   /// </summary>
   public interface ICreateItemActions
   {
