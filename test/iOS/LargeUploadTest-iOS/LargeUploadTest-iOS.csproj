@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\IMG_0994.MOV" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

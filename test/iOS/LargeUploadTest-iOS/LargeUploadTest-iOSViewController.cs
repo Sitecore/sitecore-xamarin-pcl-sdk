@@ -52,8 +52,8 @@
       // Access to the path "/var/mobile/Applications/2CD1D07E-26DD-43CC-AF52-F24368FB4676/LargeUploadTestiOS.app/IMG_0994.MOV" is denied.
 
 
-      //      using (NSData movieContents = NSData.FromFile(resourceUrl))
-      //      using (Stream videoOnFileSystem = movieContents.AsStream())
+      using (NSData movieContents = NSData.FromFile(resourceUrl))
+      using (Stream videoOnFileSystem = movieContents.AsStream())
       using (IWebApiCredentials auth = new SecureStringPasswordProvider.iOS.SecureStringPasswordProvider("sitecore\\admin", "b"))
       using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(host)
         .Credentials(auth)
@@ -66,16 +66,16 @@
         //        Stream videoOnFileSystem = movieContents.AsStream();
 
 
-        byte[] tmp = System.Text.Encoding.UTF8.GetBytes("Hello World");
-        Stream videoOnFileSystem = new MemoryStream(tmp);
+//        byte[] tmp = System.Text.Encoding.UTF8.GetBytes("Hello World");
+//        Stream videoOnFileSystem = new MemoryStream(tmp);
 
         var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/")
           .ItemDataStream(videoOnFileSystem)
           .Database("master")
           .ItemName("NewLargeMedia for adk")
           .FileName("IMG_0997.MOV")
-          //          .ContentType("video/quicktime")
-          //          .ItemTemplatePath("System/Media/Unversioned/Movie")
+          .ContentType("video/quicktime")
+          .ItemTemplatePath("System/Media/Unversioned/Movie")
           .Build();
 
         var response = await session.UploadMediaResourceAsync(request);
