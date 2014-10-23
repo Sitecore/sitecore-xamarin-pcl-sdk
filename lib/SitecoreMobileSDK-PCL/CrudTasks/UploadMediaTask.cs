@@ -32,16 +32,16 @@ namespace Sitecore.MobileSDK.CrudTasks
 
       MultipartFormDataContent multiPartContent = new MultipartFormDataContent();
 
-      StreamContent strContent = new StreamContent (request.UploadOptions.ImageDataStream);
+      StreamContent strContent = new StreamContent(request.UploadOptions.ImageDataStream);
 
-      ContentDispositionHeaderValue cdHeaderValue = new ContentDispositionHeaderValue ("data");
+      ContentDispositionHeaderValue cdHeaderValue = new ContentDispositionHeaderValue("data");
       cdHeaderValue.FileName = "\"" + request.UploadOptions.FileName + "\"";
       cdHeaderValue.Name = "\"datafile\"";
       strContent.Headers.ContentDisposition = cdHeaderValue;
 
       if (null != request.UploadOptions.ContentType)
       {
-        strContent.Headers.ContentType = MediaTypeHeaderValue.Parse (request.UploadOptions.ContentType);
+        strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(request.UploadOptions.ContentType);
       }
 
       multiPartContent.Add(strContent);
