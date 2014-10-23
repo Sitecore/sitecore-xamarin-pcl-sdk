@@ -4,13 +4,11 @@ namespace WhiteLabelAndroid.Activities.Media
   using System.IO;
   using Android.App;
   using Android.Content;
-  using Android.Database;
   using Android.Graphics;
   using Android.OS;
   using Android.Provider;
   using Android.Views;
   using Android.Widget;
-  using Java.IO;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
 
@@ -68,27 +66,6 @@ namespace WhiteLabelAndroid.Activities.Media
       }
     }
 
-    private string GetPathToImage(Android.Net.Uri uri)
-    {
-      string path = null;
-
-      var projection = new[] { Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data };
-      using (ICursor cursor = this.ContentResolver.Query(uri, projection, null, null, null))
-      {
-        if (cursor != null)
-        {
-          int columnIndex = cursor.GetColumnIndexOrThrow(Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data);
-          cursor.MoveToFirst();
-          path = cursor.GetString(columnIndex);
-        }
-        else
-        {
-          return uri.Path;
-        }
-      }
-      return path;
-    }
-
     private async void UploadImage(Android.Net.Uri data)
     {
       var imageNameField = this.FindViewById<EditText>(Resource.Id.field_media_item_name);
@@ -109,21 +86,13 @@ namespace WhiteLabelAndroid.Activities.Media
         return;
       }
 
-      var imageFilePath = this.GetPathToImage(data);
-
-      if (imageFilePath == null)
-      {
-        Toast.MakeText(this, "Failed to upload image", ToastLength.Long).Show();
-        return;
-      }
-
       try
       {
         this.SetProgressBarIndeterminateVisibility(true);
 
         using (ISitecoreWebApiSession session = Prefs.From(this).Session)
         {
-          using (Stream stream = System.IO.File.Open(imageFilePath, FileMode.Open))
+          using (Stream stream = ContentResolver.OpenInputStream(this.imageUri))
           {
             var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(imagePath)
               .ItemDataStream(stream)
