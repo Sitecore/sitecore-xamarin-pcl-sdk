@@ -4,11 +4,9 @@ namespace MobileSDKIntegrationTest
 {
   using System;
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
 
   [TestFixture]

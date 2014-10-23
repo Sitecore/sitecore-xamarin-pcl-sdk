@@ -1,6 +1,6 @@
 ﻿
 
-namespace MobileSDKUnitTest.Mock
+namespace Sitecore.MobileSDK.MockObjects
 {
   using System;
 
@@ -17,7 +17,7 @@ namespace MobileSDKUnitTest.Mock
 
     public void Dispose()
     {
-      string message = "[END] " + functionName;
+      string message = "[END] " + this.functionName;
       this.logger(message);
     }
 

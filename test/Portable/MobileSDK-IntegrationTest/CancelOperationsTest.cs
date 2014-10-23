@@ -10,7 +10,7 @@ namespace MobileSDKIntegrationTest
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Session;
 
-  using MobileSDKUnitTest.Mock;
+  using Sitecore.MobileSDK.MockObjects;
 
   [TestFixture]
   public class CancelOperationsTest

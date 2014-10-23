@@ -4,13 +4,11 @@
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
-
-  using MobileSDKUnitTest.Mock;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.MockObjects;
 
   [TestFixture]
   public class UpdateItemsTest

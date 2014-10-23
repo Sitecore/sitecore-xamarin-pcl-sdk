@@ -2,12 +2,10 @@
 {
   using NUnit.Framework;
   using System;
-
-  using MobileSDKUnitTest.Mock;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
 
   [TestFixture]

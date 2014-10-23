@@ -6,11 +6,9 @@ namespace MobileSDKIntegrationTest
   using System;
   using System.Threading;
   using System.Threading.Tasks;
-
-  using MobileSDKUnitTest.Mock;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK;

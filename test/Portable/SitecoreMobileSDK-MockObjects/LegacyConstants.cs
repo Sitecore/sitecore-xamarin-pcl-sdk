@@ -1,4 +1,4 @@
-﻿namespace MobileSDKUnitTest.Mock
+﻿namespace Sitecore.MobileSDK.MockObjects
 {
   using Sitecore.MobileSDK.Items;
 

@@ -1,20 +1,16 @@
-﻿namespace MobileSDKUnitTest.Mock
+﻿namespace Sitecore.MobileSDK.MockObjects
 {
   using System;
+  using System.Diagnostics;
   using System.IO;
   using System.Threading;
   using System.Threading.Tasks;
-  using System.Diagnostics;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.API.Session;
-  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.MediaItem;
-
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.PasswordProvider;
-
 
   public class NoThrowWebApiSession : ISitecoreWebApiSession
   {
