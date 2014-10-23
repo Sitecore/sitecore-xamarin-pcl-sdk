@@ -1,4 +1,6 @@
-﻿namespace LargeUploadTestiOS
+﻿using Sitecore.ChunkedUpload;
+
+namespace LargeUploadTestiOS
 {
   using System;
   using System.IO;

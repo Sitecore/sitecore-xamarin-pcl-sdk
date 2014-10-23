@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Web;
 using System.Text;
 using System.Diagnostics;
 using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Threading.Tasks;
 
-namespace LargeUploadTestiOS
+namespace Sitecore.ChunkedUpload
 {
   public class ChunkedUpload
   {
@@ -19,7 +20,7 @@ namespace LargeUploadTestiOS
       this.chunkedRequest = chunkedRequest.ShallowCopy();
     }
 
-    public void Upload()  
+    public async void Upload()  
     {
       string formDataBoundary = String.Format("----------{0:N}", Guid.NewGuid());
 
@@ -27,7 +28,10 @@ namespace LargeUploadTestiOS
       double fullStreamLenght = this.resourceStream.Length;
 
       string fileName = this.chunkedRequest.FileName;  
-      int totalChunks = (int)Math.Ceiling(fullStreamLenght / chunkSize);  
+      int totalChunks = (int)Math.Ceiling(fullStreamLenght / chunkSize); 
+
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
 
       for (int i = 0; i < totalChunks; i++)  
       {  
@@ -37,42 +41,68 @@ namespace LargeUploadTestiOS
 
         byte[] bytes = new byte[length];  
         this.resourceStream.Read(bytes, 0, bytes.Length);  
-        string chunkResult = ChunkRequest(bytes, formDataBoundary);  
+        string chunkResult = await ChunkRequest(bytes, httpClient); 
+
         Debug.WriteLine("---===" + i.ToString() + " chunkResult: " + chunkResult);
       }  
+
+
     }  
 
-    private string ChunkRequest(byte[] buffer, string boundary)  
+    private async Task<string> ChunkRequest(byte[] buffer, HttpClient httpClient)  
     {  
-      HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.chunkedRequest.RequestUrl);  
-      request.Method = "POST";  
+      Uri url = new Uri (this.chunkedRequest.RequestUrl);
 
-      //TODO: @igk AUTH
-      request.Headers.Add("X-Scitemwebapi-Username", "sitecore\\admin");
-      request.Headers.Add("X-Scitemwebapi-Password", "b");
-      request.Headers.Add("Content-Disposition", "form-data; name=\"datafile\"; filename=\"file.mov\"");
-      request.ContentType = MediaTypeHeaderValue.Parse(this.chunkedRequest.ContentType);;  
+      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
 
-      string requestParameters = string.Format("--{0}\r\nContent-Disposition: \r\n\r\n{1}",
-        boundary,
-        HttpUtility.UrlEncode( Convert.ToBase64String(buffer))
-      );
- 
+      MultipartFormDataContent multiPartContent = new MultipartFormDataContent();
 
-      byte[] byteData = Encoding.UTF8.GetBytes(requestParameters);  
-
-      request.ContentLength = byteData.Length;  
-
-      Stream writer = request.GetRequestStream();  
-      writer.Write(byteData, 0, byteData.Length);  
-      writer.Close();  
+      result.Headers.Add ("X-Scitemwebapi-Username", "sitecore\\admin");
+      result.Headers.Add ("X-Scitemwebapi-Password", "b");
+      result.Headers.Add ("Transfer-Encoding", "chunked");
 
 
-      // here we will receive the response from HttpHandler  
-      StreamReader stIn = new StreamReader(request.GetResponse().GetResponseStream());  
-      string strResponse = stIn.ReadToEnd();  
-      stIn.Close();  
-      return strResponse;
+      ContentDispositionHeaderValue cdHeaderValue = new ContentDispositionHeaderValue("data");
+      cdHeaderValue.FileName = "\"" + this.chunkedRequest.FileName + "\"";
+      cdHeaderValue.Name = "\"datafile\"";
+
+      byte[] endLine = {0x0d,0x0a};
+      byte[] chunkSizeHex = BitConverter.GetBytes(buffer.Length);
+      int resultSize = chunkSizeHex.Length + endLine.Length + buffer.Length + endLine.Length;
+      byte[] resultBody = new byte[resultSize];
+
+      int index = 0;
+      chunkSizeHex.CopyTo(resultBody, index);
+      index += chunkSizeHex.Length;
+
+      endLine.CopyTo(resultBody, index);
+      index += endLine.Length;
+
+      buffer.CopyTo(resultBody, index);
+      index += buffer.Length;
+
+      endLine.CopyTo(resultBody, index);
+
+      Stream stream = new MemoryStream(resultBody);
+      StreamContent strContent = new StreamContent(stream);
+
+      strContent.Headers.ContentDisposition = cdHeaderValue;
+      if (null != this.chunkedRequest.ContentType)
+      {
+        strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(this.chunkedRequest.ContentType);
+      }
+      multiPartContent.Add(strContent);
+      result.Content = multiPartContent;
+
+
+
+
+
+      //SENDING
+
+      HttpResponseMessage httpResponse = await httpClient.SendAsync(result);
+      return await httpResponse.Content.ReadAsStringAsync();
+
     } 
   }
 }

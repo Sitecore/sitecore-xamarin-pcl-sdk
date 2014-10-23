@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LargeUploadTestiOS
+namespace Sitecore.ChunkedUpload
 {
   public class ChunkedRequest : IChunkedRequest
   {
