@@ -11,6 +11,7 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.PasswordProvider;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
 
   public class NoThrowWebApiSession : ISitecoreWebApiSession
   {
