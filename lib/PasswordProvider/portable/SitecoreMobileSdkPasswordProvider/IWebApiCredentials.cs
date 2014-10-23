@@ -1,7 +1,6 @@
-﻿namespace SitecoreMobileSdkPasswordProvider.API
+﻿namespace Sitecore.MobileSDK.PasswordProvider
 {
   using System;
-
 
   /// <summary>
   /// A data provider for user's credentials.

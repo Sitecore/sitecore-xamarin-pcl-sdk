@@ -13,7 +13,7 @@
   using Sitecore.MobileSDK.API.MediaItem;
 
   using Sitecore.MobileSDK.Items;
-  using SitecoreMobileSdkPasswordProvider.API;
+  using Sitecore.MobileSDK.PasswordProvider;
 
 
   public class NoThrowWebApiSession : ISitecoreWebApiSession

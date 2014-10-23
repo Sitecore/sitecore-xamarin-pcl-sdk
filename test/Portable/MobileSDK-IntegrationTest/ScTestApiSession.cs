@@ -5,10 +5,10 @@
 
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.MediaItem;
-  using SitecoreMobileSdkPasswordProvider.API;
 
 
   public class ScTestApiSession : ScApiSession
