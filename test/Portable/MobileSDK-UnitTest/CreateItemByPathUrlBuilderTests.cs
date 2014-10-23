@@ -1,21 +1,18 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
-  using NUnit.Framework;
   using System;
   using System.Collections.Generic;
-
-  using Sitecore.MobileSDK.MockObjects;
-
+  using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
-
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
-  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UserRequest;
 
 
   [TestFixture()]

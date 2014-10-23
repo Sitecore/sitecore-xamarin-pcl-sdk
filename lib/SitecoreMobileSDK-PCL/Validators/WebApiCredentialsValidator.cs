@@ -1,9 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.Validators
 {
-  using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
-
 
   public static class WebApiCredentialsValidator
   {

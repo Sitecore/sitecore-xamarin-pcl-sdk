@@ -59,7 +59,7 @@
       this.builderForPath = null;
       this.builderForQuery = null;
 
-      this.sessionConfig = null; 
+      this.sessionConfig = null;
       this.sitecoreShellConfig = null;
       this.defaultSource = null;
     }

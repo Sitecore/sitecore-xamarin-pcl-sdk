@@ -1,5 +1,4 @@
-﻿
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;

@@ -3,19 +3,16 @@
   using System;
   using System.Collections.Generic;
   using NUnit.Framework;
-
-  using Sitecore.MobileSDK.MockObjects;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
-
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]
   public class CreateItemByIdUrlBuilderTests
