@@ -84,7 +84,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -101,9 +100,6 @@
     <Compile Include="LargeUploadTest-iOSViewController.designer.cs">
       <DependentUpon>LargeUploadTest-iOSViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChunkedUpload\ChunkedUpload.cs" />
-    <Compile Include="ChunkedUpload\IChunkedRequest.cs" />
-    <Compile Include="ChunkedUpload\ChunkedRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
@@ -123,8 +119,5 @@
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>SitecoreMobileSDK</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ChunkedUpload\" />
   </ItemGroup>
 </Project>
