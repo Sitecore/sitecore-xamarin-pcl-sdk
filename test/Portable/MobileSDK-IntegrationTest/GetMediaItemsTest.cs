@@ -5,13 +5,12 @@
   using System.IO;
   using System.Threading.Tasks;
   using NUnit.Framework;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
-  using Sitecore.MobileSDK.API.MediaItem;
 
   [TestFixture]
   public class GetMediaItemsTest
@@ -494,7 +493,7 @@
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
         .Database("")
         .Build();
-      Assert.IsNotNull (request);
+      Assert.IsNotNull(request);
     }
 
     [Test] //ALR: Argument exception should appear
@@ -503,7 +502,7 @@
       var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
         .Database(null)
         .Build();
-      Assert.IsNotNull (request);
+      Assert.IsNotNull(request);
     }
 
     [Test] //ALR: Argument exception should appear

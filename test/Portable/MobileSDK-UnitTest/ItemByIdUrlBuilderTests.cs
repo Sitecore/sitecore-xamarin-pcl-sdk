@@ -1,21 +1,17 @@
-﻿
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.UserRequest;
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
+  using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]
   public class ItemByIdUrlBuilderTests
@@ -46,7 +42,7 @@ namespace Sitecore.MobileSdkUnitTest
       mutableSessionConfig.Site = "/sitecore/shell";
       this.sitecoreShellConfig = mutableSessionConfig;
 
-      this.payload = new QueryParameters( PayloadType.Min, null, null );
+      this.payload = new QueryParameters(PayloadType.Min, null, null);
     }
 
     [TearDown]
@@ -260,7 +256,7 @@ namespace Sitecore.MobileSdkUnitTest
 
 
       IReadItemsByIdRequest parameters = mutableParameters;
-      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+      Assert.Throws<ArgumentException>(() => this.builder.GetUrlForRequest(parameters));
     }
 
 
@@ -278,7 +274,7 @@ namespace Sitecore.MobileSdkUnitTest
 
 
       IReadItemsByIdRequest parameters = mutableParameters;
-      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+      Assert.Throws<ArgumentException>(() => this.builder.GetUrlForRequest(parameters));
     }
 
     [Test]
@@ -295,7 +291,7 @@ namespace Sitecore.MobileSdkUnitTest
 
 
       IReadItemsByIdRequest parameters = mutableParameters;
-      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+      Assert.Throws<ArgumentException>(() => this.builder.GetUrlForRequest(parameters));
     }
 
     [Test]
@@ -312,7 +308,7 @@ namespace Sitecore.MobileSdkUnitTest
 
 
       IReadItemsByIdRequest parameters = mutableParameters;
-      Assert.Throws<ArgumentException>(() =>this.builder.GetUrlForRequest(parameters));
+      Assert.Throws<ArgumentException>(() => this.builder.GetUrlForRequest(parameters));
     }
   }
 }

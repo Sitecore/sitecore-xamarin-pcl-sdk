@@ -171,7 +171,7 @@
     [Test]
     public void TestGetRenderingWithNullDatabaseDoesNotReturnException()
     {
-      var request = 
+      var request =
         ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
           .SourceAndRenderingDatabase(null)
           .Build();
@@ -181,9 +181,9 @@
     [Test]
     public void TestGetRenderingWithNullItemVersionReturnsException()
     {
-        var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
-        .SourceVersion(null));
-        Assert.True(exception.Message.Contains("SourceVersion"));
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
+      .SourceVersion(null));
+      Assert.True(exception.Message.Contains("SourceVersion"));
     }
 
     [Test]
@@ -258,7 +258,7 @@
     [Test]
     public void TestGetRenderingWithSpacesInDatabaseReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => 
+      var exception = Assert.Throws<ArgumentException>(() =>
         ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(DatasourceId, RenderingId)
           .SourceAndRenderingDatabase("  ")
           .Build());

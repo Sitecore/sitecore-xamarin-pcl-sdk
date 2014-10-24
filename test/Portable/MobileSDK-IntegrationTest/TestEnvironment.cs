@@ -1,9 +1,8 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.MockObjects;
 
   public class TestEnvironment
   {
@@ -154,9 +153,9 @@
 
     public void AssertItemSourcesAreEqual(IItemSource expected, IItemSource actual)
     {
-        Assert.AreEqual(expected.Database, actual.Database);
-        Assert.AreEqual(expected.Language, actual.Language);
-        Assert.AreEqual(expected.VersionNumber, actual.VersionNumber);
+      Assert.AreEqual(expected.Database, actual.Database);
+      Assert.AreEqual(expected.Language, actual.Language);
+      Assert.AreEqual(expected.VersionNumber, actual.VersionNumber);
     }
 
     public void AssertItemsCount(int itemCount, ScItemsResponse response)

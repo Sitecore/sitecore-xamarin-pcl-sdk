@@ -1,21 +1,15 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
-  using NUnit.Framework;
-
   using System;
   using System.Diagnostics;
-
-  using MobileSDKUnitTest.Mock;
-
+  using NUnit.Framework;
+  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.MediaItem;
-
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
   using Sitecore.MobileSDK.SessionSettings;
-  using SitecoreMobileSdkPasswordProvider.API;
-
-
 
   [TestFixture]
   public class ItemSourceTest

@@ -1,9 +1,6 @@
-﻿namespace MobileSDKUnitTest.Mock
+﻿namespace Sitecore.MobileSDK.MockObjects
 {
-  using System;
   using Sitecore.MobileSDK.API.Request.Parameters;
-
-
 
   public class MutablePagingParameters : IPagingParameters
   {

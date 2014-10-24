@@ -1,15 +1,10 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
-  using System;
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
-
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Items;
-
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]
   public class ItemSourceMergerTest

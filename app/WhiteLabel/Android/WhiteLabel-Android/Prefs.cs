@@ -2,7 +2,7 @@ namespace WhiteLabelAndroid
 {
   using Android.Content;
   using Android.Preferences;
-  using SecureStringPasswordProvider.Android;
+  using Sitecore.MobileSDK.PasswordProvider.Android;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;

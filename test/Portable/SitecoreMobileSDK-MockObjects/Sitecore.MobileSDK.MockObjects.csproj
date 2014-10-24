@@ -6,8 +6,8 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{B99EEE93-6176-438F-B601-E0382545166A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SitecoreMobileSDKMockObjects</RootNamespace>
-    <AssemblyName>SitecoreMobileSDK-MockObjects</AssemblyName>
+    <RootNamespace>Sitecore.MobileSDK.MockObjects</RootNamespace>
+    <AssemblyName>Sitecore.MobileSDK.MockObjects</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\solutions\</SolutionDir>
@@ -33,9 +33,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MockGetItemsByQueryParameters.cs" />
+    <Compile Include="MockReadItemByIdParameters.cs" />
+    <Compile Include="MockReadItemByPathParameters.cs" />
+    <Compile Include="FunctionTracer.cs" />
+    <Compile Include="MutableItemSource.cs" />
+    <Compile Include="MutableSessionConfig.cs" />
+    <Compile Include="MockMutableMediaOptions.cs" />
+    <Compile Include="MutableMediaLibrarySettings.cs" />
+    <Compile Include="MutableWebApiCredentialsPOD.cs" />
+    <Compile Include="LegacyConstants.cs" />
+    <Compile Include="NoThrowWebApiSession.cs" />
+    <Compile Include="WebApiCredentialsPOD.cs" />
+    <Compile Include="MutablePagingParameters.cs" />
   </ItemGroup>
-  <Import Project="..\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems" Label="Shared" Condition="Exists('..\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
+      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
+      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
+      <Name>Sitecore.MobileSDK</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -52,15 +74,5 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\solutions\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
-      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
-      <Name>SitecoreMobileSDK</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
-      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
-      <Name>SitecoreMobileSdkPasswordProvider</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

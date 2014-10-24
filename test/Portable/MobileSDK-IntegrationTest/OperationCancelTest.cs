@@ -1,21 +1,14 @@
-﻿
-namespace MobileSDKIntegrationTest
+﻿namespace MobileSDKIntegrationTest
 {
-  using NUnit.Framework;
-
   using System;
   using System.Threading;
   using System.Threading.Tasks;
-
-  using MobileSDKUnitTest.Mock;
-
+  using NUnit.Framework;
+  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK;
-
-
 
   [TestFixture]
   public class OperationCancelTest
@@ -89,7 +82,7 @@ namespace MobileSDKIntegrationTest
     {
       TestDelegate testAction = async () =>
       {
-        var cancel = new CancellationTokenSource ();
+        var cancel = new CancellationTokenSource();
         var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home").Build();
 
         Task<ScItemsResponse> action = this.session.ReadItemAsync(request, cancel.Token);

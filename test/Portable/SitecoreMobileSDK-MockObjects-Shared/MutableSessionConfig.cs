@@ -1,8 +1,5 @@
-﻿
-
-namespace MobileSDKUnitTest.Mock
+﻿namespace Sitecore.MobileSDK.MockObjects
 {
-  using System;
   using Sitecore.MobileSDK.SessionSettings;
 
   public class MutableSessionConfig : SessionConfig

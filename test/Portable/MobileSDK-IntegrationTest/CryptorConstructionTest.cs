@@ -1,11 +1,8 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using NUnit.Framework;
-  using MobileSDKUnitTest.Mock;
-
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.Items;
-
 
   [TestFixture]
   public class CryptorConstructionTest
@@ -24,14 +21,14 @@
         "/sitecore/media library",
         "ashx",
         "~/media/");
-        
+
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
       var config = new SessionConfig(testData.InstanceUrl);
-      this.anonymousSession = new ScTestApiSession(config, null, this.mediaSettings,LegacyConstants.DefaultSource());
+      this.anonymousSession = new ScTestApiSession(config, null, this.mediaSettings, LegacyConstants.DefaultSource());
 
       config = new SessionConfig(testData.InstanceUrl);
-      this.authenticatedSession = new ScTestApiSession(config, testData.Users.Admin, this.mediaSettings,LegacyConstants.DefaultSource());
+      this.authenticatedSession = new ScTestApiSession(config, testData.Users.Admin, this.mediaSettings, LegacyConstants.DefaultSource());
     }
 
     [TearDown]

@@ -2,7 +2,7 @@
 {
   using System;
   using NUnit.Framework;
-  using SecureStringPasswordProvider.Android;
+  using Sitecore.MobileSDK.PasswordProvider.Android;
 
   [TestFixture]
   public class Android_PasswordStorageTest

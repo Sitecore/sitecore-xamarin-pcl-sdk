@@ -1,12 +1,12 @@
-﻿namespace SecureStringPasswordProvider.API
+﻿namespace Sitecore.MobileSDK.PasswordProvider
 {
   using System;
   using System.Security;
   using System.Runtime.InteropServices;
-  using SitecoreMobileSdkPasswordProvider.API;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
 
 
-  public class SecureStringPasswordProvider : IWebApiCredentials, IDisposable
+  public class SecureStringPasswordProvider : IWebApiCredentials
   {
     private SecureString encryptedLogin;
     private SecureString encryptedPassword;
@@ -21,11 +21,11 @@
       {
         throw new ArgumentException("[SecureStringPasswordProvider] : username cannot be null or empty");
       }
-      this.encryptedLogin = SecureStringPasswordProvider.EncryptString(insecureLogin);
+      this.encryptedLogin = EncryptString(insecureLogin);
 
       if (null != insecurePassword)
       {
-        this.encryptedPassword = SecureStringPasswordProvider.EncryptString(insecurePassword);
+        this.encryptedPassword = EncryptString(insecurePassword);
       }
     }
 
@@ -122,7 +122,7 @@
     {
       get
       {
-        return SecureStringPasswordProvider.DecryptSecureString(this.encryptedLogin);
+        return DecryptSecureString(this.encryptedLogin);
       }
     }
 
@@ -135,7 +135,7 @@
           return null;
         }
 
-        return SecureStringPasswordProvider.DecryptSecureString(this.encryptedPassword);
+        return DecryptSecureString(this.encryptedPassword);
       }
     }
     #endregion IWebApiCredentials

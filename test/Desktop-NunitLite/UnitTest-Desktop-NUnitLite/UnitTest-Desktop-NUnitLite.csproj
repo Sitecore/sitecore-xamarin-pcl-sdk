@@ -155,45 +155,6 @@
     <Compile Include="..\..\Portable\MobileSDK-UnitTest\UploadMediaUrlBuilderTests.cs">
       <Link>UploadMediaUrlBuilderTests.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\FunctionTracer.cs">
-      <Link>Mock\FunctionTracer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\LegacyConstants.cs">
-      <Link>Mock\LegacyConstants.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockGetItemsByQueryParameters.cs">
-      <Link>Mock\MockGetItemsByQueryParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockMutableMediaOptions.cs">
-      <Link>Mock\MockMutableMediaOptions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockReadItemByIdParameters.cs">
-      <Link>Mock\MockReadItemByIdParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockReadItemByPathParameters.cs">
-      <Link>Mock\MockReadItemByPathParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableItemSource.cs">
-      <Link>Mock\MutableItemSource.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableMediaLibrarySettings.cs">
-      <Link>Mock\MutableMediaLibrarySettings.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutablePagingParameters.cs">
-      <Link>Mock\MutablePagingParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableSessionConfig.cs">
-      <Link>Mock\MutableSessionConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableWebApiCredentialsPOD.cs">
-      <Link>Mock\MutableWebApiCredentialsPOD.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\NoThrowWebApiSession.cs">
-      <Link>Mock\NoThrowWebApiSession.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\WebApiCredentialsPOD.cs">
-      <Link>Mock\WebApiCredentialsPOD.cs</Link>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="win_PasswordStorageTest.cs" />
@@ -203,17 +164,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
       <Project>{079d5d12-ff8e-46d4-8afc-06cbf5a736c7}</Project>
-      <Name>SitecoreMobileSdkPasswordProvider</Name>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\SecureStringPasswordProvider-windows.csproj">
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\Sitecore.MobileSDK.PasswordProvider.Windows.csproj">
       <Project>{6a895746-b2ea-4865-ae55-89aec075efac}</Project>
-      <Name>SecureStringPasswordProvider-windows</Name>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Windows</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
-      <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
-      <Name>SitecoreMobileSDK</Name>
+    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
+      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
+      <Name>Sitecore.MobileSDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
+      <Project>{b99eee93-6176-438f-b601-e0382545166a}</Project>
+      <Name>Sitecore.MobileSDK.MockObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

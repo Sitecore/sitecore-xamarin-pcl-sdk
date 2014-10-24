@@ -1,26 +1,18 @@
-﻿
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
-  using System.Collections.Generic;
   using System.IO;
-
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
-
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.API.Request.Parameters;
-
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.API.MediaItem;
+  using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]
   public class UploadMediaUrlBuilderTests
@@ -44,7 +36,7 @@ namespace Sitecore.MobileSdkUnitTest
 
       IMediaLibrarySettings mediaSettings = mutableSessionConfig;
 
-      this.builder = new UploadMediaUrlBuilder (restGrammar, webApiGrammar, mutableSessionConfig, mediaSettings);
+      this.builder = new UploadMediaUrlBuilder(restGrammar, webApiGrammar, mutableSessionConfig, mediaSettings);
     }
 
     [TearDown]
@@ -52,7 +44,7 @@ namespace Sitecore.MobileSdkUnitTest
     {
       this.builder = null;
     }
-      
+
     [Test]
     public void TestCorrectParamsForParentId()
     {
@@ -83,27 +75,27 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestEmptyParentId()
     {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId (""));
+      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(""));
     }
 
     [Test]
     public void TestNullParentId()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId (null));
+      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UploadResourceRequestWithParentId(null));
     }
-   
+
     [Test]
     public void TestEmptyParentPath()
     {
       var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("");
-      Assert.NotNull (builder, "empty path should be available");
+      Assert.NotNull(builder, "empty path should be available");
     }
 
     [Test]
     public void TestNullParentPath()
     {
       var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(null);
-      Assert.NotNull (builder, "null path should be available");
+      Assert.NotNull(builder, "null path should be available");
     }
 
     [Test]
@@ -122,10 +114,10 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestFileNameRequired()
     {
       Stream stream = this.GenerateFakeStream();
-      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path")
-        .ContentType ("image/jpg")
-        .ItemName ("name1")
-        .ItemDataStream (stream);
+      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/some folder/path")
+        .ContentType("image/jpg")
+        .ItemName("name1")
+        .ItemDataStream(stream);
 
       Assert.Throws<ArgumentNullException>(() => builder.Build());
     }
@@ -134,10 +126,10 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestItemNameRequired()
     {
       Stream stream = this.GenerateFakeStream();
-      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path")
-        .ContentType ("image/jpg")
+      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/some folder/path")
+        .ContentType("image/jpg")
         .FileName("bugaga.jpg")
-        .ItemDataStream (stream);
+        .ItemDataStream(stream);
 
       Assert.Throws<ArgumentNullException>(() => builder.Build());
     }
@@ -146,33 +138,33 @@ namespace Sitecore.MobileSdkUnitTest
     public void TestContentTypeIsNotRequired()
     {
       Stream stream = this.GenerateFakeStream();
-      var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path")
+      var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/some folder/path")
         .ItemName("name1")
         .FileName("bugaga.jpg")
-        .ItemDataStream (stream)
+        .ItemDataStream(stream)
         .Build();
-     
-      Assert.NotNull (request, "null Content type should be available");
+
+      Assert.NotNull(request, "null Content type should be available");
     }
-      
+
     [Test]
     public void TestEmptyFileName()
     {
-      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path");
+      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/some folder/path");
       Assert.Throws<ArgumentException>(() => builder.FileName(""));
     }
 
     [Test]
     public void TestEmptyItemName()
     {
-      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path");
+      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/some folder/path");
       Assert.Throws<ArgumentException>(() => builder.ItemName(""));
     }
 
     [Test]
     public void TestEmptyContentType()
     {
-      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath ("/some folder/path");
+      var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath("/some folder/path");
       Assert.Throws<ArgumentException>(() => builder.ContentType(""));
     }
 
