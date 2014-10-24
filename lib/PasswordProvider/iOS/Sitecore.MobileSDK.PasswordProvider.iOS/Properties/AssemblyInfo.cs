@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("SecureStringPasswordProvider-iOS")]
-[assembly: AssemblyDescription("SecureString based password storage class for Xamarin.iOS")]
+[assembly: AssemblyTitle("Sitecore.MobileSDK.PasswordProvider.iOS")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sitecore Corporation")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Sitecore Corporation")]
+[assembly: AssemblyCopyright("dodikk")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
