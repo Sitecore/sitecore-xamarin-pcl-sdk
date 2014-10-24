@@ -51,6 +51,11 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// <returns>Content type.</returns>
     string ContentType { get; }
 
+    /// <summary>
+    /// Specifies the parent item GUID value enclosed in curly braces.
+    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// </summary>
+    /// <returns>Parent item GUID.</returns>
     string ParentId { get; }
   }
 }

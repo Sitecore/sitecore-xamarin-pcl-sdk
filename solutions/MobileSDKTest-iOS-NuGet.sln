@@ -9,7 +9,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest",
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.shproj", "{8A52A2A6-20A1-42BD-B586-242F77089B1D}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SitecoreMobileSDK-MockObjects-Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sitecore.MobileSDK.MockObjects.Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\Sitecore.MobileSDK.MockObjects.Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKUnitTest-iOS-NuGet", "..\test\iOS\MobileSDKUnitTest-iOS-NuGet\MobileSDKUnitTest-iOS-NuGet.csproj", "{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}"
 EndProject
