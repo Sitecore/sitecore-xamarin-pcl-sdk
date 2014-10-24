@@ -120,6 +120,45 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UploadMediaTest.cs">
       <Link>UploadMediaTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\FunctionTracer.cs">
+      <Link>MockClasses\FunctionTracer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\LegacyConstants.cs">
+      <Link>MockClasses\LegacyConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockGetItemsByQueryParameters.cs">
+      <Link>MockClasses\MockGetItemsByQueryParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockMutableMediaOptions.cs">
+      <Link>MockClasses\MockMutableMediaOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockReadItemByIdParameters.cs">
+      <Link>MockClasses\MockReadItemByIdParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockReadItemByPathParameters.cs">
+      <Link>MockClasses\MockReadItemByPathParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableItemSource.cs">
+      <Link>MockClasses\MutableItemSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableMediaLibrarySettings.cs">
+      <Link>MockClasses\MutableMediaLibrarySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutablePagingParameters.cs">
+      <Link>MockClasses\MutablePagingParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableSessionConfig.cs">
+      <Link>MockClasses\MutableSessionConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableWebApiCredentialsPOD.cs">
+      <Link>MockClasses\MutableWebApiCredentialsPOD.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\NoThrowWebApiSession.cs">
+      <Link>MockClasses\NoThrowWebApiSession.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\WebApiCredentialsPOD.cs">
+      <Link>MockClasses\WebApiCredentialsPOD.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
