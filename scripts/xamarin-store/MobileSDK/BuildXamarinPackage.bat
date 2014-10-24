@@ -40,8 +40,8 @@ CALL %PACKAGE_UTILITY_EXE% create-manually Sitecore.MobileSDK.PCL-1.0.0.xam     
 		--icon="icons\Sitecore.MobileSDK.PCL_128x128.png"                                   ^
 		--icon="icons\Sitecore.MobileSDK.PCL_512x512.png"                                   ^
  		--library="ios":"%BINARIES_DIR%\Sitecore.MobileSDK.dll"                             ^
-		--library="ios":"%BINARIES_DIR%Sitecore.MobileSDK.PasswordProvider.iOS.dll"         ^
-                --library="ios":"%BINARIES_DIR%\Sitecore.MobileSDK.PasswordProvider.Interface.dll"  ^
+		--library="ios":"%BINARIES_DIR%\Sitecore.MobileSDK.PasswordProvider.iOS.dll"         ^
+        --library="ios":"%BINARIES_DIR%\Sitecore.MobileSDK.PasswordProvider.Interface.dll"  ^
 		--library="ios":"%BINARIES_DIR%\Microsoft.Threading.Tasks.Extensions.dll"           ^
 		--library="ios":"%BINARIES_DIR%\Microsoft.Threading.Tasks.dll"                      ^
 		--library="ios":"%BINARIES_DIR%\Newtonsoft.Json.dll"                                ^
