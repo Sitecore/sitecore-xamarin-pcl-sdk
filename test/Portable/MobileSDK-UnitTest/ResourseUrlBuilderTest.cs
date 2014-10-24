@@ -1,22 +1,16 @@
-﻿using Sitecore.MobileSDK.UrlBuilder.WebApi;
-
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
-  using NUnit.Framework;
   using System;
-
-  using MobileSDKUnitTest.Mock;
-
+  using NUnit.Framework;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.MediaItem;
-  using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
-
-
+  using Sitecore.MobileSDK.UrlBuilder.Rest;
+  using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
   [TestFixture]
   public class ResourseUrlBuilderTest
@@ -108,7 +102,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestExtensionOnItemPathThrowsArgumentException()
     {
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentException>(() =>
         this.builder.BuildUrlStringForPath("/mediaXYZ/1.png", null)
       );
     }
@@ -125,7 +119,7 @@ namespace Sitecore.MobileSdkUnitTest
     [Test]
     public void TestIncorrectMediaHookCausesArgumentException()
     {
-      Assert.Throws<ArgumentException>( ()=>
+      Assert.Throws<ArgumentException>(() =>
         this.builder.BuildUrlStringForPath("~/mediaXYZ/1.png", null)
       );
     }
@@ -148,11 +142,11 @@ namespace Sitecore.MobileSdkUnitTest
       ItemSource itemSource = LegacyConstants.DefaultSource();
       this.builder = new MediaItemUrlBuilder(this.restGrammar, this.webApiGrammar, sessionSettings, mediaSettings, itemSource);
 
-      var customBuilder = 
+      var customBuilder =
         new MediaItemUrlBuilder(
-          this.restGrammar, 
+          this.restGrammar,
           this.webApiGrammar,
-          sessionSettings, 
+          sessionSettings,
           mediaSettings,
           itemSource);
 

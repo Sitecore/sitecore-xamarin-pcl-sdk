@@ -2,23 +2,21 @@
 {
   using System.Threading;
   using System.Threading.Tasks;
-
   using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.MediaItem;
-  using SitecoreMobileSdkPasswordProvider.API;
-
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
+  using Sitecore.MobileSDK.PublicKey;
 
   public class ScTestApiSession : ScApiSession
   {
     public ScTestApiSession(
-      ISessionConfig config, 
+      ISessionConfig config,
       IWebApiCredentials credentials,
       IMediaLibrarySettings mediaSettings,
       ItemSource defaultSource = null) :
-    base(config, credentials, mediaSettings, defaultSource)
+      base(config, credentials, mediaSettings, defaultSource)
     {
       this.GetPublicKeyInvocationsCount = 0;
     }

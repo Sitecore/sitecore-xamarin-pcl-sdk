@@ -1,11 +1,10 @@
-﻿namespace SecureStringPasswordProvider.Windows
+﻿namespace Sitecore.MobileSDK.PasswordProvider.Windows
 {
-  using System;
-  using SitecoreMobileSdkPasswordProvider.API;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
 
-  public class SecureStringPasswordProvider : IWebApiCredentials, IDisposable
+  public class SecureStringPasswordProvider : IWebApiCredentials
   {
-    private global::SecureStringPasswordProvider.API.SecureStringPasswordProvider providerImpl;
+    private PasswordProvider.SecureStringPasswordProvider providerImpl;
 
     private SecureStringPasswordProvider()
     {
@@ -14,7 +13,7 @@
     public SecureStringPasswordProvider(string insecureLogin, string insecurePassword)
     {
       this.providerImpl =
-        new global::SecureStringPasswordProvider.API.SecureStringPasswordProvider(
+        new PasswordProvider.SecureStringPasswordProvider(
           insecureLogin,
           insecurePassword);
     }

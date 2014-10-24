@@ -1,12 +1,9 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
-  using NUnit.Framework;
-  using System;
   using System.Threading;
-
-  using Sitecore.MobileSDK.CrudTasks.Resource;
+  using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
-
+  using Sitecore.MobileSDK.CrudTasks.Resource;
 
   [TestFixture]
   public class HashedUrlResponseTest

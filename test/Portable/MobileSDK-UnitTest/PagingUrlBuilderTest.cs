@@ -2,23 +2,17 @@
 {
   using System;
   using NUnit.Framework;
-  using MobileSDKUnitTest.Mock;
-
-  using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.UrlBuilder.ItemById;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
-
-
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.ItemById;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
+  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
+  using Sitecore.MobileSDK.UrlBuilder.Rest;
+  using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
   [TestFixture]
   public class PagingUrlBuilderTest
@@ -65,7 +59,7 @@
       this.builderForPath = null;
       this.builderForQuery = null;
 
-      this.sessionConfig = null; 
+      this.sessionConfig = null;
       this.sitecoreShellConfig = null;
       this.defaultSource = null;
     }

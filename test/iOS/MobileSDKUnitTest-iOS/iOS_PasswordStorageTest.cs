@@ -2,7 +2,7 @@
 {
   using System;
   using NUnit.Framework;
-  using SecureStringPasswordProvider.iOS;
+  using Sitecore.MobileSDK.PasswordProvider.iOS;
 
 
 

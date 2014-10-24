@@ -2,7 +2,6 @@
 namespace Sitecore.MobileSdkUnitTest
 {
   using NUnit.Framework;
-  using System;
 
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
 

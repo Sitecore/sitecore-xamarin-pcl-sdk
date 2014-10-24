@@ -3,15 +3,11 @@
   using System;
   using NUnit.Framework;
 
-  using MobileSDKUnitTest.Mock;
-
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.UrlBuilder;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-
-
 
   [TestFixture]
   public class ItemSourceUrlBuilderTest

@@ -3,14 +3,12 @@
   using System;
   using System.Threading.Tasks;
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.MockObjects;
 
   [TestFixture]
   public class CreateItemsTest
@@ -68,7 +66,7 @@
       const string ItemName = "Create by parent id";
       var expectedItem = this.CreateTestItem(ItemName);
 
-      var request = 
+      var request =
         ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(ItemName)
@@ -368,7 +366,7 @@
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("somekey", null));
-      Assert.IsTrue (exception2.Message.Contains ("fieldValue"));
+      Assert.IsTrue(exception2.Message.Contains("fieldValue"));
 
       var exception3 = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
         .ItemTemplatePath("/Sample/Sample Item")
@@ -384,13 +382,13 @@
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create and set invalid field");
       const string FieldName = "@*<<%#==_&@";
-        var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-          .ItemTemplatePath(testData.Items.Home.Template)
-          .ItemName(expectedItem.DisplayName)
-          .Database("master")
-          .AddFieldsToRead(FieldName)
-          .AddFieldsRawValuesByNameToSet(FieldName, FieldName)         
-          .Build();
+      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
+        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemName(expectedItem.DisplayName)
+        .Database("master")
+        .AddFieldsToRead(FieldName)
+        .AddFieldsRawValuesByNameToSet(FieldName, FieldName)
+        .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
@@ -404,7 +402,7 @@
     public void TestCreateItemByIdWithEmptyNameReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-        .ItemTemplatePath(testData.Items.Home.Template) 
+        .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName("")
         .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
@@ -631,7 +629,7 @@
          .ItemName("Item with null db")
          .Database(null)
          .Build();
-      Assert.IsNotNull (request);
+      Assert.IsNotNull(request);
     }
 
     [Test]
@@ -642,7 +640,7 @@
          .ItemName("Item with empty db")
          .Database("")
          .Build();
-      Assert.IsNotNull (request);
+      Assert.IsNotNull(request);
     }
 
     [Test]
@@ -653,14 +651,14 @@
          .ItemName("Item with null language")
          .Language(null)
          .Build();
-      Assert.IsNotNull (request);
+      Assert.IsNotNull(request);
     }
 
     [Test]
     public void TestCreateItemByIdWithSpacesOnlyInLanguageReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Id)
-         .ItemTemplatePath("Some template") 
+         .ItemTemplatePath("Some template")
          .ItemName("Item with empty language")
          .Language("  ")
          .Build());

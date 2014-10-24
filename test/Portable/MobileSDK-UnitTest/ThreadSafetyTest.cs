@@ -1,16 +1,12 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
-  using Sitecore.MobileSDK.Items;
-
-  using Sitecore.MobileSDK.API.Request.Parameters;
-
   using Sitecore.MobileSDK;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
 
   [TestFixture]
   public class ThreadSafetyTest
@@ -144,9 +140,9 @@
 
       IPagingParameters pagingSettings = null;
       ReadItemsByIdParameters request = new ReadItemsByIdParameters(
-        sessionSettings, 
-        defaultSource, 
-        queryParameters, 
+        sessionSettings,
+        defaultSource,
+        queryParameters,
         pagingSettings,
         "{aaaa-aa-bb}");
       var otherRequest = request.DeepCopyGetItemByIdRequest();
@@ -165,10 +161,10 @@
         Assert.AreNotSame(request.QueryParameters, otherRequest.QueryParameters);
       }
     }
-  
+
     [Test]
     public void TestReadItemByIdRequestCopiesPagingOptions()
-    {      
+    {
       var defaultSource = new MutableItemSource("master", "en", 33);
       var sessionSettings = new MutableSessionConfig("localhost", "/sitecore/shell", "v100500");
 
@@ -181,9 +177,9 @@
 
       var pagingSettings = new MutablePagingParameters(1, 10);
       ReadItemsByIdParameters request = new ReadItemsByIdParameters(
-        sessionSettings, 
-        defaultSource, 
-        queryParameters, 
+        sessionSettings,
+        defaultSource,
+        queryParameters,
         pagingSettings,
         "{aaaa-aa-bb}");
       var otherRequest = request.DeepCopyGetItemByIdRequest();
@@ -202,7 +198,7 @@
 
     [Test]
     public void TestReadItemPathRequestCopiesPagingOptions()
-    {      
+    {
       var defaultSource = new MutableItemSource("master", "en", 33);
       var sessionSettings = new MutableSessionConfig("localhost", "/sitecore/shell", "v100500");
 
@@ -215,9 +211,9 @@
 
       var pagingSettings = new MutablePagingParameters(1, 10);
       ReadItemByPathParameters request = new ReadItemByPathParameters(
-        sessionSettings, 
-        defaultSource, 
-        queryParameters, 
+        sessionSettings,
+        defaultSource,
+        queryParameters,
         pagingSettings,
         "/x/y/z");
       var otherRequest = request.DeepCopyGetItemByPathRequest();
@@ -236,7 +232,7 @@
 
     [Test]
     public void TestReadItemQueryRequestCopiesPagingOptions()
-    {      
+    {
       var defaultSource = new MutableItemSource("master", "en", 33);
       var sessionSettings = new MutableSessionConfig("localhost", "/sitecore/shell", "v100500");
 
@@ -249,9 +245,9 @@
 
       var pagingSettings = new MutablePagingParameters(1, 10);
       ReadItemByQueryParameters request = new ReadItemByQueryParameters(
-        sessionSettings, 
-        defaultSource, 
-        queryParameters, 
+        sessionSettings,
+        defaultSource,
+        queryParameters,
         pagingSettings,
         "/x/y/z");
       var otherRequest = request.DeepCopyGetItemByQueryRequest();

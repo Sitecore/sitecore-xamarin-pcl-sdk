@@ -1,14 +1,11 @@
-﻿
-
-namespace Sitecore.MobileSdkUnitTest
+﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
   using System.IO;
   using System.Text;
-  using System.Xml;
   using System.Threading;
   using System.Threading.Tasks;
-
+  using System.Xml;
   using NUnit.Framework;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.PublicKey;
@@ -45,7 +42,7 @@ namespace Sitecore.MobileSdkUnitTest
       TestDelegate action = () =>
       {
         string invalidXml = "<RSAKeyValue><Modus>0jvvnZgV2r8hlQ6rPIFcoQxJntKBnu3dsmPVzv+diFpkEHrQxX1XRz3KK2f4EBqXASEXFQrluJda7c0d82p76HFjcORGqF5/iTvnlEXotzgy+dAa4BGYa//LNp4DFOipfdvGQlN7lZJyRZqaXGVryueyBHK6MiT6KPcoDmZNZN8=</Modulus><Exponent>AQAB<xponensdadt></RSAKeyValue>";
-        using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(invalidXml)) )
+        using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(invalidXml)))
         {
           this.parser.Parse(xmlStream, CancellationToken.None);
         }
@@ -85,13 +82,13 @@ namespace Sitecore.MobileSdkUnitTest
     {
       TestDelegate testAction = async () =>
       {
-        var cancel = new CancellationTokenSource ();
+        var cancel = new CancellationTokenSource();
         using (Stream xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(VALID_PUBLIC_KEY_XML)))
         {
-          Task<PublicKeyX509Certificate> action = Task.Factory.StartNew( ()=> 
+          Task<PublicKeyX509Certificate> action = Task.Factory.StartNew(() =>
           {
             int millisecondTimeout = 10;
-            Thread.Sleep(millisecondTimeout);    
+            Thread.Sleep(millisecondTimeout);
 
             return this.parser.Parse(xmlStream, cancel.Token);
           });

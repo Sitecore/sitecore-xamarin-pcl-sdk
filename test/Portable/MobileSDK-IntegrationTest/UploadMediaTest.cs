@@ -12,7 +12,6 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
 
-
   [TestFixture]
   public class UploadMediaTest
   {

@@ -1,16 +1,12 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
-  using System;
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
+  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.Items;
-
-
 
   [TestFixture]
   public class HashedUrlRequestBuilderTest

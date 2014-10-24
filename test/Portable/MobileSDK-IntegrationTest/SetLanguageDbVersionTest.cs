@@ -44,25 +44,25 @@
       const string Db = "web";
       const string Language = "da";
       var itemSource = new ItemSource(Db, Language, 1);
-      using 
+      using
       (
-        var session = this.CreateAdminSession (itemSource)
+        var session = this.CreateAdminSession(itemSource)
       )
       {
-        var response = await this.GetHomeItem (session);
+        var response = await this.GetHomeItem(session);
 
-        testData.AssertItemsCount (1, response);
-        ISitecoreItem resultItem = response [0];
-        Assert.AreEqual (testData.Items.Home.Id, resultItem.Id);
-        testData.AssertItemSourcesAreEqual (itemSource, resultItem.Source);
-        Assert.AreEqual ("", resultItem ["Title"].RawValue);
+        testData.AssertItemsCount(1, response);
+        ISitecoreItem resultItem = response[0];
+        Assert.AreEqual(testData.Items.Home.Id, resultItem.Id);
+        testData.AssertItemSourcesAreEqual(itemSource, resultItem.Source);
+        Assert.AreEqual("", resultItem["Title"].RawValue);
       }
     }
 
     [Test]
     public async void TestGetItemWithNullLanguage()
     {
-      using 
+      using
       (
         var session =
           SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
@@ -84,7 +84,7 @@
     [Test]
     public async void TestGetItemWithNullDb()
     {
-      using 
+      using
       (
         var session =
           SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
@@ -107,7 +107,7 @@
     public async void TestGetItemWithMasterDb()
     {
       const string Db = "master";
-      using 
+      using
       (
         var session = this.CreateAdminSession()
       )
@@ -136,7 +136,7 @@
     public async void TestGetItemWithWebCaseInsensetive()
     {
       const string Db = "wEB";
-      using 
+      using
       (
         var session = this.CreateAdminSession()
       )
@@ -155,7 +155,7 @@
     public async void TestGetItemWithCoreDbLanguageAndVersion()
     {
       const string Db = "CoRE";
-      using 
+      using
       (
         var session = this.CreateAdminSession()
       )
@@ -184,7 +184,7 @@
       const int Version = 12;
 
       var itemSource = new ItemSource(Db, Language, Version);
-      using 
+      using
       (
         var session = this.CreateAdminSession(itemSource)
       )
@@ -209,7 +209,7 @@
       const int Version = 12;
 
       var itemSource = new ItemSource(Db, Language, Version);
-      using 
+      using
       (
         var session = this.CreateAdminSession(itemSource)
       )
@@ -231,7 +231,7 @@
     {
       const string Database = "new_database";
       var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id).Database(Database);
-      using 
+      using
       (
         var session = this.CreateAdminSession()
       )
@@ -248,7 +248,7 @@
         Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
         Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Database + "']"));
       }
-      }
+    }
 
     [Test]
     public async void TestGetItemWithInvalidLanguage()
@@ -257,7 +257,7 @@
       const string Language = "#%^^&";
 
       var itemSource = new ItemSource(Db, Language);
-      using 
+      using
       (
         var session = this.CreateAdminSession(itemSource)
       )
@@ -280,7 +280,7 @@
       const string Db = "@#er$#";
       const string Language = "da";
       var itemSource = new ItemSource(Db, Language);
-      using 
+      using
       (
         var session = this.CreateAdminSession(itemSource)
       )
@@ -296,13 +296,13 @@
         Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
         Assert.True(exception.InnerException.Message.Contains("Could not find configuration node: databases/database[@id='" + Db + "']"));
       }
-      }
+    }
 
     [Test]
     public async void TestGetItemWithShellSite()
     {
       var site = testData.ShellSite;
-      using 
+      using
       (
         var session = this.CreateCreatorexSession(site)
       )
@@ -317,7 +317,7 @@
     public async void TestGetItemWithWebSite()
     {
       const string Site = "/";
-      using 
+      using
       (
         var session = this.CreateCreatorexSession(Site)
       )
@@ -334,7 +334,7 @@
     public async void TestGetItemWithShellSiteWithoutDomain()
     {
       const string Site = "/";
-      using 
+      using
       (
         var session = this.CreateCreatorexSession(Site)
       )
@@ -358,7 +358,7 @@
     public void TestGetItemWithInvalidSiteReturnsException()
     {
       const string Site = "/@$%/";
-      using 
+      using
       (
         var session = this.CreateCreatorexSession(Site)
       )
