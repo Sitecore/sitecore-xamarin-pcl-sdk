@@ -108,20 +108,19 @@
     <Compile Include="iOS_PasswordStorageTest.cs" />
   </ItemGroup>
   <Import Project="..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems')" />
-  <Import Project="..\..\..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems" Label="Shared" Condition="Exists('..\..\..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
-      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
-      <Name>SitecoreMobileSDK</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj">
-      <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
-      <Name>SitecoreMobileSDK-MockObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj">
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
       <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
-      <Name>SitecoreMobileSdkPasswordProvider</Name>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
+      <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
+      <Name>Sitecore.MobileSDK.MockObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
+      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
+      <Name>Sitecore.MobileSDK</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\SecureStringPasswordProvider-iOS.csproj">
       <Project>{E4FA0E8C-90C5-472D-8264-2D026CCB3D4E}</Project>

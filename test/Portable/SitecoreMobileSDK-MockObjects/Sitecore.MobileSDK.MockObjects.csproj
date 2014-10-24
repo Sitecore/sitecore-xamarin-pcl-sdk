@@ -33,20 +33,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MockGetItemsByQueryParameters.cs" />
-    <Compile Include="MockReadItemByIdParameters.cs" />
-    <Compile Include="MockReadItemByPathParameters.cs" />
-    <Compile Include="FunctionTracer.cs" />
-    <Compile Include="MutableItemSource.cs" />
-    <Compile Include="MutableSessionConfig.cs" />
-    <Compile Include="MockMutableMediaOptions.cs" />
-    <Compile Include="MutableMediaLibrarySettings.cs" />
-    <Compile Include="MutableWebApiCredentialsPOD.cs" />
-    <Compile Include="LegacyConstants.cs" />
-    <Compile Include="NoThrowWebApiSession.cs" />
-    <Compile Include="WebApiCredentialsPOD.cs" />
-    <Compile Include="MutablePagingParameters.cs" />
   </ItemGroup>
+  <Import Project="..\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems" Label="Shared" Condition="Exists('..\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
