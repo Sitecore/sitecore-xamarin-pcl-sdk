@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3A35C7C2-2188-4365-8156-A1CC78A48253}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IntegrationTest_Desktop_NuGet</RootNamespace>
+    <AssemblyName>IntegrationTest-Desktop-NuGet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\solutions\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\AuthenticateTest.cs">
+      <Link>Tests\AuthenticateTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\BuildSessionTest.cs">
+      <Link>Tests\BuildSessionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CancelOperationsTest.cs">
+      <Link>Tests\CancelOperationsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateFromBranchTest.cs">
+      <Link>Tests\CreateFromBranchTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateItemsTest.cs">
+      <Link>Tests\CreateItemsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CryptorConstructionTest.cs">
+      <Link>Tests\CryptorConstructionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\DeleteItemsTest.cs">
+      <Link>Tests\DeleteItemsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetFieldsTest.cs">
+      <Link>Tests\GetFieldsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsTest.cs">
+      <Link>Tests\GetItemsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsWithScopeTest.cs">
+      <Link>Tests\GetItemsWithScopeTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsTest.cs">
+      <Link>Tests\GetMediaItemsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsWithHashesTest.cs">
+      <Link>Tests\GetMediaItemsWithHashesTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetPublicKeyTest.cs">
+      <Link>Tests\GetPublicKeyTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetRenderingHTMLTest.cs">
+      <Link>Tests\GetRenderingHTMLTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\OperationCancelTest.cs">
+      <Link>Tests\OperationCancelTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ReadPagedItemsTest.cs">
+      <Link>Tests\ReadPagedItemsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ScTestApiSession.cs">
+      <Link>Tests\ScTestApiSession.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\SetDefaultSessionSettingsTest.cs">
+      <Link>Tests\SetDefaultSessionSettingsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\SetLanguageDbVersionTest.cs">
+      <Link>Tests\SetLanguageDbVersionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\TestEnvironment.cs">
+      <Link>Tests\TestEnvironment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ThreadSafetyTest.cs">
+      <Link>Tests\ThreadSafetyTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\FunctionTracer.cs">
+      <Link>Mocks\FunctionTracer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\LegacyConstants.cs">
+      <Link>Mocks\LegacyConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockGetItemsByQueryParameters.cs">
+      <Link>Mocks\MockGetItemsByQueryParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockMutableMediaOptions.cs">
+      <Link>Mocks\MockMutableMediaOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockReadItemByIdParameters.cs">
+      <Link>Mocks\MockReadItemByIdParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockReadItemByPathParameters.cs">
+      <Link>Mocks\MockReadItemByPathParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableItemSource.cs">
+      <Link>Mocks\MutableItemSource.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableMediaLibrarySettings.cs">
+      <Link>Mocks\MutableMediaLibrarySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutablePagingParameters.cs">
+      <Link>Mocks\MutablePagingParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableSessionConfig.cs">
+      <Link>Mocks\MutableSessionConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableWebApiCredentialsPOD.cs">
+      <Link>Mocks\MutableWebApiCredentialsPOD.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\NoThrowWebApiSession.cs">
+      <Link>Mocks\NoThrowWebApiSession.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\WebApiCredentialsPOD.cs">
+      <Link>Mocks\WebApiCredentialsPOD.cs</Link>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
