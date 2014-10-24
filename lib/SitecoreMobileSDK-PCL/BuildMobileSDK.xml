@@ -168,11 +168,11 @@
 	
 	<Exec
 	  Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
-	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\" 
+	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\" 
     IgnoreExitCode="true"/>
 	
 	 <ItemGroup>
-      <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\bin\Release\*.dll" />
+      <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\bin\Release\*.dll" />
     </ItemGroup>
 	
 	<CallTarget Targets="PrepareDeploymentDir"/>
