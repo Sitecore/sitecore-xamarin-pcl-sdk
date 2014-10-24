@@ -128,8 +128,8 @@
       <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
       <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\Sitecore.MobileSDK.PasswordProvider.iOS.csproj">
-      <Project>{E4FA0E8C-90C5-472D-8264-2D026CCB3D4E}</Project>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\Sitecore.MobileSDK.PasswordProvider.iOS.csproj">
+      <Project>{95ED660D-1BF8-4668-A252-A87F0D1240A6}</Project>
       <Name>Sitecore.MobileSDK.PasswordProvider.iOS</Name>
     </ProjectReference>
   </ItemGroup>
