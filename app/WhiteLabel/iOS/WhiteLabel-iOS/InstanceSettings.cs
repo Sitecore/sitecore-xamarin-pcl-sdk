@@ -6,7 +6,7 @@ namespace WhiteLabeliOS
 
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
-  using SecureStringPasswordProvider.iOS;
+  using Sitecore.MobileSDK.PasswordProvider.iOS;
 
   public class InstanceSettings
   {

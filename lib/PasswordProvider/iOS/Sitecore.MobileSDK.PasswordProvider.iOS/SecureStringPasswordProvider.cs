@@ -1,4 +1,4 @@
-﻿namespace SecureStringPasswordProvider.iOS
+﻿namespace Sitecore.MobileSDK.PasswordProvider.iOS
 {
   using System;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
