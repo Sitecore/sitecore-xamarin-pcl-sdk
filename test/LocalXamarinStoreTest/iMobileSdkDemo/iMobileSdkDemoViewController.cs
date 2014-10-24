@@ -10,8 +10,8 @@
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  using SitecoreMobileSdkPasswordProvider.API;
-  using SecureStringPasswordProvider.iOS;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
+  using Sitecore.MobileSDK.PasswordProvider.iOS;
 
 
 
