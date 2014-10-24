@@ -13,25 +13,27 @@ namespace Sitecore.ChunkedUpload
   {
     private Stream resourceStream;
     private IChunkedRequest chunkedRequest;
+    byte[] currentPackageBody;
+    HttpClient httpClient;
 
-    public ChunkedUpload(Stream dataStream, IChunkedRequest chunkedRequest)
+    public ChunkedUpload(Stream dataStream, IChunkedRequest chunkedRequest, HttpClient httpClient)
     {
       this.resourceStream = dataStream;
       this.chunkedRequest = chunkedRequest.ShallowCopy();
+      this.httpClient = httpClient;
     }
 
-    public async void Upload()  
+    public async Task<string> Upload()  
     {
       string formDataBoundary = String.Format("----------{0:N}", Guid.NewGuid());
 
-      int chunkSize = this.chunkedRequest.ChunkSize;
+      byte chunkSize = 255;
       double fullStreamLenght = this.resourceStream.Length;
 
       string fileName = this.chunkedRequest.FileName;  
       int totalChunks = (int)Math.Ceiling(fullStreamLenght / chunkSize); 
 
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
+      string result;
 
       for (int i = 0; i < totalChunks; i++)  
       {  
@@ -41,31 +43,43 @@ namespace Sitecore.ChunkedUpload
 
         byte[] bytes = new byte[length];  
         this.resourceStream.Read(bytes, 0, bytes.Length);  
-        string chunkResult = await ChunkRequest(bytes, httpClient); 
+        result = await AppendPacketBodyWithChunk(bytes); 
 
-        Debug.WriteLine("---===" + i.ToString() + " chunkResult: " + chunkResult);
+        if (result != null)
+        {
+          Debug.WriteLine ("---===" + i.ToString () + " chunkResult: " + result);
+        }
       }  
 
+      return await this.SendLastChunk();
 
     }  
 
-    private async Task<string> ChunkRequest(byte[] buffer, HttpClient httpClient)  
+    private async Task<string> SendLastChunk()
+    {
+      byte[] endLine = {0x0d,0x0a};
+      byte[] nullLine = {0x00};
+
+      byte[] resultBody = new byte[5];
+      int index = 0;
+
+      nullLine.CopyTo(resultBody, index);
+      index += nullLine.Length;
+
+      endLine.CopyTo(resultBody, index);
+      index += endLine.Length;
+
+      endLine.CopyTo(resultBody, index);
+      index += endLine.Length;
+
+      this.AppendPacketBodyWithBytes(resultBody);
+
+      return await this.SendRequestWithCurrentBody ();
+    }
+
+    private async Task<string> AppendPacketBodyWithChunk(byte[] buffer)  
     {  
-      Uri url = new Uri (this.chunkedRequest.RequestUrl);
-
-      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
-
-      MultipartFormDataContent multiPartContent = new MultipartFormDataContent();
-
-      result.Headers.Add ("X-Scitemwebapi-Username", "sitecore\\admin");
-      result.Headers.Add ("X-Scitemwebapi-Password", "b");
-      result.Headers.Add ("Transfer-Encoding", "chunked");
-
-
-      ContentDispositionHeaderValue cdHeaderValue = new ContentDispositionHeaderValue("data");
-      cdHeaderValue.FileName = "\"" + this.chunkedRequest.FileName + "\"";
-      cdHeaderValue.Name = "\"datafile\"";
-
+      // one chunk
       byte[] endLine = {0x0d,0x0a};
       byte[] chunkSizeHex = BitConverter.GetBytes(buffer.Length);
       int resultSize = chunkSizeHex.Length + endLine.Length + buffer.Length + endLine.Length;
@@ -82,11 +96,67 @@ namespace Sitecore.ChunkedUpload
       index += buffer.Length;
 
       endLine.CopyTo(resultBody, index);
+      // end one chunk
 
-      Stream stream = new MemoryStream(resultBody);
+      this.AppendPacketBodyWithBytes(resultBody);
+
+      string result = null;
+
+      if (this.currentPackageBody.Length >= this.chunkedRequest.ChunkSize)
+      {
+        result = await this.SendRequestWithCurrentBody ();
+        this.currentPackageBody = null;
+      }
+
+      return result;
+    } 
+         
+    private void AppendPacketBodyWithBytes(byte[] buffer)
+    {
+      if (null == this.currentPackageBody)
+      {
+        this.currentPackageBody = buffer;
+        return;
+      }
+
+      //request body
+      int bodyResultSize = buffer.Length + this.currentPackageBody.Length;
+      byte[] bodyResultArray = new byte[bodyResultSize];
+      this.currentPackageBody.CopyTo(bodyResultArray, 0);
+      buffer.CopyTo(bodyResultArray, this.currentPackageBody.Length);
+      this.currentPackageBody = bodyResultArray;
+    }
+
+    private async Task<string> SendRequestWithCurrentBody()
+    {  
+      Uri url = new Uri (this.chunkedRequest.RequestUrl);
+
+      HttpRequestMessage result = new HttpRequestMessage (HttpMethod.Post, url);
+
+      MultipartFormDataContent multiPartContent = new MultipartFormDataContent ();
+
+
+      result.Headers.Add ("X-Scitemwebapi-Username", "sitecore\\admin");
+      result.Headers.Add ("X-Scitemwebapi-Password", "b");
+
+
+      ContentDispositionHeaderValue cdHeaderValue = new ContentDispositionHeaderValue ("data");
+      cdHeaderValue.FileName = "\"" + this.chunkedRequest.FileName + "\"";
+      cdHeaderValue.Name = "\"datafile\"";
+
+
+//      result.Headers.Add ("Transfer-Encoding", "chunked");
+//      result.Headers.TransferEncodingChunked = true;
+
+//      TransferCodingHeaderValue tcHeaderValue = new TransferCodingHeaderValue ("chunked");
+
+
+      Stream stream = new MemoryStream(this.currentPackageBody);
       StreamContent strContent = new StreamContent(stream);
 
       strContent.Headers.ContentDisposition = cdHeaderValue;
+     
+
       if (null != this.chunkedRequest.ContentType)
       {
         strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(this.chunkedRequest.ContentType);
@@ -94,16 +164,14 @@ namespace Sitecore.ChunkedUpload
       multiPartContent.Add(strContent);
       result.Content = multiPartContent;
 
-
-
-
-
       //SENDING
 
       HttpResponseMessage httpResponse = await httpClient.SendAsync(result);
       return await httpResponse.Content.ReadAsStringAsync();
 
-    } 
+    }
+
+
   }
 }
 
