@@ -317,7 +317,7 @@
 
 	 
 	 <Exec 
-      Command="&quot;$(NugetExe)&quot; pack SitecoreMobileSdkPasswordProviderInterface.nuspec"
+      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.Interface.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0.nupkg"
@@ -330,7 +330,7 @@
 	 
 
     <Exec 
-      Command="&quot;$(NugetExe)&quot; pack SitecoreMobileSdkPasswordProvider.nuspec"
+      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.0.nupkg"
