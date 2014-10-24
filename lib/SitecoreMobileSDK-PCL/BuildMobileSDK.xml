@@ -167,7 +167,7 @@
     <Message Text="Building PasswordProvider For iOS..." />
 	
 	<Exec
-	  Command="&quot;$(MSBuildExe)&quot; SecureStringPasswordProvider-iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
+	  Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
 	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\" 
     IgnoreExitCode="true"/>
 	
