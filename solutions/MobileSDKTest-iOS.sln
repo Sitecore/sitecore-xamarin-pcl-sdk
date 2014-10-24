@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PasswordProvider", "Passwor
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SecureStringPasswordProvider", "..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.shproj", "{25A7AAE3-E76A-4C4F-AA0E-24983166C37D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureStringPasswordProvider-iOS", "..\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\SecureStringPasswordProvider-iOS.csproj", "{E4FA0E8C-90C5-472D-8264-2D026CCB3D4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.iOS", "..\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\Sitecore.MobileSDK.PasswordProvider.iOS.csproj", "{E4FA0E8C-90C5-472D-8264-2D026CCB3D4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Interface", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
 EndProject
