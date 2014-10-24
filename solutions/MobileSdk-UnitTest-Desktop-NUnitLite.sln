@@ -1,10 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.MockObjects", "..\test\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj", "{B99EEE93-6176-438F-B601-E0382545166A}"
-EndProject
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest-Desktop-NUnitLite", "..\test\Desktop-NunitLite\UnitTest-Desktop-NUnitLite\UnitTest-Desktop-NUnitLite.csproj", "{458B812E-CBDC-45D5-89FE-DC7791D8EDBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Windows", "..\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\Sitecore.MobileSDK.PasswordProvider.Windows.csproj", "{6A895746-B2EA-4865-AE55-89AEC075EFAC}"
@@ -19,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{458B812E-CBDC-45D5-89FE-DC7791D8EDBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{458B812E-CBDC-45D5-89FE-DC7791D8EDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{458B812E-CBDC-45D5-89FE-DC7791D8EDBB}.Release|Any CPU.ActiveCfg = Release|Any CPU

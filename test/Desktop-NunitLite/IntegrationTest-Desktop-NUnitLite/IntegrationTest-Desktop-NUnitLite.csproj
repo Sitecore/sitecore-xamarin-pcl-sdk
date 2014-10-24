@@ -175,10 +175,6 @@
       <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
       <Name>Sitecore.MobileSDK</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
-      <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
-      <Name>Sitecore.MobileSDK.MockObjects</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
