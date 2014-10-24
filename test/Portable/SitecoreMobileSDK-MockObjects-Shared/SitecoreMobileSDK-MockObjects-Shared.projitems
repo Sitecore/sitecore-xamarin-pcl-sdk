@@ -6,7 +6,7 @@
     <SharedGUID>{8007ADBC-4501-447F-BE99-E628A481BB3F}</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>SitecoreMobileSDK-MockObjects-Shared</Import_RootNamespace>
+    <Import_RootNamespace>Sitecore.MobileSDK.MockObjects</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)FunctionTracer.cs" />

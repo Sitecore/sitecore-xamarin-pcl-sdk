@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.Password
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Interface", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SitecoreMobileSDK-MockObjects-Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sitecore.MobileSDK.MockObjects.Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\Sitecore.MobileSDK.MockObjects.Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK", "..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
 EndProject
