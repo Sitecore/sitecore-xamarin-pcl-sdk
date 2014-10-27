@@ -54,7 +54,7 @@
       <HintPath>packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>packages\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
+      <HintPath>packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Windows">
       <HintPath>packages\Sitecore.MobileSDK.PasswordProvider.1.0.0\lib\net4\Sitecore.MobileSDK.PasswordProvider.Windows.dll</HintPath>
