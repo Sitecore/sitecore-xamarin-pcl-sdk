@@ -70,43 +70,55 @@ cd "$LAUNCH_DIR"
 
 
 
-echo "===========Run_Unit_Tests==========="
-DEVICE_NAME="1"
-
-"$MTOUCH_EXE" \
-  --devname="$DEVICE_NAME" \
-  --installdev "$UNIT_TEST_APP"
-
-"$MTOUCH_EXE" \
-  --devname="$DEVICE_NAME" \
-  --killdev "$UNIT_TEST_APP_BUNDLE_ID"
 
 
-"$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE"   \
-  --autoexit                              \
-  --port=16390                            \
-  --launchdev="$UNIT_TEST_APP_BUNDLE_ID"  \
-  --devname="$DEVICE_NAME"                \
-  --logfile="$DEPLOYMENT_DIR/UnitTestReport-Device.xml"
+RAW_DEVICES="1;3"
+DEVICE_LIST=$(echo "$RAW_DEVICES" | tr ";" "\n")
+
+for DEVICE_NAME in $DEVICE_LIST
+do
+  echo "===========[BEGIN]Unit_Tests_for_device_[$DEVICE_NAME]==========="
+  "$MTOUCH_EXE" \
+    --devname="$DEVICE_NAME" \
+    --installdev "$UNIT_TEST_APP"
+
+  "$MTOUCH_EXE" \
+    --devname="$DEVICE_NAME" \
+    --killdev "$UNIT_TEST_APP_BUNDLE_ID"
+
+
+  "$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE"   \
+    --autoexit                              \
+    --port=16390                            \
+    --launchdev="$UNIT_TEST_APP_BUNDLE_ID"  \
+    --devname="$DEVICE_NAME"                \
+    --logfile="$DEPLOYMENT_DIR/UnitTestReport-Device-$DEVICE_NAME.xml"  
+  echo "===========[END]Unit_Tests_for_device_[$DEVICE_NAME]==========="
+done
+
+
+# DEVICE_NAME="1"
 
 
 
-echo "===========Run_Integraation_Tests==========="
-"$MTOUCH_EXE" \
-  --devname="$DEVICE_NAME" \
-  --installdev "$INTEGRATION_TEST_APP"
-
-"$MTOUCH_EXE" \
-  --devname="$DEVICE_NAME" \
-  --killdev "$INTEGRATION_TEST_APP_BUNDLE_ID"
 
 
-"$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE"       \
-  --autoexit                                   \
-  --port=16391                                  \
-  --launchdev="$INTEGRATION_TEST_APP_BUNDLE_ID"  \
-  --devname="$DEVICE_NAME"                        \
-  --logfile="$DEPLOYMENT_DIR/IntegrationTestReport-Device.xml"
+# echo "===========Run_Integraation_Tests==========="
+# "$MTOUCH_EXE" \
+#   --devname="$DEVICE_NAME" \
+#   --installdev "$INTEGRATION_TEST_APP"
+
+# "$MTOUCH_EXE" \
+#   --devname="$DEVICE_NAME" \
+#   --killdev "$INTEGRATION_TEST_APP_BUNDLE_ID"
+
+
+# "$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE"       \
+#   --autoexit                                   \
+#   --port=16391                                  \
+#   --launchdev="$INTEGRATION_TEST_APP_BUNDLE_ID"  \
+#   --devname="$DEVICE_NAME"                        \
+#   --logfile="$DEPLOYMENT_DIR/IntegrationTestReport-Device.xml"
 
 
 
