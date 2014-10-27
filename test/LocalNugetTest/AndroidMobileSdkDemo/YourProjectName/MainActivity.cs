@@ -13,7 +13,7 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Items;
 
-  using SecureStringPasswordProvider.Android;
+  using Sitecore.MobileSDK.PasswordProvider.Android;
 
   [Activity(Label = "YourProjectName", MainLauncher = true, Icon = "@drawable/icon")]
   public class MainActivity : Activity
