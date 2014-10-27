@@ -72,7 +72,9 @@ cd "$LAUNCH_DIR"
 
 
 
-RAW_DEVICES="1;3"
+# RAW_DEVICES="1;3"
+
+RAW_DEVICES=$1
 DEVICE_LIST=$(echo "$RAW_DEVICES" | tr ";" "\n")
 
 for DEVICE_NAME in $DEVICE_LIST
