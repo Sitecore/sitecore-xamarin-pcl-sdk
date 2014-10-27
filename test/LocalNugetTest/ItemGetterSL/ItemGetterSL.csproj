@@ -80,7 +80,7 @@
       <HintPath>packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>packages\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
+      <HintPath>packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations, Version=5.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217, processorArchitecture=MSIL" />
     <Reference Include="System.IO">
@@ -92,7 +92,8 @@
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives">
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime">

@@ -10,8 +10,6 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   using Sitecore.MobileSDK.PasswordProvider.Windows;
-  using Sitecore.MobileSDK.PasswordProvider.Interface;
-
 
   class Program
   {

@@ -25,7 +25,7 @@ namespace MobileSDKSample
 
       string instanceUrl = "http://my.site.com";
 
-      using (var credentials = new SecureStringPasswordProvider.Android.SecureStringPasswordProvider("login", "password"))
+      using (var credentials = new SecureStringPasswordProvider("login", "password"))
       using (
         var session =
           SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
