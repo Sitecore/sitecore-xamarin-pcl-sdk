@@ -316,19 +316,6 @@
      />
 
 	 
-	 <Exec 
-      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.Interface.nuspec"
-      WorkingDirectory="$(ScriptsDirectory)\nuget" />
-    <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0.nupkg"
-      DestinationFolder="$(DeploymentDirectory)"
-     />
-	 <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0.nupkg"
-      DestinationFolder="$(LocalNugetRepoDirectory)"
-     />
-	 
-
     <Exec 
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
