@@ -10,13 +10,19 @@ DEPLOYMENT_DIR="$REPOSITORY_ROOT/deployment"
 SOLUTIONS_DIR="$REPOSITORY_ROOT/solutions"
 
 
-INTEGRATION_TEST_APP="$REPOSITORY_ROOT/test/iOS/MobileSDK-IntegrationTest-iOS/bin/iPhoneSimulator/Release/MobileSDKIntegrationTestiOS.app"
-UNIT_TEST_APP="$REPOSITORY_ROOT/test/iOS/MobileSDKUnitTest-iOS/bin/iPhoneSimulator/Release/MobileSDKUnitTestiOS.app"
+INTEGRATION_TEST_APP="$REPOSITORY_ROOT/test/iOS/MobileSDK-IntegrationTest-iOS/bin/iPhone/Release/MobileSDKIntegrationTestiOS.app"
+INTEGRATION_TEST_APP_BUNDLE_ID="net.sitecore.MobileSDKIntegrationTestiOS"
+
+UNIT_TEST_APP="$REPOSITORY_ROOT/test/iOS/MobileSDKUnitTest-iOS/bin/iPhone/Release/MobileSDKUnitTestiOS.app"
+UNIT_TEST_APP_BUNDLE_ID="net.sitecore.MobileSDKUnitTestiOS"
 
 
 TEST_REPORT_RECEIVER_EXE="$SCRIPTS_DIR/Touch.Server.exe"
 MDTOOL_EXE="/Applications/Xamarin Studio.app/Contents/MacOS/mdtool"
 MONO_EXE=mono
+MTOUCH_EXE="/Developer/MonoTouch/usr/bin/mtouch"
+
+
 
 
 echo "===========Environment==========="
@@ -33,6 +39,7 @@ echo "UNIT_TEST_APP - $UNIT_TEST_APP"
 echo "TEST_REPORT_RECEIVER_EXE - $TEST_REPORT_RECEIVER_EXE"
 echo "MDTOOL_EXE - $MDTOOL_EXE"
 echo "MONO_EXE - $MONO_EXE"
+echo "MTOUCH_EXE - $MTOUCH_EXE"
 
 
 
@@ -64,20 +71,42 @@ cd "$LAUNCH_DIR"
 
 
 echo "===========Run_Unit_Tests==========="
-"$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE" \
-  --autoexit                            \
-  --port=16390                          \
-  --launchsim="$UNIT_TEST_APP"          \
-  --logfile="$DEPLOYMENT_DIR/UnitTestReport.xml"
+DEVICE_NAME="2"
+
+"$MTOUCH_EXE" \
+  --devname="$DEVICE_NAME" \
+  --installdev "$UNIT_TEST_APP"
+
+"$MTOUCH_EXE" \
+  --devname="$DEVICE_NAME" \
+  --killdev "$UNIT_TEST_APP_BUNDLE_ID"
+
+
+"$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE"   \
+  --autoexit                              \
+  --port=16390                            \
+  --launchdev="$UNIT_TEST_APP_BUNDLE_ID"  \
+  --devname="$DEVICE_NAME"                \
+  --logfile="$DEPLOYMENT_DIR/UnitTestReport-Device.xml"
 
 
 
 echo "===========Run_Integraation_Tests==========="
-"$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE" \
-  --autoexit                            \
-  --port=16391                          \
-  --launchsim="$INTEGRATION_TEST_APP"   \
-  --logfile="$DEPLOYMENT_DIR/IntegrationTestReport.xml"
+"$MTOUCH_EXE" \
+  --devname="$DEVICE_NAME" \
+  --installdev "$INTEGRATION_TEST_APP"
+
+"$MTOUCH_EXE" \
+  --devname="$DEVICE_NAME" \
+  --killdev "$INTEGRATION_TEST_APP_BUNDLE_ID"
+
+
+"$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE"       \
+  --autoexit                                   \
+  --port=16391                                  \
+  --launchdev="$INTEGRATION_TEST_APP_BUNDLE_ID"  \
+  --devname="$DEVICE_NAME"                        \
+  --logfile="$DEPLOYMENT_DIR/IntegrationTestReport-Device.xml"
 
 
 
