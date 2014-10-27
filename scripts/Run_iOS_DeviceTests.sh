@@ -71,7 +71,7 @@ cd "$LAUNCH_DIR"
 
 
 echo "===========Run_Unit_Tests==========="
-DEVICE_NAME="2"
+DEVICE_NAME="1"
 
 "$MTOUCH_EXE" \
   --devname="$DEVICE_NAME" \
