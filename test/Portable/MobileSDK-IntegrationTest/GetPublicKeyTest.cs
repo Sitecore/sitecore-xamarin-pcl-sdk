@@ -1,14 +1,11 @@
 ﻿namespace MobileSDKIntegrationTest
 {
-  using NUnit.Framework;
   using System;
-
-  using MobileSDKUnitTest.Mock;
-
+  using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.MockObjects;
 
   [TestFixture]
   public class GetPublicKeyTest
@@ -154,25 +151,25 @@
     [Test]
     public void TestGetItemAsAnonymousWithoutReadAccessReturnsError()
     {
-      using 
+      using
       (
-        var session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost (testData.InstanceUrl)
-        .DefaultDatabase ("web")
-        .DefaultLanguage ("en")
-        .Site (testData.ShellSite)
-        .BuildReadonlySession ()
+        var session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
+        .DefaultDatabase("web")
+        .DefaultLanguage("en")
+        .Site(testData.ShellSite)
+        .BuildReadonlySession()
       )
       {
         TestDelegate testCode = async () =>
         {
-          var task = session.ReadItemAsync (this.requestWithItemId);
+          var task = session.ReadItemAsync(this.requestWithItemId);
           await task;
         };
-        Exception exception = Assert.Throws<ParserException> (testCode);
+        Exception exception = Assert.Throws<ParserException>(testCode);
 
         Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-        Assert.AreEqual ("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType ().ToString ());
-        Assert.True (exception.InnerException.Message.Contains ("Access to site is not granted."));
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
       }
     }
   }

@@ -7,7 +7,7 @@
   using MonoTouch.Foundation;
   using MonoTouch.UIKit;
   using Sitecore.MobileSDK.API;
-  using SecureStringPasswordProvider.iOS;
+  using Sitecore.MobileSDK.PasswordProvider.iOS;
 
   public partial class AuthViewController : BaseTaskViewController
   {

@@ -5,7 +5,7 @@ namespace WhiteLabelAndroid.Activities
   using Android.Views;
   using Android.Widget;
 
-  using SecureStringPasswordProvider.Android;
+  using Sitecore.MobileSDK.PasswordProvider.Android;
   using Sitecore.MobileSDK.API;
 
   [Activity]

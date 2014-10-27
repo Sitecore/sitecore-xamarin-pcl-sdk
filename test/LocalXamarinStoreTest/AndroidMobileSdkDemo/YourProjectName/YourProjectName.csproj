@@ -41,12 +41,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="SecureStringPasswordProvider-Android">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\SecureStringPasswordProvider-Android.dll</HintPath>
-    </Reference>
-    <Reference Include="SitecoreMobileSdkPasswordProvider">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\SitecoreMobileSdkPasswordProvider.dll</HintPath>
-    </Reference>
     <Reference Include="crypto">
       <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\crypto.dll</HintPath>
     </Reference>
@@ -61,6 +55,12 @@
     </Reference>
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\Sitecore.MobileSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Android">
+      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\Sitecore.MobileSDK.PasswordProvider.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
+      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
       <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\android\System.IO.dll</HintPath>

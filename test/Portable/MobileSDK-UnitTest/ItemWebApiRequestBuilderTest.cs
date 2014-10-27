@@ -1,10 +1,9 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
-  using System.Linq;
   using System.Collections.Generic;
+  using System.Linq;
   using NUnit.Framework;
-
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Parameters;

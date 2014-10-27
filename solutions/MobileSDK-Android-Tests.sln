@@ -1,15 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{35799CB2-AD21-4004-AAA6-5D8B7767CECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK", "..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK-MockObjects", "..\test\Portable\SitecoreMobileSDK-MockObjects\SitecoreMobileSDK-MockObjects.csproj", "{B99EEE93-6176-438F-B601-E0382545166A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.MockObjects", "..\test\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj", "{B99EEE93-6176-438F-B601-E0382545166A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSdkPasswordProvider", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\SitecoreMobileSdkPasswordProvider.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Interface", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SecureStringPasswordProvider", "..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.shproj", "{25A7AAE3-E76A-4C4F-AA0E-24983166C37D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sitecore.MobileSDK.MockObjects.Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\Sitecore.MobileSDK.MockObjects.Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Android", "..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\Sitecore.MobileSDK.PasswordProvider.Android.csproj", "{8578D879-0661-4986-A37C-D37538458981}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{46462244-D5D8-44B6-A46E-5EA74117B523}"
 EndProject
@@ -22,8 +28,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{40853BAA-B317-4F6B-9F40-C55A529BD583}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.shproj", "{8A52A2A6-20A1-42BD-B586-242F77089B1D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureStringPasswordProvider-Android", "..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\SecureStringPasswordProvider-Android.csproj", "{8578D879-0661-4986-A37C-D37538458981}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Unit-Tests", "..\test\Android\MobileSDK-Android-Unit-Tests\MobileSDK-Android-Unit-Tests.csproj", "{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}"
 EndProject
@@ -43,6 +47,7 @@ Global
 		{8578D879-0661-4986-A37C-D37538458981}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -55,10 +60,7 @@ Global
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
@@ -67,15 +69,27 @@ Global
 		{B99EEE93-6176-438F-B601-E0382545166A} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
 		{25A7AAE3-E76A-4C4F-AA0E-24983166C37D} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
+		{8007ADBC-4501-447F-BE99-E628A481BB3F} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
+		{8578D879-0661-4986-A37C-D37538458981} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
 		{F4684840-46F5-4BED-9E05-A2C45C381BE2} = {46462244-D5D8-44B6-A46E-5EA74117B523}
 		{40853BAA-B317-4F6B-9F40-C55A529BD583} = {46462244-D5D8-44B6-A46E-5EA74117B523}
 		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
 		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
-		{8578D879-0661-4986-A37C-D37538458981} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
 		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ..\test\Android\MobileSDK-Android-Unit-Tests\MobileSDK-Android-Unit-Tests.csproj
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8dd5feee-1ed8-4f6d-a388-133e1f823811}*SharedItemsImports = 4
+		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8a52a2a6-20a1-42bd-b586-242f77089b1d}*SharedItemsImports = 13
+		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{25a7aae3-e76a-4c4f-aa0e-24983166c37d}*SharedItemsImports = 13
+		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{2b6ef2c4-3ae1-414b-8833-3a0d25a0afb0}*SharedItemsImports = 13
+		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{8578d879-0661-4986-a37c-d37538458981}*SharedItemsImports = 4
+		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{e7a0d5ec-7424-4e3b-bab3-c66ebfd2c21a}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

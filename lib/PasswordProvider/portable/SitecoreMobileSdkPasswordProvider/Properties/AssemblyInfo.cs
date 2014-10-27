@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("SitecoreMobileSdkPasswordProvider")]
+[assembly: AssemblyTitle("Sitecore.MobileSDK.PasswordProvider.Interface")]
 [assembly: AssemblyDescription("Password Storage Interfaces for Sitecore Mobile SDK")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sitecore Corporation")]

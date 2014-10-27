@@ -13,7 +13,7 @@
     [Test]
     public void TestPagingSettingsCanBeCalledOnlyOnce()
     {
-      Assert.Throws<InvalidOperationException>( ()=>
+      Assert.Throws<InvalidOperationException>(() =>
       {
         ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/A/B/C/D/E")
           .AddScope(ScopeType.Self)

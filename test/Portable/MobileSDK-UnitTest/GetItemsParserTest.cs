@@ -4,18 +4,13 @@
   using System.Linq;
   using System.Threading;
   using System.Threading.Tasks;
-  using System.Diagnostics;
-
+  // @adk.review : waybe we should we wrap this? 
+  using Newtonsoft.Json;
   using NUnit.Framework;
-
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Fields;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Items.Fields;
-      // @adk.review : waybe we should we wrap this? 
-  using Newtonsoft.Json;
 
   [TestFixture]
   public class GetItemsParserTest
@@ -55,7 +50,7 @@
     public void TestAll20XCodesAreValid()
     {
       string responseBegin = "{\"statusCode\":";
-      string responseEnd   = ",\"result\":{\"totalCount\":0,\"resultCount\":0,\"items\":[]}}";
+      string responseEnd = ",\"result\":{\"totalCount\":0,\"resultCount\":0,\"items\":[]}}";
 
       for (int i = 200; i < 300; ++i)
       {
@@ -118,12 +113,12 @@
     {
       TestDelegate testAction = async () =>
       {
-        var cancel = new CancellationTokenSource ();
+        var cancel = new CancellationTokenSource();
 
-        Task<ScItemsResponse> action = Task.Factory.StartNew( ()=> 
+        Task<ScItemsResponse> action = Task.Factory.StartNew(() =>
         {
           int millisecondTimeout = 10;
-          Thread.Sleep(millisecondTimeout);    
+          Thread.Sleep(millisecondTimeout);
 
           return ScItemsParser.Parse(VALID_RESPONSE, cancel.Token);
         });

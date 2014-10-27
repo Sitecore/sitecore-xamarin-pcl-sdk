@@ -167,12 +167,12 @@
     <Message Text="Building PasswordProvider For iOS..." />
 	
 	<Exec
-	  Command="&quot;$(MSBuildExe)&quot; SecureStringPasswordProvider-iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
-	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\" 
+	  Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
+	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\" 
     IgnoreExitCode="true"/>
 	
 	 <ItemGroup>
-      <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\SecureStringPasswordProvider-iOS\bin\Release\*.dll" />
+      <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\bin\Release\*.dll" />
     </ItemGroup>
 	
 	<CallTarget Targets="PrepareDeploymentDir"/>
@@ -187,7 +187,7 @@
 
 
   <Exec
-    Command="&quot;$(MSBuildExe)&quot; SecureStringPasswordProvider-Android.csproj /t:Build /p:Configuration=Release"
+    Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.Android.csproj /t:Build /p:Configuration=Release"
     WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\" />
 	
 	 <ItemGroup>
@@ -316,21 +316,8 @@
      />
 
 	 
-	 <Exec 
-      Command="&quot;$(NugetExe)&quot; pack SitecoreMobileSdkPasswordProviderInterface.nuspec"
-      WorkingDirectory="$(ScriptsDirectory)\nuget" />
-    <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0.nupkg"
-      DestinationFolder="$(DeploymentDirectory)"
-     />
-	 <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0.nupkg"
-      DestinationFolder="$(LocalNugetRepoDirectory)"
-     />
-	 
-
     <Exec 
-      Command="&quot;$(NugetExe)&quot; pack SitecoreMobileSdkPasswordProvider.nuspec"
+      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.0.nupkg"

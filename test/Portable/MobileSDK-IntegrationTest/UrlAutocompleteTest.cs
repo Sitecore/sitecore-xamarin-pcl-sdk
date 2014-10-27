@@ -1,16 +1,9 @@
 ﻿namespace MobileSDKIntegrationTest
 {
-  using System.Threading.Tasks;
   using NUnit.Framework;
 
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Session;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-
 
   [TestFixture]
   public class UrlAutocompleteTest
@@ -135,7 +128,7 @@
       //    at Sitecore.MobileSDK.ScApiSession.<ReadItemAsync>d__a.MoveNext() in c:\dev\Jenkins\jobs\XamarinSDK-FullBuild\workspace\lib\SitecoreMobileSDK-PCL\ScApiSession.cs:line 215
       using
       (
-        var session = 
+        var session =
           SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
             .Credentials(this.testData.Users.Admin)
             .BuildReadonlySession()

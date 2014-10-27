@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-IntegrationTest-iOS-XamarinStore", "..\test\iOS\MobileSDK-IntegrationTest-iOS-XamarinStore\MobileSDK-IntegrationTest-iOS-XamarinStore.csproj", "{51383445-EE64-4B1A-B859-73F66D316D2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{70AD497B-759C-4FBC-BD70-D46C8C494AF4}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SitecoreMobileSDK-MockObjects-Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.shproj", "{8A52A2A6-20A1-42BD-B586-242F77089B1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKUnitTest-iOS-XamarinStore", "..\test\iOS\MobileSDKUnitTest-iOS-XamarinStore\MobileSDKUnitTest-iOS-XamarinStore.csproj", "{1B8CED85-345F-4022-B4D5-7C23FD6153C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Debug|iPhone.Build.0 = Debug|iPhone
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Release|iPhone.ActiveCfg = Release|iPhone
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Release|iPhone.Build.0 = Release|iPhone
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{1B8CED85-345F-4022-B4D5-7C23FD6153C4}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Debug|iPhone.Build.0 = Debug|iPhone
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Release|iPhone.ActiveCfg = Release|iPhone
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Release|iPhone.Build.0 = Release|iPhone
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{51383445-EE64-4B1A-B859-73F66D316D2E}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8007ADBC-4501-447F-BE99-E628A481BB3F} = {70AD497B-759C-4FBC-BD70-D46C8C494AF4}
+		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {70AD497B-759C-4FBC-BD70-D46C8C494AF4}
+		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {70AD497B-759C-4FBC-BD70-D46C8C494AF4}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\test\iOS\MobileSDKUnitTest-iOS-XamarinStore\MobileSDKUnitTest-iOS-XamarinStore.csproj
+	EndGlobalSection
+EndGlobal

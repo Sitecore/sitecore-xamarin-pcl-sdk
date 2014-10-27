@@ -3,21 +3,15 @@
   using System;
   using System.Collections.Generic;
   using NUnit.Framework;
-
-  using MobileSDKUnitTest.Mock;
-
-  using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.API.Request.Parameters;
-
-  using Sitecore.MobileSDK.SessionSettings;
-
   using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.UserRequest;
+  using Sitecore.MobileSDK.MockObjects;
+  using Sitecore.MobileSDK.SessionSettings;
+  using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
-  using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
+  using Sitecore.MobileSDK.UserRequest;
 
 
   [TestFixture]
@@ -49,7 +43,7 @@
     {
       this.builder = null;
     }
-      
+
     [Test]
     public void TestDefaultHTMLRendering()
     {
@@ -74,7 +68,7 @@
     [Test]
     public void TestHTMLRenderingWithEmptySourceId()
     {
-      TestDelegate action = () =>  ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}");
+      TestDelegate action = () => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}");
       Assert.Throws<ArgumentException>(action);
     }
 
@@ -82,35 +76,35 @@
     public void TestHTMLRenderingWithNullSourceId()
     {
 
-      TestDelegate action = () =>  ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(null, "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}");
+      TestDelegate action = () => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(null, "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}");
       Assert.Throws<ArgumentNullException>(action);
     }
 
     [Test]
     public void TestHTMLRenderingWithEmptyRederingId()
     {
-      TestDelegate action = () =>  ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}", "");
+      TestDelegate action = () => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}", "");
       Assert.Throws<ArgumentException>(action);
     }
 
     [Test]
     public void TestHTMLRenderingWithNullRederingId()
     {
-      TestDelegate action = () =>  ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}", null);
+      TestDelegate action = () => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}", null);
       Assert.Throws<ArgumentNullException>(action);
     }
 
     [Test]
     public void TestHTMLRenderingWithWrongFormatSourceId()
     {
-      TestDelegate action = () =>  ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("dsdfsdfsf", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}");
+      TestDelegate action = () => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("dsdfsdfsf", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}");
       Assert.Throws<ArgumentException>(action);
     }
 
     [Test]
     public void TestHTMLRenderingWithWrongFormatRederingId()
     {
-      TestDelegate action = () =>  ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}", "dfdfdf");
+      TestDelegate action = () => ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}", "dfdfdf");
       Assert.Throws<ArgumentException>(action);
     }
 
@@ -142,11 +136,11 @@
     [Test]
     public void TestDefaultHTMLRenderingwithCustomParameters()
     {
-      Dictionary<string, string> paramDict = new Dictionary<string, string> ();
-      paramDict.Add ("param3", "value3");
-      paramDict.Add ("param4", "value4");
+      Dictionary<string, string> paramDict = new Dictionary<string, string>();
+      paramDict.Add("param3", "value3");
+      paramDict.Add("param4", "value4");
 
-      IGetRenderingHtmlRequest request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId ("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}")
+      IGetRenderingHtmlRequest request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}")
         .AddRenderingParameterNameValue("param1", "value1")
         .AddRenderingParameterNameValue("param2", "value2")
         .AddRenderingParameterNameValue(paramDict)
@@ -175,7 +169,7 @@
     public void TestDefaultHTMLRenderingCustomParametersIsCaseSensitive()
     {
 
-      IGetRenderingHtmlRequest request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId ("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}")
+      IGetRenderingHtmlRequest request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", "{220D559F-DEA5-42EA-9C1C-8A5DF7E70E22}")
         .AddRenderingParameterNameValue("PaRam", "VALue")
         .Build();
 

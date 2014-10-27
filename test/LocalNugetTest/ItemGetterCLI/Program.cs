@@ -9,8 +9,8 @@
   using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  using SecureStringPasswordProvider.Windows;
-  using SitecoreMobileSdkPasswordProvider.API;
+  using Sitecore.MobileSDK.PasswordProvider.Windows;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
 
 
   class Program

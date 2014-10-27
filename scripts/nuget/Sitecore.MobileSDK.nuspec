@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>Sitecore.MobileSDK.PCL</id>
     <title>Sitecore MobileSDK PCL</title>
@@ -8,31 +8,23 @@
     <owners>Sitecore Corporation</owners>
     <licenseUrl>https://raw.githubusercontent.com/Sitecore/sitecore-ios-sdk/master/license.txt</licenseUrl>
     <projectUrl>http://sdn.sitecore.net/Products/Sitecore%20Mobile%20SDK.aspx</projectUrl>
-
-   <iconUrl>http://s4.uploads.im/S3BR8.png</iconUrl>
-
+    <iconUrl>http://s4.uploads.im/S3BR8.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore.</description>
     <releaseNotes>Initial release with items manipulation support</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Sitecore iOS Android PCL Xamarin</tags>
-
     <dependencies>
-      <dependency id="Sitecore.MobileSDK.PasswordProvider.Interface" version="1.0.0" />
-
-	  <dependency id="Microsoft.Bcl" version="1.1.9" />
-	  <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
-	  <dependency id="Microsoft.Bcl.Build" version="1.0.14" />
-	  <dependency id="Microsoft.Net.Http" version="2.2.22" />
-	  
-      <dependency id="Newtonsoft.Json" version="6.0.3" />
-	  <dependency id="Portable.BouncyCastle" version="1.7.0" />
+      <dependency id="Microsoft.Bcl" version="1.1.9"/>
+      <dependency id="Microsoft.Bcl.Async" version="1.0.168"/>
+      <dependency id="Microsoft.Bcl.Build" version="1.0.14"/>
+      <dependency id="Microsoft.Net.Http" version="2.2.22"/>
+      <dependency id="Newtonsoft.Json" version="6.0.3"/>
+      <dependency id="Portable.BouncyCastle" version="1.7.0"/>
     </dependencies>
   </metadata>
-
-    <files>
-       <file
-		src="..\..\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" 
-		target="lib\portable-win+net4+sl5+wp8\"  />
-    </files>
+  <files>
+    <file src="..\..\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" target="lib\portable-win+net4+sl5+wp8\"/>
+    <file src="..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\bin\Release\Sitecore.MobileSDK.PasswordProvider.Interface.dll" target="lib\portable-win+net4+sl5+wp8\"/>
+  </files>
 </package>
