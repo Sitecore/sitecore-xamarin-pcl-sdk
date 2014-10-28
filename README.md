@@ -74,7 +74,7 @@ They are :
 * Objective-C and Swift - for iOS
 * Java - for Android 
 
-This SDK offers the C# API for both iOS and Android platforms. The downside of this approach is the dependency on the Xamarin toolchain. If you do not want this dependency or you feel more comfortable with the platform specific tools, please use 
+This SDK offers the C# API for both iOS and Android platforms. For this reason we have a dependency on the [Xamarin toolchain](http://xamarin.com/platform). If you do not want this dependency or you feel more comfortable with the platform specific tools, please use 
 
 * [Sitecore Mobile SDK for iOS](https://github.com/sitecore/sitecore-ios-sdk/)
 * [Sitecore Mobile SDK for Android](https://github.com/sitecore/sitecore-android-sdk/)
