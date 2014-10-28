@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MobileSDKIntegrationTest</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)UrlAutocompleteTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UploadMediaTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UpdateItemsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ThreadSafetyTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SetLanguageDbVersionTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SetDefaultSessionSettingsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScTestApiSession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReadPagedItemsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OperationCancelTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetRenderingHTMLTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetPublicKeyTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetMediaItemsWithHashesTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetMediaItemsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetItemsWithScopeTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetItemsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetFieldsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CryptorConstructionTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CreateItemsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CreateFromBranchTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CancelOperationsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BuildSessionTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AuthenticateTest.cs" />
+  </ItemGroup>
+</Project>

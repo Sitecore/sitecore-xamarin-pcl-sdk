@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-IntegrationTest-iOS-NuGet", "..\test\iOS\MobileSDK-IntegrationTest-iOS-NuGet\MobileSDK-IntegrationTest-iOS-NuGet.csproj", "{D11B5CC4-D57E-4000-AC53-723E625122B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{2C70868B-468C-4FA3-B82C-3193AD762AD0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.shproj", "{8A52A2A6-20A1-42BD-B586-242F77089B1D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sitecore.MobileSDK.MockObjects.Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\Sitecore.MobileSDK.MockObjects.Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKUnitTest-iOS-NuGet", "..\test\iOS\MobileSDKUnitTest-iOS-NuGet\MobileSDKUnitTest-iOS-NuGet.csproj", "{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Debug|iPhone.Build.0 = Debug|iPhone
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Release|iPhone.ActiveCfg = Release|iPhone
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Release|iPhone.Build.0 = Release|iPhone
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Debug|iPhone.Build.0 = Debug|iPhone
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Release|iPhone.ActiveCfg = Release|iPhone
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Release|iPhone.Build.0 = Release|iPhone
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
+		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
+		{8007ADBC-4501-447F-BE99-E628A481BB3F} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\test\iOS\MobileSDK-IntegrationTest-iOS-NuGet\MobileSDK-IntegrationTest-iOS-NuGet.csproj
+	EndGlobalSection
+EndGlobal

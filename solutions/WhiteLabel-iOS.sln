@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteLabel-iOS", "..\app\WhiteLabel\iOS\WhiteLabel-iOS\WhiteLabel-iOS.csproj", "{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PasswordProvider", "PasswordProvider", "{09E9EE90-DF7E-41F4-BA6A-9231689AB21C}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SecureStringPasswordProvider", "..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.shproj", "{25A7AAE3-E76A-4C4F-AA0E-24983166C37D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Interface", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.iOS", "..\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\Sitecore.MobileSDK.PasswordProvider.iOS.csproj", "{95ED660D-1BF8-4668-A252-A87F0D1240A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK", "..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|iPhone.Build.0 = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Release|iPhone.Build.0 = Release|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Debug|iPhone.Build.0 = Debug|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Release|iPhone.ActiveCfg = Release|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Release|iPhone.Build.0 = Release|iPhone
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhone.Build.0 = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{25A7AAE3-E76A-4C4F-AA0E-24983166C37D} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
+		{95ED660D-1BF8-4668-A252-A87F0D1240A6} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\app\WhiteLabel\iOS\WhiteLabel-iOS\WhiteLabel-iOS.csproj
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D247D253-0923-4541-90B5-0F5E6304C33F}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Sitecore.MobileSDK</RootNamespace>
+    <AssemblyName>Sitecore.MobileSDK</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile136</TargetFrameworkProfile>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\solutions\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>Sitecore.MobileSDK.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>Sitecore.MobileSDK.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="API\Exceptions\LoadDataFromNetworkException.cs" />
+    <Compile Include="API\Exceptions\ParserException.cs" />
+    <Compile Include="API\Exceptions\ProcessUserRequestException.cs" />
+    <Compile Include="API\Exceptions\RsaHandshakeException.cs" />
+    <Compile Include="API\Exceptions\SitecoreMobileSdkException.cs" />
+    <Compile Include="API\Exceptions\WebApiJsonErrorException.cs" />
+    <Compile Include="API\Exceptions\WebApiJsonStatusMessage.cs" />
+    <Compile Include="API\Fields\IField.cs" />
+    <Compile Include="API\ISessionConfig.cs" />
+    <Compile Include="API\Items\IItemSource.cs" />
+    <Compile Include="API\Items\ISitecoreItem.cs" />
+    <Compile Include="API\Items\ScDeleteItemsResponse.cs" />
+    <Compile Include="API\Items\ScItemsResponse.cs" />
+    <Compile Include="API\ItemWebApiRequestBuilder.cs" />
+    <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
+    <Compile Include="API\Request\IBaseDeleteItemRequest.cs" />
+    <Compile Include="API\Request\IBaseItemRequest.cs" />
+    <Compile Include="API\Request\IBaseRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IChangeItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\ICreateItemByIdRequest.cs" />
+    <Compile Include="API\Request\ICreateItemByPathRequest.cs" />
+    <Compile Include="API\Request\ICreateItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IDeleteItemRequestBuilder.cs" />
+    <Compile Include="API\Request\IDeleteItemsByIdRequest.cs" />
+    <Compile Include="API\Request\IDeleteItemsByPathRequest.cs" />
+    <Compile Include="API\Request\IDeleteItemsByQueryRequest.cs" />
+    <Compile Include="API\Request\IGetVersionedItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IReadItemsByIdRequest.cs" />
+    <Compile Include="API\Request\IReadItemsByPathRequest.cs" />
+    <Compile Include="API\Request\IReadItemsByQueryRequest.cs" />
+    <Compile Include="API\Request\IScopedRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
+    <Compile Include="API\Request\Parameters\IDownloadMediaOptions.cs" />
+    <Compile Include="API\Request\Parameters\IQueryParameters.cs" />
+    <Compile Include="API\Request\Parameters\IScopeParameters.cs" />
+    <Compile Include="API\Request\Parameters\PayloadType.cs" />
+    <Compile Include="API\Request\Parameters\ScopeType.cs" />
+    <Compile Include="API\Session\IAnonymousSessionBuilder.cs" />
+    <Compile Include="API\Session\IAuthenticatedSessionBuilder.cs" />
+    <Compile Include="API\Session\IBaseSessionBuilder.cs" />
+    <Compile Include="API\Session\IConnectionActions.cs" />
+    <Compile Include="API\Session\ICreateItemActions.cs" />
+    <Compile Include="API\Session\IDeleteItemActions.cs" />
+    <Compile Include="API\Session\IMediaActions.cs" />
+    <Compile Include="API\Session\IReadItemActions.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiReadonlySession.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSession.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSessionActions.cs" />
+    <Compile Include="API\Session\ISitecoreWebApiSessionState.cs" />
+    <Compile Include="API\Session\IUpdateItemActions.cs" />
+    <Compile Include="API\SitecoreWebApiSessionBuilder.cs" />
+    <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
+    <Compile Include="Authenticate\AuthenticateTasks.cs" />
+    <Compile Include="CrudTasks\DeleteItemTasks.cs" />
+    <Compile Include="Items\DeleteItemsResponseParser.cs" />
+    <Compile Include="Items\Delete\DeleteItemByIdParameters.cs" />
+    <Compile Include="Items\Delete\DeleteItemByPathParameters.cs" />
+    <Compile Include="Items\Delete\DeleteItemByQueryParameters.cs" />
+    <Compile Include="Items\ReadItemByPathParameters.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicKey\EncryptionUtil.cs" />
+    <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
+    <Compile Include="UrlBuilder\MediaItem\DownloadMediaOptions.cs" />
+    <Compile Include="UserRequest\AbstractScopedRequestParametersBuilder.cs" />
+    <Compile Include="ScApiSession.cs" />
+    <Compile Include="SessionSettings\SessionConfig.cs" />
+    <Compile Include="PublicKeyX509Certificate.cs" />
+    <Compile Include="SessionSettings\SessionConfigUrlBuilder.cs" />
+    <Compile Include="TaskFlow\IRestApiCallTasks.cs" />
+    <Compile Include="TaskFlow\RestApiCallFlow.cs" />
+    <Compile Include="PublicKey\GetPublicKeyTasks.cs" />
+    <Compile Include="Items\ScItem.cs" />
+    <Compile Include="Items\ScItemsParser.cs" />
+    <Compile Include="Items\ItemSource.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\AbstractDeleteItemUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByPathUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByQueryUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsUrlBuilder.cs" />
+    <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
+    <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
+    <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
+    <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
+    <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
+    <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
+    <Compile Include="UrlBuilder\ItemById\ItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\QueryParametersUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\QueryParameters.cs" />
+    <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
+    <Compile Include="UrlBuilder\ScopeParametersUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
+    <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
+    <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
+    <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
+    <Compile Include="UserRequest\DeleteRequest\AbstractDeleteItemRequestBuilder.cs" />
+    <Compile Include="UserRequest\DeleteRequest\DeleteItemByIdRequestBuilder.cs" />
+    <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByPathRequestBuilder.cs" />
+    <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByQueryRequestBuilder.cs" />
+    <Compile Include="UserRequest\UploadMediaRequest\BaseUploadMediaRequestBuilder.cs" />
+    <Compile Include="UserRequest\UploadMediaRequest\UploadMediaItemByParentIdRequestBuilder.cs" />
+    <Compile Include="UserRequest\UploadMediaRequest\UploadMediaItemByParentPathRequestBuilder.cs" />
+    <Compile Include="Utils\UrlBuilderUtils.cs" />
+    <Compile Include="Items\ReadItemByQueryParameters.cs" />
+    <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
+    <Compile Include="Items\ReadItemsByIdParameters.cs" />
+    <Compile Include="UserRequest\UserRequestMerger.cs" />
+    <Compile Include="UserRequest\ItemSourceFieldMerger.cs" />
+    <Compile Include="Items\ItemSourcePOD.cs" />
+    <Compile Include="UserRequest\SessionConfigMerger.cs" />
+    <Compile Include="SessionSettings\SessionSettingsPOD.cs" />
+    <Compile Include="Items\Fields\ScField.cs" />
+    <Compile Include="Items\Fields\ScFieldsParser.cs" />
+    <Compile Include="UrlBuilder\AbstractGetItemUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
+    <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
+    <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
+    <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
+    <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
+    <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
+    <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
+    <Compile Include="Items\CreateItemByIdParameters.cs" />
+    <Compile Include="Validators\BaseValidator.cs" />
+    <Compile Include="Validators\DuplicateEntryValidator.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
+    <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
+    <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
+    <Compile Include="Items\CreateItemByPathParameters.cs" />
+    <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
+    <Compile Include="Items\UpdateItemByIdParameters.cs" />
+    <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
+    <Compile Include="CrudTasks\AbstractUpdateItemTask.cs" />
+    <Compile Include="UserRequest\UpdateRequest\UpdateItemByIdRequestBuilder.cs" />
+    <Compile Include="Session\SessionBuilder.cs" />
+    <Compile Include="Validators\ItemIdValidator.cs" />
+    <Compile Include="Validators\ItemPathValidator.cs" />
+    <Compile Include="Validators\SitecoreQueryValidator.cs" />
+    <Compile Include="Validators\MediaPathValidator.cs" />
+    <Compile Include="Validators\SessionConfigValidator.cs" />
+    <Compile Include="Validators\MediaOptionsValidator.cs" />
+    <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
+    <Compile Include="Validators\WebApiCredentialsValidator.cs" />
+    <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
+    <Compile Include="API\Request\IUpdateItemByPathRequest.cs" />
+    <Compile Include="Items\UpdateItemByPathParameters.cs" />
+    <Compile Include="CrudTasks\UpdateItemByPathTask.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\UpdateItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\UpdateItem\UpdateItemByPathUrlBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\UpdateItemByPathRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\CreateItem\CreateItemByPathUrlBuilder.cs" />
+    <Compile Include="API\Request\IBaseUpdateItemRequest.cs" />
+    <Compile Include="API\MediaItem\IMediaOptionsBuilder.cs" />
+    <Compile Include="Media\MediaOptionsBuilderImpl.cs" />
+    <Compile Include="PublicKey\AuthenticatedSessionCryptor.cs" />
+    <Compile Include="UrlBuilder\ChangeItem\AbstractChangeItemUrlBuilder.cs" />
+    <Compile Include="API\Request\IBaseChangeItemRequest.cs" />
+    <Compile Include="UserRequest\ReadRequest\AbstractBaseRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadRequest\ReadItemByIdRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadRequest\ReadItemByPathRequestBuilder.cs" />
+    <Compile Include="UserRequest\ReadRequest\ReadItemByQueryRequestBuilder.cs" />
+    <Compile Include="API\Request\IBaseReadItemsRequest.cs" />
+    <Compile Include="UserRequest\ChangeRequest\AbstractChangeItemRequestBuilder.cs" />
+    <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
+    <Compile Include="API\Request\IUpdateItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\Template\ISetTemplateBuilder.cs" />
+    <Compile Include="API\Request\Template\ISetNewItemNameBuilder.cs" />
+    <Compile Include="API\Request\IMediaResourceDownloadRequest.cs" />
+    <Compile Include="API\Request\IGetRenderingHtmlRequest.cs" />
+    <Compile Include="Items\ReadRenderingHTMLParameters.cs" />
+    <Compile Include="UserRequest\RenderingHTMLRequest\RenderingHTMLRequestBuilder.cs" />
+    <Compile Include="CrudTasks\Resource\GetRenderingHtmlTasks.cs" />
+    <Compile Include="UrlBuilder\RenderingHTML\RenderingHtmlUrlBuilder.cs" />
+    <Compile Include="API\Request\IRenderingHtmlRequestParametersBuilder.cs" />
+    <Compile Include="Items\MediaResourceDownloadParameters.cs" />
+    <Compile Include="API\Request\IMediaResourceUploadRequest.cs" />
+    <Compile Include="Items\MediaResourceUploadParameters.cs" />
+    <Compile Include="UrlBuilder\MediaItem\UploadMediaUrlBuilder.cs" />
+    <Compile Include="CrudTasks\UploadMediaTask.cs" />
+    <Compile Include="API\Request\IGetMediaItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\IUploadMediaItemRequestParametersBuilder.cs" />
+    <Compile Include="API\Request\Parameters\IPagingParameters.cs" />
+    <Compile Include="UrlBuilder\PagingUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\GetPagedItemsUrlBuilder.cs" />
+    <Compile Include="Items\PagingParameters.cs" />
+    <Compile Include="API\Request\Paging\IPageNumberAccumulator.cs" />
+    <Compile Include="UserRequest\DownloadMediaResourceRequestBuilder.cs" />
+    <Compile Include="API\MediaItem\IMediaLibrarySettings.cs" />
+    <Compile Include="API\MediaItem\DownloadStrategy.cs" />
+    <Compile Include="CrudTasks\GetMediaContentHashTask.cs" />
+    <Compile Include="CrudTasks\Resource\HashedMediaUrlParser.cs" />
+    <Compile Include="Session\TaskFlowErrorMessages.cs" />
+    <Compile Include="UrlBuilder\WebApiActionBuilder.cs" />
+    <Compile Include="API\Request\Parameters\IUploadMediaOptions.cs" />
+    <Compile Include="UrlBuilder\MediaItem\UploadMediaOptions.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\solutions\packages\Newtonsoft.Json.6.0.3\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="crypto">
+      <HintPath>..\..\solutions\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>..\..\solutions\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\solutions\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>..\..\solutions\packages\Microsoft.Bcl.1.1.9\lib\portable-net40+sl5+win8+wp8+wpa81\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\solutions\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
+      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

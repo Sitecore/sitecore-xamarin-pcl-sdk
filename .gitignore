@@ -1,0 +1,46 @@
+test/LocalNugetTest/LocalRepository/
+
+deployment
+*.nupkg
+*.log
+
+#Xamarin Store
+Components
+
+# Mac OS X
+.DS_Store
+
+
+# xcode
+*.xccheckout
+*xcuserdata*
+DerivedData
+build
+*xcworkspace*
+
+
+# JetBrains
+.idea
+
+
+# MS Visual Studio
+bin
+obj
+*.pdb
+*.ncb
+*.suo
+*.csproj.user
+*.userprefs
+TestResult.xml
+UpgradeLog.html
+UpgradeLog.htm
+*.VisualState.xml
+*.psess
+*.sln.*
+
+# NuGet
+packages
+*.exe
+*.dgml
+lib/SitecoreMobileSDK-PCL/Sitecore.MobileSDK.XML
+*.MOV

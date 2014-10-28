@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="QuickBuild" InitialTargets="RestorePackages" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!-- "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" BuildMobileSDK.xml /t:log -->
+
+
+  <!-- For NUnit -->
+  <!-- <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/> -->
+
+  <!-- For Zip Archiving -->
+  <Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
+
+
+<!-- ====================================================  -->
+  <PropertyGroup>
+  	<!-- newline symbols matter -->
+
+	<MSBuildExe>C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe</MSBuildExe>
+	
+    <RepositoryRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\..'))</RepositoryRoot>
+    <MobileSdkLibraryRoot>$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL</MobileSdkLibraryRoot>
+	  <ScriptsDirectory>$(RepositoryRoot)\scripts</ScriptsDirectory>
+    <SolutionsDirectory>$(RepositoryRoot)\solutions</SolutionsDirectory>
+    <DeploymentDirectory>$(RepositoryRoot)\deployment</DeploymentDirectory>
+    <LocalNugetRepoDirectory>C:\dev\LocalNugetRepository\</LocalNugetRepoDirectory>
+    <LocalXamarinComponentsRepoDirectory>C:\dev\LocalXamarinStoreComponents\</LocalXamarinComponentsRepoDirectory>
+    <BinariesDeploymentDirectory>$(RepositoryRoot)\deployment\lib</BinariesDeploymentDirectory>
+
+    <UnitTestReportXml>$(RepositoryRoot)\deployment\UnitTestDesktopReport.xml</UnitTestReportXml>
+    <IntegrationTestReportXml>$(RepositoryRoot)\deployment\IntegrationTestDesktopReport.xml</IntegrationTestReportXml>
+
+    <NugetExe>$(RepositoryRoot)\solutions\.nuget\NuGet.exe</NugetExe>
+
+    <UnitTestDesktopBuildDirectory>$(RepositoryRoot)\test\Desktop-NunitLite\UnitTest-Desktop-NUnitLite\bin\Release</UnitTestDesktopBuildDirectory>
+    <IntegrationTestDesktopBuildDirectory>$(RepositoryRoot)\test\Desktop-NunitLite\IntegrationTest-Desktop-NUnitLite\bin\Release</IntegrationTestDesktopBuildDirectory>
+
+    <DocumentationXml>$(MobileSdkLibraryRoot)\bin\Release\Sitecore.MobileSDK.XML</DocumentationXml>
+    <DoxygenConfig>$(MobileSdkLibraryRoot)\SitecoreMobileSDK.doxygen</DoxygenConfig>
+    <DoxygenExe>doxygen</DoxygenExe>
+    <JavadocDeploymentDir>$(RepositoryRoot)\deployment\doc</JavadocDeploymentDir>
+  </PropertyGroup>
+
+
+<!-- ====================================================  -->
+  <ItemGroup>
+    	<!-- Attribute letter case matters -->
+  	<ObjDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'obj', System.IO.SearchOption.AllDirectories))" />
+  	<BinDirectories Include="$([System.IO.Directory]::GetDirectories('$(RepositoryRoot)', 'bin', System.IO.SearchOption.AllDirectories))" />
+
+  	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
+    <PasswordStorageWinProject Include="$(RepositoryRoot)\lib\PasswordProvider\windows\*.csproj" />
+    <PasswordStorageIOSProject Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\*.csproj" />
+    <PasswordStorageAndroidProject Include="$(RepositoryRoot)\lib\PasswordProvider\Android\*.csproj" />
+
+
+    <UnitTestDesktopProject Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\*.csproj" />
+
+  	<MobileSdkArtefactsDir Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release" />
+  	<MobileSdkDll Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" />
+
+
+    <UnitTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-UnitTest-Desktop\bin\Release\MobileSDK-UnitTest-Desktop.dll" />
+    <IntegrationTestDesktopDll Include="$(RepositoryRoot)\test\Desktop\MobileSDK-IntegrationTest-Desktop\bin\Release\MobileSDK-IntegrationTest-Desktop.dll" />
+  </ItemGroup>
+  
+  <Import Project="$(SolutionsDirectory)\.nuget\NuGet.targets" Condition="Exists('$(SolutionsDirectory)\.nuget\NuGet.targets')" />
+
+<!-- ====================================================  -->
+  <Target Name="QuickBuild">
+    <CallTarget Targets="clean"/>
+    <CallTarget Targets="UnitTest"/>
+    <CallTarget Targets="SitecoreMobileSDK"/>
+	<CallTarget Targets="PasswordProvider"/>
+    <CallTarget Targets="package"/>
+	<CallTarget Targets="DeviceTests"/>
+    <CallTarget Targets="doc"/>
+  </Target>
+
+  <Target Name="FullBuild">
+    <CallTarget Targets="QuickBuild"/>
+    <CallTarget Targets="IntegrationTest"/>
+  </Target>
+
+ <!-- ====================================================  -->
+  <Target Name="DeviceTests">
+	<!-- Xamarin bug https://bugzilla.xamarin.com/show_bug.cgi?id=18357 -->
+	<!-- <CallTarget Targets="UnitTest-iOS-Build"/>        -->
+    <!-- <CallTarget Targets="IntegrationTest-iOS-Build"/> -->
+	<CallTarget Targets="UnitTest-Android-Build"/>
+	<CallTarget Targets="IntegrationTest-Android-Build"/>
+  </Target>
+  
+  <Target Name="UnitTest-iOS-Build">
+  <Message Text="Building iOS Unit Test App..." />
+    
+  	<Exec
+	  Command="&quot;$(MSBuildExe)&quot; MobileSDKUnitTest-iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release;Platform=iPhone"
+	  WorkingDirectory="$(RepositoryRoot)\test\iOS\MobileSDKUnitTest-iOS\" 
+      IgnoreExitCode="true"/>
+	
+	 <ItemGroup>
+      <UnitTestIOSArtefacts Include="$(RepositoryRoot)\test\iOS\MobileSDKUnitTest-iOS\bin\iPhone\Release\*.ipa" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(UnitTestIOSArtefacts)"
+      DestinationFolder="$(DeploymentDirectory) "
+     />
+  </Target>
+  
+  <Target Name="IntegrationTest-iOS-Build">
+    <Message Text="Building iOS IntegrationTest Test App..." />
+  
+    <Exec
+	  Command="&quot;$(MSBuildExe)&quot; MobileSDK-IntegrationTest-iOS.csproj  /t:Build;_RemoteBuild /p:Configuration=Release;Platform=iPhone"
+	  WorkingDirectory="$(RepositoryRoot)\test\iOS\MobileSDK-IntegrationTest-iOS\" 
+      IgnoreExitCode="true"/>
+	
+	 <ItemGroup>
+      <IntegrationTestIOSArtefacts Include="$(RepositoryRoot)\test\iOS\MobileSDK-IntegrationTest-iOS\bin\iPhone\Release\*.ipa" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(IntegrationTestIOSArtefacts)"
+      DestinationFolder="$(DeploymentDirectory) "
+     />
+  </Target>
+  
+  <Target Name="UnitTest-Android-Build">
+  <Message Text="Building Android Unit Test App..." />
+  </Target>
+  
+  <Target Name="IntegrationTest-Android-Build">
+  <Message Text="Building Android IntegrationTest Test App..." />
+  </Target>
+  
+<!-- ====================================================  -->
+  <Target Name="PasswordProvider">
+    <Message Text="Building PasswordProvider Libraries..." />
+    <CallTarget Targets="PasswordProviderWin"/>
+    <CallTarget Targets="PasswordProviderIOS"/>
+    <CallTarget Targets="PasswordProviderAndroid"/>	
+  </Target>
+
+  <Target Name="PasswordProviderWin">
+    <Message Text="Building PasswordProvider For Windows..." />
+
+    <MSBuild 
+      Projects="@(PasswordStorageWinProject)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+	
+	 <ItemGroup>
+      <PasswordWinArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\bin\Release\*.dll" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(PasswordWinArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
+  </Target>
+
+  <Target Name="PasswordProviderIOS">
+    <Message Text="Building PasswordProvider For iOS..." />
+	
+	<Exec
+	  Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
+	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\" 
+    IgnoreExitCode="true"/>
+	
+	 <ItemGroup>
+      <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\bin\Release\*.dll" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(PasswordIOSArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
+  </Target>
+
+  <Target Name="PasswordProviderAndroid">
+    <Message Text="Building PasswordProvider For Android..." />
+
+
+  <Exec
+    Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.Android.csproj /t:Build /p:Configuration=Release"
+    WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\" />
+	
+	 <ItemGroup>
+      <PasswordAndroidArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\bin\Release\*.dll" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(PasswordAndroidArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
+  </Target>
+
+  <Target Name="PrepareDeploymentDir">
+    <MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+    <MakeDir 
+      Condition="!Exists('$(BinariesDeploymentDirectory)')"
+      Directories="$(BinariesDeploymentDirectory)" 
+    />
+  </Target>
+
+<!-- ====================================================  -->
+  <Target Name="SitecoreMobileSDK">
+    <Message Text="Building SitecoreMobileSDK..." />
+  	<MSBuild 
+      Projects="@(MobileSdkProject)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+    
+
+    <ItemGroup>
+      <MobileSdkArtefacts Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\bin\Release\*.dll" />
+    </ItemGroup>
+
+    <Copy
+      SourceFiles="@(MobileSdkArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
+  </Target>
+
+<!-- ====================================================  -->
+  <Target Name="clean">
+  	<RemoveDir Directories="@(ObjDirectories)" />
+  	<RemoveDir Directories="@(BinDirectories)" />
+  	<RemoveDir Directories="$(DeploymentDirectory)" />
+  </Target>
+
+
+<!-- ====================================================  -->
+<Target Name="UnitTest">
+    <MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+    <Message Text="Building MobileSDK-UnitTest-Desktop-NUnitLite..." />
+    <MSBuild 
+      Projects="$(SolutionsDirectory)\MobileSDK-UnitTest-Desktop-NUnitLite.sln" 
+      Targets="Build" 
+      Properties="Configuration=Release" 
+    />
+
+    <Exec
+      Command="UnitTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\UnitTestReport.txt -result:$(DeploymentDirectory)\UnitTestReport.xml -format:nunit2"
+      WorkingDirectory="$(UnitTestDesktopBuildDirectory)"
+      />
+</Target>
+
+<Target Name="IntegrationTest">
+    <MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+    <Message Text="Building MobileSdk-IntegrationTest-Desktop-NUnitLite..." />
+    <MSBuild 
+      Projects="$(SolutionsDirectory)\MobileSdk-IntegrationTest-Desktop-NUnitLite.sln" 
+      Targets="Build" 
+      Properties="Configuration=Release" 
+    />
+
+    <Exec
+      Command="IntegrationTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\InegrationTestReport.txt -result:$(DeploymentDirectory)\IntegrationTestReport.xml -format:nunit2"
+      WorkingDirectory="$(IntegrationTestDesktopBuildDirectory)"
+    />
+</Target>
+
+
+<!-- ====================================================  -->
+  <Target Name="package">
+    <ItemGroup>
+      <MobileSdkArtefacts Include="$(RepositoryRoot)\deployment\lib\*.dll" />
+    </ItemGroup>
+
+
+  	<MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(MobileSdkArtefacts)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Full.zip" 
+      RemoveRoot="@(MobileSdkArtefactsDir)" 
+    />
+
+    <MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(MobileSdkDll)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Minimal.zip" 
+      RemoveRoot="@(MobileSdkArtefactsDir)" 
+    />  
+  
+  
+    <Exec 
+      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
+      WorkingDirectory="$(ScriptsDirectory)\nuget" />
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PCL.1.0.0.nupkg"
+      DestinationFolder="$(DeploymentDirectory)"
+     />
+	<Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PCL.1.0.0.nupkg"
+      DestinationFolder="$(LocalNugetRepoDirectory)"
+     />
+
+	 
+    <Exec 
+      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.nuspec"
+      WorkingDirectory="$(ScriptsDirectory)\nuget" />
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.0.nupkg"
+      DestinationFolder="$(DeploymentDirectory)"
+     />
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.0.nupkg"
+      DestinationFolder="$(LocalNugetRepoDirectory)"
+     />
+	 
+
+     <Exec
+      Command="BuildXamarinPackage.bat"
+      WorkingDirectory="$(ScriptsDirectory)\xamarin-store\MobileSDK"
+    />
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.MobileSDK.PCL-1.0.0.xam"
+      DestinationFolder="$(DeploymentDirectory)"
+     />
+    <Copy
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.MobileSDK.PCL-1.0.0.xam"
+      DestinationFolder="$(LocalXamarinComponentsRepoDirectory)"
+     />
+
+	 <Exec
+	    Command="xamarin-component install Sitecore.MobileSDK.PCL-1.0.0.xam"
+		WorkingDirectory="$(LocalXamarinComponentsRepoDirectory)"
+    />
+	    
+  </Target>
+
+  <Target Name="doc">
+     <MakeDir 
+      Condition="!Exists('$(JavadocDeploymentDir)')"
+      Directories="$(JavadocDeploymentDir)" 
+    /> 
+
+    <Copy
+      SourceFiles="$(DocumentationXml)"
+      DestinationFolder="$(DeploymentDirectory)"
+     />
+
+    <Exec 
+      Command="&quot;$(DoxygenExe)&quot; &quot;$(DoxygenConfig)&quot;"
+      WorkingDirectory="$(MobileSdkLibraryRoot)" />
+
+    <ItemGroup>
+      <DoxygenFiles Include="$(JavadocDeploymentDir)\MobileSDK-doxygen-html\**" />
+    </ItemGroup>
+
+    <MSBuild.ExtensionPack.Compression.Zip 
+      TaskAction="Create" 
+      CompressFiles="@(DoxygenFiles)" 
+      ZipFileName="$(DeploymentDirectory)\SitecoreMobileSDK-Doxygen.zip" 
+      RemoveRoot="$(JavadocDeploymentDir)" 
+    />
+  </Target>
+
+<!-- ====================================================  -->
+  <Target Name="log">
+    <Message Text="MobileSdkProject : @(MobileSdkProject)" />
+    <Message Text="RepositoryRoot : $(RepositoryRoot)" />
+    <Message Text="DeploymentDirectory : $(DeploymentDirectory)" />
+
+
+    <Message Text="MobileSdkArtefactsDir : @(MobileSdkArtefactsDir)" />
+    <Message Text="MobileSdkDll : @(MobileSdkDll)" />
+	
+
+	<Message Text="===========" />
+    <Message Text="MobileSdkArtefacts : @(MobileSdkArtefacts, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
+
+	<Message Text="===========" />
+    <Message Text="ObjDirectories : @(ObjDirectories, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
+
+    <Message Text="===========" />
+    <Message Text="BinDirectories : @(BinDirectories, '&#x0d;&#x0a;')" />
+    <Message Text="===========" />
+
+    <Message Text="UnitTestDesktopProject : @(UnitTestDesktopProject)" />
+    <Message Text="UnitTestReportXml : $(UnitTestReportXml)" />
+  </Target>
+
+</Project>

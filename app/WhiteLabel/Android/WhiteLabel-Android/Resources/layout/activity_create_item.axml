@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+    <EditText
+        android:id="@+id/field_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+    <EditText
+        android:id="@+id/field_item_name"
+        android:hint="@string/hint_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+    <EditText
+        android:id="@+id/field_item_title_field_name"
+        android:hint="@string/hint_item_title_field_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/field_item_text_field_value"
+        android:hint="@string/hint_item_text_field_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/button_create_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create" />
+        <Button
+            android:id="@+id/button_update_created_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update created item" />
+    </LinearLayout>
+</LinearLayout>
