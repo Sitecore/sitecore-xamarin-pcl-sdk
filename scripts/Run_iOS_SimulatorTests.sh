@@ -63,12 +63,12 @@ cd "$LAUNCH_DIR"
 
 
 
-# echo "===========Run_Unit_Tests==========="
-# "$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE" \
-#   --autoexit                            \
-#   --port=16390                          \
-#   --launchsim="$UNIT_TEST_APP"          \
-#   --logfile="$DEPLOYMENT_DIR/UnitTestReport.xml"
+echo "===========Run_Unit_Tests==========="
+"$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE" \
+  --autoexit                            \
+  --port=16390                          \
+  --launchsim="$UNIT_TEST_APP"          \
+  --logfile="$DEPLOYMENT_DIR/UnitTestReport.xml"
 
 
 
