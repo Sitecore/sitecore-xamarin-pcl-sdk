@@ -1,29 +1,30 @@
-Sitecore Mobile SDK - a Portable .NET Library
+Sitecore Mobile SDK
 ========
 
-Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The library is PCL standard compliant and can be used on the following platforms :
+Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 
+The SDK includes the following features:
+
+* Fetching CMS Content
+* Source HTML renderings from Sitecore CMS
+* Create, Delete, Update Items
+* Downloading and Uploading Media Resources
+* Protect security sensitive data
+
+
+
+The library is PCL standard compliant and can be used on the following platforms :
 
 * iOS 7 and newer
 * Android
 * Windows Desktop (.NET 4.5)
 * Windows Phone 7.1
-* Silverlight 5
 
-It uses the modern C# features and approaches such as :
+
+It uses the modern C# approaches such as :
 * PCL distribution
 * async/await based API
 * Fluent interface
 
-
-## The SDK includes the following features:
-
-* Authentication
-* Credentials protection based on SecureString class
-* CRUD operations on items
-* Access item fields and properties
-* Download content of media items
-* Upload media items
-* Getting html rendering of an item
 
 
 # Licence
