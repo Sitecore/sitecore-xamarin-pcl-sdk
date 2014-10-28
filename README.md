@@ -1,4 +1,4 @@
-Sitecore Mobile SDK
+Sitecore Mobile SDK for .NET
 ========
 
 Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 
@@ -67,9 +67,23 @@ using
 }
 ```
 
+# Native Versions of Mobile SDK
+By default the vendors of mobile platforms restrict the developers's choice of languages, instruments and tools for mobile apps development. 
+They are : 
+
+* Objective-C and Swift - for iOS
+* Java - for Android 
+
+This SDK offers the C# API for both iOS and Android platforms. The downside of this approach is the dependency on the Xamarin toolchain. If you do not want this dependency or you feel more comfortable with the platform specific tools, please use 
+
+* (Sitecore Mobile SDK for iOS](https://github.com/sitecore/sitecore-ios-sdk/)
+* (Sitecore Mobile SDK for Android)[https://github.com/sitecore/sitecore-android-sdk/]
+
+
+
 ## Other Resources
 
-* [Component Documentation](https://sitecore1-my.sharepoint.com/personal/adk_sitecore_net/Documents/Shared%20with%20Everyone/MobileSDK-C-sharp-Doc/Sitecore%20Mobile%20SDK%20PCL%20v1.pdf)
+* [Component Documentation](N/A)
 * [Support Forums](http://sdn.sitecore.net/Forum.aspx?)
 * [Xamarin Store Component](N/A)
 * [NuGet Component](N/A)
