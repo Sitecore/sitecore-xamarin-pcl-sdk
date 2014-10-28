@@ -37,7 +37,7 @@
       this.ConfigureRunnerForCI();
       #endif
 
-      UIApplication.SharedApplication.IdleTimerDisabled = true;
+      app.IdleTimerDisabled = true;
 
       // register every tests included in the main application/assembly
       var thisAssembly = System.Reflection.Assembly.GetExecutingAssembly();
