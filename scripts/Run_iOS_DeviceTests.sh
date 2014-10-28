@@ -79,23 +79,23 @@ DEVICE_LIST=$(echo "$RAW_DEVICES" | tr ";" "\n")
 
 for DEVICE_NAME in $DEVICE_LIST
 do
-  # echo "===========[BEGIN]Unit_Tests_for_device_[$DEVICE_NAME]==========="
-  # "$MTOUCH_EXE" \
-  #   --devname="$DEVICE_NAME" \
-  #   --installdev "$UNIT_TEST_APP"
+  echo "===========[BEGIN]Unit_Tests_for_device_[$DEVICE_NAME]==========="
+  "$MTOUCH_EXE" \
+    --devname="$DEVICE_NAME" \
+    --installdev "$UNIT_TEST_APP"
 
-  # "$MTOUCH_EXE" \
-  #   --devname="$DEVICE_NAME" \
-  #   --killdev "$UNIT_TEST_APP_BUNDLE_ID"
+  "$MTOUCH_EXE" \
+    --devname="$DEVICE_NAME" \
+    --killdev "$UNIT_TEST_APP_BUNDLE_ID"
 
 
-  # "$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE"   \
-  #   --autoexit                              \
-  #   --port=16390                            \
-  #   --launchdev="$UNIT_TEST_APP_BUNDLE_ID"  \
-  #   --devname="$DEVICE_NAME"                \
-  #   --logfile="$DEPLOYMENT_DIR/UnitTestReport-Device-$DEVICE_NAME.xml"  
-  # echo "===========[END]Unit_Tests_for_device_[$DEVICE_NAME]==========="
+  "$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE"   \
+    --autoexit                              \
+    --port=16390                            \
+    --launchdev="$UNIT_TEST_APP_BUNDLE_ID"  \
+    --devname="$DEVICE_NAME"                \
+    --logfile="$DEPLOYMENT_DIR/UnitTestReport-Device-$DEVICE_NAME.xml"  
+  echo "===========[END]Unit_Tests_for_device_[$DEVICE_NAME]==========="
 
 
 
