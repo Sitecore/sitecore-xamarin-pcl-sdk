@@ -32,11 +32,15 @@ SITECORE SHARED SOURCE LICENSE
 
 
 # Adding the SDK to your Project
-The SDK is available in the 
+The SDK is can be added to your project from the following sources 
 
 * [NuGet repository](https://www.nuget.org)
 * [Xamarin Store](https://components.xamarin.com)
 
+The actual installation instructions may vary depending on both the distribution system and the IDE you are using. Most of them can by found in one of the following links :
+http://docs.nuget.org/docs/start-here/overview
+http://developer.xamarin.com/guides/cross-platform/application_fundamentals/nuget_walkthrough/
+http://developer.xamarin.com/guides/cross-platform/application_fundamentals/components_walkthrough/
 
 
 
