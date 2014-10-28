@@ -29,7 +29,7 @@ It uses the modern C# approaches such as :
 
 # Licence
 ```
-SITECORE SHARED SOURCE LICENSE
+License : SITECORE SHARED SOURCE LICENSE
 ```
 
 
