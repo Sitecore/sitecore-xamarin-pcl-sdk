@@ -31,6 +31,14 @@ It uses the modern C# approaches such as :
 SITECORE SHARED SOURCE LICENSE
 
 
+# Adding the SDK to your Project
+The SDK is available in the 
+
+* [NuGet repository](https://www.nuget.org)
+* [Xamarin Store](https://components.xamarin.com)
+
+
+
 
 # Sample Code
 Since the SDK has been designed as a portable class library (PCL), you can use the very same code on all platforms to fetch the home item contents. 
