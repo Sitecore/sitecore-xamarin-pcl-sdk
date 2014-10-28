@@ -28,12 +28,11 @@ It uses the modern C# approaches such as :
 
 
 # Licence
-```
-License : SITECORE SHARED SOURCE LICENSE
-```
+SITECORE SHARED SOURCE LICENSE
 
 
 
+# Sample Code
 Since the SDK has been designed as a portable class library (PCL), you can use the very same code on all platforms to fetch the home item contents. 
 
 ```csharp
@@ -68,5 +67,10 @@ using
 }
 ```
 
+## Other Resources
 
+* [Component Documentation](https://sitecore1-my.sharepoint.com/personal/adk_sitecore_net/Documents/Shared%20with%20Everyone/MobileSDK-C-sharp-Doc/Sitecore%20Mobile%20SDK%20PCL%20v1.pdf)
+* [Support Forums](http://sdn.sitecore.net/Forum.aspx?)
+* [Xamarin Store Component](N/A)
+* [NuGet Component](N/A)
 
