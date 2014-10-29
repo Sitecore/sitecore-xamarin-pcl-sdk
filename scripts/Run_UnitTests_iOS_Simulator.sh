@@ -62,33 +62,10 @@ cd "$SOLUTIONS_DIR"
 cd "$LAUNCH_DIR"
 
 
-
-echo "===========Run_Integraation_Tests==========="
-"$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE" \
-  --autoexit                            \
-  --port=16391                          \
-  --launchsim="$INTEGRATION_TEST_APP"   \
-  --logfile="$DEPLOYMENT_DIR/IntegrationTestReport.xml"
-
-
 echo "===========Run_Unit_Tests==========="
 "$MONO_EXE" "$TEST_REPORT_RECEIVER_EXE" \
   --autoexit                            \
   --port=16390                          \
   --launchsim="$UNIT_TEST_APP"          \
   --logfile="$DEPLOYMENT_DIR/UnitTestReport.xml"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
