@@ -88,9 +88,8 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>..\packages\Sitecore.MobileSDK.PasswordProvider.Interface.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\monotouch\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
@@ -112,6 +111,9 @@
     </Reference>
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>..\packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
+      <HintPath>..\packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS">
       <HintPath>..\packages\Sitecore.MobileSDK.PasswordProvider.1.0.0\lib\MonoTouch10\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
