@@ -94,14 +94,14 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SecureStringPasswordProvider-iOS">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\SecureStringPasswordProvider-iOS.dll</HintPath>
+    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS">
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Sitecore.MobileSDK.dll</HintPath>
-    </Reference>
-    <Reference Include="SitecoreMobileSdkPasswordProvider">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\SitecoreMobileSdkPasswordProvider.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
       <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\System.IO.dll</HintPath>

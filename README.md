@@ -17,7 +17,7 @@ The library is PCL standard compliant and can be used on the following platforms
 * iOS 7 and newer
 * Android
 * Windows Desktop (.NET 4.5)
-* Windows Phone 7.1
+* Windows Phone 8 and newer
 
 
 It uses the modern C# approaches such as :
