@@ -10,10 +10,10 @@
     {
       var result = new TestEnvironment
       {
-        InstanceWithMediaHashing = "http://cms80.test24dk1.dk.sitecore.net",
+        InstanceWithMediaHashing = "http://cms75.test24dk1.dk.sitecore.net",
         InstanceWithoutMediaHashing = "http://cms66u8.test24dk1.dk.sitecore.net",
 
-        InstanceUrl = "http://cms80.test24dk1.dk.sitecore.net",
+        InstanceUrl = "http://cms66u8.test24dk1.dk.sitecore.net",
         ShellSite = "/sitecore/shell"
       };
 
