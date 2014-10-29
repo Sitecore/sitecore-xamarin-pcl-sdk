@@ -11,7 +11,6 @@
   using Sitecore.MobileSDK.MockObjects;
 
   [TestFixture]
-  [Ignore]
   public class UpdateItemsTest
   {
     private TestEnvironment testData;
