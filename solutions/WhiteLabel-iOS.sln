@@ -11,7 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.Password
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.iOS", "..\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\Sitecore.MobileSDK.PasswordProvider.iOS.csproj", "{95ED660D-1BF8-4668-A252-A87F0D1240A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI", "..\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.csproj", "{F973D9C9-61F3-417F-92D1-F32E0CB59187}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK", "..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteLabel-iOS-Unified", "..\app\WhiteLabel\iOS\WhiteLabel-iOS-Unified\WhiteLabel-iOS-Unified.csproj", "{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,13 +75,38 @@ Global
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhone.Build.0 = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Debug|iPhone.Build.0 = Debug|iPhone
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Release|iPhone.ActiveCfg = Release|iPhone
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Release|iPhone.Build.0 = Release|iPhone
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Release|iPhone.Build.0 = Release|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{25A7AAE3-E76A-4C4F-AA0E-24983166C37D} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
 		{95ED660D-1BF8-4668-A252-A87F0D1240A6} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
+		{F973D9C9-61F3-417F-92D1-F32E0CB59187} = {09E9EE90-DF7E-41F4-BA6A-9231689AB21C}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\app\WhiteLabel\iOS\WhiteLabel-iOS\WhiteLabel-iOS.csproj
+		StartupItem = ..\app\WhiteLabel\iOS\WhiteLabel-iOS-Unified\WhiteLabel-iOS-Unified.csproj
 	EndGlobalSection
 EndGlobal
