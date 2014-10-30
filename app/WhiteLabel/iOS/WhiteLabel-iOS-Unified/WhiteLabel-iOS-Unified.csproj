@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{EDAA5F1A-FA94-4787-A9F4-FED91BBD2B93}</ProjectGuid>
+    <ProjectGuid>{EF9F6A06-26BA-4075-B374-AC7E8015D2EE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>WhiteLabeliOSUnified</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>

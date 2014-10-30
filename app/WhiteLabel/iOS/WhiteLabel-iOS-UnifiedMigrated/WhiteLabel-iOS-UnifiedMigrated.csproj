@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProjectGuid>{AA5BC69A-A9BE-45F7-97B1-635D8BEB0BFE}</ProjectGuid>
+    <ProjectGuid>{50EA2C35-2DB9-4EF8-8E24-2D19F9A09EB7}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>WhiteLabeliOS</RootNamespace>
