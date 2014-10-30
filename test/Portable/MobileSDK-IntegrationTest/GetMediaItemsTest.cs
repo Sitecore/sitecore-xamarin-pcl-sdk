@@ -357,7 +357,7 @@
         // @adk : changed since different size has been received 
         // * Mac OS
         // * IOS Simulator
-        Assert.IsTrue(141750 == ms.Length);
+        Assert.IsTrue(141750 == responseFromMasterDb.Length);
       }
 
       var requestFromWebDb = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(Path)
