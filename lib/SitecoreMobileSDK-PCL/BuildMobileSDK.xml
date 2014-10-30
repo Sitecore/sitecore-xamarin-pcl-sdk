@@ -139,7 +139,7 @@
   <Target Name="PasswordProvider">
     <Message Text="Building PasswordProvider Libraries..." />
     <CallTarget Targets="PasswordProviderWin"/>
-    <CallTarget Targets="PasswordProviderIOS"/>
+    <CallTarget Targets="PasswordProviderIOS-Classic"/>
     <CallTarget Targets="PasswordProviderAndroid"/>	
   </Target>
 
@@ -163,7 +163,7 @@
      />
   </Target>
 
-  <Target Name="PasswordProviderIOS">
+  <Target Name="PasswordProviderIOS-Classic">
     <Message Text="Building PasswordProvider For iOS..." />
 	
 	<Exec
