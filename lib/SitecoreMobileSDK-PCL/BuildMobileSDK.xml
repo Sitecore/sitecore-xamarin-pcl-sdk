@@ -218,7 +218,6 @@
 	<Copy
       SourceFiles="@(PasswordAndroidArtefacts)"
       DestinationFolder="$(BinariesDeploymentDirectory) ">
-  </Exec>
 	 
   </Target>
 
