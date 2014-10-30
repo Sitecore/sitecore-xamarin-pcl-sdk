@@ -20,7 +20,7 @@ namespace WhiteLabeliOS
 	partial class FieldsViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UITableView FieldsTableView { get; set; }
+		UITableView FieldsTableView { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

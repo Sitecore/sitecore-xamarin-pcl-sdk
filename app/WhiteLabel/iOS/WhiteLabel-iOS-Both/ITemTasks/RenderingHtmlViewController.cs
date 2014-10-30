@@ -1,10 +1,9 @@
-using Sitecore.MobileSDK.API.Session;
-using Sitecore.MobileSDK.API;
-using System.IO;
-
 namespace WhiteLabeliOS
 {
   using System;
+  using Sitecore.MobileSDK.API.Session;
+  using Sitecore.MobileSDK.API;
+  using System.IO;
 
   #if __UNIFIED__
   using UIKit;
@@ -33,7 +32,7 @@ namespace WhiteLabeliOS
       renderingIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Rendering id", null);
     }
 
-    partial void OnGetRenderingTouch (MonoTouch.Foundation.NSObject sender)
+    partial void OnGetRenderingTouch (NSObject sender)
     {
       if (String.IsNullOrEmpty(sourceIdTextField.Text))
       {

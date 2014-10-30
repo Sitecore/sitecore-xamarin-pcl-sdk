@@ -21,22 +21,22 @@ namespace WhiteLabeliOS
 	partial class SettingsViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UITextField dbField { get; set; }
+		UITextField dbField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField instanceUrlField { get; set; }
+		UITextField instanceUrlField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField languageField { get; set; }
+		UITextField languageField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField loginField { get; set; }
+		UITextField loginField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField passwordField { get; set; }
+		UITextField passwordField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField siteField { get; set; }
+		UITextField siteField { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

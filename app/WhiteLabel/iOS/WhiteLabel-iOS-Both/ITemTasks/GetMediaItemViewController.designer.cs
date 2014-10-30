@@ -21,28 +21,28 @@ namespace WhiteLabeliOS
 	partial class GetMediaItemViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton DownloadButton { get; set; }
+		UIButton DownloadButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel HeightLabel { get; set; }
+		UILabel HeightLabel { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField HeightTextField { get; set; }
+		UITextField HeightTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIImageView ImageView { get; set; }
+		UIImageView ImageView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField MediaPathTextField { get; set; }
+		UITextField MediaPathTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel WidthLabel { get; set; }
+		UILabel WidthLabel { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField WidthTextField { get; set; }
+		UITextField WidthTextField { get; set; }
 
 		[Action ("OnDownloadButtonTouched:")]
-		partial void OnDownloadButtonTouched (MonoTouch.Foundation.NSObject sender);
+		partial void OnDownloadButtonTouched (NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

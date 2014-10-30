@@ -224,6 +224,9 @@
     <Compile Include="..\WhiteLabel-iOS-Both\SettingsViewController.designer.cs">
       <Link>SettingsViewController.designer.cs</Link>
     </Compile>
+    <Compile Include="..\WhiteLabel-iOS-Both\InstanceSettings.cs">
+      <Link>InstanceSettings.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

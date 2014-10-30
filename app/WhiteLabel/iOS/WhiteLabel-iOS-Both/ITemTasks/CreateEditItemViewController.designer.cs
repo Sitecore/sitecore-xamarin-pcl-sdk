@@ -19,28 +19,28 @@ namespace WhiteLabeliOS
 	partial class CreateEditItemViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton createButton { get; set; }
+		UIButton createButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField nameField { get; set; }
+		UITextField nameField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField pathField { get; set; }
+		UITextField pathField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField textField { get; set; }
+		UITextField textField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField titleField { get; set; }
+		UITextField titleField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton updateButton { get; set; }
+		UIButton updateButton { get; set; }
 
 		[Action ("OnCreateItemButtonTapped:")]
-		partial void OnCreateItemButtonTapped (MonoTouch.Foundation.NSObject sender);
+		partial void OnCreateItemButtonTapped (NSObject sender);
 
 		[Action ("OnUpdateItemButtonTapped:")]
-		partial void OnUpdateItemButtonTapped (MonoTouch.Foundation.NSObject sender);
+		partial void OnUpdateItemButtonTapped (NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

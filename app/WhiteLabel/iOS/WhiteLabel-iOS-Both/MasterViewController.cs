@@ -11,40 +11,43 @@ namespace WhiteLabeliOS
   #else
   using MonoTouch.UIKit;
   using MonoTouch.Foundation;
+
+  using nint = global::System.Int32;
+  using nuint = global::System.UInt32;
   #endif
 
-	public partial class MasterViewController : UITableViewController
-	{
-        #region UIViewController
-		public MasterViewController (IntPtr handle) : base (handle)
-		{
-            this.Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
-		}
+  public partial class MasterViewController : UITableViewController
+  {
+    #region UIViewController
+    public MasterViewController (IntPtr handle) : base (handle)
+    {
+      this.Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
+    }
 
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear (animated);
-			System.Console.WriteLine ("Current settings:\n"
-				+ "\nURL:       " + this.settings.InstanceUrl
-				+ "\nLogin:     " + this.settings.InstanceLogin
-				+ "\nPassword:  " + this.settings.InstancePassword
-				+ "\nSite:      " + this.settings.InstanceSite
-				+ "\nDataBase:  " + this.settings.InstanceDataBase);
-		}
+    public override void ViewDidAppear(bool animated)
+    {
+      base.ViewDidAppear (animated);
+      System.Console.WriteLine ("Current settings:\n"
+        + "\nURL:       " + this.settings.InstanceUrl
+        + "\nLogin:     " + this.settings.InstanceLogin
+        + "\nPassword:  " + this.settings.InstancePassword
+        + "\nSite:      " + this.settings.InstanceSite
+        + "\nDataBase:  " + this.settings.InstanceDataBase);
+    }
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
+    public override void ViewDidLoad ()
+    {
+      base.ViewDidLoad ();
 
       this.Title = NSBundle.MainBundle.LocalizedString("MASTER_VIEW_CONTROLLER_TITLE", null);
 
-			this.settings = new InstanceSettings();
-			this.InitFeaturesList ();
+      this.settings = new InstanceSettings();
+      this.InitFeaturesList ();
 
-			this.dataSource = new DataSource (this);
-            this.TableView.Source = this.dataSource;
-			this.TableView.ReloadData();
-		}
+      this.dataSource = new DataSource (this);
+      this.TableView.Source = this.dataSource;
+      this.TableView.ReloadData();
+    }
     #endregion UIViewController
 
     #region Navigation
@@ -54,13 +57,13 @@ namespace WhiteLabeliOS
 
       if ("configurationViewController" == segue.Identifier)
       {
-          var settingsViewController = segue.DestinationViewController as SettingsViewController;
-          settingsViewController.instanceSettings = this.settings;
+        var settingsViewController = segue.DestinationViewController as SettingsViewController;
+        settingsViewController.instanceSettings = this.settings;
       }
       else
       {
-          var targetController = segue.DestinationViewController as BaseTaskViewController;
-          targetController.instanceSettings = this.settings;
+        var targetController = segue.DestinationViewController as BaseTaskViewController;
+        targetController.instanceSettings = this.settings;
 
       }
     }
@@ -87,52 +90,52 @@ namespace WhiteLabeliOS
     private List<object> features = new List<object> ();
     #endregion Instance Variables
 
-		class DataSource : UITableViewSource
-		{
-            #region UITableViewDataSource
-			public DataSource (MasterViewController controller)
-			{
-				this.controller = controller;
-			}
+    class DataSource : UITableViewSource
+    {
+      #region UITableViewDataSource
+      public DataSource (MasterViewController controller)
+      {
+        this.controller = controller;
+      }
 
-			public override int NumberOfSections (UITableView tableView)
-			{
-				return 1;
-			}
+      public override int NumberOfSections (UITableView tableView)
+      {
+        return 1;
+      }
 
-			public override int RowsInSection (UITableView tableview, int section)
-			{
-				return controller.features.Count;
-			}
+      public override int RowsInSection (UITableView tableview, int section)
+      {
+        return controller.features.Count;
+      }
 
-			public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
-			{
-                var cell = tableView.DequeueReusableCell (CellIdentifier, indexPath);
-				string featureKey = controller.features [indexPath.Row].ToString ();
-				string featureTitle = NSBundle.MainBundle.LocalizedString (featureKey, null);
-				cell.TextLabel.Text = featureTitle;
+      public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
+      {
+        var cell = tableView.DequeueReusableCell (CellIdentifier, indexPath);
+        string featureKey = controller.features [indexPath.Row].ToString ();
+        string featureTitle = NSBundle.MainBundle.LocalizedString (featureKey, null);
+        cell.TextLabel.Text = featureTitle;
 
-				return cell;
-			}
-            #endregion UITableViewDataSource
-
-
-            #region UITableViewDelegate
-			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
-			{
-				UINavigationController navController = controller.NavigationController;
-				string featureKey = controller.features [indexPath.Row].ToString ();
-
-                this.controller.PerformSegue(featureKey, this.controller);
-			}
-            #endregion UITableViewDelegate
+        return cell;
+      }
+      #endregion UITableViewDataSource
 
 
-            #region Instance Variables
-            private static readonly NSString CellIdentifier = new NSString ("Cell");
-            private readonly MasterViewController controller;
-            #endregion Instance Variables
-		}
-	}
+      #region UITableViewDelegate
+      public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+      {
+        UINavigationController navController = controller.NavigationController;
+        string featureKey = controller.features [indexPath.Row].ToString ();
+
+        this.controller.PerformSegue(featureKey, this.controller);
+      }
+      #endregion UITableViewDelegate
+
+
+      #region Instance Variables
+      private static readonly NSString CellIdentifier = new NSString ("Cell");
+      private readonly MasterViewController controller;
+      #endregion Instance Variables
+    }
+  }
 }
 

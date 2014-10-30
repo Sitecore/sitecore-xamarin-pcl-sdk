@@ -13,6 +13,9 @@ namespace WhiteLabeliOS.FieldsTableView
   #else
   using MonoTouch.UIKit;
   using MonoTouch.Foundation;
+
+  using nint = global::System.Int32;
+  using nuint = global::System.UInt32;
   #endif
 
 
@@ -88,12 +91,12 @@ namespace WhiteLabeliOS.FieldsTableView
 
 
     #region UITableViewDataSource
-    public override int NumberOfSections(UITableView tableView)
+    public override nint NumberOfSections(UITableView tableView)
     {
       return 1;
     }
 
-    public override int RowsInSection(UITableView tableView, int section)
+    public override nint RowsInSection(UITableView tableView, nint section)
     {
       if (null == this.sitecoreItems)
       {
@@ -123,7 +126,7 @@ namespace WhiteLabeliOS.FieldsTableView
       return result;
     }
 
-    public override string TitleForHeader (UITableView tableView, int section)
+    public override string TitleForHeader (UITableView tableView, nint section)
     {
       return "Items List";
     }

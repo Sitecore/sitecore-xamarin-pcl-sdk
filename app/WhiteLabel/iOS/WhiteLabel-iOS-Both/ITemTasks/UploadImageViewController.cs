@@ -33,13 +33,13 @@
 
     }
 
-		partial void OnCancelUploadButtonTouched(MonoTouch.Foundation.NSObject sender)
+		partial void OnCancelUploadButtonTouched(NSObject sender)
 		{
 			AlertHelper.ShowLocalizedNotImlementedAlert();
 			this.cancelButton.Enabled = false;
 		}
 
-		partial void OnUploadImageButtonTouched(MonoTouch.Foundation.NSObject sender)
+		partial void OnUploadImageButtonTouched(NSObject sender)
 		{
 			this.cancelButton.Enabled = true;
 			this.ChooseImageFromLibrary();

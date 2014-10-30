@@ -20,19 +20,19 @@ namespace WhiteLabeliOS
 	partial class RenderingHtmlViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton getRenderingButton { get; set; }
+		UIButton getRenderingButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField renderingIdTextField { get; set; }
+		UITextField renderingIdTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIWebView resultWebView { get; set; }
+		UIWebView resultWebView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField sourceIdTextField { get; set; }
+		UITextField sourceIdTextField { get; set; }
 
 		[Action ("OnGetRenderingTouch:")]
-		partial void OnGetRenderingTouch (MonoTouch.Foundation.NSObject sender);
+		partial void OnGetRenderingTouch (NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

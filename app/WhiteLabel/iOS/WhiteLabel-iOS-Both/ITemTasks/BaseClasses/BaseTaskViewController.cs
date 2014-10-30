@@ -25,7 +25,7 @@ namespace WhiteLabeliOS
 
 		}
 
-		public bool HideKeyboard(MonoTouch.UIKit.UITextField sender)
+		public bool HideKeyboard(UITextField sender)
 		{
 			sender.ResignFirstResponder();
 			return true;

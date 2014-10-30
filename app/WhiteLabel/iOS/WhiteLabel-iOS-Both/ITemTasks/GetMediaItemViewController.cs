@@ -51,7 +51,7 @@ namespace WhiteLabeliOS
       this.HeightTextField.Text = maxHeight.ToString();
     }
 
-    partial void OnDownloadButtonTouched(MonoTouch.Foundation.NSObject sender)
+    partial void OnDownloadButtonTouched(NSObject sender)
     {
       try
       {

@@ -44,7 +44,7 @@
       authButton.SetTitle(authButtonTitle, UIControlState.Normal);
     }
 
-    partial void OnAuthButtonTapped(MonoTouch.UIKit.UIButton sender)
+    partial void OnAuthButtonTapped(UIButton sender)
     {
       this.SendAuthRequest();
     }

@@ -20,31 +20,31 @@ namespace WhiteLabeliOS
 	partial class DeleteITemByIdViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton deleteByIdButton { get; set; }
+		UIButton deleteByIdButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton deleteByPathButton { get; set; }
+		UIButton deleteByPathButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton deleteByQueryButton { get; set; }
+		UIButton deleteByQueryButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField itemIdField { get; set; }
+		UITextField itemIdField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField itemPathField { get; set; }
+		UITextField itemPathField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField itemQueryField { get; set; }
+		UITextField itemQueryField { get; set; }
 
 		[Action ("OnDeleteItemByIdButtonTouched:")]
-		partial void OnDeleteItemByIdButtonTouched (MonoTouch.UIKit.UIButton sender);
+		partial void OnDeleteItemByIdButtonTouched (UIButton sender);
 
 		[Action ("OnDeleteItemByPathButtonTouched:")]
-		partial void OnDeleteItemByPathButtonTouched (MonoTouch.UIKit.UIButton sender);
+		partial void OnDeleteItemByPathButtonTouched (UIButton sender);
 
 		[Action ("OnDeleteItemByqueryButtonTouched:")]
-		partial void OnDeleteItemByqueryButtonTouched (MonoTouch.UIKit.UIButton sender);
+		partial void OnDeleteItemByqueryButtonTouched (UIButton sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

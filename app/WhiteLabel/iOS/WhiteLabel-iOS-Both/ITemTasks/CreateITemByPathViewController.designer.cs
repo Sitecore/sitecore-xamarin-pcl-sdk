@@ -20,28 +20,28 @@ namespace WhiteLabeliOS
 	partial class CreateITemByPathViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton createButton { get; set; }
+		UIButton createButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField nameField { get; set; }
+		UITextField nameField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField pathField { get; set; }
+		UITextField pathField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField textField { get; set; }
+		UITextField textField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField titleField { get; set; }
+		UITextField titleField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton updateButton { get; set; }
+		UIButton updateButton { get; set; }
 
 		[Action ("OnCreateItemButtonTapped:")]
-		partial void OnCreateItemButtonTapped (MonoTouch.UIKit.UIButton sender);
+		partial void OnCreateItemButtonTapped (UIButton sender);
 
 		[Action ("OnUpdateItemButtonTapped:")]
-		partial void OnUpdateItemButtonTapped (MonoTouch.UIKit.UIButton sender);
+		partial void OnUpdateItemButtonTapped (UIButton sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

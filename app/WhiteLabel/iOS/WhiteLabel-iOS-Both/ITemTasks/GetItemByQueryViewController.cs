@@ -38,7 +38,7 @@
       nameLabel.Text = NSBundle.MainBundle.LocalizedString("Type query", null);
     }
 
-    partial void OnGetItemButtonTouched(MonoTouch.Foundation.NSObject sender)
+    partial void OnGetItemButtonTouched(NSObject sender)
     {
       if (String.IsNullOrEmpty(queryTextField.Text))
       {

@@ -2,7 +2,11 @@
 namespace WhiteLabeliOS
 {
   using System;
+  #if __UNIFIED__
+  using Foundation;
+  #else
   using MonoTouch.Foundation;
+  #endif
 
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;

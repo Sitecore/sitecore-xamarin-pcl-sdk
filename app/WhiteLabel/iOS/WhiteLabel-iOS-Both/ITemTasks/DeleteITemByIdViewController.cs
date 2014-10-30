@@ -45,17 +45,17 @@ namespace WhiteLabeliOS
       this.deleteByQueryButton.SetTitle(deleteByQueryButtonTitle, UIControlState.Normal);
 		}
       
-    partial void OnDeleteItemByIdButtonTouched(MonoTouch.UIKit.UIButton sender)
+    partial void OnDeleteItemByIdButtonTouched(UIButton sender)
     {
       this.SendDeleteByIdRequest();
     }
 
-    partial void OnDeleteItemByPathButtonTouched(MonoTouch.UIKit.UIButton sender)
+    partial void OnDeleteItemByPathButtonTouched(UIButton sender)
     {
       this.SendDeleteByPathRequest();
     }
 
-    partial void OnDeleteItemByqueryButtonTouched(MonoTouch.UIKit.UIButton sender)
+    partial void OnDeleteItemByqueryButtonTouched(UIButton sender)
     {
       this.SendDeleteByQueryRequest();
     }

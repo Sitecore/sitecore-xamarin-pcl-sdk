@@ -20,37 +20,37 @@ namespace WhiteLabeliOS
 	partial class GetItemByPathViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton childrenScopeButton { get; set; }
+		UIButton childrenScopeButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField fieldNameTextField { get; set; }
+		UITextField fieldNameTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView FieldsTableView { get; set; }
+		UITableView FieldsTableView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton getItemButton { get; set; }
+		UIButton getItemButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField ItemPathField { get; set; }
+		UITextField ItemPathField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISegmentedControl PayloadSelectionView { get; set; }
+		UISegmentedControl PayloadSelectionView { get; set; }
 
     [Outlet]
-		MonoTouch.UIKit.UIButton parentScopeButton { get; set; }
+		UIButton parentScopeButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton selfScopeButton { get; set; }
+		UIButton selfScopeButton { get; set; }
 
 		[Action ("OnButtonChangeState:")]
-		partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender);
+		partial void OnButtonChangeState (UIButton sender);
 
 		[Action ("OnGetItemButtonTouched:")]
-		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
+		partial void OnGetItemButtonTouched (NSObject sender);
 
 		[Action ("OnPayloadValueChanged:")]
-		partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender);
+		partial void OnPayloadValueChanged (UISegmentedControl sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

@@ -20,10 +20,10 @@ namespace WhiteLabeliOS
 	partial class MasterViewController
 	{
 		[Action ("settingsButtonTouched:")]
-		partial void settingsButtonTouched (MonoTouch.UIKit.UIBarButtonItem sender);
+		partial void settingsButtonTouched (UIBarButtonItem sender);
 
 		[Action ("SettingsButtonTouched:")]
-		partial void SettingsButtonTouched (MonoTouch.UIKit.UIBarButtonItem sender);
+		partial void SettingsButtonTouched (UIBarButtonItem sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

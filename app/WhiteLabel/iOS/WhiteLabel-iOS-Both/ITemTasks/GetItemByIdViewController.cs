@@ -45,7 +45,7 @@ namespace WhiteLabeliOS
       getItemButton.SetTitle(getItemButtonTitle, UIControlState.Normal);
     }
 
-    partial void OnGetItemButtonTouched(MonoTouch.Foundation.NSObject sender)
+    partial void OnGetItemButtonTouched(NSObject sender)
     {
       if (String.IsNullOrEmpty(itemIdTextField.Text))
       {
@@ -64,7 +64,7 @@ namespace WhiteLabeliOS
       this.HideKeyboard(this.fieldNameTextField);
     }
 
-    partial void OnPayloadValueChanged(MonoTouch.UIKit.UISegmentedControl sender)
+    partial void OnPayloadValueChanged(UISegmentedControl sender)
     {
       switch (sender.SelectedSegment)
       {
@@ -86,7 +86,7 @@ namespace WhiteLabeliOS
       }
     }
 
-    partial void OnButtonChangeState(MonoTouch.UIKit.UIButton sender)
+    partial void OnButtonChangeState(UIButton sender)
     {
       sender.Selected = !sender.Selected;
     }

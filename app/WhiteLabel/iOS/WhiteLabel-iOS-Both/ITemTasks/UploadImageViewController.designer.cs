@@ -21,19 +21,19 @@ namespace WhiteLabeliOS
 	partial class UploadImageViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton cancelButton { get; set; }
+		UIButton cancelButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField itemNameTextField { get; set; }
+		UITextField itemNameTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField itemPathTextField { get; set; }
+		UITextField itemPathTextField { get; set; }
 
 		[Action ("OnCancelUploadButtonTouched:")]
-		partial void OnCancelUploadButtonTouched (MonoTouch.Foundation.NSObject sender);
+		partial void OnCancelUploadButtonTouched (NSObject sender);
 
 		[Action ("OnUploadImageButtonTouched:")]
-		partial void OnUploadImageButtonTouched (MonoTouch.Foundation.NSObject sender);
+		partial void OnUploadImageButtonTouched (NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

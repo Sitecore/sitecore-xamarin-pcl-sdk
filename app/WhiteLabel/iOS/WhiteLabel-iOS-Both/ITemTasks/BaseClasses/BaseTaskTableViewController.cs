@@ -96,7 +96,7 @@ namespace WhiteLabeliOS
     
     }
 
-		protected MonoTouch.UIKit.UITableView TableView;
+		protected UITableView TableView;
     protected ISitecoreItem selectedItem;
     protected ItemsDataSource itemsDataSource;
     protected ItemCellSelectionHandler itemsTableDelegate;

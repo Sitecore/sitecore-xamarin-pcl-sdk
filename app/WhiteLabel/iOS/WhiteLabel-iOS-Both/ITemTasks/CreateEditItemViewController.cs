@@ -46,12 +46,12 @@
       this.updateButton.SetTitle(updateButtonTitle, UIControlState.Normal);
 		}
 
-		partial void OnCreateItemButtonTapped(MonoTouch.Foundation.NSObject sender)
+		partial void OnCreateItemButtonTapped(NSObject sender)
 		{
       this.SendRequest();
 		}
 
-    partial void OnUpdateItemButtonTapped(MonoTouch.Foundation.NSObject sender)
+    partial void OnUpdateItemButtonTapped(NSObject sender)
     {
       if (null == this.CreatedItemId)
       {

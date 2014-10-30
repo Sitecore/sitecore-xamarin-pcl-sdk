@@ -44,7 +44,7 @@
       getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);
     }
 
-    partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender)
+    partial void OnGetItemButtonTouched (NSObject sender)
     {
       if (String.IsNullOrEmpty(this.ItemPathField.Text))
       {
@@ -59,7 +59,7 @@
       }
     }
 
-    partial void OnPayloadValueChanged (MonoTouch.UIKit.UISegmentedControl sender)
+    partial void OnPayloadValueChanged (UISegmentedControl sender)
     {
       switch (sender.SelectedSegment)
       {
@@ -81,7 +81,7 @@
       }
     }
 
-    partial void OnButtonChangeState (MonoTouch.UIKit.UIButton sender)
+    partial void OnButtonChangeState (UIButton sender)
     {
       sender.Selected = !sender.Selected;
     }

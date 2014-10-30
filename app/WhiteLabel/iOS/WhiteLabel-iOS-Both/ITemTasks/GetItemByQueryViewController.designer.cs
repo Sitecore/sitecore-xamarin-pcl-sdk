@@ -21,19 +21,19 @@ namespace WhiteLabeliOS
 	partial class GetItemByQueryViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton getItemButton { get; set; }
+		UIButton getItemButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView ItemsTableView { get; set; }
+		UITableView ItemsTableView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel nameLabel { get; set; }
+		UILabel nameLabel { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField queryTextField { get; set; }
+		UITextField queryTextField { get; set; }
 
 		[Action ("OnGetItemButtonTouched:")]
-		partial void OnGetItemButtonTouched (MonoTouch.Foundation.NSObject sender);
+		partial void OnGetItemButtonTouched (NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
