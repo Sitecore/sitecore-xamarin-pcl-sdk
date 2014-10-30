@@ -217,7 +217,7 @@
 	<CallTarget Targets="PrepareDeploymentDir"/>
 	<Copy
       SourceFiles="@(PasswordAndroidArtefacts)"
-      DestinationFolder="$(BinariesDeploymentDirectory) ">
+      DestinationFolder="$(BinariesDeploymentDirectory) "/>
 	 
   </Target>
 
