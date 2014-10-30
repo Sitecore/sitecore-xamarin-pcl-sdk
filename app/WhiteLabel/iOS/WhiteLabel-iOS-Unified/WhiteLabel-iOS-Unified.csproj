@@ -113,129 +113,119 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="..\WhiteLabel-iOS\FieldsTableView\FieldCellSelectionHandler.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\FieldsTableView\FieldCellSelectionHandler.cs">
       <Link>FieldsTableView\FieldCellSelectionHandler.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\FieldsTableView\FieldsDataSource.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\FieldsTableView\FieldsDataSource.cs">
       <Link>FieldsTableView\FieldsDataSource.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\FieldsTableView\ItemCellSelectionHandler.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\FieldsTableView\ItemCellSelectionHandler.cs">
       <Link>FieldsTableView\ItemCellSelectionHandler.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\FieldsTableView\ItemsDataSource.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\FieldsTableView\ItemsDataSource.cs">
       <Link>FieldsTableView\ItemsDataSource.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\Helpers\AlertHelper.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\Helpers\AlertHelper.cs">
       <Link>Helpers\AlertHelper.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\Helpers\LoadingOverlay.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\Helpers\LoadingOverlay.cs">
       <Link>Helpers\LoadingOverlay.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\Helpers\PayloadSelectorViewHelper.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\Helpers\PayloadSelectorViewHelper.cs">
       <Link>Helpers\PayloadSelectorViewHelper.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\AuthViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\AuthViewController.cs">
       <Link>ITemTasks\AuthViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\AuthViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\AuthViewController.designer.cs">
       <Link>ITemTasks\AuthViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\CreateEditItemViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\CreateEditItemViewController.cs">
       <Link>ITemTasks\CreateEditItemViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\CreateEditItemViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\CreateEditItemViewController.designer.cs">
       <Link>ITemTasks\CreateEditItemViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\CreateITemByPathViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\CreateITemByPathViewController.cs">
       <Link>ITemTasks\CreateITemByPathViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\CreateITemByPathViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\CreateITemByPathViewController.designer.cs">
       <Link>ITemTasks\CreateITemByPathViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\DeleteITemByIdViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\DeleteITemByIdViewController.cs">
       <Link>ITemTasks\DeleteITemByIdViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\DeleteITemByIdViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\DeleteITemByIdViewController.designer.cs">
       <Link>ITemTasks\DeleteITemByIdViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\FieldsViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\FieldsViewController.cs">
       <Link>ITemTasks\FieldsViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\FieldsViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\FieldsViewController.designer.cs">
       <Link>ITemTasks\FieldsViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\GetItemByIdViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\GetItemByIdViewController.cs">
       <Link>ITemTasks\GetItemByIdViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\GetItemByIdViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\GetItemByIdViewController.designer.cs">
       <Link>ITemTasks\GetItemByIdViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\GetItemByPathViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\GetItemByPathViewController.cs">
       <Link>ITemTasks\GetItemByPathViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\GetItemByPathViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\GetItemByPathViewController.designer.cs">
       <Link>ITemTasks\GetItemByPathViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\GetItemByQueryViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\GetItemByQueryViewController.cs">
       <Link>ITemTasks\GetItemByQueryViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\GetItemByQueryViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\GetItemByQueryViewController.designer.cs">
       <Link>ITemTasks\GetItemByQueryViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\GetMediaItemViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\GetMediaItemViewController.cs">
       <Link>ITemTasks\GetMediaItemViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\GetMediaItemViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\GetMediaItemViewController.designer.cs">
       <Link>ITemTasks\GetMediaItemViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\RenderingHtmlViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\RenderingHtmlViewController.cs">
       <Link>ITemTasks\RenderingHtmlViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\RenderingHtmlViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\RenderingHtmlViewController.designer.cs">
       <Link>ITemTasks\RenderingHtmlViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\UploadImageViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\UploadImageViewController.cs">
       <Link>ITemTasks\UploadImageViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\UploadImageViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\UploadImageViewController.designer.cs">
       <Link>ITemTasks\UploadImageViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\BaseClasses\BaseTaskTableViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\BaseClasses\BaseTaskTableViewController.cs">
       <Link>ITemTasks\BaseClasses\BaseTaskTableViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs">
       <Link>ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\BaseClasses\BaseTaskViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\BaseClasses\BaseTaskViewController.cs">
       <Link>ITemTasks\BaseClasses\BaseTaskViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\ITemTasks\BaseClasses\BaseTaskViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\ITemTasks\BaseClasses\BaseTaskViewController.designer.cs">
       <Link>ITemTasks\BaseClasses\BaseTaskViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\MasterViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\MasterViewController.cs">
       <Link>MasterViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\MasterViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\MasterViewController.designer.cs">
       <Link>MasterViewController.designer.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\SettingsViewController.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\SettingsViewController.cs">
       <Link>SettingsViewController.cs</Link>
     </Compile>
-    <Compile Include="..\WhiteLabel-iOS\SettingsViewController.designer.cs">
+    <Compile Include="..\WhiteLabel-iOS-Both\SettingsViewController.designer.cs">
       <Link>SettingsViewController.designer.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="FieldsTableView\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="ITemTasks\" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="..\WhiteLabel-iOS\MainStoryboard_iPhone.storyboard">
-      <Link>MainStoryboard_iPhone.storyboard</Link>
-    </InterfaceDefinition>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
@@ -249,5 +239,27 @@
       <Project>{F973D9C9-61F3-417F-92D1-F32E0CB59187}</Project>
       <Name>Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FieldsTableView\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="ITemTasks\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\WhiteLabel-iOS-Both\Resources\Default-568h%402x.png">
+      <Link>Resources\Default-568h%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\WhiteLabel-iOS-Both\Resources\en.lproj\Localizable.strings">
+      <Link>Resources\en.lproj\Localizable.strings</Link>
+    </BundleResource>
+    <BundleResource Include="..\WhiteLabel-iOS-Both\Resources\ru.lproj\Localizable.strings">
+      <Link>Resources\ru.lproj\Localizable.strings</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="..\WhiteLabel-iOS-Both\MainStoryboard_iPhone.storyboard">
+      <Link>MainStoryboard_iPhone.storyboard</Link>
+    </InterfaceDefinition>
   </ItemGroup>
 </Project>
