@@ -98,12 +98,12 @@ namespace WhiteLabeliOS
         this.controller = controller;
       }
 
-      public override int NumberOfSections (UITableView tableView)
+      public override nint NumberOfSections (UITableView tableView)
       {
         return 1;
       }
 
-      public override int RowsInSection (UITableView tableview, int section)
+      public override nint RowsInSection (UITableView tableview, nint section)
       {
         return controller.features.Count;
       }

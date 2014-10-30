@@ -7,6 +7,8 @@ using Foundation;
 #else
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+
+using nint = global::System.Int32;
 #endif
 
 
@@ -49,9 +51,9 @@ namespace WhiteLabeliOS
 			AlertHelper.ShowLocalizedAlertWithOkOption("Alert", "Not implemented yet");
 		}
 
-		public static Task<int> ShowAlert(string title, string message, params string [] buttons)
+		public static Task<nint> ShowAlert(string title, string message, params string [] buttons)
 		{
-			var tcs 	= new TaskCompletionSource<int>();
+			var tcs 	= new TaskCompletionSource<nint>();
 			var alert 	= new UIAlertView 
 			{
 				Title = title,
