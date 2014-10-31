@@ -49,7 +49,7 @@ The actual installation instructions may vary depending on both the distribution
 Since the SDK has been designed as a portable class library (PCL), you can use the very same code on all platforms to fetch the home item contents. 
 
 ```csharp
-using (var credentials = new SecureStringPasswordProvider("admin", "b")) // providing secure credentials
+using (var credentials = new SecureStringPasswordProvider("username", "password")) // providing secure credentials
 using 
 (
   var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
