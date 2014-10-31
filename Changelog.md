@@ -5,14 +5,8 @@
 
 ### New Features :
 
-[-] Authentication
-[-] Read Item by Id
-[-] Read Item by Path
-[-] Read Items using Sitecore Query 
-[-] Read raw value for fields
-
-
-### Out of Scope
-
-* Caching and persistence
-* Fetching field value objects
+* Fetching CMS Content
+* Source HTML renderings from Sitecore CMS
+* Create, Delete, Update Items
+* Downloading and Uploading Media Resources
+* Protect security sensitive data
