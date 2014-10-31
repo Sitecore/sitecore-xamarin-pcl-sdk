@@ -1,7 +1,7 @@
 # Sitecore Mobile SDK PCL
 
 
-# Version 0.1
+# Version 1.0
 
 ### New Features :
 
