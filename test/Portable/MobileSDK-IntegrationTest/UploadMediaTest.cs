@@ -429,9 +429,8 @@
 
     private Stream GetStreamFromUrl(string url)
     {
-
-      WebRequest req = WebRequest.Create(url);
-      return req.GetResponse().GetResponseStream();
+      var data = new WebClient().DownloadData(new Uri(url));
+      return new MemoryStream(data);
     }
 
     private async void AssertImageUploaded(string itemPath, string database)
@@ -441,8 +440,10 @@
         .Build();
 
       using (var response = await this.session.DownloadMediaResourceAsync(request))
+      using (var ms = new MemoryStream())
       {
-        Assert.IsTrue(response.Length > 0);
+        await response.CopyToAsync(ms);
+        Assert.IsTrue(ms.Length > 0);
       }
     }
 
