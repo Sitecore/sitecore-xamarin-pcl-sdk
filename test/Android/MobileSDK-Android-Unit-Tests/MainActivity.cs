@@ -1,23 +1,49 @@
-﻿using System.Reflection;
-
-using Android.App;
-using Android.OS;
-using Xamarin.Android.NUnitLite;
-
-namespace MobileSDKAndroidUnitTests
+﻿namespace MobileSDKAndroidTests
 {
-  [Activity(Label = "MobileSDK-Android-Unit-Tests", MainLauncher = true)]
-  public class MainActivity : TestSuiteActivity
-  {
-    protected override void OnCreate(Bundle bundle)
-    {
-      // tests can be inside the main assembly
-      AddTest(Assembly.GetExecutingAssembly());
-      // or in any reference assemblies
-      // AddTest (typeof (Your.Library.TestClass).Assembly);
+  using System.IO;
 
-      // Once you called base.OnCreate(), you cannot add more assemblies.
-      base.OnCreate(bundle);
+  using System.Reflection;
+  using Android.App;
+  using Android.OS;
+  using Xamarin.Android.NUnitLite;
+
+  using System;
+  using Android.Util;
+
+  [Activity(Label = "MobileSDK-Android-Unit-Tests", MainLauncher = true)]
+  public class MainActivity : ConfigurableTestActivity
+  {
+    private const string TouchServerHost = "10.38.10.175";
+    private const int TouchServerPort = 8888;
+
+    protected override bool IsAutomated
+    {
+      get
+      {
+        return true;
+      }
+    }
+
+    protected override TextWriter TargetTextWriter
+    {
+      get
+      {
+        var message = string.Format("[{0}] Sending results to {1}:{2}", DateTime.Now, TouchServerHost, TouchServerPort);
+
+        Log.Debug(this.GetType().Name, message);
+        try
+        {
+          return new TcpTextWriter(hostName: TouchServerHost, port: TouchServerPort);
+        }
+        catch (System.Exception exception)
+        {
+          var debugMessage = string.Format("Failed to connect to {0}:{1}.\n{2}", TouchServerHost, TouchServerPort,
+            exception);
+
+          Log.Debug(GetType().Name, debugMessage);
+          throw;
+        }
+      }
     }
   }
 }

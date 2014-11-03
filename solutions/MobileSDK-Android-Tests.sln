@@ -31,6 +31,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Unit-Tests", "..\test\Android\MobileSDK-Android-Unit-Tests\MobileSDK-Android-Unit-Tests.csproj", "{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestConfiguration", "..\test\Android\TestConfiguration\TestConfiguration.shproj", "{6687F381-77B9-4C70-9E43-6916FA6FF5AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,7 @@ Global
 		{8578D879-0661-4986-A37C-D37538458981} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
 		{F4684840-46F5-4BED-9E05-A2C45C381BE2} = {46462244-D5D8-44B6-A46E-5EA74117B523}
 		{40853BAA-B317-4F6B-9F40-C55A529BD583} = {46462244-D5D8-44B6-A46E-5EA74117B523}
+		{6687F381-77B9-4C70-9E43-6916FA6FF5AB} = {46462244-D5D8-44B6-A46E-5EA74117B523}
 		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
 		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
@@ -85,9 +88,12 @@ Global
 		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8dd5feee-1ed8-4f6d-a388-133e1f823811}*SharedItemsImports = 4
 		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8a52a2a6-20a1-42bd-b586-242f77089b1d}*SharedItemsImports = 13
 		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{25a7aae3-e76a-4c4f-aa0e-24983166c37d}*SharedItemsImports = 13
+		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{8007adbc-4501-447f-be99-e628a481bb3f}*SharedItemsImports = 13
 		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{2b6ef2c4-3ae1-414b-8833-3a0d25a0afb0}*SharedItemsImports = 13
+		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{b99eee93-6176-438f-b601-e0382545166a}*SharedItemsImports = 4
 		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{8578d879-0661-4986-a37c-d37538458981}*SharedItemsImports = 4
 		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{e7a0d5ec-7424-4e3b-bab3-c66ebfd2c21a}*SharedItemsImports = 4
+		..\test\Android\TestConfiguration\TestConfiguration.projitems*{6687f381-77b9-4c70-9e43-6916fa6ff5ab}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
