@@ -39,6 +39,8 @@ namespace MobileSDKAndroidTests
 
       this.AddTest(TestsAssembly);
 
+      Intent.PutExtra("automated", this.IsAutomated);
+
       base.OnCreate(bundle);
     }
 
