@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch.Server", "Touch.Server.csproj", "{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Debug|iPhone.Build.0 = Debug|iPhone
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Release|iPhone.ActiveCfg = Release|iPhone
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Release|iPhone.Build.0 = Release|iPhone
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
