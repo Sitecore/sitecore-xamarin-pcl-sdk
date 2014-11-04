@@ -124,7 +124,6 @@
       ushort p;
       if (UInt16.TryParse(Options.Port, out p))
       {
-        LogMessage(string.Format("Unable to parse port : {0}", Options.Port));
         listener.Port = p;
       }
 
