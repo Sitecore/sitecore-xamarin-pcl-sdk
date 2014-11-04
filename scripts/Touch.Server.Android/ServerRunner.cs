@@ -113,7 +113,7 @@
       IPAddress ip;
       if (String.IsNullOrEmpty(Options.IpAddress) || !IPAddress.TryParse(Options.IpAddress, out ip))
       {
-        LogMessage("Failed to parse ip addres. Using : " + IPAddress.Any);
+        LogMessage("Failed to parse ip address. Using : " + IPAddress.Any);
         listener.Address = IPAddress.Any;
       }
       else
