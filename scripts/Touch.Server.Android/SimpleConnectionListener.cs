@@ -90,23 +90,16 @@
 
     public bool Processing(TcpClient client)
     {
-      string logfile = Path.Combine(this.LogPath, this.LogFile ?? DateTime.UtcNow.Ticks.ToString() + ".log");
+      string logfile = Path.Combine(this.LogPath, this.LogFile ?? DateTime.UtcNow.Ticks + ".log");
       string remote = client.Client.RemoteEndPoint.ToString();
       ServerRunner.LogMessage("Connection from {0} saving logs to {1}", remote, logfile);
 
       using (FileStream fs = File.OpenWrite(logfile))
       {
-        // a few extra bits of data only available from this side
         string header = String.Format("[Local Date/Time:\t{1}]{0}[Remote Address:\t{2}]{0}",
           Environment.NewLine, DateTime.Now, remote);
         ServerRunner.LogMessage(header);
 
-        /*
-              byte[] array = Encoding.UTF8.GetBytes (header);
-              fs.Write (array, 0, array.Length);
-              fs.Flush ();
-        */
-        // now simply copy what we receive
         int i;
         int total = 0;
         NetworkStream stream = client.GetStream();

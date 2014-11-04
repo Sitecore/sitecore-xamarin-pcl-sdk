@@ -81,13 +81,13 @@
 
       if (_connectionListener != null && _adbCommand != null)
       {
-        if (_connectionListener.ExitCode == 1 && _adbCommand.ExitCode == 1)
+        if (_connectionListener.ExitCode == 0 && _adbCommand.ExitCode == 0)
         {
-          return 1;
+          return 0;
         }
       }
 
-      return 0;
+      return -1;
     }
 
     public static void LogMessage(string message)
