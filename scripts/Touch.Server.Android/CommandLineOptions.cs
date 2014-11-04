@@ -21,7 +21,7 @@ namespace Touch.Server
     [Option("autoexit", DefaultValue = false, HelpText = "Exit the server once a test run has completed (default: false)")]
     public bool AutoExit { get; set; }
 
-    [Option("adbCommand", HelpText = "Adb coomand to run with server")]
+    [Option("adbCommand", HelpText = "Adb coomand to run with server simultaneously")]
     public string AdbCommand { get; set; }
 
     [Option('v', null, HelpText = "Print details during execution.")]

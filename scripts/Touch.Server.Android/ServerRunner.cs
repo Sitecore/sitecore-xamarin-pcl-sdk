@@ -2,53 +2,97 @@
 {
   using System;
   using System.Net;
+  using System.Threading;
 
   class ServerRunner
   {
-    private static readonly CommandLineOptions options = new CommandLineOptions();
+    private static readonly CommandLineOptions Options = new CommandLineOptions();
+    private static SimpleConnectionListener _connectionListener;
+    private static AdbCommand _adbCommand;
 
     public static int Main(string[] args)
     {
-      if (CommandLine.Parser.Default.ParseArguments(args, options))
-      {
-        var listener = PrepareListener();
-        listener.Initialize();
-        listener.Start();
+      var returnCode = -1;
 
-        //        TODO: call methods
+      if (CommandLine.Parser.Default.ParseArguments(args, Options))
+      {
+        if (!string.IsNullOrWhiteSpace(Options.AdbCommand))
+        {
+          returnCode = StartAdbAndListener();
+        }
+        else
+        {
+          StartListener();
+          returnCode = _connectionListener.ExitCode;
+        }
       }
       else
       {
-        Console.WriteLine("Failed to parse oprions");
-        return 0;
+        Console.WriteLine("Failed to parse options");
       }
 
-      //
-      //      var p = new Process
-      //      {
-      //        StartInfo =
-      //        {
-      ////          adb shell am start -a android.intent.action.MAIN -n MobileSDK_Android_Unit_Tests.MobileSDK_Android_Unit_Tests/mobilesdkandroidunittests.MainActivity
-      //          FileName = "adb.exe",
-      //          Arguments = "shell am start -a android.intent.action.MAIN -n MobileSDK_Android_Unit_Tests.MobileSDK_Android_Unit_Tests/mobilesdkandroidunittests.MainActivity",
-      //          UseShellExecute = false,
-      //          RedirectStandardOutput = true
-      //        }
-      //      };
-      //      p.Start();
-      //
-      //      string output = p.StandardOutput.ReadToEnd();
-      //      p.WaitForExit();
-      //
-      //      Console.WriteLine("Output:");
-      //      Console.WriteLine(output);
+      return returnCode;
+    }
 
-      return 1;
+    private static void StartListener()
+    {
+      _connectionListener = PrepareListener();
+      _connectionListener.Initialize();
+      _connectionListener.Start();
+    }
+
+    private static int StartAdbAndListener()
+    {
+      var handles = new ManualResetEvent[2];
+
+      var listenerHandle = new ManualResetEvent(false);
+      Action listenerAction = () =>
+      {
+        try
+        {
+          StartListener();
+        }
+        finally
+        {
+          listenerHandle.Set();
+        }
+      };
+
+      handles[0] = listenerHandle;
+      ThreadPool.QueueUserWorkItem(x => listenerAction());
+
+      var adbHandle = new ManualResetEvent(false);
+      Action adbAction = () =>
+      {
+        try
+        {
+          _adbCommand = new AdbCommand(Options.AdbCommand, "adb.exe");
+          _adbCommand.Execute();
+        }
+        finally
+        {
+          adbHandle.Set();
+        }
+      };
+      handles[1] = adbHandle;
+      ThreadPool.QueueUserWorkItem(x => adbAction());
+
+      WaitHandle.WaitAll(handles);
+
+      if (_connectionListener != null && _adbCommand != null)
+      {
+        if (_connectionListener.ExitCode == 1 && _adbCommand.ExitCode == 1)
+        {
+          return 1;
+        }
+      }
+
+      return 0;
     }
 
     public static void LogMessage(string message)
     {
-      if (options != null && options.Verbose)
+      if (Options != null && Options.Verbose)
       {
         Console.WriteLine(message);
       }
@@ -56,7 +100,7 @@
 
     public static void LogMessage(string message, params object[] objects)
     {
-      if (options != null && options.Verbose)
+      if (Options != null && Options.Verbose)
       {
         Console.WriteLine(message, objects);
       }
@@ -67,7 +111,7 @@
       var listener = new SimpleConnectionListener();
 
       IPAddress ip;
-      if (String.IsNullOrEmpty(options.IpAddress) || !IPAddress.TryParse(options.IpAddress, out ip))
+      if (String.IsNullOrEmpty(Options.IpAddress) || !IPAddress.TryParse(Options.IpAddress, out ip))
       {
         LogMessage("Failed to parse ip addres. Using : " + IPAddress.Any);
         listener.Address = IPAddress.Any;
@@ -78,15 +122,15 @@
       }
 
       ushort p;
-      if (UInt16.TryParse(options.Port, out p))
+      if (UInt16.TryParse(Options.Port, out p))
       {
-        LogMessage(string.Format("Unable to parse port : {0}", options.Port));
+        LogMessage(string.Format("Unable to parse port : {0}", Options.Port));
         listener.Port = p;
       }
 
-      listener.LogPath = options.LogFilePath ?? ".";
-      listener.LogFile = options.LogFileName;
-      listener.AutoExit = options.AutoExit;
+      listener.LogPath = Options.LogFilePath ?? ".";
+      listener.LogFile = Options.LogFileName;
+      listener.AutoExit = Options.AutoExit;
 
       return listener;
     }

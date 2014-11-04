@@ -8,6 +8,8 @@
 
   class SimpleConnectionListener
   {
+    public int ExitCode { get; private set; }
+
     static byte[] buffer = new byte[16 * 1024];
 
     TcpListener server;
@@ -46,6 +48,8 @@
       }
 
       ServerRunner.LogMessage("Touch Server listening on: {0}:{1}", Address, Port);
+
+      this.ExitCode = -1;
     }
 
     public int Start()
@@ -60,13 +64,14 @@
           using (TcpClient client = server.AcceptTcpClient())
           {
             processed = Processing(client);
+            ExitCode = 0;
           }
         } while (!AutoExit || !processed);
       }
       catch (Exception e)
       {
         Console.WriteLine("[{0}] : {1}", DateTime.Now, e);
-        return 1;
+        return -1;
       }
       finally
       {
@@ -84,41 +89,44 @@
     }
 
     public bool Processing(TcpClient client)
-	{
-		string logfile = Path.Combine (LogPath, LogFile ?? DateTime.UtcNow.Ticks.ToString () + ".log");
-		string remote = client.Client.RemoteEndPoint.ToString ();
-		Console.WriteLine ("Connection from {0} saving logs to {1}", remote, logfile);
+    {
+      string logfile = Path.Combine(LogPath, LogFile ?? DateTime.UtcNow.Ticks.ToString() + ".log");
+      string remote = client.Client.RemoteEndPoint.ToString();
+      ServerRunner.LogMessage("Connection from {0} saving logs to {1}", remote, logfile);
 
-		using (FileStream fs = File.OpenWrite (logfile)) {
-			// a few extra bits of data only available from this side
-			string header = String.Format ("[Local Date/Time:\t{1}]{0}[Remote Address:\t{2}]{0}", 
-				Environment.NewLine, DateTime.Now, remote);
-			Console.WriteLine(header);
+      using (FileStream fs = File.OpenWrite(logfile))
+      {
+        // a few extra bits of data only available from this side
+        string header = String.Format("[Local Date/Time:\t{1}]{0}[Remote Address:\t{2}]{0}",
+          Environment.NewLine, DateTime.Now, remote);
+        ServerRunner.LogMessage(header);
 
-/*
-			byte[] array = Encoding.UTF8.GetBytes (header);
-			fs.Write (array, 0, array.Length);
-			fs.Flush ();
-*/
-			// now simply copy what we receive
-			int i;
-			int total = 0;
-			NetworkStream stream = client.GetStream ();
-			
-      while ((i = stream.Read (buffer, 0, buffer.Length)) != 0) {
-				fs.Write (buffer, 0, i);
-				fs.Flush ();
-				total += i;
-			}
-			
-			if (total < 16) {
-				// This wasn't a test run, but a connection from the app (on device) to find
-				// the ip address we're reachable on.
-				return false;
-			}
-		}
-		
-		return true;
-	}
+        /*
+              byte[] array = Encoding.UTF8.GetBytes (header);
+              fs.Write (array, 0, array.Length);
+              fs.Flush ();
+        */
+        // now simply copy what we receive
+        int i;
+        int total = 0;
+        NetworkStream stream = client.GetStream();
+
+        while ((i = stream.Read(buffer, 0, buffer.Length)) != 0)
+        {
+          fs.Write(buffer, 0, i);
+          fs.Flush();
+          total += i;
+        }
+
+        if (total < 16)
+        {
+          // This wasn't a test run, but a connection from the app (on device) to find
+          // the ip address we're reachable on.
+          return false;
+        }
+      }
+
+      return true;
+    }
   }
 }
