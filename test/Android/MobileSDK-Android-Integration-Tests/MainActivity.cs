@@ -9,8 +9,8 @@
   [Activity(Label = "MobileSDK-Android-Tests", MainLauncher = true)]
   public class MainActivity : ConfigurableTestActivity
   {
-    private const string TouchServerHost = "10.38.10.175";
-    private const int TouchServerPort = 8888;
+    private const string TouchServerHost = "10.45.110.119";
+    private const int TouchServerPort = 55555;
 
     protected override bool IsAutomated
     {
