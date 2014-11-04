@@ -1,4 +1,4 @@
-﻿namespace Touch.Server
+﻿namespace Touch.Server.Android
 {
   using System;
   using System.IO;
@@ -26,8 +26,8 @@
       try
       {
         // wait a second just in case more data arrives.
-        if (!stopped.WaitOne(TimeSpan.FromSeconds(1)))
-          server.Stop();
+        if (!this.stopped.WaitOne(TimeSpan.FromSeconds(1)))
+          this.server.Stop();
       }
       catch
       {
@@ -37,17 +37,17 @@
 
     public void Initialize()
     {
-      ServerRunner.LogMessage("User input for endpoint: {0}:{1}", Address, Port);
+      ServerRunner.LogMessage("User input for endpoint: {0}:{1}", this.Address, this.Port);
 
-      server = new TcpListener(Address, Port);
-      server.Start();
+      this.server = new TcpListener(this.Address, this.Port);
+      this.server.Start();
 
-      if (Port == 0)
+      if (this.Port == 0)
       {
-        Port = ((IPEndPoint)server.LocalEndpoint).Port;
+        this.Port = ((IPEndPoint)this.server.LocalEndpoint).Port;
       }
 
-      ServerRunner.LogMessage("Touch Server listening on: {0}:{1}", Address, Port);
+      ServerRunner.LogMessage("Touch Server listening on: {0}:{1}", this.Address, this.Port);
 
       this.ExitCode = -1;
     }
@@ -61,12 +61,12 @@
 
         do
         {
-          using (TcpClient client = server.AcceptTcpClient())
+          using (TcpClient client = this.server.AcceptTcpClient())
           {
-            processed = Processing(client);
-            ExitCode = 0;
+            processed = this.Processing(client);
+            this.ExitCode = 0;
           }
-        } while (!AutoExit || !processed);
+        } while (!this.AutoExit || !processed);
       }
       catch (Exception e)
       {
@@ -77,11 +77,11 @@
       {
         try
         {
-          server.Stop();
+          this.server.Stop();
         }
         finally
         {
-          stopped.Set();
+          this.stopped.Set();
         }
       }
 
@@ -90,7 +90,7 @@
 
     public bool Processing(TcpClient client)
     {
-      string logfile = Path.Combine(LogPath, LogFile ?? DateTime.UtcNow.Ticks.ToString() + ".log");
+      string logfile = Path.Combine(this.LogPath, this.LogFile ?? DateTime.UtcNow.Ticks.ToString() + ".log");
       string remote = client.Client.RemoteEndPoint.ToString();
       ServerRunner.LogMessage("Connection from {0} saving logs to {1}", remote, logfile);
 

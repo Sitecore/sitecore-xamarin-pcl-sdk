@@ -1,4 +1,4 @@
-﻿namespace Touch.Server
+﻿namespace Touch.Server.Android
 {
   using System;
   using System.Net;

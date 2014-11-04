@@ -1,5 +1,5 @@
 ﻿
-namespace Touch.Server
+namespace Touch.Server.Android
 {
   using CommandLine;
   using CommandLine.Text;
