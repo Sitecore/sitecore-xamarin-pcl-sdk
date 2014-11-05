@@ -24,6 +24,11 @@
         return AdbExeName;
       }
 
+      if (path.Contains("adb"))
+      {
+        return path;
+      }
+
       if (!path.EndsWith("\\"))
       {
         path += "\\";
@@ -50,6 +55,7 @@
         proc.Start();
         proc.WaitForExit();
         
+        ServerRunner.LogMessage("Finished with adb command (return code : {0})", proc.ExitCode);
         this.ExitCode = proc.ExitCode;
       }
     }
