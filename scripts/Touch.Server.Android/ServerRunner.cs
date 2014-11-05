@@ -66,7 +66,7 @@
       {
         try
         {
-          _adbCommand = new AdbCommand(Options.AdbCommand, "adb.exe");
+          _adbCommand = new AdbCommand(Options.AdbCommand, Options.AdbPath);
           _adbCommand.Execute();
         }
         finally
