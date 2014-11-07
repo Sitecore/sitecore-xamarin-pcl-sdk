@@ -8,7 +8,7 @@
   {
     private static readonly CommandLineOptions Options = new CommandLineOptions();
     private static SimpleConnectionListener _connectionListener;
-    private static AdbCommand _adbCommand;
+    private static AdbActivtiyLaunchCommand _adbActivtiyLaunchCommand;
 
     public static int Main(string[] args)
     {
@@ -16,7 +16,7 @@
 
       if (CommandLine.Parser.Default.ParseArguments(args, Options))
       {
-        if (!string.IsNullOrWhiteSpace(Options.AdbCommand))
+        if (!string.IsNullOrWhiteSpace(Options.Activity))
         {
           returnCode = StartAdbAndListener();
         }
@@ -66,8 +66,8 @@
       {
         try
         {
-          _adbCommand = new AdbCommand(Options.AdbCommand, Options.AdbPath);
-          _adbCommand.Execute();
+          _adbActivtiyLaunchCommand = new AdbActivtiyLaunchCommand(Options.Activity, Options.AdbPath);
+          _adbActivtiyLaunchCommand.Execute();
         }
         finally
         {
@@ -79,9 +79,9 @@
 
       WaitHandle.WaitAll(handles);
 
-      if (_connectionListener != null && _adbCommand != null)
+      if (_connectionListener != null && _adbActivtiyLaunchCommand != null)
       {
-        if (_connectionListener.ExitCode == 0 && _adbCommand.ExitCode == 0)
+        if (_connectionListener.ExitCode == 0 && _adbActivtiyLaunchCommand.ExitCode == 0)
         {
           return 0;
         }

@@ -21,8 +21,9 @@ namespace Touch.Server.Android
     [Option("autoexit", DefaultValue = false, HelpText = "Exit the server once a test run has completed (default: false)")]
     public bool AutoExit { get; set; }
 
-    [Option("adbCommand", HelpText = "Adb coomand to run with server simultaneously")]
-    public string AdbCommand { get; set; }
+    [Option("activity", HelpText = "Fully qualified activity name that will be launched after server starts.(exmaple : " +
+                                   "package_name/namespace.MainActivity)")]
+    public string Activity { get; set; }
 
     [Option("adbPath", HelpText = "Path to adb.exe (default: will use adb.exe from environment)")]
     public string AdbPath { get; set; }

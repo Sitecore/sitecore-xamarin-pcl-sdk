@@ -62,7 +62,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdbCommand.cs" />
+    <Compile Include="AdbActivtiyLaunchCommand.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="CommandLineOptions.cs" />
     <Compile Include="ServerRunner.cs" />
