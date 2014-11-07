@@ -18,7 +18,7 @@ namespace MobileSDKAndroidTests
     {
       get
       {
-        return false;
+        return TestResultsConfig.IsAutomated;
       }
     }
 
