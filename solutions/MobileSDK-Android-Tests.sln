@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{35799CB2-AD21-4004-AAA6-5D8B7767CECB}"
@@ -34,11 +34,32 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestConfiguration", "..\test\Android\TestConfiguration\TestConfiguration.shproj", "{6687F381-77B9-4C70-9E43-6916FA6FF5AB}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\test\Android\TestConfiguration\TestConfiguration.projitems*{8dd5feee-1ed8-4f6d-a388-133e1f823811}*SharedItemsImports = 4
+		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8dd5feee-1ed8-4f6d-a388-133e1f823811}*SharedItemsImports = 4
+		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8a52a2a6-20a1-42bd-b586-242f77089b1d}*SharedItemsImports = 13
+		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{25a7aae3-e76a-4c4f-aa0e-24983166c37d}*SharedItemsImports = 13
+		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{8007adbc-4501-447f-be99-e628a481bb3f}*SharedItemsImports = 13
+		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{2b6ef2c4-3ae1-414b-8833-3a0d25a0afb0}*SharedItemsImports = 13
+		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{b99eee93-6176-438f-b601-e0382545166a}*SharedItemsImports = 4
+		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{8578d879-0661-4986-a37c-d37538458981}*SharedItemsImports = 4
+		..\test\Android\TestConfiguration\TestConfiguration.projitems*{e7a0d5ec-7424-4e3b-bab3-c66ebfd2c21a}*SharedItemsImports = 4
+		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{e7a0d5ec-7424-4e3b-bab3-c66ebfd2c21a}*SharedItemsImports = 4
+		..\test\Android\TestConfiguration\TestConfiguration.projitems*{6687f381-77b9-4c70-9e43-6916fa6ff5ab}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,24 +68,19 @@ Global
 		{8578D879-0661-4986-A37C-D37538458981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8578D879-0661-4986-A37C-D37538458981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8578D879-0661-4986-A37C-D37538458981}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B99EEE93-6176-438F-B601-E0382545166A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D247D253-0923-4541-90B5-0F5E6304C33F} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
@@ -74,28 +90,14 @@ Global
 		{8007ADBC-4501-447F-BE99-E628A481BB3F} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
 		{8578D879-0661-4986-A37C-D37538458981} = {35799CB2-AD21-4004-AAA6-5D8B7767CECB}
 		{F4684840-46F5-4BED-9E05-A2C45C381BE2} = {46462244-D5D8-44B6-A46E-5EA74117B523}
-		{40853BAA-B317-4F6B-9F40-C55A529BD583} = {46462244-D5D8-44B6-A46E-5EA74117B523}
-		{6687F381-77B9-4C70-9E43-6916FA6FF5AB} = {46462244-D5D8-44B6-A46E-5EA74117B523}
 		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
 		{E7A0D5EC-7424-4E3B-BAB3-C66EBFD2C21A} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
+		{40853BAA-B317-4F6B-9F40-C55A529BD583} = {46462244-D5D8-44B6-A46E-5EA74117B523}
 		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
 		{8DD5FEEE-1ED8-4F6D-A388-133E1F823811} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
+		{6687F381-77B9-4C70-9E43-6916FA6FF5AB} = {46462244-D5D8-44B6-A46E-5EA74117B523}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ..\test\Android\MobileSDK-Android-Unit-Tests\MobileSDK-Android-Unit-Tests.csproj
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8dd5feee-1ed8-4f6d-a388-133e1f823811}*SharedItemsImports = 4
-		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8a52a2a6-20a1-42bd-b586-242f77089b1d}*SharedItemsImports = 13
-		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{25a7aae3-e76a-4c4f-aa0e-24983166c37d}*SharedItemsImports = 13
-		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{8007adbc-4501-447f-be99-e628a481bb3f}*SharedItemsImports = 13
-		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{2b6ef2c4-3ae1-414b-8833-3a0d25a0afb0}*SharedItemsImports = 13
-		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{b99eee93-6176-438f-b601-e0382545166a}*SharedItemsImports = 4
-		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{8578d879-0661-4986-a37c-d37538458981}*SharedItemsImports = 4
-		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{e7a0d5ec-7424-4e3b-bab3-c66ebfd2c21a}*SharedItemsImports = 4
-		..\test\Android\TestConfiguration\TestConfiguration.projitems*{6687f381-77b9-4c70-9e43-6916fa6ff5ab}*SharedItemsImports = 13
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
