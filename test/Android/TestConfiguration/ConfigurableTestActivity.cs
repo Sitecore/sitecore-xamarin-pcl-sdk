@@ -12,6 +12,7 @@ namespace MobileSDKAndroidTests
 
   public abstract class ConfigurableTestActivity : TestSuiteActivity
   {
+    private readonly string tag = typeof(ConfigurableTestActivity).Name;
     private DateTime testsStartTime;
 
     protected virtual bool IsAutomated
@@ -51,8 +52,6 @@ namespace MobileSDKAndroidTests
 
       this.AddTest(TestsAssembly);
 
-      Intent.PutExtra("automated", this.IsAutomated);
-
       base.OnCreate(bundle);
     }
 
@@ -75,6 +74,11 @@ namespace MobileSDKAndroidTests
 
     protected virtual void PublishResults(TestResult testResults)
     {
+      Log.Info(this.tag, "Publishing results : " + DateTime.Now +
+                    "\nTotal count : {0}, Failed : {1}",
+        testResults.AssertCount,
+        testResults.FailCount);
+
       // ReSharper disable once ConditionIsAlwaysTrueOrFalse
       if (TestResultsConfig.IsRemote)
       {
@@ -88,6 +92,9 @@ namespace MobileSDKAndroidTests
             var tcpwriter = this.NetworkWriter;
 
             nunit2Writer.WriteResultFile(testResults, tcpwriter);
+            tcpwriter.Close();
+
+            Log.Info(this.tag, "Published tests results in nunit2 format");
             return;
           case "nunit3":
             var nunit3Writer = new NUnit3XmlOutputWriter(this.testsStartTime);
@@ -95,6 +102,8 @@ namespace MobileSDKAndroidTests
 
             nunit3Writer.WriteResultFile(testResults, newtworkWriter);
             newtworkWriter.Close();
+
+            Log.Info(this.tag, "Published tests results in nunit3 format");
             return;
         }
       }
@@ -108,9 +117,9 @@ namespace MobileSDKAndroidTests
     protected TestResult RunTests()
     {
       var runMethod = this.GetAndroidRunner().GetType().GetMethod("Run", BindingFlags.Public | BindingFlags.Instance);
-
       this.testsStartTime = DateTime.Now;
 
+      Log.Info(this.tag, "Running tests: " + this.testsStartTime);
       var result = runMethod.Invoke(this.GetAndroidRunner(), new object[]
       {
         this.CurrentTest
