@@ -126,6 +126,10 @@
       {
         listener.Port = p;
       }
+      else
+      {
+        Console.WriteLine("Failed to parse port. Will use dafult.");
+      }
 
       listener.LogPath = Options.LogFilePath ?? ".";
       listener.LogFile = Options.LogFileName;

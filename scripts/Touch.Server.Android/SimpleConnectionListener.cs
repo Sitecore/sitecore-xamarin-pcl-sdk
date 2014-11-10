@@ -47,7 +47,7 @@
         this.Port = ((IPEndPoint)this.server.LocalEndpoint).Port;
       }
 
-      ServerRunner.LogMessage("Touch Server listening on: {0}:{1}", this.Address, this.Port);
+      Console.WriteLine("Touch Server listening on: {0}:{1}", this.Address, this.Port);
 
       this.ExitCode = -1;
     }
@@ -90,9 +90,9 @@
 
     public bool Processing(TcpClient client)
     {
-      string logfile = Path.Combine(this.LogPath, this.LogFile ?? DateTime.UtcNow.Ticks + ".log");
+      string logfile = Path.Combine(this.@LogPath, this.LogFile ?? DateTime.UtcNow.Ticks + ".log");
       string remote = client.Client.RemoteEndPoint.ToString();
-      ServerRunner.LogMessage("Connection from {0} saving logs to {1}", remote, logfile);
+      Console.WriteLine("Connection from {0} saving logs to {1}", remote, logfile);
 
       using (FileStream fs = File.OpenWrite(logfile))
       {

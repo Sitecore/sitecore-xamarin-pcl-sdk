@@ -25,7 +25,7 @@ namespace Touch.Server.Android
                                    "package_name/namespace.MainActivity)")]
     public string Activity { get; set; }
 
-    [Option("adbPath", HelpText = "Path to adb.exe (default: will use adb.exe from environment)")]
+    [Option("adbpath", HelpText = "Path to adb.exe (default: will use adb.exe from environment)")]
     public string AdbPath { get; set; }
 
     [Option('v', null, HelpText = "Print details during execution.")]

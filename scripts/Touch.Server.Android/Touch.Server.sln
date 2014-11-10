@@ -7,15 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch.Server.Android", "Tou
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|iPhone = Debug|iPhone
-		Release|iPhone = Release|iPhone
+		Debug|AnyCPU = Debug|AnyCPU
+		Release|AnyCPU = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Debug|iPhone.Build.0 = Debug|iPhone
-		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Release|iPhone.Build.0 = Release|Any CPU
-		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Release|iPhone.Deploy.0 = Release|Any CPU
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{A1303AE1-2693-4DF7-A17B-20C2ABA1E2ED}.Release|AnyCPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

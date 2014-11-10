@@ -1,14 +1,13 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Touch.Server.Android")]
-[assembly: AssemblyDescription("Touch server for Xamarin Android Tests")]
+[assembly: AssemblyDescription("Touch server for collection results of Xamarin Android Nunitlite Tests")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sitecore")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Touch.Server.Android")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
