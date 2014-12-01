@@ -74,7 +74,9 @@ To see fields list just touch the item. For example, ‘Home’ item have follow
 Touch ‘Back’ button to return to the main screen.
 
 Appropriate source code, to send **ReadItemsRequestWithId** request you can find in 
+
 class 		- **GetItemByIdViewController **
+
 method 	- **SendRequest()**
 
 
@@ -253,11 +255,14 @@ method 	- **SendRequest()**
 
 In case of any errors from server side try to ensure that you have correctly installed and configured WebApi module on your cms. Also ensure you have access to the server from your device or simulator. Try to send the following request via your browser(simulator browser, device browser):
 
-> <*host*>/-/item/v1%2fsitecore%2fshell/-/actions/getpublickey
+```
+<host>/-/item/v1%2fsitecore%2fshell/-/actions/getpublickey
+```
 
-response should looks like:
-><RSAKeyValue>Modulus>qj4TwhUdSCSCYo8g4o/bWMCyI3NiNLAB79NvU6rdEGS4U1u9DNd3LUThqKBY7OqsL8A5dE6HE+0y95BXVmlmb9FSQPpwygnVl0C+Ym+ahRafNBcmf04wYuwV6OWsnA7RtKWT3c0xpuYmxiUoqghrSLbk+QjtmRnBxfsN4qJjHuU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>
-
+response should look like:
+```xml
+<RSAKeyValue>Modulus>qj4TwhUdSCSCYo8g4o/bWMCyI3NiNLAB79NvU6rdEGS4U1u9DNd3LUThqKBY7OqsL8A5dE6HE+0y95BXVmlmb9FSQPpwygnVl0C+Ym+ahRafNBcmf04wYuwV6OWsnA7RtKWT3c0xpuYmxiUoqghrSLbk+QjtmRnBxfsN4qJjHuU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>
+```
 
 ####*Application side issues*
 
