@@ -3,20 +3,20 @@
 
 - How to run WhiteLabel-iOS application
 - WhiteLabel-iOS overview
-	1. Main Page
-	2. Settings
-	3. Get Item by ID
-	4. Get Item by Path
-	5. Get Item by Query
-	5. Create/Update Item by ID
-	6. Delete Item
-	7. Authentication
-	8. Download Image
-	9. Upload Image
-	10. Get Rendering HTML
+	* Main Page
+	* Settings
+	* Get Item by ID
+	* Get Item by Path
+	* Get Item by Query
+	* Create/Update Item by ID
+	* Delete Item
+	* Authentication
+	* Download Image
+	* Upload Image
+	* Get Rendering HTML
 - Troubles
-	1. Server side issues
-	2. Application side issues
+	* Server side issues
+	* Application side issues
 
 ###**How to run WhiteLabel-iOS application**
 To build iOS application from source code you will need:
@@ -31,7 +31,218 @@ To build iOS application from source code you will need:
 3. Select Run -> Run With -> Choose simulator
 
 ###**WhiteLabel-iOS overview**
-1. Main Page
+#### *Main Page*
 On the main page you can see the list of all available features. To see feature screen you should touch appropriate element.
 
-![Main Page](screens/MainPage.png?raw=true)
+![Main Page](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/MainPage.png?raw=true)
+
+####*Settings*
+![Settings Icon](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/SettingsIcon.png?raw=true)
+
+Touch  button to open Settings screen
+
+![Settings Screen](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/SettingsScreen.png?raw=true)
+
+*Options:*
+
+1. Url. Required. Your CMS instance url, should be started with ‘http://’ or ‘https://’ prefix.
+2. Existent username. Required.
+3. Existent password. Required.
+4. Site. Optional. Can be empty, but you must specify domain for the username in this case. For example, username should be like: ‘sitecore\admin’.
+5. Default database. Optional. Can be specified programmatically in your code.
+6. Default language. Optional. Can be specified programmatically in your code.
+
+####<a name="GetItembyID"></a>*Get Item by ID*
+
+![Get Item By Id Screen](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemById.png?raw=true)
+
+*Options:*
+
+1. Appropriate item GUID values enclosed in curly braces. Required.
+2. Field name. Optional. Will read single field value.
+3. Payload. Required. Specified the set of fields to read.
+4. Scope. Required. Specified item, or parent item, or item’s children will be read.
+
+Touch “Get Item” button to read item. Result should look like this:
+
+![Get Item By Id Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByIdResults.png?raw=true)
+
+To see fields list just touch the item. For example, ‘Home’ item have following fields:
+
+![Get Item By Id Item Fields Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByIdResultsFields.png?raw=true)
+
+Touch ‘Back’ button to return to the main screen.
+
+Appropriate source code, to send **ReadItemsRequestWithId** request you can find in 
+class 		- **GetItemByIdViewController **
+method 	- **SendRequest()**
+
+
+####*Get Item by Path*
+
+![Get Item By Path Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByPath.png?raw=true)
+
+*Options:*
+
+1. .Appropriate item path. Required.
+2. Field name. Optional. Will read single field value.
+3. Payload. Required. Specified the set of fields to read.
+4. Scope. Required. Specified item, or parent item, or item’s children will be read.
+
+
+Touch “Get Item” button to read item. You will receive same results as in section [Get Item by ID](#GetItembyID) 
+
+Appropriate source code, to send **ReadItemsRequestWithPath** request you can find in 
+class 		- **GetItemByPathViewController**
+method 	- **SendRequest()**
+
+####*Get Item by Query*
+
+![Get Item by Query Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByQuery.png?raw=true)
+
+*Options:*
+
+1. Sitecore Query. Required. 
+
+Touch “Get Item” button to read item. With default query in this demo you will receive children list for the ‘Home’ item.
+
+![Get Item by Query Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetitemByQueryResults.png?raw=true)
+
+Appropriate source code, to send **ReadItemsRequestWithSitecoreQuery** request you can find in 
+class 		- **GetItemByQueryViewController** 
+method 	- **SendRequest()**
+
+####*Create/Update Item by ID*
+
+![Create Item By Id Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/CreateItemById.png?raw=true)
+
+*Options:*
+
+1. Parent item id. Required.
+2. New Item Display name. Required.
+3. New Item Title Field value. Required.
+4. New Item Text Field value. Required.
+
+To create new item touch ‘create’ button.
+When new item will be created the following message will appear.
+
+![Create Item By Path Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/CreateItemByPathResult.png?raw=true)
+
+And the appropriate item will be created:
+
+![Created Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/CreatedItem.png?raw=true)
+
+Also you can update created item, to do this you need change some of the fields values and touch ‘Update created item’.
+For example, type ‘Updated title’ instead of ‘Test title’ and touch ‘Update created item’. Appropriate item will be updated:
+
+![Updated Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/UpdatedItem.png?raw=true)
+
+Appropriate source code, to send **CreateItemRequestWithParentPath** request you can find in 
+class 		- **CreateITemByPathViewController**
+method 	- **SendRequest()**
+
+And **UpdateItemRequestWithPath** request example you can find in 
+class 		- **CreateITemByPathViewController**
+method 	- **SendUpdateRequest()**
+
+####*Delete Item*
+
+![Delete Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DeleteItem.png?raw=true)
+
+*Options:*
+
+1. Item GUID values enclosed in curly braces. Required.
+2. Item path. Required.
+3. Sitecore query. Required.
+
+You have 3 option to delete items. Fill one of the fields and touch button under field, appropriate item will be deleted. And you should see the following alert.
+
+![Delete Item Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DeleteItemResults.png?raw=true)
+
+Appropriate source code, to:
+Delete item by id - **DeleteItemRequestWithId** request you can find in 
+class 		- **DeleteITemByIdViewController** 
+method 	- **SendDeleteByIdRequest()**
+
+Delete item by path - **DeleteItemRequestWithPath** request you can find in 
+class 		- **DeleteITemByIdViewController**
+method 	- **SendDeleteByPathRequest()**
+
+Delete item by query - **DeleteItemRequestWithSitecoreQuery** request you can find in 
+class 		- **DeleteITemByIdViewController**
+method 	- **SendDeleteByQueryRequest()**
+
+####*Authentication*
+
+![Authentication Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/Authentication.png?raw=true)
+
+*Options:*
+
+1. Url. Required. Your cms base url, should started with ‘http://’ or ‘https://’ prefix.
+2. Existed user name. Required.
+3. Existed user password. Required.
+4. Site. Optional. Can be empty, but you must specify domain for the user name in this case. For example, user name should be like: ‘sitecore\admin’.
+
+As result you will see the following alert if this user exists. 
+
+![Authentication Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/AuthenticationResult.png?raw=true)
+
+Appropriate source code, to send **AuthenticatedSessionWithHost** request you can find in 
+class 		- **AuthViewController** 
+method 	- **SendAuthRequest()**
+
+####*Download Image*
+
+![Download Image Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DownloadImage.png?raw=true)
+
+*Options:*
+
+1. Media path. Required.
+2. Image width. Optional.
+3. Image height. Optional.
+
+As result you will see the requested image.
+
+![Download Image Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DownloadImageResult.png?raw=true)
+
+Appropriate source code, to send **DownloadResourceRequestWithMediaPath** request you can find in 
+class 		- **GetMediaItemViewController** 
+method 	- **SendRequest()**
+
+####*Upload Image*
+
+![Upload Image Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/UploadImage.png?raw=true)
+
+*Options:*
+
+1. Path to images folder. Required. Related to the media library root.
+2. New image name. Required.
+
+Touch ‘Upload’ button to start image uploading. If you would like to cancel uploading process just touch ‘Cancel’ button.
+As result new media item will be created.
+ 
+Appropriate source code, to send **UploadResourceRequestWithParentPath** request you can find in 
+class 		- **UploadImageViewController** 
+method 	- **SendImage()**
+
+####*Get Rendering HTML*
+
+![Get Rendering HTML Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetRenderingHtml.png?raw=true)
+
+*Options:*
+
+1. Data source item GUID  for rendering, values enclosed in curly braces. Required.
+2. Rendering item GUID, values enclosed in curly braces. Required.
+
+Touch ‘Get rendering html’ button to get rendering. As result you will see the html page.
+For example, use:
+*{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}* - Home item for source id.
+*{493B3A83-0FA7-4484-8FC9-4680991CF743}* - default Sitecore ‘Sample Rendering’ for rendering id.
+
+Result:
+
+![Get Rendering HTML Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetRenderingHtmlResult.png?raw=true)
+
+Appropriate source code, to send **RenderingHtmlRequestWithSourceAndRenderingId** request you can find in 
+class 		- **RenderingHtmlViewController** 
+method 	- **SendRequest()**
