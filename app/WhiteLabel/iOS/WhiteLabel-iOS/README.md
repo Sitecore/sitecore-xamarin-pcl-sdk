@@ -261,7 +261,7 @@ Source code can be found in :
 
 Touch ‘Get rendering html’ button to get rendering. As result you will see the html page.
 For example, use: <br/>
->*{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}* - Home item for source id.
+>*{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}* - Home item for source id.<br/>
 >*{493B3A83-0FA7-4484-8FC9-4680991CF743}* - default Sitecore ‘Sample Rendering’ for rendering id.
 
 Result:
