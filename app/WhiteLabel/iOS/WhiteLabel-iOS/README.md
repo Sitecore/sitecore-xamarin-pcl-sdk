@@ -18,7 +18,7 @@
 	* [Server side issues](#ServerSideIssues) 
 	* [Application side issues](#ApplicationSideIssues) 
 
-###<a name="HowTo"></a>**How to run WhiteLabel-iOS application**
+###<a name="HowTo">**How to run WhiteLabel-iOS application**
 To build iOS application from source code you will need:
 > 	1. Mac computer with MacOS operation system
 > 	2. Installed Xcode (free, you can download it from App Store)
@@ -30,7 +30,7 @@ To build iOS application from source code you will need:
 2. Open the following file with Xamarin studio **root**/solutions/WhiteLabel-iOS.sln
 3. Select Run -> Run With -> Choose simulator
 
-###<a name="WhiteLabel"></a>**WhiteLabel-iOS overview**
+###<a name="WhiteLabel">**WhiteLabel-iOS overview**
 ####<a name="MainPage">*Main Page*
 On the main page you can see the list of all available features. To see feature screen you should touch appropriate element.
 
@@ -52,7 +52,7 @@ Touch  button to open Settings screen
 5. Default database. Optional. Can be specified programmatically in your code.
 6. Default language. Optional. Can be specified programmatically in your code.
 
-####<a name="GetItembyID"></a>*Get Item by ID*
+####<a name="GetItembyID">*Get Item by ID*
 
 ![Get Item By Id Screen](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemById.png?raw=true)
 
