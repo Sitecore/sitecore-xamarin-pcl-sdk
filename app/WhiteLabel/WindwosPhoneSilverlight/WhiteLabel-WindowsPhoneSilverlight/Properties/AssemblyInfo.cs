@@ -8,10 +8,10 @@ using System.Resources;
 [assembly: AssemblyTitle("WhiteLabel_WindowsPhoneSilverlight")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sitecore")]
-[assembly: AssemblyProduct("WhiteLabel_WindowsPhoneSilverlight")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Sitecore Corporation A/S")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("(c) 1999 - 2014. All rights reserved. Sitecore is a registered trademark of Sitecore Corporation A/S")]
+[assembly: AssemblyTrademark("Sitecore Corporation A/S")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
