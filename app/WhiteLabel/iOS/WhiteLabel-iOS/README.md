@@ -94,9 +94,12 @@ Source code can be found in :
 
 Touch “Get Item” button to read item. You will receive same results as in section [Get Item by ID](#GetItembyID) 
 
-Appropriate source code, to send **ReadItemsRequestWithPath** request you can find in <br/>
-class 		- **GetItemByPathViewController**<br/>
-method 	- **SendRequest()**<br/>
+Source code can be found in :
+
+| Request 	| **ReadItemsRequestWithPath** |
+|---------	| ---------------------------	|
+| Class 	| *GetItemByPathViewController* 	|
+| Method 	| *SendRequest()* 	|
 
 ####*Get Item by Query*
 
@@ -110,9 +113,12 @@ Touch “Get Item” button to read item. With default query in this demo you wi
 
 ![Get Item by Query Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetitemByQueryResults.png?raw=true)
 
-Appropriate source code, to send **ReadItemsRequestWithSitecoreQuery** request you can find in 
-class 		- **GetItemByQueryViewController** 
-method 	- **SendRequest()**
+Source code can be found in :
+
+| Request 	| **ReadItemsRequestWithSitecoreQuery** |
+|---------	| ---------------------------	|
+| Class 	| *GetItemByQueryViewController* 	|
+| Method 	| *SendRequest()* 	|
 
 ####*Create/Update Item by ID*
 
@@ -139,13 +145,17 @@ For example, type ‘Updated title’ instead of ‘Test title’ and touch ‘U
 
 ![Updated Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/UpdatedItem.png?raw=true)
 
-Appropriate source code, to send **CreateItemRequestWithParentPath** request you can find in 
-class 		- **CreateITemByPathViewController**
-method 	- **SendRequest()**
+Source code can be found in :
 
-And **UpdateItemRequestWithPath** request example you can find in 
-class 		- **CreateITemByPathViewController**
-method 	- **SendUpdateRequest()**
+| Request 	| **CreateItemRequestWithParentPath** |
+|---------	| ---------------------------	|
+| Class 	| *CreateITemByPathViewController* 	|
+| Method 	| *SendRequest()* 	|
+
+| Request 	| **UpdateItemRequestWithPath** |
+|---------	| ---------------------------	|
+| Class 	| *CreateITemByPathViewController* 	|
+| Method 	| *SendRequest()* 	|
 
 ####*Delete Item*
 
@@ -161,18 +171,22 @@ You have 3 option to delete items. Fill one of the fields and touch button under
 
 ![Delete Item Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DeleteItemResults.png?raw=true)
 
-Appropriate source code, to:
-Delete item by id - **DeleteItemRequestWithId** request you can find in 
-class 		- **DeleteITemByIdViewController** 
-method 	- **SendDeleteByIdRequest()**
+Source code can be found in :
 
-Delete item by path - **DeleteItemRequestWithPath** request you can find in 
-class 		- **DeleteITemByIdViewController**
-method 	- **SendDeleteByPathRequest()**
+| Request 	| **DeleteItemRequestWithId** |
+|---------	| ---------------------------	|
+| Class 	| *DeleteITemByIdViewController* 	|
+| Method 	| *SendDeleteByIdRequest()* 	|
 
-Delete item by query - **DeleteItemRequestWithSitecoreQuery** request you can find in 
-class 		- **DeleteITemByIdViewController**
-method 	- **SendDeleteByQueryRequest()**
+| Request 	| **DeleteItemRequestWithPath** |
+|---------	| ---------------------------	|
+| Class 	| *DeleteITemByIdViewController* 	|
+| Method 	| *SendDeleteByPathRequest()* 	|
+
+| Request 	| **DeleteItemRequestWithSitecoreQuery** |
+|---------	| ---------------------------	|
+| Class 	| *DeleteITemByIdViewController* 	|
+| Method 	| *SendDeleteByQueryRequest()* 	|
 
 ####*Authentication*
 
@@ -189,9 +203,12 @@ As result you will see the following alert if this user exists.
 
 ![Authentication Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/AuthenticationResult.png?raw=true)
 
-Appropriate source code, to send **AuthenticatedSessionWithHost** request you can find in 
-class 		- **AuthViewController** 
-method 	- **SendAuthRequest()**
+Source code can be found in :
+
+| Request 	| **AuthenticatedSessionWithHost** |
+|---------	| ---------------------------	|
+| Class 	| *AuthViewController* 	|
+| Method 	| *SendAuthRequest()* 	|
 
 ####*Download Image*
 
@@ -207,9 +224,12 @@ As result you will see the requested image.
 
 ![Download Image Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DownloadImageResult.png?raw=true)
 
-Appropriate source code, to send **DownloadResourceRequestWithMediaPath** request you can find in 
-class 		- **GetMediaItemViewController** 
-method 	- **SendRequest()**
+Source code can be found in :
+
+| Request 	| **DownloadResourceRequestWithMediaPath** |
+|---------	| ---------------------------	|
+| Class 	| *GetMediaItemViewController* 	|
+| Method 	| *SendRequest()* 	|
 
 ####*Upload Image*
 
@@ -222,10 +242,13 @@ method 	- **SendRequest()**
 
 Touch ‘Upload’ button to start image uploading. If you would like to cancel uploading process just touch ‘Cancel’ button.
 As result new media item will be created.
- 
-Appropriate source code, to send **UploadResourceRequestWithParentPath** request you can find in 
-class 		- **UploadImageViewController** 
-method 	- **SendImage()**
+
+Source code can be found in :
+
+| Request 	| **UploadResourceRequestWithParentPath** |
+|---------	| ---------------------------	|
+| Class 	| *UploadImageViewController* 	|
+| Method 	| *SendImage()* 	| 
 
 ####*Get Rendering HTML*
 
@@ -237,17 +260,20 @@ method 	- **SendImage()**
 2. Rendering item GUID, values enclosed in curly braces. Required.
 
 Touch ‘Get rendering html’ button to get rendering. As result you will see the html page.
-For example, use:
-*{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}* - Home item for source id.
-*{493B3A83-0FA7-4484-8FC9-4680991CF743}* - default Sitecore ‘Sample Rendering’ for rendering id.
+For example, use: <br/>
+>*{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}* - Home item for source id.
+>*{493B3A83-0FA7-4484-8FC9-4680991CF743}* - default Sitecore ‘Sample Rendering’ for rendering id.
 
 Result:
 
 ![Get Rendering HTML Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetRenderingHtmlResult.png?raw=true)
 
-Appropriate source code, to send **RenderingHtmlRequestWithSourceAndRenderingId** request you can find in 
-class 		- **RenderingHtmlViewController** 
-method 	- **SendRequest()**
+Source code can be found in :
+
+| Request 	| **RenderingHtmlRequestWithSourceAndRenderingId** |
+|---------	| ---------------------------	|
+| Class 	| *RenderingHtmlViewController* 	|
+| Method 	| *SendRequest()* 	| 
 
 ###**Troubles**
 
