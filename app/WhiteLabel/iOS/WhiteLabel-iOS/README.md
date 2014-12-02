@@ -73,12 +73,12 @@ To see fields list just touch the item. For example, ‘Home’ item have follow
 
 Touch ‘Back’ button to return to the main screen.
 
-Appropriate source code, to send **ReadItemsRequestWithId** request you can find in 
+Source code can be found in :
 
-class 		- **GetItemByIdViewController **
-
-method 	- **SendRequest()**
-
+| Request 	| **ReadItemsRequestWithId** |
+|---------	| ---------------------------	|
+| Class 	| *GetItemByIdViewController* 	|
+| Method 	| *SendRequest()* 	|
 
 ####*Get Item by Path*
 
@@ -94,9 +94,9 @@ method 	- **SendRequest()**
 
 Touch “Get Item” button to read item. You will receive same results as in section [Get Item by ID](#GetItembyID) 
 
-Appropriate source code, to send **ReadItemsRequestWithPath** request you can find in 
-class 		- **GetItemByPathViewController**
-method 	- **SendRequest()**
+Appropriate source code, to send **ReadItemsRequestWithPath** request you can find in <br/>
+class 		- **GetItemByPathViewController**<br/>
+method 	- **SendRequest()**<br/>
 
 ####*Get Item by Query*
 
