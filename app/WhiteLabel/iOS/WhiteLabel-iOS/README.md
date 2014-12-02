@@ -1,24 +1,24 @@
 #**.Net SDK iOS WhiteLabel app overview**
 
 
-- How to run WhiteLabel-iOS application
-- WhiteLabel-iOS overview
-	* Main Page
-	* Settings
-	* Get Item by ID
-	* Get Item by Path
-	* Get Item by Query
-	* Create/Update Item by ID
-	* Delete Item
-	* Authentication
-	* Download Image
-	* Upload Image
-	* Get Rendering HTML
-- Troubles
-	* Server side issues
-	* Application side issues
+- [How to run WhiteLabel-iOS application](#HowTo) 
+- [WhiteLabel-iOS overview](#WhiteLabel) 
+	* [Main Page](#MainPage) 
+	* [Settings](#Settings) 
+	* [Get Item by ID](#GetItembyID) 
+	* [Get Item by Path](#GetItembyPath) 
+	* [Get Item by Query](#GetItembyQuery) 
+	* [Create/Update Item by ID](#Create.UpdateItembyID) 
+	* [Delete Item](#DeleteItem) 
+	* [Authentication](#Authentication) 
+	* [Download Image](#DownloadImage) 
+	* [Upload Image](#UploadImage) 
+	* [Get Rendering HTML](#GetRenderingHTML) 
+- [Troubles](#Troubles) 
+	* [Server side issues](#ServerSideIssues) 
+	* [Application side issues](#ApplicationSideIssues) 
 
-###**How to run WhiteLabel-iOS application**
+###<a name="HowTo"></a>**How to run WhiteLabel-iOS application**
 To build iOS application from source code you will need:
 > 	1. Mac computer with MacOS operation system
 > 	2. Installed Xcode (free, you can download it from App Store)
@@ -30,13 +30,13 @@ To build iOS application from source code you will need:
 2. Open the following file with Xamarin studio **root**/solutions/WhiteLabel-iOS.sln
 3. Select Run -> Run With -> Choose simulator
 
-###**WhiteLabel-iOS overview**
-#### *Main Page*
+###<a name="WhiteLabel"></a>**WhiteLabel-iOS overview**
+####<a name="MainPage">*Main Page*
 On the main page you can see the list of all available features. To see feature screen you should touch appropriate element.
 
 ![Main Page](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/MainPage.png?raw=true)
 
-####*Settings*
+####<a name="Settings">*Settings*
 ![Settings Icon](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/SettingsIcon.png?raw=true)
 
 Touch  button to open Settings screen
@@ -80,7 +80,7 @@ Source code can be found in :
 | Class 	| *GetItemByIdViewController* 	|
 | Method 	| *SendRequest()* 	|
 
-####*Get Item by Path*
+####<a name="GetItembyPath">*Get Item by Path*
 
 ![Get Item By Path Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByPath.png?raw=true)
 
@@ -101,7 +101,7 @@ Source code can be found in :
 | Class 	| *GetItemByPathViewController* 	|
 | Method 	| *SendRequest()* 	|
 
-####*Get Item by Query*
+####<a name="GetItembyQuery">*Get Item by Query*
 
 ![Get Item by Query Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByQuery.png?raw=true)
 
@@ -120,7 +120,7 @@ Source code can be found in :
 | Class 	| *GetItemByQueryViewController* 	|
 | Method 	| *SendRequest()* 	|
 
-####*Create/Update Item by ID*
+####<a name="Create.UpdateItembyID">*Create/Update Item by ID*
 
 ![Create Item By Id Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/CreateItemById.png?raw=true)
 
@@ -157,7 +157,7 @@ Source code can be found in :
 | Class 	| *CreateITemByPathViewController* 	|
 | Method 	| *SendRequest()* 	|
 
-####*Delete Item*
+####<a name="DeleteItem">*Delete Item*
 
 ![Delete Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DeleteItem.png?raw=true)
 
@@ -188,7 +188,7 @@ Source code can be found in :
 | Class 	| *DeleteITemByIdViewController* 	|
 | Method 	| *SendDeleteByQueryRequest()* 	|
 
-####*Authentication*
+####<a name="Authentication">*Authentication*
 
 ![Authentication Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/Authentication.png?raw=true)
 
@@ -210,7 +210,7 @@ Source code can be found in :
 | Class 	| *AuthViewController* 	|
 | Method 	| *SendAuthRequest()* 	|
 
-####*Download Image*
+####<a name="DownloadImage">*Download Image*
 
 ![Download Image Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DownloadImage.png?raw=true)
 
@@ -231,7 +231,7 @@ Source code can be found in :
 | Class 	| *GetMediaItemViewController* 	|
 | Method 	| *SendRequest()* 	|
 
-####*Upload Image*
+####<a name="UploadImage">*Upload Image*
 
 ![Upload Image Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/UploadImage.png?raw=true)
 
@@ -250,7 +250,7 @@ Source code can be found in :
 | Class 	| *UploadImageViewController* 	|
 | Method 	| *SendImage()* 	| 
 
-####*Get Rendering HTML*
+####<a name="GetRenderingHTML">*Get Rendering HTML*
 
 ![Get Rendering HTML Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetRenderingHtml.png?raw=true)
 
@@ -275,9 +275,9 @@ Source code can be found in :
 | Class 	| *RenderingHtmlViewController* 	|
 | Method 	| *SendRequest()* 	| 
 
-###**Troubles**
+###<a name="Troubles">**Troubles**
 
-####*Server side issues*
+####<a name="ServerSideIssues">*Server side issues*
 
 In case of any errors from server side try to ensure that you have correctly installed and configured WebApi module on your cms. Also ensure you have access to the server from your device or simulator. Try to send the following request via your browser(simulator browser, device browser):
 
@@ -290,7 +290,7 @@ response should look like:
 <RSAKeyValue>Modulus>qj4TwhUdSCSCYo8g4o/bWMCyI3NiNLAB79NvU6rdEGS4U1u9DNd3LUThqKBY7OqsL8A5dE6HE+0y95BXVmlmb9FSQPpwygnVl0C+Ym+ahRafNBcmf04wYuwV6OWsnA7RtKWT3c0xpuYmxiUoqghrSLbk+QjtmRnBxfsN4qJjHuU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>
 ```
 
-####*Application side issues*
+####<a name="ApplicationSideIssues">*Application side issues*
 
 In case of application errors try to cleanup application and rebuild all components:
 
