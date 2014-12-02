@@ -18,7 +18,7 @@
 	* [Server side issues](#ServerSideIssues) 
 	* [Application side issues](#ApplicationSideIssues) 
 
-###<a name="HowTo"></a>**How to run WhiteLabel-Android application**
+###<a name="HowTo">**How to run WhiteLabel-Android application**
 To build Android application from source code you will need:
 > 	1. PC with Installed Xamarin Studio (free trial, you can download it from the [xamarin](http://xamarin.com/)).
 
@@ -27,7 +27,7 @@ To build Android application from source code you will need:
 2. Open the following file with Xamarin studio **root**/solutions/WhiteLabel-Android.sln
 3. Select Run -> Run With -> Choose simulator
 
-###<a name="WhiteLabel"></a>**WhiteLabel-Android overview**
+###<a name="WhiteLabel">**WhiteLabel-Android overview**
 ####<a name="MainPage">*Main Page*
 On the main page you can see the list of all available features. To see feature screen you should touch appropriate element.
 
@@ -48,7 +48,7 @@ Touch  ![Settings Icon](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blo
 For example, username should be like: ‘sitecore\admin’.
 5. Database. Optional. The default database to retrieve items from.
 
-####<a name="GetItembyID"></a>*Get Item by ID*
+####<a name="GetItembyID">*Get Item by ID*
 
 ![Get Item By Id Screen](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/Android/WhiteLabel-Android/screens/GetItemById.png?raw=true)
 
