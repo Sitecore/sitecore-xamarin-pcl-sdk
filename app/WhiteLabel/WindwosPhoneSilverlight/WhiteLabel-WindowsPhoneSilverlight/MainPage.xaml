@@ -41,13 +41,11 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding RawValue}" TextWrapping="Wrap"  Margin="9,-7,0,0" Style="{StaticResource PhoneTextSmallStyle}" x:Name="ResultBlock"/>
+            <TextBlock Text="{Binding RawValue}" TextWrapping="Wrap"  Margin="0,-7,10,0" 
+                       Style="{StaticResource PhoneTextExtraLargeStyle}" x:Name="ResultBlock" Height="757"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-        </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
