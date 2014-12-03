@@ -5,12 +5,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WhiteLabel_WindowsPhoneSilverlight")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+
+[assembly: AssemblyTitle("WhiteLabel-WindowsPhoneSilverlight")]
+[assembly: AssemblyDescription("Sample app that uses Sitecore Mobile SDK")]
 [assembly: AssemblyCompany("Sitecore")]
-[assembly: AssemblyProduct("WhiteLabel_WindowsPhoneSilverlight")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
