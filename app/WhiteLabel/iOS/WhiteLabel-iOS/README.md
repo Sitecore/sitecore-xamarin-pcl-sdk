@@ -23,7 +23,7 @@ To build iOS application from source code you will need:
 > 	1. Mac computer with MacOS operation system
 > 	2. Installed Xcode (free, you can download it from App Store)
 > 	3. Installed Xamarin Studio (free trial, you can download it from the [xamarin](http://xamarin.com/))
-> 	4. For now, it’s possible launch application only on simulator, if you want to install application on real device you will need apple developer account.
+> 	4. For now, it’s possible launch application only on simulator, if you want to install application on real device you will need Apple developer account.
 
 ###Application launching:
 > 1. Clone or download the following GitHub repository: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk.git
