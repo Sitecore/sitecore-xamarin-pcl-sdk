@@ -8,11 +8,12 @@ using System.Resources;
 
 [assembly: AssemblyTitle("WhiteLabel-WindowsPhoneSilverlight")]
 [assembly: AssemblyDescription("Sample app that uses Sitecore Mobile SDK")]
-[assembly: AssemblyCompany("Sitecore")]
+[assembly: AssemblyCompany("Sitecore Corporation A/S")]
+[assembly: AssemblyCopyright("(c) 1999 - 2014. All rights reserved. Sitecore is a registered trademark of Sitecore Corporation A/S")]
+[assembly: AssemblyTrademark("Sitecore Corporation A/S")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
