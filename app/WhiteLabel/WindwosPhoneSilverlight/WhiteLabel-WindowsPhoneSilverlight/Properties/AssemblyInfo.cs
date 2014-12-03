@@ -5,14 +5,15 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WhiteLabel_WindowsPhoneSilverlight")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+
+[assembly: AssemblyTitle("WhiteLabel-WindowsPhoneSilverlight")]
+[assembly: AssemblyDescription("Sample app that uses Sitecore Mobile SDK")]
 [assembly: AssemblyCompany("Sitecore Corporation A/S")]
-[assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("(c) 1999 - 2014. All rights reserved. Sitecore is a registered trademark of Sitecore Corporation A/S")]
 [assembly: AssemblyTrademark("Sitecore Corporation A/S")]
+[assembly: AssemblyProduct("")]
 [assembly: AssemblyCulture("")]
+
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
