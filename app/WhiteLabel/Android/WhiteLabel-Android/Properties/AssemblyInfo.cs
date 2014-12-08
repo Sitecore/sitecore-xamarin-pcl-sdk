@@ -4,10 +4,10 @@
 [assembly: AssemblyTitle("WhiteLabel-Android")]
 [assembly: AssemblyDescription("Sample app that uses Sitecore SDK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sitecore")]
+[assembly: AssemblyCompany("Sitecore Corporation A/S")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("(c) 1999 - 2014. All rights reserved. Sitecore is a registered trademark of Sitecore Corporation A/S")]
+[assembly: AssemblyTrademark("Sitecore Corporation A/S")]
 [assembly: AssemblyCulture("")]
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,

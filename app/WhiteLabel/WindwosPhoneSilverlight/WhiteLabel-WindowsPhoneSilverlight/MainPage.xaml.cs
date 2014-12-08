@@ -1,11 +1,12 @@
 ﻿namespace WhiteLabel_WindowsPhoneSilverlight
 {
-  using Microsoft.Phone.Controls;
-  using Sitecore.MobileSDK;
-  using Sitecore.MobileSDK.SessionSettings;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
+  using System;
+  using System.Windows;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
 
-  public partial class MainPage : PhoneApplicationPage
+  public partial class MainPage
   {
     public MainPage()
     {
@@ -15,16 +16,52 @@
 
     private async void MakeRequest()
     {
-      var config = new SessionConfig("http://mobiledev1ua1.dk.sitecore.net:722", "extranet\\adminex", "adminex");
-      var session = new ScApiSession(config, null);
-
-      var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home").Payload(PayloadType.Full).Build();
-      var response = await session.ReadItemAsync(builder);
-
-      if (response.Items.Count > 0)
+      using (var credentials = new Credentials("admin", "b"))
+      using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://cms75.test24dk1.dk.sitecore.net/")
+        .Credentials(credentials)
+        .Site("/sitecore/shell")
+        .BuildSession())
       {
-        ResultBlock.DataContext = response.Items[0].FieldWithName("Text");
+        try
+        {
+          var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+            .Payload(PayloadType.Full);
+
+          var response = await session.ReadItemAsync(builder.Build());
+
+          if (response.ResultCount != 0)
+          {
+            ResultBlock.DataContext = response[0]["Text"];
+          }
+        }
+        catch (Exception exception)
+        {
+          MessageBox.Show("Failed to receive item. Message : " + exception.Message);
+        }
       }
+    }
+  }
+
+  class Credentials : IWebApiCredentials
+  {
+    public string Username { get; private set; }
+    public string Password { get; private set; }
+
+    public Credentials(string username, string password)
+    {
+      this.Username = username;
+      this.Password = password;
+    }
+
+    public void Dispose()
+    {
+      this.Username = null;
+      this.Password = null;
+    }
+
+    public IWebApiCredentials CredentialsShallowCopy()
+    {
+      return new Credentials(this.Username, this.Password);
     }
   }
 }
