@@ -23,7 +23,7 @@ To build Windows Phone application from source code you will need:
 This app receives **Home** item from Sitecore instance and displays the value of item's **Text** field.
 Code that receives this item is located in **MakeRequest()** method.
 
-![Main Page](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/WindwosPhoneSilverlight/WhiteLabel-WindowsPhoneSilverlight/screens/MainPage.png?raw=true)
+![Main Page](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/windows-phone/MainPage.png?raw=true)
 
 ###<a name="Troubles">**Troubles**
 

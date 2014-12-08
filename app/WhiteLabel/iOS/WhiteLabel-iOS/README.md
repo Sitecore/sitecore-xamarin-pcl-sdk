@@ -34,14 +34,14 @@ To build iOS application from source code you will need:
 ####<a name="MainPage">*Main Page*
 On the main page you can see the list of all available features. To see feature screen you should touch appropriate element.
 
-![Main Page](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/MainPage.png?raw=true)
+![Main Page](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/MainPage.png?raw=true)
 
 ####<a name="Settings">*Settings*
-![Settings Icon](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/SettingsIcon.png?raw=true)
+![Settings Icon](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/SettingsIcon.png?raw=true)
 
 Touch  button to open Settings screen
 
-![Settings Screen](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/SettingsScreen.png?raw=true)
+![Settings Screen](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/SettingsScreen.png?raw=true)
 
 *Options:*
 
@@ -54,7 +54,7 @@ Touch  button to open Settings screen
 
 ####<a name="GetItembyID">*Get Item by ID*
 
-![Get Item By Id Screen](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemById.png?raw=true)
+![Get Item By Id Screen](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/GetItemById.png?raw=true)
 
 *Options:*
 
@@ -65,11 +65,11 @@ Touch  button to open Settings screen
 
 Touch “Get Item” button to read item. Result should look like this:
 
-![Get Item By Id Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByIdResults.png?raw=true)
+![Get Item By Id Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/GetItemByIdResults.png?raw=true)
 
 To see fields list just touch the item. For example, ‘Home’ item have following fields:
 
-![Get Item By Id Item Fields Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByIdResultsFields.png?raw=true)
+![Get Item By Id Item Fields Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/GetItemByIdResultsFields.png?raw=true)
 
 Touch ‘Back’ button to return to the main screen.
 
@@ -82,7 +82,7 @@ Source code can be found in :
 
 ####<a name="GetItembyPath">*Get Item by Path*
 
-![Get Item By Path Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByPath.png?raw=true)
+![Get Item By Path Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/GetItemByPath.png?raw=true)
 
 *Options:*
 
@@ -103,7 +103,7 @@ Source code can be found in :
 
 ####<a name="GetItembyQuery">*Get Item by Query*
 
-![Get Item by Query Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetItemByQuery.png?raw=true)
+![Get Item by Query Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/GetItemByQuery.png?raw=true)
 
 *Options:*
 
@@ -111,7 +111,7 @@ Source code can be found in :
 
 Touch “Get Item” button to read item. With default query in this demo you will receive children list for the ‘Home’ item.
 
-![Get Item by Query Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetitemByQueryResults.png?raw=true)
+![Get Item by Query Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/GetitemByQueryResults.png?raw=true)
 
 Source code can be found in :
 
@@ -122,7 +122,7 @@ Source code can be found in :
 
 ####<a name="Create.UpdateItembyID">*Create/Update Item by ID*
 
-![Create Item By Id Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/CreateItemById.png?raw=true)
+![Create Item By Id Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/CreateItemById.png?raw=true)
 
 *Options:*
 
@@ -134,16 +134,16 @@ Source code can be found in :
 To create new item touch ‘create’ button.
 When new item will be created the following message will appear.
 
-![Create Item By Path Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/CreateItemByPathResult.png?raw=true)
+![Create Item By Path Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/CreateItemByPathResult.png?raw=true)
 
 And the appropriate item will be created:
 
-![Created Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/CreatedItem.png?raw=true)
+![Created Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/CreatedItem.png?raw=true)
 
 Also you can update created item, to do this you need change some of the fields values and touch ‘Update created item’.
 For example, type ‘Updated title’ instead of ‘Test title’ and touch ‘Update created item’. Appropriate item will be updated:
 
-![Updated Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/UpdatedItem.png?raw=true)
+![Updated Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/UpdatedItem.png?raw=true)
 
 Source code can be found in :
 
@@ -159,7 +159,7 @@ Source code can be found in :
 
 ####<a name="DeleteItem">*Delete Item*
 
-![Delete Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DeleteItem.png?raw=true)
+![Delete Item Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/DeleteItem.png?raw=true)
 
 *Options:*
 
@@ -169,7 +169,7 @@ Source code can be found in :
 
 You have 3 option to delete items. Fill one of the fields and touch button under field, appropriate item will be deleted. And you should see the following alert.
 
-![Delete Item Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DeleteItemResults.png?raw=true)
+![Delete Item Results Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/DeleteItemResults.png?raw=true)
 
 Source code can be found in :
 
@@ -190,7 +190,7 @@ Source code can be found in :
 
 ####<a name="Authentication">*Authentication*
 
-![Authentication Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/Authentication.png?raw=true)
+![Authentication Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/Authentication.png?raw=true)
 
 *Options:*
 
@@ -201,7 +201,7 @@ Source code can be found in :
 
 As result you will see the following alert if this user exists. 
 
-![Authentication Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/AuthenticationResult.png?raw=true)
+![Authentication Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/AuthenticationResult.png?raw=true)
 
 Source code can be found in :
 
@@ -212,7 +212,7 @@ Source code can be found in :
 
 ####<a name="DownloadImage">*Download Image*
 
-![Download Image Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DownloadImage.png?raw=true)
+![Download Image Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/DownloadImage.png?raw=true)
 
 *Options:*
 
@@ -222,7 +222,7 @@ Source code can be found in :
 
 As result you will see the requested image.
 
-![Download Image Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/DownloadImageResult.png?raw=true)
+![Download Image Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/DownloadImageResult.png?raw=true)
 
 Source code can be found in :
 
@@ -233,7 +233,7 @@ Source code can be found in :
 
 ####<a name="UploadImage">*Upload Image*
 
-![Upload Image Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/UploadImage.png?raw=true)
+![Upload Image Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/UploadImage.png?raw=true)
 
 *Options:*
 
@@ -252,7 +252,7 @@ Source code can be found in :
 
 ####<a name="GetRenderingHTML">*Get Rendering HTML*
 
-![Get Rendering HTML Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetRenderingHtml.png?raw=true)
+![Get Rendering HTML Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/GetRenderingHtml.png?raw=true)
 
 *Options:*
 
@@ -266,7 +266,7 @@ For example, use: <br/>
 
 Result:
 
-![Get Rendering HTML Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/screens/app/WhiteLabel/iOS/WhiteLabel-iOS/screens/GetRenderingHtmlResult.png?raw=true)
+![Get Rendering HTML Result Screen ](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/gh-pages/screenshots/ios/GetRenderingHtmlResult.png?raw=true)
 
 Source code can be found in :
 
