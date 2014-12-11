@@ -94,7 +94,7 @@
       string remote = client.Client.RemoteEndPoint.ToString();
       Console.WriteLine("Connection from {0} saving logs to {1}", remote, logfile);
 
-      using (FileStream fs = File.OpenWrite(logfile))
+      using (FileStream fs = File.Create(logfile))
       {
         string header = String.Format("[Local Date/Time:\t{1}]{0}[Remote Address:\t{2}]{0}",
           Environment.NewLine, DateTime.Now, remote);
