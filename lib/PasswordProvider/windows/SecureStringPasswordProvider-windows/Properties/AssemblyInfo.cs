@@ -8,10 +8,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Sitecore.MobileSDK.PasswordProvider.Windows")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Sitecore.MobileSDK.PasswordProvider.Windows")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Sitecore Corporation A/S")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("(c) 1999 - 2014. All rights reserved. Sitecore is a registered trademark of Sitecore Corporation A/S")]
+[assembly: AssemblyTrademark("Sitecore Corporation A/S")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

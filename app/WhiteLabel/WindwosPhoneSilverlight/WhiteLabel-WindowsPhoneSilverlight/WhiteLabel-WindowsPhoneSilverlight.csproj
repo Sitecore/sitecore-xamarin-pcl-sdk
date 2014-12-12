@@ -148,9 +148,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj">
+    <ProjectReference Include="..\..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
+      <Project>{079d5d12-ff8e-46d4-8afc-06cbf5a736c7}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
       <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
-      <Name>SitecoreMobileSDK</Name>
+      <Name>Sitecore.MobileSDK</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

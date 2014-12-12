@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteLabel-WindowsPhoneSilverlight", "..\app\WhiteLabel\WindwosPhoneSilverlight\WhiteLabel-WindowsPhoneSilverlight\WhiteLabel-WindowsPhoneSilverlight.csproj", "{C2CEFA17-51AC-439A-A3D0-5539AD7348B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreMobileSDK", "..\lib\SitecoreMobileSDK-PCL\SitecoreMobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK", "..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK.PasswordProvider.Interface", "..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj", "{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,14 @@ Global
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|ARM.ActiveCfg = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|x86.ActiveCfg = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

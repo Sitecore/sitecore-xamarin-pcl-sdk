@@ -274,7 +274,6 @@
     }
 
     [Test]
-    [Ignore]
     public async void TestCreateItemByIdAndSetHtmlFieldValue()
     {
       await this.RemoveAll();

@@ -6,10 +6,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle ("SitecoreMobileSDK")]
 [assembly: AssemblyDescription ("Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore.")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("sitecore")]
+[assembly: AssemblyCompany ("Sitecore Corporation A/S")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("Sitecore Corporation")]
-[assembly: AssemblyTrademark ("Sitecore")]
+[assembly: AssemblyCopyright ("(с) 1999 - 2014. All rights reserved. Sitecore is a registered trademark of Sitecore Corporation A/S.")]
+[assembly: AssemblyTrademark ("Sitecore Corporation A/S")]
 [assembly: AssemblyCulture ("")]
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,

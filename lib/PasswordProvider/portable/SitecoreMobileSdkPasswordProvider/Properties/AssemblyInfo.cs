@@ -7,10 +7,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("Sitecore.MobileSDK.PasswordProvider.Interface")]
 [assembly: AssemblyDescription("Password Storage Interfaces for Sitecore Mobile SDK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sitecore Corporation")]
+[assembly: AssemblyCompany("Sitecore Corporation A/S")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Sitecore Corporation")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("(c) 1999 - 2014. All rights reserved. Sitecore is a registered trademark of Sitecore Corporation A/S")]
+[assembly: AssemblyTrademark("Sitecore Corporation A/S")]
 [assembly: AssemblyCulture("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".

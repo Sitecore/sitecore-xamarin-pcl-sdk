@@ -7,10 +7,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("Sitecore.MobileSDK.PasswordProvider.iOS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Sitecore Corporation A/S")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("dodikk")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("(с) 1999 - 2014. All rights reserved. Sitecore is a registered trademark of Sitecore Corporation A/S.")]
+[assembly: AssemblyTrademark("Sitecore Corporation A/S")]
 [assembly: AssemblyCulture("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".

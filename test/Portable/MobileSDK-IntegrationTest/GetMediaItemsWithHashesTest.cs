@@ -158,20 +158,6 @@
     }
 
     [Test]
-    [Ignore]
-    public void TestGetMediaWithPathBeginsWithoutSlashReturnsError()
-    {
-      TestDelegate testCode = () => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("sitecore/media library/images/kirkorov");
-      Exception exception = Assert.Throws<ArgumentException>(testCode);
-
-      // @adk : unable to assert since session settings and "~/media" value should be shared.
-      // Solutions
-      // 1. Construct a builder using a session.
-      // 2. Not validate this particular value at this stage.
-      Assert.AreEqual("ReadMediaItemRequestBuilder.Path : Media path should begin with '/' or '~'", exception.Message);
-    }
-
-    [Test]
     public void TestGetMediaWithNegativeScaleValueReturnsError()
     {
       TestDelegate testCode = () => new MediaOptionsBuilder().Set

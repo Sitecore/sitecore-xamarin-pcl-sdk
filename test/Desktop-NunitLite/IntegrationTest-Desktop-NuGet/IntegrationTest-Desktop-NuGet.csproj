@@ -143,6 +143,15 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\ThreadSafetyTest.cs">
       <Link>Tests\ThreadSafetyTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UpdateItemsTest.cs">
+      <Link>Tests\UpdateItemsTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UploadMediaTest.cs">
+      <Link>Tests\UploadMediaTest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UrlAutocompleteTest.cs">
+      <Link>Tests\UrlAutocompleteTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\FunctionTracer.cs">
       <Link>Mocks\FunctionTracer.cs</Link>
     </Compile>

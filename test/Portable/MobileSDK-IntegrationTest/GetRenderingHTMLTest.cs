@@ -133,7 +133,6 @@
     }
 
     //Item Web API issue #421406
-    [Ignore]
     [Test]
     public async void TestGetRenderingWithCustomRenderingParams()
     {
