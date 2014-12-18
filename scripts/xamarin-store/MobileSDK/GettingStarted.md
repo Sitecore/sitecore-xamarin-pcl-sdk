@@ -8,7 +8,7 @@ You should now be ready to access content from Sitecore within your mobile appli
 
 
 ```csharp
-using (var credentials = new SecureStringPasswordProvider("admin", "b")) // securing credentials, entered by the end user
+using (var credentials = new SecureStringPasswordProvider(“username”, “password”)) // securing credentials, entered by the end user
 using 
 (
   var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
