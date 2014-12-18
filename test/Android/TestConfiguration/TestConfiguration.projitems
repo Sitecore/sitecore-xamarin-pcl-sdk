@@ -11,6 +11,5 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableTestActivity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TcpTextWriter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TestResultsConfig.cs" />
   </ItemGroup>
 </Project>

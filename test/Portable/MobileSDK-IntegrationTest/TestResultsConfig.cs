@@ -1,4 +1,4 @@
-﻿namespace MobileSDKAndroidTests
+﻿namespace MobileSDKIntegrationTest
 {
   public class TestResultsConfig
   {

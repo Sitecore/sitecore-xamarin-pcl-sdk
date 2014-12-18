@@ -6,6 +6,7 @@ namespace MobileSDKAndroidTests
   using System.Reflection;
   using Android.OS;
   using Android.Util;
+  using MobileSDKIntegrationTest;
   using NUnit.Framework.Internal;
   using NUnitLite.Runner;
   using Xamarin.Android.NUnitLite;
@@ -79,7 +80,6 @@ namespace MobileSDKAndroidTests
         testResults.AssertCount,
         testResults.FailCount);
 
-      // ReSharper disable once ConditionIsAlwaysTrueOrFalse
       if (TestResultsConfig.IsRemote)
       {
         switch (TestResultsConfig.TestsResultsFormat)
