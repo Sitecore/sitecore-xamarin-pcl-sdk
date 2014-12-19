@@ -1,11 +1,11 @@
 @echo off
 
-call settings.cmd
+call .\settings.cmd
 
 echo Starting script...
 echo Settings :
 echo msbuild_path : %msbuild_path%
-echo solution_path : %solution_path%
+echo solutions_path : %solutions_path%
 echo nuget_path : %nuget_path%
 
 :loop
