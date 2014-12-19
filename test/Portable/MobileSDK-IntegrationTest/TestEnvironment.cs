@@ -10,10 +10,9 @@
     {
       var result = new TestEnvironment
       {
-        InstanceWithMediaHashing = TestEndpointsConfig.InstanceWithMediaHashing,
-        InstanceWithoutMediaHashing = TestEndpointsConfig.InstanceWithoutMediaHashing,
-
+        IsMediaHashesSupported = TestEndpointsConfig.IsMediaHashesSupported,
         InstanceUrl = TestEndpointsConfig.InstanceUrl,
+
         ShellSite = "/sitecore/shell"
       };
 
@@ -57,9 +56,8 @@
     }
 
     private TestEnvironment() { }
-    public string InstanceWithMediaHashing { get; private set; }
-    public string InstanceWithoutMediaHashing { get; private set; }
-
+    
+    public bool IsMediaHashesSupported { get; private set; }
     public string InstanceUrl { get; private set; }
     public string ShellSite { get; private set; }
 
