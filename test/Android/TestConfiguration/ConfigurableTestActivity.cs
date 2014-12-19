@@ -6,7 +6,7 @@ namespace MobileSDKAndroidTests
   using System.Reflection;
   using Android.OS;
   using Android.Util;
-  using MobileSDKIntegrationTest;
+  using MobileSDKAndroidIntegrationTests;
   using NUnit.Framework.Internal;
   using NUnitLite.Runner;
   using Xamarin.Android.NUnitLite;
