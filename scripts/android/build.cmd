@@ -1,4 +1,4 @@
-@echo off
+@echo on
 
 call scripts\android\settings.cmd
 
