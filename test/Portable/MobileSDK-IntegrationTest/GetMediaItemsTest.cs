@@ -41,7 +41,8 @@
     public void TearDown()
     {
       this.testData = null;
-      this.session.Dispose();
+
+      if (this.session != null) this.session.Dispose();
       this.session = null;
     }
 
