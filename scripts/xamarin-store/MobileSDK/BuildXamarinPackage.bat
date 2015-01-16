@@ -87,4 +87,4 @@ CALL %PACKAGE_UTILITY_EXE% create-manually Sitecore.MobileSDK.PCL-1.0.0.xam     
 		--library="winphone-8.0":"%BINARIES_DIR%\crypto.dll"                                ^
 		--library="winphone-8.0":"%BINARIES_DIR%\System.IO.dll"                             ^
 		--sample="iOS Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.":"%REPOSITORY_ROOT%/test/LocalXamarinStoreTest/iMobileSdkDemo/iMobileSdkDemo.sln" ^
-		--sample="Android Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.":"%REPOSITORY_ROOT%\test\LocalXamarinStoreTest\AndroidMobileSdkDemo\YourSolutionName.sln"
+		--sample="Android Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.":"%REPOSITORY_ROOT%/test/LocalXamarinStoreTest/AndroidMobileSdkDemo/YourSolutionName.sln"
