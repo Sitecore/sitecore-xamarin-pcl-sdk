@@ -349,22 +349,22 @@
      />
 	 
 
-     <Exec
-      Command="BuildXamarinPackage.bat"
+    <Exec
+      Command="xamarin-component\xamarin-component package"
       WorkingDirectory="$(ScriptsDirectory)\xamarin-store\MobileSDK"
     />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.MobileSDK.PCL-1.0.0.xam"
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.0.xam"
       DestinationFolder="$(DeploymentDirectory)"
      />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.MobileSDK.PCL-1.0.0.xam"
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.0.xam"
       DestinationFolder="$(LocalXamarinComponentsRepoDirectory)"
      />
 
-	 <Exec
-	    Command="xamarin-component install Sitecore.MobileSDK.PCL-1.0.0.xam"
-		WorkingDirectory="$(LocalXamarinComponentsRepoDirectory)"
+   <Exec
+      Command="xamarin-component install Sitecore.Mobile.SDK-1.0.xam"
+    WorkingDirectory="$(LocalXamarinComponentsRepoDirectory)"
     />
 	    
   </Target>
