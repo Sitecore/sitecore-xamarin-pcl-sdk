@@ -7,6 +7,7 @@ echo Settings :
 echo msbuild_path : %msbuild_path%
 echo solutions_path : %solutions_path%
 echo nuget_path : %nuget_path%
+echo xamarin_component : %xamarin_component%
 
 :loop
 IF NOT "%1"=="" (
@@ -43,8 +44,11 @@ if exist %project_folder%\bin\%build_mode% del %project_folder%\bin\%build_mode%
 ::Clearing project
 %msbuild_path% %project_folder%\%csproj% /p:Configuration=%build_mode% /t:Clean
 
-::Restoring solution packages
+::Restoring solution Nuget packages
 %nuget_path% restore %solution_path%\%solution%
+
+::Restoring solution Xamarin components
+%xamarin_component% restore %solution_path%\%solution%
 
 ::Building project and creating apk.
 %msbuild_path% %project_folder%\%csproj% /p:Configuration=%build_mode% /t:SignAndroidPackage
