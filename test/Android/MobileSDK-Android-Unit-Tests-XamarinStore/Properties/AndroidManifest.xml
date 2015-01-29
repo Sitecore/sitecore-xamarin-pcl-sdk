@@ -2,4 +2,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="MobileSDK_Android_Unit_Tests_XamarinStore.MobileSDK_Android_Unit_Tests_XamarinStore">
 	<uses-sdk android:minSdkVersion="10" />
 	<application android:label="MobileSDK-Android-Unit-Tests-XamarinStore"></application>
+	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>
