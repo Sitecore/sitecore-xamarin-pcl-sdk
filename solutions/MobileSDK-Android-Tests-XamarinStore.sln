@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Unit-Test
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sitecore.MobileSDK.MockObjects.Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\Sitecore.MobileSDK.MockObjects.Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestConfiguration", "..\test\Android\TestConfiguration\TestConfiguration.shproj", "{6687F381-77B9-4C70-9E43-6916FA6FF5AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,9 +39,6 @@ Global
 		{F02A01C0-F2CC-4B06-8927-053DF7EEAA73} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
 		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
 		{9E20350C-89CD-4A84-B363-8D64C58261E8} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\test\Android\MobileSDK-Android-Unit-Tests-XamarinStore\MobileSDK-Android-Unit-Tests-XamarinStore.csproj
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8dd5feee-1ed8-4f6d-a388-133e1f823811}*SharedItemsImports = 4
