@@ -74,6 +74,8 @@ namespace MobileSDKAndroidTests
 
     protected virtual void PublishResults(TestResult testResults)
     {
+      TestResultsConfig.PrintConfig();
+
       Log.Info(this.tag, "Publishing results : " + DateTime.Now +
                     "\nTotal count : {0}, Failed : {1}",
         testResults.AssertCount,
