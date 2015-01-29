@@ -5,7 +5,7 @@ namespace MobileSDKAndroidTests
   public class TestResultsConfig
   {
     private static readonly string Tag = typeof(TestResultsConfig).Name;
-    public const bool IsRemote = false
+    public const bool IsRemote = false;
     public const bool IsAutomated = true;
 
     public const string RemoteServerIp = "10.38.10.175";
