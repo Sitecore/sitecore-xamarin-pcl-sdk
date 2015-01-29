@@ -88,5 +88,6 @@
   </ItemGroup>
   <Import Project="..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems')" />
   <Import Project="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems" Label="Shared" Condition="Exists('..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems')" />
+  <Import Project="..\TestConfiguration\TestConfiguration.projitems" Label="Shared" Condition="Exists('..\TestConfiguration\TestConfiguration.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
 </Project>
