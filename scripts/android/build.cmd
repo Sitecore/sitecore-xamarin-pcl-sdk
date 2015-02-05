@@ -45,7 +45,7 @@ if exist %project_folder%\bin\%build_mode% del %project_folder%\bin\%build_mode%
 %msbuild_path% %project_folder%\%csproj% /p:Configuration=%build_mode% /t:Clean
 
 ::Restoring solution Nuget packages
-%nuget_path% restore %solutions_path%\%solution%
+%nuget_path% restore -NoCache %solutions_path%\%solution%
 
 ::Restoring solution Xamarin components
 %xamarin_component% restore %solutions_path%\%solution%
