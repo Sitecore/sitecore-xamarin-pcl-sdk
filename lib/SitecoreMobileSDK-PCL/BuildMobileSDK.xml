@@ -150,7 +150,7 @@
     <MSBuild 
       Projects="@(PasswordStorageWinProject)" 
       Targets="Build" 
-      Properties="Configuration=Release;" 
+      Properties="Configuration=Debug;" 
     />
 	
 	 <ItemGroup>
@@ -207,7 +207,7 @@
 
 
   <Exec
-    Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.Android.csproj /t:Build /p:Configuration=Release"
+    Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.Android.csproj /t:Build /p:Configuration=Debug"
     WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\" />
 	
 	 <ItemGroup>
@@ -238,7 +238,7 @@
   	<MSBuild 
       Projects="@(MobileSdkProject)" 
       Targets="Build" 
-      Properties="Configuration=Release;" 
+      Properties="Configuration=Debug;" 
     />
 
 	
