@@ -11,6 +11,11 @@ icons:
 publisher-url: http://www.sitecore.net
 no_build: true
 libraries:
+# We have to exclude System.Net.Http.dll from component for Android and iOS as this platforms already has them.
+# But we need to include it for Windows Phone.
+#   See :
+#     1) http://stackoverflow.com/questions/23577465/operation-is-not-valid-error-at-xamarin-ios-project-with-httpclient
+#     2) http://motzcod.es/post/78863496592/portable-class-libraries-httpclient-so-happy
   ios:
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.iOS.dll
@@ -20,7 +25,6 @@ libraries:
   - ..\..\..\deployment\lib\Newtonsoft.Json.dll
   - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll     
   - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll     
-  - ..\..\..\deployment\lib\System.Net.Http.dll
   - ..\..\..\deployment\lib\System.Threading.Tasks.dll 
   - ..\..\..\deployment\lib\crypto.dll 
   - ..\..\..\deployment\lib\System.IO.dll
@@ -33,7 +37,6 @@ libraries:
   - ..\..\..\deployment\lib\Newtonsoft.Json.dll
   - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll
   - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll
-  - ..\..\..\deployment\lib\System.Net.Http.dll
   - ..\..\..\deployment\lib\System.Threading.Tasks.dll
   - ..\..\..\deployment\lib\crypto.dll
   - ..\..\..\deployment\lib\System.IO.dll
@@ -46,7 +49,6 @@ libraries:
   - ..\..\..\deployment\lib\Newtonsoft.Json.dll    
   - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll 
   - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll 
-  - ..\..\..\deployment\lib\System.Net.Http.dll    
   - ..\..\..\deployment\lib\System.Threading.Tasks.dll     
   - ..\..\..\deployment\lib\crypto.dll     
   - ..\..\..\deployment\lib\System.IO.dll
