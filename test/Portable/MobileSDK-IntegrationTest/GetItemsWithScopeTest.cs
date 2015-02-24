@@ -114,17 +114,13 @@
     [Test]
     public async void TestGetItemWithChildrenAndSelfAndParentScopeByQuery()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/Allowed_Parent/Allowed_Item/ancestor-or-self::*")
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/Allowed_Parent/Allowed_Item")
         .AddScope(ScopeType.Children, ScopeType.Self, ScopeType.Parent)
         .Language("en")
         .Payload(PayloadType.Content)
         .Build();
       var response = await this.session.ReadItemAsync(request);
-      testData.AssertItemsCount(28, response);
-      Assert.AreEqual("Allowed_Child", response[0].DisplayName);
-      Assert.AreEqual("Not_Allowed_Child", response[1].DisplayName);
-      Assert.AreEqual("Allowed_Item", response[2].DisplayName);
-      Assert.AreEqual("Allowed_Parent", response[3].DisplayName);
+      testData.AssertItemsCount(4, response);
     }
 
     [Test]
