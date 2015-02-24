@@ -99,6 +99,9 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\SetLanguageDbVersionTest.cs">
       <Link>SetLanguageDbVersionTest.cs</Link>
     </Compile>
+    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\TestEndpointsConfig.cs">
+      <Link>TestEndpointsConfig.cs</Link>
+    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\TestEnvironment.cs">
       <Link>TestEnvironment.cs</Link>
     </Compile>

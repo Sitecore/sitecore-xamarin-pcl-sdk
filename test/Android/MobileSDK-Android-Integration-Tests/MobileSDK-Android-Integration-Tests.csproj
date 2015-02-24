@@ -40,6 +40,7 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -75,6 +76,7 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <Import Project="..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems')" />
+  <Import Project="..\TestConfiguration\TestConfiguration.projitems" Label="Shared" Condition="Exists('..\TestConfiguration\TestConfiguration.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
