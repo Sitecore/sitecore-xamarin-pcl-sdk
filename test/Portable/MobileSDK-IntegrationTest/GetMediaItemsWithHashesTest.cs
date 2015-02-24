@@ -25,8 +25,14 @@
     public void Setup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
+
+      if (!this.testData.IsMediaHashesSupported)
+      {
+        Assert.Ignore();
+      }
+
       this.session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithMediaHashing)
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
           .MediaResizingStrategy(DownloadStrategy.Hashed)
           .BuildReadonlySession();
@@ -36,7 +42,7 @@
     public void TearDown()
     {
       this.testData = null;
-      this.session.Dispose();
+      if (this.session != null) this.session.Dispose();
       this.session = null;
     }
 
@@ -227,7 +233,7 @@
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
       var sessionNoReadAccess =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceWithMediaHashing)
+        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.NoReadUserExtranet)
           .BuildReadonlySession();
 

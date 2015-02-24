@@ -6,10 +6,10 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{8DD5FEEE-1ED8-4F6D-A388-133E1F823811}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>MobileSDKAndroidUnitTests</RootNamespace>
+    <RootNamespace>MobileSDKAndroidTests</RootNamespace>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -80,6 +80,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
+  <Import Project="..\TestConfiguration\TestConfiguration.projitems" Label="Shared" Condition="Exists('..\TestConfiguration\TestConfiguration.projitems')" />
   <Import Project="..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -91,6 +92,10 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\Sitecore.MobileSDK.PasswordProvider.Android.csproj">
+      <Project>{8578d879-0661-4986-a37c-d37538458981}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>Sitecore.MobileSDK</Name>
@@ -98,10 +103,6 @@
     <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
       <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
       <Name>Sitecore.MobileSDK.MockObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\Sitecore.MobileSDK.PasswordProvider.Android.csproj">
-      <Project>{8578D879-0661-4986-A37C-D37538458981}</Project>
-      <Name>Sitecore.MobileSDK.PasswordProvider.Android</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
       <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>

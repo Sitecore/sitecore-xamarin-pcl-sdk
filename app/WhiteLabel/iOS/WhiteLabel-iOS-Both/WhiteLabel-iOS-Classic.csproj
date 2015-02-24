@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{7F65B313-F1B9-4CF0-8F5C-45494BB3466D}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>WhiteLabeliOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>WhiteLabeliOS</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <BuildIpa>true</BuildIpa>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\en.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\ru.lproj\Localizable.strings" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="MasterViewController.cs" />
+    <Compile Include="MasterViewController.designer.cs">
+      <DependentUpon>MasterViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsViewController.cs" />
+    <Compile Include="SettingsViewController.designer.cs">
+      <DependentUpon>SettingsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstanceSettings.cs" />
+    <Compile Include="ITemTasks\GetItemByIdViewController.cs" />
+    <Compile Include="ITemTasks\DeleteITemByIdViewController.cs" />
+    <Compile Include="ITemTasks\GetItemByIdViewController.designer.cs">
+      <DependentUpon>GetItemByIdViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\GetItemByPathViewController.cs" />
+    <Compile Include="ITemTasks\GetItemByPathViewController.designer.cs">
+      <DependentUpon>GetItemByPathViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\DeleteITemByIdViewController.designer.cs">
+      <DependentUpon>DeleteITemByIdViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskViewController.cs" />
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskViewController.designer.cs">
+      <DependentUpon>BaseTaskViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AlertHelper.cs" />
+    <Compile Include="ITemTasks\CreateEditItemViewController.cs" />
+    <Compile Include="ITemTasks\CreateEditItemViewController.designer.cs">
+      <DependentUpon>CreateEditItemViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\UploadImageViewController.cs" />
+    <Compile Include="ITemTasks\UploadImageViewController.designer.cs">
+      <DependentUpon>UploadImageViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\LoadingOverlay.cs" />
+    <Compile Include="ITemTasks\GetItemByQueryViewController.cs" />
+    <Compile Include="ITemTasks\GetItemByQueryViewController.designer.cs">
+      <DependentUpon>GetItemByQueryViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FieldsTableView\FieldsDataSource.cs" />
+    <Compile Include="FieldsTableView\FieldCellSelectionHandler.cs" />
+    <Compile Include="ITemTasks\GetMediaItemViewController.cs" />
+    <Compile Include="ITemTasks\GetMediaItemViewController.designer.cs">
+      <DependentUpon>GetMediaItemViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.cs" />
+    <Compile Include="ITemTasks\BaseClasses\BaseTaskTableViewController.designer.cs">
+      <DependentUpon>BaseTaskTableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\PayloadSelectorViewHelper.cs" />
+    <Compile Include="FieldsTableView\ItemsDataSource.cs" />
+    <Compile Include="FieldsTableView\ItemCellSelectionHandler.cs" />
+    <Compile Include="ITemTasks\FieldsViewController.cs" />
+    <Compile Include="ITemTasks\FieldsViewController.designer.cs">
+      <DependentUpon>FieldsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\CreateITemByPathViewController.cs" />
+    <Compile Include="ITemTasks\CreateITemByPathViewController.designer.cs">
+      <DependentUpon>CreateITemByPathViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\AuthViewController.cs" />
+    <Compile Include="ITemTasks\AuthViewController.designer.cs">
+      <DependentUpon>AuthViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITemTasks\RenderingHtmlViewController.cs" />
+    <Compile Include="ITemTasks\RenderingHtmlViewController.designer.cs">
+      <DependentUpon>RenderingHtmlViewController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Resources\en.lproj\" />
+    <Folder Include="ITemTasks\" />
+    <Folder Include="ITemTasks\BaseClasses\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Resources\ru.lproj\" />
+    <Folder Include="FieldsTableView\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
+      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
+      <Name>Sitecore.MobileSDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
+      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\Sitecore.MobileSDK.PasswordProvider.iOS.csproj">
+      <Project>{95ED660D-1BF8-4668-A252-A87F0D1240A6}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
