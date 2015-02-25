@@ -51,6 +51,4 @@ Note : Both the session and the credentials objects must be wrapped into the "us
 
 ## Other Resources
 
-* [Component Documentation](http://sdn.sitecore.net/Products/Sitecore%20Mobile%20SDK/Sitecore%20Mobile%20SDK%20for%20,-d-,NET.aspx)
-* [Support Forums](http://sdn.sitecore.net/Forum.aspx?)
 * [Source Code Repository](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk)
