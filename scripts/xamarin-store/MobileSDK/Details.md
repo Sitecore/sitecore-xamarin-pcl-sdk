@@ -36,7 +36,7 @@ SITECORE SHARED SOURCE LICENSE
 As the SDK is designed as a portable class library (PCL), you can use the same code on all platforms to fetch the default "home" item content. 
 
 ```csharp
-using (var credentials = new SecureStringPasswordProvider("admin", "b")) // providing secure credentials
+using (var credentials = new SecureStringPasswordProvider("username", "password")) // providing secure credentials
 using 
 (
   var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
