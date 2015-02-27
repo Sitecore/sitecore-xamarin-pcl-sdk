@@ -17,7 +17,7 @@
     private async void MakeRequest()
     {
       using (var credentials = new Credentials("admin", "b"))
-      using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://cms75.test24dk1.dk.sitecore.net/")
+      using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://cms80full.build.test24dk1.dk.sitecore.net/")
         .Credentials(credentials)
         .Site("/sitecore/shell")
         .BuildSession())
