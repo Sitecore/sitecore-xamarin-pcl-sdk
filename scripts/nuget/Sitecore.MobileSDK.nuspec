@@ -29,7 +29,7 @@ The SDK supports producing native applications through the Xamarin framework
 
     <releaseNotes>Initial release with items manipulation support</releaseNotes>
 
-    <copyright>Copyright 1999-2014 Sitecore</copyright> 
+    <copyright>Copyright 1999-2015 Sitecore</copyright> 
     <tags>Sitecore iOS Android PCL Xamarin</tags>
    
     <dependencies>
