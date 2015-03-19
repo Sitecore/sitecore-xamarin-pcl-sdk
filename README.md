@@ -20,7 +20,7 @@ The library is PCL standard compliant and can be used on the following platforms
 * Windows Phone 8 and newer
 
 
-It uses the modern C# approaches such as :
+It uses the modern C# approaches such as:
 * PCL distribution
 * async/await based API
 * Fluent interface
