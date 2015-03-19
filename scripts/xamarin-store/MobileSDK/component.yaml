@@ -78,5 +78,5 @@ samples:
     path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo-Unified\iMobileSdkDemo-Unified.sln
   - name: Android Sample
     description: Android Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.
-    path: ..\..\..\test\LocalXamarinStoreTest\AndroidMobileSdkDemo\YourSolutionName.sln
+    path: ..\..\..\test\LocalXamarinStoreTest\AndroidMobileSdkDemo\AndroidMobileSdkDemo.sln
 ...
