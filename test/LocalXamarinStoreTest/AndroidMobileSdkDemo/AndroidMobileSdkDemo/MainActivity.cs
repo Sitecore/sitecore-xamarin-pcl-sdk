@@ -14,9 +14,9 @@ using Sitecore.MobileSDK.API.Items;
 
 using Sitecore.MobileSDK.PasswordProvider.Android;
 
-namespace MobileSDKSample
+namespace AndroidMobileSdkDemo
 {
-  [Activity(Label = "YourProjectName", MainLauncher = true, Icon = "@drawable/icon")]
+  [Activity(Label = "AndroidMobileSdkDemo", MainLauncher = true, Icon = "@drawable/icon")]
   public class MainActivity : Activity
   {
     protected async override void OnCreate(Bundle bundle)
