@@ -51,4 +51,4 @@ Note : Both the session and the credentials objects must be wrapped into the "us
 
 ## Other Resources
 
-* [Source Code Repository](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk)
+* [Project Site](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk)
