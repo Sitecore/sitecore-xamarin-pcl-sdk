@@ -9,6 +9,8 @@ icons:
   - icons\Sitecore.MobileSDK.PCL_128x128.png
   - icons\Sitecore.MobileSDK.PCL_512x512.png
 publisher-url: http://www.sitecore.net
+docs-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
+src-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
 no_build: true
 libraries:
 # We have to exclude System.Net.Http.dll from component for Android and iOS as this platforms already has them.
@@ -76,5 +78,5 @@ samples:
     path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo-Unified\iMobileSdkDemo-Unified.sln
   - name: Android Sample
     description: Android Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.
-    path: ..\..\..\test\LocalXamarinStoreTest\AndroidMobileSdkDemo\YourSolutionName.sln
+    path: ..\..\..\test\LocalXamarinStoreTest\AndroidMobileSdkDemo\AndroidMobileSdkDemo.sln
 ...
