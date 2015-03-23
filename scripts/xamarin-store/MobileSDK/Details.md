@@ -13,7 +13,7 @@ The SDK includes the following features:
 The library is PCL standard compliant and can be used on the following platforms :
 
 * iOS 7 and newer
-* Android
+* Android 4.0 and newer
 * Windows Desktop (.NET 4.5)
 * Windows Phone 8 and newer
 
