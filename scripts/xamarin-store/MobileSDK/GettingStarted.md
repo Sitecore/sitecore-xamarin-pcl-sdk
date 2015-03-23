@@ -8,7 +8,7 @@ You should now be ready to access content from Sitecore within your mobile appli
 
 
 ```csharp
-using (var credentials = new SecureStringPasswordProvider("username", "password")) // securing credentials, entered by the end user
+using (var credentials = new SecureStringPasswordProvider(“username”, “password”)) // securing credentials, entered by the end user
 using 
 (
   var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
@@ -51,4 +51,4 @@ Note : Both the session and the credentials objects must be wrapped into the "us
 
 ## Other Resources
 
-* [Source Code Repository](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk)
+* [Project Site](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk)

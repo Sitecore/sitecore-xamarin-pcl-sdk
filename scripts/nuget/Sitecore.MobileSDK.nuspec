@@ -7,7 +7,7 @@
     <authors>Sitecore Mobile Team</authors>
     <owners>Sitecore Corporation A&#8260;S</owners>
     <licenseUrl>https://raw.githubusercontent.com/Sitecore/sitecore-xamarin-pcl-sdk/master/license.txt</licenseUrl>
-    <projectUrl>https://github.com/Sitecore/sitecore-xamarin-pcl-sdk</projectUrl>
+    <projectUrl>https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/</projectUrl>
     <iconUrl>http://s4.uploads.im/S3BR8.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
 
@@ -29,7 +29,7 @@ The SDK supports producing native applications through the Xamarin framework
 
     <releaseNotes>Initial release with items manipulation support</releaseNotes>
 
-    <copyright>Copyright 1999-2014 Sitecore</copyright> 
+    <copyright>Copyright 1999-2015 Sitecore</copyright> 
     <tags>Sitecore iOS Android PCL Xamarin</tags>
    
     <dependencies>

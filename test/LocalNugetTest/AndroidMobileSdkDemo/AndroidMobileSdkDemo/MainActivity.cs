@@ -1,22 +1,21 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Sitecore.MobileSDK;
-using Sitecore.MobileSDK.API;
-using Sitecore.MobileSDK.SessionSettings;
-using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
-using Sitecore.MobileSDK.API.Request.Parameters;
-using Sitecore.MobileSDK.API.Items;
-
-using Sitecore.MobileSDK.PasswordProvider.Android;
-
-namespace MobileSDKSample
+﻿namespace MobileSDKSample
 {
-  [Activity(Label = "YourProjectName", MainLauncher = true, Icon = "@drawable/icon")]
+  using System;
+  using Android.App;
+  using Android.Content;
+  using Android.OS;
+  using Android.Runtime;
+  using Android.Views;
+  using Android.Widget;
+
+  using System.Threading.Tasks;
+  using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Request.Parameters;
+  using Sitecore.MobileSDK.API.Items;
+
+  using Sitecore.MobileSDK.PasswordProvider.Android;
+
+  [Activity(Label = "AndroidMobileSdkDemo", MainLauncher = true, Icon = "@drawable/icon")]
   public class MainActivity : Activity
   {
     protected async override void OnCreate(Bundle bundle)
@@ -29,13 +28,13 @@ namespace MobileSDKSample
       using (
         var session =
           SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
-        .Credentials(credentials)
-        .DefaultDatabase("web")
-        .DefaultLanguage("en")
-        .MediaLibraryRoot("/sitecore/media library")
-        .MediaPrefix("~/media/")
-        .DefaultMediaResourceExtension("ashx")
-        .BuildReadonlySession())
+          .Credentials(credentials)
+          .DefaultDatabase("web")
+          .DefaultLanguage("en")
+          .MediaLibraryRoot("/sitecore/media library")
+          .MediaPrefix("~/media/")
+          .DefaultMediaResourceExtension("ashx")
+          .BuildReadonlySession())
       {
         var request =
           ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
@@ -57,7 +56,8 @@ namespace MobileSDKSample
 
         dialogBuilder.Create().Show();
       }
-  }
+    }
+
   }
 }
 
