@@ -111,7 +111,6 @@
     }
 
     [Test]
-	[Ignore]
     public async void TestWithHttpsInUrlById()
     {
       var url = "https://scmobileteam.sitecoretest.net";
