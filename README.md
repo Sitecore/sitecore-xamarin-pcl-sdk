@@ -18,6 +18,8 @@ The library is PCL standard compliant and can be used on the following platforms
 * Windows Phone 8 and newer
 
 # Downloads
+- [NuGet packages](https://www.nuget.org/packages?q=Sitecore+Mobile+SDK)
+- [Xamarin component](https://components.xamarin.com/view/sitecore.mobile.sdk?version=1.0)
 
 # Links
 - [API Documentation](http://sitecore.github.io/sitecore-xamarin-pcl-sdk/v1.0/)
