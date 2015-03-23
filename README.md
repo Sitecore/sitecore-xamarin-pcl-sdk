@@ -20,6 +20,7 @@ The library is PCL standard compliant and can be used on the following platforms
 # Downloads
 
 # Links
+- [API Documentation](http://sitecore.github.io/sitecore-xamarin-pcl-sdk/v1.0/)
 - [Documentation](https://doc.sitecore.net)
 - [iOS Sample](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/tree/master/app/WhiteLabel/iOS)
 - [Android Sample](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/tree/master/app/WhiteLabel/Android/WhiteLabel-Android)
