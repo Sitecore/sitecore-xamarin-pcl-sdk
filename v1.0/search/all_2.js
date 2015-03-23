@@ -1,0 +1,14 @@
+var searchData=
+[
+  ['children',['Children',['../a00151_a1aec1a85642e43bec5f9e81e6606b6f5.html#a1aec1a85642e43bec5f9e81e6606b6f5a64e4aca4297806247f62a7b5f8cbd3df',1,'Sitecore::MobileSDK::API::Request::Parameters']]],
+  ['childrenscopeisset',['ChildrenScopeIsSet',['../a00042_a12fd2163c45b6020d6915767089e3195.html#a12fd2163c45b6020d6915767089e3195',1,'Sitecore::MobileSDK::API::Request::Parameters::IScopeParameters']]],
+  ['config',['Config',['../a00050_a905e1bb149b92b2b5327f6df94a9a0ea.html#a905e1bb149b92b2b5327f6df94a9a0ea',1,'Sitecore::MobileSDK::API::Session::ISitecoreWebApiSessionState']]],
+  ['content',['Content',['../a00151_a924fcb93ec6247fa4d0667856679efe5.html#a924fcb93ec6247fa4d0667856679efe5af15c1cae7882448b3fb0404682e17e61',1,'Sitecore::MobileSDK::API::Request::Parameters']]],
+  ['contenttype',['ContentType',['../a00057_afcaec9a12bb4b7af9acc480789d5c0c3.html#afcaec9a12bb4b7af9acc480789d5c0c3',1,'Sitecore.MobileSDK.API.Request.Parameters.IUploadMediaOptions.ContentType()'],['../a00056_a2456c5204ede039cdadce47518f60f35.html#a2456c5204ede039cdadce47518f60f35',1,'Sitecore.MobileSDK.API.Request.Parameters.IUploadMediaItemRequestParametersBuilder&lt; out T &gt;.ContentType()']]],
+  ['count',['Count',['../a00064_a6d0e0167c9da8ca31a75aac249d395aa.html#a6d0e0167c9da8ca31a75aac249d395aa',1,'Sitecore::MobileSDK::API::Items::ScDeleteItemsResponse']]],
+  ['createitemasync',['CreateItemAsync',['../a00013_adfedfc70768d4d6e6336ef1771dc3a8c.html#adfedfc70768d4d6e6336ef1771dc3a8c',1,'Sitecore.MobileSDK.API.Session.ICreateItemActions.CreateItemAsync(ICreateItemByIdRequest request, CancellationToken cancelToken=default(CancellationToken))'],['../a00013_a91ee04c59f55994c1328231ea0a71ca9.html#a91ee04c59f55994c1328231ea0a71ca9',1,'Sitecore.MobileSDK.API.Session.ICreateItemActions.CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken=default(CancellationToken))']]],
+  ['createitemrequestwithparentid',['CreateItemRequestWithParentId',['../a00051_a0d93be66644fd657aa0e197311a6236c.html#a0d93be66644fd657aa0e197311a6236c',1,'Sitecore::MobileSDK::API::ItemWebApiRequestBuilder']]],
+  ['createitemrequestwithparentpath',['CreateItemRequestWithParentPath',['../a00051_adfbf53bad1a921f46fdbe1d7da7081b0.html#adfbf53bad1a921f46fdbe1d7da7081b0',1,'Sitecore::MobileSDK::API::ItemWebApiRequestBuilder']]],
+  ['credentials',['Credentials',['../a00050_a371004514d3e7075d47f0ef625183aec.html#a371004514d3e7075d47f0ef625183aec',1,'Sitecore.MobileSDK.API.Session.ISitecoreWebApiSessionState.Credentials()'],['../a00002_a16cc4a5ea903bc75ef0572a0605b8a7a.html#a16cc4a5ea903bc75ef0572a0605b8a7a',1,'Sitecore.MobileSDK.API.Session.IAuthenticatedSessionBuilder.Credentials()']]],
+  ['credentialsshallowcopy',['CredentialsShallowCopy',['../a00058_ab11ee5cc925a80d0a1949dedc10981b3.html#ab11ee5cc925a80d0a1949dedc10981b3',1,'Sitecore::MobileSDK::API::IWebApiCredentials']]]
+];

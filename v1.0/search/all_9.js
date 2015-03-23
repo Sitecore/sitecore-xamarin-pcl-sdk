@@ -1,0 +1,14 @@
+var searchData=
+[
+  ['maxheight',['MaxHeight',['../a00022_a726e661f585b9ca57d7e36af0e8442b0.html#a726e661f585b9ca57d7e36af0e8442b0',1,'Sitecore.MobileSDK.API.Request.Parameters.IDownloadMediaOptions.MaxHeight()'],['../a00030_ab65bcb45b1f9a98398fb8f07830969d0.html#ab65bcb45b1f9a98398fb8f07830969d0',1,'Sitecore.MobileSDK.API.MediaItem.IMediaOptionsBuilder.MaxHeight()']]],
+  ['maxwidth',['MaxWidth',['../a00022_accfd2d82be3559a490d3d9060db28ef5.html#accfd2d82be3559a490d3d9060db28ef5',1,'Sitecore.MobileSDK.API.Request.Parameters.IDownloadMediaOptions.MaxWidth()'],['../a00030_a6ef38b73635b72d84df1edf2c4ab7787.html#a6ef38b73635b72d84df1edf2c4ab7787',1,'Sitecore.MobileSDK.API.MediaItem.IMediaOptionsBuilder.MaxWidth()']]],
+  ['medialibraryroot',['MediaLibraryRoot',['../a00029_a9f9ef6df807a8dfe6039be49a09b8759.html#a9f9ef6df807a8dfe6039be49a09b8759',1,'Sitecore.MobileSDK.API.MediaItem.IMediaLibrarySettings.MediaLibraryRoot()'],['../a00009_ae7d98b0a3e41a9039f77735aee4c5757.html#ae7d98b0a3e41a9039f77735aee4c5757',1,'Sitecore.MobileSDK.API.Session.IBaseSessionBuilder.MediaLibraryRoot()']]],
+  ['medialibrarysettings',['MediaLibrarySettings',['../a00050_a81519642f2537e7194e6ccdc51c4a147.html#a81519642f2537e7194e6ccdc51c4a147',1,'Sitecore::MobileSDK::API::Session::ISitecoreWebApiSessionState']]],
+  ['mediaoptionsbuilder',['MediaOptionsBuilder',['../a00060.html',1,'Sitecore::MobileSDK::API::MediaItem']]],
+  ['mediapath',['MediaPath',['../a00031_a578b011b3f02c58503d8241b7a1af07d.html#a578b011b3f02c58503d8241b7a1af07d',1,'Sitecore.MobileSDK.API.Request.IMediaResourceDownloadRequest.MediaPath()'],['../a00057_accb5364a4b3567d05ff1c0ca12197a4b.html#accb5364a4b3567d05ff1c0ca12197a4b',1,'Sitecore.MobileSDK.API.Request.Parameters.IUploadMediaOptions.MediaPath()']]],
+  ['mediaprefix',['MediaPrefix',['../a00029_afe587c605e8b36f76a207d057b9edbe6.html#afe587c605e8b36f76a207d057b9edbe6',1,'Sitecore.MobileSDK.API.MediaItem.IMediaLibrarySettings.MediaPrefix()'],['../a00009_aaac8943f5279b0fb7f4e10422f745dd0.html#aaac8943f5279b0fb7f4e10422f745dd0',1,'Sitecore.MobileSDK.API.Session.IBaseSessionBuilder.MediaPrefix()']]],
+  ['mediaresizingstrategy',['MediaResizingStrategy',['../a00009_a2cf309586454f926a69883ef446ba22d.html#a2cf309586454f926a69883ef446ba22d',1,'Sitecore::MobileSDK::API::Session::IBaseSessionBuilder']]],
+  ['mediasettingsshallowcopy',['MediaSettingsShallowCopy',['../a00029_a42640057d78306b0e9b04c79d0f0012c.html#a42640057d78306b0e9b04c79d0f0012c',1,'Sitecore::MobileSDK::API::MediaItem::IMediaLibrarySettings']]],
+  ['message',['Message',['../a00069_a3aa137a764fe98f8ca9f28fa4db76db1.html#a3aa137a764fe98f8ca9f28fa4db76db1',1,'Sitecore::MobileSDK::API::Exceptions::WebApiJsonStatusMessage']]],
+  ['min',['Min',['../a00151_a924fcb93ec6247fa4d0667856679efe5.html#a924fcb93ec6247fa4d0667856679efe5a78d811e98514cd165dda532286610fd2',1,'Sitecore::MobileSDK::API::Request::Parameters']]]
+];
