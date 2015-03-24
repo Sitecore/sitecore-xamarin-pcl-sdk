@@ -33,9 +33,6 @@ namespace AndroidMobileSdkDemo
         .Credentials(credentials)
         .DefaultDatabase("web")
         .DefaultLanguage("en")
-        .MediaLibraryRoot("/sitecore/media library")
-        .MediaPrefix("~/media/")
-        .DefaultMediaResourceExtension("ashx")
         .BuildReadonlySession())
       {
         var request =
