@@ -22,54 +22,28 @@ libraries:
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.iOS.dll
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Interface.dll  
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.Extensions.dll   
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.dll      
-  - ..\..\..\deployment\lib\Newtonsoft.Json.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll     
-  - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll     
-  - ..\..\..\deployment\lib\System.Threading.Tasks.dll 
-  - ..\..\..\deployment\lib\crypto.dll 
-  - ..\..\..\deployment\lib\System.IO.dll
   ios-unified:
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.dll
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Interface.dll
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.Extensions.dll
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.dll
-  - ..\..\..\deployment\lib\Newtonsoft.Json.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll
-  - ..\..\..\deployment\lib\System.Threading.Tasks.dll
-  - ..\..\..\deployment\lib\crypto.dll
-  - ..\..\..\deployment\lib\System.IO.dll
   android:
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll 
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Interface.dll 
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Android.dll 
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.Extensions.dll       
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.dll  
-  - ..\..\..\deployment\lib\Newtonsoft.Json.dll    
-  - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll 
-  - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll 
-  - ..\..\..\deployment\lib\System.Threading.Tasks.dll     
-  - ..\..\..\deployment\lib\crypto.dll     
-  - ..\..\..\deployment\lib\System.IO.dll
   winphone-8.0:
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll
   - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Interface.dll
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.Extensions.dll
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.dll
-  - ..\..\..\deployment\lib\Newtonsoft.Json.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll
-  - ..\..\..\deployment\lib\System.Net.Http.dll
-  - ..\..\..\deployment\lib\System.Threading.Tasks.dll
-  - ..\..\..\deployment\lib\crypto.dll
-  - ..\..\..\deployment\lib\System.IO.dll  
 summary: "Use Sitecore CMS content in your native mobile apps written in C#."
 details: Details.md
 getting-started: GettingStarted.md
 version: 1.0
+packages:
+  - Newtonsoft.Json, Version=6.0.3
+  - Microsoft.Bcl, Version=1.1.9
+  - Microsoft.Bcl.Async, Version=1.0.168
+  - Microsoft.Bcl.Build, Version=1.0.14
+  - Microsoft.Net.Http, Version=2.2.22
+  - Portable.BouncyCastle, Version=1.7.0
 samples: 
   - name: iOS Sample
     path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo\iMobileSdkDemo.sln
