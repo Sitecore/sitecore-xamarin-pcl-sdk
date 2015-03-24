@@ -24,9 +24,9 @@ namespace AndroidMobileSdkDemo
       base.OnCreate(bundle);
 
       #warning first we have to setup connection info and create a session
-      string instanceUrl = "cms80full.build.test24dk1.dk.sitecore.net";
+      string instanceUrl = "http://my.site.com";
 
-      using (var credentials = new SecureStringPasswordProvider("sitecore\\admin", "b"))
+      using (var credentials = new SecureStringPasswordProvider("login", "password"))
       using (
         var session =
           SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
