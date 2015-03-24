@@ -38,12 +38,13 @@ details: Details.md
 getting-started: GettingStarted.md
 version: 1.0
 packages:
-  - Newtonsoft.Json, Version=6.0.3
-  - Microsoft.Bcl, Version=1.1.9
-  - Microsoft.Bcl.Async, Version=1.0.168
-  - Microsoft.Bcl.Build, Version=1.0.14
-  - Microsoft.Net.Http, Version=2.2.22
-  - Portable.BouncyCastle, Version=1.7.0
+  mobile:
+    - Newtonsoft.Json, Version=6.0.3
+    - Microsoft.Bcl, Version=1.1.9
+    - Microsoft.Bcl.Async, Version=1.0.168
+    - Microsoft.Bcl.Build, Version=1.0.14
+    - Microsoft.Net.Http, Version=2.2.22
+    - Portable.BouncyCastle, Version=1.7.0
 samples: 
   - name: iOS Sample
     path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo\iMobileSdkDemo.sln
