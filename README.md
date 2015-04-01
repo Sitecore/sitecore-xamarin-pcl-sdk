@@ -1,4 +1,4 @@
-Sitecore Mobile SDK for .NET
+Sitecore Mobile SDK for Xamarin
 ========
 
 Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 

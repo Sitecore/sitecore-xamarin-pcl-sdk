@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 # "..\..\..\" -> is jenkins job's workspace
-name: Sitecore Mobile SDK
+name: Sitecore Mobile SDK for Xamarin
 id: Sitecore.Mobile.SDK
 publisher: Sitecore Corporation A/S
 license: License.md
