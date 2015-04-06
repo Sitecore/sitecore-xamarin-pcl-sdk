@@ -3,7 +3,7 @@ require "rake/clean"
 CLEAN.include "*.xam"
 CLEAN.include "xamarin-component"
 
-COMPONENT = "Sitecore.MobileSDK.PCL-1.0.0.xam"
+COMPONENT = "Sitecore.MobileSDK.Xamarin-1.0.0.xam"
 BINARIES_DIR = "../../deployment/lib"
 SCRIPT_THIS_DIR = File.expand_path(File.dirname(__FILE__))
 XAMARIN_COMPONENT_EXE = SCRIPT_THIS_DIR + "/xamarin-component/xamarin-component.exe"
@@ -19,15 +19,15 @@ end
 task :default => "xamarin-component/xamarin-component.exe" do
     line = <<-END
     create-manually #{COMPONENT}                                                             \
-        --name="Sitecore Mobile SDK PCL"                                                     \
+        --name="Sitecore Mobile SDK for Xamarin"                                                     \
         --summary="Use content Sitecore CMS content in your native mobile apps in C#."       \
         --publisher="Sitecore Corporation"                                                   \
         --website="http://www.sitecore.net"                                                  \
         --details="Details.md"                                                               \
         --license="License.md"                                                               \
         --getting-started="GettingStarted.md"                                                \
-        --icon="icons/Sitecore.MobileSDK.PCL_128x128.png"                                    \
-        --icon="icons/Sitecore.MobileSDK.PCL_512x512.png"                                    \
+        --icon="icons/Sitecore.MobileSDK.Xamarin_128x128.png"                                    \
+        --icon="icons/Sitecore.MobileSDK.Xamarin_512x512.png"                                    \
                                                                                              \
         --library="ios":"#{BINARIES_DIR}/Sitecore.MobileSDK.dll"                             \
         --library="ios":"#{BINARIES_DIR}/Microsoft.Threading.Tasks.Extensions.dll"           \

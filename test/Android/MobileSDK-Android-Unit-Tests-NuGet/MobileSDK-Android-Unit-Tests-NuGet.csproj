@@ -14,7 +14,7 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AssemblyName>MobileSDK-Android-Unit-Tests-NuGet</AssemblyName>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -63,10 +63,10 @@
       <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
+      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.PCL.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
+      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Android">
       <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.PasswordProvider.1.0.0\lib\MonoAndroid\Sitecore.MobileSDK.PasswordProvider.Android.dll</HintPath>

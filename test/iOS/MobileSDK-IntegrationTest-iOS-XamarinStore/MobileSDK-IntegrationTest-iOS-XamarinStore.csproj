@@ -86,40 +86,40 @@
     <Reference Include="monotouch" />
     <Reference Include="MonoTouch.NUnitLite" />
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Microsoft.Threading.Tasks.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\Sitecore.MobileSDK.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\Sitecore.MobileSDK.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\System.IO.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\System.IO.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\System.Net.Http.Extensions.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\System.Net.Http.Primitives.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\System.Net.Http.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\System.Threading.Tasks.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\System.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="crypto">
-      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios\crypto.dll</HintPath>
+      <HintPath>..\..\..\solutions\Components\Sitecore.MobileSDK.Xamarin-1.0.0\lib\ios\crypto.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +138,7 @@
   <Import Project="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems" Label="Shared" Condition="Exists('..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
-    <XamarinComponentReference Include="Sitecore.MobileSDK.PCL">
+    <XamarinComponentReference Include="Sitecore.MobileSDK.Xamarin">
       <Version>1.0.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
