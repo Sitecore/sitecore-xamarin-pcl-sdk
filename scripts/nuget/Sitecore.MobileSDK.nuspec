@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>Sitecore.MobileSDK.PCL</id>
+    <id>Sitecore.MobileSDK.Xamarin</id>
     <title>Sitecore MobileSDK for Xamarin</title>
     <version>1.0.0</version>
     <authors>Sitecore Mobile Team</authors>
