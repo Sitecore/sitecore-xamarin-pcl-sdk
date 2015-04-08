@@ -55,7 +55,7 @@
       #warning first we have to setup connection info and create a session
       var instanceUrl = "http://my.site.com";
 
-      using (var credentials = new SecureStringPasswordProvider("admin", "b"))
+      using (var credentials = new SecureStringPasswordProvider("login", "password"))
       using (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
         .Credentials(credentials)

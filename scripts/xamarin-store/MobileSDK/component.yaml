@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 # "..\..\..\" -> is jenkins job's workspace
-name: Sitecore Mobile SDK
+name: Sitecore Mobile SDK for Xamarin
 id: Sitecore.Mobile.SDK
 publisher: Sitecore Corporation A/S
 license: License.md
 icons: 
-  - icons\Sitecore.MobileSDK.PCL_128x128.png
-  - icons\Sitecore.MobileSDK.PCL_512x512.png
+  - icons\Sitecore.MobileSDK.Xamarin_128x128.png
+  - icons\Sitecore.MobileSDK.Xamarin_512x512.png
 publisher-url: http://www.sitecore.net
 docs-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
 src-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk

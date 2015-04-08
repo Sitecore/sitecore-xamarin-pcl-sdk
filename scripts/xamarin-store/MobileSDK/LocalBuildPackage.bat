@@ -1,14 +1,14 @@
 CALL Z:/Xamarin_Sdk_tfs/scripts/xamarin-store/xamarin-component/xamarin-component.exe     ^
-create-manually Sitecore.MobileSDK.PCL-1.0.0.xam                        ^
---name="Sitecore Mobile SDK PCL"                                                             ^
+create-manually Sitecore.MobileSDK.Xamarin-1.0.0.xam                        ^
+--name="Sitecore Mobile SDK for Xamarin"                                                             ^
 --summary="Use content Sitecore CMS content in your native mobile apps in C#."               ^
 --publisher="Sitecore Corporation"                                                           ^
 --website="http://www.sitecore.net"                                                          ^
 --details="Details.md"                                                                       ^
 --license="License.md"                                                                       ^
 --getting-started="GettingStarted.md"                                                        ^
---icon="icons/Sitecore.MobileSDK.PCL_128x128.png"                                            ^
---icon="icons/Sitecore.MobileSDK.PCL_512x512.png"                                            ^
+--icon="icons/Sitecore.MobileSDK.Xamarin_128x128.png"                                            ^
+--icon="icons/Sitecore.MobileSDK.Xamarin_512x512.png"                                            ^
 --library="ios":"../../deployment/lib/Sitecore.MobileSDK.dll"                                                 ^
 --library="ios":"../../deployment/lib/Microsoft.Threading.Tasks.Extensions.dll"                   ^
 --library="ios":"../../deployment/lib/Microsoft.Threading.Tasks.dll"                              ^

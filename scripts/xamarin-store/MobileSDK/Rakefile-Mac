@@ -3,7 +3,7 @@ require "rake/clean"
 CLEAN.include "*.xam"
 CLEAN.include "xamarin-component"
 
-COMPONENT = "Sitecore.MobileSDK.PCL-1.0.0.xam"
+COMPONENT = "Sitecore.MobileSDK.Xamarin-1.0.0.xam"
 
 file "xamarin-component/xamarin-component.exe" do
     puts "* Downloading xamarin-component..."
@@ -23,8 +23,8 @@ task :default => "xamarin-component/xamarin-component.exe" do
         --details="Details.md"                                                               \
         --license="License.md"                                                               \
         --getting-started="GettingStarted.md"                                                \
-        --icon="icons/Sitecore.MobileSDK.PCL_128x128.png"                                    \
-        --icon="icons/Sitecore.MobileSDK.PCL_512x512.png"                                    \
+        --icon="icons/Sitecore.MobileSDK.Xamarin_128x128.png"                                    \
+        --icon="icons/Sitecore.MobileSDK.Xamarin_512x512.png"                                    \
                                                                                              \
         --library="ios":"bin/Sitecore.MobileSDK.dll"                                         \
         --library="ios":"bin/third-party/Microsoft.Threading.Tasks.Extensions.dll"           \
