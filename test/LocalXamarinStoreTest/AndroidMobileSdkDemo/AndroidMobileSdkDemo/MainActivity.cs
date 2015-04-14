@@ -23,6 +23,7 @@ namespace AndroidMobileSdkDemo
     {
       base.OnCreate(bundle);
 
+      #warning first we have to setup connection info and create a session
       string instanceUrl = "http://my.site.com";
 
       using (var credentials = new SecureStringPasswordProvider("login", "password"))
@@ -32,9 +33,6 @@ namespace AndroidMobileSdkDemo
         .Credentials(credentials)
         .DefaultDatabase("web")
         .DefaultLanguage("en")
-        .MediaLibraryRoot("/sitecore/media library")
-        .MediaPrefix("~/media/")
-        .DefaultMediaResourceExtension("ashx")
         .BuildReadonlySession())
       {
         var request =

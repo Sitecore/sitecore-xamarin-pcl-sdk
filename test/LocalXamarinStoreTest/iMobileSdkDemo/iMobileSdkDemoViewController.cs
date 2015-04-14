@@ -52,19 +52,16 @@
     {
       base.ViewDidAppear(animated);
 
-      // first we have to setup connection info and create a session
-      var instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722";
+      #warning first we have to setup connection info and create a session
+      var instanceUrl = "http://my.site.com";
 
-      using (var credentials = new SecureStringPasswordProvider("admin", "b"))
+      using (var credentials = new SecureStringPasswordProvider("login", "password"))
       using (
         var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
         .Credentials(credentials)
         .WebApiVersion("v1")
         .DefaultDatabase("web")
         .DefaultLanguage("en")
-        .MediaLibraryRoot("/sitecore/media library")
-        .MediaPrefix("~/media/")
-        .DefaultMediaResourceExtension("ashx")
         .BuildSession())
       {
         // In order to fetch some data we have to build a request

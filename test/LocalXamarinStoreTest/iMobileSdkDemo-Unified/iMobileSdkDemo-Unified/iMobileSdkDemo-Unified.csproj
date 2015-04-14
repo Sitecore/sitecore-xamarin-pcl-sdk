@@ -91,37 +91,37 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\Microsoft.Threading.Tasks.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\Sitecore.MobileSDK.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\Sitecore.MobileSDK.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\System.IO.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\System.IO.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\System.Net.Http.Extensions.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\System.Net.Http.Primitives.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\System.Threading.Tasks.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\System.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="crypto">
-      <HintPath>..\Components\Sitecore.MobileSDK.PCL-1.0.0\lib\ios-unified\crypto.dll</HintPath>
+      <HintPath>..\Components\Sitecore.Mobile.SDK-1.0\lib\ios-unified\crypto.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -147,8 +147,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <XamarinComponentReference Include="Sitecore.MobileSDK.PCL">
-      <Version>1.0.0</Version>
+    <XamarinComponentReference Include="Sitecore.Mobile.SDK">
+      <Version>1.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
