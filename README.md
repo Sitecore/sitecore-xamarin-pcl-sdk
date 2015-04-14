@@ -18,12 +18,13 @@ The library is PCL standard compliant and can be used on the following platforms
 * Windows Phone 8 and newer
 
 # Downloads
-- [NuGet packages](https://www.nuget.org/packages?q=Sitecore+Mobile+SDK)
-- [Xamarin component](https://components.xamarin.com/view/sitecore.mobile.sdk?version=1.0)
+- [NuGet packages](https://www.nuget.org/packages/Sitecore.MobileSDK.Xamarin/)
+- [Xamarin component](https://components.xamarin.com/view/Sitecore.Mobile.SDK)
 
 # Links
 - [API Documentation](http://sitecore.github.io/sitecore-xamarin-pcl-sdk/v1.0/)
-- [Documentation](https://doc.sitecore.net)
+- [Documentation](https://doc.sitecore.net/Products/Mobile_SDK_for_Xamarin)
+- [Product Page](https://dev.sitecore.net/en/Downloads/Sitecore_Mobile_SDK_for_Xamarin/1_0/Sitecore_Mobile_SDK_10_for_Xamarin.aspx)
 - [iOS Sample](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/tree/master/app/WhiteLabel/iOS)
 - [Android Sample](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/tree/master/app/WhiteLabel/Android/WhiteLabel-Android)
 - [Windwos Phone Silverlight](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/tree/master/app/WhiteLabel/WindwosPhoneSilverlight/WhiteLabel-WindowsPhoneSilverlight)
@@ -62,4 +63,4 @@ using
 }
 ```
 # Licence
-SITECORE SHARED SOURCE LICENSE
+[SITECORE SHARED SOURCE LICENSE](https://github.com/Sitecore/sitecore-xamarin-pcl-sdk/blob/master/license.txt)
