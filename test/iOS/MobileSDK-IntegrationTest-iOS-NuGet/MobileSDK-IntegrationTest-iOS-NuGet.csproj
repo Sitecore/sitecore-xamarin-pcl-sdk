@@ -105,7 +105,7 @@
       <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.PasswordProvider.1.0.0\lib\MonoTouch10\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
+      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.PasswordProvider.1.0.1\lib\MonoTouch10\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
