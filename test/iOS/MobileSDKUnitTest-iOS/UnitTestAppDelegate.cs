@@ -67,8 +67,9 @@
 
       //      string host = "localhost";
       //      string host = "10.38.11.5"; // @adk mac-mini
-      //string host = "10.38.11.23"; // @igk mac-mini
-      string host = "10.38.10.236"; // @darthvader.local
+      string host = "127.0.0.1"; // @igk mac-mini
+//      string host = "10.38.10.236"; // @darthvader.local
+
       var targetStreamOnBuildServer = new TcpTextWriter(host, 16390);
 
       runner.Writer = new NUnitOutputTextWriter(runner, targetStreamOnBuildServer, reportStream);

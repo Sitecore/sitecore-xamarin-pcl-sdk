@@ -34,6 +34,9 @@ namespace MobileSDKIntegrationTestiOSUnified
 
       // register every tests included in the main application/assembly
       runner.Add(System.Reflection.Assembly.GetExecutingAssembly());
+       
+      //prevent device from sleep mode
+      UIApplication.SharedApplication.IdleTimerDisabled = true;
 
       window.RootViewController = new UINavigationController(runner.GetViewController());
             

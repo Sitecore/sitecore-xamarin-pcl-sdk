@@ -31,6 +31,9 @@ namespace MobileSDKIntegrationTestiOSXamarinStore
       window = new UIWindow(UIScreen.MainScreen.Bounds);
       runner = new TouchRunner(window);
 
+
+      app.IdleTimerDisabled = true;
+
       // register every tests included in the main application/assembly
       runner.Add(System.Reflection.Assembly.GetExecutingAssembly());
 

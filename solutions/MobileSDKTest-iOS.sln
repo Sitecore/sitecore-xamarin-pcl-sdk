@@ -208,9 +208,6 @@ Global
 		{3099A100-12CA-45D0-A45F-087632139637} = {E0E03E8E-2782-4217-9146-5A706CB30487}
 		{36B3E8FB-1C45-4EB6-9D5F-11A034FE1A64} = {E0E03E8E-2782-4217-9146-5A706CB30487}
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\test\iOS\MobileSDK-UnitTest-iOS-Unified\MobileSDK-UnitTest-iOS-Unified.csproj
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
