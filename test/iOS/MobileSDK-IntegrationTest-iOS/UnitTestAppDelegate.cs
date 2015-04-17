@@ -64,7 +64,8 @@
 
       //      string host = "localhost";
       //      string host = "10.38.11.5"; // @adk mac-mini
-      string host = "10.38.10.205"; // @darthvader.local
+      //string host = "10.38.11.23"; // @igk mac-mini
+      string host = "10.38.10.236"; // @darthvader.local
 
       var targetStreamOnBuildServer = new TcpTextWriter(host, 16391);
 
