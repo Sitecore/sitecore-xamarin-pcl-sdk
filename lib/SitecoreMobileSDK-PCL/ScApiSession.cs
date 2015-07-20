@@ -41,7 +41,8 @@ namespace Sitecore.MobileSDK
       ISessionConfig config,
       IWebApiCredentials credentials,
       IMediaLibrarySettings mediaSettings,
-      ItemSource defaultSource = null)
+      ItemSource defaultSource = null,
+      HttpMessageHandler httpMessageHandler = null)
     {
       if (null == config)
       {
@@ -61,7 +62,7 @@ namespace Sitecore.MobileSDK
         this.mediaSettings = mediaSettings.MediaSettingsShallowCopy();
       }
 
-      this.httpClient = new HttpClient();
+      this.httpClient = httpMessageHandler == null ? new HttpClient() : new HttpClient(httpMessageHandler);
     }
 
     #region IDisposable

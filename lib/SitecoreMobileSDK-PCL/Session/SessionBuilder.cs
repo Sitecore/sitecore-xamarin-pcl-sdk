@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSDK.Session
+﻿using System.Net.Http;
+
+namespace Sitecore.MobileSDK.Session
 {
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.MediaItem;
@@ -37,7 +39,7 @@
         this.itemSourceAccumulator.Language,
         this.itemSourceAccumulator.VersionNumber);
 
-      var result = new ScApiSession(conf, this.credentials, mediaSettings, itemSource);
+      var result = new ScApiSession(conf, this.credentials, mediaSettings, itemSource, httpMessageHandler);
       return result;
     }
 
@@ -241,6 +243,13 @@
       this.resizingFlag = resizingFlag;
       return this;
     }
+
+    public IBaseSessionBuilder MessageHandler(HttpMessageHandler httpMessageHandler)
+    {
+      this.httpMessageHandler = httpMessageHandler;
+      return this;
+    }
+
     #endregion IAnonymousSessionBuilder
 
     #region State
@@ -254,6 +263,8 @@
 
     private IWebApiCredentials credentials = null;
     private ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
+    private HttpMessageHandler httpMessageHandler;
+
     #endregion State
   }
 }

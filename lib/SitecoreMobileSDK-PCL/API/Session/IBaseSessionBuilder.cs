@@ -1,3 +1,5 @@
+using System.Net.Http;
+
 namespace Sitecore.MobileSDK.API.Session
 {
   using Sitecore.MobileSDK.API.MediaItem;
@@ -118,6 +120,13 @@ namespace Sitecore.MobileSDK.API.Session
     /// this
     /// </returns>
     IBaseSessionBuilder MediaResizingStrategy(DownloadStrategy resizingFlag);
+
+    /// <summary>
+    /// Sets the HttpMessageHandler to be used for the underlying requests
+    /// </summary>
+    /// <param name="httpMessageHandler">Concrete HttpMessageHandler to be used. (null == default)</param>
+    /// <returns>this</returns>
+    IBaseSessionBuilder MessageHandler(HttpMessageHandler httpMessageHandler);
   }
 }
 
