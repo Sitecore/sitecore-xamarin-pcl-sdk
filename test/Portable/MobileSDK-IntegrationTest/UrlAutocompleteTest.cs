@@ -113,8 +113,8 @@
     [Test]
     public async void TestWithHttpsInUrlById()
     {
-      var url = "https://scmobileteam.sitecoretest.net";
-
+      //var url = "https://scmobileteam.sitecoretest.net";
+      var url = "https://sc81151003sec.test24dk1.dk.sitecore.net";
       // @adk : inlined due to 
       //
       // Failed UrlAutocompleteTest.TestWithHttpsInUrlById
