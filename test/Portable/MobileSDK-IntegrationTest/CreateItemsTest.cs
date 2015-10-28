@@ -273,6 +273,7 @@
       this.GetAndCheckItem(expectedItem, resultItem);
     }
 
+    //Item Web API issue #451738
     [Test]
     public async void TestCreateItemByIdAndSetHtmlFieldValue()
     {
