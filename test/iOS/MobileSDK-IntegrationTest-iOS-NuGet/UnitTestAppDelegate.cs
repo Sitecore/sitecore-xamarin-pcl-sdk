@@ -5,6 +5,7 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.NUnit.UI;
+using System.Net;
 
 namespace MobileSDKIntegrationTestiOSNuGet
 {
@@ -27,6 +28,15 @@ namespace MobileSDKIntegrationTestiOSNuGet
     //
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
+
+      ServicePointManager
+        .ServerCertificateValidationCallback +=
+          (sender, cert, chain, sslPolicyErrors) => true;
+
+
+
+
+
       // create a new window instance based on the screen size
       window = new UIWindow(UIScreen.MainScreen.Bounds);
       runner = new TouchRunner(window);
