@@ -53,7 +53,4 @@ Global
 		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
 		{8007ADBC-4501-447F-BE99-E628A481BB3F} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\test\iOS\MobileSDK-IntegrationTest-iOS-NuGet\MobileSDK-IntegrationTest-iOS-NuGet.csproj
-	EndGlobalSection
 EndGlobal
