@@ -3,7 +3,7 @@
   <metadata>
     <id>Sitecore.MobileSDK.Xamarin</id>
     <title>Sitecore MobileSDK for Xamarin</title>
-    <version>1.1.0</version>
+    <version>1.0.1</version>
     <authors>Sitecore Mobile Team</authors>
     <owners>Sitecore Corporation A&#8260;S</owners>
     <licenseUrl>https://raw.githubusercontent.com/Sitecore/sitecore-xamarin-pcl-sdk/master/license.txt</licenseUrl>
@@ -42,7 +42,7 @@ The SDK supports producing native applications through the Xamarin framework
     </dependencies>
   </metadata>
   <files>
-    <file src="Sitecore.MobileSDK.dll" target="lib\portable-win+net4+sl5+wp8\"/>
-    <file src="Sitecore.MobileSDK.PasswordProvider.Interface.dll" target="lib\portable-win+net4+sl5+wp8\"/>
+    <file src="..\..\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" target="lib\portable-win+net4+sl5+wp8\"/>
+    <file src="..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\bin\Release\Sitecore.MobileSDK.PasswordProvider.Interface.dll" target="lib\portable-win+net4+sl5+wp8\"/>
   </files>
 </package>
