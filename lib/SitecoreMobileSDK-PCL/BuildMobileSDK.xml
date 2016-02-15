@@ -327,11 +327,11 @@
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.0.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.1.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
      />
 	<Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.0.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.1.nupkg"
       DestinationFolder="$(LocalNugetRepoDirectory)"
      />
 
