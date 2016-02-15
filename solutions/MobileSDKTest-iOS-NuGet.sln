@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-IntegrationTest-iOS-NuGet", "..\test\iOS\MobileSDK-IntegrationTest-iOS-NuGet\MobileSDK-IntegrationTest-iOS-NuGet.csproj", "{D11B5CC4-D57E-4000-AC53-723E625122B8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{2C70868B-468C-4FA3-B82C-3193AD762AD0}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
@@ -11,7 +9,9 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\te
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sitecore.MobileSDK.MockObjects.Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\Sitecore.MobileSDK.MockObjects.Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKUnitTest-iOS-NuGet", "..\test\iOS\MobileSDKUnitTest-iOS-NuGet\MobileSDKUnitTest-iOS-NuGet.csproj", "{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-IntegrationTest-iOS-NuGet-Updated", "Updated\MobileSDK-IntegrationTest-iOS-NuGet-Updated\MobileSDK-IntegrationTest-iOS-NuGet-Updated.csproj", "{2CEDD496-1972-4E50-96DF-25378B34DE40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKUnitTest-iOS-NuGet-Updated", "Updated\MobileSDKUnitTest-iOS-NuGet-Updated\MobileSDKUnitTest-iOS-NuGet-Updated.csproj", "{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,30 +23,30 @@ Global
 		AppStore|iPhone = AppStore|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.AppStore|iPhone.Build.0 = AppStore|iPhone
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Debug|iPhone.Build.0 = Debug|iPhone
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Release|iPhone.ActiveCfg = Release|iPhone
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Release|iPhone.Build.0 = Release|iPhone
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{D11B5CC4-D57E-4000-AC53-723E625122B8}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.AppStore|iPhone.Build.0 = AppStore|iPhone
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Debug|iPhone.Build.0 = Debug|iPhone
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Release|iPhone.ActiveCfg = Release|iPhone
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Release|iPhone.Build.0 = Release|iPhone
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{EE2295EC-28EB-4C63-8FF3-8F655D34F7E9}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Ad-Hoc|iPhone.ActiveCfg = Release|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Ad-Hoc|iPhone.Build.0 = Release|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.AppStore|iPhone.ActiveCfg = Release|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.AppStore|iPhone.Build.0 = Release|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhone.Build.0 = Debug|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Release|iPhone.ActiveCfg = Release|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Release|iPhone.Build.0 = Release|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Ad-Hoc|iPhone.ActiveCfg = Release|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Ad-Hoc|iPhone.Build.0 = Release|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.AppStore|iPhone.ActiveCfg = Release|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.AppStore|iPhone.Build.0 = Release|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhone.Build.0 = Debug|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Release|iPhone.ActiveCfg = Release|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Release|iPhone.Build.0 = Release|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
