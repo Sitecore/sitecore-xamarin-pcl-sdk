@@ -81,10 +81,13 @@
     <Reference Include="Xamarin.iOS" />
     <Reference Include="MonoTouch.NUnitLite" />
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS">
-      <HintPath>..\..\..\..\..\..\..\Users\Igor\Downloads\SitecoreMobileSDK-Full\dev\Jenkins\jobs\XamarinSDK-FullBuild\workspace\deployment\lib\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Users\Igor\Desktop\latestSDK\Sitecore.MobileSDK.PasswordProvider.1.0.1.nupkg\lib\MonoTouch10\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="crypto">
+      <HintPath>..\..\packages\Portable.BouncyCastle.1.8.1\lib\XamarinIos\crypto.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\Xamarin.iOS10\System.Net.Http.Primitives.dll</HintPath>
@@ -97,9 +100,6 @@
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="crypto">
-      <HintPath>..\..\packages\Portable.BouncyCastle.1.8.1\lib\XamarinIos\crypto.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>..\..\packages\Sitecore.MobileSDK.Xamarin.1.1.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>

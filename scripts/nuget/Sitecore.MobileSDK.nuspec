@@ -3,7 +3,7 @@
   <metadata>
     <id>Sitecore.MobileSDK.Xamarin</id>
     <title>Sitecore MobileSDK for Xamarin</title>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <authors>Sitecore Mobile Team</authors>
     <owners>Sitecore Corporation A&#8260;S</owners>
     <licenseUrl>https://raw.githubusercontent.com/Sitecore/sitecore-xamarin-pcl-sdk/master/license.txt</licenseUrl>
@@ -33,16 +33,16 @@ The SDK supports producing native applications through the Xamarin framework
     <tags>Sitecore iOS Android PCL Xamarin</tags>
    
     <dependencies>
-      <dependency id="Microsoft.Bcl" version="1.1.9"/>
+      <dependency id="Newtonsoft.Json" version="8.0.2"/>
+      <dependency id="Portable.BouncyCastle" version="1.8.1"/>
+	  <dependency id="Microsoft.Net.Http" version="2.2.29"/>
+	  <dependency id="Microsoft.Bcl" version="1.1.10"/>
       <dependency id="Microsoft.Bcl.Async" version="1.0.168"/>
-      <dependency id="Microsoft.Bcl.Build" version="1.0.14"/>
-      <dependency id="Microsoft.Net.Http" version="2.2.22"/>
-      <dependency id="Newtonsoft.Json" version="6.0.3"/>
-      <dependency id="Portable.BouncyCastle" version="1.7.0"/>
+      <dependency id="Microsoft.Bcl.Build" version="1.0.21"/>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" target="lib\portable-win+net4+sl5+wp8\"/>
-    <file src="..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\bin\Release\Sitecore.MobileSDK.PasswordProvider.Interface.dll" target="lib\portable-win+net4+sl5+wp8\"/>
+    <file src="Sitecore.MobileSDK.dll" target="lib\portable-win+net4+sl5+wp8\"/>
+    <file src="Sitecore.MobileSDK.PasswordProvider.Interface.dll" target="lib\portable-win+net4+sl5+wp8\"/>
   </files>
 </package>
