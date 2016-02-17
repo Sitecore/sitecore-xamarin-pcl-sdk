@@ -350,7 +350,7 @@
 	 
 
     <Exec
-      Command="xamarin-component\xamarin-component package"
+      Command="xamarin-component\xamarin-component.exe package"
       WorkingDirectory="$(ScriptsDirectory)\xamarin-store\MobileSDK"
     />
     <Copy
@@ -363,7 +363,7 @@
      />
 
    <Exec
-      Command="xamarin-component install Sitecore.Mobile.SDK-1.1.xam"
+      Command="xamarin-component.exe install Sitecore.Mobile.SDK-1.1.xam"
     WorkingDirectory="$(LocalXamarinComponentsRepoDirectory)"
     />
 	    
