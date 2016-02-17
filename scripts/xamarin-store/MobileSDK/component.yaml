@@ -12,8 +12,9 @@ publisher-url: http://www.sitecore.net
 docs-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
 src-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
 no_build: true
+is_shell: true
 packages:
-  "": Sitecore.MobileSDK.Xamarin, Version=1.0.1
+  "mobile": Sitecore.MobileSDK.Xamarin, Version=1.0.1
 summary: "Use Sitecore CMS content in your native mobile apps written in C#."
 details: Details.md
 getting-started: GettingStarted.md
@@ -22,8 +23,6 @@ samples:
   - name: iOS Sample
     path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo\iMobileSdkDemo.sln
     description: iOS Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.
-  - name: iOS Unified Sample
-    path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo-Unified\iMobileSdkDemo-Unified.sln
   - name: Android Sample
     description: Android Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.
     path: ..\..\..\test\LocalXamarinStoreTest\AndroidMobileSdkDemo\AndroidMobileSdkDemo.sln
