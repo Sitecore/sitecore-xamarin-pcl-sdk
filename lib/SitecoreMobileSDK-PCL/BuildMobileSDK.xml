@@ -354,16 +354,16 @@
       WorkingDirectory="$(ScriptsDirectory)\xamarin-store\MobileSDK"
     />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.0.xam"
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.1.xam"
       DestinationFolder="$(DeploymentDirectory)"
      />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.0.xam"
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.1.xam"
       DestinationFolder="$(LocalXamarinComponentsRepoDirectory)"
      />
 
    <Exec
-      Command="xamarin-component install Sitecore.Mobile.SDK-1.0.xam"
+      Command="xamarin-component install Sitecore.Mobile.SDK-1.1.xam"
     WorkingDirectory="$(LocalXamarinComponentsRepoDirectory)"
     />
 	    
