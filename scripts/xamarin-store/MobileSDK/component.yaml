@@ -12,64 +12,12 @@ publisher-url: http://www.sitecore.net
 docs-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
 src-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
 no_build: true
-libraries:
-# We have to exclude System.Net.Http.dll from component for Android and iOS as this platforms already has them.
-# But we need to include it for Windows Phone.
-#   See :
-#     1) http://stackoverflow.com/questions/23577465/operation-is-not-valid-error-at-xamarin-ios-project-with-httpclient
-#     2) http://motzcod.es/post/78863496592/portable-class-libraries-httpclient-so-happy
-  ios:
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.iOS.dll
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Interface.dll  
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.Extensions.dll   
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.dll      
-  - ..\..\..\deployment\lib\Newtonsoft.Json.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll     
-  - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll     
-  - ..\..\..\deployment\lib\System.Threading.Tasks.dll 
-  - ..\..\..\deployment\lib\crypto.dll 
-  - ..\..\..\deployment\lib\System.IO.dll
-  ios-unified:
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.dll
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Interface.dll
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.Extensions.dll
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.dll
-  - ..\..\..\deployment\lib\Newtonsoft.Json.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll
-  - ..\..\..\deployment\lib\System.Threading.Tasks.dll
-  - ..\..\..\deployment\lib\crypto.dll
-  - ..\..\..\deployment\lib\System.IO.dll
-  android:
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll 
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Interface.dll 
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Android.dll 
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.Extensions.dll       
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.dll  
-  - ..\..\..\deployment\lib\Newtonsoft.Json.dll    
-  - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll 
-  - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll 
-  - ..\..\..\deployment\lib\System.Threading.Tasks.dll     
-  - ..\..\..\deployment\lib\crypto.dll     
-  - ..\..\..\deployment\lib\System.IO.dll
-  winphone-8.0:
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.dll
-  - ..\..\..\deployment\lib\Sitecore.MobileSDK.PasswordProvider.Interface.dll
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.Extensions.dll
-  - ..\..\..\deployment\lib\Microsoft.Threading.Tasks.dll
-  - ..\..\..\deployment\lib\Newtonsoft.Json.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Extensions.dll
-  - ..\..\..\deployment\lib\System.Net.Http.Primitives.dll
-  - ..\..\..\deployment\lib\System.Net.Http.dll
-  - ..\..\..\deployment\lib\System.Threading.Tasks.dll
-  - ..\..\..\deployment\lib\crypto.dll
-  - ..\..\..\deployment\lib\System.IO.dll  
+packages:
+  "": Sitecore.MobileSDK.Xamarin, Version=1.0.1
 summary: "Use Sitecore CMS content in your native mobile apps written in C#."
 details: Details.md
 getting-started: GettingStarted.md
-version: 1.0
+version: 1.1
 samples: 
   - name: iOS Sample
     path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo\iMobileSdkDemo.sln
