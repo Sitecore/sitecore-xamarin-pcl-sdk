@@ -15,7 +15,6 @@ no_build: true
 is_shell: true
 packages:
   "mobile": Sitecore.MobileSDK.Xamarin, Version=1.0.1
-  "mobile": Sitecore.MobileSDK.PasswordProvider, Version=1.0.2
 summary: "Use Sitecore CMS content in your native mobile apps written in C#."
 details: Details.md
 getting-started: GettingStarted.md
