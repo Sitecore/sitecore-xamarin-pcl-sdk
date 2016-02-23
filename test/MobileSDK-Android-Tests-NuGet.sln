@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{F4684840-46F5-4BED-9E05-A2C45C381BE2}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Integration-NuGet", "..\test\Android\MobileSDK-Android-Integration-NuGet\MobileSDK-Android-Integration-NuGet.csproj", "{7A34672C-B40E-4273-9B44-B328DA8322C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{40853BAA-B317-4F6B-9F40-C55A529BD583}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-UnitTest", "..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.shproj", "{8A52A2A6-20A1-42BD-B586-242F77089B1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDK-Android-Unit-Tests-NuGet", "..\test\Android\MobileSDK-Android-Unit-Tests-NuGet\MobileSDK-Android-Unit-Tests-NuGet.csproj", "{4CD78146-2E40-4D37-8313-D73E9B8A9D1A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sitecore.MobileSDK.MockObjects.Shared", "..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\Sitecore.MobileSDK.MockObjects.Shared.shproj", "{8007ADBC-4501-447F-BE99-E628A481BB3F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestConfiguration", "..\test\Android\TestConfiguration\TestConfiguration.shproj", "{6687F381-77B9-4C70-9E43-6916FA6FF5AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CD78146-2E40-4D37-8313-D73E9B8A9D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD78146-2E40-4D37-8313-D73E9B8A9D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD78146-2E40-4D37-8313-D73E9B8A9D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD78146-2E40-4D37-8313-D73E9B8A9D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A34672C-B40E-4273-9B44-B328DA8322C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A34672C-B40E-4273-9B44-B328DA8322C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A34672C-B40E-4273-9B44-B328DA8322C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A34672C-B40E-4273-9B44-B328DA8322C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
+		{7A34672C-B40E-4273-9B44-B328DA8322C7} = {F4684840-46F5-4BED-9E05-A2C45C381BE2}
+		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
+		{4CD78146-2E40-4D37-8313-D73E9B8A9D1A} = {40853BAA-B317-4F6B-9F40-C55A529BD583}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8dd5feee-1ed8-4f6d-a388-133e1f823811}*SharedItemsImports = 4
+		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8a52a2a6-20a1-42bd-b586-242f77089b1d}*SharedItemsImports = 13
+		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{25a7aae3-e76a-4c4f-aa0e-24983166c37d}*SharedItemsImports = 13
+		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{2b6ef2c4-3ae1-414b-8833-3a0d25a0afb0}*SharedItemsImports = 13
+		..\lib\PasswordProvider\portable\SecureStringPasswordProvider\SecureStringPasswordProvider.projitems*{8578d879-0661-4986-a37c-d37538458981}*SharedItemsImports = 4
+		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{e7a0d5ec-7424-4e3b-bab3-c66ebfd2c21a}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
