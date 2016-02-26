@@ -226,7 +226,6 @@
 
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
         .AddFieldsRawValuesByNameToSet("Text", textValue)
-        .Payload(PayloadType.Full)
         .Version(Version)
         .Build();
 
@@ -251,7 +250,6 @@
       var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/" + ItemName)
         .AddFieldsRawValuesByNameToSet("Text", TextValue)
         .AddFieldsToRead("Text")
-        .Payload(PayloadType.Content)
         .Build();
 
       var result = await this.session.UpdateItemAsync(request);
@@ -387,7 +385,6 @@
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
       var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
-        .AddScope(ScopeType.Children)
         .Database(database)
         .Build();
       var response = await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);

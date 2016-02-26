@@ -34,7 +34,7 @@
       mutableSession.Site = null;
       this.sessionConfig = mutableSession;
 
-      this.payload = new QueryParameters( PayloadType.Full, null, null );
+      this.payload = new QueryParameters(null );
     }
 
     [TearDown]
@@ -52,7 +52,7 @@
       mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.SitecoreQuery = "/Sitecore/Content/*";
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.QueryParameters = new QueryParameters(null, null, null);
+      mutableParameters.QueryParameters = new QueryParameters(null);
 
       IReadItemsByQueryRequest request = mutableParameters;
 
@@ -179,7 +179,6 @@
       var connection = new SessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/home/*")
-        .Payload(PayloadType.Full)
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByQueryGaps(request);
@@ -218,7 +217,6 @@
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/home/*")
         .Language("da")
-        .Payload(PayloadType.Content)
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByQueryGaps(request);
@@ -240,7 +238,7 @@
       mutableParameters.SitecoreQuery = "/aaa/bbb/ccc/*";
 
       string[] fields = { "x", "y", "x" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      IQueryParameters duplicatedFields = new QueryParameters(fields);
       mutableParameters.QueryParameters = duplicatedFields;
 
 
@@ -259,7 +257,7 @@
 
 
       string[] fields = { "x", "y", "X" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      IQueryParameters duplicatedFields = new QueryParameters(fields);
       mutableParameters.QueryParameters = duplicatedFields;
 
 

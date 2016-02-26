@@ -51,7 +51,6 @@
         .ItemName("ItEmNaMe")
         .Database("db")
         .Language("lg")
-        .Payload(PayloadType.Full)
         .AddFieldsRawValuesByNameToSet(fields)
         .AddFieldsRawValuesByNameToSet("field3", "VaLuE3")
         .Build();
@@ -106,7 +105,7 @@
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
       var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
-       .ItemTemplatePath("/Sample/Sample Item")
+        .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
         .AddFieldsRawValuesByNameToSet("field2", "VaLuE2");

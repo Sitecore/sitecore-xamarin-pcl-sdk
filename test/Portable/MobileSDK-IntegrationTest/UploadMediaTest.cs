@@ -450,7 +450,6 @@
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
       var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(this.testData.Items.UploadMediaHere.Id)
-        .AddScope(ScopeType.Children)
         .Database(database)
         .Build();
       return await this.session.DeleteItemAsync(request);

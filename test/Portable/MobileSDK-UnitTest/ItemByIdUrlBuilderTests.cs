@@ -42,7 +42,7 @@
       mutableSessionConfig.Site = "/sitecore/shell";
       this.sitecoreShellConfig = mutableSessionConfig;
 
-      this.payload = new QueryParameters(PayloadType.Min, null, null);
+      this.payload = new QueryParameters(null);
     }
 
     [TearDown]
@@ -59,7 +59,7 @@
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemId = "{   xxx   }";
-      mutableParameters.QueryParameters = new QueryParameters(null, null, null);
+      mutableParameters.QueryParameters = new QueryParameters(null);
 
       IReadItemsByIdRequest parameters = mutableParameters;
 
@@ -190,7 +190,6 @@
       var connection = new SessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Payload(PayloadType.Full)
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
@@ -198,7 +197,7 @@
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?payload=full&sc_itemid=%7bxxx-yyy-zzz%7d";
+      string expected = "http://localhost/-/item/v1?sc_itemid=%7bxxx-yyy-zzz%7d";
 
       Assert.AreEqual(expected, result);
     }
@@ -229,7 +228,6 @@
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
         .Language("da")
-        .Payload(PayloadType.Content)
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
@@ -251,7 +249,7 @@
       mutableParameters.ItemId = "{   xxx   }";
 
       string[] fields = { "x", "y", "x" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      IQueryParameters duplicatedFields = new QueryParameters(fields);
       mutableParameters.QueryParameters = duplicatedFields;
 
 
@@ -269,7 +267,7 @@
       mutableParameters.ItemId = "{   xxx   }";
 
       string[] fields = { "x", "y", "X" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      IQueryParameters duplicatedFields = new QueryParameters(fields);
       mutableParameters.QueryParameters = duplicatedFields;
 
 
@@ -286,7 +284,7 @@
       mutableParameters.ItemId = "{   xxx   }";
 
       string[] fields = { "x", "y", null };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      IQueryParameters duplicatedFields = new QueryParameters(fields);
       mutableParameters.QueryParameters = duplicatedFields;
 
 
@@ -303,7 +301,7 @@
       mutableParameters.ItemId = "{   xxx   }";
 
       string[] fields = { "x", "y", "" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      IQueryParameters duplicatedFields = new QueryParameters(fields);
       mutableParameters.QueryParameters = duplicatedFields;
 
 

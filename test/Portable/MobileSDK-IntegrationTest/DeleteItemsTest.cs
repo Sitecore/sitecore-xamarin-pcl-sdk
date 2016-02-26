@@ -105,7 +105,6 @@
       ISitecoreItem childItem = await this.CreateItem("Child item", parentItem);
 
       var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(childItem.Path)
-        .AddScope(ScopeType.Parent)
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
@@ -129,62 +128,7 @@
       Assert.AreEqual(item1.Id, result[0]);
       Assert.AreEqual(item2.Id, result[1]);
     }
-
-    [Test]
-    public async void TestDeleteItemByIdbWithParentAndChildrenScope()
-    {
-      await this.RemoveAll();
-
-      ISitecoreItem parentItem = await this.CreateItem("Parent item");
-      ISitecoreItem selfItem = await this.CreateItem("Self item", parentItem);
-      ISitecoreItem childItem = await this.CreateItem("Child item", selfItem);
-
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(selfItem.Path)
-        .AddScope(ScopeType.Parent)
-        .AddScope(ScopeType.Children)
-        .Build();
-
-      var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(2, result.Count);
-      Assert.AreEqual(parentItem.Id, result[0]);
-      Assert.AreEqual(childItem.Id, result[1]);
-    }
-
-    [Test]
-    public async void TestDeleteInternationalItemByPathbWithChildrenScope()
-    {
-      await this.RemoveAll();
-
-      ISitecoreItem selfItem = await this.CreateItem("インターナショナル عالمي JJ ж");
-      ISitecoreItem childItem = await this.CreateItem("インターナショナル", selfItem);
-
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(selfItem.Path)
-        .AddScope(ScopeType.Children)
-        .Build();
-
-      var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(1, result.Count);
-      Assert.AreEqual(childItem.Id, result[0]);
-    }
-
-    [Test]
-    public async void TestDeleteItemByQueryWithChildrenAndSelfScope()
-    {
-      await this.RemoveAll();
-
-      ISitecoreItem parentItem = await this.CreateItem("Parent item");
-      ISitecoreItem selfItem = await this.CreateItem("Self item", parentItem);
-      await this.CreateItem("Child item", selfItem);
-
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(testData.Items.CreateItemsHere.Path + "/descendant::*[@@templatename='Sample Item']")
-        .AddScope(ScopeType.Children)
-        .AddScope(ScopeType.Self)
-        .Build();
-
-      var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(5, result.Count);  //but 3 items was deleted in fact (Item Web API issue)
-    }
-
+ 
     [Test]
     public async void TestDeleteItemByIdAsAnonymousFromShellSiteReturnsException()
     {
@@ -275,27 +219,10 @@
     }
 
     [Test]
-    public void TestDeleteItemByIdWithDuplicateScopeReturnsException()
-    {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
-        .AddScope(ScopeType.Self)
-        .AddScope(ScopeType.Self));
-      Assert.AreEqual("DeleteItemByIdRequestBuilder.Scope : Adding scope parameter duplicates is forbidden", exception.Message);
-    }
-
-    [Test]
     public void TestDeleteItemWithInvalidPathReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("invalid path )"));
       Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
-    }
-
-    [Test]
-    public void TestDeleteItemByQueryWithNullScopeReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
-        .AddScope(null));
-      Assert.IsTrue(exception.Message.Contains("DeleteItemItemByQueryRequestBuilder.Scope"));
     }
 
     [Test]
@@ -395,7 +322,6 @@
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
       var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
-        .AddScope(ScopeType.Children)
         .Database(database)
         .Build();
       return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);

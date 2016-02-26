@@ -31,7 +31,6 @@
           .BuildReadonlySession();
 
       this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
-        .Payload(PayloadType.Content)
         .Build();
     }
 
@@ -90,7 +89,6 @@
         .Database(Db)
         .Language(Language)
         .Version(Version)
-        .Payload(PayloadType.Content)
         .Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -118,7 +116,6 @@
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Language(Language)
         .Version(Version)
-        .Payload(PayloadType.Content)
         .Build();
       var response = await session.ReadItemAsync(request);
 
@@ -147,7 +144,6 @@
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Version(Version)
         .Database(Db)
-        .Payload(PayloadType.Content)
         .Build();
       var response = await session.ReadItemAsync(request);
 
@@ -184,7 +180,7 @@
       Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
        .Database("master")
        .Database(Db)
-       .Payload(PayloadType.Content).Build());
+       .Build());
       Assert.AreEqual("ReadItemByPathRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
     }
 
@@ -193,7 +189,6 @@
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
                             .Database(null)
-                            .Payload(PayloadType.Content)
                             .Build();
       Assert.IsNotNull(request);
     }
@@ -203,7 +198,7 @@
     {
 
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
-      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Database(" ").Payload(PayloadType.Content).Build());
+      Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Database(" ").Build());
       Assert.AreEqual("ReadItemByPathRequestBuilder.Database : The input cannot be empty.", exception.Message);
     }
 
@@ -265,7 +260,7 @@
     public async void TestGetItemByQueryWithCorrectField()
     {
       var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore//*[@Title='English version 2 web']");
-      var request = requestBuilder.Payload(PayloadType.Content).Build();
+      var request = requestBuilder.Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -302,7 +297,6 @@
       else
       {
         request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
-        .Payload(PayloadType.Content)
         .Version(itemSource.VersionNumber.Value)
         .Build();
       }

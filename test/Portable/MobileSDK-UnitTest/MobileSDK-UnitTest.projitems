@@ -39,7 +39,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ResourseUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ThreadSafetyTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByIdUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByPathUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UploadMediaUrlBuilderTests.cs" />

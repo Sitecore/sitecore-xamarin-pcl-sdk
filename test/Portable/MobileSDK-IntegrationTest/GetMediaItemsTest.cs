@@ -583,7 +583,7 @@
 
     private async Task<ISitecoreItem> GetItemByPath(string path, string db = null)
     {
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path).Payload(PayloadType.Content);
+      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path);
       if (db != null)
       {
         requestBuilder.Database(db);

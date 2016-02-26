@@ -125,11 +125,6 @@
       return (ICreateItemRequestParametersBuilder<T>)base.Language(itemLanguage);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> Payload(PayloadType payload)
-    {
-      return (ICreateItemRequestParametersBuilder<T>)base.Payload(payload);
-    }
-
     new public ICreateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
       return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);

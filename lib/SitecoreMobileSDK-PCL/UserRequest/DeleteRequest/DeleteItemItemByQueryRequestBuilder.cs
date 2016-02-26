@@ -16,7 +16,7 @@
 
     public override IDeleteItemsByQueryRequest Build()
     {
-      return new DeleteItemByQueryParameters(null, this.scopeParameters, this.database, this.sitecoreQuery);
+      return new DeleteItemByQueryParameters(null, this.database, this.sitecoreQuery);
     }
   }
 }

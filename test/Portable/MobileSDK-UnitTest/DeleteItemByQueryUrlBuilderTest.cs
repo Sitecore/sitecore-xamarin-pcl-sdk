@@ -16,7 +16,6 @@
   public class DeleteItemByQueryUrlBuilderTest
   {
     private SessionConfig sessionConfig;
-    private ScopeParameters scopeParameters;
 
     private string query;
     private string fastQuery;
@@ -28,7 +27,6 @@
     public void Setup()
     {
       this.sessionConfig = new MutableSessionConfig("http://testurl");
-      this.scopeParameters = new ScopeParameters();
 
       this.query = "/Sitecore/Content/*";
       this.fastQuery = "fast:/sitecore/content/Home/Products/*[@@name = 'Hammer']";
@@ -41,7 +39,6 @@
     public void TearDown()
     {
       this.sessionConfig = null;
-      this.scopeParameters = null;
 
       this.query = null;
       this.fastQuery = null;
@@ -63,7 +60,7 @@
     {
       TestDelegate action = () =>
       {
-        var parameters = new DeleteItemByQueryParameters(null, this.scopeParameters, this.database, this.query);
+        var parameters = new DeleteItemByQueryParameters(null, this.database, this.query);
 
         this.builder.GetUrlForRequest(parameters);
       };
@@ -76,7 +73,7 @@
     {
       TestDelegate action = () =>
       {
-        var parameters = new DeleteItemByQueryParameters(this.sessionConfig, this.scopeParameters, this.database, null);
+        var parameters = new DeleteItemByQueryParameters(this.sessionConfig, this.database, null);
 
         this.builder.GetUrlForRequest(parameters);
       };
@@ -87,7 +84,7 @@
     [Test]
     public void TestCorrectQuery()
     {
-      var parameters = new DeleteItemByQueryParameters(this.sessionConfig, this.scopeParameters, null, this.query);
+      var parameters = new DeleteItemByQueryParameters(this.sessionConfig, null, this.query);
 
       var url = this.builder.GetUrlForRequest(parameters);
 
@@ -97,7 +94,7 @@
     [Test]
     public void TestCorrectQueryWithDatabase()
     {
-      var parameters = new DeleteItemByQueryParameters(this.sessionConfig, this.scopeParameters, this.database, this.query);
+      var parameters = new DeleteItemByQueryParameters(this.sessionConfig, this.database, this.query);
 
       var url = this.builder.GetUrlForRequest(parameters);
 
@@ -105,35 +102,10 @@
     }
 
     [Test]
-    public void TestCorrectQueryWithDatabaseAndScope()
-    {
-      scopeParameters.AddScope(ScopeType.Children);
-
-      var parameters = new DeleteItemByQueryParameters(this.sessionConfig, this.scopeParameters, this.database, this.query);
-
-      var url = this.builder.GetUrlForRequest(parameters);
-
-      Assert.AreEqual("http://testurl/-/item/v1?query=%2fSitecore%2fContent%2f%2a&scope=c&sc_database=master", url);
-    }
-
-    [Test]
-    public void TestCorrectQueryWithScope()
-    {
-      scopeParameters.AddScope(ScopeType.Children);
-
-      var parameters = new DeleteItemByQueryParameters(this.sessionConfig, this.scopeParameters, null, this.query);
-
-      var url = this.builder.GetUrlForRequest(parameters);
-
-      Assert.AreEqual("http://testurl/-/item/v1?query=%2fSitecore%2fContent%2f%2a&scope=c", url);
-    }
-
-    [Test]
     public void TestCorrectFastQuery()
     {
-      scopeParameters.AddScope(ScopeType.Children);
 
-      var parameters = new DeleteItemByQueryParameters(this.sessionConfig, this.scopeParameters, null, this.fastQuery);
+      var parameters = new DeleteItemByQueryParameters(this.sessionConfig, null, this.fastQuery);
 
       var url = this.builder.GetUrlForRequest(parameters);
 

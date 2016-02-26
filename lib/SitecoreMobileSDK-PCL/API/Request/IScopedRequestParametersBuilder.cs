@@ -54,15 +54,6 @@
     IScopedRequestParametersBuilder<T> Language(string itemLanguage);
 
     /// <summary>
-    /// Specifies payload.
-    /// </summary>
-    /// <param name="payload"><see cref="PayloadType" /> The payload.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    IScopedRequestParametersBuilder<T> Payload(PayloadType payload);
-
-    /// <summary>
     /// Adds the fields that will be read from the server.
     /// 
     /// The values is case insensitive.
@@ -84,24 +75,6 @@
     /// </returns>
     /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
     IScopedRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
-
-    /// <summary>
-    /// Adds the scopes.
-    /// </summary>
-    /// <param name="scope"><see cref="ScopeType" /> The scopes.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    IScopedRequestParametersBuilder<T> AddScope(IEnumerable<ScopeType> scope);
-
-    /// <summary>
-    /// Adds the scopes.
-    /// </summary>
-    /// <param name="scope"><see cref="ScopeType" /> The scopes.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    IScopedRequestParametersBuilder<T> AddScope(params ScopeType[] scope);
 
     /// <summary>
     /// Builds request with specified parameters.

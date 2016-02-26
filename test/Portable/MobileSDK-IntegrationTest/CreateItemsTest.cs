@@ -214,7 +214,6 @@
         .Database("master")
         .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
         .AddFieldsRawValuesByNameToSet("Text", CreatedText)
-        .Payload(PayloadType.Content)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -237,7 +236,6 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .Payload(PayloadType.Content)
         .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
         .AddFieldsRawValuesByNameToSet("Texttt", CreatedTexttt)
         .Build();
@@ -713,7 +711,6 @@
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
       var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
-          .AddScope(ScopeType.Children)
           .Database(database)
           .Build();
       return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);

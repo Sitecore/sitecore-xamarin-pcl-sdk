@@ -23,24 +23,6 @@
     IDeleteItemRequestBuilder<T> Database(string database);
 
     /// <summary>
-    /// Adds the scopes.
-    /// </summary>
-    /// <param name="scope"><see cref="ScopeType"/> The scopes.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    IDeleteItemRequestBuilder<T> AddScope(IEnumerable<ScopeType> scope);
-
-    /// <summary>
-    /// Adds the scopes.
-    /// </summary>
-    /// <param name="scope"><see cref="ScopeType"/> The scopes.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    IDeleteItemRequestBuilder<T> AddScope(params ScopeType[] scope);
-
-    /// <summary>
     /// Builds request with specified parameters.
     /// </summary>
     /// <returns>

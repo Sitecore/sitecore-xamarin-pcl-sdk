@@ -68,8 +68,6 @@
     <Compile Include="API\Request\IUpdateItemByIdRequest.cs" />
     <Compile Include="API\Request\Parameters\IDownloadMediaOptions.cs" />
     <Compile Include="API\Request\Parameters\IQueryParameters.cs" />
-    <Compile Include="API\Request\Parameters\IScopeParameters.cs" />
-    <Compile Include="API\Request\Parameters\PayloadType.cs" />
     <Compile Include="API\Request\Parameters\ScopeType.cs" />
     <Compile Include="API\Session\IAnonymousSessionBuilder.cs" />
     <Compile Include="API\Session\IAuthenticatedSessionBuilder.cs" />
@@ -97,7 +95,6 @@
     <Compile Include="PublicKey\EncryptionUtil.cs" />
     <Compile Include="PublicKey\PublicKeyXmlParser.cs" />
     <Compile Include="UrlBuilder\MediaItem\DownloadMediaOptions.cs" />
-    <Compile Include="UserRequest\AbstractScopedRequestParametersBuilder.cs" />
     <Compile Include="ScApiSession.cs" />
     <Compile Include="SessionSettings\SessionConfig.cs" />
     <Compile Include="PublicKeyX509Certificate.cs" />
@@ -126,7 +123,6 @@
     <Compile Include="UrlBuilder\QueryParameters\QueryParameters.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
-    <Compile Include="UrlBuilder\ScopeParametersUrlBuilder.cs" />
     <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
@@ -153,7 +149,6 @@
     <Compile Include="UrlBuilder\MediaItem\MediaItemUrlBuilder.cs" />
     <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
     <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
-    <Compile Include="UrlBuilder\QueryParameters\ScopeParameters.cs" />
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
     <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
@@ -233,6 +228,7 @@
     <Compile Include="UrlBuilder\WebApiActionBuilder.cs" />
     <Compile Include="API\Request\Parameters\IUploadMediaOptions.cs" />
     <Compile Include="UrlBuilder\MediaItem\UploadMediaOptions.cs" />
+    <Compile Include="UserRequest\AbstractScopedRequestParametersBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

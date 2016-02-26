@@ -12,7 +12,6 @@
     where T : class
   {
     protected string database;
-    protected ScopeParameters scopeParameters;
     protected ISessionConfig sessionConfig;
 
     public abstract T Build();
@@ -32,28 +31,5 @@
       return this;
     }
 
-    public IDeleteItemRequestBuilder<T> AddScope(IEnumerable<ScopeType> scope)
-    {
-      BaseValidator.CheckNullAndThrow(scope, this.GetType().Name + ".Scope");
-
-      var scopeParams = new ScopeParameters(this.scopeParameters);
-
-      foreach (var singleScope in scope)
-      {
-        if (!scopeParams.AddScope(singleScope))
-        {
-          throw new InvalidOperationException(this.GetType().Name + ".Scope : Adding scope parameter duplicates is forbidden");
-        }
-      }
-      this.scopeParameters = scopeParams;
-
-      return this;
-    }
-
-    public IDeleteItemRequestBuilder<T> AddScope(params ScopeType[] scope)
-    {
-      IEnumerable<ScopeType> castedScope = scope;
-      return this.AddScope(castedScope);
-    }
   }
 }

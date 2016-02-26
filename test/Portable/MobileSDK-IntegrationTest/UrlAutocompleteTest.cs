@@ -36,7 +36,7 @@
             .BuildReadonlySession()
       )
       {
-        var requestWithItemPath = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Payload(PayloadType.Content).Build();
+        var requestWithItemPath = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
         var response = await session.ReadItemAsync(requestWithItemPath);
 
         testData.AssertItemsCount(1, response);
@@ -58,7 +58,7 @@
             .BuildReadonlySession()
       )
       {
-        var requestWithItemPath = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Payload(PayloadType.Content).Build();
+        var requestWithItemPath = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
         var response = await session.ReadItemAsync(requestWithItemPath);
 
         testData.AssertItemsCount(1, response);
@@ -80,7 +80,7 @@
            .BuildReadonlySession()
      )
       {
-        var requestWithItemQuery = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).Payload(PayloadType.Content).Build();
+        var requestWithItemQuery = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).Build();
         var response = await session.ReadItemAsync(requestWithItemQuery);
 
         testData.AssertItemsCount(1, response);
@@ -102,7 +102,7 @@
            .BuildReadonlySession()
      )
       {
-        var requestWithItemQuery = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).Payload(PayloadType.Content).Build();
+        var requestWithItemQuery = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).Build();
         var response = await session.ReadItemAsync(requestWithItemQuery);
 
         testData.AssertItemsCount(1, response);
@@ -134,7 +134,7 @@
             .BuildReadonlySession()
       )
       {
-        var requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Payload(PayloadType.Content).Build();
+        var requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
         var response = await session.ReadItemAsync(requestWithItemId);
 
         testData.AssertItemsCount(1, response);

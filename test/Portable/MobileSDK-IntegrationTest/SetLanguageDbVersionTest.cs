@@ -25,11 +25,10 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      var builder = new ReadItemByIdRequestBuilder(this.testData.Items.ItemWithVersions.Id).Payload(PayloadType.Content);
+      var builder = new ReadItemByIdRequestBuilder(this.testData.Items.ItemWithVersions.Id);
       this.requestWithVersionsItemId = builder.Build();
 
       homeItemRequestBuilder = new ReadItemByIdRequestBuilder(this.testData.Items.Home.Id);
-      homeItemRequestBuilder.Payload(PayloadType.Content);
     }
 
     [TearDown]

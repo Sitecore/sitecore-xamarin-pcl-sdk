@@ -65,15 +65,6 @@
     new IUpdateItemRequestParametersBuilder<T> Language(string itemLanguage);
 
     /// <summary>
-    /// Specifies payload.
-    /// </summary>
-    /// <param name="payload"><see cref="PayloadType" /> The payload.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    new IUpdateItemRequestParametersBuilder<T> Payload(PayloadType payload);
-
-    /// <summary>
     /// Adds the fields that will be read from the server.
     /// </summary>
     /// <param name="fields">The fields names.</param>

@@ -55,7 +55,7 @@
     {
       string homeId = this.env.Items.Home.Id;
 
-      IQueryParameters payload = new QueryParameters(PayloadType.Min, null, null);
+      IQueryParameters payload = new QueryParameters(null);
 
       MockGetItemsByIdParameters mockMutableRequest = new MockGetItemsByIdParameters();
       mockMutableRequest.ItemId = homeId;
@@ -90,7 +90,7 @@
     {
       string homePath = "/sitecore/content/home";
 
-      IQueryParameters payload = new QueryParameters(PayloadType.Min, null, null);
+      IQueryParameters payload = new QueryParameters(null);
 
       MockGetItemsByPathParameters mockMutableRequest = new MockGetItemsByPathParameters();
       mockMutableRequest.ItemPath = homePath;
@@ -121,7 +121,7 @@
     {
       string homePath = "/sitecore/content/home";
 
-      IQueryParameters payload = new QueryParameters(PayloadType.Min, null, null);
+      IQueryParameters payload = new QueryParameters(null);
 
       MockGetItemsByQueryParameters mockMutableRequest = new MockGetItemsByQueryParameters();
       mockMutableRequest.SitecoreQuery = homePath;

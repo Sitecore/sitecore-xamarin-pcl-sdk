@@ -38,7 +38,6 @@
     public async void TestGetPage0WithSize3ByQuery()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/*")
-        .AddScope(ScopeType.Self)
         .PageNumber(0)
         .ItemsPerPage(3)
         .Build();
@@ -55,7 +54,6 @@
     public async void TestGetPage2WithSize3ByItemIdWithChildrenScope()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.MediaImagesItem.Id)
-        .AddScope(ScopeType.Children)
         .PageNumber(2)
         .ItemsPerPage(3)
         .Build();
@@ -71,7 +69,6 @@
     public async void TestOutOfRangeRequestReturnsEmptyDataset()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path)
-        .AddScope(ScopeType.Children)
         .PageNumber(10)
         .ItemsPerPage(5)
         .Build();

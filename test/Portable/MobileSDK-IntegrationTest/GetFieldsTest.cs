@@ -37,7 +37,7 @@
     [Test]
     public async void TestGetItemByIdWithContentFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Payload(PayloadType.Content).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -51,7 +51,7 @@
     [Test]
     public async void TestGetItemByPathWithAllFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Full).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -66,7 +66,7 @@
     [Test]
     public async void TestGetItemByPathWithoutFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Payload(PayloadType.Min).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -77,7 +77,7 @@
     [Test]
     public async void TestGetItemByQueryWithContentFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/ancestor-or-self::*").Payload(PayloadType.Content).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/ancestor-or-self::*").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(3, response);
@@ -91,7 +91,7 @@
     [Test]
     public async void TestGetItemWithInternationalFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/Home/Android/Static/Japanese/宇都宮").Payload(PayloadType.Content).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/Home/Android/Static/Japanese/宇都宮").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -149,7 +149,6 @@
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.TestFieldsItem.Path)
         .AddFieldsToRead(fields)
-        .Payload(PayloadType.Default)
         .Build();
 
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
@@ -253,7 +252,6 @@
     public async void TestGetSeveralItemsByQueryWithContentFields()
     {
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*")
-        .Payload(PayloadType.Content)
         .Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -294,7 +292,7 @@
           .Credentials(this.testData.Users.Creatorex)
           .BuildReadonlySession();
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Payload(PayloadType.Full).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Build();
 
       var responseCreatorex = await sessionCreatorexUser.ReadItemAsync(request);
       var responseAdmin = await this.sessionAuthenticatedUser.ReadItemAsync(request);
@@ -349,7 +347,7 @@
     [Test]
     public async void TestGetItemByIdWithDefaultPayload()     // ALR: PayloadType.Default constant should be removed
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Payload(PayloadType.Default).Build();
+      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -373,35 +371,5 @@
       Assert.AreEqual("Sitecore", item["Title"].RawValue);
     }
 
-    [Test]
-    public void TestGetItemByIdWithOverridenPayloadReturnsException()
-    {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
-        .Payload(PayloadType.Content)
-        .Payload(PayloadType.Full)
-        .Build());
-      Assert.AreEqual("ReadItemByIdRequestBuilder.Payload : Property cannot be assigned twice.", exception.Message);
-
-    }
-
-    [Test]
-    public void TestGetItemByPathWithOverridenPayloadReturnsException()
-    {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
-        .Payload(PayloadType.Full)
-        .Payload(PayloadType.Min)
-        .Build());
-      Assert.AreEqual("ReadItemByPathRequestBuilder.Payload : Property cannot be assigned twice.", exception.Message);
-    }
-
-    [Test]
-    public void TestGetItemByQueryWithOverridenPayloadReturnsException()
-    {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path)
-        .Payload(PayloadType.Content)
-        .Payload(PayloadType.Content)
-        .Build());
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.Payload : Property cannot be assigned twice.", exception.Message);
-    }
   }
 }

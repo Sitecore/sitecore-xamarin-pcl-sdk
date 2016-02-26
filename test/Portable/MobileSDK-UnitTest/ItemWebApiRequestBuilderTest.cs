@@ -19,7 +19,6 @@
         .Database("web")
         .Language("en")
         .Version(1)
-        .Payload(PayloadType.Full)
         .Build();
 
       Assert.IsNotNull(result);
@@ -32,7 +31,6 @@
       Assert.AreEqual("en", result.ItemSource.Language);
       Assert.AreEqual("web", result.ItemSource.Database);
       Assert.AreEqual(1, result.ItemSource.VersionNumber);
-      Assert.AreEqual( PayloadType.Full, result.QueryParameters.Payload );
     }
 
 
@@ -52,7 +50,6 @@
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
-      Assert.IsNull(result.QueryParameters.Payload);
     }
 
     [Test]
@@ -98,7 +95,6 @@
         .Database("master")
         .Language("da")
         .Version(100500)
-        .Payload( PayloadType.Content )
         .Build();
 
 
@@ -112,7 +108,6 @@
       Assert.AreEqual("da", result.ItemSource.Language);
       Assert.AreEqual("master", result.ItemSource.Database);
       Assert.AreEqual(100500, result.ItemSource.VersionNumber);
-      Assert.AreEqual(PayloadType.Content, result.QueryParameters.Payload );
     }
 
     [Test]
@@ -131,7 +126,6 @@
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
-      Assert.IsNull(result.QueryParameters.Payload);
     }
 
     [Test]
@@ -186,7 +180,6 @@
 //      Assert.AreEqual("341", result.ItemSource.VersionNumber);
       Assert.IsNull(result.ItemSource.VersionNumber);
 
-      Assert.IsNull(result.QueryParameters.Payload);
     }
 
     [Test]
@@ -201,7 +194,6 @@
       Assert.IsNull(result.SessionSettings);
 
       Assert.AreEqual("sitecore/content/HOME/*", result.SitecoreQuery);
-      Assert.IsNull(result.QueryParameters.Payload);
 
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
@@ -253,7 +245,6 @@
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
-      Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
 
@@ -283,7 +274,6 @@
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
-      Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
 
@@ -312,7 +302,6 @@
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
-      Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
 
@@ -407,7 +396,6 @@
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
-      Assert.IsNull(result.QueryParameters.Payload);
       Assert.AreEqual(expectedFields, result.QueryParameters.Fields);
     }
     #endregion Fields
@@ -534,66 +522,6 @@
     }
     #endregion Version Validation
 
-    #region Payload Validation
-    [Test]
-    public void TestPayloadCannotBeAssignedTwice()
-    {
-      Assert.Throws<InvalidOperationException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
-        .Payload(PayloadType.Content)
-        .Payload(PayloadType.Min)
-      );
-    }
-    #endregion Payload Validation
-  
-    #region Scope
-    [Test]
-    public void TestAddScopeThrowsExceptionOnDuplicates()
-    {
-      Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/SitecoreDotShell")
-        .AddScope(ScopeType.Self)
-        .AddScope(ScopeType.Self));
-    }
-
-    [Test]
-    public void TestAddScopeSupportsParamsSyntax()
-    {
-      var request = 
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/sHell")
-          .AddScope(ScopeType.Self, ScopeType.Parent, ScopeType.Children);
-
-      Assert.IsNotNull(request);
-    }
-
-    [Test]
-    public void TestAddScopeSupportsCollection()
-    {
-      ScopeType[] scopeArgs = { ScopeType.Self, ScopeType.Parent, ScopeType.Children };
-      var scopeArgsList = new List<ScopeType>(scopeArgs);
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/aaaa")
-        .AddScope(scopeArgsList);
-      Assert.IsNotNull(request);
-    }
-
-
-    [Test]
-    public void TestAddScopeThrowsExceptionOnDuplicatesInParams()
-    {
-      Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecoreDOTshell")
-        .AddScope(ScopeType.Self, ScopeType.Parent, ScopeType.Self ) );
-    }
-
-    [Test]
-    public void TestAddScopeThrowsExceptionOnDuplicatesInIncrementCalls()
-    {
-      Assert.Throws<InvalidOperationException>( ()=>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecoreDOTshell")
-        .AddScope(ScopeType.Self, ScopeType.Parent )
-        .AddScope(ScopeType.Self) );
-    }
-    #endregion Scope
   }
 }
 

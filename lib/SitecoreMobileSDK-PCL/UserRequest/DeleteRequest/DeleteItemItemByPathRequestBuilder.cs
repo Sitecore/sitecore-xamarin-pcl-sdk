@@ -16,7 +16,7 @@
 
     public override IDeleteItemsByPathRequest Build()
     {
-      return new DeleteItemByPathParameters(null, this.scopeParameters, this.database, this.itemPath);
+      return new DeleteItemByPathParameters(null, this.database, this.itemPath);
     }
   }
 }

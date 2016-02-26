@@ -168,7 +168,6 @@
       IUpdateItemByIdRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .Database("db")
         .Language("lg")
-        .Payload(PayloadType.Full)
         .AddFieldsRawValuesByNameToSet(fields)
         .AddFieldsRawValuesByNameToSet("field3", "VaLuE3")
         .Build();

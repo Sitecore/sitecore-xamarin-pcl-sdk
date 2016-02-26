@@ -10,7 +10,6 @@
     where TRequest : IBaseDeleteItemRequest
   {
     private readonly SessionConfigUrlBuilder sessionConfigUrlBuilder;
-    readonly ScopeParametersUrlBuilder scopeBuilder;
     protected IRestServiceGrammar RestGrammar;
     protected IWebApiUrlParameters WebApiGrammar;
 
@@ -19,7 +18,6 @@
       this.RestGrammar = restGrammar;
       this.WebApiGrammar = webApiGrammar;
       this.sessionConfigUrlBuilder = new SessionConfigUrlBuilder(restGrammar, webApiGrammar);
-      this.scopeBuilder = new ScopeParametersUrlBuilder(restGrammar, webApiGrammar);
     }
 
     public abstract void ValidateSpecificPart(TRequest request);
@@ -35,13 +33,7 @@
     {
       var parametersString = "";
 
-      var scopeString = this.scopeBuilder.ScopeToRestArgumentStatement(request.ScopeParameters);
       var database = request.Database;
-
-      if (!string.IsNullOrEmpty(scopeString))
-      {
-        parametersString += scopeString;
-      }
 
       if (!string.IsNullOrEmpty(database))
       {

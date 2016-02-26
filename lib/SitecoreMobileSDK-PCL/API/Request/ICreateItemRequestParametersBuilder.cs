@@ -56,16 +56,6 @@ namespace Sitecore.MobileSDK.API.Request
     new ICreateItemRequestParametersBuilder<T> Language(string itemLanguage);
 
     /// <summary>
-    /// Specifies payload.
-    /// </summary>
-    /// <param name="payload">The payload.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    /// <seealso cref="PayloadType" />
-    new ICreateItemRequestParametersBuilder<T> Payload(PayloadType payload);
-
-    /// <summary>
     /// Adds the fields names that will be read from the server.
     /// 
     /// The value is case insensitive.

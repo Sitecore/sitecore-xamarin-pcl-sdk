@@ -50,14 +50,6 @@
       return this;
     }
 
-    public IBaseRequestParametersBuilder<T> Payload(PayloadType payload)
-    {
-      BaseValidator.CheckForTwiceSetAndThrow(this.queryParameters.Payload, this.GetType().Name + ".Payload");
-
-      this.queryParameters = new QueryParameters(payload, this.queryParameters.ScopeParameters, this.queryParameters.Fields);
-      return this;
-    }
-
     public IBaseRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
       BaseValidator.CheckNullAndThrow(fields, this.GetType().Name + ".Fields");
@@ -95,10 +87,7 @@
         throw new InvalidOperationException(this.GetType().Name + ".Fields" + " : duplicate fields are not allowed");
       }
 
-      this.queryParameters = new QueryParameters(
-        this.queryParameters.Payload,
-        this.queryParameters.ScopeParameters,
-        newFields);
+      this.queryParameters = new QueryParameters(newFields);
 
       return this;
     }
@@ -122,7 +111,7 @@
     public abstract T Build();
 
     protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
-    protected QueryParameters queryParameters = new QueryParameters(null, null, null);
+    protected QueryParameters queryParameters = new QueryParameters(null);
   }
 }
 

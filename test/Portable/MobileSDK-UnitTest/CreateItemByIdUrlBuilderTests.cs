@@ -206,7 +206,6 @@
         .ItemName("ItEmNaMe")
         .Database("db")
         .Language("lg")
-        .Payload(PayloadType.Full)
         .AddFieldsRawValuesByNameToSet(fields)
         .AddFieldsRawValuesByNameToSet("field3", "VaLuE3")
         .Build();

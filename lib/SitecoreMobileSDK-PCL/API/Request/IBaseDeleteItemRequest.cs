@@ -17,15 +17,6 @@
     ISessionConfig SessionConfig { get; }
 
     /// <summary>
-    /// Gets the scope parameters.
-    /// <seealso cref="IScopeParameters"/>
-    /// </summary>
-    /// <returns>>
-    /// The scope parameters.
-    /// </returns>>
-    IScopeParameters ScopeParameters { get; }
-
-    /// <summary>
     /// Returns database name.
     /// For example: "web"
     /// 

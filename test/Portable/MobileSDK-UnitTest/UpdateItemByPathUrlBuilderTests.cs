@@ -49,7 +49,6 @@
         .Database("db")
         .Language("lg")
         .Version(2)
-        .Payload(PayloadType.Full)
         .AddFieldsRawValuesByNameToSet(fields)
         .AddFieldsRawValuesByNameToSet("field3", "VaLuE3")
         .Build();

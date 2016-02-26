@@ -16,7 +16,6 @@
   public class DeleteItemByPathUrlBuilderTest
   {
     private SessionConfig sessionConfig;
-    private ScopeParameters scopeParameters;
 
     private string path;
     private string database;
@@ -27,7 +26,6 @@
     public void Setup()
     {
       this.sessionConfig = new MutableSessionConfig("http://testurl");
-      this.scopeParameters = new ScopeParameters();
 
       this.path = "/sitecore/content/Home/Android/Folder for deleting/1";
       this.database = "master";
@@ -39,7 +37,6 @@
     public void TearDown()
     {
       this.sessionConfig = null;
-      this.scopeParameters = null;
 
       this.path = null;
       this.database = null;
@@ -60,7 +57,7 @@
     {
       TestDelegate action = () =>
       {
-        var parameters = new DeleteItemByPathParameters(null, this.scopeParameters, this.path, this.database);
+        var parameters = new DeleteItemByPathParameters(null, this.path, this.database);
 
         this.builder.GetUrlForRequest(parameters);
       };
@@ -73,7 +70,7 @@
     {
       TestDelegate action = () =>
       {
-        var parameters = new DeleteItemByPathParameters(this.sessionConfig, this.scopeParameters, this.database, null);
+        var parameters = new DeleteItemByPathParameters(this.sessionConfig, this.database, null);
 
         this.builder.GetUrlForRequest(parameters);
       };
@@ -84,7 +81,7 @@
     [Test]
     public void TestCorrectPath()
     {
-      var parameters = new DeleteItemByPathParameters(this.sessionConfig, this.scopeParameters, null, this.path);
+      var parameters = new DeleteItemByPathParameters(this.sessionConfig, null, this.path);
 
       var url = this.builder.GetUrlForRequest(parameters);
 
@@ -94,36 +91,13 @@
     [Test]
     public void TestCorrectPathWithDatabase()
     {
-      var parameters = new DeleteItemByPathParameters(this.sessionConfig, this.scopeParameters, this.database, this.path);
+      var parameters = new DeleteItemByPathParameters(this.sessionConfig, this.database, this.path);
 
       var url = this.builder.GetUrlForRequest(parameters);
 
       Assert.AreEqual("http://testurl/-/item/v1%2fsitecore%2fcontent%2fhome%2fandroid%2ffolder%20for%20deleting%2f1?sc_database=master", url);
     }
-
-    [Test]
-    public void TestCorrectPathWithDatabaseAndScope()
-    {
-      scopeParameters.AddScope(ScopeType.Children);
-
-      var parameters = new DeleteItemByPathParameters(this.sessionConfig, this.scopeParameters, this.database, this.path);
-
-      var url = this.builder.GetUrlForRequest(parameters);
-
-      Assert.AreEqual("http://testurl/-/item/v1%2fsitecore%2fcontent%2fhome%2fandroid%2ffolder%20for%20deleting%2f1?scope=c&sc_database=master", url);
-    }
-
-    [Test]
-    public void TestCorrectPathWithScope()
-    {
-      scopeParameters.AddScope(ScopeType.Children);
-
-      var parameters = new DeleteItemByPathParameters(this.sessionConfig, this.scopeParameters, null, this.path);
-
-      var url = this.builder.GetUrlForRequest(parameters);
-
-      Assert.AreEqual("http://testurl/-/item/v1%2fsitecore%2fcontent%2fhome%2fandroid%2ffolder%20for%20deleting%2f1?scope=c", url);
-    }
+      
   }
 }
 

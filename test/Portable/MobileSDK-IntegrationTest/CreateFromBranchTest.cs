@@ -75,7 +75,6 @@
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
       var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
-        .AddScope(ScopeType.Children)
         .Database(database)
         .Build();
       return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
@@ -97,7 +96,6 @@
         .ItemName(ItemFromBranchName)
         .Database("master")
         .Language("en")
-        .Payload(PayloadType.Content)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -130,7 +128,6 @@
         .ItemName(ItemFromBranchName)
         .Database("master")
         .Language("en")
-        .Payload(PayloadType.Content)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
@@ -164,7 +161,6 @@
         .ItemName(ItemFromBranchName)
         .Database("master")
         .Language("en")
-        .Payload(PayloadType.Content)
         .Build();
 
       var ex = Assert.Throws<ParserException>(async () =>
@@ -193,7 +189,6 @@
         .ItemName(ItemFromBranchName)
         .Database("master")
         .Language("en")
-        .Payload(PayloadType.Content)
         .Build();
 
 

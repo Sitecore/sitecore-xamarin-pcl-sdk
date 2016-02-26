@@ -16,28 +16,10 @@
       Assert.Throws<InvalidOperationException>(() =>
       {
         ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/A/B/C/D/E")
-          .AddScope(ScopeType.Self)
           .PageNumber(5)
           .ItemsPerPage(10)
           .PageNumber(1);
       });
-    }
-
-    [Test]
-    public void TestPagingSettingsUsedForSelfScopeAndSingleItemResponse()
-    {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/A/B/C/D/E")
-        .AddScope(ScopeType.Self)
-        .PageNumber(5)
-        .ItemsPerPage(10)
-        .Build();
-
-      Assert.IsFalse(request.QueryParameters.ScopeParameters.ChildrenScopeIsSet);
-      Assert.IsFalse(request.QueryParameters.ScopeParameters.ParentScopeIsSet);
-      Assert.IsTrue(request.QueryParameters.ScopeParameters.SelfScopeIsSet);
-
-      Assert.AreEqual(5, request.PagingSettings.PageNumber);
-      Assert.AreEqual(10, request.PagingSettings.ItemsPerPageCount);
     }
 
     [Test]

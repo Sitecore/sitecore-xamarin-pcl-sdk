@@ -34,7 +34,7 @@
       mutableSession.Site = "";
       this.sessionConfig = mutableSession;
 
-      this.payload = new QueryParameters(PayloadType.Content, null, null);
+      this.payload = new QueryParameters(null);
     }
 
     [TearDown]
@@ -52,7 +52,7 @@
       mutableParameters.ItemSource = LegacyConstants.DefaultSource();
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.QueryParameters = new QueryParameters(null, null, null);
+      mutableParameters.QueryParameters = new QueryParameters(null);
 
       IReadItemsByPathRequest request = mutableParameters;
 
@@ -192,7 +192,7 @@
       mutableParameters.ItemPath = "/path/TO/iTEm";
       mutableParameters.SessionSettings = this.sessionConfig;
 
-      QueryParameters fieldsList = new QueryParameters(PayloadType.Default, null, new string[2] { "x", "y" });
+      QueryParameters fieldsList = new QueryParameters( new string[2] { "x", "y" });
       mutableParameters.QueryParameters = fieldsList;
 
       IReadItemsByPathRequest request = mutableParameters;
@@ -228,7 +228,6 @@
       var connection = new SessionConfig("localhost");
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
-        .Payload(PayloadType.Full)
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
@@ -267,7 +266,6 @@
 
       var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Language("da")
-        .Payload(PayloadType.Content)
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
@@ -289,7 +287,7 @@
       mutableParameters.ItemPath = "/aaa/bbb/ccc/ddd";
 
       string[] fields = { "x", "y", "x" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      IQueryParameters duplicatedFields = new QueryParameters(fields);
       mutableParameters.QueryParameters = duplicatedFields;
 
 
@@ -308,7 +306,7 @@
 
 
       string[] fields = { "x", "y", "X" };
-      IQueryParameters duplicatedFields = new QueryParameters(null, null, fields);
+      IQueryParameters duplicatedFields = new QueryParameters(fields);
       mutableParameters.QueryParameters = duplicatedFields;
 
 

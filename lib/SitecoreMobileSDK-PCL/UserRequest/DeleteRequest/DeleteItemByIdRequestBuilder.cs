@@ -15,7 +15,7 @@
     }
     public override IDeleteItemsByIdRequest Build()
     {
-      return new DeleteItemByIdParameters(null, this.scopeParameters, this.database, this.itemId);
+      return new DeleteItemByIdParameters(null, this.database, this.itemId);
     }
   }
 }

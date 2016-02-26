@@ -62,11 +62,6 @@
       return (IChangeItemRequestParametersBuilder<T>)base.Language(itemLanguage);
     }
 
-    new public IChangeItemRequestParametersBuilder<T> Payload(PayloadType payload)
-    {
-      return (IChangeItemRequestParametersBuilder<T>)base.Payload(payload);
-    }
-
     new public IChangeItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
       return (IChangeItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
