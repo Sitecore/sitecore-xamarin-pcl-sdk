@@ -13,6 +13,15 @@
     {
     }
 
+    protected override string GetHostUrlForRequest(IReadItemsByIdRequest request)
+    {
+      string hostUrl = base.GetHostUrlForRequest(request);
+      string itemId = UrlBuilderUtils.EscapeDataString(request.ItemId.ToLowerInvariant());
+
+      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId;
+      return result;
+    }
+
     protected override string GetItemIdenticationForRequest(IReadItemsByIdRequest request)
     {
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
