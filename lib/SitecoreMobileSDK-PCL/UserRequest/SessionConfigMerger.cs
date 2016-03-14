@@ -24,7 +24,6 @@
       var result = new SessionConfigPOD();
       result.InstanceUrl = userConfig.InstanceUrl ?? this.defaultSessionConfig.InstanceUrl;
       result.Site = userConfig.Site ?? this.defaultSessionConfig.Site;
-      result.ItemWebApiVersion = userConfig.ItemWebApiVersion ?? this.defaultSessionConfig.ItemWebApiVersion;
 
       return result;
     }
@@ -38,10 +37,6 @@
       else if (null == this.defaultSessionConfig.InstanceUrl)
       {
         throw new ArgumentNullException("SessionConfigMerger.defaultSessionConfig.InstanceUrl cannot be null");
-      }
-      else if (null == this.defaultSessionConfig.ItemWebApiVersion)
-      {
-        throw new ArgumentNullException("SessionConfigMerger.defaultSessionConfig.ItemWebApiVersion cannot be null");
       }
     }
 

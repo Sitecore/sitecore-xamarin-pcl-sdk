@@ -59,6 +59,17 @@ namespace WhiteLabeliOS
       }
     }
 
+    public ISitecoreWebApiSession GetAnonymousSession()
+    {
+      var result = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.instanceUrl)
+          .Site(this.instanceSite)
+          .DefaultDatabase(this.instanceDataBase)
+          .DefaultLanguage(this.instanceLanguage)
+          .BuildSession();
+
+        return result;
+    }
+
     private void SaveValueToStorage(string value, string key)
     {
       NSUserDefaults userDefaults = NSUserDefaults.StandardUserDefaults;

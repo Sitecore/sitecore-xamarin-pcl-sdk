@@ -13,7 +13,6 @@ namespace WhiteLabeliOS
 	{
 		public InstanceSettings instanceSettings {get; set;}
 		private LoadingOverlay loadingOverlay;
-    protected PayloadType currentPayloadType = PayloadSelectorViewHelper.DEFAULT_PAYLOAD;
 
 		public BaseTaskViewController(IntPtr handle) : base (handle)
 		{

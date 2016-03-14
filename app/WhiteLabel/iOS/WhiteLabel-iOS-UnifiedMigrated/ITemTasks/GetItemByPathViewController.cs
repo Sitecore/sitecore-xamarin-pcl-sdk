@@ -55,24 +55,7 @@
 
     partial void OnPayloadValueChanged (UIKit.UISegmentedControl sender)
     {
-      switch (sender.SelectedSegment)
-      {
-        case 0:
-        {
-          this.currentPayloadType = PayloadType.Full;
-          break;
-        }
-        case 1:
-        {
-          this.currentPayloadType = PayloadType.Content;
-          break;
-        }
-        case 2:
-        {
-          this.currentPayloadType = PayloadType.Min;
-          break;
-        }
-      }
+      
     }
 
     partial void OnButtonChangeState (UIKit.UIButton sender)
@@ -84,27 +67,12 @@
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetAnonymousSession())
         {
-          var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-            .Payload(this.currentPayloadType)
-            .AddFieldsToRead(this.fieldNameTextField.Text);
-
-          if (this.parentScopeButton.Selected)
-          {
-            builder = builder.AddScope(ScopeType.Parent);
-          }
-          if (this.selfScopeButton.Selected)
-          {
-            builder = builder.AddScope(ScopeType.Self);
-          }
-          if (this.childrenScopeButton.Selected)
-          {
-            builder = builder.AddScope(ScopeType.Children);
-          }
-
-          var request = builder.Build();
-
+          var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+            .AddFieldsToRead(this.fieldNameTextField.Text)
+            .Build();
+          
           this.ShowLoader();
 
           ScItemsResponse response = await session.ReadItemAsync(request);

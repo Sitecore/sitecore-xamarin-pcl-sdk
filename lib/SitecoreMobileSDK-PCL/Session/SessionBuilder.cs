@@ -14,7 +14,6 @@
     #region Main Logic
     public ISitecoreWebApiSession BuildSession()
     {
-      string optionalWebApiVersion = this.OptionalWebApiVersion();
       string optionalMediaRoot = this.OptionalMediaRoot();
       string optionalMediaExtension = this.OptionalMediaExtension();
       string optionalMediaPrefix = this.OptionalMediaPrefix();
@@ -23,8 +22,7 @@
       ////////
       SessionConfig conf = new SessionConfig(
         this.instanceUrl,
-        this.site,
-        optionalWebApiVersion);
+        this.site);
 
       var mediaSettings = new MediaLibrarySettings(
         optionalMediaRoot,
@@ -44,17 +42,6 @@
     public ISitecoreWebApiReadonlySession BuildReadonlySession()
     {
       return this.BuildSession();
-    }
-
-    private string OptionalWebApiVersion()
-    {
-      string optionalWebApiVersion = this.webApiVersion;
-      if (null == optionalWebApiVersion)
-      {
-        optionalWebApiVersion = "v1";
-      }
-
-      return optionalWebApiVersion;
     }
 
     private string OptionalMediaRoot()

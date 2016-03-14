@@ -10,12 +10,10 @@
   {
     public SessionConfig(
       string instanceUrl,
-      string site = null,
-      string itemWebApiVersion = "v1")
+      string site = null)
     {
       this.InstanceUrl = instanceUrl;
       this.Site = site;
-      this.ItemWebApiVersion = itemWebApiVersion;
 
       this.Validate();
     }
@@ -25,8 +23,8 @@
     {
       SessionConfig result = new SessionConfig(
         this.InstanceUrl,
-        this.Site,
-        this.ItemWebApiVersion);
+        this.Site
+      );
 
       return result;
     }
@@ -49,18 +47,12 @@
       get;
       protected set;
     }
-    public string ItemWebApiVersion
-    {
-      get;
-      protected set;
-    }
     #endregion Properties
 
     #region Validation
     private void Validate()
     {
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(this.InstanceUrl, "SessionConfig.InstanceUrl is required");
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(this.ItemWebApiVersion, "SessionConfig.ItemWebApiVersion is required");
 
       if (!SessionConfigValidator.IsValidSchemeOfInstanceUrl(this.InstanceUrl))
       {

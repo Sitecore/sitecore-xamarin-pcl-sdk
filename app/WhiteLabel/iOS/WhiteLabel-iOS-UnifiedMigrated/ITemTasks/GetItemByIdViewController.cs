@@ -60,24 +60,7 @@ namespace WhiteLabeliOS
 
     partial void OnPayloadValueChanged(UIKit.UISegmentedControl sender)
     {
-      switch (sender.SelectedSegment)
-      {
-        case 0:
-        {
-          this.currentPayloadType = PayloadType.Full;
-          break;
-        }
-        case 1:
-        {
-          this.currentPayloadType = PayloadType.Content;
-          break;
-        }
-        case 2:
-        {
-          this.currentPayloadType = PayloadType.Min;
-          break;
-        }
-      }
+      
     }
 
     partial void OnButtonChangeState(UIKit.UIButton sender)
@@ -89,26 +72,11 @@ namespace WhiteLabeliOS
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetAnonymousSession())
         {
-          var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
-            .Payload(this.currentPayloadType)
-            .AddFieldsToRead(this.fieldNameTextField.Text);
-
-          if (this.parentScopeButton.Selected)
-          {
-            builder = builder.AddScope(ScopeType.Parent);
-          }
-          if (this.selfScopeButton.Selected)
-          {
-            builder = builder.AddScope(ScopeType.Self);
-          }
-          if (this.childrenScopeButton.Selected)
-          {
-            builder = builder.AddScope(ScopeType.Children);
-          }
-
-          var request = builder.Build();
+          var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+            .AddFieldsToRead(this.fieldNameTextField.Text)
+            .Build();
 
           this.ShowLoader();
 

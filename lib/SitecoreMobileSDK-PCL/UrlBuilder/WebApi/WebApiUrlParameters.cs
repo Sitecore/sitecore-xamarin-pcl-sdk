@@ -20,7 +20,7 @@
       result.ItemIdParameterName = "sc_itemid";
       result.SitecoreQueryParameterName = "query";
 
-      result.ItemWebApiEndpoint = "/-/item/";
+      result.ItemWebApiEndpoint = "/sitecore/api/ssc/item";
 
       result.ItemWebApiActionsEndpoint = "-/actions";
       result.ItemWebApiAuthenticateAction = "/authenticate";

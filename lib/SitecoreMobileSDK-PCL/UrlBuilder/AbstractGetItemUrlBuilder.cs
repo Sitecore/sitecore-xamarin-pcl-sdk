@@ -112,10 +112,6 @@
       {
         throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null");
       }
-      else if (null == request.SessionSettings.ItemWebApiVersion)
-      {
-        throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl.ItemWebApiVersion cannot be null");
-      }
 
       if (null != request.QueryParameters)
       {

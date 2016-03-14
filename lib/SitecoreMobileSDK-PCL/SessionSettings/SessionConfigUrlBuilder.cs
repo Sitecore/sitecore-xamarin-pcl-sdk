@@ -23,14 +23,9 @@
       this.ValidateRequest(request);
 
       string autocompletedInstanceUrl = SessionConfigValidator.AutocompleteInstanceUrl(request.InstanceUrl);
-      string escapedVersion = UrlBuilderUtils.EscapeDataString(request.ItemWebApiVersion);
 
       string result =
-        autocompletedInstanceUrl;
-
-      result +=
-        this.webApiGrammar.ItemWebApiEndpoint +
-        escapedVersion;
+        autocompletedInstanceUrl + this.webApiGrammar.ItemWebApiEndpoint;
 
       if (!string.IsNullOrEmpty(request.Site))
       {

@@ -55,9 +55,6 @@
 
       BaseValidator.CheckNullAndThrow(request.SessionConfig.InstanceUrl, this.GetType().Name + ".InstanceUrl");
 
-      BaseValidator.CheckNullAndThrow(request.SessionConfig.ItemWebApiVersion,
-        this.GetType().Name + ".ItemWebApiVersion");
-
       this.ValidateSpecificPart(request);
     }
   }
