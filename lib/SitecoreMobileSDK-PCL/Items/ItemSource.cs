@@ -1,9 +1,12 @@
-﻿namespace Sitecore.MobileSDK.Items
+﻿using Newtonsoft.Json;
+
+namespace Sitecore.MobileSDK.Items
 {
   using Sitecore.MobileSDK.API.Items;
 
   public class ItemSource : ItemSourcePOD
   {
+    [JsonConstructor]
     public ItemSource(string database, string language, int? version = null)
       : base(database, language, version)
     {

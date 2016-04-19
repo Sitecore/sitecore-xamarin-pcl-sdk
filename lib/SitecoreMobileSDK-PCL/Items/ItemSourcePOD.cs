@@ -1,14 +1,17 @@
-﻿namespace Sitecore.MobileSDK.Items
+﻿using Newtonsoft.Json;
+
+namespace Sitecore.MobileSDK.Items
 {
   using Sitecore.MobileSDK.API.Items;
 
   public class ItemSourcePOD : IItemSource
   {
-    public ItemSourcePOD(string database, string language, int? version = null)
+    [JsonConstructor]
+    public ItemSourcePOD(string Database, string Language, int? VersionNumber = null)
     {
-      this.Database = database;
-      this.Language = language;
-      this.VersionNumber = version;
+      this.Database = Database;
+      this.Language = Language;
+      this.VersionNumber = VersionNumber;
     }
 
     public virtual IItemSource ShallowCopy()
@@ -41,8 +44,11 @@
       return base.GetHashCode() + this.Database.GetHashCode() + this.Language.GetHashCode() + this.VersionNumber.GetHashCode();
     }
 
+    [JsonProperty]
     public string Database { get; protected set; }
+    [JsonProperty]
     public string Language { get; protected set; }
+    [JsonProperty]
     public int? VersionNumber { get; protected set; }
   }
 }

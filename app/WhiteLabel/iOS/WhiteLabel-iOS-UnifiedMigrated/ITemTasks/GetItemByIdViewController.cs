@@ -1,4 +1,7 @@
-﻿
+﻿using Sitecore.MobileSDK.Items;
+using Newtonsoft.Json;
+
+
 namespace WhiteLabeliOS
 {
   using System;
@@ -116,6 +119,12 @@ namespace WhiteLabeliOS
           if (response.Any())
           {
             this.ShowItemsList(response);
+
+            //items serialization test
+            ScItem item = response[0] as ScItem;
+            string json = JsonConvert.SerializeObject(item);
+            ScItem restoredItem = JsonConvert.DeserializeObject<ScItem>(json);
+            Console.WriteLine(restoredItem.DisplayName);
           }
           else
           {
