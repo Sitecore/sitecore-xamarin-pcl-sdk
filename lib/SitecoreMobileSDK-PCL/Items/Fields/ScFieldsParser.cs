@@ -15,7 +15,7 @@
     }
 
     public static List<IField> ParseFieldsData(JObject fieldsData, CancellationToken cancelToken)
-    {
+    { 
       if (fieldsData == null)
       {
         throw new ArgumentNullException();
@@ -23,19 +23,12 @@
 
       var fields = new List<IField>();
 
-      IList<string> propertyNames = fieldsData.Properties().Select(p => p.Name).ToList();
-
-
-      foreach (string fieldId in propertyNames)
+      foreach (var field in fieldsData)
       {
-        cancelToken.ThrowIfCancellationRequested();
+        string key = field.Key;
+        string value = field.Value.ToString();
 
-        JObject fieldData = (JObject)fieldsData.GetValue(fieldId);
-        var name = (string)fieldData.GetValue("Name");
-        var type = (string)fieldData.GetValue("Type");
-        var value = (string)fieldData.GetValue("Value");
-
-        ScField newField = new ScField(fieldId, name, type, value);
+        ScField newField = new ScField(key, value);
         fields.Add(newField);
       }
 

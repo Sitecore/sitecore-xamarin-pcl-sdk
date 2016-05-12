@@ -39,6 +39,8 @@
 
       string updateButtonTitle = NSBundle.MainBundle.LocalizedString("Update created item", null);
       this.updateButton.SetTitle(updateButtonTitle, UIControlState.Normal);
+
+      this.pathField.Text = "997E8AAF-A41F-45BF-93C7-C7489D1A76CF";
 		}
 
 		partial void OnCreateItemButtonTapped(Foundation.NSObject sender)
@@ -48,14 +50,7 @@
 
     partial void OnUpdateItemButtonTapped(Foundation.NSObject sender)
     {
-      if (null == this.CreatedItemId)
-      {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Create item at first");
-      }
-      else
-      {
         this.SendUpdateRequest();
-      }
     }
 
     private async void SendUpdateRequest()
@@ -64,9 +59,9 @@
       {
         using ( var session = this.instanceSettings.GetSession() )
         {
-          var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.CreatedItemId)
-            .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
-            .AddFieldsRawValuesByNameToSet("Text", textField.Text)
+          var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.pathField.Text)
+            .AddFieldsRawValuesByNameToSet("Title", this.titleField.Text)
+            .AddFieldsRawValuesByNameToSet("Text", this.textField.Text)
             .Build();
 
           this.ShowLoader();

@@ -12,27 +12,24 @@
       : base(restGrammar, webApiGrammar)
     {
     }
-
+  
     public override string GetUrlForRequest(IDeleteItemsByIdRequest request)
     {
       this.Validate(request);
 
-      var baseUrl = base.GetBaseUrlForRequest(request);
-      var escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId);
+      string hostUrl = base.GetBaseUrlForRequest(request);
+      string itemId = UrlBuilderUtils.EscapeDataString(request.ItemId.ToLowerInvariant());
 
-      var fullUrl = baseUrl
-                       + this.RestGrammar.HostAndArgsSeparator
-                       + this.WebApiGrammar.ItemIdParameterName
-                       + this.RestGrammar.KeyValuePairSeparator
-                       + escapedId;
+      string result = hostUrl + this.RestGrammar.PathComponentSeparator + itemId;
 
-      if (!string.IsNullOrEmpty(this.GetParametersString(request)))
+      string parameters = this.GetParametersString(request);
+
+      if (!string.IsNullOrEmpty(parameters))
       {
-        fullUrl += this.RestGrammar.FieldSeparator
-          + this.GetParametersString(request);
+        result += this.RestGrammar.HostAndArgsSeparator + parameters;
       }
 
-      return fullUrl.ToLowerInvariant();
+      return result.ToLowerInvariant();
     }
 
     public override void ValidateSpecificPart(IDeleteItemsByIdRequest request)

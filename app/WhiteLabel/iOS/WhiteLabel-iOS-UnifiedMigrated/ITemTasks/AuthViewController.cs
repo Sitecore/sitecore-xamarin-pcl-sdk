@@ -24,7 +24,7 @@
       this.passwordField.ShouldReturn = this.HideKeyboard;
 
       //TODO: remove later, default values
-      this.urlField.Text = "http://mobiledev1ua1.dk.sitecore.net:7200/";
+      this.urlField.Text = "https://cms80u2.test24dk1.dk.sitecore.net/";
       this.loginField.Text = "admin";
       this.passwordField.Text = "b";
       this.siteField.Text = "/sitecore/shell";

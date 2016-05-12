@@ -30,7 +30,7 @@ namespace WhiteLabeliOS
 
       this.itemIdTextField.ShouldReturn = this.HideKeyboard;
 
-      this.itemIdTextField.Text = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
+      this.itemIdTextField.Text = "997E8AAF-A41F-45BF-93C7-C7489D1A76CF";
 
       fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Type field name", null);
       itemIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Type item ID", null);
@@ -74,13 +74,13 @@ namespace WhiteLabeliOS
       {
         using (ISitecoreWebApiSession session = this.instanceSettings.GetAnonymousSession())
         {
-          var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+          var request = ItemWebApiRequestBuilder.ReadChildrenRequestWithId(itemIdTextField.Text)
             .AddFieldsToRead(this.fieldNameTextField.Text)
             .Build();
 
           this.ShowLoader();
 
-          ScItemsResponse response = await session.ReadItemAsync(request);
+          ScItemsResponse response = await session.ReadChildrenAsync(request);
           if (response.Any())
           {
             this.ShowItemsList(response);

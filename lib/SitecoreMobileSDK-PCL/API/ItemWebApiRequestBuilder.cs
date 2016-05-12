@@ -33,6 +33,17 @@ namespace Sitecore.MobileSDK.API
       return new ReadItemByIdRequestBuilder(itemId);
     }
 
+    public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> ReadChildrenRequestWithId(string itemId)
+    {
+      return new ReadChildrenByIdRequestBuilder(itemId);
+    }
+
+    //TODO: @igk I should think about naming
+    public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> RunStoredQuerry(string itemId)
+    {
+      return new RunStoredQuerryRequestBuilder(itemId);
+    }
+
     /// <summary>
     /// Provides builder for constructing read item request by item path.
     /// </summary>

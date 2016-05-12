@@ -4,12 +4,13 @@ namespace Sitecore.MobileSDK.API.Session
   /// Interface represents CRUD actions that can be executed on items.
   /// </summary>
   public interface ISitecoreWebApiSessionActions :
-  IReadItemActions,
-  ICreateItemActions,
-  IUpdateItemActions,
-  IConnectionActions,
-  IDeleteItemActions,
-  IMediaActions
+    IReadItemActions,
+    ICreateItemActions,
+    IUpdateItemActions,
+    IConnectionActions,
+    IDeleteItemActions,
+    ISearchActions,
+    IMediaActions
   {
   }
 }

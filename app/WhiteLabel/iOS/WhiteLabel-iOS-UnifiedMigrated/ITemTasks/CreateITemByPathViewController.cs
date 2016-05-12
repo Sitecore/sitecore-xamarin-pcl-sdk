@@ -46,14 +46,7 @@
 
     partial void OnUpdateItemButtonTapped(UIKit.UIButton sender)
     {
-      if (null == this.CreatedItemPath)
-      {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Create item at first");
-      }
-      else
-      {
-        this.SendUpdateRequest();
-      }
+      this.SendUpdateRequest();
     }
 
     private async void SendUpdateRequest()
@@ -62,9 +55,9 @@
       {
         using (var session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(this.CreatedItemPath)
-            .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
-            .AddFieldsRawValuesByNameToSet("Text", textField.Text)
+          var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(this.pathField.Text)
+            .AddFieldsRawValuesByNameToSet("Title", "new title")
+            .AddFieldsRawValuesByNameToSet("Text", "new text")
             .Build();
 
           this.ShowLoader();
@@ -101,7 +94,7 @@
         using (var session = this.instanceSettings.GetSession())
         {
           var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
-            .ItemTemplatePath("Sample/Sample Item")
+            .ItemTemplatePath("76036f5e-cbce-46d1-af0a-4143f9b557aa")
             .ItemName(this.nameField.Text)
             .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
             .AddFieldsRawValuesByNameToSet("Text", textField.Text)

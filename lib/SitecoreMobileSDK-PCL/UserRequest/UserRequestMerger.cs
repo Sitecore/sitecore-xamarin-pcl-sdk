@@ -97,7 +97,7 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
-      CreateItemParameters createParams = new CreateItemParameters(userRequest.ItemName, userRequest.ItemTemplate, userRequest.FieldsRawValuesByName);
+      CreateItemParameters createParams = new CreateItemParameters(userRequest.ItemName, userRequest.ItemTemplateId, userRequest.FieldsRawValuesByName);
 
       return new CreateItemByIdParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, createParams, userRequest.ItemId);
     }
@@ -106,7 +106,7 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
-      CreateItemParameters createParams = new CreateItemParameters(userRequest.ItemName, userRequest.ItemTemplate, userRequest.FieldsRawValuesByName);
+      CreateItemParameters createParams = new CreateItemParameters(userRequest.ItemName, userRequest.ItemTemplateId, userRequest.FieldsRawValuesByName);
 
       return new CreateItemByPathParameters(mergedSessionConfig, mergedSource, userRequest.QueryParameters, createParams, userRequest.ItemPath);
     }

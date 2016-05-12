@@ -17,6 +17,7 @@ namespace Sitecore.MobileSDK.API.Request
     /// </returns>
     string ItemName { get; }
 
+    //TODO: fix template description, id instead of path
     /// <summary>
     /// A relative path to the item's template. 
     /// The path is relative to the "/sitecore/templates" item.
@@ -27,7 +28,7 @@ namespace Sitecore.MobileSDK.API.Request
     /// <returns>
     /// The item template.
     /// </returns>
-    string ItemTemplate { get; }
+    string ItemTemplateId { get; }
   }
 }
 

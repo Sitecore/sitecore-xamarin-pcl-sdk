@@ -6,9 +6,9 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class ReadChildrenByIdRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByIdRequest>
+  public class RunStoredQuerryRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByIdRequest>
   {
-    public ReadChildrenByIdRequestBuilder(string itemId)
+    public RunStoredQuerryRequestBuilder(string itemId)
     {
       ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".ItemId");
 

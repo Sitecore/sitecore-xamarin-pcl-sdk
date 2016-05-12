@@ -61,7 +61,7 @@
       }
     }
 
-    public string ItemTemplate
+    public string ItemTemplateId
     {
       get
       {

@@ -1,3 +1,9 @@
+using System.Net;
+using System.Collections.Generic;
+using System.Linq;
+using System.Diagnostics;
+using Sitecore.MobileSDK.UrlBuilder.Children;
+
 namespace Sitecore.MobileSDK
 {
   using System;
@@ -61,7 +67,11 @@ namespace Sitecore.MobileSDK
         this.mediaSettings = mediaSettings.MediaSettingsShallowCopy();
       }
 
-      this.httpClient = new HttpClient();
+      this.cookies = new CookieContainer();
+      this.handler = new HttpClientHandler();
+      this.handler.CookieContainer = cookies;
+      this.httpClient = new HttpClient(this.handler);
+
     }
 
     #region IDisposable
@@ -161,14 +171,14 @@ namespace Sitecore.MobileSDK
 
     #region Encryption
 
-    protected virtual async Task<PublicKeyX509Certificate> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
+    protected virtual async Task<string> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
     {
       try
       {
         var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
         var taskFlow = new GetPublicKeyTasks(sessionConfigBuilder, this.restGrammar, this.webApiGrammar, this.httpClient);
 
-        PublicKeyX509Certificate result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
+        string result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
         this.publicCertifiacte = result;
       }
       catch (ObjectDisposedException)
@@ -224,7 +234,41 @@ namespace Sitecore.MobileSDK
 
     #endregion Encryption
 
+    #region SearchItems
+
+    public async Task<ScItemsResponse> RunStoredQuerryAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IReadItemsByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
+
+      using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
+      {
+        IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
+
+        var urlBuilder = new RunStoredQuerryUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var taskFlow = new RunStoredQuerryTasks(urlBuilder, this.httpClient, cryptor);
+
+        return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      }
+    }
+
+    #endregion SearchItems
+
     #region GetItems
+
+    public async Task<ScItemsResponse> ReadChildrenAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IReadItemsByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
+
+      using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
+      {
+        IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
+
+        var urlBuilder = new ChildrenByIdUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var taskFlow = new GetChildrenByIdTasks(urlBuilder, this.httpClient, cryptor);
+
+        return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      }
+    }
 
     public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
@@ -388,9 +432,16 @@ namespace Sitecore.MobileSDK
     public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       ICreateItemByPathRequest requestCopy = request.DeepCopyCreateItemByPathRequest();
-
+     
       using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
       {
+        //TODO: @igk debug info remove later
+        IEnumerable<Cookie> responseCookies = cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
+        foreach (Cookie cookie in responseCookies)
+        {
+          Debug.WriteLine(cookie.Name + ": " + cookie.Value);
+        }
+        
         ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps(requestCopy);
 
         var urlBuilder = new CreateItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar);
@@ -507,6 +558,8 @@ namespace Sitecore.MobileSDK
 
     private readonly UserRequestMerger requestMerger;
     private HttpClient httpClient;
+    private CookieContainer cookies;
+    private HttpClientHandler handler;
 
     protected readonly ISessionConfig sessionConfig;
     private IWebApiCredentials credentials;
@@ -517,7 +570,7 @@ namespace Sitecore.MobileSDK
     private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
 
 
-    private PublicKeyX509Certificate publicCertifiacte;
+    private string publicCertifiacte;
 
     #endregion Private Variables
   }

@@ -14,27 +14,30 @@
     {
     }
 
+    //TODO: IGK probable we do not need this class at all for now
     protected override string GetSpecificPartForRequest(TRequest request)
     {
-      string escapedTemplate = UrlBuilderUtils.EscapeDataString(request.ItemTemplate).ToLowerInvariant();
-      string escapedName = UrlBuilderUtils.EscapeDataString(request.ItemName);
+      return "";
 
-      string result =
-        this.webApiGrammar.TemplateParameterName
-        + this.restGrammar.KeyValuePairSeparator
-        + escapedTemplate;
-
-
-      if (!string.IsNullOrEmpty(escapedName))
-      {
-        result = result
-          + this.restGrammar.FieldSeparator
-          + this.webApiGrammar.ItemNameParameterName
-          + this.restGrammar.KeyValuePairSeparator
-          + escapedName;
-      }
-
-      return result;
+//      string escapedTemplate = UrlBuilderUtils.EscapeDataString(request.ItemTemplateId).ToLowerInvariant();
+//      string escapedName = UrlBuilderUtils.EscapeDataString(request.ItemName);
+//
+//      string result =
+//        this.webApiGrammar.TemplateParameterName
+//        + this.restGrammar.KeyValuePairSeparator
+//        + escapedTemplate;
+//
+//
+//      if (!string.IsNullOrEmpty(escapedName))
+//      {
+//        result = result
+//          + this.restGrammar.FieldSeparator
+//          + this.webApiGrammar.ItemNameParameterName
+//          + this.restGrammar.KeyValuePairSeparator
+//          + escapedName;
+//      }
+//
+//      return result;
     }
   }
 }

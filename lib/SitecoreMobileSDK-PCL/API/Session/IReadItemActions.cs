@@ -22,6 +22,8 @@ namespace Sitecore.MobileSDK.API.Session
     /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
 
+    Task<ScItemsResponse> ReadChildrenAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
+
     /// <summary>
     /// Reads the item for item Path asynchronously
     /// </summary>

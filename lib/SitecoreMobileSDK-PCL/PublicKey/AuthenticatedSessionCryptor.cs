@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSDK.PublicKey
+﻿using System.Net;
+
+namespace Sitecore.MobileSDK.PublicKey
 {
   using System;
   using System.Threading;
@@ -11,7 +13,7 @@
   {
     private string password;
     private string login;
-    private PublicKeyX509Certificate certificate;
+    private string certificate;
 
 
     public void Dispose()
@@ -19,9 +21,12 @@
       this.login = null;
       this.password = null;
       this.certificate = null;
+      this.AuthToken = null;
     }
 
-    public AuthenticatedSessionCryptor(string login, string password, PublicKeyX509Certificate certificate)
+    public string AuthToken { get; private set; }
+
+    public AuthenticatedSessionCryptor(string login, string password, string certificate)
     {
       //      TODO: validate params
       this.login = login;
@@ -41,21 +46,25 @@
 
     public HttpRequestMessage AddEncryptedCredentialHeaders(HttpRequestMessage httpRequest)
     {
+      //TODO: @igk exclude this
       #if !ENCRYPTION_DISABLED
-      EncryptionUtil cryptor = new EncryptionUtil(this.certificate);
-      var encryptedLogin = cryptor.Encrypt(this.login);
-      var encryptedPassword = cryptor.Encrypt(this.password);
+     // EncryptionUtil cryptor = new EncryptionUtil(this.certificate);
+//      var encryptedLogin = cryptor.Encrypt(this.login);
+//      var encryptedPassword = cryptor.Encrypt(this.password);
       #else
       var encryptedLogin = this.login;
       var encryptedPassword = this.password;
       #endif
 
-      httpRequest.Headers.Add("X-Scitemwebapi-Username", encryptedLogin);
-      httpRequest.Headers.Add("X-Scitemwebapi-Password", encryptedPassword);
+//      httpRequest.Headers.Add("Cookie", "cookie1=value1; cookie2=value2");
 
-      #if !ENCRYPTION_DISABLED
-      httpRequest.Headers.Add("X-Scitemwebapi-Encrypted", "1");
-      #endif
+
+//      httpRequest.Headers.Add("X-Scitemwebapi-Username", encryptedLogin);
+//      httpRequest.Headers.Add("X-Scitemwebapi-Password", encryptedPassword);
+//
+//      #if !ENCRYPTION_DISABLED
+//      httpRequest.Headers.Add("X-Scitemwebapi-Encrypted", "1");
+//      #endif
 
       return httpRequest;
     }

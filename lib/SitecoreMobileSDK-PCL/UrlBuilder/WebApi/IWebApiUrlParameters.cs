@@ -2,6 +2,13 @@
 {
   public interface IWebApiUrlParameters
   {
+    #region Authentication
+    string ItemWebApiAuthEndpoint { get; }
+    string ItemWebApiItemsEndpoint { get; }
+    string ItemWebApiLoginAction  { get; }
+    string ItemWebApiLogoutAction { get; }
+    #endregion Authentication
+
     #region Item Source
     string DatabaseParameterName { get; }
     string LanguageParameterName { get; }
@@ -11,16 +18,20 @@
     #region Item Identifiers
     string SitecoreQueryParameterName { get; }
     string ItemIdParameterName { get; }
+    string ItemPathParameterName { get; }
+    string ItemWebApiChildrenAction { get; }
     #endregion Item Identifiers
+
+    #region Search
+    string RunStoredSearchParameterName { get; }
+    #endregion Search
 
     #region Rendering Identifiers
     string RenderingIdParameterName { get; }
     #endregion Rendering Identifiers
 
     #region query parameters
-    string PayloadParameterName { get; }
     string TemplateParameterName { get; }
-    string ScopeParameterName { get; }
     string FieldsListParameterName { get; }
     string ItemNameParameterName { get; }
     #endregion query parameters
@@ -31,7 +42,6 @@
     #endregion Item Web API Endpoints
 
     #region Item Web API Actions
-    string ItemWebApiAuthenticateAction { get; }
     string ItemWebApiGetPublicKeyAction { get; }
     string ItemWebApiGetRenderingAction { get; }
 

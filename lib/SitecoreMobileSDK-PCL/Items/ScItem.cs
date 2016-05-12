@@ -1,28 +1,23 @@
 ﻿namespace Sitecore.MobileSDK.Items
 {
+  using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Fields;
   using Sitecore.MobileSDK.API.Items;
 
   public class ScItem : ISitecoreItem
   {
+    private const string DisplayNameKey = "DisplayName";
+    private const string HasChildrenKey = "HasChildren";
+    private const string ItemIDKey      = "ItemID";
+    private const string ItemPathKey    = "ItemPath";
+    private const string TemplateIDKey  = "TemplateID";
+
     #region Class variables;
 
     public const string RootItemId = "{11111111-1111-1111-1111-111111111111}";
 
     public IItemSource Source { get; private set; }
-
-    public string DisplayName { get; private set; }
-
-    public bool HasChildren { get; private set; }
-
-    public string Id { get; private set; }
-
-    public string LongId { get; private set; }
-
-    public string Path { get; private set; }
-
-    public string Template { get; private set; }
 
     public IEnumerable<IField> Fields { get; private set; }
 
@@ -52,27 +47,54 @@
 
     #endregion Class variables;
 
+    #region Standard Fields;
+
+    public string DisplayName { 
+      get
+      { 
+        return this.FieldWithName(DisplayNameKey).RawValue;
+      }
+    }
+
+    public bool HasChildren { 
+      get
+      { 
+        return  Convert.ToBoolean(this.FieldWithName(HasChildrenKey).RawValue);
+      }
+    }
+
+    public string Id { 
+      get
+      { 
+        return this.FieldWithName(ItemIDKey).RawValue;
+      }
+    }
+
+    public string Path { 
+      get
+      { 
+        return this.FieldWithName(ItemPathKey).RawValue;
+      }
+    }
+
+    public string TemplateId { 
+      get
+      { 
+        return this.FieldWithName(TemplateIDKey).RawValue;
+      }
+    }
+
+    #endregion Standard Fields;
+
     private ScItem()
     {
     }
 
     public ScItem(
     IItemSource source,
-    string displayName,
-    bool hasChildren,
-    string id,
-    string longId,
-    string path,
-    string template,
     Dictionary<string, IField> fieldsByName)
     {
       this.Source = source;
-      this.DisplayName = displayName;
-      this.HasChildren = hasChildren;
-      this.Id = id;
-      this.LongId = longId;
-      this.Path = path;
-      this.Template = template;
       this.FieldsByName = fieldsByName;
 
       int fieldsCount = fieldsByName.Count;

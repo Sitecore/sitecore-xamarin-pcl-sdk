@@ -27,14 +27,6 @@
       string result =
         autocompletedInstanceUrl + this.webApiGrammar.ItemWebApiEndpoint;
 
-      //TODO: no site in ssc
-//      if (!string.IsNullOrEmpty(request.Site))
-//      {
-//        string escapedSite = UrlBuilderUtils.EscapeDataString(request.Site);
-//        result +=
-//          escapedSite;
-//      }
-
       return result.ToLowerInvariant();
     }
 

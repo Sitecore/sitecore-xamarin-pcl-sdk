@@ -17,8 +17,8 @@
     {
       string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId).ToLowerInvariant();
 
-      string result = base.GetSpecificPartForRequest(request);
-      result += this.restGrammar.FieldSeparator
+      //string result = base.GetSpecificPartForRequest(request);
+      string result = this.restGrammar.FieldSeparator
         + this.webApiGrammar.ItemIdParameterName
         + this.restGrammar.KeyValuePairSeparator
         + escapedId;

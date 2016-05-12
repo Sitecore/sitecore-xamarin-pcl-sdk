@@ -13,17 +13,19 @@
     {
     }
 
-    //TODO: igk common part for all requests "by id", we should merge it somehow!!!
+    protected override string GetHostUrlForRequest(IUpdateItemByIdRequest request)
+    {
+      string hostUrl = base.GetHostUrlForRequest(request);
+      string itemId = UrlBuilderUtils.EscapeDataString(request.ItemId.ToLowerInvariant());
+
+      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId;
+      return result;
+    }
+
+    //TODO: @igk we do not need it any more
     protected override string GetSpecificPartForRequest(IUpdateItemByIdRequest request)
     {
-      string escapedId = UrlBuilderUtils.EscapeDataString(request.ItemId).ToLowerInvariant();
-
-      string result =
-          this.webApiGrammar.ItemIdParameterName
-        + this.restGrammar.KeyValuePairSeparator
-        + escapedId;
-
-      return result;
+      return "";
     }
 
     protected override void ValidateSpecificRequest(IUpdateItemByIdRequest request)

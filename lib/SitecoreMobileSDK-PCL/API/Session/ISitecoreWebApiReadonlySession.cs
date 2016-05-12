@@ -10,7 +10,8 @@ namespace Sitecore.MobileSDK.API.Session
     ISitecoreWebApiSessionState,
     IConnectionActions,
     IMediaActions,
-    IReadItemActions
+    IReadItemActions,
+    ISearchActions
   {
   }
 }

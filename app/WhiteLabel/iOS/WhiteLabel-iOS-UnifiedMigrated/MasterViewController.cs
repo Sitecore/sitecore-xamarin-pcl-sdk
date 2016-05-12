@@ -9,7 +9,7 @@ namespace WhiteLabeliOS
 
 	public partial class MasterViewController : UITableViewController
 	{
-        #region UIViewController
+    #region UIViewController
 		public MasterViewController (IntPtr handle) : base (handle)
 		{
             this.Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
@@ -83,7 +83,7 @@ namespace WhiteLabeliOS
 
 		class DataSource : UITableViewSource
 		{
-            #region UITableViewDataSource
+      #region UITableViewDataSource
 			public DataSource (MasterViewController controller)
 			{
 				this.controller = controller;
@@ -108,10 +108,10 @@ namespace WhiteLabeliOS
 
 				return cell;
 			}
-            #endregion UITableViewDataSource
+      #endregion UITableViewDataSource
 
 
-            #region UITableViewDelegate
+      #region UITableViewDelegate
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
 				UINavigationController navController = controller.NavigationController;
@@ -119,13 +119,13 @@ namespace WhiteLabeliOS
 
                 this.controller.PerformSegue(featureKey, this.controller);
 			}
-            #endregion UITableViewDelegate
+      #endregion UITableViewDelegate
 
 
-            #region Instance Variables
-            private static readonly NSString CellIdentifier = new NSString ("Cell");
-            private readonly MasterViewController controller;
-            #endregion Instance Variables
+      #region Instance Variables
+      private static readonly NSString CellIdentifier = new NSString ("Cell");
+      private readonly MasterViewController controller;
+      #endregion Instance Variables
 		}
 	}
 }

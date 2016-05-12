@@ -4,17 +4,13 @@
 
   public static class ItemIdValidator
   {
-    private const string INVALID_ID_MESSAGE = "Item id must have curly braces '{}'";
+    private const string INVALID_ID_MESSAGE = "Item id lenght must be 36";
     public static void ValidateItemId(string itemId, string source)
     {
+      //TODO: @igk investigate and test in unit tests base id criterias, no info in documentation is available
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemId, source);
-
-      bool hasOpeningBrace = itemId.StartsWith("{");
-      bool hasClosingBrace = itemId.EndsWith("}");
-      bool hasNonBraceSymbols = (itemId.Length > 2);
-
-      bool isValidId = hasOpeningBrace && hasClosingBrace && hasNonBraceSymbols;
-      if (!isValidId)
+    
+      if (itemId.Length != 36)
       {
         throw new ArgumentException(source + " : " + INVALID_ID_MESSAGE);
       }

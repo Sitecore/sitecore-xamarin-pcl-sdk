@@ -18,14 +18,18 @@
     public override async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
-      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Put, url);
+      HttpRequestMessage result = new HttpRequestMessage(new HttpMethod("PATCH"), url);
+
       string fieldsList = this.GetFieldsListString(request);
-      result.Content = new StringContent(fieldsList, Encoding.UTF8, "application/x-www-form-urlencoded");
+      StringContent bodycontent = new StringContent(fieldsList, Encoding.UTF8, "application/json");
+      result.Content = bodycontent;
+
       result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
 
     public abstract string GetFieldsListString(TRequest request);
+
   }
 }
 

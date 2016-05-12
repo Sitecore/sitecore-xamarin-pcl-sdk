@@ -16,13 +16,22 @@
 
     protected override string GetSpecificPartForRequest(TRequest request)
     {
+      string formattedItemPath = this.GetItemIdenticationForRequest(request);
       string formattedPagingInfo = this.GetPagingInfoForRequest(request);
 
       string result = null;
-   
-      if (!string.IsNullOrEmpty(formattedPagingInfo))
+      if (string.IsNullOrEmpty(formattedItemPath))
       {
-        result = result + this.restGrammar.FieldSeparator + formattedPagingInfo;
+        result = formattedPagingInfo;
+      }
+      else
+      {
+        result = formattedItemPath;
+
+        if (!string.IsNullOrEmpty(formattedPagingInfo))
+        {
+          result = result + this.restGrammar.FieldSeparator + formattedPagingInfo;
+        }
       }
 
       return result;

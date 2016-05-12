@@ -52,7 +52,7 @@ namespace WhiteLabeliOS
 
     partial void OnDeleteItemByqueryButtonTouched(UIKit.UIButton sender)
     {
-      this.SendDeleteByQueryRequest();
+//      this.SendDeleteByQueryRequest();
     }
 
     private async void SendDeleteByIdRequest()
@@ -113,35 +113,35 @@ namespace WhiteLabeliOS
         });
       }
     }
-
-    private async void SendDeleteByQueryRequest()
-    {
-      try
-      {
-        using (var session = this.instanceSettings.GetSession())
-        {
-          var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.itemQueryField.Text)
-            .Build();
-
-          this.ShowLoader();
-
-          ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
-
-          this.ProceedResponce(response);
-        }
-      }
-      catch(Exception e) 
-      {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-      }
-      finally
-      {
-        BeginInvokeOnMainThread(delegate
-        {
-          this.HideLoader();
-        });
-      }
-    }
+//
+//    private async void SendDeleteByQueryRequest()
+//    {
+//      try
+//      {
+//        using (var session = this.instanceSettings.GetSession())
+//        {
+//          var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.itemQueryField.Text)
+//            .Build();
+//
+//          this.ShowLoader();
+//
+//          ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
+//
+//          this.ProceedResponce(response);
+//        }
+//      }
+//      catch(Exception e) 
+//      {
+//        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+//      }
+//      finally
+//      {
+//        BeginInvokeOnMainThread(delegate
+//        {
+//          this.HideLoader();
+//        });
+//      }
+//    }
 
     private void ProceedResponce(ScDeleteItemsResponse response)
     {

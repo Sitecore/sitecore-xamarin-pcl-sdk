@@ -1,6 +1,7 @@
 ﻿using System;
 using Foundation;
 using UIKit;
+using System.Net;
 
 namespace WhiteLabeliOS
 {
@@ -19,7 +20,15 @@ namespace WhiteLabeliOS
 
 		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
+			// Override point for custo mization after application launch.
+
+      //FIXME: remove this
+      #warning !!!!ignoring ssl certification!!!!
+      //ignoring ssl certification to test https request
+      ServicePointManager
+        .ServerCertificateValidationCallback +=
+          (sender, cert, chain, sslPolicyErrors) => true;
+      
 			return true;
 		}
 		//

@@ -16,6 +16,8 @@
       return httpRequest;
     }
 
+    public string AuthToken { get; private set; }
+
     public void Dispose()
     {
       // IDLE : nothing to clean up

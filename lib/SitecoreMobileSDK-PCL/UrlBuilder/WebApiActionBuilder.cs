@@ -39,7 +39,7 @@
     public string GetAuthenticateActionUrlForSession(ISessionConfig sessionConfig)
     {
       return this.GetWebApiActionEndpointUrlForSession(
-        this.webApiGrammar.ItemWebApiAuthenticateAction,
+        this.webApiGrammar.ItemWebApiLoginAction,
         sessionConfig);
     }
     #endregion Actions
@@ -57,7 +57,7 @@
 
       string result = hostWithSite +
                       this.restGrammar.PathComponentSeparator +
-                      this.webApiGrammar.ItemWebApiActionsEndpoint +
+                      this.webApiGrammar.ItemWebApiAuthEndpoint +
                       actionName;
 
       return result;

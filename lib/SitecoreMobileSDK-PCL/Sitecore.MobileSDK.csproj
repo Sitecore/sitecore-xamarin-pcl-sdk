@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <DocumentationFile>Sitecore.MobileSDK.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -229,6 +230,13 @@
     <Compile Include="API\Request\Parameters\IUploadMediaOptions.cs" />
     <Compile Include="UrlBuilder\MediaItem\UploadMediaOptions.cs" />
     <Compile Include="UserRequest\AbstractScopedRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\ReadRequest\ReadChildrenByIdRequestBuilder.cs" />
+    <Compile Include="CrudTasks\GetChildrenByIdTasks.cs" />
+    <Compile Include="UserRequest\SearchRequests\RunStoredQuerryRequestBuilder.cs" />
+    <Compile Include="API\Session\ISearchActions.cs" />
+    <Compile Include="UrlBuilder\SearchItems\ChildrenByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\Children\RunStoredQuerryUrlBuilder.cs" />
+    <Compile Include="CrudTasks\RunStoredQuerryTasks.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -285,5 +293,10 @@
       <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
       <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UrlBuilder\Children\" />
+    <Folder Include="UserRequest\SearchRequests\" />
+    <Folder Include="UrlBuilder\SearchItems\" />
   </ItemGroup>
 </Project>

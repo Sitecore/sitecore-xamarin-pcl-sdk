@@ -16,15 +16,18 @@
     protected override string GetHostUrlForRequest(IReadItemsByPathRequest request)
     {
       string hostUrl = base.GetHostUrlForRequest(request);
-      string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
+      string result = hostUrl;
 
-      string result = hostUrl + escapedPath;
       return result;
     }
 
     protected override string GetItemIdenticationForRequest(IReadItemsByPathRequest request)
     {
-      return null;
+      string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
+      string strItemPath = this.webApiGrammar.ItemPathParameterName + this.restGrammar.KeyValuePairSeparator + escapedPath;
+      string lowerCaseItemPath = strItemPath.ToLowerInvariant();
+
+      return lowerCaseItemPath;
     }
 
     protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)

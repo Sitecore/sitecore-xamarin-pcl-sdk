@@ -13,22 +13,29 @@
     {
     }
 
+
+    //TODO: @igk saved in demo purposes to test item manipulations via path
+    //FIXME: @igk remove before release
     public override string GetUrlForRequest(IDeleteItemsByPathRequest request)
     {
       this.Validate(request);
 
-      var baseUrl = base.GetBaseUrlForRequest(request);
+      string result = base.GetBaseUrlForRequest(request);
+
       string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
+      string strItemPath = this.WebApiGrammar.ItemPathParameterName + this.RestGrammar.KeyValuePairSeparator + escapedPath;
+      string lowerCaseItemPath = strItemPath.ToLowerInvariant();
 
-      var fullUrl = baseUrl + escapedPath;
+      result += this.RestGrammar.HostAndArgsSeparator + lowerCaseItemPath;
 
-      if (!string.IsNullOrEmpty(this.GetParametersString(request)))
+      string parameters = this.GetParametersString(request);
+
+      if (!string.IsNullOrEmpty(parameters))
       {
-        fullUrl += this.RestGrammar.HostAndArgsSeparator
-          + this.GetParametersString(request);
+        result += this.RestGrammar.FieldSeparator + parameters;
       }
 
-      return fullUrl.ToLowerInvariant();
+      return result.ToLowerInvariant();
     }
 
     public override void ValidateSpecificPart(IDeleteItemsByPathRequest request)

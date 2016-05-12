@@ -26,7 +26,10 @@
 
     public virtual string GetBaseUrlForRequest(TRequest request)
     {
-      return this.sessionConfigUrlBuilder.BuildUrlString(request.SessionConfig);
+      string hostUrl = this.sessionConfigUrlBuilder.BuildUrlString(request.SessionConfig);
+      hostUrl = hostUrl + this.WebApiGrammar.ItemWebApiItemsEndpoint;
+
+      return hostUrl;
     }
 
     protected string GetParametersString(TRequest request)

@@ -23,61 +23,56 @@
         throw new ArgumentException("response cannot null or empty");
       }
 
-      JObject response = JObject.Parse(responseString);
+      var response = JToken.Parse(responseString);
 
-      int statusCode = ScItemsParser.ParseOrFail<int>(response, "$.statusCode");
-      bool isSuccessfulCode = (200 <= statusCode) && (statusCode <= 299);
-
-      if (!isSuccessfulCode)
-      {
-        var error = new WebApiJsonStatusMessage(statusCode, ParseOrFail<string>(response, "$.error.message"));
-        throw new WebApiJsonErrorException(error);
-      }
-
-      int totalCount = ParseOrFail<int>(response, "$.result.totalCount");
-      int resultCount = ParseOrFail<int>(response, "$.result.resultCount");
-
-      var responseItems = response.SelectToken("$.result.items");
       var items = new List<ISitecoreItem>();
 
-      foreach (JObject item in responseItems)
+      if (response is JArray)
       {
-        cancelToken.ThrowIfCancellationRequested();
-
-        var source = ParseItemSource(item);
-
-        var displayName = (string)item.GetValue("DisplayName");
-        var hasChildren = (bool)item.GetValue("HasChildren");
-        var id = (string)item.GetValue("ID");
-        var longId = (string)item.GetValue("LongID");
-        var path = (string)item.GetValue("Path");
-        var template = (string)item.GetValue("Template");
-
-        JObject fieldsJSON = (JObject)item.GetValue("Fields");
-        List<IField> fields = ScFieldsParser.ParseFieldsData(fieldsJSON, cancelToken);
-        var fieldsByName = new Dictionary<string, IField>(fields.Count);
-        foreach (IField singleField in fields)
+        foreach (JObject item in response)
         {
           cancelToken.ThrowIfCancellationRequested();
 
-          string lowercaseName = singleField.Name.ToLowerInvariant();
-          fieldsByName[lowercaseName] = singleField;
+          ScItem newItem = ScItemsParser.ParseSource(item, cancelToken);
+          items.Add(newItem);
         }
-
-
-        ScItem newItem = new ScItem(source, displayName, hasChildren, id, longId, path, template, fieldsByName);
+      }
+      else if (response is JObject)
+      {
+        ScItem newItem = ScItemsParser.ParseSource(response as JObject, cancelToken);
         items.Add(newItem);
       }
-      return new ScItemsResponse(totalCount, resultCount, items);
+
+      //FIXME: int totalCount, int resultCount not available for SSC fix
+      return new ScItemsResponse(items.Count, items.Count, items);
+    }
+
+    public static ScItem ParseSource(JObject item, CancellationToken cancelToken)
+    {
+      var source = ParseItemSource(item);
+
+      List<IField> fields = ScFieldsParser.ParseFieldsData(item, cancelToken);
+      var fieldsByName = new Dictionary<string, IField>(fields.Count);
+      foreach (IField singleField in fields)
+      {
+        cancelToken.ThrowIfCancellationRequested();
+
+        string lowercaseName = singleField.Name.ToLowerInvariant();
+        fieldsByName[lowercaseName] = singleField;
+      }
+
+      ScItem newItem = new ScItem(source, fieldsByName);
+
+      return newItem;
     }
 
     private static ItemSource ParseItemSource(JObject json)
     {
-      var language = (string)json.GetValue("Language");
-      var database = (string)json.GetValue("Database");
-      var version = (int)json.GetValue("Version");
+      var language = (string)json.GetValue("ItemLanguage");
+      var version = (int)json.GetValue("ItemVersion");
 
-      return new ItemSource(database, language, version);
+      //FIXME: no database field in response!!!
+      return new ItemSource("web", language, version);
     }
 
     private static T ParseOrFail<T>(JObject json, string path)

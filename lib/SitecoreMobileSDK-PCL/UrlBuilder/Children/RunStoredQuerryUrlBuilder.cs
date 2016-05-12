@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.ItemById
+﻿namespace Sitecore.MobileSDK.UrlBuilder.Children
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -6,9 +6,9 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class ItemByIdUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByIdRequest>
+  public class RunStoredQuerryUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByIdRequest>
   {
-    public ItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    public RunStoredQuerryUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
       : base(restGrammar, webApiGrammar)
     {
     }
@@ -18,7 +18,7 @@
       string hostUrl = base.GetHostUrlForRequest(request);
       string itemId = UrlBuilderUtils.EscapeDataString(request.ItemId.ToLowerInvariant());
 
-      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId;
+      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId + webApiGrammar.RunStoredSearchParameterName;
       return result;
     }
 

@@ -1,4 +1,6 @@
-﻿
+﻿using System.Text;
+
+
 namespace Sitecore.MobileSDK.PublicKey
 {
   using System;
@@ -13,7 +15,7 @@ namespace Sitecore.MobileSDK.PublicKey
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.WebApi;
 
-  public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, Stream, PublicKeyX509Certificate>
+  public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, Stream, string>
   {
     #region Private Variables
 
@@ -43,7 +45,11 @@ namespace Sitecore.MobileSDK.PublicKey
     {
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + requestUrl);
-      HttpResponseMessage httpResponse = await this.httpClient.GetAsync(requestUrl, cancelToken);
+
+      //FIXME: @igk fix hardcode!!!!
+      var stringContent = new StringContent("{\"domain\":\"sitecore\",\"username\":\"admin\",\"password\":\"b\"}", Encoding.UTF8, "application/json");
+      HttpResponseMessage httpResponse = await this.httpClient.PostAsync(requestUrl, stringContent, cancelToken);
+
       HttpContent responseContent = httpResponse.Content;
 
       Stream result = await responseContent.ReadAsStreamAsync();
@@ -51,25 +57,36 @@ namespace Sitecore.MobileSDK.PublicKey
     }
 
     // disposes httpData
-    public async Task<PublicKeyX509Certificate> ParseResponseDataAsync(Stream httpData, CancellationToken cancelToken)
+    public async Task<string> ParseResponseDataAsync(Stream httpData, CancellationToken cancelToken)
     {
+
       using (Stream publicKeyStream = httpData)
       {
-        Func<PublicKeyX509Certificate> syncParsePublicKey = () =>
+        Func<string> syncParsePublicKey = () =>
         {
-          return new PublicKeyXmlParser().Parse(publicKeyStream, cancelToken);
+          return "OK";
+          //return new PublicKeyXmlParser().Parse(publicKeyStream, cancelToken);
         };
-        PublicKeyX509Certificate result = await Task.Factory.StartNew(syncParsePublicKey, cancelToken);
+        string result = await Task.Factory.StartNew(syncParsePublicKey, cancelToken);
         return result;
       }
     }
 
     private string PrepareRequestUrl(ISessionConfig instanceUrl)
     {
-      return this.sessionConfigBuilder.BuildUrlString(instanceUrl)
-        + this.restGrammar.PathComponentSeparator
-        + this.webApiGrammar.ItemWebApiActionsEndpoint
-        + this.webApiGrammar.ItemWebApiGetPublicKeyAction;
+      string url = this.sessionConfigBuilder.BuildUrlString(instanceUrl);
+
+      //FIXME: hack to force https protocol
+      if (!url.StartsWith("https"))
+      {
+        url = url.Insert(4, "s");
+      }
+
+      url = url + this.webApiGrammar.ItemWebApiAuthEndpoint
+                + this.webApiGrammar.ItemWebApiLoginAction;
+      
+      return url;
+
     }
 
     #endregion IRestApiCallTasks

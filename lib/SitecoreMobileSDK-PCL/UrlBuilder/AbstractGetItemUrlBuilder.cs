@@ -70,6 +70,7 @@
     {
       SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
       string hostUrl = sessionBuilder.BuildUrlString(request.SessionSettings);
+      hostUrl = hostUrl + this.webApiGrammar.ItemWebApiItemsEndpoint;
 
       return hostUrl;
     }

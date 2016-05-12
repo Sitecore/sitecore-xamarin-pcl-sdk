@@ -27,20 +27,12 @@ namespace Sitecore.MobileSDK.API.Items
     bool HasChildren { get; }
 
     /// <summary>
-    /// Returns item's GUID. Item Web API service returns GUID values enclosed in curly braces.
-    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    /// Returns item's GUID.
+    /// For example: "110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9"
     /// 
     /// The value is case insensitive.
     /// </summary>
     string Id { get; }
-
-    /// <summary>
-    /// Returns item's long id. LongId is similar to the Path property. However, it contains of GUIDs separated by the slash symbol.
-    /// For example: "/{11111111-1111-1111-1111-111111111111}/{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
-    /// 
-    /// The value is case insensitive.
-    /// </summary>
-    string LongId { get; }
 
     /// <summary>
     /// Returns item's path in the content tree. 
@@ -51,13 +43,12 @@ namespace Sitecore.MobileSDK.API.Items
     string Path { get; }
 
     /// <summary>
-    /// Returns a relative path to the item's template. 
-    /// The path is relative to the "/sitecore/templates" item.
-    /// For example: "Common/Folder".
+    /// Returns template's GUID.
+    /// For example: "76036f5e-cbce-46d1-af0a-4143f9b557aa"
     /// 
     /// The value is case insensitive.
     /// </summary>
-    string Template { get; }
+    string TemplateId { get; }
 
     /// <summary>
     /// Returns number of downloaded fields for the given item.
