@@ -4,7 +4,7 @@
   using System.Globalization;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
 
   public class ItemSourceUrlBuilder
@@ -13,11 +13,11 @@
     {
     }
 
-    public ItemSourceUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar, IItemSource itemSource)
+    public ItemSourceUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar, IItemSource itemSource)
     {
       this.itemSource = itemSource;
       this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
 
       this.Validate();
     }
@@ -39,7 +39,7 @@
       {
         result =
           result +
-          this.webApiGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + escapedDatabase;
+          this.sscGrammar.DatabaseParameterName + this.restGrammar.KeyValuePairSeparator + escapedDatabase;
       }
 
       if (!string.IsNullOrEmpty(escapedLanguage))
@@ -47,7 +47,7 @@
         result =
           result +
           this.restGrammar.FieldSeparator +
-          this.webApiGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
+          this.sscGrammar.LanguageParameterName + this.restGrammar.KeyValuePairSeparator + escapedLanguage;
       }
 
 
@@ -61,7 +61,7 @@
 
         result +=
           this.restGrammar.FieldSeparator +
-          this.webApiGrammar.VersionParameterName + this.restGrammar.KeyValuePairSeparator + escapedVersion;
+          this.sscGrammar.VersionParameterName + this.restGrammar.KeyValuePairSeparator + escapedVersion;
       }
 
       return result.ToLowerInvariant();
@@ -77,7 +77,7 @@
       {
         throw new ArgumentNullException("[ItemSourceUrlBuilder.grammar] Do not pass null");
       }
-      else if (null == this.webApiGrammar)
+      else if (null == this.sscGrammar)
       {
         throw new ArgumentNullException("[ItemSourceUrlBuilder.grammar] Do not pass null");
       }
@@ -85,7 +85,7 @@
 
     private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;
-    private IWebApiUrlParameters webApiGrammar;
+    private ISSCUrlParameters sscGrammar;
   }
 }
 

@@ -16,9 +16,9 @@ namespace Sitecore.MobileSDK.API
   /// <summary>
   /// Main factory to construct buider for concrete request. 
   /// </summary>
-  public class ItemWebApiRequestBuilder
+  public class ItemSSCRequestBuilder
   {
-    private ItemWebApiRequestBuilder()
+    private ItemSSCRequestBuilder()
     {
     }
 

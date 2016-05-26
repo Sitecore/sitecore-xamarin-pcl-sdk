@@ -8,7 +8,7 @@ namespace Sitecore.MobileSDK.API.Exceptions
   /// </example>
   /// 
   /// </summary>
-  public class WebApiJsonStatusMessage
+  public class SSCJsonStatusMessage
   {
     /// <summary>
     ///  Gets status code of response.
@@ -21,11 +21,11 @@ namespace Sitecore.MobileSDK.API.Exceptions
     public string Message { get; private set; }
 
     /// <summary>
-    ///  Initializes a new instance of the <see cref="WebApiJsonStatusMessage"/> class.
+    ///  Initializes a new instance of the <see cref="SSCJsonStatusMessage"/> class.
     /// </summary>
     /// <param name="statusCode">status code of the response</param>
     /// <param name="message">error message of the response</param>
-    public WebApiJsonStatusMessage(int statusCode, string message)
+    public SSCJsonStatusMessage(int statusCode, string message)
     {
       this.StatusCode = statusCode;
       this.Message = message;

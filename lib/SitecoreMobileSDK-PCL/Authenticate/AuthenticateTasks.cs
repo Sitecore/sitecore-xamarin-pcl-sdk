@@ -11,26 +11,26 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.UrlBuilder;
 
-  class AuthenticateTasks : IRestApiCallTasks<ISessionConfig, HttpRequestMessage, string, WebApiJsonStatusMessage>
+  class AuthenticateTasks : IRestApiCallTasks<ISessionConfig, HttpRequestMessage, string, SSCJsonStatusMessage>
   {
     #region Private Variables
 
     private readonly IRestServiceGrammar restGrammar;
-    private readonly IWebApiUrlParameters webApiGrammar;
+    private readonly ISSCUrlParameters sscGrammar;
     private readonly SessionConfigUrlBuilder urlBuilder;
     private readonly HttpClient httpClient;
     private readonly ICredentialsHeadersCryptor credentialsCryptor;
 
     #endregion Private Variables
 
-    public AuthenticateTasks(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar,
+    public AuthenticateTasks(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar,
       SessionConfigUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor cryptor)
     {
       this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
       this.credentialsCryptor = cryptor;
@@ -56,9 +56,9 @@
       return await responseContent.ReadAsStringAsync();
     }
 
-    public async Task<WebApiJsonStatusMessage> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
+    public async Task<SSCJsonStatusMessage> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
     {
-      Func<WebApiJsonStatusMessage> syncParsePublicKey = () =>
+      Func<SSCJsonStatusMessage> syncParsePublicKey = () =>
       {
         return AuthenticateResponseParser.ParseResponse(httpData, cancelToken);
       };
@@ -68,7 +68,7 @@
 
     private string PrepareRequestUrl(ISessionConfig request)
     {
-      WebApiActionBuilder builder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar); 
+      SSCActionBuilder builder = new SSCActionBuilder(this.restGrammar, this.sscGrammar); 
       return builder.GetAuthenticateActionUrlForSession(request);
     }
 

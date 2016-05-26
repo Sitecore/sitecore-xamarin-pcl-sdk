@@ -67,9 +67,9 @@
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+          var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
             .AddFieldsToRead(this.fieldNameTextField.Text)
             .Build();
           

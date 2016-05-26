@@ -2,14 +2,14 @@
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public class DeleteItemByIdUrlBuilder : AbstractDeleteItemUrlBuilder<IDeleteItemsByIdRequest>
   {
-    public DeleteItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public DeleteItemByIdUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
   

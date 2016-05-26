@@ -3,13 +3,13 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Validators;
 
   public class CreateItemByIdUrlBuilder : AbstractCreateItemUrlBuilder<ICreateItemByIdRequest>
   {
-    public CreateItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public CreateItemByIdUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 
@@ -19,7 +19,7 @@
 
       //string result = base.GetSpecificPartForRequest(request);
       string result = this.restGrammar.FieldSeparator
-        + this.webApiGrammar.ItemIdParameterName
+        + this.sscGrammar.ItemIdParameterName
         + this.restGrammar.KeyValuePairSeparator
         + escapedId;
 

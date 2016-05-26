@@ -75,9 +75,9 @@ namespace WhiteLabeliOS
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+          var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
             .AddFieldsToRead(this.fieldNameTextField.Text)
             .Build();
 
@@ -114,9 +114,9 @@ namespace WhiteLabeliOS
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.ReadChildrenRequestWithId(itemIdTextField.Text)
+          var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId(itemIdTextField.Text)
             .Build();
 
           this.ShowLoader();

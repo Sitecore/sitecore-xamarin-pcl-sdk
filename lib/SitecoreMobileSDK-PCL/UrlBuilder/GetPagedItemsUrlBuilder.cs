@@ -3,14 +3,14 @@
   using System;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
 
   public abstract class GetPagedItemsUrlBuilder<TRequest> : AbstractGetItemUrlBuilder<TRequest>
     where TRequest : IBaseReadItemsRequest
   {
-    public GetPagedItemsUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar) : 
-    base(restGrammar, webApiGrammar)
+    public GetPagedItemsUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar) : 
+    base(restGrammar, sscGrammar)
     {
     }
 
@@ -39,7 +39,7 @@
 
     private string GetPagingInfoForRequest(TRequest request)
     {
-      var pageBuilder = new PagingUrlBuilder(this.restGrammar, this.webApiGrammar);
+      var pageBuilder = new PagingUrlBuilder(this.restGrammar, this.sscGrammar);
       string strPageInfo = pageBuilder.BuildUrlQueryString(request.PagingSettings);
 
       return strPageInfo;

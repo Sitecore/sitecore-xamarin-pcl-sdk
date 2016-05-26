@@ -2,14 +2,14 @@
 {
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.API.Request;
 
   public class UpdateItemByIdUrlBuilder : AbstractUpdateItemUrlBuilder<IUpdateItemByIdRequest>
   {
-    public UpdateItemByIdUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public UpdateItemByIdUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 

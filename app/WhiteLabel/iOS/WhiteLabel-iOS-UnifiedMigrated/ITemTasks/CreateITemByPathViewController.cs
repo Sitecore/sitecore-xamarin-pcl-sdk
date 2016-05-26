@@ -44,7 +44,7 @@
       {
         using (var session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.pathField.Text)
+          var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(this.pathField.Text)
             .AddFieldsRawValuesByNameToSet("Title", this.titleField.Text)
             .AddFieldsRawValuesByNameToSet("Text", this.textField.Text)
             .Build();

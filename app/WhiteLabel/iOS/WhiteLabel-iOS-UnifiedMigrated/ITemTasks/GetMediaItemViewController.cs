@@ -95,7 +95,7 @@ namespace WhiteLabeliOS
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
           IDownloadMediaOptions options = new MediaOptionsBuilder()
             .Set
@@ -106,7 +106,7 @@ namespace WhiteLabeliOS
 
           string path = this.MediaPathTextField.Text;
 
-          var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(path)
+          var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(path)
             .DownloadOptions(options)
             .Build();
 

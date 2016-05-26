@@ -7,7 +7,7 @@
 
   public class AuthenticateResponseParser
   {
-    public static WebApiJsonStatusMessage ParseResponse(string response, CancellationToken token)
+    public static SSCJsonStatusMessage ParseResponse(string response, CancellationToken token)
     {
       if (string.IsNullOrEmpty(response))
       {
@@ -20,7 +20,7 @@
       var statusCode = (int)responseJObject.SelectToken("statusCode");
       var message = (string)responseJObject.SelectToken("error.message");
 
-      return new WebApiJsonStatusMessage(statusCode, message);
+      return new SSCJsonStatusMessage(statusCode, message);
     }
   }
 }

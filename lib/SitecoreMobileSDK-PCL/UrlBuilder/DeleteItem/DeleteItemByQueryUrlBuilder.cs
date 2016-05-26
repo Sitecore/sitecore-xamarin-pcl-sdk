@@ -2,14 +2,14 @@
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public class DeleteItemByQueryUrlBuilder : AbstractDeleteItemUrlBuilder<IDeleteItemsByQueryRequest>
   {
-    public DeleteItemByQueryUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public DeleteItemByQueryUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 
@@ -27,7 +27,7 @@
 
       string fullUrl = baseUrl
                        + this.RestGrammar.HostAndArgsSeparator
-                       + this.WebApiGrammar.SitecoreQueryParameterName
+                       + this.SSCGrammar.SitecoreQueryParameterName
                        + this.RestGrammar.KeyValuePairSeparator;
 
       fullUrl = fullUrl.ToLowerInvariant() + escapedQuery;

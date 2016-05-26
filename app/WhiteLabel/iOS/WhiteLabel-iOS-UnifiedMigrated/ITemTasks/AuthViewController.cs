@@ -50,7 +50,7 @@
         using (var credentials = new SecureStringPasswordProvider(this.loginField.Text, this.passwordField.Text))
         using 
         ( 
-            var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
+            var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
             .Credentials(credentials)
             .Site(this.siteField.Text)
             .BuildReadonlySession()

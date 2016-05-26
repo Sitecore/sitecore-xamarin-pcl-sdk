@@ -61,9 +61,9 @@
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.StoredQuerryRequest(queryTextField.Text)
+          var request = ItemSSCRequestBuilder.StoredQuerryRequest(queryTextField.Text)
             .Build();
 
           this.ShowLoader();
@@ -92,9 +92,9 @@
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.StoredSearchRequest(queryTextField.Text)
+          var request = ItemSSCRequestBuilder.StoredSearchRequest(queryTextField.Text)
             .Term(this.termTextField.Text)
             .Build();
 

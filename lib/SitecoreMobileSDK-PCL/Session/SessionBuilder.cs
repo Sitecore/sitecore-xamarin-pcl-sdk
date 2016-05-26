@@ -12,7 +12,7 @@
   internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder
   {
     #region Main Logic
-    public ISitecoreWebApiSession BuildSession()
+    public ISitecoreSSCSession BuildSession()
     {
       string optionalMediaRoot = this.OptionalMediaRoot();
       string optionalMediaExtension = this.OptionalMediaExtension();
@@ -39,7 +39,7 @@
       return result;
     }
 
-    public ISitecoreWebApiReadonlySession BuildReadonlySession()
+    public ISitecoreSSCReadonlySession BuildReadonlySession()
     {
       return this.BuildSession();
     }
@@ -97,7 +97,7 @@
     #endregion Constructor
 
     #region IAuthenticatedSessionBuilder
-    public IBaseSessionBuilder Credentials(IWebApiCredentials credentials)
+    public IBaseSessionBuilder Credentials(ISSCCredentials credentials)
     {
       // @adk : won't be invoked more than once.
       // No validation needed.
@@ -124,12 +124,12 @@
       return this;
     }
 
-    public IBaseSessionBuilder WebApiVersion(string webApiVersion)
+    public IBaseSessionBuilder SSCVersion(string sscVersion)
     {
-      BaseValidator.CheckForTwiceSetAndThrow(this.webApiVersion, this.GetType().Name + ".WebApiVersion");
-      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(webApiVersion, this.GetType().Name + ".WebApiVersion");
+      BaseValidator.CheckForTwiceSetAndThrow(this.sscVersion, this.GetType().Name + ".SSCVersion");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(sscVersion, this.GetType().Name + ".SSCVersion");
 
-      this.webApiVersion = webApiVersion;
+      this.sscVersion = sscVersion;
       return this;
     }
 
@@ -232,14 +232,14 @@
 
     #region State
     private string instanceUrl;
-    private string webApiVersion;
+    private string sscVersion;
     private string site;
     private string mediaRoot;
     private string mediaExtension;
     private string mediaPrefix;
     DownloadStrategy resizingFlag = DownloadStrategy.Plain;
 
-    private IWebApiCredentials credentials = null;
+    private ISSCCredentials credentials = null;
     private ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
     #endregion State
   }

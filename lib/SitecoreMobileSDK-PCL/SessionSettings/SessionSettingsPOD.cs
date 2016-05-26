@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK.SessionSettings
     {
       SessionConfigPOD result = new SessionConfigPOD();
       result.InstanceUrl = this.InstanceUrl;
-      result.ItemWebApiVersion = this.ItemWebApiVersion;
+      result.ItemSSCVersion = this.ItemSSCVersion;
       result.Site = this.Site;
       result.MediaLibraryRoot = this.MediaLibraryRoot;
       result.DefaultMediaResourceExtension = this.DefaultMediaResourceExtension;
@@ -33,7 +33,7 @@ namespace Sitecore.MobileSDK.SessionSettings
     #region ISessionConfig
     public string InstanceUrl { get; set; }
 
-    public string ItemWebApiVersion { get; set; }
+    public string ItemSSCVersion { get; set; }
 
     public string Site
     {
@@ -103,7 +103,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
 
       bool isUrlEqual = object.Equals(this.InstanceUrl, other.InstanceUrl);
-      bool isVersionEqual = object.Equals(this.ItemWebApiVersion, other.ItemWebApiVersion);
+      bool isVersionEqual = object.Equals(this.ItemSSCVersion, other.ItemSSCVersion);
       bool isSiteEqual = object.Equals(this.Site, other.Site);
 
       return isUrlEqual && isVersionEqual && isSiteEqual;
@@ -111,7 +111,7 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     public override int GetHashCode()
     {
-      return base.GetHashCode() + this.InstanceUrl.GetHashCode() + this.ItemWebApiVersion.GetHashCode() + this.Site.GetHashCode();
+      return base.GetHashCode() + this.InstanceUrl.GetHashCode() + this.ItemSSCVersion.GetHashCode() + this.Site.GetHashCode();
     }
     #endregion Comparator
 

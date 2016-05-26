@@ -13,7 +13,7 @@ namespace Sitecore.MobileSDK.PublicKey
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, Stream, string>
   {
@@ -21,16 +21,16 @@ namespace Sitecore.MobileSDK.PublicKey
 
     private readonly SessionConfigUrlBuilder sessionConfigBuilder;
     private readonly IRestServiceGrammar restGrammar;
-    private readonly IWebApiUrlParameters webApiGrammar;
+    private readonly ISSCUrlParameters sscGrammar;
     private readonly HttpClient httpClient;
 
     #endregion Private Variables
 
-    public GetPublicKeyTasks(SessionConfigUrlBuilder sessionConfigBuilder, IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar, HttpClient httpClient)
+    public GetPublicKeyTasks(SessionConfigUrlBuilder sessionConfigBuilder, IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar, HttpClient httpClient)
     {
       this.sessionConfigBuilder = sessionConfigBuilder;
       this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
       this.httpClient = httpClient;
     }
 
@@ -82,8 +82,8 @@ namespace Sitecore.MobileSDK.PublicKey
         url = url.Insert(4, "s");
       }
 
-      url = url + this.webApiGrammar.ItemWebApiAuthEndpoint
-                + this.webApiGrammar.ItemWebApiLoginAction;
+      url = url + this.sscGrammar.ItemSSCAuthEndpoint
+                + this.sscGrammar.ItemSSCLoginAction;
       
       return url;
 

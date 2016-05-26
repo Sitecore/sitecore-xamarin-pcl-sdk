@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK.API
   /// * Readonly session
   /// * A session capable of modifying the content
   /// </summary>
-  public static class SitecoreWebApiSessionBuilder
+  public static class SitecoreSSCSessionBuilder
   {
     /// <summary>
     /// Creates a session for the anonymous user. It does not require any credentials.

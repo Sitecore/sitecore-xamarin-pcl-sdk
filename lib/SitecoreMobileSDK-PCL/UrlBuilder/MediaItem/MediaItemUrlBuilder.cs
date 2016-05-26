@@ -10,21 +10,21 @@
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.Validators;
   using Sitecore.MobileSDK.Utils;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
 
   public class MediaItemUrlBuilder
   {
     public MediaItemUrlBuilder(
       IRestServiceGrammar restGrammar,
-      IWebApiUrlParameters webApiGrammar,
+      ISSCUrlParameters sscGrammar,
       ISessionConfig sessionConfig,
       IMediaLibrarySettings mediaSettings,
       IItemSource itemSource)
     {
       this.itemSource = itemSource;
       this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
       this.mediaSettings = mediaSettings;
       this.sessionConfig = sessionConfig;
 
@@ -101,12 +101,12 @@
       string originalUrl = this.BuildUrlStringForPath(path, options);
       string encodedOriginalUrl = UrlBuilderUtils.EscapeDataString(originalUrl);
 
-      var actionBuilder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar);
+      var actionBuilder = new SSCActionBuilder(this.restGrammar, this.sscGrammar);
       string result = actionBuilder.GetHashedMediaUrlAction(this.sessionConfig);
 
       result = result +
         this.restGrammar.HostAndArgsSeparator + 
-        this.webApiGrammar.UrlForHashingParameterName + this.restGrammar.KeyValuePairSeparator + encodedOriginalUrl;
+        this.sscGrammar.UrlForHashingParameterName + this.restGrammar.KeyValuePairSeparator + encodedOriginalUrl;
 
       return result;
     }
@@ -172,7 +172,7 @@
 
     private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;
-    private IWebApiUrlParameters webApiGrammar;
+    private ISSCUrlParameters sscGrammar;
     private ISessionConfig sessionConfig;
     private IMediaLibrarySettings mediaSettings;
   }

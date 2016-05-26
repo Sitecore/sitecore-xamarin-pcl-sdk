@@ -2,14 +2,14 @@
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public class RunSitecoreSearchUrlBuilder : GetPagedItemsUrlBuilder<ISitecoreSearchRequest>
   {
-    public RunSitecoreSearchUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public RunSitecoreSearchUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 
@@ -17,14 +17,14 @@
     {
       string hostUrl = base.GetHostUrlForRequest(request);
 
-      string result = hostUrl + this.restGrammar.PathComponentSeparator + webApiGrammar.ItemSearchAction;
+      string result = hostUrl + this.restGrammar.PathComponentSeparator + sscGrammar.ItemSearchAction;
 
       return result;
     }
 
     protected override string GetItemIdenticationForRequest(ISitecoreSearchRequest request)
     {
-      string strItemPath = this.webApiGrammar.SitecoreSearchParameterName + this.restGrammar.KeyValuePairSeparator + request.Term;
+      string strItemPath = this.sscGrammar.SitecoreSearchParameterName + this.restGrammar.KeyValuePairSeparator + request.Term;
       return strItemPath;
 
     }

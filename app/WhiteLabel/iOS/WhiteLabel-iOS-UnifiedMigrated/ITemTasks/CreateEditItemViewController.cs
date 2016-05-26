@@ -49,9 +49,9 @@
     {
       try
       {
-        using ( ISitecoreWebApiSession session = this.instanceSettings.GetSession() )
+        using ( ISitecoreSSCSession session = this.instanceSettings.GetSession() )
         {
-          var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
+          var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
             .ItemTemplatePath("76036f5e-cbce-46d1-af0a-4143f9b557aa")
             .ItemName(this.nameField.Text)
             .AddFieldsRawValuesByNameToSet("Title", titleField.Text)

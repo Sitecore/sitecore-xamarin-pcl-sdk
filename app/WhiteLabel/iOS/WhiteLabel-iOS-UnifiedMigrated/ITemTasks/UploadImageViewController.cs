@@ -87,11 +87,11 @@
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
           Stream stream = image.AsJPEG().AsStream();
 
-          var request = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(itemPathTextField.Text)
+          var request = ItemSSCRequestBuilder.UploadResourceRequestWithParentPath(itemPathTextField.Text)
             .ItemDataStream(stream)
             .ContentType("image/jpg")
             .ItemName(this.itemNameTextField.Text)

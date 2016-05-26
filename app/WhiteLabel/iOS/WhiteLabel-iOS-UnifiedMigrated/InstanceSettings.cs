@@ -38,7 +38,7 @@ namespace WhiteLabeliOS
       this.instanceLanguage       = userDefaults.StringForKey("instanceLanguage");
     }
 
-    public ISitecoreWebApiSession GetSession()
+    public ISitecoreSSCSession GetSession()
     {
       using 
       (
@@ -48,7 +48,7 @@ namespace WhiteLabeliOS
             this.instancePassword)
       )
       {
-        var result = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.instanceUrl)
+        var result = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.instanceUrl)
           .Credentials(credentials)
           .DefaultDatabase(this.instanceDataBase)
           .DefaultLanguage(this.instanceLanguage)
@@ -58,9 +58,9 @@ namespace WhiteLabeliOS
       }
     }
 
-    public ISitecoreWebApiSession GetAnonymousSession()
+    public ISitecoreSSCSession GetAnonymousSession()
     {
-      var result = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.instanceUrl)
+      var result = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(this.instanceUrl)
           .DefaultDatabase(this.instanceDataBase)
           .DefaultLanguage(this.instanceLanguage)
           .BuildSession();

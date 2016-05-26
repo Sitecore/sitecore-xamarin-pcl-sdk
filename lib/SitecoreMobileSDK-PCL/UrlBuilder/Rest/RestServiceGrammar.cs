@@ -2,7 +2,7 @@
 {
   public class RestServiceGrammar : IRestServiceGrammar
   {
-    public static RestServiceGrammar ItemWebApiV2Grammar()
+    public static RestServiceGrammar ItemSSCV2Grammar()
     {
       RestServiceGrammar result = new RestServiceGrammar();
       result.KeyValuePairSeparator = "=";

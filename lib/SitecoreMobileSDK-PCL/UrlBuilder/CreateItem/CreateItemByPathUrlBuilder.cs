@@ -3,13 +3,13 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Validators;
 
   public class CreateItemByPathUrlBuilder : AbstractCreateItemUrlBuilder<ICreateItemByPathRequest>
   {
-    public CreateItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public CreateItemByPathUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 

@@ -33,8 +33,8 @@
 
       if (!isSuccessfulCode)
       {
-        var error = new WebApiJsonStatusMessage(statusCode, ParseOrFail<string>(responseJObject, "$.error.message"));
-        throw new WebApiJsonErrorException(error);
+        var error = new SSCJsonStatusMessage(statusCode, ParseOrFail<string>(responseJObject, "$.error.message"));
+        throw new SSCJsonErrorException(error);
       }
 
       var count = (int)responseJObject.SelectToken("$.result.count");

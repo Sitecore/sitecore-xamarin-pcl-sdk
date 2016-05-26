@@ -12,17 +12,17 @@ namespace Sitecore.MobileSDK.API.Session
     /// Builds session.
     /// </summary>
     /// <returns>
-    ///   <seealso cref="ISitecoreWebApiSession" />
+    ///   <seealso cref="ISitecoreSSCSession" />
     /// </returns>
-    ISitecoreWebApiSession BuildSession();
+    ISitecoreSSCSession BuildSession();
 
     /// <summary>
     /// Builds session which contain read only operations.
     /// </summary>
     /// <returns>
-    ///   <seealso cref="ISitecoreWebApiReadonlySession" />
+    ///   <seealso cref="ISitecoreSSCReadonlySession" />
     /// </returns>
-    ISitecoreWebApiReadonlySession BuildReadonlySession();
+    ISitecoreSSCReadonlySession BuildReadonlySession();
 
     /// <summary>
     /// Specifies site parameter.
@@ -43,11 +43,11 @@ namespace Sitecore.MobileSDK.API.Session
     /// 
     /// The value is case insensitive.
     /// </summary>
-    /// <param name="webApiVersion">Item Web API version</param>
+    /// <param name="sscVersion">Item Web API version</param>
     /// <returns>
     /// this
     /// </returns>
-    IBaseSessionBuilder WebApiVersion(string webApiVersion);
+    IBaseSessionBuilder SSCVersion(string sscVersion);
 
     /// <summary>
     /// Specifies default database.

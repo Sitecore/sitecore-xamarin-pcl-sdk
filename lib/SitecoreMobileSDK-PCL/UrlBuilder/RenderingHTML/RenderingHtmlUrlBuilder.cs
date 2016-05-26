@@ -4,26 +4,26 @@ namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public class RenderingHtmlUrlBuilder
   {
     private IRestServiceGrammar restGrammar;
-    private IWebApiUrlParameters webApiGrammar;
+    private ISSCUrlParameters sscGrammar;
 
-    public RenderingHtmlUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    public RenderingHtmlUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
     {
       this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
     }
 
     public string GetUrlForRequest(IGetRenderingHtmlRequest request)
     {
       this.ValidateSpecificRequest(request);
 
-      var actionBuilder = new WebApiActionBuilder(this.restGrammar, this.webApiGrammar);
+      var actionBuilder = new SSCActionBuilder(this.restGrammar, this.sscGrammar);
       string hostUrl = actionBuilder.GetRenderingHtmlAction(request.SessionSettings);
 
 
@@ -63,9 +63,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
     {
       string escapedSourceId = UrlBuilderUtils.EscapeDataString(request.SourceId);
       string escapedRenderingId = UrlBuilderUtils.EscapeDataString(request.RenderingId);
-      string result = this.webApiGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedSourceId
+      string result = this.sscGrammar.ItemIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedSourceId
         + restGrammar.FieldSeparator 
-        + this.webApiGrammar.RenderingIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedRenderingId;
+        + this.sscGrammar.RenderingIdParameterName + this.restGrammar.KeyValuePairSeparator + escapedRenderingId;
 
       result = result.ToLowerInvariant();
 
@@ -96,7 +96,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
 
     private string GetCommonPartForRequest(IGetRenderingHtmlRequest request)
     {
-      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.webApiGrammar, request.ItemSource);
+      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.sscGrammar, request.ItemSource);
       string itemSourceArgs = sourceBuilder.BuildUrlQueryString();
 
       string result = string.Empty;
@@ -123,7 +123,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.RenderingHtml
 
     protected virtual string GetHostUrlForRequest(IGetRenderingHtmlRequest request)
     {
-      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
       string hostUrl = sessionBuilder.BuildUrlString(request.SessionSettings);
 
       return hostUrl;

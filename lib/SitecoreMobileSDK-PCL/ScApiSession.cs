@@ -32,7 +32,7 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
@@ -42,11 +42,11 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
-  public class ScApiSession : ISitecoreWebApiSession
+  public class ScApiSession : ISitecoreSSCSession
   {
     public ScApiSession(
       ISessionConfig config,
-      IWebApiCredentials credentials,
+      ISSCCredentials credentials,
       IMediaLibrarySettings mediaSettings,
       ItemSource defaultSource = null)
     {
@@ -128,7 +128,7 @@ namespace Sitecore.MobileSDK
     }
     #endregion IDisposable
 
-    #region ISitecoreWebApiSessionState
+    #region ISitecoreSSCSessionState
     public IItemSource DefaultSource
     {
       get
@@ -145,7 +145,7 @@ namespace Sitecore.MobileSDK
       }
     }
 
-    public IWebApiCredentials Credentials
+    public ISSCCredentials Credentials
     {
       get
       {
@@ -176,8 +176,8 @@ namespace Sitecore.MobileSDK
     {
       try
       {
-        var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
-        var taskFlow = new GetPublicKeyTasks(sessionConfigBuilder, this.restGrammar, this.webApiGrammar, this.httpClient);
+        var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
+        var taskFlow = new GetPublicKeyTasks(sessionConfigBuilder, this.restGrammar, this.sscGrammar, this.httpClient);
 
         string result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
         this.publicCertifiacte = result;
@@ -208,13 +208,13 @@ namespace Sitecore.MobileSDK
 
     protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync(CancellationToken cancelToken = default(CancellationToken))
     {
-      bool isAnonymous = (null == this.Credentials) || WebApiCredentialsValidator.IsAnonymousSession(this.Credentials);
+      bool isAnonymous = (null == this.Credentials) || SSCCredentialsValidator.IsAnonymousSession(this.Credentials);
 
       if (isAnonymous)
       {
         return new AnonymousSessionCryptor();
       }
-      else if (WebApiCredentialsValidator.IsValidCredentials(this.Credentials))
+      else if (SSCCredentialsValidator.IsValidCredentials(this.Credentials))
       {
         #if !ENCRYPTION_DISABLED
         // TODO : flow should be responsible for caching. Do not hard code here
@@ -245,7 +245,7 @@ namespace Sitecore.MobileSDK
       {
         ISitecoreStoredSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreStoredSearchGaps(requestCopy);
 
-        var urlBuilder = new RunStoredSearchUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new RunStoredSearchUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new RunStoredSearchTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -260,7 +260,7 @@ namespace Sitecore.MobileSDK
       {
         IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
 
-        var urlBuilder = new RunStoredQuerryUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new RunStoredQuerryUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new RunStoredQuerryTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -275,7 +275,7 @@ namespace Sitecore.MobileSDK
       {
         ISitecoreSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreSearchGaps(requestCopy);
 
-        var urlBuilder = new RunSitecoreSearchUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new RunSitecoreSearchUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new RunSitecoreSearchTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -294,7 +294,7 @@ namespace Sitecore.MobileSDK
       {
         IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
 
-        var urlBuilder = new ChildrenByIdUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new ChildrenByIdUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new GetChildrenByIdTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -309,7 +309,7 @@ namespace Sitecore.MobileSDK
       {
         IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
 
-        var urlBuilder = new ItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new ItemByIdUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new GetItemsByIdTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -324,7 +324,7 @@ namespace Sitecore.MobileSDK
       {
         IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps(requestCopy);
 
-        var urlBuilder = new ItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new ItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new GetItemsByPathTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -339,7 +339,7 @@ namespace Sitecore.MobileSDK
       {
         IReadItemsByQueryRequest autocompletedRequest = this.requestMerger.FillReadItemByQueryGaps(requestCopy);
 
-        var urlBuilder = new ItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new ItemByQueryUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new GetItemsByQueryTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -370,7 +370,7 @@ namespace Sitecore.MobileSDK
     {
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar,
-        this.webApiGrammar,
+        this.sscGrammar,
         this.sessionConfig,
         this.mediaSettings,
         request.ItemSource);
@@ -385,7 +385,7 @@ namespace Sitecore.MobileSDK
 
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar,
-        this.webApiGrammar,
+        this.sscGrammar,
         this.sessionConfig,
         this.mediaSettings,
         request.ItemSource);
@@ -415,7 +415,7 @@ namespace Sitecore.MobileSDK
       {
         IMediaResourceUploadRequest autocompletedRequest = this.requestMerger.FillUploadMediaGaps(requestCopy);
 
-        var urlBuilder = new UploadMediaUrlBuilder(this.restGrammar, this.webApiGrammar, this.sessionConfig, this.mediaSettings);
+        var urlBuilder = new UploadMediaUrlBuilder(this.restGrammar, this.sscGrammar, this.sessionConfig, this.mediaSettings);
         var taskFlow = new UploadMediaTask(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -434,7 +434,7 @@ namespace Sitecore.MobileSDK
       {
         IGetRenderingHtmlRequest autocompletedRequest = this.requestMerger.FillGetRenderingHtmlGaps(requestCopy);
 
-        var urlBuilder = new RenderingHtmlUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new RenderingHtmlUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new GetRenderingHtmlTasks(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -453,7 +453,7 @@ namespace Sitecore.MobileSDK
       {
         ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps(requestCopy);
 
-        var urlBuilder = new CreateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new CreateItemByIdUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new CreateItemByIdTask(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -475,7 +475,7 @@ namespace Sitecore.MobileSDK
         
         ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps(requestCopy);
 
-        var urlBuilder = new CreateItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new CreateItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new CreateItemByPathTask(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -494,7 +494,7 @@ namespace Sitecore.MobileSDK
       {
         IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps(requestCopy);
 
-        var urlBuilder = new UpdateItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new UpdateItemByIdUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new UpdateItemByIdTask(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -509,7 +509,7 @@ namespace Sitecore.MobileSDK
       {
         IUpdateItemByPathRequest autocompletedRequest = this.requestMerger.FillUpdateItemByPathGaps(requestCopy);
 
-        var urlBuilder = new UpdateItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new UpdateItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new UpdateItemByPathTask(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -528,7 +528,7 @@ namespace Sitecore.MobileSDK
       {
         IDeleteItemsByIdRequest autocompletedRequest = this.requestMerger.FillDeleteItemByIdGaps(requestCopy);
 
-        var urlBuilder = new DeleteItemByIdUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new DeleteItemByIdUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new DeleteItemTasks<IDeleteItemsByIdRequest>(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -543,7 +543,7 @@ namespace Sitecore.MobileSDK
       {
         IDeleteItemsByPathRequest autocompletedRequest = this.requestMerger.FillDeleteItemByPathGaps(requestCopy);
 
-        var urlBuilder = new DeleteItemByPathUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new DeleteItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new DeleteItemTasks<IDeleteItemsByPathRequest>(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -558,7 +558,7 @@ namespace Sitecore.MobileSDK
       {
         IDeleteItemsByQueryRequest autocompletedRequest = this.requestMerger.FillDeleteItemByQueryGaps(requestCopy);
 
-        var urlBuilder = new DeleteItemByQueryUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var urlBuilder = new DeleteItemByQueryUrlBuilder(this.restGrammar, this.sscGrammar);
         var taskFlow = new DeleteItemTasks<IDeleteItemsByQueryRequest>(urlBuilder, this.httpClient, cryptor);
 
         return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -571,12 +571,12 @@ namespace Sitecore.MobileSDK
 
     public async Task<bool> AuthenticateAsync(CancellationToken cancelToken = default(CancellationToken))
     {
-      var sessionUrlBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+      var sessionUrlBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
       using (var cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
       {
-        var taskFlow = new AuthenticateTasks(this.restGrammar, this.webApiGrammar, sessionUrlBuilder, this.httpClient, cryptor);
+        var taskFlow = new AuthenticateTasks(this.restGrammar, this.sscGrammar, sessionUrlBuilder, this.httpClient, cryptor);
 
-        WebApiJsonStatusMessage result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
+        SSCJsonStatusMessage result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
 
         return result.StatusCode == 200;
       }
@@ -593,12 +593,12 @@ namespace Sitecore.MobileSDK
     private HttpClientHandler handler;
 
     protected readonly ISessionConfig sessionConfig;
-    private IWebApiCredentials credentials;
+    private ISSCCredentials credentials;
     private readonly IMediaLibrarySettings mediaSettings;
 
 
-    private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-    private readonly IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+    private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
+    private readonly ISSCUrlParameters sscGrammar = SSCUrlParameters.ItemSSCV2UrlParameters();
 
 
     private string publicCertifiacte;

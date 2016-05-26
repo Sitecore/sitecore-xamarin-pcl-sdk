@@ -4,7 +4,7 @@
   using Sitecore.MobileSDK.PasswordProvider.Interface;
 
 
-  public class SecureStringPasswordProvider : IWebApiCredentials, IDisposable
+  public class SecureStringPasswordProvider : ISSCCredentials, IDisposable
   {
     private global::Sitecore.MobileSDK.PasswordProvider.SecureStringPasswordProvider providerImpl;
 
@@ -36,8 +36,8 @@
       }
     }
 
-    #region IWebApiCredentials
-    public IWebApiCredentials CredentialsShallowCopy()
+    #region ISSCCredentials
+    public ISSCCredentials CredentialsShallowCopy()
     {
       var result = new SecureStringPasswordProvider();
       result.providerImpl = this.providerImpl.PasswordProviderCopy();
@@ -60,7 +60,7 @@
         return this.providerImpl.Password;
       }
     }
-    #endregion IWebApiCredentials
+    #endregion ISSCCredentials
   }
 }
 

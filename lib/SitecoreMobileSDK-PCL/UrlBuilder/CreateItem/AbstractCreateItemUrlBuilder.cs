@@ -4,13 +4,13 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.ChangeItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   public abstract class AbstractCreateItemUrlBuilder<TRequest> : AbstractChangeItemUrlBuilder<TRequest>
     where TRequest : IBaseCreateItemRequest
   {
-    public AbstractCreateItemUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public AbstractCreateItemUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 
@@ -23,7 +23,7 @@
 //      string escapedName = UrlBuilderUtils.EscapeDataString(request.ItemName);
 //
 //      string result =
-//        this.webApiGrammar.TemplateParameterName
+//        this.sscGrammar.TemplateParameterName
 //        + this.restGrammar.KeyValuePairSeparator
 //        + escapedTemplate;
 //
@@ -32,7 +32,7 @@
 //      {
 //        result = result
 //          + this.restGrammar.FieldSeparator
-//          + this.webApiGrammar.ItemNameParameterName
+//          + this.sscGrammar.ItemNameParameterName
 //          + this.restGrammar.KeyValuePairSeparator
 //          + escapedName;
 //      }

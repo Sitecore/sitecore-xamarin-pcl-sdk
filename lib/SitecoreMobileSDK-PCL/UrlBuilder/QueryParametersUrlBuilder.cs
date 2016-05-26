@@ -6,14 +6,14 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   public class QueryParametersUrlBuilder
   {
-    public QueryParametersUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    public QueryParametersUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
     {
       this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
     }
 
     public string BuildUrlString(IQueryParameters queryParameters)
@@ -58,7 +58,7 @@
 
     private string GetFieldsStatementFromCollection(IEnumerable<string> fields)
     {
-      string result = this.webApiGrammar.FieldsListParameterName + this.restGrammar.KeyValuePairSeparator;
+      string result = this.sscGrammar.FieldsListParameterName + this.restGrammar.KeyValuePairSeparator;
 
       IRestServiceGrammar restGrammar = this.restGrammar;
 
@@ -78,6 +78,6 @@
     }
 
     private IRestServiceGrammar restGrammar;
-    private IWebApiUrlParameters webApiGrammar;
+    private ISSCUrlParameters sscGrammar;
   }
 }

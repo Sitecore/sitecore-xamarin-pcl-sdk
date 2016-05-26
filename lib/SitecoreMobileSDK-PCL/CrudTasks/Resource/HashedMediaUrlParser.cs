@@ -24,8 +24,8 @@
 
       if (!isSuccessfulCode)
       {
-        var error = new WebApiJsonStatusMessage(statusCode, ParseOrFail<string>(response, "$.error.message"));
-        throw new WebApiJsonErrorException(error);
+        var error = new SSCJsonStatusMessage(statusCode, ParseOrFail<string>(response, "$.error.message"));
+        throw new SSCJsonErrorException(error);
       }
 
       cancelToken.ThrowIfCancellationRequested();

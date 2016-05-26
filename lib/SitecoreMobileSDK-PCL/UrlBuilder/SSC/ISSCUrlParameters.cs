@@ -1,12 +1,12 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.WebApi
+﻿namespace Sitecore.MobileSDK.UrlBuilder.SSC
 {
-  public interface IWebApiUrlParameters
+  public interface ISSCUrlParameters
   {
     #region Authentication
-    string ItemWebApiAuthEndpoint { get; }
-    string ItemWebApiItemsEndpoint { get; }
-    string ItemWebApiLoginAction  { get; }
-    string ItemWebApiLogoutAction { get; }
+    string ItemSSCAuthEndpoint { get; }
+    string ItemSSCItemsEndpoint { get; }
+    string ItemSSCLoginAction  { get; }
+    string ItemSSCLogoutAction { get; }
     #endregion Authentication
 
     #region Item Source
@@ -19,7 +19,7 @@
     string SitecoreQueryParameterName { get; }
     string ItemIdParameterName { get; }
     string ItemPathParameterName { get; }
-    string ItemWebApiChildrenAction { get; }
+    string ItemSSCChildrenAction { get; }
     #endregion Item Identifiers
 
     #region Search
@@ -40,15 +40,15 @@
     #endregion query parameters
 
     #region Item Web API Endpoints
-    string ItemWebApiEndpoint { get; }
-    string ItemWebApiActionsEndpoint { get; }
+    string ItemSSCEndpoint { get; }
+    string ItemSSCActionsEndpoint { get; }
     #endregion Item Web API Endpoints
 
     #region Item Web API Actions
-    string ItemWebApiGetPublicKeyAction { get; }
-    string ItemWebApiGetRenderingAction { get; }
+    string ItemSSCGetPublicKeyAction { get; }
+    string ItemSSCGetRenderingAction { get; }
 
-    string ItemWebApiGetHashFormediaContentAction { get; }
+    string ItemSSCGetHashFormediaContentAction { get; }
     string UrlForHashingParameterName { get; }
     #endregion Item Web API Actions
 

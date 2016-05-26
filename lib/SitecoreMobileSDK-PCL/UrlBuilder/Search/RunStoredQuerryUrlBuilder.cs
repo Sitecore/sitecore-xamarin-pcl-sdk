@@ -2,14 +2,14 @@
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public class RunStoredQuerryUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByIdRequest>
   {
-    public RunStoredQuerryUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public RunStoredQuerryUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 
@@ -18,7 +18,7 @@
       string hostUrl = base.GetHostUrlForRequest(request);
       string itemId = UrlBuilderUtils.EscapeDataString(request.ItemId.ToLowerInvariant());
 
-      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId + webApiGrammar.RunStoredQueryAction;
+      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId + sscGrammar.RunStoredQueryAction;
       return result;
     }
 

@@ -5,11 +5,11 @@ namespace Sitecore.MobileSDK.API.Session
   /// <summary>
   /// Interface represents session to work with Sitecore Mobile SDK.
   /// </summary>
-  public interface ISitecoreWebApiSession :
+  public interface ISitecoreSSCSession :
     IDisposable,
-    ISitecoreWebApiSessionState,
-    ISitecoreWebApiReadonlySession,
-    ISitecoreWebApiSessionActions
+    ISitecoreSSCSessionState,
+    ISitecoreSSCReadonlySession,
+    ISitecoreSSCSessionActions
   {
   }
 }

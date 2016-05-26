@@ -43,7 +43,7 @@ namespace WhiteLabeliOS
           using (var session = this.instanceSettings.GetSession())
           {
 
-          var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(this.itemIdField.Text)
+          var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(this.itemIdField.Text)
             .Build();
 
           this.ShowLoader();

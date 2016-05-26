@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.API.MediaItem;
 
@@ -18,7 +18,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
   {
     public UploadMediaUrlBuilder(
       IRestServiceGrammar restGrammar,
-      IWebApiUrlParameters webApiGrammar,
+      ISSCUrlParameters sscGrammar,
       ISessionConfig sessionConfig,
       IMediaLibrarySettings mediaSettings
     )
@@ -26,7 +26,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       this.mediaSettings = mediaSettings;
       this.restGrammar = restGrammar;
       this.mediaSettings = mediaSettings;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
     }
 
     public virtual string GetUrlForRequest(IMediaResourceUploadRequest request)
@@ -37,7 +37,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
       hostUrl = hostUrl + baseUrl;
 
-      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.webApiGrammar, request.ItemSource);
+      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.sscGrammar, request.ItemSource);
       string itemSourceArgs = sourceBuilder.BuildUrlQueryString();
 
       string allParameters = itemSourceArgs;
@@ -65,7 +65,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
 
     protected virtual string GetHostUrlForRequest(IMediaResourceUploadRequest request)
     {
-      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
       string hostUrl = sessionBuilder.BuildUrlString(request.SessionSettings);
 
       return hostUrl;
@@ -83,7 +83,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       if (null != request.UploadOptions.FileName)
       {
         result += this.restGrammar.FieldSeparator
-          + this.webApiGrammar.ItemNameParameterName
+          + this.sscGrammar.ItemNameParameterName
           + this.restGrammar.KeyValuePairSeparator
           + UrlBuilderUtils.EscapeDataString(request.UploadOptions.ItemName);
       }
@@ -91,7 +91,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       if (null != request.UploadOptions.ItemTemplatePath)
       {
         result += this.restGrammar.FieldSeparator
-          + this.webApiGrammar.TemplateParameterName
+          + this.sscGrammar.TemplateParameterName
           + this.restGrammar.KeyValuePairSeparator
           + UrlBuilderUtils.EscapeDataString(request.UploadOptions.ItemTemplatePath);
       }
@@ -99,7 +99,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       if (null != request.UploadOptions.ParentId)
       {
         result += this.restGrammar.FieldSeparator
-          + this.webApiGrammar.ItemIdParameterName
+          + this.sscGrammar.ItemIdParameterName
           + this.restGrammar.KeyValuePairSeparator
           + UrlBuilderUtils.EscapeDataString(request.UploadOptions.ParentId);
       }
@@ -113,13 +113,13 @@ namespace Sitecore.MobileSDK.UrlBuilder.MediaItem
       {
         throw new ArgumentNullException("[GetItemUrlBuilder] restGrammar cannot be null");
       }
-      else if (null == this.webApiGrammar)
+      else if (null == this.sscGrammar)
       {
-        throw new ArgumentNullException("[GetItemUrlBuilder] webApiGrammar cannot be null");
+        throw new ArgumentNullException("[GetItemUrlBuilder] sscGrammar cannot be null");
       }
     }
 
-    private IWebApiUrlParameters webApiGrammar;
+    private ISSCUrlParameters sscGrammar;
     private IMediaLibrarySettings mediaSettings;
     private IRestServiceGrammar restGrammar;
     private ISessionConfig sessionConfig;

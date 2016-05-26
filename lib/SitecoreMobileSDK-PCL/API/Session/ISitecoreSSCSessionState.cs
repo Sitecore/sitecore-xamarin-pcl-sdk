@@ -10,7 +10,7 @@ namespace Sitecore.MobileSDK.API.Session
   /// <summary>
   /// Interface represents session state.
   /// </summary>
-  public interface ISitecoreWebApiSessionState : IDisposable
+  public interface ISitecoreSSCSessionState : IDisposable
   {
     /// <summary>
     /// Gets the default settings: database name, language and item version number.
@@ -36,8 +36,8 @@ namespace Sitecore.MobileSDK.API.Session
     /// <value>
     /// The credentials.
     /// </value>
-    /// <seealso cref="IWebApiCredentials" />
-    IWebApiCredentials Credentials { get; }
+    /// <seealso cref="ISSCCredentials" />
+    ISSCCredentials Credentials { get; }
 
     /// <summary>
     /// Gets the settings : 

@@ -4,19 +4,19 @@
   using System.Globalization;
 
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
 
   internal class PagingUrlBuilder
   {
     private IRestServiceGrammar restGrammar;
-    private  IWebApiUrlParameters webApiGrammar;
+    private  ISSCUrlParameters sscGrammar;
 
-    public PagingUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    public PagingUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
     {
       this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
     }
 
     public string BuildUrlQueryString(IPagingParameters pagingParameters)
@@ -31,9 +31,9 @@
       string strPageNumber = pagingParameters.PageNumber.ToString(invariangCulture);
 
       string result = 
-        this.webApiGrammar.PageNumberParameterName + this.restGrammar.KeyValuePairSeparator + strPageNumber +
+        this.sscGrammar.PageNumberParameterName + this.restGrammar.KeyValuePairSeparator + strPageNumber +
         this.restGrammar.FieldSeparator +
-        this.webApiGrammar.ItemsPerPageParameterName + this.restGrammar.KeyValuePairSeparator + strPerPage;
+        this.sscGrammar.ItemsPerPageParameterName + this.restGrammar.KeyValuePairSeparator + strPerPage;
 
       return result;
     }

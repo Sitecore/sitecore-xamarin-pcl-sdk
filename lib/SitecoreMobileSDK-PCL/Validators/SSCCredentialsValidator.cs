@@ -2,9 +2,9 @@
 {
   using Sitecore.MobileSDK.PasswordProvider.Interface;
 
-  public static class WebApiCredentialsValidator
+  public static class SSCCredentialsValidator
   {
-    public static bool IsValidCredentials(IWebApiCredentials credentials)
+    public static bool IsValidCredentials(ISSCCredentials credentials)
     {
       if (null == credentials)
       {
@@ -28,7 +28,7 @@
       }
     }
 
-    public static bool IsAnonymousSession(IWebApiCredentials credentials)
+    public static bool IsAnonymousSession(ISSCCredentials credentials)
     {
       if (!IsValidCredentials(credentials))
       {

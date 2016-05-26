@@ -6,16 +6,16 @@
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractGetItemUrlBuilder<TRequest>
     where TRequest : IBaseItemRequest
   {
-    public AbstractGetItemUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    public AbstractGetItemUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
     {
       this.restGrammar = restGrammar;
-      this.webApiGrammar = webApiGrammar;
+      this.sscGrammar = sscGrammar;
 
       this.Validate();
     }
@@ -68,19 +68,19 @@
     #region Common Logic
     protected virtual string GetHostUrlForRequest(TRequest request)
     {
-      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.webApiGrammar);
+      SessionConfigUrlBuilder sessionBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
       string hostUrl = sessionBuilder.BuildUrlString(request.SessionSettings);
-      hostUrl = hostUrl + this.webApiGrammar.ItemWebApiItemsEndpoint;
+      hostUrl = hostUrl + this.sscGrammar.ItemSSCItemsEndpoint;
 
       return hostUrl;
     }
 
     private string GetCommonPartForRequest(TRequest request)
     {
-      QueryParametersUrlBuilder queryParametersUrlBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.webApiGrammar);
+      QueryParametersUrlBuilder queryParametersUrlBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.sscGrammar);
       string queryParamsUrl = queryParametersUrlBuilder.BuildUrlString(request.QueryParameters);
 
-      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.webApiGrammar, request.ItemSource);
+      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.sscGrammar, request.ItemSource);
       string itemSourceArgs = sourceBuilder.BuildUrlQueryString();
 
       string result = string.Empty;
@@ -134,9 +134,9 @@
       {
         throw new ArgumentNullException("[GetItemUrlBuilder] restGrammar cannot be null");
       }
-      else if (null == this.webApiGrammar)
+      else if (null == this.sscGrammar)
       {
-        throw new ArgumentNullException("[GetItemUrlBuilder] webApiGrammar cannot be null");
+        throw new ArgumentNullException("[GetItemUrlBuilder] sscGrammar cannot be null");
       }
     }
     #endregion Common Logic
@@ -149,7 +149,7 @@
 
     #region instance variables
     protected IRestServiceGrammar restGrammar;
-    protected IWebApiUrlParameters webApiGrammar;
+    protected ISSCUrlParameters sscGrammar;
     #endregion instance variables
   }
 }

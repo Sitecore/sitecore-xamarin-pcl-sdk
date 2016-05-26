@@ -2,14 +2,14 @@
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public class ItemByPathUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByPathRequest>
   {
-    public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 
@@ -24,7 +24,7 @@
     protected override string GetItemIdenticationForRequest(IReadItemsByPathRequest request)
     {
       string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
-      string strItemPath = this.webApiGrammar.ItemPathParameterName + this.restGrammar.KeyValuePairSeparator + escapedPath;
+      string strItemPath = this.sscGrammar.ItemPathParameterName + this.restGrammar.KeyValuePairSeparator + escapedPath;
       string lowerCaseItemPath = strItemPath.ToLowerInvariant();
 
       return lowerCaseItemPath;

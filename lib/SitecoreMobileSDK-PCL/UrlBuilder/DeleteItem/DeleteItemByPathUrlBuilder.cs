@@ -2,14 +2,14 @@
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public class DeleteItemByPathUrlBuilder : AbstractDeleteItemUrlBuilder<IDeleteItemsByPathRequest>
   {
-    public DeleteItemByPathUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
-      : base(restGrammar, webApiGrammar)
+    public DeleteItemByPathUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+      : base(restGrammar, sscGrammar)
     {
     }
 
@@ -23,7 +23,7 @@
       string result = base.GetBaseUrlForRequest(request);
 
       string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
-      string strItemPath = this.WebApiGrammar.ItemPathParameterName + this.RestGrammar.KeyValuePairSeparator + escapedPath;
+      string strItemPath = this.SSCGrammar.ItemPathParameterName + this.RestGrammar.KeyValuePairSeparator + escapedPath;
       string lowerCaseItemPath = strItemPath.ToLowerInvariant();
 
       result += this.RestGrammar.HostAndArgsSeparator + lowerCaseItemPath;

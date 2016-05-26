@@ -5,9 +5,9 @@ namespace Sitecore.MobileSDK.API.Session
   /// <summary>
   /// Interface represents readonly actions that can be executed on items.
   /// </summary>
-  public interface ISitecoreWebApiReadonlySession :
+  public interface ISitecoreSSCReadonlySession :
     IDisposable,
-    ISitecoreWebApiSessionState,
+    ISitecoreSSCSessionState,
     IConnectionActions,
     IMediaActions,
     IReadItemActions,

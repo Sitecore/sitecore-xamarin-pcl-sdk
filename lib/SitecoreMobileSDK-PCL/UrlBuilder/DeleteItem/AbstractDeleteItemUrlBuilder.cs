@@ -3,7 +3,7 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractDeleteItemUrlBuilder<TRequest> : IDeleteItemsUrlBuilder<TRequest>
@@ -11,13 +11,13 @@
   {
     private readonly SessionConfigUrlBuilder sessionConfigUrlBuilder;
     protected IRestServiceGrammar RestGrammar;
-    protected IWebApiUrlParameters WebApiGrammar;
+    protected ISSCUrlParameters SSCGrammar;
 
-    protected AbstractDeleteItemUrlBuilder(IRestServiceGrammar restGrammar, IWebApiUrlParameters webApiGrammar)
+    protected AbstractDeleteItemUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
     {
       this.RestGrammar = restGrammar;
-      this.WebApiGrammar = webApiGrammar;
-      this.sessionConfigUrlBuilder = new SessionConfigUrlBuilder(restGrammar, webApiGrammar);
+      this.SSCGrammar = sscGrammar;
+      this.sessionConfigUrlBuilder = new SessionConfigUrlBuilder(restGrammar, sscGrammar);
     }
 
     public abstract void ValidateSpecificPart(TRequest request);
@@ -27,7 +27,7 @@
     public virtual string GetBaseUrlForRequest(TRequest request)
     {
       string hostUrl = this.sessionConfigUrlBuilder.BuildUrlString(request.SessionConfig);
-      hostUrl = hostUrl + this.WebApiGrammar.ItemWebApiItemsEndpoint;
+      hostUrl = hostUrl + this.SSCGrammar.ItemSSCItemsEndpoint;
 
       return hostUrl;
     }
@@ -44,7 +44,7 @@
         {
           parametersString += this.RestGrammar.FieldSeparator;
         }
-        parametersString += this.WebApiGrammar.DatabaseParameterName + this.RestGrammar.KeyValuePairSeparator
+        parametersString += this.SSCGrammar.DatabaseParameterName + this.RestGrammar.KeyValuePairSeparator
           + database;
       }
       return parametersString;

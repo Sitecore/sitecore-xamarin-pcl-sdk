@@ -40,15 +40,12 @@
     <Compile Include="API\Exceptions\ProcessUserRequestException.cs" />
     <Compile Include="API\Exceptions\RsaHandshakeException.cs" />
     <Compile Include="API\Exceptions\SitecoreMobileSdkException.cs" />
-    <Compile Include="API\Exceptions\WebApiJsonErrorException.cs" />
-    <Compile Include="API\Exceptions\WebApiJsonStatusMessage.cs" />
     <Compile Include="API\Fields\IField.cs" />
     <Compile Include="API\ISessionConfig.cs" />
     <Compile Include="API\Items\IItemSource.cs" />
     <Compile Include="API\Items\ISitecoreItem.cs" />
     <Compile Include="API\Items\ScDeleteItemsResponse.cs" />
     <Compile Include="API\Items\ScItemsResponse.cs" />
-    <Compile Include="API\ItemWebApiRequestBuilder.cs" />
     <Compile Include="API\Request\IBaseCreateItemRequest.cs" />
     <Compile Include="API\Request\IBaseDeleteItemRequest.cs" />
     <Compile Include="API\Request\IBaseItemRequest.cs" />
@@ -78,12 +75,7 @@
     <Compile Include="API\Session\IDeleteItemActions.cs" />
     <Compile Include="API\Session\IMediaActions.cs" />
     <Compile Include="API\Session\IReadItemActions.cs" />
-    <Compile Include="API\Session\ISitecoreWebApiReadonlySession.cs" />
-    <Compile Include="API\Session\ISitecoreWebApiSession.cs" />
-    <Compile Include="API\Session\ISitecoreWebApiSessionActions.cs" />
-    <Compile Include="API\Session\ISitecoreWebApiSessionState.cs" />
     <Compile Include="API\Session\IUpdateItemActions.cs" />
-    <Compile Include="API\SitecoreWebApiSessionBuilder.cs" />
     <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
     <Compile Include="Authenticate\AuthenticateTasks.cs" />
     <Compile Include="CrudTasks\DeleteItemTasks.cs" />
@@ -124,8 +116,6 @@
     <Compile Include="UrlBuilder\QueryParameters\QueryParameters.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
-    <Compile Include="UrlBuilder\WebApi\WebApiUrlParameters.cs" />
-    <Compile Include="UrlBuilder\WebApi\IWebApiUrlParameters.cs" />
     <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\AbstractDeleteItemRequestBuilder.cs" />
@@ -175,7 +165,6 @@
     <Compile Include="Validators\SessionConfigValidator.cs" />
     <Compile Include="Validators\MediaOptionsValidator.cs" />
     <Compile Include="API\MediaItem\MediaOptionsBuilder.cs" />
-    <Compile Include="Validators\WebApiCredentialsValidator.cs" />
     <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
     <Compile Include="API\Request\IUpdateItemByPathRequest.cs" />
     <Compile Include="Items\UpdateItemByPathParameters.cs" />
@@ -225,7 +214,6 @@
     <Compile Include="CrudTasks\GetMediaContentHashTask.cs" />
     <Compile Include="CrudTasks\Resource\HashedMediaUrlParser.cs" />
     <Compile Include="Session\TaskFlowErrorMessages.cs" />
-    <Compile Include="UrlBuilder\WebApiActionBuilder.cs" />
     <Compile Include="API\Request\Parameters\IUploadMediaOptions.cs" />
     <Compile Include="UrlBuilder\MediaItem\UploadMediaOptions.cs" />
     <Compile Include="UserRequest\AbstractScopedRequestParametersBuilder.cs" />
@@ -247,6 +235,18 @@
     <Compile Include="UserRequest\SearchRequests\RunStoredSearchRequestBuilder.cs" />
     <Compile Include="Items\StoredSearchParameters.cs" />
     <Compile Include="API\Request\ISitecoreStoredSearchRequest.cs" />
+    <Compile Include="UrlBuilder\SSCActionBuilder.cs" />
+    <Compile Include="Validators\SSCCredentialsValidator.cs" />
+    <Compile Include="API\ItemSSCRequestBuilder.cs" />
+    <Compile Include="API\Session\ISitecoreSSCReadonlySession.cs" />
+    <Compile Include="API\Session\ISitecoreSSCSession.cs" />
+    <Compile Include="API\Session\ISitecoreSSCSessionActions.cs" />
+    <Compile Include="API\Session\ISitecoreSSCSessionState.cs" />
+    <Compile Include="API\SitecoreSSCSessionBuilder.cs" />
+    <Compile Include="API\Exceptions\SSCJsonErrorException.cs" />
+    <Compile Include="API\Exceptions\SSCJsonStatusMessage.cs" />
+    <Compile Include="UrlBuilder\SSC\SSCUrlParameters.cs" />
+    <Compile Include="UrlBuilder\SSC\ISSCUrlParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

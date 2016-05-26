@@ -1,10 +1,10 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.WebApi
+﻿namespace Sitecore.MobileSDK.UrlBuilder.SSC
 {
-  public class WebApiUrlParameters : IWebApiUrlParameters
+  public class SSCUrlParameters : ISSCUrlParameters
   {
-    public static WebApiUrlParameters ItemWebApiV2UrlParameters()
+    public static SSCUrlParameters ItemSSCV2UrlParameters()
     {
-      WebApiUrlParameters result = new WebApiUrlParameters();
+      SSCUrlParameters result = new SSCUrlParameters();
       result.DatabaseParameterName = "database";
       result.LanguageParameterName = "language";
       result.VersionParameterName = "version";
@@ -22,24 +22,24 @@
 
       result.SitecoreQueryParameterName = "query";
 
-      result.ItemWebApiEndpoint = "/sitecore/api/ssc";
+      result.ItemSSCEndpoint = "/sitecore/api/ssc";
 
-      result.ItemWebApiActionsEndpoint = "-/actions";
+      result.ItemSSCActionsEndpoint = "-/actions";
 
-      result.ItemWebApiItemsEndpoint = "/item";
-      result.ItemWebApiAuthEndpoint = "/auth";
-      result.ItemWebApiLoginAction = "/login";
-      result.ItemWebApiLogoutAction = "/logout";
-      result.ItemWebApiChildrenAction = "/children";
+      result.ItemSSCItemsEndpoint = "/item";
+      result.ItemSSCAuthEndpoint = "/auth";
+      result.ItemSSCLoginAction = "/login";
+      result.ItemSSCLogoutAction = "/logout";
+      result.ItemSSCChildrenAction = "/children";
       result.ItemSearchAction = "/search";
 
 
-      result.ItemWebApiGetRenderingAction = "/getrenderinghtml";
+      result.ItemSSCGetRenderingAction = "/getrenderinghtml";
 
       result.PageNumberParameterName = "page";
       result.ItemsPerPageParameterName = "pageSize";
 
-      result.ItemWebApiGetHashFormediaContentAction = "/getsignedmediaurl";
+      result.ItemSSCGetHashFormediaContentAction = "/getsignedmediaurl";
       result.UrlForHashingParameterName = "url";
 
       result.RunStoredSearchAction = "/search";
@@ -48,13 +48,13 @@
       return result;
     }
 
-    private WebApiUrlParameters()
+    private SSCUrlParameters()
     {
     }
 
-    public string ItemWebApiAuthEndpoint { get; private set; }
-    public string ItemWebApiLoginAction  { get; private set; }
-    public string ItemWebApiLogoutAction { get; private set; }
+    public string ItemSSCAuthEndpoint { get; private set; }
+    public string ItemSSCLoginAction  { get; private set; }
+    public string ItemSSCLogoutAction { get; private set; }
 
     public string DatabaseParameterName { get; private set; }
     public string LanguageParameterName { get; private set; }
@@ -70,17 +70,17 @@
     public string ItemPathParameterName { get; private set; }
     public string SitecoreQueryParameterName { get; private set; }
 
-    public string ItemWebApiEndpoint { get; private set; }
-    public string ItemWebApiItemsEndpoint { get; private set; }
-    public string ItemWebApiActionsEndpoint { get; private set; }
+    public string ItemSSCEndpoint { get; private set; }
+    public string ItemSSCItemsEndpoint { get; private set; }
+    public string ItemSSCActionsEndpoint { get; private set; }
 
-    public string ItemWebApiAuthenticateAction { get; private set; }
-    public string ItemWebApiGetPublicKeyAction { get; private set; }
-    public string ItemWebApiGetRenderingAction { get; private set; }
-    public string ItemWebApiGetHashFormediaContentAction { get; private set; }
+    public string ItemSSCAuthenticateAction { get; private set; }
+    public string ItemSSCGetPublicKeyAction { get; private set; }
+    public string ItemSSCGetRenderingAction { get; private set; }
+    public string ItemSSCGetHashFormediaContentAction { get; private set; }
     public string UrlForHashingParameterName { get; private set; }
 
-    public string ItemWebApiChildrenAction { get; private set; }
+    public string ItemSSCChildrenAction { get; private set; }
 
     public string PageNumberParameterName { get; private set; }
     public string ItemsPerPageParameterName { get; private set; }
