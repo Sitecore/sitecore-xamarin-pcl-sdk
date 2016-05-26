@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.Children
+﻿namespace Sitecore.MobileSDK.UrlBuilder.Search
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -18,7 +18,7 @@
       string hostUrl = base.GetHostUrlForRequest(request);
       string itemId = UrlBuilderUtils.EscapeDataString(request.ItemId.ToLowerInvariant());
 
-      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId + webApiGrammar.RunStoredSearchAction;
+      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId + webApiGrammar.RunStoredQueryAction;
       return result;
     }
 

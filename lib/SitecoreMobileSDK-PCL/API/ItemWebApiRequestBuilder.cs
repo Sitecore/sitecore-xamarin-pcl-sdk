@@ -1,4 +1,5 @@
 using Sitecore.MobileSDK.UserRequest.SearchRequest;
+using Sitecore.MobileSDK.Items;
 
 namespace Sitecore.MobileSDK.API
 {
@@ -46,7 +47,12 @@ namespace Sitecore.MobileSDK.API
       return new RunStoredQuerryRequestBuilder(itemId);
     }
 
-    public static IGetVersionedItemRequestParametersBuilder<ISitecoreSearchRequest> SitecoreSearchRequest(string term)
+    public static RunStoredSearchRequestBuilder StoredSearchRequest(string itemId)
+    {
+      return new RunStoredSearchRequestBuilder(itemId);
+    }
+
+    public static IGetVersionedItemRequestParametersBuilder<SitecoreSearchParameters> SitecoreSearchRequest(string term)
     {
       return new SitecoreSearchRequestBuilder(term);
     }

@@ -4,7 +4,7 @@
 
   public static class ItemIdValidator
   {
-    private const string INVALID_ID_MESSAGE = "Item id lenght must be 36";
+    private const string INVALID_ID_MESSAGE = "wrong item id";
     private const string EMPTY_ERROR_MESSAGE = "Item can not be empty";
 
 
@@ -13,7 +13,8 @@
       //TODO: @igk investigate and test in unit tests base id criterias, no info in documentation is available
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(itemId, source);
     
-      if (itemId.Length != 36)
+      bool correctIdLenght = (itemId.Length == 36 || itemId.Length == 38);
+      if (!correctIdLenght)
       {
         throw new ArgumentException(source + " : " + INVALID_ID_MESSAGE);
       }

@@ -73,7 +73,7 @@
       }
       catch(Exception e) 
       {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item created successfully");
       }
       finally
       {

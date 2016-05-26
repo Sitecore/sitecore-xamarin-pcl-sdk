@@ -42,7 +42,8 @@
       result.ItemWebApiGetHashFormediaContentAction = "/getsignedmediaurl";
       result.UrlForHashingParameterName = "url";
 
-      result.RunStoredSearchAction = "/query";
+      result.RunStoredSearchAction = "/search";
+      result.RunStoredQueryAction = "/query";
 
       return result;
     }
@@ -85,6 +86,7 @@
     public string ItemsPerPageParameterName { get; private set; }
 
     public string RunStoredSearchAction { get; private set; }
+    public string RunStoredQueryAction { get; private set; }
     public string SitecoreSearchParameterName { get; private set; }
     public string ItemSearchAction { get; private set; }
   }

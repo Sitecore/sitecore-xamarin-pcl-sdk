@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.Children
+﻿namespace Sitecore.MobileSDK.UrlBuilder.Search
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;

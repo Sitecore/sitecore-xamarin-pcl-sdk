@@ -235,13 +235,18 @@
     <Compile Include="API\Session\ISearchActions.cs" />
     <Compile Include="CrudTasks\RunStoredQuerryTasks.cs" />
     <Compile Include="UrlBuilder\Children\ChildrenByIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\SearchItems\RunStoredQuerryUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\SearchItems\RunSitecoreSearchUrlBuilder.cs" />
     <Compile Include="Items\SitecoreSearchParameters.cs" />
     <Compile Include="API\Request\ISitecoreSearchRequest.cs" />
     <Compile Include="CrudTasks\RunSitecoreSearchTasks.cs" />
     <Compile Include="UserRequest\SearchRequests\SitecoreSearchRequestBuilder.cs" />
     <Compile Include="UserRequest\RenderingHTMLReques\RenderingHTMLRequestBuilder.cs" />
+    <Compile Include="UrlBuilder\Search\RunStoredQuerryUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\Search\RunSitecoreSearchUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\Search\RunStoredSearchUrlBuilder.cs" />
+    <Compile Include="CrudTasks\RunStoredSearchTasks.cs" />
+    <Compile Include="UserRequest\SearchRequests\RunStoredSearchRequestBuilder.cs" />
+    <Compile Include="Items\StoredSearchParameters.cs" />
+    <Compile Include="API\Request\ISitecoreStoredSearchRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -302,6 +307,6 @@
   <ItemGroup>
     <Folder Include="UrlBuilder\Children\" />
     <Folder Include="UserRequest\SearchRequests\" />
-    <Folder Include="UrlBuilder\SearchItems\" />
+    <Folder Include="UrlBuilder\Search\" />
   </ItemGroup>
 </Project>

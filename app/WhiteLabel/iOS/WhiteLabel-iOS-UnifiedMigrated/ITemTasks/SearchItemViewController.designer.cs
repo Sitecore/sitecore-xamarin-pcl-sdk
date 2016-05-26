@@ -12,43 +12,42 @@ namespace WhiteLabeliOS
 	[Register ("SearchItemViewController")]
 	partial class SearchItemViewController
 	{
-    [Outlet]
-    UIKit.UIButton getItemButton { get; set; }
+		[Outlet]
+		UIKit.UIButton getItemButton { get; set; }
 
-    [Outlet]
-    UIKit.UITableView ItemsTableView { get; set; }
+		[Outlet]
+		UIKit.UITableView ItemsTableView { get; set; }
 
-    [Outlet]
-    UIKit.UILabel nameLabel { get; set; }
+		[Outlet]
+		UIKit.UILabel nameLabel { get; set; }
 
-    [Outlet]
-    UIKit.UITextField queryTextField { get; set; }
+		[Outlet]
+		UIKit.UITextField queryTextField { get; set; }
 
-    [Action ("OnGetItemButtonTouched:")]
-    partial void OnGetItemButtonTouched (Foundation.NSObject sender);
+		[Action ("OnGetItemButtonTouched:")]
+		partial void OnGetItemButtonTouched (Foundation.NSObject sender);
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (getItemButton != null) {
+				getItemButton.Dispose ();
+				getItemButton = null;
+			}
 
-    void ReleaseDesignerOutlets ()
-    {
+			if (ItemsTableView != null) {
+				ItemsTableView.Dispose ();
+				ItemsTableView = null;
+			}
 
-      if (ItemsTableView != null) {
-        ItemsTableView.Dispose ();
-        ItemsTableView = null;
-      }
+			if (nameLabel != null) {
+				nameLabel.Dispose ();
+				nameLabel = null;
+			}
 
-      if (getItemButton != null) {
-        getItemButton.Dispose ();
-        getItemButton = null;
-      }
-
-      if (nameLabel != null) {
-        nameLabel.Dispose ();
-        nameLabel = null;
-      }
-
-      if (queryTextField != null) {
-        queryTextField.Dispose ();
-        queryTextField = null;
-      }
+			if (queryTextField != null) {
+				queryTextField.Dispose ();
+				queryTextField = null;
+			}
+		}
 	}
-  }
 }

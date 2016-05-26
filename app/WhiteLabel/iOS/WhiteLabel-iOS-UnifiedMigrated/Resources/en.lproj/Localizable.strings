@@ -2,7 +2,7 @@
 "Settings" = "Settings";
 "getItemByPath" = "Get Item by Path";
 "getItemById" = "Get Item by ID";
-"getItemByQuery" = "Get Item by Query";
+"getItemByQuery" = "Run Stored Search";
 "deleteItemById" = "Delete Item";
 "createEditItem" = "Create Item by ID";
 "createItemByPath" = "Create item by Path";
@@ -94,3 +94,4 @@
 "type parent item path" = "type parent item path";
 "create" = "create";
 "Update created item" = "Update created item";
+"Type query or search id:" = "Type query or search item id:";

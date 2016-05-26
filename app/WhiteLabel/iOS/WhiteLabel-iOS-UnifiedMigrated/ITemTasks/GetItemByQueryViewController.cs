@@ -25,27 +25,39 @@
 
       queryTextField.Text = "06DC2442-78F6-4BD1-8C8D-A3251BDAA5F2";
 
-
-      string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString("Get Items", null);
+      string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString("Run Stored Query", null);
       getItemButton.SetTitle(getChildrenButtonTitle, UIControlState.Normal);
 
-      nameLabel.Text = NSBundle.MainBundle.LocalizedString("Type query", null);
+      nameLabel.Text = NSBundle.MainBundle.LocalizedString("Type query or search id:", null);
     }
 
     partial void OnGetItemButtonTouched(Foundation.NSObject sender)
     {
       if (String.IsNullOrEmpty(queryTextField.Text))
       {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type query");
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type query id");
       }
       else
       {
         this.HideKeyboard(this.queryTextField);
-        this.SendRequest();
+        this.SendQueryRequest();
       }
     }
 
-    private async void SendRequest()
+    partial void OnStoredSearchButtonTouched (Foundation.NSObject sender)
+    {
+      if (String.IsNullOrEmpty(queryTextField.Text))
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type search id");
+      }
+      else
+      {
+        this.HideKeyboard(this.queryTextField);
+        this.SendSearchRequest();
+      }
+    }
+
+    private async void SendQueryRequest()
     {
       try
       {
@@ -65,7 +77,7 @@
           }
           else
           {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "No item found");
           }
         }
       }
@@ -75,6 +87,40 @@
         AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
       }
     }
+
+    private async void SendSearchRequest()
+    {
+      try
+      {
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        {
+          var request = ItemWebApiRequestBuilder.StoredSearchRequest(queryTextField.Text)
+            .Term(this.termTextField.Text)
+            .Build();
+
+          this.ShowLoader();
+
+          ScItemsResponse response = await session.RunStoredSearchAsync(request);
+
+          this.HideLoader();
+          if (response.ResultCount > 0)
+          {
+            this.ShowItemsList(response);
+          }
+          else
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "No item found");
+          }
+        }
+      }
+      catch(Exception e) 
+      {
+        this.HideLoader();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+    }
+
+
   }
 }
 

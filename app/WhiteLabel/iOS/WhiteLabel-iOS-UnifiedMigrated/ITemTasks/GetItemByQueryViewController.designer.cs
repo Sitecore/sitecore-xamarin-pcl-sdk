@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
+// This file has been generated automatically by Xamarin Studio Business to store outlets and
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
@@ -24,20 +24,25 @@ namespace WhiteLabeliOS
 		[Outlet]
 		UIKit.UITextField queryTextField { get; set; }
 
+		[Outlet]
+		UIKit.UITextField termTextField { get; set; }
+
 		[Action ("OnGetItemButtonTouched:")]
 		partial void OnGetItemButtonTouched (Foundation.NSObject sender);
+
+		[Action ("OnStoredSearchButtonTouched:")]
+		partial void OnStoredSearchButtonTouched (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (getItemButton != null) {
+				getItemButton.Dispose ();
+				getItemButton = null;
+			}
 
 			if (ItemsTableView != null) {
 				ItemsTableView.Dispose ();
 				ItemsTableView = null;
-			}
-
-			if (getItemButton != null) {
-				getItemButton.Dispose ();
-				getItemButton = null;
 			}
 
 			if (nameLabel != null) {
@@ -48,6 +53,11 @@ namespace WhiteLabeliOS
 			if (queryTextField != null) {
 				queryTextField.Dispose ();
 				queryTextField = null;
+			}
+
+			if (termTextField != null) {
+				termTextField.Dispose ();
+				termTextField = null;
 			}
 		}
 	}

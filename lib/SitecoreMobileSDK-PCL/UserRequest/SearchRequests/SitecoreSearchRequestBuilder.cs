@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.UserRequest.SearchRequest
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class SitecoreSearchRequestBuilder : AbstractGetVersionedItemRequestBuilder<ISitecoreSearchRequest>
+  public class SitecoreSearchRequestBuilder : AbstractGetVersionedItemRequestBuilder<SitecoreSearchParameters>
   {
     public SitecoreSearchRequestBuilder(string term)
     {
@@ -15,7 +15,7 @@ namespace Sitecore.MobileSDK.UserRequest.SearchRequest
       this.term = term;
     }
 
-    public override ISitecoreSearchRequest Build()
+    public override SitecoreSearchParameters Build()
     {
       IPagingParameters pagingSettings = this.AccumulatedPagingParameters;
 

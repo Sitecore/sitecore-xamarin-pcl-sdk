@@ -24,6 +24,7 @@
 
     #region Search
     string RunStoredSearchAction { get; }
+    string RunStoredQueryAction { get; }
     string ItemSearchAction { get; }
     string SitecoreSearchParameterName { get; }
     #endregion Search

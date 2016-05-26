@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using Sitecore.MobileSDK.UrlBuilder.Children;
+using Sitecore.MobileSDK.UrlBuilder.Search;
 
 namespace Sitecore.MobileSDK
 {
@@ -235,6 +236,21 @@ namespace Sitecore.MobileSDK
     #endregion Encryption
 
     #region SearchItems
+
+    public async Task<ScItemsResponse> RunStoredSearchAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      ISitecoreStoredSearchRequest requestCopy = request.DeepCopySitecoreStoredSearchRequest();
+
+      using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
+      {
+        ISitecoreStoredSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreStoredSearchGaps(requestCopy);
+
+        var urlBuilder = new RunStoredSearchUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var taskFlow = new RunStoredSearchTasks(urlBuilder, this.httpClient, cryptor);
+
+        return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      }
+    }
 
     public async Task<ScItemsResponse> RunStoredQuerryAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
     {

@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK.API.Session
 
     Task<ScItemsResponse> RunSitecoreSearchAsync(ISitecoreSearchRequest request, CancellationToken cancelToken = default(CancellationToken));
 
-//    Task<ScItemsResponse> RunStoredSitecoreSearchAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScItemsResponse> RunStoredSearchAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken));
 
   }
 }
