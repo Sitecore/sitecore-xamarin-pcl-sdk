@@ -251,6 +251,21 @@ namespace Sitecore.MobileSDK
       }
     }
 
+    public async Task<ScItemsResponse> RunSitecoreSearchAsync(ISitecoreSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      ISitecoreSearchRequest requestCopy = request.DeepCopySitecoreSearchRequest();
+
+      using (ICredentialsHeadersCryptor cryptor = await this.GetCredentialsCryptorAsync(cancelToken))
+      {
+        ISitecoreSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreSearchGaps(requestCopy);
+
+        var urlBuilder = new RunSitecoreSearchUrlBuilder(this.restGrammar, this.webApiGrammar);
+        var taskFlow = new RunSitecoreSearchTasks(urlBuilder, this.httpClient, cryptor);
+
+        return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+      }
+    }
+
     #endregion SearchItems
 
     #region GetItems

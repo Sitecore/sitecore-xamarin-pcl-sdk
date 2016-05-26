@@ -1,3 +1,5 @@
+using Sitecore.MobileSDK.UserRequest.SearchRequest;
+
 namespace Sitecore.MobileSDK.API
 {
   using Sitecore.MobileSDK.API.Request;
@@ -39,9 +41,14 @@ namespace Sitecore.MobileSDK.API
     }
 
     //TODO: @igk I should think about naming
-    public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> RunStoredQuerry(string itemId)
+    public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> StoredQuerryRequest(string itemId)
     {
       return new RunStoredQuerryRequestBuilder(itemId);
+    }
+
+    public static IGetVersionedItemRequestParametersBuilder<ISitecoreSearchRequest> SitecoreSearchRequest(string term)
+    {
+      return new SitecoreSearchRequestBuilder(term);
     }
 
     /// <summary>

@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
+// This file has been generated automatically by Xamarin Studio Business to store outlets and
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
@@ -12,12 +12,6 @@ namespace WhiteLabeliOS
 	[Register ("GetItemByIdViewController")]
 	partial class GetItemByIdViewController
 	{
-    [Outlet]
-    UIKit.UIButton parentScopeButton { get; set; }
-
-    [Outlet]
-    UIKit.UIButton selfScopeButton { get; set; }
-
 		[Outlet]
 		UIKit.UIButton childrenScopeButton { get; set; }
 
@@ -37,10 +31,19 @@ namespace WhiteLabeliOS
 		UIKit.UITextField itemIdTextField { get; set; }
 
 		[Outlet]
+		UIKit.UIButton parentScopeButton { get; set; }
+
+		[Outlet]
 		UIKit.UISegmentedControl PayloadSelectionView { get; set; }
+
+		[Outlet]
+		UIKit.UIButton selfScopeButton { get; set; }
 
 		[Action ("OnButtonChangeState:")]
 		partial void OnButtonChangeState (UIKit.UIButton sender);
+
+		[Action ("OnChildrenButtonTouched:")]
+		partial void OnChildrenButtonTouched (Foundation.NSObject sender);
 
 		[Action ("OnGetItemButtonTouched:")]
 		partial void OnGetItemButtonTouched (Foundation.NSObject sender);
@@ -50,6 +53,21 @@ namespace WhiteLabeliOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (parentScopeButton != null) {
+				parentScopeButton.Dispose ();
+				parentScopeButton = null;
+			}
+
+			if (selfScopeButton != null) {
+				selfScopeButton.Dispose ();
+				selfScopeButton = null;
+			}
+
+			if (childrenScopeButton != null) {
+				childrenScopeButton.Dispose ();
+				childrenScopeButton = null;
+			}
+
 			if (fieldNameTextField != null) {
 				fieldNameTextField.Dispose ();
 				fieldNameTextField = null;
@@ -75,26 +93,10 @@ namespace WhiteLabeliOS
 				itemIdTextField = null;
 			}
 
-      if (PayloadSelectionView != null) {
-        PayloadSelectionView.Dispose ();
-        PayloadSelectionView = null;
-      }
-
-      if (parentScopeButton != null) {
-				parentScopeButton.Dispose ();
-				parentScopeButton = null;
+			if (PayloadSelectionView != null) {
+				PayloadSelectionView.Dispose ();
+				PayloadSelectionView = null;
 			}
-
-			if (selfScopeButton != null) {
-				selfScopeButton.Dispose ();
-				selfScopeButton = null;
-			}
-
-			if (childrenScopeButton != null) {
-				childrenScopeButton.Dispose ();
-				childrenScopeButton = null;
-			}
-
-	  }
-  }
+		}
+	}
 }

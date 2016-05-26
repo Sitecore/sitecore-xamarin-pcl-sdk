@@ -14,6 +14,10 @@
   {
     private List<string> ItemsIds { get; set; }
 
+    public ScDeleteItemsResponse()
+    {
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ScDeleteItemsResponse"/> class.
     /// 

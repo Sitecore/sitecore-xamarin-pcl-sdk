@@ -27,6 +27,24 @@
 
       var items = new List<ISitecoreItem>();
 
+      //FIXME: @igk to manny result variants, do we still need univarsal parser?
+
+      JToken results = null;
+
+      try
+      {
+        results = response.Value<JToken>("Results");
+      }
+      catch(Exception e)
+      {
+        
+      }
+
+      if ( results != null)
+      {
+        response = results;
+      }
+
       if (response is JArray)
       {
         foreach (JObject item in response)

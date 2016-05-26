@@ -18,7 +18,7 @@
       string hostUrl = base.GetHostUrlForRequest(request);
       string itemId = UrlBuilderUtils.EscapeDataString(request.ItemId.ToLowerInvariant());
 
-      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId + webApiGrammar.RunStoredSearchParameterName;
+      string result = hostUrl + this.restGrammar.PathComponentSeparator + itemId + webApiGrammar.RunStoredSearchAction;
       return result;
     }
 

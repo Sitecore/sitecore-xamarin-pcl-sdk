@@ -11,37 +11,26 @@
 
   public partial class CreateITemByPathViewController : BaseTaskViewController
   {
-    private string CreatedItemPath;
 
     public CreateITemByPathViewController(IntPtr handle) : base (handle)
     {
-      Title = NSBundle.MainBundle.LocalizedString("createItemByPath", null);
+      Title = NSBundle.MainBundle.LocalizedString("updateItem", null);
     }
       
     public override void ViewDidLoad()
     {
       base.ViewDidLoad();
 
-      this.nameField.ShouldReturn = this.HideKeyboard;
       this.pathField.ShouldReturn = this.HideKeyboard;
       this.textField.ShouldReturn = this.HideKeyboard;
       this.titleField.ShouldReturn = this.HideKeyboard;
 
-      this.nameField.Placeholder = NSBundle.MainBundle.LocalizedString("type item name", null);
-      this.pathField.Placeholder = NSBundle.MainBundle.LocalizedString("type parent item path", null);
+      this.pathField.Placeholder = NSBundle.MainBundle.LocalizedString("type item id", null);
       this.textField.Placeholder = NSBundle.MainBundle.LocalizedString("type text field value", null);
       this.titleField.Placeholder = NSBundle.MainBundle.LocalizedString("type title field value", null);
 
-      string createButtonTitle = NSBundle.MainBundle.LocalizedString("create", null);
-      this.createButton.SetTitle(createButtonTitle, UIControlState.Normal);
-
       string updateButtonTitle = NSBundle.MainBundle.LocalizedString("Update created item", null);
       this.updateButton.SetTitle(updateButtonTitle, UIControlState.Normal);
-    }
-
-    partial void OnCreateItemButtonTapped(UIKit.UIButton sender)
-    {
-      this.SendRequest();
     }
 
     partial void OnUpdateItemButtonTapped(UIKit.UIButton sender)
@@ -55,18 +44,17 @@
       {
         using (var session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(this.pathField.Text)
-            .AddFieldsRawValuesByNameToSet("Title", "new title")
-            .AddFieldsRawValuesByNameToSet("Text", "new text")
+          var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.pathField.Text)
+            .AddFieldsRawValuesByNameToSet("Title", this.titleField.Text)
+            .AddFieldsRawValuesByNameToSet("Text", this.textField.Text)
             .Build();
 
           this.ShowLoader();
 
           ScItemsResponse response = await session.UpdateItemAsync(request);
-          if (response.Any())
+          if (response != null)
           {
-            ISitecoreItem item = response[0];
-            AlertHelper.ShowLocalizedAlertWithOkOption("The item created successfully", "Item path: " + item.Path);
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item updated successfully");
           }
           else
           {
@@ -87,46 +75,6 @@
       }
     }
 
-    private async void SendRequest()
-    {
-      try
-      {
-        using (var session = this.instanceSettings.GetSession())
-        {
-          var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
-            .ItemTemplatePath("76036f5e-cbce-46d1-af0a-4143f9b557aa")
-            .ItemName(this.nameField.Text)
-            .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
-            .AddFieldsRawValuesByNameToSet("Text", textField.Text)
-            .Build();
-
-          this.ShowLoader();
-
-          ScItemsResponse response = await session.CreateItemAsync(request);
-          if (response.Any())
-          {
-            ISitecoreItem item = response[0];
-            this.CreatedItemPath = item.Path;
-            AlertHelper.ShowLocalizedAlertWithOkOption("The item created successfully", "Item path: " + item.Path);
-          }
-          else
-          {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-          }
-        }
-      }
-      catch(Exception e) 
-      {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-      }
-      finally
-      {
-        BeginInvokeOnMainThread(delegate
-        {
-          this.HideLoader();
-        });
-      }
-    }
   }
 }
 

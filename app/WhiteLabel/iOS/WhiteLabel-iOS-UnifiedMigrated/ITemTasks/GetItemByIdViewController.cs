@@ -30,7 +30,7 @@ namespace WhiteLabeliOS
 
       this.itemIdTextField.ShouldReturn = this.HideKeyboard;
 
-      this.itemIdTextField.Text = "997E8AAF-A41F-45BF-93C7-C7489D1A76CF";
+      this.itemIdTextField.Text = "110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9";
 
       fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Type field name", null);
       itemIdTextField.Placeholder = NSBundle.MainBundle.LocalizedString("Type item ID", null);
@@ -58,29 +58,33 @@ namespace WhiteLabeliOS
       this.HideKeyboard(this.fieldNameTextField);
     }
 
-    partial void OnPayloadValueChanged(UIKit.UISegmentedControl sender)
+    partial void OnChildrenButtonTouched (Foundation.NSObject sender)
     {
-      
-    }
-
-    partial void OnButtonChangeState(UIKit.UIButton sender)
-    {
-      sender.Selected = !sender.Selected;
+      if (String.IsNullOrEmpty(itemIdTextField.Text))
+      {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", "Please type item Id");
+      }
+      else
+      {
+        this.HideKeyboardForAllFields();
+        this.SendChildrenRequest();
+      }
     }
 
     private async void SendRequest()
     {
       try
       {
-        using (ISitecoreWebApiSession session = this.instanceSettings.GetAnonymousSession())
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.ReadChildrenRequestWithId(itemIdTextField.Text)
+          var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
             .AddFieldsToRead(this.fieldNameTextField.Text)
             .Build();
 
           this.ShowLoader();
 
-          ScItemsResponse response = await session.ReadChildrenAsync(request);
+          ScItemsResponse response = await session.ReadItemAsync(request);
+
           if (response.Any())
           {
             this.ShowItemsList(response);
@@ -105,6 +109,46 @@ namespace WhiteLabeliOS
         });
       }
     }
+
+    private async void SendChildrenRequest()
+    {
+      try
+      {
+        using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
+        {
+          var request = ItemWebApiRequestBuilder.ReadChildrenRequestWithId(itemIdTextField.Text)
+            .Build();
+
+          this.ShowLoader();
+
+          ScItemsResponse response = await session.ReadChildrenAsync(request);
+
+          if (response.Any())
+          {
+            this.ShowItemsList(response);
+          }
+          else
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+          }
+        }
+      }
+      catch(Exception e) 
+      {
+        this.CleanupTableViewBindings();
+        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
+          this.HideLoader();
+          this.FieldsTableView.ReloadData();
+        });
+      }
+    }
+
+
   }
 }
 

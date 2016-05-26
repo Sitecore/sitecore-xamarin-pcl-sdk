@@ -12,6 +12,13 @@
   {
     public static ScDeleteItemsResponse ParseResponse(string response, CancellationToken token)
     {
+      //FIXME: @igk refactor
+
+      if (response == "NoContent")
+      {
+        return new ScDeleteItemsResponse();
+      }
+
       if (string.IsNullOrEmpty(response))
       {
         throw new ArgumentException("response shouldn't be empty or null");

@@ -12,7 +12,7 @@ namespace WhiteLabeliOS
     #region UIViewController
 		public MasterViewController (IntPtr handle) : base (handle)
 		{
-            this.Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
+       this.Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
 		}
 
 		public override void ViewDidAppear(bool animated)
@@ -61,14 +61,15 @@ namespace WhiteLabeliOS
 
     private void InitFeaturesList()
     {
-      this.features.Insert(0, "getRenderingHtml");
-      this.features.Insert(0, "uploadImageVC");
-      this.features.Insert(0, "getMediaItem");
-      this.features.Insert(0, "authTestVC");
-      this.features.Insert(0, "deleteItemById");
-      this.features.Insert(0, "createItemByPath");
-      this.features.Insert(0, "createEditItem");
+//      this.features.Insert(0, "getRenderingHtml");
+//      this.features.Insert(0, "uploadImageVC");
+//      this.features.Insert(0, "getMediaItem");
+//      this.features.Insert(0, "authTestVC");
+      this.features.Insert(0, "getItemBySearch");
       this.features.Insert(0, "getItemByQuery");
+      this.features.Insert(0, "deleteItemById");
+      this.features.Insert(0, "updateItem");
+      this.features.Insert(0, "createEditItem");
       this.features.Insert(0, "getItemByPath");
       this.features.Insert(0, "getItemById");
     }

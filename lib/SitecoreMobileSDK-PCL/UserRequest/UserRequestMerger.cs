@@ -46,6 +46,20 @@ namespace Sitecore.MobileSDK.UserRequest
         userRequest.ItemId);
     }
 
+    public ISitecoreSearchRequest FillSitecoreSearchGaps(ISitecoreSearchRequest userRequest)
+    {
+      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+
+      IPagingParameters pagingSettings = userRequest.PagingSettings;
+      return new SitecoreSearchParameters(
+        mergedSessionConfig, 
+        mergedSource, 
+        userRequest.QueryParameters, 
+        pagingSettings, 
+        userRequest.Term);
+    }
+
     public IReadItemsByPathRequest FillReadItemByPathGaps(IReadItemsByPathRequest userRequest)
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);

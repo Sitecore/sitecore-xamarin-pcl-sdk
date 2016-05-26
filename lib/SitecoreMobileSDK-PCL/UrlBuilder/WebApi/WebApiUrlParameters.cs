@@ -18,6 +18,8 @@
       result.ItemIdParameterName = "id";
       result.ItemPathParameterName = "path";
 
+      result.SitecoreSearchParameterName = "term";
+
       result.SitecoreQueryParameterName = "query";
 
       result.ItemWebApiEndpoint = "/sitecore/api/ssc";
@@ -29,6 +31,8 @@
       result.ItemWebApiLoginAction = "/login";
       result.ItemWebApiLogoutAction = "/logout";
       result.ItemWebApiChildrenAction = "/children";
+      result.ItemSearchAction = "/search";
+
 
       result.ItemWebApiGetRenderingAction = "/getrenderinghtml";
 
@@ -38,7 +42,7 @@
       result.ItemWebApiGetHashFormediaContentAction = "/getsignedmediaurl";
       result.UrlForHashingParameterName = "url";
 
-      result.RunStoredSearchParameterName = "/query";
+      result.RunStoredSearchAction = "/query";
 
       return result;
     }
@@ -80,7 +84,9 @@
     public string PageNumberParameterName { get; private set; }
     public string ItemsPerPageParameterName { get; private set; }
 
-    public string RunStoredSearchParameterName { get; private set; }
+    public string RunStoredSearchAction { get; private set; }
+    public string SitecoreSearchParameterName { get; private set; }
+    public string ItemSearchAction { get; private set; }
   }
 }
 

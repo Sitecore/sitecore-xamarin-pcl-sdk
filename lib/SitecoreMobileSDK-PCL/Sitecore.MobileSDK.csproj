@@ -204,7 +204,6 @@
     <Compile Include="API\Request\IMediaResourceDownloadRequest.cs" />
     <Compile Include="API\Request\IGetRenderingHtmlRequest.cs" />
     <Compile Include="Items\ReadRenderingHTMLParameters.cs" />
-    <Compile Include="UserRequest\RenderingHTMLRequest\RenderingHTMLRequestBuilder.cs" />
     <Compile Include="CrudTasks\Resource\GetRenderingHtmlTasks.cs" />
     <Compile Include="UrlBuilder\RenderingHTML\RenderingHtmlUrlBuilder.cs" />
     <Compile Include="API\Request\IRenderingHtmlRequestParametersBuilder.cs" />
@@ -234,9 +233,15 @@
     <Compile Include="CrudTasks\GetChildrenByIdTasks.cs" />
     <Compile Include="UserRequest\SearchRequests\RunStoredQuerryRequestBuilder.cs" />
     <Compile Include="API\Session\ISearchActions.cs" />
-    <Compile Include="UrlBuilder\SearchItems\ChildrenByIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\Children\RunStoredQuerryUrlBuilder.cs" />
     <Compile Include="CrudTasks\RunStoredQuerryTasks.cs" />
+    <Compile Include="UrlBuilder\Children\ChildrenByIdUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\SearchItems\RunStoredQuerryUrlBuilder.cs" />
+    <Compile Include="UrlBuilder\SearchItems\RunSitecoreSearchUrlBuilder.cs" />
+    <Compile Include="Items\SitecoreSearchParameters.cs" />
+    <Compile Include="API\Request\ISitecoreSearchRequest.cs" />
+    <Compile Include="CrudTasks\RunSitecoreSearchTasks.cs" />
+    <Compile Include="UserRequest\SearchRequests\SitecoreSearchRequestBuilder.cs" />
+    <Compile Include="UserRequest\RenderingHTMLReques\RenderingHTMLRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

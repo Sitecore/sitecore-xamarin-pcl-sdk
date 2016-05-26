@@ -10,6 +10,9 @@
 "getMediaItem" = "Download Image";
 "authTestVC" = "Authentication";
 "getRenderingHtml" = "Get Rendering HTML";
+"updateItem" = "Edit Item";
+"getItemBySearch" = "Search item";
+
 "Master" = "Master";
 
 "MASTER_VIEW_CONTROLLER_TITLE" = "White Label";
@@ -57,7 +60,7 @@
 "Field Raw Value" = "Field Raw Value";
 "Please type media path" = "Media path cannot be empty";
 "Incorect width or height value" = "Incorect width or height value";
-"Type query" = "Type Sitecore query:";
+"Type query" = "Query Definition item Id:";
 "Type Media Path" = "Type Media Path";
 "Item has no children" = "Item has no children";
 "children count is" = "children count is";

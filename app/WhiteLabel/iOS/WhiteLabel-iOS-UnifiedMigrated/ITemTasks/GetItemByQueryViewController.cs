@@ -23,10 +23,10 @@
       base.ViewDidLoad();
       this.TableView = this.ItemsTableView;
 
-      queryTextField.Text = "/Sitecore/Content/Home/*";
+      queryTextField.Text = "06DC2442-78F6-4BD1-8C8D-A3251BDAA5F2";
 
 
-      string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString("Get Item", null);
+      string getChildrenButtonTitle = NSBundle.MainBundle.LocalizedString("Get Items", null);
       getItemButton.SetTitle(getChildrenButtonTitle, UIControlState.Normal);
 
       nameLabel.Text = NSBundle.MainBundle.LocalizedString("Type query", null);
@@ -51,12 +51,12 @@
       {
         using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(queryTextField.Text)
+          var request = ItemWebApiRequestBuilder.StoredQuerryRequest(queryTextField.Text)
             .Build();
 
           this.ShowLoader();
 
-          ScItemsResponse response = await session.ReadItemAsync(request);
+          ScItemsResponse response = await session.RunStoredQuerryAsync(request);
 
           this.HideLoader();
           if (response.ResultCount > 0)

@@ -25,7 +25,7 @@
     //TODO: @igk we do not need it any more
     protected override string GetSpecificPartForRequest(IUpdateItemByIdRequest request)
     {
-      return "";
+      return string.Empty;
     }
 
     protected override void ValidateSpecificRequest(IUpdateItemByIdRequest request)

@@ -23,7 +23,9 @@
     #endregion Item Identifiers
 
     #region Search
-    string RunStoredSearchParameterName { get; }
+    string RunStoredSearchAction { get; }
+    string ItemSearchAction { get; }
+    string SitecoreSearchParameterName { get; }
     #endregion Search
 
     #region Rendering Identifiers

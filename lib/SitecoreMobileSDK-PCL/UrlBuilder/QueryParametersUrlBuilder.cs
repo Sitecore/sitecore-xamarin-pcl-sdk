@@ -40,13 +40,17 @@
       }
 
       string fieldsStatement = this.GetFieldsStatementFromCollection(queryParameters.Fields);
+
+      //FIXME: @igk extract or refactor to do not use dafault fields
+      string defaultFieldsList = "%2CItemID%2CItemName%2CItemPath%2CParentID%2CTemplateID%2CTemplateName%2CItemLanguage%2CItemVersion%2CDisplayName";
+
       if (null != fieldsStatement)
       {
         if (!string.IsNullOrEmpty(result))
         {
           result += this.restGrammar.FieldSeparator;
         }
-        result += fieldsStatement;
+        result += fieldsStatement + defaultFieldsList;
       }
 
       return result.ToLowerInvariant();

@@ -175,6 +175,10 @@
     <Compile Include="ITemTasks\RenderingHtmlViewController.designer.cs">
       <DependentUpon>RenderingHtmlViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITemTasks\SearchItemViewController.cs" />
+    <Compile Include="ITemTasks\SearchItemViewController.designer.cs">
+      <DependentUpon>SearchItemViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
