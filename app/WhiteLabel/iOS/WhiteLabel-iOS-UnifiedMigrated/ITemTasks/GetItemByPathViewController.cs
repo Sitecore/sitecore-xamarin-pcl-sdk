@@ -63,13 +63,14 @@
       sender.Selected = !sender.Selected;
     }
 
-    private async void SendRequest ()
+    private async void SendRequest()
     {
       try
       {
         using (ISitecoreWebApiSession session = this.instanceSettings.GetSession())
         {
           var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+            .AddFieldsToRead(this.fieldNameTextField.Text)
             .Build();
           
           this.ShowLoader();

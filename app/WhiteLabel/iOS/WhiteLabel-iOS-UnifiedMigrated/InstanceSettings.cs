@@ -50,7 +50,6 @@ namespace WhiteLabeliOS
       {
         var result = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.instanceUrl)
           .Credentials(credentials)
-          .Site(this.instanceSite)
           .DefaultDatabase(this.instanceDataBase)
           .DefaultLanguage(this.instanceLanguage)
           .BuildSession();
@@ -62,7 +61,6 @@ namespace WhiteLabeliOS
     public ISitecoreWebApiSession GetAnonymousSession()
     {
       var result = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.instanceUrl)
-          .Site(this.instanceSite)
           .DefaultDatabase(this.instanceDataBase)
           .DefaultLanguage(this.instanceLanguage)
           .BuildSession();
