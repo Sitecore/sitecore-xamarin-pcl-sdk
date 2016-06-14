@@ -33,7 +33,7 @@ The SDK supports producing native applications through the Xamarin framework
     <tags>Sitecore iOS Android PCL Xamarin</tags>
    
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="9.0.1"/>
+      <dependency id="Newtonsoft.Json" version="9.0.1-beta1"/>
       <dependency id="Portable.BouncyCastle" version="1.8.1"/>
 	  <dependency id="Microsoft.Net.Http" version="2.2.29"/>
     </dependencies>
