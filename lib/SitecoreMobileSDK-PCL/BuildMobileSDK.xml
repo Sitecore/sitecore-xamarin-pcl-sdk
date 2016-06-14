@@ -327,11 +327,11 @@
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.1.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.2-beta1.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
      />
 	<Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.1.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.2-beta1.nupkg"
       DestinationFolder="$(LocalNugetRepoDirectory)"
      />
 
@@ -340,11 +340,11 @@
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.2.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.3.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
      />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.2.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.3.nupkg"
       DestinationFolder="$(LocalNugetRepoDirectory)"
      />
 	 
@@ -354,16 +354,16 @@
       WorkingDirectory="$(ScriptsDirectory)\xamarin-store\MobileSDK"
     />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.1.xam"
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.2.xam"
       DestinationFolder="$(DeploymentDirectory)"
      />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.1.xam"
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.2.xam"
       DestinationFolder="$(LocalXamarinComponentsRepoDirectory)"
      />
 
    <Exec
-      Command="xamarin-component.exe install Sitecore.Mobile.SDK-1.1.xam"
+      Command="xamarin-component.exe install Sitecore.Mobile.SDK-1.2.xam"
     WorkingDirectory="$(LocalXamarinComponentsRepoDirectory)"
     />
 	    
