@@ -1,9 +1,10 @@
 ﻿namespace Sitecore.MobileSDK.MockObjects
 {
-  using Sitecore.MobileSDK.PasswordProvider;
-  using Sitecore.MobileSDK.PasswordProvider.Interface;
+    using PasswordProvider.Interface;
+    using Sitecore.MobileSDK.PasswordProvider;
+    using Sitecore.MobileSDK.PasswordProvider.Interface;
 
-  public class MutableWebApiCredentialsPOD : IWebApiCredentials
+    public class MutableWebApiCredentialsPOD : IWebApiCredentials
   {
     public MutableWebApiCredentialsPOD(string username, string password)
     {

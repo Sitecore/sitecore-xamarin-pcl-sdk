@@ -48,6 +48,8 @@
 
   	<MobileSdkProject Include="$(RepositoryRoot)\lib\SitecoreMobileSDK-PCL\*.csproj" />
     <PasswordStorageWinProject Include="$(RepositoryRoot)\lib\PasswordProvider\windows\*.csproj" />
+	<PasswordStorageWinUniversalProject Include="$(RepositoryRoot)\lib\PasswordProvider\windows\PasswordProviderWindowsRT\Sitecore.MobileSDK.PasswordProvider.WindowsRT\*.csproj" />
+	<PasswordStorageUWP Include="$(RepositoryRoot)\lib\PasswordProvider\windows\PasswordProviderWindowsRT\Sitecore.MobileSDK.PasswordProvider.WindowsUniversal\*.csproj" />
     <PasswordStorageIOSProject Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\*.csproj" />
     <PasswordStorageAndroidProject Include="$(RepositoryRoot)\lib\PasswordProvider\Android\*.csproj" />
 
@@ -142,6 +144,8 @@
     <CallTarget Targets="PasswordProviderIOS-Classic"/>
 	<CallTarget Targets="PasswordProviderIOS-Unified"/>
     <CallTarget Targets="PasswordProviderAndroid"/>	
+	<CallTarget Targets="PasswordProviderWinUniversal"/>
+	<CallTarget Targets="PasswordProviderWinUWP"/>
   </Target>
 
   <Target Name="PasswordProviderWin">
@@ -219,6 +223,46 @@
       SourceFiles="@(PasswordAndroidArtefacts)"
       DestinationFolder="$(BinariesDeploymentDirectory) "/>
 	 
+  </Target>
+  
+  <Target Name="PasswordProviderWinUniversal">
+    <Message Text="Building PasswordProvider For Windows Universal..." />
+
+    <MSBuild 
+      Projects="@(PasswordStorageWinUniversalProject)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+	
+	 <ItemGroup>
+      <PasswordWinUniversalArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\windows\PasswordProviderWindowsRT\Sitecore.MobileSDK.PasswordProvider.WindowsRT\bin\Release\*.dll" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(PasswordWinUniversalArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
+  </Target>
+  
+  <Target Name="PasswordProviderWinUWP">
+    <Message Text="Building PasswordProvider For UWP..." />
+
+    <MSBuild 
+      Projects="@(PasswordStorageUWP)" 
+      Targets="Build" 
+      Properties="Configuration=Release;" 
+    />
+	
+	 <ItemGroup>
+      <PasswordWinUniversalArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\windows\PasswordProviderWindowsRT\Sitecore.MobileSDK.PasswordProvider.WindowsUniversal\bin\Release\*.dll" />
+    </ItemGroup>
+	
+	<CallTarget Targets="PrepareDeploymentDir"/>
+	<Copy
+      SourceFiles="@(PasswordWinUniversalArtefacts)"
+      DestinationFolder="$(BinariesDeploymentDirectory) "
+     />
   </Target>
 
   <Target Name="PrepareDeploymentDir">

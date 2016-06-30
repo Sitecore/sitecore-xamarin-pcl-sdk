@@ -42,7 +42,7 @@ The SDK supports producing native applications through the Xamarin framework
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" target="lib\portable-win+net4+sl5+wp8\"/>
-    <file src="..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\bin\Release\Sitecore.MobileSDK.PasswordProvider.Interface.dll" target="lib\portable-win+net4+sl5+wp8\"/>
+    <file src="..\..\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" target="lib\portable-net45+win8+wpa81\"/>
+    <file src="..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\bin\Release\Sitecore.MobileSDK.PasswordProvider.Interface.dll" target="lib\portable-net45+win8+wpa81\"/>
   </files>
 </package>

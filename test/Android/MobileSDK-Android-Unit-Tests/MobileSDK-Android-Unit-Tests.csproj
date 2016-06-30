@@ -102,6 +102,10 @@
       <Project>{8578d879-0661-4986-a37c-d37538458981}</Project>
       <Name>Sitecore.MobileSDK.PasswordProvider.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
+      <Project>{079d5d12-ff8e-46d4-8afc-06cbf5a736c7}</Project>
+      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>Sitecore.MobileSDK</Name>
@@ -109,10 +113,6 @@
     <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
       <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
       <Name>Sitecore.MobileSDK.MockObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
-      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
-      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -9,6 +9,8 @@
     <RootNamespace>MobileSDKIntegrationTestiOSUnified</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>MobileSDKIntegrationTestiOSUnified</AssemblyName>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +50,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignProvision>15aa9e19-402c-4215-9441-6256dd5b7d03</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -85,7 +88,43 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.8.1\lib\XamarinIos\crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Newtonsoft.Json.9.0.1-beta1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.MobileSDK, Version=1.0.6024.24218, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.2-beta1\lib\portable-net45+win8+wpa81\Sitecore.MobileSDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface, Version=1.0.6024.24218, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.2-beta1\lib\portable-net45+win8+wpa81\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI, Version=1.0.6024.24221, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.PasswordProvider.1.0.3-beta1\lib\Xamarin.iOS10\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.29\lib\Xamarin.iOS10\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.29\lib\Xamarin.iOS10\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
@@ -101,8 +140,10 @@
     <BundleResource Include="Resources\Default-568h%402x.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -111,21 +152,16 @@
   <Import Project="..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
-      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
-      <Name>Sitecore.MobileSDK</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
       <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
       <Name>Sitecore.MobileSDK.MockObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
-      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
-      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.csproj">
-      <Project>{F973D9C9-61F3-417F-92D1-F32E0CB59187}</Project>
-      <Name>Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI</Name>
-    </ProjectReference>
   </ItemGroup>
+  <Import Project="..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
 </Project>
