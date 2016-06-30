@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="MobileSDK_Android_Integration_Nuget_Updated.MobileSDK_Android_Integration_Nuget_Updated">
+	<uses-sdk android:minSdkVersion="19" />
+	<application android:label="MobileSDK-Android-Integration-Nuget-Updated"></application>
+</manifest>

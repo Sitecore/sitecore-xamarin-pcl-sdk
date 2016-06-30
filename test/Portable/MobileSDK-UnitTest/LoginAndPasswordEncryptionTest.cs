@@ -42,6 +42,7 @@
       EncryptionUtil publicEcnryptor = new EncryptionUtil(this.publicCertificate);
 
       BigInteger publicModulusInteger = publicEcnryptor.BigIntegerForModulus();
+
       BigInteger publicExponentInteger = publicEcnryptor.BigIntegerForExponent();
 
       EncryptionUtil privateEcnryptor = new EncryptionUtil(this.privateCertificate);

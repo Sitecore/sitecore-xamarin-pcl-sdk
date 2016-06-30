@@ -83,35 +83,32 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="monotouch" />
     <Reference Include="MonoTouch.NUnitLite" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS">
+      <HintPath>..\..\..\..\..\..\..\Users\Igor\Downloads\SitecoreMobileSDK-Full\dev\Jenkins\jobs\XamarinSDK-FullBuild\workspace\deployment\lib\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="monotouch" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\solutions\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="crypto">
+      <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.8.1\lib\MonoTouch\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.29\lib\monotouch\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.29\lib\monotouch\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\monotouch\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\..\..\solutions\packages\Microsoft.Net.Http.2.2.22\lib\monotouch\System.Net.Http.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\solutions\packages\Newtonsoft.Json.6.0.3\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="crypto">
-      <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.7.0\lib\portable-net4+sl5+wp8+win8\crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.MobileSDK">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
-    </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.PasswordProvider.1.0.1\lib\MonoTouch10\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
+      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.1.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -129,4 +126,5 @@
   <Import Project="..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems')" />
   <Import Project="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems" Label="Shared" Condition="Exists('..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
+  <Import Project="..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\solutions\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
 </Project>

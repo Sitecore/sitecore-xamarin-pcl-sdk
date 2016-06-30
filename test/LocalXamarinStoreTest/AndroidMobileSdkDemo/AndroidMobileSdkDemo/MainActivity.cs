@@ -24,7 +24,7 @@ namespace AndroidMobileSdkDemo
       base.OnCreate(bundle);
 
       #warning first we have to setup connection info and create a session
-      string instanceUrl = "http://my.site.com";
+      string instanceUrl = "http://myinstance.com/";
 
       using (var credentials = new SecureStringPasswordProvider("login", "password"))
       using (

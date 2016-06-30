@@ -3,8 +3,7 @@
   using System;
   using System.Drawing;
 
-  using MonoTouch.Foundation;
-  using MonoTouch.UIKit;
+  using UIKit;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
@@ -53,7 +52,7 @@
       base.ViewDidAppear(animated);
 
       #warning first we have to setup connection info and create a session
-      var instanceUrl = "http://my.site.com";
+      var instanceUrl = "http://myinstance.com/";
 
       using (var credentials = new SecureStringPasswordProvider("login", "password"))
       using (
