@@ -107,9 +107,6 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\..\..\solutions\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.MobileSDK">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.1.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
-    </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
       <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.1.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>

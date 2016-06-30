@@ -120,7 +120,10 @@
         .Payload(PayloadType.Content)
         .Build();
       var response = await this.session.ReadItemAsync(request);
-      testData.AssertItemsCount(28, response);
+
+      //testData.AssertItemsCount(28, response); // sitecore 7 and earlier no "/sitecore/social" item
+      testData.AssertItemsCount(29, response); // since sitecore 8 "/sitecore/social" item added
+
       Assert.AreEqual("Allowed_Child", response[0].DisplayName);
       Assert.AreEqual("Not_Allowed_Child", response[1].DisplayName);
       Assert.AreEqual("Allowed_Item", response[2].DisplayName);

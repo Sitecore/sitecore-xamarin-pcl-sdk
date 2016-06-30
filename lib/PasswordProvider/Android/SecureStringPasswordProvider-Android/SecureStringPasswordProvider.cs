@@ -1,8 +1,9 @@
-﻿namespace Sitecore.MobileSDK.PasswordProvider.Android
+﻿
+namespace Sitecore.MobileSDK.PasswordProvider.Android
 {
-  using Sitecore.MobileSDK.PasswordProvider.Interface;
+    using Sitecore.MobileSDK.PasswordProvider.Interface;
 
-  public class SecureStringPasswordProvider : IWebApiCredentials
+    public class SecureStringPasswordProvider : IWebApiCredentials
   {
     private PasswordProvider.SecureStringPasswordProvider providerImpl;
 

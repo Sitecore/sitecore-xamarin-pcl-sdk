@@ -37,12 +37,12 @@ namespace WhiteLabeliOS
 		{
 			base.ViewWillAppear (animated);
 
-			this.instanceUrlField.Text = this.instanceSettings.InstanceUrl;
-			this.passwordField.Text = this.instanceSettings.InstancePassword;
-			this.loginField.Text = this.instanceSettings.InstanceLogin;
-			this.siteField.Text = this.instanceSettings.InstanceSite;
-			this.dbField.Text = this.instanceSettings.InstanceDataBase;
-			this.languageField.Text = this.instanceSettings.InstanceLanguage;
+			this.instanceUrlField.Text  = this.instanceSettings.InstanceUrl;
+			this.passwordField.Text     = this.instanceSettings.InstancePassword;
+			this.loginField.Text        = this.instanceSettings.InstanceLogin;
+			this.siteField.Text         = this.instanceSettings.InstanceSite;
+			this.dbField.Text           = this.instanceSettings.InstanceDataBase;
+			this.languageField.Text     = this.instanceSettings.InstanceLanguage;
 		}
 
 		public override void ViewWillDisappear(bool animated)
@@ -51,12 +51,12 @@ namespace WhiteLabeliOS
 
 			InstanceSettings settings = this.instanceSettings;
 
-			settings.InstanceUrl 		= this.instanceUrlField.Text;
-			settings.InstancePassword 	= this.passwordField.Text;
+			settings.InstanceUrl 		  = this.instanceUrlField.Text;
+			settings.InstancePassword = this.passwordField.Text;
 			settings.InstanceLogin 		= this.loginField.Text;
 			settings.InstanceSite 		= this.siteField.Text;
-			settings.InstanceDataBase 	= this.dbField.Text;
-			settings.InstanceLanguage 	= this.languageField.Text;
+			settings.InstanceDataBase = this.dbField.Text;
+			settings.InstanceLanguage = this.languageField.Text;
 		}
 	}
 }
