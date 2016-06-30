@@ -49,20 +49,23 @@ namespace WhiteLabeliOS
       try
       {
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
-        {
-          var request = ItemSSCRequestBuilder.SitecoreSearchRequest(queryTextField.Text)
-            .Build();
-
+        {          
           this.ShowLoader();
+
+          var request = ItemSSCRequestBuilder.SitecoreSearchRequest(queryTextField.Text)
+            .PageNumber(1)
+            .ItemsPerPage(1)
+            .Build();
 
           ScItemsResponse response = await session.RunSitecoreSearchAsync(request);
 
           this.HideLoader();
+
           if (response.ResultCount > 0)
           {
             this.ShowItemsList(response);
           }
-          else
+          else 
           {
             AlertHelper.ShowLocalizedAlertWithOkOption("Message", "No items found");
           }

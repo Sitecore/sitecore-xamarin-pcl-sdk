@@ -32,7 +32,7 @@
       this.ItemPathField.ShouldReturn = this.HideKeyboard;
 
       this.ItemPathField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type item Path", null);
-      this.fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);;
+      this.fieldNameTextField.Placeholder = NSBundle.MainBundle.LocalizedString ("Type field name", null);
 
       string getItemButtonTitle = NSBundle.MainBundle.LocalizedString ("Get Item", null);
       getItemButton.SetTitle (getItemButtonTitle, UIControlState.Normal);

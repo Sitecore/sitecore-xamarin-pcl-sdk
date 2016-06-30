@@ -31,6 +31,8 @@ namespace WhiteLabeliOS
 			this.siteField.ShouldReturn     	= this.HideKeyboard;
 			this.dbField.ShouldReturn       	= this.HideKeyboard;
 			this.languageField.ShouldReturn 	= this.HideKeyboard;
+
+      this.siteField.Hidden = true;
 		}
 
 		public override void ViewWillAppear(bool animated)

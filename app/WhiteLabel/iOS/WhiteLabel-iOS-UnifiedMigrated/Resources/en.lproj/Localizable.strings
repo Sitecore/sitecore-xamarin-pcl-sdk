@@ -4,7 +4,7 @@
 "getItemById" = "Get Item by ID";
 "getItemByQuery" = "Run Stored Search";
 "deleteItemById" = "Delete Item";
-"createEditItem" = "Create Item by ID";
+"createEditItem" = "Create Item";
 "createItemByPath" = "Create item by Path";
 "uploadImageVC" = "Upload Image";
 "getMediaItem" = "Download Image";

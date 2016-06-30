@@ -14,7 +14,7 @@
     {
       //FIXME: @igk refactor
 
-      if (response == "NoContent")
+      if (response == "204")
       {
         return new ScDeleteItemsResponse();
       }

@@ -77,11 +77,11 @@ namespace WhiteLabeliOS
       {
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
+          this.ShowLoader();
+
           var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
             .AddFieldsToRead(this.fieldNameTextField.Text)
             .Build();
-
-          this.ShowLoader();
 
           ScItemsResponse response = await session.ReadItemAsync(request);
 

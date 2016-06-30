@@ -1,4 +1,6 @@
-﻿namespace Sitecore.MobileSDK.CrudTasks
+﻿using System.Net;
+
+namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
   using System.Diagnostics;
@@ -45,7 +47,8 @@
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
      // return await result.Content.ReadAsStringAsync();
-      return result.StatusCode.ToString();
+      int code = (int)result.StatusCode;
+      return code.ToString();
     }
 
     public async Task<ScDeleteItemsResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
