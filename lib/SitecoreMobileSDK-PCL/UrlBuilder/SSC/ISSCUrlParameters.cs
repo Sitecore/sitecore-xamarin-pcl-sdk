@@ -27,6 +27,7 @@
     string RunStoredQueryAction { get; }
     string ItemSearchAction { get; }
     string SitecoreSearchParameterName { get; }
+    string SortingParameterName { get; }
     #endregion Search
 
     #region Rendering Identifiers
@@ -56,6 +57,8 @@
     string PageNumberParameterName { get; }
     string ItemsPerPageParameterName { get; }
     #endregion Paging
+
+    string IncludeStandardTemplateFieldsParameterName { get; }
   }
 }
 

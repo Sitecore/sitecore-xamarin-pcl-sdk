@@ -51,6 +51,8 @@ namespace Sitecore.MobileSDK.API.Request
     /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
     IBaseRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
 
+    IBaseRequestParametersBuilder<T> IcludeStanderdTemplateFields(bool include);
+
     /// <summary>
     /// Builds request with specified parameters.
     /// </summary>

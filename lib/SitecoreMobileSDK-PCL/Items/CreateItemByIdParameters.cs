@@ -86,6 +86,8 @@
     public IQueryParameters QueryParameters { get; private set; }
 
     public CreateItemParameters CreateParameters { get; private set; }
+
+    public bool IcludeStanderdTemplateFields { get; private set; }
   }
 }
 

@@ -1,3 +1,5 @@
+using Sitecore.MobileSDK.API.Request.Parameters;
+
 namespace Sitecore.MobileSDK.API.Request
 {
   /// <summary>
@@ -10,6 +12,8 @@ namespace Sitecore.MobileSDK.API.Request
     /// </summary>
     /// <returns><seealso cref="ISitecoreSearchRequest"/></returns>
     ISitecoreSearchRequest DeepCopySitecoreSearchRequest();
+
+    ISortParameters SortParameters { get; }
 
     string Term { get; }
   }

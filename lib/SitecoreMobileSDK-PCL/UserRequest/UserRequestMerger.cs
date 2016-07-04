@@ -42,7 +42,8 @@ namespace Sitecore.MobileSDK.UserRequest
         mergedSessionConfig, 
         mergedSource, 
         userRequest.QueryParameters, 
-        pagingSettings, 
+        pagingSettings,
+        userRequest.IcludeStanderdTemplateFields,
         userRequest.ItemId);
     }
 
@@ -72,6 +73,7 @@ namespace Sitecore.MobileSDK.UserRequest
         mergedSource, 
         userRequest.QueryParameters, 
         pagingSettings, 
+        userRequest.SortParameters,
         userRequest.Term);
     }
 

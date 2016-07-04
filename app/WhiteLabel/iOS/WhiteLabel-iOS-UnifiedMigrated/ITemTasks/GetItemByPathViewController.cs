@@ -95,6 +95,7 @@
       finally
       {
         BeginInvokeOnMainThread(delegate
+                                
         {
           this.FieldsTableView.ReloadData();
           this.HideLoader();

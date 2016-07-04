@@ -22,6 +22,26 @@
       return result;
     }
 
+    protected override string GetSpecificPartForRequest(ISitecoreSearchRequest request)
+    {
+      string baseParams = base.GetSpecificPartForRequest(request);
+
+      string sortValue = "";
+
+      foreach (string field in request.SortParameters.Fields) {
+        sortValue += "|" + field;
+      }
+
+      if (sortValue.Length > 0) {
+        baseParams += this.restGrammar.FieldSeparator
+                          + this.sscGrammar.SortingParameterName
+                          + this.restGrammar.KeyValuePairSeparator
+                          + sortValue;
+      }
+
+      return baseParams;
+    }
+
     protected override string GetItemIdenticationForRequest(ISitecoreSearchRequest request)
     {
       string strItemPath = this.sscGrammar.SitecoreSearchParameterName + this.restGrammar.KeyValuePairSeparator + request.Term;

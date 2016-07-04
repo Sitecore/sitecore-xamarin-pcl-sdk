@@ -96,6 +96,16 @@
         }
       }
 
+
+      if (request.IcludeStanderdTemplateFields) {
+        result =
+          result +
+          this.restGrammar.FieldSeparator 
+              + this.sscGrammar.IncludeStandardTemplateFieldsParameterName 
+              + this.restGrammar.KeyValuePairSeparator 
+              + "true";
+      }
+
       return result.ToLowerInvariant();
     }
 

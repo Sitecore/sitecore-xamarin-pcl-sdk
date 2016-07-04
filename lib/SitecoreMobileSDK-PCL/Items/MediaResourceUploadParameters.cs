@@ -53,5 +53,7 @@ namespace Sitecore.MobileSDK.Items
     public UploadMediaOptions UploadOptions { get; private set; }
 
     public IQueryParameters QueryParameters { get; private set; }
+
+    public bool IcludeStanderdTemplateFields { get; private set; }
   }
 }

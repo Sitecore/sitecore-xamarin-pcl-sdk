@@ -67,6 +67,8 @@
     public IQueryParameters QueryParameters { get; private set; }
   
     public IPagingParameters PagingSettings { get; private set; }
+
+    public bool IcludeStanderdTemplateFields { get; private set; }
   }
 }
 

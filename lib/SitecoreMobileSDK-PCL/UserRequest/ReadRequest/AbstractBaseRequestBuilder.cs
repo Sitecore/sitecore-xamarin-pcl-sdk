@@ -108,8 +108,16 @@
       return this.AddFieldsToRead((IEnumerable<string>)fieldParams);
     }
 
+    public IBaseRequestParametersBuilder<T> IcludeStanderdTemplateFields(bool include)
+    {
+      this.icludeStanderdTemplateFields = include;
+
+      return this;
+    }
+
     public abstract T Build();
 
+    protected bool icludeStanderdTemplateFields = false;
     protected ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
     protected QueryParameters queryParameters = new QueryParameters(null);
   }

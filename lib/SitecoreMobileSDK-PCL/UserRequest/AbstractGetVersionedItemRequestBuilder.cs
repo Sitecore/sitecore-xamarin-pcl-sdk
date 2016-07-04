@@ -17,8 +17,6 @@
 
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
 
-
-
       return this;
     }
 
@@ -52,6 +50,11 @@
     new public IGetVersionedItemRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage)
     {
       return (IGetVersionedItemRequestParametersBuilder<T>)base.ItemsPerPage(itemsCountPerPage);
+    }
+
+    new public IGetVersionedItemRequestParametersBuilder<T> IcludeStanderdTemplateFields(bool include)
+    {
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.IcludeStanderdTemplateFields(include);
     }
     #endregion Compatibility Casts
   }

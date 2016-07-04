@@ -12,6 +12,7 @@
       IItemSource itemSource, 
       IQueryParameters queryParameters, 
       IPagingParameters pagingSettings,
+      bool icludeStanderdTemplateFields,
       string itemId)
     {
       this.SessionSettings = sessionSettings;
@@ -19,7 +20,8 @@
       this.ItemId = itemId;
       this.QueryParameters = queryParameters;
       this.PagingSettings = pagingSettings;
-    }
+      this.IcludeStanderdTemplateFields = icludeStanderdTemplateFields;
+    } 
 
     public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
     {
@@ -48,7 +50,7 @@
         pagingSettings = this.PagingSettings.PagingParametersCopy();
       }
 
-      return new ReadItemsByIdParameters(connection, itemSrc, payload, pagingSettings, this.ItemId);
+      return new ReadItemsByIdParameters(connection, itemSrc, payload, pagingSettings, this.IcludeStanderdTemplateFields, this.ItemId);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -67,6 +69,8 @@
     public IQueryParameters QueryParameters { get; private set; }
   
     public IPagingParameters PagingSettings { get; private set; }
+
+    public bool IcludeStanderdTemplateFields { get; private set; }
   }
 }
 

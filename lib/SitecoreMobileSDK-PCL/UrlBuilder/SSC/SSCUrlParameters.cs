@@ -12,6 +12,7 @@
       result.FieldsListParameterName = "fields";
       result.TemplateParameterName = "template";
       result.ItemNameParameterName = "name";
+      result.SortingParameterName = "sorting";
 
       result.RenderingIdParameterName = "renderingId";
 
@@ -38,6 +39,7 @@
 
       result.PageNumberParameterName = "page";
       result.ItemsPerPageParameterName = "pageSize";
+      result.IncludeStandardTemplateFieldsParameterName = "includeStandardTemplateFields";
 
       result.ItemSSCGetHashFormediaContentAction = "/getsignedmediaurl";
       result.UrlForHashingParameterName = "url";
@@ -89,6 +91,10 @@
     public string RunStoredQueryAction { get; private set; }
     public string SitecoreSearchParameterName { get; private set; }
     public string ItemSearchAction { get; private set; }
+
+    public string IncludeStandardTemplateFieldsParameterName { get; private set; }
+
+    public string SortingParameterName { get; private set; }
   }
 }
 

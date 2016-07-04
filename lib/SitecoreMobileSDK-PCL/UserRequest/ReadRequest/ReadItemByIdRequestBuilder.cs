@@ -24,6 +24,7 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest
         this.itemSourceAccumulator, 
         this.queryParameters, 
         pagingSettings,
+        this.resultIcludeStanderdTemplateFields,
         this.itemId);
 
       return result;

@@ -80,8 +80,9 @@ namespace WhiteLabeliOS
           this.ShowLoader();
 
           var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
-            .AddFieldsToRead(this.fieldNameTextField.Text)
-            .Build();
+                                             .AddFieldsToRead(this.fieldNameTextField.Text)
+                                             .IcludeStanderdTemplateFields(true)
+                                             .Build();
 
           ScItemsResponse response = await session.ReadItemAsync(request);
 
@@ -116,8 +117,9 @@ namespace WhiteLabeliOS
       {
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId(itemIdTextField.Text)
-            .Build();
+          var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId (itemIdTextField.Text)
+                                             .AddFieldsToRead("bla")
+                                             .Build();
 
           this.ShowLoader();
 

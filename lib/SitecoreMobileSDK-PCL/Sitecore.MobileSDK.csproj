@@ -247,6 +247,8 @@
     <Compile Include="API\Exceptions\SSCJsonStatusMessage.cs" />
     <Compile Include="UrlBuilder\SSC\SSCUrlParameters.cs" />
     <Compile Include="UrlBuilder\SSC\ISSCUrlParameters.cs" />
+    <Compile Include="API\Request\Parameters\ISortParameters.cs" />
+    <Compile Include="UrlBuilder\SortParameters\SortParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -308,5 +310,6 @@
     <Folder Include="UrlBuilder\Children\" />
     <Folder Include="UserRequest\SearchRequests\" />
     <Folder Include="UrlBuilder\Search\" />
+    <Folder Include="UrlBuilder\SortParameters\" />
   </ItemGroup>
 </Project>
