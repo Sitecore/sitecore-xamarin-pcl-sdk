@@ -177,7 +177,7 @@ namespace Sitecore.MobileSDK
       try
       {
         var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
-        var taskFlow = new GetPublicKeyTasks(sessionConfigBuilder, this.restGrammar, this.sscGrammar, this.httpClient);
+        var taskFlow = new GetPublicKeyTasks(this.credentials, sessionConfigBuilder, this.sscGrammar, this.httpClient);
 
         string result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
         this.publicCertifiacte = result;

@@ -49,10 +49,11 @@ namespace WhiteLabeliOS
       )
       {
         var result = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.instanceUrl)
-          .Credentials(credentials)
-          .DefaultDatabase(this.instanceDataBase)
-          .DefaultLanguage(this.instanceLanguage)
-          .BuildSession();
+                                              .Credentials(credentials)
+                                              .DefaultDatabase(this.instanceDataBase)
+                                              .DefaultLanguage(this.instanceLanguage)
+                                              .Site("sitecore")
+                                              .BuildSession();
 
         return result;
       }
@@ -61,9 +62,10 @@ namespace WhiteLabeliOS
     public ISitecoreSSCSession GetAnonymousSession()
     {
       var result = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(this.instanceUrl)
-          .DefaultDatabase(this.instanceDataBase)
-          .DefaultLanguage(this.instanceLanguage)
-          .BuildSession();
+                                            .DefaultDatabase(this.instanceDataBase)
+                                            .DefaultLanguage(this.instanceLanguage)
+                                            .Site("sitecore")
+                                            .BuildSession();
 
         return result;
     }
