@@ -226,7 +226,7 @@
     <Compile Include="Items\SitecoreSearchParameters.cs" />
     <Compile Include="API\Request\ISitecoreSearchRequest.cs" />
     <Compile Include="CrudTasks\RunSitecoreSearchTasks.cs" />
-    <Compile Include="UserRequest\SearchRequests\SitecoreSearchRequestBuilder.cs" />
+    <Compile Include="UserRequest\SearchRequests\AbstractSitecoreSearchRequestBuilder.cs" />
     <Compile Include="UserRequest\RenderingHTMLReques\RenderingHTMLRequestBuilder.cs" />
     <Compile Include="UrlBuilder\Search\RunStoredQuerryUrlBuilder.cs" />
     <Compile Include="UrlBuilder\Search\RunSitecoreSearchUrlBuilder.cs" />
@@ -249,6 +249,8 @@
     <Compile Include="UrlBuilder\SSC\ISSCUrlParameters.cs" />
     <Compile Include="API\Request\Parameters\ISortParameters.cs" />
     <Compile Include="UrlBuilder\SortParameters\SortParameters.cs" />
+    <Compile Include="API\Request\ISearchItemRequestParametersBuilder.cs" />
+    <Compile Include="UserRequest\SearchRequests\SitecoreSearchRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

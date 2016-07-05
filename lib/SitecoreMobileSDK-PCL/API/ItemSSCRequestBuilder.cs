@@ -52,9 +52,9 @@ namespace Sitecore.MobileSDK.API
       return new RunStoredSearchRequestBuilder(itemId);
     }
 
-    public static IGetVersionedItemRequestParametersBuilder<SitecoreSearchParameters> SitecoreSearchRequest(string term)
+    public static ISearchItemRequestParametersBuilder<SitecoreSearchParameters> SitecoreSearchRequest(string term)
     {
-      return new SitecoreSearchRequestBuilder(term);
+      return (ISearchItemRequestParametersBuilder<SitecoreSearchParameters>)new SitecoreSearchRequestBuilder(term);
     }
 
     /// <summary>

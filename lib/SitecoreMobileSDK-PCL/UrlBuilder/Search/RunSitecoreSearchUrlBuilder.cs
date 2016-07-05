@@ -28,8 +28,12 @@
 
       string sortValue = "";
 
-      foreach (string field in request.SortParameters.Fields) {
-        sortValue += "|" + field;
+      if (request.SortParameters.Fields != null) {
+        foreach (string field in request.SortParameters.Fields) {
+          sortValue += this.restGrammar.ItemFieldSeparator + field;
+        }
+
+        sortValue = sortValue.Remove(0, 1);
       }
 
       if (sortValue.Length > 0) {
