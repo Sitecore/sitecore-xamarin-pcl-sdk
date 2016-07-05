@@ -26,7 +26,7 @@
 
     #region  IRestApiCallTasks
 
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken)
+    public HttpRequestMessage BuildRequestUrlForRequestAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);

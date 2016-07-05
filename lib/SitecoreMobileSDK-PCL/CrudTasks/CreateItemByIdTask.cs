@@ -7,8 +7,8 @@
 
   internal class CreateItemByIdTask : AbstractCreateItemTask<ICreateItemByIdRequest>
   {
-    public CreateItemByIdTask(CreateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public CreateItemByIdTask(CreateItemByIdUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
     }

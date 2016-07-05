@@ -40,7 +40,6 @@ namespace WhiteLabeliOS
         else
         {
           this.HideKeyboardForAllFields();
-          this.SendRequest();
         }
     }
 
@@ -50,41 +49,7 @@ namespace WhiteLabeliOS
       this.HideKeyboard(this.sourceIdTextField);
     }
 
-    private async void SendRequest()
-    {
-      try
-      {
-        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
-        {
-          var request = ItemSSCRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(sourceIdTextField.Text, renderingIdTextField.Text)
-            .Build();
 
-          this.ShowLoader();
-
-          Stream response = await session.ReadRenderingHtmlAsync(request);
-
-          response.Position = 0;
-          string htmlText = "";
-          using (StreamReader reader = new StreamReader(response))
-          {
-            htmlText = await reader.ReadToEndAsync();
-          }
-
-          this.resultWebView.LoadHtmlString(htmlText, null);
-        }
-      }
-      catch(Exception e) 
-      {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-      }
-      finally
-      {
-        BeginInvokeOnMainThread(delegate
-        {
-          this.HideLoader();
-        });
-      }
-    }
 
 	}
 }

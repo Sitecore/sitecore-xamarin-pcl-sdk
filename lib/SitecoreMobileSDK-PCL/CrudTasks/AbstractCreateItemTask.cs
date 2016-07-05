@@ -12,13 +12,13 @@ namespace Sitecore.MobileSDK.CrudTasks
   internal abstract class AbstractCreateItemTask<TRequest> : AbstractGetItemTask<TRequest>
     where TRequest : class
   {
-    public AbstractCreateItemTask(HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public AbstractCreateItemTask(HttpClient httpClient)
+      : base(httpClient)
     {
 
     }
 
-    public override async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
+    public override HttpRequestMessage BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
@@ -27,7 +27,6 @@ namespace Sitecore.MobileSDK.CrudTasks
       StringContent bodycontent = new StringContent(fieldsList, Encoding.UTF8, "application/json");
       result.Content = bodycontent;
 
-      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
       

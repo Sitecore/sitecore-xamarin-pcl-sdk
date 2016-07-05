@@ -9,8 +9,8 @@ namespace Sitecore.MobileSDK.CrudTasks
 
   internal class RunSitecoreSearchTasks : AbstractGetItemTask<ISitecoreSearchRequest>
   {
-    public RunSitecoreSearchTasks(RunSitecoreSearchUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public RunSitecoreSearchTasks(RunSitecoreSearchUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
     }

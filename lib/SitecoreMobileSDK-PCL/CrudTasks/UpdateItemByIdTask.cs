@@ -10,8 +10,8 @@ namespace Sitecore.MobileSDK.CrudTasks
 
   internal class UpdateItemByIdTask : AbstractUpdateItemTask<IUpdateItemByIdRequest>
   {
-    public UpdateItemByIdTask(UpdateItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public UpdateItemByIdTask(UpdateItemByIdUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
     }

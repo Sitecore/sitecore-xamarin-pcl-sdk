@@ -8,7 +8,7 @@
     where THttpRequest : class
     where THttpResult : class
   {
-    Task<THttpRequest> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken);
+    THttpRequest BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken);
 
     Task<THttpResult> SendRequestForUrlAsync(THttpRequest requestUrl, CancellationToken cancelToken);
   }

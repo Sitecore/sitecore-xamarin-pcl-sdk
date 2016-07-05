@@ -18,22 +18,20 @@
     {
     }
 
-    public AbstractGetItemTask(HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+    public AbstractGetItemTask(HttpClient httpClient)
     {
       this.httpClient = httpClient;
-      this.credentialsHeadersCryptor = credentialsHeadersCryptor;
 
       this.Validate();
     }
 
     #region  IRestApiCallTasks
 
-    public virtual async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
+    public virtual HttpRequestMessage BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
 
@@ -64,17 +62,12 @@
       {
         throw new ArgumentNullException("AbstractGetItemTask.httpClient cannot be null");
       }
-      else if (null == this.credentialsHeadersCryptor)
-      {
-        throw new ArgumentNullException("AbstractGetItemTask.credentialsHeadersCryptor cannot be null");
-      }
+
     }
 
     protected abstract string UrlToGetItemWithRequest(TRequest request);
 
-
     private HttpClient httpClient;
-    protected ICredentialsHeadersCryptor credentialsHeadersCryptor;
   }
 }
 

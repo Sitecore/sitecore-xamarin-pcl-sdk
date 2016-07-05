@@ -8,8 +8,8 @@
 
   internal class GetItemsByQueryTasks : AbstractGetItemTask<IReadItemsByQueryRequest>
   {
-    public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public GetItemsByQueryTasks(ItemByQueryUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
       this.Validate();

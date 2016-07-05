@@ -17,15 +17,14 @@ namespace Sitecore.MobileSDK.CrudTasks
   internal class UploadMediaTask : AbstractGetItemTask<IMediaResourceUploadRequest>
   {
 
-    public UploadMediaTask(UploadMediaUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public UploadMediaTask(UploadMediaUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
-      this.credentialsHeadersCryptor = credentialsHeadersCryptor;
       this.httpClient = httpClient;
     }
       
-    public override async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken)
+    public override HttpRequestMessage BuildRequestUrlForRequestAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
@@ -48,10 +47,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
       result.Content = multiPartContent;
 
-      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
-
       return result;
-
     }
 
     protected override string UrlToGetItemWithRequest(IMediaResourceUploadRequest request)
@@ -61,6 +57,5 @@ namespace Sitecore.MobileSDK.CrudTasks
 
     private HttpClient httpClient;
     private readonly UploadMediaUrlBuilder urlBuilder;
-    protected ICredentialsHeadersCryptor credentialsHeadersCryptor;
   }
 }

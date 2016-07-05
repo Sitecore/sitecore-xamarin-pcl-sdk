@@ -10,8 +10,8 @@ namespace Sitecore.MobileSDK.CrudTasks
 
   internal class CreateItemByPathTask : AbstractCreateItemTask<ICreateItemByPathRequest>
   {
-    public CreateItemByPathTask(CreateItemByPathUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public CreateItemByPathTask(CreateItemByPathUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
     }

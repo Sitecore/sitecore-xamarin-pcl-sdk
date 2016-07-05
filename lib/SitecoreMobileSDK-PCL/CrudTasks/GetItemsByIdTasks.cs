@@ -8,8 +8,8 @@
 
   internal class GetItemsByIdTasks : AbstractGetItemTask<IReadItemsByIdRequest>
   {
-    public GetItemsByIdTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public GetItemsByIdTasks(ItemByIdUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
     }

@@ -86,11 +86,7 @@
 
 
       Func<Exception, ProcessUserRequestException> urlExceptionWrapper = (Exception ex) => new ProcessUserRequestException(TaskFlowErrorMessages.BAD_USER_REQUEST_MESSAGE, ex);
-      Task<THttpRequest> requsetLoader = stages.BuildRequestUrlForRequestAsync(request, cancelToken);
-
-      requestUrl = await RestApiCallFlow.IvokeTaskAndWrapExceptions(requsetLoader, urlExceptionWrapper);
-      ////
-
+      requestUrl = stages.BuildRequestUrlForRequestAsync(request, cancelToken);
 
       if (null == requestUrl)
       {

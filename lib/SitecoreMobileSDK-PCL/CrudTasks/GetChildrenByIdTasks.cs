@@ -7,8 +7,8 @@
 
   internal class GetChildrenByIdTasks : AbstractGetItemTask<IReadItemsByIdRequest>
   {
-    public GetChildrenByIdTasks(ChildrenByIdUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public GetChildrenByIdTasks(ChildrenByIdUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
     }

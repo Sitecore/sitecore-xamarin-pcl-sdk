@@ -38,10 +38,10 @@ namespace Sitecore.MobileSDK.PublicKey
 
     #region IRestApiCallTasks
 
-    public async Task<string> BuildRequestUrlForRequestAsync(ISessionConfig request, CancellationToken cancelToken)
+    public string BuildRequestUrlForRequestAsync(ISessionConfig request, CancellationToken cancelToken)
     {
       this.domain = request.Site;
-      return await Task.Factory.StartNew(() => this.PrepareRequestUrl(request), cancelToken);
+      return this.PrepareRequestUrl(request);
     }
 
     public async Task<Stream> SendRequestForUrlAsync(string requestUrl, CancellationToken cancelToken)

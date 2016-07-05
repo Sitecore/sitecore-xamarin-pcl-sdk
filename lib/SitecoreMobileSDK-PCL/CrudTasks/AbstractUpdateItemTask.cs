@@ -9,13 +9,13 @@
   internal abstract class AbstractUpdateItemTask<TRequest> : AbstractGetItemTask<TRequest>
     where TRequest : class
   {
-    public AbstractUpdateItemTask(HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public AbstractUpdateItemTask(HttpClient httpClient)
+      : base(httpClient)
     {
 
     }
 
-    public override async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
+    public override HttpRequestMessage BuildRequestUrlForRequestAsync(TRequest request, CancellationToken cancelToken)
     {
       string url = this.UrlToGetItemWithRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(new HttpMethod("PATCH"), url);
@@ -24,7 +24,6 @@
       StringContent bodycontent = new StringContent(fieldsList, Encoding.UTF8, "application/json");
       result.Content = bodycontent;
 
-      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
 

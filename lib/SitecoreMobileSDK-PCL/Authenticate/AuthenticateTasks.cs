@@ -22,28 +22,24 @@
     private readonly ISSCUrlParameters sscGrammar;
     private readonly SessionConfigUrlBuilder urlBuilder;
     private readonly HttpClient httpClient;
-    private readonly ICredentialsHeadersCryptor credentialsCryptor;
 
     #endregion Private Variables
 
     public AuthenticateTasks(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar,
-      SessionConfigUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor cryptor)
+      SessionConfigUrlBuilder urlBuilder, HttpClient httpClient)
     {
       this.restGrammar = restGrammar;
       this.sscGrammar = sscGrammar;
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
-      this.credentialsCryptor = cryptor;
     }
 
     #region IRestApiCallTasks
 
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(ISessionConfig request, CancellationToken cancelToken)
+    public HttpRequestMessage BuildRequestUrlForRequestAsync(ISessionConfig request, CancellationToken cancelToken)
     {
       string url = this.PrepareRequestUrl(request);
-      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
-
-      return await this.credentialsCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
+      return new HttpRequestMessage(HttpMethod.Get, url);
     }
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestMessage, CancellationToken cancelToken)

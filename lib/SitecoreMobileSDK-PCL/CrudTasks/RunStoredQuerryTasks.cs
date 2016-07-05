@@ -8,8 +8,8 @@ namespace Sitecore.MobileSDK.CrudTasks
 
   internal class RunStoredQuerryTasks : AbstractGetItemTask<IReadItemsByIdRequest>
   {
-    public RunStoredQuerryTasks(RunStoredQuerryUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public RunStoredQuerryTasks(RunStoredQuerryUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
     }

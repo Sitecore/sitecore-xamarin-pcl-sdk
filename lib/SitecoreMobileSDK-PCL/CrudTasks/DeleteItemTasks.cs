@@ -19,26 +19,21 @@ namespace Sitecore.MobileSDK.CrudTasks
   {
     private readonly IDeleteItemsUrlBuilder<T> deleteItemsBuilder;
     private readonly HttpClient httpClient;
-    private readonly ICredentialsHeadersCryptor cryptor;
 
     public DeleteItemTasks(
       IDeleteItemsUrlBuilder<T> deleteItemsBuilder,
-      HttpClient httpClient,
-      ICredentialsHeadersCryptor cryptor)
+      HttpClient httpClient)
     {
       this.deleteItemsBuilder = deleteItemsBuilder;
       this.httpClient = httpClient;
-      this.cryptor = cryptor;
 
       this.Validate();
     }
 
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(T request, CancellationToken cancelToken)
+    public HttpRequestMessage BuildRequestUrlForRequestAsync(T request, CancellationToken cancelToken)
     {
       var url = this.deleteItemsBuilder.GetUrlForRequest(request);
-      var result = new HttpRequestMessage(HttpMethod.Delete, url);
-
-      return await this.cryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
+      return new HttpRequestMessage(HttpMethod.Delete, url);
     }
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage request, CancellationToken cancelToken)
@@ -67,11 +62,6 @@ namespace Sitecore.MobileSDK.CrudTasks
       if (null == this.httpClient)
       {
         throw new ArgumentNullException("DeleteItemTasks.httpClient cannot be null");
-      }
-
-      if (null == this.cryptor)
-      {
-        throw new ArgumentNullException("DeleteItemTasks.cryptor cannot be null");
       }
 
       if (null == this.deleteItemsBuilder)

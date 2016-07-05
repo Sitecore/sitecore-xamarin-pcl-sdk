@@ -23,25 +23,21 @@
   {
     private HttpClient httpClient;
     MediaItemUrlBuilder urlBuilder;
-    private ICredentialsHeadersCryptor credentialsHeadersCryptor;
 
     public GetMediaContentHashTask(
       MediaItemUrlBuilder urlBuilder, 
-      HttpClient httpClient, 
-      ICredentialsHeadersCryptor credentialsHeadersCryptor)
+      HttpClient httpClient)
     {
       this.httpClient = httpClient;
       this.urlBuilder = urlBuilder;
-      this.credentialsHeadersCryptor = credentialsHeadersCryptor;
     }
 
 
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken)
+    public HttpRequestMessage BuildRequestUrlForRequestAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken)
     {
       string url = this.urlBuilder.BuildUrlToRequestHashForPath(request.MediaPath, request.DownloadOptions);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
 

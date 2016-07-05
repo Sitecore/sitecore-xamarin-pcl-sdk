@@ -17,23 +17,21 @@
     {
     }
 
-    public GetRenderingHtmlTasks(RenderingHtmlUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
+    public GetRenderingHtmlTasks(RenderingHtmlUrlBuilder urlBuilder, HttpClient httpClient)
     {
       this.urlBuilder = urlBuilder;
       this.httpClient = httpClient;
-      this.credentialsHeadersCryptor = credentialsHeadersCryptor;
 
       this.Validate();
     }
 
     #region  IRestApiCallTasks
 
-    public async Task<HttpRequestMessage> BuildRequestUrlForRequestAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken)
+    public HttpRequestMessage BuildRequestUrlForRequestAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken)
     {
       string url = this.urlBuilder.GetUrlForRequest(request);
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Get, url);
 
-      result = await this.credentialsHeadersCryptor.AddEncryptedCredentialHeadersAsync(result, cancelToken);
       return result;
     }
 
@@ -64,7 +62,6 @@
 
     private readonly RenderingHtmlUrlBuilder urlBuilder;
     private HttpClient httpClient;
-    private ICredentialsHeadersCryptor credentialsHeadersCryptor;
   }
 }
 

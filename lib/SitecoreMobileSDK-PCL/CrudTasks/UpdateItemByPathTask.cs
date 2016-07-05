@@ -7,8 +7,8 @@
 
   internal class UpdateItemByPathTask : AbstractUpdateItemTask<IUpdateItemByPathRequest>
   {
-    public UpdateItemByPathTask(UpdateItemByPathUrlBuilder urlBuilder, HttpClient httpClient, ICredentialsHeadersCryptor credentialsHeadersCryptor)
-      : base(httpClient, credentialsHeadersCryptor)
+    public UpdateItemByPathTask(UpdateItemByPathUrlBuilder urlBuilder, HttpClient httpClient)
+      : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
     }

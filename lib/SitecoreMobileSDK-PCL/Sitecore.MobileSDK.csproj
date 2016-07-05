@@ -103,12 +103,9 @@
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByPathUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByQueryUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsUrlBuilder.cs" />
-    <Compile Include="PublicKey\ICredentialsHeadersCryptor.cs" />
-    <Compile Include="PublicKey\AnonymousSessionCryptor.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
     <Compile Include="CrudTasks\AbstractGetItemTask.cs" />
-    <Compile Include="PublicKey\ICredentialCryptorOwner.cs" />
     <Compile Include="UrlBuilder\ItemById\ItemByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\ItemByPath\ItemByPathUrlBuilder.cs" />
     <Compile Include="UrlBuilder\ItemSourceUrlBuilder.cs" />
@@ -177,7 +174,6 @@
     <Compile Include="API\Request\IBaseUpdateItemRequest.cs" />
     <Compile Include="API\MediaItem\IMediaOptionsBuilder.cs" />
     <Compile Include="Media\MediaOptionsBuilderImpl.cs" />
-    <Compile Include="PublicKey\AuthenticatedSessionCryptor.cs" />
     <Compile Include="UrlBuilder\ChangeItem\AbstractChangeItemUrlBuilder.cs" />
     <Compile Include="API\Request\IBaseChangeItemRequest.cs" />
     <Compile Include="UserRequest\ReadRequest\AbstractBaseRequestBuilder.cs" />
