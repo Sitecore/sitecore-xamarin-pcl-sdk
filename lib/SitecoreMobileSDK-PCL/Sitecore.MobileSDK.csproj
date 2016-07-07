@@ -119,9 +119,6 @@
     <Compile Include="UserRequest\DeleteRequest\DeleteItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByQueryRequestBuilder.cs" />
-    <Compile Include="UserRequest\UploadMediaRequest\BaseUploadMediaRequestBuilder.cs" />
-    <Compile Include="UserRequest\UploadMediaRequest\UploadMediaItemByParentIdRequestBuilder.cs" />
-    <Compile Include="UserRequest\UploadMediaRequest\UploadMediaItemByParentPathRequestBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
@@ -193,12 +190,7 @@
     <Compile Include="UrlBuilder\RenderingHTML\RenderingHtmlUrlBuilder.cs" />
     <Compile Include="API\Request\IRenderingHtmlRequestParametersBuilder.cs" />
     <Compile Include="Items\MediaResourceDownloadParameters.cs" />
-    <Compile Include="API\Request\IMediaResourceUploadRequest.cs" />
-    <Compile Include="Items\MediaResourceUploadParameters.cs" />
-    <Compile Include="UrlBuilder\MediaItem\UploadMediaUrlBuilder.cs" />
-    <Compile Include="CrudTasks\UploadMediaTask.cs" />
     <Compile Include="API\Request\IGetMediaItemRequestParametersBuilder.cs" />
-    <Compile Include="API\Request\IUploadMediaItemRequestParametersBuilder.cs" />
     <Compile Include="API\Request\Parameters\IPagingParameters.cs" />
     <Compile Include="UrlBuilder\PagingUrlBuilder.cs" />
     <Compile Include="UrlBuilder\GetPagedItemsUrlBuilder.cs" />
@@ -210,8 +202,6 @@
     <Compile Include="CrudTasks\GetMediaContentHashTask.cs" />
     <Compile Include="CrudTasks\Resource\HashedMediaUrlParser.cs" />
     <Compile Include="Session\TaskFlowErrorMessages.cs" />
-    <Compile Include="API\Request\Parameters\IUploadMediaOptions.cs" />
-    <Compile Include="UrlBuilder\MediaItem\UploadMediaOptions.cs" />
     <Compile Include="UserRequest\AbstractScopedRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\ReadRequest\ReadChildrenByIdRequestBuilder.cs" />
     <Compile Include="CrudTasks\GetChildrenByIdTasks.cs" />

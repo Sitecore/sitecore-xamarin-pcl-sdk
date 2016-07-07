@@ -72,7 +72,6 @@
 				UIImage originalImage = e.Info[UIImagePickerController.OriginalImage] as UIImage;
 				if(originalImage != null) 
 				{
-          this.SendImage(originalImage);
 				}
 			} 
 			else 
@@ -83,47 +82,7 @@
 			imagePicker.DismissViewController(true, null);
 		}
 
-    private async void SendImage(UIImage image)
-    {
-      try
-      {
-        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
-        {
-          Stream stream = image.AsJPEG().AsStream();
 
-          var request = ItemSSCRequestBuilder.UploadResourceRequestWithParentPath(itemPathTextField.Text)
-            .ItemDataStream(stream)
-            .ContentType("image/jpg")
-            .ItemName(this.itemNameTextField.Text)
-            .FileName("imageFile.jpg")
-            .Build();
-
-          this.ShowLoader();
-
-          var response = await session.UploadMediaResourceAsync(request);
-
-          if (response != null)
-          {
-            AlertHelper.ShowAlertWithOkOption("upload image result","The image uploaded successfuly");
-          }
-          else
-          {
-            AlertHelper.ShowAlertWithOkOption("upload image result","something wrong");
-          }
-        }
-      }
-      catch(Exception e) 
-      {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-      }
-      finally
-      {
-        BeginInvokeOnMainThread(delegate
-        {
-          this.HideLoader();
-        });
-      }
-    }
 
 		void Handle_Canceled(object sender, EventArgs e) 
 		{

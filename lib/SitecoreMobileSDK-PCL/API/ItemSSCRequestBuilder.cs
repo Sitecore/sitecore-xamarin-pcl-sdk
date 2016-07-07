@@ -11,7 +11,6 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.UserRequest.UpdateRequest;
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
-  using Sitecore.MobileSDK.UserRequest.UploadMediaRequest;
 
   /// <summary>
   /// Main factory to construct buider for concrete request. 
@@ -197,31 +196,7 @@ namespace Sitecore.MobileSDK.API
     {
       return new RenderingHtmlRequestBuilder(sourceId, renderingId);
     }
-
-    /// <summary>
-    /// Provides builder for constructing upload media request with parent item path.
-    /// </summary>
-    /// <param name="itemPath">Relative path to the media library folder. Must stars with the '/' symbol.</param>
-    /// <returns>
-    ///   <see cref="IUploadMediaItemRequestParametersBuilder{T}" />Upload media request builder.
-    /// </returns>
-    public static IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> UploadResourceRequestWithParentPath(string mediaPath)
-    {
-      return new UploadMediaItemByParentPathRequestBuilder(mediaPath);
-    }
-
-    /// <summary>
-    /// Provides builder for constructing upload media request with parent item Id.
-    /// </summary>
-    /// <param name="parentId">Parent item GUID value enclosed in curly braces.
-    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"</param>
-    /// <returns>
-    ///   <see cref="IUploadMediaItemRequestParametersBuilder{T}" />Upload media request builder.
-    /// </returns>
-    public static IUploadMediaItemRequestParametersBuilder<IMediaResourceUploadRequest> UploadResourceRequestWithParentId(string parentId)
-    {
-      return new UploadMediaItemByParentIdRequestBuilder(parentId);
-    }
+   
   }
 }
 

@@ -141,7 +141,7 @@ namespace WhiteLabeliOS
         #if DEBUG
         if (this.instanceSite == null) 
         {
-          this.instanceSite = "/sitecore/shell";
+          this.instanceSite = "sitecore";
         }
         #endif
         return this.instanceSite;

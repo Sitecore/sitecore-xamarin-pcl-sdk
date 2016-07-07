@@ -62,7 +62,7 @@ namespace WhiteLabeliOS
     private void InitFeaturesList()
     {
 //      this.features.Insert(0, "uploadImageVC");
-//      this.features.Insert(0, "getMediaItem");
+      this.features.Insert(0, "getMediaItem");
       this.features.Insert(0, "getItemBySearch");
       this.features.Insert(0, "getItemByQuery");
       this.features.Insert(0, "deleteItemById");

@@ -396,24 +396,6 @@ namespace Sitecore.MobileSDK
     }
     #endregion GetItems
 
-    #region UploadImage
-
-    public async Task<ScItemsResponse> UploadMediaResourceAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      IMediaResourceUploadRequest requestCopy = request.DeepCopyUploadMediaRequest();
-
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
-
-      IMediaResourceUploadRequest autocompletedRequest = this.requestMerger.FillUploadMediaGaps(requestCopy);
-
-      var urlBuilder = new UploadMediaUrlBuilder(this.restGrammar, this.sscGrammar, this.sessionConfig, this.mediaSettings);
-      var taskFlow = new UploadMediaTask(urlBuilder, this.httpClient);
-
-      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-    }
-
-    #endregion UploadImage
-
     #region CreateItems
 
     public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
@@ -558,7 +540,6 @@ namespace Sitecore.MobileSDK
     protected readonly ISessionConfig sessionConfig;
     private ISSCCredentials credentials;
     private readonly IMediaLibrarySettings mediaSettings;
-
 
     private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
     private readonly ISSCUrlParameters sscGrammar = SSCUrlParameters.ItemSSCV2UrlParameters();

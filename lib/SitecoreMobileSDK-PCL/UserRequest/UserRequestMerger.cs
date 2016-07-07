@@ -113,17 +113,6 @@ namespace Sitecore.MobileSDK.UserRequest
       return new MediaResourceDownloadParameters(mergedSessionConfig, mergedSource, userRequest.DownloadOptions, userRequest.MediaPath);
     }
 
-    public IMediaResourceUploadRequest FillUploadMediaGaps(IMediaResourceUploadRequest userRequest)
-    {
-      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGapsForMediaUpload(userRequest.ItemSource);
-
-      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
-     
-      UploadMediaOptions createMediaParameters = userRequest.UploadOptions.ShallowCopy();
-
-      return new MediaResourceUploadParameters(mergedSessionConfig, mergedSource, createMediaParameters);
-    }
-
     public ICreateItemByIdRequest FillCreateItemByIdGaps(ICreateItemByIdRequest userRequest)
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
