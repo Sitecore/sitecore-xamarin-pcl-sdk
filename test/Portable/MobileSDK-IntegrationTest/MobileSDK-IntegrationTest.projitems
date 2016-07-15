@@ -11,7 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)TestEndpointsConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UrlAutocompleteTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UploadMediaTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ThreadSafetyTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TestEnvironment.cs" />
@@ -20,7 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ScTestApiSession.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ReadPagedItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OperationCancelTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GetRenderingHTMLTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetPublicKeyTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetMediaItemsWithHashesTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetMediaItemsTest.cs" />
@@ -28,7 +26,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetFieldsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CryptorConstructionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateFromBranchTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CancelOperationsTest.cs" />

@@ -11,7 +11,7 @@
   public class GetItemsTest
   {
     private TestEnvironment testData;
-    private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
+    private ISitecoreSSCReadonlySession sessionAuthenticatedUser;
 
     private const string ItemWithSpacesPath = "/sitecore/content/Home/Android/Static/Test item 1";
     private const string ItemWithSpacesName = "Test item 1";
@@ -21,7 +21,7 @@
     {
       testData = TestEnvironment.DefaultTestEnvironment();
       this.sessionAuthenticatedUser =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
           .BuildReadonlySession();
     }
@@ -42,7 +42,7 @@
     //        .SetDisplayAsThumbnail(true)
     //        .Build();
     //
-    //      var request = ItemWebApiRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
+    //      var request = ItemSSCRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
     //        .DownloadOptions(options)
     //        .Database("master")
     //        .Build();
@@ -101,7 +101,7 @@
     [Test]
     public void TestGetItemByIdWithPathInParamsReturnsError()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Path).Build());
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Path).Build());
       Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
 
@@ -173,43 +173,12 @@
     {
       const string ItemInterationalPath = "/sitecore/content/Home/Android/Static/Japanese/宇都宮/ではまた明日";
       var response = await GetItemByPath(ItemInterationalPath);
-      var expectedItem = new TestEnvironment.Item
-      {
+      var expectedItem = new TestEnvironment.Item {
         DisplayName = "ではまた明日",
         Path = ItemInterationalPath,
         Template = testData.Items.Home.Template
       };
       testData.AssertItemsAreEqual(expectedItem, response[0]);
-    }
-
-    [Test]
-    public async void TestGetItemsByQueryCaseInsensetive()
-    {
-      const string Query = "/sitecore/content/HOME/AllowED_PARent/*";
-
-      var response = await this.GetItemByQuery(Query);
-
-      testData.AssertItemsCount(2, response);
-      Assert.AreEqual(testData.Items.Home.Template, response[0].Template);
-    }
-
-    [Test]
-    public async void TestGetItemByInternationalQuery()
-    {
-      const string QueryInternational = "/sitecore/content/HOME//*[@title='宇都宮']";
-      var response = await this.GetItemByQuery(QueryInternational);
-
-      testData.AssertItemsCount(1, response);
-      Assert.AreEqual("宇都宮", response[0].DisplayName);
-    }
-
-    [Test]
-    public async void TestGetItemByInvalidQueryReturnsError()
-    {
-      const string QueryInvalid = "/sitecore/content/HOME/AllowED_PARent//*[@@templatekey123='sample item']";
-      var response = await this.GetItemByQuery(QueryInvalid);
-
-      testData.AssertItemsCount(0, response);
     }
 
     [Test]
@@ -239,19 +208,6 @@
     }
 
     [Test]
-    public void TestGetItemByNullQueryReturnsError()
-    {
-      TestDelegate testCode = async () =>
-      {
-        var task = this.GetItemByQuery(null);
-        await task;
-      };
-
-      var exception = Assert.Throws<ArgumentNullException>(testCode);
-      Assert.IsTrue(exception.Message.Contains("ReadItemByQueryRequestBuilder.SitecoreQuery"));
-    }
-
-    [Test]
     public void TestGetItemByEmptyPathReturnsError()
     {
       TestDelegate testCode = async () =>
@@ -262,19 +218,6 @@
 
       var exception = Assert.Throws<ArgumentException>(testCode);
       Assert.AreEqual("ReadItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
-    }
-
-    [Test]
-    public void TestGetItemByEmptyQueryReturnsError()
-    {
-      TestDelegate testCode = async () =>
-      {
-        var task = this.GetItemByQuery("");
-        await task;
-      };
-
-      var exception = Assert.Throws<ArgumentException>(testCode);
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.SitecoreQuery : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -307,11 +250,11 @@
     public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
       var sessionWithoutAccess =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.NoReadUserExtranet)
           .BuildReadonlySession();
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
       var response = await sessionWithoutAccess.ReadItemAsync(request);
 
       testData.AssertItemsCount(0, response);
@@ -319,23 +262,17 @@
 
     private async Task<ScItemsResponse> GetItemById(string id)
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(id).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
     private async Task<ScItemsResponse> GetItemByPath(string itemPath)
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(itemPath).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(itemPath).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
 
-    private async Task<ScItemsResponse> GetItemByQuery(string query)
-    {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
-      return response;
-    }
   }
 }

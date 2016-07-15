@@ -10,7 +10,7 @@
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]
@@ -23,14 +23,14 @@
     [SetUp]
     public void SetUp()
     {
-      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-      IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
+      ISSCUrlParameters webApiGrammar = SSCUrlParameters.ItemSSCV2UrlParameters();
 
       this.builder = new ItemByPathUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSession = new SessionConfigPOD();
       mutableSession.InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net";
-      mutableSession.ItemWebApiVersion = "v2";
+      mutableSession.ItemSSCVersion = "v2";
       mutableSession.Site = "";
       this.sessionConfig = mutableSession;
 
@@ -209,11 +209,11 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO").Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
-      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
       string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo";
@@ -227,12 +227,12 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
-      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
       string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?payload=full";
@@ -245,13 +245,13 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Database("master")
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
-      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
       string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?sc_database=master";
@@ -264,13 +264,13 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Language("da")
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
-      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
       string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?language=da&payload=content";

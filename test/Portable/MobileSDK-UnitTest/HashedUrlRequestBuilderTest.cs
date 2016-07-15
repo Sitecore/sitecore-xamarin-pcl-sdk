@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   [TestFixture]
   public class HashedUrlRequestBuilderTest
@@ -20,7 +20,7 @@
     {
       SessionConfigPOD mockConfig = new SessionConfigPOD();
       mockConfig.InstanceUrl = "localhost";
-      mockConfig.ItemWebApiVersion = "v1";
+      mockConfig.ItemSSCVersion = "v1";
       mockConfig.Site = null;
 
       var itemSource = new ItemSourcePOD("master", "fr");
@@ -28,8 +28,8 @@
       var mediaSettings = new MutableMediaLibrarySettings();
 
       this.builder = new MediaItemUrlBuilder(
-        RestServiceGrammar.ItemWebApiV2Grammar(),
-        WebApiUrlParameters.ItemWebApiV2UrlParameters(),
+        RestServiceGrammar.ItemSSCV2Grammar(),
+        SSCUrlParameters.ItemSSCV2UrlParameters(),
         mockConfig,
         mediaSettings,
         itemSource);
@@ -37,11 +37,11 @@
 
       SessionConfigPOD mockConfigWithShell = new SessionConfigPOD();
       mockConfigWithShell.InstanceUrl = "localhost";
-      mockConfigWithShell.ItemWebApiVersion = "v1";
+      mockConfigWithShell.ItemSSCVersion = "v1";
       mockConfigWithShell.Site = "/sitecore/shell";
       this.builderWithShellSite = new MediaItemUrlBuilder(
-        RestServiceGrammar.ItemWebApiV2Grammar(),
-        WebApiUrlParameters.ItemWebApiV2UrlParameters(),
+        RestServiceGrammar.ItemSSCV2Grammar(),
+        SSCUrlParameters.ItemSSCV2UrlParameters(),
         mockConfigWithShell,
         mediaSettings,
         itemSource);

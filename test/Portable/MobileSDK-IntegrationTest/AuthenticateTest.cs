@@ -28,7 +28,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .BuildReadonlySession()
       )
@@ -43,7 +43,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.NotExistent)
           .BuildReadonlySession()
       )
@@ -59,7 +59,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Creatorex)
           .Site(testData.ShellSite)
           .BuildReadonlySession()
@@ -75,7 +75,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Creatorex)
           .Site("/")
           .BuildReadonlySession()
@@ -91,7 +91,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.SitecoreCreator)
           .Site("/")
           .BuildReadonlySession()
@@ -107,7 +107,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.SitecoreCreator)
           .Site(testData.ShellSite)
           .BuildReadonlySession()
@@ -123,8 +123,8 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Username, "wrongpassword"))
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(new SSCCredentialsPOD(testData.Users.Admin.Username, "wrongpassword"))
         .BuildReadonlySession()
       )
       {
@@ -138,8 +138,8 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new WebApiCredentialsPOD(testData.Users.Admin.Username, "Password $#%^&^*"))
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        .Credentials(new SSCCredentialsPOD(testData.Users.Admin.Username, "Password $#%^&^*"))
         .BuildReadonlySession()
       )
       {
@@ -153,8 +153,8 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(new WebApiCredentialsPOD("Username $#%^&^*", testData.Users.Admin.Password))
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(new SSCCredentialsPOD("Username $#%^&^*", testData.Users.Admin.Password))
           .BuildReadonlySession()
       )
       {
@@ -168,7 +168,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobilesdk-notexistent.com")
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("http://mobilesdk-notexistent.com")
           .Credentials(testData.Users.Admin)
           .BuildReadonlySession()
       )
@@ -201,7 +201,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("\\m.dk%&^&*(.net")
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("\\m.dk%&^&*(.net")
         .Credentials(testData.Users.Admin)
         .BuildReadonlySession()
       )
@@ -224,7 +224,7 @@
       var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
           .Credentials(testData.Users.Admin)
           .BuildReadonlySession()
       )

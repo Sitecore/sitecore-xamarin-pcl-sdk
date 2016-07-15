@@ -1,18 +1,19 @@
 ﻿namespace Sitecore.MobileSDK.MockObjects
 {
+  using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
 
-  public class WebApiCredentialsPOD : IWebApiCredentials
+  public class MutableSSCCredentialsPOD : ISSCCredentials
   {
-    public WebApiCredentialsPOD(string username, string password)
+    public MutableSSCCredentialsPOD(string username, string password)
     {
       this.Username = username;
       this.Password = password;
     }
 
-    public IWebApiCredentials CredentialsShallowCopy()
+    public ISSCCredentials CredentialsShallowCopy()
     {
-      return new WebApiCredentialsPOD(this.Username, this.Password);
+      return new MutableSSCCredentialsPOD(this.Username, this.Password);
     }
 
     public void Dispose()
@@ -24,14 +25,14 @@
     public string Username
     {
       get;
-      private set;
+      set;
     }
 
     public string Password
     {
       get;
-      private set;
-    }
+      set;
+    }  
   }
 }
 

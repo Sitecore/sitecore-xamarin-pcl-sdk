@@ -15,32 +15,27 @@
     <Compile Include="$(MSBuildThisFileDirectory)CreateSessionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByIdUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByPathUrlBuilderTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByQueryUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsResponseParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloadMediaOptionsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FieldsParserTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GetHtmlRenderingUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HashedUrlRequestBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HashedUrlResponseTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemByIdUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemByPathUrlBuilderTests.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ItemByQueryUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceUrlBuilderTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ItemWebApiRequestBuilderTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemSSCRequestBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginAndPasswordEncryptionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagingRequestBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagingUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PortablePasswordStorageTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PublicKeyParsingTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)QueryParametersUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResourseUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByIdUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByPathUrlBuilderTests.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UploadMediaUrlBuilderTests.cs" />
   </ItemGroup>
 </Project>

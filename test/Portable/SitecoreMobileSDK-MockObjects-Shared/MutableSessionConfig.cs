@@ -8,7 +8,7 @@
       string instanceUrl, 
       string site = null, 
       string itemWebApiVersion = "v1")
-    : base(instanceUrl, site, itemWebApiVersion)
+    : base(instanceUrl, site)
     {
     }
 
@@ -22,7 +22,6 @@
       // @adk : skipping validation
       result.SetInstanceUrl(this.InstanceUrl);
       result.SetSite(this.Site);
-      result.SetItemWebApiVersion(this.ItemWebApiVersion);
 
       return result;
     }
@@ -39,7 +38,6 @@
 
     public void SetItemWebApiVersion(string value)
     {
-      this.ItemWebApiVersion = value;
     }
   }
 }

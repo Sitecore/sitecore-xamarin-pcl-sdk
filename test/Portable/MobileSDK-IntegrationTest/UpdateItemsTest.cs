@@ -14,8 +14,8 @@
   public class UpdateItemsTest
   {
     private TestEnvironment testData;
-    private ISitecoreWebApiSession session;
-    private ISitecoreWebApiSession noThrowCleanupSession;
+    private ISitecoreSSCSession session;
+    private ISitecoreSSCSession noThrowCleanupSession;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
 
     [SetUp]
@@ -26,12 +26,13 @@
 
       // Same as this.session
       var cleanupSession = this.CreateSession();
-      this.noThrowCleanupSession = new NoThrowWebApiSession(cleanupSession);
+
+      this.noThrowCleanupSession = new NoThrowSSCSession(cleanupSession);
     }
 
-    private ISitecoreWebApiSession CreateSession()
+    private ISitecoreSSCSession CreateSession()
     {
-      return SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      return SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
@@ -64,7 +65,7 @@
       const string Language = "da";
       var titleValue = RandomText();
       var textValue = RandomText();
-      var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var itemSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultLanguage(Language)
@@ -72,7 +73,7 @@
         .BuildSession();
       ISitecoreItem item = await this.CreateItem("Danish item to update", null, itemSession);
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(item.Path)
         .AddFieldsRawValuesByNameToSet("Title", titleValue)
         .AddFieldsRawValuesByNameToSet("Text", textValue)
         .Language(Language)
@@ -93,7 +94,7 @@
     {
       var textValue = RandomText();
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
         .AddFieldsRawValuesByNameToSet("Text", textValue)
         .Build();
 
@@ -105,7 +106,7 @@
     [Test]
     public void TestUpdateItemByInvalidIdReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.Home.Path)
+      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId(testData.Items.Home.Path)
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
@@ -113,7 +114,7 @@
     [Test]
     public void TestUpdateItemByEmptyIdReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId("")
+      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId("")
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.ItemId : The input cannot be empty.", exception.Message);
     }
@@ -121,7 +122,7 @@
     [Test]
     public void TestUpdateItemByNullPathReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath(null)
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath(null)
         .Build());
       Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.ItemPath"));
     }
@@ -129,7 +130,7 @@
     [Test]
     public void TestUpdateItemByInvalidPathReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("invalid path)")
+      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("invalid path)")
         .Build());
       Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
     }
@@ -137,7 +138,7 @@
     [Test]
     public void TestUpdateItemByIdWithNullDatabaseDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
         .Database(null)
         .Build();
       Assert.IsNotNull(request);
@@ -146,7 +147,7 @@
     [Test]
     public void TestUpdateItemByPathWithTwoDatabasesReturnsException()
     {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("/path")
         .Database("db1")
         .Database("db2")
         .Build());
@@ -156,7 +157,7 @@
     [Test]
     public void TestUpdateItemByIdWithSpacesOnlyInLanguageReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
         .Language("  ")
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.Language : The input cannot be empty.", exception.Message);
@@ -165,7 +166,7 @@
     [Test]
     public void TestUpdateItemByIdWithNullReadFieldsReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
         .AddFieldsToRead(null)
         .Build());
       Assert.IsTrue(exception.Message.Contains("UpdateItemByIdRequestBuilder.Fields"));
@@ -174,7 +175,7 @@
     [Test]
     public void TestUpdateItemByPathWithNullFieldsToUpdateReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("/path")
         .AddFieldsRawValuesByNameToSet(null)
         .Build());
       Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.FieldsRawValuesByName"));
@@ -183,7 +184,7 @@
     [Test]
     public void TestUpdateItemByIdWithDuplicateFieldsToUpdateReturnsException()
     {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
         .AddFieldsRawValuesByNameToSet("Title", "Value1")
         .AddFieldsRawValuesByNameToSet("Title", "Value2")
         .Build());
@@ -193,7 +194,7 @@
     [Test]
     public void TestUpdateItemByPathWithDuplicateFieldsToReadReturnsException()
     {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/path")
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("/path")
         .AddFieldsToRead("Title")
         .AddFieldsToRead("Title"));
       Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
@@ -202,7 +203,7 @@
     [Test]
     public void TestUpdateItemByIdWithTwoVersionsReturnsException()
     {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithId(SampleId)
+      var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
         .Version(1)
         .Version(2)
         .Build());
@@ -212,7 +213,7 @@
     [Test]
     public void TestUpdateItemByPathWithSpacesOnlyReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.UpdateItemRequestWithPath("  ")
+      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("  ")
         .Build());
       Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
@@ -224,7 +225,7 @@
       const int Version = 1;
       var textValue = RandomText();
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
         .AddFieldsRawValuesByNameToSet("Text", textValue)
         .Version(Version)
         .Build();
@@ -247,7 +248,7 @@
       const string ItemName = "גלורי לאוקראינה";
       ISitecoreItem item = await this.CreateItem(ItemName);
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/" + ItemName)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/" + ItemName)
         .AddFieldsRawValuesByNameToSet("Text", TextValue)
         .AddFieldsToRead("Text")
         .Build();
@@ -270,7 +271,7 @@
 
       ISitecoreItem item = await this.CreateItem("item to updata not existen field");
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(item.Path)
         .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
         .AddFieldsToRead(FieldName)
         .Build();
@@ -293,7 +294,7 @@
 
       ISitecoreItem item = await this.CreateItem("item to updata not existen field");
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(item.Path)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(item.Path)
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
         .AddFieldsToRead(FieldName)
         .Build();
@@ -313,12 +314,12 @@
       const string FieldName = "Text";
       var fieldValue = RandomText();
 
-      var itemSession = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
+      var itemSession = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
         .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
         .Build();
 
@@ -329,7 +330,7 @@
       };
       var exception = Assert.Throws<ParserException>(testCode);
       Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.AreEqual("Access to site is not granted.", exception.InnerException.Message);
     }
 
@@ -339,13 +340,13 @@
       const string FieldName = "Text";
       var fieldValue = RandomText();
 
-      var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var itemSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.NoCreateAccess)
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
 
-      var request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
+      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
         .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
         .Build();
 
@@ -356,18 +357,18 @@
       };
       var exception = Assert.Throws<ParserException>(testCode);
       Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("The current user does not have write access to this item"));
     }
 
-    private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)
+    private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreSSCSession itemSession = null)
     {
       if (itemSession == null)
       {
         itemSession = session;
       }
       string parentPath = parentItem == null ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
-      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(parentPath)
+      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(parentPath)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(itemName)
         .Build();
@@ -384,9 +385,10 @@
 
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+      var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
         .Database(database)
         .Build();
+      
       var response = await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
       return response;
     }

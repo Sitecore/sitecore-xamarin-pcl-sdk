@@ -15,7 +15,7 @@
     {
       Assert.Throws<InvalidOperationException>(() =>
       {
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/A/B/C/D/E")
+        ItemSSCRequestBuilder.ReadItemsRequestWithPath("/A/B/C/D/E")
           .PageNumber(5)
           .ItemsPerPage(10)
           .PageNumber(1);
@@ -25,7 +25,7 @@
     [Test]
     public void TestPagingSettingsUsedForOmittedScopeAndSingleItemResponse()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/x/y/z/*")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/x/y/z/*")
         .PageNumber(44)
         .ItemsPerPage(5)
         .Build();

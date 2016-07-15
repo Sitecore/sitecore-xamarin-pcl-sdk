@@ -15,14 +15,14 @@
   public class ItemSourceTest
   {
     IMediaLibrarySettings mediaSettings;
-    IWebApiCredentials credentials;
+    ISSCCredentials credentials;
     ISessionConfig localhostConnection;
 
 
     [SetUp]
     public void SetUp()
     {
-      this.credentials = new WebApiCredentialsPOD(
+      this.credentials = new SSCCredentialsPOD(
         "alex.fergusson", 
         "man u is a champion");
 

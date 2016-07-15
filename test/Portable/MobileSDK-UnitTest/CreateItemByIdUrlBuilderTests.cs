@@ -11,7 +11,7 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]
@@ -23,13 +23,13 @@
     [SetUp]
     public void SetUp()
     {
-      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-      IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
+      ISSCUrlParameters webApiGrammar =  SSCUrlParameters.ItemSSCV2UrlParameters();
 
       this.builder = new CreateItemByIdUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemWebApiVersion = "v234";
+      mutableSessionConfig.ItemSSCVersion = "v234";
       mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
       mutableSessionConfig.Site = "/sitecore/shell";
 
@@ -47,7 +47,7 @@
     [Test]
     public void TestCorrectParamsWithoutFields()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("item name")
         .Build();
@@ -72,7 +72,7 @@
     [Test]
     public void TestCorrectParamsWithFields()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("item name")
         .AddFieldsRawValuesByNameToSet("field1", "value1")
@@ -99,7 +99,7 @@
     [Test]
     public void TestFieldsValuesIsCaseInsensitive()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("item name")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
@@ -126,7 +126,7 @@
     [Test]
     public void TestItemNameIsCaseInsensitive()
     {
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
@@ -153,7 +153,7 @@
     [Test]
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      var requestBuilder = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
@@ -166,7 +166,7 @@
     [Test]
     public void TestAppendingDuplicatedFieldsCausesInvalidOperationException()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      var requestBuilder = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
@@ -179,7 +179,7 @@
     [Test]
     public void TestNameCanNotBeEmpty()
     {
-      var builder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
+      var builder = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
 
       TestDelegate action = () => builder.ItemTemplatePath("Sample/Sample Item").ItemName(" ");
       Assert.Throws<ArgumentException>(action);
@@ -188,7 +188,7 @@
     [Test]
     public void TestTemplateCanNotBeEmpty()
     {
-      var builder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
+      var builder = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}");
 
       TestDelegate action = () => builder.ItemTemplatePath(" ");
       Assert.Throws<ArgumentException>(action);
@@ -201,7 +201,7 @@
       fields.Add("field1", "VaLuE1");
       fields.Add("field2", "VaLuE2");
 
-      ICreateItemByIdRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      ICreateItemByIdRequest request = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .Database("db")

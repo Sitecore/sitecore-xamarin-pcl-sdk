@@ -20,24 +20,24 @@
     {
       var noInstanceUrl = new SessionConfigPOD();
       noInstanceUrl.InstanceUrl = null;
-      noInstanceUrl.ItemWebApiVersion = "v1";
+      noInstanceUrl.ItemSSCVersion = "v1";
       noInstanceUrl.Site = "/sitecore/shell";
 
       var noSite = new SessionConfigPOD();
       noSite.InstanceUrl = "http://localhost:80";
-      noSite.ItemWebApiVersion = "v1";
+      noSite.ItemSSCVersion = "v1";
       noSite.Site = null;
 
 
-      var noWebApiVersion = new SessionConfigPOD();
-      noWebApiVersion.InstanceUrl = "sitecore.net";
-      noWebApiVersion.ItemWebApiVersion = null;
-      noWebApiVersion.Site = "/sitecore/shell";
+      var noSSCVersion = new SessionConfigPOD();
+      noSSCVersion.InstanceUrl = "sitecore.net";
+      noSSCVersion.ItemSSCVersion = null;
+      noSSCVersion.Site = "/sitecore/shell";
 
 
 
       Assert.Throws<ArgumentNullException>(() => new SessionConfigMerger(noInstanceUrl));
-      Assert.Throws<ArgumentNullException>(() => new SessionConfigMerger(noWebApiVersion));
+      Assert.Throws<ArgumentNullException>(() => new SessionConfigMerger(noSSCVersion));
       Assert.DoesNotThrow(() => new SessionConfigMerger(noSite));
     }
 
@@ -46,7 +46,7 @@
     {
       var defaultConfig = new SessionConfigPOD();
       defaultConfig.InstanceUrl = "sitecore.net";
-      defaultConfig.ItemWebApiVersion = "v1";
+      defaultConfig.ItemSSCVersion = "v1";
       defaultConfig.Site = "/sitecore/shell";
 
 
@@ -62,12 +62,12 @@
     {
       var defaultConfig = new SessionConfigPOD();
       defaultConfig.InstanceUrl = "sitecore.net";
-      defaultConfig.ItemWebApiVersion = "v1";
+      defaultConfig.ItemSSCVersion = "v1";
       defaultConfig.Site = "/sitecore/shell";
 
       var userConfig = new SessionConfigPOD();
       userConfig.InstanceUrl = "http://localhost:80";
-      userConfig.ItemWebApiVersion = "v100500";
+      userConfig.ItemSSCVersion = "v100500";
       userConfig.Site = "/abra/kadabra";
 
       var merger = new SessionConfigMerger(defaultConfig);
@@ -82,12 +82,12 @@
     {
       var defaultConfig = new SessionConfigPOD();
       defaultConfig.InstanceUrl = "sitecore.net";
-      defaultConfig.ItemWebApiVersion = "v1";
+      defaultConfig.ItemSSCVersion = "v1";
       defaultConfig.Site = "/sitecore/shell";
 
       var userConfig = new SessionConfigPOD();
       userConfig.InstanceUrl = null;
-      userConfig.ItemWebApiVersion = null;
+      userConfig.ItemSSCVersion = null;
       userConfig.Site = null;
 
       var merger = new SessionConfigMerger(defaultConfig);

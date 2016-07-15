@@ -68,7 +68,7 @@
         DeleteItemsResponseParser.ParseResponse(responseString, CancellationToken.None);
       };
 
-      var exception = Assert.Throws<WebApiJsonErrorException>(action);
+      var exception = Assert.Throws<SSCJsonErrorException>(action);
 
       Assert.AreEqual(401, exception.Response.StatusCode);
       Assert.AreEqual("Access to the \u0027master\u0027 database is denied." +

@@ -9,13 +9,13 @@
   using Sitecore.MobileSDK.API.Request.Parameters;
 
   [TestFixture]
-  public class ItemWebApiRequestBuilderTest
+  public class ItemSSCRequestBuilderTest
   {
     #region ItemId
     [Test]
     public void TestItemIdRequestBuilderWithAllFields()
     {
-      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Database("web")
         .Language("en")
         .Version(1)
@@ -37,7 +37,7 @@
     [Test]
     public void TestItemIdRequestBuilderWithIdOnly()
     {
-      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{abra-kadabra}").Build();
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{abra-kadabra}").Build();
 
       Assert.IsNotNull(result);
       Assert.IsNotNull(result.ItemSource);
@@ -55,34 +55,34 @@
     [Test]
     public void TestItemIdRequestBuilderWithNullIdCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(null));
+      Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId(null));
     }
 
     [Test]
     public void TestItemIdRequestBuilderWithEmptyIdCrashes()
     {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(""));
+      Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId(""));
     }
 
     [Test]
     public void TestItemIdRequestBuilderWithWhitespaceIdCrashes()
     {
 
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId("\t \r \n"));
+      Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId("\t \r \n"));
     }
 
     [Test]
     public void TestItemIdWithoutBracesCrashesBuilder()
     {
 
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId("ololololo"));
+      Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId("ololololo"));
     }
 
     [Test]
     public void TestItemIdWithBracesOnlyCrashesBuilder()
     {
 
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId("{}"));
+      Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId("{}"));
     }
     #endregion ItemId
 
@@ -91,7 +91,7 @@
     [Test]
     public void TestItemPathRequestBuilderWithAllFields()
     {
-      IReadItemsByPathRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content")
+      IReadItemsByPathRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content")
         .Database("master")
         .Language("da")
         .Version(100500)
@@ -113,7 +113,7 @@
     [Test]
     public void TestItemPathRequestBuilderWithPathOnly()
     {
-      IReadItemsByPathRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content").Build();
+      IReadItemsByPathRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content").Build();
 
 
       Assert.IsNotNull(result);
@@ -131,94 +131,27 @@
     [Test]
     public void TestItemPathRequestBuilderWithNullPathCrashes()
     {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(null));
+      Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath(null));
     }
 
     [Test]
     public void TestItemPathRequestBuilderWithEmptyPathCrashes()
     {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(""));
+      Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath(""));
     }
 
     [Test]
     public void TestItemPathRequestBuilderWithWhitespacePathCrashes()
     {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath("\t \r \n"));
+      Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath("\t \r \n"));
     }
 
     [Test]
     public void TestItemPathWithoutStartingSlashCrashesBuilder()
     {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath("blablabla"));
+      Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath("blablabla"));
     }
     #endregion ItemPath
-
-
-    #region SitecoreQuery
-    [Test]
-    public void TestSitecoreQueryRequestBuilderWithAllFields()
-    {
-      IReadItemsByQueryRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("fast:/sitecore/content/HOME/*")
-        .Database("core")
-        .Language("de")
-
-        // @adk : does not compile by design
-        //        .Version("341")
-        .Build();
-
-
-      Assert.IsNotNull(result);
-      Assert.IsNotNull(result.ItemSource);
-      Assert.IsNotNull(result.SitecoreQuery);
-      Assert.IsNotNull( result.QueryParameters );
-      Assert.IsNull(result.SessionSettings);
-
-      Assert.AreEqual("fast:/sitecore/content/HOME/*", result.SitecoreQuery);
-      Assert.AreEqual("de", result.ItemSource.Language);
-      Assert.AreEqual("core", result.ItemSource.Database);
-
-//      Assert.AreEqual("341", result.ItemSource.VersionNumber);
-      Assert.IsNull(result.ItemSource.VersionNumber);
-
-    }
-
-    [Test]
-    public void TestQueryRequestBuilderWithQueryOnly()
-    {
-      IReadItemsByQueryRequest result = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("sitecore/content/HOME/*").Build();
-
-      Assert.IsNotNull(result);
-      Assert.IsNotNull(result.ItemSource);
-      Assert.IsNotNull(result.SitecoreQuery);
-      Assert.IsNotNull( result.QueryParameters );
-      Assert.IsNull(result.SessionSettings);
-
-      Assert.AreEqual("sitecore/content/HOME/*", result.SitecoreQuery);
-
-      Assert.IsNull(result.ItemSource.Language);
-      Assert.IsNull(result.ItemSource.Database);
-      Assert.IsNull(result.ItemSource.VersionNumber);
-    }
-
-    [Test]
-    public void TestQueryRequestBuilderWithNullQueryCrashes()
-    {
-      Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(null));
-    }
-
-    [Test]
-    public void TestItemQueryRequestBuilderWithEmptyQueryCrashes()
-    {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(""));
-    }
-
-    [Test]
-    public void TestQueryRequestBuilderWithWhitespaceQueryCrashes()
-    {
-      Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("\t \r \n"));
-    }            
-    #endregion SitecoreQuery
-
 
     #region Fields
     [Test]
@@ -228,7 +161,7 @@
       string[] moarFields = { "1", "2", "4" };
       string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
 
-      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFieldsToRead(fields)
         .AddFieldsToRead(moarFields)
         .Build();
@@ -257,7 +190,7 @@
 
       string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
 
-      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFieldsToRead(fields)
         .AddFieldsToRead(moarFieldsList)
         .Build();
@@ -284,7 +217,7 @@
     {
       string[] expectedFields = { "Мыла", "Раму", "Мама" };
 
-      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFieldsToRead("Мыла")
         .AddFieldsToRead("Раму")
         .AddFieldsToRead("Мама")
@@ -310,7 +243,7 @@
     public void TestDuplicatedFieldsCauseException()
     {
       Assert.Throws<InvalidOperationException>(() => 
-      ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFieldsToRead("XXXXX")
         .AddFieldsToRead("YYY")
         .AddFieldsToRead("XXXXX")
@@ -321,7 +254,7 @@
     public void TestCaseInsensitiveDuplicatedFieldsCauseException()
     {
       Assert.Throws<InvalidOperationException>(() => 
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFieldsToRead("XXXXX")
         .AddFieldsToRead("YYY")
         .AddFieldsToRead("xxXXx")
@@ -333,7 +266,7 @@
     public void TestEmptyFieldsAreIgnored()
     {
       var request = 
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFieldsToRead("")
         .Build();
 
@@ -349,12 +282,12 @@
     public void TestNullFieldsAreNotIgnored()
     {
       {
-        TestDelegate action = () => ItemWebApiRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFieldsToRead ((string)null);
+        TestDelegate action = () => ItemSSCRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFieldsToRead ((string)null);
         Assert.Throws<ArgumentNullException>(action);
       }
 
       {
-        TestDelegate action = () => ItemWebApiRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFieldsToRead ((IEnumerable<string>)null);
+        TestDelegate action = () => ItemSSCRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFieldsToRead ((IEnumerable<string>)null);
         Assert.Throws<ArgumentNullException>(action);
       }
     }
@@ -363,7 +296,7 @@
     public void TestWhitespaceFieldsAreIgnored()
     {
       var request = 
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFieldsToRead("\n   \t   \r")
         .Build();
 
@@ -380,7 +313,7 @@
     {
       string[] expectedFields = { "alpha", "beta", "gamma" };
 
-      IReadItemsByIdRequest result =  ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
         .AddFieldsToRead("alpha", "beta", "gamma")
         .Build();
 
@@ -404,7 +337,7 @@
     [Test]
     public void TestNullDatabaseCanBeAssignedExplicitly()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Database(null)
         .Build();
 
@@ -414,7 +347,7 @@
     [Test]
     public void TestEmptyDatabaseCanBeAssignedExplicitly()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
         .Database(string.Empty)
         .Build();
 
@@ -425,9 +358,9 @@
     public void TestDatabaseCannotBeAssignedTwice()
     {
       Assert.Throws<InvalidOperationException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
-        .Database("master")
-        .Database("web")
+                                               ItemSSCRequestBuilder.ReadItemsRequestWithPath("/pppp/sss/*")
+                                               .Database("master")
+                                               .Database("web")
       );
     }
 
@@ -435,19 +368,19 @@
     public void TestWhitespaceDatabaseCannotBeAssignedExplicitly()
     {
       Assert.Throws<ArgumentException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        ItemSSCRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
         .Database("\t   \r  \n")
       );
     }
     #endregion Database Validation
 
 
-    #region Language Validationvar request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+    #region Language Validationvar request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
      
     [Test]
     public void TestNullLanguageCanBeAssignedExplicitly()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/pppp/sss/*")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/pppp/sss/*")
         .Language(null)
         .Build();
 
@@ -457,7 +390,7 @@
     [Test]
     public void TestEmptyLanguageCanBeAssignedExplicitly()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Language(string.Empty)
         .Build();
       Assert.IsNotNull(request);
@@ -467,7 +400,7 @@
     public void TestLanguageCannotBeAssignedTwice()
     {
       Assert.Throws<InvalidOperationException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        ItemSSCRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
         .Language("en")
         .Language("fr")
       );
@@ -477,7 +410,7 @@
     public void TestWhitespaceLanguageCannotBeAssignedExplicitly()
     {
       Assert.Throws<ArgumentException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        ItemSSCRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
         .Language("\t   \r  \n")
       );
     }
@@ -488,7 +421,7 @@
     public void TestNullVersionCannotBeAssignedExplicitly()
     {
       Assert.Throws<ArgumentNullException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
+        ItemSSCRequestBuilder.ReadItemsRequestWithPath("/aaa/bb/fff")
         .Version(null)
       );
     }
@@ -497,7 +430,7 @@
     public void TestZeroVersionCannotBeAssignedExplicitly()
     {
       Assert.Throws<ArgumentException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/pppp/sss")
+        ItemSSCRequestBuilder.ReadItemsRequestWithPath("/pppp/sss")
         .Version(0)
       );
     }
@@ -506,7 +439,7 @@
     public void TestNegativeVersionCannotBeAssignedExplicitly()
     {
       Assert.Throws<ArgumentException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/pppp/sss")
+        ItemSSCRequestBuilder.ReadItemsRequestWithPath("/pppp/sss")
         .Version(-34)
       );
     }
@@ -515,7 +448,7 @@
     public void TestVersionCannotBeAssignedTwice()
     {
       Assert.Throws<InvalidOperationException>( () =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+        ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
         .Version(2)
         .Version(99)
       );

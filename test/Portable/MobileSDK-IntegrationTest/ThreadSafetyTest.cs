@@ -117,37 +117,6 @@
     }
 
     [Test]
-    public async void TestItemByQueryRequestMutationDoesNotAffectSession()
-    {
-      string homePath = "/sitecore/content/home";
-
-      IQueryParameters payload = new QueryParameters(null);
-
-      MockGetItemsByQueryParameters mockMutableRequest = new MockGetItemsByQueryParameters();
-      mockMutableRequest.SitecoreQuery = homePath;
-      mockMutableRequest.QueryParameters = payload;
-      mockMutableRequest.ItemSource = this.itemSource;
-
-      try
-      {
-        Task<ScItemsResponse> loadItemsTask = this.session.ReadItemAsync(mockMutableRequest);
-        //      await Task.Factory.StartNew(() => mockMutableRequest.SitecoreQuery = "/sitecore/content/media library");
-        ScItemsResponse response = await loadItemsTask;
-        var item = response[0];
-        Assert.AreEqual(homePath.ToLowerInvariant(), item.Path.ToLowerInvariant());
-      }
-      catch (LoadDataFromNetworkException)
-      {
-        //IDLE
-      }
-      finally
-      {
-        Assert.AreEqual(1, this.itemSource.CopyInvocationCount);
-        Assert.AreEqual(1, mockMutableRequest.CopyInvocationCount);
-      }
-    }
-
-    [Test]
     public async void TestMediaOptionsMutationDoesNotAffectSession()
     {
       var resizing = new MockMutableMediaOptions();

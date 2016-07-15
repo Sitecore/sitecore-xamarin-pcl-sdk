@@ -50,7 +50,7 @@
       {
         var cancel = new CancellationTokenSource();
 
-        Task<PublicKeyX509Certificate> action = this.session.GetPublicKeyAsyncPublic(cancel.Token);
+        Task<string> action = this.session.GetPublicKeyAsyncPublic(cancel.Token);
         cancel.Cancel();
 
         await action;
@@ -65,7 +65,7 @@
       TestDelegate testAction = async () =>
       {
         var cancel = new CancellationTokenSource();
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.env.Items.Home.Id).Build();
+        var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(this.env.Items.Home.Id).Build();
 
         Task<ScItemsResponse> action = this.session.ReadItemAsync(request, cancel.Token);
         cancel.Cancel();
@@ -74,8 +74,6 @@
       };
       Assert.Catch<OperationCanceledException>(testAction);
     }
-
-
 
     [Test]
     public void TestCancelExceptionIsNotWrappedForItemByPathRequest()
@@ -83,7 +81,7 @@
       TestDelegate testAction = async () =>
       {
         var cancel = new CancellationTokenSource();
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home").Build();
+        var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home").Build();
 
         Task<ScItemsResponse> action = this.session.ReadItemAsync(request, cancel.Token);
         cancel.Cancel();
@@ -93,22 +91,6 @@
       Assert.Catch<OperationCanceledException>(testAction);
     }
 
-
-    [Test]
-    public void TestCancelExceptionIsNotWrappedForItemByQueryRequest()
-    {
-      TestDelegate testAction = async () =>
-      {
-        var cancel = new CancellationTokenSource();
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/home/*").Build();
-
-        Task<ScItemsResponse> action = this.session.ReadItemAsync(request, cancel.Token);
-        cancel.Cancel();
-
-        await action;
-      };
-      Assert.Catch<OperationCanceledException>(testAction);
-    }
   }
 }
 

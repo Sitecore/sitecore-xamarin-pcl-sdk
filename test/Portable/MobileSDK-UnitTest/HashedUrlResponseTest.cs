@@ -26,7 +26,7 @@
         "{\"statusCode\":401,\"error\":" +
         "{\"message\":\"Fake error message\"}" +
         "}";
-      var ex = Assert.Throws<WebApiJsonErrorException>( () =>  HashedMediaUrlParser.Parse(response, default(CancellationToken)) );
+      var ex = Assert.Throws<SSCJsonErrorException>( () =>  HashedMediaUrlParser.Parse(response, default(CancellationToken)) );
 
       Assert.AreEqual(401, ex.Response.StatusCode);
       Assert.AreEqual("Fake error message", ex.Response.Message);

@@ -11,7 +11,7 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.UserRequest;
 
 
@@ -24,13 +24,13 @@
     [SetUp]
     public void SetUp()
     {
-      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-      IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
+      ISSCUrlParameters webApiGrammar =SSCUrlParameters.ItemSSCV2UrlParameters();
 
       this.builder = new CreateItemByPathUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemWebApiVersion = "v234";
+      mutableSessionConfig.ItemSSCVersion = "v234";
       mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
       mutableSessionConfig.Site = "/sitecore/shell";
 
@@ -46,7 +46,7 @@
       fields.Add("field1", "VaLuE1");
       fields.Add("field2", "VaLuE2");
 
-      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/sitecore/content/home")
+      ICreateItemByPathRequest request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath("/sitecore/content/home")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .Database("db")
@@ -77,7 +77,7 @@
     [Test]
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
-      ICreateItemByPathRequest request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath("/sitecore/content/home")
+      ICreateItemByPathRequest request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath("/sitecore/content/home")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
@@ -104,7 +104,7 @@
     [Test]
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      var requestBuilder = ItemSSCRequestBuilder.CreateItemRequestWithParentId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("ItEmNaMe")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")

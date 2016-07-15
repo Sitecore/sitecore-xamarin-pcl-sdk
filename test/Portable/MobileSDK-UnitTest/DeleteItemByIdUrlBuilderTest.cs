@@ -10,7 +10,7 @@
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   [TestFixture]
   public class DeleteItemByIdUrlBuilderTest
@@ -30,7 +30,7 @@
       this.id = "{B0ED4777-1F5D-478D-AF47-145CCA9E4311}";
       this.database = "master";
 
-      this.builder = new DeleteItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      this.builder = new DeleteItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(),SSCUrlParameters.ItemSSCV2UrlParameters());
     }
 
     [TearDown]

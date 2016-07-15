@@ -13,7 +13,7 @@
   public class GetFieldsTest
   {
     private TestEnvironment testData;
-    private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
+    private ISitecoreSSCReadonlySession sessionAuthenticatedUser;
 
     [SetUp]
     public void Setup()
@@ -21,7 +21,7 @@
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
       this.sessionAuthenticatedUser =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
           .BuildReadonlySession();
     }
@@ -37,7 +37,7 @@
     [Test]
     public async void TestGetItemByIdWithContentFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -51,7 +51,7 @@
     [Test]
     public async void TestGetItemByPathWithAllFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -66,7 +66,7 @@
     [Test]
     public async void TestGetItemByPathWithoutFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -75,23 +75,9 @@
     }
 
     [Test]
-    public async void TestGetItemByQueryWithContentFields()
-    {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/ancestor-or-self::*").Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
-
-      testData.AssertItemsCount(3, response);
-      testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
-      ISitecoreItem item = response[0];
-
-      Assert.AreEqual(2, item.FieldsCount);
-      Assert.AreEqual("Sitecore", item["Title"].RawValue);
-    }
-
-    [Test]
     public async void TestGetItemWithInternationalFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/Home/Android/Static/Japanese/宇都宮").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/Home/Android/Static/Japanese/宇都宮").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -106,7 +92,7 @@
     [Test]
     public async void TestGetHtmlField()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFieldsToRead(new Collection<string> { "Text" }).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFieldsToRead(new Collection<string> { "Text" }).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -127,7 +113,7 @@
         "CheckBoxField",
         "MultiListField"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.TestFieldsItem.Id).AddFieldsToRead(fields).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.TestFieldsItem.Id).AddFieldsToRead(fields).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -147,7 +133,7 @@
         "",
       };
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.TestFieldsItem.Path)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.TestFieldsItem.Path)
         .AddFieldsToRead(fields)
         .Build();
 
@@ -165,7 +151,7 @@
       {
         "Title"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("en").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("en").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -183,7 +169,7 @@
       {
         "{75577384-3C97-45DA-A847-81B00500E250}"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -202,7 +188,7 @@
         "{75577384-3C97-45DA-A847-81B00500E250}",
         "Title"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -220,7 +206,7 @@
       {
         "Title"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("da").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("da").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -238,7 +224,7 @@
       {
         ".!@#$%^&*()_+*/"
       };
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("da").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id).AddFieldsToRead(fields).Language("da").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -251,7 +237,7 @@
     [Test]
     public async void TestGetSeveralItemsByQueryWithContentFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*")
+      var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId(testData.Items.Home.Id)
         .Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -288,11 +274,11 @@
     public async void TestGetItemByIdWithAllFieldsWithoutReadAccessToSomeFields()
     {
       var sessionCreatorexUser =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Creatorex)
           .BuildReadonlySession();
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").Build();
 
       var responseCreatorex = await sessionCreatorexUser.ReadItemAsync(request);
       var responseAdmin = await this.sessionAuthenticatedUser.ReadItemAsync(request);
@@ -303,7 +289,7 @@
     [Test]
     public async void TestGetFieldsWithSymbolsAndSpacesInNameFields()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").AddFieldsToRead("Normal Text", "__Owner").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}").AddFieldsToRead("Normal Text", "__Owner").Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -323,7 +309,7 @@
     [Test]
     public void TestGetItemByIdWithDuplicateFieldsReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFieldsToRead("Title", "Text").AddFieldsToRead("title").Build());
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).AddFieldsToRead("Title", "Text").AddFieldsToRead("title").Build());
 
       Assert.AreEqual("ReadItemByIdRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
@@ -331,23 +317,15 @@
     [Test]
     public void TestGetItemByPathWithDuplicateFieldsReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFieldsToRead("Text", "Text").Build());
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).AddFieldsToRead("Text", "Text").Build());
 
       Assert.AreEqual("ReadItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
-    public void TestGetItemByQueryWithDuplicateAndEmptyFieldReturnsException()
-    {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path).AddFieldsToRead("Title", "", "Title").Build());
-
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
-    }
-
-    [Test]
     public async void TestGetItemByIdWithDefaultPayload()     // ALR: PayloadType.Default constant should be removed
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);
@@ -360,7 +338,7 @@
     [Test]
     public async void TestGetItemByIdWithoutPayload()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Build();
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
 
       testData.AssertItemsCount(1, response);

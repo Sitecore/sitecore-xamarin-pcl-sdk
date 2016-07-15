@@ -11,7 +11,7 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture()]
@@ -23,13 +23,13 @@
     [SetUp]
     public void SetUp()
     {
-      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-      IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
+      ISSCUrlParameters webApiGrammar = SSCUrlParameters.ItemSSCV2UrlParameters();
 
       this.builder = new UpdateItemByPathUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemWebApiVersion = "v234";
+      mutableSessionConfig.ItemSSCVersion = "v234";
       mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
       mutableSessionConfig.Site = "/sitecore/shell";
 
@@ -45,7 +45,7 @@
       fields.Add("field1", "VaLuE1");
       fields.Add("field2", "VaLuE2");
 
-      IUpdateItemByPathRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
+      IUpdateItemByPathRequest request = ItemSSCRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
         .Database("db")
         .Language("lg")
         .Version(2)
@@ -74,7 +74,7 @@
     [Test]
     public void TestItemNameAndFieldNameIsCaseInsensitive()
     {
-      IUpdateItemByPathRequest request = ItemWebApiRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
+      IUpdateItemByPathRequest request = ItemSSCRequestBuilder.UpdateItemRequestWithPath("/sitecore/content/home")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
         .AddFieldsRawValuesByNameToSet("field2", "VaLuE2")
         .Build();
@@ -97,7 +97,7 @@
     [Test]
     public void TestFieldWithDuplicatedKeyWillCrash()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
+      var requestBuilder = ItemSSCRequestBuilder.UpdateItemRequestWithId("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}")
         .AddFieldsRawValuesByNameToSet("field1", "VaLuE1")
         .AddFieldsRawValuesByNameToSet("field2", "VaLuE2");
 

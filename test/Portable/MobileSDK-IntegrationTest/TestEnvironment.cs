@@ -16,40 +16,40 @@
         ShellSite = "/sitecore/shell"
       };
 
-      result.Items.Home.Id = "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
+      result.Items.Home.Id = "110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9";
       result.Items.Home.Path = "/sitecore/content/Home";
       result.Items.Home.DisplayName = "Home";
       result.Items.Home.Template = "Sample/Sample Item";
-      result.Items.Home.TemplateId = "{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}";
+      result.Items.Home.TemplateId = "76036F5E-CBCE-46D1-AF0A-4143F9B557AA";
 
-      result.Items.ItemWithVersions.Id = "{B86C2CBB-7808-4798-A461-1FB3EB0A43E5}";
+      result.Items.ItemWithVersions.Id = "B86C2CBB-7808-4798-A461-1FB3EB0A43E5";
       result.Items.ItemWithVersions.Path = "/sitecore/content/FieldsTest/TestFieldsVersionsAndDB";
       result.Items.ItemWithVersions.DisplayName = "TestFieldsVersionsAndDB";
 
-      result.Items.TestFieldsItem.Id = "{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}";
+      result.Items.TestFieldsItem.Id = "00CB2AC4-70DB-482C-85B4-B1F3A4CFE643";
       result.Items.TestFieldsItem.Path = "/sitecore/content/Home/Test Fields";
       result.Items.TestFieldsItem.DisplayName = "Test Fields";
       result.Items.TestFieldsItem.Template = "Test Templates/Sample fields";
-      result.Items.TestFieldsItem.TemplateId = "{5FC0D542-E27B-4E55-A1F0-702E959DCD6C}";
+      result.Items.TestFieldsItem.TemplateId = "5FC0D542-E27B-4E55-A1F0-702E959DCD6C";
 
-      result.Items.AllowedItem.Id = "{387B69B2-B2EA-4618-8C3E-2785DC0469A7}";
+      result.Items.AllowedItem.Id = "387B69B2-B2EA-4618-8C3E-2785DC0469A7";
       result.Items.AllowedItem.Path = "/sitecore/content/Home/Allowed_Parent/Allowed_Item";
       result.Items.AllowedItem.DisplayName = "Allowed_Item";
 
-      result.Items.AllowedParent.Id = "{2075CBFF-C330-434D-9E1B-937782E0DE49}";
+      result.Items.AllowedParent.Id = "2075CBFF-C330-434D-9E1B-937782E0DE49";
       result.Items.AllowedParent.Path = "/sitecore/content/Home/Allowed_Parent";
       result.Items.AllowedParent.DisplayName = "Allowed_Parent";
 
-      result.Items.CreateItemsHere.Id = "{C50613DC-D792-467C-832F-F93BB121D775}";
+      result.Items.CreateItemsHere.Id = "C50613DC-D792-467C-832F-F93BB121D775";
       result.Items.CreateItemsHere.Path = "/sitecore/content/Home/Android/Folder for create items";
       result.Items.CreateItemsHere.DisplayName = "Folder for create items";
 
-      result.Items.MediaImagesItem.Id = "{15451229-7534-44EF-815D-D93D6170BFCB}";
+      result.Items.MediaImagesItem.Id = "15451229-7534-44EF-815D-D93D6170BFCB";
       result.Items.MediaImagesItem.Path = "/sitecore/media library/Images";
       result.Items.MediaImagesItem.Template = "/sitecore/templates/System/Media/Media folder";
-      result.Items.MediaImagesItem.TemplateId = "{FE5DD826-48C6-436D-B87A-7C4210C7413B}";
+      result.Items.MediaImagesItem.TemplateId = "FE5DD826-48C6-436D-B87A-7C4210C7413B";
 
-      result.Items.UploadMediaHere.Id = "{EFBA81CC-69A3-4E32-BADB-379B6C347437}";
+      result.Items.UploadMediaHere.Id = "EFBA81CC-69A3-4E32-BADB-379B6C347437";
       result.Items.UploadMediaHere.Path = "/Test Data/Create Edit Delete Media";
 
       return result;
@@ -66,15 +66,15 @@
 
     public class UsersList
     {
-      public WebApiCredentialsPOD Admin = new WebApiCredentialsPOD("sitecore\\admin", "b");
-      public WebApiCredentialsPOD Anonymous = new WebApiCredentialsPOD(null, null);
-      public WebApiCredentialsPOD Creatorex = new WebApiCredentialsPOD("extranet\\creatorex", "creatorex");
-      public WebApiCredentialsPOD SitecoreCreator = new WebApiCredentialsPOD("sitecore\\creator", "creator");
-      public WebApiCredentialsPOD NoReadUserExtranet = new WebApiCredentialsPOD("extranet\\noreadaccess", "noreadaccess");
-      public WebApiCredentialsPOD FakeAnonymous = new WebApiCredentialsPOD("extranet\\FakeAnonymous", "b");
-      public WebApiCredentialsPOD NotExistent = new WebApiCredentialsPOD("sitecore\\notexistent", "notexistent");
-      public WebApiCredentialsPOD NoCreateAccess = new WebApiCredentialsPOD("sitecore\\nocreate", "nocreate");
-      public WebApiCredentialsPOD NoReadUserSitecore = new WebApiCredentialsPOD("sitecore\\noreaduser", "noreaduser");
+      public SSCCredentialsPOD Admin = new SSCCredentialsPOD("admin", "b");
+      public SSCCredentialsPOD Anonymous = new SSCCredentialsPOD(null, null);
+      public SSCCredentialsPOD Creatorex = new SSCCredentialsPOD("extranet\\creatorex", "creatorex");
+      public SSCCredentialsPOD SitecoreCreator = new SSCCredentialsPOD("creator", "creator");
+      public SSCCredentialsPOD NoReadUserExtranet = new SSCCredentialsPOD("extranet\\noreadaccess", "noreadaccess");
+      public SSCCredentialsPOD FakeAnonymous = new SSCCredentialsPOD("extranet\\FakeAnonymous", "b");
+      public SSCCredentialsPOD NotExistent = new SSCCredentialsPOD("notexistent", "notexistent");
+      public SSCCredentialsPOD NoCreateAccess = new SSCCredentialsPOD("nocreate", "nocreate");
+      public SSCCredentialsPOD NoReadUserSitecore = new SSCCredentialsPOD("noreaduser", "noreaduser");
     }
 
     public class ItemsList
@@ -137,15 +137,15 @@
       }
       if (null != expected.Id)
       {
-        Assert.AreEqual(expected.Id, actual.Id);
+        Assert.AreEqual(expected.Id.ToUpper(), actual.Id.ToUpper());
       }
       if (null != expected.Path)
       {
-        Assert.AreEqual(expected.Path, actual.Path);
+        Assert.AreEqual(expected.Path.ToUpper(), actual.Path.ToUpper());
       }
       if (null != expected.Template)
       {
-        Assert.AreEqual(expected.Template, actual.Template);
+        Assert.AreEqual(expected.TemplateId.ToUpper(), actual.TemplateId.ToUpper());
       }
     }
 

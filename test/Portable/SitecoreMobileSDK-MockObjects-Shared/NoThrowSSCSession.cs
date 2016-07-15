@@ -13,11 +13,11 @@
   using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
 
-  public class NoThrowWebApiSession : ISitecoreWebApiSession
+  public class NoThrowSSCSession : ISitecoreSSCSession
   {
-    private ISitecoreWebApiSession workerSession;
+    private ISitecoreSSCSession workerSession;
 
-    public NoThrowWebApiSession(ISitecoreWebApiSession workerSession)
+    public NoThrowSSCSession(ISitecoreSSCSession workerSession)
     {
       this.workerSession = workerSession;
     }
@@ -62,7 +62,7 @@
       }
     }
 
-    public IWebApiCredentials Credentials
+    public ISSCCredentials Credentials
     {
       get
       {
@@ -101,11 +101,6 @@
       return await this.InvokeNoThrow(this.workerSession.DownloadMediaResourceAsync(request, cancelToken));
     }
 
-    public async Task<Stream> ReadRenderingHtmlAsync(IGetRenderingHtmlRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      return await this.InvokeNoThrow(this.workerSession.ReadRenderingHtmlAsync(request, cancelToken));
-    }
-
     #endregion GetItems
 
     #region CreateItems
@@ -120,9 +115,9 @@
       return await this.InvokeNoThrow(this.workerSession.CreateItemAsync(request, cancelToken));
     }
 
-    public async Task<ScItemsResponse> UploadMediaResourceAsync(IMediaResourceUploadRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      return await this.InvokeNoThrow(this.workerSession.UploadMediaResourceAsync(request, cancelToken));
+    public async Task<ScItemsResponse> ReadChildrenAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    { 
+      return await this.InvokeNoThrow(this.workerSession.ReadChildrenAsync(request, cancelToken));
     }
 
     #endregion CreateItems
@@ -137,6 +132,21 @@
     public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       return await this.InvokeNoThrow(this.workerSession.UpdateItemAsync(request, cancelToken));
+    }
+
+    public async Task<ScItemsResponse> RunStoredSearchAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.RunStoredSearchAsync(request, cancelToken));
+    }
+
+    public async Task<ScItemsResponse> RunStoredQuerryAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.RunStoredQuerryAsync(request, cancelToken));
+    }
+
+    public async Task<ScItemsResponse> RunSitecoreSearchAsync(ISitecoreSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.RunSitecoreSearchAsync(request, cancelToken));
     }
 
     #endregion Update Items

@@ -10,24 +10,24 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   [TestFixture]
   public class ResourseUrlBuilderTest
   {
     MediaItemUrlBuilder builder;
     RestServiceGrammar restGrammar;
-    WebApiUrlParameters webApiGrammar;
+    SSCUrlParameters webApiGrammar;
 
     [SetUp]
     public void SetUp()
     {
-      this.webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
-      this.restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
+      this.webApiGrammar = SSCUrlParameters.ItemSSCV2UrlParameters();
+      this.restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
 
       SessionConfigPOD sessionConfig = new SessionConfigPOD();
       sessionConfig.InstanceUrl = "http://test.host";
-      sessionConfig.ItemWebApiVersion = "v1";
+      sessionConfig.ItemSSCVersion = "v1";
       sessionConfig.Site = "/sitecore/shell";
       sessionConfig.MediaLibraryRoot = "/sitecore/media library";
       sessionConfig.DefaultMediaResourceExtension = "ashx";
@@ -56,7 +56,7 @@
         .DisplayAsThumbnail(true)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/1 dot png")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/1 dot png")
         .DownloadOptions(options)
         .Database("master")
         .Build();
@@ -129,7 +129,7 @@
     {
       SessionConfigPOD sessionConfig = new SessionConfigPOD();
       sessionConfig.InstanceUrl = "htTP://CUSTOM.hoST";
-      sessionConfig.ItemWebApiVersion = "v1";
+      sessionConfig.ItemSSCVersion = "v1";
       sessionConfig.Site = "/sitecore/shell";
       sessionConfig.MediaLibraryRoot = "/SiteCore/Other Media Library";
       sessionConfig.DefaultMediaResourceExtension = "ZIP";

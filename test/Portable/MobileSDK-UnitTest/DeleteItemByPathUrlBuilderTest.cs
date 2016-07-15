@@ -10,7 +10,7 @@
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   [TestFixture]
   public class DeleteItemByPathUrlBuilderTest
@@ -30,7 +30,7 @@
       this.path = "/sitecore/content/Home/Android/Folder for deleting/1";
       this.database = "master";
 
-      this.builder = new DeleteItemByPathUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      this.builder = new DeleteItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(),SSCUrlParameters.ItemSSCV2UrlParameters());
     }
 
     [TearDown]

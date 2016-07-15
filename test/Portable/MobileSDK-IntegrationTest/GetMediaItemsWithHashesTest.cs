@@ -17,7 +17,7 @@
   public class GetMediaItemsWithHashesTest
   {
     private TestEnvironment testData;
-    private ISitecoreWebApiReadonlySession session;
+    private ISitecoreSSCReadonlySession session;
 
     const string SitecoreMouseIconPath = "/sitecore/media library/images/mouse-icon";
 
@@ -32,7 +32,7 @@
       }
 
       this.session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
           .MediaResizingStrategy(DownloadStrategy.Hashed)
           .BuildReadonlySession();
@@ -53,7 +53,7 @@
        .Scale(0.5f)
        .Build();
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/testname222")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/testname222")
         .DownloadOptions(options)
         .Build();
 
@@ -72,7 +72,7 @@
         .DisplayAsThumbnail(true)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/butterfly2_large")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/butterfly2_large")
         .DownloadOptions(options)
         .Build();
 
@@ -96,7 +96,7 @@
         .AllowStrech(true)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/kirkorov")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/kirkorov")
         .DownloadOptions(options)
         .Build();
 
@@ -114,7 +114,7 @@
       const string MediaPath = SitecoreMouseIconPath;
       const string Db = "master";
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .Database(Db)
         .Build();
 
@@ -130,7 +130,7 @@
     [Test]
     public void TestGetMediaWithEmptyPathReturnsError()
     {
-      TestDelegate testCode = () => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("");
+      TestDelegate testCode = () => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("");
       var exception = Assert.Throws<ArgumentException>(testCode);
       Assert.AreEqual("DownloadMediaResourceRequestBuilder.MediaPath : The input cannot be empty.", exception.Message);
     }
@@ -138,7 +138,7 @@
     [Test]
     public void TestGetMediaWithNullPathReturnsError()
     {
-      TestDelegate testCode = () => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(null);
+      TestDelegate testCode = () => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(null);
       var exception = Assert.Throws<ArgumentNullException>(testCode);
       Assert.IsTrue(exception.Message.Contains("DownloadMediaResourceRequestBuilder.MediaPath"));
     }
@@ -146,7 +146,7 @@
     [Test]
     public void TestGetMediaWithNotExistentPathReturnsError()
     {
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/images/not existent")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/images/not existent")
         .Build();
 
       TestDelegate testCode = async () =>
@@ -210,7 +210,7 @@
         .Height(100)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/nexus")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("/sitecore/media library/Images/nexus")
        .DownloadOptions(options)
        .Build();
 
@@ -233,14 +233,14 @@
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
       var sessionNoReadAccess =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.NoReadUserExtranet)
           .BuildReadonlySession();
 
       var options = new MediaOptionsBuilder().Set
         .Scale(1)
         .Build();
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .DownloadOptions(options)
         .Build();
 
@@ -257,7 +257,7 @@
     public async void TestGetMediaWithAbsolutePath()
     {
       const string MediaPath = "/sitecore/media library/Images/testname222";
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .Build();
 
       using (var response = await this.session.DownloadMediaResourceAsync(request))
@@ -272,7 +272,7 @@
     [Test]
     public async void TestGetMediaWithRelativePath()
     {
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/Images/green_mineraly1")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("/Images/green_mineraly1")
         .Build();
 
       using (var response = await this.session.DownloadMediaResourceAsync(request))
@@ -293,7 +293,7 @@
         .Height(150)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/Images/green_mineraly1")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/Images/green_mineraly1")
         .DownloadOptions(options)
         .Build();
 
@@ -312,7 +312,7 @@
       const string MediaPath = "~/media/Images/Files/pdf example.pdf";
       const string Db = "master";
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .Database(Db)
         .Build();
 
@@ -336,7 +336,7 @@
         .Height(50)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .DownloadOptions(options)
         .Database(Db)
         .Build();
@@ -355,7 +355,7 @@
     {
 
       const string Path = SitecoreMouseIconPath;
-      var requestFromMasterDb = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(Path)
+      var requestFromMasterDb = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(Path)
         .Database("master")
         .Build();
 
@@ -370,7 +370,7 @@
         Assert.IsTrue(141750 == ms.Length);
       }
 
-      var requestFromWebDb = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(Path)
+      var requestFromWebDb = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(Path)
        .Database("web")
        .Build();
 
@@ -396,7 +396,7 @@
         .Width(50)
         .Build();
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/Images/files/では/flowers")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/Images/files/では/flowers")
         .DownloadOptions(options)
         .Database("master")
         .Build();
@@ -412,7 +412,7 @@
     [Test]
     public async void TestGetMediaWithLanguageAndVersion()
     {
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("/images/test image")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("/images/test image")
         .Database("web")
         .Language("en")
         .Version(1)
@@ -435,7 +435,7 @@
       var z = await this.GetMediaFieldAsStringArray("/sitecore/content/Home/Test fields");
 
       // z[5]: src="~/media/4F20B519D5654472B01891CB6103C667.ashx"
-      var requestWithSrcParameter = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[5])
+      var requestWithSrcParameter = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(z[5])
           .Build();
 
 
@@ -445,7 +445,7 @@
         await responseWithSrcParameter.CopyToAsync(msWithSrcParameter);
 
         // z[3]: mediapath="/Images/test image"
-        var requestWithMediapathParameter = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])
+        var requestWithMediapathParameter = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])
          .Build();
         using (var responseWithMediapathParameter = await this.session.DownloadMediaResourceAsync(requestWithMediapathParameter))
         using (var msWithMediapathParameter = new MemoryStream())
@@ -461,7 +461,7 @@
     {
       var z = await this.GetMediaFieldAsStringArray("/sitecore/content/Home/Test fields");
 
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])   // z[3]: mediapath="/Images/test image"
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(z[3])   // z[3]: mediapath="/Images/test image"
          .Build();
       using (var responseWithMediapathParameter = await this.session.DownloadMediaResourceAsync(request))
       using (var ms = new MemoryStream())
@@ -474,7 +474,7 @@
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithEmptyDatabaseDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
         .Database("")
         .Build();
       Assert.IsNotNull(request);
@@ -483,7 +483,7 @@
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullDatabaseDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
         .Database(null)
         .Build();
       Assert.IsNotNull(request);
@@ -492,14 +492,14 @@
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithSpacesInLanguageReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Language("  "));
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Language("  "));
       Assert.AreEqual("DownloadMediaResourceRequestBuilder.Language : The input cannot be empty.", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullLanguageDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+      var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
         .Language(null)
         .Build();
       Assert.IsNotNull(request);
@@ -508,14 +508,14 @@
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithZeroVersionReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Version(0));
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Version(0));
       Assert.AreEqual("DownloadMediaResourceRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNegativeVersionReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Version(-1));
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Version(-1));
       Assert.AreEqual("DownloadMediaResourceRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
@@ -523,14 +523,14 @@
     [Test] //ALR: Argument exception should appear
     public void TestGetMediaWithNullVersionReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Version(null));
+      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test").Version(null));
       Assert.IsTrue(exception.Message.Contains("DownloadMediaResourceRequestBuilder.Version"));
     }
 
     [Test]
     public void TestGetMediaWithOverridenVersionReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
         .Version(2)
         .Version(1)
         .Build());
@@ -540,7 +540,7 @@
     [Test]
     public void TestGetMediaWithOverridenLanguageReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
         .Language("en")
         .Language("da")
         .Build());
@@ -550,7 +550,7 @@
     [Test]
     public void TestGetMediaWithOverridenDatabaseReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath("~/media/test")
         .Database("master")
         .Database("web")
         .Build());
@@ -572,7 +572,7 @@
 
     private async Task<ISitecoreItem> GetItemByPath(string path, string db = null)
     {
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path);
+      var requestBuilder = ItemSSCRequestBuilder.ReadItemsRequestWithPath(path);
       if (db != null)
       {
         requestBuilder.Database(db);

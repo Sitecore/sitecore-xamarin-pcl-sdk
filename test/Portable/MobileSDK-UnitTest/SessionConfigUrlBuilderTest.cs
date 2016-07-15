@@ -4,7 +4,7 @@
   using NUnit.Framework;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   [TestFixture]
   public class SessionConfigUrlBuilderTest
@@ -12,10 +12,10 @@
     [Test]
     public void TestBuildBaseUrlWithSite()
     {
-      SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
       SessionConfigPOD mockConfig = new SessionConfigPOD();
       mockConfig.InstanceUrl = "localhost";
-      mockConfig.ItemWebApiVersion = "v1";
+      mockConfig.ItemSSCVersion = "v1";
       mockConfig.Site = "/sitecore/shell";
 
       string result = builder.BuildUrlString(mockConfig);
@@ -26,10 +26,10 @@
 
     public void TestBuildBaseUrlWithoutSite()
     {
-      SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
       SessionConfigPOD mockConfig = new SessionConfigPOD();
       mockConfig.InstanceUrl = "localhost";
-      mockConfig.ItemWebApiVersion = "v1";
+      mockConfig.ItemSSCVersion = "v1";
       mockConfig.Site = null;
 
       string result = builder.BuildUrlString(mockConfig);
@@ -41,7 +41,7 @@
     [Test]
     public void TestBuildNullSessionConfig()
     {
-      SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
       TestDelegate action = () => builder.BuildUrlString(null);
 
       Assert.Throws<ArgumentNullException>(action);
@@ -52,7 +52,7 @@
     {
       SessionConfigPOD mockConfig = new SessionConfigPOD();
       mockConfig.InstanceUrl = "localhost";
-      mockConfig.ItemWebApiVersion = "v1";
+      mockConfig.ItemSSCVersion = "v1";
 
       TestDelegate action = () => mockConfig.Site = "sitecore/shell";
       Assert.Throws<ArgumentException>(action, "site must starts with '/'");

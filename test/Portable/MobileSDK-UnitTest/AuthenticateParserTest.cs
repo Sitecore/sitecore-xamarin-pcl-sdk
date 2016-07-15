@@ -30,7 +30,7 @@
     public void TestParseCorrectData()
     {
       var response = "{\"statusCode\":200,\"result\":{}}";
-      WebApiJsonStatusMessage message = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
+      SSCJsonStatusMessage message = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
 
       Assert.AreEqual(200, message.StatusCode);
     }
@@ -46,7 +46,7 @@
     public void TestParseDeniedResponseData()
     {
       var response = "{\"statusCode\":401,\"error\":{\"message\":\"Access to site is not granted.\"}}";
-      WebApiJsonStatusMessage message = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
+      SSCJsonStatusMessage message = AuthenticateResponseParser.ParseResponse(response, CancellationToken.None);
 
       Assert.AreEqual(401, message.StatusCode);
       Assert.AreEqual("Access to site is not granted.", message.Message);
@@ -59,7 +59,7 @@
       {
         var cancel = new CancellationTokenSource();
 
-        Task<WebApiJsonStatusMessage> action = Task.Factory.StartNew(() =>
+        Task<SSCJsonStatusMessage> action = Task.Factory.StartNew(() =>
         {
           var millisecondTimeout = 10;
           Thread.Sleep(millisecondTimeout);

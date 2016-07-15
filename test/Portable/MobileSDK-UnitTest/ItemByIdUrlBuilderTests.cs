@@ -10,7 +10,7 @@
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]
@@ -24,20 +24,20 @@
     [SetUp]
     public void SetUp()
     {
-      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-      IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
+      ISSCUrlParameters webApiGrammar = SSCUrlParameters.ItemSSCV2UrlParameters();
 
       this.builder = new ItemByIdUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemWebApiVersion = "v1";
+      mutableSessionConfig.ItemSSCVersion = "v1";
       mutableSessionConfig.InstanceUrl = "sitecore.net";
       mutableSessionConfig.Site = null;
       this.sessionConfig = mutableSessionConfig;
 
 
       mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemWebApiVersion = "v234";
+      mutableSessionConfig.ItemSSCVersion = "v234";
       mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
       mutableSessionConfig.Site = "/sitecore/shell";
       this.sitecoreShellConfig = mutableSessionConfig;
@@ -172,11 +172,11 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}").Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
       string expected = "http://localhost/-/item/v1?sc_itemid=%7bxxx-yyy-zzz%7d";
@@ -189,12 +189,12 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
       string expected = "http://localhost/-/item/v1?sc_itemid=%7bxxx-yyy-zzz%7d";
@@ -207,13 +207,13 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
         .Database("master")
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
       string expected = "http://localhost/-/item/v1?sc_database=master&sc_itemid=%7bxxx-yyy-zzz%7d";
@@ -226,13 +226,13 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
         .Language("da")
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemWebApiV2Grammar(), WebApiUrlParameters.ItemWebApiV2UrlParameters());
+      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
       string expected = "http://localhost/-/item/v1?language=da&payload=content&sc_itemid=%7bxxx-yyy-zzz%7d";

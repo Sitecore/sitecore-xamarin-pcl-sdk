@@ -33,17 +33,12 @@
       Assert.AreEqual("en", item1.Source.Language);
       Assert.AreEqual("{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}", item1.Id);
 
-      string expectedFullId = "/{11111111-1111-1111-1111-111111111111}/{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}";
-      Assert.AreEqual(expectedFullId, item1.LongId);
       Assert.AreEqual("/sitecore/content/Home", item1.Path);
-      Assert.AreEqual("Sample/Sample Item", item1.Template);
       Assert.AreEqual(1, item1.Source.VersionNumber);
 
       Assert.AreEqual(2, item1.FieldsCount);
       IField field1 = item1.Fields.ElementAt(0);
-      Assert.AreEqual("{75577384-3C97-45DA-A847-81B00500E250}", field1.FieldId);
       IField field2 = item1.Fields.ElementAt(1);
-      Assert.AreEqual("{A60ACD61-A6DB-4182-8329-C957982CEC74}", field2.FieldId);
     }
 
     [Test]
@@ -101,7 +96,7 @@
     {
       string rawResponse = "{\"statusCode\":401,\"error\":{\"message\":\"Access to the \\u0027master\\u0027 database is denied. Only members of the Sitecore Client Users role can switch databases.\"}}";
       TestDelegate action = () => ScItemsParser.Parse(rawResponse, CancellationToken.None);
-      WebApiJsonErrorException exception = Assert.Throws<WebApiJsonErrorException>(action, "ScResponseException should be here");
+      SSCJsonErrorException exception = Assert.Throws<SSCJsonErrorException>(action, "ScResponseException should be here");
 
       Assert.AreEqual(401, exception.Response.StatusCode);
       Assert.AreEqual("Access to the 'master' database is denied. Only members of the Sitecore Client Users role can switch databases.", exception.Response.Message);

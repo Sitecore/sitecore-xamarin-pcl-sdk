@@ -12,7 +12,7 @@
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
-  using Sitecore.MobileSDK.UrlBuilder.WebApi;
+  using Sitecore.MobileSDK.UrlBuilder.SSC;
 
   [TestFixture]
   public class PagingUrlBuilderTest
@@ -29,8 +29,8 @@
     [SetUp]
     public void SetUp()
     {
-      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemWebApiV2Grammar();
-      IWebApiUrlParameters webApiGrammar = WebApiUrlParameters.ItemWebApiV2UrlParameters();
+      IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
+      ISSCUrlParameters webApiGrammar = SSCUrlParameters.ItemSSCV2UrlParameters();
 
       this.builderForId = new ItemByIdUrlBuilder(restGrammar, webApiGrammar);
       this.builderForPath = new ItemByPathUrlBuilder(restGrammar, webApiGrammar);
@@ -39,14 +39,14 @@
       this.defaultSource = new ItemSourcePOD(null, null, null);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemWebApiVersion = "v1";
+      mutableSessionConfig.ItemSSCVersion = "v1";
       mutableSessionConfig.InstanceUrl = "tumba.yumba";
       mutableSessionConfig.Site = null;
       this.sessionConfig = mutableSessionConfig;
 
 
       mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemWebApiVersion = "v234";
+      mutableSessionConfig.ItemSSCVersion = "v234";
       mutableSessionConfig.InstanceUrl = "trololo.net";
       mutableSessionConfig.Site = "/sitecore/shell";
       this.sitecoreShellConfig = mutableSessionConfig;
@@ -69,7 +69,8 @@
     public void TestValidRequestWithId()
     {
       IPagingParameters paging = new MutablePagingParameters(3, 5);
-      var request = new ReadItemsByIdParameters(this.sessionConfig, this.defaultSource, null, paging, "{item-id}");
+
+      var request = new ReadItemsByIdParameters(this.sessionConfig, this.defaultSource, null, paging, true, "{item-id}");
 
       string result = this.builderForId.GetUrlForRequest(request);
       string expected = "http://tumba.yumba/-/item/v1?sc_itemid=%7bitem-id%7d&page=3&pageSize=5";
@@ -81,7 +82,7 @@
     public void TestValidRequestWithIdForShellSite()
     {
       IPagingParameters paging = new MutablePagingParameters(1, 10);
-      var request = new ReadItemsByIdParameters(this.sitecoreShellConfig, this.defaultSource, null, paging, "{item-id}");
+      var request = new ReadItemsByIdParameters(this.sitecoreShellConfig, this.defaultSource, null, paging, true, "{item-id}");
 
       string result = this.builderForId.GetUrlForRequest(request);
       string expected = "http://trololo.net/-/item/v234%2fsitecore%2fshell?sc_itemid=%7bitem-id%7d&page=1&pageSize=10";
@@ -93,7 +94,7 @@
     public void TestPagingCanBeOmittedForId()
     {
       IPagingParameters paging = null;
-      var request = new ReadItemsByIdParameters(this.sessionConfig, this.defaultSource, null, paging, "{item-id}");
+      var request = new ReadItemsByIdParameters(this.sessionConfig, this.defaultSource, null, paging, true, "{item-id}");
 
       string result = this.builderForId.GetUrlForRequest(request);
       string expected = "http://tumba.yumba/-/item/v1?sc_itemid=%7bitem-id%7d";

@@ -18,7 +18,7 @@
     public void Setup()
     {
       testData = TestEnvironment.DefaultTestEnvironment();
-      this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
+      this.requestWithItemId = ItemSSCRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
     }
 
     [TearDown]
@@ -32,7 +32,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
           .BuildReadonlySession()
       )
@@ -49,7 +49,7 @@
       var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
           .Credentials(this.testData.Users.Admin)
           .BuildReadonlySession()
       )
@@ -65,7 +65,7 @@
       string urlWithSlahInTheEnd = testData.InstanceUrl + '/';
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(urlWithSlahInTheEnd)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(urlWithSlahInTheEnd)
           .Credentials(this.testData.Users.Admin)
           .BuildReadonlySession()
       )
@@ -81,7 +81,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dddk.sitecore.net")
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dddk.sitecore.net")
           .Credentials(this.testData.Users.Admin)
           .BuildReadonlySession()
       )
@@ -103,7 +103,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.NotExistent)
           .DefaultDatabase("web")
           .DefaultLanguage("en")
@@ -119,7 +119,7 @@
         Exception exception = Assert.Throws<ParserException>(testCode);
 
         Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
         Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
       }
     }
@@ -129,8 +129,8 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(new WebApiCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd"))
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          .Credentials(new SSCCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd"))
           .Site(testData.ShellSite)
           .BuildSession()
       )
@@ -143,7 +143,7 @@
         Exception exception = Assert.Throws<ParserException>(testCode);
 
         Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
         Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
       }
     }
@@ -153,7 +153,7 @@
     {
       using
       (
-        var session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
+        var session = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .DefaultDatabase("web")
         .DefaultLanguage("en")
         .Site(testData.ShellSite)
@@ -168,7 +168,7 @@
         Exception exception = Assert.Throws<ParserException>(testCode);
 
         Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
         Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
       }
     }

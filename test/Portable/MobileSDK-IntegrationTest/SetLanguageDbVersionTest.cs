@@ -64,13 +64,13 @@
       using
       (
         var session =
-          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
             .Credentials(testData.Users.Admin)
             .DefaultDatabase("master")
             .BuildReadonlySession()
       )
       {
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
           .Version(1)
           .Build();
 
@@ -86,13 +86,13 @@
       using
       (
         var session =
-          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+          SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
             .Credentials(testData.Users.Admin)
             .DefaultLanguage("en")
             .BuildReadonlySession()
       )
       {
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+        var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
           .Version(1)
           .Build();
 
@@ -383,45 +383,35 @@
     [Test]
     public void TestGetItemWithNullVersionInRequestByPathReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Version(null).Build());
+      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Version(null).Build());
       Assert.IsTrue(exception.Message.Contains("ReadItemByPathRequestBuilder.Version"));
     }
 
     [Test]
     public void TestGetItemWithZeroInVersionInRequestByIdReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(0).Build());
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(0).Build());
       Assert.AreEqual("ReadItemByIdRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
     [Test]
     public void TestGetItemWithNegativeVersionInRequestByIdReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(-1).Build());
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id).Version(-1).Build());
       Assert.AreEqual("ReadItemByIdRequestBuilder.Version : Positive number expected", exception.Message);
-    }
-
-
-    [Test]
-    public void TestGetItemWithEmpryLanguageInRequestByQueryDoNotReturnsException()
-    {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Id)
-        .Language("")
-        .Build();
-      Assert.IsNotNull(request);
     }
 
     [Test]
     public void TestGetItemWithSpacesInLanguageInRequestByPathReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Language("   ").Build());
+      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Language("   ").Build());
       Assert.AreEqual("ReadItemByPathRequestBuilder.Language : The input cannot be empty.", exception.Message);
     }
 
     [Test]
     public void TestGetItemWithNullLanguageInRequestByIdDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
         .Language(null)
         .Build();
       Assert.IsNotNull(request);
@@ -430,7 +420,7 @@
     [Test]
     public void TestGetItemWithEmptyDatabaseInRequestByIdDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
         .Database("")
         .Build();
       Assert.IsNotNull(request);
@@ -439,25 +429,16 @@
     [Test]
     public void TestGetItemWithNullDatabaseInRequestByPathDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Database(null)
         .Build();
       Assert.IsNotNull(request);
     }
 
     [Test]
-    public void TestGetItemWithSpacesInDatabaseInRequestByQueryReturnsException()
-    {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Id)
-        .Database(" 	")
-        .Build());
-      Assert.AreEqual("ReadItemByQueryRequestBuilder.Database : The input cannot be empty.", exception.Message);
-    }
-
-    [Test]
     public void TestGetItemByPathWithOverrideLanguageTwiceReturnsException()
     {
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
         .Language("da")
         .Language("en")
         .Build());
@@ -468,17 +449,17 @@
     public void TestGetItemByIdWithOverrideVersionTwiceReturnsException()
     {
       Exception exception = Assert.Throws<InvalidOperationException>(() =>
-        ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+        ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
           .Version(2)
           .Version(1)
           .Build());
       Assert.AreEqual("ReadItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }
 
-    private ISitecoreWebApiReadonlySession CreateAdminSession(ItemSource itemSource = null)
+    private ISitecoreSSCReadonlySession CreateAdminSession(ItemSource itemSource = null)
     {
       var builder =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin);
 
       if (null != itemSource)
@@ -490,10 +471,10 @@
       return session;
     }
 
-    private ISitecoreWebApiReadonlySession CreateCreatorexSession(string site)
+    private ISitecoreSSCReadonlySession CreateCreatorexSession(string site)
     {
       var session =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.Creatorex)
           .Site(site)
           .DefaultDatabase("web")

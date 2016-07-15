@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 //using NUnit.UI;
 using MonoTouch.NUnit.UI;
+using System.Net;
 
 namespace MobileSDKUnitTestiOSUnified
 {
@@ -30,6 +31,13 @@ namespace MobileSDKUnitTestiOSUnified
     {
       // create a new window instance based on the screen size
       window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+#warning !!!!ignoring ssl certification!!!!
+      //ignoring ssl certification to test https request
+      ServicePointManager
+        .ServerCertificateValidationCallback +=
+          (sender, cert, chain, sslPolicyErrors) => true;
+      
       runner = new TouchRunner(window);
 
       // register every tests included in the main application/assembly

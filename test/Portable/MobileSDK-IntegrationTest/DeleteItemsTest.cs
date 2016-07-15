@@ -14,15 +14,15 @@
   public class DeleteItemsTest
   {
     private TestEnvironment testData;
-    private ISitecoreWebApiSession session;
-    private ISitecoreWebApiSession noThrowCleanupSession;
+    private ISitecoreSSCSession session;
+    private ISitecoreSSCSession noThrowCleanupSession;
     private const string SampleId = "{SAMPLEID-7808-4798-A461-1FB3EB0A43E5}";
     /*
     [TestFixtureSetUp]
     public async void TestFixtureSetup()
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
-      this.session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      this.session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
@@ -35,9 +35,9 @@
      */
 
 
-    private ISitecoreWebApiSession CreateSession()
+    private ISitecoreSSCSession CreateSession()
     {
-      return SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      return SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultDatabase("master")
@@ -59,7 +59,7 @@
 
       // Same as this.session
       var cleanupSession = this.CreateSession();
-      this.noThrowCleanupSession = new NoThrowWebApiSession(cleanupSession);
+      this.noThrowCleanupSession = new NoThrowSSCSession(cleanupSession);
     }
 
     [TearDown]
@@ -75,19 +75,19 @@
     }
 
     [Test]
-    public async void TestDeleteItemByPathWithDb()
+    public async void TestDeleteItemByIdWithDb()
     {
       await this.RemoveAll();
 
       const string Db = "web";
-      var itemSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var itemSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .Site(testData.ShellSite)
         .DefaultDatabase(Db)
         .BuildSession();
       ISitecoreItem item = await this.CreateItem("Item in web", null, itemSession);
 
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(item.Path)
+      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
         .Database(Db)
         .Build();
 
@@ -104,7 +104,7 @@
       ISitecoreItem parentItem = await this.CreateItem("Parent item");
       ISitecoreItem childItem = await this.CreateItem("Child item", parentItem);
 
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(childItem.Path)
+      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(childItem.Id)
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
@@ -113,35 +113,18 @@
     }
 
     [Test]
-    public async void TestDeleteInternationalItemWithSpacesInNameByQuery()
-    {
-      await this.RemoveAll();
-
-      ISitecoreItem item1 = await this.CreateItem("International בינלאומי");
-      ISitecoreItem item2 = await this.CreateItem("インターナショナル عالمي");
-
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(testData.Items.CreateItemsHere.Path + "/*")
-        .Build();
-
-      var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(2, result.Count);
-      Assert.AreEqual(item1.Id, result[0]);
-      Assert.AreEqual(item2.Id, result[1]);
-    }
- 
-    [Test]
     public async void TestDeleteItemByIdAsAnonymousFromShellSiteReturnsException()
     {
       await this.RemoveAll();
 
-      var anonymousSession = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
+      var anonymousSession = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .DefaultDatabase("master")
         .Site(testData.ShellSite)
         .BuildSession();
 
       ISitecoreItem item = await this.CreateItem("Item to delete as anonymous");
 
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(item.Path)
+      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
         .Build();
 
       TestDelegate testCode = async () =>
@@ -151,18 +134,18 @@
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
       Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.AreEqual("Access to site is not granted.", exception.InnerException.Message);
 
       await session.DeleteItemAsync(request);
     }
 
     [Test]
-    public async void TestDeleteItemByPathWithoutDeleteAccessReturnsException()
+    public async void TestDeleteItemByIdWithoutDeleteAccessReturnsException()
     {
       await this.RemoveAll();
 
-      var noAccessSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var noAccessSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.NoCreateAccess)
         .DefaultDatabase("master")
         .Site(testData.ShellSite)
@@ -170,7 +153,7 @@
 
       ISitecoreItem item = await this.CreateItem("Item to delete without delete access");
 
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(item.Path)
+      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
         .Build();
 
       TestDelegate testCode = async () =>
@@ -180,22 +163,10 @@
       };
       Exception exception = Assert.Throws<ParserException>(testCode);
       Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.WebApiJsonErrorException", exception.InnerException.GetType().ToString());
+      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
       Assert.True(exception.InnerException.Message.Contains("DeleteItem - Delete right required"));
 
       await session.DeleteItemAsync(request);
-    }
-
-    [Test]
-    public async void TestDeleteItemByNotExistentPath()
-    {
-      await this.RemoveAll();
-
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/not existent item")
-        .Build();
-
-      var response = await session.DeleteItemAsync(request);
-      Assert.AreEqual(0, response.Count);
     }
 
     [Test]
@@ -203,7 +174,7 @@
     {
       await this.RemoveAll();
 
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId).Build();
+      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(SampleId).Build();
 
 
       var response = await session.DeleteItemAsync(request);
@@ -213,31 +184,17 @@
     [Test]
     public void TestDeleteItemByInvalidIdReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId("invalid id")
+      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.DeleteItemRequestWithId("invalid id")
         .Build());
       Assert.AreEqual("DeleteItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
     }
 
-    [Test]
-    public void TestDeleteItemWithInvalidPathReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath("invalid path )"));
-      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
-    }
-
-    [Test]
-    public void TestDeleteItemByQueryWithTwoDatabasesReturnsException()
-    {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("sample query")
-        .Database("1")
-        .Database("2"));
-      Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
-    }
+  
 
     [Test]
     public void TestDeleteItemByPathWithNullDatabaseDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath("/sample path")
+      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(SampleId)
         .Database(null)
         .Build();
       Assert.IsNotNull(request);
@@ -246,70 +203,27 @@
     [Test]
     public void TestDeleteItemByIdWithEmptyDatabaseDoNotReturnsException()
     {
-      var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(SampleId)
+      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(SampleId)
         .Database("")
         .Build();
       Assert.IsNotNull(request);
     }
 
     [Test]
-    public void TestDeleteItemByQueryWithSpacesOnlyInDatabaseReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery("/sample query")
-        .Database("  "));
-      Assert.AreEqual("DeleteItemItemByQueryRequestBuilder.Database : The input cannot be empty.", exception.Message);
-    }
-
-    [Test]
     public void TestDeleteItemByEmptyIdReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithId(""));
+      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.DeleteItemRequestWithId(""));
       Assert.AreEqual("DeleteItemByIdRequestBuilder.ItemId : The input cannot be empty.", exception.Message);
     }
 
-    [Test]
-    public void TestDeleteItemByNullQueryReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(null));
-      Assert.IsTrue(exception.Message.Contains("DeleteItemItemByQueryRequestBuilder.SitecoreQuery"));
-    }
-
-    [Test]
-    public void TestDeleteItemByPathWithSpacesOnlyReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentException>(() => ItemWebApiRequestBuilder.DeleteItemRequestWithPath(" "));
-      Assert.AreEqual("DeleteItemItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
-    }
-
-    [Test]
-    public async void TestCreateGetAndDelete100ItemsByQuery()
-    {
-      await this.RemoveAll();
-
-      for (int i = 0; i < 100; i++)
-      {
-        await this.CreateItem("Test item " + (i + 1));
-      }
-
-      var query = testData.Items.CreateItemsHere.Path + "/descendant::*[@@templatename='Sample Item']";
-
-      var readRequest = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).PageNumber(0).ItemsPerPage(100).Build();
-      var readResult = await this.session.ReadItemAsync(readRequest);
-      testData.AssertItemsCount(100, readResult);
-
-      var deleteRequest = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(query).Build();
-      var deleteResult = await this.session.DeleteItemAsync(deleteRequest);
-      Assert.AreEqual(100, deleteResult.Count);
-    }
-
-    private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreWebApiSession itemSession = null)
+    private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreSSCSession itemSession = null)
     {
       if (itemSession == null)
       {
         itemSession = this.session;
       }
       string parentPath = (parentItem == null) ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
-      var request = ItemWebApiRequestBuilder.CreateItemRequestWithParentPath(parentPath)
+      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(parentPath)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(itemName)
         .Build();
@@ -321,7 +235,7 @@
 
     private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
     {
-      var deleteFromMaster = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(this.testData.Items.CreateItemsHere.Path)
+      var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
         .Database(database)
         .Build();
       return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);

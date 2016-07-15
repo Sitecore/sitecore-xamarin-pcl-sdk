@@ -31,12 +31,13 @@
       using
       (
         var session =
-          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
+          SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(url)
             .Credentials(this.testData.Users.Admin)
+            .Site("sitecore")
             .BuildReadonlySession()
       )
       {
-        var requestWithItemPath = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
+        var requestWithItemPath = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
         var response = await session.ReadItemAsync(requestWithItemPath);
 
         testData.AssertItemsCount(1, response);
@@ -53,12 +54,12 @@
       using
       (
         var session =
-          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
+          SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(url)
             .Credentials(this.testData.Users.Admin)
             .BuildReadonlySession()
       )
       {
-        var requestWithItemPath = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
+        var requestWithItemPath = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
         var response = await session.ReadItemAsync(requestWithItemPath);
 
         testData.AssertItemsCount(1, response);
@@ -66,49 +67,6 @@
       }
     }
 
-    [Test]
-    public async void TestWithoutHttpInUrlByQuery()
-    {
-      var urlWithoutHttp = this.RemoveHttpSymbols(this.testData.InstanceUrl);
-      var url = urlWithoutHttp;
-
-      using
-     (
-       var session =
-         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
-           .Credentials(this.testData.Users.Admin)
-           .BuildReadonlySession()
-     )
-      {
-        var requestWithItemQuery = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).Build();
-        var response = await session.ReadItemAsync(requestWithItemQuery);
-
-        testData.AssertItemsCount(1, response);
-        testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
-      }
-    }
-
-    [Test]
-    public async void TestWithHttpInUrlAndWithOneSlashInTheEndByQuery()
-    {
-      var urlWithOneSlash = testData.InstanceUrl + "/";
-      var url = urlWithOneSlash;
-
-      using
-     (
-       var session =
-         SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
-           .Credentials(this.testData.Users.Admin)
-           .BuildReadonlySession()
-     )
-      {
-        var requestWithItemQuery = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(this.testData.Items.Home.Path).Build();
-        var response = await session.ReadItemAsync(requestWithItemQuery);
-
-        testData.AssertItemsCount(1, response);
-        testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
-      }
-    }
 
     [Test]
     public async void TestWithHttpsInUrlById()
@@ -129,12 +87,12 @@
       using
       (
         var session =
-          SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(url)
+          SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(url)
             .Credentials(this.testData.Users.Admin)
             .BuildReadonlySession()
       )
       {
-        var requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
+        var requestWithItemId = ItemSSCRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();
         var response = await session.ReadItemAsync(requestWithItemId);
 
         testData.AssertItemsCount(1, response);

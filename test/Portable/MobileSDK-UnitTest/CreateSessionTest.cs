@@ -12,14 +12,14 @@
   [TestFixture]
   public class CreateSessionTest
   {
-    private IWebApiCredentials adminCredentials = new WebApiCredentialsPOD("admin", "b");
+    private ISSCCredentials adminCredentials = new SSCCredentialsPOD("admin", "b");
 
     #region Explicit Construction
     [Test]
     public void TestSessionConfigForAuthenticatedSession()
     {
-      var sessionSettings = new SessionConfig("localhost", "/sitecore/shell", "v1");
-      var credentials = new WebApiCredentialsPOD("root", "pass");
+      var sessionSettings = new SessionConfig("localhost", "sitecore");
+      var credentials = new SSCCredentialsPOD("root", "pass");
 
       Assert.IsNotNull(sessionSettings);
       Assert.IsNotNull(credentials);
@@ -27,15 +27,14 @@
       Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
       Assert.AreEqual("root", credentials.Username);
       Assert.AreEqual("pass", credentials.Password);
-      Assert.AreEqual("/sitecore/shell", sessionSettings.Site);
-      Assert.AreEqual("v1", sessionSettings.ItemWebApiVersion);
+      Assert.AreEqual("sitecore", sessionSettings.Site);
     }
 
     [Test]
     public void TestSessionConfigAllowsBothNullForAuthenticatedSession()
     {
-      var sessionSettings = new SessionConfig("localhost", "/sitecore/shell", "v1");
-      var credentials = new WebApiCredentialsPOD(null, null);
+      var sessionSettings = new SessionConfig("localhost", "sitecore");
+      var credentials = new SSCCredentialsPOD(null, null);
 
       Assert.IsNotNull(sessionSettings);
       Assert.IsNotNull(credentials);
@@ -43,16 +42,15 @@
       Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
       Assert.IsNull(credentials.Username);
       Assert.IsNull(credentials.Password);
-      Assert.AreEqual("/sitecore/shell", sessionSettings.Site);
-      Assert.AreEqual("v1", sessionSettings.ItemWebApiVersion);
+      Assert.AreEqual("sitecore", sessionSettings.Site);
     }
 
 
     [Test]
     public void TestSessionConfigAllowsNullUsernameForAuthenticatedSession()
     {
-      var sessionSettings = new SessionConfig("localhost", "/sitecore/shell", "v1");
-      var credentials = new WebApiCredentialsPOD(null, "pass");
+      var sessionSettings = new SessionConfig("localhost", "sitecore");
+      var credentials = new SSCCredentialsPOD(null, "pass");
 
       Assert.IsNotNull(sessionSettings);
       Assert.IsNotNull(credentials);
@@ -60,8 +58,7 @@
       Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
       Assert.IsNull(credentials.Username);
       Assert.AreEqual("pass", credentials.Password);
-      Assert.AreEqual("/sitecore/shell", sessionSettings.Site);
-      Assert.AreEqual("v1", sessionSettings.ItemWebApiVersion);
+      Assert.AreEqual("sitecore", sessionSettings.Site);
     }
     #endregion Explicit Construction
 
@@ -70,11 +67,10 @@
     public void TestAnonymousSessionShouldBeCreatedByTheBuilder()
     {
       var builder =
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-          .WebApiVersion("v1")
+        SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
           .DefaultDatabase("web")
           .DefaultLanguage("en")
-          .Site("/sitecore/shell")
+          .Site(" sitecore")
           .MediaLibraryRoot("/sitecore/media library")
           .DefaultMediaResourceExtension("ashx")
           .MediaPrefix("~/media");
@@ -89,19 +85,18 @@
     [Test]
     public void TestAuthenticatedSessionShouldBeCreatedByTheBuilder()
     {
-      IWebApiCredentials credentials = this.adminCredentials;
+      ISSCCredentials credentials = this.adminCredentials;
 
-      var builder = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+      var builder = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(credentials)
-        .WebApiVersion("v1")
         .DefaultDatabase("web")
         .DefaultLanguage("en")
-        .Site("/sitecore/shell")
+        .Site("sitecore")
         .MediaLibraryRoot("/sitecore/media library")
         .DefaultMediaResourceExtension("ashx");
 
 
-      ISitecoreWebApiSession session = builder.BuildSession();
+      ISitecoreSSCSession session = builder.BuildSession();
       Assert.IsNotNull(session);
 
       var roSession = builder.BuildReadonlySession();
@@ -110,35 +105,20 @@
     #endregion Builder Interface
 
     #region Write Once
-    [Test]
-    public void TestWebApiVersionIsWriteOnce()
-    {
-      Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
-        .Credentials(this.adminCredentials)
-        .WebApiVersion("v1")
-        .WebApiVersion("v1")
-      );
 
-      Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .WebApiVersion("v3")
-        .WebApiVersion("v4")
-      );
-    }
 
     [Test]
     public void TestDatabaseIsWriteOnce()
     {
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultDatabase("web")
         .DefaultDatabase("web")
       );
 
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .DefaultDatabase("master")
         .DefaultDatabase("core")
       );
@@ -148,14 +128,14 @@
     public void TestLanguageIsWriteOnce()
     {
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultLanguage("en")
         .DefaultLanguage("es")
       );
 
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .DefaultLanguage("en")
         .DefaultLanguage("en")
       );
@@ -165,14 +145,14 @@
     public void TestSiteIsWriteOnce()
     {
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
-        .Site("/sitecore/shell")
+        .Site("sitecore")
         .Site("/baz/baz")
       );
 
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .Site("/ololo/trololo")
         .Site("/foo/bar")
       );
@@ -183,14 +163,14 @@
     public void TestMediaRootIsWriteOnce()
     {
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .MediaLibraryRoot("/sitecore/media library")
         .MediaLibraryRoot("/sitecore/other media library")
       );
 
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .MediaLibraryRoot("/dev/null")
         .MediaLibraryRoot("/sitecore/media library")
       );
@@ -201,14 +181,14 @@
     public void TestMediaExtIsWriteOnce()
     {
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultMediaResourceExtension("ashx")
         .DefaultMediaResourceExtension("pdf")
       );
 
       Assert.Throws<InvalidOperationException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
         .DefaultMediaResourceExtension("jpeg")
         .DefaultMediaResourceExtension("jpg")
       );
@@ -217,17 +197,17 @@
 
     #region Validate Null
     [Test]
-    public void TestWebApiVersionThrowsExceptionForNullInput()
+    public void TestSSCVersionThrowsExceptionForNullInput()
     {
       Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
-        .WebApiVersion(null)
+        .SSCVersion(null)
       );
 
       Assert.Throws<ArgumentNullException>(() =>
-        SitecoreWebApiSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .WebApiVersion(null)
+        SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
+        .SSCVersion(null)
       );
     }
 
@@ -236,7 +216,7 @@
     {
       using
         (
-        var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultDatabase(null)
         .BuildSession()
@@ -251,7 +231,7 @@
     {
       using
         (
-          var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+          var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
           .DefaultLanguage(null)
           .BuildSession()
@@ -266,7 +246,7 @@
     {
       using
         (
-          var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+          var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
           .Site(null)
           .BuildSession()
@@ -282,7 +262,7 @@
     {
       using
         (
-          var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+          var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
           .MediaLibraryRoot(null)
           .BuildSession()
@@ -298,7 +278,7 @@
     {
       using
         (
-          var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+          var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
           .DefaultMediaResourceExtension(null)
           .BuildSession()
@@ -312,7 +292,7 @@
     [Test]
     public void TestHashingFlagCanBeSet()
     {
-      using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+      using (var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .MediaResizingStrategy(DownloadStrategy.Plain)
         .BuildSession())
@@ -323,7 +303,7 @@
       }
 
 
-      using (var otherSession = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
+      using (var otherSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .MediaResizingStrategy(DownloadStrategy.Hashed)
         .BuildSession())

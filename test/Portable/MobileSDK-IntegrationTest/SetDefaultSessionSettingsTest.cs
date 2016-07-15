@@ -15,7 +15,7 @@
   public class SetDefaultSessionSettingsTest
   {
     private TestEnvironment testData;
-    private ISitecoreWebApiReadonlySession sessionAuthenticatedUser;
+    private ISitecoreSSCReadonlySession sessionAuthenticatedUser;
     IReadItemsByIdRequest requestWithItemId;
 
     [SetUp]
@@ -24,13 +24,13 @@
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
       this.sessionAuthenticatedUser =
-        SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .DefaultDatabase("web")
           .DefaultLanguage("en")
           .BuildReadonlySession();
 
-      this.requestWithItemId = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+      this.requestWithItemId = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Build();
     }
 
@@ -85,7 +85,7 @@
       const string Language = "da";
       const int Version = 1;
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Database(Db)
         .Language(Language)
         .Version(Version)
@@ -106,14 +106,14 @@
       const string Language = "en";
       const int Version = 2;
 
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .DefaultDatabase(Db)
         .DefaultLanguage("da")
         .BuildReadonlySession();
 
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Language(Language)
         .Version(Version)
         .Build();
@@ -135,13 +135,13 @@
       const int Version = 2;
       var source = new ItemSource("web", Language, 1);
 
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .DefaultDatabase(source.Database)
         .DefaultLanguage(source.Language)
         .BuildReadonlySession();
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Version(Version)
         .Database(Db)
         .Build();
@@ -160,7 +160,7 @@
     {
       const string Db = "master";
 
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.ItemWithVersions.Path);
+      var requestBuilder = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.ItemWithVersions.Path);
       var request = requestBuilder.Database(Db).Build();
       var response = await sessionAuthenticatedUser.ReadItemAsync(request);
 
@@ -177,7 +177,7 @@
     {
       const string Db = "web";
 
-      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
+      Exception exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
        .Database("master")
        .Database(Db)
        .Build());
@@ -187,7 +187,7 @@
     [Test]
     public void TestGetItemByIdWithNullDatabaseDoNotReturnsError()
     {
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
                             .Database(null)
                             .Build();
       Assert.IsNotNull(request);
@@ -197,19 +197,9 @@
     public void TestGetItemByPathWithEmptyDatabaseReturnsError()
     {
 
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
+      var requestBuilder = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Database(" ").Build());
       Assert.AreEqual("ReadItemByPathRequestBuilder.Database : The input cannot be empty.", exception.Message);
-    }
-
-    [Test]
-    public async void TestGetItemInRequestByQueryAsConcatenationString()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(testData.Items.Home.Path + "/*");
-      var request = requestBuilder.Database("master").Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
-
-      this.testData.AssertItemsCount(4, response);
     }
 
     [Test]
@@ -217,7 +207,7 @@
     {
       const string Language = "";
 
-      var request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
                                             .Language(Language)
                                             .Build();
       Assert.IsNotNull(request);
@@ -226,7 +216,7 @@
     [Test]
     public void TestOverrideVersionWithZeroValueInRequestByPathReturnsError()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
+      var requestBuilder = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(0).Build());
       Assert.AreEqual("ReadItemByPathRequestBuilder.Version : Positive number expected", exception.Message);
     }
@@ -234,55 +224,14 @@
     [Test]
     public void TestOverrideVersionWithNegativeValueInRequestByPathReturnsError()
     {
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
+      var requestBuilder = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path);
       Exception exception = Assert.Throws<ArgumentException>(() => requestBuilder.Version(-1).Build());
       Assert.AreEqual("ReadItemByPathRequestBuilder.Version : Positive number expected", exception.Message);
     }
 
-    [Test]
-    public async void TestOverrideLanguageInRequestByQuery()
-    {
-      const string Language = "da";
-
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content/Home/*");
-      var request = requestBuilder
-        .Language(Language)
-        .Build();
-      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
-
-      testData.AssertItemsCount(4, response);
-      var resultItem = response[3];
-      var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, Language, 1);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-    }
-
-    [Test]
-    public async void TestGetItemByQueryWithCorrectField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore//*[@Title='English version 2 web']");
-      var request = requestBuilder.Build();
-      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
-
-      testData.AssertItemsCount(1, response);
-      var resultItem = response[0];
-      var expectedSource = new ItemSource(LegacyConstants.DefaultSource().Database, LegacyConstants.DefaultSource().Language, 2);
-      testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-    }
-
-    [Test]
-    public async void TestGetItemByQueryWithNotCorrectField()
-    {
-      var requestBuilder = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery("/sitecore/content//*[@Title='DANISH version 2 web']");
-      var request = requestBuilder.Language("da").Database("master").Build();
-      var response = await sessionAuthenticatedUser.ReadItemAsync(request);
-
-      testData.AssertItemsCount(0, response);
-    }
-
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)
     {
-      var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+      var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .DefaultLanguage(itemSource.Language)
         .DefaultDatabase(itemSource.Database)
@@ -296,7 +245,7 @@
       }
       else
       {
-        request = ItemWebApiRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
+        request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Version(itemSource.VersionNumber.Value)
         .Build();
       }
