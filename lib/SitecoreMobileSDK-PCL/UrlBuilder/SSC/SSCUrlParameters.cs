@@ -4,7 +4,7 @@
   {
     public static SSCUrlParameters ItemSSCV2UrlParameters()
     {
-      SSCUrlParameters result = new SSCUrlParameters();
+     SSCUrlParameters result = new SSCUrlParameters();
       result.DatabaseParameterName = "database";
       result.LanguageParameterName = "language";
       result.VersionParameterName = "version";
@@ -29,8 +29,10 @@
 
       result.ItemSSCItemsEndpoint = "/item";
       result.ItemSSCAuthEndpoint = "/auth";
+
       result.ItemSSCLoginAction = "/login";
       result.ItemSSCLogoutAction = "/logout";
+
       result.ItemSSCChildrenAction = "/children";
       result.ItemSearchAction = "/search";
 

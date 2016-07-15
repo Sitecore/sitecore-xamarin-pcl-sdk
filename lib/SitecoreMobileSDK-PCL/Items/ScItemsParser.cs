@@ -61,7 +61,7 @@
         items.Add(newItem);
       }
 
-      //FIXME: int totalCount, int resultCount not available for SSC fix
+      //FIXME: int totalCount, int resultCount not available forSSC fix
       return new ScItemsResponse(items.Count, items.Count, items);
     }
 

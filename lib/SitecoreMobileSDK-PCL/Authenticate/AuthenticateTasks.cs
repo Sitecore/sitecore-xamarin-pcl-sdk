@@ -14,7 +14,7 @@
   using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.UrlBuilder;
 
-  class AuthenticateTasks : IRestApiCallTasks<ISessionConfig, HttpRequestMessage, string, SSCJsonStatusMessage>
+  class AuthenticateTasks : IRestApiCallTasks<ISessionConfig, HttpRequestMessage, string,SSCJsonStatusMessage>
   {
     #region Private Variables
 
@@ -64,7 +64,7 @@
 
     private string PrepareRequestUrl(ISessionConfig request)
     {
-      SSCActionBuilder builder = new SSCActionBuilder(this.restGrammar, this.sscGrammar); 
+     SSCActionBuilder builder = new SSCActionBuilder(this.restGrammar, this.sscGrammar); 
       return builder.GetAuthenticateActionUrlForSession(request);
     }
 

@@ -13,7 +13,7 @@ namespace Sitecore.MobileSDK.API.Items
   /// </summary>
   public class ScItemsResponse : IEnumerable<ISitecoreItem>
   {
-    //FIXME: int totalCount, int resultCount not available for SSC fix
+    //FIXME: int totalCount, int resultCount not available forSSC fix
     /// <summary>
     /// Initializes a new instance of the <see cref="ScItemsResponse"/> class.
     /// </summary>

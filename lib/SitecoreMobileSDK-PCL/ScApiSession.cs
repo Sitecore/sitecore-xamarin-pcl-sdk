@@ -204,11 +204,11 @@ namespace Sitecore.MobileSDK
       }
 
       return this.publicCertifiacte;
-    }
+    } 
 
     //protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync(CancellationToken cancelToken = default(CancellationToken))
     //{
-    //  bool isAnonymous = (null == this.Credentials) || SSCCredentialsValidator.IsAnonymousSession(this.Credentials);
+    //  bool isAnonymous = (null == this.Credentials) ||SSCCredentialsValidator.IsAnonymousSession(this.Credentials);
 
     //  if (isAnonymous)
     //  {
@@ -522,7 +522,7 @@ namespace Sitecore.MobileSDK
 
       var taskFlow = new AuthenticateTasks(this.restGrammar, this.sscGrammar, sessionUrlBuilder, this.httpClient);
 
-      SSCJsonStatusMessage result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
+     SSCJsonStatusMessage result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
 
       return result.StatusCode == 200;
     }
@@ -542,7 +542,7 @@ namespace Sitecore.MobileSDK
     private readonly IMediaLibrarySettings mediaSettings;
 
     private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
-    private readonly ISSCUrlParameters sscGrammar = SSCUrlParameters.ItemSSCV2UrlParameters();
+    private readonly ISSCUrlParameters sscGrammar =SSCUrlParameters.ItemSSCV2UrlParameters();
 
 
     private string publicCertifiacte;

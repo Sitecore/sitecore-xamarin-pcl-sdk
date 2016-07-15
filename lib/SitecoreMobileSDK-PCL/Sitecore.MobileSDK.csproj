@@ -117,8 +117,6 @@
     <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\AbstractDeleteItemRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemByIdRequestBuilder.cs" />
-    <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByPathRequestBuilder.cs" />
-    <Compile Include="UserRequest\DeleteRequest\DeleteItemItemByQueryRequestBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
@@ -176,7 +174,6 @@
     <Compile Include="UserRequest\ReadRequest\AbstractBaseRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadRequest\ReadItemByIdRequestBuilder.cs" />
     <Compile Include="UserRequest\ReadRequest\ReadItemByPathRequestBuilder.cs" />
-    <Compile Include="UserRequest\ReadRequest\ReadItemByQueryRequestBuilder.cs" />
     <Compile Include="API\Request\IBaseReadItemsRequest.cs" />
     <Compile Include="UserRequest\ChangeRequest\AbstractChangeItemRequestBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\AbstractUpdateItemRequestBuilder.cs" />
@@ -213,7 +210,6 @@
     <Compile Include="API\Request\ISitecoreSearchRequest.cs" />
     <Compile Include="CrudTasks\RunSitecoreSearchTasks.cs" />
     <Compile Include="UserRequest\SearchRequests\AbstractSitecoreSearchRequestBuilder.cs" />
-    <Compile Include="UserRequest\RenderingHTMLReques\RenderingHTMLRequestBuilder.cs" />
     <Compile Include="UrlBuilder\Search\RunStoredQuerryUrlBuilder.cs" />
     <Compile Include="UrlBuilder\Search\RunSitecoreSearchUrlBuilder.cs" />
     <Compile Include="UrlBuilder\Search\RunStoredSearchUrlBuilder.cs" />
