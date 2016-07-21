@@ -13,16 +13,20 @@
     {
     }
 
-    protected override string GetHostUrlForRequest(ICreateItemByPathRequest request)
+    public override string GetUrlForRequest(ICreateItemByPathRequest request)
     {
-      string hostUrl = base.GetHostUrlForRequest(request);
+      this.Validate(request);
+
+      string hostUrl = base.GetBaseUrlForRequest(request);
+
       string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
 
       string result = hostUrl + escapedPath;
-      return result;
+
+      return result.ToLowerInvariant();
     }
 
-    protected override void ValidateSpecificRequest(ICreateItemByPathRequest request)
+    public override void ValidateSpecificPart(ICreateItemByPathRequest request)
     {
       ItemPathValidator.ValidateItemPath(request.ItemPath, this.GetType().Name + ".ItemPath");
     }

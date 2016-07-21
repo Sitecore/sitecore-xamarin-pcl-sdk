@@ -10,7 +10,6 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
 
@@ -19,7 +18,6 @@
   {
     private ItemByIdUrlBuilder builderForId;
     private ItemByPathUrlBuilder builderForPath;
-    private ItemByQueryUrlBuilder builderForQuery;
 
     private ISessionConfig sessionConfig;
     private ISessionConfig sitecoreShellConfig;
@@ -34,7 +32,6 @@
 
       this.builderForId = new ItemByIdUrlBuilder(restGrammar, webApiGrammar);
       this.builderForPath = new ItemByPathUrlBuilder(restGrammar, webApiGrammar);
-      this.builderForQuery = new ItemByQueryUrlBuilder(restGrammar, webApiGrammar);
 
       this.defaultSource = new ItemSourcePOD(null, null, null);
 
@@ -57,7 +54,6 @@
     {
       this.builderForId = null;
       this.builderForPath = null;
-      this.builderForQuery = null;
 
       this.sessionConfig = null;
       this.sitecoreShellConfig = null;
@@ -141,44 +137,6 @@
     }
     #endregion By Path
 
-    #region By Query
-    [Test]
-    public void TestValidRequestWithQuery()
-    {
-      IPagingParameters paging = new MutablePagingParameters(3, 5);
-      var request = new ReadItemByQueryParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content");
-
-      string result = this.builderForQuery.GetUrlForRequest(request);
-      string expected = "http://tumba.yumba/-/item/v1?query=%2fsitecore%2fcontent&page=3&pageSize=5";
-
-      Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    public void TestValidRequestWithQueryForShellSite()
-    {
-      IPagingParameters paging = new MutablePagingParameters(1, 10);
-      var request = new ReadItemByQueryParameters(this.sitecoreShellConfig, this.defaultSource, null, paging, "/x/y/z");
-
-      string result = this.builderForQuery.GetUrlForRequest(request);
-      string expected = "http://trololo.net/-/item/v234%2fsitecore%2fshell?query=%2fx%2fy%2fz&page=1&pageSize=10";
-
-      Assert.AreEqual(expected, result);
-    }
-
-    [Test]
-    public void TestPagingCanBeOmittedForQuery()
-    {
-      IPagingParameters paging = null;
-      var request = new ReadItemByQueryParameters(this.sessionConfig, this.defaultSource, null, paging, "/root");
-
-      string result = this.builderForQuery.GetUrlForRequest(request);
-      string expected = "http://tumba.yumba/-/item/v1?query=%2froot";
-
-      Assert.AreEqual(expected, result);
-    }
-    #endregion By Query
-
     #region Validation
     [Test]
     public void TestNegativePageNumberIsNotAllowed()
@@ -189,23 +147,6 @@
       Assert.Throws<ArgumentException>(() => this.builderForPath.GetUrlForRequest(request));
     }
 
-    [Test]
-    public void TestZeroItemsCountIsNotAllowed()
-    {
-      IPagingParameters paging = new MutablePagingParameters(3, 0);
-      var request = new ReadItemByQueryParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content/*");
-
-      Assert.Throws<ArgumentException>(() => this.builderForQuery.GetUrlForRequest(request));
-    }
-
-    [Test]
-    public void TestNegativeItemsCountIsNotAllowed()
-    {
-      IPagingParameters paging = new MutablePagingParameters(4, -1);
-      var request = new ReadItemByQueryParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content/*");
-
-      Assert.Throws<ArgumentException>(() => this.builderForQuery.GetUrlForRequest(request));
-    }
     #endregion Validation
   }
 }

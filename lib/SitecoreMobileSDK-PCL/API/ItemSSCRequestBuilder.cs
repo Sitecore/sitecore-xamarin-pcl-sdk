@@ -81,20 +81,6 @@ namespace Sitecore.MobileSDK.API
     }
 
     /// <summary>
-    /// Provides builder for constructing create item request with parent item GUID.
-    /// </summary>
-    /// <param name="itemId">Parent item GUID value enclosed in curly braces.
-    /// For example: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
-    /// </param>
-    /// <returns>
-    ///   <see cref="ISetTemplateBuilder{T}" /> Create item with parent Item Id request.
-    /// </returns>
-    public static ISetTemplateBuilder<ICreateItemByIdRequest> CreateItemRequestWithParentId(string itemId)
-    {
-      return new CreateItemByIdRequestBuilder(itemId);
-    }
-
-    /// <summary>
     /// Provides builder for constructing create item request with parent item path.
     /// </summary>
     /// <param name="itemPath">Parent item absolute path, must starts with "/" symbol.</param>
@@ -132,18 +118,6 @@ namespace Sitecore.MobileSDK.API
     public static IUpdateItemRequestParametersBuilder<IUpdateItemByIdRequest> UpdateItemRequestWithId(string itemId)
     {
       return new UpdateItemByIdRequestBuilder(itemId);
-    }
-
-    /// <summary>
-    /// Provides builder for constructing update item request with item path.
-    /// </summary>
-    /// <param name="itemPath">Absolute Item path, must starts with "/" symbol</param>
-    /// <returns>
-    ///   <see cref="IUpdateItemRequestParametersBuilder{T}" /> Update item with Item Path request.
-    /// </returns>
-    public static IUpdateItemRequestParametersBuilder<IUpdateItemByPathRequest> UpdateItemRequestWithPath(string itemPath)
-    {
-      return new UpdateItemByPathRequestBuilder(itemPath);
     }
 
   }

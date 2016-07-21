@@ -47,6 +47,7 @@
           var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(this.pathField.Text)
             .AddFieldsRawValuesByNameToSet("Title", this.titleField.Text)
             .AddFieldsRawValuesByNameToSet("Text", this.textField.Text)
+            .Database("master")
             .Build();
 
           this.ShowLoader();

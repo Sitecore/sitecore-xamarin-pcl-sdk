@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.PasswordProvider.Interface;
 
 
-  public class SecureStringPasswordProvider : ISSCCredentials
+  public class SecureStringPasswordProvider : IWebApiCredentials
   {
     private SecureString encryptedLogin;
     private SecureString encryptedPassword;
@@ -100,8 +100,8 @@
         // Suppressing all exceptions in destructor
       }
     }
-  
-    #region ISSCCredentials
+
+    #region IWebApiCredentials
     public SecureStringPasswordProvider PasswordProviderCopy()
     {
       SecureStringPasswordProvider result = new SecureStringPasswordProvider();
@@ -113,7 +113,7 @@
       return result;
     }
 
-    public ISSCCredentials CredentialsShallowCopy()
+    public IWebApiCredentials CredentialsShallowCopy()
     {
       return this.PasswordProviderCopy();
     }
@@ -138,7 +138,7 @@
         return DecryptSecureString(this.encryptedPassword);
       }
     }
-    #endregion ISSCCredentials
+    #endregion IWebApiCredentials
   }
 }
 

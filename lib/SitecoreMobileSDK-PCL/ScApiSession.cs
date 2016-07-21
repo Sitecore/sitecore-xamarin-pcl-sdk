@@ -38,15 +38,13 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByQuery;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
-  using Sitecore.MobileSDK.UrlBuilder.RenderingHtml;
 
   public class ScApiSession : ISitecoreSSCSession
   {
     public ScApiSession(
       ISessionConfig config,
-      ISSCCredentials credentials,
+      IWebApiCredentials credentials,
       IMediaLibrarySettings mediaSettings,
       ItemSource defaultSource = null)
     {
@@ -145,7 +143,7 @@ namespace Sitecore.MobileSDK
       }
     }
 
-    public ISSCCredentials Credentials
+    public IWebApiCredentials Credentials
     {
       get
       {
@@ -174,6 +172,11 @@ namespace Sitecore.MobileSDK
 
     protected virtual async Task<string> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
     {
+      IEnumerable<Cookie> oldCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
+      if (oldCookies.Count() > 0) { 
+        return this.publicCertifiacte;
+      }
+
       try
       {
         var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
@@ -181,6 +184,13 @@ namespace Sitecore.MobileSDK
 
         string result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
         this.publicCertifiacte = result;
+
+        //TODO: @igk debug info remove later
+
+        IEnumerable<Cookie> responseCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
+        foreach (Cookie cookie in responseCookies) {
+          Debug.WriteLine("COOKIE_SET: " + cookie.Name + ": " + cookie.Value);
+        }
       }
       catch (ObjectDisposedException)
       {
@@ -323,20 +333,6 @@ namespace Sitecore.MobileSDK
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
-    public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      IReadItemsByQueryRequest requestCopy = request.DeepCopyGetItemByQueryRequest();
-
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
-
-      IReadItemsByQueryRequest autocompletedRequest = this.requestMerger.FillReadItemByQueryGaps(requestCopy);
-
-      var urlBuilder = new ItemByQueryUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new GetItemsByQueryTasks(urlBuilder, this.httpClient);
-
-      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-    }
-
     public async Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
@@ -398,36 +394,22 @@ namespace Sitecore.MobileSDK
 
     #region CreateItems
 
-    public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      ICreateItemByIdRequest requestCopy = request.DeepCopyCreateItemByIdRequest();
-
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
-      ICreateItemByIdRequest autocompletedRequest = this.requestMerger.FillCreateItemByIdGaps(requestCopy);
-
-      var urlBuilder = new CreateItemByIdUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new CreateItemByIdTask(urlBuilder, this.httpClient);
-
-      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-    }
-
-    public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScCreateItemResponse> CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       ICreateItemByPathRequest requestCopy = request.DeepCopyCreateItemByPathRequest();
      
       var authResult = await this.GetPublicKeyAsync(cancelToken);
 
       //TODO: @igk debug info remove later
-      IEnumerable<Cookie> responseCookies = cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
-      foreach (Cookie cookie in responseCookies)
-      {
-        Debug.WriteLine(cookie.Name + ": " + cookie.Value);
+      IEnumerable<Cookie> responseCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
+      foreach (Cookie cookie in responseCookies) {
+        Debug.WriteLine("COOKIE_SET: " + cookie.Name + ": " + cookie.Value);
       }
-      
+
       ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps(requestCopy);
 
       var urlBuilder = new CreateItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new CreateItemByPathTask(urlBuilder, this.httpClient);
+      var taskFlow = new CreateItemByPathTask<ICreateItemByPathRequest>(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
@@ -450,20 +432,6 @@ namespace Sitecore.MobileSDK
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
-    public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      IUpdateItemByPathRequest requestCopy = request.DeepCopyUpdateItemByPathRequest();
-
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
-
-      IUpdateItemByPathRequest autocompletedRequest = this.requestMerger.FillUpdateItemByPathGaps(requestCopy);
-
-      var urlBuilder = new UpdateItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new UpdateItemByPathTask(urlBuilder, this.httpClient);
-
-      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-    }
-
     #endregion Update Items
 
     #region DeleteItems
@@ -478,34 +446,6 @@ namespace Sitecore.MobileSDK
 
       var urlBuilder = new DeleteItemByIdUrlBuilder(this.restGrammar, this.sscGrammar);
       var taskFlow = new DeleteItemTasks<IDeleteItemsByIdRequest>(urlBuilder, this.httpClient);
-
-      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-    }
-
-    public async Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      IDeleteItemsByPathRequest requestCopy = request.DeepCopyDeleteItemRequest();
-
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
-
-      IDeleteItemsByPathRequest autocompletedRequest = this.requestMerger.FillDeleteItemByPathGaps(requestCopy);
-
-      var urlBuilder = new DeleteItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new DeleteItemTasks<IDeleteItemsByPathRequest>(urlBuilder, this.httpClient);
-
-      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-    }
-
-    public async Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      IDeleteItemsByQueryRequest requestCopy = request.DeepCopyDeleteItemRequest();
-
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
-
-      IDeleteItemsByQueryRequest autocompletedRequest = this.requestMerger.FillDeleteItemByQueryGaps(requestCopy);
-
-      var urlBuilder = new DeleteItemByQueryUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new DeleteItemTasks<IDeleteItemsByQueryRequest>(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
@@ -538,7 +478,7 @@ namespace Sitecore.MobileSDK
     private HttpClientHandler handler;
 
     protected readonly ISessionConfig sessionConfig;
-    private ISSCCredentials credentials;
+    private IWebApiCredentials credentials;
     private readonly IMediaLibrarySettings mediaSettings;
 
     private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();

@@ -6,7 +6,7 @@
   /// A data provider for user's credentials.
   /// A secure implementation must be submitted by the user
   /// </summary>
-  public interface ISSCCredentials : IDisposable
+  public interface IWebApiCredentials : IDisposable
   {
 
     /// <summary>
@@ -14,7 +14,7 @@
     /// This method will be executed once the object is submitted to the session
     /// </summary>
     /// <returns>A copy of the current instance</returns>
-    ISSCCredentials CredentialsShallowCopy();
+    IWebApiCredentials CredentialsShallowCopy();
 
     /// <summary>
     /// Gets the username from the keychain.

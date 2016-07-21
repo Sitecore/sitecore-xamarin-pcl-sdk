@@ -97,7 +97,7 @@
     #endregion Constructor
 
     #region IAuthenticatedSessionBuilder
-    public IBaseSessionBuilder Credentials(ISSCCredentials credentials)
+    public IBaseSessionBuilder Credentials(IWebApiCredentials credentials)
     {
       // @adk : won't be invoked more than once.
       // No validation needed.
@@ -239,7 +239,7 @@
     private string mediaPrefix;
     DownloadStrategy resizingFlag = DownloadStrategy.Plain;
 
-    private ISSCCredentials credentials = null;
+    private IWebApiCredentials credentials = null;
     private ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
     #endregion State
   }

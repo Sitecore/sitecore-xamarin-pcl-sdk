@@ -15,7 +15,7 @@
   public class ItemSourceTest
   {
     IMediaLibrarySettings mediaSettings;
-    ISSCCredentials credentials;
+    IWebApiCredentials credentials;
     ISessionConfig localhostConnection;
 
 

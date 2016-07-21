@@ -62,7 +62,7 @@
       }
     }
 
-    public ISSCCredentials Credentials
+    public IWebApiCredentials Credentials
     {
       get
       {
@@ -91,11 +91,6 @@
       return await this.InvokeNoThrow(this.workerSession.ReadItemAsync(request, cancelToken));
     }
 
-    public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      return await this.InvokeNoThrow(this.workerSession.ReadItemAsync(request, cancelToken));
-    }
-
     public async Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       return await this.InvokeNoThrow(this.workerSession.DownloadMediaResourceAsync(request, cancelToken));
@@ -105,12 +100,7 @@
 
     #region CreateItems
 
-    public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      return await this.InvokeNoThrow(this.workerSession.CreateItemAsync(request, cancelToken));
-    }
-
-    public async Task<ScItemsResponse> CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScCreateItemResponse> CreateItemAsync(ICreateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       return await this.InvokeNoThrow(this.workerSession.CreateItemAsync(request, cancelToken));
     }
@@ -125,11 +115,6 @@
     #region Update Items
 
     public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      return await this.InvokeNoThrow(this.workerSession.UpdateItemAsync(request, cancelToken));
-    }
-
-    public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       return await this.InvokeNoThrow(this.workerSession.UpdateItemAsync(request, cancelToken));
     }
@@ -154,16 +139,6 @@
     #region DeleteItems
 
     public async Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      return await this.InvokeNoThrow(this.workerSession.DeleteItemAsync(request, cancelToken));
-    }
-
-    public async Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      return await this.InvokeNoThrow(this.workerSession.DeleteItemAsync(request, cancelToken));
-    }
-
-    public async Task<ScDeleteItemsResponse> DeleteItemAsync(IDeleteItemsByQueryRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       return await this.InvokeNoThrow(this.workerSession.DeleteItemAsync(request, cancelToken));
     }

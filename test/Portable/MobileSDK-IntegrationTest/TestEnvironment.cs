@@ -13,7 +13,7 @@
         IsMediaHashesSupported = TestEndpointsConfig.IsMediaHashesSupported,
         InstanceUrl = TestEndpointsConfig.InstanceUrl,
 
-        ShellSite = "/sitecore/shell"
+        ShellSite = "sitecore"
       };
 
       result.Items.Home.Id = "110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9";

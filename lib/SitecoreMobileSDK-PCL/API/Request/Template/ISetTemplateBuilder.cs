@@ -22,15 +22,6 @@
     /// <returns><seealso cref="ISetNewItemNameBuilder{T}"/></returns>
     ISetNewItemNameBuilder<T> ItemTemplateId(string templateId);
 
-    //    ICreateItemRequestParametersBuilder<T> BranchId(string branchId);
-
-    /// <summary>
-    /// Specifies branch GUID to create item from. Must containg appropriate item GUID value enclosed in curly braces.
-    /// For example: "{B174990B-37B1-4A60-9C7D-891B521E1B76}"
-    /// </summary>
-    /// <param name="branchId">The branch GUID.</param>
-    /// <returns><seealso cref="ISetNewItemNameBuilder{T}"/></returns>
-    ISetNewItemNameBuilder<T> BranchId(string branchId);
   }
 }
 

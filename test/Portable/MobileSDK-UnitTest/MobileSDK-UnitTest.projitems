@@ -10,11 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AuthenticateParserTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CreateItemByIdUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateItemByPathUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateSessionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByIdUrlBuilderTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByPathUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsResponseParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloadMediaOptionsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FieldsParserTest.cs" />
@@ -36,6 +34,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByIdUrlBuilderTests.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByPathUrlBuilderTests.cs" />
   </ItemGroup>
 </Project>

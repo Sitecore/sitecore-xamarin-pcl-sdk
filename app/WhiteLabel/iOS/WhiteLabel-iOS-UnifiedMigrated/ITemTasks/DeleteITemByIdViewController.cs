@@ -44,13 +44,14 @@ namespace WhiteLabeliOS
           {
 
           var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(this.itemIdField.Text)
-            .Build();
+                                             .Database("master")
+                                             .Build();
 
           this.ShowLoader();
 
           ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
 
-          if (response != null)
+          if (response.Deleted)
           {
              AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item deleted successfully");
           }

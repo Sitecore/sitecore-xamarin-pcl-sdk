@@ -4,7 +4,7 @@
 
   public static class SSCCredentialsValidator
   {
-    public static bool IsValidCredentials(ISSCCredentials credentials)
+    public static bool IsValidCredentials(IWebApiCredentials credentials)
     {
       if (null == credentials)
       {
@@ -28,7 +28,7 @@
       }
     }
 
-    public static bool IsAnonymousSession(ISSCCredentials credentials)
+    public static bool IsAnonymousSession(IWebApiCredentials credentials)
     {
       if (!IsValidCredentials(credentials))
       {

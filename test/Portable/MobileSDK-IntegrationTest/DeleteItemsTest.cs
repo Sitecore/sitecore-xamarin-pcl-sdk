@@ -45,10 +45,10 @@
     }
 
 
-    private async Task<ScDeleteItemsResponse> RemoveAll()
+    private async Task RemoveAll()
     {
       await this.DeleteAllItems("master");
-      return await this.DeleteAllItems("web");
+      await this.DeleteAllItems("web");
     }
 
     [SetUp]
@@ -92,8 +92,7 @@
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(1, result.Count);
-      Assert.AreEqual(item.Id, result[0]);
+      Assert.IsTrue(result.Deleted);
     }
 
     [Test]
@@ -108,8 +107,7 @@
         .Build();
 
       var result = await this.session.DeleteItemAsync(request);
-      Assert.AreEqual(1, result.Count);
-      Assert.AreEqual(parentItem.Id, result[0]);
+      Assert.IsTrue(result.Deleted);
     }
 
     [Test]
@@ -178,7 +176,7 @@
 
 
       var response = await session.DeleteItemAsync(request);
-      Assert.AreEqual(0, response.Count);
+      Assert.IsFalse(response.Deleted);
     }
 
     [Test]
@@ -229,16 +227,32 @@
         .Build();
       var createResponse = await itemSession.CreateItemAsync(request);
 
-      Assert.AreEqual(1, createResponse.ResultCount);
-      return createResponse[0];
+     Assert.IsTrue(createResponse.Created);
+
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + itemName)
+                                         .Build();
+
+      var readResponse = await itemSession.ReadItemAsync(readRequest);
+
+      return readResponse[0];
     }
 
-    private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
+    private async Task DeleteAllItems(string database)
     {
-      var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .Database(database)
-        .Build();
-      return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+      var getItemsToDelet = ItemSSCRequestBuilder.ReadChildrenRequestWithId(this.testData.Items.CreateItemsHere.Id)
+          .Database(database)
+          .Build();
+
+      ScItemsResponse items = await this.noThrowCleanupSession.ReadChildrenAsync(getItemsToDelet);
+
+      foreach (var item in items) {
+
+        var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
+          .Database(database)
+          .Build();
+        await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+
+      }
     }
   }
 }

@@ -40,10 +40,10 @@
       return result;
     }
 
-    public async Task<ScDeleteItemsResponse> RemoveAll()
+    public async Task RemoveAll()
     {
       await this.DeleteAllItems("master");
-      return await this.DeleteAllItems("web");
+      await this.DeleteAllItems("web");
     }
 
     [TearDown]
@@ -59,92 +59,12 @@
     }
 
     [Test]
-    public async void TestCreateItemByIdWithoutFieldsSet()
-    {
-      await this.RemoveAll();
-
-      const string ItemName = "Create by parent id";
-      var expectedItem = this.CreateTestItem(ItemName);
-
-      var request =
-        ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-        .ItemTemplatePath(testData.Items.Home.Template)
-        .ItemName(ItemName)
-        .Database("master")
-        .Build();
-
-      var createResponse = await session.CreateItemAsync(request);
-
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      this.GetAndCheckItem(expectedItem, resultItem);
-    }
-
-    [Test]
-    public async void TestCreateItemByIdWithOverridenDatabaseAndLanguageInRequest()
-    {
-      await this.RemoveAll();
-      const string Db = "web";
-      const string Language = "da";
-      var expectedItem = this.CreateTestItem("Create danish version in web from request");
-
-      var adminSession =
-        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Admin)
-          .Site(testData.ShellSite)
-          .DefaultDatabase("master")
-          .DefaultLanguage("en")
-          .BuildSession();
-
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentId(testData.Items.CreateItemsHere.Id)
-        .ItemTemplatePath(expectedItem.Template)
-         .ItemName(expectedItem.DisplayName)
-         .Database(Db)
-         .Language(Language)
-         .Build();
-
-      var createResponse = await adminSession.CreateItemAsync(request);
-
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(Db, resultItem.Source.Database);
-      Assert.AreEqual(Language, resultItem.Source.Language);
-    }
-
-    [Test]
-    public async void TestCreateItemByPathWithDatabaseAndLanguageInSession()
-    {
-      await this.RemoveAll();
-      const string Db = "web";
-      const string Language = "da";
-      var expectedItem = this.CreateTestItem("Create danish version in web from session");
-
-      var adminSession =
-        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Admin)
-          .Site(testData.ShellSite)
-          .DefaultDatabase(Db)
-          .DefaultLanguage(Language)
-          .BuildSession();
-
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(expectedItem.Template)
-         .ItemName(expectedItem.DisplayName)
-         .Build();
-
-      var createResponse = await adminSession.CreateItemAsync(request);
-
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(Db, resultItem.Source.Database);
-      Assert.AreEqual(Language, resultItem.Source.Language);
-    }
-
-
-    [Test]
     public async void TestCreateItemByPathAndTemplatePathWithoutFieldsSet()
     {
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create by parent path and template Path");
 
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
@@ -152,8 +72,7 @@
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      this.GetAndCheckItem(expectedItem, resultItem);
+      Assert.IsTrue(createResponse.Created);
     }
 
     [Test]
@@ -162,7 +81,7 @@
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
@@ -170,8 +89,14 @@
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      this.GetAndCheckItem(expectedItem, resultItem);
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
+                                        .Database("master")
+                                        .Build();
+
+      var readResponse = await session.ReadItemAsync(readRequest);
+
+      var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
+
     }
 
 
@@ -189,16 +114,20 @@
          .Database("master")
          .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
          .AddFieldsRawValuesByNameToSet("Text", CreatedText)
-         .AddFieldsToRead("Text", "Title")
          .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
+                                        .Database("master")
+                                        .Build();
+
+      var readResponse = await session.ReadItemAsync(readRequest);
+
+      var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
       Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
       Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);
 
-      this.GetAndCheckItem(expectedItem, resultItem);
     }
 
     [Test]
@@ -208,7 +137,7 @@
       var expectedItem = this.CreateTestItem("International Слава Україні ウクライナへの栄光 عالمي");
       const string CreatedTitle = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
       const string CreatedText = "युक्रेन गौरव גלורי לאוקראינה";
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
@@ -218,21 +147,26 @@
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
+                                        .Database("master")
+                                        .Build();
+
+      var readResponse = await session.ReadItemAsync(readRequest);
+
+      var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
       Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
       Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);
 
-      this.GetAndCheckItem(expectedItem, resultItem);
     }
 
     [Test]
-    public async void TestCreateItemByIdWithNotExistentFields()
+    public async void TestCreateItemByPathWithNotExistentFields()
     {
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Set not existent field");
       const string CreatedTitle = "Existent title";
       const string CreatedTexttt = "Not existent texttt";
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
@@ -242,10 +176,15 @@
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
+                                        .Database("master")
+                                        .Build();
+
+      var readResponse = await session.ReadItemAsync(readRequest);
+
+      var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
       Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
 
-      this.GetAndCheckItem(expectedItem, resultItem);
     }
 
     [Test]
@@ -259,16 +198,21 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFieldsToRead(FieldName)
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
+                                        .Database("master")
+                                        .Build();
+
+      var readResponse = await session.ReadItemAsync(readRequest);
+
+      var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
       Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
 
-      this.GetAndCheckItem(expectedItem, resultItem);
+
     }
 
     //Item Web API issue #451738
@@ -281,33 +225,27 @@
       const string FieldValue = "<div>Welcome to Sitecore!</div><div><br /><a href=\"~/link.aspx?_id=A2EE64D5BD7A4567A27E708440CAA9CD&amp;_z=z\">Accelerometer</a></div>";
 
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplatePath(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFieldsToRead(FieldName)
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      Assert.IsTrue(createResponse.Created);
+
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
+                                        .Database("master")
+                                        .AddFieldsToRead(FieldName)
+                                        .Build();
+
+      var readResponse = await session.ReadItemAsync(readRequest);
+
+      var resultItem = readResponse[0];
+
       Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
 
-      this.GetAndCheckItem(expectedItem, resultItem);
-    }
-
-    [Test]
-    public void TestCreateItemByIdAndGetDuplicateFieldsReturnsException()
-    {
-      const string FieldName = "Text";
-
-      var exception = Assert.Throws<InvalidOperationException>(() =>
-        ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
-         .ItemTemplatePath(testData.Items.Home.Template)
-         .ItemName("Get duplicate fields")
-         .AddFieldsToRead(FieldName, "Title", FieldName)
-         .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
     }
 
     [Test]
@@ -334,39 +272,36 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFieldsToRead(FieldName, null, "")
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
-      Assert.AreEqual(0, resultItem.FieldsCount);
+      Assert.IsFalse(createResponse.Created);
 
-      this.GetAndCheckItem(expectedItem, resultItem);
     }
 
     [Test]
     public void TestCreateItemWithEmptyOrNullFieldsReturnsException()
     {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet(null, "somevalue"));
       Assert.IsTrue(exception.Message.Contains("fieldName"));
 
-      var exception1 = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var exception1 = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("", "somevalue"));
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldName : The input cannot be empty.", exception1.Message);
 
-      var exception2 = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var exception2 = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("somekey", null));
       Assert.IsTrue(exception2.Message.Contains("fieldValue"));
 
-      var exception3 = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var exception3 = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath("/Sample/Sample Item")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("somekey", ""));
@@ -375,7 +310,7 @@
 
 
     [Test]
-    public async void TestCreateItemByIdAndSetInvalidEmptyAndNullFields()
+    public async void TestCreateItemByPathAndSetInvalidEmptyAndNullFields()
     {
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Create and set invalid field");
@@ -384,22 +319,27 @@
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
-        .AddFieldsToRead(FieldName)
         .AddFieldsRawValuesByNameToSet(FieldName, FieldName)
         .Build();
 
       var createResponse = await session.CreateItemAsync(request);
 
-      var resultItem = this.CheckCreatedItem(createResponse, expectedItem);
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
+                                        .Database("master")
+                                        .Build();
+
+      var readResponse = await session.ReadItemAsync(readRequest);
+
+      var resultItem = readResponse[0];
+
       Assert.AreEqual(0, resultItem.FieldsCount);
 
-      this.GetAndCheckItem(expectedItem, resultItem);
     }
 
     [Test]
-    public void TestCreateItemByIdWithEmptyNameReturnsException()
+    public void TestCreateItemByPathWithEmptyNameReturnsException()
     {
-      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(testData.Items.Home.Template)
         .ItemName("")
         .Build());
@@ -556,23 +496,13 @@
     }
 
     [Test]
-    public void TestCreateItemByIdhWithNullTemplateReturnsException()
+    public void TestCreateItemByPathhWithNullTemplateReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId(this.testData.Items.CreateItemsHere.Id)
+      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
          .ItemTemplatePath(null)
          .ItemName("Item with empty template")
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.ItemTemplate"));
-    }
-
-    [Test]
-    public void TestCreateItemByEmptyIdReturnsException()
-    {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId("")
-         .ItemTemplatePath("Some template")
-         .ItemName("Item with empty parent id")
-         .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemId : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -586,16 +516,6 @@
     }
 
     [Test]
-    public void TestCreateItemByInvalidIdReturnsException()
-    {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Path)
-         .ItemTemplatePath("Some template")
-         .ItemName("Item with invalid parent id")
-         .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
-    }
-
-    [Test]
     public void TestCreateItemWithSpacesOnlyInPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath("  ")
@@ -606,23 +526,9 @@
     }
 
     [Test]
-    public async void TestCreateItemWithNotExistentItemId()
+    public void TestCreateItemByPathWithNullDatabaseDoNotReturnsException()
     {
-      const string Id = "{000D009F-D000-000A-0C0C-0A0DF0E00EF0}";
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentId(Id)
-        .ItemTemplatePath(testData.Items.Home.Template)
-        .ItemName("item with not existent id")
-        .Database("master")
-        .Build();
-
-      var createResponse = await session.CreateItemAsync(request);
-      Assert.AreEqual(0, createResponse.ResultCount);
-    }
-
-    [Test]
-    public void TestCreateItemByIdWithNullDatabaseDoNotReturnsException()
-    {
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Id)
+      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
          .ItemTemplatePath("Some template")
          .ItemName("Item with null db")
          .Database(null)
@@ -631,9 +537,9 @@
     }
 
     [Test]
-    public void TestCreateItemByIdWithEmptyDatabaseDoNotReturnsException()
+    public void TestCreateItemByPathWithEmptyDatabaseDoNotReturnsException()
     {
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Id)
+      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
          .ItemTemplatePath("Some template")
          .ItemName("Item with empty db")
          .Database("")
@@ -653,17 +559,6 @@
     }
 
     [Test]
-    public void TestCreateItemByIdWithSpacesOnlyInLanguageReturnsException()
-    {
-      Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentId(testData.Items.Home.Id)
-         .ItemTemplatePath("Some template")
-         .ItemName("Item with empty language")
-         .Language("  ")
-         .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.Language : The input cannot be empty.", exception.Message);
-    }
-
-    [Test]
     public void TestCreateItemByPathWithSpacesOnlyInDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
@@ -672,21 +567,6 @@
          .Database("   ")
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.Database : The input cannot be empty.", exception.Message);
-    }
-
-    private async void GetAndCheckItem(TestEnvironment.Item expectedItem, ISitecoreItem resultItem)
-    {
-      var readResponse = await this.GetItemById(resultItem.Id);
-
-      this.testData.AssertItemsCount(1, readResponse);
-      this.testData.AssertItemsAreEqual(expectedItem, readResponse[0]);
-    }
-
-    private async Task<ScItemsResponse> GetItemById(string id)
-    {
-      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(id).Database("master").Build();
-      var response = await this.session.ReadItemAsync(request);
-      return response;
     }
 
     private TestEnvironment.Item CreateTestItem(string name)
@@ -708,12 +588,23 @@
       return resultItem;
     }
 
-    private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
+    private async Task DeleteAllItems(string database)
     {
-      var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
+      var getItemsToDelet = ItemSSCRequestBuilder.ReadChildrenRequestWithId(this.testData.Items.CreateItemsHere.Id)
           .Database(database)
           .Build();
-      return await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+
+      ScItemsResponse items = await this.noThrowCleanupSession.ReadChildrenAsync(getItemsToDelet);
+
+      foreach (var item in items) { 
+
+        var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
+          .Database(database)
+          .Build();
+        await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+      
+      }
+
     }
   }
 }

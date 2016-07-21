@@ -32,25 +32,6 @@ namespace Sitecore.MobileSDK.API.Request
     /// </returns>
     IBaseRequestParametersBuilder<T> Language(string itemLanguage);
 
-    /// <summary>
-    /// Adds the fields that will be read from the server.
-    /// </summary>
-    /// <param name="fields">The fields.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    IBaseRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
-
-    /// <summary>
-    /// Adds the fields that will be read from the server.
-    /// </summary>
-    /// <param name="fieldParams">The field parameters.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
-    IBaseRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
-
     IBaseRequestParametersBuilder<T> IcludeStanderdTemplateFields(bool include);
 
     /// <summary>

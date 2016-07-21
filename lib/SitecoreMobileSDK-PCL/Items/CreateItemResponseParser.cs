@@ -8,9 +8,9 @@
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
 
-  public class DeleteItemsResponseParser
+  public class CreateItemResponseParser
   {
-    public static ScDeleteItemsResponse ParseResponse(string response, CancellationToken token)
+    public static ScCreateItemResponse ParseResponse(string response, CancellationToken token)
     {
       token.ThrowIfCancellationRequested();
 
@@ -18,8 +18,7 @@
         throw new ArgumentException("response shouldn't be empty or null");
       }
 
-      return new ScDeleteItemsResponse(response);
+      return new ScCreateItemResponse(response);
     }
-
   }
 }

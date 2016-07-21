@@ -5,13 +5,10 @@
   using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.Session;
 
-  /// <summary>
-  /// Class represents server response for delete items request.
-  /// It contains a list of ids for the successfully removed items.
-  /// </summary>
-  public class ScDeleteItemsResponse
+  public class ScCreateItemResponse 
   {
-   public ScDeleteItemsResponse(string number)
+
+    public ScCreateItemResponse(string number)
     {
       int result;
       if (Int32.TryParse(number, out result)) {
@@ -22,10 +19,10 @@
 
     }
 
-    public bool Deleted {
-      get {
-        return this.StatusCode == 204;
-      }
+    public bool Created {
+        get{
+          return this.StatusCode == 201;
+        }
     }
 
     public int StatusCode {

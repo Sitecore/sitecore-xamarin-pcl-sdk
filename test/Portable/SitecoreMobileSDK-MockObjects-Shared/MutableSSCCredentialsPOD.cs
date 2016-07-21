@@ -3,7 +3,7 @@
   using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
 
-  public class MutableSSCCredentialsPOD : ISSCCredentials
+  public class MutableSSCCredentialsPOD : IWebApiCredentials
   {
     public MutableSSCCredentialsPOD(string username, string password)
     {
@@ -11,7 +11,7 @@
       this.Password = password;
     }
 
-    public ISSCCredentials CredentialsShallowCopy()
+    public IWebApiCredentials CredentialsShallowCopy()
     {
       return new MutableSSCCredentialsPOD(this.Username, this.Password);
     }

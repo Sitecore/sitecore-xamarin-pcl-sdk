@@ -27,7 +27,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GetFieldsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateItemsTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CreateFromBranchTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CancelOperationsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BuildSessionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AuthenticateTest.cs" />

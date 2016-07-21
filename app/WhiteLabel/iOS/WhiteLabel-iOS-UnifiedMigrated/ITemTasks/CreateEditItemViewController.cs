@@ -60,8 +60,8 @@
            
           this.ShowLoader();
 
-          ScItemsResponse response = await session.CreateItemAsync(request);
-          if (response != null)
+          var response = await session.CreateItemAsync(request);
+          if (response.Created)
           {
             AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item created successfully");
           }

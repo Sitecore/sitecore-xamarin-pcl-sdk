@@ -9,7 +9,7 @@
   using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.Validators;
 
-  public abstract class AbstractBaseRequestBuilder<T> : IBaseRequestParametersBuilder<T>
+  public abstract class AbstractBaseRequestBuilder<T> : IBaseReadRequestParametersBuilder<T>
     where T : class
   {
     public IBaseRequestParametersBuilder<T> Database(string sitecoreDatabase)

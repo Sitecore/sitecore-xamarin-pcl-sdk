@@ -100,8 +100,6 @@
     <Compile Include="Items\ItemSource.cs" />
     <Compile Include="UrlBuilder\DeleteItem\AbstractDeleteItemUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\DeleteItemByIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByPathUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\DeleteItem\DeleteItemByQueryUrlBuilder.cs" />
     <Compile Include="UrlBuilder\DeleteItem\IDeleteItemsUrlBuilder.cs" />
     <Compile Include="CrudTasks\GetItemsByIdTasks.cs" />
     <Compile Include="CrudTasks\GetItemsByPathTasks.cs" />
@@ -113,13 +111,11 @@
     <Compile Include="UrlBuilder\QueryParameters\QueryParameters.cs" />
     <Compile Include="UrlBuilder\Rest\IRestServiceGrammar.cs" />
     <Compile Include="UrlBuilder\Rest\RestServiceGrammar.cs" />
-    <Compile Include="UrlBuilder\ItemByQuery\ItemByQueryUrlBuilder.cs" />
     <Compile Include="UserRequest\CreateRequest\CreateItemByPathRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\AbstractDeleteItemRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemByIdRequestBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
     <Compile Include="Items\ReadItemByQueryParameters.cs" />
-    <Compile Include="CrudTasks\GetItemsByQueryTasks.cs" />
     <Compile Include="Items\ReadItemsByIdParameters.cs" />
     <Compile Include="UserRequest\UserRequestMerger.cs" />
     <Compile Include="UserRequest\ItemSourceFieldMerger.cs" />
@@ -133,9 +129,6 @@
     <Compile Include="TaskFlow\IDownloadApiCallTasks.cs" />
     <Compile Include="CrudTasks\Resource\GetResourceTask.cs" />
     <Compile Include="UserRequest\CreateRequest\AbstractCreateItemRequestBuilder.cs" />
-    <Compile Include="UserRequest\CreateRequest\CreateItemByIdRequestBuilder.cs" />
-    <Compile Include="CrudTasks\CreateItemByIdTask.cs" />
-    <Compile Include="Items\CreateItemByIdParameters.cs" />
     <Compile Include="Validators\BaseValidator.cs" />
     <Compile Include="Validators\DuplicateEntryValidator.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
@@ -143,7 +136,6 @@
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
     <Compile Include="Items\CreateItemByPathParameters.cs" />
-    <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
     <Compile Include="UrlBuilder\UpdateItem\AbstractUpdateItemUrlBuilder.cs" />
     <Compile Include="Items\UpdateItemByIdParameters.cs" />
     <Compile Include="CrudTasks\UpdateItemByIdTask.cs" />
@@ -160,11 +152,8 @@
     <Compile Include="SessionSettings\MediaLibrarySettings.cs" />
     <Compile Include="API\Request\IUpdateItemByPathRequest.cs" />
     <Compile Include="Items\UpdateItemByPathParameters.cs" />
-    <Compile Include="CrudTasks\UpdateItemByPathTask.cs" />
     <Compile Include="UrlBuilder\UpdateItem\UpdateItemByIdUrlBuilder.cs" />
-    <Compile Include="UrlBuilder\UpdateItem\UpdateItemByPathUrlBuilder.cs" />
     <Compile Include="UserRequest\UpdateRequest\UpdateItemByPathRequestBuilder.cs" />
-    <Compile Include="UrlBuilder\CreateItem\CreateItemByIdUrlBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemByPathUrlBuilder.cs" />
     <Compile Include="API\Request\IBaseUpdateItemRequest.cs" />
     <Compile Include="API\MediaItem\IMediaOptionsBuilder.cs" />
@@ -183,8 +172,6 @@
     <Compile Include="API\Request\IMediaResourceDownloadRequest.cs" />
     <Compile Include="API\Request\IGetRenderingHtmlRequest.cs" />
     <Compile Include="Items\ReadRenderingHTMLParameters.cs" />
-    <Compile Include="CrudTasks\Resource\GetRenderingHtmlTasks.cs" />
-    <Compile Include="UrlBuilder\RenderingHTML\RenderingHtmlUrlBuilder.cs" />
     <Compile Include="API\Request\IRenderingHtmlRequestParametersBuilder.cs" />
     <Compile Include="Items\MediaResourceDownloadParameters.cs" />
     <Compile Include="API\Request\IGetMediaItemRequestParametersBuilder.cs" />
@@ -233,6 +220,11 @@
     <Compile Include="UrlBuilder\SortParameters\SortParameters.cs" />
     <Compile Include="API\Request\ISearchItemRequestParametersBuilder.cs" />
     <Compile Include="UserRequest\SearchRequests\SitecoreSearchRequestBuilder.cs" />
+    <Compile Include="API\Items\ScCreateItemResponse.cs" />
+    <Compile Include="CrudTasks\CreateItemByPathTask.cs" />
+    <Compile Include="UrlBuilder\CreateItem\ICreateItemUrlBuilder.cs" />
+    <Compile Include="Items\CreateItemResponseParser.cs" />
+    <Compile Include="API\Request\IBaseReadRequestParametersBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

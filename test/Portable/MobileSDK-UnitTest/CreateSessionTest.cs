@@ -12,7 +12,7 @@
   [TestFixture]
   public class CreateSessionTest
   {
-    private ISSCCredentials adminCredentials = new SSCCredentialsPOD("admin", "b");
+    private IWebApiCredentials adminCredentials = new SSCCredentialsPOD("admin", "b");
 
     #region Explicit Construction
     [Test]
@@ -85,7 +85,7 @@
     [Test]
     public void TestAuthenticatedSessionShouldBeCreatedByTheBuilder()
     {
-      ISSCCredentials credentials = this.adminCredentials;
+      IWebApiCredentials credentials = this.adminCredentials;
 
       var builder = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(credentials)

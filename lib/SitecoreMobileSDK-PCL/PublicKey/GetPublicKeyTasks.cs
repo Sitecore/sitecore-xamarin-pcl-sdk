@@ -23,12 +23,12 @@ namespace Sitecore.MobileSDK.PublicKey
     private readonly SessionConfigUrlBuilder sessionConfigBuilder;
     private readonly ISSCUrlParameters sscGrammar;
     private readonly HttpClient httpClient;
-    private readonly ISSCCredentials credentials;
+    private readonly IWebApiCredentials credentials;
     private string domain;
 
     #endregion Private Variables
 
-    public GetPublicKeyTasks(ISSCCredentials credentials, SessionConfigUrlBuilder sessionConfigBuilder, ISSCUrlParameters sscGrammar, HttpClient httpClient)
+    public GetPublicKeyTasks(IWebApiCredentials credentials, SessionConfigUrlBuilder sessionConfigBuilder, ISSCUrlParameters sscGrammar, HttpClient httpClient)
     {
       this.sessionConfigBuilder = sessionConfigBuilder;
       this.sscGrammar = sscGrammar;

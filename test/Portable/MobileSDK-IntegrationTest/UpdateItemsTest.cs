@@ -40,10 +40,10 @@
     }
 
 
-    private async Task<ScDeleteItemsResponse> RemoveAll()
+    private async Task RemoveAll()
     {
       await this.DeleteAllItems("master");
-      return await this.DeleteAllItems("web");
+      await this.DeleteAllItems("web");
     }
 
     [TearDown]
@@ -58,36 +58,7 @@
       this.noThrowCleanupSession = null;
     }
 
-    [Test]
-    public async void TestUpdateDanishItemByPath()
-    {
-      await this.RemoveAll();
-      const string Language = "da";
-      var titleValue = RandomText();
-      var textValue = RandomText();
-      var itemSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
-        .DefaultLanguage(Language)
-        .DefaultDatabase("master")
-        .BuildSession();
-      ISitecoreItem item = await this.CreateItem("Danish item to update", null, itemSession);
-
-      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(item.Path)
-        .AddFieldsRawValuesByNameToSet("Title", titleValue)
-        .AddFieldsRawValuesByNameToSet("Text", textValue)
-        .Language(Language)
-        .Build();
-
-      var result = await this.session.UpdateItemAsync(request);
-
-      Assert.AreEqual(1, result.ResultCount);
-      var resultItem = result[0];
-      Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(titleValue, resultItem["Title"].RawValue);
-      Assert.AreEqual(textValue, resultItem["Text"].RawValue);
-      Assert.AreEqual(Language, resultItem.Source.Language);
-    }
+   
 
     [Test]
     public async void TestUpdateItemByNotExistentId()
@@ -120,38 +91,12 @@
     }
 
     [Test]
-    public void TestUpdateItemByNullPathReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath(null)
-        .Build());
-      Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.ItemPath"));
-    }
-
-    [Test]
-    public void TestUpdateItemByInvalidPathReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("invalid path)")
-        .Build());
-      Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : should begin with '/'", exception.Message);
-    }
-
-    [Test]
     public void TestUpdateItemByIdWithNullDatabaseDoNotReturnsException()
     {
       var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
         .Database(null)
         .Build();
       Assert.IsNotNull(request);
-    }
-
-    [Test]
-    public void TestUpdateItemByPathWithTwoDatabasesReturnsException()
-    {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("/path")
-        .Database("db1")
-        .Database("db2")
-        .Build());
-      Assert.AreEqual("UpdateItemByPathRequestBuilder.Database : Property cannot be assigned twice.", exception.Message);
     }
 
     [Test]
@@ -173,15 +118,6 @@
     }
 
     [Test]
-    public void TestUpdateItemByPathWithNullFieldsToUpdateReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("/path")
-        .AddFieldsRawValuesByNameToSet(null)
-        .Build());
-      Assert.IsTrue(exception.Message.Contains("UpdateItemByPathRequestBuilder.FieldsRawValuesByName"));
-    }
-
-    [Test]
     public void TestUpdateItemByIdWithDuplicateFieldsToUpdateReturnsException()
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
@@ -192,15 +128,6 @@
     }
 
     [Test]
-    public void TestUpdateItemByPathWithDuplicateFieldsToReadReturnsException()
-    {
-      var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("/path")
-        .AddFieldsToRead("Title")
-        .AddFieldsToRead("Title"));
-      Assert.AreEqual("UpdateItemByPathRequestBuilder.Fields : duplicate fields are not allowed", exception.Message);
-    }
-
-    [Test]
     public void TestUpdateItemByIdWithTwoVersionsReturnsException()
     {
       var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId(SampleId)
@@ -208,14 +135,6 @@
         .Version(2)
         .Build());
       Assert.AreEqual("UpdateItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
-    }
-
-    [Test]
-    public void TestUpdateItemByPathWithSpacesOnlyReturnsException()
-    {
-      var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithPath("  ")
-        .Build());
-      Assert.AreEqual("UpdateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -240,131 +159,9 @@
       Assert.AreEqual(Version, resultItem.Source.VersionNumber);
     }
 
-    [Test]
-    public async void TestUpdateInternationalItemByPath()
-    {
-      await this.RemoveAll();
-      const string TextValue = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
-      const string ItemName = "גלורי לאוקראינה";
-      ISitecoreItem item = await this.CreateItem(ItemName);
-
-      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(testData.Items.CreateItemsHere.Path + "/" + ItemName)
-        .AddFieldsRawValuesByNameToSet("Text", TextValue)
-        .AddFieldsToRead("Text")
-        .Build();
-
-      var result = await this.session.UpdateItemAsync(request);
-
-      Assert.AreEqual(1, result.ResultCount);
-      var resultItem = result[0];
-      Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(item.DisplayName, resultItem.DisplayName);
-      Assert.AreEqual(TextValue, resultItem["Text"].RawValue);
-    }
-
-    [Test]
-    public async void TestUpdateItemByIdWithNotExistentField()
-    {
-      await this.RemoveAll();
-      const string FieldName = "Texttt";
-      var fieldValue = RandomText();
-
-      ISitecoreItem item = await this.CreateItem("item to updata not existen field");
-
-      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(item.Path)
-        .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
-        .AddFieldsToRead(FieldName)
-        .Build();
-
-      var result = await this.session.UpdateItemAsync(request);
-
-      Assert.AreEqual(1, result.ResultCount);
-      var resultItem = result[0];
-      Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(0, resultItem.FieldsCount);
-    }
-
-    [Test]
-    [Ignore]
-    public async void TestUpdateItemByIdSetHtmlField()
-    {
-      await this.RemoveAll();
-      const string FieldName = "Text";
-      const string FieldValue = "<div>Welcome to Sitecore!</div>";
-
-      ISitecoreItem item = await this.CreateItem("item to updata not existen field");
-
-      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(item.Path)
-        .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
-        .AddFieldsToRead(FieldName)
-        .Build();
-
-      var result = await this.session.UpdateItemAsync(request);
-
-      Assert.AreEqual(1, result.ResultCount);
-      var resultItem = result[0];
-      Assert.AreEqual(item.Id, resultItem.Id);
-      Assert.AreEqual(1, resultItem.FieldsCount);
-      Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
-    }
-
-    [Test]
-    public void TestUpdateItemAsAnonymousFromShell()
-    {
-      const string FieldName = "Text";
-      var fieldValue = RandomText();
-
-      var itemSession = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
-        .Site(testData.ShellSite)
-        .DefaultDatabase("master")
-        .BuildSession();
-
-      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
-        .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
-        .Build();
-
-      TestDelegate testCode = async () =>
-      {
-        var task = itemSession.UpdateItemAsync(request);
-        await task;
-      };
-      var exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.AreEqual("Access to site is not granted.", exception.InnerException.Message);
-    }
-
-    [Test]
-    public void TestUpdateItemAsUserWithoutWriteAccess()
-    {
-      const string FieldName = "Text";
-      var fieldValue = RandomText();
-
-      var itemSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.NoCreateAccess)
-        .Site(testData.ShellSite)
-        .DefaultDatabase("master")
-        .BuildSession();
-
-      var request = ItemSSCRequestBuilder.UpdateItemRequestWithPath(testData.Items.ItemWithVersions.Path)
-        .AddFieldsRawValuesByNameToSet(FieldName, fieldValue)
-        .Build();
-
-      TestDelegate testCode = async () =>
-      {
-        var task = itemSession.UpdateItemAsync(request);
-        await task;
-      };
-      var exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("The current user does not have write access to this item"));
-    }
-
     private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreSSCSession itemSession = null)
     {
-      if (itemSession == null)
-      {
+      if (itemSession == null) {
         itemSession = session;
       }
       string parentPath = parentItem == null ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
@@ -374,8 +171,14 @@
         .Build();
       var createResponse = await itemSession.CreateItemAsync(request);
 
-      Assert.AreEqual(1, createResponse.ResultCount);
-      return createResponse[0];
+      Assert.IsTrue(createResponse.Created);
+
+      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + itemName)
+                                         .Build();
+
+      var readResponse = await itemSession.ReadItemAsync(readRequest);
+
+      return readResponse[0];
     }
 
     private static string RandomText()
@@ -383,14 +186,22 @@
       return "UpdatedText" + new Random(10000);
     }
 
-    private async Task<ScDeleteItemsResponse> DeleteAllItems(string database)
+    private async Task DeleteAllItems(string database)
     {
-      var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(this.testData.Items.CreateItemsHere.Id)
-        .Database(database)
-        .Build();
-      
-      var response = await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
-      return response;
+      var getItemsToDelet = ItemSSCRequestBuilder.ReadChildrenRequestWithId(this.testData.Items.CreateItemsHere.Id)
+          .Database(database)
+          .Build();
+
+      ScItemsResponse items = await this.noThrowCleanupSession.ReadChildrenAsync(getItemsToDelet);
+
+      foreach (var item in items) {
+
+        var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
+          .Database(database)
+          .Build();
+        await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+
+      }
     }
   }
 }

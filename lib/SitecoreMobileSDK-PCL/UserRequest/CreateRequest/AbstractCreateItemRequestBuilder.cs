@@ -125,15 +125,6 @@
       return (ICreateItemRequestParametersBuilder<T>)base.Language(itemLanguage);
     }
 
-    new public ICreateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
-    {
-      return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
-    }
-
-    new public ICreateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
-    {
-      return (ICreateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
-    }
   }
 }
 

@@ -55,28 +55,6 @@ namespace Sitecore.MobileSDK.API.Request
     /// </returns>
     new ICreateItemRequestParametersBuilder<T> Language(string itemLanguage);
 
-    /// <summary>
-    /// Adds the fields names that will be read from the server.
-    /// 
-    /// The value is case insensitive.
-    /// </summary>
-    /// <param name="fields">The fields.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    new ICreateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
-
-    /// <summary>
-    /// Adds the fields names that will be read from the server.
-    /// 
-    /// The value is case insensitive.
-    /// </summary>
-    /// <param name="fieldParams">The field parameters.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
-    new ICreateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
   }
 }
 
