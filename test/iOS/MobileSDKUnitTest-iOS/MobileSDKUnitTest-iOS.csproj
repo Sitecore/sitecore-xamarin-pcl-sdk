@@ -93,16 +93,11 @@
     <Reference Include="monotouch" />
     <Reference Include="MonoTouch.NUnitLite" />
     <Reference Include="System.Net.Http" />
-<<<<<<< HEAD
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\solutions\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="crypto">
       <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.8.1.1\lib\netstandard1.3\crypto.dll</HintPath>
-=======
-    <Reference Include="crypto">
-      <HintPath>..\..\..\solutions\packages\Portable.BouncyCastle.1.8.1\lib\MonoTouch\crypto.dll</HintPath>
->>>>>>> 5258161321f6e9bfede35c691ab087a47ec8b543
     </Reference>
   </ItemGroup>
   <ItemGroup>

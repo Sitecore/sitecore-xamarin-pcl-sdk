@@ -35,7 +35,7 @@
       var responseItems = responseJObject.SelectToken("$.result.itemIds");
       var itemsIds = new List<string>();
 
-      foreach (JValue itemId in responseItems)
+      foreach (var itemId in responseItems)
       {
         token.ThrowIfCancellationRequested();
 
