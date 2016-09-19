@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{2C70868B-468C-4FA3-B82C-3193AD762AD0}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MobileSDK-IntegrationTest", "..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.shproj", "{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0}"
@@ -14,46 +16,63 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSDKUnitTest-iOS-NuGet-Updated", "Updated\MobileSDKUnitTest-iOS-NuGet-Updated\MobileSDKUnitTest-iOS-NuGet-Updated.csproj", "{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{8a52a2a6-20a1-42bd-b586-242f77089b1d}*SharedItemsImports = 13
+		..\test\Portable\MobileSDK-UnitTest\MobileSDK-UnitTest.projitems*{b8cd1ccd-f8b5-4dcd-8505-ffa1ee70de99}*SharedItemsImports = 4
+		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{b8cd1ccd-f8b5-4dcd-8505-ffa1ee70de99}*SharedItemsImports = 4
+		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{2cedd496-1972-4e50-96df-25378b34de40}*SharedItemsImports = 4
+		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{2cedd496-1972-4e50-96df-25378b34de40}*SharedItemsImports = 4
+		..\test\Portable\SitecoreMobileSDK-MockObjects-Shared\SitecoreMobileSDK-MockObjects-Shared.projitems*{8007adbc-4501-447f-be99-e628a481bb3f}*SharedItemsImports = 13
+		..\test\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems*{2b6ef2c4-3ae1-414b-8833-3a0d25a0afb0}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|iPhoneSimulator = Debug|iPhoneSimulator
-		Release|iPhoneSimulator = Release|iPhoneSimulator
-		Debug|iPhone = Debug|iPhone
-		Release|iPhone = Release|iPhone
 		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		Ad-Hoc|iPhoneSimulator = Ad-Hoc|iPhoneSimulator
 		AppStore|iPhone = AppStore|iPhone
+		AppStore|iPhoneSimulator = AppStore|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Ad-Hoc|iPhone.ActiveCfg = Release|iPhone
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Ad-Hoc|iPhone.Build.0 = Release|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.AppStore|iPhone.ActiveCfg = Release|iPhone
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.AppStore|iPhone.Build.0 = Release|iPhone
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.AppStore|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhone.Build.0 = Debug|iPhone
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Debug|iPhoneSimulator.Deploy.0 = Debug|iPhoneSimulator
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Release|iPhone.ActiveCfg = Release|iPhone
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Release|iPhone.Build.0 = Release|iPhone
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{2CEDD496-1972-4E50-96DF-25378B34DE40}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Ad-Hoc|iPhone.ActiveCfg = Release|iPhone
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Ad-Hoc|iPhone.Build.0 = Release|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.AppStore|iPhone.ActiveCfg = Release|iPhone
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.AppStore|iPhone.Build.0 = Release|iPhone
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.AppStore|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhone.Build.0 = Debug|iPhone
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Debug|iPhoneSimulator.Deploy.0 = Debug|iPhoneSimulator
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Release|iPhone.ActiveCfg = Release|iPhone
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Release|iPhone.Build.0 = Release|iPhone
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{B8CD1CCD-F8B5-4DCD-8505-FFA1EE70DE99}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2B6EF2C4-3AE1-414B-8833-3A0D25A0AFB0} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
 		{8A52A2A6-20A1-42BD-B586-242F77089B1D} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
 		{8007ADBC-4501-447F-BE99-E628A481BB3F} = {2C70868B-468C-4FA3-B82C-3193AD762AD0}
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\test\iOS\MobileSDK-IntegrationTest-iOS-NuGet\MobileSDK-IntegrationTest-iOS-NuGet.csproj
 	EndGlobalSection
 EndGlobal

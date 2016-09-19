@@ -80,9 +80,6 @@
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sitecore.MobileSDK">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.1.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
-    </Reference>
     <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
       <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.1.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
     </Reference>

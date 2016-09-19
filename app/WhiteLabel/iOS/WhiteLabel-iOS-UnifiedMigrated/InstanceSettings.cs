@@ -73,7 +73,7 @@ namespace WhiteLabeliOS
         #if DEBUG
         if (this.instanceUrl == null) 
         {
-          this.instanceUrl = "http://mobiledev1ua1.dk.sitecore.net:722/";
+          this.instanceUrl = "http://cms80u1.test24dk1.dk.sitecore.net/";
         }
         #endif
         return this.instanceUrl;

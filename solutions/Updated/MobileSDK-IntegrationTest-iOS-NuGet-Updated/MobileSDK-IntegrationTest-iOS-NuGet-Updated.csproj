@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>MobileSDKIntegrationTestiOSNuGetUpdated</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>MobileSDK-IntegrationTest-iOS-NuGet-Updated</AssemblyName>
+    <AssemblyName>MobileSDKIntegrationTestiOSNuGetUpdated</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,17 +75,15 @@
     <MtouchProfiling>true</MtouchProfiling>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1-beta1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="MonoTouch.NUnitLite" />
-    <Reference Include="Sitecore.MobileSDK.PasswordProvider.iOS">
-      <HintPath>..\..\..\..\..\..\..\Users\Igor\Desktop\latestSDK\Sitecore.MobileSDK.PasswordProvider.1.0.1.nupkg\lib\MonoTouch10\Sitecore.MobileSDK.PasswordProvider.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="crypto">
       <HintPath>..\..\packages\Portable.BouncyCastle.1.8.1\lib\XamarinIos\crypto.dll</HintPath>
     </Reference>
@@ -101,17 +99,12 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.MobileSDK">
-      <HintPath>..\..\packages\Sitecore.MobileSDK.Xamarin.1.1.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>..\..\packages\Sitecore.MobileSDK.Xamarin.1.1.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
