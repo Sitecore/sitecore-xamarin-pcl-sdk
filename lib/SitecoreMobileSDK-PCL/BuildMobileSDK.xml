@@ -141,7 +141,7 @@
   <Target Name="PasswordProvider">
     <Message Text="Building PasswordProvider Libraries..." />
     <CallTarget Targets="PasswordProviderWin"/>
-    <CallTarget Targets="PasswordProviderIOS-Classic"/>
+ <!--   <CallTarget Targets="PasswordProviderIOS-Classic"/>-->
 	<CallTarget Targets="PasswordProviderIOS-Unified"/>
     <CallTarget Targets="PasswordProviderAndroid"/>	
 	<CallTarget Targets="PasswordProviderWinUniversal"/>
