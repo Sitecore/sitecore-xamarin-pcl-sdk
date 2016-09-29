@@ -2,8 +2,8 @@
 <package>
   <metadata>
     <id>Sitecore.MobileSDK.Xamarin</id>
-    <title>Sitecore MobileSDK for Xamarin</title>
-    <version>1.0.2</version>
+    <title>Sitecore Mobile SDK (WebAPI) for Xamarin </title>
+    <version>1.3.0</version>
     <authors>Sitecore Mobile Team</authors>
     <owners>Sitecore Corporation A&#8260;S</owners>
     <licenseUrl>https://raw.githubusercontent.com/Sitecore/sitecore-xamarin-pcl-sdk/master/license.txt</licenseUrl>
@@ -11,10 +11,10 @@
     <iconUrl>http://s4.uploads.im/S3BR8.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
 
-    <summary>Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore.</summary>
+    <summary>Sitecore Mobile SDK (WebAPI) for Xamarin is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore.</summary>
     
 
-    <description>Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. 
+    <description>Sitecore Mobile SDK (WebAPI) for Xamarin is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. 
 The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. The SDK includes the following features:
 * Fetching CMS Content
 * Source HTML renderings from Sitecore CMS
