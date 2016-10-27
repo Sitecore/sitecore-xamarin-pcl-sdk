@@ -14,11 +14,11 @@ src-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
 no_build: true
 is_shell: true
 packages:
-  "mobile": Sitecore.MobileSDK.Xamarin, Version=1.0.1
+  "mobile": Sitecore.MobileSDK.Xamarin, Version=1.3.0
 summary: "Use Sitecore CMS content in your native mobile apps written in C#."
 details: Details.md
 getting-started: GettingStarted.md
-version: 1.1
+version: 1.3
 samples: 
   - name: iOS Sample
     path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo\iMobileSdkDemo.sln
